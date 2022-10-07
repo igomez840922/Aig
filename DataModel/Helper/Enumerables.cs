@@ -67,4 +67,33 @@ namespace DataModel.Helper
 		Publico = 2
 	}
 
+	public enum enumAUD_StatusEstablecimiento
+	{
+		[Description("Inactivo")]
+		Inactivo = 0,
+		[Description("Operando")]
+		Operando = 1,
+		[Description("Cerrado")]
+		Cerrado = 2,
+	}
+
+	public enum enumAUD_TipoInspeccion
+	{
+		[Description("Ninguna")]
+		None = 0,
+		[Description("Apertura / Cambio de Ubicación")]
+		AperturaCambioUbicación = 1,
+		[Description("Cerrado")]
+		Cerrado = 2,
+	}
+
+	public enum enumAUD_TipoSeleccion
+	{
+		[Description("N/A")]
+		NA = 0,
+		[Description("Si")]
+		Si = 1,
+		[Description("No")]
+		No = 2,
+	}
 }

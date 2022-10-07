@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DataAccess
+namespace DataAccess.Auditoria
 {    
     //ApiAuthorizationDbContext IdentityDbContext
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
@@ -38,25 +38,26 @@ namespace DataAccess
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<ApplicationUser>()
-            //    .HasMany(e => e.LPosSystems)
-            //    .WithOne(e => e.User)
-            //    .HasForeignKey(e => e.UserId)
-            //    .OnDelete(DeleteBehavior.Cascade);
-                      
-            //modelBuilder.Entity<ApplicationUser>()
-            //    .HasOne(s => s.UserProfile)
-            //    .WithOne(ad => ad.AppUser);
+        {			
 
-            //modelBuilder.Entity<PurchaseOrderProduct>()
-            //    .HasOne(e => e.Product)
-            //    .WithOne()
-            //    .HasForeignKey<PurchaseOrderProduct>(e => e.ProductId);
+			//modelBuilder.Entity<ApplicationUser>()
+			//    .HasMany(e => e.LPosSystems)
+			//    .WithOne(e => e.User)
+			//    .HasForeignKey(e => e.UserId)
+			//    .OnDelete(DeleteBehavior.Cascade);
+
+			//modelBuilder.Entity<ApplicationUser>()
+			//    .HasOne(s => s.UserProfile)
+			//    .WithOne(ad => ad.AppUser);
+
+			//modelBuilder.Entity<PurchaseOrderProduct>()
+			//    .HasOne(e => e.Product)
+			//    .WithOne()
+			//    .HasForeignKey<PurchaseOrderProduct>(e => e.ProductId);
 
 
 
-            base.OnModelCreating(modelBuilder);
+			base.OnModelCreating(modelBuilder);
         }
 
        

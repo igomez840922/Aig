@@ -9,16 +9,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataModel
-{
-	public enum enumAUD_TipoEstablecimiento
-	{
-		[Description("User")]
-		None = 0,
-		[Description("Admin")]
-		Admin = 1,
-		[Description("PosUser")]
-		Manager = 2,
-	}
+{	
 
 	/// <summary>
 	/// Tabla que guarda los Establecimientos con Lic. de Operaciones 
@@ -54,7 +45,6 @@ namespace DataModel
 		//sector
 		private enumAUD_TipoSector sector;
 		public enumAUD_TipoSector Sector { get => sector; set => SetProperty(ref sector, value); }
-
 
 		//institución
 		private string institucion;
@@ -141,7 +131,102 @@ namespace DataModel
 		[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "InvalidEmail")]
 		public string Email { get => email; set => SetProperty(ref email, value); }
 
-		
+		//horarios del establecimiento
+		private string horariosEstablecimiento;
+		public string HorariosEstablecimiento { get => horariosEstablecimiento; set => SetProperty(ref horariosEstablecimiento, value); }
+
+		//area de controlados
+		private long? areaControladoId;
+		public long? AreaControladoId { get => areaControladoId; set => SetProperty(ref areaControladoId, value); }
+		private AUD_AreaControladoTB? areaControlado;
+		public virtual AUD_AreaControladoTB? AreaControlado { get => areaControlado; set => SetProperty(ref areaControlado, value); }
+
+		//tipo de actividad del establecimiento
+		private string tipoActividad;
+		public string TipoActividad { get => tipoActividad; set => SetProperty(ref tipoActividad, value); }
+
+		//Solicitante de Licencia
+		private string solicitanteLicNombre;
+		[StringLength(250)]
+		public string SolicitanteLicNombre { get => solicitanteLicNombre; set => SetProperty(ref solicitanteLicNombre, value); }
+
+		//Solicitante de cedula
+		private string solicitanteLicCedula;
+		[StringLength(250)]
+		public string SolicitanteLicCedula { get => solicitanteLicCedula; set => SetProperty(ref solicitanteLicCedula, value); }
+
+		//Estatus
+		private enumAUD_StatusEstablecimiento status;
+		public enumAUD_StatusEstablecimiento Status { get => status; set => SetProperty(ref status, value); }
+
+		//fecha de cierre
+		private DateTime? fechaCierre;
+		public DateTime? FechaCierre { get => fechaCierre; set => SetProperty(ref fechaCierre, value); }
+
+
+		//Representante legal
+		private string repLegalNombre;
+		[StringLength(250)]
+		public string RepLegalNombre { get => repLegalNombre; set => SetProperty(ref repLegalNombre, value); }
+
+		//Representante legal cedula
+		private string repLegalCedula;
+		[StringLength(250)]
+		public string RepLegalCedula { get => repLegalCedula; set => SetProperty(ref repLegalCedula, value); }
+
+		//Representante legal
+		private string corregidorNombre;
+		[StringLength(250)]
+		public string CorregidorNombre { get => corregidorNombre; set => SetProperty(ref corregidorNombre, value); }
+
+		//nombre de establecimiento
+		private string nombreSociedad;
+		[StringLength(250)]
+		public string NombreSociedad { get => nombreSociedad; set => SetProperty(ref nombreSociedad, value); }
+
+		//nombre del farmaceutico #1
+		private string farmac1Nombre;
+		[StringLength(250)]
+		public string Farmac1Nombre { get => farmac1Nombre; set => SetProperty(ref farmac1Nombre, value); }
+
+		//Num. registro del farmaceutico #1
+		private string farmac1NumRegistro;
+		[StringLength(250)]
+		public string Farmac1NumRegistro { get => farmac1NumRegistro; set => SetProperty(ref farmac1NumRegistro, value); }
+
+		//Sector del farmaceutico #1
+		private string farmac1Sector;
+		[StringLength(250)]
+		public string Farmac1Sector { get => farmac1Sector; set => SetProperty(ref farmac1Sector, value); }
+
+		//vmedico del farmaceutico #1
+		private string farmac1VMedico;
+		[StringLength(250)]
+		public string Farmac1VMedico { get => farmac1VMedico; set => SetProperty(ref farmac1VMedico, value); }
+
+		//nombre del farmaceutico #2
+		private string farmac2Nombre;
+		[StringLength(250)]
+		public string Farmac2Nombre { get => farmac2Nombre; set => SetProperty(ref farmac2Nombre, value); }
+
+		//Num. registro del farmaceutico #2
+		private string farmac2NumRegistro;
+		[StringLength(250)]
+		public string Farmac2NumRegistro { get => farmac2NumRegistro; set => SetProperty(ref farmac2NumRegistro, value); }
+
+		//Sector del farmaceutico #2
+		private string farmac2Sector;
+		[StringLength(250)]
+		public string Farmac2Sector { get => farmac2Sector; set => SetProperty(ref farmac2Sector, value); }
+
+		//vmedico del farmaceutico #2
+		private string farmac2VMedico;
+		[StringLength(250)]
+		public string Farmac2VMedico { get => farmac2VMedico; set => SetProperty(ref farmac2VMedico, value); }
+
+		//observaciones
+		private string observaciones;
+		public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
 
 
 	}

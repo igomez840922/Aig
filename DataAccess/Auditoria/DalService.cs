@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess
+namespace DataAccess.Auditoria
 {
     public class DalService: IDalService
     {
