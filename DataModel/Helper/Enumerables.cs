@@ -81,10 +81,10 @@ namespace DataModel.Helper
 	{
 		[Description("Ninguna")]
 		None = 0,
-		[Description("Apertura / Cambio de Ubicación")]
-		AperturaCambioUbicación = 1,
-		[Description("Cerrado")]
-		Cerrado = 2,
+		[Description("Apertura")]
+        Apertura = 1,
+		[Description("Cambio de Ubicación")]
+        CambioUbicacion = 2,
 	}
 
 	public enum enumAUD_TipoSeleccion
@@ -96,4 +96,18 @@ namespace DataModel.Helper
 		[Description("No")]
 		No = 2,
 	}
+
+    public enum enumAUD_TipoActa
+    {
+        [Description("Ninguna")]
+        None = 0,
+        [Description("Apertura y Cambio de Ubicación de Farmacias")]
+        AperturaCambioUbicacionFarmacias = 1,
+        [Description("Apertura y Cambio de Ubicación de Agencias Distribuidoras de Productos Farmacéuticos")]
+        AperturaCambioUbicacionAgencias = 2,
+        [Description("Inspección de Rutina a Farmacias")]
+        InspecRutinaFarmacias = 3,
+        [Description("Inspección de Rutina a Agencias Distribuidoras de Productos Farmacéuticos")]
+        InspecRutinaAgencias = 4,
+    }
 }

@@ -10,6 +10,7 @@ namespace DataAccess.Auditoria
 {
     public class DalService: IDalService
     {
+
         public ApplicationDbContext DBContext { get; set; }
 
         public DalService(ApplicationDbContext dbContext)

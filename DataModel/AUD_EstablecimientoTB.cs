@@ -135,12 +135,11 @@ namespace DataModel
 		private string horariosEstablecimiento;
 		public string HorariosEstablecimiento { get => horariosEstablecimiento; set => SetProperty(ref horariosEstablecimiento, value); }
 
-		//area de controlados
-		private long? areaControladoId;
-		public long? AreaControladoId { get => areaControladoId; set => SetProperty(ref areaControladoId, value); }
-		private AUD_AreaControladoTB? areaControlado;
-		public virtual AUD_AreaControladoTB? AreaControlado { get => areaControlado; set => SetProperty(ref areaControlado, value); }
-
+        //area de controlados
+        private string areaControlado;
+        [StringLength(250)]
+        public string AreaControlado { get => areaControlado; set => SetProperty(ref areaControlado, value); }
+		      
 		//tipo de actividad del establecimiento
 		private string tipoActividad;
 		public string TipoActividad { get => tipoActividad; set => SetProperty(ref tipoActividad, value); }
