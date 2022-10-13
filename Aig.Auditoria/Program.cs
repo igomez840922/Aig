@@ -3,6 +3,7 @@ using Aig.Auditoria.Helper;
 using Aig.Auditoria.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
+using Blazored.LocalStorage;
 using DataAccess.Auditoria;
 using DataModel;
 using Microsoft.AspNetCore.Components;
@@ -76,7 +77,12 @@ builder.Services.AddScoped<ComponentBus>();
 //builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 //Dependency Injection
-builder.Services.AddScoped<IDalService, DalService>();
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<IDalService, DalService>(); 
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ISystemUserService, SystemUserService>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
+
 builder.Services.AddScoped<IInspeccionService, InspeccionService>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
