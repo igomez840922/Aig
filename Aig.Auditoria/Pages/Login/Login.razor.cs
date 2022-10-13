@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System;
 using DataModel.Models;
+using Aig.Auditoria.Services;
+using BlazorComponentBus;
+using Aig.Auditoria.Events;
 
 namespace Aig.Auditoria.Pages.Login
 {
@@ -14,26 +17,42 @@ namespace Aig.Auditoria.Pages.Login
         UserManager<ApplicationUser> userManager { get; set; }
         [Inject]
         SignInManager<ApplicationUser> signInManager { get; set; }
+		[Inject]
+		IProfileService profileService { get; set; }
 
-        [CascadingParameter]
+		[CascadingParameter]
         protected Task<AuthenticationState> authStat { get; set; }
 
         LoginModel loginRequest { get; set; } = new LoginModel();
         string error { get; set; }
 
         protected async override Task OnInitializedAsync()
-        {
-            var user = (await authStat).User;
+        {			
+
+			var user = (await authStat).User;
             if (user.Identity.IsAuthenticated)
             {
                 navigationManager.NavigateTo("/",true);
                 return;
             }
-            await base.OnInitializedAsync();
+
+			//Subscribe Component to Language Change Event
+			bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+
+			await base.OnInitializedAsync();
         }
 
+		protected override async Task OnAfterRenderAsync(bool firstRender)
+		{
+			if (firstRender)
+			{				
+				await getUserLanguaje();
+			}
+			await base.OnAfterRenderAsync(firstRender);
+		}
 
-        async Task OnLogin()
+
+		async Task OnLogin()
         {
             error = null;
             try
@@ -72,5 +91,18 @@ namespace Aig.Auditoria.Pages.Login
             }
         }
 
-    }
+		protected async Task getUserLanguaje(string? language = null)
+		{
+			language = string.IsNullOrEmpty(language) ? await profileService.GetLanguage() : language;
+			languageContainerService.SetLanguage(System.Globalization.CultureInfo.GetCultureInfo(language));
+			await this.InvokeAsync(StateHasChanged);
+		}
+		private void LanguageChangeEventHandler(MessageArgs args)
+		{
+			var message = args.GetMessage<LanguageChangeEvent>();
+
+			getUserLanguaje(message.Language);
+		}
+
+	}
 }

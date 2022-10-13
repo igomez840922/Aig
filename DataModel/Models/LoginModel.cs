@@ -7,10 +7,10 @@ namespace DataModel.Models
 {
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage = "RequiredField")]
         public string UserName { get; set; }
-        [Required]
-        public string Password { get; set; }
+		[Required(ErrorMessage = "RequiredField")]
+		public string Password { get; set; }
         public bool RememberMe { get; set; }
 
         public DateTime LoginStarted { get; set; }

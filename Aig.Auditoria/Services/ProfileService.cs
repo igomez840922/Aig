@@ -27,8 +27,8 @@ namespace Aig.Auditoria.Services
             try
             {
                 var data = await _localStorageService.GetItemAsync<string>("language");
-                return string.IsNullOrEmpty(data) ? "en-US" : data;
-            }
+                return string.IsNullOrEmpty(data) ? "es-ES" : data; //"en-US"
+			}
             catch (Exception ex)
             { }
             return "en-US";
