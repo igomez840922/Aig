@@ -24,7 +24,7 @@ namespace Aig.Auditoria.Pages.Inspections
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<AddEditCloseEvent>(AddEditCloseEventHandler);
+            bus.Subscribe<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>(InspectionBase_CloseEventHandler);
             bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
@@ -99,12 +99,12 @@ namespace Aig.Auditoria.Pages.Inspections
             {
                 result = new AUD_InspeccionTB();
             }
-            await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditOpenEvent { Inspeccion = result });
-            //await this.InvokeAsync(StateHasChanged);
+            await bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionBase_OpenEvent { Inspeccion = result });
+            await this.InvokeAsync(StateHasChanged);
         }
-        private void AddEditCloseEventHandler(MessageArgs args)
+        private void InspectionBase_CloseEventHandler(MessageArgs args)
         {
-            var message = args.GetMessage<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>();
+            var message = args.GetMessage<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>();
             FetchData();
         }
 

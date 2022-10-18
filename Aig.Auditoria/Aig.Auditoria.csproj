@@ -23,8 +23,8 @@
 
   <ItemGroup>
     <None Include="Components\DeleteConfirmDialog.razor" />
+    <None Include="Components\Inspections\RetencionRetiroProductos.razor" />
     <None Include="Components\RetiredProduct\AddEditProductComponent.razor" />
-    <None Include="Components\Inspections\AddEditComponent.razor" />
     <None Include="wwwroot\assets\css\pages\error\error-1.js" />
     <None Include="wwwroot\assets\css\pages\error\error-2.js" />
     <None Include="wwwroot\assets\css\pages\error\error-3.js" />

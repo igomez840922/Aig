@@ -13,7 +13,7 @@ using System;
 
 namespace Aig.Auditoria.Components.Inspections
 {
-    public partial class AddEditComponent
+    public partial class RetencionRetiroProductos
     {
         [Inject]
         IInspeccionService inspeccionService { get; set; }
@@ -22,14 +22,14 @@ namespace Aig.Auditoria.Components.Inspections
         [Inject]
         IEstablecimientoService establecimientoService { get; set; }
         bool OpenDialog { get; set; }
-        DataModel.AUD_InspeccionTB Inspeccion { get; set; } = null;
+        [Parameter]
+        public DataModel.AUD_InspeccionTB Inspeccion { get; set; }
         List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<AddEditOpenEvent>(AddEditOpenEventHandler);
             bus.Subscribe<Aig.Auditoria.Events.RetiredProduct.AddEditCloseEvent>(RetiredProduct_AddEditCloseEventHandler);
 
             base.OnInitialized();
@@ -58,31 +58,25 @@ namespace Aig.Auditoria.Components.Inspections
             getUserLanguaje(message.Language);
         }
 
-        //OPEN MODAL TO ADD/EDIT INSPECTIONS 
-        private void AddEditOpenEventHandler(MessageArgs args)
-        {
-            var message = args.GetMessage<AddEditOpenEvent>();
+        
 
-            Inspeccion = message.Inspeccion!=null? message.Inspeccion : new DataModel.AUD_InspeccionTB();
-
-            OpenDialog = true;
-            
-            this.InvokeAsync(StateHasChanged);
-        }
-
+        //Fill Data
         protected async Task FetchData()
         {
             if (lEstablecimientos == null || lEstablecimientos.Count < 1)
             {
                 lEstablecimientos = await establecimientoService.GetAll();
             }
+
+            if (Inspeccion != null)
+            {
+                OpenDialog = true;
+            }
+
             await this.InvokeAsync(StateHasChanged);
         }
-
-        /// <summary>
-        /// Saving Data
-        /// </summary>
-
+            
+        //Save Data and Close
         protected async Task SaveData()
         {     
             var result = await inspeccionService.Save(Inspeccion);
@@ -93,35 +87,23 @@ namespace Aig.Auditoria.Components.Inspections
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Inspeccion = result;
 
-               await bus.Publish(new AddEditCloseEvent { Inspeccion = Inspeccion });
+                await bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent { });
 
-               await this.InvokeAsync(StateHasChanged);
+                await this.InvokeAsync(StateHasChanged);
             }
             else
                 await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
         }
 
+        //Cancel and Close
         protected async Task Cancel()
         {
             OpenDialog = false;
-            await bus.Publish(new AddEditCloseEvent { Inspeccion = null });
+            await bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent { });
             await this.InvokeAsync(StateHasChanged);
         }
-
-        protected async Task SelectInspectionType(enumAUD_TipoActa tipoActa)
-        {
-            Inspeccion.TipoActa = tipoActa;
-            switch(Inspeccion.TipoActa)
-            {
-                case enumAUD_TipoActa.RetencionRetiroProductos:
-                    {
-                        Inspeccion.InspRetiroRetencion = Inspeccion.InspRetiroRetencion != null ? Inspeccion.InspRetiroRetencion : new AUD_InspRetiroRetencionTB();
-                        break;
-                    }                
-            }
-            await this.InvokeAsync(StateHasChanged);
-        }
-
+        
+        //Add New Product
         protected async Task OpenProduct(AUD_ProdRetiroRetencionTB product=null)
         {
             product = product != null ? product : new AUD_ProdRetiroRetencionTB();
@@ -129,6 +111,7 @@ namespace Aig.Auditoria.Components.Inspections
             await bus.Publish(new Aig.Auditoria.Events.RetiredProduct.AddEditOpenEvent { Product = product }); 
             await this.InvokeAsync(StateHasChanged);
         }
+        
         //Remove Product
         protected async Task RemoveProduct(AUD_ProdRetiroRetencionTB product)
         {
@@ -138,6 +121,7 @@ namespace Aig.Auditoria.Components.Inspections
                 this.InvokeAsync(StateHasChanged);
             }
         }
+       
         //ON CLOSE PRODUCT MODAL 
         private void RetiredProduct_AddEditCloseEventHandler(MessageArgs args)
         {
@@ -152,8 +136,7 @@ namespace Aig.Auditoria.Components.Inspections
             }
 
         }
-
-        
+                
 
     }
 }

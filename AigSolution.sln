@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModel", "DataModel\DataModel.csproj", "{07E58158-80C4-4FA9-8255-AAAA46B5039C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aig.Auditoria", "Aig.Auditoria\Aig.Auditoria.csproj", "{0AEBEA4D-D353-4DB7-A290-D596EA2F6752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Auditoria", "Aig.Auditoria\Aig.Auditoria.csproj", "{0AEBEA4D-D353-4DB7-A290-D596EA2F6752}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
