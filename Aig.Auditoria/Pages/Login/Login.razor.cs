@@ -8,6 +8,7 @@ using DataModel.Models;
 using Aig.Auditoria.Services;
 using BlazorComponentBus;
 using Aig.Auditoria.Events;
+using Aig.Auditoria.Events.Language;
 
 namespace Aig.Auditoria.Pages.Login
 {
@@ -27,12 +28,11 @@ namespace Aig.Auditoria.Pages.Login
         string error { get; set; }
 
         protected async override Task OnInitializedAsync()
-        {			
-
+        {		
 			var user = (await authStat).User;
             if (user.Identity.IsAuthenticated)
             {
-                navigationManager.NavigateTo("/",true);
+                navigationManager.NavigateTo("/dashboard", true);
                 return;
             }
 
@@ -105,4 +105,5 @@ namespace Aig.Auditoria.Pages.Login
 		}
 
 	}
+
 }

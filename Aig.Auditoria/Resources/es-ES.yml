@@ -95,3 +95,25 @@ Establishments: Establecimientos
 Inspections: Inspecciones
 QualityAudit: Auditorías de Calidad
 RecalledProducts: Productos Retirados
+RetentionAndWithdrawalOfPharmaceuticalProducts: Retención y/o Retiro de Productos Farmaceuticos
+SelectInspectionType: Seleccione el Tipo de Inspección
+Select: Seleccionar
+NewInspection: Nueva Inspección
+EditInspection: Editar Inspección
+StartDate: Fecha Inicio
+GeneralInfo: Información General
+Section: Sección/Oficina Regional
+OperLicenseNumber: Número de Licencia/Aviso de Operaciones
+Products: Productos
+AddProduct: Agregar Producto
+CommercialPresentation: Presentación Comercial
+Country: Pais
+Lot: Lote
+ExpDate: Fecha Exp.
+AmountWithheld: Cantidad Retenida
+AmountWithdrawal: Cantidad Retirada
+ProductDestiny: Destino del Producto
+Manufacturer: Fabricante
+None: Ninguno
+ActNumber: Número de Acta
+Type: Tipo

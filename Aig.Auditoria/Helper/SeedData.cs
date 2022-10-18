@@ -86,7 +86,7 @@ namespace Aig.Auditoria.Helper
                     AUD_InspeccionTB _Inspection = new AUD_InspeccionTB()
                     {
                         FechaInicio = DateTime.Now,
-                        NumActa = 1,
+                        //NumActa = 1,
                         TipoActa = DataModel.Helper.enumAUD_TipoActa.AperturaCambioUbicacionFarmacias,
                         InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB()
                         {

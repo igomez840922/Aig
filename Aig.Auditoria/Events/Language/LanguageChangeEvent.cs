@@ -1,4 +1,4 @@
-﻿namespace Aig.Auditoria.Events
+﻿namespace Aig.Auditoria.Events.Language
 {
     public class LanguageChangeEvent
     {

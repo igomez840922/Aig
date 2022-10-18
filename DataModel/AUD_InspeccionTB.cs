@@ -13,14 +13,17 @@ namespace DataModel
 
     public  class AUD_InspeccionTB:SystemId
     {
+        public AUD_InspeccionTB()
+        {
+            FechaInicio=DateTime.Now;
+        }
         /// <summary>
         /// /////////Generalidades de la Farmacia y Solicitante
         /// </summary>
 
         //numero de acta ... debe ser Autogenerado Secuencial
-        private int numActa;
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int NumActa { get => numActa; set => SetProperty(ref numActa, value); }
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string NumActa { get { return Id.ToString("000000"); } set { }  }
 
         //tipo de acta ... va a determinar el formulario a mostrar
         private enumAUD_TipoActa tipoActa;
@@ -28,6 +31,7 @@ namespace DataModel
 
         //fecha y Hora de inicio del acta
         private DateTime fechaInicio;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)] 
         public DateTime FechaInicio { get => fechaInicio; set => SetProperty(ref fechaInicio, value); }
 
         ////////////////

@@ -2,6 +2,7 @@
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace Aig.Auditoria.Services
 {    
@@ -13,22 +14,22 @@ namespace Aig.Auditoria.Services
             DalService = dalService;
         }
 
-        public async Task<GenericModel<AUD_InspeccionTB>> FindAll(string filter, int pIdx, int pAmt)
+        public async Task<GenericModel<AUD_InspeccionTB>> FindAll(GenericModel<AUD_InspeccionTB> model)
         {
             try
             {
-                //var result = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
-                //              where data.UserRoleType == enumUserRoleType.None &&
-                //              (string.IsNullOrEmpty(filter) ? true : (data.Email.Contains(filter) || data.UserProfile.FirstName.Contains(filter) || data.UserProfile.SecondName.Contains(filter) || data.UserProfile.SureName.Contains(filter) || data.UserProfile.SecondSurName.Contains(filter) || data.Email.Contains(filter) || data.PhoneNumber.Contains(filter)))
-                //              orderby data.UserProfile.FirstName
-                //              select data).Skip(pIdx * pAmt).Take(pAmt).ToList();
+                var result = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
+                              where data.Deleted == false &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Establecimiento!=null && (data.Establecimiento.Nombre.Contains(model.Filter))))
+                              orderby data.FechaInicio
+                              select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                //var count = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
-                //             where data.UserRoleType == enumUserRoleType.None &&
-                //             (string.IsNullOrEmpty(filter) ? true : (data.Email.Contains(filter) || data.UserProfile.FirstName.Contains(filter) || data.UserProfile.SecondName.Contains(filter) || data.UserProfile.SureName.Contains(filter) || data.UserProfile.SecondSurName.Contains(filter) || data.Email.Contains(filter) || data.PhoneNumber.Contains(filter)))
-                //             select data).Count();
+                var count = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
+                             where data.Deleted == false &&
+                             (string.IsNullOrEmpty(model.Filter) ? true : (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter))))
+                             select data).Count();
 
-                //return new GenericModel<AUD_InspeccionTB>() { Ldata = result, Total = count };
+                return new GenericModel<AUD_InspeccionTB>() { Ldata = result, Total = count };
             }
             catch (Exception ex)
             { }

@@ -105,9 +105,23 @@ namespace DataModel.Helper
         AperturaCambioUbicacionFarmacias = 1,
         [Description("Apertura y Cambio de Ubicación de Agencias Distribuidoras de Productos Farmacéuticos")]
         AperturaCambioUbicacionAgencias = 2,
-        [Description("Inspección de Rutina a Farmacias")]
+        [Description("Inspección de Rutina o Vigilancia a Farmacias")]
         InspecRutinaFarmacias = 3,
-        [Description("Inspección de Rutina a Agencias Distribuidoras de Productos Farmacéuticos")]
+        [Description("Inspección de Rutina o Vigilancia a Agencias Distribuidoras de Productos Farmacéuticos")]
         InspecRutinaAgencias = 4,
+        [Description("Inspección o Investigación")]
+        InspecInvestigacion = 5,
+        [Description("Retención o Retiro de Productos del Mercado")]
+        RetencionRetiroProductos = 6,
+        [Description("Cierre de Operaciones de Establecimientos")]
+        CierreOperaciones = 7,
+        [Description("Disposición Final de Desechos Farmaceuticos")]
+        DisposicionFinalDesechosFarma= 8,
+        [Description("Evaluación Técnica por Apertura a Fabricante de Medicamentos")]
+        EvaluacionTecnicaAperturaFabMedicamento = 9,
+        [Description("Evaluación Técnica por Apertura a Fabricante de Cosméticos y Desinfectantes")]
+        EvaluacionTecnicaAperturaFabDesinfectantes = 10,
+        [Description("Evaluación Técnica por Apertura para la Elaboración de Cosméticos Artesanales")]
+        EvaluacionTecnicaAperturaCosmeticArtesanales = 11,
     }
 }

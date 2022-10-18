@@ -95,3 +95,25 @@ Establishments: Establishments
 Inspections: Inspections
 QualityAudit: Quality Audit
 RecalledProducts: Recalled Products
+RetentionAndWithdrawalOfPharmaceuticalProducts: Retention And Withdrawal Of Pharmaceutical Products
+SelectInspectionType: Select Inspection Type
+Select: Select
+NewInspection: New Inspection
+EditInspection: Edit Inspection
+StartDate: Start Date
+GeneralInfo: General Info
+Section: Section/Regional Office
+OperLicenseNumber: Operational License Number
+Products: Products
+AddProduct: Add Product
+CommercialPresentation: Comercial Presentation
+Country: Country
+Lot: Lot
+ExpDate: Exp. Date
+AmountWithheld: Amount Withheld
+AmountWithdrawal: Amount Withdrawal
+ProductDestiny: Destiny
+Manufacturer: Manufacturer
+None: None
+ActNumber: Act Number
+Type: Type

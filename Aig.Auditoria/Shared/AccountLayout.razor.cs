@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
+using Aig.Auditoria.Events.Language;
 
 namespace Aig.Auditoria.Shared
 {

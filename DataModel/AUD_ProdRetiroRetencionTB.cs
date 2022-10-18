@@ -10,6 +10,11 @@ namespace DataModel
 {
     public class AUD_ProdRetiroRetencionTB:SystemId
     {
+        public AUD_ProdRetiroRetencionTB()
+        {
+            FechaExp=DateTime.Now;
+        }
+
         //Formulario de retencion / retiro
         private long frmRetiroRetencionId;
         public long FrmRetiroRetencionId { get => frmRetiroRetencionId; set => SetProperty(ref frmRetiroRetencionId, value); }
@@ -33,10 +38,13 @@ namespace DataModel
         public string Fabricante { get => fabricante; set => SetProperty(ref fabricante, value); }
 
         //pais de fabricación
-        private long? paisId;
-        public long? PaisId { get => paisId; set => SetProperty(ref paisId, value); }
-        private PaisTB? pais;
-        public virtual PaisTB? Pais { get => pais; set => SetProperty(ref pais, value); }
+        //private long? paisId;
+        //public long? PaisId { get => paisId; set => SetProperty(ref paisId, value); }
+        //private PaisTB? pais;
+        //public virtual PaisTB? Pais { get => pais; set => SetProperty(ref pais, value); }
+        private string pais;
+        [StringLength(250)]
+        public string Pais { get => pais; set => SetProperty(ref pais, value); }
 
         //lote
         private string lote;
@@ -45,6 +53,7 @@ namespace DataModel
 
         //fecha de Expiración
         private DateTime? fechaExp;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FechaExp { get => fechaExp; set => SetProperty(ref fechaExp, value); }
 
         //cantidad Retenida
