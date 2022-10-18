@@ -16,11 +16,11 @@ namespace Aig.Auditoria.Components.Inspections
     public partial class RetencionRetiroProductos
     {
         [Inject]
-        IInspeccionService inspeccionService { get; set; }
+        IInspectionsService inspeccionService { get; set; }
         [Inject]
         IProfileService profileService { get; set; }
         [Inject]
-        IEstablecimientoService establecimientoService { get; set; }
+        IEstablishmentsService establecimientoService { get; set; }
         bool OpenDialog { get; set; }
         [Parameter]
         public DataModel.AUD_InspeccionTB Inspeccion { get; set; }

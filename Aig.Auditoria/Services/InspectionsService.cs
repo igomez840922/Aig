@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace Aig.Auditoria.Services
 {    
-    public class InspeccionService : IInspeccionService
+    public class InspectionsService : IInspectionsService
     {
         private readonly IDalService DalService;
-        public InspeccionService(IDalService dalService)
+        public InspectionsService(IDalService dalService)
         {
             DalService = dalService;
         }

@@ -8,23 +8,23 @@ using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Aig.Auditoria.Pages.Inspections
+namespace Aig.Auditoria.Pages.Establishments
 {
-    public partial class Inspections
+    public partial class Establishments
     {
         [Inject]
         IProfileService profileService { get; set; }
         [Inject]
-        IInspectionsService inspeccionService { get; set; }
+        IEstablishmentsService establishmentsService { get; set; }
 
-        GenericModel<AUD_InspeccionTB> dataModel { get; set; } = new GenericModel<AUD_InspeccionTB>()
-        { Data = new AUD_InspeccionTB() };
+        GenericModel<AUD_EstablecimientoTB> dataModel { get; set; } = new GenericModel<AUD_EstablecimientoTB>()
+        { Data = new AUD_EstablecimientoTB() };
                 
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>(InspectionBase_CloseEventHandler);
+            bus.Subscribe<Aig.Auditoria.Events.Establishments.EstablishmentsAddEdit_CloseEvent>(EstablishmentsAddEdit_CloseEventHandler);
             bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
@@ -47,8 +47,8 @@ namespace Aig.Auditoria.Pages.Inspections
         protected async Task FetchData()
         {           
             dataModel.ErrorMsg = null;
-            dataModel.Data = new AUD_InspeccionTB();
-            var data = await inspeccionService.FindAll(dataModel);
+            dataModel.Data = new AUD_EstablecimientoTB();
+            var data = await establishmentsService.FindAll(dataModel);
             if (data != null)
             {
                 dataModel = data;
@@ -94,21 +94,21 @@ namespace Aig.Auditoria.Pages.Inspections
         //Call Add/Edit 
         private async Task OnEdit(long id)
         {
-            var result = await inspeccionService.Get(id);
+            var result = await establishmentsService.Get(id);
             if (result == null)
             {
-                result = new AUD_InspeccionTB();
+                result = new AUD_EstablecimientoTB();
             }
-            await bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionBase_OpenEvent { Inspeccion = result });
+            await bus.Publish(new Aig.Auditoria.Events.Establishments.EstablishmentsAddEdit_OpenEvent { Data = result });
             await this.InvokeAsync(StateHasChanged);
         }
-        private void InspectionBase_CloseEventHandler(MessageArgs args)
+        private void EstablishmentsAddEdit_CloseEventHandler(MessageArgs args)
         {
-            var message = args.GetMessage<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>();
+            var message = args.GetMessage<Aig.Auditoria.Events.Establishments.EstablishmentsAddEdit_CloseEvent>();
             FetchData();
         }
 
-        private async Task OnDelete(AUD_InspeccionTB data)
+        private async Task OnDelete(AUD_EstablecimientoTB data)
         {
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
@@ -123,7 +123,7 @@ namespace Aig.Auditoria.Pages.Inspections
         }
         private async Task DeleteData()
         {
-            var result = await inspeccionService.Delete(dataModel.Data.Id);
+            var result = await establishmentsService.Delete(dataModel.Data.Id);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);

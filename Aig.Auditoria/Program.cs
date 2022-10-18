@@ -82,8 +82,9 @@ builder.Services.AddScoped<IDalService, DalService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISystemUserService, SystemUserService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
-builder.Services.AddScoped<IInspeccionService, InspeccionService>();
-builder.Services.AddScoped<IEstablecimientoService, EstablecimientoService>();
+builder.Services.AddScoped<IInspectionsService, InspectionsService>();
+builder.Services.AddScoped<IEstablishmentsService, EstablishmentsService>();
+builder.Services.AddScoped<IRetiredProductService, RetiredProductService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

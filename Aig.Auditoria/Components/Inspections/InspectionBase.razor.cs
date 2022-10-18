@@ -11,7 +11,7 @@ namespace Aig.Auditoria.Components.Inspections
     public partial class InspectionBase
     {
         [Inject]
-        IInspeccionService inspeccionService { get; set; }
+        IInspectionsService inspeccionService { get; set; }
         [Inject]
         IProfileService profileService { get; set; }
         bool OpenDialog { get; set; }

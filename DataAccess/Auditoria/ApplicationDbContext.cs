@@ -87,6 +87,11 @@ namespace DataAccess.Auditoria
             .Property(e => e.DatosEstructuraOrganizacional)
             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEstructuraOrganizacional>(x));
 
+            modelBuilder.Entity<AUD_EstablecimientoTB>()
+                .HasMany(e => e.LInspections)
+                .WithOne(e => e.Establecimiento)
+                .HasForeignKey(e => e.EstablecimientoId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(modelBuilder);
         }

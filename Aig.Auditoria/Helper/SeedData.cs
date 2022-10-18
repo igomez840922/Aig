@@ -79,7 +79,7 @@ namespace Aig.Auditoria.Helper
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var inspeccionService = serviceScope.ServiceProvider.GetService<IInspeccionService>();
+                var inspeccionService = serviceScope.ServiceProvider.GetService<IInspectionsService>();
 
                 if (await inspeccionService.Count() <= 0)
                 {

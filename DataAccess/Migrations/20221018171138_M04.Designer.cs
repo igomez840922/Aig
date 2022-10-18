@@ -4,6 +4,7 @@ using DataAccess.Auditoria;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221018171138_M04")]
+    partial class M04
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,8 +307,8 @@ namespace DataAccess.Migrations
                     b.Property<string>("TipoActividad")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoEstablecimiento")
-                        .HasColumnType("int");
+                    b.Property<long?>("TipoEstablecimientoId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Ubicacion")
                         .HasMaxLength(500)
@@ -316,6 +318,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TipoEstablecimientoId");
 
                     b.ToTable("AUD_Establecimiento");
                 });
@@ -407,7 +411,9 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstablecimientoId");
+                    b.HasIndex("EstablecimientoId")
+                        .IsUnique()
+                        .HasFilter("[EstablecimientoId] IS NOT NULL");
 
                     b.HasIndex("InspAperCambUbicFarmId")
                         .IsUnique()
@@ -1078,12 +1084,20 @@ namespace DataAccess.Migrations
                     b.Navigation("UserProfile");
                 });
 
+            modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>
+                {
+                    b.HasOne("DataModel.AUD_TipoEstablecimientoTB", "TipoEstablecimiento")
+                        .WithMany()
+                        .HasForeignKey("TipoEstablecimientoId");
+
+                    b.Navigation("TipoEstablecimiento");
+                });
+
             modelBuilder.Entity("DataModel.AUD_InspeccionTB", b =>
                 {
                     b.HasOne("DataModel.AUD_EstablecimientoTB", "Establecimiento")
-                        .WithMany("LInspections")
-                        .HasForeignKey("EstablecimientoId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .WithOne()
+                        .HasForeignKey("DataModel.AUD_InspeccionTB", "EstablecimientoId");
 
                     b.HasOne("DataModel.AUD_InspAperCambUbicFarmTB", "InspAperCambUbicFarm")
                         .WithOne()
@@ -1187,11 +1201,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>
-                {
-                    b.Navigation("LInspections");
                 });
 
             modelBuilder.Entity("DataModel.AUD_InspRetiroRetencionTB", b =>

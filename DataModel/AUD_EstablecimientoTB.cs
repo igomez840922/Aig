@@ -1,4 +1,5 @@
 ﻿using DataModel.Helper;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,14 +33,17 @@ namespace DataModel
 		private int periodo;
 		public int Periodo { get => periodo; set => SetProperty(ref periodo, value); }
 
-		//tipo de establecimiento
-		private long? tipoEstablecimientoId;
-		public long? TipoEstablecimientoId { get => tipoEstablecimientoId; set => SetProperty(ref tipoEstablecimientoId, value); }
-		private AUD_TipoEstablecimientoTB? tipoEstablecimiento;
-		public virtual AUD_TipoEstablecimientoTB? TipoEstablecimiento { get => tipoEstablecimiento; set => SetProperty(ref tipoEstablecimiento, value); }
+        //tipo de establecimiento
+        //private long? tipoEstablecimientoId;
+        //public long? TipoEstablecimientoId { get => tipoEstablecimientoId; set => SetProperty(ref tipoEstablecimientoId, value); }
+        //private AUD_TipoEstablecimientoTB? tipoEstablecimiento;
+        //public virtual AUD_TipoEstablecimientoTB? TipoEstablecimiento { get => tipoEstablecimiento; set => SetProperty(ref tipoEstablecimiento, value); }
+        private enumAUD_TipoEstablecimiento tipoEstablecimiento;
+        public enumAUD_TipoEstablecimiento TipoEstablecimiento { get => tipoEstablecimiento; set => SetProperty(ref tipoEstablecimiento, value); }
 
-		//clasificacion
-		private enumAUD_TipoTramite clasificacion;
+
+        //clasificacion
+        private enumAUD_TipoTramite clasificacion;
 		public enumAUD_TipoTramite Clasificacion { get => clasificacion; set => SetProperty(ref clasificacion, value); }
 
 		//sector
@@ -87,26 +91,32 @@ namespace DataModel
 		public DateTime? FechaDuplicado { get => fechaDuplicado; set => SetProperty(ref fechaDuplicado, value); }
 
 
-		//Provincia
-		private long? provinciaId;
-		public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
-		private ProvinciaTB? provincia;
-		public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+        //Provincia
+        //private long? provinciaId;
+        //public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
+        //private ProvinciaTB? provincia;
+        //public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+        private string provincia;
+        public virtual string Provincia { get => provincia; set => SetProperty(ref provincia, value); }
 
-		//distrito
-		private long? distritoId;
-		public long? DistritoId { get => distritoId; set => SetProperty(ref distritoId, value); }
-		private DistritoTB? distrito;
-		public virtual DistritoTB? Distrito { get => distrito; set => SetProperty(ref distrito, value); }
+        //distrito
+        //      private long? distritoId;
+        //public long? DistritoId { get => distritoId; set => SetProperty(ref distritoId, value); }
+        //private DistritoTB? distrito;
+        //public virtual DistritoTB? Distrito { get => distrito; set => SetProperty(ref distrito, value); }
+        private string distrito;
+        public virtual string Distrito { get => distrito; set => SetProperty(ref distrito, value); }
 
-		//distrito
-		private long? corregimientoId;
-		public long? CorregimientoId { get => corregimientoId; set => SetProperty(ref corregimientoId, value); }
-		private CorregimientoTB? corregimiento;
-		public virtual CorregimientoTB? Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
+        //distrito
+        //      private long? corregimientoId;
+        //public long? CorregimientoId { get => corregimientoId; set => SetProperty(ref corregimientoId, value); }
+        //private CorregimientoTB? corregimiento;
+        //public virtual CorregimientoTB? Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
+        private string corregimiento;
+        public virtual string Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
 
-		//ubicacion
-		private string ubicacion;
+        //ubicacion
+        private string ubicacion;
 		[StringLength(500)]
 		public string Ubicacion { get => ubicacion; set => SetProperty(ref ubicacion, value); }
 
@@ -227,6 +237,8 @@ namespace DataModel
 		private string observaciones;
 		public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
 
-
+        private List<AUD_InspeccionTB> lInspections;
+        public virtual List<AUD_InspeccionTB> LInspections { get => lInspections; set => SetProperty(ref lInspections, value); }
+    
 	}
 }

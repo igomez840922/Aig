@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Aig.Auditoria.Services
 {
-    public interface IEstablecimientoService
+    public interface IEstablishmentsService
     {
         Task<GenericModel<AUD_EstablecimientoTB>> FindAll(GenericModel<AUD_EstablecimientoTB> model);
         Task<List<AUD_EstablecimientoTB>> GetAll();

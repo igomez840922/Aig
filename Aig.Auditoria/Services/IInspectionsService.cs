@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Aig.Auditoria.Services
 {
-    public interface IInspeccionService
+    public interface IInspectionsService
     {
         Task<GenericModel<AUD_InspeccionTB>> FindAll(GenericModel<AUD_InspeccionTB> model);
         Task<List<AUD_InspeccionTB>> GetAll();

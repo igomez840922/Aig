@@ -1,25 +1,25 @@
 ﻿using Aig.Auditoria.Events.DeleteConfirmationDlg;
-using Aig.Auditoria.Events.Inspections;
 using Aig.Auditoria.Events.Language;
 using Aig.Auditoria.Services;
+using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Aig.Auditoria.Pages.Inspections
-{
-    public partial class Inspections
+namespace Aig.Auditoria.Pages.RetiredProduct
+{   
+    public partial class RetiredProduct
     {
         [Inject]
         IProfileService profileService { get; set; }
         [Inject]
-        IInspectionsService inspeccionService { get; set; }
+        IRetiredProductService retiredProductService { get; set; }
 
-        GenericModel<AUD_InspeccionTB> dataModel { get; set; } = new GenericModel<AUD_InspeccionTB>()
-        { Data = new AUD_InspeccionTB() };
-                
+        GenericModel<AUD_ProdRetiroRetencionTB> dataModel { get; set; } = new GenericModel<AUD_ProdRetiroRetencionTB>()
+        { Data = new AUD_ProdRetiroRetencionTB() };
+
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
@@ -45,10 +45,10 @@ namespace Aig.Auditoria.Pages.Inspections
         }
 
         protected async Task FetchData()
-        {           
+        {
             dataModel.ErrorMsg = null;
-            dataModel.Data = new AUD_InspeccionTB();
-            var data = await inspeccionService.FindAll(dataModel);
+            dataModel.Data = new AUD_ProdRetiroRetencionTB();
+            var data = await retiredProductService.FindAll(dataModel);
             if (data != null)
             {
                 dataModel = data;
@@ -94,11 +94,12 @@ namespace Aig.Auditoria.Pages.Inspections
         //Call Add/Edit 
         private async Task OnEdit(long id)
         {
-            var result = await inspeccionService.Get(id);
-            if (result == null)
-            {
-                result = new AUD_InspeccionTB();
-            }
+            //var result = await retiredProductService.Get(id);
+            //if (result == null)
+            //{
+            //    result = new AUD_InspeccionTB();
+            //}
+            var result = new AUD_InspeccionTB() { TipoActa = DataModel.Helper.enumAUD_TipoActa.RetencionRetiroProductos, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
             await bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionBase_OpenEvent { Inspeccion = result });
             await this.InvokeAsync(StateHasChanged);
         }
@@ -108,7 +109,7 @@ namespace Aig.Auditoria.Pages.Inspections
             FetchData();
         }
 
-        private async Task OnDelete(AUD_InspeccionTB data)
+        private async Task OnDelete(AUD_ProdRetiroRetencionTB data)
         {
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
@@ -123,7 +124,7 @@ namespace Aig.Auditoria.Pages.Inspections
         }
         private async Task DeleteData()
         {
-            var result = await inspeccionService.Delete(dataModel.Data.Id);
+            var result = await retiredProductService.Delete(dataModel.Data.Id);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);
