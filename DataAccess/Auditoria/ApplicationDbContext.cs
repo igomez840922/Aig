@@ -56,6 +56,11 @@ namespace DataAccess.Auditoria
                 .WithOne()
                 .HasForeignKey<AUD_InspeccionTB>(e => e.EstablecimientoId);
 
+            //modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
+            //   .HasOne(e => e.Inspeccion)
+            //   .WithOne()
+            //   .HasForeignKey<AUD_InspRetiroRetencionTB>(e => e.EstablecimientoId);
+
             modelBuilder.Entity<AUD_InspeccionTB>()
                .HasOne(e => e.InspAperCambUbicFarm)
                .WithOne()
@@ -93,6 +98,7 @@ namespace DataAccess.Auditoria
                 .HasForeignKey(e => e.EstablecimientoId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+           
             base.OnModelCreating(modelBuilder);
         }
        

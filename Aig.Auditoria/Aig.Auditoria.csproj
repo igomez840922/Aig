@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Content Remove="Components\Inspections\AddEditProductComponent.razor" />
+    <Content Remove="Resources\paises.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\en-US.yml" />
     <EmbeddedResource Include="Resources\es-ES.yml" />
+    <EmbeddedResource Include="Resources\paises.json" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,23 +17,23 @@ namespace Aig.Auditoria.Services
         {
             try
             {
-                var result = (from data in DalService.DBContext.Set<AUD_EstablecimientoTB>()
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata  = (from data in DalService.DBContext.Set<AUD_EstablecimientoTB>()
                               where data.Deleted == false &&
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter)))
                               orderby data.Nombre
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                var count = (from data in DalService.DBContext.Set<AUD_EstablecimientoTB>()
+                model.Total = (from data in DalService.DBContext.Set<AUD_EstablecimientoTB>()
                              where data.Deleted == false &&
                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter)))
-                             select data).Count();
-
-                return new GenericModel<AUD_EstablecimientoTB>() { Ldata = result, Total = count };
+                             select data).Count();  
             }
             catch (Exception ex)
             { }
 
-            return null;
+            return model;
         }
 
         public async Task<List<AUD_EstablecimientoTB>> GetAll()

@@ -21,9 +21,11 @@ namespace DataModel
         /// /////////Generalidades de la Farmacia y Solicitante
         /// </summary>
 
-        //numero de acta ... debe ser Autogenerado Secuencial
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public string NumActa { get { return Id.ToString("000000"); } set { }  }
+        //numero de acta...
+        private string numActa;
+        public string NumActa { get => numActa; set => SetProperty(ref numActa, value); }
+        private int intNumActa;
+        public int IntNumActa { get => intNumActa; set => SetProperty(ref intNumActa, value); }
 
         //tipo de acta ... va a determinar el formulario a mostrar
         private enumAUD_TipoActa tipoActa;

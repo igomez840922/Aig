@@ -7,7 +7,7 @@
                     <div class="modal-dialog modal-xl" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="formModal">@(Inspeccion != null && Inspeccion.Id > 0 ? @languageContainerService.Keys["EditInspection"] : @languageContainerService.Keys["NewInspection"])</h5>
+                    <h5 class="modal-title" id="formModal">@(Inspeccion != null && Inspeccion.Id > 0 ? @languageContainerService.Keys["EditInspection"] : @languageContainerService.Keys["NewInspection"]): @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))</h5>
                                 <button type="button" class="close" @onclick="(e)=>{Cancel();}"
                         aria-label="Close">
                                     <span aria-hidden="true">&times;</span>

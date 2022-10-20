@@ -23,5 +23,9 @@ namespace DataModel
 
 
         public virtual List<AUD_ProdRetiroRetencionTB> LProductos { get; set; }
+
+        //private AUD_InspeccionTB? inspeccion;
+        //public virtual AUD_InspeccionTB? Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
+
     }
 }

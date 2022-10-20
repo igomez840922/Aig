@@ -1,0 +1,1227 @@
+[
+    {
+        "Nombre": "Afghanistan",
+        "Codigo": "AF",
+        "country_phone_Codigo": 93
+    },
+    {
+        "Nombre": "Albania",
+        "Codigo": "AL",
+        "country_phone_Codigo": 355
+    },
+    {
+        "Nombre": "Algeria",
+        "Codigo": "DZ",
+        "country_phone_Codigo": 213
+    },
+    {
+        "Nombre": "American Samoa",
+        "Codigo": "AS",
+        "country_phone_Codigo": 1684
+    },
+    {
+        "Nombre": "Andorra",
+        "Codigo": "AD",
+        "country_phone_Codigo": 376
+    },
+    {
+        "Nombre": "Angola",
+        "Codigo": "AO",
+        "country_phone_Codigo": 244
+    },
+    {
+        "Nombre": "Anguilla",
+        "Codigo": "AI",
+        "country_phone_Codigo": 1264
+    },
+    {
+        "Nombre": "Antarctica",
+        "Codigo": "AQ",
+        "country_phone_Codigo": 0
+    },
+    {
+        "Nombre": "Antigua And Barbuda",
+        "Codigo": "AG",
+        "country_phone_Codigo": 1268
+    },
+    {
+        "Nombre": "Argentina",
+        "Codigo": "AR",
+        "country_phone_Codigo": 54
+    },
+    {
+        "Nombre": "Armenia",
+        "Codigo": "AM",
+        "country_phone_Codigo": 374
+    },
+    {
+        "Nombre": "Aruba",
+        "Codigo": "AW",
+        "country_phone_Codigo": 297
+    },
+    {
+        "Nombre": "Australia",
+        "Codigo": "AU",
+        "country_phone_Codigo": 61
+    },
+    {
+        "Nombre": "Austria",
+        "Codigo": "AT",
+        "country_phone_Codigo": 43
+    },
+    {
+        "Nombre": "Azerbaijan",
+        "Codigo": "AZ",
+        "country_phone_Codigo": 994
+    },
+    {
+        "Nombre": "Bahamas The",
+        "Codigo": "BS",
+        "country_phone_Codigo": 1242
+    },
+    {
+        "Nombre": "Bahrain",
+        "Codigo": "BH",
+        "country_phone_Codigo": 973
+    },
+    {
+        "Nombre": "Bangladesh",
+        "Codigo": "BD",
+        "country_phone_Codigo": 880
+    },
+    {
+        "Nombre": "Barbados",
+        "Codigo": "BB",
+        "country_phone_Codigo": 1246
+    },
+    {
+        "Nombre": "Belarus",
+        "Codigo": "BY",
+        "country_phone_Codigo": 375
+    },
+    {
+        "Nombre": "Belgium",
+        "Codigo": "BE",
+        "country_phone_Codigo": 32
+    },
+    {
+        "Nombre": "Belize",
+        "Codigo": "BZ",
+        "country_phone_Codigo": 501
+    },
+    {
+        "Nombre": "Benin",
+        "Codigo": "BJ",
+        "country_phone_Codigo": 229
+    },
+    {
+        "Nombre": "Bermuda",
+        "Codigo": "BM",
+        "country_phone_Codigo": 1441
+    },
+    {
+        "Nombre": "Bhutan",
+        "Codigo": "BT",
+        "country_phone_Codigo": 975
+    },
+    {
+        "Nombre": "Bolivia",
+        "Codigo": "BO",
+        "country_phone_Codigo": 591
+    },
+    {
+        "Nombre": "Bosnia and Herzegovina",
+        "Codigo": "BA",
+        "country_phone_Codigo": 387
+    },
+    {
+        "Nombre": "Botswana",
+        "Codigo": "BW",
+        "country_phone_Codigo": 267
+    },
+    {
+        "Nombre": "Bouvet Island",
+        "Codigo": "BV",
+        "country_phone_Codigo": 0
+    },
+    {
+        "Nombre": "Brazil",
+        "Codigo": "BR",
+        "country_phone_Codigo": 55
+    },
+    {
+        "Nombre": "British Indian Ocean Territory",
+        "Codigo": "IO",
+        "country_phone_Codigo": 246
+    },
+    {
+        "Nombre": "Brunei",
+        "Codigo": "BN",
+        "country_phone_Codigo": 673
+    },
+    {
+        "Nombre": "Bulgaria",
+        "Codigo": "BG",
+        "country_phone_Codigo": 359
+    },
+    {
+        "Nombre": "Burkina Faso",
+        "Codigo": "BF",
+        "country_phone_Codigo": 226
+    },
+    {
+        "Nombre": "Burundi",
+        "Codigo": "BI",
+        "country_phone_Codigo": 257
+    },
+    {
+        "Nombre": "Cambodia",
+        "Codigo": "KH",
+        "country_phone_Codigo": 855
+    },
+    {
+        "Nombre": "Cameroon",
+        "Codigo": "CM",
+        "country_phone_Codigo": 237
+    },
+    {
+        "Nombre": "Canada",
+        "Codigo": "CA",
+        "country_phone_Codigo": 1
+    },
+    {
+        "Nombre": "Cape Verde",
+        "Codigo": "CV",
+        "country_phone_Codigo": 238
+    },
+    {
+        "Nombre": "Cayman Islands",
+        "Codigo": "KY",
+        "country_phone_Codigo": 1345
+    },
+    {
+        "Nombre": "Central African Republic",
+        "Codigo": "CF",
+        "country_phone_Codigo": 236
+    },
+    {
+        "Nombre": "Chad",
+        "Codigo": "TD",
+        "country_phone_Codigo": 235
+    },
+    {
+        "Nombre": "Chile",
+        "Codigo": "CL",
+        "country_phone_Codigo": 56
+    },
+    {
+        "Nombre": "China",
+        "Codigo": "CN",
+        "country_phone_Codigo": 86
+    },
+    {
+        "Nombre": "Christmas Island",
+        "Codigo": "CX",
+        "country_phone_Codigo": 61
+    },
+    {
+        "Nombre": "Cocos (Keeling) Islands",
+        "Codigo": "CC",
+        "country_phone_Codigo": 672
+    },
+    {
+        "Nombre": "Colombia",
+        "Codigo": "CO",
+        "country_phone_Codigo": 57
+    },
+    {
+        "Nombre": "Comoros",
+        "Codigo": "KM",
+        "country_phone_Codigo": 269
+    },
+    {
+        "Nombre": "Cook Islands",
+        "Codigo": "CK",
+        "country_phone_Codigo": 682
+    },
+    {
+        "Nombre": "Costa Rica",
+        "Codigo": "CR",
+        "country_phone_Codigo": 506
+    },
+    {
+        "Nombre": "Cote D'Ivoire (Ivory Coast)",
+        "Codigo": "CI",
+        "country_phone_Codigo": 225
+    },
+    {
+        "Nombre": "Croatia (Hrvatska)",
+        "Codigo": "HR",
+        "country_phone_Codigo": 385
+    },
+    {
+        "Nombre": "Cuba",
+        "Codigo": "CU",
+        "country_phone_Codigo": 53
+    },
+    {
+        "Nombre": "Cyprus",
+        "Codigo": "CY",
+        "country_phone_Codigo": 357
+    },
+    {
+        "Nombre": "Czech Republic",
+        "Codigo": "CZ",
+        "country_phone_Codigo": 420
+    },
+    {
+        "Nombre": "Democratic Republic Of The Congo",
+        "Codigo": "CD",
+        "country_phone_Codigo": 243
+    },
+    {
+        "Nombre": "Denmark",
+        "Codigo": "DK",
+        "country_phone_Codigo": 45
+    },
+    {
+        "Nombre": "Djibouti",
+        "Codigo": "DJ",
+        "country_phone_Codigo": 253
+    },
+    {
+        "Nombre": "Dominica",
+        "Codigo": "DM",
+        "country_phone_Codigo": 1767
+    },
+    {
+        "Nombre": "Dominican Republic",
+        "Codigo": "DO",
+        "country_phone_Codigo": 1809
+    },
+    {
+        "Nombre": "East Timor",
+        "Codigo": "TP",
+        "country_phone_Codigo": 670
+    },
+    {
+        "Nombre": "Ecuador",
+        "Codigo": "EC",
+        "country_phone_Codigo": 593
+    },
+    {
+        "Nombre": "Egypt",
+        "Codigo": "EG",
+        "country_phone_Codigo": 20
+    },
+    {
+        "Nombre": "El Salvador",
+        "Codigo": "SV",
+        "country_phone_Codigo": 503
+    },
+    {
+        "Nombre": "Equatorial Guinea",
+        "Codigo": "GQ",
+        "country_phone_Codigo": 240
+    },
+    {
+        "Nombre": "Eritrea",
+        "Codigo": "ER",
+        "country_phone_Codigo": 291
+    },
+    {
+        "Nombre": "Estonia",
+        "Codigo": "EE",
+        "country_phone_Codigo": 372
+    },
+    {
+        "Nombre": "Ethiopia",
+        "Codigo": "ET",
+        "country_phone_Codigo": 251
+    },
+    {
+        "Nombre": "Falkland Islands",
+        "Codigo": "FK",
+        "country_phone_Codigo": 500
+    },
+    {
+        "Nombre": "Faroe Islands",
+        "Codigo": "FO",
+        "country_phone_Codigo": 298
+    },
+    {
+        "Nombre": "Fiji Islands",
+        "Codigo": "FJ",
+        "country_phone_Codigo": 679
+    },
+    {
+        "Nombre": "Finland",
+        "Codigo": "FI",
+        "country_phone_Codigo": 358
+    },
+    {
+        "Nombre": "France",
+        "Codigo": "FR",
+        "country_phone_Codigo": 33
+    },
+    {
+        "Nombre": "French Guiana",
+        "Codigo": "GF",
+        "country_phone_Codigo": 594
+    },
+    {
+        "Nombre": "French Polynesia",
+        "Codigo": "PF",
+        "country_phone_Codigo": 689
+    },
+    {
+        "Nombre": "French Southern Territories",
+        "Codigo": "TF",
+        "country_phone_Codigo": 0
+    },
+    {
+        "Nombre": "Gabon",
+        "Codigo": "GA",
+        "country_phone_Codigo": 241
+    },
+    {
+        "Nombre": "Gambia The",
+        "Codigo": "GM",
+        "country_phone_Codigo": 220
+    },
+    {
+        "Nombre": "Georgia",
+        "Codigo": "GE",
+        "country_phone_Codigo": 995
+    },
+    {
+        "Nombre": "Germany",
+        "Codigo": "DE",
+        "country_phone_Codigo": 49
+    },
+    {
+        "Nombre": "Ghana",
+        "Codigo": "GH",
+        "country_phone_Codigo": 233
+    },
+    {
+        "Nombre": "Gibraltar",
+        "Codigo": "GI",
+        "country_phone_Codigo": 350
+    },
+    {
+        "Nombre": "Greece",
+        "Codigo": "GR",
+        "country_phone_Codigo": 30
+    },
+    {
+        "Nombre": "Greenland",
+        "Codigo": "GL",
+        "country_phone_Codigo": 299
+    },
+    {
+        "Nombre": "Grenada",
+        "Codigo": "GD",
+        "country_phone_Codigo": 1473
+    },
+    {
+        "Nombre": "Guadeloupe",
+        "Codigo": "GP",
+        "country_phone_Codigo": 590
+    },
+    {
+        "Nombre": "Guam",
+        "Codigo": "GU",
+        "country_phone_Codigo": 1671
+    },
+    {
+        "Nombre": "Guatemala",
+        "Codigo": "GT",
+        "country_phone_Codigo": 502
+    },
+    {
+        "Nombre": "Guernsey and Alderney",
+        "Codigo": "XU",
+        "country_phone_Codigo": 44
+    },
+    {
+        "Nombre": "Guinea",
+        "Codigo": "GN",
+        "country_phone_Codigo": 224
+    },
+    {
+        "Nombre": "Guinea-Bissau",
+        "Codigo": "GW",
+        "country_phone_Codigo": 245
+    },
+    {
+        "Nombre": "Guyana",
+        "Codigo": "GY",
+        "country_phone_Codigo": 592
+    },
+    {
+        "Nombre": "Haiti",
+        "Codigo": "HT",
+        "country_phone_Codigo": 509
+    },
+    {
+        "Nombre": "Heard and McDonald Islands",
+        "Codigo": "HM",
+        "country_phone_Codigo": 0
+    },
+    {
+        "Nombre": "Honduras",
+        "Codigo": "HN",
+        "country_phone_Codigo": 504
+    },
+    {
+        "Nombre": "Hong Kong S.A.R.",
+        "Codigo": "HK",
+        "country_phone_Codigo": 852
+    },
+    {
+        "Nombre": "Hungary",
+        "Codigo": "HU",
+        "country_phone_Codigo": 36
+    },
+    {
+        "Nombre": "Iceland",
+        "Codigo": "IS",
+        "country_phone_Codigo": 354
+    },
+    {
+        "Nombre": "India",
+        "Codigo": "IN",
+        "country_phone_Codigo": 91
+    },
+    {
+        "Nombre": "Indonesia",
+        "Codigo": "ID",
+        "country_phone_Codigo": 62
+    },
+    {
+        "Nombre": "Iran",
+        "Codigo": "IR",
+        "country_phone_Codigo": 98
+    },
+    {
+        "Nombre": "Iraq",
+        "Codigo": "IQ",
+        "country_phone_Codigo": 964
+    },
+    {
+        "Nombre": "Ireland",
+        "Codigo": "IE",
+        "country_phone_Codigo": 353
+    },
+    {
+        "Nombre": "Israel",
+        "Codigo": "IL",
+        "country_phone_Codigo": 972
+    },
+    {
+        "Nombre": "Italy",
+        "Codigo": "IT",
+        "country_phone_Codigo": 39
+    },
+    {
+        "Nombre": "Jamaica",
+        "Codigo": "JM",
+        "country_phone_Codigo": 1876
+    },
+    {
+        "Nombre": "Japan",
+        "Codigo": "JP",
+        "country_phone_Codigo": 81
+    },
+    {
+        "Nombre": "Jersey",
+        "Codigo": "XJ",
+        "country_phone_Codigo": 44
+    },
+    {
+        "Nombre": "Jordan",
+        "Codigo": "JO",
+        "country_phone_Codigo": 962
+    },
+    {
+        "Nombre": "Kazakhstan",
+        "Codigo": "KZ",
+        "country_phone_Codigo": 7
+    },
+    {
+        "Nombre": "Kenya",
+        "Codigo": "KE",
+        "country_phone_Codigo": 254
+    },
+    {
+        "Nombre": "Kiribati",
+        "Codigo": "KI",
+        "country_phone_Codigo": 686
+    },
+    {
+        "Nombre": "Korea North",
+        "Codigo": "KP",
+        "country_phone_Codigo": 850
+    },
+    {
+        "Nombre": "Korea South",
+        "Codigo": "KR",
+        "country_phone_Codigo": 82
+    },
+    {
+        "Nombre": "Kuwait",
+        "Codigo": "KW",
+        "country_phone_Codigo": 965
+    },
+    {
+        "Nombre": "Kyrgyzstan",
+        "Codigo": "KG",
+        "country_phone_Codigo": 996
+    },
+    {
+        "Nombre": "Laos",
+        "Codigo": "LA",
+        "country_phone_Codigo": 856
+    },
+    {
+        "Nombre": "Latvia",
+        "Codigo": "LV",
+        "country_phone_Codigo": 371
+    },
+    {
+        "Nombre": "Lebanon",
+        "Codigo": "LB",
+        "country_phone_Codigo": 961
+    },
+    {
+        "Nombre": "Lesotho",
+        "Codigo": "LS",
+        "country_phone_Codigo": 266
+    },
+    {
+        "Nombre": "Liberia",
+        "Codigo": "LR",
+        "country_phone_Codigo": 231
+    },
+    {
+        "Nombre": "Libya",
+        "Codigo": "LY",
+        "country_phone_Codigo": 218
+    },
+    {
+        "Nombre": "Liechtenstein",
+        "Codigo": "LI",
+        "country_phone_Codigo": 423
+    },
+    {
+        "Nombre": "Lithuania",
+        "Codigo": "LT",
+        "country_phone_Codigo": 370
+    },
+    {
+        "Nombre": "Luxembourg",
+        "Codigo": "LU",
+        "country_phone_Codigo": 352
+    },
+    {
+        "Nombre": "Macau S.A.R.",
+        "Codigo": "MO",
+        "country_phone_Codigo": 853
+    },
+    {
+        "Nombre": "Macedonia",
+        "Codigo": "MK",
+        "country_phone_Codigo": 389
+    },
+    {
+        "Nombre": "Madagascar",
+        "Codigo": "MG",
+        "country_phone_Codigo": 261
+    },
+    {
+        "Nombre": "Malawi",
+        "Codigo": "MW",
+        "country_phone_Codigo": 265
+    },
+    {
+        "Nombre": "Malaysia",
+        "Codigo": "MY",
+        "country_phone_Codigo": 60
+    },
+    {
+        "Nombre": "Maldives",
+        "Codigo": "MV",
+        "country_phone_Codigo": 960
+    },
+    {
+        "Nombre": "Mali",
+        "Codigo": "ML",
+        "country_phone_Codigo": 223
+    },
+    {
+        "Nombre": "Malta",
+        "Codigo": "MT",
+        "country_phone_Codigo": 356
+    },
+    {
+        "Nombre": "Man (Isle of)",
+        "Codigo": "XM",
+        "country_phone_Codigo": 44
+    },
+    {
+        "Nombre": "Marshall Islands",
+        "Codigo": "MH",
+        "country_phone_Codigo": 692
+    },
+    {
+        "Nombre": "Martinique",
+        "Codigo": "MQ",
+        "country_phone_Codigo": 596
+    },
+    {
+        "Nombre": "Mauritania",
+        "Codigo": "MR",
+        "country_phone_Codigo": 222
+    },
+    {
+        "Nombre": "Mauritius",
+        "Codigo": "MU",
+        "country_phone_Codigo": 230
+    },
+    {
+        "Nombre": "Mayotte",
+        "Codigo": "YT",
+        "country_phone_Codigo": 269
+    },
+    {
+        "Nombre": "Mexico",
+        "Codigo": "MX",
+        "country_phone_Codigo": 52
+    },
+    {
+        "Nombre": "Micronesia",
+        "Codigo": "FM",
+        "country_phone_Codigo": 691
+    },
+    {
+        "Nombre": "Moldova",
+        "Codigo": "MD",
+        "country_phone_Codigo": 373
+    },
+    {
+        "Nombre": "Monaco",
+        "Codigo": "MC",
+        "country_phone_Codigo": 377
+    },
+    {
+        "Nombre": "Mongolia",
+        "Codigo": "MN",
+        "country_phone_Codigo": 976
+    },
+    {
+        "Nombre": "Montserrat",
+        "Codigo": "MS",
+        "country_phone_Codigo": 1664
+    },
+    {
+        "Nombre": "Morocco",
+        "Codigo": "MA",
+        "country_phone_Codigo": 212
+    },
+    {
+        "Nombre": "Mozambique",
+        "Codigo": "MZ",
+        "country_phone_Codigo": 258
+    },
+    {
+        "Nombre": "Myanmar",
+        "Codigo": "MM",
+        "country_phone_Codigo": 95
+    },
+    {
+        "Nombre": "Namibia",
+        "Codigo": "NA",
+        "country_phone_Codigo": 264
+    },
+    {
+        "Nombre": "Nauru",
+        "Codigo": "NR",
+        "country_phone_Codigo": 674
+    },
+    {
+        "Nombre": "Nepal",
+        "Codigo": "NP",
+        "country_phone_Codigo": 977
+    },
+    {
+        "Nombre": "Netherlands Antilles",
+        "Codigo": "AN",
+        "country_phone_Codigo": 599
+    },
+    {
+        "Nombre": "Netherlands The",
+        "Codigo": "NL",
+        "country_phone_Codigo": 31
+    },
+    {
+        "Nombre": "New Caledonia",
+        "Codigo": "NC",
+        "country_phone_Codigo": 687
+    },
+    {
+        "Nombre": "New Zealand",
+        "Codigo": "NZ",
+        "country_phone_Codigo": 64
+    },
+    {
+        "Nombre": "Nicaragua",
+        "Codigo": "NI",
+        "country_phone_Codigo": 505
+    },
+    {
+        "Nombre": "Niger",
+        "Codigo": "NE",
+        "country_phone_Codigo": 227
+    },
+    {
+        "Nombre": "Nigeria",
+        "Codigo": "NG",
+        "country_phone_Codigo": 234
+    },
+    {
+        "Nombre": "Niue",
+        "Codigo": "NU",
+        "country_phone_Codigo": 683
+    },
+    {
+        "Nombre": "Norfolk Island",
+        "Codigo": "NF",
+        "country_phone_Codigo": 672
+    },
+    {
+        "Nombre": "Northern Mariana Islands",
+        "Codigo": "MP",
+        "country_phone_Codigo": 1670
+    },
+    {
+        "Nombre": "Norway",
+        "Codigo": "NO",
+        "country_phone_Codigo": 47
+    },
+    {
+        "Nombre": "Oman",
+        "Codigo": "OM",
+        "country_phone_Codigo": 968
+    },
+    {
+        "Nombre": "Pakistan",
+        "Codigo": "PK",
+        "country_phone_Codigo": 92
+    },
+    {
+        "Nombre": "Palau",
+        "Codigo": "PW",
+        "country_phone_Codigo": 680
+    },
+    {
+        "Nombre": "Palestinian Territory Occupied",
+        "Codigo": "PS",
+        "country_phone_Codigo": 970
+    },
+    {
+        "Nombre": "Panama",
+        "Codigo": "PA",
+        "country_phone_Codigo": 507
+    },
+    {
+        "Nombre": "Papua new Guinea",
+        "Codigo": "PG",
+        "country_phone_Codigo": 675
+    },
+    {
+        "Nombre": "Paraguay",
+        "Codigo": "PY",
+        "country_phone_Codigo": 595
+    },
+    {
+        "Nombre": "Peru",
+        "Codigo": "PE",
+        "country_phone_Codigo": 51
+    },
+    {
+        "Nombre": "Philippines",
+        "Codigo": "PH",
+        "country_phone_Codigo": 63
+    },
+    {
+        "Nombre": "Pitcairn Island",
+        "Codigo": "PN",
+        "country_phone_Codigo": 0
+    },
+    {
+        "Nombre": "Poland",
+        "Codigo": "PL",
+        "country_phone_Codigo": 48
+    },
+    {
+        "Nombre": "Portugal",
+        "Codigo": "PT",
+        "country_phone_Codigo": 351
+    },
+    {
+        "Nombre": "Puerto Rico",
+        "Codigo": "PR",
+        "country_phone_Codigo": 1787
+    },
+    {
+        "Nombre": "Qatar",
+        "Codigo": "QA",
+        "country_phone_Codigo": 974
+    },
+    {
+        "Nombre": "Republic Of The Congo",
+        "Codigo": "CG",
+        "country_phone_Codigo": 242
+    },
+    {
+        "Nombre": "Reunion",
+        "Codigo": "RE",
+        "country_phone_Codigo": 262
+    },
+    {
+        "Nombre": "Romania",
+        "Codigo": "RO",
+        "country_phone_Codigo": 40
+    },
+    {
+        "Nombre": "Russia",
+        "Codigo": "RU",
+        "country_phone_Codigo": 70
+    },
+    {
+        "Nombre": "Rwanda",
+        "Codigo": "RW",
+        "country_phone_Codigo": 250
+    },
+    {
+        "Nombre": "Saint Helena",
+        "Codigo": "SH",
+        "country_phone_Codigo": 290
+    },
+    {
+        "Nombre": "Saint Kitts And Nevis",
+        "Codigo": "KN",
+        "country_phone_Codigo": 1869
+    },
+    {
+        "Nombre": "Saint Lucia",
+        "Codigo": "LC",
+        "country_phone_Codigo": 1758
+    },
+    {
+        "Nombre": "Saint Pierre and Miquelon",
+        "Codigo": "PM",
+        "country_phone_Codigo": 508
+    },
+    {
+        "Nombre": "Saint Vincent And The Grenadines",
+        "Codigo": "VC",
+        "country_phone_Codigo": 1784
+    },
+    {
+        "Nombre": "Samoa",
+        "Codigo": "WS",
+        "country_phone_Codigo": 684
+    },
+    {
+        "Nombre": "San Marino",
+        "Codigo": "SM",
+        "country_phone_Codigo": 378
+    },
+    {
+        "Nombre": "Sao Tome and Principe",
+        "Codigo": "ST",
+        "country_phone_Codigo": 239
+    },
+    {
+        "Nombre": "Saudi Arabia",
+        "Codigo": "SA",
+        "country_phone_Codigo": 966
+    },
+    {
+        "Nombre": "Senegal",
+        "Codigo": "SN",
+        "country_phone_Codigo": 221
+    },
+    {
+        "Nombre": "Serbia",
+        "Codigo": "RS",
+        "country_phone_Codigo": 381
+    },
+    {
+        "Nombre": "Seychelles",
+        "Codigo": "SC",
+        "country_phone_Codigo": 248
+    },
+    {
+        "Nombre": "Sierra Leone",
+        "Codigo": "SL",
+        "country_phone_Codigo": 232
+    },
+    {
+        "Nombre": "Singapore",
+        "Codigo": "SG",
+        "country_phone_Codigo": 65
+    },
+    {
+        "Nombre": "Slovakia",
+        "Codigo": "SK",
+        "country_phone_Codigo": 421
+    },
+    {
+        "Nombre": "Slovenia",
+        "Codigo": "SI",
+        "country_phone_Codigo": 386
+    },
+    {
+        "Nombre": "Smaller Territories of the UK",
+        "Codigo": "XG",
+        "country_phone_Codigo": 44
+    },
+    {
+        "Nombre": "Solomon Islands",
+        "Codigo": "SB",
+        "country_phone_Codigo": 677
+    },
+    {
+        "Nombre": "Somalia",
+        "Codigo": "SO",
+        "country_phone_Codigo": 252
+    },
+    {
+        "Nombre": "South Africa",
+        "Codigo": "ZA",
+        "country_phone_Codigo": 27
+    },
+    {
+        "Nombre": "South Georgia",
+        "Codigo": "GS",
+        "country_phone_Codigo": 0
+    },
+    {
+        "Nombre": "South Sudan",
+        "Codigo": "SS",
+        "country_phone_Codigo": 211
+    },
+    {
+        "Nombre": "Spain",
+        "Codigo": "ES",
+        "country_phone_Codigo": 34
+    },
+    {
+        "Nombre": "Sri Lanka",
+        "Codigo": "LK",
+        "country_phone_Codigo": 94
+    },
+    {
+        "Nombre": "Sudan",
+        "Codigo": "SD",
+        "country_phone_Codigo": 249
+    },
+    {
+        "Nombre": "SuriNombre",
+        "Codigo": "SR",
+        "country_phone_Codigo": 597
+    },
+    {
+        "Nombre": "Svalbard And Jan Mayen Islands",
+        "Codigo": "SJ",
+        "country_phone_Codigo": 47
+    },
+    {
+        "Nombre": "Swaziland",
+        "Codigo": "SZ",
+        "country_phone_Codigo": 268
+    },
+    {
+        "Nombre": "Sweden",
+        "Codigo": "SE",
+        "country_phone_Codigo": 46
+    },
+    {
+        "Nombre": "Switzerland",
+        "Codigo": "CH",
+        "country_phone_Codigo": 41
+    },
+    {
+        "Nombre": "Syria",
+        "Codigo": "SY",
+        "country_phone_Codigo": 963
+    },
+    {
+        "Nombre": "Taiwan",
+        "Codigo": "TW",
+        "country_phone_Codigo": 886
+    },
+    {
+        "Nombre": "Tajikistan",
+        "Codigo": "TJ",
+        "country_phone_Codigo": 992
+    },
+    {
+        "Nombre": "Tanzania",
+        "Codigo": "TZ",
+        "country_phone_Codigo": 255
+    },
+    {
+        "Nombre": "Thailand",
+        "Codigo": "TH",
+        "country_phone_Codigo": 66
+    },
+    {
+        "Nombre": "Togo",
+        "Codigo": "TG",
+        "country_phone_Codigo": 228
+    },
+    {
+        "Nombre": "Tokelau",
+        "Codigo": "TK",
+        "country_phone_Codigo": 690
+    },
+    {
+        "Nombre": "Tonga",
+        "Codigo": "TO",
+        "country_phone_Codigo": 676
+    },
+    {
+        "Nombre": "Trinidad And Tobago",
+        "Codigo": "TT",
+        "country_phone_Codigo": 1868
+    },
+    {
+        "Nombre": "Tunisia",
+        "Codigo": "TN",
+        "country_phone_Codigo": 216
+    },
+    {
+        "Nombre": "Turkey",
+        "Codigo": "TR",
+        "country_phone_Codigo": 90
+    },
+    {
+        "Nombre": "Turkmenistan",
+        "Codigo": "TM",
+        "country_phone_Codigo": 7370
+    },
+    {
+        "Nombre": "Turks And Caicos Islands",
+        "Codigo": "TC",
+        "country_phone_Codigo": 1649
+    },
+    {
+        "Nombre": "Tuvalu",
+        "Codigo": "TV",
+        "country_phone_Codigo": 688
+    },
+    {
+        "Nombre": "Uganda",
+        "Codigo": "UG",
+        "country_phone_Codigo": 256
+    },
+    {
+        "Nombre": "Ukraine",
+        "Codigo": "UA",
+        "country_phone_Codigo": 380
+    },
+    {
+        "Nombre": "United Arab Emirates",
+        "Codigo": "AE",
+        "country_phone_Codigo": 971
+    },
+    {
+        "Nombre": "United Kingdom",
+        "Codigo": "GB",
+        "country_phone_Codigo": 44
+    },
+    {
+        "Nombre": "United States",
+        "Codigo": "US",
+        "country_phone_Codigo": 1
+    },
+    {
+        "Nombre": "United States Minor Outlying Islands",
+        "Codigo": "UM",
+        "country_phone_Codigo": 1
+    },
+    {
+        "Nombre": "Uruguay",
+        "Codigo": "UY",
+        "country_phone_Codigo": 598
+    },
+    {
+        "Nombre": "Uzbekistan",
+        "Codigo": "UZ",
+        "country_phone_Codigo": 998
+    },
+    {
+        "Nombre": "Vanuatu",
+        "Codigo": "VU",
+        "country_phone_Codigo": 678
+    },
+    {
+        "Nombre": "Vatican City State (Holy See)",
+        "Codigo": "VA",
+        "country_phone_Codigo": 39
+    },
+    {
+        "Nombre": "Venezuela",
+        "Codigo": "VE",
+        "country_phone_Codigo": 58
+    },
+    {
+        "Nombre": "Vietnam",
+        "Codigo": "VN",
+        "country_phone_Codigo": 84
+    },
+    {
+        "Nombre": "Virgin Islands (British)",
+        "Codigo": "VG",
+        "country_phone_Codigo": 1284
+    },
+    {
+        "Nombre": "Virgin Islands (US)",
+        "Codigo": "VI",
+        "country_phone_Codigo": 1340
+    },
+    {
+        "Nombre": "Wallis And Futuna Islands",
+        "Codigo": "WF",
+        "country_phone_Codigo": 681
+    },
+    {
+        "Nombre": "Western Sahara",
+        "Codigo": "EH",
+        "country_phone_Codigo": 212
+    },
+    {
+        "Nombre": "Yemen",
+        "Codigo": "YE",
+        "country_phone_Codigo": 967
+    },
+    {
+        "Nombre": "Yugoslavia",
+        "Codigo": "YU",
+        "country_phone_Codigo": 38
+    },
+    {
+        "Nombre": "Zambia",
+        "Codigo": "ZM",
+        "country_phone_Codigo": 260
+    },
+    {
+        "Nombre": "Zimbabwe",
+        "Codigo": "ZW",
+        "country_phone_Codigo": 263
+    }
+]

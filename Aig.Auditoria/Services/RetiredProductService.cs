@@ -17,23 +17,24 @@ namespace Aig.Auditoria.Services
         {
             try
             {
-                var result = (from data in DalService.DBContext.Set<AUD_ProdRetiroRetencionTB>()
-                              where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.PresentacionComercial.Contains(model.Filter) || data.Fabricante.Contains(model.Filter) || data.Lote.Contains(model.Filter)))
-                              orderby data.Nombre
-                              select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+                model.Ldata = null; model.Total = 0;
 
-                var count = (from data in DalService.DBContext.Set<AUD_ProdRetiroRetencionTB>()
-                             where data.Deleted == false &&
-                             (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.PresentacionComercial.Contains(model.Filter) || data.Fabricante.Contains(model.Filter) || data.Lote.Contains(model.Filter)))
-                             select data).Count();
+                model.Ldata = (from data in DalService.DBContext.Set<AUD_ProdRetiroRetencionTB>()
+                               where data.Deleted == false &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.PresentacionComercial.Contains(model.Filter) || data.Fabricante.Contains(model.Filter) || data.Lote.Contains(model.Filter)))
+                               orderby data.Nombre
+                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                return new GenericModel<AUD_ProdRetiroRetencionTB>() { Ldata = result, Total = count };
+                model.Total = (from data in DalService.DBContext.Set<AUD_ProdRetiroRetencionTB>()
+                               where data.Deleted == false &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.PresentacionComercial.Contains(model.Filter) || data.Fabricante.Contains(model.Filter) || data.Lote.Contains(model.Filter)))
+                               select data).Count();
+
             }
             catch (Exception ex)
             { }
 
-            return null;
+            return model;
         }
 
         public async Task<List<AUD_ProdRetiroRetencionTB>> GetAll()

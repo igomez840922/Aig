@@ -1,6 +1,6 @@
 ﻿@if (OpenDialog)
 {
-    <div class="modal show fade" style="display:block;" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal show fade" style="display: block;overflow-y: auto;" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,18 +22,20 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="kt-portlet__foot" style="padding:10px!important">
-                            <div class="kt-form__actions text-right">
-                                <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal" aria-label="Close" @onclick="@OptionNo">@languageContainerService.Keys["No"]</button>
-
-                                <button type="button" class="btn btn-md btn-primary" data-dismiss="modal" @onclick="@OptionYes">@languageContainerService.Keys["Yes"]</button>
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
+                    <div class="modal-footer">
+                    <button type="button" @onclick="@OptionYes"
+                        class="btn btn-info waves-effect btn-wide">
+                        @languageContainerService.Keys["Yes"]
+                                </button>
+
+                    <button type="button" class="btn btn-danger waves-effect btn-wide"
+                        @onclick="@OptionNo">
+                        @languageContainerService.Keys["No"]
+                                </button>
+                            </div>
             </div>
         </div>
     </div>

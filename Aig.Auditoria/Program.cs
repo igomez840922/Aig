@@ -85,6 +85,7 @@ builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IInspectionsService, InspectionsService>();
 builder.Services.AddScoped<IEstablishmentsService, EstablishmentsService>();
 builder.Services.AddScoped<IRetiredProductService, RetiredProductService>();
+builder.Services.AddScoped<ICountriesService, CountriesService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

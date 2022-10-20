@@ -1,12 +1,15 @@
-﻿using Aig.Auditoria.Services;
+﻿using Aig.Auditoria.Pages.Settings.Country;
+using Aig.Auditoria.Services;
 using DataAccess;
 using DataAccess.Auditoria;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -79,8 +82,30 @@ namespace Aig.Auditoria.Helper
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
+                var countryService = serviceScope.ServiceProvider.GetService<ICountriesService>();
                 var inspeccionService = serviceScope.ServiceProvider.GetService<IInspectionsService>();
 
+                //Countries
+                if (await countryService.Count() <= 0)
+                {
+                    List<PaisTB> lCountries = null;
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.paises.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        var jsonFileContent = reader.ReadToEnd();
+                        lCountries = JsonConvert.DeserializeObject<List<PaisTB>>(jsonFileContent);
+                    }
+                    if (lCountries != null)
+                    {
+                        foreach (var country in lCountries)
+                        {
+                            await countryService.Save(country);
+                        }
+                    }
+                }
+
+
+                //Probando Inspecciones
                 if (await inspeccionService.Count() <= 0)
                 {
                     AUD_InspeccionTB _Inspection = new AUD_InspeccionTB()

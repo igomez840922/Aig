@@ -1,4 +1,4 @@
-﻿@page "/productosretirados"
+﻿@page "/configuracion/paises"
 @layout BackendLayout
 @attribute [Authorize]
 
@@ -23,7 +23,7 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                @languageContainerService.Keys["RecalledProducts"]
+                                @languageContainerService.Keys["Countries"]
                             </h3>
                         </div>
                         <div class="kt-portlet__head-toolbar">
@@ -67,36 +67,28 @@
                                                 <table class="table rounded table-striped">
                                                     <thead class=thead-light>
                                                         <tr>
-                                                            <th>@languageContainerService.Keys["Sección"]</th>
                                                             <th>@languageContainerService.Keys["Name"]</th>
-                                                            <th>@languageContainerService.Keys["CommercialPresentation"]</th>
-                                                            <th>@languageContainerService.Keys["Fabricante"]</th>
-                                                            <th>@languageContainerService.Keys["Pais"]</th>
-                                                            <th>@languageContainerService.Keys["Lot"]</th>
-                                                            <th>@languageContainerService.Keys["ExpDate"]</th>
-                                                            <th>@languageContainerService.Keys["AmountWithheld"]</th>
-                                                            <th>@languageContainerService.Keys["AmountWithdrawal"]</th>
-                                                            <th>@languageContainerService.Keys["ProductDestiny"]</th>
+                                                            <th>@languageContainerService.Keys["Code"]</th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @if (dataModel.Ldata != null)
+                                                        @foreach (var dt in dataModel.Ldata)
                                                         {
-                                                            @foreach (var dt in dataModel.Ldata)
-                                                            {
-                                                                <tr>
-                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.SeccionOficinaRegional??"")</td>
-                                                                    <td scope="row">@dt.Nombre</td>
-                                                                    <td>@dt.PresentacionComercial</td>
-                                                                    <td>@dt.Fabricante</td>
-                                                                    <td>@dt.Pais</td>
-                                                                    <td>@dt.Lote</td>
-                                                                    <td>@(dt.FechaExp?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                    <td>@dt.CantidadRetenida</td>
-                                                                    <td>@dt.CantidadRetenida</td>
-                                                                    <td>@dt.Destino</td>
-                                                                </tr>
-                                                            }
+                                                            <tr>
+                                                                <td scope="row">@dt.Nombre</td>
+                                                                <td scope="row">@dt.Codigo</td>                                                                
+                                                                <td style="text-align:right">
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                        <div class="dropdown-menu">
+                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- /btn-group -->
+                                                                </td>
+                                                            </tr>
                                                         }
                                                     </tbody>
                                                 </table>
@@ -140,5 +132,5 @@
 
 </div>
 
-<Aig.Auditoria.Components.Inspections.InspectionBase></Aig.Auditoria.Components.Inspections.InspectionBase>
+<Aig.Auditoria.Components.Contries.AddEditCountry></Aig.Auditoria.Components.Contries.AddEditCountry>
 <Aig.Auditoria.Components.DeleteConfirmDialog></Aig.Auditoria.Components.DeleteConfirmDialog>
