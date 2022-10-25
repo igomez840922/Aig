@@ -103,7 +103,7 @@ EditInspection: Editar Inspección
 StartDate: Fecha Inicio
 GeneralInfo: Información General
 Section: Sección/Oficina Regional
-OperLicenseNumber: Número de Licencia/Aviso de Operaciones
+OperLicenseNumber: No. de Licencia
 Products: Productos
 AddProduct: Agregar Producto
 CommercialPresentation: Presentación Comercial
@@ -131,3 +131,32 @@ NewCountry: Nuevo País
 EditCountry: Editar País
 NewProduct: Nuevo Producto
 EditProduct: Editar Producto
+EmailServer: Servidor de Correo
+SmtpServer: Servidor Smtp
+SmtpPort: Puerto Smtp
+EmailAccount: Cuenta de Correo
+ProductName: Nombre del Producto
+CountryOfManufacture: Pais de Fabricación
+RetentionReason: Motivo de Retención y/o Retiro
+NumberOfHealthRegister: No. Registro Sanitario
+Add: Agregar
+Attachments: Archivos Adjuntos
+File: Archivo
+UploadAttachment: Adjuntar Archivo
+YouExceedMaximumSizeOf: Ha excedido el tamaño máximo de
+IspectionType: Tipo de Inspección
+ViewAttachemnt: Ver Adjunto
+InspectionDate: Fecha de Inspección
+InspectionType: Tipo de Inspección
+NoticeOperation: Aviso de Operaciones
+LegalRepresentation: Representación Legal
+DNFDParticipants: Participantes DNFD
+Identification: Identificación
+EstablishmentParticipants: Participantes del Establecimiento
+Position: Cargo
+Location: Ubicación
+SignatureBytheMinistryofHealth: Firma por el Ministerio de Salud
+SignatureBytheEstablishment: Firma por el Establecimiento
+Clear: Borrar
+RegNum: Número de Registro
+Download: Descargar

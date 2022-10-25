@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -10,12 +12,22 @@ namespace DataModel
 {
 	public class AttachmentTB : SystemId
 	{
-		private string absolutePath;
-		[System.ComponentModel.DataAnnotations.StringLength(250)]
+        private string description;
+        [System.ComponentModel.DataAnnotations.StringLength(500)]
+        [Required(ErrorMessage = "RequiredField")]
+        public string Description { get => description; set => SetProperty(ref description, value); }
+
+        private string fileName;
+        [System.ComponentModel.DataAnnotations.StringLength(500)]
+        public string FileName { get => fileName; set => SetProperty(ref fileName, value); }
+
+
+        private string absolutePath;
+		[System.ComponentModel.DataAnnotations.StringLength(500)]
 		public string AbsolutePath { get => absolutePath; set => SetProperty(ref absolutePath, value); }
 
 		private string url;
-		[System.ComponentModel.DataAnnotations.StringLength(250)]
+		[System.ComponentModel.DataAnnotations.StringLength(500)]
 		public string Url { get => url; set => SetProperty(ref url, value); }
 
 		private string base64;
@@ -38,29 +50,11 @@ namespace DataModel
 			set { }
 		}
 
-		//public void SetImageSize()
-		//{
-		//	try
-		//	{
-		//		var imagePath = System.Web.HttpContext.Current.Server.MapPath("~" + Url);
-		//		using (var fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-		//		{
-		//			using (var image = Image.FromStream(fileStream, false, false))
-		//			{
-		//				Height = image.Height;
-		//				Width = image.Width;
-		//			}
-		//		}
-		//	}
-		//	catch { }
-
-		//}
-
-		//[System.ComponentModel.DataAnnotations.Schema.NotMapped]
-		//public int Height { get; set; }
-
-		//[System.ComponentModel.DataAnnotations.Schema.NotMapped]
-		//public int Width { get; set; }
-
-	}
+        //Inspección
+        private long? inspeccionId;
+        public long? InspeccionId { get => inspeccionId; set => SetProperty(ref inspeccionId, value); }
+        private AUD_InspeccionTB? inspeccion;
+        [JsonIgnore]
+        public virtual AUD_InspeccionTB? Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
+    }
 }

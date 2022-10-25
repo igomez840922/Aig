@@ -124,4 +124,24 @@ namespace DataModel.Helper
         [Description("Evaluación Técnica por Apertura para la Elaboración de Cosméticos Artesanales")]
         EvaluacionTecnicaAperturaCosmeticArtesanales = 11,
     }
+
+    public enum enum_StatusInspecciones
+    {
+        [Description("Pendiente")]
+        Pending = 0,
+        [Description("Reprogramar")]
+        Reprograming = 1,
+        [Description("Finalizado")]
+        Completed = 2
+    }
+
+    public enum enum_InspRetiroRetencionType
+    {
+        [Description("Retención")]
+        Withholding = 0,
+        [Description("Retención y Retiro")]
+        WithholdingWithdrawal = 1
+    }
+
+    
 }

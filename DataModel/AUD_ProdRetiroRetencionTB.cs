@@ -75,5 +75,12 @@ namespace DataModel
         private string destino;
         [StringLength(250)]
         public string Destino { get => destino; set => SetProperty(ref destino, value); }
+
+        //Registro Sanitario
+        private string regSanitario;
+        [StringLength(250)]
+        public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
+
+
     }
 }

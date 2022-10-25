@@ -6,6 +6,7 @@ using DataModel.Helper;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Duende.IdentityServer.Models;
 
 namespace Aig.Auditoria.Components.Inspections
 {   
@@ -15,11 +16,8 @@ namespace Aig.Auditoria.Components.Inspections
         IInspectionsService inspeccionService { get; set; }
         [Inject]
         IProfileService profileService { get; set; }
-        bool OpenDialog { get; set; }
 
-        [Parameter]
-        public DataModel.AUD_InspeccionTB Inspeccion { get; set; }
-
+       
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
@@ -33,7 +31,7 @@ namespace Aig.Auditoria.Components.Inspections
             if (firstRender)
             {
                 await getUserLanguaje();
-                await FetchData();
+                //await FetchData();
             }
         }
 
@@ -53,11 +51,7 @@ namespace Aig.Auditoria.Components.Inspections
 
         
         protected async Task FetchData()
-        {
-            if (Inspeccion != null)
-            {
-                OpenDialog = true;
-            }
+        {            
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -68,16 +62,27 @@ namespace Aig.Auditoria.Components.Inspections
 
         protected async Task Cancel()
         {
-            OpenDialog = false;
-            bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionType_SelectedEvent { tipoActa =  enumAUD_TipoActa.None });
+            bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion =  null });
             await this.InvokeAsync(StateHasChanged);
         }
 
         protected async Task SelectInspectionType(enumAUD_TipoActa tipoActa)
         {
-            OpenDialog = false;
-            Inspeccion.TipoActa = tipoActa;            
-            bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionType_SelectedEvent { tipoActa = tipoActa });
+            AUD_InspeccionTB data = null;
+            switch (tipoActa)
+            {
+                case enumAUD_TipoActa.RetencionRetiroProductos:
+                    {
+                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
+                        break;
+                    }
+                default:
+                    {
+                        return;
+                    }
+            }
+
+            bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = data });
             await this.InvokeAsync(StateHasChanged);
         }
 

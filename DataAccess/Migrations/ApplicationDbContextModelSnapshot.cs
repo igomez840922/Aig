@@ -107,8 +107,8 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("AbsolutePath")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Base64")
                         .HasColumnType("nvarchar(max)");
@@ -119,20 +119,34 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FileName")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
+
+                    b.Property<long?>("InspeccionId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InspeccionId");
 
                     b.ToTable("Attachment");
                 });
@@ -375,6 +389,10 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<string>("AvisoOperación")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -390,6 +408,19 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("FechaInicio")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FirmaDNFD1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirmaDNFD2")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("FirmaEstablec1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirmaEstablec2")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
@@ -402,11 +433,53 @@ namespace DataAccess.Migrations
                     b.Property<int>("IntNumActa")
                         .HasColumnType("int");
 
+                    b.Property<string>("LicenseNumber")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<string>("NumActa")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NumRegDNFD1")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("NumRegDNFD2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParticEstablecimiento")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ParticEstablecimientoCIP")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ParticEstablecimientoCargo")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ParticipantesDNFD")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("RepreLegal")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("RepreLegalIdentificacion")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("StatusInspecciones")
+                        .HasColumnType("int");
+
                     b.Property<int>("TipoActa")
                         .HasColumnType("int");
+
+                    b.Property<string>("UbicacionEstablecimiento")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -446,9 +519,8 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LicenseNumber")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<int>("RetiroRetencionType")
+                        .HasColumnType("int");
 
                     b.Property<string>("SeccionOficinaRegional")
                         .HasMaxLength(250)
@@ -521,6 +593,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("PresentacionComercial")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("RegSanitario")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -735,6 +811,57 @@ namespace DataAccess.Migrations
                     b.HasIndex("PaisId");
 
                     b.ToTable("Provincia");
+                });
+
+            modelBuilder.Entity("DataModel.SmtpCorreoTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Contrasena")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SmtpPuerto")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SmtpServidor")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SmtpCorreo");
                 });
 
             modelBuilder.Entity("DataModel.UserProfileTB", b =>
@@ -1084,6 +1211,16 @@ namespace DataAccess.Migrations
                     b.Navigation("UserProfile");
                 });
 
+            modelBuilder.Entity("DataModel.AttachmentTB", b =>
+                {
+                    b.HasOne("DataModel.AUD_InspeccionTB", "Inspeccion")
+                        .WithMany("LAttachments")
+                        .HasForeignKey("InspeccionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Inspeccion");
+                });
+
             modelBuilder.Entity("DataModel.AUD_InspeccionTB", b =>
                 {
                     b.HasOne("DataModel.AUD_EstablecimientoTB", "Establecimiento")
@@ -1096,7 +1233,7 @@ namespace DataAccess.Migrations
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspAperCambUbicFarmId");
 
                     b.HasOne("DataModel.AUD_InspRetiroRetencionTB", "InspRetiroRetencion")
-                        .WithOne()
+                        .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspRetiroRetencionId");
 
                     b.Navigation("Establecimiento");
@@ -1200,8 +1337,15 @@ namespace DataAccess.Migrations
                     b.Navigation("LInspections");
                 });
 
+            modelBuilder.Entity("DataModel.AUD_InspeccionTB", b =>
+                {
+                    b.Navigation("LAttachments");
+                });
+
             modelBuilder.Entity("DataModel.AUD_InspRetiroRetencionTB", b =>
                 {
+                    b.Navigation("Inspeccion");
+
                     b.Navigation("LProductos");
                 });
 

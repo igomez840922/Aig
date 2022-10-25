@@ -21,13 +21,13 @@ namespace Aig.Auditoria.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<AUD_ProdRetiroRetencionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.PresentacionComercial.Contains(model.Filter) || data.Fabricante.Contains(model.Filter) || data.Lote.Contains(model.Filter)))
-                               orderby data.Nombre
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.RegSanitario.Contains(model.Filter) || data.PresentacionComercial.Contains(model.Filter) || data.Fabricante.Contains(model.Filter) || data.Lote.Contains(model.Filter) || data.Pais.Contains(model.Filter) || data.Destino.Contains(model.Filter) || data.FrmRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter) || data.FrmRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter) || data.FrmRetiroRetencion.Inspeccion.LicenseNumber.Contains(model.Filter) || data.FrmRetiroRetencion.Inspeccion.NumActa.Contains(model.Filter) || data.FrmRetiroRetencion.Inspeccion.Establecimiento.Nombre.Contains(model.Filter)))
+                               orderby data.CreatedDate
                                select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_ProdRetiroRetencionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.PresentacionComercial.Contains(model.Filter) || data.Fabricante.Contains(model.Filter) || data.Lote.Contains(model.Filter)))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.RegSanitario.Contains(model.Filter) || data.PresentacionComercial.Contains(model.Filter) || data.Fabricante.Contains(model.Filter) || data.Lote.Contains(model.Filter) || data.Pais.Contains(model.Filter) || data.Destino.Contains(model.Filter) || data.FrmRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter) || data.FrmRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter) || data.FrmRetiroRetencion.Inspeccion.LicenseNumber.Contains(model.Filter) || data.FrmRetiroRetencion.Inspeccion.NumActa.Contains(model.Filter) || data.FrmRetiroRetencion.Inspeccion.Establecimiento.Nombre.Contains(model.Filter)))
                                select data).Count();
 
             }

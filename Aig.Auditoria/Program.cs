@@ -3,6 +3,7 @@ using Aig.Auditoria.Helper;
 using Aig.Auditoria.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
+using BlazorDownloadFile;
 using Blazored.LocalStorage;
 using DataAccess.Auditoria;
 using DataModel;
@@ -54,6 +55,8 @@ builder.Services.AddEndpointsApiExplorer();
 //For Components Comunucations Pul-Sub
 builder.Services.AddScoped<ComponentBus>();
 
+//Download File
+builder.Services.AddBlazorDownloadFile(ServiceLifetime.Scoped);
 
 ////Quartz Hosted
 //builder.Services.AddQuartz(q =>
@@ -86,6 +89,10 @@ builder.Services.AddScoped<IInspectionsService, InspectionsService>();
 builder.Services.AddScoped<IEstablishmentsService, EstablishmentsService>();
 builder.Services.AddScoped<IRetiredProductService, RetiredProductService>();
 builder.Services.AddScoped<ICountriesService, CountriesService>();
+builder.Services.AddScoped<ISmtpCorreoService, SmtpCorreoService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IAttachmentsService, AttachmentsService>();
+builder.Services.AddScoped<IPdfGenerationService, PdfGenerationService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

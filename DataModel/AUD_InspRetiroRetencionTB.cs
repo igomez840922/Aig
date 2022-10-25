@@ -16,16 +16,17 @@ namespace DataModel
         [StringLength(250)]
         public string SeccionOficinaRegional { get => seccionOficinaRegional; set => SetProperty(ref seccionOficinaRegional, value); }
 
-        //nombre de licencia o aviso de operaciones
-        private string licenseNumber;
-        [StringLength(250)]
-        public string LicenseNumber { get => licenseNumber; set => SetProperty(ref licenseNumber, value); }
+        
+        //nombre del producto
+        private enum_InspRetiroRetencionType retiroRetencionType;
+        public enum_InspRetiroRetencionType RetiroRetencionType { get => retiroRetencionType; set => SetProperty(ref retiroRetencionType, value); }
 
 
-        public virtual List<AUD_ProdRetiroRetencionTB> LProductos { get; set; }
+        private List<AUD_ProdRetiroRetencionTB> lProductos;
+        public virtual List<AUD_ProdRetiroRetencionTB> LProductos { get => lProductos; set => SetProperty(ref lProductos, value); }
 
-        //private AUD_InspeccionTB? inspeccion;
-        //public virtual AUD_InspeccionTB? Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
+        private AUD_InspeccionTB inspeccion;
+        public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
     }
 }

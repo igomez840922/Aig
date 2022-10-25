@@ -7,6 +7,9 @@ using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using DataModel.Helper;
+using Microsoft.AspNetCore.Mvc;
+using BlazorDownloadFile;
 
 namespace Aig.Auditoria.Pages.Inspections
 {
@@ -16,16 +19,21 @@ namespace Aig.Auditoria.Pages.Inspections
         IProfileService profileService { get; set; }
         [Inject]
         IInspectionsService inspeccionService { get; set; }
+        [Inject]
+        IPdfGenerationService pdfGenerationService { get; set; }
+        [Inject] 
+        IBlazorDownloadFileService blazorDownloadFileService { get; set; }
 
         GenericModel<AUD_InspeccionTB> dataModel { get; set; } = new GenericModel<AUD_InspeccionTB>()
         { Data = new AUD_InspeccionTB() };
-                
+
+        bool OpenAddEdit { get; set; }=false;
+
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>(InspectionBase_CloseEventHandler);
-            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
+
             base.OnInitialized();
         }
 
@@ -45,9 +53,9 @@ namespace Aig.Auditoria.Pages.Inspections
         }
 
         protected async Task FetchData()
-        {           
-            dataModel.ErrorMsg = null;
-            dataModel.Data = new AUD_InspeccionTB();
+        {
+            OpenAddEdit = false;
+            dataModel.Data = null;
             var data = await inspeccionService.FindAll(dataModel);
             if (data != null)
             {
@@ -87,9 +95,7 @@ namespace Aig.Auditoria.Pages.Inspections
 
             getUserLanguaje(message.Language);
         }
-        /// <summary>
-        /// /////////////
-        /// </summary>
+        
 
         //Call Add/Edit 
         private async Task OnEdit(long id)
@@ -99,22 +105,40 @@ namespace Aig.Auditoria.Pages.Inspections
             {
                 result = new AUD_InspeccionTB();
             }
-            await bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionBase_OpenEvent { Inspeccion = result });
-            await this.InvokeAsync(StateHasChanged);
+            OpenAddEditScreen(result);
         }
-        private void InspectionBase_CloseEventHandler(MessageArgs args)
+        private void InspectionAddEdit_CloseEventHandler(MessageArgs args)
         {
-            var message = args.GetMessage<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>();
+            bus.Subscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>();
+
+            if (message.Inspeccion != null)
+            {
+                OpenAddEditScreen(message.Inspeccion);
+                return;
+            }
             FetchData();
+        }
+        private async Task OpenAddEditScreen(AUD_InspeccionTB data)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
+            dataModel.Data = data;
+            OpenAddEdit = true;
+            await this.InvokeAsync(StateHasChanged);
         }
 
         private async Task OnDelete(AUD_InspeccionTB data)
         {
+            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
+
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)
         {
+            bus.UnSubscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
+
             var message = args.GetMessage<DeleteConfirmationCloseEvent>();
             if (message.YesNo)
             {
@@ -136,7 +160,21 @@ namespace Aig.Auditoria.Pages.Inspections
                 await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataDeleteError"]);
         }
 
+      
+        private async Task DownloadPdf(long Id)
+        {            
+            Stream stream = await pdfGenerationService.GenerateRetentionReceptionPDF(Id);
 
+            if(stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("inspeccion.pdf", stream, "application/actet-stream");
+            }
+
+            //if (stream != null)
+            //{
+            //    await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "inspeccion.pdf", stream);
+            //}
+        }
 
     }
 

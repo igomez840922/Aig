@@ -1,0 +1,162 @@
+﻿@page "/configuracion/servidorcorreo"
+@layout BackendLayout
+@attribute [Authorize]
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    @*<div class="kt-subheader  kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid ">
+    <div class="kt-subheader__main">
+    <h3 class="kt-subheader__title">
+    <NavLink href='/dashboard' class="kt-subheader__breadcrumbs-link">
+    @languageContainerService.Keys["Dashboard"]
+    </NavLink>
+    </h3>
+    </div>
+    </div>
+    </div>*@
+
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                @languageContainerService.Keys["EmailServer"]
+                            </h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="dropdown dropdown-inline">
+                                <button type="button" class="btn btn-hover-brand btn-elevate-hover btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="flaticon-more"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
+                                    @*<a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body kt-portlet__body--fit">
+                        <div class="row">
+                            <div class="col-12">
+                                @*<div class="kt-portlet__body">
+                                    <EditForm Model="@dataModel" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
+                                        <DataAnnotationsValidator />
+                                        <div class="form-group row">
+                                            <div class="col-lg-4">
+                                                <label>@languageContainerService.Keys["Search"]</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </EditForm>
+                                </div>*@
+
+                                @if (dataModel != null && dataModel.Data !=null)
+                                {
+                                    <div class="kt-portlet__body">
+                                        <!--begin::Section-->
+                                        <div class="kt-section">
+
+                                            <EditForm Model="@dataModel.Data" OnValidSubmit="SaveData">
+                                                <DataAnnotationsValidator />
+
+                                                <div class="row clearfix">
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["UserName"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText class="form-control" @bind-Value="dataModel.Data.Usuario" />
+                                                                <ValidationMessage For=@(() => dataModel.Data.Usuario) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["Password"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText type="password" class="form-control" @bind-Value="dataModel.Data.Contrasena" />
+                                                                <ValidationMessage For=@(() => dataModel.Data.Contrasena) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">                                                    
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["EmailAccount"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText class="form-control" @bind-Value="dataModel.Data.Correo" />
+                                                                <ValidationMessage For=@(() => dataModel.Data.Correo) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["SmtpServer"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText class="form-control" @bind-Value="dataModel.Data.SmtpServidor" />
+                                                                <ValidationMessage For=@(() => dataModel.Data.SmtpServidor) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["SmtpPort"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputNumber class="form-control" @bind-Value="dataModel.Data.SmtpPuerto" />
+                                                                <ValidationMessage For=@(() => dataModel.Data.SmtpPuerto) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="modal-footer">
+                                                    <button type="submit"
+                                                        class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cancel"]
+                                                    </button>
+                                                </div>
+
+
+                                            </EditForm>
+
+                                        
+                                        </div>
+                                        <!--end::Section-->
+                                    </div>
+                                  
+
+                                }
+                                <!--end::Form-->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+<Aig.Auditoria.Components.Contries.AddEditCountry></Aig.Auditoria.Components.Contries.AddEditCountry>
+<Aig.Auditoria.Components.DeleteConfirmDialog></Aig.Auditoria.Components.DeleteConfirmDialog>

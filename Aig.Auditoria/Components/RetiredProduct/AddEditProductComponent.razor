@@ -21,7 +21,7 @@
 
                                   <div class="row clearfix">
                                             <div class="col-sm-4">
-                                                            <label>@languageContainerService.Keys["Name"]</label>
+                                                            <label>@languageContainerService.Keys["ProductName"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
                                         <InputText class="form-control" @bind-Value="Product.Nombre" />
@@ -39,27 +39,51 @@
                                                 </div>
                                             </div>                                           
                                         </div>
-                                        
-                                  <div class="row clearfix">
-                                        <div class="col-sm-4">
-                                <label>@languageContainerService.Keys["Manufacturer"]</label>
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="Product.Fabricante" />
-                                        <ValidationMessage For=@(() => Product.Fabricante) />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="row clearfix">
+
                             <div class="col-sm-4">
-                                <label>@languageContainerService.Keys["Country"]</label>
+                                <label>@languageContainerService.Keys["NumberOfHealthRegister"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="Product.Pais" />
-                                        <ValidationMessage For=@(() => Product.Pais) />
+                                        <InputText class="form-control" @bind-Value="Product.RegSanitario" />
+                                        <ValidationMessage For=@(() => Product.RegSanitario) />
                                     </div>
                                 </div>
                             </div>
+                                           
                             <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Manufacturer"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Product.Fabricante" />
+                                        <ValidationMessage For=@(() => Product.Fabricante) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["CountryOfManufacture"]</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                        <InputSelect @bind-Value="Product.Pais" class="form-control">                                        
+                                        @if (lPaises != null)
+                                        {
+                                                foreach (var dt in lPaises)
+                                            {
+                                                <option value="@dt.Nombre">@dt.Nombre</option>
+                                            }
+                                        }
+                                    </InputSelect>
+                                        <ValidationMessage For=@(() => Product.Pais) />
+                                </div>
+                            </div>
+                        </div>
+                           
+                                        </div>
+                                
+                        <div class="row clearfix">
+
+                             <div class="col-sm-4">
                                 <label>@languageContainerService.Keys["Lot"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
@@ -68,17 +92,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>  
-                        <div class="row clearfix">
-                             <div class="col-sm-4">
-                                                            <label>@languageContainerService.Keys["ExpDate"]</label>
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                        <InputDate class="form-control" @bind-Value="Product.FechaExp" />
-                                        <ValidationMessage For=@(() => Product.FechaExp) />
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                             <div class="col-sm-4">
                                 <label>@languageContainerService.Keys["AmountWithheld"]</label>
                                 <div class="form-group">
@@ -99,6 +113,17 @@
                             </div>
                         </div>
                         <div class="row clearfix">
+
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["ExpDate"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputDate class="form-control" @bind-Value="Product.FechaExp" />
+                                        <ValidationMessage For=@(() => Product.FechaExp) />
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-sm-8">
                                 <label>@languageContainerService.Keys["ProductDestiny"]</label>
                                 <div class="form-group">
@@ -111,10 +136,10 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <label>@languageContainerService.Keys["Motivo"]</label>
+                                <label>@languageContainerService.Keys["RetentionReason"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="Product.Motivo" />
+                                        <InputTextArea class="form-control" @bind-Value="Product.Motivo" rows="4" />
                                         <ValidationMessage For=@(() => Product.Motivo) />
                                     </div>
                                 </div>

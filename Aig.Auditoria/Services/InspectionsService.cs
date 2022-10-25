@@ -22,13 +22,13 @@ namespace Aig.Auditoria.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter))))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)) || (data.InspRetiroRetencion != null && data.InspRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter))))
                                orderby data.FechaInicio
                                select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter))))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)) || (data.InspRetiroRetencion != null && data.InspRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter))))
                                select data).Count();
 
             }

@@ -68,8 +68,10 @@
                                 <thead class=thead-light>
                                     <tr>
                                         <th>@languageContainerService.Keys["ActNumber"]</th>
-                                                            <th>@languageContainerService.Keys["Type"]</th>
+                                                            <th>@languageContainerService.Keys["IspectionType"]</th>
+                                                            <th>@languageContainerService.Keys["Status"]</th>
                                                             <th>@languageContainerService.Keys["StartDate"]</th>
+                                                            <th>@languageContainerService.Keys["OperLicenseNumber"]</th>
                                         <th>@languageContainerService.Keys["Establishments"]</th>
                                         <th></th>
                                     </tr>
@@ -79,13 +81,16 @@
                                 {
                                     <tr>
                                         <td scope="row">@dt.NumActa</td>
-                                        <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoActa))</td>
+                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoActa))</td>
+                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.StatusInspecciones))</td>
                                         <td>@dt.FechaInicio.ToString("dd/MM/yyyy")</td>
+                                                                <td scope="row">@dt.LicenseNumber</td>
                                         <td >@(dt.Establecimiento?.Nombre??"")</td>
                                         <td style="text-align:right">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                 <div class="dropdown-menu">
+                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => DownloadPdf(dt.Id)"><i class="fa fa-file-pdf"></i>@languageContainerService.Keys["Download"]</a>
                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
                                             </div>
@@ -136,5 +141,27 @@
 
 </div>
 
-<Aig.Auditoria.Components.Inspections.InspectionBase></Aig.Auditoria.Components.Inspections.InspectionBase>
+@if ( OpenAddEdit && dataModel.Data!=null)
+{
+    @*<Aig.Auditoria.Components.Inspections.InspectionBase Inspeccion="dataModel.Data"></Aig.Auditoria.Components.Inspections.InspectionBase>*@
+    switch (dataModel.Data.TipoActa)
+    {
+        case DataModel.Helper.enumAUD_TipoActa.None:
+        {
+            //SELECCIONAR EL TIPO DE ACTA QUE SE QUIERE AGREGAR
+            <Aig.Auditoria.Components.Inspections.InspectionType></Aig.Auditoria.Components.Inspections.InspectionType>
+            break;
+        }
+        case DataModel.Helper.enumAUD_TipoActa.RetencionRetiroProductos:
+        {
+            <Aig.Auditoria.Components.Inspections.RetencionRetiroProductos Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RetencionRetiroProductos>
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}
+
 <Aig.Auditoria.Components.DeleteConfirmDialog></Aig.Auditoria.Components.DeleteConfirmDialog>

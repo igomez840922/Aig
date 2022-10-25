@@ -131,3 +131,31 @@ NewCountry: New Country
 EditCountry: Edit Country
 NewProduct: New Product
 EditProduct: Edit Product
+EmailServer: Email Server
+SmtpServer: Smtp Server
+SmtpPort: Smtp Port
+EmailAccount: Email Account
+ProductName: Product Name
+RetentionReason: Retention Reason
+NumberOfHealthRegister: Number of Health Register
+Add: Add
+Attachments: Attachments
+File: File
+UploadAttachment: Upload Attachment
+YouExceedMaximumSizeOf: You has been exceed the Maximum size of
+IspectionType: Ispection Type
+ViewAttachemnt: View Attachemnt
+InspectionDate: Inspection Date
+InspectionType: Inspection Type
+NoticeOperation: Notice Operation
+LegalRepresentation: Legal Representation
+DNFDParticipants: DNFD Participants
+Identification: Identification
+EstablishmentParticipants: Establishment Participants
+Position: Position
+Location: Location
+SignatureBytheMinistryofHealth: Signature by the Ministry of Health
+SignatureBytheEstablishment: Signature by the Establishment
+Clear: Clear
+RegNum: Register Number
+Download: Download

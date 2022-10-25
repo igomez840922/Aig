@@ -68,10 +68,15 @@
                                                     <thead class=thead-light>
                                                         <tr>
                                                             <th>@languageContainerService.Keys["Sección"]</th>
+                                                            <th>@languageContainerService.Keys["InspectionDate"]</th>
+                                                            <th>@languageContainerService.Keys["Establishments"]</th>
+                                                            <th>@languageContainerService.Keys["OperLicenseNumber"]</th>
+                                                            <th>@languageContainerService.Keys["ActNumber"]</th>
                                                             <th>@languageContainerService.Keys["Name"]</th>
+                                                            <th>@languageContainerService.Keys["NumberOfHealthRegister"]</th>
                                                             <th>@languageContainerService.Keys["CommercialPresentation"]</th>
                                                             <th>@languageContainerService.Keys["Fabricante"]</th>
-                                                            <th>@languageContainerService.Keys["Pais"]</th>
+                                                            <th>@languageContainerService.Keys["Country"]</th>
                                                             <th>@languageContainerService.Keys["Lot"]</th>
                                                             <th>@languageContainerService.Keys["ExpDate"]</th>
                                                             <th>@languageContainerService.Keys["AmountWithheld"]</th>
@@ -85,7 +90,12 @@
                                                             @foreach (var dt in dataModel.Ldata)
                                                             {
                                                                 <tr>
-                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.SeccionOficinaRegional??"")</td>
+                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.SeccionOficinaRegional ?? "")</td>
+                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.FechaInicio.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.Establecimiento?.Nombre ?? "")</td>
+                                                                    <td scope="row">@dt.RegSanitario</td>
+                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.LicenseNumber ?? "")</td>
+                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.NumActa ?? "")</td>
                                                                     <td scope="row">@dt.Nombre</td>
                                                                     <td>@dt.PresentacionComercial</td>
                                                                     <td>@dt.Fabricante</td>
@@ -140,5 +150,8 @@
 
 </div>
 
-<Aig.Auditoria.Components.Inspections.InspectionBase></Aig.Auditoria.Components.Inspections.InspectionBase>
+@if (OpenAddEdit && inspeccion != null)
+{
+    <Aig.Auditoria.Components.Inspections.RetencionRetiroProductos Inspeccion="inspeccion"></Aig.Auditoria.Components.Inspections.RetencionRetiroProductos>
+}
 <Aig.Auditoria.Components.DeleteConfirmDialog></Aig.Auditoria.Components.DeleteConfirmDialog>

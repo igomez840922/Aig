@@ -17,9 +17,12 @@ namespace Aig.Auditoria.Components.RetiredProduct
     {
         [Inject]
         IProfileService profileService { get; set; }
+        [Inject]
+        ICountriesService countriesService { get; set; }
         bool OpenDialog { get; set; }
         DataModel.AUD_ProdRetiroRetencionTB Product { get; set; } = null;
-        
+        List<PaisTB> lPaises { get; set; }
+
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
@@ -34,6 +37,7 @@ namespace Aig.Auditoria.Components.RetiredProduct
             if (firstRender)
             {
                 await getUserLanguaje();
+                await FetchData();
             }
         }
 
@@ -49,6 +53,17 @@ namespace Aig.Auditoria.Components.RetiredProduct
             var message = args.GetMessage<LanguageChangeEvent>();
 
             getUserLanguaje(message.Language);
+        }
+
+        //Fill Data
+        protected async Task FetchData()
+        {
+            if (lPaises == null || lPaises.Count < 1)
+            {
+                lPaises = await countriesService.GetAll();
+            }
+
+            await this.InvokeAsync(StateHasChanged);
         }
 
         //OPEN MODAL TO ADD/Edit 

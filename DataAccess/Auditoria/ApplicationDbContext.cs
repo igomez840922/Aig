@@ -68,7 +68,7 @@ namespace DataAccess.Auditoria
 
             modelBuilder.Entity<AUD_InspeccionTB>()
                .HasOne(e => e.InspRetiroRetencion)
-               .WithOne()
+               .WithOne(e=>e.Inspeccion)
                .HasForeignKey<AUD_InspeccionTB>(e => e.InspRetiroRetencionId);
 
             //JSON Serialization
@@ -98,7 +98,18 @@ namespace DataAccess.Auditoria
                 .HasForeignKey(e => e.EstablecimientoId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-           
+            modelBuilder.Entity<AUD_InspeccionTB>()
+                .HasMany(e => e.LAttachments)
+                .WithOne(e=>e.Inspeccion)
+                .HasForeignKey(e => e.InspeccionId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
+                .HasMany(e => e.LProductos)
+                .WithOne(e => e.FrmRetiroRetencion)
+                .HasForeignKey(e => e.FrmRetiroRetencionId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
        
@@ -113,9 +124,8 @@ namespace DataAccess.Auditoria
         public virtual DbSet<DistritoTB> Distrito { get; set; }
         public virtual DbSet<PaisTB> Pais { get; set; }
         public virtual DbSet<ProvinciaTB> Provincia { get; set; }
+        public virtual DbSet<SmtpCorreoTB> SmtpCorreo { get; set; }
         public virtual DbSet<UserProfileTB> UserProfile { get; set; }
-
-
 
     }
 }

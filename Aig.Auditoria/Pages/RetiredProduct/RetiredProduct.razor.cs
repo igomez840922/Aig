@@ -16,16 +16,20 @@ namespace Aig.Auditoria.Pages.RetiredProduct
         IProfileService profileService { get; set; }
         [Inject]
         IRetiredProductService retiredProductService { get; set; }
+        [Inject]
+        IInspectionsService inspectionsService { get; set; }
 
         GenericModel<AUD_ProdRetiroRetencionTB> dataModel { get; set; } = new GenericModel<AUD_ProdRetiroRetencionTB>()
         { Data = new AUD_ProdRetiroRetencionTB() };
+        AUD_InspeccionTB inspeccion { get; set; }
+        bool OpenAddEdit { get; set; } = false;
+
 
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>(InspectionBase_CloseEventHandler);
-            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
+
             base.OnInitialized();
         }
 
@@ -94,18 +98,37 @@ namespace Aig.Auditoria.Pages.RetiredProduct
         //Call Add/Edit 
         private async Task OnEdit(long id)
         {
-            //var result = await retiredProductService.Get(id);
-            //if (result == null)
-            //{
-            //    result = new AUD_InspeccionTB();
-            //}
-            var result = new AUD_InspeccionTB() { TipoActa = DataModel.Helper.enumAUD_TipoActa.RetencionRetiroProductos, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
-            await bus.Publish(new Aig.Auditoria.Events.Inspections.InspectionBase_OpenEvent { Inspeccion = result });
+            var result = await inspectionsService.Get(id);
+            if (result == null)
+            {
+                result = new AUD_InspeccionTB() { TipoActa = DataModel.Helper.enumAUD_TipoActa.RetencionRetiroProductos, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
+            }
+            OpenAddEditScreen(result);
+        }
+        private async Task OpenAddEditScreen(AUD_InspeccionTB data)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
+            inspeccion = data;
+            OpenAddEdit = true;
             await this.InvokeAsync(StateHasChanged);
         }
+        private void InspectionAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>();
+
+            if (message.Inspeccion != null)
+            {
+                OpenAddEditScreen(message.Inspeccion);
+                return;
+            }
+            FetchData();
+        }
+
         private void InspectionBase_CloseEventHandler(MessageArgs args)
         {
-            var message = args.GetMessage<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>();
+            //var message = args.GetMessage<Aig.Auditoria.Events.Inspections.InspectionBase_CloseEvent>();
             FetchData();
         }
 
