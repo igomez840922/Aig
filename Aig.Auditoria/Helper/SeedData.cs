@@ -1,4 +1,5 @@
-﻿using Aig.Auditoria.Pages.Settings.Country;
+﻿using Aig.Auditoria.Data;
+using Aig.Auditoria.Pages.Settings.Country;
 using Aig.Auditoria.Services;
 using DataAccess;
 using DataAccess.Auditoria;
@@ -84,12 +85,13 @@ namespace Aig.Auditoria.Helper
             {
                 var countryService = serviceScope.ServiceProvider.GetService<ICountriesService>();
                 var inspeccionService = serviceScope.ServiceProvider.GetService<IInspectionsService>();
+                var dalService = serviceScope.ServiceProvider.GetService<IDalService>();
 
                 //Countries
                 if (await countryService.Count() <= 0)
                 {
                     List<PaisTB> lCountries = null;
-                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.paises.json"))
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.provincias.json"))
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         var jsonFileContent = reader.ReadToEnd();
@@ -104,23 +106,54 @@ namespace Aig.Auditoria.Helper
                     }
                 }
 
+                if (dalService.Count<ProvinciaTB>() <= 0)
+                {
+                    PaisTB pais = dalService.Find<PaisTB>(x=>x.Codigo=="PA");
+                    List<Provincium> lProvincial = null;
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.provincias.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        var jsonFileContent = reader.ReadToEnd();
+                        var mainProv = JsonConvert.DeserializeObject<MainProvincias>(jsonFileContent);
+                        lProvincial = mainProv.provincia;
+                    }
+                    if (lProvincial != null)
+                    {
+                        foreach (var prov in lProvincial)
+                        {
+                            //await countryService.Save(prov);
+                            var provincia = new ProvinciaTB() { Nombre = prov.nombre, Codigo=prov.ced,LDistritos=new List<DistritoTB>(), Pais= pais };
+                            foreach (var dist in prov.distrito)
+                            {
+                                var distrito = new DistritoTB() { Nombre = dist.nombre, Codigo = dist.cabecera,LCorregimientos=new List<CorregimientoTB>() };
+                                provincia.LDistritos.Add(distrito);
+                                foreach (var corr in dist.corregimientos)
+                                {
+                                    var corregimiento = new CorregimientoTB() { Nombre = corr, Codigo = corr };
+                                    distrito.LCorregimientos.Add(corregimiento);
+                                }
+                            }
+                            dalService.Save(provincia);
+                        }
+                    }
+                }
 
                 //Probando Inspecciones
-                if (await inspeccionService.Count() <= 0)
-                {
-                    AUD_InspeccionTB _Inspection = new AUD_InspeccionTB()
-                    {
-                        FechaInicio = DateTime.Now,
-                        //NumActa = 1,
-                        TipoActa = DataModel.Helper.enumAUD_TipoActa.AperturaCambioUbicacionFarmacias,
-                        InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB()
-                        {
-                            DatosEstablecimiento = new AUD_DatosEstablecimiento() { Corregimiento = "Corregimiento 1", Distrito = "Distrito 1", Provincia = "Provincia 1", Telefono = "62453371", Ubicacion = "Obarrio esquina verde" },
-                        }
-                    };
+                //if (await inspeccionService.Count() <= 0)
+                //{
+                //    AUD_InspeccionTB _Inspection = new AUD_InspeccionTB()
+                //    {
+                //        FechaInicio = DateTime.Now,
+                //        //NumActa = 1,
+                //        TipoActa = DataModel.Helper.enumAUD_TipoActa.AperturaCambioUbicacionFarmacias,
+                //        InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB()
+                //        {
+                //            DatosEstablecimiento = new AUD_DatosEstablecimiento() { Corregimiento = "Corregimiento 1", Distrito = "Distrito 1", Provincia = "Provincia 1", Telefono = "62453371", Ubicacion = "Obarrio esquina verde" },
+                //        }
+                //    };
 
-                    _Inspection = await inspeccionService.Save(_Inspection);
-                }
+                    //    _Inspection = await inspeccionService.Save(_Inspection);
+                    //}
 
             }
         }

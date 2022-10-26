@@ -71,7 +71,7 @@ namespace Aig.Auditoria.Components.Inspections
             AUD_InspeccionTB data = null;
             switch (tipoActa)
             {
-                case enumAUD_TipoActa.RetencionRetiroProductos:
+                case enumAUD_TipoActa.RR:
                     {
                         data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
                         break;

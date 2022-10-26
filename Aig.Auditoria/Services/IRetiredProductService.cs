@@ -6,6 +6,7 @@ namespace Aig.Auditoria.Services
 {
     public interface IRetiredProductService
     {
+        Task<Stream> ExportToExcel(GenericModel<AUD_ProdRetiroRetencionTB> model);
         Task<GenericModel<AUD_ProdRetiroRetencionTB>> FindAll(GenericModel<AUD_ProdRetiroRetencionTB> model);
         Task<List<AUD_ProdRetiroRetencionTB>> GetAll();
         Task<AUD_ProdRetiroRetencionTB> Get(long id);

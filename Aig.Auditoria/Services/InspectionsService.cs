@@ -19,16 +19,26 @@ namespace Aig.Auditoria.Services
             try
             {
                 model.Ldata = null; model.Total = 0;
+                model.FromDate = model.FromDate != null ? new DateTime(model.FromDate.Value.Year, model.FromDate.Value.Month, model.FromDate.Value.Day,0,0,0) : model.FromDate;
+                model.ToDate = model.ToDate != null ? new DateTime(model.ToDate.Value.Year, model.ToDate.Value.Month, model.ToDate.Value.Day, 23, 59, 59) : model.ToDate;
 
                 model.Ldata = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)) || (data.InspRetiroRetencion != null && data.InspRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter))))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)) || (data.InspRetiroRetencion != null && data.InspRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter)))) &&
+                               (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
+                               (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None? data.StatusInspecciones == model.StatusInspecciones : true) &&
+                               (model.FromDate !=null? data.FechaInicio >= model.FromDate:true) &&
+                               (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
                                orderby data.FechaInicio
                                select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)) || (data.InspRetiroRetencion != null && data.InspRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter))))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)) || (data.InspRetiroRetencion != null && data.InspRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter)))) &&
+                               (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
+                               (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
+                               (model.FromDate != null ? data.FechaInicio >= model.FromDate : true) &&
+                               (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
                                select data).Count();
 
             }
@@ -57,7 +67,7 @@ namespace Aig.Auditoria.Services
             if(string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"),DateTime.Now.ToString("yyyy"),data.TipoActa.ToString(),data.Establecimiento?.TipoEstablecimiento.ToString()??"NA",data.Establecimiento?.Provincia?.Codigo??"0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -80,8 +90,8 @@ namespace Aig.Auditoria.Services
         private int GetMaxInspectionActNumber()
         {
             try {
-                var startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-                var endDate = new DateTime(startDate.Year, startDate.Month, startDate.Day, 23, 59, 59);
+                var startDate = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0);
+                var endDate = new DateTime(startDate.Year, 12, 31, 23, 59, 59);
 
                 return ((from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                         where data.CreatedDate >= startDate && data.CreatedDate <= endDate

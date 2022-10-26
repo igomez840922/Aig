@@ -11,6 +11,7 @@
   <ItemGroup>
     <Content Remove="Components\Inspections\AddEditProductComponent.razor" />
     <Content Remove="Resources\paises.json" />
+    <Content Remove="Resources\provincias.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
     <EmbeddedResource Include="Resources\en-US.yml" />
     <EmbeddedResource Include="Resources\es-ES.yml" />
     <EmbeddedResource Include="Resources\paises.json" />
+    <EmbeddedResource Include="Resources\provincias.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -1761,6 +1763,7 @@
     <PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="BlazorPagination" Version="0.2.16" />
+    <PackageReference Include="ClosedXML" Version="0.97.0" />
     <PackageReference Include="MailKit" Version="3.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />

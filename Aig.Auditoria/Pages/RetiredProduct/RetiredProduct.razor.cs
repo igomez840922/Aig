@@ -7,6 +7,8 @@ using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using BlazorDownloadFile;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace Aig.Auditoria.Pages.RetiredProduct
 {   
@@ -18,6 +20,8 @@ namespace Aig.Auditoria.Pages.RetiredProduct
         IRetiredProductService retiredProductService { get; set; }
         [Inject]
         IInspectionsService inspectionsService { get; set; }
+        [Inject]
+        IBlazorDownloadFileService blazorDownloadFileService { get; set; }
 
         GenericModel<AUD_ProdRetiroRetencionTB> dataModel { get; set; } = new GenericModel<AUD_ProdRetiroRetencionTB>()
         { Data = new AUD_ProdRetiroRetencionTB() };
@@ -50,8 +54,8 @@ namespace Aig.Auditoria.Pages.RetiredProduct
 
         protected async Task FetchData()
         {
-            dataModel.ErrorMsg = null;
-            dataModel.Data = new AUD_ProdRetiroRetencionTB();
+            OpenAddEdit = false;
+            dataModel.Data = null;
             var data = await retiredProductService.FindAll(dataModel);
             if (data != null)
             {
@@ -101,7 +105,7 @@ namespace Aig.Auditoria.Pages.RetiredProduct
             var result = await inspectionsService.Get(id);
             if (result == null)
             {
-                result = new AUD_InspeccionTB() { TipoActa = DataModel.Helper.enumAUD_TipoActa.RetencionRetiroProductos, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
+                result = new AUD_InspeccionTB() { TipoActa = DataModel.Helper.enumAUD_TipoActa.RR, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
             }
             OpenAddEditScreen(result);
         }
@@ -160,8 +164,16 @@ namespace Aig.Auditoria.Pages.RetiredProduct
                 await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataDeleteError"]);
         }
 
+        ///Export to excel
+        protected async Task ExportToExcel()
+        {
+            Stream stream = await retiredProductService.ExportToExcel(dataModel);
+            if (stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("productosretirados.xlsx", stream, "application/actet-stream");
+            }
+        }
 
-
-    }
+}
 
 }

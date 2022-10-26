@@ -11,23 +11,75 @@ namespace DataModel.Helper
 	{
 		[Description("Ninguna")]
 		None = 0,
-		[Description("Farmacias")]
-		Farmacias = 1,
-		[Description("Agencias Distribuidoras")]
-		AgenciasDistribuidoras = 2,
-		[Description("Laboratorio Fabricante")]
-		LaboratorioFabricante = 3,
-		[Description("Laboratorio Acondicionador")]
-		LaboratorioAcondicionador = 4,
-		[Description("Droguería")]
-		Drogueria = 5,
-		[Description("Establecimiento No Farmacéuticos")]
-		EstablecimientoNoFarmaceuticos = 6,
-		[Description("Botiquín de Pueblo")]
-		BotiquinPueblo = 7,
+        [Description("Farmacia Hospitalaria")]
+        FH = 1,
+        [Description("Farmacia Comunitaria")]
+		F = 2,
+        [Description("Radiofarmacia")]
+        FR = 3,
+        [Description("Agencia")]
+        A = 3,
+        [Description("Laboratorio Fabricante")]
+        LF = 4,
+        [Description("Laboratorio Acondiconador")]
+        LA = 5,
+        [Description("Droguería")]
+        D = 6,
+        [Description("Establecimiento No Farmacéutico")]
+        ENF = 7,
+        [Description("Máquina Expendedora de medicamentos de venta popular")]
+        ENFM = 8,
+        [Description("Botiquines de Pueblo")]
+        B = 9,
+        [Description("Elaborador de Cosméticos Artesanales")]
+        ECA = 10,
 	}
 
-	public enum enumAUD_ClasificacionTramite
+    public enum enumAUD_TipoActa //Tipo de Inspeccion
+    {
+        [Description("Ninguna")]
+        None = 0,
+        [Description("Apertura de Farmacia")]
+        AF = 1,
+        [Description("Cambio de ubicación de Farmacia")]
+        CUF = 2,
+        [Description("Apertura  de Agencia")]
+        AA = 3,
+        [Description("Cambio de Ubicación de Agencia")]
+        CUA = 4,
+        [Description("Rutina o Vigilancia de Farmacia")]
+        VF = 5,
+        [Description("Rutina o Vigilancia de Agencia")]
+        VA = 6,
+        [Description("Investigaciones")]
+        INV = 7,
+        [Description("Retención y Retiro de Productos")]
+        RR = 8,
+        [Description("Cierre de Operación")]
+        COP = 9,
+        [Description("Disposición Final de Productos")]
+        DFP = 10,
+        [Description("Apertura de Fabricantes - Medicamentos")]
+        AFM = 11,
+        [Description("Apertura Fabricantes – Cosméticos y Desinfectantes")]
+        AFC = 12,
+        [Description("Guía BPM – Fabricantes de Medicamentos")]
+        BPMFM = 13,
+        [Description("Guía BPM – Acondicionadores de Medicamentos")]
+        BPMAM = 14,
+        [Description("Guía BPM – Fabricantes Cosméticos y Desinfectantes")]
+        BPMCD = 15,
+        [Description("Guía BPM – Fabricantes de Naturales Medicinales")]
+        BPMMN = 16,
+        [Description("Guía de BPA")]
+        BPA = 17,
+        [Description("Apertura – Cosméticos Artesanales")]
+        AECA = 18,
+        [Description("Rutina o vigilancia de Establecimiento No Farmacéutico")]
+        VENF = 19,
+    }
+
+    public enum enumAUD_ClasificacionTramite
 	{
 		[Description("Ninguna")]
 		None = 0,
@@ -97,36 +149,12 @@ namespace DataModel.Helper
 		No = 2,
 	}
 
-    public enum enumAUD_TipoActa
-    {
-        [Description("Ninguna")]
-        None = 0,
-        [Description("Apertura y Cambio de Ubicación de Farmacias")]
-        AperturaCambioUbicacionFarmacias = 1,
-        [Description("Apertura y Cambio de Ubicación de Agencias Distribuidoras de Productos Farmacéuticos")]
-        AperturaCambioUbicacionAgencias = 2,
-        [Description("Inspección de Rutina o Vigilancia a Farmacias")]
-        InspecRutinaFarmacias = 3,
-        [Description("Inspección de Rutina o Vigilancia a Agencias Distribuidoras de Productos Farmacéuticos")]
-        InspecRutinaAgencias = 4,
-        [Description("Inspección o Investigación")]
-        InspecInvestigacion = 5,
-        [Description("Retención o Retiro de Productos del Mercado")]
-        RetencionRetiroProductos = 6,
-        [Description("Cierre de Operaciones de Establecimientos")]
-        CierreOperaciones = 7,
-        [Description("Disposición Final de Desechos Farmaceuticos")]
-        DisposicionFinalDesechosFarma= 8,
-        [Description("Evaluación Técnica por Apertura a Fabricante de Medicamentos")]
-        EvaluacionTecnicaAperturaFabMedicamento = 9,
-        [Description("Evaluación Técnica por Apertura a Fabricante de Cosméticos y Desinfectantes")]
-        EvaluacionTecnicaAperturaFabDesinfectantes = 10,
-        [Description("Evaluación Técnica por Apertura para la Elaboración de Cosméticos Artesanales")]
-        EvaluacionTecnicaAperturaCosmeticArtesanales = 11,
-    }
+    
 
     public enum enum_StatusInspecciones
     {
+        [Description("None")]
+        None = -1,
         [Description("Pendiente")]
         Pending = 0,
         [Description("Reprogramar")]

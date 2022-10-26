@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="formModal">@(Inspeccion != null && Inspeccion.Id > 0 ? @languageContainerService.Keys["EditInspection"] : @languageContainerService.Keys["NewInspection"]): @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))</h5>
+                <h5 class="modal-title" id="formModal">@(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))</h5>
                 <button type="button" class="close" @onclick="(e)=>{Cancel();}"
                         aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -14,7 +14,6 @@
             <div class="modal-body">
                 <EditForm Model="@Inspeccion" OnValidSubmit="SaveData">
                     <DataAnnotationsValidator />
-
                     <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
@@ -28,7 +27,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="generalInfo" role="tabpanel">
-                            <h3>@languageContainerService.Keys["GeneralInfo"]</h3>
+                            <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
                             <div class="row clearfix">
                                 <div class="col-sm-4">
                                     <label>@languageContainerService.Keys["StartDate"]</label>
@@ -95,7 +94,6 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.EstablecimientoId" class="form-control">
-                                                <option value="null">@languageContainerService.Keys["None"]</option>
                                                 @if (lEstablecimientos != null)
                                                 {
                                                     foreach (var dt in lEstablecimientos)
@@ -104,7 +102,7 @@
                                                     }
                                                 }
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.Establecimiento) />
+                                            <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +180,7 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>@languageContainerService.Keys["EstablishmentParticipants"]</label>
+                                    <label>@languageContainerService.Keys["WeWereServedBy"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputText class="form-control" @bind-Value="Inspeccion.ParticEstablecimiento" />
@@ -208,7 +206,18 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                           
+                            </div>  
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>@languageContainerService.Keys["Email"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.ParticEstablecimientoEmail" />
+                                            <ValidationMessage For=@(() => Inspeccion.ParticEstablecimientoEmail) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <label>@languageContainerService.Keys["SignatureBytheMinistryofHealth"]</label>
@@ -256,9 +265,9 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="products" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Products"]</h4>
                             <div class="row clearfix">
                                 <div class="col-9" style="text-align:left;">
-                                    <h3>@languageContainerService.Keys["Products"]</h3>
                                 </div>
                                 <div class="col-3" style="text-align:right;">
                                     <button type="button" @onclick="(e)=>{OpenProduct();}"
@@ -313,9 +322,9 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="attachments" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Attachments"]</h4>
                             <div class="row clearfix">
                                 <div class="col-9" style="text-align:left;">
-                                    <h3>@languageContainerService.Keys["Attachments"]</h3>
                                 </div>
                                 <div class="col-3" style="text-align:right;">
                                     <button type="button" @onclick="(e)=>{OpenAttachment();}"

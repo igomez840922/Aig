@@ -22,7 +22,6 @@ namespace Aig.Auditoria.Services
         {
             try
             {
-                return;
                 var smtpConfig = DalService.First<SmtpCorreoTB>();
 
                 var message = new MimeMessage();

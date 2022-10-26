@@ -1,8 +1,10 @@
-﻿using Aig.Auditoria.Events.Establishments;
+﻿using Aig.Auditoria.Data;
+using Aig.Auditoria.Events.Establishments;
 using Aig.Auditoria.Events.Language;
 using Aig.Auditoria.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
+using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -15,6 +17,22 @@ namespace Aig.Auditoria.Components.Establishments
         IProfileService profileService { get; set; }
         [Inject]
         IEstablishmentsService establishmentsService { get; set; }
+
+        [Inject]
+        IProvicesService provicesService { get; set; }
+        [Inject]
+        IDistrictService districtService { get; set; }
+        [Inject]
+        ICorregimientoService corregimientoService { get; set; }
+                
+        List<ProvinciaTB> LProvincias { get; set; }
+        List<DistritoTB> LDistritos { get; set; }
+        List<CorregimientoTB> LCorregimiento { get; set; }
+
+        long IdProvincia { get; set; }
+        long IdDistrito { get; set; }
+        long IdCorregimiento { get; set; }
+
         bool OpenDialog { get; set; }
         DataModel.AUD_EstablecimientoTB Establecimiento { get; set; } = null;
 
@@ -32,8 +50,34 @@ namespace Aig.Auditoria.Components.Establishments
             if (firstRender)
             {
                 await getUserLanguaje();
+                await FetchData();
             }
         }
+
+        private async Task FetchData()
+        {
+            if (LProvincias == null || LProvincias.Count <= 0)
+            {
+                LProvincias = await provicesService.GetAll();
+            }
+
+            IdProvincia = Establecimiento?.ProvinciaId ?? 0;//?? LProvincias?.FirstOrDefault()?.Id??0;
+            IdDistrito = 0;
+            IdCorregimiento = 0;
+            if (IdProvincia > 0)
+            {
+                LDistritos = LProvincias.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos?.ToList()??null;
+                IdDistrito = LDistritos?.Where(x => x.Id == (Establecimiento?.DistritoId ?? 0)).FirstOrDefault()?.Id ?? LDistritos?.FirstOrDefault()?.Id??0;
+                if (IdDistrito > 0)
+                {
+                    LCorregimiento = LDistritos.Where(x => x.Id == IdDistrito).FirstOrDefault()?.LCorregimientos?.ToList() ?? null;
+                    IdCorregimiento = LCorregimiento?.Where(x => x.Id == (Establecimiento?.CorregimientoId ?? 0)).FirstOrDefault()?.Id ?? LCorregimiento?.FirstOrDefault()?.Id??0;
+                }
+            }
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+
 
         //CHANGE LANGUAJE
         protected async Task getUserLanguaje(string? language = null)
@@ -58,7 +102,7 @@ namespace Aig.Auditoria.Components.Establishments
 
             OpenDialog = true;
 
-            this.InvokeAsync(StateHasChanged);
+            FetchData();
         }
 
 
@@ -69,6 +113,19 @@ namespace Aig.Auditoria.Components.Establishments
         //Save Data and Close
         protected async Task SaveData()
         {
+            if (Establecimiento.ProvinciaId != null && Establecimiento.ProvinciaId > 0)
+            {
+                Establecimiento.Provincia = await provicesService.Get(Establecimiento.ProvinciaId.Value);
+            }
+            if (Establecimiento.DistritoId != null && Establecimiento.DistritoId > 0)
+            {
+                Establecimiento.Distrito = await districtService.Get(Establecimiento.DistritoId.Value);
+            }
+            if (Establecimiento.CorregimientoId != null && Establecimiento.CorregimientoId > 0)
+            {
+                Establecimiento.Corregimiento = await corregimientoService.Get(Establecimiento.CorregimientoId.Value);
+            }
+
             var result = await establishmentsService.Save(Establecimiento);
             if (result != null)
             {
@@ -93,5 +150,32 @@ namespace Aig.Auditoria.Components.Establishments
         }
 
 
+        protected async Task OnProvinceChange(long Id)
+        {
+            IdProvincia = Id;
+            LDistritos = LProvincias?.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos??null;
+            IdDistrito = LDistritos?.FirstOrDefault()?.Id ?? 0;
+            LCorregimiento = LDistritos?.Where(x => x.Id == IdDistrito).FirstOrDefault()?.LCorregimientos ?? null;
+            IdCorregimiento = LCorregimiento?.FirstOrDefault()?.Id ?? 0;
+            Establecimiento.ProvinciaId = IdProvincia > 0 ? IdProvincia : null;
+            Establecimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+            Establecimiento.CorregimientoId = IdCorregimiento > 0 ? IdCorregimiento : null;
+        }
+        protected async Task OnDistrictChange(long Id)
+        {
+            IdDistrito = Id;
+            LCorregimiento = LDistritos?.Where(x => x.Id == IdDistrito).FirstOrDefault()?.LCorregimientos ?? null;
+            IdCorregimiento = LCorregimiento?.FirstOrDefault()?.Id ?? 0;
+            Establecimiento.ProvinciaId = IdProvincia > 0 ? IdProvincia : null;
+            Establecimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+            Establecimiento.CorregimientoId = IdCorregimiento > 0 ? IdCorregimiento : null;
+        }
+        protected async Task OnCorregimientoChange(long Id)
+        {
+            IdCorregimiento = Id;
+            Establecimiento.ProvinciaId = IdProvincia > 0 ? IdProvincia : null;
+            Establecimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+            Establecimiento.CorregimientoId = IdCorregimiento > 0 ? IdCorregimiento : null;
+        }
     }
 }

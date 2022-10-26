@@ -25,5 +25,8 @@ namespace DataModel
 		public long? PaisId { get => paisId; set => SetProperty(ref paisId, value); }
 		private PaisTB? pais;
 		public virtual PaisTB? Pais { get => pais; set => SetProperty(ref pais, value); }
-	}
+
+        private List<DistritoTB> lDistritos;
+        public virtual List<DistritoTB> LDistritos { get => lDistritos; set => SetProperty(ref lDistritos, value); }
+    }
 }

@@ -20,5 +20,8 @@ namespace DataModel
 		[StringLength(250)]
 		public string Codigo { get => codigo; set => SetProperty(ref codigo, value); }
 
-	}
+		private List<ProvinciaTB> lProvincia;
+        public virtual List<ProvinciaTB> LProvincia { get => lProvincia; set => SetProperty(ref lProvincia, value); }
+
+    }
 }

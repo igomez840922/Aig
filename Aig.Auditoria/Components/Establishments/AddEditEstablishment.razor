@@ -87,29 +87,59 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-4">
-                                <label for="password">@languageContainerService.Keys["Province"]</label>
+                                <label>@languageContainerService.Keys["Province"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="Establecimiento.Provincia" />
-                                        <ValidationMessage For=@(() => Establecimiento.Provincia) />
+                                        <InputSelect class="form-control"
+                                                 ValueExpression="@(() => IdProvincia)"
+                                                 Value="@IdProvincia"
+                                                 ValueChanged="@((long value) => OnProvinceChange(value))">
+                                            @if (LProvincias != null)
+                                            {
+                                                foreach (var dt in LProvincias)
+                                                {
+                                                    <option value="@dt.Id">@dt.Nombre</option>
+                                                }
+                                            }
+                                        </InputSelect>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="password">@languageContainerService.Keys["District"]</label>
+                                <label>@languageContainerService.Keys["District"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="Establecimiento.Distrito" />
-                                        <ValidationMessage For=@(() => Establecimiento.Distrito) />
+                                        <InputSelect class="form-control"
+                                                 ValueExpression="@(() => IdDistrito)"
+                                                 Value="@IdDistrito"
+                                                 ValueChanged="@((long value) => OnDistrictChange(value))">
+                                            @if (LDistritos != null)
+                                            {
+                                                foreach (var dt in LDistritos)
+                                                {
+                                                    <option value="@dt.Id">@dt.Nombre</option>
+                                                }
+                                            }
+                                        </InputSelect>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="password">@languageContainerService.Keys["Corregimiento"]</label>
+                                <label>@languageContainerService.Keys["Corregimiento"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="Establecimiento.Corregimiento" />
-                                        <ValidationMessage For=@(() => Establecimiento.Corregimiento) />
+                                        <InputSelect class="form-control"
+                                                 ValueExpression="@(() => IdCorregimiento)"
+                                                 Value="@IdCorregimiento"
+                                                 ValueChanged="@((long value) => OnCorregimientoChange(value))">
+                                            @if (LCorregimiento != null)
+                                            {
+                                                foreach (var dt in LCorregimiento)
+                                                {
+                                                    <option value="@dt.Id">@dt.Nombre</option>
+                                                }
+                                            }
+                                        </InputSelect>
                                     </div>
                                 </div>
                             </div>

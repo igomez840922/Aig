@@ -90,30 +90,30 @@ namespace DataModel
 		private DateTime? fechaDuplicado;
 		public DateTime? FechaDuplicado { get => fechaDuplicado; set => SetProperty(ref fechaDuplicado, value); }
 
+		//Provincia
+		private long? provinciaId;
+        [Required(ErrorMessage = "RequiredField")]
+        public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
+		private ProvinciaTB? provincia;
+		public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+		//private string provincia;
+		//public virtual string Provincia { get => provincia; set => SetProperty(ref provincia, value); }
 
-        //Provincia
-        //private long? provinciaId;
-        //public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
-        //private ProvinciaTB? provincia;
-        //public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
-        private string provincia;
-        public virtual string Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+		//distrito
+		private long? distritoId;
+		public long? DistritoId { get => distritoId; set => SetProperty(ref distritoId, value); }
+		private DistritoTB? distrito;
+		public virtual DistritoTB? Distrito { get => distrito; set => SetProperty(ref distrito, value); }
+		//private string distrito;
+		//public virtual string Distrito { get => distrito; set => SetProperty(ref distrito, value); }
 
-        //distrito
-        //      private long? distritoId;
-        //public long? DistritoId { get => distritoId; set => SetProperty(ref distritoId, value); }
-        //private DistritoTB? distrito;
-        //public virtual DistritoTB? Distrito { get => distrito; set => SetProperty(ref distrito, value); }
-        private string distrito;
-        public virtual string Distrito { get => distrito; set => SetProperty(ref distrito, value); }
-
-        //distrito
-        //      private long? corregimientoId;
-        //public long? CorregimientoId { get => corregimientoId; set => SetProperty(ref corregimientoId, value); }
-        //private CorregimientoTB? corregimiento;
-        //public virtual CorregimientoTB? Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
-        private string corregimiento;
-        public virtual string Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
+		//distrito
+		private long? corregimientoId;
+		public long? CorregimientoId { get => corregimientoId; set => SetProperty(ref corregimientoId, value); }
+		private CorregimientoTB? corregimiento;
+		public virtual CorregimientoTB? Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
+		//private string corregimiento;
+        //public virtual string Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
 
         //ubicacion
         private string ubicacion;

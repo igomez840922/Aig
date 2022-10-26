@@ -107,7 +107,7 @@ OperLicenseNumber: No. de Licencia
 Products: Productos
 AddProduct: Agregar Producto
 CommercialPresentation: Presentación Comercial
-Country: Pais
+Country: País
 Lot: Lote
 ExpDate: Fecha Exp.
 AmountWithheld: Cantidad Retenida
@@ -136,7 +136,7 @@ SmtpServer: Servidor Smtp
 SmtpPort: Puerto Smtp
 EmailAccount: Cuenta de Correo
 ProductName: Nombre del Producto
-CountryOfManufacture: Pais de Fabricación
+CountryOfManufacture: País de Fabricación
 RetentionReason: Motivo de Retención y/o Retiro
 NumberOfHealthRegister: No. Registro Sanitario
 Add: Agregar
@@ -160,3 +160,19 @@ SignatureBytheEstablishment: Firma por el Establecimiento
 Clear: Borrar
 RegNum: Número de Registro
 Download: Descargar
+DateOfRecord: Fecha del Acta
+All: Todos
+FromDate: Fecha Inicial
+ToDate: Fecha Final
+FromExpDate: Fecha Exp. Inicial
+ToExpDate: Fecha Exp. Final
+WeWereServedBy: Fuimos Atendidos Por
+Ubication: Ubicación
+Provinces: Provincias
+NewProvince: Nueva Provincia
+Districts: Distritos
+NewDistrict: Nuevo Distrito
+EditDistrict: Editar Distrito
+Corregimientos: Corregimientos
+NewCorregimiento: Nuevo Corregimiento
+EditCorregimiento: Editar Corregimiento

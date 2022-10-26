@@ -1,4 +1,5 @@
 ﻿@page "/productosretirados"
+@using DataModel.Helper;
 @layout BackendLayout
 @attribute [Authorize]
 
@@ -33,7 +34,7 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
-                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
+                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ExportToExcel()"><i class="fa fa-file-excel"></i>@languageContainerService.Keys["Export"]</a>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +46,7 @@
                                     <EditForm Model="@dataModel" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
                                         <DataAnnotationsValidator />
                                         <div class="form-group row">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <label>@languageContainerService.Keys["Search"]</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />
@@ -53,6 +54,37 @@
                                                         <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label>@languageContainerService.Keys["Status"]</label>
+                                                <div class="form-line">
+                                                    <InputSelect @bind-Value="dataModel.StatusInspecciones" class="form-control" @onclick="OnFilter">
+                                                        <option value="@enum_StatusInspecciones.None">@languageContainerService.Keys["All"]</option>
+
+                                                        @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
+                                                        {
+                                                            if (dt != enum_StatusInspecciones.None)
+                                                            {
+                                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                            }
+                                                        }
+                                                    </InputSelect>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label>@languageContainerService.Keys["FromExpDate"]</label>
+                                                <div class="form-line">
+                                                    <InputDate class="form-control" @bind-Value="dataModel.FromDate" @oninput="(e)=>{ try{dataModel.FromDate = DateTime.Parse((string)e.Value);}catch{dataModel.FromDate =null;} OnFilter();}" />
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label>@languageContainerService.Keys["ToExpDate"]</label>
+                                                <div class="form-line">
+                                                    <InputDate class="form-control" @bind-Value="dataModel.ToDate" @oninput="(e)=>{ try{dataModel.ToDate = DateTime.Parse((string)e.Value);}catch{dataModel.ToDate =null;} OnFilter();}" />
+                                                </div>
+
                                             </div>
                                         </div>
                                     </EditForm>
@@ -67,10 +99,11 @@
                                                 <table class="table rounded table-striped">
                                                     <thead class=thead-light>
                                                         <tr>
+                                                            <th>@languageContainerService.Keys["Status"]</th>
                                                             <th>@languageContainerService.Keys["Sección"]</th>
                                                             <th>@languageContainerService.Keys["InspectionDate"]</th>
                                                             <th>@languageContainerService.Keys["Establishments"]</th>
-                                                            <th>@languageContainerService.Keys["OperLicenseNumber"]</th>
+                                                            <th>@languageContainerService.Keys["LicNumber"]</th>
                                                             <th>@languageContainerService.Keys["ActNumber"]</th>
                                                             <th>@languageContainerService.Keys["Name"]</th>
                                                             <th>@languageContainerService.Keys["NumberOfHealthRegister"]</th>
@@ -90,20 +123,21 @@
                                                             @foreach (var dt in dataModel.Ldata)
                                                             {
                                                                 <tr>
+                                                                    <td>@(DataModel.Helper.Helper.GetDescription(dt.FrmRetiroRetencion?.Inspeccion?.StatusInspecciones ?? enum_StatusInspecciones.None))</td>
                                                                     <td scope="row">@(dt.FrmRetiroRetencion?.SeccionOficinaRegional ?? "")</td>
                                                                     <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.FechaInicio.ToString("dd/MM/yyyy") ?? "")</td>
                                                                     <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.Establecimiento?.Nombre ?? "")</td>
-                                                                    <td scope="row">@dt.RegSanitario</td>
                                                                     <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.LicenseNumber ?? "")</td>
                                                                     <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.NumActa ?? "")</td>
                                                                     <td scope="row">@dt.Nombre</td>
+                                                                    <td scope="row">@(dt.RegSanitario)</td>
                                                                     <td>@dt.PresentacionComercial</td>
                                                                     <td>@dt.Fabricante</td>
                                                                     <td>@dt.Pais</td>
                                                                     <td>@dt.Lote</td>
                                                                     <td>@(dt.FechaExp?.ToString("dd/MM/yyyy") ?? "")</td>
                                                                     <td>@dt.CantidadRetenida</td>
-                                                                    <td>@dt.CantidadRetenida</td>
+                                                                    <td>@dt.CantidadRetirada</td>
                                                                     <td>@dt.Destino</td>
                                                                 </tr>
                                                             }

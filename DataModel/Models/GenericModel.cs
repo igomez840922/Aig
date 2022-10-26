@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataModel.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace DataModel.Models
         public string ErrorMsg { get; set; }  
 
         public long ParentId { get; set; }
+        public long Parent2Id { get; set; }
+        public long Parent3Id { get; set; }
 
         public List<T> Ldata { get; set; }
 
@@ -43,6 +46,10 @@ namespace DataModel.Models
         }
         public T Data { get; set; }
 
+        public enumAUD_TipoActa TipoActa { get; set; } = enumAUD_TipoActa.None;
+        public enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.None;
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
     }
 
