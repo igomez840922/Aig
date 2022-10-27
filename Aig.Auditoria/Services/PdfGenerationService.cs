@@ -69,7 +69,7 @@ namespace Aig.Auditoria.Services
                           page.Content().PaddingVertical(15).Column(column =>
                               {                                  
                                   column.Item().Text(string.Format("Siendo las {0} del día {1} de {2} de {3}, actuando en representación de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, procedimos a efectuar la {4}, de los productos a continuación descritos y que fueron localizados en el establecimiento denominado: {5}, ubicado en: {6}, con Aviso de Operación No. {7} y Licencia de operación {8}/DNFD. Y cuyo Representante Legal es {9} con documento de identidad personal N° {10}. Por la Dirección Nacional de Farmacia y Drogas, participamos: {11}. Y fuimos atendidos por: {12}, con cargo {13} cip: {14}\r\n",
-                                      inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.ToString("dd"), inspection.FechaInicio.ToString("MMMM"), inspection.FechaInicio.ToString("yyyy"), DataModel.Helper.Helper.GetDescription(inspection.InspRetiroRetencion.RetiroRetencionType), inspection.Establecimiento?.Nombre??"", inspection.UbicacionEstablecimiento,inspection.AvisoOperación, inspection.LicenseNumber, inspection.RepreLegal,inspection.RepreLegalIdentificacion, inspection.ParticipantesDNFD, inspection.ParticEstablecimiento, inspection.ParticEstablecimientoCargo, inspection.ParticEstablecimientoCIP));
+                                      inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.ToString("dd"), Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.ToString("yyyy"), DataModel.Helper.Helper.GetDescription(inspection.InspRetiroRetencion.RetiroRetencionType), inspection.Establecimiento?.Nombre??"", inspection.UbicacionEstablecimiento,inspection.AvisoOperación, inspection.LicenseNumber, inspection.RepreLegal,inspection.RepreLegalIdentificacion, inspection.ParticipantesDNFD, inspection.ParticEstablecimiento, inspection.ParticEstablecimientoCargo, inspection.ParticEstablecimientoCIP));
 
                                   column.Item().Table(table =>
                                   {
@@ -125,7 +125,7 @@ namespace Aig.Auditoria.Services
 
                               });
 
-                          page.Footer().Column(column =>
+                          page.Footer().AlignBottom().Column(column =>
                              {
                                  column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                                  column.Item().Table(table =>
@@ -171,6 +171,25 @@ namespace Aig.Auditoria.Services
                                      table.Cell().Text("");
                                      table.Cell().AlignLeft().Text(string.Format("Cédula: {0}  Cargo: {1}", inspection.ParticEstablecimientoCIP, inspection.ParticEstablecimientoCargo));
 
+                                 });
+                                 column.Item().PaddingVertical(10).Text(" ");
+                                 column.Item().AlignBottom().Table(table =>
+                                 {
+                                     table.ColumnsDefinition(columns =>
+                                     {
+                                         columns.RelativeColumn(1);
+                                         columns.RelativeColumn((float)1.5);
+                                     });
+
+                                     table.Cell().AlignLeft().Text(" ");                                     
+
+                                     table.Cell().Border(1).BorderColor(Colors.Black).Padding(10).AlignBottom().AlignLeft().Column(col =>
+                                     {
+                                         col.Item().AlignLeft().Text("Para uso de la Administración de la DNFD:").Bold();
+                                         col.Item().PaddingTop(5).Text("Productos recibidos por (nombre): _____________________________________________________________");
+                                         col.Item().PaddingTop(15).Text("(firma): ___________________________________________________________________________________________");
+                                         col.Item().PaddingTop(15).Text("Fecha (dd/MM/yyyy): __________________________     Hora: __________________________");
+                                     });
 
                                  });
 

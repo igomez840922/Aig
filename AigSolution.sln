@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModel", "DataModel\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Auditoria", "Aig.Auditoria\Aig.Auditoria.csproj", "{0AEBEA4D-D353-4DB7-A290-D596EA2F6752}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.FarmacoVigilancia", "Aig.FarmacoVigilancia\Aig.FarmacoVigilancia.csproj", "{97EEB9BF-A40A-4A7B-888B-C06C396B1166}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0AEBEA4D-D353-4DB7-A290-D596EA2F6752}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AEBEA4D-D353-4DB7-A290-D596EA2F6752}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AEBEA4D-D353-4DB7-A290-D596EA2F6752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97EEB9BF-A40A-4A7B-888B-C06C396B1166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97EEB9BF-A40A-4A7B-888B-C06C396B1166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97EEB9BF-A40A-4A7B-888B-C06C396B1166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97EEB9BF-A40A-4A7B-888B-C06C396B1166}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,84 @@
+﻿<!-- Modal Creat/Edit -->
+@if (Provincia != null && OpenDialog)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog  modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Provincia != null && Provincia.Id > 0 ? @languageContainerService.Keys["EditProvince"] : @languageContainerService.Keys["NewProvince"])</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Provincia" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Country"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Provincia.PaisId" class="form-control">
+                                            @if (LPaises != null)
+                                            {
+                                                foreach (var dt in LPaises)
+                                                {
+                                                    <option value="@dt.Id">@dt.Nombre</option>
+                                                }
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Provincia.PaisId) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <label>@languageContainerService.Keys["Name"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Provincia.Nombre" />
+                                        <ValidationMessage For=@(() => Provincia.Nombre) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Code"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Provincia.Codigo" />
+                                        <ValidationMessage For=@(() => Provincia.Codigo) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                                @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop fade show"></div>
+}
+

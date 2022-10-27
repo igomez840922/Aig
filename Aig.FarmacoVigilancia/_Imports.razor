@@ -1,0 +1,26 @@
+﻿@using System.Net.Http
+@using System.Text
+@using System.Net.Http.Headers
+
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+@using Aig.FarmacoVigilancia
+@using Aig.FarmacoVigilancia.Shared
+@using AKSoftware.Localization.MultiLanguages;
+@using Newtonsoft.Json
+@using BlazorComponentBus
+@using BlazorPagination
+@using Mobsites.Blazor //Signature pad
+
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+@*Multilanguaje*@
+@inject ILanguageContainerService languageContainerService
+@*Comunication Betweens Components in Blazor*@
+@inject ComponentBus bus
+

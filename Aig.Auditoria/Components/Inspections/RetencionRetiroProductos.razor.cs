@@ -16,6 +16,8 @@ using System.IO;
 using Mobsites.Blazor;
 using Org.BouncyCastle.Utilities;
 using DocumentFormat.OpenXml.ExtendedProperties;
+using Aig.Auditoria.Data;
+using Aig.Auditoria.Pages.Settings.Corregimiento;
 
 namespace Aig.Auditoria.Components.Inspections
 {
@@ -26,9 +28,7 @@ namespace Aig.Auditoria.Components.Inspections
         [Inject]
         IProfileService profileService { get; set; }
         [Inject]
-        IEstablishmentsService establecimientoService { get; set; }        
-        [Inject]
-        IEmailService emailService { get; set; }
+        IEstablishmentsService establecimientoService { get; set; } 
         [Inject]
         IPdfGenerationService pdfGenerationService { get; set; }
         [Parameter]
@@ -87,6 +87,10 @@ namespace Aig.Auditoria.Components.Inspections
                 if (Inspeccion.EstablecimientoId == null)
                 {
                     Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
+                    if (Inspeccion.EstablecimientoId != null)
+                    {
+                        Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
+                    }
                 }
             }            
             
@@ -95,17 +99,14 @@ namespace Aig.Auditoria.Components.Inspections
             
         //Save Data and Close
         protected async Task SaveData()
-        {
-            if(Inspeccion.EstablecimientoId!=null && Inspeccion.EstablecimientoId > 0) {
+        {            
+            if (Inspeccion.EstablecimientoId!=null && Inspeccion.EstablecimientoId > 0) {
                 Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
             }
 
             var result = await inspeccionService.Save(Inspeccion);
             if (result != null)
-            {
-                //Enviamos correo de notificacion
-                await sendNotificationEmail(result);
-
+            {                            
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Inspeccion = result;
 
@@ -156,46 +157,7 @@ namespace Aig.Auditoria.Components.Inspections
                 this.InvokeAsync(StateHasChanged);
             }
         }
-             
-        private async Task sendNotificationEmail(AUD_InspeccionTB data)
-        {
-            try {
-
-                if (!string.IsNullOrEmpty(data.ParticEstablecimientoEmail))
-                {
-                    var subject = data.NumActa + " - " + DataModel.Helper.Helper.GetDescription(data.TipoActa);
-
-                    var builder = new BodyBuilder();
-
-                    builder.TextBody = "Inspección #" + data.NumActa + " - " + DataModel.Helper.Helper.GetDescription(data.TipoActa);
-
-                    var stream = await pdfGenerationService.GenerateRetentionReceptionPDF(data.Id);
-                    if(stream!=null)
-                    {
-                        builder.Attachments.Add("inspeccion.pdf", stream);
-                    }
-                    // If you find that MimeKit does not properly auto-detect the mime-type based on the
-                    // filename, you can specify a mime-type like this:
-                    //emailBody.Attachments.Add ("Receipt.pdf", bytes, ContentType.Parse (MediaTypeNames.Application.Pdf));
-
-
-                    //string messageBody = string.Format(builder.HtmlBody,
-                    //    String.Format("{0} {1} {2} {3}", subscription.Assistant.AppUser.FirstName, subscription.Assistant.AppUser.SecondName, subscription.Assistant.AppUser.SureName, subscription.Assistant.AppUser.SecondSurName),
-                    //    String.Format("data:image/svg+xml;base64,{0}", subscription.LogoBase64),
-                    //    subscription.Events.Name,
-                    //    subscription.Events.StartDate.ToString("dd/MM/yyyy"),
-                    //    subscription.Events.EndDate.ToString("dd/MM/yyyy"),
-                    //    String.Format("{0}, {1}, {2}", subscription.Events.Address, subscription.Events.City, subscription.Events.Country.Name),
-                    //    subscription.Events.Description
-                    //    );
-
-                    await emailService.SendEmailAsync(data.ParticEstablecimientoEmail, subject, builder);
-                }
-                
-            }
-            catch(Exception ex) { }
-        }
-
+          
         //Add New Attachment
         protected async Task OpenAttachment(AttachmentTB attachment = null)
         {
@@ -264,6 +226,13 @@ namespace Aig.Auditoria.Components.Inspections
         {
             signaturePadESTAB.Image = null;
         }
+
+        protected async Task OnEstablishmentChange(long? Id)
+        {
+            Inspeccion.EstablecimientoId = Id;
+            Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.Ubicacion ?? "";
+        }
+
 
     }
 }

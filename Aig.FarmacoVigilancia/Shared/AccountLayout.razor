@@ -1,0 +1,54 @@
+﻿@inherits LayoutComponentBase
+@layout MainLayout
+
+@* <div class="kt-grid kt-grid--ver kt-grid--root">
+        <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v4 kt-login--signin" id="kt_login">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background-color:black"> 
+                <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+                    <div class="kt-login__container">
+                        <div class="kt-login__logo">
+                            <a href="#">
+                                <img src="assets/media/logos/logo.jpg" style="height:30vh">
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+	<!-- begin:: Page -->
+		<div class="kt-grid kt-grid--ver kt-grid--root">
+			<div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v5 kt-login--signin" id="kt_login">
+				<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile" style="background-image: url(assets/media/bg/bg-3.jpg);">
+					<div class="kt-login__left">
+						<div class="kt-login__wrapper">
+							<div class="kt-login__content">
+						<NavLink class="kt-login__logo" href="/login">
+							<img src="img/nuevo_logo3.jpg" style="width:25vw!important">
+								</NavLink>
+						<h3 class="kt-login__title">@languageContainerService.Keys["PharmacoVigilanceSystem"]</h3>
+								<span class="kt-login__desc">
+							@*The ultimate Bootstrap & Angular 6 admin theme framework for next generation web apps.*@
+								</span>
+								<div class="kt-login__actions">
+							@*<button type="button" id="kt_login_signup" class="btn btn-outline-brand btn-pill">Get An Account</button>*@
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="kt-login__divider">
+						<div></div>
+					</div>
+					<div class="kt-login__right">
+						<div class="kt-login__wrapper">
+					@Body
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+

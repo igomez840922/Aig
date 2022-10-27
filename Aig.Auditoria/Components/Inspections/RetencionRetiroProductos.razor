@@ -93,7 +93,10 @@
                                     <label for="password">@languageContainerService.Keys["Establishments"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.EstablecimientoId" class="form-control">
+                                            <InputSelect class="form-control"
+                                                         ValueExpression="@(() => Inspeccion.EstablecimientoId)"
+                                                         Value="@Inspeccion.EstablecimientoId"
+                                                         ValueChanged="@((long? value) => OnEstablishmentChange(value))">
                                                 @if (lEstablecimientos != null)
                                                 {
                                                     foreach (var dt in lEstablecimientos)
@@ -270,10 +273,12 @@
                                 <div class="col-9" style="text-align:left;">
                                 </div>
                                 <div class="col-3" style="text-align:right;">
+                                    @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
                                     <button type="button" @onclick="(e)=>{OpenProduct();}"
                                             class="btn btn-sm btn-outline-primary waves-effect">
                                         @languageContainerService.Keys["Add"]
                                     </button>
+                                    }                                    
                                 </div>
                             </div>
                             <!--begin::Section-->
@@ -307,10 +312,13 @@
                                                         <td>@dt.Lote</td>
                                                         <td>@(dt.FechaExp?.ToString("dd/MM/yyyy") ?? "")</td>
                                                         <td>@dt.CantidadRetenida</td>
-                                                        <td>@dt.CantidadRetenida</td>
+                                                        <td>@dt.CantidadRetirada</td>
                                                         <td>@dt.Destino</td>
                                                         <td style="text-align:right">
+                                                            @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
                                                             <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveProduct(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                            }
                                                             <!-- /btn-group -->
                                                         </td>
                                                     </tr>
@@ -327,10 +335,12 @@
                                 <div class="col-9" style="text-align:left;">
                                 </div>
                                 <div class="col-3" style="text-align:right;">
+                                    @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
                                     <button type="button" @onclick="(e)=>{OpenAttachment();}"
                                             class="btn btn-sm btn-outline-primary waves-effect">
                                         @languageContainerService.Keys["Add"]
                                     </button>
+                                    }                                    
                                 </div>
                             </div>
                             <!--begin::Section-->
@@ -355,7 +365,10 @@
                                                             <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
                                                         </td>
                                                         <td style="text-align:right">
+                                                            @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
                                                             <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                            }
                                                             <!-- /btn-group -->
                                                         </td>
                                                     </tr>
@@ -372,10 +385,13 @@
                     <br>
                     <div class="modal-footer">
 
+                        @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
                         <button type="submit"
                                 class="btn btn-info waves-effect">
                             @languageContainerService.Keys["Save"]
                         </button>
+                        }
+                        
                         <button type="button" class="btn btn-danger waves-effect"
                                 @onclick="(e)=>{Cancel();}">
                             @languageContainerService.Keys["Cancel"]

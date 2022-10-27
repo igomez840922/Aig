@@ -10,6 +10,7 @@ using Microsoft.JSInterop;
 using DataModel.Helper;
 using Microsoft.AspNetCore.Mvc;
 using BlazorDownloadFile;
+using MimeKit;
 
 namespace Aig.Auditoria.Pages.Inspections
 {
@@ -23,6 +24,8 @@ namespace Aig.Auditoria.Pages.Inspections
         IPdfGenerationService pdfGenerationService { get; set; }
         [Inject] 
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
+        [Inject]
+        IEmailService emailService { get; set; }
 
         GenericModel<AUD_InspeccionTB> dataModel { get; set; } = new GenericModel<AUD_InspeccionTB>()
         { Data = new AUD_InspeccionTB() };
@@ -174,6 +177,31 @@ namespace Aig.Auditoria.Pages.Inspections
             //{
             //    await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "inspeccion.pdf", stream);
             //}
+        }
+
+        private async Task SendEmailNotification(long Id)
+        {
+            try
+            {
+                var data = await inspeccionService.Get(Id);
+                if (data!=null && !string.IsNullOrEmpty(data.ParticEstablecimientoEmail))
+                {
+                    var subject = data.NumActa + " - " + DataModel.Helper.Helper.GetDescription(data.TipoActa);
+
+                    var builder = new BodyBuilder();
+
+                    builder.TextBody = "Inspección #" + data.NumActa + " - " + DataModel.Helper.Helper.GetDescription(data.TipoActa);
+
+                    var stream = await pdfGenerationService.GenerateRetentionReceptionPDF(data.Id);
+                    if (stream != null)
+                    {
+                        builder.Attachments.Add("inspeccion.pdf", stream);
+                    }                    
+                    await emailService.SendEmailAsync(data.ParticEstablecimientoEmail, subject, builder);
+                }
+
+            }
+            catch (Exception ex) { }
         }
 
     }

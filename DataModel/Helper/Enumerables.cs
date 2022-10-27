@@ -18,21 +18,21 @@ namespace DataModel.Helper
         [Description("Radiofarmacia")]
         FR = 3,
         [Description("Agencia")]
-        A = 3,
+        A = 4,
         [Description("Laboratorio Fabricante")]
-        LF = 4,
+        LF = 5,
         [Description("Laboratorio Acondiconador")]
-        LA = 5,
+        LA = 6,
         [Description("Droguería")]
-        D = 6,
+        D = 7,
         [Description("Establecimiento No Farmacéutico")]
-        ENF = 7,
+        ENF = 8,
         [Description("Máquina Expendedora de medicamentos de venta popular")]
-        ENFM = 8,
+        ENFM = 9,
         [Description("Botiquines de Pueblo")]
-        B = 9,
+        B = 10,
         [Description("Elaborador de Cosméticos Artesanales")]
-        ECA = 10,
+        ECA = 11,
 	}
 
     public enum enumAUD_TipoActa //Tipo de Inspeccion
@@ -171,5 +171,29 @@ namespace DataModel.Helper
         WithholdingWithdrawal = 1
     }
 
-    
+    //////////////////////////////
+    ///
+
+    public enum enumFMV_RAMType
+    {
+        [Description("No hay RAM")]
+        NoRam = 0,
+        [Description("Si hay RAM")]
+        SiRam = 1,
+        [Description("Estudio Clínico")]
+        EstClinico = 2,
+        [Description("Literatura")]
+        Literatura = 3,
+    }
+    public enum enumFMV_RAMOrigenType
+    {
+        [Description("Alta Manual")]
+        AltaManual = 0,
+        [Description("Servicio Web")]
+        ServicioWeb = 1,
+        [Description("En Papel")]
+        Papel = 2,
+        [Description("Facedra")]
+        Facedra = 3,
+    }
 }

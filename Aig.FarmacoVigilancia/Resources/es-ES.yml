@@ -1,0 +1,179 @@
+HelloWorld: ¡Hola mundo!
+WelcomeMessage: Mensaje de bienvenida
+InvalidEmail: Correo electrónico no válido
+RequiredField: Campo obligatorio
+ConfirmationPasswordNotMatch: La contraseña de confirmación no coincide
+Payments: Pagos Entrantes
+Payouts: Pagos Salientes
+Refunds: Reembolsos
+Settlements: Liquidación
+Pending: Pendiente
+Completed: Completado
+Cancelled: Anulado
+Declined: Disminuido
+Dashboard: Tablero
+Hi: Hola
+Profile: Perfil
+logIn: Iniciar Sesión
+SignOut: Salir
+English: Inglés
+Spanish: Español
+Settings: Configuraciones
+SystemUsers: Usuarios del Sistema
+Update: Actualizar
+New: Nuevo
+Search: Buscar
+Picture: Foto
+FilesType: Archivos
+AccessData: Datos de Acceso
+PersonalAccess: Datos Personales
+UserName: Nombre de Usuario
+Password: Constraseña
+ConfirmPassword: Confirmar Contraseña
+Email: Correo
+PhoneNumber: Telefono
+DataSaveSuccessfully: Datos Guardados Satisfactoriamente
+DataSaveError: Los Datos No Pudieron ser Guardados
+DataDeleteSuccessfully: Los Datos Fueron Eliminados Satisfactoriamente
+DataDeleteError: Los Datos no Pudieron ser Eliminados
+DeleteConfirmation: Confirmación para Eliminar
+AreYouSureToDeleteItem: Seguro desea eliminar el elemento seleccionado?  
+ChangePassword: Cambiar Contraseña
+NewPassword: Nueva Contraseña
+Edit: Editar
+Delete: Eliminar
+Save: Guardar
+Cancel: Cancelar
+FirstName: Primer Nombre
+SecondName: Segundo Nombre
+SureName: Primer Apellido
+SecondSurName: Segundo Apellido
+Yes: Si
+No: No
+GeneralData: Datos Generales
+GateWays: Pasarelas
+FiatCurrency: Monedas Fiat
+CryptoCurrency: Crypto Monedas
+Name: Nombre
+Code: Código
+Description: Descripción
+SandBoxUrl: Url de SandBox
+ProductionUrl: Url de Producción
+ClientId: Client Id
+ClientSecret: Client Secret
+GrantType: Grant Type
+AccessToken: Token de Acceso
+ApiKey: Api Key
+Environment: Ambiente
+Disabled: Deshabilitado
+SandBox: Desarrollo
+Production: Producción
+TaxPercent: Impuesto (%)
+Actions: Acciones
+Clients: Clientes
+FullName: Nombre Completo
+PosSystems: Sistemas POS
+Operations: Operaciones
+ApiSecret: Api Secret
+Company: Compañía
+Details: Detalles
+ClientsTotals: Total de Clientes
+PosSystemsTotals: Total de Sistemas POS
+OperationsTotals : Total de Operaciones
+Transactions: Transacciones
+TransactionsAmount: Monto de Transacciones
+PublicKey: Public Key
+PrivateKey: Private Key
+MerchantId: Merchant Id
+LoginToYourAccount: Entrar en su Cuenta
+RememberMe: Recordarme
+ForgetPassword: Olvidó su Contraseña
+SignIn: Entrar
+AuditorysystemAig: Sistema de Auditoría de la AIG
+PharmaciesAndDrugsAuditSystem: Sistema de Auditoría de Faramacias y Drogas
+Establishments: Establecimientos
+Inspections: Inspecciones
+QualityAudit: Auditorías de Calidad
+RecalledProducts: Productos Retirados
+RetentionAndWithdrawalOfPharmaceuticalProducts: Retención y/o Retiro de Productos Farmaceuticos
+SelectInspectionType: Seleccione el Tipo de Inspección
+Select: Seleccionar
+NewInspection: Nueva Inspección
+EditInspection: Editar Inspección
+StartDate: Fecha Inicio
+GeneralInfo: Información General
+Section: Sección/Oficina Regional
+OperLicenseNumber: No. de Licencia
+Products: Productos
+AddProduct: Agregar Producto
+CommercialPresentation: Presentación Comercial
+Country: País
+Lot: Lote
+ExpDate: Fecha Exp.
+AmountWithheld: Cantidad Retenida
+AmountWithdrawal: Cantidad Retirada
+ProductDestiny: Destino del Producto
+Manufacturer: Fabricante
+None: Ninguno
+ActNumber: Número de Acta
+Type: Tipo
+LicNumber: Número de Licencia
+Institute: Institución
+EditEstablishments: Editar Establecimiento
+NewEstablishments: Nuevo Establecimiento
+Status: Estatus
+NoMaquina: No. Máquina
+Province: Provincia
+District: Distrito
+Address: Dirección
+Countries: Países
+NewCountry: Nuevo País
+EditCountry: Editar País
+NewProduct: Nuevo Producto
+EditProduct: Editar Producto
+EmailServer: Servidor de Correo
+SmtpServer: Servidor Smtp
+SmtpPort: Puerto Smtp
+EmailAccount: Cuenta de Correo
+ProductName: Nombre del Producto
+CountryOfManufacture: País de Fabricación
+RetentionReason: Motivo de Retención y/o Retiro
+NumberOfHealthRegister: No. Registro Sanitario
+Add: Agregar
+Attachments: Archivos Adjuntos
+File: Archivo
+UploadAttachment: Adjuntar Archivo
+YouExceedMaximumSizeOf: Ha excedido el tamaño máximo de
+IspectionType: Tipo de Inspección
+ViewAttachemnt: Ver Adjunto
+InspectionDate: Fecha de Inspección
+InspectionType: Tipo de Inspección
+NoticeOperation: Aviso de Operaciones
+LegalRepresentation: Representación Legal
+DNFDParticipants: Participantes DNFD
+Identification: Identificación
+EstablishmentParticipants: Participantes del Establecimiento
+Position: Cargo
+Location: Ubicación
+SignatureBytheMinistryofHealth: Firma por el Ministerio de Salud
+SignatureBytheEstablishment: Firma por el Establecimiento
+Clear: Borrar
+RegNum: Número de Registro
+Download: Descargar
+DateOfRecord: Fecha del Acta
+All: Todos
+FromDate: Fecha Inicial
+ToDate: Fecha Final
+FromExpDate: Fecha Exp. Inicial
+ToExpDate: Fecha Exp. Final
+WeWereServedBy: Fuimos Atendidos Por
+Ubication: Ubicación
+Provinces: Provincias
+NewProvince: Nueva Provincia
+Districts: Distritos
+NewDistrict: Nuevo Distrito
+EditDistrict: Editar Distrito
+Corregimientos: Corregimientos
+NewCorregimiento: Nuevo Corregimiento
+EditCorregimiento: Editar Corregimiento
+PharmacoVigilanceSystem: Sistema de Farmaco Vigilancia
