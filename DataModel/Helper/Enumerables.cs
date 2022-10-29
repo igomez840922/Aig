@@ -148,8 +148,7 @@ namespace DataModel.Helper
 		[Description("No")]
 		No = 2,
 	}
-
-    
+       
 
     public enum enum_StatusInspecciones
     {
@@ -174,6 +173,31 @@ namespace DataModel.Helper
     //////////////////////////////
     ///
 
+    public enum enumFMV_StatusPMR
+    {
+        [Description("None")]
+        None = -1,
+        [Description("Pendiente")]
+        Pending = 0,
+        [Description("En Proceso")]
+        InProcess = 1,
+        [Description("Finalizado")]
+        Completed = 2
+    }
+
+    public enum enumFMV_AlertType
+    {
+        [Description("Ninguna")]
+        None = 0,
+        [Description("Plan de Manejo de Riesgo")]
+        PMR = 1,
+        [Description("Informes Periódicos de Seguridad")]
+        IPS = 2,
+        [Description("RF")]
+        RF = 3,
+        [Description("Reacciones Adversas a Medicamentos")]
+        RAM = 4,
+    }
     public enum enumFMV_RAMType
     {
         [Description("No hay RAM")]
@@ -196,4 +220,55 @@ namespace DataModel.Helper
         [Description("Facedra")]
         Facedra = 3,
     }
+
+    public enum enumFMV_IpsPresentaCD
+    {
+        [Description("No Adjunta")]
+        NoAdjunta = 0,
+        [Description("Impresa")]
+        Printed = 1,
+        [Description("CD/USB")]
+        CDUSB = 2,
+    }
+    public enum enumFMV_IpsStatusRecepcion
+    {
+        [Description("Pendiente")]
+        Pending = 0,
+        [Description("Aceptado")]
+        Accepted = 1,
+        [Description("Rechazado")]
+        Rejected = 2,
+    }
+
+    public enum enumFMV_IpsStatusRegistro
+    {
+        [Description("Por Tramitar")]
+        Pending = 0,
+        [Description("Tramitado")]
+        Processed = 1,
+        [Description("Prioridad de Evaluación")]
+        Evaluation = 2,
+    }
+
+    public enum enumFMV_IpsTipoPresentaiones
+    {
+        [Description("No Presentado")]
+        NotPresent = 0,
+        [Description("Presentado")]
+        Presented = 1,
+        [Description("Si")]
+        Yes = 2,
+        [Description("No")]
+        No = 3,
+    }
+
+    public enum enumFMV_IpsStatusRevision
+    {
+        [Description("Por Evaluar")]
+        Pending = 0,
+        [Description("Evaluado")]
+        Evaluated = 1,
+    }
+
+   
 }

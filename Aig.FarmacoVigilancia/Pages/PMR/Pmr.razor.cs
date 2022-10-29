@@ -1,40 +1,33 @@
-﻿using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
-using Aig.FarmacoVigilancia.Events.Language;
-using Aig.FarmacoVigilancia.Services;
-using AKSoftware.Localization.MultiLanguages;
+﻿using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Aig.FarmacoVigilancia.Services;
+using Aig.FarmacoVigilancia.Events.Language;
+using Aig.FarmacoVigilancia.Events.PMR;
+using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
 
-namespace Aig.FarmacoVigilancia.Pages.Settings.District
+namespace Aig.FarmacoVigilancia.Pages.PMR
 {    
-    public partial class District
+    public partial class Pmr
     {
         [Inject]
         IProfileService profileService { get; set; }
         [Inject]
-        ICountriesService countriesService { get; set; }
-        [Inject]
-        IProvicesService provicesService { get; set; }
-        [Inject]
-        IDistrictService districtService { get; set; }
+        IPmrService pmrService { get; set; }
 
-        List<PaisTB> LPaises { get; set; }
-        List<ProvinciaTB> LProvincias { get; set; }
+        GenericModel<FMV_PmrTB> dataModel { get; set; } = new GenericModel<FMV_PmrTB>()
+        { Data = new FMV_PmrTB() };
 
-        long IdPais { get; set; }
-        long IdProvincia { get; set; }
-
-        GenericModel<DistritoTB> dataModel { get; set; } = new GenericModel<DistritoTB>()
-        { Data = new DistritoTB() };
+        bool OpenAddEditDialog { get; set; }=false;
 
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<Aig.FarmacoVigilancia.Events.District.DistrictAddEdit_CloseEvent>(DistrictAddEdit_CloseEvent);
+            bus.Subscribe<PmrAddEdit_CloseEvent>(PmrAddEdit_CloseHandler);
             bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
@@ -56,14 +49,9 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.District
 
         protected async Task FetchData()
         {
-            if (LPaises == null || LPaises.Count <= 0)
-            {
-                LPaises = await countriesService.GetAll();
-            }
-
             dataModel.ErrorMsg = null;
-            dataModel.Data = new DistritoTB();
-            var data = await districtService.FindAll(dataModel);
+            dataModel.Data = null;
+            var data = await pmrService.FindAll(dataModel);
             if (data != null)
             {
                 dataModel = data;
@@ -109,21 +97,24 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.District
         //Call Add/Edit 
         private async Task OnEdit(long id)
         {
-            var result = await districtService.Get(id);
+            OpenAddEditDialog = true;
+            var result = await pmrService.Get(id);
             if (result == null)
             {
-                result = new DistritoTB() {Provincia=new ProvinciaTB() { Pais = new PaisTB() } };
+                result = new FMV_PmrTB();
             }
-            await bus.Publish(new Aig.FarmacoVigilancia.Events.District.DistrictAddEdit_OpenEvent { Data = result });
+            dataModel.Data = result;
+            await bus.Publish(new PmrAddEdit_OpenEvent { Data = result });
             await this.InvokeAsync(StateHasChanged);
         }
-        private void DistrictAddEdit_CloseEvent(MessageArgs args)
+        private void PmrAddEdit_CloseHandler(MessageArgs args)
         {
-            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.District.DistrictAddEdit_CloseEvent>();
+            OpenAddEditDialog = false;
+            var message = args.GetMessage<PmrAddEdit_CloseEvent>();
             FetchData();
         }
 
-        private async Task OnDelete(DistritoTB data)
+        private async Task OnDelete(FMV_PmrTB data)
         {
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
@@ -138,11 +129,10 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.District
         }
         private async Task DeleteData()
         {
-            var result = await districtService.Delete(dataModel.Data.Id);
+            var result = await pmrService.Delete(dataModel.Data.Id);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);
-
                 await jsRuntime.InvokeVoidAsync("OpenCloseModal", "#btnCloseDeleteModal");
 
                 await FetchData();
@@ -151,24 +141,7 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.District
                 await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataDeleteError"]);
         }
 
-        protected async Task OnCountryChange(long Id)
-        {
-            IdPais = Id;
-            LProvincias = LPaises.Where(x => x.Id == IdPais).FirstOrDefault()?.LProvincia;
-            IdProvincia = 0;
-            dataModel.ParentId = IdProvincia > 0 ? IdProvincia : 0;
-            dataModel.Parent2Id = IdPais > 0 ? IdPais : 0;
-            await FetchData();
-        }
-        protected async Task OnProvincesChange(long Id)
-        {
-            IdProvincia = Id;
-            //LProvincias = LPaises.Where(x => x.Id == IdPais).FirstOrDefault()?.LProvincia;
-            //IdProvincia = 0;
-            dataModel.ParentId = IdProvincia > 0 ? IdProvincia : 0;
-            dataModel.Parent2Id = IdPais > 0 ? IdPais : 0;
-            await FetchData();
-        }
+
 
     }
 

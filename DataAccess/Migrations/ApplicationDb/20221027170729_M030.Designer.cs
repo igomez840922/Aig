@@ -4,6 +4,7 @@ using DataAccess.FarmacoVigilancia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221027170729_M030")]
+    partial class M030
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -764,6 +766,11 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.Property<long>("PmrId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("PrincActivo")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<string>("RegSanitario")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -812,11 +819,6 @@ namespace DataAccess.Migrations.ApplicationDb
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
-
-                    b.Property<string>("PrincActivo")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

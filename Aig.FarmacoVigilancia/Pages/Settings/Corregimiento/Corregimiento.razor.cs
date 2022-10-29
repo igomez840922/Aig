@@ -8,7 +8,6 @@ using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Corregimiento;
-using Aig.FarmacoVigilancia.Data;
 
 namespace Aig.FarmacoVigilancia.Pages.Settings.Corregimiento
 {    

@@ -90,7 +90,7 @@ RememberMe: Recordarme
 ForgetPassword: Olvidó su Contraseña
 SignIn: Entrar
 AuditorysystemAig: Sistema de Auditoría de la AIG
-PharmaciesAndDrugsAuditSystem: Sistema de Auditoría de Faramacias y Drogas
+PharmaciesAndDrugsAuditSystem: Sistema de Auditoría de Farmacias y Drogas
 Establishments: Establecimientos
 Inspections: Inspecciones
 QualityAudit: Auditorías de Calidad
@@ -176,4 +176,16 @@ EditDistrict: Editar Distrito
 Corregimientos: Corregimientos
 NewCorregimiento: Nuevo Corregimiento
 EditCorregimiento: Editar Corregimiento
-PharmacoVigilanceSystem: Sistema de Farmaco Vigilancia
+PharmacoVigilanceSystem: Sistema de FarmacoVigilancia
+PMR: Plan de Manejo de Riesgo
+ActivePrinciple: Principio Activo
+CommercialName: Nombre Comercial
+Laboratory: Laboratorio
+IPS: Informes Periódicos de Seguridad
+RF: Responsables de Farmacovigilancia
+NewPMR: Nuevo Plan de Manejo de Riesgo
+EditPMR: Editar Plan de Manejo de Riesgo
+EntryDate: Fecha de Entrada
+EvaluatorDate: Fecha Entrega a Evaluador
+TramitDate: Fecha del Trámite
+Evaluator: Evaluador

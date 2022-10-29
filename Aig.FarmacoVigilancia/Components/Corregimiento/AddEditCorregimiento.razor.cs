@@ -1,5 +1,4 @@
-﻿using Aig.FarmacoVigilancia.Data;
-using Aig.FarmacoVigilancia.Events.Corregimiento;
+﻿using Aig.FarmacoVigilancia.Events.Corregimiento;
 using Aig.FarmacoVigilancia.Events.District;
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Services;

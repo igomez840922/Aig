@@ -1,0 +1,190 @@
+﻿@using DataModel.Helper;
+
+@if (Pmr != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Pmr != null && Pmr.Id > 0 ? @languageContainerService.Keys["EditPMR"] : @languageContainerService.Keys["NewPMR"])</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Pmr" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+                        <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#products" role="tab">@languageContainerService.Keys["Products"]</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="generalInfo" role="tabpanel">
+                                <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["EntryDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Pmr.FechaEntrada" />
+                                                <ValidationMessage For=@(() => Pmr.FechaEntrada) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["TramitDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Pmr.FechaTramite" />
+                                                <ValidationMessage For=@(() => Pmr.FechaTramite) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["EvaluatorDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Pmr.FechaEntregaEvaluador" />
+                                                <ValidationMessage For=@(() => Pmr.FechaEntregaEvaluador) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                     <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["ActivePrinciple"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Pmr.PrincActivo" />
+                                                <ValidationMessage For=@(() => Pmr.PrincActivo) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Evaluator"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect class="form-control"
+                                                         ValueExpression="@(() => Pmr.EvaluadorId)"
+                                                         Value="@Pmr.EvaluadorId"
+                                                         ValueChanged="@((long? value) => OnEvaluatorChange(value))">
+                                                    @if (lEvaluators != null)
+                                                    {
+                                                        foreach (var dt in lEvaluators)
+                                                        {
+                                                            <option value="@dt.Id">@dt.NombreCompleto</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Pmr.EvaluadorId) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Status"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Pmr.Status" class="form-control">
+                                                    @foreach (enumFMV_StatusPMR dt in Enum.GetValues(typeof(enumFMV_StatusPMR)))
+                                                    {
+                                                        if (dt != enumFMV_StatusPMR.None)
+                                                        {
+                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Pmr.Status) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="products" role="tabpanel">
+                                <h4>@languageContainerService.Keys["Products"]</h4>
+                                <div class="row clearfix">
+                                    <div class="col-9" style="text-align:left;">
+                                    </div>
+                                    <div class="col-3" style="text-align:right;">
+                                        <button type="button" @onclick="(e)=>{OpenProduct();}"
+                                            class="btn btn-sm btn-outline-primary waves-effect">
+                                            @languageContainerService.Keys["Add"]
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="kt-section">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["NumberOfHealthRegister"]</th>
+                                                    <th>@languageContainerService.Keys["CommercialName"]</th>
+                                                    <th>@languageContainerService.Keys["Laboratory"]</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Pmr != null && Pmr.LProductos != null)
+                                                {
+                                                    @foreach (var dt in Pmr.LProductos)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.RegSanitario</td>
+                                                            <td>@dt.NomComercial</td>
+                                                            <td>@(dt.Laboratorio?.Nombre ?? "")</td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveProduct(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                                <!-- /btn-group -->
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="modal-footer">
+
+                            <button type="submit"
+                                class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+
+                            <button type="button" class="btn btn-danger waves-effect"
+                                @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+}
+
+            
+@if (OpenAddEditProduct)
+{
+    <Aig.FarmacoVigilancia.Components.PmrProduct.AddEditProductComponent  Product="AddProduct"></Aig.FarmacoVigilancia.Components.PmrProduct.AddEditProductComponent>
+}
+
+<div class="modal-backdrop fade show"></div>

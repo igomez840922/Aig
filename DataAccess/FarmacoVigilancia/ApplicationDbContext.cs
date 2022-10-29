@@ -81,18 +81,67 @@ namespace DataAccess.FarmacoVigilancia
             //.Property(e => e.DatosEstructuraOrganizacional)
             //.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEstructuraOrganizacional>(x));
 
-            modelBuilder.Entity<FMV_EvaluadorTB>()
-                .HasMany(e => e.LRam)
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+                .HasMany(e => e.LPmr)
                 .WithOne(e => e.Evaluador)
                 .HasForeignKey(e => e.EvaluadorId)
-                .OnDelete(DeleteBehavior.NoAction);            
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+               .HasMany(e => e.LIpsTramitador)
+               .WithOne(e => e.Tramitador)
+               .HasForeignKey(e => e.TramitadorId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+              .HasMany(e => e.LIpsRegistrador)
+              .WithOne(e => e.Registrador)
+              .HasForeignKey(e => e.RegistradorId)
+              .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+              .HasMany(e => e.LIpsEvaluador)
+              .WithOne(e => e.Evaluador)
+              .HasForeignKey(e => e.EvaluadorId)
+              .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<FMV_PmrTB>()
+               .HasMany(e => e.LProductos)
+               .WithOne(e => e.Pmr)
+               .HasForeignKey(e => e.PmrId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<LaboratorioTB>()
+              .HasMany(e => e.LProductos)
+              .WithOne(e => e.Laboratorio)
+              .HasForeignKey(e => e.LaboratorioId)
+              .OnDelete(DeleteBehavior.NoAction);          
+
+            modelBuilder.Entity<LaboratorioTB>()
+              .HasMany(e => e.LIps)
+              .WithOne(e => e.Laboratorio)
+              .HasForeignKey(e => e.LaboratorioId)
+              .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<FMV_IpsTB>()
+            .Property(e => e.IpsData)
+            .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_IpsData>(x));
+
+            //modelBuilder.Entity<FMV_IpsTB>()
+            //  .HasMany(e => e.LProducts)
+            //  .WithOne(e => e.Ips)
+            //  .HasForeignKey(e => e.IpsId)
+            //  .OnDelete(DeleteBehavior.Cascade);                        
 
             base.OnModelCreating(modelBuilder);
         }
        
         public virtual DbSet<AttachmentTB> Attachment { get; set; }
-        public virtual DbSet<FMV_EvaluadorTB> FMV_Evaluador { get; set; }
-        public virtual DbSet<FMV_RamTB> FMV_Ram { get; set; }        
+        public virtual DbSet<PersonalTrabajadorTB> PersonalTrabajador { get; set; }
+        public virtual DbSet<FMV_PmrTB> PmrTB { get; set; }
+        public virtual DbSet<FMV_PmrProductoTB> Ram { get; set; }
+        public virtual DbSet<FMV_IpsTB> Ips { get; set; }
+        public virtual DbSet<LaboratorioTB> Laboratorio { get; set; }
         public virtual DbSet<CorregimientoTB> Corregimiento { get; set; }
         public virtual DbSet<DistritoTB> Distrito { get; set; }
         public virtual DbSet<PaisTB> Pais { get; set; }

@@ -11,21 +11,9 @@ namespace DataModel
     //Notificaciones de Reacciones Adversas a Medicamentos
     public class FMV_RamTB:SystemId
     {
-        //fecha y Hora de inicio del acta
-        private DateTime? fechaRecibido;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaRecibido { get => fechaRecibido; set => SetProperty(ref fechaRecibido, value); }
+        private FMV_AlertaTB alerta;
+        public virtual FMV_AlertaTB Alerta { get => alerta; set => SetProperty(ref alerta, value); }
 
-        //fecha de entrega al evaluador
-        private DateTime? fechaEntregaEvaluador;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaEntregaEvaluador { get => fechaEntregaEvaluador; set => SetProperty(ref fechaEntregaEvaluador, value); }
-
-        //Establecimiento
-        private long? evaluadorId;
-        public long? EvaluadorId { get => evaluadorId; set => SetProperty(ref evaluadorId, value); }
-        private FMV_EvaluadorTB? evaluador;
-        public virtual FMV_EvaluadorTB? Evaluador { get => evaluador; set => SetProperty(ref evaluador, value); }
 
         private string farmacoSospechosoComercial;
         [StringLength(250)]

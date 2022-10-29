@@ -1,5 +1,4 @@
 ﻿using Aig.FarmacoVigilancia.Events.Country;
-using Aig.FarmacoVigilancia.Events.Establishments;
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;

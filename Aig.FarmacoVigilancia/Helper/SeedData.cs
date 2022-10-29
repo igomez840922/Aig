@@ -79,82 +79,87 @@ namespace Aig.FarmacoVigilancia.Helper
 
         public static async Task SeedFirstData(IServiceProvider serviceProvider)
         {
-            //using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            //{
-            //    var countryService = serviceScope.ServiceProvider.GetService<ICountriesService>();
-            //    var inspeccionService = serviceScope.ServiceProvider.GetService<IInspectionsService>();
-            //    var dalService = serviceScope.ServiceProvider.GetService<IDalService>();
+            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var dalService = serviceScope.ServiceProvider.GetService<IDalService>();
 
-            //    //Countries
-            //    if (await countryService.Count() <= 0)
-            //    {
-            //        List<PaisTB> lCountries = null;
-            //        using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.provincias.json"))
-            //        using (StreamReader reader = new StreamReader(stream))
-            //        {
-            //            var jsonFileContent = reader.ReadToEnd();
-            //            lCountries = JsonConvert.DeserializeObject<List<PaisTB>>(jsonFileContent);
-            //        }
-            //        if (lCountries != null)
-            //        {
-            //            foreach (var country in lCountries)
-            //            {
-            //                await countryService.Save(country);
-            //            }
-            //        }
-            //    }
+                if (dalService.Count<LaboratorioTB>() <= 0)
+                {
+                    LaboratorioTB lab = new LaboratorioTB() { Nombre = "Abbott" };
+                    dalService.Save(lab);
+                    lab = new LaboratorioTB() { Nombre = "Roche" };
+                    dalService.Save(lab);
+                    lab = new LaboratorioTB() { Nombre = "GSK" };
+                    dalService.Save(lab);
+                    lab = new LaboratorioTB() { Nombre = "Novartis" };
+                    dalService.Save(lab);
+                }
+                if (dalService.Count<PersonalTrabajadorTB>() <= 0)
+                {
+                    PersonalTrabajadorTB lab = new PersonalTrabajadorTB() { NombreCompleto = "Arelis Quintero" };
+                    dalService.Save(lab);
+                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Favio Navarro" };
+                    dalService.Save(lab);
+                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Idalmis Aguilar" };
+                    dalService.Save(lab);
+                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Miguel Díaz" };
+                    dalService.Save(lab);
+                }
 
-            //    if (dalService.Count<ProvinciaTB>() <= 0)
-            //    {
-            //        PaisTB pais = dalService.Find<PaisTB>(x=>x.Codigo=="PA");
-            //        List<Provincium> lProvincial = null;
-            //        using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.provincias.json"))
-            //        using (StreamReader reader = new StreamReader(stream))
-            //        {
-            //            var jsonFileContent = reader.ReadToEnd();
-            //            var mainProv = JsonConvert.DeserializeObject<MainProvincias>(jsonFileContent);
-            //            lProvincial = mainProv.provincia;
-            //        }
-            //        if (lProvincial != null)
-            //        {
-            //            foreach (var prov in lProvincial)
-            //            {
-            //                //await countryService.Save(prov);
-            //                var provincia = new ProvinciaTB() { Nombre = prov.nombre, Codigo=prov.ced,LDistritos=new List<DistritoTB>(), Pais= pais };
-            //                foreach (var dist in prov.distrito)
-            //                {
-            //                    var distrito = new DistritoTB() { Nombre = dist.nombre, Codigo = dist.cabecera,LCorregimientos=new List<CorregimientoTB>() };
-            //                    provincia.LDistritos.Add(distrito);
-            //                    foreach (var corr in dist.corregimientos)
-            //                    {
-            //                        var corregimiento = new CorregimientoTB() { Nombre = corr, Codigo = corr };
-            //                        distrito.LCorregimientos.Add(corregimiento);
-            //                    }
-            //                }
-            //                dalService.Save(provincia);
-            //            }
-            //        }
-            //    }
+                ////Countries
+                //if (await countryService.Count() <= 0)
+                //{
+                //    List<PaisTB> lCountries = null;
+                //    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.provincias.json"))
+                //    using (StreamReader reader = new StreamReader(stream))
+                //    {
+                //        var jsonFileContent = reader.ReadToEnd();
+                //        lCountries = JsonConvert.DeserializeObject<List<PaisTB>>(jsonFileContent);
+                //    }
+                //    if (lCountries != null)
+                //    {
+                //        foreach (var country in lCountries)
+                //        {
+                //            await countryService.Save(country);
+                //        }
+                //    }
+                //}
 
-            //    //Probando Inspecciones
-            //    //if (await inspeccionService.Count() <= 0)
-            //    //{
-            //    //    AUD_InspeccionTB _Inspection = new AUD_InspeccionTB()
-            //    //    {
-            //    //        FechaInicio = DateTime.Now,
-            //    //        //NumActa = 1,
-            //    //        TipoActa = DataModel.Helper.enumAUD_TipoActa.AperturaCambioUbicacionFarmacias,
-            //    //        InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB()
-            //    //        {
-            //    //            DatosEstablecimiento = new AUD_DatosEstablecimiento() { Corregimiento = "Corregimiento 1", Distrito = "Distrito 1", Provincia = "Provincia 1", Telefono = "62453371", Ubicacion = "Obarrio esquina verde" },
-            //    //        }
-            //    //    };
+                //if (dalService.Count<ProvinciaTB>() <= 0)
+                //{
+                //    PaisTB pais = dalService.Find<PaisTB>(x => x.Codigo == "PA");
+                //    List<Provincium> lProvincial = null;
+                //    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.provincias.json"))
+                //    using (StreamReader reader = new StreamReader(stream))
+                //    {
+                //        var jsonFileContent = reader.ReadToEnd();
+                //        var mainProv = JsonConvert.DeserializeObject<MainProvincias>(jsonFileContent);
+                //        lProvincial = mainProv.provincia;
+                //    }
+                //    if (lProvincial != null)
+                //    {
+                //        foreach (var prov in lProvincial)
+                //        {
+                //            //await countryService.Save(prov);
+                //            var provincia = new ProvinciaTB() { Nombre = prov.nombre, Codigo = prov.ced, LDistritos = new List<DistritoTB>(), Pais = pais };
+                //            foreach (var dist in prov.distrito)
+                //            {
+                //                var distrito = new DistritoTB() { Nombre = dist.nombre, Codigo = dist.cabecera, LCorregimientos = new List<CorregimientoTB>() };
+                //                provincia.LDistritos.Add(distrito);
+                //                foreach (var corr in dist.corregimientos)
+                //                {
+                //                    var corregimiento = new CorregimientoTB() { Nombre = corr, Codigo = corr };
+                //                    distrito.LCorregimientos.Add(corregimiento);
+                //                }
+                //            }
+                //            dalService.Save(provincia);
+                //        }
+                //    }
+                //}
 
-            //        //    _Inspection = await inspeccionService.Save(_Inspection);
-            //        //}
 
-            //}
-        
+            }
+
         }
 
 

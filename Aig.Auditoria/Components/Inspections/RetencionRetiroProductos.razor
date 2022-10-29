@@ -46,7 +46,10 @@
                                             <InputSelect @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
                                                 @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
                                                 {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    if (dt!= enum_StatusInspecciones.None)
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
                                                 }
                                             </InputSelect>
                                             <ValidationMessage For=@(() => Inspeccion.StatusInspecciones) />
