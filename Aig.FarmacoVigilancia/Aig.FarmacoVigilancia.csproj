@@ -61,7 +61,6 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Pages\IPS\" />
   </ItemGroup>
 
 </Project>

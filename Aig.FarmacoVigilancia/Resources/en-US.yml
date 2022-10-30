@@ -180,11 +180,66 @@ PMR: Risk Management Plan
 ActivePrinciple: Active Principle
 CommercialName: Commercial Name
 Laboratory: Laboratory
-IPS: Informes Periódicos de Seguridad
-RF: Responsables de Farmacovigilancia
+IPS: Periodic Security Reports
+RF: Responsible for Pharmacovigilance
 NewPMR: New Risk Management Plan
 EditPMR: Edit Risk Management Plan
 EntryDate: Entry Date
 EvaluatorDate: Evaluator Date
 TramitDate: Tramit Date
 Evaluator: Evaluator
+SpecificInfo: Specific Information
+ReceptionDateCNFV: Reception Date CNFV
+DeliveryDateRegister: Delivery Date to Register
+Register: Register
+PresentCD: Present CD
+InitialPeriod: Initial Period
+EndPeriod: End Period
+RigisteredDate: Rigistered Date
+ReceptionDate: Reception Date
+ReceptionStatus: Reception Status
+AsignPreEvaluationDate: Asigned for PreEvaluation Date
+Tramitator: Tramitator
+Innovator: Innovator
+Biologic: Biologic
+InterchangeRequired: Interchange Required
+AuthDatePanama: Authentication Date in Panama
+PreEvaluationDate: PreEvaluation Date
+RecordStatus: Record Status
+Priority: Priority
+AsignEvaluationDate: Asign Evaluation Date
+ExecutiveResume: Executive Resume
+ExecutiveResumeTranslated: Executive Resume Translated
+ContentTable: Content Table
+Introduction: Introduction
+WorldSituationForCommercialAuth: World Situation of Commercial Authorization
+AdoptedMeasures: Adopted Measures for ARNs or TRS
+ChangesToSecurityInformation: Changes to the Security Information
+Monographs: Monographs
+EstimateExposition: Estimate Exposition
+CasePresentations: Cases Presentations
+SummaryFindings: Summary Findings
+OtherRelatedInfo: Other Related Info
+NoClinicalData: No Clinical Data
+OtherPeriodicInfo: Other Periodic Info
+LackEfficacyClinicalTrials: Lack Efficacy in Clinical Trials
+SignalReview: Signal Review
+SignalRiskEvaluation: Signal Risk Evaluation
+BenefitEvaluation: Benefit Evaluation
+BenefitRiskAnalysis: Benefit Risk Analysis
+ActionsConclusions: Actions Conclusions
+AnnexAppendices: Annex Appendices
+BRBalanceHasChange: B/R Balance has Changed
+ActionPlanProposal: ActionPlan Proposal
+ManufacturerInformationRequest: Manufacturer Information Request
+ReviewDate: Review Date
+ReviewStatus: Review Status
+IPSMadeAccordingRegulations: IPS Made According to the Regulations
+ReportNumber: Report Number
+Observatios: Observatios
+ResumeInfo: Resume Info
+RevisionInfo: Revision Info
+NewIPS: New Periodic Security Reports
+EditIPS: Edit Periodic Security Reports
+From: From
+To: To

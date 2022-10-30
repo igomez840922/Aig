@@ -34,6 +34,7 @@ namespace DataModel
         //Principio Activo
         private string princActivo;
         [StringLength(250)]
+        [Required(ErrorMessage = "RequiredField")]
         public string PrincActivo { get => princActivo; set => SetProperty(ref princActivo, value); }
 
         //Titular
@@ -105,6 +106,10 @@ namespace DataModel
         // Estatus de Revision
         private enumFMV_IpsStatusRevision statusRevision;
         public enumFMV_IpsStatusRevision StatusRevision { get => statusRevision; set => SetProperty(ref statusRevision, value); }
+
+        // IPS confeccionado conforme a la normativa: Cumple, no cumple
+        private bool confecConNormativa;
+        public bool ConfecConNormativa { get => confecConNormativa; set => SetProperty(ref confecConNormativa, value); }
 
         // No. de Informe 
         private string noInforme;

@@ -1,0 +1,692 @@
+﻿@using DataModel.Helper;
+
+@if (Ips != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Ips != null && Ips.Id > 0 ? @languageContainerService.Keys["EditIPS"] : @languageContainerService.Keys["NewIPS"])</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Ips" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+                        <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#specificInfo" role="tab">@languageContainerService.Keys["SpecificInfo"]</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#resumeInfo" role="tab">@languageContainerService.Keys["ResumeInfo"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#revisionInfo" role="tab">@languageContainerService.Keys["RevisionInfo"]</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="generalInfo" role="tabpanel">
+                                <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
+                                <div class="row clearfix">
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["ReceptionDateCNFV"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.FechaRecepcion" />
+                                                <ValidationMessage For=@(() => Ips.FechaRecepcion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["DeliveryDateRegister"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.FechaRegistrador" />
+                                                <ValidationMessage For=@(() => Ips.FechaRegistrador) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["Register"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect class="form-control" @bind-Value="Ips.RegistradorId">
+                                                    <option value=""></option>
+                                                    @if (lPersons != null)
+                                                    {
+                                                        foreach (var dt in lPersons.Where(x=>x.Registrador))
+                                                        {
+                                                            <option value="@dt.Id">@dt.NombreCompleto</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Ips.RegistradorId) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["NumberOfHealthRegister"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Ips.RegSanitario" />
+                                                <ValidationMessage For=@(() => Ips.RegSanitario) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["CommercialName"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Ips.NomComercial" />
+                                                <ValidationMessage For=@(() => Ips.NomComercial) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["ActivePrinciple"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Ips.PrincActivo" />
+                                                <ValidationMessage For=@(() => Ips.PrincActivo) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["Laboratory"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect class="form-control" @bind-Value="Ips.LaboratorioId">
+                                                    <option value=""></option>
+                                                    @if (Labs != null)
+                                                    {
+                                                        foreach (var dt in Labs)
+                                                        {
+                                                            <option value="@dt.Id">@dt.Nombre</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Ips.LaboratorioId) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="specificInfo" role="tabpanel">
+                                <h4>@languageContainerService.Keys["SpecificInfo"]</h4>
+                                <div class="row clearfix">
+                                    
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["PresentCD"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.PresentaCd" class="form-control">
+                                                @foreach (enumFMV_IpsPresentaCD dt in Enum.GetValues(typeof(enumFMV_IpsPresentaCD)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.PresentaCd) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["InitialPeriod"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.PeriodoIni" />
+                                                <ValidationMessage For=@(() => Ips.IpsData.PeriodoIni) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["EndPeriod"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.PeriodoFin" />
+                                                <ValidationMessage For=@(() => Ips.IpsData.PeriodoFin) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["RigisteredDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.FechaRegistro" />
+                                                <ValidationMessage For=@(() => Ips.IpsData.FechaRegistro) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["ReceptionStatus"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.EstatusRecepcion" class="form-control">
+                                                @foreach (enumFMV_IpsStatusRecepcion dt in Enum.GetValues(typeof(enumFMV_IpsStatusRecepcion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.EstatusRecepcion) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["PreEvaluationDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.FechaAsigPreEva" />
+                                                <ValidationMessage For=@(() => Ips.IpsData.FechaAsigPreEva) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["Tramitator"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect class="form-control" @bind-Value="Ips.TramitadorId">
+                                                    <option value=""></option>
+                                                    @if (lPersons != null)
+                                                    {
+                                                        foreach (var dt in lPersons.Where(x => x.Tramitador))
+                                                        {
+                                                            <option value="@dt.Id">@dt.NombreCompleto</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Ips.TramitadorId) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["Innovator"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.Innovador" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.Innovador) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["Biologic"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.Biologico" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.Biologico) />
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["InterchangeRequired"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.ReqIntercam" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.ReqIntercam) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["AuthDatePanama"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.FechaAutPan" />
+                                                <ValidationMessage For=@(() => Ips.IpsData.FechaAutPan) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">                                   
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["PreEvaluationDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.FechaPreEva" />
+                                                <ValidationMessage For=@(() => Ips.IpsData.FechaPreEva) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["RecordStatus"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.EstatusRecepcion" class="form-control">
+                                                @foreach (enumFMV_IpsStatusRegistro dt in Enum.GetValues(typeof(enumFMV_IpsStatusRegistro)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.EstatusRegistro) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["Priority"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.Prioridad" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.Prioridad) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["AsignEvaluationDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.FechaAsigEva" />
+                                                <ValidationMessage For=@(() => Ips.FechaAsigEva) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["Evaluator"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect class="form-control" @bind-Value="Ips.EvaluadorId">
+                                                    <option value=""></option>
+                                                    @if (lPersons != null)
+                                                    {
+                                                        foreach (var dt in lPersons.Where(x => x.Evaluador))
+                                                        {
+                                                            <option value="@dt.Id">@dt.NombreCompleto</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Ips.EvaluadorId) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="resumeInfo" role="tabpanel">
+                                <h4>@languageContainerService.Keys["ResumeInfo"]</h4>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["ExecutiveResume"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.ResumenEjec" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.ResumenEjec) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["ExecutiveResumeTranslated"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.ResumenEjecTrad" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.ResumenEjecTrad) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["ContentTable"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.TablaContenido" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.TablaContenido) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Introduction"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.Introduccion" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.Introduccion) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["WorldSituationForCommercialAuth"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.SitMunAutCom" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.SitMunAutCom) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["AdoptedMeasures"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.MedAdoptada" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.MedAdoptada) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["ChangesToSecurityInformation"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.CamInfoSeg" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.CamInfoSeg) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Monographs"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.Monografia" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.Monografia) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["EstimateExposition"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.ExpEstimada" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.ExpEstimada) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["CasePresentations"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.PresCasos" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.PresCasos) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["SummaryFindings"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.ResHallazgo" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.ResHallazgo) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["OtherRelatedInfo"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.OtraInfRel" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.OtraInfRel) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["NoClinicalData"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.DatosNoCli" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.DatosNoCli) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["OtherPeriodicInfo"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.OtroInfPer" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.OtroInfPer) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["LackEfficacyClinicalTrials"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.FaltaEficacia" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.FaltaEficacia) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["SignalReview"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.RevisionSenales" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.RevisionSenales) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["SignalRiskEvaluation"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.EvaluacionSenales" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.EvaluacionSenales) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["BenefitEvaluation"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.EvaluacionBeneficio" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.EvaluacionBeneficio) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["BenefitRiskAnalysis"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.AnaBenRiesgo" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.AnaBenRiesgo) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["ActionsConclusions"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.ConcluAcciones" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.ConcluAcciones) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["AnnexAppendices"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.AnexoApendice" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.AnexoApendice) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["BRBalanceHasChange"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.CambioBalance" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.CambioBalance) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["ActionPlanProposal"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.PropPlanAccion" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.PropPlanAccion) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["ManufacturerInformationRequest"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.IpsData.SolInfoFabricante" class="form-control">
+                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.IpsData.SolInfoFabricante) />
+                                        </div>
+                                    </div>
+
+                                </div>
+                               
+                            </div>
+                            <div class="tab-pane" id="revisionInfo" role="tabpanel">
+                                <h4>@languageContainerService.Keys["RevisionInfo"]</h4>
+                                <div class="row clearfix">
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["ReviewDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Ips.FechaRev" />
+                                                <ValidationMessage For=@(() => Ips.FechaRev) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["ReviewStatus"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.StatusRevision" class="form-control">
+                                                @foreach (enumFMV_IpsStatusRevision dt in Enum.GetValues(typeof(enumFMV_IpsStatusRevision)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.StatusRevision) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["IPSMadeAccordingRegulations"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Ips.ConfecConNormativa" class="form-control">
+                                                <option value="false">No Cumple</option>
+                                                <option value="true">Cumple</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Ips.ConfecConNormativa) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["ReportNumber"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Ips.NoInforme" />
+                                                <ValidationMessage For=@(() => Ips.NoInforme) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <label>@languageContainerService.Keys["Observatios"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="6" class="form-control" @bind-Value="Ips.IpsData.Observaciones" />
+                                                <ValidationMessage For=@(() => Ips.IpsData.Observaciones) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                        <br>
+                        <div class="modal-footer">
+
+                            <button type="submit"
+                                class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+
+                            <button type="button" class="btn btn-danger waves-effect"
+                                @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="modal-backdrop fade show"></div>

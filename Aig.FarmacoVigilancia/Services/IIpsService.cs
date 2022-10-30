@@ -6,6 +6,8 @@ namespace Aig.FarmacoVigilancia.Services
 {
     public interface IIpsService
     {
+        Task<Stream> ExportToExcel(GenericModel<FMV_IpsTB> model);
+
         Task<GenericModel<FMV_IpsTB>> FindAll(GenericModel<FMV_IpsTB> model);
         Task<List<FMV_IpsTB>> GetAll();
         Task<FMV_IpsTB> Get(long id);

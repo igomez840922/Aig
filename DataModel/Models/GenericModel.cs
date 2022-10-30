@@ -1,6 +1,7 @@
 ﻿using DataModel.Helper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,8 +49,13 @@ namespace DataModel.Models
 
         public enumAUD_TipoActa TipoActa { get; set; } = enumAUD_TipoActa.None;
         public enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.None;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FromDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? ToDate { get; set; }
+        public enumFMV_IpsStatusRevision? IpsStatusRevision { get; set; } = null;
+        public long? EvaluatorId { get; set; } = null;
+        public long? RegisterId { get; set; } = null;
 
     }
 

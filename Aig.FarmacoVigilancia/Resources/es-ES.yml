@@ -189,3 +189,58 @@ EntryDate: Fecha de Entrada
 EvaluatorDate: Fecha Entrega a Evaluador
 TramitDate: Fecha del Trámite
 Evaluator: Evaluador
+SpecificInfo: Información Específica
+ReceptionDateCNFV: Fecha de Recepción CNFV
+DeliveryDateRegister: Entrega al Registrador
+Register: Registrador
+PresentCD: Presenta CD
+InitialPeriod: Período Inicial
+EndPeriod: Período Final
+RigisteredDate: Fecha de Registro
+ReceptionDate: Fecha de Recepción
+ReceptionStatus: Estatus de Recepción
+AsignPreEvaluationDate: Asignación para PreEvaluación
+Tramitator: Tramitador
+Innovator: Innovador
+Biologic: Biologico
+InterchangeRequired: Requiere Intercambiabilidad
+AuthDatePanama: Autorización en Panamá
+PreEvaluationDate: Fecha de PreEvaluación
+RecordStatus: Estatus del Registro
+Priority: Prioridad
+AsignEvaluationDate: Asignación para Evaluación
+ExecutiveResume: Resumen Ejecutivo
+ExecutiveResumeTranslated: Resumen Ejecutivo Traducido
+ContentTable: Tabla de Contenido
+Introduction: Introducción
+WorldSituationForCommercialAuth: Situación Mundial de Autorización de Comercialización
+AdoptedMeasures: Medidas Adoptadas por ARNs o TRS
+ChangesToSecurityInformation: Cambios a la Info de Seguridad
+Monographs: Monografías
+EstimateExposition: Exposición Estimada y Patrones de uso
+CasePresentations: Presentación de Casos (Rams Reportadas)
+SummaryFindings: Resumen de Hallazgos Significantes de Seguridad
+OtherRelatedInfo: Otra Información Relacionada
+NoClinicalData: Datos No Clínicos
+OtherPeriodicInfo: Otros Informes Periódicos
+LackEfficacyClinicalTrials: Falta Eficiencia en Ensayos Clinicos
+SignalReview: Revisión de Señales
+SignalRiskEvaluation: Evaluación de Señales de Riesgo
+BenefitEvaluation: Evaluación del Beneficio
+BenefitRisk Analysis: Anlisis de Riesgo Beneficio
+ActionsConclusions: Conclusiones y Acciones
+AnnexAppendices: Anexos y Apendices
+BRBalanceHasChange: Ha Cambiado el Balance B/R
+ActionPlanProposal: Propusta de un Plan de Acción
+ManufacturerInformationRequest: Solicitud de Información al Fabricante
+ReviewDate: Fecha de Revisión
+ReviewStatus: Estatus de Revisión
+IPSMadeAccordingRegulations: IPS Confeccionado Conforme a Normativas
+ReportNumber: No. del Informe
+Observatios: Observaciones
+ResumeInfo: Información de Resumen
+RevisionInfo: Información de Revisión
+NewIPS: Nuevo Informes Periódicos de Seguridad
+EditIPS: Editar Informes Periódicos de Seguridad
+From: Desde
+To: Hasta

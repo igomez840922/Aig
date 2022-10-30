@@ -96,13 +96,13 @@ namespace Aig.FarmacoVigilancia.Helper
                 }
                 if (dalService.Count<PersonalTrabajadorTB>() <= 0)
                 {
-                    PersonalTrabajadorTB lab = new PersonalTrabajadorTB() { NombreCompleto = "Arelis Quintero" };
+                    PersonalTrabajadorTB lab = new PersonalTrabajadorTB() { NombreCompleto = "Arelis Quintero", Evaluador = true, Registrador = true, Tramitador = true };
                     dalService.Save(lab);
-                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Favio Navarro" };
+                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Favio Navarro", Evaluador=true, Registrador=true, Tramitador=true };
                     dalService.Save(lab);
-                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Idalmis Aguilar" };
+                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Idalmis Aguilar", Evaluador = true, Registrador = true, Tramitador = true };
                     dalService.Save(lab);
-                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Miguel Díaz" };
+                    lab = new PersonalTrabajadorTB() { NombreCompleto = "Miguel Díaz" , Evaluador = true, Registrador = true, Tramitador = true };
                     dalService.Save(lab);
                 }
 

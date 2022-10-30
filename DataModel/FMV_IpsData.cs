@@ -29,6 +29,12 @@ namespace DataModel
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FechaRegistro { get => fechaRegistro; set => SetProperty(ref fechaRegistro, value); }
 
+        // Fecha asignacion pre evaluacion
+        private DateTime? fechaAsigPreEva;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaAsigPreEva { get => fechaAsigPreEva; set => SetProperty(ref fechaAsigPreEva, value); }
+
+
         // Innovador: si, no
         private bool innovador;
         public bool Innovador { get => innovador; set => SetProperty(ref innovador, value); }
@@ -108,12 +114,12 @@ namespace DataModel
         public enumFMV_IpsTipoPresentaiones RevisionSenales { get => revisionSenales; set => SetProperty(ref revisionSenales, value); }
 
         // Evaluación de señales y riesgos: Presentado, No Presentado, Si, No
-        private enumFMV_IpsTipoPresentaiones evaSenales;
-        public enumFMV_IpsTipoPresentaiones EvaSenales { get => evaSenales; set => SetProperty(ref evaSenales, value); }
+        private enumFMV_IpsTipoPresentaiones evaluacionSenales;
+        public enumFMV_IpsTipoPresentaiones EvaluacionSenales { get => evaluacionSenales; set => SetProperty(ref evaluacionSenales, value); }
 
         // Evaluación del beneficio: Presentado, No Presentado, Si, No
-        private enumFMV_IpsTipoPresentaiones evaBeneficio;
-        public enumFMV_IpsTipoPresentaiones EvaBeneficio { get => evaBeneficio; set => SetProperty(ref evaBeneficio, value); }
+        private enumFMV_IpsTipoPresentaiones evaluacionBeneficio;
+        public enumFMV_IpsTipoPresentaiones EvaluacionBeneficio { get => evaluacionBeneficio; set => SetProperty(ref evaluacionBeneficio, value); }
 
         // Análisis de beneficio riesgo: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones anaBenRiesgo;
@@ -138,12 +144,6 @@ namespace DataModel
         // Solicitud de informacion al fabricante: Si, no
         private enumFMV_IpsTipoPresentaiones solInfoFabricante;
         public enumFMV_IpsTipoPresentaiones SolInfoFabricante { get => solInfoFabricante; set => SetProperty(ref solInfoFabricante, value); }
-
-
-        // IPS confeccionado conforme a la normativa: Cumple, no cumple
-        private bool confecConNormativa;
-        public bool ConfecConNormativa { get => confecConNormativa; set => SetProperty(ref confecConNormativa, value); }
-
 
         // Observaciones
         private string observaciones;
