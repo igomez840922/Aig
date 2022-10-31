@@ -1,36 +1,33 @@
-﻿using Aig.FarmacoVigilancia.Events.PMR;
+﻿using Aig.FarmacoVigilancia.Events.IPS;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
+using BlazorDownloadFile;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
-using Aig.FarmacoVigilancia.Events.IPS;
+using Aig.FarmacoVigilancia.Events.PMR;
 using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
-using BlazorDownloadFile;
 
-namespace Aig.FarmacoVigilancia.Pages.IPS
-{    
-    public partial class Ips
+namespace Aig.FarmacoVigilancia.Pages.RFV
+{
+    public partial class Rfv
     {
         [Inject]
         IProfileService profileService { get; set; }
         [Inject]
-        IIpsService ipsService { get; set; }
-        [Inject]
-        IWorkerPersonService workerPersonService { get; set; }
+        IRfvService rfvService { get; set; }
         [Inject]
         ILabsService labsService { get; set; }
-        List<PersonalTrabajadorTB> lPersons { get; set; }
         List<LaboratorioTB> Labs { get; set; }
-        
+
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
 
-        GenericModel<FMV_IpsTB> dataModel { get; set; } = new GenericModel<FMV_IpsTB>()
-        { Data = new FMV_IpsTB() };
+        GenericModel<FMV_RfvTB> dataModel { get; set; } = new GenericModel<FMV_RfvTB>()
+        { Data = new FMV_RfvTB() };
 
         bool OpenAddEditDialog { get; set; } = false;
 
@@ -38,7 +35,7 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<IpsAddEdit_CloseEvent>(IpsAddEdit_CloseHandler);
+            bus.Subscribe<RfvAddEdit_CloseEvent>(RfvAddEdit_CloseHandler);
             bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
@@ -60,10 +57,6 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
 
         protected async Task FetchData()
         {
-            if (lPersons == null || lPersons.Count < 1)
-            {
-                lPersons = await workerPersonService.GetAll();
-            }
             if (Labs == null || Labs.Count < 1)
             {
                 Labs = await labsService.GetAll();
@@ -71,7 +64,7 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
 
             dataModel.ErrorMsg = null;
             dataModel.Data = null;
-            var data = await ipsService.FindAll(dataModel);
+            var data = await rfvService.FindAll(dataModel);
             if (data != null)
             {
                 dataModel = data;
@@ -118,23 +111,23 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
         private async Task OnEdit(long id)
         {
             OpenAddEditDialog = true;
-            var result = await ipsService.Get(id);
+            var result = await rfvService.Get(id);
             if (result == null)
             {
-                result = new FMV_IpsTB() { IpsData=new FMV_IpsData() };
+                result = new FMV_RfvTB();
             }
             dataModel.Data = result;
-            await bus.Publish(new IpsAddEdit_OpenEvent { Data = result });
+            await bus.Publish(new RfvAddEdit_OpenEvent { Data = result });
             await this.InvokeAsync(StateHasChanged);
         }
-        private void IpsAddEdit_CloseHandler(MessageArgs args)
+        private void RfvAddEdit_CloseHandler(MessageArgs args)
         {
             OpenAddEditDialog = false;
-            var message = args.GetMessage<IpsAddEdit_CloseEvent>();
+            var message = args.GetMessage<RfvAddEdit_CloseEvent>();
             FetchData();
         }
 
-        private async Task OnDelete(FMV_IpsTB data)
+        private async Task OnDelete(FMV_RfvTB data)
         {
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
@@ -149,7 +142,7 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
         }
         private async Task DeleteData()
         {
-            var result = await ipsService.Delete(dataModel.Data.Id);
+            var result = await rfvService.Delete(dataModel.Data.Id);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);
@@ -164,10 +157,10 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
         ///Export to excel
         protected async Task ExportToExcel()
         {
-            Stream stream = await ipsService.ExportToExcel(dataModel);
+            Stream stream = await rfvService.ExportToExcel(dataModel);
             if (stream != null)
             {
-                await blazorDownloadFileService.DownloadFile("INFORMES_PERIODICOS_SEGURIDAD.xlsx", stream, "application/actet-stream");
+                await blazorDownloadFileService.DownloadFile("RESPONSABLES_FARMACOVIGILANCIA.xlsx", stream, "application/actet-stream");
             }
         }
 

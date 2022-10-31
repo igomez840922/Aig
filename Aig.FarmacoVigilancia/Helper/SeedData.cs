@@ -1,4 +1,5 @@
 ﻿
+using ClosedXML.Excel;
 using DataAccess;
 using DataAccess.FarmacoVigilancia;
 using DataModel;
@@ -83,6 +84,73 @@ namespace Aig.FarmacoVigilancia.Helper
             {
                 var dalService = serviceScope.ServiceProvider.GetService<IDalService>();
 
+                if (dalService.Count<FMV_RfvTB>() <= 0)
+                {
+                    List<LaboratorioTB> lLabs = new List<LaboratorioTB>();
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.Empresas.xlsx"))
+                    {
+                        try 
+                        {
+                            using var wbook = new XLWorkbook(stream);
+                            var ws1 = wbook.Worksheet(1);
+                            for (int row = 2; row < ws1.RowCount(); row++)
+                            {
+                                LaboratorioTB lab = new LaboratorioTB();
+                                var data = ws1.Row(row);
+
+                                var idTemp = data.Cell(1).GetValue<int?>();
+                                if (idTemp == null)
+                                    break;
+
+                                lab.IdEmpresa = idTemp.Value;
+                                lab.Nombre = data.Cell(2).GetValue<string>();
+                                lab.Pais = data.Cell(3).GetValue<string>();
+                                lab.TipoLaboratorio = data.Cell(4).GetValue<string>().Contains("Distribuidora") ? DataModel.Helper.enum_LaboratoryType.Distributor : DataModel.Helper.enum_LaboratoryType.Laboratory;
+                                lab.TipoUbicacion = data.Cell(5).GetValue<string>().Contains("Extranjera") ? DataModel.Helper.enum_UbicationType.Foreign : DataModel.Helper.enum_UbicationType.Local;
+                                dalService.Save(lab);
+                                lLabs.Add(lab);
+                            }
+                        }
+                        catch { }
+                                              
+                    }
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.RFV.xlsx"))
+                    {
+                        using var wbook = new XLWorkbook(stream);
+                        var ws1 = wbook.Worksheet(1);
+                        for (int row = 2; row < ws1.RowCount(); row++)
+                        {
+                            try {
+                                FMV_RfvTB rfv = new FMV_RfvTB();
+                                var data = ws1.Row(row);
+                                var idTemp = data.Cell(1).GetValue<int?>();
+                                if (idTemp == null)
+                                    break;
+
+                                rfv.FechaNotificacion = data.Cell(2).GetValue<DateTime?>();
+                                rfv.LaboratorioId = lLabs.Where(x => x.IdEmpresa == data.Cell(3).GetValue<int>()).FirstOrDefault()?.Id ?? null;
+                                rfv.Laboratorio = lLabs.Where(x => x.IdEmpresa == data.Cell(3).GetValue<int>()).FirstOrDefault() ?? null;
+                                rfv.NombreCompleto = data.Cell(4).GetValue<string>();
+                                rfv.Cargo = data.Cell(5).GetValue<string>();
+                                rfv.DireccionFisica = data.Cell(6).GetValue<string>();
+                                rfv.Telefonos = data.Cell(7).GetValue<string>();
+                                rfv.Correos = data.Cell(8).GetValue<string>();
+                                rfv.TipoUbicacion = data.Cell(9).GetValue<string>().Contains("Extranjero") ? DataModel.Helper.enum_UbicationType.Foreign : DataModel.Helper.enum_UbicationType.Local;
+                                rfv.Observaciones = data.Cell(10).GetValue<string>();
+                                dalService.Save(rfv);
+                            }
+                            catch { }                            
+                        }
+                    }
+                    //LaboratorioTB lab = new LaboratorioTB() { Nombre = "Abbott" };
+                    //dalService.Save(lab);
+                    //lab = new LaboratorioTB() { Nombre = "Roche" };
+                    //dalService.Save(lab);
+                    //lab = new LaboratorioTB() { Nombre = "GSK" };
+                    //dalService.Save(lab);
+                    //lab = new LaboratorioTB() { Nombre = "Novartis" };
+                    //dalService.Save(lab);
+                }
                 if (dalService.Count<LaboratorioTB>() <= 0)
                 {
                     LaboratorioTB lab = new LaboratorioTB() { Nombre = "Abbott" };

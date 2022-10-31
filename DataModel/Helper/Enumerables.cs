@@ -171,7 +171,9 @@ namespace DataModel.Helper
     }
 
     //////////////////////////////
-    ///
+    /// <summary>
+    /// 
+    /// </summary>
 
     public enum enumFMV_StatusPMR
     {
@@ -240,6 +242,10 @@ namespace DataModel.Helper
         Rejected = 2,
     }
 
+    //////////////////////////////
+    /// <summary>
+    /// 
+    /// </summary>
     public enum enumFMV_IpsStatusRegistro
     {
         [Description("Por Tramitar")]
@@ -270,5 +276,25 @@ namespace DataModel.Helper
         Evaluated = 1,
     }
 
-   
+    //////////////////////////////
+    /// <summary>
+    /// 
+    /// </summary>
+
+    public enum enum_UbicationType
+    {
+        [Description("Local")]
+        Local = 0,
+        [Description("Extranjero")]
+        Foreign = 1,
+    }
+
+    public enum enum_LaboratoryType
+    {
+        [Description("Laboratorio")]
+        Laboratory = 0,
+        [Description("Distribuidora")]
+        Distributor = 1,
+    }
+
 }

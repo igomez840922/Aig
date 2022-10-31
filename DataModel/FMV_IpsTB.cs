@@ -45,7 +45,6 @@ namespace DataModel
         public virtual LaboratorioTB? Laboratorio { get => laboratorio; set => SetProperty(ref laboratorio, value); }
 
 
-
         ////FMV_IspProductTB
         //private List<FMV_IpsProductTB> lProducts;
         //[StringLength(250)]

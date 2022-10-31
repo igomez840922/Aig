@@ -1,0 +1,178 @@
+﻿@page "/rfv"
+@using DataModel.Helper;
+@layout BackendLayout
+@attribute [Authorize]
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    @*<div class="kt-subheader  kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <NavLink href='/dashboard' class="kt-subheader__breadcrumbs-link">
+						@languageContainerService.Keys["Dashboard"]
+                    </NavLink>
+                </h3>
+            </div>
+        </div>
+    </div>*@
+
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                @languageContainerService.Keys["RFV"]
+                            </h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="dropdown dropdown-inline">
+                                <button type="button" class="btn btn-hover-brand btn-elevate-hover btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="flaticon-more"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ExportToExcel()"><i class="fa fa-file-excel"></i>@languageContainerService.Keys["Export"]</a>
+                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
+                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body kt-portlet__body--fit">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="kt-portlet__body">
+                                    <EditForm Model="@dataModel" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
+                                        <DataAnnotationsValidator />
+                                        <div class="form-group row">
+                                            <div class="col-lg-4">
+                                                <label>@languageContainerService.Keys["Search"]</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label>@languageContainerService.Keys["Business"]</label>
+                                                <div class="form-line">
+                                                    <InputSelect class="form-control" @bind-Value="dataModel.LabId" @oninput="(e)=>{ try{dataModel.LabId = long.Parse((string)e.Value);}catch{dataModel.LabId =null;} OnFilter();}">
+                                                        <option value="">@languageContainerService.Keys["All"]</option>
+                                                        @if (Labs != null)
+                                                        {
+                                                            foreach (var dt in Labs)
+                                                            {
+                                                                <option value="@dt.Id">@dt.Nombre</option>
+                                                            }
+                                                        }
+                                                    </InputSelect>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label>@languageContainerService.Keys["Type"]</label>
+                                                <div class="form-line">
+                                                    <InputSelect @bind-Value="dataModel.UbicationType" class="form-control" @onclick="OnFilter">
+                                                        <option value="">@languageContainerService.Keys["All"]</option>
+                                                        @foreach (enum_UbicationType dt in Enum.GetValues(typeof(enum_UbicationType)))
+                                                        {
+                                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                        }
+                                                    </InputSelect>
+                                                </div>
+                                            </div>
+                                        </div>                                       
+                                    </EditForm>
+                                </div>
+
+                                @if (dataModel != null && dataModel.Ldata != null && dataModel.Ldata.Count > 0)
+                                {
+                                             <div class="kt-portlet__body">
+                                        <!--begin::Section-->
+                                        <div class="kt-section">
+                                        <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                        <thead class=thead-light>
+                                                <tr>
+                                                        <th>@languageContainerService.Keys["Business"]</th>
+                                                        <th>@languageContainerService.Keys["Name"]</th>
+                                                        <th>@languageContainerService.Keys["Charge"]</th>
+                                                        <th>@languageContainerService.Keys["Address"]</th>
+                                                        <th>@languageContainerService.Keys["Phones"]</th>
+                                                        <th>@languageContainerService.Keys["Emails"]</th>
+                                                        <th>@languageContainerService.Keys["Type"]</th>
+                                                        <th>@languageContainerService.Keys["NotificationDate"]</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                            <tbody>
+                                                        @foreach (var dt in dataModel.Ldata)
+                                                        {
+                                                            <tr>
+                                                                <td scope="row">@(dt.Laboratorio?.Nombre??"")</td>
+                                                                <td>@(dt.NombreCompleto)</td>
+                                                                <td>@(dt.Cargo)</td>
+                                                                <td>@(dt.DireccionFisica)</td>
+                                                                <td>@(dt.Telefonos)</td>
+                                                                <td>@(dt.Correos)</td>
+                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoUbicacion))</td>
+                                                                <td >@(dt.FechaNotificacion?.ToString("dd/MM/yyyy")??"")</td>
+                                                                <td style="text-align:right">
+                                                            <div class="btn-group">
+                                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                            </div>
+                                                            </div>
+                                                        <!-- /btn-group -->
+                                                        </td>
+                                                    </tr>
+                                                        }
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        </div>
+                                        <!--end::Section-->
+                                        </div>
+                                            <div class="kt-portlet__foot">
+                                                <BlazorPager CurrentPage="@(dataModel.PagIdx + 1)"
+                                                 PageCount="@dataModel.PagesCount"
+                                                 VisiblePages="@(dataModel.PagesCount>3?4:dataModel.PagesCount)"
+                                                 ShowFirstLast="true"
+                                                 ShowPageNumbers="true"
+                                                 FirstText="<<"
+                                                 LastText=">>"
+                                                 NextText=">"
+                                                 PreviousText="<"
+                                                 OnPageChanged="(async e => {
+						                     if (dataModel.PagesCount < e)
+							                    return;
+						                    dataModel.PagIdx = e - 1;
+						                    await FetchData();})">
+                                                </BlazorPager>
+                                            </div>
+
+                                }
+                                <!--end::Form-->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@if (OpenAddEditDialog)
+{
+        <Aig.FarmacoVigilancia.Components.RFV.AddEditRfv Rfv="@dataModel.Data"></Aig.FarmacoVigilancia.Components.RFV.AddEditRfv>
+}
+
+<Aig.FarmacoVigilancia.Components.DeleteConfirmDialog></Aig.FarmacoVigilancia.Components.DeleteConfirmDialog>

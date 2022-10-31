@@ -12,15 +12,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Empresas.xlsx" />
     <None Remove="Resources\en-US.yml" />
     <None Remove="Resources\es-ES.yml" />
+    <None Remove="Resources\RFV.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Empresas.xlsx" />
     <EmbeddedResource Include="Resources\en-US.yml" />
     <EmbeddedResource Include="Resources\es-ES.yml" />
     <EmbeddedResource Include="Resources\paises.json" />
     <EmbeddedResource Include="Resources\provincias.json" />
+    <EmbeddedResource Include="Resources\RFV.xlsx" />
   </ItemGroup>
 
   <ItemGroup>

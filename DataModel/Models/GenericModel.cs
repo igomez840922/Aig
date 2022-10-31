@@ -56,6 +56,8 @@ namespace DataModel.Models
         public enumFMV_IpsStatusRevision? IpsStatusRevision { get; set; } = null;
         public long? EvaluatorId { get; set; } = null;
         public long? RegisterId { get; set; } = null;
+        public long? LabId { get; set; } = null;
+        public enum_UbicationType? UbicationType { get; set; } = null;
 
     }
 

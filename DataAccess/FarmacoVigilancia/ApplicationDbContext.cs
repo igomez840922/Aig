@@ -123,6 +123,12 @@ namespace DataAccess.FarmacoVigilancia
               .HasForeignKey(e => e.LaboratorioId)
               .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<LaboratorioTB>()
+             .HasMany(e => e.LRfv)
+             .WithOne(e => e.Laboratorio)
+             .HasForeignKey(e => e.LaboratorioId)
+             .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<FMV_IpsTB>()
             .Property(e => e.IpsData)
             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_IpsData>(x));
@@ -141,6 +147,7 @@ namespace DataAccess.FarmacoVigilancia
         public virtual DbSet<FMV_PmrTB> PmrTB { get; set; }
         public virtual DbSet<FMV_PmrProductoTB> Ram { get; set; }
         public virtual DbSet<FMV_IpsTB> Ips { get; set; }
+        public virtual DbSet<FMV_RfvTB> Rfv { get; set; }
         public virtual DbSet<LaboratorioTB> Laboratorio { get; set; }
         public virtual DbSet<CorregimientoTB> Corregimiento { get; set; }
         public virtual DbSet<DistritoTB> Distrito { get; set; }

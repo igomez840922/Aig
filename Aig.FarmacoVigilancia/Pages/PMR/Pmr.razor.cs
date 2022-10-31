@@ -8,6 +8,7 @@ using Aig.FarmacoVigilancia.Services;
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.PMR;
 using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
+using BlazorDownloadFile;
 
 namespace Aig.FarmacoVigilancia.Pages.PMR
 {    
@@ -17,7 +18,11 @@ namespace Aig.FarmacoVigilancia.Pages.PMR
         IProfileService profileService { get; set; }
         [Inject]
         IPmrService pmrService { get; set; }
-
+        [Inject]
+        IWorkerPersonService workerPersonService { get; set; }
+        [Inject]
+        IBlazorDownloadFileService blazorDownloadFileService { get; set; }
+        List<PersonalTrabajadorTB> lPersons { get; set; }
         GenericModel<FMV_PmrTB> dataModel { get; set; } = new GenericModel<FMV_PmrTB>()
         { Data = new FMV_PmrTB() };
 
@@ -49,6 +54,10 @@ namespace Aig.FarmacoVigilancia.Pages.PMR
 
         protected async Task FetchData()
         {
+            if (lPersons == null || lPersons.Count < 1)
+            {
+                lPersons = await workerPersonService.GetAll();
+            }
             dataModel.ErrorMsg = null;
             dataModel.Data = null;
             var data = await pmrService.FindAll(dataModel);
@@ -141,7 +150,15 @@ namespace Aig.FarmacoVigilancia.Pages.PMR
                 await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataDeleteError"]);
         }
 
-
+        ///Export to excel
+        protected async Task ExportToExcel()
+        {
+            Stream stream = await pmrService.ExportToExcel(dataModel);
+            if (stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("PLAN_MANEJO_RIESGO.xlsx", stream, "application/actet-stream");
+            }
+        }
 
     }
 

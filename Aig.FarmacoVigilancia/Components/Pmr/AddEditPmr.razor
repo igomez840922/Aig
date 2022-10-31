@@ -76,7 +76,7 @@
                                                          ValueChanged="@((long? value) => OnEvaluatorChange(value))">
                                                     @if (lEvaluators != null)
                                                     {
-                                                        foreach (var dt in lEvaluators)
+                                                        foreach (var dt in lEvaluators.Where(x=>x.Evaluador))
                                                         {
                                                             <option value="@dt.Id">@dt.NombreCompleto</option>
                                                         }

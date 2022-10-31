@@ -95,6 +95,7 @@ builder.Services.AddScoped<IWorkerPersonService, WorkerPersonService>();
 builder.Services.AddScoped<ILabsService, LabsService>();
 builder.Services.AddScoped<IPmrService, PmrService>();
 builder.Services.AddScoped<IIpsService, IpsService>();
+builder.Services.AddScoped<IRfvService, RfvService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

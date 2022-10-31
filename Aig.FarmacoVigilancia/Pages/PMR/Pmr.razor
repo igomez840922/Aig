@@ -32,6 +32,7 @@
                                     <i class="flaticon-more"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ExportToExcel()"><i class="fa fa-file-excel"></i>@languageContainerService.Keys["Export"]</a>
                                     <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
                                     <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
                                 </div>
@@ -45,13 +46,45 @@
                                     <EditForm Model="@dataModel" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
                                         <DataAnnotationsValidator />
                                         <div class="form-group row">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <label>@languageContainerService.Keys["Search"]</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />
                                                     <div class="input-group-append">
                                                         <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="form-group row">
+                                             <div class="col-sm-3">
+                                                <label>@languageContainerService.Keys["From"] @languageContainerService.Keys["EntryDate"]</label>
+                                                <div class="form-line">
+                                                    <InputDate class="form-control" @bind-Value="dataModel.FromDate" @bind-Value:format="dd/MM/yyyy" @oninput="(e)=>{ try{dataModel.FromDate = DateTime.Parse((string)e.Value);}catch{dataModel.FromDate =null;} OnFilter();}" />
+                                                    <ValidationMessage For=@(() => dataModel.FromDate) />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label>@languageContainerService.Keys["To"] @languageContainerService.Keys["EntryDate"]</label>
+                                                <div class="form-line">
+                                                    <InputDate class="form-control" @bind-Value="dataModel.ToDate" @bind-Value:format="dd/MM/yyyy" @oninput="(e)=>{ try{dataModel.ToDate = DateTime.Parse((string)e.Value);}catch{dataModel.ToDate =null;} OnFilter();}" />
+                                                    <ValidationMessage For=@(() => dataModel.ToDate) />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label>@languageContainerService.Keys["Evaluator"]</label>
+                                                <div class="form-line">
+                                                    <InputSelect class="form-control" @bind-Value="dataModel.EvaluatorId" @oninput="(e)=>{ try{dataModel.EvaluatorId = long.Parse((string)e.Value);}catch{dataModel.EvaluatorId =null;} OnFilter();}">
+                                                        <option value="">@languageContainerService.Keys["All"]</option>
+                                                    @if (lPersons != null)
+                                                    {
+                                                        foreach (var dt in lPersons.Where(x=>x.Evaluador))
+                                                        {
+                                                            <option value="@dt.Id">@dt.NombreCompleto</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
                                                 </div>
                                             </div>
                                         </div>

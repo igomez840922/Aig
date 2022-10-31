@@ -2,6 +2,7 @@
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
+using ClosedXML.Excel;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -21,13 +22,17 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  = (from data in DalService.DBContext.Set<FMV_PmrTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                              (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate && data.FechaEntrada <= model.FromDate)) &&
+                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
                               orderby data.CreatedDate
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_PmrTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
+                               (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate && data.FechaEntrada <= model.FromDate)) &&
+                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
                                select data).Count();  
             }
             catch (Exception ex)
@@ -35,6 +40,77 @@ namespace Aig.FarmacoVigilancia.Services
 
             return model;
         }
+
+        public async Task<Stream> ExportToExcel(GenericModel<FMV_PmrTB> model)
+        {
+            try
+            {
+                model.PagIdx = 0; model.PagAmt = int.MaxValue;
+
+                model = await FindAll(model);
+
+                if (model.Ldata != null && model.Ldata.Count > 0)
+                {
+                    var wb = new XLWorkbook();
+                    wb.Properties.Author = "PLAN_MANEJO_RIESGO";
+                    wb.Properties.Title = "PLAN_MANEJO_RIESGO";
+                    wb.Properties.Subject = "PLAN_MANEJO_RIESGO";
+
+                    var ws = wb.Worksheets.Add("PLAN_MANEJO_RIESGO");
+
+                    ws.Cell(1, 1).Value = "Fecha de Entrada";
+                    ws.Cell(1, 2).Value = "Fecha de Entrega a Evaluador";
+                    ws.Cell(1, 3).Value = "Fecha de Trámite";
+                    ws.Cell(1, 4).Value = "Evaluador";
+                    ws.Cell(1, 5).Value = "Registro Sanitario";
+                    ws.Cell(1, 6).Value = "Principio Activo";
+                    ws.Cell(1, 7).Value = "Nombre Comercial";
+                    ws.Cell(1, 8).Value = "Laboratorio";
+
+                    for (int row = 1; row <= model.Ldata.Count; row++)
+                    {
+                        var prod = model.Ldata[row - 1];
+                        if(prod.LProductos!=null && prod.LProductos.Count > 0)
+                        {
+                            for (int rowChild = 1; rowChild <= prod.LProductos.Count; rowChild++)
+                            {
+                                var prodChild = prod.LProductos[rowChild - 1];
+
+                                ws.Cell(rowChild + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(rowChild + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(rowChild + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(rowChild + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
+                                ws.Cell(rowChild + 1, 5).Value = prodChild.RegSanitario;
+                                ws.Cell(rowChild + 1, 6).Value = prod.PrincActivo;
+                                ws.Cell(rowChild + 1, 7).Value = prodChild.NomComercial;
+                                ws.Cell(rowChild + 1, 8).Value = prodChild.Laboratorio?.Nombre??"";
+                            }
+                        }
+                        else
+                        {
+                            ws.Cell(row + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
+                            ws.Cell(row + 1, 5).Value = "";
+                            ws.Cell(row + 1, 6).Value = prod.PrincActivo;
+                            ws.Cell(row + 1, 7).Value = "";
+                            ws.Cell(row + 1, 8).Value = "";
+                        }
+                    }
+
+                        MemoryStream XLSStream = new();
+                    wb.SaveAs(XLSStream);
+
+                    return XLSStream;
+                }
+            }
+            catch (Exception ex)
+            { }
+
+            return null;
+        }
+
 
         public async Task<List<FMV_PmrTB>> GetAll()
         {

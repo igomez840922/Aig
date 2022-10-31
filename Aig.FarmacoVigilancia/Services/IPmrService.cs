@@ -6,6 +6,7 @@ namespace Aig.FarmacoVigilancia.Services
 {
     public interface IPmrService
     {
+        Task<Stream> ExportToExcel(GenericModel<FMV_PmrTB> model);
         Task<GenericModel<FMV_PmrTB>> FindAll(GenericModel<FMV_PmrTB> model);
         Task<List<FMV_PmrTB>> GetAll();
         Task<FMV_PmrTB> Get(long id);
