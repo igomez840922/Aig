@@ -1,0 +1,18 @@
+﻿@inherits LayoutComponentBase
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+<PageTitle>Aig.Farmacoterapia.Admin</PageTitle>
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+        @Body				
+    </div>
+</div>
+
+<MudThemeProvider/>
+
+@code {
+
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
+}

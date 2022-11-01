@@ -1,0 +1,91 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-Aig.Farmacoterapia.Admin-E30F222E-6B5B-4DDE-8F62-7152FA3D8B5E</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Products\Index - Copy.razor" />
+    <Content Remove="Pages\_Host - Copy.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Product\ProductAddEdit.razor" />
+    <None Include="wwwroot\assets\js\jquery-bootpag\jquery.bootpag.js" />
+    <None Include="wwwroot\assets\js\jquery-bootpag\jquery.bootpag.min.js" />
+    <None Include="wwwroot\assets\js\jquery-bootpag\README.md" />
+    <None Include="wwwroot\assets\js\jquery-loading-overlay\loadingoverlay.js" />
+    <None Include="wwwroot\assets\js\select2\LICENSE" />
+    <None Include="wwwroot\assets\js\select2\README.md" />
+    <None Include="wwwroot\assets\js\select2\select2.js" />
+    <None Include="wwwroot\assets\js\select2\select2.min.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ar.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_az.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_bg.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ca.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_cs.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_da.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_de.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_el.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_en.js.template" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_es.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_et.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_eu.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_fa.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_fi.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_fr.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_gl.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_he.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_hr.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_hu.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_id.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_is.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_it.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ja.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ka.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ko.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_lt.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_lv.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_mk.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ms.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_nl.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_no.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_pl.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_pt-BR.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_pt-PT.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ro.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_rs.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ru.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_sk.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_sv.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_th.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_tr.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_ug-CN.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_uk.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_vi.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_zh-CN.js" />
+    <None Include="wwwroot\assets\js\select2\select2_locale_zh-TW.js" />
+    <None Include="wwwroot\assets\plugins\daterangepicker\clickAndPositionHandler.js" />
+    <None Include="wwwroot\assets\plugins\daterangepicker\daterangepicker.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BlazorPagination" Version="0.2.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1" />
+    <PackageReference Include="MudBlazor" Version="6.0.17" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aig.Farmacoterapia.Application\Aig.Farmacoterapia.Application.csproj" />
+    <ProjectReference Include="..\Aig.Farmacoterapia.Infraestructura\Aig.Farmacoterapia.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
