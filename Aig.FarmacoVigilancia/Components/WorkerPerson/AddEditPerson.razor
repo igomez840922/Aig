@@ -1,0 +1,115 @@
+﻿@using DataModel.Helper;
+
+@if (Persona != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Persona != null && Persona.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["Official"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Persona" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+                        <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
+                        <div class="row clearfix">
+                            <div class="col-sm-9">
+                                <label>@languageContainerService.Keys["FullName"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Persona.NombreCompleto" />
+                                        <ValidationMessage For=@(() => Persona.NombreCompleto) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Persona.Cargo" />
+                                        <ValidationMessage For=@(() => Persona.Cargo) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <label for="password">@languageContainerService.Keys["PhoneNumber"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Persona.Telefono" />
+                                        <ValidationMessage For=@(() => Persona.Telefono) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="password">@languageContainerService.Keys["Email"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Persona.Correo" />
+                                        <ValidationMessage For=@(() => Persona.Correo) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Evaluator"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputCheckbox class="form-control" @bind-Value="Persona.Evaluador" />
+                                        <ValidationMessage For=@(() => Persona.Evaluador) />
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Tramitador"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputCheckbox class="form-control" @bind-Value="Persona.Tramitador" />
+                                        <ValidationMessage For=@(() => Persona.Tramitador) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Registrador"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputCheckbox class="form-control" @bind-Value="Persona.Registrador" />
+                                        <ValidationMessage For=@(() => Persona.Registrador) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <br>
+                        <div class="modal-footer">
+
+                            <button type="submit"
+                                class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+
+                            <button type="button" class="btn btn-danger waves-effect"
+                                @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="modal-backdrop fade show"></div>

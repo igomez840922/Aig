@@ -249,3 +249,19 @@ Business: Business
 NotificationDate: Notification Date
 Phones: Phone Numbers
 Emails: Emails
+Official: Official
+AlertOrigin: Alert Origin
+AlertsOrigin: Alerts Origin
+AlertSecurityNote: Alert or Security Note
+AlertsSecurityNotes: Alerts or Security Notes
+EvaluationDate: Evaluation Date
+AlertType: Alert Type
+AlertNoteInfo: Alert or Note Information
+Product: Product
+RecomProfPaciente: Recommendations to Professionals and Patients
+ActualizaMonografias: Update of monograph and Insert
+ConsentFirmado: Informed Consent
+SuspencionRetiroLote: Suspension and Withdrawal of Lot(s)
+SuspencCancelRegSanitario: Sanitary Registration (Suspension/Cancellation)
+OtrasConsideraciones: Others
+NumNota: Note Number

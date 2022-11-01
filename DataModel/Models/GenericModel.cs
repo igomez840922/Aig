@@ -58,6 +58,8 @@ namespace DataModel.Models
         public long? RegisterId { get; set; } = null;
         public long? LabId { get; set; } = null;
         public enum_UbicationType? UbicationType { get; set; } = null;
+        public enumFMV_AlertaNotaStatus? AlertaNotaStatus { get; set; } = null;
+        public enumFMV_AlertaNotaType? AlertaNotaType { get; set; } = null;
 
     }
 

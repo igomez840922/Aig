@@ -250,3 +250,19 @@ Business: Empresa
 NotificationDate: Fecha de Notificación
 Phones: Telefonos
 Emails: Correos
+Official: Funcionario
+AlertOrigin: Origen de Alerta
+AlertsOrigin: Origenes de Alerta
+AlertSecurityNote: Alerta o Nota de Seguridad
+AlertsSecurityNotes: Alertas o Notas de Seguridad
+EvaluationDate: Fecha de Evaluación
+AlertType: Tipo de Alerta
+AlertNoteInfo: Información de Alerta o Nota
+Product: Producto
+RecomProfPaciente: Recomendaciones a Profesionales y Pacientes
+ActualizaMonografias: Actualización de monografía e Inserto
+ConsentFirmado: Consentimiento Informado
+SuspencionRetiroLote: Suspensión y Retiro de Lote(s)
+SuspencCancelRegSanitario: Registro Sanitario (Suspensión/Cancelación)
+OtrasConsideraciones: Otras
+NumNota: Número de la Nota
