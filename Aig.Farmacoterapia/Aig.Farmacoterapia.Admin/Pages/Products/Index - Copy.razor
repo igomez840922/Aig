@@ -1,0 +1,401 @@
+﻿@page "/products/list"
+@*@layout null*@
+@using Aig.Farmacoterapia.Admin.Components.Product
+@using Sve.Blazor.DataTable.Components
+@using Sve.Blazor.Core.Models
+@using System.Linq
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using System.Globalization
+@attribute [Authorize]
+@inject IUnitOfWork _unitOfWork;
+
+<div class="kt-portlet__head kt-portlet__head--lg">
+    <div class="kt-portlet__head-label">
+        <span class="kt-portlet__head-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24"></rect>
+                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                    <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                </g>
+            </svg>
+        </span>
+        <h3 class="kt-portlet__head-title">
+            Productos
+        </h3>
+    </div>
+    <div class="kt-portlet__head-toolbar">
+        <div class="kt-portlet__head-wrapper">
+            <div class="kt-portlet__head-actions">
+                <div class="dropdown dropdown-inline">
+                    <button type="button"
+                            class="btn btn-default btn-icon-sm dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="la la-download"></i> Exportar
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="kt-nav">
+                            <li class="kt-nav__section kt-nav__section--first">
+                                <span class="kt-nav__section-text">Seleccionar</span>
+                            </li>
+                            <li class="kt-nav__item">
+                                <a href="#" class="kt-nav__link">
+                                    <i class="kt-nav__link-icon la la-print"></i>
+                                    <span class="kt-nav__link-text">Imprimir</span>
+                                </a>
+                            </li>
+                            <li class="kt-nav__item">
+                                <a href="#" class="kt-nav__link">
+                                    <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                    <span class="kt-nav__link-text">Excel</span>
+                                </a>
+                            </li>
+                            <li class="kt-nav__item">
+                                <a href="#" class="kt-nav__link">
+                                    <i class="kt-nav__link-icon la la-file-text-o"></i>
+                                    <span class="kt-nav__link-text">CSV</span>
+                                </a>
+                            </li>
+                            <li class="kt-nav__item">
+                                <a href="#" class="kt-nav__link">
+                                    <i class="kt-nav__link-icon la la-file-pdf-o"></i>
+                                    <span class="kt-nav__link-text">PDF</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                &nbsp;
+               <a href="#" class="btn btn-brand btn-elevate btn-icon-sm" @onclick="() => OnEdit(0)" data-toggle="modal" data-target="#modal_createedit">
+                    <i class="la la-plus"></i>
+                   Nuevo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kt-portlet__body">
+
+<!--begin: Datatable -->
+@*<div id="kt_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+<div class="row">
+<div class="col-sm-12">
+<table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline"
+       id="kt_table_1" role="grid" aria-describedby="kt_table_1_info"
+       style="width: 1452px;">
+<thead>
+<tr role="row">
+    <th class="dt-right sorting_disabled" rowspan="1" colspan="1"
+        style="width: 30.503px;" aria-label="Record ID">
+        <label class="kt-checkbox kt-checkbox--single kt-checkbox--solid">
+            <input type="checkbox" value=""
+                   class="kt-group-checkable"> <span></span>
+        </label>
+    </th>
+    <th class="sorting_desc" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 58.253px;"
+        aria-sort="descending"
+        aria-label="Order ID: activate to sort column ascending">
+        Order ID
+    </th>
+    <th class="sorting" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 105.253px;"
+        aria-label="Country: activate to sort column ascending">
+        Country
+    </th>
+    <th class="sorting" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 136.253px;"
+        aria-label="Ship City: activate to sort column ascending">
+        Ship City
+    </th>
+    <th class="sorting" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 169.253px;"
+        aria-label="Ship Address: activate to sort column ascending">
+        Ship Address
+    </th>
+    <th class="sorting" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 129.253px;"
+        aria-label="Company Agent: activate to sort column ascending">
+        Company Agent
+    </th>
+    <th class="sorting" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 202.253px;"
+        aria-label="Company Name: activate to sort column ascending">
+        Company Name
+    </th>
+    <th class="sorting" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 62.253px;"
+        aria-label="Ship Date: activate to sort column ascending">
+        Ship Date
+    </th>
+    <th class="sorting" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 48.253px;"
+        aria-label="Status: activate to sort column ascending">
+        Status
+    </th>
+    <th class="sorting" tabindex="0" aria-controls="kt_table_1"
+        rowspan="1" colspan="1" style="width: 32.253px;"
+        aria-label="Type: activate to sort column ascending">
+        Type
+    </th>
+    <th class="sorting_disabled" rowspan="1" colspan="1"
+        style="width: 69.5px;" aria-label="Actions">Actions</th>
+</tr>
+</thead>
+<tbody>
+
+<tr role="row" class="odd">
+    <td class=" dt-right" tabindex="0">
+        <label class="kt-checkbox kt-checkbox--single kt-checkbox--solid">
+            <input type="checkbox" value="" class="kt-checkable">
+            <span></span>
+        </label>
+    </td>
+    <td class="sorting_1">68428-725</td>
+    <td>China</td>
+    <td>Zhangcun</td>
+    <td>3 Goodland Terrace</td>
+    <td style="">Pavel Kringe</td>
+    <td style="">Goldner-Lehner</td>
+    <td style="">4/2/2017</td>
+    <td style="">
+        <span class="kt-badge  kt-badge--success kt-badge--inline kt-badge--pill">Success</span>
+    </td>
+    <td style="">
+        <span class="kt-badge kt-badge--danger kt-badge--dot"></span>&nbsp;<span class="kt-font-bold kt-font-danger">Online</span>
+    </td>
+    <td nowrap="" style="">
+        <span class="dropdown">
+            <a href="#"
+               class="btn btn-sm btn-clean btn-icon btn-icon-md"
+               data-toggle="dropdown" aria-expanded="true">
+                <i class="la la-ellipsis-h"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">
+                    <i class="la la-edit"></i> Edit Details
+                </a> <a class="dropdown-item" href="#">
+                    <i class="la la-leaf"></i> Update Status
+                </a> <a class="dropdown-item" href="#">
+                    <i class="la la-print"></i> Generate Report
+                </a>
+            </div>
+        </span> <a href="#"
+                   class="btn btn-sm btn-clean btn-icon btn-icon-md"
+                   title="View"> <i class="la la-edit"></i> </a>
+    </td>
+</tr>
+<tr role="row" class="even">
+    <td class=" dt-right" tabindex="0">
+        <label class="kt-checkbox kt-checkbox--single kt-checkbox--solid">
+            <input type="checkbox" value="" class="kt-checkable">
+            <span></span>
+        </label>
+    </td>
+    <td class="sorting_1">68084-123</td>
+    <td>Argentina</td>
+    <td>Puerto Iguazú</td>
+    <td>2 Pine View Park</td>
+    <td style="">Ula Luckin</td>
+    <td style="">Kulas, Cassin and Batz</td>
+    <td style="">5/26/2016</td>
+    <td style="">
+        <span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">Pending</span>
+    </td>
+    <td style="">
+        <span class="kt-badge kt-badge--primary kt-badge--dot"></span>&nbsp;<span class="kt-font-bold kt-font-primary">Retail</span>
+    </td>
+    <td nowrap="" style="">
+        <span class="dropdown">
+            <a href="#"
+               class="btn btn-sm btn-clean btn-icon btn-icon-md"
+               data-toggle="dropdown" aria-expanded="true">
+                <i class="la la-ellipsis-h"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">
+                    <i class="la la-edit"></i> Edit Details
+                </a> <a class="dropdown-item" href="#">
+                    <i class="la la-leaf"></i> Update Status
+                </a> <a class="dropdown-item" href="#">
+                    <i class="la la-print"></i> Generate Report
+                </a>
+            </div>
+        </span> <a href="#"
+                   class="btn btn-sm btn-clean btn-icon btn-icon-md"
+                   title="View"> <i class="la la-edit"></i> </a>
+    </td>
+</tr>
+<tr role="row" class="odd">
+    <td class=" dt-right" tabindex="0">
+        <label class="kt-checkbox kt-checkbox--single kt-checkbox--solid">
+            <input type="checkbox" value="" class="kt-checkable">
+            <span></span>
+        </label>
+    </td>
+    <td class="sorting_1">67510-0062</td>
+    <td>South Africa</td>
+    <td>Pongola</td>
+    <td>02534 Hauk Trail</td>
+    <td style="">Shandee Goracci</td>
+    <td style="">Bergnaum, Thiel and Schuppe</td>
+    <td style="">7/24/2016</td>
+    <td style="">
+        <span class="kt-badge  kt-badge--info kt-badge--inline kt-badge--pill">Info</span>
+    </td>
+    <td style="">
+        <span class="kt-badge kt-badge--success kt-badge--dot"></span>&nbsp;<span class="kt-font-bold kt-font-success">Direct</span>
+    </td>
+    <td nowrap="" style="">
+        <span class="dropdown">
+            <a href="#"
+               class="btn btn-sm btn-clean btn-icon btn-icon-md"
+               data-toggle="dropdown" aria-expanded="true">
+                <i class="la la-ellipsis-h"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">
+                    <i class="la la-edit"></i> Edit Details
+                </a> <a class="dropdown-item" href="#">
+                    <i class="la la-leaf"></i> Update Status
+                </a> <a class="dropdown-item" href="#">
+                    <i class="la la-print"></i> Generate Report
+                </a>
+            </div>
+        </span> <a href="#"
+                   class="btn btn-sm btn-clean btn-icon btn-icon-md"
+                   title="View"> <i class="la la-edit"></i> </a>
+    </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+</div>
+
+</div>*@
+
+<DataTable TModel="ProductObject" lang="en" IsLoading="Loading" Items="list.Data" UsePaging="true" FetchData="DoFetchData" PageCount="@list.Paging.PageCount" PageSize="@list.Paging.PageSize" IncludeHeaderFilters="true" IncludeAdvancedFilters="true">
+    <DataTableColumn TModel="ProductObject" IsSortable="true" IsFilterable="true" Property="(e) => e.Code" CustomTitle="Code" />
+    <DataTableColumn TModel="ProductObject" IsSortable="true" IsFilterable="true" Property="(e) => e.Presentation" CustomTitle="Presentación" />
+    <DataTableColumn TModel="ProductObject" IsSortable="true" IsFilterable="true" Property="(e) => e.AuthorizationStatus" CustomTitle="Estado" />
+    <DataTableColumn TModel="ProductObject" IsSortable="true" IsFilterable="true" Property="(e) => e.Created" CustomTitle="Fec.Registro"></DataTableColumn>
+    <DataTableColumn TModel="ProductObject" Property="(e) => e.AuthorizationDate" IsFilterable="false" CustomTitle="Fec.Autorizo">
+      <RowTemplate Context="item">
+          @if (item.AuthorizationDate.HasValue)
+          {
+              
+              <span>@item.AuthorizationDate.Value.ToString(CultureInfo.InvariantCulture)</span>
+          }
+          else
+          {
+              <span>-</span>
+          }
+      </RowTemplate>
+    </DataTableColumn>
+    <DataTableColumn TModel="ProductObject" Property="(e) => e.LastModified" IsFilterable="false" CustomTitle="Fec.Actualización">
+      <RowTemplate Context="item">
+          @if (item.LastModified.HasValue)
+          {
+              <span>@item.LastModified.Value.ToString(CultureInfo.InvariantCulture)</span>
+          }
+          else
+          {
+              <span>-</span>
+          }
+      </RowTemplate>
+    </DataTableColumn>
+</DataTable>
+
+@if(addEditDialogIsOpen)
+{
+    <ProductAddEdit ModelData="@ModelData" OnClose="@OnEventAddEditClose">
+    </ProductAddEdit>
+}
+
+</div>
+
+@code {
+    protected bool Loading = false;
+    protected ProductObject ModelData;
+    private bool firstFetch = true;
+    protected bool addEditDialogIsOpen = false;
+    private PagedResult<ProductObject> list = new PagedResult<ProductObject>(new List<ProductObject>(), pageNr: 1, pageSize: 10, 0);
+    private Task<PagedResult<ProductObject>> SearchAsync(RequestArgs<ProductObject> args, int amount = 10)
+    {    
+        var filter = args?.GetFilterExpression();
+        var pager =args!=null ? args.Pager: new Pager(pageNr: 1, pageSize: 10, sortColumn: "", SortDirection.Ascending);
+        var query = _unitOfWork.Repository<ProductObject>().GetAll();
+        if(filter!=null)
+            query = query.Where(filter);
+        var result = Sve.Blazor.Core.Utils.ApplyPaging(query, pager);
+        return Task.FromResult(result);
+    }
+    private async Task DoFetchData(RequestArgs<ProductObject> args)
+    {    Loading = true;
+        if (firstFetch){
+            list = await SearchAsync(null, 1000);
+            firstFetch = false;
+        }
+        else list = await SearchAsync(args, 1000);
+        StateHasChanged();
+         Loading = false;
+    }
+
+    private async Task OnEdit(long id)
+    {
+        //var result = await MainService.Get(id);
+        //if (result == null)
+        //{
+        //    result = new CurrencyFiatTB();
+        //} 
+
+        ModelData = new ProductObject();
+        addEditDialogIsOpen = true;
+        StateHasChanged();
+    }
+    private async Task OnEventAddEditClose(long id)
+    {
+        addEditDialogIsOpen = false;
+        if (id>0)
+        {
+            list = await SearchAsync(null, 1000);
+        }
+
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        try
+        {
+            Loading = true;
+            //new_schemaContext Context = new new_schemaContext();
+            //var l=Context.EncaSolicituds.ToList();
+            //;
+
+            //var item = new Product();.
+            //item.Code = "Code-1";
+            //item.AuthorizationNum = "123";
+            //item.Presentation = "Presentation";
+            //item.AuthorizationStatus = AuthorizationStatus.Authorised;
+       
+            //var product= await _unitOfWork.Repository<Product>().AddAsync(item);
+            //var result=await _unitOfWork.Commit(default);
+
+            //var list=await _unitOfWork.Repository<Product>().GetPagedResponseAsync(1,10);
+
+            //var item = await _unitOfWork.Repository<Product>().GetByIdAsync(4);
+            //item.Code = "Code-2";
+            //await _unitOfWork.Repository<Product>().UpdateAsync(item);
+            //var result=await _unitOfWork.Commit(default);
+     
+        }
+        catch (Exception exc)
+        {
+            ;
+        }
+       
+        base.OnInitialized();
+    }
+}
