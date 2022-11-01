@@ -1,6 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
-using Aig.Farmacoterapia.Infrastructure.Configurations;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
