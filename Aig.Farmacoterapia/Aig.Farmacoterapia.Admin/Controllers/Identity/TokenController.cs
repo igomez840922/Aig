@@ -1,4 +1,5 @@
 ﻿
+using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Identity;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,16 +12,25 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Identity
     public class TokenController : ControllerBase
     {
         private readonly ITokenService _identityService;
-        public TokenController(ITokenService identityService, ICurrentUserService currentUserService)
+        private readonly ISystemLogger _systemLogger;
+        public TokenController(ITokenService identityService, ISystemLogger systemLogger)
         {
             _identityService = identityService;
+            _systemLogger = systemLogger;
         }
 
         [HttpPost]
-        public async Task<ActionResult> Get(TokenRequest model)
+        public async Task<Result<TokenResponse>> Get(TokenRequest model)
         {
-            var response = await _identityService.LoginAsync(model);
-            return Ok(response);
+            try
+            {
+                return await _identityService.LoginAsync(model);
+            }
+            catch (Exception ex)
+            {
+                _systemLogger.Error(ex.Message);
+                return Result<TokenResponse>.Fail(new List<string>() { ex.Message });
+            }
         }
     }
 }
