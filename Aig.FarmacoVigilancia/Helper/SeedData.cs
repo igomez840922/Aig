@@ -1,4 +1,5 @@
 ﻿
+using Aig.FarmacoVigilancia.Data;
 using ClosedXML.Excel;
 using DataAccess;
 using DataAccess.FarmacoVigilancia;
@@ -83,7 +84,42 @@ namespace Aig.FarmacoVigilancia.Helper
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var dalService = serviceScope.ServiceProvider.GetService<IDalService>();
-
+                
+                if (dalService.Count<FMV_OrigenAlertaTB>() <= 0)
+                {
+                    FMV_OrigenAlertaTB data = new FMV_OrigenAlertaTB() { Nombre = "EMA" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "AEMPS" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "FDA" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "HEALTH CANADA" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "MHRA" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "PMDA" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "TGA" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "INVIMA" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "COFEPRIS" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "ANVISA" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "ANMAT" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "CECMED" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "ISP" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "LABORATORIOS" };
+                    dalService.Save(data);
+                    data = new FMV_OrigenAlertaTB() { Nombre = "RAMs LOCALES" };
+                    dalService.Save(data); 
+                    data = new FMV_OrigenAlertaTB() { Nombre = "DIRECCIÓN" };
+                    dalService.Save(data);
+                }
                 if (dalService.Count<FMV_RfvTB>() <= 0)
                 {
                     List<LaboratorioTB> lLabs = new List<LaboratorioTB>();
@@ -174,56 +210,56 @@ namespace Aig.FarmacoVigilancia.Helper
                     dalService.Save(lab);
                 }
 
-                ////Countries
-                //if (await countryService.Count() <= 0)
-                //{
-                //    List<PaisTB> lCountries = null;
-                //    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.provincias.json"))
-                //    using (StreamReader reader = new StreamReader(stream))
-                //    {
-                //        var jsonFileContent = reader.ReadToEnd();
-                //        lCountries = JsonConvert.DeserializeObject<List<PaisTB>>(jsonFileContent);
-                //    }
-                //    if (lCountries != null)
-                //    {
-                //        foreach (var country in lCountries)
-                //        {
-                //            await countryService.Save(country);
-                //        }
-                //    }
-                //}
+                //Countries
+                if (dalService.Count<PaisTB>() <= 0)
+                {
+                    List<PaisTB> lCountries = null;
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.paises.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        var jsonFileContent = reader.ReadToEnd();
+                        lCountries = JsonConvert.DeserializeObject<List<PaisTB>>(jsonFileContent);
+                    }
+                    if (lCountries != null)
+                    {
+                        foreach (var country in lCountries)
+                        {
+                            dalService.Save(country);
+                        }
+                    }
+                }
 
-                //if (dalService.Count<ProvinciaTB>() <= 0)
-                //{
-                //    PaisTB pais = dalService.Find<PaisTB>(x => x.Codigo == "PA");
-                //    List<Provincium> lProvincial = null;
-                //    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.provincias.json"))
-                //    using (StreamReader reader = new StreamReader(stream))
-                //    {
-                //        var jsonFileContent = reader.ReadToEnd();
-                //        var mainProv = JsonConvert.DeserializeObject<MainProvincias>(jsonFileContent);
-                //        lProvincial = mainProv.provincia;
-                //    }
-                //    if (lProvincial != null)
-                //    {
-                //        foreach (var prov in lProvincial)
-                //        {
-                //            //await countryService.Save(prov);
-                //            var provincia = new ProvinciaTB() { Nombre = prov.nombre, Codigo = prov.ced, LDistritos = new List<DistritoTB>(), Pais = pais };
-                //            foreach (var dist in prov.distrito)
-                //            {
-                //                var distrito = new DistritoTB() { Nombre = dist.nombre, Codigo = dist.cabecera, LCorregimientos = new List<CorregimientoTB>() };
-                //                provincia.LDistritos.Add(distrito);
-                //                foreach (var corr in dist.corregimientos)
-                //                {
-                //                    var corregimiento = new CorregimientoTB() { Nombre = corr, Codigo = corr };
-                //                    distrito.LCorregimientos.Add(corregimiento);
-                //                }
-                //            }
-                //            dalService.Save(provincia);
-                //        }
-                //    }
-                //}
+                if (dalService.Count<ProvinciaTB>() <= 0)
+                {
+                    PaisTB pais = dalService.Find<PaisTB>(x => x.Codigo == "PA");
+                    List<Provincium> lProvincial = null;
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.provincias.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        var jsonFileContent = reader.ReadToEnd();
+                        var mainProv = JsonConvert.DeserializeObject<MainProvincias>(jsonFileContent);
+                        lProvincial = mainProv.provincia;
+                    }
+                    if (lProvincial != null)
+                    {
+                        foreach (var prov in lProvincial)
+                        {
+                            //await countryService.Save(prov);
+                            var provincia = new ProvinciaTB() { Nombre = prov.nombre, Codigo = prov.ced, LDistritos = new List<DistritoTB>(), Pais = pais };
+                            foreach (var dist in prov.distrito)
+                            {
+                                var distrito = new DistritoTB() { Nombre = dist.nombre, Codigo = dist.cabecera, LCorregimientos = new List<CorregimientoTB>() };
+                                provincia.LDistritos.Add(distrito);
+                                foreach (var corr in dist.corregimientos)
+                                {
+                                    var corregimiento = new CorregimientoTB() { Nombre = corr, Codigo = corr };
+                                    distrito.LCorregimientos.Add(corregimiento);
+                                }
+                            }
+                            dalService.Save(provincia);
+                        }
+                    }
+                }
 
 
             }

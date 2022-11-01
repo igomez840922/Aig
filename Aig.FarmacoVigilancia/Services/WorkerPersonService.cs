@@ -21,13 +21,13 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  = (from data in DalService.DBContext.Set<PersonalTrabajadorTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter)))
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter) || data.Correo.Contains(model.Filter) || data.Telefono.Contains(model.Filter)))
                               orderby data.NombreCompleto
                                 select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<PersonalTrabajadorTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter)))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter) || data.Correo.Contains(model.Filter) || data.Telefono.Contains(model.Filter)))
                                select data).Count();  
             }
             catch (Exception ex)

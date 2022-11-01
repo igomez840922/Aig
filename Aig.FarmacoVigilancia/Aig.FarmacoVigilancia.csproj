@@ -63,8 +63,4 @@
     <ProjectReference Include="..\DataModel\DataModel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

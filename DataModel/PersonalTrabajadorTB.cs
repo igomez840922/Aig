@@ -16,6 +16,11 @@ namespace DataModel
         [Required(ErrorMessage = "RequiredField")]
         public string NombreCompleto { get => nombreCompleto; set => SetProperty(ref nombreCompleto, value); }
 
+        private string cargo;
+        [StringLength(250)]
+        public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
+
+
         private string telefono;
         [StringLength(250)]
         public string Telefono { get => telefono; set => SetProperty(ref telefono, value); }

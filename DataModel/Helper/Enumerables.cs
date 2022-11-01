@@ -276,6 +276,34 @@ namespace DataModel.Helper
         Evaluated = 1,
     }
 
+    public enum enumFMV_AlertaNotaType
+    {
+        [Description("Alerta de Calidad")]
+        AlertaCalidad = 0,
+        [Description("Nota de Seguridad")]
+        NotaSeguridad = 1,
+        [Description("Nota Informativa")]
+        NotaInformativa = 2,
+        [Description("Boletines")]
+        Boletines = 3,
+        [Description("Comunicado")]
+        Comunicado = 4,
+    }
+
+    public enum enumFMV_AlertaNotaStatus
+    {
+        [Description("Pendiente")]
+        Pendiente = 0,
+        [Description("Trabajada")]
+        Trabajada = 1,
+        [Description("Duplicada")]
+        Duplicada = 2,
+        [Description("Complementaria")]
+        Complementaria = 3,
+        [Description("N/A Nota de Seguridad")]
+        NotaSeguridad = 4,
+    }
+
     //////////////////////////////
     /// <summary>
     /// 

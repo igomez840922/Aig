@@ -4,6 +4,7 @@ using DataAccess.FarmacoVigilancia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221031154127_M04")]
+    partial class M04
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -692,95 +694,6 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.ToTable("Distrito");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_AlertaNotaSeguridadTB", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<bool>("ActualizaMonografias")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ConsentFirmado")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DCI")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Estado")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("EvaluadorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("FechaEntregaEvaluador")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FechaEvaluacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FechaRecepcion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NumNota")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("Observaciones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("OrigenAlertaId")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("OtrasConsideraciones")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Producto")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<bool>("RecomProfPaciente")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("SuspencCancelRegSanitario")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("SuspencionRetiroLote")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TipoAlerta")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EvaluadorId");
-
-                    b.HasIndex("OrigenAlertaId");
-
-                    b.ToTable("AlertaNotaSeguridad");
-                });
-
             modelBuilder.Entity("DataModel.FMV_IpsTB", b =>
                 {
                     b.Property<long>("Id")
@@ -885,43 +798,6 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.HasIndex("TramitadorId");
 
                     b.ToTable("Ips");
-                });
-
-            modelBuilder.Entity("DataModel.FMV_OrigenAlertaTB", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Descripcion")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrigenAlerta");
                 });
 
             modelBuilder.Entity("DataModel.FMV_PmrProductoTB", b =>
@@ -1743,22 +1619,6 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.Navigation("Provincia");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_AlertaNotaSeguridadTB", b =>
-                {
-                    b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
-                        .WithMany()
-                        .HasForeignKey("EvaluadorId");
-
-                    b.HasOne("DataModel.FMV_OrigenAlertaTB", "OrigenAlerta")
-                        .WithMany("LNotas")
-                        .HasForeignKey("OrigenAlertaId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Evaluador");
-
-                    b.Navigation("OrigenAlerta");
-                });
-
             modelBuilder.Entity("DataModel.FMV_IpsTB", b =>
                 {
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
@@ -1908,11 +1768,6 @@ namespace DataAccess.Migrations.ApplicationDb
             modelBuilder.Entity("DataModel.DistritoTB", b =>
                 {
                     b.Navigation("LCorregimientos");
-                });
-
-            modelBuilder.Entity("DataModel.FMV_OrigenAlertaTB", b =>
-                {
-                    b.Navigation("LNotas");
                 });
 
             modelBuilder.Entity("DataModel.FMV_PmrTB", b =>
