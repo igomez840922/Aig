@@ -21,13 +21,17 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  = (from data in DalService.DBContext.Set<LaboratorioTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter)))
-                              orderby data.Nombre
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.Pais.Contains(model.Filter) || data.Telefono.Contains(model.Filter) || data.Correo.Contains(model.Filter))) &&
+                              (model.LaboratoryType == null ? true : (data.TipoLaboratorio == model.LaboratoryType)) &&
+                              (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType))
+                                orderby data.Nombre
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<LaboratorioTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter)))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.Pais.Contains(model.Filter) || data.Telefono.Contains(model.Filter) || data.Correo.Contains(model.Filter))) &&
+                               (model.LaboratoryType == null ? true : (data.TipoLaboratorio == model.LaboratoryType)) &&
+                               (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType))
                                select data).Count();  
             }
             catch (Exception ex)

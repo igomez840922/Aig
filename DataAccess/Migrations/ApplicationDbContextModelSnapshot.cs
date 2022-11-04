@@ -692,7 +692,7 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.ToTable("Distrito");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_AlertaNotaSeguridadTB", b =>
+            modelBuilder.Entity("DataModel.FMV_AlertaTB", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -778,7 +778,7 @@ namespace DataAccess.Migrations.ApplicationDb
 
                     b.HasIndex("OrigenAlertaId");
 
-                    b.ToTable("AlertaNotaSeguridad");
+                    b.ToTable("Alerta");
                 });
 
             modelBuilder.Entity("DataModel.FMV_IpsTB", b =>
@@ -885,6 +885,61 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.HasIndex("TramitadorId");
 
                     b.ToTable("Ips");
+                });
+
+            modelBuilder.Entity("DataModel.FMV_NotaTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Destinatario")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("EvaluadorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("InstitucionDestinoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("NumNota")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("TipoNota")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EvaluadorId");
+
+                    b.HasIndex("InstitucionDestinoId");
+
+                    b.ToTable("Nota");
                 });
 
             modelBuilder.Entity("DataModel.FMV_OrigenAlertaTB", b =>
@@ -1085,7 +1140,7 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.ToTable("Rfv");
                 });
 
-            modelBuilder.Entity("DataModel.LaboratorioTB", b =>
+            modelBuilder.Entity("DataModel.InstitucionDestinoTB", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -1099,6 +1154,49 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InstitucionDestino");
+                });
+
+            modelBuilder.Entity("DataModel.LaboratorioTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Correo")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Direccion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
@@ -1111,6 +1209,10 @@ namespace DataAccess.Migrations.ApplicationDb
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Pais")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Telefono")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -1743,14 +1845,15 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.Navigation("Provincia");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_AlertaNotaSeguridadTB", b =>
+            modelBuilder.Entity("DataModel.FMV_AlertaTB", b =>
                 {
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
-                        .WithMany()
-                        .HasForeignKey("EvaluadorId");
+                        .WithMany("LAlertas")
+                        .HasForeignKey("EvaluadorId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.FMV_OrigenAlertaTB", "OrigenAlerta")
-                        .WithMany("LNotas")
+                        .WithMany("LAlertas")
                         .HasForeignKey("OrigenAlertaId")
                         .OnDelete(DeleteBehavior.NoAction);
 
@@ -1788,6 +1891,23 @@ namespace DataAccess.Migrations.ApplicationDb
                     b.Navigation("Registrador");
 
                     b.Navigation("Tramitador");
+                });
+
+            modelBuilder.Entity("DataModel.FMV_NotaTB", b =>
+                {
+                    b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
+                        .WithMany("LNotas")
+                        .HasForeignKey("EvaluadorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
+                        .WithMany("LNotas")
+                        .HasForeignKey("InstitucionDestinoId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Evaluador");
+
+                    b.Navigation("InstitucionDestino");
                 });
 
             modelBuilder.Entity("DataModel.FMV_PmrProductoTB", b =>
@@ -1912,12 +2032,17 @@ namespace DataAccess.Migrations.ApplicationDb
 
             modelBuilder.Entity("DataModel.FMV_OrigenAlertaTB", b =>
                 {
-                    b.Navigation("LNotas");
+                    b.Navigation("LAlertas");
                 });
 
             modelBuilder.Entity("DataModel.FMV_PmrTB", b =>
                 {
                     b.Navigation("LProductos");
+                });
+
+            modelBuilder.Entity("DataModel.InstitucionDestinoTB", b =>
+                {
+                    b.Navigation("LNotas");
                 });
 
             modelBuilder.Entity("DataModel.LaboratorioTB", b =>
@@ -1936,11 +2061,15 @@ namespace DataAccess.Migrations.ApplicationDb
 
             modelBuilder.Entity("DataModel.PersonalTrabajadorTB", b =>
                 {
+                    b.Navigation("LAlertas");
+
                     b.Navigation("LIpsEvaluador");
 
                     b.Navigation("LIpsRegistrador");
 
                     b.Navigation("LIpsTramitador");
+
+                    b.Navigation("LNotas");
 
                     b.Navigation("LPmr");
                 });

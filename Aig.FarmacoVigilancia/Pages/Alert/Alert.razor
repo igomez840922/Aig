@@ -1,4 +1,4 @@
-﻿@page "/alertanotasseguridad"
+﻿@page "/alertas"
 @using DataModel.Helper;
 @layout BackendLayout
 @attribute [Authorize]
@@ -24,7 +24,7 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                @languageContainerService.Keys["AlertsSecurityNotes"]
+                                @languageContainerService.Keys["Alerts"]
                             </h3>
                         </div>
                         <div class="kt-portlet__head-toolbar">
@@ -92,7 +92,7 @@
                                                 <div class="form-line">
                                                     <InputSelect @bind-Value="dataModel.AlertaNotaType" class="form-control" @onclick="OnFilter">
                                                         <option value="">@languageContainerService.Keys["All"]</option>
-                                                        @foreach (enumFMV_AlertaNotaType dt in Enum.GetValues(typeof(enumFMV_AlertaNotaType)))
+                                                        @foreach (enumFMV_AlertType dt in Enum.GetValues(typeof(enumFMV_AlertType)))
                                                         {
                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                         }
@@ -208,7 +208,7 @@
 
 @if (OpenAddEditDialog)
 {
-  <Aig.FarmacoVigilancia.Components.AlertNotes.AddEditAlertNotes AlertaNotaSeguridad="@dataModel.Data"></Aig.FarmacoVigilancia.Components.AlertNotes.AddEditAlertNotes>
+    <Aig.FarmacoVigilancia.Components.Alert.AddEditAlert Alerta="@dataModel.Data"></Aig.FarmacoVigilancia.Components.Alert.AddEditAlert>
 }
 
 <Aig.FarmacoVigilancia.Components.DeleteConfirmDialog></Aig.FarmacoVigilancia.Components.DeleteConfirmDialog>

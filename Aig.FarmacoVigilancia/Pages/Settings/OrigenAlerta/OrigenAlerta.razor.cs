@@ -29,7 +29,6 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.OrigenAlerta
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             bus.Subscribe<OrigenAlertaAddEdit_CloseEvent>(OrigenAlertaAddEdit_CloseHandler);
-            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
 
@@ -117,11 +116,13 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.OrigenAlerta
 
         private async Task OnDelete(FMV_OrigenAlertaTB data)
         {
+            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)
         {
+            bus.UnSubscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             var message = args.GetMessage<DeleteConfirmationCloseEvent>();
             if (message.YesNo)
             {
@@ -130,7 +131,7 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.OrigenAlerta
         }
         private async Task DeleteData()
         {
-            var result = await origenAlertaService.Delete(dataModel.Data.Id);
+            var result = await origenAlertaService.Delete(dataModel.Data?.Id??0);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);

@@ -187,19 +187,19 @@ namespace DataModel.Helper
         Completed = 2
     }
 
-    public enum enumFMV_AlertType
-    {
-        [Description("Ninguna")]
-        None = 0,
-        [Description("Plan de Manejo de Riesgo")]
-        PMR = 1,
-        [Description("Informes Periódicos de Seguridad")]
-        IPS = 2,
-        [Description("RF")]
-        RF = 3,
-        [Description("Reacciones Adversas a Medicamentos")]
-        RAM = 4,
-    }
+    //public enum enumFMV_AlertType
+    //{
+    //    [Description("Ninguna")]
+    //    None = 0,
+    //    [Description("Plan de Manejo de Riesgo")]
+    //    PMR = 1,
+    //    [Description("Informes Periódicos de Seguridad")]
+    //    IPS = 2,
+    //    [Description("RF")]
+    //    RF = 3,
+    //    [Description("Reacciones Adversas a Medicamentos")]
+    //    RAM = 4,
+    //}
     public enum enumFMV_RAMType
     {
         [Description("No hay RAM")]
@@ -276,7 +276,7 @@ namespace DataModel.Helper
         Evaluated = 1,
     }
 
-    public enum enumFMV_AlertaNotaType
+    public enum enumFMV_AlertType
     {
         [Description("Alerta de Calidad")]
         AlertaCalidad = 0,
@@ -302,6 +302,20 @@ namespace DataModel.Helper
         Complementaria = 3,
         [Description("N/A Nota de Seguridad")]
         NotaSeguridad = 4,
+    }
+
+    public enum enumFMV_NoteType
+    {
+        [Description("Interna")]
+        Interna = 0,
+        [Description("Externa")]
+        Externa = 1,
+        [Description("Hoja de Trámite")]
+        HojaTramite = 2,
+        [Description("Circular")]
+        Circular = 3,
+        [Description("Monitoreo")]
+        Monitoreo = 4,
     }
 
     //////////////////////////////

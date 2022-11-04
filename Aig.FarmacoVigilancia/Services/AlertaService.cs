@@ -8,33 +8,35 @@ using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
-    public class AlertaNotaSeguridadService : IAlertaNotaSeguridadService
+    public class AlertaService : IAlertaService
     {
         private readonly IDalService DalService;
-        public AlertaNotaSeguridadService(IDalService dalService)
+        public AlertaService(IDalService dalService)
         {
             DalService = dalService;
         }
 
-        public async Task<GenericModel<FMV_AlertaNotaSeguridadTB>> FindAll(GenericModel<FMV_AlertaNotaSeguridadTB> model)
+        public async Task<GenericModel<FMV_AlertaTB>> FindAll(GenericModel<FMV_AlertaTB> model)
         {
             try
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata  =(from data in DalService.DBContext.Set<FMV_AlertaNotaSeguridadTB>()
+                model.Ldata  =(from data in DalService.DBContext.Set<FMV_AlertaTB>()
                               where data.Deleted == false &&
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter)))&&
+                              (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate && data.FechaRecepcion <= model.FromDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
                               (model.AlertaNotaType == null ? true : (data.TipoAlerta == model.AlertaNotaType)) &&
                               (model.AlertaNotaStatus == null ? true : (data.Estado == model.AlertaNotaStatus))
                               orderby data.CreatedDate
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_AlertaNotaSeguridadTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
                                where data.Deleted == false &&
                                (string.IsNullOrEmpty(model.Filter) ? true : (data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter))) &&
-                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate && data.FechaRecepcion <= model.FromDate)) &&
+                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
                                (model.AlertaNotaType == null ? true : (data.TipoAlerta == model.AlertaNotaType)) &&
                                (model.AlertaNotaStatus == null ? true : (data.Estado == model.AlertaNotaStatus))
                                select data).Count();  
@@ -45,7 +47,7 @@ namespace Aig.FarmacoVigilancia.Services
             return model;
         }
 
-        public async Task<Stream> ExportToExcel(GenericModel<FMV_AlertaNotaSeguridadTB> model)
+        public async Task<Stream> ExportToExcel(GenericModel<FMV_AlertaTB> model)
         {
             try
             {
@@ -56,11 +58,11 @@ namespace Aig.FarmacoVigilancia.Services
                 if (model.Ldata != null && model.Ldata.Count > 0)
                 {
                     var wb = new XLWorkbook();
-                    wb.Properties.Author = "RESPONSABLES_FARMACOVIGILANCIA";
-                    wb.Properties.Title = "RESPONSABLES_FARMACOVIGILANCIA";
-                    wb.Properties.Subject = "RESPONSABLES_FARMACOVIGILANCIA";
+                    wb.Properties.Author = "ALERTAS_SEGURIDAD";
+                    wb.Properties.Title = "ALERTAS_SEGURIDAD";
+                    wb.Properties.Subject = "ALERTAS_SEGURIDAD";
 
-                    var ws = wb.Worksheets.Add("RESPONSABLES_FARMACOVIGILANCIA");
+                    var ws = wb.Worksheets.Add("ALERTAS_SEGURIDAD");
 
                     ws.Cell(1, 1).Value = "Fecha de recibida (CNFV)";
                     ws.Cell(1, 2).Value = "Fecha de entrega al evaluador";
@@ -117,34 +119,34 @@ namespace Aig.FarmacoVigilancia.Services
         }
 
 
-        public async Task<List<FMV_AlertaNotaSeguridadTB>> GetAll()
+        public async Task<List<FMV_AlertaTB>> GetAll()
         {
-            return (from data in DalService.DBContext.Set<FMV_AlertaNotaSeguridadTB>()
+            return (from data in DalService.DBContext.Set<FMV_AlertaTB>()
                     where data.Deleted == false
                     select data).ToList();
         }
 
-        public async Task<FMV_AlertaNotaSeguridadTB> Get(long Id)
+        public async Task<FMV_AlertaTB> Get(long Id)
         {
-            var result = DalService.Get<FMV_AlertaNotaSeguridadTB>(Id);
+            var result = DalService.Get<FMV_AlertaTB>(Id);
             return result;
         }
 
-        public async Task<FMV_AlertaNotaSeguridadTB> Save(FMV_AlertaNotaSeguridadTB data)
+        public async Task<FMV_AlertaTB> Save(FMV_AlertaTB data)
         {
             var result = DalService.Save(data);
             return result;           
         }
 
-        public async Task<FMV_AlertaNotaSeguridadTB> Delete(long Id)
+        public async Task<FMV_AlertaTB> Delete(long Id)
         {
-            var data = DalService.Delete<FMV_AlertaNotaSeguridadTB>(Id);
+            var data = DalService.Delete<FMV_AlertaTB>(Id);
             return data;
         }
 
         public async Task<int> Count()
         {
-            try { return DalService.Count<FMV_AlertaNotaSeguridadTB>(); }
+            try { return DalService.Count<FMV_AlertaTB>(); }
             catch { }return 0;
         }
     }

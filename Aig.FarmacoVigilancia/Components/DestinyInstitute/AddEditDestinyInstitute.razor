@@ -1,0 +1,68 @@
+﻿@using DataModel.Helper;
+
+@if (InstitucionDestino != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(InstitucionDestino != null && InstitucionDestino.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["DestinyInstitute"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@InstitucionDestino" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+                        <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["FullName"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="InstitucionDestino.Nombre" />
+                                        <ValidationMessage For=@(() => InstitucionDestino.Nombre) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="password">@languageContainerService.Keys["Description"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputTextArea rows="6" class="form-control" @bind-Value="InstitucionDestino.Descripcion" />
+                                        <ValidationMessage For=@(() => InstitucionDestino.Descripcion) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+
+                            <button type="submit"
+                                class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+
+                            <button type="button" class="btn btn-danger waves-effect"
+                                @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="modal-backdrop fade show"></div>

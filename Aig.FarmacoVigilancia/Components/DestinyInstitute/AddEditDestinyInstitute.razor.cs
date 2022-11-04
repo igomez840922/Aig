@@ -1,29 +1,24 @@
-﻿using Aig.FarmacoVigilancia.Events.AlertNotes;
+﻿using Aig.FarmacoVigilancia.Events.DestinyInstitute;
 using Aig.FarmacoVigilancia.Events.Language;
-using Aig.FarmacoVigilancia.Events.PMR;
+using Aig.FarmacoVigilancia.Events.OrigenAlerta;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
-using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Aig.FarmacoVigilancia.Components.AlertNotes
+namespace Aig.FarmacoVigilancia.Components.DestinyInstitute
 {    
-    public partial class AddEditAlertNotes
+    public partial class AddEditDestinyInstitute
     {
         [Inject]
-        IAlertaNotaSeguridadService alertaNotaSeguridadService { get; set; }
+        IDestinyInstituteService destinyInstituteService { get; set; }
         [Inject]
         IProfileService profileService { get; set; }
-        [Inject]
-        IWorkerPersonService personService { get; set; }
-        [Inject]
-        IOrigenAlertaService origenAlertaService { get; set; }
+
         [Parameter]
-        public DataModel.FMV_AlertaNotaSeguridadTB AlertaNotaSeguridad { get; set; }
-        List<PersonalTrabajadorTB> LPerson { get; set; }
-        List<FMV_OrigenAlertaTB> LOriginAlert { get; set; }
+        public DataModel.InstitucionDestinoTB InstitucionDestino { get; set; }
+
 
         protected async override Task OnInitializedAsync()
         {
@@ -59,37 +54,20 @@ namespace Aig.FarmacoVigilancia.Components.AlertNotes
         //Fill Data
         protected async Task FetchData()
         {
-            if (LPerson == null || LPerson.Count < 1)
-            {
-                LPerson = await personService.GetAll();
-            }
-            if (LOriginAlert == null || LOriginAlert.Count < 1)
-            {
-                LOriginAlert = await origenAlertaService.GetAll();
-            }
-
             await this.InvokeAsync(StateHasChanged);
         }
 
         //Save Data and Close
         protected async Task SaveData()
         {
-            if (AlertaNotaSeguridad.OrigenAlertaId != null && AlertaNotaSeguridad.OrigenAlertaId > 0)
-            {
-                AlertaNotaSeguridad.OrigenAlerta = LOriginAlert?.Where(x => x.Id == AlertaNotaSeguridad.OrigenAlertaId.Value).FirstOrDefault();
-            }
-            if (AlertaNotaSeguridad.EvaluadorId != null && AlertaNotaSeguridad.EvaluadorId > 0)
-            {
-                AlertaNotaSeguridad.Evaluador = LPerson?.Where(x => x.Id == AlertaNotaSeguridad.EvaluadorId.Value).FirstOrDefault();
-            }
 
-            var result = await alertaNotaSeguridadService.Save(AlertaNotaSeguridad);
+            var result = await destinyInstituteService.Save(InstitucionDestino);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                AlertaNotaSeguridad = result;
+                InstitucionDestino = result;
 
-                await bus.Publish(new AlertNotesAddEdit_CloseEvent { Data = null });
+                await bus.Publish(new DestinyInstituteAddEdit_CloseEvent { Data = null });
             }
             else
                 await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
@@ -98,7 +76,7 @@ namespace Aig.FarmacoVigilancia.Components.AlertNotes
         //Cancel and Close
         protected async Task Cancel()
         {
-            await bus.Publish(new AlertNotesAddEdit_CloseEvent { Data = null });
+            await bus.Publish(new DestinyInstituteAddEdit_CloseEvent { Data = null });
             await this.InvokeAsync(StateHasChanged);
         }
 

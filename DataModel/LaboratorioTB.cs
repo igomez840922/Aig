@@ -17,6 +17,10 @@ namespace DataModel
         [Required(ErrorMessage = "RequiredField")]
         public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
+        private enum_LaboratoryType tipoLaboratorio;
+        public enum_LaboratoryType TipoLaboratorio { get => tipoLaboratorio; set => SetProperty(ref tipoLaboratorio, value); }
+
+
         private enum_UbicationType tipoUbicacion;
         public enum_UbicationType TipoUbicacion { get => tipoUbicacion; set => SetProperty(ref tipoUbicacion, value); }
 
@@ -24,9 +28,20 @@ namespace DataModel
         private string pais;
         [StringLength(250)]
         public string Pais { get => pais; set => SetProperty(ref pais, value); }
+                
+        //Direccion
+        private string direccion;
+        public string Direccion { get => direccion; set => SetProperty(ref direccion, value); }
 
-        private enum_LaboratoryType tipoLaboratorio;
-        public enum_LaboratoryType TipoLaboratorio { get => tipoLaboratorio; set => SetProperty(ref tipoLaboratorio, value); }
+        //Telefono
+        private string telefono;
+        [StringLength(250)]
+        public string Telefono { get => telefono; set => SetProperty(ref telefono, value); }
+
+        //Correo
+        private string correo;
+        [StringLength(250)]
+        public string Correo { get => correo; set => SetProperty(ref correo, value); }
 
         //antigua BD
         private int idEmpresa;

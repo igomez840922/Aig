@@ -150,7 +150,7 @@ namespace Aig.Auditoria.Pages.Inspections
         }
         private async Task DeleteData()
         {
-            var result = await inspeccionService.Delete(dataModel.Data.Id);
+            var result = await inspeccionService.Delete(dataModel.Data?.Id ?? 0);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);

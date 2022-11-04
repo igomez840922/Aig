@@ -30,7 +30,6 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.WorkerPerson
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             bus.Subscribe<PersonAddEdit_CloseEvent>(PersonAddEdit_CloseHandler);
-            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
 
@@ -118,11 +117,13 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.WorkerPerson
 
         private async Task OnDelete(PersonalTrabajadorTB data)
         {
+            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)
         {
+            bus.UnSubscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             var message = args.GetMessage<DeleteConfirmationCloseEvent>();
             if (message.YesNo)
             {
@@ -131,7 +132,7 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.WorkerPerson
         }
         private async Task DeleteData()
         {
-            var result = await personService.Delete(dataModel.Data.Id);
+            var result = await personService.Delete(dataModel.Data?.Id??0);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);

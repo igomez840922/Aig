@@ -84,7 +84,41 @@ namespace Aig.FarmacoVigilancia.Helper
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var dalService = serviceScope.ServiceProvider.GetService<IDalService>();
-                
+                if (dalService.Count<InstitucionDestinoTB>() <= 0)
+                    {
+                    InstitucionDestinoTB data = new InstitucionDestinoTB() { Nombre = "CSS" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "MINSA" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Hospitales/Patronatos/Centros Especializados" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Clínica/Hospital Privados" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Farmacias Privadas" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Industria Farmacéutica" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Dirección" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Administración" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Asesoría Legal" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "CTC" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Registro Sanitario" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Sebeq" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Modificaciones" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Control de Calidad" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Departamento de Auditoría" };
+                    dalService.Save(data);
+                    data = new InstitucionDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia" };
+                    dalService.Save(data);
+                }
                 if (dalService.Count<FMV_OrigenAlertaTB>() <= 0)
                 {
                     FMV_OrigenAlertaTB data = new FMV_OrigenAlertaTB() { Nombre = "EMA" };

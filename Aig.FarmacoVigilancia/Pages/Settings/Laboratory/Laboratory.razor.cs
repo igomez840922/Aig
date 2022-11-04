@@ -1,36 +1,26 @@
-﻿using Aig.FarmacoVigilancia.Events.PMR;
+﻿using Aig.FarmacoVigilancia.Events.DestinyInstitute;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
-using BlazorDownloadFile;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
-using Aig.FarmacoVigilancia.Events.AlertNotes;
 using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
+using Aig.FarmacoVigilancia.Events.Laboratory;
 
-namespace Aig.FarmacoVigilancia.Pages.AlertNotes
-{
-    public partial class AlertNotes
+namespace Aig.FarmacoVigilancia.Pages.Settings.Laboratory
+{    
+    public partial class Laboratory
     {
         [Inject]
         IProfileService profileService { get; set; }
         [Inject]
-        IAlertaNotaSeguridadService alertaNotaSeguridadService { get; set; }
-        [Inject]
-        IWorkerPersonService personService { get; set; }
-        [Inject]
-        IOrigenAlertaService origenAlertaService { get; set; }
-        List<PersonalTrabajadorTB> LPerson { get; set; }
-        List<FMV_OrigenAlertaTB> LOriginAlert { get; set; }
+        ILabsService labsService { get; set; }
 
-        [Inject]
-        IBlazorDownloadFileService blazorDownloadFileService { get; set; }
-
-        GenericModel<FMV_AlertaNotaSeguridadTB> dataModel { get; set; } = new GenericModel<FMV_AlertaNotaSeguridadTB>()
-        { Data = new FMV_AlertaNotaSeguridadTB() };
+        GenericModel<LaboratorioTB> dataModel { get; set; } = new GenericModel<LaboratorioTB>()
+        { Data = new LaboratorioTB() };
 
         bool OpenAddEditDialog { get; set; } = false;
 
@@ -38,8 +28,7 @@ namespace Aig.FarmacoVigilancia.Pages.AlertNotes
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<AlertNotesAddEdit_CloseEvent>(RfvAddEdit_CloseHandler);
-            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
+            bus.Subscribe<LaboratoryAddEdit_CloseEvent>(LaboratoryAddEdit_CloseHandler);
             base.OnInitialized();
         }
 
@@ -60,18 +49,9 @@ namespace Aig.FarmacoVigilancia.Pages.AlertNotes
 
         protected async Task FetchData()
         {
-            if (LPerson == null || LPerson.Count < 1)
-            {
-                LPerson = await personService.GetAll();
-            }
-            if (LOriginAlert == null || LOriginAlert.Count < 1)
-            {
-                LOriginAlert = await origenAlertaService.GetAll();
-            }
-
             dataModel.ErrorMsg = null;
             dataModel.Data = null;
-            var data = await alertaNotaSeguridadService.FindAll(dataModel);
+            var data = await labsService.FindAll(dataModel);
             if (data != null)
             {
                 dataModel = data;
@@ -118,29 +98,31 @@ namespace Aig.FarmacoVigilancia.Pages.AlertNotes
         private async Task OnEdit(long id)
         {
             OpenAddEditDialog = true;
-            var result = await alertaNotaSeguridadService.Get(id);
+            var result = await labsService.Get(id);
             if (result == null)
             {
-                result = new FMV_AlertaNotaSeguridadTB();
+                result = new LaboratorioTB();
             }
             dataModel.Data = result;
-            await bus.Publish(new AlertNotesAddEdit_OpenEvent { Data = result });
+            await bus.Publish(new LaboratoryAddEdit_OpenEvent { Data = result });
             await this.InvokeAsync(StateHasChanged);
         }
-        private void RfvAddEdit_CloseHandler(MessageArgs args)
+        private void LaboratoryAddEdit_CloseHandler(MessageArgs args)
         {
             OpenAddEditDialog = false;
-            var message = args.GetMessage<AlertNotesAddEdit_CloseEvent>();
+            var message = args.GetMessage<LaboratoryAddEdit_CloseEvent>();
             FetchData();
         }
 
-        private async Task OnDelete(FMV_AlertaNotaSeguridadTB data)
+        private async Task OnDelete(LaboratorioTB data)
         {
+            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)
         {
+            bus.UnSubscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             var message = args.GetMessage<DeleteConfirmationCloseEvent>();
             if (message.YesNo)
             {
@@ -149,7 +131,7 @@ namespace Aig.FarmacoVigilancia.Pages.AlertNotes
         }
         private async Task DeleteData()
         {
-            var result = await alertaNotaSeguridadService.Delete(dataModel.Data.Id);
+            var result = await labsService.Delete(dataModel.Data?.Id??0);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);
@@ -161,15 +143,15 @@ namespace Aig.FarmacoVigilancia.Pages.AlertNotes
                 await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataDeleteError"]);
         }
 
-        ///Export to excel
-        protected async Task ExportToExcel()
-        {
-            Stream stream = await alertaNotaSeguridadService.ExportToExcel(dataModel);
-            if (stream != null)
-            {
-                await blazorDownloadFileService.DownloadFile("ALERTA_NOTAS_SEGURIDAD.xlsx", stream, "application/actet-stream");
-            }
-        }
+        /////Export to excel
+        //protected async Task ExportToExcel()
+        //{
+        //    Stream stream = await personService.ExportToExcel(dataModel);
+        //    if (stream != null)
+        //    {
+        //        await blazorDownloadFileService.DownloadFile("RESPONSABLES_FARMACOVIGILANCIA.xlsx", stream, "application/actet-stream");
+        //    }
+        //}
 
     }
 

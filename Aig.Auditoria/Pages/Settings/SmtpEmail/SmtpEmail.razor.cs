@@ -27,7 +27,6 @@ namespace Aig.Auditoria.Pages.Settings.SmtpEmail
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             //bus.Subscribe<Aig.Auditoria.Events.EmailServer.EmailServerAddEdit_CloseEvent>(EmailServerAddEdit_CloseEventHandler);
-            //bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
 

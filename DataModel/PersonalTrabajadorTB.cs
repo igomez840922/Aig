@@ -53,6 +53,13 @@ namespace DataModel
         private List<FMV_IpsTB> lIpsEvaluador;
         public virtual List<FMV_IpsTB> LIpsEvaluador { get => lIpsEvaluador; set => SetProperty(ref lIpsEvaluador, value); }
 
+
+        private List<FMV_AlertaTB> lAlertas;
+        public virtual List<FMV_AlertaTB> LAlertas { get => lAlertas; set => SetProperty(ref lAlertas, value); }
+
+        private List<FMV_NotaTB> lNotas;
+        public virtual List<FMV_NotaTB> LNotas { get => lNotas; set => SetProperty(ref lNotas, value); }
+
         //private List<FMV_IpsProductTB> lIpsProducts;
         //public virtual List<FMV_IpsProductTB> LIpsProducts { get => lIpsProducts; set => SetProperty(ref lIpsProducts, value); }
     }

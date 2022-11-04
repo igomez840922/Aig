@@ -36,7 +36,6 @@ namespace Aig.FarmacoVigilancia.Pages.RFV
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             bus.Subscribe<RfvAddEdit_CloseEvent>(RfvAddEdit_CloseHandler);
-            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
 
@@ -129,11 +128,13 @@ namespace Aig.FarmacoVigilancia.Pages.RFV
 
         private async Task OnDelete(FMV_RfvTB data)
         {
+            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)
         {
+            bus.UnSubscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             var message = args.GetMessage<DeleteConfirmationCloseEvent>();
             if (message.YesNo)
             {
@@ -142,7 +143,7 @@ namespace Aig.FarmacoVigilancia.Pages.RFV
         }
         private async Task DeleteData()
         {
-            var result = await rfvService.Delete(dataModel.Data.Id);
+            var result = await rfvService.Delete(dataModel.Data?.Id ?? 0);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);

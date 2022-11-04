@@ -22,7 +22,7 @@ namespace DataModel.Models
         public int PagAmt { get; set; }
         public int PagIdx { get; set; }
         public string Filter { get; set; }
-        public string ErrorMsg { get; set; }  
+        public string ErrorMsg { get; set; }
 
         public long ParentId { get; set; }
         public long Parent2Id { get; set; }
@@ -31,17 +31,17 @@ namespace DataModel.Models
         public List<T> Ldata { get; set; }
 
         public int Total { get; set; }
-        private int pagesCount=0;
-		public int PagesCount
+        private int pagesCount = 0;
+        public int PagesCount
         {
             get
             {
                 try
                 {
-					pagesCount = ((int)Math.Ceiling((decimal)Total / (decimal)PagAmt));
+                    pagesCount = ((int)Math.Ceiling((decimal)Total / (decimal)PagAmt));
                 }
                 catch { }
-                return pagesCount > 1? pagesCount:1;
+                return pagesCount > 1 ? pagesCount : 1;
             }
             set { }
         }
@@ -59,7 +59,11 @@ namespace DataModel.Models
         public long? LabId { get; set; } = null;
         public enum_UbicationType? UbicationType { get; set; } = null;
         public enumFMV_AlertaNotaStatus? AlertaNotaStatus { get; set; } = null;
-        public enumFMV_AlertaNotaType? AlertaNotaType { get; set; } = null;
+        public enumFMV_AlertType? AlertaNotaType { get; set; } = null;
+        public enumFMV_NoteType? NotaType { get; set; } = null;
+        public enum_LaboratoryType? LaboratoryType { get; set; } = null;
+
+
 
     }
 
