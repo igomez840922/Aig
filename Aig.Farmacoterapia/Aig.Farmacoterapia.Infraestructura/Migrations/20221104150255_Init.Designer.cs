@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Aig.Farmacoterapia.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221026162345_Init")]
+    [Migration("20221104150255_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,9 +25,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Codigo")
                         .HasColumnType("int");
 
                     b.Property<string>("Correo")
@@ -50,6 +47,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(600)");
+
                     b.Property<int>("PaisId")
                         .HasColumnType("int");
 
@@ -64,9 +65,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Codigo")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
@@ -114,28 +112,21 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Estado")
-                        .HasColumnType("int");
-
                     b.Property<string>("Excipientes")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("ExpiraciónRegistro")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("FabricanteId")
+                    b.Property<int?>("FabricanteId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("FechaEmisiónRegistro")
+                    b.Property<DateTime?>("FechaEmision")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("FormaFarmaceuticaId")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("FechaExpiracion")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Formafarmaceutica")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int?>("FormaFarmaceuticaId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime(6)");
@@ -148,6 +139,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("NumReg")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NumRen")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Presentacion")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -166,11 +165,19 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("ViaAdministracionId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Vigente")
+                        .HasColumnType("tinyint(1)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FabricanteId");
 
                     b.HasIndex("FormaFarmaceuticaId");
+
+                    b.HasIndex("ViaAdministracionId");
 
                     b.ToTable("Medicamento");
                 });
@@ -179,9 +186,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Codigo")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
@@ -209,6 +213,35 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                     b.ToTable("Pais");
                 });
 
+            modelBuilder.Entity("Aig.Farmacoterapia.Domain.Entities.AigViaAdministracion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AigViaAdministracion");
+                });
+
             modelBuilder.Entity("Aig.Farmacoterapia.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -227,6 +260,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -250,6 +291,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ProfilePicture")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -562,18 +607,23 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                     b.HasOne("Aig.Farmacoterapia.Domain.Entities.AigFabricante", "Fabricante")
                         .WithMany("Medicamentos")
                         .HasForeignKey("FabricanteId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Aig.Farmacoterapia.Domain.Entities.AigFormaFarmaceutica", "FormaFarmaceutica")
                         .WithMany("Medicamentos")
                         .HasForeignKey("FormaFarmaceuticaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Aig.Farmacoterapia.Domain.Entities.AigViaAdministracion", "ViaAdministracion")
+                        .WithMany("Medicamentos")
+                        .HasForeignKey("ViaAdministracionId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Fabricante");
 
                     b.Navigation("FormaFarmaceutica");
+
+                    b.Navigation("ViaAdministracion");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -640,6 +690,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
             modelBuilder.Entity("Aig.Farmacoterapia.Domain.Entities.AigPais", b =>
                 {
                     b.Navigation("Fabricantes");
+                });
+
+            modelBuilder.Entity("Aig.Farmacoterapia.Domain.Entities.AigViaAdministracion", b =>
+                {
+                    b.Navigation("Medicamentos");
                 });
 #pragma warning restore 612, 618
         }

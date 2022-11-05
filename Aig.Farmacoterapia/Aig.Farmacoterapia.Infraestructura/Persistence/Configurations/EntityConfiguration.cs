@@ -11,35 +11,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
         IEntityTypeConfiguration<AigMedicamento>,
         IEntityTypeConfiguration<AigFabricante>,
         IEntityTypeConfiguration<AigPais>,
-        IEntityTypeConfiguration<AigFormaFarmaceutica> {
+        IEntityTypeConfiguration<AigFormaFarmaceutica>,
+        IEntityTypeConfiguration<AigViaAdministracion>
+       {
         public void Configure(EntityTypeBuilder<AigMedicamento> builder)
         {
             builder.HasKey(k => new { k.Id });
-            //builder.OwnsOne(o => o.Propiadades, p => {
-            //    p.Property(s => s.Quimico).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Propiedades).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.PropiedadesFarmaco).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Indicaciones).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Contraindicaciones).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Advertencias).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Embarazo).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Conducir).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Interacciones).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Reacciones).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Posologia).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Sobredosificacion).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Preclinicos).HasColumnType("nvarchar(512)");
-            //});
-            //builder.OwnsOne(o => o.Prospecto, p => {
-            //    p.Property(s => s.ModoDeUso).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Composicion).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Forma).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Envase).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.VidaUtil).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.Condicion).HasColumnType("nvarchar(512)");
-            //    p.Property(s => s.InformaciónAdicional).HasColumnType("nvarchar(512)");
-            //});
             builder.Ignore(c => c.ShowDetails);
+
             builder.HasOne(t => t.Fabricante)
                  .WithMany(t => t.Medicamentos)
                  .HasForeignKey(t => t.FabricanteId)
@@ -49,6 +28,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
                   .WithMany(t => t.Medicamentos)
                   .HasForeignKey(t => t.FormaFarmaceuticaId)
                   .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(t => t.ViaAdministracion)
+                 .WithMany(t => t.Medicamentos)
+                 .HasForeignKey(t => t.ViaAdministracionId)
+                 .OnDelete(DeleteBehavior.NoAction);
         }
 
         public void Configure(EntityTypeBuilder<AigFabricante> builder)
@@ -69,6 +53,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
         }
 
         public void Configure(EntityTypeBuilder<AigFormaFarmaceutica> builder)
+        {
+            builder.HasKey(k => new { k.Id });
+        }
+        public void Configure(EntityTypeBuilder<AigViaAdministracion> builder)
         {
             builder.HasKey(k => new { k.Id });
         }

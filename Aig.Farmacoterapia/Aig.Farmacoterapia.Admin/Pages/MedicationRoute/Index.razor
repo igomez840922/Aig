@@ -1,4 +1,4 @@
-﻿@page "/pharmaceutical/list"
+﻿@page "/medicationroute/list"
 @*@layout null*@
 @using Aig.Farmacoterapia.Admin.Components.Product
 @using Aig.Farmacoterapia.Admin.Models
@@ -12,7 +12,7 @@
 @attribute [Authorize]
 @inject IUnitOfWork _unitOfWork;
 @inject ISystemLogger _systemLogger;
-@inject IPharmaceuticalRepository _repository;
+@inject IMedicationRouteRepository _repository;
 @inject IJSRuntime JS
 
 <div class="kt-portlet__head kt-portlet__head--lg">
@@ -77,11 +77,11 @@
     </EditForm>
 
  <div class="table-responsive">
-        <MudTable @ref="table" Striped="true"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigFormaFarmaceutica>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
+        <MudTable @ref="table" Striped="true"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigViaAdministracion>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
 
             <HeaderContent>
-                <MudTh style="width:200px;"><MudTableSortLabel Enabled="true" InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigFormaFarmaceutica">Nombre</MudTableSortLabel></MudTh>
-                <MudTh style="width:10px;"><MudTableSortLabel T="AigFormaFarmaceutica" SortLabel="status">Estado</MudTableSortLabel></MudTh>
+                <MudTh style="width:200px;"><MudTableSortLabel Enabled="true" InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigViaAdministracion">Nombre</MudTableSortLabel></MudTh>
+                <MudTh style="width:10px;"><MudTableSortLabel T="AigViaAdministracion" SortLabel="status">Estado</MudTableSortLabel></MudTh>
                 <MudTh style="width:20px;">Creado</MudTh>
                 <MudTh style="width:20px;">Modificado</MudTh>
                 <MudTh style="width:5px;"></MudTh>
@@ -130,8 +130,8 @@
 
 @code {
 
-    private MudTable<AigFormaFarmaceutica> table;
-    private static IEnumerable<AigFormaFarmaceutica> List { get; set; }
+    private MudTable<AigViaAdministracion> table;
+    private static IEnumerable<AigViaAdministracion> List { get; set; }
     private string searchString;
     protected ProductObject modelData;
     protected bool addEditDialogIsOpen = false;
@@ -149,7 +149,7 @@
 
         base.OnInitialized();
     }
-    private async Task<TableData<AigFormaFarmaceutica>> DoFetchData(TableState state)
+    private async Task<TableData<AigViaAdministracion>> DoFetchData(TableState state)
     {   
         StateHasChanged();
         var sorting = new List<SortingOption>();
@@ -170,7 +170,7 @@
         };
         var paginatedResult = await _repository.ListAsync(args);
         List = paginatedResult.Data;
-        return new TableData<AigFormaFarmaceutica>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
+        return new TableData<AigViaAdministracion>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
     }
     private void OnSearch(string text)
     {

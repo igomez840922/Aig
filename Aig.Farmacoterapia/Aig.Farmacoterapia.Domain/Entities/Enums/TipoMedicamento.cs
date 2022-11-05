@@ -8,12 +8,12 @@ namespace Aig.Farmacoterapia.Domain.Entities.Enums
 {
     public static class TipoMedicamento
     {
-        public const string SI = "SI";
-        public const string RA = "RA";
-        public const string HU = "HU";
-        public const string HO = "HO";
-        public const string FF = "FF";
-        public const string BT = "BT";
-        public const string BI = "BI";
+        public const string SI = "SI"; // Síntisis Química
+        public const string RA = "RA"; // Radiofármacos
+        public const string HU = "HU"; // Huérfanos
+        public const string HO = "HO"; // Homeopáticos
+        public const string FF = "FF"; // Fitofármacos
+        public const string BT = "BT"; // Biotecnológicos
+        public const string BI = "BI"; // Biológicos
     }
 }

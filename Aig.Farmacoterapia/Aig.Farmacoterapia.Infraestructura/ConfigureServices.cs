@@ -1,34 +1,25 @@
-﻿using Aig.Farmacoterapia.Domain.Common;
-using Aig.Farmacoterapia.Domain.Interfaces;
+﻿using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Files;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Aig.Farmacoterapia.Infrastructure.Logging;
 using Aig.Farmacoterapia.Infrastructure.Persistence;
-using Aig.Farmacoterapia.Infrastructure.Persistence.BlazorHero.CleanArchitecture.Infrastructure.Repositories;
 using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories;
 using Aig.Farmacoterapia.Infrastructure.Services;
 using log4net.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
-using System.Globalization;
-using System.Net;
-using System.Security.Claims;
 using System.Text;
 
 namespace Aig.Farmacoterapia.Infrastructure
 {
     public static class ConfigureServices
     {
-        
         private static IServiceCollection AddCurrentUserService(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
@@ -45,8 +36,8 @@ namespace Aig.Farmacoterapia.Infrastructure
                 options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             })
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -58,7 +49,6 @@ namespace Aig.Farmacoterapia.Infrastructure
             });
             return services;
         }
-
         internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
         {
             services.AddAuthentication().AddJwtBearer("JwtClient", options =>
@@ -124,23 +114,16 @@ namespace Aig.Farmacoterapia.Infrastructure
             //            //sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
             //        });
             //});
-            services.AddDbContext<ApplicationDbContext>(options =>
-            {
+
+            services.AddDbContext<ApplicationDbContext>(options => {
                 options.UseMySql(conn, ServerVersion.AutoDetect(conn), mySqlOptionsAction:
-                    sqlOptions =>
-                    {
+                    sqlOptions => {
+                        options.EnableDetailedErrors();
                         sqlOptions.EnableRetryOnFailure();
                         sqlOptions.CommandTimeout(120);
                     });
             });
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //{
-            //    options.UseMySql(conn, ServerVersion.AutoDetect(conn));
-            //});
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //{
-            //    options.UseMySql("server=localhost;database=new_schema;user=root;password=Adm123+-*", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.30-mysql"));
-            //});
+
             return services;
         }
         private static IServiceCollection AddInfrastructure(this IServiceCollection services)
@@ -157,11 +140,12 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddTransient<IMedicamentRepository, MedicamentRepository>()
                 .AddTransient<IContryRepository, ContryRepository>()
                 .AddTransient<IPharmaceuticalRepository, PharmaceuticalRepository>()
-                .AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
+                .AddTransient<IMedicationRouteRepository, MedicationRouteRepository>()
+                .AddTransient<IUnitOfWork, UnitOfWork>();
         }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //Configure Log4net.
+            //Log4net
             XmlConfigurator.Configure(new FileInfo("log4net.config"));
 
             AddDatabase(services, configuration);
@@ -172,7 +156,6 @@ namespace Aig.Farmacoterapia.Infrastructure
             AddJwtAuthentication(services);
             RegisterSwagger(services);
 
-            //services.AddScoped<ApplicationDbContextInitialiser>();
             return services;
         }
     }

@@ -42,9 +42,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 orderByList.Add(new(sortingOption, c => c.Nombre));
                                 break;
                             case "dateOfIssue":
-                                orderByList.Add(new(sortingOption, c => c.FechaEmisiónRegistro));
+                                orderByList.Add(new(sortingOption, c => c.FechaEmision));
                                 break;
-                                
+                            case "expirationDate":
+                                orderByList.Add(new(sortingOption, c => c.FechaExpiracion));
+                                break;
                         }
                     }
                 }
@@ -62,17 +64,34 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                             case "startDateOfIssue":
                                 {
                                     var value = filteringOption.Value.ToString();
-                                    var date = DateOnly.FromDateTime(DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None));
-                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmisiónRegistro >= date;
+                                    var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision >= date;
                                     filterList.Add(expression);
-                                    
+
                                 }
                                 break;
                             case "endDateOfIssue":
                                 {
                                     var value = filteringOption.Value.ToString();
-                                    var date = DateOnly.FromDateTime(DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None));
-                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmisiónRegistro <= date;
+                                    var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision <= date;
+                                    filterList.Add(expression);
+                                }
+                                break;
+                            case "startExpirationDate":
+                                {
+                                    var value = filteringOption.Value.ToString();
+                                    var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision >= date;
+                                    filterList.Add(expression);
+
+                                }
+                                break;
+                            case "endDateExpirationDate":
+                                {
+                                    var value = filteringOption.Value.ToString();
+                                    var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision <= date;
                                     filterList.Add(expression);
                                 }
                                 break;

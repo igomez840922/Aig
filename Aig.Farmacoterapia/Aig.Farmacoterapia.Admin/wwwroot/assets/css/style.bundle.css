@@ -1625,7 +1625,7 @@ textarea.form-control {
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 80%;
+  font-size: 95%;
   color: #fd397a; }
 
 .invalid-tooltip {
@@ -19105,7 +19105,8 @@ strong {
   background-color: rgba(255, 184, 34, 0.1) !important; }
 
 .kt-font-danger {
-  color: #fd397a !important; }
+    color: #feb5cd !important;
+}
 
 .kt-font-hover-danger:hover {
   color: #ce0246; }
@@ -27513,9 +27514,10 @@ strong {
   .kt-badge.kt-badge--unified-warning {
     color: #ffb822;
     background: rgba(255, 184, 34, 0.1); }
-  .kt-badge.kt-badge--unified-danger {
-    color: #fd397a;
-    background: rgba(253, 57, 122, 0.1); }
+    .kt-badge.kt-badge--unified-danger {
+        color: #feb5cd;
+        background: rgba(253, 57, 122, 0.1);
+    }
   .kt-badge.kt-badge--inline {
     height: auto;
     width: auto;

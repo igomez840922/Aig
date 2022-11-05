@@ -49,6 +49,8 @@ namespace Aig.Farmacoterapia.Infrastructure.SeedData
                 if (userManager.FindByNameAsync("admin").Result == null)
                 {
                     ApplicationUser user = new ApplicationUser();
+                    user.FirstName = "admin";
+                    user.LastName = "admin";
                     user.UserName = "admin";
                     user.Email = "admin@admin.com";
                     user.PhoneNumber = "3055525252";

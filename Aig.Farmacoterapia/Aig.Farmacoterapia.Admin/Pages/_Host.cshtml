@@ -23,7 +23,7 @@
 
     @if (Request.Path.Value.Contains("/login"))
     {
-        <link href="assets/css/pages/login/login-5.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/pages/login/login-1.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/skins/header/base/light.css" rel="stylesheet" type="text/css" />
@@ -75,7 +75,41 @@
 {
     <body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
 
-        <div class="kt-grid kt-grid--ver kt-grid--root">
+		<div class="kt-grid kt-grid--ver kt-grid--root">
+			<div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v1" id="kt_login">
+				<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile">
+
+					<div class="kt-grid__item kt-grid__item--order-tablet-and-mobile-2 kt-grid kt-grid--hor kt-login__aside" style="background-image: url(assets/media/bg/bg-4.jpg);">
+						<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
+							<div class="kt-grid__item kt-grid__item--middle">
+                                <a class="kt-login__logo" href="#">
+                                    <img src="assets/media/logos/mylogo.png">
+                                </a>
+								<h4 class="kt-login__subtitle" style="text-align:end">Sistema de Farmacoterapia</h4>
+							</div>
+						</div>
+						<div class="kt-grid__item">
+							<div class="kt-login__info">
+								<div class="kt-login__copyright">
+									&copy 2022 SOAINT
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="kt-grid__item kt-grid__item--fluid  kt-grid__item--order-tablet-and-mobile-1  kt-login__wrapper">
+
+                         <component type="typeof(App)" render-mode="Server" />
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+
+     @*   <div class="kt-grid kt-grid--ver kt-grid--root">
             <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v5 kt-login--signin" id="kt_login">
                 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile" style="background-image: url(assets/media/bg/bg-3.jpg);">
                     <div class="kt-login__left">
@@ -97,10 +131,9 @@
                     </div>
                     <component type="typeof(App)" render-mode="Server" />
 
-
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <script>
             var KTAppOptions = {
@@ -256,8 +289,7 @@ else
 								   </li>
 
                                     <li class="kt-menu__item " aria-haspopup="true">
-                                        <a href="/pharmaceutical/list"
-                                   class="kt-menu__link ">
+                                        <a href="/pharmaceutical/list" class="kt-menu__link ">
                                             <span class="kt-menu__link-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -270,6 +302,19 @@ else
                                         </a>
                                     </li>
 
+                                     <li class="kt-menu__item " aria-haspopup="true">
+                                        <a href="/medicationroute/list" class="kt-menu__link ">
+                                            <span class="kt-menu__link-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                        <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                                                        <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                                                    </g>
+                                                </svg>
+                                            </span><span class="kt-menu__link-text">Vías de administración</span>
+                                        </a>
+                                    </li>
 
                                     <li class="kt-menu__item " aria-haspopup="true">
                                         <a href="#" class="kt-menu__link ">

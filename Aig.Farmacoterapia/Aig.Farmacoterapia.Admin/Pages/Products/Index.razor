@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 &nbsp;*@
-                <a href="#" class="btn btn-brand btn-elevate btn-icon-sm" @onclick="() => OnEdit(0)" data-toggle="modal" data-target="#modal_createedit">
+                <a href="#" class="btn btn-outline-brand btn-square" @onclick="() => OnEdit(0)" data-toggle="modal" data-target="#modal_createedit">
                     <i class="la la-plus"></i>
                     Nuevo
                 </a>
@@ -86,24 +86,27 @@
     <EditForm Model="@modelFilter" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
 
         <div class="row kt-margin-b-20">
-            <div class="col-lg-4 kt-margin-b-10-tablet-and-mobile">
+            <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                 <label>Medicamento:</label>
                 <input type="text" @bind-value="modelFilter.Term" class="form-control kt-input" placeholder="Reg / Nombre / Principio Activo" data-col-index="0">
             </div>
             <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                 <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Emisión:" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" @bind-DateRange="dateRange" />
             </div>
-            <div class="col-lg-5 kt-margin-b-10-tablet-and-mobile">
+            <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
+                <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Expiración:" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" @bind-DateRange="expirationRange" />
+            </div>
+            <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                 <div class="row" style="margin-top: 23px;">
-                    <div class="col-lg-12">
-                        <button type="submit" class="btn btn-primary btn-brand--icon" style="padding: 5px 10px 5px 10px;">
+                    <div class="col-lg-12" style="margin-top: 2px;">
+                        <button type="submit" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
                             <span>
                                 <i class="la la-search"></i>
                                 <span>Buscar</span>
                             </span>
                         </button>
                         &nbsp;&nbsp;
-                        <button @onclick="() => OnReset()" class="btn btn-secondary btn-secondary--icon" style="padding: 5px 10px 5px 10px;">
+                        <button @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
                             <span>
                                 <i class="la la-close"></i>
                                 <span>Eliminar</span>
@@ -114,14 +117,15 @@
             </div>
         </div>
     </EditForm>
-
+    
     <div class="table-responsive">
         <MudTable @ref="table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigMedicamento>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
 
             <HeaderContent>
                 <MudTh style="width:5px;"></MudTh>
-                <MudTh style="width:50px;"><MudTableSortLabel SortLabel="numReg" T="AigMedicamento">Registro</MudTableSortLabel></MudTh>
-                <MudTh style="width:200px;"><MudTableSortLabel SortLabel="dateOfIssue" T="AigMedicamento">Fech. Emisión</MudTableSortLabel></MudTh>
+                <MudTh style="width:60px;"><MudTableSortLabel SortLabel="numReg" T="AigMedicamento">Registro</MudTableSortLabel></MudTh>
+                <MudTh style="width:100px;"><MudTableSortLabel SortLabel="dateOfIssue" T="AigMedicamento">Expedido</MudTableSortLabel></MudTh>
+                <MudTh style="width:100px;"><MudTableSortLabel SortLabel="expirationDate" T="AigMedicamento">Vence</MudTableSortLabel></MudTh>
                 <MudTh style="width:350px;"><MudTableSortLabel Enabled="true" InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigMedicamento">Medicamento</MudTableSortLabel></MudTh>
                 <MudTh style="width:350px;">Principio Activo</MudTh>
                 <MudTh style="width:200px;">Forma Farmaceutica</MudTh>
@@ -132,9 +136,9 @@
                 <MudTd>
                     <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
                 </MudTd>
-
-                <MudTd DataLabel="Registro">@context.NumReg</MudTd>
-                <MudTd DataLabel="Fech. Emisión">@context.FechaEmisiónRegistro</MudTd>
+                <MudTd DataLabel="No. Registro">@context.NumReg</MudTd>
+                <MudTd DataLabel="Fech. Emisión">@(string.Format("{0:dd/MM/yyyy}",context.FechaEmision))</MudTd>
+                <MudTd DataLabel="Fech. Expiración">@(string.Format("{0:dd/MM/yyyy}",context.FechaExpiracion))</MudTd>
                 <MudTd DataLabel="Medicamento">@context.Nombre</MudTd>
                 <MudTd DataLabel="Principio Activo">@context.Principio</MudTd>
                 <MudTd DataLabel="Forma Farmaceutica">@context.FormaFarmaceutica?.Nombre</MudTd>
@@ -169,7 +173,7 @@
                 @if (context.ShowDetails)
                 {
                     <MudTr>
-                        <td colspan="7">
+                        <td colspan="9">
 
                             <div style="background-color: #f2eefc;" _ngcontent-lil-c210="" class="py-4 d-flex ng-star-inserted">
 
@@ -233,7 +237,7 @@
                                             Concentración:
                                         </span>
                                         <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.Concentracion) ? @context.Concentracion : "<Ninguna")
+                                            @(!string.IsNullOrEmpty(context.Concentracion) ? context.Concentracion : "<Ninguna")
                                         </span>
                                     </div>
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
@@ -241,7 +245,7 @@
                                             Vía de Administración:
                                         </span>
                                         <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.Via) ? @context.Via : "<Ninguna>")
+                                           @(context.ViaAdministracion!=null ? context.ViaAdministracion?.Nombre : "<Ninguna>")
                                         </span>
                                     </div>
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
@@ -283,6 +287,7 @@
 
     private MudTable<AigMedicamento> table;
     private DateRange dateRange;
+    private DateRange expirationRange;
     private static IEnumerable<AigMedicamento> List { get; set; }
     private string searchString = null;
     protected MedicamentFilter modelFilter;
@@ -296,9 +301,12 @@
     protected async override Task OnInitializedAsync()
     {
         try
-        {
+        {  
+          
             modelFilter = new MedicamentFilter();
             dateRange = new DateRange();
+            expirationRange= new DateRange();
+
         }
         catch (Exception ex)
         {
@@ -307,22 +315,25 @@
 
         base.OnInitialized();
     }
+   
     private async Task<TableData<AigMedicamento>> DoFetchData(TableState state)
-    {  
+    {
         StateHasChanged();
         var sorting = new List<SortingOption>();
         var filters = new List<FilteringOption>();
-        if (state.SortDirection != SortDirection.None)
-        {
+        if (state.SortDirection != SortDirection.None){
             var sortDirection = state.SortDirection == SortDirection.Descending ? SortingDirection.DESC : SortingDirection.ASC;
             sorting = new() { new SortingOption { Field = state.SortLabel, Direction = sortDirection } };
         }
         if (!string.IsNullOrEmpty(modelFilter.Term))
             filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = modelFilter.Term });
-        if (modelFilter.StartDate != null && modelFilter.EndDate != null)
-        {
+        if (modelFilter.StartDate != null && modelFilter.EndDate != null){
             filters.Add(new FilteringOption { Field = "startDateOfIssue", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartDate.Value });
             filters.Add(new FilteringOption { Field = "endDateOfIssue", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndDate.Value });
+        }
+        if (modelFilter.StartExpirationDate != null && modelFilter.EndExpirationDate != null){
+            filters.Add(new FilteringOption { Field = "startExpirationDate", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartExpirationDate.Value });
+            filters.Add(new FilteringOption { Field = "endDateExpirationDate", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndExpirationDate.Value });
         }
         var args = new PageSearchArgs(){
             PageIndex = state.Page + 1,
@@ -334,11 +345,12 @@
         List = paginatedResult.Data;
         return new TableData<AigMedicamento>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
     }
-  
-    private void OnSearch()
+    private void  OnSearch()
     {
         modelFilter.StartDate = dateRange.Start;
         modelFilter.EndDate = dateRange.End;
+        modelFilter.StartExpirationDate = dateRange.Start;
+        modelFilter.EndExpirationDate = dateRange.End;
         table.ReloadServerData();
     }
     private void OnReset()
@@ -365,5 +377,6 @@
     {
         addEditDialogIsOpen = false;
     }
+
 
 }

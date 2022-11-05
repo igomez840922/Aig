@@ -14,6 +14,29 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "AigViaAdministracion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Estado = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModified = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AigViaAdministracion", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -37,6 +60,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FirstName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProfilePicture = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -100,7 +129,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Codigo = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Estado = table.Column<string>(type: "longtext", nullable: false)
@@ -147,7 +175,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Codigo = table.Column<int>(type: "int", nullable: false),
                     Iso = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Nombre = table.Column<string>(type: "longtext", nullable: false)
@@ -326,7 +353,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Codigo = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(600)", nullable: false),
                     Direccion = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Correo = table.Column<string>(type: "longtext", nullable: false)
@@ -359,28 +386,31 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     NumReg = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    NumRen = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Nombre = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Estado = table.Column<int>(type: "int", nullable: false),
+                    Presentacion = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Vigente = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     TipoEquivalencia = table.Column<int>(type: "int", nullable: false),
-                    FechaEmisiónRegistro = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     TipoMedicamento = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    FechaEmision = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CondicionVenta = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ExpiraciónRegistro = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    FechaExpiracion = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Principio = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Excipientes = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Concentracion = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Formafarmaceutica = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Via = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FormaFarmaceuticaId = table.Column<int>(type: "int", nullable: false),
-                    FabricanteId = table.Column<int>(type: "int", nullable: false),
+                    FormaFarmaceuticaId = table.Column<int>(type: "int", nullable: true),
+                    ViaAdministracionId = table.Column<int>(type: "int", nullable: true),
+                    FabricanteId = table.Column<int>(type: "int", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     CreatedBy = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -392,17 +422,20 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Medicamento", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Medicamento_AigViaAdministracion_ViaAdministracionId",
+                        column: x => x.ViaAdministracionId,
+                        principalTable: "AigViaAdministracion",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Medicamento_Fabricante_FabricanteId",
                         column: x => x.FabricanteId,
                         principalTable: "Fabricante",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Medicamento_FormaFarmaceutica_FormaFarmaceuticaId",
                         column: x => x.FormaFarmaceuticaId,
                         principalTable: "FormaFarmaceutica",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -475,6 +508,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
                 column: "FormaFarmaceuticaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Medicamento_ViaAdministracionId",
+                table: "Medicamento",
+                column: "ViaAdministracionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_ConsumedTime",
                 table: "PersistedGrants",
                 column: "ConsumedTime");
@@ -529,6 +567,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "AigViaAdministracion");
 
             migrationBuilder.DropTable(
                 name: "Fabricante");

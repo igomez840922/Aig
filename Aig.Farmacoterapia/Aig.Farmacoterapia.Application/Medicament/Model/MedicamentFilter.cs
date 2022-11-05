@@ -21,9 +21,14 @@ namespace Aig.Farmacoterapia.Application.Medicament.Model
         public MedicamentFilter():base() {
             StartDate = null;
             EndDate =null;
+            StartExpirationDate = null;
+            EndExpirationDate = null;
         }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public DateTime? StartExpirationDate { get; set; }
+        public DateTime? EndExpirationDate { get; set; }
+        
     }
     public class MedicamentPageSearch : BaseFilter
     {

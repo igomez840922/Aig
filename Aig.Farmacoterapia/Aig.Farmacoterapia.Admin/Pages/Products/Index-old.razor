@@ -365,9 +365,12 @@
 
             //}
 
-
-            //var repository=_unitOfWork.Repository<AigMedicamento>();
+            // var repository=_unitOfWork.Repository<AigMedicamento>();
+            //var repositoryF=_unitOfWork.Repository<AigFabricante>().GetAll();
+            //var repositoryFF=_unitOfWork.Repository<AigFormaFarmaceutica>().GetAll();
+            //var repositoryVA=_unitOfWork.Repository<AigViaAdministracion>().GetAll();
             //var list=mysql.EncaSolicituds.OrderBy(s=>s.CodigoSol).ToList();
+
             //foreach (var item in list)
             //{
             //    _systemLogger.Warn(item.CodigoSol);
@@ -378,33 +381,50 @@
             //    }
             //    var record = new AigMedicamento();
             //    var f = _unitOfWork.Repository<AigFabricante>().GetAll().FirstOrDefault(p => p.Nombre.Trim().ToLower() == item.FabricanteproductoSol.Trim().ToLower());
-            //    var ff = _unitOfWork.Repository<AigFormaFarmaceutica>().GetAll().FirstOrDefault(p => p.Nombre.Trim().ToLower() == item.FormafarmaceuticaSol.Trim().ToLower());
+            //    var ff = repositoryFF.FirstOrDefault(p => p.Nombre.Trim().ToLower() == item.FormafarmaceuticaSol.Trim().ToLower());
+            //    var va = repositoryVA.FirstOrDefault(p => item.ViaSol.Trim().ToLower().Contains(p.Nombre.Trim().ToLower()));
             //    if (ff != null)
             //        record.FormaFarmaceuticaId = ff.Id;
             //    else
             //    {
+            //        var FormafarmaceuticaSol = item.FormafarmaceuticaSol;
+            //        ;
+            //    }
+            //    if (va != null)
+            //        record.ViaAdministracionId = va.Id;
+            //    else
+            //    {
+            //        var ViaSol = item.ViaSol;
             //        ;
             //    }
 
             //    if (f != null)
             //        record.FabricanteId = f.Id;
+            //    else
+            //    {
+            //        ;
+            //    }
+
 
             //    record.NumReg = !string.IsNullOrEmpty(item.NumeroRegistroIn) ? item.NumeroRegistroIn : string.Empty;
-            //    record.FechaEmisiónRegistro = item.FechaSol != null ? item.FechaSol : null;
-            //    record.ExpiraciónRegistro = null;
-            //    record.Estado = TipoEstado.Authorised;
+            //    record.FechaEmision = item.FechaSol != null ? new DateTime(item.FechaSol.Value.Year, item.FechaSol.Value.Month, item.FechaSol.Value.Day) : null;
+            //    record.FechaExpiracion = item.FechaSol != null ? new DateTime(item.FechaSol.Value.Year + 5, item.FechaSol.Value.Month, item.FechaSol.Value.Day) : null; ;
+            //    record.Vigente = true;
             //    record.Nombre = item.ProductoSol;
+            //    record.VidaUtil = item.VidaUtil;
+            //    record.Envase = item.EnvaseSol;
+            //    record.Presentacion = item.ProductoSol;
             //    record.Principio = item.PrincipioSol;
             //    record.Excipientes = item.ExcipientesSol;
             //    record.Concentracion = item.ConcentracionSol;
-            //    record.Via = item.ViaSol;
             //    record.CondicionVenta = item.CondicionventaSol;
             //    record.TipoMedicamento = item.TipoMedicamentoSol;
             //    record.TipoEquivalencia = TipoEquivalencia.None;
 
             //    await repository.AddAsync(record);
-            //    await _unitOfWork.CommitAsync();
+
             //}
+            //await _unitOfWork.CommitAsync();
 
         }
         catch (Exception ex)
