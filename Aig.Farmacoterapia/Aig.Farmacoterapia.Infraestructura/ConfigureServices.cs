@@ -141,6 +141,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddTransient<IContryRepository, ContryRepository>()
                 .AddTransient<IPharmaceuticalRepository, PharmaceuticalRepository>()
                 .AddTransient<IMedicationRouteRepository, MedicationRouteRepository>()
+                .AddTransient<IMakerRepository, MakerRepository>()
                 .AddTransient<IUnitOfWork, UnitOfWork>();
         }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)

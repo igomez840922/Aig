@@ -1,4 +1,4 @@
-﻿@page "/medicationroute/list"
+﻿@page "/marker/list"
 @*@layout null*@
 @using Aig.Farmacoterapia.Admin.Components.Product
 @using Aig.Farmacoterapia.Admin.Models
@@ -12,7 +12,7 @@
 @attribute [Authorize]
 @inject IUnitOfWork _unitOfWork;
 @inject ISystemLogger _systemLogger;
-@inject IMedicationRouteRepository _repository;
+@inject IMakerRepository _repository;
 @inject IJSRuntime JS
 
 <div class="kt-portlet__head kt-portlet__head--lg">
@@ -27,7 +27,7 @@
             </svg>
         </span>
         <h3 class="kt-portlet__head-title">
-           Vías de administración
+            Fabricantes
         </h3>
     </div>
     <div class="kt-portlet__head-toolbar">
@@ -35,7 +35,7 @@
             <div class="kt-portlet__head-actions">
                 <a href="#" class="btn btn-outline-brand btn-square" @onclick="() => OnEdit(0)" data-toggle="modal" data-target="#modal_createedit">
                     <i class="la la-plus"></i>
-                    Nueva
+                    Nuevo
                 </a>
             </div>
         </div>
@@ -43,8 +43,6 @@
 </div>
 
 <div class="kt-portlet__body">
-
-
 
     <EditForm Model="this" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
 
@@ -77,20 +75,25 @@
     </EditForm>
 
  <div class="table-responsive">
-        <MudTable @ref="table" Striped="true"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigViaAdministracion>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
+        <MudTable @ref="table" Striped="true"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigFabricante>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
 
             <HeaderContent>
-                <MudTh style="width:200px;"><MudTableSortLabel Enabled="true" InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigViaAdministracion">Nombre</MudTableSortLabel></MudTh>
-                <MudTh style="width:10px;"><MudTableSortLabel T="AigViaAdministracion" SortLabel="status">Estado</MudTableSortLabel></MudTh>
-                <MudTh style="width:20px;">Creado</MudTh>
+                <MudTh style="width:150px;"><MudTableSortLabel  InitialDirection="SortDirection.Ascending"  T="AigFabricante" SortLabel="nombre">Nombre</MudTableSortLabel></MudTh>
+                <MudTh style="width:150px;">Dirección</MudTh>
+                <MudTh style="width:10px;">Correo</MudTh>
+                <MudTh style="width:20px;">País</MudTh>
+                <MudTh style="width:30px;">Creado</MudTh>
                 <MudTh style="width:20px;">Creado por</MudTh>
-                <MudTh style="width:20px;">Última modificación</MudTh>
+                <MudTh style="width:30px;">Última modificación</MudTh>
                 <MudTh style="width:20px;">Modificado por</MudTh>
                 <MudTh style="width:5px;"></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Nombre">@context.Nombre</MudTd>
-                <MudTd DataLabel="Estado">@context.Estado</MudTd>
+                <MudTd DataLabel="Dirección">@context.Direccion</MudTd>
+                <MudTd DataLabel="Correo">@context.Correo</MudTd>
+                <MudTd DataLabel="País">@(context.Pais!=null ? context.Pais.Nombre: "-")</MudTd>
+               
                 <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}",context.Created))</MudTd>
                 <MudTd DataLabel="Creado por">@context.CreatedBy</MudTd>
                 <MudTd DataLabel="Última modificación">@(context.LastModified!=null ?string.Format("{0:dd/MM/yyyy}",context.LastModified) : "-")</MudTd>
@@ -134,8 +137,8 @@
 
 @code {
 
-    private MudTable<AigViaAdministracion> table;
-    private static IEnumerable<AigViaAdministracion> List { get; set; }
+    private MudTable<AigFabricante> table;
+    private static IEnumerable<AigFabricante> List { get; set; }
     private string searchString;
     protected ProductObject modelData;
     protected bool addEditDialogIsOpen = false;
@@ -153,7 +156,7 @@
 
         base.OnInitialized();
     }
-    private async Task<TableData<AigViaAdministracion>> DoFetchData(TableState state)
+    private async Task<TableData<AigFabricante>> DoFetchData(TableState state)
     {   
         StateHasChanged();
         var sorting = new List<SortingOption>();
@@ -174,7 +177,7 @@
         };
         var paginatedResult = await _repository.ListAsync(args);
         List = paginatedResult.Data;
-        return new TableData<AigViaAdministracion>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
+        return new TableData<AigFabricante>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
     }
     private void OnSearch(string text)
     {

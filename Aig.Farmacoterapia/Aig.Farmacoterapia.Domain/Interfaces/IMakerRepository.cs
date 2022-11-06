@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Aig.Farmacoterapia.Domain.Interfaces
 {
-    public interface IContryRepository
+    public interface IMakerRepository
     {
-        Task<PaginatedResult<AigPais>> ListAsync(PageSearchArgs args);
+        Task<PaginatedResult<AigFabricante>> ListAsync(PageSearchArgs args);
     }
 }

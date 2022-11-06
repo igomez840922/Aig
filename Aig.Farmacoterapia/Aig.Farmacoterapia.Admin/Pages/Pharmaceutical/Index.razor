@@ -44,8 +44,6 @@
 
 <div class="kt-portlet__body">
 
-
-
     <EditForm Model="this" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
 
         <div class="row kt-margin-b-20">
@@ -83,14 +81,18 @@
                 <MudTh style="width:200px;"><MudTableSortLabel Enabled="true" InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigFormaFarmaceutica">Nombre</MudTableSortLabel></MudTh>
                 <MudTh style="width:10px;"><MudTableSortLabel T="AigFormaFarmaceutica" SortLabel="status">Estado</MudTableSortLabel></MudTh>
                 <MudTh style="width:20px;">Creado</MudTh>
-                <MudTh style="width:20px;">Modificado</MudTh>
+                <MudTh style="width:20px;">Creado por</MudTh>
+                <MudTh style="width:20px;">Última modificación</MudTh>
+                <MudTh style="width:20px;">Modificado por</MudTh>
                 <MudTh style="width:5px;"></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Nombre">@context.Nombre</MudTd>
                 <MudTd DataLabel="Estado">@context.Estado</MudTd>
-                <MudTd DataLabel="Creado">@context.Created</MudTd>
-                <MudTd DataLabel="Última modificación">@(context.LastModified!=null ? context.LastModified : "-")</MudTd>
+                <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}",context.Created))</MudTd>
+                <MudTd DataLabel="Creado por">@context.CreatedBy</MudTd>
+                <MudTd DataLabel="Última modificación">@(context.LastModified!=null ?string.Format("{0:dd/MM/yyyy}",context.LastModified) : "-")</MudTd>
+                <MudTd DataLabel="Modificado por">@(context.LastModifiedBy!=null ? context.LastModifiedBy : "-")</MudTd>
                 <MudTd>
                     <span class="dropdown">
                         <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">

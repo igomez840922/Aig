@@ -12,23 +12,23 @@ using Aig.Farmacoterapia.Infrastructure.Extensions;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
 {
-    public class ContryRepository : IContryRepository
+    public class MakerRepository : IMakerRepository
     {
-        private readonly IRepositoryAsync<AigPais> _repository;
+        private readonly IRepositoryAsync<AigFabricante> _repository;
         private readonly ISystemLogger _logger;
-        public ContryRepository(IRepositoryAsync<AigPais> repository, ISystemLogger logger)
+        public MakerRepository(IRepositoryAsync<AigFabricante> repository, ISystemLogger logger)
         {
             _repository = repository;
             _logger = logger;
         }
-        public async Task<PaginatedResult<AigPais>> ListAsync(PageSearchArgs args)
+        public async Task<PaginatedResult<AigFabricante>> ListAsync(PageSearchArgs args)
         {
             if (args == null) throw new Exception();
-            var result = new PaginatedResult<AigPais>(new List<AigPais>());
+            var result = new PaginatedResult<AigFabricante>(new List<AigFabricante>());
             try
             {
-                var orderByList = new List<Tuple<SortingOption, Expression<Func<AigPais, object>>>>();
-                var filterList = new List<Expression<Func<AigPais, bool>>>();
+                var orderByList = new List<Tuple<SortingOption, Expression<Func<AigFabricante, object>>>>();
+                var filterList = new List<Expression<Func<AigFabricante, bool>>>();
 
                 if (args.SortingOptions != null)
                 {
@@ -36,9 +36,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                     {
                         switch (sortingOption.Field)
                         {
-                            case "iso":
-                                orderByList.Add(new(sortingOption, c => c.Iso));
-                                break;
                             case "name":
                                 orderByList.Add(new(sortingOption, c => c.Nombre));
                                 break;
@@ -53,7 +50,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                         {
                             case "term":
                                 {
-                                    Expression<Func<AigPais, bool>> expression = f => f.Nombre.Contains((string)filteringOption.Value);
+                                    Expression<Func<AigFabricante, bool>> expression = f => f.Nombre.Contains((string)filteringOption.Value);
                                     filterList.Add(expression);
                                 }
                                 break;
@@ -64,7 +61,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 if (orderByList.Count == 0)
                     orderByList.Add(new(new() { Direction = SortingDirection.ASC }, c => c.Created));
 
-                var filterSpec = new ContrySpecification(filterList);
+                var filterSpec = new MakerSpecification(filterList);
                 result = await _repository.Entities
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
