@@ -106,7 +106,7 @@
                             </span>
                         </button>
                         &nbsp;&nbsp;
-                        <button @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
+                        <button  type="button" @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
                             <span>
                                 <i class="la la-close"></i>
                                 <span>Eliminar</span>
@@ -280,7 +280,7 @@
 
 @if (addEditDialogIsOpen)
 {
-    <ProductAddEdit ModelData="@modelData" OnClose="@OnEventAddEditClose"></ProductAddEdit>
+    <AddEdit ModelData="@modelData" OnClose="@OnEventAddEditClose"></AddEdit>
 }
 
 @code {
@@ -291,9 +291,9 @@
     private static IEnumerable<AigMedicamento> List { get; set; }
     private string searchString = null;
     protected MedicamentFilter modelFilter;
-    protected ProductObject modelData;
+    protected AigMedicamento modelData;
     protected bool addEditDialogIsOpen = false;
-    private void ShowBtnPress(int nr)
+    private void ShowBtnPress(long nr)
     {
         AigMedicamento tmpPerson = List.First(f => f.Id == nr);
         tmpPerson.ShowDetails = !tmpPerson.ShowDetails;
@@ -362,13 +362,11 @@
 
     private async Task OnEdit(long id)
     {
-        //var result = await MainService.Get(id);
-        //if (result == null)
-        //{
-        //    result = new CurrencyFiatTB();
-        //}
+         var result = await _unitOfWork.Repository<AigMedicamento>().GetByIdAsync(id);
+        if (result == null)
+            result = new AigMedicamento();
 
-        modelData = new ProductObject();
+        modelData = result;
         addEditDialogIsOpen = true;
         StateHasChanged();
     }

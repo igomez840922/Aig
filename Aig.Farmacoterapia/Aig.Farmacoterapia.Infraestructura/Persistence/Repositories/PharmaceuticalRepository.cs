@@ -38,6 +38,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                     {
                         switch (sortingOption.Field)
                         {
+                            case "created":
+                                orderByList.Add(new(sortingOption, c => c.Created));
+                             break;
+                            case "modified":
+                                orderByList.Add(new(sortingOption, c => c.LastModified));
+                                break;
                             case "name":
                                 orderByList.Add(new(sortingOption, c => c.Nombre));
                                 break;

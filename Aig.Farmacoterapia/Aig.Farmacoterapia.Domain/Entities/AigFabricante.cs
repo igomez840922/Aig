@@ -14,7 +14,7 @@ namespace Aig.Farmacoterapia.Domain.Entities
         public string Direccion { get; set; }
         public string Correo { get; set; }
         [JsonIgnore]
-        public int PaisId { get; set; }
+        public long PaisId { get; set; }
         public virtual AigPais Pais { get; set; }
         [JsonIgnore]
         public virtual ICollection<AigMedicamento> Medicamentos { get; set; }

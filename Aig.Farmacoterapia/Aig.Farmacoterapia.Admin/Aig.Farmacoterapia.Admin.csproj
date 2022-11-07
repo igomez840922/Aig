@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Components\Product\ProductAddEdit.razor" />
+    <None Include="Components\Product\-AddEdit.razor" />
     <None Include="wwwroot\assets\js\jquery-bootpag\jquery.bootpag.js" />
     <None Include="wwwroot\assets\js\jquery-bootpag\jquery.bootpag.min.js" />
     <None Include="wwwroot\assets\js\jquery-bootpag\README.md" />

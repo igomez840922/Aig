@@ -136,13 +136,13 @@ namespace Aig.Farmacoterapia.Infrastructure
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services
-                .AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
-                .AddTransient<IMedicamentRepository, MedicamentRepository>()
-                .AddTransient<IContryRepository, ContryRepository>()
-                .AddTransient<IPharmaceuticalRepository, PharmaceuticalRepository>()
-                .AddTransient<IMedicationRouteRepository, MedicationRouteRepository>()
-                .AddTransient<IMakerRepository, MakerRepository>()
-                .AddTransient<IUnitOfWork, UnitOfWork>();
+                .AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
+                .AddScoped<IMedicamentRepository, MedicamentRepository>()
+                .AddScoped<IContryRepository, ContryRepository>()
+                .AddScoped<IPharmaceuticalRepository, PharmaceuticalRepository>()
+                .AddScoped<IMedicationRouteRepository, MedicationRouteRepository>()
+                .AddScoped<IMakerRepository, MakerRepository>()
+                .AddScoped<IUnitOfWork, UnitOfWork>();
         }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {

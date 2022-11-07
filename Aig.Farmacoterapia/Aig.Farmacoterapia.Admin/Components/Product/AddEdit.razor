@@ -1,0 +1,230 @@
+﻿@inject IJSRuntime JsRuntime
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Interfaces
+@inject IUnitOfWork _unitOfWork;
+@using MudBlazor
+@using System.Globalization
+
+<div class="modal show fade" style="display:block;overflow-y:auto!important;" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">@(ModelData.Id > 0? "Editar" :"Nuevo")</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="@Cancel">
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="kt-portlet" style="margin-bottom:0px !important;">
+
+                    <EditForm Model="@ModelData" OnValidSubmit="SaveData" class="kt-form kt-form--label-right">
+                        <DataAnnotationsValidator />
+
+                        <div class="kt-portlet__body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div>
+                                                <label>Registro Sanitario</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.NumReg" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.NumReg) /></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div>
+                                                <label>Revisiones</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.NumRen" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.NumRen) /></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label>Medicamento</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.Nombre" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Nombre) /></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-3">
+                                            <div>
+                                                <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de emisión" @bind-Date="ModelData.FechaEmision" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.FechaEmision) /></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div>
+                                                <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de expiración" @bind-Date="ModelData.FechaExpiracion" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.FechaExpiracion) /></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-3">
+                                            <div>
+                                               <label>Tipo</label>
+                                                <MudSelect Margin="Margin.Dense" T="string" Label="" Variant="Variant.Outlined">
+                                                    <MudSelectItem Value="@("Intercambiable")" />
+                                                    <MudSelectItem Value="@("De referencia")" />
+                                                    <MudSelectItem Value="@("Medicamento")" />
+                                                </MudSelect>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div>
+                                               <label>Clasificación</label>
+                                                <MudSelect Margin="Margin.Dense" T="string" Label="" Variant="Variant.Outlined">
+                                                    <MudSelectItem Value="@("Radiofármacos")" />
+                                                    <MudSelectItem Value="@("Huérfanos")" />
+                                                    <MudSelectItem Value="@("Homeopáticos")" />
+                                                    <MudSelectItem Value="@("Fitofármacos")" />
+                                                    <MudSelectItem Value="@("Biotecnológicos")" />
+                                                    <MudSelectItem Value="@("Biotecnológicos")" />
+                                                </MudSelect>
+                                            </div>
+                                        </div>
+                                         <div class="col-lg-4">
+                                            <div>
+                                               <label>Clasificación</label>
+                                                <MudSelect Margin="Margin.Dense" T="string" Label="" Variant="Variant.Outlined">
+                                                    <MudSelectItem Value="@("Con Prescripción Médica")" />
+                                                    <MudSelectItem Value="@("Uso Hospitalario Exclusivo")" />
+                                                    <MudSelectItem Value="@("Venta Popular")" />
+                                                </MudSelect>
+                                            </div>
+                                        </div>
+
+                                    </div>
+      
+                                      <div class="row" style="margin-top:10px">
+
+                                        <div class="col-lg-3">
+                                            <div>
+                                                 <label>Vida útil </label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.VidaUtil" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.VidaUtil) /></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div>
+                                                 <label>Concentración</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.Concentracion" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Concentracion) /></p>
+                                            </div>
+                                        </div>
+
+                                       
+                                    </div>
+
+                                     <div class="row" style="margin-top:5px">
+
+                                          <div class="col-lg-3">
+                                            <div>
+                                                <MudCheckBox Style="font-size: 11px;" class="checkBox" @bind-Checked="ModelData.Vigente" Label="Vigente" Color="Color.Primary"></MudCheckBox>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+
+
+                                    <hr />
+                                     <div class="row">
+
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <label>Principios Activos</label>
+                                                <textarea rows="4" id="active_principles" class="form-control" @bind="ModelData.Principio" @bind:event="oninput" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Principio) /></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <label>Excipientes</label>
+                                                <textarea rows="4" id="excipientes" class="form-control" @bind="ModelData.Excipientes" @bind:event="oninput" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Excipientes) /></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <div class="row">
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <label>Descripción del Envase</label>
+                                                <textarea rows="4" id="active_principles" class="form-control" @bind="ModelData.Envase" @bind:event="oninput" />
+                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Envase) /></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="kt-portlet__foot" style="padding:10px!important">
+                            <div class="kt-form__actions text-right">
+
+                                <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+                                <button type="submit" class="btn btn-primary btn-square">Save</button>
+
+                            </div>
+                        </div>
+                    </EditForm>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop fade show"></div>
+
+
+@code {
+    DateTime? date = DateTime.Today;
+    [Parameter] public EventCallback<long> OnClose { get; set; }
+    [Parameter] public AigMedicamento ModelData { get; set; }
+    bool status;
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
+
+    private Task Cancel()
+    {
+        return OnClose.InvokeAsync(0);
+    }
+
+    protected async Task SaveData()
+    {
+
+        AigMedicamento result;
+        if (ModelData.Id > 0)
+            result = await _unitOfWork.Repository<AigMedicamento>().UpdateAsync(ModelData);
+        else
+            result = await _unitOfWork.Repository<AigMedicamento>().AddAsync(ModelData);
+        if (_unitOfWork.Commit())
+        {
+            ModelData = result;
+            await JsRuntime.InvokeVoidAsync("ShowMessage", "El elemento ha sido creado correctamente");
+            await OnClose.InvokeAsync(result.Id);
+        }
+        else
+            await JsRuntime.InvokeVoidAsync("ShowError", "Error durante la operación");
+    }
+}

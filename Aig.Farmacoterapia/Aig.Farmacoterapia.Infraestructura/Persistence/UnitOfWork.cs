@@ -60,9 +60,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence
             var commit = false;
             try
             {
-                commit= await _context.SaveChangesAsync(cancellationToken)>0;
+                await _context.SaveChangesAsync(cancellationToken);
                 if (_transaction != null)
                     await _transaction.CommitAsync(cancellationToken);
+                commit = true;
             }
             catch (Exception exc)
             {

@@ -38,7 +38,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
             return  _dbContext.Set<T>().AsQueryable();
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(long id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
@@ -53,11 +53,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             var exist = _dbContext.Set<T>().Find(entity.Id);
             _dbContext.Entry(exist).CurrentValues.SetValues(entity);
-            return Task.CompletedTask;
+            return entity;
         }
     }
 }

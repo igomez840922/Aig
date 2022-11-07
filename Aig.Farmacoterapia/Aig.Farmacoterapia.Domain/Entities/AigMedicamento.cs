@@ -21,21 +21,21 @@ namespace Aig.Farmacoterapia.Domain.Entities
         public TipoEquivalencia TipoEquivalencia { get; set; }
         public string TipoMedicamento { get; set; }
         [JsonIgnore]
-        public DateTime? FechaEmision { get; set; }
+        public DateTime? FechaEmision { get; set; } = DateTime.Today;
         public string CondicionVenta { get; set; }
         [JsonIgnore]
-        public DateTime? FechaExpiracion{ get; set; }
+        public DateTime? FechaExpiracion{ get; set; } = DateTime.Today;
         public string Principio { get; set; }
         public string Excipientes{ get; set; }
         public string Concentracion { get; set; }
         [JsonIgnore]
-        public int? FormaFarmaceuticaId { get; set; }
+        public long? FormaFarmaceuticaId { get; set; }
         public virtual AigFormaFarmaceutica? FormaFarmaceutica { get; set; }
         [JsonIgnore]
-        public int? ViaAdministracionId { get; set; }
+        public long? ViaAdministracionId { get; set; }
         public virtual AigViaAdministracion? ViaAdministracion { get; set; }
         [JsonIgnore]
-        public int? FabricanteId { get; set; }
+        public long? FabricanteId { get; set; }
         public virtual AigFabricante? Fabricante { get; set; }
         public bool ShowDetails { get; set; } = false;
     }

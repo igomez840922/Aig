@@ -10,14 +10,14 @@ namespace Aig.Farmacoterapia.Domain.Interfaces
     {
         IQueryable<T> Entities { get; }
 
-        Task<T?> GetByIdAsync(int id);
+        Task<T?> GetByIdAsync(long id);
         IQueryable<T> GetAll();
 
         Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize);
 
         Task<T> AddAsync(T entity);
 
-        Task UpdateAsync(T entity);
+        Task<T> UpdateAsync(T entity);
 
         Task DeleteAsync(T entity);
     }
