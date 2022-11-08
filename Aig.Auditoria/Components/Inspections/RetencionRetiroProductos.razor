@@ -24,6 +24,9 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
                         </li>
+                       @* <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#signature" role="tab" @onclick="(e)=>{ updateSignatureControls();}">@languageContainerService.Keys["Signature"]</a>
+                        </li>*@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="generalInfo" role="tabpanel">
@@ -224,17 +227,29 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="row clearfix">
+                            <div class="col-sm-4">
+                            <label>@languageContainerService.Keys["RegNum"]</label>
+                            <div class="form-group">
+                            <div class="form-line">
+                            <InputText class="form-control" @bind-Value="Inspeccion.NumRegDNFD1" />
+                            <ValidationMessage For=@(() => Inspeccion.NumRegDNFD1) />
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+
+                              <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <label>@languageContainerService.Keys["SignatureBytheMinistryofHealth"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD"
-                                                          OnSignatureChange="OnSignatureDNFDChange"
-                                                 MinHeight="200" MaxHeight="200" BackgroundColor="#FFFFFF">
+                                            <SignaturePad @ref="signaturePadDNFD1" OnSignatureChange="OnSignatureDNFDChange1"
+                                                 MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
                                                 <SignaturePadFooter>
                                                     <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg">@languageContainerService.Keys["Clear"]</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg1">@languageContainerService.Keys["Clear"]</button>
                                                     </SignaturePadClear>
                                                 </SignaturePadFooter>
                                             </SignaturePad>
@@ -245,12 +260,11 @@
                                     <label>@languageContainerService.Keys["SignatureBytheEstablishment"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <SignaturePad @ref="signaturePadESTAB"
-                                                          OnSignatureChange="OnSignatureESTABChange"
-                                                          MinHeight="200" MaxHeight="200" BackgroundColor="#FFFFFF">
+                                            <SignaturePad @ref="signaturePadESTAB1" OnSignatureChange="OnSignatureESTABChange1"
+                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
                                                 <SignaturePadFooter>
                                                     <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureESTABImg">@languageContainerService.Keys["Clear"]</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureESTABImg1">@languageContainerService.Keys["Clear"]</button>
                                                     </SignaturePadClear>
                                                 </SignaturePadFooter>
                                             </SignaturePad>
@@ -259,16 +273,154 @@
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-4">
-                                    <label>@languageContainerService.Keys["RegNum"]</label>
+                                <div class="col-sm-6">
+                                    <label>&emsp;</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.NumRegDNFD1" />
-                                            <ValidationMessage For=@(() => Inspeccion.NumRegDNFD1) />
+                                            <SignaturePad @ref="signaturePadDNFD2" OnSignatureChange="OnSignatureDNFDChange2"
+                                                 MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                <SignaturePadFooter>
+                                                    <SignaturePadClear>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg2">@languageContainerService.Keys["Clear"]</button>
+                                                    </SignaturePadClear>
+                                                </SignaturePadFooter>
+                                            </SignaturePad>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>&emsp;</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <SignaturePad @ref="signaturePadESTAB2" OnSignatureChange="OnSignatureESTABChange2"
+                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                <SignaturePadFooter>
+                                                    <SignaturePadClear>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureESTABImg2">@languageContainerService.Keys["Clear"]</button>
+                                                    </SignaturePadClear>
+                                                </SignaturePadFooter>
+                                            </SignaturePad>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>&emsp;</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <SignaturePad @ref="signaturePadDNFD3" OnSignatureChange="OnSignatureDNFDChange3"
+                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                <SignaturePadFooter>
+                                                    <SignaturePadClear>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg3">@languageContainerService.Keys["Clear"]</button>
+                                                    </SignaturePadClear>
+                                                </SignaturePadFooter>
+                                            </SignaturePad>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>&emsp;</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <SignaturePad @ref="signaturePadDNFD4" OnSignatureChange="OnSignatureDNFDChange4"
+                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                <SignaturePadFooter>
+                                                    <SignaturePadClear>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg4">@languageContainerService.Keys["Clear"]</button>
+                                                    </SignaturePadClear>
+                                                </SignaturePadFooter>
+                                            </SignaturePad>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>&emsp;</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <SignaturePad @ref="signaturePadDNFD5" OnSignatureChange="OnSignatureDNFDChange5"
+                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                <SignaturePadFooter>
+                                                    <SignaturePadClear>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg5">@languageContainerService.Keys["Clear"]</button>
+                                                    </SignaturePadClear>
+                                                </SignaturePadFooter>
+                                            </SignaturePad>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>&emsp;</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <SignaturePad @ref="signaturePadDNFD6" OnSignatureChange="OnSignatureDNFDChange6"
+                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                <SignaturePadFooter>
+                                                    <SignaturePadClear>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg6">@languageContainerService.Keys["Clear"]</button>
+                                                    </SignaturePadClear>
+                                                </SignaturePadFooter>
+                                            </SignaturePad>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>&emsp;</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <SignaturePad @ref="signaturePadDNFD7" OnSignatureChange="OnSignatureDNFDChange7"
+                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                <SignaturePadFooter>
+                                                    <SignaturePadClear>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg7">@languageContainerService.Keys["Clear"]</button>
+                                                    </SignaturePadClear>
+                                                </SignaturePadFooter>
+                                            </SignaturePad>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>&emsp;</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <SignaturePad @ref="signaturePadDNFD8" OnSignatureChange="OnSignatureDNFDChange8"
+                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                <SignaturePadFooter>
+                                                    <SignaturePadClear>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg8">@languageContainerService.Keys["Clear"]</button>
+                                                    </SignaturePadClear>
+                                                </SignaturePadFooter>
+                                            </SignaturePad>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+
+                            
                         </div>
                         <div class="tab-pane" id="products" role="tabpanel">
                             <h4>@languageContainerService.Keys["Products"]</h4>
@@ -383,9 +535,14 @@
                             </div>
 
                         </div>
+                       @* <div class="tab-pane" id="signature" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Signature"]</h4>
+
+                          
+                        </div>*@
                     </div>
 
-                    <br>
+                    <br><br>
                     <div class="modal-footer">
 
                         @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){

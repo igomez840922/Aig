@@ -129,16 +129,7 @@ namespace DataModel.Helper
 		Cerrado = 2,
 	}
 
-	public enum enumAUD_TipoInspeccion
-	{
-		[Description("Ninguna")]
-		None = 0,
-		[Description("Apertura")]
-        Apertura = 1,
-		[Description("Cambio de Ubicación")]
-        CambioUbicacion = 2,
-	}
-
+	
 	public enum enumAUD_TipoSeleccion
 	{
 		[Description("N/A")]

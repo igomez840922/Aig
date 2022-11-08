@@ -27,6 +27,8 @@ namespace Aig.FarmacoVigilancia.Pages.Alert
 
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
+        [Inject]
+        IPdfGenerationService pdfGenerationService { get; set; }
 
         GenericModel<FMV_AlertaTB> dataModel { get; set; } = new GenericModel<FMV_AlertaTB>()
         { Data = new FMV_AlertaTB() };
@@ -169,6 +171,21 @@ namespace Aig.FarmacoVigilancia.Pages.Alert
             {
                 await blazorDownloadFileService.DownloadFile("ALERTA_SEGURIDAD.xlsx", stream, "application/actet-stream");
             }
+        }
+
+        private async Task DownloadPdf(long Id)
+        {
+            Stream stream = await pdfGenerationService.GenerateAlertPDF(Id);
+
+            if (stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("ALERTA_SEGURIDAD.pdf", stream, "application/actet-stream");
+            }
+
+            //if (stream != null)
+            //{
+            //    await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "inspeccion.pdf", stream);
+            //}
         }
 
     }

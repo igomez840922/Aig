@@ -258,7 +258,7 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["RecordStatus"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.EstatusRecepcion" class="form-control">
+                                            <InputSelect @bind-Value="Ips.EstatusRegistro" class="form-control">
                                                 @foreach (enumFMV_IpsStatusRegistro dt in Enum.GetValues(typeof(enumFMV_IpsStatusRegistro)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -396,7 +396,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="password">@languageContainerService.Keys["Monographs"]</label>
+                                        <label for="password">@languageContainerService.Keys["Monographs"]/@languageContainerService.Keys["Inserto"]</label>
                                         <div class="form-group">
                                             <InputSelect @bind-Value="Ips.IpsData.Monografia" class="form-control">
                                                 @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))

@@ -130,13 +130,30 @@ namespace DataModel
         private string firmaRepresentanteLegal;
         public string FirmaRepresentanteLegal { get => firmaRepresentanteLegal; set => SetProperty(ref firmaRepresentanteLegal, value); }
 
-        //fecha y Hora de finalizacion
-        private DateTime fechaFinalizacion;
-        public DateTime FechaFinalizacion { get => fechaFinalizacion; set => SetProperty(ref fechaFinalizacion, value); }
+        //nombre representante legal
+        private string nombreRegente;
+        [StringLength(250)]
+        public string NombreRegente { get => nombreRegente; set => SetProperty(ref nombreRegente, value); }
 
-        // El establecimiento se compromete al fiel cumplimiento del Artículo 639 del Decreto Ejecutivo 115 De 16 de agosto de 2022. Firma de Regente Farmacéutico:
+        //cedula representante legal
+        private string cedulaRegente;
+        [StringLength(250)]
+        public string CedulaRegente { get => cedulaRegente; set => SetProperty(ref cedulaRegente, value); }
+
+        //registro representante legal
+        private string registroRegente;
+        [StringLength(250)]
+        public string RegistroRegente { get => registroRegente; set => SetProperty(ref registroRegente, value); }
+
+        //firma representante legal
         private string firmaRegente;
         public string FirmaRegente { get => firmaRegente; set => SetProperty(ref firmaRegente, value); }
+
+        //fecha y Hora de finalizacion
+        private DateTime? fechaFinalizacion;
+        public DateTime? FechaFinalizacion { get => fechaFinalizacion; set => SetProperty(ref fechaFinalizacion, value); }
+
+       
 
     }
 }

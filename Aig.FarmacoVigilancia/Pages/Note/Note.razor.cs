@@ -28,6 +28,9 @@ namespace Aig.FarmacoVigilancia.Pages.Note
 
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
+        [Inject]
+        IPdfGenerationService pdfGenerationService { get; set; }
+
 
         GenericModel<FMV_NotaTB> dataModel { get; set; } = new GenericModel<FMV_NotaTB>()
         { Data = new FMV_NotaTB() };
@@ -172,6 +175,21 @@ namespace Aig.FarmacoVigilancia.Pages.Note
             {
                 await blazorDownloadFileService.DownloadFile("NOTA_SEGURIDAD.xlsx", stream, "application/actet-stream");
             }
+        }
+
+        private async Task DownloadPdf(long Id)
+        {
+            Stream stream = await pdfGenerationService.GenerateNotePDF(Id);
+
+            if (stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("NOTA_SEGURIDAD.pdf", stream, "application/actet-stream");
+            }
+
+            //if (stream != null)
+            //{
+            //    await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "inspeccion.pdf", stream);
+            //}
         }
 
     }

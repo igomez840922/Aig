@@ -11,13 +11,13 @@ namespace DataModel
 {
     public class AUD_InspRetiroRetencionTB:SystemId
     {
-        //nombre del producto
+       
         private string seccionOficinaRegional;
         [StringLength(250)]
         public string SeccionOficinaRegional { get => seccionOficinaRegional; set => SetProperty(ref seccionOficinaRegional, value); }
 
         
-        //nombre del producto
+        //tipo de retención
         private enum_InspRetiroRetencionType retiroRetencionType;
         public enum_InspRetiroRetencionType RetiroRetencionType { get => retiroRetencionType; set => SetProperty(ref retiroRetencionType, value); }
 

@@ -1,0 +1,1760 @@
+﻿@using DataModel.Helper;
+
+<div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModal">@(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))</h5>
+                <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <EditForm Model="@Inspeccion" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+                    <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#applicantInfo" role="tab">@languageContainerService.Keys["ApplicantInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#regentInfo" role="tab">@languageContainerService.Keys["RegentInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#pharmacyOrganizationalStructure" role="tab">@languageContainerService.Keys["PharmacyOrganizationalStructure"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#pharmacyInfrastructure" role="tab">@languageContainerService.Keys["PharmacyInfrastructure"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#pharmacyPhysicalArea" role="tab">@languageContainerService.Keys["PharmacyPhysicalArea"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#questions" role="tab">@languageContainerService.Keys["Questions"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#controlledProductsArea" role="tab">@languageContainerService.Keys["ControlledProductsArea"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#medicationStorageArea" role="tab">@languageContainerService.Keys["MedicationStorageArea"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#conclusionInfo" role="tab">@languageContainerService.Keys["ConclusionInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#inspectorsApprovals" role="tab">@languageContainerService.Keys["InspectorsAndApprovals"]</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="generalInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["StartDate"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputDate class="form-control" @bind-Value="Inspeccion.FechaInicio" />
+                                            <ValidationMessage For=@(() => Inspeccion.FechaInicio) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Status"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
+                                                @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
+                                                {
+                                                    if (dt != enum_StatusInspecciones.None)
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.StatusInspecciones) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Establishments"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect class="form-control"
+                                                         ValueExpression="@(() => Inspeccion.EstablecimientoId)"
+                                                         Value="@Inspeccion.EstablecimientoId"
+                                                         ValueChanged="@((long? value) => OnEstablishmentChange(value))">
+                                                @if (lEstablecimientos != null)
+                                                {
+                                                    foreach (var dt in lEstablecimientos)
+                                                    {
+                                                        <option value="@dt.Id">@dt.Nombre</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Location"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.UbicacionEstablecimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.UbicacionEstablecimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["PhoneNumber"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.TelefonoEstablecimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.TelefonoEstablecimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                        <div class="tab-pane" id="applicantInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["ApplicantInfo"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Nationality"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect class="form-control" @bind-Value="@Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Nacionalidad">
+                                                <option value=""></option>
+                                                @if (lPaises != null)
+                                                {
+                                                    foreach (var dt in lPaises)
+                                                    {
+                                                        <option value="@dt.Nombre">@dt.Nombre</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Nacionalidad) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Identification"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Cedula) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["TelefonoMovil"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosSolicitante.TelefonoMovil" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.TelefonoMovil) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["TelefonoOfic"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosSolicitante.TelefonoOfic" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.TelefonoOfic) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["TelefonoResid"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosSolicitante.TelefonoResid" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.TelefonoResid) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Email"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Email" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Email) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Profesion"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Profesion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Profesion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Address"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Direccion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Direccion) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                           
+                            
+                        </div>
+                        <div class="tab-pane" id="regentInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["RegentInfo"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Número de Registro de Idoneidad"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.NumregistroIdoneidad" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.NumregistroIdoneidad) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Cédula"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.Cedula) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["TelefonoMovil"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.TelefonoMovil" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.TelefonoMovil) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["TelefonoOfic"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.TelefonoOfic" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.TelefonoOfic) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["TelefonoResid"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.TelefonoResid" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.TelefonoResid) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Email"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.Email" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.Email) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Address"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.Ubicacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.Ubicacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="pharmacyOrganizationalStructure" role="tabpanel">
+                            <h4>@languageContainerService.Keys["PharmacyOrganizationalStructure"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Dispone de su letrero de Identificación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.LetreroIdentificacion" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.LetreroIdentificacion) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Horario de Operación coincide con lo señalado en la solicitud de licencia de operación?"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.HorarioOpeIgualSolic" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.HorarioOpeIgualSolic) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["El establecimiento utilizará plataformas tecnológicas para la comercialización de medicamentos de venta sin prescripción médica y otros productos?"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.UtilizaPlatafComercial" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.UtilizaPlatafComercial) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Horario de Atención"]</label>
+                                    <!--begin::Section-->
+                                    <div class="kt-section">
+                                        <div class="table-responsive">
+                                            <table class="table rounded table-striped">
+                                                <thead class=thead-light>
+                                                    <tr>
+                                                        <th>@languageContainerService.Keys["Days"]</th>
+                                                        <th>@languageContainerService.Keys["Time"]</th>
+                                                        <th>
+                                                            <button type="button" @onclick="(e)=>{OpenHour();}"
+                                                                    class="btn btn-sm btn-outline-primary waves-effect">
+                                                                @languageContainerService.Keys["Add"]
+                                                            </button>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Inspeccion != null && Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.HorariosAtencion != null)
+                                                    {
+                                                        @foreach (var dt in Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.HorariosAtencion)
+                                                        {
+                                                            <tr>
+                                                                <td scope="row">@dt.Dias</td>
+                                                                <td>@dt.Horarios</td>
+                                                                <td style="text-align:right">
+                                                                    @if (Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending)
+                                                                    {
+                                                                        <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveHour(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                                    }
+                                                                    <!-- /btn-group -->
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["SignatureRegente"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <SignaturePad @ref="signaturePad1" OnSignatureChange="OnSignatureChange1"
+                                                              MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
+                                                    <SignaturePadFooter>
+                                                        <SignaturePadClear>
+                                                            <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg1">@languageContainerService.Keys["Clear"]</button>
+                                                        </SignaturePadClear>
+                                                    </SignaturePadFooter>
+                                                </SignaturePad>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="pharmacyPhysicalArea" role="tabpanel">
+                            <h4>@languageContainerService.Keys["PharmacyPhysicalArea"]</h4>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Iluminación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.PresentaIluminacion" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.PresentaIluminacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.PresentaIluminacionDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.PresentaIluminacionDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Mobiliario para Medicamentos"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.MobiliarioMedicamentos" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.MobiliarioMedicamentos) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.MobiliarioMedicamentosDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.MobiliarioMedicamentosDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Muebles separados de las paredes, pisos, y techos"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.MueblesSeparadosPared" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.MueblesSeparadosPared) />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane" id="questions" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Questions"]</h4>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Anuncio visible y legible frente al recetario con la instrucción del Art. 151 de la Ley 1 de 10 de enero de 2001"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AnuncioVisibleLeyArt151" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AnuncioVisibleLeyArt151) />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Anuncio visible y legible de Tabla de Promedio y Precio Mínimo Unitario de la Canasta básica de Medicamentos. Resolución No. 774 de 7 de octubre de 2019."]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AnuncioVisibleTablaPromPrecio" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AnuncioVisibleTablaPromPrecio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Anuncio visible y legible de Art. 1 y Art. 2 de Ley 17 de 12 de septiembre de 2014"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AnuncioVisibleLeyArt1" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AnuncioVisibleLeyArt1) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Anuncio visible y legible Art. 655 y Art. 656 del Decreto Ejecutivo 115 de 16 de agosto de 2022"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AnuncioVisibleLeyArt656" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AnuncioVisibleLeyArt656) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Higrótermometro y formato de registro de temperatura y humedad relativa"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.RegistroTempHumedadRelat" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.RegistroTempHumedadRelat) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.RegistroTempHumedadRelatDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.RegistroTempHumedadRelatDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Cuenta con programa de calibración de equipos como equipo para la medición de temperatura y humedad relativa"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.ProgramaCalibracion" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.ProgramaCalibracion) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.ProgramaCalibracionDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.ProgramaCalibracionDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["El espacio físico es de un mínimo de 20 metros cuadrados. Esto incluye la ubicación de los medicamentos y otros productos para la salud humana, el área de consulta farmacéutica, el área de asesoría bibliográfica, el área administrativa del farmacéutico. Que permita adecuada y cómodamente las labores al personal. No incluye el área de Almacén de Medicamentos y Otros Productos para la Salud Humana"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.EspacioFisicoMin20" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.EspacioFisicoMin20) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.EspacioFisicoMin20Descrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.EspacioFisicoMin20Descrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Área separada para la alimentación del personal"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AreaSeparadaAlimentPersonal" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AreaSeparadaAlimentPersonal) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AreaSeparadaAlimentPersonalDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AreaSeparadaAlimentPersonalDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Sanitario para el personal. En caso de que la farmacia esté ubicada en locales comerciales o similares y el mismo posea baños comunes (para compartir entre los locales comerciales). Será permitido siempre y cuando el personal de la farmacia mantenga los debidos cuidados de higiene"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.SanitarioPersonal" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.SanitarioPersonal) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.SanitarioPersonalDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.SanitarioPersonalDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Aire acondicionado para mantener las condiciones de almacenamiento"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AireAcondicionadoCondAliment" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AireAcondicionadoCondAliment) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Extintores contra incendios(vigentes y aprobados por el cuerpo de Bomberos)"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.ExtintoresIncendio" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.ExtintoresIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Alarmas contra incendio  o detector de humo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AlarmaIntrusoIncendio" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.AlarmaIntrusoIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Luces de Emergencia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.LucesEmergencias" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.LucesEmergencias) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Salida Emergencias"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.SalidaEmergencias" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.SalidaEmergencias) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["No Comer"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.NoComer" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.NoComer) />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["No Beber"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.NoBeber" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.NoBeber) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["No Fumar"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.NoFumar" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.NoFumar) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["No Guardar Plantas, Comidas y Bebidas"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.NoGuardarPlantasComidasBebidas" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.NoGuardarPlantasComidasBebidas) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane" id="controlledProductsArea" role="tabpanel">
+                            <h4>@languageContainerService.Keys["ControlledProductsArea"]</h4>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["El área se encuentra identificada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIdentificada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIdentificada) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIdentificadaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIdentificadaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["El área se encuentra asegurada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaAsegurada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaAsegurada) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaAseguradaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaAseguradaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["El área se encuentra independiente de otras áreas"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIndependiente" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIndependiente) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIndependienteDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIndependienteDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["El área se encuentra delimitada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaDelimitada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaDelimitada) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaDelimitadaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaDelimitadaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["El área posee una ubicación  identificada para productos vencidos"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIdentProdVencidoDesc" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIdentProdVencidoDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIdentProdVencidoDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIdentProdVencidoDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["El área se encuentra con iluminación y ventilación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIluminaVentila" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIluminaVentila) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIluminaVentilaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.AreaIluminaVentilaDesc) />
+                                        </div>
+                                    </div>
+                                </div>                                                               
+
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Describa el lugar donde se almacenan y las medidas de seguridad"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.LugarAlmacenMedidasSegDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.LugarAlmacenMedidasSegDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Dimensiones: Largo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.DimLargo" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.DimLargo) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Dimensiones: Ancho"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.DimAncho" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.DimAncho) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Dimensiones: Alto"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.DimAltura" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados.DimAltura) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane" id="medicationStorageArea" role="tabpanel">
+                            <h4>@languageContainerService.Keys["MedicationStorageArea"]</h4>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Está identificada y delimitada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Identificada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Identificada) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.IdentificadaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.IdentificadaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["El espacio físico de almacenamiento es adecuado para el movimiento y operaciones del personal permitiendo un despacho oportuno a las estanterías del área de recetario"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.EspacioFisicoAdecuado" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.EspacioFisicoAdecuado) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.EspacioFisicoAdecuadoDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.EspacioFisicoAdecuadoDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Higrotermómetro y formato de registro de temperatura y humedad relativa. El registro y control de los parámetros debe ser como mínimo tres veces al día."]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.TempHumedadRelat" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.TempHumedadRelat) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.TempHumedadRelatDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.TempHumedadRelatDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Limpio y ordenado"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LimpioOrdenado" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LimpioOrdenado) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LimpioOrdenadoDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LimpioOrdenadoDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Iluminación "]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Iluminacion" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Iluminacion) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.IluminacionDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.IluminacionDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Los productos farmacéuticos se almacenan sobre anaqueles"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobreAnaqueles" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobreAnaqueles) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Los productos farmacéuticos se almacenan sobre racks"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobreRacks" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobreRacks) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Los productos farmacéuticos se almacenan sobre pallets"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobrePalets" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobrePalets) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Los productos farmacéuticos se almacenan sobre tarimas"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobreTarimas" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobreTarimas) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobreDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ProdSobreDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Las condiciones de paredes, piso y techo deben ser adecuadas para evitar posible contaminación de los medicamentos."]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CondParedesPisoTecho" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CondParedesPisoTecho) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CondParedesPisoTechoDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CondParedesPisoTechoDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Área de cuarentena identificada, delimitada y asegurada bajo llave"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CuarentenaIdentDeli" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CuarentenaIdentDeli) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CuarentenaIdentDeliDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CuarentenaIdentDeliDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Cuenta con cortina de aire a la entrada del almacén para evitar posible contaminación de los medicamentos"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CortinaAire" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CortinaAire) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CortinaAireDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.CortinaAireDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Extintores contra incendios (vigentes y aprobados por el Cuerpo de Bomberos)."]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ExtintoresIncendio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ExtintoresIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ExtintoresIncendioDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ExtintoresIncendioDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Alarmas contra incendios o detector de humo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AlarmaIncendio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AlarmaIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AlarmaIncendioDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AlarmaIncendioDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Luces de emergencia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LucesEmergencias" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LucesEmergencias) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LucesEmergenciasDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LucesEmergenciasDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Existe un sistema para el control de fauna nociva"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ControlFaunaNociva" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ControlFaunaNociva) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ControlFaunaNocivaDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.ControlFaunaNocivaDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Área de cuarentena identificada, delimitada y asegurada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AreaCuarentena" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AreaCuarentena) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AreaCuarentenaDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AreaCuarentenaDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Área de productos controlados, delimitada y asegurada bajo llave"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AreaProdControlados" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AreaProdControlados) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AreaProdControladosDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AreaProdControladosDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Área de almacenamiento de Alcohol o productos inflamables separada con ventilación adecuada que evite la exposición a los vapores"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Alcohol" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Alcohol) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AlcoholDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AlcoholDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Área de almacenamiento de un alto inventario o volumen de Alcohol o productos inflamables el cual cuenta con extintores, detectores de humo o alarma contra incendio, lámpara de emergencia en el área y kit de emergencia para el manejo de derrames de sustancias peligrosas o corrosivas"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AltoNivelInventario" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AltoNivelInventario) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AltoNivelInventarioDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.AltoNivelInventarioDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Área de vencidos o deteriorados separada e identificada. Asegurada bajo llave"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Vencidos" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Vencidos) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.VencidosDescrip" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.VencidosDescrip) />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Dimensiones: Largo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.DimLargo" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.DimLargo) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Dimensiones: Ancho"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.DimAncho" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.DimAncho) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Dimensiones: Alto"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.DimAltura" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.DimAltura) />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane" id="conclusionInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["ConclusionInfo"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["El local cumple  o no cumple con los requisitos mínimos para operar"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="false">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CumpleRequisitosMinOperacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Observaciones"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="8" class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.ObservacionesFinales" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.ObservacionesFinales) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
+                            <h4>@languageContainerService.Keys["InspectorsAndApprovals"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["FinishedDate"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputDate class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Inspector"] 1</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector1" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector1) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Register"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector1" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector1) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector1" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector1) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Inspector"] 2</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector2" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector2) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Register"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector2" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector2) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector2" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector2) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Inspector"] 3</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector3" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector3) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Register"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector3" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector3) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector3" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector3) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Inspector"] 4</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector4" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector4) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Register"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector4" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector4) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector4" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector4) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Representante Legal de la Empresa"] 1</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRepresentanteLegal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRepresentanteLegal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Register"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroRepresentanteLegal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroRepresentanteLegal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Identification"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRepresentanteLegal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRepresentanteLegal) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Regente Farmaceutico"] 1</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRegente" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRegente) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Register"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroRegente" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroRegente) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Identification"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRegente" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRegente) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <br><br>
+                    <div class="modal-footer">
+
+                        @if (Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending)
+                        {
+                            <button type="submit"
+                                class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                        }
+
+                        <button type="button" class="btn btn-danger waves-effect"
+                                @onclick="(e)=>{Cancel();}">
+                            @languageContainerService.Keys["Cancel"]
+                        </button>
+                    </div>
+
+
+                </EditForm>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<Aig.Auditoria.Components.OpenHours.AddEditOpenHoursComponent></Aig.Auditoria.Components.OpenHours.AddEditOpenHoursComponent>
+
+<div class="modal-backdrop fade show"></div>

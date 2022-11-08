@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DataAccess.Migrations
+namespace DataAccess.Migrations.ApplicationDb
 {
-    public partial class M00 : Migration
+    public partial class M001 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,37 +24,13 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attachment",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AbsolutePath = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Url = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Base64 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    Disabled = table.Column<bool>(type: "bit", nullable: false),
-                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Attachment", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AUD_InspAperCambUbicFarm",
+                name: "AUD_InspAperCambUbicFarmTB",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoInspeccion = table.Column<int>(type: "int", nullable: false),
                     ReciboPago = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    DatosEstablecimiento = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DatosSolicitante = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DatosRegente = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DatosEstructuraOrganizacional = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     Disabled = table.Column<bool>(type: "bit", nullable: false),
                     FromSystem = table.Column<bool>(type: "bit", nullable: false),
@@ -63,15 +39,17 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AUD_InspAperCambUbicFarm", x => x.Id);
+                    table.PrimaryKey("PK_AUD_InspAperCambUbicFarmTB", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AUD_InspRetiroRetencion",
+                name: "AUD_InspRetiroRetencionTB",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    SeccionOficinaRegional = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    RetiroRetencionType = table.Column<int>(type: "int", nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     Disabled = table.Column<bool>(type: "bit", nullable: false),
                     FromSystem = table.Column<bool>(type: "bit", nullable: false),
@@ -80,27 +58,7 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AUD_InspRetiroRetencion", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AUD_TipoEstablecimiento",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    TipoEstablecimiento = table.Column<int>(type: "int", nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    Disabled = table.Column<bool>(type: "bit", nullable: false),
-                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AUD_TipoEstablecimiento", x => x.Id);
+                    table.PrimaryKey("PK_AUD_InspRetiroRetencionTB", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,6 +81,25 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InstitucionDestino",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InstitucionDestino", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Keys",
                 columns: table => new
                 {
@@ -138,6 +115,49 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Keys", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Laboratorio",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    TipoLaboratorio = table.Column<int>(type: "int", nullable: false),
+                    TipoUbicacion = table.Column<int>(type: "int", nullable: false),
+                    Pais = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telefono = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Correo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Laboratorio", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrigenAlerta",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrigenAlerta", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +197,52 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PersistedGrants", x => x.Key);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonalTrabajador",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreCompleto = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Cargo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Telefono = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Correo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Evaluador = table.Column<bool>(type: "bit", nullable: false),
+                    Tramitador = table.Column<bool>(type: "bit", nullable: false),
+                    Registrador = table.Column<bool>(type: "bit", nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonalTrabajador", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SmtpCorreo",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Usuario = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Contrasena = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    SmtpServidor = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    SmtpPuerto = table.Column<int>(type: "int", nullable: false),
+                    Correo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SmtpCorreo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,7 +292,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AUD_ProdRetiroRetencion",
+                name: "AUD_ProdRetiroRetencionTB",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -235,13 +301,14 @@ namespace DataAccess.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     PresentacionComercial = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Fabricante = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    PaisId = table.Column<long>(type: "bigint", nullable: true),
+                    Pais = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Lote = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     FechaExp = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CantidadRetenida = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CantidadRetirada = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Motivo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Destino = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    RegSanitario = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     Disabled = table.Column<bool>(type: "bit", nullable: false),
                     FromSystem = table.Column<bool>(type: "bit", nullable: false),
@@ -250,17 +317,43 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AUD_ProdRetiroRetencion", x => x.Id);
+                    table.PrimaryKey("PK_AUD_ProdRetiroRetencionTB", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AUD_ProdRetiroRetencion_AUD_InspRetiroRetencion_FrmRetiroRetencionId",
+                        name: "FK_AUD_ProdRetiroRetencionTB_AUD_InspRetiroRetencionTB_FrmRetiroRetencionId",
                         column: x => x.FrmRetiroRetencionId,
-                        principalTable: "AUD_InspRetiroRetencion",
+                        principalTable: "AUD_InspRetiroRetencionTB",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Rfv",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreCompleto = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Cargo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    DireccionFisica = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Telefonos = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Correos = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    TipoUbicacion = table.Column<int>(type: "int", nullable: false),
+                    Observaciones = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FechaNotificacion = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LaboratorioId = table.Column<long>(type: "bigint", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rfv", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AUD_ProdRetiroRetencion_Pais_PaisId",
-                        column: x => x.PaisId,
-                        principalTable: "Pais",
+                        name: "FK_Rfv_Laboratorio_LaboratorioId",
+                        column: x => x.LaboratorioId,
+                        principalTable: "Laboratorio",
                         principalColumn: "Id");
                 });
 
@@ -286,6 +379,171 @@ namespace DataAccess.Migrations
                         name: "FK_Provincia_Pais_PaisId",
                         column: x => x.PaisId,
                         principalTable: "Pais",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Alerta",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FechaRecepcion = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    FechaEntregaEvaluador = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    FechaEvaluacion = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EvaluadorId = table.Column<long>(type: "bigint", nullable: true),
+                    OrigenAlertaId = table.Column<long>(type: "bigint", nullable: true),
+                    TipoAlerta = table.Column<int>(type: "int", nullable: false),
+                    Producto = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    DCI = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RecomProfPaciente = table.Column<bool>(type: "bit", nullable: false),
+                    ActualizaMonografias = table.Column<bool>(type: "bit", nullable: false),
+                    ConsentFirmado = table.Column<bool>(type: "bit", nullable: false),
+                    SuspencionRetiroLote = table.Column<bool>(type: "bit", nullable: false),
+                    SuspencCancelRegSanitario = table.Column<bool>(type: "bit", nullable: false),
+                    OtrasConsideraciones = table.Column<bool>(type: "bit", nullable: false),
+                    Estado = table.Column<int>(type: "int", nullable: false),
+                    NumNota = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Observaciones = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Alerta", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Alerta_OrigenAlerta_OrigenAlertaId",
+                        column: x => x.OrigenAlertaId,
+                        principalTable: "OrigenAlerta",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Alerta_PersonalTrabajador_EvaluadorId",
+                        column: x => x.EvaluadorId,
+                        principalTable: "PersonalTrabajador",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ips",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FechaRecepcion = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    FechaRegistrador = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RegistradorId = table.Column<long>(type: "bigint", nullable: true),
+                    NomComercial = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    PrincActivo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    LaboratorioId = table.Column<long>(type: "bigint", nullable: true),
+                    RegSanitario = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    EstatusRecepcion = table.Column<int>(type: "int", nullable: false),
+                    FechaAsignacion = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TramitadorId = table.Column<long>(type: "bigint", nullable: true),
+                    EstatusRegistro = table.Column<int>(type: "int", nullable: false),
+                    FechaAsigEva = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EvaluadorId = table.Column<long>(type: "bigint", nullable: true),
+                    ResumenEjec = table.Column<int>(type: "int", nullable: false),
+                    ResumenEjecTrad = table.Column<int>(type: "int", nullable: false),
+                    Prioridad = table.Column<bool>(type: "bit", nullable: false),
+                    FechaRev = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    StatusRevision = table.Column<int>(type: "int", nullable: false),
+                    ConfecConNormativa = table.Column<bool>(type: "bit", nullable: false),
+                    NoInforme = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    IpsData = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ips", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ips_Laboratorio_LaboratorioId",
+                        column: x => x.LaboratorioId,
+                        principalTable: "Laboratorio",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ips_PersonalTrabajador_EvaluadorId",
+                        column: x => x.EvaluadorId,
+                        principalTable: "PersonalTrabajador",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ips_PersonalTrabajador_RegistradorId",
+                        column: x => x.RegistradorId,
+                        principalTable: "PersonalTrabajador",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ips_PersonalTrabajador_TramitadorId",
+                        column: x => x.TramitadorId,
+                        principalTable: "PersonalTrabajador",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Nota",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NumNota = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    EvaluadorId = table.Column<long>(type: "bigint", nullable: true),
+                    TipoNota = table.Column<int>(type: "int", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InstitucionDestinoId = table.Column<long>(type: "bigint", nullable: true),
+                    Destinatario = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Nota", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Nota_InstitucionDestino_InstitucionDestinoId",
+                        column: x => x.InstitucionDestinoId,
+                        principalTable: "InstitucionDestino",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Nota_PersonalTrabajador_EvaluadorId",
+                        column: x => x.EvaluadorId,
+                        principalTable: "PersonalTrabajador",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PmrTB",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    FechaEntrada = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    FechaEntregaEvaluador = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    FechaTramite = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EvaluadorId = table.Column<long>(type: "bigint", nullable: true),
+                    PrincActivo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PmrTB", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PmrTB_PersonalTrabajador_EvaluadorId",
+                        column: x => x.EvaluadorId,
+                        principalTable: "PersonalTrabajador",
                         principalColumn: "Id");
                 });
 
@@ -344,6 +602,38 @@ namespace DataAccess.Migrations
                         column: x => x.ProvinciaId,
                         principalTable: "Provincia",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ram",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PmrId = table.Column<long>(type: "bigint", nullable: false),
+                    RegSanitario = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    NomComercial = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    LaboratorioId = table.Column<long>(type: "bigint", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ram", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ram_Laboratorio_LaboratorioId",
+                        column: x => x.LaboratorioId,
+                        principalTable: "Laboratorio",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ram_PmrTB_PmrId",
+                        column: x => x.PmrId,
+                        principalTable: "PmrTB",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -457,7 +747,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AUD_Establecimiento",
+                name: "AUD_EstablecimientoTB",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -465,7 +755,7 @@ namespace DataAccess.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     NumLicencia = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Periodo = table.Column<int>(type: "int", nullable: false),
-                    TipoEstablecimientoId = table.Column<long>(type: "bigint", nullable: true),
+                    TipoEstablecimiento = table.Column<int>(type: "int", nullable: false),
                     Clasificacion = table.Column<int>(type: "int", nullable: false),
                     Sector = table.Column<int>(type: "int", nullable: false),
                     Institucion = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
@@ -477,7 +767,7 @@ namespace DataAccess.Migrations
                     FechaVigenciaFin = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NoMaquina = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     FechaDuplicado = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ProvinciaId = table.Column<long>(type: "bigint", nullable: true),
+                    ProvinciaId = table.Column<long>(type: "bigint", nullable: false),
                     DistritoId = table.Column<long>(type: "bigint", nullable: true),
                     CorregimientoId = table.Column<long>(type: "bigint", nullable: true),
                     Ubicacion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
@@ -513,39 +803,59 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AUD_Establecimiento", x => x.Id);
+                    table.PrimaryKey("PK_AUD_EstablecimientoTB", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AUD_Establecimiento_AUD_TipoEstablecimiento_TipoEstablecimientoId",
-                        column: x => x.TipoEstablecimientoId,
-                        principalTable: "AUD_TipoEstablecimiento",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_AUD_Establecimiento_Corregimiento_CorregimientoId",
+                        name: "FK_AUD_EstablecimientoTB_Corregimiento_CorregimientoId",
                         column: x => x.CorregimientoId,
                         principalTable: "Corregimiento",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AUD_Establecimiento_Distrito_DistritoId",
+                        name: "FK_AUD_EstablecimientoTB_Distrito_DistritoId",
                         column: x => x.DistritoId,
                         principalTable: "Distrito",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AUD_Establecimiento_Provincia_ProvinciaId",
+                        name: "FK_AUD_EstablecimientoTB_Provincia_ProvinciaId",
                         column: x => x.ProvinciaId,
                         principalTable: "Provincia",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AUD_Inspeccion",
+                name: "AUD_InspeccionTB",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NumActa = table.Column<int>(type: "int", nullable: false),
+                    NumActa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IntNumActa = table.Column<int>(type: "int", nullable: false),
+                    StatusInspecciones = table.Column<int>(type: "int", nullable: false),
                     TipoActa = table.Column<int>(type: "int", nullable: false),
                     FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EstablecimientoId = table.Column<long>(type: "bigint", nullable: true),
+                    EstablecimientoId = table.Column<long>(type: "bigint", nullable: false),
+                    UbicacionEstablecimiento = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    LicenseNumber = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    AvisoOperación = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    RepreLegal = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    RepreLegalIdentificacion = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    ParticipantesDNFD = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    ParticEstablecimiento = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    ParticEstablecimientoCargo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    ParticEstablecimientoEmail = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    ParticEstablecimientoCIP = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    FirmaDNFD1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumRegDNFD1 = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    FirmaDNFD2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumRegDNFD2 = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    FirmaDNFD3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirmaDNFD4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirmaDNFD5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirmaDNFD6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirmaDNFD7 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirmaDNFD8 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirmaEstablec1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirmaEstablec2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InspAperCambUbicFarmId = table.Column<long>(type: "bigint", nullable: true),
                     InspRetiroRetencionId = table.Column<long>(type: "bigint", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
@@ -556,23 +866,62 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AUD_Inspeccion", x => x.Id);
+                    table.PrimaryKey("PK_AUD_InspeccionTB", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AUD_Inspeccion_AUD_Establecimiento_EstablecimientoId",
+                        name: "FK_AUD_InspeccionTB_AUD_EstablecimientoTB_EstablecimientoId",
                         column: x => x.EstablecimientoId,
-                        principalTable: "AUD_Establecimiento",
-                        principalColumn: "Id");
+                        principalTable: "AUD_EstablecimientoTB",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AUD_Inspeccion_AUD_InspAperCambUbicFarm_InspAperCambUbicFarmId",
+                        name: "FK_AUD_InspeccionTB_AUD_InspAperCambUbicFarmTB_InspAperCambUbicFarmId",
                         column: x => x.InspAperCambUbicFarmId,
-                        principalTable: "AUD_InspAperCambUbicFarm",
+                        principalTable: "AUD_InspAperCambUbicFarmTB",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AUD_Inspeccion_AUD_InspRetiroRetencion_InspRetiroRetencionId",
+                        name: "FK_AUD_InspeccionTB_AUD_InspRetiroRetencionTB_InspRetiroRetencionId",
                         column: x => x.InspRetiroRetencionId,
-                        principalTable: "AUD_InspRetiroRetencion",
+                        principalTable: "AUD_InspRetiroRetencionTB",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Attachment",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    AbsolutePath = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Base64 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InspeccionId = table.Column<long>(type: "bigint", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    FromSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attachment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Attachment_AUD_InspeccionTB_InspeccionId",
+                        column: x => x.InspeccionId,
+                        principalTable: "AUD_InspeccionTB",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Alerta_EvaluadorId",
+                table: "Alerta",
+                column: "EvaluadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Alerta_OrigenAlertaId",
+                table: "Alerta",
+                column: "OrigenAlertaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -621,55 +970,46 @@ namespace DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AUD_Establecimiento_CorregimientoId",
-                table: "AUD_Establecimiento",
+                name: "IX_Attachment_InspeccionId",
+                table: "Attachment",
+                column: "InspeccionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AUD_EstablecimientoTB_CorregimientoId",
+                table: "AUD_EstablecimientoTB",
                 column: "CorregimientoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AUD_Establecimiento_DistritoId",
-                table: "AUD_Establecimiento",
+                name: "IX_AUD_EstablecimientoTB_DistritoId",
+                table: "AUD_EstablecimientoTB",
                 column: "DistritoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AUD_Establecimiento_ProvinciaId",
-                table: "AUD_Establecimiento",
+                name: "IX_AUD_EstablecimientoTB_ProvinciaId",
+                table: "AUD_EstablecimientoTB",
                 column: "ProvinciaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AUD_Establecimiento_TipoEstablecimientoId",
-                table: "AUD_Establecimiento",
-                column: "TipoEstablecimientoId");
+                name: "IX_AUD_InspeccionTB_EstablecimientoId",
+                table: "AUD_InspeccionTB",
+                column: "EstablecimientoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AUD_Inspeccion_EstablecimientoId",
-                table: "AUD_Inspeccion",
-                column: "EstablecimientoId",
-                unique: true,
-                filter: "[EstablecimientoId] IS NOT NULL");
+                name: "IX_AUD_InspeccionTB_InspAperCambUbicFarmId",
+                table: "AUD_InspeccionTB",
+                column: "InspAperCambUbicFarmId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AUD_Inspeccion_InspAperCambUbicFarmId",
-                table: "AUD_Inspeccion",
-                column: "InspAperCambUbicFarmId",
-                unique: true,
-                filter: "[InspAperCambUbicFarmId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AUD_Inspeccion_InspRetiroRetencionId",
-                table: "AUD_Inspeccion",
+                name: "IX_AUD_InspeccionTB_InspRetiroRetencionId",
+                table: "AUD_InspeccionTB",
                 column: "InspRetiroRetencionId",
                 unique: true,
                 filter: "[InspRetiroRetencionId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AUD_ProdRetiroRetencion_FrmRetiroRetencionId",
-                table: "AUD_ProdRetiroRetencion",
+                name: "IX_AUD_ProdRetiroRetencionTB_FrmRetiroRetencionId",
+                table: "AUD_ProdRetiroRetencionTB",
                 column: "FrmRetiroRetencionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AUD_ProdRetiroRetencion_PaisId",
-                table: "AUD_ProdRetiroRetencion",
-                column: "PaisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Corregimiento_DistritoId",
@@ -693,9 +1033,39 @@ namespace DataAccess.Migrations
                 column: "ProvinciaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Ips_EvaluadorId",
+                table: "Ips",
+                column: "EvaluadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ips_LaboratorioId",
+                table: "Ips",
+                column: "LaboratorioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ips_RegistradorId",
+                table: "Ips",
+                column: "RegistradorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ips_TramitadorId",
+                table: "Ips",
+                column: "TramitadorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Keys_Use",
                 table: "Keys",
                 column: "Use");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Nota_EvaluadorId",
+                table: "Nota",
+                column: "EvaluadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Nota_InstitucionDestinoId",
+                table: "Nota",
+                column: "InstitucionDestinoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_ConsumedTime",
@@ -718,13 +1088,36 @@ namespace DataAccess.Migrations
                 columns: new[] { "SubjectId", "SessionId", "Type" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_PmrTB_EvaluadorId",
+                table: "PmrTB",
+                column: "EvaluadorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Provincia_PaisId",
                 table: "Provincia",
                 column: "PaisId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ram_LaboratorioId",
+                table: "Ram",
+                column: "LaboratorioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ram_PmrId",
+                table: "Ram",
+                column: "PmrId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rfv_LaboratorioId",
+                table: "Rfv",
+                column: "LaboratorioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Alerta");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -744,19 +1137,34 @@ namespace DataAccess.Migrations
                 name: "Attachment");
 
             migrationBuilder.DropTable(
-                name: "AUD_Inspeccion");
-
-            migrationBuilder.DropTable(
-                name: "AUD_ProdRetiroRetencion");
+                name: "AUD_ProdRetiroRetencionTB");
 
             migrationBuilder.DropTable(
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
+                name: "Ips");
+
+            migrationBuilder.DropTable(
                 name: "Keys");
 
             migrationBuilder.DropTable(
+                name: "Nota");
+
+            migrationBuilder.DropTable(
                 name: "PersistedGrants");
+
+            migrationBuilder.DropTable(
+                name: "Ram");
+
+            migrationBuilder.DropTable(
+                name: "Rfv");
+
+            migrationBuilder.DropTable(
+                name: "SmtpCorreo");
+
+            migrationBuilder.DropTable(
+                name: "OrigenAlerta");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -765,19 +1173,31 @@ namespace DataAccess.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AUD_Establecimiento");
+                name: "AUD_InspeccionTB");
 
             migrationBuilder.DropTable(
-                name: "AUD_InspAperCambUbicFarm");
+                name: "InstitucionDestino");
 
             migrationBuilder.DropTable(
-                name: "AUD_InspRetiroRetencion");
+                name: "PmrTB");
+
+            migrationBuilder.DropTable(
+                name: "Laboratorio");
 
             migrationBuilder.DropTable(
                 name: "UserProfile");
 
             migrationBuilder.DropTable(
-                name: "AUD_TipoEstablecimiento");
+                name: "AUD_EstablecimientoTB");
+
+            migrationBuilder.DropTable(
+                name: "AUD_InspAperCambUbicFarmTB");
+
+            migrationBuilder.DropTable(
+                name: "AUD_InspRetiroRetencionTB");
+
+            migrationBuilder.DropTable(
+                name: "PersonalTrabajador");
 
             migrationBuilder.DropTable(
                 name: "Corregimiento");

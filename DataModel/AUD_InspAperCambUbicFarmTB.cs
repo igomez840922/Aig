@@ -11,10 +11,21 @@ using System.Threading.Tasks;
 namespace DataModel
 {
 	public class AUD_InspAperCambUbicFarmTB : SystemId
-	{
-        //Tipo de Inspección
-        private enumAUD_TipoInspeccion tipoInspeccion;
-        public enumAUD_TipoInspeccion TipoInspeccion { get => tipoInspeccion; set => SetProperty(ref tipoInspeccion, value); }
+	{        
+        public AUD_InspAperCambUbicFarmTB()
+        {
+            DatosEstablecimiento=new AUD_DatosEstablecimiento();
+            DatosSolicitante= new AUD_DatosSolicitante();
+            DatosRegente = new AUD_DatosRegente();
+            DatosEstructuraOrganizacional = new AUD_DatosEstructuraOrganizacional();
+            DatosInfraEstructura = new AUD_DatosInfraEstructura();
+            DatosAreaFisica = new AUD_DatosAreasFisicas();
+            DatosPreguntasGenericas = new AUD_DatosPreguntasGenericas();
+            DatosSenalizacionAvisos = new AUD_DatosSenalizacionAvisos();
+            DatosAreaProductosControlados = new AUD_DatosAreaProductosControlados();
+            DatosAreaAlmacenamiento = new AUD_DatosAreaAlmacenamiento();
+            DatosConclusiones = new AUD_DatosConclusiones();
+        }
 
         //codigo
         private string reciboPago;

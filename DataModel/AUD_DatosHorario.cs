@@ -14,19 +14,17 @@ namespace DataModel
     public class AUD_DatosHorario : SystemId
     {
         //dia
-        private string dia;
+        private string dias;
         [StringLength(250)]
-        public string Dia { get => dia; set => SetProperty(ref dia, value); }
+        [Required(ErrorMessage = "RequiredField")]
+        public string Dias { get => dias; set => SetProperty(ref dias, value); }
 
         //horario Inicio
-        private string horarioInicio;
+        private string horarios;
         [StringLength(250)]
-        public string HorarioInicio { get => horarioInicio; set => SetProperty(ref horarioInicio, value); }
+        [Required(ErrorMessage = "RequiredField")]
+        public string Horarios { get => horarios; set => SetProperty(ref horarios, value); }
 
-        //horario Fin
-        private string horarioFin;
-        [StringLength(250)]
-        public string HorarioFin { get => horarioFin; set => SetProperty(ref horarioFin, value); }
 
     }
 }

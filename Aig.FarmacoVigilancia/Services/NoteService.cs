@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using BlazorDownloadFile;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -123,6 +124,8 @@ namespace Aig.FarmacoVigilancia.Services
             try { return DalService.Count<FMV_NotaTB>(); }
             catch { }return 0;
         }
+
+        
     }
 
 }

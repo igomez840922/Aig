@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221025190836_M020")]
-    partial class M020
+    [Migration("20221107060725_M001")]
+    partial class M001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -172,8 +172,8 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("Corregimiento")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("CorregimientoId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -188,8 +188,8 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Distrito")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("DistritoId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .HasMaxLength(250)
@@ -285,8 +285,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("Periodo")
                         .HasColumnType("int");
 
-                    b.Property<string>("Provincia")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("ProvinciaId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
 
                     b.Property<string>("RepLegalCedula")
                         .HasMaxLength(250)
@@ -332,6 +333,12 @@ namespace DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CorregimientoId");
+
+                    b.HasIndex("DistritoId");
+
+                    b.HasIndex("ProvinciaId");
 
                     b.ToTable("AUD_Establecimiento");
                 });
@@ -405,6 +412,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<long?>("EstablecimientoId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("FechaInicio")
@@ -416,6 +424,24 @@ namespace DataAccess.Migrations
                     b.Property<string>("FirmaDNFD2")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("FirmaDNFD3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirmaDNFD4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirmaDNFD5")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirmaDNFD6")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirmaDNFD7")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirmaDNFD8")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirmaEstablec1")
                         .HasColumnType("nvarchar(max)");
@@ -1227,12 +1253,36 @@ namespace DataAccess.Migrations
                     b.Navigation("Inspeccion");
                 });
 
+            modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>
+                {
+                    b.HasOne("DataModel.CorregimientoTB", "Corregimiento")
+                        .WithMany()
+                        .HasForeignKey("CorregimientoId");
+
+                    b.HasOne("DataModel.DistritoTB", "Distrito")
+                        .WithMany()
+                        .HasForeignKey("DistritoId");
+
+                    b.HasOne("DataModel.ProvinciaTB", "Provincia")
+                        .WithMany()
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Corregimiento");
+
+                    b.Navigation("Distrito");
+
+                    b.Navigation("Provincia");
+                });
+
             modelBuilder.Entity("DataModel.AUD_InspeccionTB", b =>
                 {
                     b.HasOne("DataModel.AUD_EstablecimientoTB", "Establecimiento")
                         .WithMany("LInspections")
                         .HasForeignKey("EstablecimientoId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("DataModel.AUD_InspAperCambUbicFarmTB", "InspAperCambUbicFarm")
                         .WithOne()
@@ -1263,7 +1313,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.CorregimientoTB", b =>
                 {
                     b.HasOne("DataModel.DistritoTB", "Distrito")
-                        .WithMany()
+                        .WithMany("LCorregimientos")
                         .HasForeignKey("DistritoId");
 
                     b.Navigation("Distrito");
@@ -1272,7 +1322,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.DistritoTB", b =>
                 {
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithMany()
+                        .WithMany("LDistritos")
                         .HasForeignKey("ProvinciaId");
 
                     b.Navigation("Provincia");
@@ -1281,7 +1331,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.ProvinciaTB", b =>
                 {
                     b.HasOne("DataModel.PaisTB", "Pais")
-                        .WithMany()
+                        .WithMany("LProvincia")
                         .HasForeignKey("PaisId");
 
                     b.Navigation("Pais");
@@ -1353,6 +1403,21 @@ namespace DataAccess.Migrations
                     b.Navigation("Inspeccion");
 
                     b.Navigation("LProductos");
+                });
+
+            modelBuilder.Entity("DataModel.DistritoTB", b =>
+                {
+                    b.Navigation("LCorregimientos");
+                });
+
+            modelBuilder.Entity("DataModel.PaisTB", b =>
+                {
+                    b.Navigation("LProvincia");
+                });
+
+            modelBuilder.Entity("DataModel.ProvinciaTB", b =>
+                {
+                    b.Navigation("LDistritos");
                 });
 
             modelBuilder.Entity("DataModel.UserProfileTB", b =>

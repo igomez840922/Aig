@@ -7,5 +7,7 @@ namespace Aig.FarmacoVigilancia.Services
     public interface IPdfGenerationService
     {
         Task<Stream> GenerateRetentionReceptionPDF(long InspectionId);
+        Task<Stream> GenerateNotePDF(long IdNote);
+        Task<Stream> GenerateAlertPDF(long IdAlert);
     }
 }

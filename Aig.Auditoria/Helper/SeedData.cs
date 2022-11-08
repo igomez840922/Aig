@@ -91,7 +91,7 @@ namespace Aig.Auditoria.Helper
                 if (await countryService.Count() <= 0)
                 {
                     List<PaisTB> lCountries = null;
-                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.provincias.json"))
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.paises.json"))
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         var jsonFileContent = reader.ReadToEnd();

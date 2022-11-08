@@ -42,16 +42,11 @@ namespace DataModel
         private string corregimiento;
         [StringLength(250)]
         public string Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
-
+                
         //ubicacion
-        private string ubicacionEstablec;
+        private string ubicacion;
         [StringLength(500)]
-        public string UbicacionEstablec { get => ubicacionEstablec; set => SetProperty(ref ubicacionEstablec, value); }
-
-        //ubicacion
-        private string ubicacionRegente;
-        [StringLength(500)]
-        public string UbicacionRegente { get => ubicacionRegente; set => SetProperty(ref ubicacionRegente, value); }
+        public string Ubicacion { get => ubicacion; set => SetProperty(ref ubicacion, value); }
 
         //Solicitante Telefono Oficina
         private string telefonoOfic;
@@ -59,9 +54,9 @@ namespace DataModel
         public string TelefonoOfic { get => telefonoOfic; set => SetProperty(ref telefonoOfic, value); }
 
         //Solicitante Telefono Residencial
-        private string telefonoRecid;
+        private string telefonoResid;
         [StringLength(250)]
-        public string TelefonoRecid { get => telefonoRecid; set => SetProperty(ref telefonoRecid, value); }
+        public string TelefonoResid { get => telefonoResid; set => SetProperty(ref telefonoResid, value); }
 
         //Solicitante Telefono Movil
         private string telefonoMovil;

@@ -123,77 +123,381 @@ namespace Aig.Auditoria.Services
 
                                   column.Item().PaddingVertical(10).Text(string.Format("Los productos retenidos y retirados del establecimiento se mantendrán bajo custodia en las instalaciones de la Dirección Nacional de Farmacia y Drogas, hasta culminar las investigaciones.\r\nLos productos farmacéuticos que se mantengan retenidos en el local no podrán ser movidos del lugar donde se fijó su ubicación al momento de levantar este documento.\r\n"));
 
+                                  ////////////////////////////
+                                  ///
+
+                                  column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
+                                  column.Item().Table(table =>
+                                  {
+                                      table.ColumnsDefinition(columns =>
+                                      {
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                      });
+
+                                      table.Cell().AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("Por el establecimiento:").Bold();
+
+                                      table.Cell().AlignLeft().Text(string.Format("No. Registro: {0}", inspection.NumRegDNFD1));
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("Cédula: {0}  Cargo: {1}", inspection.ParticEstablecimientoCIP, inspection.ParticEstablecimientoCargo));
+
+
+                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD1))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD1.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      if (!string.IsNullOrEmpty(inspection.FirmaEstablec1))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaEstablec1.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+
+                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD2))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD2.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      if (!string.IsNullOrEmpty(inspection.FirmaEstablec2))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaEstablec2.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+
+                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD3))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD3.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+
+                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD4))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD4.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+
+                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD5))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD5.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+
+                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD6))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD6.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+
+                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD7))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD7.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+
+                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD8))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD8.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+
+                                  });
+                                  column.Item().PaddingVertical(10).Text(" ");
+                                  column.Item().AlignBottom().Table(table =>
+                                  {
+                                      table.ColumnsDefinition(columns =>
+                                      {
+                                          columns.RelativeColumn(1);
+                                          columns.RelativeColumn((float)1.5);
+                                      });
+
+                                      table.Cell().AlignLeft().Text(" ");
+
+                                      table.Cell().Border(1).BorderColor(Colors.Black).Padding(10).AlignBottom().AlignLeft().Column(col =>
+                                      {
+                                          col.Item().AlignLeft().Text("Para uso de la Administración de la DNFD:").Bold();
+                                          col.Item().PaddingTop(5).Text("Productos recibidos por (nombre): _____________________________________________________________");
+                                          col.Item().PaddingTop(15).Text("(firma): ___________________________________________________________________________________________");
+                                          col.Item().PaddingTop(15).Text("Fecha (dd/MM/yyyy): __________________________     Hora: __________________________");
+                                      });
+
+                                  });
+
+
                               });
 
-                          page.Footer().AlignBottom().Column(column =>
-                             {
-                                 column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
-                                 column.Item().Table(table =>
-                                 {
-                                     table.ColumnsDefinition(columns =>
-                                     {
-                                         columns.RelativeColumn();
-                                         columns.RelativeColumn();
-                                         columns.RelativeColumn();
-                                     });
+                          //page.Footer().AlignBottom().Column(column =>
+                          //   {
+                          //       column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
+                          //       column.Item().Table(table =>
+                          //       {
+                          //           table.ColumnsDefinition(columns =>
+                          //           {
+                          //               columns.RelativeColumn();
+                          //               columns.RelativeColumn();
+                          //               columns.RelativeColumn();
+                          //           });
 
-                                     table.Cell().AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
-                                     table.Cell().Text("");
-                                     table.Cell().AlignLeft().Text("Por el establecimiento:").Bold();
+                          //           table.Cell().AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+                          //           table.Cell().Text("");
+                          //           table.Cell().AlignLeft().Text("Por el establecimiento:").Bold();
 
-                                     if (!string.IsNullOrEmpty(inspection.FirmaDNFD1))
-                                     {
-                                         //var bytes = Convert.FromBase64String(base64encodedstring);
-                                         //var contents = new StreamContent(new MemoryStream(bytes));
-                                         byte[] data = Convert.FromBase64String(inspection.FirmaDNFD1.Split("image/png;base64,")[1]);
-                                         MemoryStream memoryStream = new MemoryStream(data);
-                                         table.Cell().AlignLeft().Image(memoryStream);
-                                     }
-                                     else
-                                     {
-                                         table.Cell().AlignLeft().Text("");
-                                     }
-                                     table.Cell().Text("");
-                                     if (!string.IsNullOrEmpty(inspection.FirmaEstablec1))
-                                     {
-                                         //var bytes = Convert.FromBase64String(base64encodedstring);
-                                         //var contents = new StreamContent(new MemoryStream(bytes));
-                                         byte[] data = Convert.FromBase64String(inspection.FirmaEstablec1.Split("image/png;base64,")[1]);
-                                         MemoryStream memoryStream = new MemoryStream(data);
-                                         table.Cell().AlignLeft().Image(memoryStream);
-                                     }
-                                     else
-                                     {
-                                         table.Cell().AlignLeft().Text("");
-                                     }
+                          //           table.Cell().AlignLeft().Text(string.Format("No. Registro: {0}", inspection.NumRegDNFD1));
+                          //           table.Cell().Text("");
+                          //           table.Cell().AlignLeft().Text(string.Format("Cédula: {0}  Cargo: {1}", inspection.ParticEstablecimientoCIP, inspection.ParticEstablecimientoCargo));
 
-                                     table.Cell().AlignLeft().Text(string.Format("No. Registro: {0}", inspection.NumRegDNFD1));
-                                     table.Cell().Text("");
-                                     table.Cell().AlignLeft().Text(string.Format("Cédula: {0}  Cargo: {1}", inspection.ParticEstablecimientoCIP, inspection.ParticEstablecimientoCargo));
 
-                                 });
-                                 column.Item().PaddingVertical(10).Text(" ");
-                                 column.Item().AlignBottom().Table(table =>
-                                 {
-                                     table.ColumnsDefinition(columns =>
-                                     {
-                                         columns.RelativeColumn(1);
-                                         columns.RelativeColumn((float)1.5);
-                                     });
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaDNFD1))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaDNFD1.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
+                          //           table.Cell().Text("");
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaEstablec1))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaEstablec1.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
 
-                                     table.Cell().AlignLeft().Text(" ");                                     
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaDNFD2))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaDNFD2.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
+                          //           table.Cell().Text("");
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaEstablec2))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaEstablec2.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
 
-                                     table.Cell().Border(1).BorderColor(Colors.Black).Padding(10).AlignBottom().AlignLeft().Column(col =>
-                                     {
-                                         col.Item().AlignLeft().Text("Para uso de la Administración de la DNFD:").Bold();
-                                         col.Item().PaddingTop(5).Text("Productos recibidos por (nombre): _____________________________________________________________");
-                                         col.Item().PaddingTop(15).Text("(firma): ___________________________________________________________________________________________");
-                                         col.Item().PaddingTop(15).Text("Fecha (dd/MM/yyyy): __________________________     Hora: __________________________");
-                                     });
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaDNFD3))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaDNFD3.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
+                          //           table.Cell().Text("");
+                          //           table.Cell().AlignLeft().Text("");
 
-                                 });
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaDNFD4))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaDNFD4.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
+                          //           table.Cell().Text("");
+                          //           table.Cell().AlignLeft().Text("");
 
-                             });
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaDNFD5))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaDNFD5.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
+                          //           table.Cell().Text("");
+                          //           table.Cell().AlignLeft().Text("");
+
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaDNFD6))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaDNFD6.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
+                          //           table.Cell().Text("");
+                          //           table.Cell().AlignLeft().Text("");
+
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaDNFD7))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaDNFD7.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
+                          //           table.Cell().Text("");
+                          //           table.Cell().AlignLeft().Text("");
+
+                          //           if (!string.IsNullOrEmpty(inspection.FirmaDNFD8))
+                          //           {
+                          //               //var bytes = Convert.FromBase64String(base64encodedstring);
+                          //               //var contents = new StreamContent(new MemoryStream(bytes));
+                          //               byte[] data = Convert.FromBase64String(inspection.FirmaDNFD8.Split("image/png;base64,")[1]);
+                          //               MemoryStream memoryStream = new MemoryStream(data);
+                          //               table.Cell().AlignLeft().Image(memoryStream);
+                          //           }
+                          //           else
+                          //           {
+                          //               table.Cell().AlignLeft().Text("");
+                          //           }
+                          //           table.Cell().Text("");
+                          //           table.Cell().AlignLeft().Text("");
+
+                          //       });
+                          //       column.Item().PaddingVertical(10).Text(" ");
+                          //       column.Item().AlignBottom().Table(table =>
+                          //       {
+                          //           table.ColumnsDefinition(columns =>
+                          //           {
+                          //               columns.RelativeColumn(1);
+                          //               columns.RelativeColumn((float)1.5);
+                          //           });
+
+                          //           table.Cell().AlignLeft().Text(" ");                                     
+
+                          //           table.Cell().Border(1).BorderColor(Colors.Black).Padding(10).AlignBottom().AlignLeft().Column(col =>
+                          //           {
+                          //               col.Item().AlignLeft().Text("Para uso de la Administración de la DNFD:").Bold();
+                          //               col.Item().PaddingTop(5).Text("Productos recibidos por (nombre): _____________________________________________________________");
+                          //               col.Item().PaddingTop(15).Text("(firma): ___________________________________________________________________________________________");
+                          //               col.Item().PaddingTop(15).Text("Fecha (dd/MM/yyyy): __________________________     Hora: __________________________");
+                          //           });
+
+                          //       });
+
+                          //   });
                           
                       });
                   })
@@ -206,6 +510,7 @@ namespace Aig.Auditoria.Services
             catch { }
             return null;
         }
+    
     }
 
 }

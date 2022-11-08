@@ -13,6 +13,11 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosEstructuraOrganizacional : SystemId
     {
+        public AUD_DatosEstructuraOrganizacional()
+        {
+            HorariosAtencion = new List<AUD_DatosHorario>();
+        }
+
         //Dispone de su letrero de Identificación
         private bool letreroIdentificacion;
         public bool LetreroIdentificacion { get => letreroIdentificacion; set => SetProperty(ref letreroIdentificacion, value); }

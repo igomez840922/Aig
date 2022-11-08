@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace DataModel
 {
     //Tabla padre de las inspecciones para generar las actas
-
     public  class AUD_InspeccionTB:SystemId
     {
         public AUD_InspeccionTB()
@@ -60,6 +59,10 @@ namespace DataModel
         [StringLength(500)]
         public string UbicacionEstablecimiento { get => ubicacionEstablecimiento; set => SetProperty(ref ubicacionEstablecimiento, value); }
 
+        //num de licencia o aviso de operaciones
+        private string telefonoEstablecimiento;
+        [StringLength(250)]
+        public string TelefonoEstablecimiento { get => telefonoEstablecimiento; set => SetProperty(ref telefonoEstablecimiento, value); }
 
         //num de licencia o aviso de operaciones
         private string licenseNumber;
@@ -119,12 +122,32 @@ namespace DataModel
 
         //participante del DNFD Firma2
         private string firmaDNFD2;
-        [StringLength(250)]
         public string FirmaDNFD2 { get => firmaDNFD2; set => SetProperty(ref firmaDNFD2, value); }
 
         //participante del DNFD NumRegDNFD2
         private string numRegDNFD2;
+        [StringLength(250)]
         public string NumRegDNFD2 { get => numRegDNFD2; set => SetProperty(ref numRegDNFD2, value); }
+
+        //participante del DNFD Firma1
+        private string firmaDNFD3;
+        public string FirmaDNFD3 { get => firmaDNFD3; set => SetProperty(ref firmaDNFD3, value); }
+        //participante del DNFD Firma1
+        private string firmaDNFD4;
+        public string FirmaDNFD4 { get => firmaDNFD4; set => SetProperty(ref firmaDNFD4, value); }
+        //participante del DNFD Firma1
+        private string firmaDNFD5;
+        public string FirmaDNFD5 { get => firmaDNFD5; set => SetProperty(ref firmaDNFD5, value); }
+        //participante del DNFD Firma1
+        private string firmaDNFD6;
+        public string FirmaDNFD6 { get => firmaDNFD6; set => SetProperty(ref firmaDNFD6, value); }
+        //participante del DNFD Firma1
+        private string firmaDNFD7;
+        public string FirmaDNFD7 { get => firmaDNFD7; set => SetProperty(ref firmaDNFD7, value); }
+        //participante del DNFD Firma1
+        private string firmaDNFD8;
+        public string FirmaDNFD8 { get => firmaDNFD8; set => SetProperty(ref firmaDNFD8, value); }
+
 
         //participante del Establecimiento Firma1
         private string firmaEstablec1;

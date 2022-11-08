@@ -65,7 +65,7 @@ namespace DataModel
         //Los productos farmacéuticos se almacenan sobre anaqueles, racks, tarimas o pallets 
         private enumAUD_TipoSeleccion prodSobreAnaqueles;
         public enumAUD_TipoSeleccion ProdSobreAnaqueles { get => prodSobreAnaqueles; set => SetProperty(ref prodSobreAnaqueles, value); }
-
+               
         private enumAUD_TipoSeleccion prodSobreRacks;
         public enumAUD_TipoSeleccion ProdSobreRacks { get => prodSobreRacks; set => SetProperty(ref prodSobreRacks, value); }
 
