@@ -73,7 +73,13 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 case enumAUD_TipoActa.RR:
                     {
-                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
+                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() };
+                        break;
+                    }
+                case enumAUD_TipoActa.AF:
+                case enumAUD_TipoActa.CUF:
+                    {
+                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB() };
                         break;
                     }
                 default:

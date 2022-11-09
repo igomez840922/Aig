@@ -24,9 +24,9 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
                         </li>
-                       @* <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#signature" role="tab" @onclick="(e)=>{ updateSignatureControls();}">@languageContainerService.Keys["Signature"]</a>
-                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#signature" role="tab" @onclick="(e)=>{OnShowSignasure();}">@languageContainerService.Keys["Signature"]</a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="generalInfo" role="tabpanel">
@@ -73,24 +73,7 @@
                                             <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.RetiroRetencionType) />
                                         </div>
                                     </div>
-                                </div>
-                                @*<div class="col-sm-4">
-                                <label for="password">@languageContainerService.Keys["InspectionType"]</label>
-                                <div class="form-group">
-                                <div class="kt-radio-inline">
-                                <InputRadioGroup @bind-Value="Inspeccion.InspRetiroRetencion.RetiroRetencionType">
-                                @foreach (enum_InspRetiroRetencionType dt in Enum.GetValues(typeof(enum_InspRetiroRetencionType)))
-                                {
-                                <label class="kt-radio">
-                                <InputRadio Value="@dt"></InputRadio>@(DataModel.Helper.Helper.GetDescription(dt))<br />
-                                <span></span>
-                                </label>
-                                }
-                                </InputRadioGroup>
-                                <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.RetiroRetencionType) />
-                                </div>
-                                </div>
-                                </div>*@
+                                </div>                               
 
                             </div>
                             <div class="row clearfix">
@@ -215,8 +198,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>  
-                            <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <label>@languageContainerService.Keys["Email"]</label>
                                     <div class="form-group">
@@ -226,201 +207,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="row clearfix">
-                            <div class="col-sm-4">
-                            <label>@languageContainerService.Keys["RegNum"]</label>
-                            <div class="form-group">
-                            <div class="form-line">
-                            <InputText class="form-control" @bind-Value="Inspeccion.NumRegDNFD1" />
-                            <ValidationMessage For=@(() => Inspeccion.NumRegDNFD1) />
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-
-                              <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <label>@languageContainerService.Keys["SignatureBytheMinistryofHealth"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD1" OnSignatureChange="OnSignatureDNFDChange1"
-                                                 MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg1">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>@languageContainerService.Keys["SignatureBytheEstablishment"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadESTAB1" OnSignatureChange="OnSignatureESTABChange1"
-                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureESTABImg1">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <label>&emsp;</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD2" OnSignatureChange="OnSignatureDNFDChange2"
-                                                 MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg2">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>&emsp;</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadESTAB2" OnSignatureChange="OnSignatureESTABChange2"
-                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureESTABImg2">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <label>&emsp;</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD3" OnSignatureChange="OnSignatureDNFDChange3"
-                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg3">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <label>&emsp;</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD4" OnSignatureChange="OnSignatureDNFDChange4"
-                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg4">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <label>&emsp;</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD5" OnSignatureChange="OnSignatureDNFDChange5"
-                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg5">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <label>&emsp;</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD6" OnSignatureChange="OnSignatureDNFDChange6"
-                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg6">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <label>&emsp;</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD7" OnSignatureChange="OnSignatureDNFDChange7"
-                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg7">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <label>&emsp;</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <SignaturePad @ref="signaturePadDNFD8" OnSignatureChange="OnSignatureDNFDChange8"
-                                                          MinHeight="150" MaxHeight="150" BackgroundColor="#FFFFFF">
-                                                <SignaturePadFooter>
-                                                    <SignaturePadClear>
-                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureDNFDImg8">@languageContainerService.Keys["Clear"]</button>
-                                                    </SignaturePadClear>
-                                                </SignaturePadFooter>
-                                            </SignaturePad>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                </div>
-                            </div>
-
-                            
+                            </div>                                                       
                         </div>
                         <div class="tab-pane" id="products" role="tabpanel">
                             <h4>@languageContainerService.Keys["Products"]</h4>
@@ -428,7 +215,8 @@
                                 <div class="col-9" style="text-align:left;">
                                 </div>
                                 <div class="col-3" style="text-align:right;">
-                                    @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
+                                    @if (StatusInspecciones == enum_StatusInspecciones.Pending)
+                                    {
                                     <button type="button" @onclick="(e)=>{OpenProduct();}"
                                             class="btn btn-sm btn-outline-primary waves-effect">
                                         @languageContainerService.Keys["Add"]
@@ -470,7 +258,7 @@
                                                         <td>@dt.CantidadRetirada</td>
                                                         <td>@dt.Destino</td>
                                                         <td style="text-align:right">
-                                                            @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
+                                                            @if (StatusInspecciones == enum_StatusInspecciones.Pending){
                                                             <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveProduct(dt);}">@languageContainerService.Keys["Delete"]</button>
 
                                                             }
@@ -490,7 +278,7 @@
                                 <div class="col-9" style="text-align:left;">
                                 </div>
                                 <div class="col-3" style="text-align:right;">
-                                    @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
+                                    @if (StatusInspecciones == enum_StatusInspecciones.Pending){
                                     <button type="button" @onclick="(e)=>{OpenAttachment();}"
                                             class="btn btn-sm btn-outline-primary waves-effect">
                                         @languageContainerService.Keys["Add"]
@@ -520,7 +308,7 @@
                                                             <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
                                                         </td>
                                                         <td style="text-align:right">
-                                                            @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
+                                                            @if (StatusInspecciones == enum_StatusInspecciones.Pending){
                                                             <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
 
                                                             }
@@ -535,17 +323,506 @@
                             </div>
 
                         </div>
-                       @* <div class="tab-pane" id="signature" role="tabpanel">
+                        <div class="tab-pane" id="signature" role="tabpanel">
                             <h4>@languageContainerService.Keys["Signature"]</h4>
+                            @if (showSignasure)
+                            {
+                                <div class="row clearfix">
 
-                          
-                        </div>*@
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Inspector"] 1</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector1" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector1) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector1" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector1) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector1" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector1) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad1" OnSignatureChange="OnSignatureChange1"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg1">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Inspector"] 2</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector2" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector2) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector2" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector2) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector2" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector2) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad2" OnSignatureChange="OnSignatureChange2"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg2">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Inspector"] 3</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector3" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector3) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector3" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector3) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector3" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector3) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad3" OnSignatureChange="OnSignatureChange3"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg3">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                           <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Inspector"] 4</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector4" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector4) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector4" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector4) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector4" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector4) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad4" OnSignatureChange="OnSignatureChange4"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg4">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                   
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Inspector"] 5</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector5" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector5) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector5" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector5) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector5" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector5) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad5" OnSignatureChange="OnSignatureChange5"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Inspector"] 6</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector6" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector6) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector6" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector6) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector6" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector6) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad6" OnSignatureChange="OnSignatureChange6"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg6">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Inspector"] 7</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector7" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector7) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector7" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector7) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector7" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector7) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad7" OnSignatureChange="OnSignatureChange7"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg7">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                           <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Inspector"] 8</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector8" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreInspector8) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector8" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.RegistroInspector8) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector8" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaInspector8) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad8" OnSignatureChange="OnSignatureChange8"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg8">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                           <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Representante Legal de la Empresa"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreRepresentanteLegal) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CargoRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CargoRepresentanteLegal) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaRepresentanteLegal) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad9" OnSignatureChange="OnSignatureChange9"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg9">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Regente Farmaceutico"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.NombreRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CargoRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CargoRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosConclusiones.CedulaRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad10" OnSignatureChange="OnSignatureChange10"
+                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg10">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            }
+                            
+                        </div>
                     </div>
 
                     <br><br>
                     <div class="modal-footer">
 
-                        @if(Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending){
+                        @if (StatusInspecciones == enum_StatusInspecciones.Pending){
                         <button type="submit"
                                 class="btn btn-info waves-effect">
                             @languageContainerService.Keys["Save"]

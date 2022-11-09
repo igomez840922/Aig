@@ -178,3 +178,26 @@ NewCorregimiento: Nuevo Corregimiento
 EditCorregimiento: Editar Corregimiento
 Signature: Firma
 ApplicantName: Nombre del Solicitante
+ApplicantInfo: Información del Solicitante
+Nationality: Nacionalidad
+MobilePhone: Telefono Movil
+OfficePhone: Telefono Oficina
+ResidencePhone: Telefono Residencial
+BusinessPhone: Telefono Establecimiento
+Profession: Profesión
+RegentInfo: Información del Regente
+SuitabilityRegistrationNumber: Número de Registro de Idoneidad
+IdentificationCard: Cédula
+PharmacyOrganizationalStructure: Estructura Organizativa de la Farmacia
+YouHaveYourIdentificationSign: Dispone de su letrero de Identificación
+PharmacyInfrastructure: Infraestructura de Farmacia
+PharmacyPhysicalArea: Área Física de Farmacia
+Questions: Preguntas
+ControlledProductsArea: Área de Productos Controlados
+MedicationStorageArea: Área de Almacenamiento de Medicamentos
+ConclusionInfo: Conclusiones
+InspectorsApprovals: Aprobaciones de Inspectores
+RegisterNumber: Número de Registro
+Charge: Cargo
+Time: Hora
+Days: Días

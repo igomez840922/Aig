@@ -177,3 +177,26 @@ NewCorregimiento: New Corregimiento
 EditCorregimiento: Edit Corregimiento
 Signature: Signature
 ApplicantName: Applicant's Name
+ApplicantInfo: Applicant Info
+Nationality: Nationality
+MobilePhone: Mobile Phone
+OfficePhone: Office Phone
+ResidencePhone: Residence Phone
+BusinessPhone: Business Phone
+Profession: Profession
+RegentInfo: Regent Info
+SuitabilityRegistrationNumber: Suitability Registration Number
+IdentificationCard: Identification Card
+PharmacyOrganizationalStructure: Pharmacy Organizational Structure
+YouHaveYourIdentificationSign: You have your Identification Sign
+PharmacyInfrastructure: Pharmacy Infrastructure
+PharmacyPhysicalArea: Pharmacy Physical Area
+Questions: Questions
+ControlledProductsArea: Controlled Products Area
+MedicationStorageArea: Medication Storage Area
+ConclusionInfo: Conclusion Info
+InspectorsApprovals: Inspectors Approvals
+RegisterNumber: Register Number
+Charge: Charge
+Time: Time
+Days: Days

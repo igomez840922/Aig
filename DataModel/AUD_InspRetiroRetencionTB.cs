@@ -11,7 +11,12 @@ namespace DataModel
 {
     public class AUD_InspRetiroRetencionTB:SystemId
     {
-       
+        public AUD_InspRetiroRetencionTB()
+        {
+            DatosConclusiones = new AUD_DatosConclusiones();
+            LProductos = new List<AUD_ProdRetiroRetencionTB>();
+        }
+
         private string seccionOficinaRegional;
         [StringLength(250)]
         public string SeccionOficinaRegional { get => seccionOficinaRegional; set => SetProperty(ref seccionOficinaRegional, value); }
@@ -27,6 +32,13 @@ namespace DataModel
 
         private AUD_InspeccionTB inspeccion;
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
+
+
+        //Datos Conclusión de Inspección
+        private AUD_DatosConclusiones datosConclusiones;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
+
 
     }
 }

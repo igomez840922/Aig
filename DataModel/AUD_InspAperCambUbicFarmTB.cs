@@ -27,6 +27,10 @@ namespace DataModel
             DatosConclusiones = new AUD_DatosConclusiones();
         }
 
+        private AUD_InspeccionTB inspeccion;
+        public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
+
+
         //codigo
         private string reciboPago;
         [StringLength(250)]

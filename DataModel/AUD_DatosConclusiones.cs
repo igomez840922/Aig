@@ -37,6 +37,11 @@ namespace DataModel
         [StringLength(250)]
         public string NombreInspector1 { get => nombreInspector1; set => SetProperty(ref nombreInspector1, value); }
 
+        //cedula 1 registro
+        private string cedulaInspector1;
+        [StringLength(250)]
+        public string CedulaInspector1 { get => cedulaInspector1; set => SetProperty(ref cedulaInspector1, value); }
+
         //Inspector 1 registro
         private string registroInspector1;
         [StringLength(250)]
@@ -56,6 +61,11 @@ namespace DataModel
         private string nombreInspector2;
         [StringLength(250)]
         public string NombreInspector2 { get => nombreInspector2; set => SetProperty(ref nombreInspector2, value); }
+
+        //cedula 2 registro
+        private string cedulaInspector2;
+        [StringLength(250)]
+        public string CedulaInspector2 { get => cedulaInspector2; set => SetProperty(ref cedulaInspector2, value); }
 
         //Inspector 2 registro
         private string registroInspector2;
@@ -77,6 +87,11 @@ namespace DataModel
         [StringLength(250)]
         public string NombreInspector3 { get => nombreInspector3; set => SetProperty(ref nombreInspector3, value); }
 
+        //cedula 3 registro
+        private string cedulaInspector3;
+        [StringLength(250)]
+        public string CedulaInspector3 { get => cedulaInspector3; set => SetProperty(ref cedulaInspector3, value); }
+
         //Inspector 3 registro
         private string registroInspector3;
         [StringLength(250)]
@@ -96,6 +111,12 @@ namespace DataModel
         [StringLength(250)]
         public string NombreInspector4 { get => nombreInspector4; set => SetProperty(ref nombreInspector4, value); }
 
+        //cedula 4 registro
+        private string cedulaInspector4;
+        [StringLength(250)]
+        public string CedulaInspector4 { get => cedulaInspector4; set => SetProperty(ref cedulaInspector4, value); }
+
+
         //Inspector 4 registro
         private string registroInspector4;
         [StringLength(250)]
@@ -109,6 +130,106 @@ namespace DataModel
         //Inspector 4 firma
         private string firmaInspector4;
         public string FirmaInspector4 { get => firmaInspector4; set => SetProperty(ref firmaInspector4, value); }
+
+
+        //Inspector 5 Nombre
+        private string nombreInspector5;
+        [StringLength(250)]
+        public string NombreInspector5 { get => nombreInspector5; set => SetProperty(ref nombreInspector5, value); }
+
+        //cedula 5 registro
+        private string cedulaInspector5;
+        [StringLength(250)]
+        public string CedulaInspector5 { get => cedulaInspector5; set => SetProperty(ref cedulaInspector5, value); }
+
+        //Inspector 5 registro
+        private string registroInspector5;
+        [StringLength(250)]
+        public string RegistroInspector5 { get => registroInspector5; set => SetProperty(ref registroInspector5, value); }
+
+        //Inspector 5 cargo
+        private string cargoInspector5;
+        [StringLength(250)]
+        public string CargoInspector5 { get => cargoInspector5; set => SetProperty(ref cargoInspector5, value); }
+
+        //Inspector 5 firma
+        private string firmaInspector5;
+        public string FirmaInspector5 { get => firmaInspector5; set => SetProperty(ref firmaInspector5, value); }
+
+
+        //Inspector 6 Nombre
+        private string nombreInspector6;
+        [StringLength(250)]
+        public string NombreInspector6 { get => nombreInspector6; set => SetProperty(ref nombreInspector6, value); }
+
+        //cedula 6 registro
+        private string cedulaInspector6;
+        [StringLength(250)]
+        public string CedulaInspector6 { get => cedulaInspector6; set => SetProperty(ref cedulaInspector6, value); }
+
+        //Inspector 6 registro
+        private string registroInspector6;
+        [StringLength(250)]
+        public string RegistroInspector6 { get => registroInspector6; set => SetProperty(ref registroInspector6, value); }
+
+        //Inspector 6 cargo
+        private string cargoInspector6;
+        [StringLength(250)]
+        public string CargoInspector6 { get => cargoInspector6; set => SetProperty(ref cargoInspector6, value); }
+
+        //Inspector 6 firma
+        private string firmaInspector6;
+        public string FirmaInspector6 { get => firmaInspector6; set => SetProperty(ref firmaInspector6, value); }
+
+
+        //Inspector 7 Nombre
+        private string nombreInspector7;
+        [StringLength(250)]
+        public string NombreInspector7 { get => nombreInspector7; set => SetProperty(ref nombreInspector7, value); }
+
+        //cedula 7 registro
+        private string cedulaInspector7;
+        [StringLength(250)]
+        public string CedulaInspector7 { get => cedulaInspector7; set => SetProperty(ref cedulaInspector7, value); }
+
+
+        //Inspector 7 registro
+        private string registroInspector7;
+        [StringLength(250)]
+        public string RegistroInspector7 { get => registroInspector7; set => SetProperty(ref registroInspector7, value); }
+
+        //Inspector 7 cargo
+        private string cargoInspector7;
+        [StringLength(250)]
+        public string CargoInspector7 { get => cargoInspector7; set => SetProperty(ref cargoInspector7, value); }
+
+        //Inspector 7 firma
+        private string firmaInspector7;
+        public string FirmaInspector7 { get => firmaInspector7; set => SetProperty(ref firmaInspector7, value); }
+
+        //Inspector 8 Nombre
+        private string nombreInspector8;
+        [StringLength(250)]
+        public string NombreInspector8 { get => nombreInspector8; set => SetProperty(ref nombreInspector8, value); }
+
+        //cedula 7 registro
+        private string cedulaInspector8;
+        [StringLength(250)]
+        public string CedulaInspector8 { get => cedulaInspector8; set => SetProperty(ref cedulaInspector8, value); }
+
+        //Inspector 8 registro
+        private string registroInspector8;
+        [StringLength(250)]
+        public string RegistroInspector8 { get => registroInspector8; set => SetProperty(ref registroInspector8, value); }
+
+        //Inspector 8 cargo
+        private string cargoInspector8;
+        [StringLength(250)]
+        public string CargoInspector8 { get => cargoInspector8; set => SetProperty(ref cargoInspector8, value); }
+
+        //Inspector 8 firma
+        private string firmaInspector8;
+        public string FirmaInspector8 { get => firmaInspector8; set => SetProperty(ref firmaInspector8, value); }
 
 
         //nombre representante legal
@@ -126,28 +247,40 @@ namespace DataModel
         [StringLength(250)]
         public string RegistroRepresentanteLegal { get => registroRepresentanteLegal; set => SetProperty(ref registroRepresentanteLegal, value); }
 
+        //registro representante legal
+        private string cargoRepresentanteLegal;
+        [StringLength(250)]
+        public string CargoRepresentanteLegal { get => cargoRepresentanteLegal; set => SetProperty(ref cargoRepresentanteLegal, value); }
+
+
         //firma representante legal
         private string firmaRepresentanteLegal;
         public string FirmaRepresentanteLegal { get => firmaRepresentanteLegal; set => SetProperty(ref firmaRepresentanteLegal, value); }
 
-        //nombre representante legal
+        //nombre regente legal
         private string nombreRegente;
         [StringLength(250)]
         public string NombreRegente { get => nombreRegente; set => SetProperty(ref nombreRegente, value); }
 
-        //cedula representante legal
+        //cedula regente legal
         private string cedulaRegente;
         [StringLength(250)]
         public string CedulaRegente { get => cedulaRegente; set => SetProperty(ref cedulaRegente, value); }
 
-        //registro representante legal
+        //registro regente legal
         private string registroRegente;
         [StringLength(250)]
         public string RegistroRegente { get => registroRegente; set => SetProperty(ref registroRegente, value); }
 
-        //firma representante legal
+        //registro regente legal
+        private string cargoRegente;
+        [StringLength(250)]
+        public string CargoRegente { get => cargoRegente; set => SetProperty(ref cargoRegente, value); }
+
+        //firma regente legal
         private string firmaRegente;
         public string FirmaRegente { get => firmaRegente; set => SetProperty(ref firmaRegente, value); }
+
 
         //fecha y Hora de finalizacion
         private DateTime? fechaFinalizacion;

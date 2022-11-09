@@ -209,9 +209,15 @@
         }
         case DataModel.Helper.enumAUD_TipoActa.RR:
         {
-            <Aig.Auditoria.Components.Inspections.RetencionRetiroProductos Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RetencionRetiroProductos>
-            break;
-        }
+                <Aig.Auditoria.Components.Inspections.RetencionRetiroProductos Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RetencionRetiroProductos>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.AF:
+        case DataModel.Helper.enumAUD_TipoActa.CUF:
+            {
+                <Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia>
+                break;
+            }
         default:
         {
             break;

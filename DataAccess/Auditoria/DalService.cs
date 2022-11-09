@@ -114,9 +114,8 @@ namespace DataAccess.Auditoria
                 _Data.UpdatedDate = DateTime.Now;
                 var _OldData = DBContext.Set<T>().Find(_Data.Id);
                 if (_OldData != null)
-                {
-                    DBContext.Entry(_OldData).CurrentValues.SetValues(_Data);
-
+                {                    
+                    DBContext.Entry(_OldData).CurrentValues.SetValues(_Data);                    
                 }
                 else
                 {

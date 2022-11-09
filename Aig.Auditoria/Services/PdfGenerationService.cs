@@ -140,16 +140,11 @@ namespace Aig.Auditoria.Services
                                       table.Cell().Text("");
                                       table.Cell().AlignLeft().Text("Por el establecimiento:").Bold();
 
-                                      table.Cell().AlignLeft().Text(string.Format("No. Registro: {0}", inspection.NumRegDNFD1));
-                                      table.Cell().Text("");
-                                      table.Cell().AlignLeft().Text(string.Format("Cédula: {0}  Cargo: {1}", inspection.ParticEstablecimientoCIP, inspection.ParticEstablecimientoCargo));
-
-
-                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD1))
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector1))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD1.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector1.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -158,11 +153,11 @@ namespace Aig.Auditoria.Services
                                           table.Cell().AlignLeft().Text("");
                                       }
                                       table.Cell().Text("");
-                                      if (!string.IsNullOrEmpty(inspection.FirmaEstablec1))
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaRepresentanteLegal))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaEstablec1.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaRepresentanteLegal.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -170,12 +165,16 @@ namespace Aig.Auditoria.Services
                                       {
                                           table.Cell().AlignLeft().Text("");
                                       }
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  No. Registro:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreInspector1, inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector1, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector1));
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  Cargo:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreRepresentanteLegal ,inspection.InspRetiroRetencion.DatosConclusiones.CedulaRepresentanteLegal, inspection.InspRetiroRetencion.DatosConclusiones.CargoRepresentanteLegal));
 
-                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD2))
+
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector2))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD2.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector2.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -184,11 +183,11 @@ namespace Aig.Auditoria.Services
                                           table.Cell().AlignLeft().Text("");
                                       }
                                       table.Cell().Text("");
-                                      if (!string.IsNullOrEmpty(inspection.FirmaEstablec2))
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaRegente))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaEstablec2.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaRegente.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -196,27 +195,16 @@ namespace Aig.Auditoria.Services
                                       {
                                           table.Cell().AlignLeft().Text("");
                                       }
-
-                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD3))
-                                      {
-                                          //var bytes = Convert.FromBase64String(base64encodedstring);
-                                          //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD3.Split("image/png;base64,")[1]);
-                                          MemoryStream memoryStream = new MemoryStream(data);
-                                          table.Cell().AlignLeft().Image(memoryStream);
-                                      }
-                                      else
-                                      {
-                                          table.Cell().AlignLeft().Text("");
-                                      }
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  No. Registro:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreInspector2, inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector2, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector2));
                                       table.Cell().Text("");
-                                      table.Cell().AlignLeft().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  Cargo:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreRegente, inspection.InspRetiroRetencion.DatosConclusiones.CedulaRegente, inspection.InspRetiroRetencion.DatosConclusiones.CargoRegente));
 
-                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD4))
+
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector3))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD4.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector3.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -226,12 +214,15 @@ namespace Aig.Auditoria.Services
                                       }
                                       table.Cell().Text("");
                                       table.Cell().AlignLeft().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  No. Registro:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreInspector3, inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector3, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector3));
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
 
-                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD5))
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector4))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD5.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector4.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -241,12 +232,16 @@ namespace Aig.Auditoria.Services
                                       }
                                       table.Cell().Text("");
                                       table.Cell().AlignLeft().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  No. Registro:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreInspector4, inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector4, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector4));
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
 
-                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD6))
+
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector5))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD6.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector5.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -256,12 +251,15 @@ namespace Aig.Auditoria.Services
                                       }
                                       table.Cell().Text("");
                                       table.Cell().AlignLeft().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  No. Registro:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreInspector5, inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector5, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector5));
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
 
-                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD7))
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector6))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD7.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector6.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -271,12 +269,15 @@ namespace Aig.Auditoria.Services
                                       }
                                       table.Cell().Text("");
                                       table.Cell().AlignLeft().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  No. Registro:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreInspector6, inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector6, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector6));
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
 
-                                      if (!string.IsNullOrEmpty(inspection.FirmaDNFD8))
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector7))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.FirmaDNFD8.Split("image/png;base64,")[1]);
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector7.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
                                           table.Cell().AlignLeft().Image(memoryStream);
                                       }
@@ -284,10 +285,33 @@ namespace Aig.Auditoria.Services
                                       {
                                           table.Cell().AlignLeft().Text("");
                                       }
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  No. Registro:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreInspector7, inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector7, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector7));
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+
+
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector8))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector8.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      table.Cell().Text("");
+                                      table.Cell().AlignLeft().Text("");
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  No. Registro:{2}", inspection.InspRetiroRetencion.DatosConclusiones.NombreInspector8, inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector8, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector8));
                                       table.Cell().Text("");
                                       table.Cell().AlignLeft().Text("");
 
                                   });
+
                                   column.Item().PaddingVertical(10).Text(" ");
                                   column.Item().AlignBottom().Table(table =>
                                   {

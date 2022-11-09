@@ -3,6 +3,7 @@ using Aig.Auditoria.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using DataModel;
+using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace Aig.Auditoria.Components.OpenHours
@@ -12,13 +13,14 @@ namespace Aig.Auditoria.Components.OpenHours
         [Inject]
         IProfileService profileService { get; set; }
         bool OpenDialog { get; set; }
-        DataModel.AUD_DatosHorario HorarioApertura { get; set; } = null;
+        [Parameter]
+        public DataModel.AUD_DatosHorario HorarioApertura { get; set; } = null;
        
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
+            //bus.Subscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
 
             base.OnInitialized();
         }
@@ -49,20 +51,21 @@ namespace Aig.Auditoria.Components.OpenHours
         //Fill Data
         protected async Task FetchData()
         {
+            OpenDialog = true;
+            HorarioApertura = HorarioApertura != null ? HorarioApertura : new DataModel.AUD_DatosHorario();
+
             await this.InvokeAsync(StateHasChanged);
         }
 
         //OPEN MODAL TO ADD/Edit 
-        private void AddEditOpenEventHandler(MessageArgs args)
-        {
-            var message = args.GetMessage<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>();
+        //private void AddEditOpenEventHandler(MessageArgs args)
+        //{
+        //    var message = args.GetMessage<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>();
 
-            HorarioApertura = message.Data != null ? message.Data : new DataModel.AUD_DatosHorario();
+        //    HorarioApertura = message.Data != null ? message.Data : new DataModel.AUD_DatosHorario();            
 
-            OpenDialog = true;
-
-            this.InvokeAsync(StateHasChanged);
-        }
+        //    this.InvokeAsync(StateHasChanged);
+        //}
 
 
         /// <summary>
@@ -71,7 +74,7 @@ namespace Aig.Auditoria.Components.OpenHours
 
         protected async Task SaveData()
         {
-            bus.UnSubscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
+            //bus.UnSubscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
             OpenDialog = false;
             await bus.Publish(new Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_CloseEvent { Data = HorarioApertura });
             await this.InvokeAsync(StateHasChanged);
@@ -79,7 +82,7 @@ namespace Aig.Auditoria.Components.OpenHours
 
         protected async Task Cancel()
         {
-            bus.UnSubscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
+            //bus.UnSubscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
             OpenDialog = false;
             await bus.Publish(new Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_CloseEvent { Data = null });
             await this.InvokeAsync(StateHasChanged);

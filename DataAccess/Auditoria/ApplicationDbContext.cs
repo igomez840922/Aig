@@ -63,7 +63,7 @@ namespace DataAccess.Auditoria
 
             modelBuilder.Entity<AUD_InspeccionTB>()
                .HasOne(e => e.InspAperCambUbicFarm)
-               .WithOne()
+               .WithOne(e => e.Inspeccion)
                .HasForeignKey<AUD_InspeccionTB>(e => e.InspAperCambUbicFarmId);
 
             modelBuilder.Entity<AUD_InspeccionTB>()
@@ -71,14 +71,11 @@ namespace DataAccess.Auditoria
                .WithOne(e=>e.Inspeccion)
                .HasForeignKey<AUD_InspeccionTB>(e => e.InspRetiroRetencionId);
 
+
             //JSON Serialization
             modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
               .Property(e => e.DatosEstablecimiento)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x==null?null: JsonConvert.DeserializeObject<AUD_DatosEstablecimiento>(x));
-
-            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
-              .Property(e => e.DatosEstablecimiento)
-              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEstablecimiento>(x));
 
             modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
              .Property(e => e.DatosSolicitante)
@@ -91,6 +88,43 @@ namespace DataAccess.Auditoria
             modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
             .Property(e => e.DatosEstructuraOrganizacional)
             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEstructuraOrganizacional>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+            .Property(e => e.DatosInfraEstructura)
+            .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosInfraEstructura>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+           .Property(e => e.DatosAreaFisica)
+           .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreasFisicas>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+          .Property(e => e.DatosPreguntasGenericas)
+          .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosPreguntasGenericas>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+          .Property(e => e.DatosSenalizacionAvisos)
+          .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosSenalizacionAvisos>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+         .Property(e => e.DatosAreaProductosControlados)
+         .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaProductosControlados>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+        .Property(e => e.DatosAreaAlmacenamiento)
+        .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaAlmacenamiento>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+       .Property(e => e.DatosConclusiones)
+       .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+
+            ///////////////////////////////////////////
+            ///
+
+            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
+      .Property(e => e.DatosConclusiones)
+      .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+
+
 
             modelBuilder.Entity<AUD_EstablecimientoTB>()
                 .HasMany(e => e.LInspections)

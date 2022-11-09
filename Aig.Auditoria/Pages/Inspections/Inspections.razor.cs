@@ -112,7 +112,7 @@ namespace Aig.Auditoria.Pages.Inspections
         }
         private void InspectionAddEdit_CloseEventHandler(MessageArgs args)
         {
-            bus.Subscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
+            bus.UnSubscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
 
             var message = args.GetMessage<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>();
 

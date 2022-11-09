@@ -141,11 +141,11 @@ namespace Aig.FarmacoVigilancia.Services
                                      table.Cell().Text("");
                                      table.Cell().AlignLeft().Text("Por el establecimiento:").Bold();
 
-                                     if (!string.IsNullOrEmpty(inspection.FirmaDNFD1))
+                                     if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector1))
                                      {
                                          //var bytes = Convert.FromBase64String(base64encodedstring);
                                          //var contents = new StreamContent(new MemoryStream(bytes));
-                                         byte[] data = Convert.FromBase64String(inspection.FirmaDNFD1.Split("image/png;base64,")[1]);
+                                         byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaInspector1.Split("image/png;base64,")[1]);
                                          MemoryStream memoryStream = new MemoryStream(data);
                                          table.Cell().AlignLeft().Image(memoryStream);
                                      }
@@ -154,11 +154,11 @@ namespace Aig.FarmacoVigilancia.Services
                                          table.Cell().AlignLeft().Text("");
                                      }
                                      table.Cell().Text("");
-                                     if (!string.IsNullOrEmpty(inspection.FirmaEstablec1))
+                                     if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosConclusiones.FirmaRepresentanteLegal))
                                      {
                                          //var bytes = Convert.FromBase64String(base64encodedstring);
                                          //var contents = new StreamContent(new MemoryStream(bytes));
-                                         byte[] data = Convert.FromBase64String(inspection.FirmaEstablec1.Split("image/png;base64,")[1]);
+                                         byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosConclusiones.FirmaRepresentanteLegal.Split("image/png;base64,")[1]);
                                          MemoryStream memoryStream = new MemoryStream(data);
                                          table.Cell().AlignLeft().Image(memoryStream);
                                      }
@@ -167,9 +167,9 @@ namespace Aig.FarmacoVigilancia.Services
                                          table.Cell().AlignLeft().Text("");
                                      }
 
-                                     table.Cell().AlignLeft().Text(string.Format("No. Registro: {0}", inspection.NumRegDNFD1));
+                                     table.Cell().AlignLeft().Text(string.Format("Cédula:{0}  No. Registro:{1}", inspection.InspRetiroRetencion.DatosConclusiones.CedulaInspector1, inspection.InspRetiroRetencion.DatosConclusiones.RegistroInspector1));
                                      table.Cell().Text("");
-                                     table.Cell().AlignLeft().Text(string.Format("Cédula: {0}  Cargo: {1}", inspection.ParticEstablecimientoCIP, inspection.ParticEstablecimientoCargo));
+                                     table.Cell().AlignLeft().Text(string.Format("Cédula:{0}  Cargo: {1}", inspection.InspRetiroRetencion.DatosConclusiones.CedulaRepresentanteLegal, inspection.InspRetiroRetencion.DatosConclusiones.CargoRepresentanteLegal));
 
                                  });
                                  column.Item().PaddingVertical(10).Text(" ");
