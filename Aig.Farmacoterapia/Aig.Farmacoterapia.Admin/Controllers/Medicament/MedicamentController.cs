@@ -2,7 +2,6 @@
 using Aig.Farmacoterapia.Application.Medicament.Model;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
-using Aig.Farmacoterapia.Domain.Identity;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

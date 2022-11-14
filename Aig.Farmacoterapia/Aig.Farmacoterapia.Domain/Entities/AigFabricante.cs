@@ -10,6 +10,7 @@ namespace Aig.Farmacoterapia.Domain.Entities
 {
     public class AigFabricante: BaseAuditableEntity
     {
+
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string Correo { get; set; }

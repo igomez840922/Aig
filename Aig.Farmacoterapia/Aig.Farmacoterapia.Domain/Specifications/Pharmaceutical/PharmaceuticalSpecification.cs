@@ -6,7 +6,11 @@ namespace Aig.Farmacoterapia.Domain.Specifications.Medicament
 {
     public class PharmaceuticalSpecification : BaseSpecification<AigFormaFarmaceutica>
     {
-       
+        public PharmaceuticalSpecification(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+                Criteria = p => p.Nombre.ToLower().StartsWith(value.ToLower());
+        }
         public PharmaceuticalSpecification(List<Expression<Func<AigFormaFarmaceutica, bool>>> filters)
         {
             Criteria = p => true;

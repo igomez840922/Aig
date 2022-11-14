@@ -37,7 +37,9 @@ namespace Aig.Farmacoterapia.Application.Common.Middleware
             }
             else
             {
+#pragma warning disable CS8603 // Possible null reference return.
                 return null;
+#pragma warning restore CS8603 // Possible null reference return.
             }
         }
 
@@ -60,7 +62,9 @@ namespace Aig.Farmacoterapia.Application.Common.Middleware
                 var result = await signInMgr.PasswordSignInAsync(info.UserName, info.Password, info.RememberMe, lockoutOnFailure: false);
 
                 //Uncache password for security:
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 info.Password = null;
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
                 if (result.Succeeded)
                 {
@@ -85,7 +89,9 @@ namespace Aig.Farmacoterapia.Application.Common.Middleware
             }
             else if (context.Request.Path.StartsWithSegments("/loginwith2fa"))
             {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 var key = Guid.Parse(context.Request.Path.Value.Split('/').Last());
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 var info = Logins[key];
 
                 if (string.IsNullOrEmpty(info.TwoFactorCode))

@@ -5,6 +5,7 @@ using Aig.Farmacoterapia.Infrastructure;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Aig.Farmacoterapia.Infrastructure.SeedData;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.FileProviders;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);

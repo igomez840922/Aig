@@ -14,7 +14,9 @@ namespace Aig.Farmacoterapia.Infrastructure.SeedData
             {
                 var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 if (dbContext.Database.GetPendingMigrations().Any())
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 {
                     await dbContext.Database.MigrateAsync();
                 }
@@ -27,7 +29,9 @@ namespace Aig.Farmacoterapia.Infrastructure.SeedData
             {
                 var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
                 var role = "Admin";
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 if (!await roleManager.RoleExistsAsync(role))
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                     await roleManager.CreateAsync(new IdentityRole(role));
                 //foreach (enumUserRoleType dt in Enum.GetValues(typeof(enumUserRoleType)))
                 //{
@@ -46,7 +50,9 @@ namespace Aig.Farmacoterapia.Infrastructure.SeedData
             {
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 if (userManager.FindByNameAsync("admin").Result == null)
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 {
                     ApplicationUser user = new ApplicationUser();
                     user.FirstName = "admin";

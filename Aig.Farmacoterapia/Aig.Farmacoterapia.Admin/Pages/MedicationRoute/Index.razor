@@ -1,6 +1,7 @@
 ﻿@page "/medicationroute/list"
 @*@layout null*@
-@using Aig.Farmacoterapia.Admin.Components.Product
+@using Aig.Farmacoterapia.Admin.Components
+@using Aig.Farmacoterapia.Admin.Components.MedicationRoute
 @using Aig.Farmacoterapia.Admin.Models
 @using Aig.Farmacoterapia.Application.Medicament.Model
 @using Aig.Farmacoterapia.Domain.Common
@@ -64,7 +65,7 @@
                             </span>
                         </button>
                         &nbsp;&nbsp;
-                        <button @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
+                        <button type="button" @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
                             <span>
                                 <i class="la la-close"></i>
                                 <span>Eliminar</span>
@@ -98,13 +99,13 @@
                 <MudTd>
                     <span class="dropdown">
                         <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                            <i class="la la-ellipsis-h"></i>
+                           <i class="flaticon-more-1 kt-font-brand"></i>
                         </a>
                         <span class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="#" @onclick="() => OnEdit(context.Id)" data-toggle="modal" data-target="#modal_createedit" >
                                 <i class="la la-edit"></i> Editar
                             </a> 
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="#" @onclick="() => OnDelete(context)" data-toggle="modal">
                                 <i class="la la-trash"></i> 
                                 Eliminar
                             </a> 
@@ -129,16 +130,24 @@
 
 @if (addEditDialogIsOpen)
 {
-    <ProductAddEdit ModelData="@modelData" OnClose="@OnEventAddEditClose"></ProductAddEdit>
+    <AddEdit ModelData="@modelData" OnClose="@OnEventAddEditClose"></AddEdit>
 }
 
+@if(deleteDialogIsOpen)
+{
+   <DeleteConfirmDialog Caption="Eliminar"
+                   Message="¿Confirma que desea de eliminar el artículo?"
+                   OnClose="@OnDeleteDialogClose">
+    </DeleteConfirmDialog>
+}
 @code {
 
     private MudTable<AigViaAdministracion> table;
     private static IEnumerable<AigViaAdministracion> List { get; set; }
     private string searchString;
-    protected ProductObject modelData;
+    protected AigViaAdministracion modelData;
     protected bool addEditDialogIsOpen = false;
+    protected bool deleteDialogIsOpen = false;
 
     protected async override Task OnInitializedAsync()
     {
@@ -190,15 +199,13 @@
         table.ReloadServerData();
     }
 
-    private async Task OnEdit(long id)
+       private async Task OnEdit(long id)
     {
-        //var result = await MainService.Get(id);
-        //if (result == null)
-        //{
-        //    result = new CurrencyFiatTB();
-        //}
+        var result = await _unitOfWork.Repository<AigViaAdministracion>().GetByIdAsync(id);
+        if (result == null)
+            result = new AigViaAdministracion();
 
-        modelData = new ProductObject();
+        modelData = result;
         addEditDialogIsOpen = true;
         StateHasChanged();
     }
@@ -206,6 +213,29 @@
     private async Task OnEventAddEditClose(long id)
     {
         addEditDialogIsOpen = false;
+        if (id>0)
+            table.ReloadServerData();
     }
+    private async Task OnDelete(AigViaAdministracion data)
+    {
+        modelData = data;
+        deleteDialogIsOpen = true;
+    }
+    private async Task OnDeleteDialogClose(bool isOk)
+    {        
+        if (isOk)
+        {
+            await _unitOfWork.Repository<AigViaAdministracion>().DeleteAsync(modelData);
+            if (_unitOfWork.Commit()){
+                await JS.InvokeVoidAsync("ShowMessage", "Elemento eliminado correctamente");
+                await JS.InvokeVoidAsync("OpenCloseModal", "#btnCloseDeleteModal");
+                await table.ReloadServerData();
+            }
+            else
+               await JS.InvokeVoidAsync("ShowError", "DataDeleteError");
+        }
+        deleteDialogIsOpen = false;
+    }
+
 
 }

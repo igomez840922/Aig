@@ -1,13 +1,13 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
-using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TokenResponse = Aig.Farmacoterapia.Domain.Identity.TokenResponse;
-using TokenRequest = Aig.Farmacoterapia.Domain.Identity.TokenRequest;
+using TokenResponse = Aig.Farmacoterapia.Infrastructure.Identity.TokenResponse;
+using TokenRequest = Aig.Farmacoterapia.Infrastructure.Identity.TokenRequest;
+using Aig.Farmacoterapia.Infrastructure.Interfaces;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services
 {

@@ -55,7 +55,9 @@ namespace Aig.Farmacoterapia.Domain.Common
     }
     public class Result<T> : Result, IResult<T>
     {
+#pragma warning disable CS8618 // Non-nullable property 'Data' must contain a non-null value when exiting constructor. Consider declaring the property as nullable.
         public Result() { }
+#pragma warning restore CS8618 // Non-nullable property 'Data' must contain a non-null value when exiting constructor. Consider declaring the property as nullable.
         public T Data { get; set; }
         public new static Result<T> Fail()
         {
@@ -135,7 +137,11 @@ namespace Aig.Farmacoterapia.Domain.Common
 
         public List<T> Data { get; set; }
 
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         internal PaginatedResult(bool succeeded, List<T> data = default, List<string> messages = null, int count = 0, int page = 1, int pageSize = 10)
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         {
             Data = data;
             CurrentPage = page;
@@ -147,12 +153,16 @@ namespace Aig.Farmacoterapia.Domain.Common
 
         public static PaginatedResult<T> Failure(List<string> messages)
         {
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             return new PaginatedResult<T>(false, default, messages);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
 
         public static PaginatedResult<T> Success(List<T> data, int count, int page, int pageSize)
         {
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             return new PaginatedResult<T>(true, data, null, count, page, pageSize);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
 
         public int CurrentPage { get; set; }

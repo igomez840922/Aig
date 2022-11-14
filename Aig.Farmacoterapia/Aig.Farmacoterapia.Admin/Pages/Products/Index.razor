@@ -1,5 +1,6 @@
 ﻿@page "/products/list"
 @*@layout null*@
+@using Aig.Farmacoterapia.Admin.Components
 @using Aig.Farmacoterapia.Admin.Components.Product
 @using Aig.Farmacoterapia.Admin.Models
 @using Aig.Farmacoterapia.Application.Medicament.Model
@@ -13,6 +14,7 @@
 @inject IUnitOfWork _unitOfWork;
 @inject ISystemLogger _systemLogger;
 @inject IMedicamentRepository _repository;
+
 @inject IJSRuntime JS
 
 <div class="kt-portlet__head kt-portlet__head--lg">
@@ -106,7 +108,7 @@
                             </span>
                         </button>
                         &nbsp;&nbsp;
-                        <button  type="button" @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
+                        <button type="button" @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
                             <span>
                                 <i class="la la-close"></i>
                                 <span>Eliminar</span>
@@ -117,7 +119,7 @@
             </div>
         </div>
     </EditForm>
-    
+
     <div class="table-responsive">
         <MudTable @ref="table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigMedicamento>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
 
@@ -126,10 +128,10 @@
                 <MudTh style="width:60px;"><MudTableSortLabel SortLabel="numReg" T="AigMedicamento">Registro</MudTableSortLabel></MudTh>
                 <MudTh style="width:100px;"><MudTableSortLabel SortLabel="dateOfIssue" T="AigMedicamento">Expedido</MudTableSortLabel></MudTh>
                 <MudTh style="width:100px;"><MudTableSortLabel SortLabel="expirationDate" T="AigMedicamento">Vence</MudTableSortLabel></MudTh>
-                <MudTh style="width:350px;"><MudTableSortLabel Enabled="true" InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigMedicamento">Medicamento</MudTableSortLabel></MudTh>
+                <MudTh style="width:350px;"><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigMedicamento">Medicamento</MudTableSortLabel></MudTh>
                 <MudTh style="width:350px;">Principio Activo</MudTh>
-                <MudTh style="width:200px;">Forma Farmaceutica</MudTh>
                 <MudTh>Fabricante</MudTh>
+                 <MudTh style="width:20px;"><MudTableSortLabel T="AigMedicamento" SortLabel="created">Creado</MudTableSortLabel></MudTh>
                 <MudTh style="width:5px;"></MudTh>
             </HeaderContent>
             <RowTemplate>
@@ -141,30 +143,22 @@
                 <MudTd DataLabel="Fech. Expiración">@(string.Format("{0:dd/MM/yyyy}",context.FechaExpiracion))</MudTd>
                 <MudTd DataLabel="Medicamento">@context.Nombre</MudTd>
                 <MudTd DataLabel="Principio Activo">@context.Principio</MudTd>
-                <MudTd DataLabel="Forma Farmaceutica">@context.FormaFarmaceutica?.Nombre</MudTd>
                 <MudTd DataLabel="Fabricante">@context.Fabricante?.Nombre</MudTd>
+                <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}",context.Created))</MudTd>
                 <MudTd>
                     <span class="dropdown">
                         <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                            <i class="la la-ellipsis-h"></i>
+                            <i class="flaticon-more-1 kt-font-brand"></i>
                         </a>
                         <span class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="#" @onclick="() => OnEdit(context.Id)" data-toggle="modal" data-target="#modal_createedit" >
                                 <i class="la la-edit"></i> Editar
                             </a> 
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="#" @onclick="() => OnDelete(context)" data-toggle="modal">
                                 <i class="la la-trash"></i> 
                                 Eliminar
                             </a> 
                             <div class="dropdown-divider ng-star-inserted"></div>
-                            <a class="dropdown-item" href="#">
-                                <i class="la la-file-text-o"></i>
-                                Monografía
-                            </a>
-                             <a class="dropdown-item" href="#">
-                                <i class="la la-file-text-o"></i> 
-                                Prospecto
-                            </a>
                         </span>
                     </span>
                 </MudTd>
@@ -282,7 +276,13 @@
 {
     <AddEdit ModelData="@modelData" OnClose="@OnEventAddEditClose"></AddEdit>
 }
-
+@if(deleteDialogIsOpen)
+{
+   <DeleteConfirmDialog Caption="Eliminar"
+                   Message="¿Confirma que desea de eliminar el artículo?"
+                   OnClose="@OnDeleteDialogClose">
+    </DeleteConfirmDialog>
+}
 @code {
 
     private MudTable<AigMedicamento> table;
@@ -293,6 +293,7 @@
     protected MedicamentFilter modelFilter;
     protected AigMedicamento modelData;
     protected bool addEditDialogIsOpen = false;
+    protected bool deleteDialogIsOpen = false;
     private void ShowBtnPress(long nr)
     {
         AigMedicamento tmpPerson = List.First(f => f.Id == nr);
@@ -302,7 +303,7 @@
     {
         try
         {  
-          
+           
             modelFilter = new MedicamentFilter();
             dateRange = new DateRange();
             expirationRange= new DateRange();
@@ -315,7 +316,7 @@
 
         base.OnInitialized();
     }
-   
+
     private async Task<TableData<AigMedicamento>> DoFetchData(TableState state)
     {
         StateHasChanged();
@@ -345,24 +346,24 @@
         List = paginatedResult.Data;
         return new TableData<AigMedicamento>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
     }
-    private void  OnSearch()
+    private async Task OnSearch()
     {
         modelFilter.StartDate = dateRange.Start;
         modelFilter.EndDate = dateRange.End;
         modelFilter.StartExpirationDate = dateRange.Start;
         modelFilter.EndExpirationDate = dateRange.End;
-        table.ReloadServerData();
+        await table.ReloadServerData();
     }
-    private void OnReset()
+    private async Task OnReset()
     {
         modelFilter = new MedicamentFilter();
         dateRange = new DateRange();
-        table.ReloadServerData();
+        await table.ReloadServerData();
     }
 
     private async Task OnEdit(long id)
     {
-         var result = await _unitOfWork.Repository<AigMedicamento>().GetByIdAsync(id);
+        var result = await _unitOfWork.Repository<AigMedicamento>().GetByIdAsync(id);
         if (result == null)
             result = new AigMedicamento();
 
@@ -374,7 +375,27 @@
     private async Task OnEventAddEditClose(long id)
     {
         addEditDialogIsOpen = false;
+        await table.ReloadServerData();
     }
-
+    private async Task OnDelete(AigMedicamento data)
+    {
+        modelData = data;
+        deleteDialogIsOpen = true;
+    }
+    private async Task OnDeleteDialogClose(bool isOk)
+    {        
+        if (isOk)
+        {
+            await _unitOfWork.Repository<AigMedicamento>().DeleteAsync(modelData);
+            if (_unitOfWork.Commit()){
+                await JS.InvokeVoidAsync("ShowMessage", "Elemento eliminado correctamente");
+                await JS.InvokeVoidAsync("OpenCloseModal", "#btnCloseDeleteModal");
+                table.ReloadServerData();
+            }
+            else
+               await JS.InvokeVoidAsync("ShowError", "DataDeleteError");
+        }
+        deleteDialogIsOpen = false;
+    }
 
 }

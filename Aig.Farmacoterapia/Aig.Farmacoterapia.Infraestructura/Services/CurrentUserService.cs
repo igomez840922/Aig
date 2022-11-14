@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services

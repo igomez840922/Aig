@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Aig.Farmacoterapia.Domain.Entities.Enums
 {
-    public enum TipoEquivalencia
+    public static class TipoEquivalencia
     {
-        None =0,
-        Intercambiable = 1,
-        Referencia = 2  
+        public const string Intercambiable = "I";//Intercambiable
+        public const string Referencia = "R";//Referencia
+        public const string Generico = "G"; //Generico
     }
-
 }

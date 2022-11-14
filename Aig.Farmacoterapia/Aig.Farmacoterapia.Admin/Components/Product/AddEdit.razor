@@ -1,10 +1,22 @@
-﻿@inject IJSRuntime JsRuntime
+﻿@using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Entities.Enums
 @using Aig.Farmacoterapia.Domain.Interfaces
-@inject IUnitOfWork _unitOfWork;
-@using MudBlazor
 @using System.Globalization
+@using Aig.Farmacoterapia.Domain.Specifications.Maker
+@using Aig.Farmacoterapia.Domain.Specifications.Medicament
+@using Aig.Farmacoterapia.Infrastructure.Extensions
+@using System.Linq.Expressions
+@using Blazored.FluentValidation
+@inject IUnitOfWork _unitOfWork;
+@inject IUploadService _uploadService;
+@inject IWebHostEnvironment env;
+@inject IJSRuntime JsRuntime
+@inject ISystemLogger _systemLogger;
+
+<style>
+    
+</style>
 
 <div class="modal show fade" style="display:block;overflow-y:auto!important;" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -18,46 +30,51 @@
 
                 <div class="kt-portlet" style="margin-bottom:0px !important;">
 
-                    <EditForm Model="@ModelData" OnValidSubmit="SaveData" class="kt-form kt-form--label-right">
-                        <DataAnnotationsValidator />
-
+                    <EditForm Model="@ModelData" OnValidSubmit="@SaveData" class="kt-form kt-form--label-right">
+                       <FluentValidationValidator />
                         <div class="kt-portlet__body">
+                            
                             <div class="row">
+                               
                                 <div class="col-lg-12">
+                                   
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div>
                                                 <label>Registro Sanitario</label>
                                                 <InputText type="text" class="form-control" @bind-Value="ModelData.NumReg" />
-                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.NumReg) /></p>
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.NumReg)" />
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div>
                                                 <label>Revisiones</label>
                                                 <InputText type="text" class="form-control" @bind-Value="ModelData.NumRen" />
-                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.NumRen) /></p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div>
                                                 <label>Medicamento</label>
                                                 <InputText type="text" class="form-control" @bind-Value="ModelData.Nombre" />
-                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Nombre) /></p>
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Nombre)" />
+                                                </div>
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" style="margin-top:8px">
 
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-6">
                                             <div>
                                                 <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de emisión" @bind-Date="ModelData.FechaEmision" />
                                                 <p class="invalid"><ValidationMessage For=@(() => ModelData.FechaEmision) /></p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-6">
                                             <div>
                                                 <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de expiración" @bind-Date="ModelData.FechaExpiracion" />
                                                 <p class="invalid"><ValidationMessage For=@(() => ModelData.FechaExpiracion) /></p>
@@ -66,101 +83,359 @@
 
                                     </div>
 
+                                    <div class="row" style="margin-top:5px">
+
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label>Forma farmacéutica  </label>
+                                                <MudAutocomplete MaxItems="null" T="AigFormaFarmaceutica" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.FormaFarmaceutica" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadPharmaceutical" ShowProgressIndicator="true">
+                                                    <ItemTemplate Context="e">
+                                                        <MudText>
+                                                            @e.Nombre
+                                                        </MudText>
+                                                    </ItemTemplate>
+                                                    <ItemSelectedTemplate Context="e">
+                                                        <MudText>
+                                                            @e.Nombre
+                                                        </MudText>
+                                                    </ItemSelectedTemplate>
+                                                </MudAutocomplete>
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.FormaFarmaceutica)" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label>Vía de administración </label>
+                                                <MudAutocomplete MaxItems="null" T="AigViaAdministracion" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.ViaAdministracion" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadMedicationRoute" ShowProgressIndicator="true">
+                                                    <ItemTemplate Context="e">
+                                                        <MudText>
+                                                            @e.Nombre
+                                                        </MudText>
+                                                    </ItemTemplate>
+                                                    <ItemSelectedTemplate Context="e">
+                                                        <MudText>
+                                                            @e.Nombre
+                                                        </MudText>
+                                                    </ItemSelectedTemplate>
+                                                </MudAutocomplete>
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.ViaAdministracion)" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row" style="margin-top:10px">
+
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <label>Clasificación</label>
+                                                <MudSelect T="string" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.TipoEquivalencia">
+                                                    <MudSelectItem Value="@(TipoEquivalencia.Referencia)">De Referencia</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoEquivalencia.Intercambiable)">Intercambiable</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoEquivalencia.Generico)">Genérico</MudSelectItem>
+                                                </MudSelect>
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.TipoEquivalencia)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <label>Tipo</label>
+                                                <MudSelect T="string" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.TipoMedicamento">
+                                                    <MudSelectItem Value="@(TipoMedicamento.RA)">Radiofármacos</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoMedicamento.HU)">Huérfanos</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoMedicamento.HO)">Homeopáticos</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoMedicamento.FF)">Fitofármacos</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoMedicamento.BT)">Biotecnológicos</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoMedicamento.BI)">Biológicos</MudSelectItem>
+                                                </MudSelect>
+                                                 <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.TipoMedicamento)" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <label>Condición de venta</label>
+                                                <MudSelect T="string" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.CondicionVenta">
+                                                    <MudSelectItem Value="@(TipoCondicionVenta.SinPrescripcion)">Sin Prescripción Médica</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoCondicionVenta.ConPrescripcion)">Con Prescripción Médica</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoCondicionVenta.UsoHospitalario)">Uso Hospitalario Exclusivo</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoCondicionVenta.VentaPopular)">Venta Popular</MudSelectItem>
+                                                </MudSelect>
+                                                 <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.CondicionVenta)" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row" style="margin-top:10px">
+
+                                        <div class="col-lg-8">
+                                            <div>
+                                                <label>Fabricante</label>
+                                                <MudAutocomplete MaxItems="null" T="AigFabricante" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.Fabricante" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadMarker" ShowProgressIndicator="true" ProgressIndicatorColor="Color.Primary">
+
+                                                    <ItemTemplate Context="e">
+                                                        <MudText>
+                                                            @e.Nombre
+                                                        </MudText>
+                                                    </ItemTemplate>
+                                                    <ItemSelectedTemplate Context="e">
+                                                        <MudText>
+                                                            @($"{e.Nombre} / ({e.Pais?.Nombre})")
+                                                        </MudText>
+                                                    </ItemSelectedTemplate>
+                                                </MudAutocomplete>
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Fabricante)" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                     <hr />
+
                                     <div class="row">
 
-                                        <div class="col-lg-3">
-                                            <div>
-                                               <label>Tipo</label>
-                                                <MudSelect Margin="Margin.Dense" T="string" Label="" Variant="Variant.Outlined">
-                                                    <MudSelectItem Value="@("Intercambiable")" />
-                                                    <MudSelectItem Value="@("De referencia")" />
-                                                    <MudSelectItem Value="@("Medicamento")" />
-                                                </MudSelect>
+                                        <div class="col-lg-12">
 
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div>
-                                               <label>Clasificación</label>
-                                                <MudSelect Margin="Margin.Dense" T="string" Label="" Variant="Variant.Outlined">
-                                                    <MudSelectItem Value="@("Radiofármacos")" />
-                                                    <MudSelectItem Value="@("Huérfanos")" />
-                                                    <MudSelectItem Value="@("Homeopáticos")" />
-                                                    <MudSelectItem Value="@("Fitofármacos")" />
-                                                    <MudSelectItem Value="@("Biotecnológicos")" />
-                                                    <MudSelectItem Value="@("Biotecnológicos")" />
-                                                </MudSelect>
-                                            </div>
-                                        </div>
-                                         <div class="col-lg-4">
-                                            <div>
-                                               <label>Clasificación</label>
-                                                <MudSelect Margin="Margin.Dense" T="string" Label="" Variant="Variant.Outlined">
-                                                    <MudSelectItem Value="@("Con Prescripción Médica")" />
-                                                    <MudSelectItem Value="@("Uso Hospitalario Exclusivo")" />
-                                                    <MudSelectItem Value="@("Venta Popular")" />
-                                                </MudSelect>
-                                            </div>
+                                            <table cellspacing="0" cellpadding="0">
+
+                                                <tr>
+                                                    <td style="border-right: 1px solid #e2e5ec; padding-right: 5px;">
+
+                                                        <table class="divInputFile" cellspacing="0" cellpadding="0">
+
+                                                            <tr>
+                                                                <td>
+                                                                    <div>
+                                                                        <InputFile id="fileInput" hidden OnChange="UploadFiles" SuppressOnChangeWhenInvalid="SuppressOnChangeWhenInvalid"/>
+                                                                        <MudButton HtmlTag="label"
+                                                                                   Variant="Variant.Text"
+                                                                                   Color="Color.Primary"
+                                                                                   Size="Size.Small"
+                                                                                   StartIcon="@Icons.Filled.CloudUpload"
+                                                                                   for="fileInput">
+                                                                            Monografía
+                                                                        </MudButton>
+                                                                       
+                                                                    </div>
+                                                                   
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+
+                                                                        @if (!showFileInputAlert && !string.IsNullOrEmpty(ModelData.DataSheetURL))
+                                                                        {
+                                                                            <MudButton Variant="Variant.Text"
+                                                                                   Color="Color.Info"
+                                                                                   StartIcon="@Icons.Filled.RemoveRedEye"
+                                                                                   Size="Size.Small"
+                                                                                   Link="@(ModelData.DataSheetURL)" Target="_blank">
+                                                                                Ver
+                                                                            </MudButton>
+                                                                            <MudButton Variant="Variant.Text"
+                                                                                   Color="Color.Error"
+                                                                                   StartIcon="@Icons.Filled.Delete"
+                                                                                   Size="Size.Small"
+                                                                                   OnClick="DeleteDataSheetAsync">
+                                                                                Eliminar
+                                                                            </MudButton>
+                                                                        }
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+                                                        
+                                                    </td>
+
+                                                    <td style="padding-left: 5px;">
+                                                        <table class="divInputFile" cellspacing="0" cellpadding="0">
+
+                                                            <tr>
+                                                                <td>
+                                                                    <div>
+                                                                        <InputFile id="prospectusfileInput" hidden OnChange="UploadProspectusFiles" />
+                                                                        <MudButton HtmlTag="label"
+                                                                                   Variant="Variant.Text"
+                                                                                   Color="Color.Primary"
+                                                                                   Size="Size.Small"
+                                                                                   StartIcon="@Icons.Filled.CloudUpload"
+                                                                                   for="prospectusfileInput">
+                                                                            Prospecto
+                                                                        </MudButton>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+
+                                                                        @if (!showProspectusFileInputAlert && !string.IsNullOrEmpty(ModelData.ProspectusURL))
+                                                                        {
+                                                                            <MudButton Variant="Variant.Text"
+                                                                                   Color="Color.Info"
+                                                                                   StartIcon="@Icons.Filled.RemoveRedEye"
+                                                                                   Size="Size.Small"
+                                                                                   Link="@(ModelData.ProspectusURL)" Target="_blank">
+                                                                                Ver
+                                                                            </MudButton>
+                                                                            <MudButton Variant="Variant.Text"
+                                                                                   Color="Color.Error"
+                                                                                   StartIcon="@Icons.Filled.Delete"
+                                                                                   Size="Size.Small"
+                                                                                   OnClick="DeleteProspectusAsync">
+                                                                                Eliminar
+                                                                            </MudButton>
+                                                                        }
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            @if (showFileInputAlert)
+                                            {
+                                                <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo de fichero para la monografía es de 5 MB </MudAlert>
+                                            }
+                                             @if (showProspectusFileInputAlert)
+                                            {
+                                                <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo de fichero para el prospecto es de 5 MB </MudAlert>
+                                            }
                                         </div>
 
                                     </div>
-      
-                                      <div class="row" style="margin-top:10px">
 
-                                        <div class="col-lg-3">
-                                            <div>
-                                                 <label>Vida útil </label>
-                                                <InputText type="text" class="form-control" @bind-Value="ModelData.VidaUtil" />
-                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.VidaUtil) /></p>
-                                            </div>
+                                     <hr />
+
+                                    <div class="row">
+
+                                        <div class="col-lg-4">
+                                            <table class="divInputFile" cellspacing="0" cellpadding="0">
+
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            <InputFile id="imagefileInput" hidden OnChange="UploadPictureFiles" />
+                                                            @if (string.IsNullOrEmpty(ModelData.PictureData))
+                                                            {
+                                                                <MudButton HtmlTag="label"
+                                                                       Variant="Variant.Text"
+                                                                       Color="Color.Primary"
+                                                                       Size="Size.Small"
+                                                                       StartIcon="@Icons.Filled.CloudUpload"
+                                                                       for="imagefileInput">
+                                                                    Foto
+                                                                </MudButton>
+                                                            }
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+
+                                                            @if (!showPictureFileInputAlert && !string.IsNullOrEmpty(ModelData.PictureData))
+                                                            {
+                                                                <img src="@ModelData.PictureData" Width="80" Height="50" Elevation="25" Class="rounded-lg ma-4" />
+                                                                <MudButton Style="padding-right: 15px;" Variant="Variant.Text"
+                                                                       Color="Color.Error"
+                                                                       StartIcon="@Icons.Filled.Delete"
+                                                                       Size="Size.Small"
+                                                                       OnClick="DeletePictureAsync">
+                                                                    Eliminar
+                                                                </MudButton>
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            @if (showPictureFileInputAlert)
+                                            {
+                                                <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo del fichero de foto es de 1 MB </MudAlert>
+                                            }
                                         </div>
 
-                                        <div class="col-lg-3">
-                                            <div>
-                                                 <label>Concentración</label>
-                                                <InputText type="text" class="form-control" @bind-Value="ModelData.Concentracion" />
-                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Concentracion) /></p>
-                                            </div>
-                                        </div>
-
-                                       
                                     </div>
 
-                                     <div class="row" style="margin-top:5px">
+                                     <hr />
 
-                                          <div class="col-lg-3">
+                                    <div class="row" style="margin-top:5px">
+
+                                        <div class="col-lg-3">
                                             <div>
                                                 <MudCheckBox Style="font-size: 11px;" class="checkBox" @bind-Checked="ModelData.Vigente" Label="Vigente" Color="Color.Primary"></MudCheckBox>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
 
+                                    <div class="row">
 
-                                    <hr />
-                                     <div class="row">
+                                        <div class="col-lg-3">
+                                            <div>
+                                                <label>Concentración</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.Concentracion" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row" style="margin-top:10px">
 
                                         <div class="col-lg-12">
                                             <div>
                                                 <label>Principios Activos</label>
                                                 <textarea rows="4" id="active_principles" class="form-control" @bind="ModelData.Principio" @bind:event="oninput" />
-                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Principio) /></p>
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Principio)" />
+                                                </div>
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div class="row">
+                                   <div class="row" style="margin-top:10px">
                                         <div class="col-lg-12">
                                             <div>
                                                 <label>Excipientes</label>
                                                 <textarea rows="4" id="excipientes" class="form-control" @bind="ModelData.Excipientes" @bind:event="oninput" />
-                                                <p class="invalid"><ValidationMessage For=@(() => ModelData.Excipientes) /></p>
+                                                 <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Excipientes)" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                     <div class="row">
+                                     <div class="row" style="margin-top:10px">
+
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <label>Presentación</label>
+                                                <textarea rows="4" id="active_principles" class="form-control" @bind="ModelData.Presentacion" @bind:event="oninput" />
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Presentacion)" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                   <div class="row" style="margin-top:10px">
                                         <div class="col-lg-12">
                                             <div>
                                                 <label>Descripción del Envase</label>
@@ -171,6 +446,7 @@
                                     </div>
 
                                 </div>
+
                             </div>
 
                         </div>
@@ -196,10 +472,181 @@
 
 
 @code {
-    DateTime? date = DateTime.Today;
+
     [Parameter] public EventCallback<long> OnClose { get; set; }
     [Parameter] public AigMedicamento ModelData { get; set; }
-    bool status;
+
+    private IBrowserFile _file;
+    private IBrowserFile _prospectusFile;
+    private IBrowserFile _imageFile;
+    private bool showFileInputAlert=false;
+    private bool showProspectusFileInputAlert=false;
+    private bool showPictureFileInputAlert=false;
+    
+    private void CloseFileInputAlert(bool value)=> showFileInputAlert = value;
+    
+    private async Task UploadFiles(InputFileChangeEventArgs e)
+    {
+        _file = e.File;
+        if (_file != null)
+        {
+            try
+            {   showFileInputAlert = false;
+                long maxFileSize = 1048576 * 5;//5MB
+                var extension = Path.GetExtension(_file.Name);
+                if (_file.Size <= maxFileSize){
+                    var buffer = new byte[_file.Size];
+                    var stream = _file.OpenReadStream(maxAllowedSize: maxFileSize);
+                    var request = new UploadObject
+                        {
+                            FileName = $"{Guid.NewGuid()}{extension}",
+                            Data = stream,
+                            Size = _file.Size,
+                            UploadType = UploadType.DataSheet,
+                            Extension = extension
+                        };
+                    ModelData.DataSheetURL = await _uploadService.UploadAsync(request);
+                }
+                else { showFileInputAlert = true; }
+            }
+            catch (Exception ex)
+            {
+                _systemLogger.Error(ex);
+            }
+        }
+    }
+
+    private async Task DeleteDataSheetAsync()
+    {
+        if (await _uploadService.DeleteAsync(ModelData.DataSheetURL))
+        {
+            _file = null;
+            ModelData.DataSheetURL = null;
+        }
+
+    }
+
+    private async Task UploadProspectusFiles(InputFileChangeEventArgs e)
+    {
+        _prospectusFile = e.File;
+        if (_prospectusFile != null)
+        {
+            try
+            {   
+                showProspectusFileInputAlert = false;
+                long maxFileSize = 1048576 * 5;//5MB
+                var extension = Path.GetExtension(_file.Name);
+                 if (_file.Size <= maxFileSize){
+                   var buffer = new byte[_prospectusFile.Size];
+                   var stream = _prospectusFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                   var request = new UploadObject{
+                        FileName = $"{Guid.NewGuid()}{extension}",
+                        Data = stream,
+                        Size = _prospectusFile.Size,
+                        UploadType = UploadType.DataSheet,
+                        Extension = extension
+                    };
+                    ModelData.ProspectusURL = await _uploadService.UploadAsync(request);
+                }
+                else { showProspectusFileInputAlert = true; }
+
+            }
+            catch (Exception ex)
+            {
+                _systemLogger.Error(ex);
+            }
+
+        }
+    }
+
+    private async Task DeleteProspectusAsync()
+    {
+        if (await _uploadService.DeleteAsync(ModelData.ProspectusURL))
+        {
+            _prospectusFile = null;
+            ModelData.ProspectusURL = null;
+        }
+    }
+
+    private async Task UploadPictureFiles(InputFileChangeEventArgs e)
+    {
+         _imageFile = e.File;
+        if (_imageFile != null)
+        {
+            try
+            {   
+                showPictureFileInputAlert = false;
+                long maxFileSize = 1048576 * 1;//1MB
+                var extension = Path.GetExtension(_imageFile.Name);
+                var format = "image/png";
+                 if (_imageFile.Size <= maxFileSize){
+                   var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
+                   var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                   var data=Convert.ToBase64String(await GetDataAsync(stream));
+                   ModelData.PictureData = $"data:{format};base64,{data}";
+                }
+                else { showPictureFileInputAlert = true; }
+
+            }
+            catch (Exception ex)
+            {
+                _systemLogger.Error(ex);
+            }
+
+        }
+    }
+
+    private async Task<byte[]> GetDataAsync(Stream stream)
+    {
+        byte[] data;
+        await using (var memoryStream = new MemoryStream())
+        {
+            await using var responseStream = stream;
+            await responseStream.CopyToAsync(memoryStream);
+            data = memoryStream.ToArray();
+        }
+        return data;
+    }
+
+      
+    private async Task DeletePictureAsync()
+    {
+        _imageFile = null;
+         ModelData.PictureData = null;
+    }
+
+    private async Task<IEnumerable<AigFormaFarmaceutica>> LoadPharmaceutical(string value)
+    {
+        var result = new List<AigFormaFarmaceutica>();
+        var query = _unitOfWork.Repository<AigFormaFarmaceutica>().GetAll();
+        if (!string.IsNullOrEmpty(value))
+            result = await query.WhereByAsync(p => p.Nombre, new PharmaceuticalSpecification(value));
+        else
+            result = await query.WhereByAsync(p => p.Nombre);
+        return result;
+    }
+    private async Task<IEnumerable<AigViaAdministracion>> LoadMedicationRoute(string value)
+    {
+        var result = new List<AigViaAdministracion>();
+        var query = _unitOfWork.Repository<AigViaAdministracion>().GetAll();
+        if (!string.IsNullOrEmpty(value))
+            result = await query.WhereByAsync(p => p.Nombre, new MedicationRouteSpecification(value));
+        else
+            result = await query.WhereByAsync(p => p.Nombre);
+        return result;
+
+    }
+    private async Task<IEnumerable<AigFabricante>> LoadMarker(string value)
+    {
+        var result = new List<AigFabricante>();
+        var query = _unitOfWork.Repository<AigFabricante>().GetAll();
+        if (!string.IsNullOrEmpty(value))
+            result = await query.WhereByAsync(p => p.Nombre, new MakerSpecification(value));
+        else
+            result = await query.WhereByAsync(p => p.Nombre);
+        return result;
+    }
+
     protected async override Task OnInitializedAsync()
     {
         base.OnInitialized();

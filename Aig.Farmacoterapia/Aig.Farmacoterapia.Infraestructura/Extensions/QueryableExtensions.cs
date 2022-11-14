@@ -30,13 +30,33 @@ namespace Aig.Farmacoterapia.Infrastructure.Extensions
                     (current, include) => current.Include(include));
             return secondaryResult.Where(spec.Criteria);
         }
-
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+        public static async Task<List<T>> WhereByAsync<T>(this IQueryable<T> query, Expression<Func<T, object>> sort = null, ISpecification<T> spec = null) where T : class, IEntity
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+        {
+         
+            if (spec is null)
+                return sort == null ? await query.ToListAsync() : await query.OrderBy(sort).ToListAsync();
+            var queryableResultWithIncludes = spec.Includes
+                .Aggregate(query,
+                    (current, include) => current.Include(include));
+            var secondaryResult = spec.IncludeStrings
+                .Aggregate(queryableResultWithIncludes,
+                    (current, include) => current.Include(include));
+            return sort == null ?
+                            await secondaryResult.Where(spec.Criteria).ToListAsync() :
+                            await secondaryResult.Where(spec.Criteria).OrderBy(sort).AsQueryable().ToListAsync();
+        }
         public static IQueryable<T> OrderBy<T>(this IQueryable<T> query, List<Tuple<SortingOption, Expression<Func<T, object>>>> orderByList)
         {
             if (orderByList == null)
                 return query;
             orderByList = orderByList.OrderBy(ob => ob.Item1.Priority).ToList();
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             IOrderedQueryable<T> orderedQuery = null;
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
             foreach (var orderBy in orderByList)
             {
                 if (orderedQuery == null)

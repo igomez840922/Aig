@@ -11,7 +11,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Logging
     {
         #region Private Members
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
         private static readonly Lazy<SystemLogger> _loggerInstance = new Lazy<SystemLogger>(() => new SystemLogger());
 
         private const string ExceptionName = "Exception";

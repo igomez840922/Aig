@@ -1,6 +1,8 @@
 ﻿using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Files;
 using Aig.Farmacoterapia.Infrastructure.Identity;
+using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Logging;
 using Aig.Farmacoterapia.Infrastructure.Persistence;
 using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories;
@@ -20,11 +22,12 @@ namespace Aig.Farmacoterapia.Infrastructure
 {
     public static class ConfigureServices
     {
-        private static IServiceCollection AddCurrentUserService(this IServiceCollection services)
+        private static IServiceCollection AddUserService(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddTransient<ITokenService, IdentityService>();
+            services.AddScoped<ITokenService, IdentityService>();
+            services.AddScoped<IUserService, UserService>();
             return services;
         }
         private static IServiceCollection AddIdentity(this IServiceCollection services)
@@ -37,7 +40,8 @@ namespace Aig.Farmacoterapia.Infrastructure
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             })
             .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -47,6 +51,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             });
+
             return services;
         }
         internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
@@ -115,9 +120,11 @@ namespace Aig.Farmacoterapia.Infrastructure
             //        });
             //});
 
-            services.AddDbContext<ApplicationDbContext>(options => {
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
                 options.UseMySql(conn, ServerVersion.AutoDetect(conn), mySqlOptionsAction:
-                    sqlOptions => {
+                    sqlOptions =>
+                    {
                         options.EnableDetailedErrors();
                         sqlOptions.EnableRetryOnFailure();
                         sqlOptions.CommandTimeout(120);
@@ -142,7 +149,14 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddScoped<IPharmaceuticalRepository, PharmaceuticalRepository>()
                 .AddScoped<IMedicationRouteRepository, MedicationRouteRepository>()
                 .AddScoped<IMakerRepository, MakerRepository>()
-                .AddScoped<IUnitOfWork, UnitOfWork>();
+                .AddScoped<IUnitOfWork, UnitOfWork>()
+                .AddScoped<IUploadService, UploadService>();
+        }
+        private static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
+            services.AddTransient<IMailService, SMTPMailService>();
+            return services;
         }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
@@ -151,8 +165,9 @@ namespace Aig.Farmacoterapia.Infrastructure
 
             AddDatabase(services, configuration);
             AddIdentity(services);
-            AddCurrentUserService(services);
+            AddUserService(services);
             AddInfrastructure(services);
+            AddSharedInfrastructure(services, configuration);
             AddRepositories(services);
             AddJwtAuthentication(services);
             RegisterSwagger(services);

@@ -98,7 +98,7 @@
                 <MudTd>
                     <span class="dropdown">
                         <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                            <i class="la la-ellipsis-h"></i>
+                             <i class="flaticon-more-1 kt-font-brand"></i>
                         </a>
                         <span class="dropdown-menu dropdown-menu-right">
 
@@ -162,6 +162,7 @@
 
         base.OnInitialized();
     }
+
     private async Task<TableData<AigFormaFarmaceutica>> DoFetchData(TableState state)
     {   
         StateHasChanged();
@@ -226,7 +227,7 @@
             if (_unitOfWork.Commit()){
                 await JS.InvokeVoidAsync("ShowMessage", "Elemento eliminado correctamente");
                 await JS.InvokeVoidAsync("OpenCloseModal", "#btnCloseDeleteModal");
-                table.ReloadServerData();
+                await table.ReloadServerData();
             }
             else
                await JS.InvokeVoidAsync("ShowError", "DataDeleteError");

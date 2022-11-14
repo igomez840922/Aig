@@ -2,13 +2,14 @@
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Entities.Enums
 @using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
 @inject IUnitOfWork _unitOfWork;
 
 <div class="modal show fade" style="display:block;overflow-y:auto!important;" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">@(ModelData.Id > 0? "Editar" :"Nuevo")</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">@(ModelData.Id > 0? "Editar" :"Nueva")</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="@Cancel">
                 </button>
             </div>
@@ -17,14 +18,17 @@
                 <div class="kt-portlet" style="margin-bottom:0px !important;">
 
                     <EditForm Model="@ModelData" OnValidSubmit="SaveData" class="kt-form kt-form--label-right">
-                        <DataAnnotationsValidator />
+                      <FluentValidationValidator />
      
                         <div class="kt-portlet__body">
                             <div class="form-group">
                                  <div class=" col-lg-6">
                                    <label>Nombre</label>
-                                   <InputText type="text" class="form-control" @bind-Value="ModelData.Nombre" />
-                                 </div>
+                                    <InputText type="text" class="form-control" @bind-Value="ModelData.Nombre" />
+                                    <div class="error invalid-feedback">
+                                        <ValidationMessage For="@(() => ModelData.Nombre)" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                  <div class="col-lg-6">
@@ -58,10 +62,10 @@
 
     [Parameter] public EventCallback<long> OnClose { get; set; }
     [Parameter] public AigFormaFarmaceutica ModelData { get; set; }
-    bool status;
+    bool status=false;
     protected async override Task OnInitializedAsync()
-    {   
-        ModelData.Estado=status ? "A" : "I";
+    {
+        status = ModelData.Estado == "A";
         base.OnInitialized();
     }
 

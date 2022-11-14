@@ -4,6 +4,7 @@ using System.Collections;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories;
+using Aig.Farmacoterapia.Infrastructure.Interfaces;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence
 {
@@ -15,13 +16,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence
         private readonly ApplicationDbContext _context;
         private bool disposed;
         private Hashtable _repositories;
-       
         public UnitOfWork(ApplicationDbContext context, ISystemLogger logger)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger;
         }
-
         public IRepositoryAsync<TEntity>? Repository<TEntity>() where TEntity : BaseEntity
         {
             _repositories ??= new Hashtable();

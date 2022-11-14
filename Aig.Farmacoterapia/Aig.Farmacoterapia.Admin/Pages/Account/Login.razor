@@ -12,7 +12,18 @@
 @inject SignInManager<ApplicationUser> signInManager
 @inject IJSRuntime JS
 
-<DateRangePicker Drops="DropsType.Up" />
+<style>
+    .invalid-feedback {
+        color: #f44336 !important;
+        display: inline !important;
+    }
+
+    .validation-message {
+        background-color: rgb(254 244 243) !important;
+        padding-left: 5px;
+        margin-top: 5px;
+    }
+</style>
 
 <div class="kt-login__form">
     <div class="kt-login__title">

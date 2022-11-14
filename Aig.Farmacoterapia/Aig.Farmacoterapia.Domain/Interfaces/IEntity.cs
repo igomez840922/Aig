@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace Aig.Farmacoterapia.Domain.Interfaces
 {
-    public interface IEntity
-    {
-    }
+    public interface IEntity{}
 }

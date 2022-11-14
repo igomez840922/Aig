@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Domain.Specifications.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
@@ -37,6 +38,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
         {
             return  _dbContext.Set<T>().AsQueryable();
         }
+        public Task<int> CountAsync()
+        {
+            return _dbContext.Set<T>().CountAsync();
+        }
 
         public async Task<T?> GetByIdAsync(long id)
         {
@@ -53,10 +58,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
 
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         public async Task<T> UpdateAsync(T entity)
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
             var exist = _dbContext.Set<T>().Find(entity.Id);
+#pragma warning disable CS8634 // The type 'T?' cannot be used as type parameter 'TEntity' in the generic type or method 'DbContext.Entry<TEntity>(TEntity)'. Nullability of type argument 'T?' doesn't match 'class' constraint.
             _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+#pragma warning restore CS8634 // The type 'T?' cannot be used as type parameter 'TEntity' in the generic type or method 'DbContext.Entry<TEntity>(TEntity)'. Nullability of type argument 'T?' doesn't match 'class' constraint.
             return entity;
         }
     }

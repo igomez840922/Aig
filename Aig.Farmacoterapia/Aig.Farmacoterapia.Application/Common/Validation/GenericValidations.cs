@@ -19,8 +19,7 @@ namespace Aig.Farmacoterapia.Application.Common.Validation
 
         protected IRuleBuilderOptions<T, string> IsValidEmail(Expression<Func<T, string>> expression)
              => RuleFor(expression)
-                 .NotEmpty().WithMessage("Invalid email Address")
-                 .EmailAddress().WithMessage("Invalid email Address");
+                 .EmailAddress().WithMessage("El correo debe ser una dirección válida");
 
         protected IRuleBuilderOptions<T, string> IsNotEmpty(Expression<Func<T, string>> expression, string message)
             => RuleFor(expression)

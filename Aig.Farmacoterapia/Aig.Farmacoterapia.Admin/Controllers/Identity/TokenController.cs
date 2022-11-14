@@ -1,9 +1,9 @@
 ﻿
 using Aig.Farmacoterapia.Domain.Common;
-using Aig.Farmacoterapia.Domain.Identity;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Infrastructure.Identity;
+using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Aig.Farmacoterapia.Admin.Controllers.Identity
 {

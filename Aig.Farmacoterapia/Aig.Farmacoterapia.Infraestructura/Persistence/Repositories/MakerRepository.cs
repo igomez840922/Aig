@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Domain.Interfaces;
-using Aig.Farmacoterapia.Domain.Specifications.Contry;
+using Aig.Farmacoterapia.Domain.Specifications.Maker;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
@@ -65,7 +65,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 result = await _repository.Entities
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                                           .PaginatedByAsync(args.PageIndex, args.PageSize);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
             catch (Exception exc)
             {

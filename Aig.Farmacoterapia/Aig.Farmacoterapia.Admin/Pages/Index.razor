@@ -1,11 +1,13 @@
 ﻿@page "/"
-@*@layout null*@
+@*@layout MainLayout*@
 @using Aig.Farmacoterapia.Admin.Components.Product
 @using System.Linq
+@using Aig.Farmacoterapia.Application.Dashboard.Model
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using System.Globalization
 @attribute [Authorize]
+@inject IMedicamentRepository _repository;
 @inject IUnitOfWork _unitOfWork;
 
 <div class="kt-portlet">
@@ -25,7 +27,7 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-success">
-							150
+							@modelData.MedicamentCount
 						</span>
 					</div>
 					<div class="progress progress--sm">
@@ -53,16 +55,17 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-success">
-							150
+							@modelData.ReferenceCount
 						</span>
 					</div>
 					<div class="progress progress--sm">
-						<div class="progress-bar kt-bg-success" role="progressbar" style="width: 80%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar kt-bg-success" role="progressbar" style="width: @(modelData.ReferencePercent)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<div class="kt-widget24__action">
 						<span class="kt-widget24__change">						
 						</span>
-						<span class="kt-widget24__number">							
+						<span class="kt-widget24__number">	
+							@modelData.ReferencePercent
 						</span>
 					</div>
 				</div>
@@ -79,17 +82,17 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-success">
-							540
+							@modelData.InterchangeableCount
 						</span>
 					</div>
 					<div class="progress progress--sm">
-						<div class="progress-bar kt-bg-success" role="progressbar" style="width: 70%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar kt-bg-success" role="progressbar" style="width: @(modelData.InterchangeablePercent)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<div class="kt-widget24__action">
 						<span class="kt-widget24__change">
 						</span>
 						<span class="kt-widget24__number">
-							70%
+							@modelData.InterchangeablePercent
 						</span>
 					</div>
 				</div>
@@ -115,17 +118,17 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-warning">
-							150
+							@modelData.PrescriptionCount
 						</span>
 					</div>
 					<div class="progress warning--sm">
-						<div class="progress-bar kt-bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar kt-bg-warning" role="progressbar" style="width: @(modelData.PrescriptionPercent)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<div class="kt-widget24__action">
 						<span class="kt-widget24__change">						
 						</span>
 						<span class="kt-widget24__number">
-							50%
+							@modelData.PrescriptionPercent
 						</span>
 					</div>
 				</div>
@@ -143,17 +146,17 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-warning">
-							100
+							@modelData.NotPrescriptionCount
 						</span>
 					</div>
 					<div class="progress progress--sm">
-						<div class="progress-bar kt-bg-warning" role="progressbar" style="width: 20%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar kt-bg-warning" role="progressbar" style="width: @(modelData.NotPrescriptionPercent)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<div class="kt-widget24__action">
 						<span class="kt-widget24__change">						
 						</span>
 						<span class="kt-widget24__number">	
-							 20%
+							@modelData.NotPrescriptionPercent
 						</span>
 					</div>
 				</div>
@@ -170,17 +173,17 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-warning">
-							540
+							@modelData.HospitalUseCount
 						</span>
 					</div>
 					<div class="progress progress--sm">
-						<div class="progress-bar kt-bg-warning" role="progressbar" style="width: 70%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar kt-bg-warning" role="progressbar" style="width: @(modelData.HospitalUsePercent)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<div class="kt-widget24__action">
 						<span class="kt-widget24__change">
 						</span>
 						<span class="kt-widget24__number">
-							70%
+							@modelData.HospitalUsePercent
 						</span>
 					</div>
 				</div>
@@ -204,17 +207,17 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-warning">
-							250
+							@modelData.PopularSaleCount
 						</span>
 					</div>
 					<div class="progress progress--sm">
-						<div class="progress-bar kt-bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar kt-bg-warning" role="progressbar" style="width: @(modelData.PopularSalePercent)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<div class="kt-widget24__action">
 						<span class="kt-widget24__change">
 						</span>
 						<span class="kt-widget24__number">
-							25%
+							@modelData.PopularSalePercent
 						</span>
 					</div>
 				</div>
@@ -232,17 +235,17 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-info">
-							540
+							@modelData.ActiveCount
 						</span>
 					</div>
 					<div class="progress progress--sm">
-						<div class="progress-bar kt-bg-info" role="progressbar" style="width: 70%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar kt-bg-info" role="progressbar" style="width: @(modelData.ActivePercent)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<div class="kt-widget24__action">
 						<span class="kt-widget24__change">
 						</span>
 						<span class="kt-widget24__number">
-							70%
+							@modelData.ActivePercent
 						</span>
 					</div>
 				</div>
@@ -260,17 +263,17 @@
 							</span>
 						</div>
 						<span class="kt-widget24__stats kt-font-danger">
-							150
+						   @modelData.NotActiveCount
 						</span>
 					</div>
 					<div class="progress progress--sm">
-						<div class="progress-bar kt-bg-danger" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar kt-bg-danger" role="progressbar" style="width:@(modelData.NotActivePercent)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<div class="kt-widget24__action">
 						<span class="kt-widget24__change">						
 						</span>
 						<span class="kt-widget24__number">
-							50%
+							 @modelData.NotActivePercent
 						</span>
 					</div>
 				</div>
@@ -283,14 +286,58 @@
 </div>
 
 @code {
-   
-protected async override Task OnInitializedAsync()
-{
-    try
-    {  
-        ;
-     
-    }
+
+	protected DashboardModel modelData=new DashboardModel();
+	protected async override Task OnInitializedAsync()
+	{
+		try
+		{  
+			var repository=_unitOfWork.Repository<AigMedicamento>();
+			modelData.MedicamentCount=await repository.CountAsync();
+			if (modelData.MedicamentCount == 0) return;
+			modelData.ReferenceCount=repository.GetAll().Where(p => p.TipoEquivalencia == "R").Count();
+			if (modelData.ReferenceCount > 0){
+				var percentage = ((decimal)modelData.ReferenceCount / (decimal)modelData.MedicamentCount) * 100;
+				modelData.ReferencePercent=$"{Math.Round(percentage,2)}%";
+		   }
+		    modelData.InterchangeableCount=repository.GetAll().Where(p => p.TipoEquivalencia == "I").Count();
+			if (modelData.InterchangeableCount > 0){
+				var percentage = ((decimal)modelData.InterchangeableCount / (decimal)modelData.MedicamentCount) * 100;
+				modelData.InterchangeablePercent=$"{Math.Round(percentage,2)}%";
+		   }
+		    modelData.PrescriptionCount=repository.GetAll().Where(p => p.CondicionVenta == "CP").Count();
+			if (modelData.PrescriptionCount > 0){
+				var percentage = ((decimal)modelData.PrescriptionCount / (decimal)modelData.MedicamentCount) * 100;
+				modelData.PrescriptionPercent=$"{Math.Round(percentage,2)}%";
+		   }
+		    modelData.NotPrescriptionCount=repository.GetAll().Where(p => p.CondicionVenta == "SP").Count();
+			if (modelData.NotPrescriptionCount > 0){
+				var percentage = ((decimal)modelData.NotPrescriptionCount / (decimal)modelData.MedicamentCount) * 100;
+				modelData.NotPrescriptionPercent=$"{Math.Round(percentage,2)}%";
+		   }
+		    modelData.HospitalUseCount=repository.GetAll().Where(p => p.CondicionVenta == "UH").Count();
+			if (modelData.HospitalUseCount > 0){
+				var percentage = ((decimal)modelData.HospitalUseCount / (decimal)modelData.MedicamentCount) * 100;
+				modelData.HospitalUsePercent=$"{Math.Round(percentage,2)}%";
+		   }
+		     modelData.PopularSaleCount=repository.GetAll().Where(p => p.CondicionVenta == "VP").Count();
+			if (modelData.PopularSaleCount > 0){
+				var percentage = ((decimal)modelData.PopularSaleCount / (decimal)modelData.MedicamentCount) * 100;
+				modelData.PopularSalePercent=$"{Math.Round(percentage,2)}%";
+		   }
+			
+		    modelData.ActiveCount=repository.GetAll().Where(p => p.Vigente).Count();
+			if (modelData.ActiveCount > 0){
+				var percentage = ((decimal)modelData.ActiveCount / (decimal)modelData.MedicamentCount) * 100;
+				modelData.ActivePercent=$"{Math.Round(percentage,2)}%";
+		   }
+
+		    modelData.NotActiveCount=modelData.MedicamentCount-modelData.ActiveCount;
+			if (modelData.NotActiveCount > 0){
+				var percentage = ((decimal)modelData.NotActiveCount / (decimal)modelData.MedicamentCount) * 100;
+				modelData.NotActivePercent=$"{Math.Round(percentage,2)}%";
+		   }
+	 }
     catch (Exception exc)
     {
         ;

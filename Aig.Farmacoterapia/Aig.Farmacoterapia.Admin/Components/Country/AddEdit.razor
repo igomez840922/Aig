@@ -1,0 +1,95 @@
+﻿@inject IJSRuntime JsRuntime
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@inject IUnitOfWork _unitOfWork;
+
+<div class="modal show fade" style="display:block;overflow-y:auto!important;" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">@(ModelData.Id > 0? "Editar" :"Nuevo")</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="@Cancel">
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="kt-portlet" style="margin-bottom:0px !important;">
+
+                    <EditForm Model="@ModelData" OnValidSubmit="SaveData" class="kt-form kt-form--label-right">
+                         <FluentValidationValidator />
+     
+                        <div class="kt-portlet__body">
+                            <div class="form-group">
+                                 <div class=" col-lg-6">
+                                   <label>Iso 2</label>
+                                   <InputText type="text" class="form-control" @bind-Value="ModelData.Iso" />
+                                    <div class="error invalid-feedback">
+                                        <ValidationMessage For="@(() => ModelData.Iso)" />
+                                    </div>
+                                 </div>
+                            </div>
+                            <div class="form-group">
+                                  <div class=" col-lg-6">
+                                   <label>Nombre</label>
+                                   <InputText type="text" class="form-control" @bind-Value="ModelData.Nombre" />
+                                    <div class="error invalid-feedback">
+                                        <ValidationMessage For="@(() => ModelData.Nombre)" />
+                                    </div>
+                                 </div>
+                            </div>
+
+                        </div>
+
+                        <div class="kt-portlet__foot" style="padding:10px!important">
+                            <div class="kt-form__actions text-right">
+
+                                <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+                                <button type="submit" class="btn btn-primary btn-square">Save</button>
+
+                            </div>
+                        </div>
+                    </EditForm>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop fade show"></div>
+
+
+@code {
+
+    [Parameter] public EventCallback<long> OnClose { get; set; }
+    [Parameter] public AigPais ModelData { get; set; }
+    protected async override Task OnInitializedAsync()
+    {   
+        base.OnInitialized();
+    }
+
+    private Task Cancel()
+    {
+        return OnClose.InvokeAsync(0);
+    }
+   
+    protected async Task SaveData()
+    {
+       
+        AigPais result;
+        if(ModelData.Id > 0)
+            result=await _unitOfWork.Repository<AigPais>().UpdateAsync(ModelData);
+        else
+            result=await _unitOfWork.Repository<AigPais>().AddAsync(ModelData);
+        if( _unitOfWork.Commit()){
+            ModelData = result;
+            await JsRuntime.InvokeVoidAsync("ShowMessage", "El elemento ha sido creado correctamente"); 
+            await OnClose.InvokeAsync(result.Id);
+        }
+        else
+          await JsRuntime.InvokeVoidAsync("ShowError", "Error durante la operación");
+    }
+}

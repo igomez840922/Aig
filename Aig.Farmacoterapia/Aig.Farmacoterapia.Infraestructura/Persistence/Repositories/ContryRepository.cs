@@ -68,7 +68,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 result = await _repository.Entities
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                                           .PaginatedByAsync(args.PageIndex, args.PageSize);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
             catch (Exception exc)
             {

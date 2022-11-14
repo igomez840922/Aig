@@ -12,7 +12,7 @@ namespace Aig.Farmacoterapia.Domain.Entities
     public partial class AigViaAdministracion: BaseAuditableEntity
     {
         public string? Nombre { get; set; }
-        public string? Estado { get; set; }
+        public string Estado { get; set; } = "I";
 
         [JsonIgnore]
         public virtual ICollection<AigMedicamento> Medicamentos { get; set; }

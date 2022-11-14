@@ -3,6 +3,7 @@ using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Identity;
+using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            //builder.HasDefaultSchema("aigmeddb");
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
         }

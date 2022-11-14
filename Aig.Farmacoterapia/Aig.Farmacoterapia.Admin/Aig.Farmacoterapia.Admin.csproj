@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Components\Product\-AddEdit.razor" />
     <None Include="wwwroot\assets\js\jquery-bootpag\jquery.bootpag.js" />
     <None Include="wwwroot\assets\js\jquery-bootpag\jquery.bootpag.min.js" />
     <None Include="wwwroot\assets\js\jquery-bootpag\README.md" />
@@ -86,6 +85,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Aig.Farmacoterapia.Application\Aig.Farmacoterapia.Application.csproj" />
     <ProjectReference Include="..\Aig.Farmacoterapia.Infraestructura\Aig.Farmacoterapia.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\files\datasheet\" />
+    <Folder Include="wwwroot\files\users\" />
   </ItemGroup>
 
 </Project>

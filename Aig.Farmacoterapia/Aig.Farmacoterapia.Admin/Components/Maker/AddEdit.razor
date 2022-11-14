@@ -1,0 +1,156 @@
+﻿@inject IJSRuntime JsRuntime
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Aig.Farmacoterapia.Domain.Specifications.Contry
+@using Aig.Farmacoterapia.Infrastructure.Extensions
+@using Blazored.FluentValidation
+@inject IUnitOfWork _unitOfWork;
+
+<div class="modal show fade" style="display:block;overflow-y:auto!important;" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">@(ModelData.Id > 0? "Editar" :"Nuevo")</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="@Cancel">
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="kt-portlet" style="margin-bottom:0px !important;">
+
+                    <EditForm Model="@ModelData" OnValidSubmit="SaveData" class="kt-form kt-form--label-right">
+                        <FluentValidationValidator />
+
+                        <div class="kt-portlet__body">
+
+                            <div class="row">
+
+                                <div class="col-lg-12">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label>Nombre</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.Nombre" />
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Nombre)" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label>Correo</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.Correo" />
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Correo)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 12px;">
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label>País</label>
+                                                <MudAutocomplete MaxItems="null" T="AigPais" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.Pais" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadContries" ShowProgressIndicator="true">
+                                                    <ItemTemplate Context="e">
+                                                        <MudText>
+                                                            @e.Nombre
+                                                        </MudText>
+                                                    </ItemTemplate>
+                                                    <ItemSelectedTemplate Context="e">
+                                                        <MudText>
+                                                            @e.Nombre
+                                                        </MudText>
+                                                    </ItemSelectedTemplate>
+                                                </MudAutocomplete>
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Pais)" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label>Dirección</label>
+                                                <textarea rows="4" id="active_principles" class="form-control" @bind="ModelData.Direccion" @bind:event="oninput" />
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.Direccion)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+                        <div class="kt-portlet__foot" style="padding:10px!important">
+                            <div class="kt-form__actions text-right">
+
+                                <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+                                <button type="submit" class="btn btn-primary btn-square">Save</button>
+
+                            </div>
+                        </div>
+                    </EditForm>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop fade show"></div>
+
+
+@code {
+
+    [Parameter] public EventCallback<long> OnClose { get; set; }
+    [Parameter] public AigFabricante ModelData { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
+    private async Task<IEnumerable<AigPais>> LoadContries(string value)
+    {
+        var result = new List<AigPais>();
+        var query = _unitOfWork.Repository<AigPais>().GetAll();
+        if (!string.IsNullOrEmpty(value))
+            result = await query.WhereByAsync(p => p.Nombre, new ContrySpecification(value));
+        else
+            result = await query.WhereByAsync(p => p.Nombre);
+        return result;
+    }
+    private Task Cancel()
+    {
+        return OnClose.InvokeAsync(0);
+    }
+
+    protected async Task SaveData()
+    {
+
+        AigFabricante result;
+        if (ModelData.Id > 0)
+            result = await _unitOfWork.Repository<AigFabricante>().UpdateAsync(ModelData);
+        else
+            result = await _unitOfWork.Repository<AigFabricante>().AddAsync(ModelData);
+        if (_unitOfWork.Commit())
+        {
+            ModelData = result;
+            await JsRuntime.InvokeVoidAsync("ShowMessage", "El elemento ha sido creado correctamente");
+            await OnClose.InvokeAsync(result.Id);
+        }
+        else
+            await JsRuntime.InvokeVoidAsync("ShowError", "Error durante la operación");
+    }
+}

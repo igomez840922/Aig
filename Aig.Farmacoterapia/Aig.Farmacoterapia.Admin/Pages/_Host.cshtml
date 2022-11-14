@@ -8,11 +8,9 @@
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,7 +28,6 @@
         <link href="assets/css/skins/header/menu/light.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/skins/brand/dark.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/skins/aside/dark.css" rel="stylesheet" type="text/css" />
-
     }
     else
     {
@@ -43,34 +40,78 @@
         <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
         <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
         <style>
-             .table th, .table td {vertical-align: middle !important;}
-             .table-sm th {padding: 0.8rem 0.3rem 0.8rem 1rem !important;}
-             .table-sm td {padding: 0.3rem 0.3rem 0.3rem 1rem !important;}
-             .dropdown-item { display: flow-root !important;}
-             .mud-table-head {
-                       background-color: #8579f2 !important; 
-                       border-color: #8579f2 !important; 
-                       color: #ffffff !important; 
-                }
-              .mud-table-root .mud-table-head .mud-table-cell {
-                  color: #ffffff !important; 
-                }
-              .mud-table-sort-label:hover {
-                   color: #ffffff !important; 
-              }
-              .mud-button:hover {background-color: transparent !important; }
-              .mud-button:focus {background-color: transparent !important; }
-              .mud-button:active {background-color: transparent !important; }
-              .mud-button:visited {background-color: transparent !important; }
-              .mud-input-label-inputcontrol {
-                 transform: translate(0,-2px) scale(.75) !important; 
-                 font-size: 15px !important; 
-              }
-              .checkBox .mud-icon-button { padding: 12px 12px 12px 0 !important;}
+            .table th, .table td {vertical-align: middle !important;}
+
+            .table-sm th {
+                padding: 0.8rem 0.3rem 0.8rem 1rem !important;
+            }
+
+            .table-sm td {
+                padding: 0.3rem 0.3rem 0.3rem 1rem !important;
+            }
+
+            .dropdown-item {
+                display: flow-root !important;
+            }
+
+            .mud-table-head {
+                background-color: #8579f2 !important;
+                border-color: #8579f2 !important;
+                color: #ffffff !important;
+            }
+
+            .mud-table-root .mud-table-head .mud-table-cell {
+                color: #ffffff !important;
+            }
+
+            .mud-table-sort-label:hover {
+                color: #ffffff !important;
+            }
+
+            .mud-button:hover {
+                background-color: transparent !important;
+            }
+
+            .mud-button:focus {
+                background-color: transparent !important;
+            }
+
+            .mud-button:active {
+                background-color: transparent !important;
+            }
+
+            .mud-button:visited {
+                background-color: transparent !important;
+            }
+
+            .mud-input-label-inputcontrol {
+                transform: translate(0,-2px) scale(.75) !important;
+                font-size: 15px !important;
+            }
+
+            .checkBox .mud-icon-button {
+                padding: 12px 12px 12px 0 !important;
+            }
+
+            .mud-input {
+                height: 40px !important;
+            }
+
+            .invalid-feedback {
+                color: #f44336 !important;
+                display: inline !important;
+            }
+            .validation-message {
+              background-color: var(--mud-palette-error-hover) !important;
+              padding-left: 5px;
+              margin-top: 5px;
+            }
+            .kt-avatar .kt-avatar__cancel {
+                display: flex !important;
+            }
 
          </style>
     }
-
 </head>
 
 @if (Request.Path.Value.Contains("/login"))
@@ -347,7 +388,7 @@ else
                                     </li>
 
                                     <li class="kt-menu__item " aria-haspopup="true">
-                                        <a href="#" class="kt-menu__link ">
+                                        <a href="/users/list" class="kt-menu__link ">
                                             <span class="kt-menu__link-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

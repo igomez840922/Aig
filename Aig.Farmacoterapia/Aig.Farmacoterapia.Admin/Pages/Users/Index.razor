@@ -1,0 +1,317 @@
+﻿@page "/users/list"
+@*@layout null*@
+@using Aig.Farmacoterapia.Admin.Components
+@using Aig.Farmacoterapia.Admin.Components.User
+@using Aig.Farmacoterapia.Admin.Models
+@using Aig.Farmacoterapia.Application.Medicament.Model
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using System.Linq
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using System.Globalization
+@using Aig.Farmacoterapia.Infrastructure.Identity
+@using Aig.Farmacoterapia.Infrastructure.Interfaces
+@attribute [Authorize]
+@inject IUnitOfWork _unitOfWork;
+@inject ISystemLogger _systemLogger;
+@inject IContryRepository _repository;
+@inject IUserService _userService;
+@inject IJSRuntime JsRuntime
+@using BlazorPagination
+
+<div class="kt-portlet__head kt-portlet__head--lg">
+    <div class="kt-portlet__head-label">
+        <span class="kt-portlet__head-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24"></rect>
+                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                    <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                </g>
+            </svg>
+        </span>
+        <h3 class="kt-portlet__head-title">
+            Usuarios
+        </h3>
+    </div>
+    <div class="kt-portlet__head-toolbar">
+        <div class="kt-portlet__head-wrapper">
+            <div class="kt-portlet__head-actions">
+                <a href="#" class="btn btn-outline-brand btn-square" @onclick="() => OnAdd()" data-toggle="modal" data-target="#modal_createedit">
+                    <i class="la la-plus"></i>
+                    Nuevo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kt-portlet__body">
+
+    <EditForm Model="this" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
+
+        <div class="row kt-margin-b-20">
+            <div class="col-lg-4 kt-margin-b-10-tablet-and-mobile">
+                <label>Nombre:</label>
+                <input type="text" @bind-value="searchString" class="form-control kt-input" placeholder="" data-col-index="0">
+            </div>
+
+            <div class="col-lg-5 kt-margin-b-10-tablet-and-mobile">
+                <div class="row" style="margin-top: 23px;">
+                    <div class="col-lg-12" style="margin-top: 3px;">
+                        <button type="submit" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
+                            <span>
+                                <i class="la la-search"></i>
+                                <span>Buscar</span>
+                            </span>
+                        </button>
+                        &nbsp;&nbsp;
+                        <button type="button" @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
+                            <span>
+                                <i class="la la-close"></i>
+                                <span>Eliminar</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+
+    @if (paginatedResult != null && paginatedResult.Data.Count > 0)
+    {
+         <div style="padding: 0px !important;" class="kt-container kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+
+                @foreach (var dt in paginatedResult.Data)
+                {
+                    <div class="col-6 col-md-4">
+
+                        <div style="background-color: #f1f2f7;" class="kt-portlet kt-portlet--height-fluid">
+                            <div class="kt-portlet__head kt-portlet__head--noborder">
+                                <div class="kt-portlet__head-label">
+                                    <h3 class="kt-portlet__head-title">
+                                    </h3>
+                                </div>
+
+                                <div class="kt-portlet__head-toolbar">
+
+                                    <span class="dropdown">
+                                        <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
+                                            <i class="flaticon-more-1 kt-font-brand"></i>
+                                        </a>
+                                        <span class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)">
+                                                <i class="la la-edit"></i> 
+                                                Editar
+                                            </a>
+                                             <a class="dropdown-item" href="javascript:void(0)" @onclick="() =>OnChangePassword(dt)">
+                                                <i class="la la-key"></i> 
+                                                Contraseña
+                                            </a>
+                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)">
+                                                <i class="la la-trash"></i>
+                                                Eliminar
+                                            </a>
+                                            <div class="dropdown-divider ng-star-inserted"></div>
+                                        </span>
+                                    </span>
+                                 
+                                </div>
+
+                            </div>
+                            <div class="kt-portlet__body">
+
+                                <div class="kt-widget kt-widget--user-profile-2">
+                                    <div class="kt-widget__head">
+                                       
+                                        <div class="kt-avatar kt-avatar--outline">
+                                            @if (string.IsNullOrEmpty(@dt.ProfilePicture)){
+                                                <div class="kt-avatar__holder" style="background-image: url(assets/media/users/default.jpg)"></div>
+                                            }
+                                            else{
+                                                <img class="kt-avatar__holder" src="@dt.ProfilePicture"/>
+                                            }
+                                        </div>
+                                       
+                                        <div class="kt-widget__info">
+                                            <a href="javascript:void(0)" class="kt-widget__username">
+                                                @(dt.FullName)
+                                            </a>
+                                            <span class="kt-widget__desc">
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="kt-widget__section">
+                                            &emsp;
+                                        </div>
+                                        <div class="kt-widget__item">
+                                            <div class="kt-widget__contact">
+                                                <span class="kt-widget__label">Correo:</span>
+                                                <a href="#" class="kt-widget__data">@dt.Email</a>
+                                            </div>
+                                            <div class="kt-widget__contact">
+                                                <span class="kt-widget__label">Teléfono:</span>
+                                                <a href="#" class="kt-widget__data">@(dt.PhoneNumber)</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__footer">
+                                        @*<button type="button" class="btn btn-label-brand btn-lg btn-upper" @onclick="() => OnShowEvents(dt)">Eventos (@(dt.Exhibitor?.LEvents?.Count()??0))</button>*@
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+             <MudPagination SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@paginatedResult.TotalPages" Class="pa-4"/>
+        </div>
+    }
+
+</div>
+
+@if (addDialogIsOpen)
+{
+    <Add ModelData="@modelData" OnClose="@OnEventAddEditClose"></Add>
+}
+@if (editDialogIsOpen)
+{
+    <Edit ModelData="@modelData" OnClose="@OnEventAddEditClose"></Edit>
+}
+@if (editPasswordDialogIsOpen)
+{
+    <EditPassword ModelData="@modelData" OnClose="@OnEventChangePasswordClose"></EditPassword>
+}
+@if (deleteDialogIsOpen)
+{
+    <DeleteConfirmDialog Caption="Eliminar"
+                     Message="¿Confirma que desea de eliminar el artículo?"
+                     OnClose="@OnDeleteDialogClose">
+    </DeleteConfirmDialog>
+}
+@code {
+
+    private PaginatedResult<ApplicationUser> paginatedResult;
+    private MudTable<ApplicationUser> table;
+    private static IEnumerable<ApplicationUser> List { get; set; }
+    private string searchString;
+    protected ApplicationUser modelData;
+    protected bool addDialogIsOpen = false;
+    protected bool editDialogIsOpen = false;
+    protected bool editPasswordDialogIsOpen = false;
+    protected bool deleteDialogIsOpen = false;
+
+    protected async override Task OnInitializedAsync()
+    {
+        try
+        {
+            searchString = string.Empty;
+            paginatedResult = new PaginatedResult<ApplicationUser>();
+            await DoFetchData();
+        }
+        catch (Exception ex)
+        {
+            _systemLogger.Error(ex.Message);
+        }
+
+        base.OnInitialized();
+    }
+
+    private async Task DoFetchData()
+    {
+        var sorting =new List<SortingOption>(){ new SortingOption { Field = "Name", Direction = SortingDirection.ASC } };
+        var filters = new List<FilteringOption>();
+        if (!string.IsNullOrEmpty(searchString))
+            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString });
+        var args = new PageSearchArgs() {
+                PageIndex = paginatedResult.CurrentPage,
+                PageSize = paginatedResult.PageSize,
+                SortingOptions = sorting,
+                FilteringOptions = filters
+            };
+        paginatedResult = await _userService.ListAsync(args);
+        StateHasChanged();
+    }
+
+  
+    private async void OnSearch()
+    {
+        await DoFetchData();
+    }
+
+    private  async Task PageChanged(int i)
+    {
+        paginatedResult.CurrentPage = i;
+        await DoFetchData();
+    }
+
+    private async void OnReset()
+    {
+        searchString = string.Empty;
+        await DoFetchData();
+    }
+    private async Task OnAdd()
+    {
+        modelData = new ApplicationUser();;
+        addDialogIsOpen = true;
+        StateHasChanged();
+    }
+    private async Task OnEdit(string id)
+    {
+        modelData = await _userService.GetAsync(id);
+        editDialogIsOpen = true;
+        StateHasChanged();
+    }
+    private void OnChangePassword(ApplicationUser user)
+    {
+        if (user != null){
+            modelData = user;
+            editPasswordDialogIsOpen = true;
+        }
+    }
+    private async Task OnEventAddEditClose(string id)
+    {
+        if (!string.IsNullOrEmpty(id))
+            await DoFetchData();
+        addDialogIsOpen=editDialogIsOpen = false;
+
+    }
+    private async Task OnDelete(ApplicationUser user)
+    {
+        modelData= user;
+        deleteDialogIsOpen = true;
+    }
+
+    private async Task OnDeleteDialogClose(bool isOk)
+    {        
+        if (isOk)
+        {
+            var result = await _userService.DeleteDeleteAsync(modelData.Id);
+            if (!result.Succeeded)
+                await JsRuntime.InvokeVoidAsync("ShowError", result.Messages.First());
+            else {
+                await DoFetchData();
+                await JsRuntime.InvokeVoidAsync("ShowMessage", result.Messages.First());
+            }
+
+        }
+        deleteDialogIsOpen = false;
+    }
+
+    private async Task  OnEventChangePasswordClose(string id)
+    {
+        if (!string.IsNullOrEmpty(id))
+            await DoFetchData();
+       editPasswordDialogIsOpen = false;
+    }
+}

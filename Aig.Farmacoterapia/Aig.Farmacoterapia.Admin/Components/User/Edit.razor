@@ -1,0 +1,192 @@
+﻿@inject IJSRuntime JsRuntime
+@using Aig.Farmacoterapia.Application.User
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Aig.Farmacoterapia.Infrastructure.Identity
+@using Aig.Farmacoterapia.Infrastructure.Interfaces
+@using Blazored.FluentValidation
+@inject IUserService _userService;
+@inject IUploadService _uploadService;
+@inject ISystemLogger _systemLogger;
+
+<style>
+   
+</style>
+
+<div class="modal show fade" style="display:block;overflow-y:auto!important;" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="@Cancel">
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="kt-portlet" style="margin-bottom:0px !important;">
+
+                   <EditForm Model="@ModelData" OnValidSubmit="SaveData" class="kt-form kt-form--label-right">
+                      <FluentValidationValidator />
+                        
+                        <div class="kt-portlet__body">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="kt-avatar kt-avatar--outline">
+
+                                        @if (string.IsNullOrEmpty(ModelData.ProfilePicture))
+                                        {
+                                            <div class="kt-avatar__holder" style="background-image: url(assets/media/users/default.jpg)"></div>
+                                        }
+                                        else
+                                        {
+                                             
+                                            <img class="kt-avatar__holder" src="@ModelData.ProfilePicture"/>
+                                        }
+                                        <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="avatar">
+                                            <i class="fa fa-pen"></i>
+                                            <InputFile OnChange="@UploadPictureFiles" accept=".png, .jpg, .jpeg"></InputFile>
+                                        </label>
+                                        <button type="button" @onclick="() => DeletePictureAsync()" class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-lg-9" style="padding-top: 10px;">
+                                    <div class="form-group row">
+                                         <h4 style="margin-left:8px">Datos de Acceso</h4>
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <label>Usuario (Correo)</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.UserName" />
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.UserName)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 style="margin-left:8px">Información personal</h4>
+                                        <div class="col-lg-12"  style="padding-top: 10px;">
+                                            <div>
+                                                <label>Nombre</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.FirstName" />
+                                                <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.FirstName)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12"  style="padding-top: 10px;">
+                                            <div>
+                                                <label>Apellido</label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.LastName" />
+                                               <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.LastName)" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6"  style="padding-top: 10px;">
+                                            <div>
+                                                <label>Teléfono </label>
+                                                <InputText type="text" class="form-control" @bind-Value="ModelData.PhoneNumber" name="PhoneNumber" />
+                                              <div class="error invalid-feedback">
+                                                    <ValidationMessage For="@(() => ModelData.PhoneNumber)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                        </div>
+
+                        <div class="kt-portlet__foot" style="padding:10px!important">
+                            <div class="kt-form__actions text-right">
+
+                                <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+                                <button type="submit" class="btn btn-primary btn-square">Save</button>
+
+                            </div>
+                        </div>
+                    </EditForm>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop fade show"></div>
+
+
+@code {
+
+    [Parameter] public EventCallback<string> OnClose { get; set; }
+    [Parameter] public ApplicationUser ModelData { get; set; }
+    private IBrowserFile _imageFile;
+    private bool showPictureFileInputAlert=false;
+    private FluentValidationValidator fluentValidationValidator;
+    private async Task UploadPictureFiles(InputFileChangeEventArgs e)
+    {
+        _imageFile = e.File;
+        if (_imageFile != null)
+        {
+            try
+            {   
+
+                showPictureFileInputAlert = false;
+                long maxFileSize = 1048576 * 1;//1MB
+                var format = "image/png";
+                if (_imageFile.Size <= maxFileSize){
+                    var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
+                    var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                    var request = new UploadObject
+                        {
+                            FileName = $"{Guid.NewGuid()}.png",
+                            Data = stream,
+                            Size = _imageFile.Size,
+                            UploadType = UploadType.Users,
+                            Extension = ".png"
+                        };
+                    ModelData.ProfilePicture = await _uploadService.UploadAsync(request);
+                }
+                else { showPictureFileInputAlert = true; }
+            }
+            catch (Exception ex)
+            {
+                _systemLogger.Error(ex);
+            }
+        }
+    }
+
+    private async Task DeletePictureAsync()
+    {
+        _imageFile = null;
+        ModelData.ProfilePicture = null;
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        ModelData.Password = ModelData.PasswordConfirm = "p";
+        base.OnInitialized();
+    }
+
+    private Task Cancel()
+    {
+        return OnClose.InvokeAsync(string.Empty);
+    }
+
+    private async Task SaveData()
+    {
+        var result = await _userService.SaveAsync(ModelData);
+        if (!result.Succeeded)
+           await JsRuntime.InvokeVoidAsync("ShowError",result.Messages.First());
+        else {
+           await OnClose.InvokeAsync(ModelData.Id);
+           await JsRuntime.InvokeVoidAsync("ShowMessage",result.Messages.First());
+        }
+
+    }
+}
