@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace DataModel
 {
     //Tabla padre de las inspecciones para generar las actas
-
     public  class AUD_InspeccionTB:SystemId
     {
         public AUD_InspeccionTB()
@@ -60,6 +59,10 @@ namespace DataModel
         [StringLength(500)]
         public string UbicacionEstablecimiento { get => ubicacionEstablecimiento; set => SetProperty(ref ubicacionEstablecimiento, value); }
 
+        //num de licencia o aviso de operaciones
+        private string telefonoEstablecimiento;
+        [StringLength(250)]
+        public string TelefonoEstablecimiento { get => telefonoEstablecimiento; set => SetProperty(ref telefonoEstablecimiento, value); }
 
         //num de licencia o aviso de operaciones
         private string licenseNumber;
@@ -81,11 +84,7 @@ namespace DataModel
         [StringLength(250)]
         public string RepreLegalIdentificacion { get => repreLegalIdentificacion; set => SetProperty(ref repreLegalIdentificacion, value); }
 
-        //participante del DNFD
-        private string particDNFD;
-        [StringLength(500)]
-        public string ParticipantesDNFD { get => particDNFD; set => SetProperty(ref particDNFD, value); }
-
+        
         //participante Establecimiento
         private string particEstablecimiento;
         [StringLength(500)]
@@ -102,40 +101,21 @@ namespace DataModel
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "InvalidEmail")]
         public string ParticEstablecimientoEmail { get => particEstablecimientoEmail; set => SetProperty(ref particEstablecimientoEmail, value); }
 
-
         //participante Establecimiento Identificacion
         private string particEstablecimientoCIP;
         [StringLength(250)]
         public string ParticEstablecimientoCIP { get => particEstablecimientoCIP; set => SetProperty(ref particEstablecimientoCIP, value); }
 
-        //participante del DNFD Firma1
-        private string firmaDNFD1;
-        public string FirmaDNFD1 { get => firmaDNFD1; set => SetProperty(ref firmaDNFD1, value); }
-       
-        //participante del DNFD NumRegDNFD1
-        private string numRegDNFD1;
-        [StringLength(250)]
-        public string NumRegDNFD1 { get => numRegDNFD1; set => SetProperty(ref numRegDNFD1, value); }
-
-        //participante del DNFD Firma2
-        private string firmaDNFD2;
-        [StringLength(250)]
-        public string FirmaDNFD2 { get => firmaDNFD2; set => SetProperty(ref firmaDNFD2, value); }
-
-        //participante del DNFD NumRegDNFD2
-        private string numRegDNFD2;
-        public string NumRegDNFD2 { get => numRegDNFD2; set => SetProperty(ref numRegDNFD2, value); }
-
-        //participante del Establecimiento Firma1
-        private string firmaEstablec1;
-        public string FirmaEstablec1 { get => firmaEstablec1; set => SetProperty(ref firmaEstablec1, value); }
-
-        //participante del Establecimiento Firma2
-        private string firmaEstablec2;
-        public string FirmaEstablec2 { get => firmaEstablec2; set => SetProperty(ref firmaEstablec2, value); }
 
         ///////////////////////
         /// LOS FORMULARIOS
+
+        //Formulario de Apertura y Cambio de Ubicación de Agencia
+        private long? inspAperCambUbicAgenId;
+        public long? InspAperCambUbicAgenId { get => inspAperCambUbicAgenId; set => SetProperty(ref inspAperCambUbicAgenId, value); }
+        private AUD_InspAperCambUbicAgenTB? inspAperCambUbicAgen;
+        public virtual AUD_InspAperCambUbicAgenTB? InspAperCambUbicAgen { get => inspAperCambUbicAgen; set => SetProperty(ref inspAperCambUbicAgen, value); }
+
 
         //Formulario de Apertura y Cambio de Ubicación de Farmacias
         private long? inspAperCambUbicFarmId;

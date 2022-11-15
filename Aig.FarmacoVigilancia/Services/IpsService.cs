@@ -197,6 +197,18 @@ namespace Aig.FarmacoVigilancia.Services
         public async Task<FMV_IpsTB> Save(FMV_IpsTB data)
         {
             var result = DalService.Save(data);
+
+            if(result != null)
+            {
+                if (result.IpsData != null)
+                {
+                    //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;
+                    DalService.DBContext.Entry(result).Property(b => b.IpsData).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
+            }
+            
+
             return result;           
         }
 

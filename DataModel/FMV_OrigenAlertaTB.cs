@@ -20,8 +20,8 @@ namespace DataModel
 		[StringLength(500)]
 		public string Descripcion { get => descripcion; set => SetProperty(ref descripcion, value); }
 
-		private List<FMV_AlertaNotaSeguridadTB> lNotas;
-        public virtual List<FMV_AlertaNotaSeguridadTB> LNotas { get => lNotas; set => SetProperty(ref lNotas, value); }
+		private List<FMV_AlertaTB> lAlertas;
+        public virtual List<FMV_AlertaTB> LAlertas { get => lAlertas; set => SetProperty(ref lAlertas, value); }
 
     }
 }

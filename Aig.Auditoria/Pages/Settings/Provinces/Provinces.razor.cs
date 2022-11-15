@@ -29,7 +29,6 @@ namespace Aig.Auditoria.Pages.Settings.Provinces
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             bus.Subscribe<Aig.Auditoria.Events.Province.ProvinceAddEdit_CloseEvent>(ProvinceAddEdit_CloseEvent);
-            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             base.OnInitialized();
         }
 
@@ -119,11 +118,13 @@ namespace Aig.Auditoria.Pages.Settings.Provinces
 
         private async Task OnDelete(ProvinciaTB data)
         {
+            bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             dataModel.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)
         {
+            bus.UnSubscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             var message = args.GetMessage<DeleteConfirmationCloseEvent>();
             if (message.YesNo)
             {
@@ -132,7 +133,7 @@ namespace Aig.Auditoria.Pages.Settings.Provinces
         }
         private async Task DeleteData()
         {
-            var result = await provicesService.Delete(dataModel.Data.Id);
+            var result = await provicesService.Delete(dataModel.Data?.Id ?? 0);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);

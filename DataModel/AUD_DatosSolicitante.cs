@@ -34,9 +34,9 @@ namespace DataModel
         public string TelefonoOfic { get => telefonoOfic; set => SetProperty(ref telefonoOfic, value); }
 
         //Solicitante Telefono Residencial
-        private string telefonoRecid;
+        private string telefonoResid;
         [StringLength(250)]
-        public string TelefonoRecid { get => telefonoRecid; set => SetProperty(ref telefonoRecid, value); }
+        public string TelefonoResid { get => telefonoResid; set => SetProperty(ref telefonoResid, value); }
 
         //Solicitante Telefono Movil
         private string telefonoMovil;
@@ -53,6 +53,10 @@ namespace DataModel
         private string profesion;
         [StringLength(250)]
         public string Profesion { get => profesion; set => SetProperty(ref profesion, value); }
+
+        //Solicitante Profesion
+        private string direccion;
+        public string Direccion { get => direccion; set => SetProperty(ref direccion, value); }
 
     }
 }

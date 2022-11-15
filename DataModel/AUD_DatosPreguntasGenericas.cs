@@ -27,8 +27,8 @@ namespace DataModel
         public bool AnuncioVisibleLeyArt1 { get => anuncioVisibleLeyArt1; set => SetProperty(ref anuncioVisibleLeyArt1, value); }
 
         //Farmacia Privada: Anuncio visible y legible Art. 655 y Art. 656 del Decreto Ejecutivo 115 de 16 de agosto de 2022.
-        private bool anuncioVisibleLeyArt665;
-        public bool AnuncioVisibleLeyArt665 { get => anuncioVisibleLeyArt665; set => SetProperty(ref anuncioVisibleLeyArt665, value); }
+        private bool anuncioVisibleLeyArt656;
+        public bool AnuncioVisibleLeyArt656 { get => anuncioVisibleLeyArt656; set => SetProperty(ref anuncioVisibleLeyArt656, value); }
 
         //Higrótermometro y formato de registro de temperatura y humedad relativa. El registro y control de los parámetros debe ser como mínimo dos veces al día de preferencia en horas de la mañana y mediodía.
         private bool registroTempHumedadRelat;
@@ -87,6 +87,42 @@ namespace DataModel
         //Luces de Emergencia
         private bool lucesEmergencias;
         public bool LucesEmergencias { get => lucesEmergencias; set => SetProperty(ref lucesEmergencias, value); }
+
+        //salida emergencia
+        private bool salidaEmergencias;
+        public bool SalidaEmergencias { get => salidaEmergencias; set => SetProperty(ref salidaEmergencias, value); }
+
+        //No Comer
+        private bool noComer;
+        public bool NoComer { get => noComer; set => SetProperty(ref noComer, value); }
+
+        //No Beber
+        private bool noBeber;
+        public bool NoBeber { get => noBeber; set => SetProperty(ref noBeber, value); }
+
+        //No Fumar
+        private bool noFumar;
+        public bool NoFumar { get => noFumar; set => SetProperty(ref noFumar, value); }
+
+        //No Fumar
+        private bool noGuardarPlantasComidasBebidas;
+        public bool NoGuardarPlantasComidasBebidas { get => noGuardarPlantasComidasBebidas; set => SetProperty(ref noGuardarPlantasComidasBebidas, value); }
+
+        ////Asesoria Farmaceutica
+        //private bool asesoriaFarmaceutica;
+        //public bool AsesoriaFarmaceutica { get => asesoriaFarmaceutica; set => SetProperty(ref asesoriaFarmaceutica, value); }
+
+        ////Consulta Bibliografica
+        //private bool consultaBibliografica;
+        //public bool ConsultaBibliografica { get => consultaBibliografica; set => SetProperty(ref consultaBibliografica, value); }
+
+        ////productos Vencidos
+        //private bool productosVencidos;
+        //public bool ProductosVencidos { get => productosVencidos; set => SetProperty(ref productosVencidos, value); }
+
+        ////Refrigeradora para productos que requiere condiciones especiales de temperatura
+        //private bool refriProductosCondEspeciales;
+        //public bool RefriProductosCondEspeciales { get => refriProductosCondEspeciales; set => SetProperty(ref refriProductosCondEspeciales, value); }
 
     }
 }

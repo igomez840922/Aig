@@ -112,7 +112,7 @@ namespace Aig.Auditoria.Pages.Inspections
         }
         private void InspectionAddEdit_CloseEventHandler(MessageArgs args)
         {
-            bus.Subscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
+            bus.UnSubscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
 
             var message = args.GetMessage<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>();
 
@@ -150,7 +150,7 @@ namespace Aig.Auditoria.Pages.Inspections
         }
         private async Task DeleteData()
         {
-            var result = await inspeccionService.Delete(dataModel.Data.Id);
+            var result = await inspeccionService.Delete(dataModel.Data?.Id ?? 0);
             if (result != null)
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataDeleteSuccessfully"]);

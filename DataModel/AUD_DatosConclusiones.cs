@@ -14,102 +14,44 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosConclusiones : SystemId
     {
+        public AUD_DatosConclusiones() {
+            LAttachments=new List<AttachmentTB>();
+            LParticipantes = new List<Participante>();
+            LPartEstablecimiento = new List<Participante>();
+        }
+
+        //fecha y Hora de finalizacion
+        private DateTime? fechaFinalizacion;
+        public DateTime? FechaFinalizacion { get => fechaFinalizacion; set => SetProperty(ref fechaFinalizacion, value); }
+
+
         //Observaciones
         private string observacionesFinales;
         public string ObservacionesFinales { get => observacionesFinales; set => SetProperty(ref observacionesFinales, value); }
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
         private List<AttachmentTB> lAttachments;
-        public virtual List<AttachmentTB> LAttachments { get => lAttachments; set => SetProperty(ref lAttachments, value); }
+        public List<AttachmentTB> LAttachments { get => lAttachments; set => SetProperty(ref lAttachments, value); }
 
 
         //Según criterio técnico se concluye que el local cumple  o no cumple con los requisitos mínimos para operar
         private bool cumpleRequisitosMinOperacion;
         public bool CumpleRequisitosMinOperacion { get => cumpleRequisitosMinOperacion; set => SetProperty(ref cumpleRequisitosMinOperacion, value); }
 
+
+        //Lista de Participantes
+        private List<Participante> lParticipantes;
+        public List<Participante> LParticipantes { get => lParticipantes; set => SetProperty(ref lParticipantes, value); }
+
+        //Lista de Participantes Establecimiento
+        private List<Participante> lPartEstablecimiento;
+        public List<Participante> LPartEstablecimiento { get => lPartEstablecimiento; set => SetProperty(ref lPartEstablecimiento, value); }
+
+
         /// <summary>
         /// Sección de Inspectores y aprobaciones
         /// </summary>
         /// 
-
-        //Inspector 1 Nombre
-        private string nombreInspector1;
-        [StringLength(250)]
-        public string NombreInspector1 { get => nombreInspector1; set => SetProperty(ref nombreInspector1, value); }
-
-        //Inspector 1 registro
-        private string registroInspector1;
-        [StringLength(250)]
-        public string RegistroInspector1 { get => registroInspector1; set => SetProperty(ref registroInspector1, value); }
-
-        //Inspector 1 cargo
-        private string cargoInspector1;
-        [StringLength(250)]
-        public string CargoInspector1 { get => cargoInspector1; set => SetProperty(ref cargoInspector1, value); }
-
-        //Inspector 1 firma
-        private string firmaInspector1;
-        public string FirmaInspector1 { get => firmaInspector1; set => SetProperty(ref firmaInspector1, value); }
-
-
-        //Inspector 2 Nombre
-        private string nombreInspector2;
-        [StringLength(250)]
-        public string NombreInspector2 { get => nombreInspector2; set => SetProperty(ref nombreInspector2, value); }
-
-        //Inspector 2 registro
-        private string registroInspector2;
-        [StringLength(250)]
-        public string RegistroInspector2 { get => registroInspector2; set => SetProperty(ref registroInspector2, value); }
-
-        //Inspector 2 cargo
-        private string cargoInspector2;
-        [StringLength(250)]
-        public string CargoInspector2 { get => cargoInspector2; set => SetProperty(ref cargoInspector2, value); }
-
-        //Inspector 2 firma
-        private string firmaInspector2;
-        public string FirmaInspector2 { get => firmaInspector2; set => SetProperty(ref firmaInspector2, value); }
-
-
-        //Inspector 3 Nombre
-        private string nombreInspector3;
-        [StringLength(250)]
-        public string NombreInspector3 { get => nombreInspector3; set => SetProperty(ref nombreInspector3, value); }
-
-        //Inspector 3 registro
-        private string registroInspector3;
-        [StringLength(250)]
-        public string RegistroInspector3 { get => registroInspector3; set => SetProperty(ref registroInspector3, value); }
-
-        //Inspector 3 cargo
-        private string cargoInspector3;
-        [StringLength(250)]
-        public string CargoInspector3 { get => cargoInspector3; set => SetProperty(ref cargoInspector3, value); }
-
-        //Inspector 3 firma
-        private string firmaInspector3;
-        public string FirmaInspector3 { get => firmaInspector3; set => SetProperty(ref firmaInspector3, value); }
-
-        //Inspector 4 Nombre
-        private string nombreInspector4;
-        [StringLength(250)]
-        public string NombreInspector4 { get => nombreInspector4; set => SetProperty(ref nombreInspector4, value); }
-
-        //Inspector 4 registro
-        private string registroInspector4;
-        [StringLength(250)]
-        public string RegistroInspector4 { get => registroInspector4; set => SetProperty(ref registroInspector4, value); }
-
-        //Inspector 4 cargo
-        private string cargoInspector4;
-        [StringLength(250)]
-        public string CargoInspector4 { get => cargoInspector4; set => SetProperty(ref cargoInspector4, value); }
-
-        //Inspector 4 firma
-        private string firmaInspector4;
-        public string FirmaInspector4 { get => firmaInspector4; set => SetProperty(ref firmaInspector4, value); }
-
 
         //nombre representante legal
         private string nombreRepresentanteLegal;
@@ -126,17 +68,41 @@ namespace DataModel
         [StringLength(250)]
         public string RegistroRepresentanteLegal { get => registroRepresentanteLegal; set => SetProperty(ref registroRepresentanteLegal, value); }
 
+        //registro representante legal
+        private string cargoRepresentanteLegal;
+        [StringLength(250)]
+        public string CargoRepresentanteLegal { get => cargoRepresentanteLegal; set => SetProperty(ref cargoRepresentanteLegal, value); }
+
+
         //firma representante legal
         private string firmaRepresentanteLegal;
         public string FirmaRepresentanteLegal { get => firmaRepresentanteLegal; set => SetProperty(ref firmaRepresentanteLegal, value); }
 
-        //fecha y Hora de finalizacion
-        private DateTime fechaFinalizacion;
-        public DateTime FechaFinalizacion { get => fechaFinalizacion; set => SetProperty(ref fechaFinalizacion, value); }
+        //nombre regente legal
+        private string nombreRegente;
+        [StringLength(250)]
+        public string NombreRegente { get => nombreRegente; set => SetProperty(ref nombreRegente, value); }
 
-        // El establecimiento se compromete al fiel cumplimiento del Artículo 639 del Decreto Ejecutivo 115 De 16 de agosto de 2022. Firma de Regente Farmacéutico:
+        //cedula regente legal
+        private string cedulaRegente;
+        [StringLength(250)]
+        public string CedulaRegente { get => cedulaRegente; set => SetProperty(ref cedulaRegente, value); }
+
+        //registro regente legal
+        private string registroRegente;
+        [StringLength(250)]
+        public string RegistroRegente { get => registroRegente; set => SetProperty(ref registroRegente, value); }
+
+        //registro regente legal
+        private string cargoRegente;
+        [StringLength(250)]
+        public string CargoRegente { get => cargoRegente; set => SetProperty(ref cargoRegente, value); }
+
+        //firma regente legal
         private string firmaRegente;
         public string FirmaRegente { get => firmaRegente; set => SetProperty(ref firmaRegente, value); }
+
+
 
     }
 }

@@ -130,10 +130,28 @@ namespace DataAccess.FarmacoVigilancia
              .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<FMV_OrigenAlertaTB>()
-             .HasMany(e => e.LNotas)
+             .HasMany(e => e.LAlertas)
              .WithOne(e => e.OrigenAlerta)
              .HasForeignKey(e => e.OrigenAlertaId)
              .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+            .HasMany(e => e.LAlertas)
+            .WithOne(e => e.Evaluador)
+            .HasForeignKey(e => e.EvaluadorId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+           .HasMany(e => e.LNotas)
+           .WithOne(e => e.Evaluador)
+           .HasForeignKey(e => e.EvaluadorId)
+           .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<InstitucionDestinoTB>()
+           .HasMany(e => e.LNotas)
+           .WithOne(e => e.InstitucionDestino)
+           .HasForeignKey(e => e.InstitucionDestinoId)
+           .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<FMV_IpsTB>()
             .Property(e => e.IpsData)
@@ -155,7 +173,9 @@ namespace DataAccess.FarmacoVigilancia
         public virtual DbSet<FMV_IpsTB> Ips { get; set; }
         public virtual DbSet<FMV_RfvTB> Rfv { get; set; }
         public virtual DbSet<FMV_OrigenAlertaTB> OrigenAlerta { get; set; }
-        public virtual DbSet<FMV_AlertaNotaSeguridadTB> AlertaNotaSeguridad { get; set; }
+        public virtual DbSet<FMV_AlertaTB> Alerta { get; set; }
+        public virtual DbSet<FMV_NotaTB> Nota { get; set; }
+        public virtual DbSet<InstitucionDestinoTB> InstitucionDestino { get; set; }
         public virtual DbSet<LaboratorioTB> Laboratorio { get; set; }
         public virtual DbSet<CorregimientoTB> Corregimiento { get; set; }
         public virtual DbSet<DistritoTB> Distrito { get; set; }

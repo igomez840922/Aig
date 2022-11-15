@@ -97,7 +97,9 @@ builder.Services.AddScoped<IPmrService, PmrService>();
 builder.Services.AddScoped<IIpsService, IpsService>();
 builder.Services.AddScoped<IRfvService, RfvService>();
 builder.Services.AddScoped<IOrigenAlertaService, OrigenAlertaService>();
-builder.Services.AddScoped<IAlertaNotaSeguridadService, AlertaNotaSeguridadService>();
+builder.Services.AddScoped<IAlertaService, AlertaService>();
+builder.Services.AddScoped<IDestinyInstituteService, DestinyInstituteService>();
+builder.Services.AddScoped<INoteService, NoteService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

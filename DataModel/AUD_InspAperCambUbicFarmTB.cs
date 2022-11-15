@@ -11,10 +11,26 @@ using System.Threading.Tasks;
 namespace DataModel
 {
 	public class AUD_InspAperCambUbicFarmTB : SystemId
-	{
-        //Tipo de Inspección
-        private enumAUD_TipoInspeccion tipoInspeccion;
-        public enumAUD_TipoInspeccion TipoInspeccion { get => tipoInspeccion; set => SetProperty(ref tipoInspeccion, value); }
+	{        
+        public AUD_InspAperCambUbicFarmTB()
+        {
+            DatosEstablecimiento=new AUD_DatosEstablecimiento();
+            DatosSolicitante= new AUD_DatosSolicitante();
+            DatosRegente = new AUD_DatosRegente();
+            DatosRepresentLegal = new AUD_DatosRepresentLegal(); 
+            DatosEstructuraOrganizacional = new AUD_DatosEstructuraOrganizacional();
+            DatosInfraEstructura = new AUD_DatosInfraEstructura();
+            DatosAreaFisica = new AUD_DatosAreaFisicas();
+            DatosPreguntasGenericas = new AUD_DatosPreguntasGenericas();
+            DatosSenalizacionAvisos = new AUD_DatosSenalizacionAvisos();
+            DatosAreaProductosControlados = new AUD_DatosAreaProductosControlados();
+            DatosAreaAlmacenamiento = new AUD_DatosAreaAlmacenamiento();
+            DatosConclusiones = new AUD_DatosConclusiones();
+        }
+
+        private AUD_InspeccionTB inspeccion;
+        public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
+
 
         //codigo
         private string reciboPago;
@@ -36,6 +52,12 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
 
+        //Datos del Regente
+        private AUD_DatosRepresentLegal datosRepresentLegal;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosRepresentLegal DatosRepresentLegal { get => datosRepresentLegal; set => SetProperty(ref datosRepresentLegal, value); }
+
+
         //Datos Estructura Organizacional
         private AUD_DatosEstructuraOrganizacional datosEstructuraOrganizacional;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
@@ -47,9 +69,9 @@ namespace DataModel
         public AUD_DatosInfraEstructura DatosInfraEstructura { get => datosInfraEstructura; set => SetProperty(ref datosInfraEstructura, value); }
 
         //Datos Area Física
-        private AUD_DatosAreasFisicas datosAreaFisica;
+        private AUD_DatosAreaFisicas datosAreaFisica;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosAreasFisicas DatosAreaFisica { get => datosAreaFisica; set => SetProperty(ref datosAreaFisica, value); }
+        public AUD_DatosAreaFisicas DatosAreaFisica { get => datosAreaFisica; set => SetProperty(ref datosAreaFisica, value); }
 
         //Datos Preguntas Genericas
         private AUD_DatosPreguntasGenericas datosPreguntasGenericas;
