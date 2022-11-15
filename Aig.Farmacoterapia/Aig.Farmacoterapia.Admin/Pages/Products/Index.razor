@@ -376,7 +376,8 @@
     private async Task OnEventAddEditClose(long id)
     {
         addEditDialogIsOpen = false;
-        await table.ReloadServerData();
+         if (id>0)
+            table.ReloadServerData();
     }
     private async Task OnDelete(AigMedicamento data)
     {
