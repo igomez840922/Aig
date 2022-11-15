@@ -303,7 +303,7 @@
     {
         try
         {  
-           
+
             modelFilter = new MedicamentFilter();
             dateRange = new DateRange();
             expirationRange= new DateRange();
@@ -319,6 +319,7 @@
 
     private async Task<TableData<AigMedicamento>> DoFetchData(TableState state)
     {
+        
         StateHasChanged();
         var sorting = new List<SortingOption>();
         var filters = new List<FilteringOption>();

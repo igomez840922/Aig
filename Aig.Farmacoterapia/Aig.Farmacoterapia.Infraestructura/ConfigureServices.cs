@@ -109,27 +109,27 @@ namespace Aig.Farmacoterapia.Infrastructure
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             var conn = configuration.GetConnectionString("DefaultConnection");
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //{
-            //    options.UseSqlServer(conn, sqlServerOptionsAction:
-            //        sqlOptions =>
-            //        {
-            //            sqlOptions.EnableRetryOnFailure();
-            //            sqlOptions.CommandTimeout(120);
-            //            //sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
-            //        });
-            //});
-
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseMySql(conn, ServerVersion.AutoDetect(conn), mySqlOptionsAction:
+                options.UseSqlServer(conn, sqlServerOptionsAction:
                     sqlOptions =>
                     {
-                        options.EnableDetailedErrors();
                         sqlOptions.EnableRetryOnFailure();
                         sqlOptions.CommandTimeout(120);
+                        //sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
                     });
             });
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //{
+            //    options.UseMySql(conn, ServerVersion.AutoDetect(conn), mySqlOptionsAction:
+            //        sqlOptions =>
+            //        {
+            //            options.EnableDetailedErrors();
+            //            sqlOptions.EnableRetryOnFailure();
+            //            sqlOptions.CommandTimeout(120);
+            //        });
+            //});
 
             return services;
         }
