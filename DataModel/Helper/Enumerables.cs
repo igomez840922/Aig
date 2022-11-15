@@ -61,7 +61,7 @@ namespace DataModel.Helper
         DFP = 10,
         [Description("Apertura de Fabricantes - Medicamentos")]
         AFM = 11,
-        [Description("Apertura Fabricantes – Cosméticos y Desinfectantes")]
+        [Description("Apertura de Fabricantes – Cosméticos y Desinfectantes")]
         AFC = 12,
         [Description("Guía BPM – Fabricantes de Medicamentos")]
         BPMFM = 13,

@@ -130,7 +130,50 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["DNFDParticipants"]</label>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["FullName"]</th>
+                                                    <th>@languageContainerService.Keys["IdentificationCard"]</th>
+                                                    <th>@languageContainerService.Keys["RegisterNumber"]</th>
+                                                    <th>@languageContainerService.Keys["Charge"]</th>
+                                                    <th style="text-align:right;">
+                                                        <button type="button" @onclick="(e)=>{OpenParticipant();}"
+                                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                                            @languageContainerService.Keys["Add"]
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.NombreCompleto</td>
+                                                            <td>@dt.CedulaIdentificacion</td>
+                                                            <td>@dt.RegistroNumero</td>
+                                                            <td>@dt.Cargo</td>
+                                                            <td style="text-align:right">
+                                                                    <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveParticipant(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
 
                         </div>
                         <div class="tab-pane" id="applicantInfo" role="tabpanel">
@@ -245,8 +288,8 @@
                                     <label>@languageContainerService.Keys["SuitabilityRegistrationNumber"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.NumregistroIdoneidad" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.NumregistroIdoneidad) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.NumRegistro" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.NumRegistro) />
                                         </div>
                                     </div>
                                 </div>
@@ -1668,259 +1711,51 @@
                                     <label>@languageContainerService.Keys["FinishedDate"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion) />
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt"  />
+                                            @*<InputDate class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion) />*@
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row clearfix">
-                                
-                                <div class="col-sm-6">
-                                    <div class="row clearfix">
-                                        
-                                        <div class="col-sm-12">
-                                                   <label for="password">@languageContainerService.Keys["Inspector"] 1</label>
-                                     <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector1" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector1) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector1" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector1) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["Charge"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector1" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector1) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @if (showSignasure)
-                                        {
+                            @if (Inspeccion != null && Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes.Count > 0 && showSignasure)
+                            {
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
                                             <div class="col-sm-12">
-                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <label for="password">@languageContainerService.Keys["Representante Legal de la Empresa"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <SignaturePad @ref="signaturePad1" OnSignatureChange="OnSignatureChange1"
-                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                            <SignaturePadFooter>
-                                                                <SignaturePadClear>
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg1">@languageContainerService.Keys["Clear"]</button>
-                                                                </SignaturePadClear>
-                                                            </SignaturePadFooter>
-                                                        </SignaturePad>
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRepresentanteLegal) />
                                                     </div>
                                                 </div>
                                             </div>
-                                        }
-                                    </div>                                    
-                                </div>                               
-                                
-                                <div class="col-sm-6">
-                                    <div class="row clearfix">
-                                        
-                                        <div class="col-sm-12">
-                                             <label for="password">@languageContainerService.Keys["Inspector"] 2</label>
-                                           <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector2" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector2) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector2" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector2) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["Charge"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector2" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector2) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @if (showSignasure)
-                                        {
-                                            <div class="col-sm-12">
-                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <SignaturePad @ref="signaturePad2" OnSignatureChange="OnSignatureChange2"
-                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                            <SignaturePadFooter>
-                                                                <SignaturePadClear>
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg2">@languageContainerService.Keys["Clear"]</button>
-                                                                </SignaturePadClear>
-                                                            </SignaturePadFooter>
-                                                        </SignaturePad>
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoRepresentanteLegal) />
                                                     </div>
                                                 </div>
                                             </div>
-                                        }
-                                        
-                                    </div>
-
-                                </div>
-                            
-                                <div class="col-sm-6">
-                                    <div class="row clearfix">
-                                       
-                                        <div class="col-sm-12">
-                                              <label for="password">@languageContainerService.Keys["Inspector"] 3</label>
-                                          <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector3" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector3) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector3" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector3) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["Charge"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector3" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector3) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @if (showSignasure)
-                                        {
-                                            <div class="col-sm-12">
-                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <SignaturePad @ref="signaturePad3" OnSignatureChange="OnSignatureChange3"
-                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                            <SignaturePadFooter>
-                                                                <SignaturePadClear>
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg3">@languageContainerService.Keys["Clear"]</button>
-                                                                </SignaturePadClear>
-                                                            </SignaturePadFooter>
-                                                        </SignaturePad>
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRepresentanteLegal) />
                                                     </div>
                                                 </div>
                                             </div>
-                                        }
-                                        
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row clearfix">
-                                       
-                                        <div class="col-sm-12">
-                                                <label for="password">@languageContainerService.Keys["Inspector"] 4</label>
-                                        <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector4" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreInspector4) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector4" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroInspector4) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["Charge"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector4" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoInspector4) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @if (showSignasure)
-                                        {
-                                            <div class="col-sm-12">
-                                                <label>@languageContainerService.Keys["Signature"]</label>
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <SignaturePad @ref="signaturePad4" OnSignatureChange="OnSignatureChange4"
-                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                            <SignaturePadFooter>
-                                                                <SignaturePadClear>
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg4">@languageContainerService.Keys["Clear"]</button>
-                                                                </SignaturePadClear>
-                                                            </SignaturePadFooter>
-                                                        </SignaturePad>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                        
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row clearfix">
-                                        <div class="col-sm-12">
-                                             <label for="password">@languageContainerService.Keys["Representante Legal de la Empresa"]</label>
-                                           <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRepresentanteLegal" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRepresentanteLegal) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroRepresentanteLegal" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroRepresentanteLegal) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRepresentanteLegal" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRepresentanteLegal) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @if (showSignasure)
-                                        {
                                             <div class="col-sm-12">
                                                 <label>@languageContainerService.Keys["Signature"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <SignaturePad @ref="signaturePad5" OnSignatureChange="OnSignatureChange5"
-                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                      MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
                                                             <SignaturePadFooter>
                                                                 <SignaturePadClear>
                                                                     <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
@@ -1930,49 +1765,55 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        }
-                                        
+
+                                        </div>
+
                                     </div>
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-8">
+                                                <label for="password">@languageContainerService.Keys["Regente Farmaceutico"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.NombreRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.RegistroRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CargoRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.CedulaRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row clearfix">
-                                        <div class="col-sm-12">
-                                             <label for="password">@languageContainerService.Keys["Regente Farmaceutico"]</label>
-                                           <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.Nombre" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.Nombre) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.NumregistroIdoneidad" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.NumregistroIdoneidad) />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosRegente.Cedula" />
-                                                    <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosRegente.Cedula) />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        @if (showSignasure)
-                                        {
                                             <div class="col-sm-12">
                                                 <label>@languageContainerService.Keys["Signature"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <SignaturePad @ref="signaturePad6" OnSignatureChange="OnSignatureChange6"
-                                                                  MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                      MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
                                                             <SignaturePadFooter>
                                                                 <SignaturePadClear>
                                                                     <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg6">@languageContainerService.Keys["Clear"]</button>
@@ -1982,13 +1823,49 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        }
+                                        </div>
+
                                     </div>
 
+                                    <div class="col-sm-12">
+                                        <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
+                                    </div>
+                                    @foreach (var dt in Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes)
+                                    {
+                                        <div class="col-sm-6">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12">
+                                                    <label for="password">@dt.NombreCompleto</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["RegisterNumber"]:@dt.RegistroNumero</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["IdentificationCard"]:@dt.CedulaIdentificacion</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Signature"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <SignaturePad @ref="signaturePad" OnSignatureChange="(e)=>{OnSignatureChange(dt);}"
+                                                                          MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                <SignaturePadFooter>
+                                                                    <SignaturePadClear>
+                                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="(e)=>{RemoveSignatureImg(dt);}">@languageContainerService.Keys["Clear"]</button>
+                                                                    </SignaturePadClear>
+                                                                </SignaturePadFooter>
+                                                            </SignaturePad>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
                                 </div>
-                            
-                            </div>
-                            
+
+                            }
+
                         </div>
                     </div>
 
@@ -2021,6 +1898,10 @@
 
 @if(OpenHourModal){
     <Aig.Auditoria.Components.OpenHours.AddEditOpenHoursComponent HorarioApertura="@DatosHorario"></Aig.Auditoria.Components.OpenHours.AddEditOpenHoursComponent>
+}
+@if (showParticipant)
+{
+    <Aig.Auditoria.Components.Participants.AddEditParticipantComponent Participante="@participante"></Aig.Auditoria.Components.Participants.AddEditParticipantComponent>
 }
 
 <div class="modal-backdrop fade show"></div>

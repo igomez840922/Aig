@@ -25,10 +25,14 @@ namespace Aig.Auditoria.Components.Inspections
         List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
         List<PaisTB> lPaises { get; set; }
 
-        SignaturePad signaturePad1;
-        SignaturePad signaturePad2;
-        SignaturePad signaturePad3;
-        SignaturePad signaturePad4;
+
+        bool showSignasure { get; set; } = false;
+        List<SignaturePad> lSignaturePads { get; set; } = new List<SignaturePad>();
+        SignaturePad signaturePad
+        {
+            get { return null; }
+            set { lSignaturePads.Add(value); }
+        }
         SignaturePad signaturePad5;
         SignaturePad signaturePad6;
         SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = SignaturePad.SupportedSaveAsTypes.png;
@@ -36,7 +40,9 @@ namespace Aig.Auditoria.Components.Inspections
         bool OpenHourModal { get; set; }=false;
         AUD_DatosHorario DatosHorario { get; set; } = null;
 
-        bool showSignasure { get; set; } = false;
+        bool showParticipant { get; set; } = false;
+        Participante participante { get; set; } = null;
+
 
         protected async override Task OnInitializedAsync()
         {
@@ -92,29 +98,18 @@ namespace Aig.Auditoria.Components.Inspections
                     }
                 }
 
-                if (signaturePad1 != null)
-                {
-                    signaturePad1.Image = Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector1;
-                }
-                if (signaturePad2 != null)
-                {
-                    signaturePad2.Image = Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector2;
-                }
-                if (signaturePad3 != null)
-                {
-                    signaturePad3.Image = Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector3;
-                }
-                if (signaturePad4 != null)
-                {
-                    signaturePad4.Image = Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector4;
-                }
                 if (signaturePad5 != null)
-                {
                     signaturePad5.Image = Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRepresentanteLegal;
-                }
                 if (signaturePad6 != null)
-                {
                     signaturePad6.Image = Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRegente;
+
+                foreach (var partic in Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes)
+                {
+                    try
+                    {
+                        lSignaturePads[Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes.IndexOf(partic)].Image = partic.Firma;
+                    }
+                    catch (Exception ex) { }
                 }
             }
 
@@ -187,76 +182,23 @@ namespace Aig.Auditoria.Components.Inspections
 
         protected async Task OnShowSignasure()
         {
-            if (!showSignasure)
+            if (!showSignasure && Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes.Count > 0)
             {
+                lSignaturePads.Clear();
                 showSignasure = true;
                 DelayToShowSignasure();
-            }            
+            }
+            //await this.InvokeAsync(StateHasChanged);
         }
         async Task DelayToShowSignasure()
         {
             await Task.Delay(2000);
             await FetchData();
         }
-        protected async Task OnSignatureChange1(ChangeEventArgs eventArgs)
-        {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector1 = null;
-            if (eventArgs?.Value != null)
-            {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
-            }
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector1 = await signaturePad1.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg1()
-        {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector1 = null;
-            signaturePad1.Image = null;
-        }
-        protected async Task OnSignatureChange2(ChangeEventArgs eventArgs)
-        {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector2 = null;
-            if (eventArgs?.Value != null)
-            {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
-            }
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector2 = await signaturePad2.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg2()
-        {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector2 = null;
-            signaturePad2.Image = null;
-        }
-        protected async Task OnSignatureChange3(ChangeEventArgs eventArgs)
-        {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector3 = null;
-            if (eventArgs?.Value != null)
-            {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
-            }
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector3 = await signaturePad3.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg3()
-        {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector3 = null;
-            signaturePad3.Image = null;
-        }
-        protected async Task OnSignatureChange4(ChangeEventArgs eventArgs)
-        {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector4 = null;
-            if (eventArgs?.Value != null)
-            {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
-            }
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector4 = await signaturePad4.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg4()
-        {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaInspector4 = null;
-            signaturePad4.Image = null;
-        }
+
         protected async Task OnSignatureChange5(ChangeEventArgs eventArgs)
         {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRepresentanteLegal = null;
+            RemoveSignatureImg5();
             if (eventArgs?.Value != null)
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
@@ -270,7 +212,7 @@ namespace Aig.Auditoria.Components.Inspections
         }
         protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
         {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRegente = null;
+            RemoveSignatureImg6();
             if (eventArgs?.Value != null)
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
@@ -282,6 +224,67 @@ namespace Aig.Auditoria.Components.Inspections
             Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRegente = null;
             signaturePad6.Image = null;
         }
+
+
+        ////////
+        ///
+        protected async Task OnSignatureChange(Participante _participante)
+        {
+            await RemoveSignatureImg(_participante);
+            var _signaturePad = lSignaturePads[Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes.IndexOf(_participante)];
+            _participante.Firma = await _signaturePad.ToDataURL(signatureType);
+        }
+        protected async Task RemoveSignatureImg(Participante _participante)
+        {
+            _participante.Firma = null;
+            var _signaturePad = lSignaturePads[Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes.IndexOf(_participante)];
+            _signaturePad.Image = null;
+        }
+
+        ///
+
+        //ADD PARTICIPANTE
+        protected async Task OpenParticipant()
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Participants.ParticipantsAddEdit_CloseEvent>(ParticipantsAddEdit_CloseEventHandler);
+
+            participante = new Participante();
+            showParticipant = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveParticipant(Participante _participante)
+        {
+            if (_participante != null)
+            {
+                try
+                {
+                    Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes.Remove(_participante);
+                }
+                catch { }
+
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void ParticipantsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            showSignasure = false;
+            showParticipant = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Participants.ParticipantsAddEdit_CloseEvent>(ParticipantsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Participants.ParticipantsAddEdit_CloseEvent>();
+
+            if (message.Data != null)
+            {
+                Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes.Add(message.Data);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
 
     }
 

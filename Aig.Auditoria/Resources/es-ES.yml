@@ -158,7 +158,7 @@ Location: Ubicación
 SignatureBytheMinistryofHealth: Firma por el Ministerio de Salud
 SignatureBytheEstablishment: Firma por el Establecimiento
 Clear: Borrar
-RegNum: Número de Registro
+RegNum: No. de Registro
 Download: Descargar
 DateOfRecord: Fecha del Acta
 All: Todos
@@ -197,7 +197,9 @@ ControlledProductsArea: Área de Productos Controlados
 MedicationStorageArea: Área de Almacenamiento de Medicamentos
 ConclusionInfo: Conclusiones
 InspectorsApprovals: Aprobaciones de Inspectores
-RegisterNumber: Número de Registro
+RegisterNumber: No. de Registro
 Charge: Cargo
 Time: Hora
 Days: Días
+FinishedDate: Fecha de Finalización
+Signatures: Firmas

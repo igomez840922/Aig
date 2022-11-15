@@ -341,6 +341,56 @@ namespace DataAccess.Migrations
                     b.ToTable("AUD_Establecimiento");
                 });
 
+            modelBuilder.Entity("DataModel.AUD_InspAperCambUbicAgenTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DatosConclusiones")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DatosCondicionesLocal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DatosEstablecimiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DatosRegente")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DatosRepresentLegal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DatosSolicitante")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReciboPago")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AUD_InspAperCambUbicAgenTB");
+                });
+
             modelBuilder.Entity("DataModel.AUD_InspAperCambUbicFarmTB", b =>
                 {
                     b.Property<long>("Id")
@@ -437,6 +487,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
+                    b.Property<long?>("InspAperCambUbicAgenId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("InspAperCambUbicFarmId")
                         .HasColumnType("bigint");
 
@@ -469,10 +522,6 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("ParticipantesDNFD")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<string>("RepreLegal")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -501,6 +550,10 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EstablecimientoId");
+
+                    b.HasIndex("InspAperCambUbicAgenId")
+                        .IsUnique()
+                        .HasFilter("[InspAperCambUbicAgenId] IS NOT NULL");
 
                     b.HasIndex("InspAperCambUbicFarmId")
                         .IsUnique()
@@ -1269,6 +1322,10 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("DataModel.AUD_InspAperCambUbicAgenTB", "InspAperCambUbicAgen")
+                        .WithOne("Inspeccion")
+                        .HasForeignKey("DataModel.AUD_InspeccionTB", "InspAperCambUbicAgenId");
+
                     b.HasOne("DataModel.AUD_InspAperCambUbicFarmTB", "InspAperCambUbicFarm")
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspAperCambUbicFarmId");
@@ -1278,6 +1335,8 @@ namespace DataAccess.Migrations
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspRetiroRetencionId");
 
                     b.Navigation("Establecimiento");
+
+                    b.Navigation("InspAperCambUbicAgen");
 
                     b.Navigation("InspAperCambUbicFarm");
 
@@ -1376,6 +1435,11 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>
                 {
                     b.Navigation("LInspections");
+                });
+
+            modelBuilder.Entity("DataModel.AUD_InspAperCambUbicAgenTB", b =>
+                {
+                    b.Navigation("Inspeccion");
                 });
 
             modelBuilder.Entity("DataModel.AUD_InspAperCambUbicFarmTB", b =>

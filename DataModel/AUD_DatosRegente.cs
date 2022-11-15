@@ -19,9 +19,9 @@ namespace DataModel
         public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
         //Numero de Registro de Identidad
-        private string numregistroIdoneidad;
+        private string numRegistro;
         [StringLength(250)]
-        public string NumregistroIdoneidad { get => numregistroIdoneidad; set => SetProperty(ref numregistroIdoneidad, value); }
+        public string NumRegistro { get => numRegistro; set => SetProperty(ref numRegistro, value); }
 
         //Regente de cedula ..... Al colocar el número de cédula debe validarse con el Web Service del Tribunal Electoral que se encuentra en el bus de integración de la AIG. Se debe alimentar de la solicitud de Licencia.
         private string cedula;

@@ -138,6 +138,18 @@ namespace Aig.Auditoria.Helper
                     }
                 }
 
+                //var prob = dalService.First<ProvinciaTB>();
+                //if (dalService.Count<AUD_EstablecimientoTB>() <= 0)
+                //{
+                //    AUD_EstablecimientoTB data = null;
+                //    for (int i = 0; i < 25; i++)
+                //    {
+                //        data = new AUD_EstablecimientoTB() { Nombre = "Establecimiento_" + i.ToString(), NumLicencia = "LicNum_" + i.ToString(), ProvinciaId = prob.Id };
+                //        dalService.Save(data);
+                //    }                    
+                //}
+
+
                 //Probando Inspecciones
                 //if (await inspeccionService.Count() <= 0)
                 //{
@@ -152,8 +164,8 @@ namespace Aig.Auditoria.Helper
                 //        }
                 //    };
 
-                    //    _Inspection = await inspeccionService.Save(_Inspection);
-                    //}
+                //    _Inspection = await inspeccionService.Save(_Inspection);
+                //}
 
             }
         }

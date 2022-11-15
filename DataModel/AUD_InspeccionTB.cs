@@ -84,11 +84,7 @@ namespace DataModel
         [StringLength(250)]
         public string RepreLegalIdentificacion { get => repreLegalIdentificacion; set => SetProperty(ref repreLegalIdentificacion, value); }
 
-        //participante del DNFD
-        private string particDNFD;
-        [StringLength(500)]
-        public string ParticipantesDNFD { get => particDNFD; set => SetProperty(ref particDNFD, value); }
-
+        
         //participante Establecimiento
         private string particEstablecimiento;
         [StringLength(500)]
@@ -110,54 +106,16 @@ namespace DataModel
         [StringLength(250)]
         public string ParticEstablecimientoCIP { get => particEstablecimientoCIP; set => SetProperty(ref particEstablecimientoCIP, value); }
 
-        ////participante del DNFD Firma1
-        //private string firmaDNFD1;
-        //public string FirmaDNFD1 { get => firmaDNFD1; set => SetProperty(ref firmaDNFD1, value); }
-       
-        ////participante del DNFD NumRegDNFD1
-        //private string numRegDNFD1;
-        //[StringLength(250)]
-        //public string NumRegDNFD1 { get => numRegDNFD1; set => SetProperty(ref numRegDNFD1, value); }
-
-        ////participante del DNFD Firma2
-        //private string firmaDNFD2;
-        //public string FirmaDNFD2 { get => firmaDNFD2; set => SetProperty(ref firmaDNFD2, value); }
-
-        ////participante del DNFD NumRegDNFD2
-        //private string numRegDNFD2;
-        //[StringLength(250)]
-        //public string NumRegDNFD2 { get => numRegDNFD2; set => SetProperty(ref numRegDNFD2, value); }
-
-        ////participante del DNFD Firma1
-        //private string firmaDNFD3;
-        //public string FirmaDNFD3 { get => firmaDNFD3; set => SetProperty(ref firmaDNFD3, value); }
-        ////participante del DNFD Firma1
-        //private string firmaDNFD4;
-        //public string FirmaDNFD4 { get => firmaDNFD4; set => SetProperty(ref firmaDNFD4, value); }
-        ////participante del DNFD Firma1
-        //private string firmaDNFD5;
-        //public string FirmaDNFD5 { get => firmaDNFD5; set => SetProperty(ref firmaDNFD5, value); }
-        ////participante del DNFD Firma1
-        //private string firmaDNFD6;
-        //public string FirmaDNFD6 { get => firmaDNFD6; set => SetProperty(ref firmaDNFD6, value); }
-        ////participante del DNFD Firma1
-        //private string firmaDNFD7;
-        //public string FirmaDNFD7 { get => firmaDNFD7; set => SetProperty(ref firmaDNFD7, value); }
-        ////participante del DNFD Firma1
-        //private string firmaDNFD8;
-        //public string FirmaDNFD8 { get => firmaDNFD8; set => SetProperty(ref firmaDNFD8, value); }
-
-
-        ////participante del Establecimiento Firma1
-        //private string firmaEstablec1;
-        //public string FirmaEstablec1 { get => firmaEstablec1; set => SetProperty(ref firmaEstablec1, value); }
-
-        ////participante del Establecimiento Firma2
-        //private string firmaEstablec2;
-        //public string FirmaEstablec2 { get => firmaEstablec2; set => SetProperty(ref firmaEstablec2, value); }
 
         ///////////////////////
         /// LOS FORMULARIOS
+
+        //Formulario de Apertura y Cambio de Ubicación de Agencia
+        private long? inspAperCambUbicAgenId;
+        public long? InspAperCambUbicAgenId { get => inspAperCambUbicAgenId; set => SetProperty(ref inspAperCambUbicAgenId, value); }
+        private AUD_InspAperCambUbicAgenTB? inspAperCambUbicAgen;
+        public virtual AUD_InspAperCambUbicAgenTB? InspAperCambUbicAgen { get => inspAperCambUbicAgen; set => SetProperty(ref inspAperCambUbicAgen, value); }
+
 
         //Formulario de Apertura y Cambio de Ubicación de Farmacias
         private long? inspAperCambUbicFarmId;

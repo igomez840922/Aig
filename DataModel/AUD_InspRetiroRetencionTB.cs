@@ -15,6 +15,7 @@ namespace DataModel
         {
             DatosConclusiones = new AUD_DatosConclusiones();
             LProductos = new List<AUD_ProdRetiroRetencionTB>();
+
         }
 
         private string seccionOficinaRegional;

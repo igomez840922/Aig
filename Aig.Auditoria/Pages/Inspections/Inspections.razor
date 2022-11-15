@@ -218,6 +218,12 @@
                 <Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia>
                 break;
             }
+        case DataModel.Helper.enumAUD_TipoActa.AA:
+        case DataModel.Helper.enumAUD_TipoActa.CUA:
+            {
+                <Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia>
+                break;
+            }
         default:
         {
             break;

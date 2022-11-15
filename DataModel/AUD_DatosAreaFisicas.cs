@@ -11,7 +11,7 @@ namespace DataModel
     /// <summary>
     /// Datos de Areas Fisica
     /// </summary>
-    public class AUD_DatosAreasFisicas : SystemId
+    public class AUD_DatosAreaFisicas : SystemId
     {
         //Debe seleccionar Si o No, dependiendo de su debido cumplimiento y describir estado del mismo.
         private bool presentaIluminacion;
