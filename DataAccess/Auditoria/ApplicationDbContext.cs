@@ -76,6 +76,11 @@ namespace DataAccess.Auditoria
               .WithOne(e => e.Inspeccion)
               .HasForeignKey<AUD_InspeccionTB>(e => e.InspAperCambUbicAgenId);
 
+            modelBuilder.Entity<AUD_InspeccionTB>()
+              .HasOne(e => e.InspAperFabricante)
+              .WithOne(e => e.Inspeccion)
+              .HasForeignKey<AUD_InspeccionTB>(e => e.InspAperFabricanteId);
+
             ///////////////////////////////////////////
             ///
 
@@ -154,7 +159,6 @@ namespace DataAccess.Auditoria
     .Property(e => e.DatosCondicionesLocal)
     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosCondicionesLocal>(x));
 
-
             modelBuilder.Entity<AUD_InspAperCambUbicAgenTB>()
      .Property(e => e.DatosConclusiones)
      .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
@@ -163,6 +167,72 @@ namespace DataAccess.Auditoria
             ///////////////////////////////////////////
             ///
 
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+     .Property(e => e.DatosEstablecimiento)
+     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEstablecimiento>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+     .Property(e => e.DatosSolicitante)
+     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosSolicitante>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+     .Property(e => e.DatosRegente)
+     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosRepresentLegal)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosDocumentacion)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosDocumentacion>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosProcedimientoPrograma)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosProcedimientoPrograma>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosAutoInspeccion)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAutoInspeccion>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosProdAnalisisContrato)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosProdAnalisisContrato>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosReclamoProductoRetirado)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosReclamoProductoRetirado>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosLocal)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosLocal>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosAreaProduccion)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaProduccion>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosEquipos)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEquipos>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosAreaLabCtrCalidad)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaLabCtrCalidad>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosAreaAlmacenamiento)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaAlmacenamiento>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosAreaAuxiliares)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaAuxiliares>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
+    .Property(e => e.DatosConclusiones)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+
+            ///////////////////////////////////////////
+            ///
 
             modelBuilder.Entity<AUD_EstablecimientoTB>()
                 .HasMany(e => e.LInspections)
@@ -187,6 +257,8 @@ namespace DataAccess.Auditoria
        
         public virtual DbSet<AttachmentTB> Attachment { get; set; }
         public virtual DbSet<AUD_EstablecimientoTB> AUD_Establecimiento { get; set; }
+        public virtual DbSet<AUD_InspAperFabricanteTB> AUD_InspAperFabricante { get; set; }
+        public virtual DbSet<AUD_InspAperCambUbicAgenTB> AUD_InspAperCambUbicAgen { get; set; }
         public virtual DbSet<AUD_InspAperCambUbicFarmTB> AUD_InspAperCambUbicFarm { get; set; }
         public virtual DbSet<AUD_InspeccionTB> AUD_Inspeccion { get; set; }
         public virtual DbSet<AUD_InspRetiroRetencionTB> AUD_InspRetiroRetencion { get; set; }

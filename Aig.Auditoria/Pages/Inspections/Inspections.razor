@@ -224,6 +224,12 @@
                 <Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia>
                 break;
             }
+        case DataModel.Helper.enumAUD_TipoActa.AFM:
+        case DataModel.Helper.enumAUD_TipoActa.AFC:
+            {
+                <Aig.Auditoria.Components.Inspections.AperturaFabricante Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaFabricante>
+                break;
+            }
         default:
         {
             break;

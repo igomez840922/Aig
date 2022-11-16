@@ -88,6 +88,12 @@ namespace Aig.Auditoria.Components.Inspections
                         data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperCambUbicAgen = new AUD_InspAperCambUbicAgenTB() };
                         break;
                     }
+                case DataModel.Helper.enumAUD_TipoActa.AFM:
+                case DataModel.Helper.enumAUD_TipoActa.AFC:
+                    {
+                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperFabricante = new AUD_InspAperFabricanteTB() };
+                        break;
+                    }
                 default:
                     {
                         return;
