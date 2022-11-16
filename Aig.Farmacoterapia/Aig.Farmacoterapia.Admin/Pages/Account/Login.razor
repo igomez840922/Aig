@@ -29,7 +29,6 @@
     <div class="kt-login__title">
         <h3>Entrar en su cuenta</h3>
     </div>
-
     <EditForm class="kt-form" Model="@LoginRequest" OnValidSubmit="@SubmitValidForm">
         <FluentValidationValidator />
         <div class="input-group">
@@ -54,8 +53,16 @@
                  <InputCheckbox type="checkbox" name="remember" @bind-Value="LoginRequest.RememberMe"/>
                     Recuerdame
                    <span></span>
-                </label>    
-            <button class="btn btn-brand kt-login__btn-primary" type="submit">Entrar</button>
+                </label> 
+                
+             @if (loading)
+             {
+               <MudProgressCircular style="margin-left: 150px;color: #5d78ff !important;" Size="Size.Small" Indeterminate="true" />
+             }
+
+            <button class="btn btn-brand kt-login__btn-primary" type="submit">
+               <span> Entrar </span>
+             </button>
         </div>
        
     </EditForm>
@@ -115,6 +122,7 @@
 
     [CascadingParameter]
     protected Task<AuthenticationState> AuthStat { get; set; }
+    protected bool loading { get; set; } = false;
     LoginModel LoginRequest { get; set; } = new LoginModel();
     string Error { get; set; } = string.Empty;
     string InvalidUser { get; set; } =  "Usuario o contraseña no válidos";
@@ -126,11 +134,13 @@
         var user = (await AuthStat).User;
         if (user.Identity is {IsAuthenticated: true })
             navigationManager.NavigateTo("./");
+         else loading = false;
     }
     private async Task SubmitValidForm()
     {
         try
         {
+            loading = true;
             var usr = await userManager.FindByNameAsync(LoginRequest.UserName);
             if (usr == null){
                 Error = this.InvalidUser;
@@ -151,7 +161,10 @@
                 Error = this.LockedUser;
 
         }
-        catch (Exception ex){Error = ex.Message;}
+        catch (Exception ex){
+            Error = ex.Message;
+        }
+        //finally {loading = false;}
     }
    
 }

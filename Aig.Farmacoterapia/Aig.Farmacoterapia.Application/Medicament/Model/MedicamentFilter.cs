@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aig.Farmacoterapia.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -28,7 +29,8 @@ namespace Aig.Farmacoterapia.Application.Medicament.Model
         public DateTime? EndDate { get; set; }
         public DateTime? StartExpirationDate { get; set; }
         public DateTime? EndExpirationDate { get; set; }
-        
+        public AigFabricante? Fabricante { get; set; }
+
     }
     public class MedicamentPageSearch : BaseFilter
     {

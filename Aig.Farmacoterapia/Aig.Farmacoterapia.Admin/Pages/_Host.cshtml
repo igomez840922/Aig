@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700">
     <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
     @if (Request.Path.Value.Contains("/login"))
     {
         <link href="assets/css/pages/login/login-1.css" rel="stylesheet" type="text/css" />
@@ -38,9 +38,10 @@
         <link href="assets/css/skins/brand/dark.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/skins/aside/light.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
         <style>
-            .table th, .table td {vertical-align: middle !important;}
+            .table th, .table td {
+                vertical-align: middle !important;
+            }
 
             .table-sm th {
                 padding: 0.8rem 0.3rem 0.8rem 1rem !important;
@@ -101,82 +102,85 @@
                 color: #f44336 !important;
                 display: inline !important;
             }
+
             .validation-message {
-              background-color: var(--mud-palette-error-hover) !important;
-              padding-left: 5px;
-              margin-top: 5px;
+                background-color: var(--mud-palette-error-hover) !important;
+                padding-left: 5px;
+                margin-top: 5px;
             }
+
             .kt-avatar .kt-avatar__cancel {
                 display: flex !important;
             }
 
-         </style>
+        </style>
     }
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
 </head>
 
 @if (Request.Path.Value.Contains("/login"))
 {
     <body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
 
-		<div class="kt-grid kt-grid--ver kt-grid--root">
-			<div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v1" id="kt_login">
-				<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile">
+        <div class="kt-grid kt-grid--ver kt-grid--root">
+            <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v1" id="kt_login">
+                <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile">
 
-					<div class="kt-grid__item kt-grid__item--order-tablet-and-mobile-2 kt-grid kt-grid--hor kt-login__aside" style="background-image: url(assets/media/bg/bg-4.jpg);">
-						<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
-							<div class="kt-grid__item kt-grid__item--middle">
+                    <div class="kt-grid__item kt-grid__item--order-tablet-and-mobile-2 kt-grid kt-grid--hor kt-login__aside" style="background-image: url(assets/media/bg/bg-4.jpg);">
+                        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
+                            <div class="kt-grid__item kt-grid__item--middle">
                                 <a class="kt-login__logo" href="#">
-                                    <img src="assets/media/logos/mylogo.png">
+                                    <img width="70%" ; src="assets/media/logos/mylogo.png">
                                 </a>
-								<h4 class="kt-login__subtitle" style="text-align:end">Sistema de Farmacoterapia</h4>
-							</div>
-						</div>
-						<div class="kt-grid__item">
-							<div class="kt-login__info">
-								<div class="kt-login__copyright">
-									&copy 2022 SOAINT
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="kt-grid__item kt-grid__item--fluid  kt-grid__item--order-tablet-and-mobile-1  kt-login__wrapper">
-
-                         <component type="typeof(App)" render-mode="Server" />
-
-					</div>
-
-
-				</div>
-			</div>
-		</div>
-
-
-     @*   <div class="kt-grid kt-grid--ver kt-grid--root">
-            <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v5 kt-login--signin" id="kt_login">
-                <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile" style="background-image: url(assets/media/bg/bg-3.jpg);">
-                    <div class="kt-login__left">
-                        <div class="kt-login__wrapper">
-                            <div class="kt-login__content">
-                                <a class="kt-login__logo" href="#">
-                                    <img src="assets/media/logos/mylogo.png">
-                                </a>
-                                <h3 class="kt-login__title">Sistema de Farmacoterapia</h3>
-                                <span class="kt-login__desc">
-
-                                </span>
-
+                                <h4 class="kt-login__subtitle" style="text-align:end">Sistema de Farmacoterapia</h4>
+                            </div>
+                        </div>
+                        <div class="kt-grid__item">
+                            <div class="kt-login__info">
+                                <div class="kt-login__copyright">
+                                    &copy 2022 SOAINT
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="kt-login__divider">
-                        <div></div>
+
+                    <div class="kt-grid__item kt-grid__item--fluid  kt-grid__item--order-tablet-and-mobile-1  kt-login__wrapper">
+
+                        <component type="typeof(App)" render-mode="Server" />
+
                     </div>
-                    <component type="typeof(App)" render-mode="Server" />
+
 
                 </div>
             </div>
-        </div>*@
+        </div>
+
+
+        @*   <div class="kt-grid kt-grid--ver kt-grid--root">
+            <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v5 kt-login--signin" id="kt_login">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile" style="background-image: url(assets/media/bg/bg-3.jpg);">
+            <div class="kt-login__left">
+            <div class="kt-login__wrapper">
+            <div class="kt-login__content">
+            <a class="kt-login__logo" href="#">
+            <img src="assets/media/logos/mylogo.png">
+            </a>
+            <h3 class="kt-login__title">Sistema de Farmacoterapia</h3>
+            <span class="kt-login__desc">
+
+            </span>
+
+            </div>
+            </div>
+            </div>
+            <div class="kt-login__divider">
+            <div></div>
+            </div>
+            <component type="typeof(App)" render-mode="Server" />
+
+            </div>
+            </div>
+            </div>*@
 
         <script>
             var KTAppOptions = {
@@ -326,61 +330,61 @@ else
                                         </a>
                                     </li>
 
-                                   <li class="kt-menu__section ">
-									 <h4 class="kt-menu__section-text">Configuración</h4>
-									 <i class="kt-menu__section-icon flaticon-more-v2"></i>
-								   </li>
+                                    <li class="kt-menu__section ">
+                                        <h4 class="kt-menu__section-text">Configuración</h4>
+                                        <i class="kt-menu__section-icon flaticon-more-v2"></i>
+                                    </li>
 
                                     <li class="kt-menu__item " aria-haspopup="true">
                                         <a href="/pharmaceutical/list" class="kt-menu__link ">
                                             <span class="kt-menu__link-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
-                                                        <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <path d="M7,14 C7,16.7614237 9.23857625,19 12,19 C14.7614237,19 17,16.7614237 17,14 C17,12.3742163 15.3702913,9.86852817 12,6.69922982 C8.62970872,9.86852817 7,12.3742163 7,14 Z M12,21 C8.13400675,21 5,17.8659932 5,14 C5,11.4226712 7.33333333,8.08933783 12,4 C16.6666667,8.08933783 19,11.4226712 19,14 C19,17.8659932 15.8659932,21 12,21 Z" fill="#000000" fill-rule="nonzero" />
+                                                        <path d="M12,4 C16.6666667,8.08933783 19,11.4226712 19,14 C19,17.8659932 15.8659932,21 12,21 L12,4 Z" fill="#000000" />
                                                     </g>
                                                 </svg>
                                             </span><span class="kt-menu__link-text">Formas Farmacéuticas</span>
                                         </a>
                                     </li>
 
-                                     <li class="kt-menu__item " aria-haspopup="true">
+                                    <li class="kt-menu__item " aria-haspopup="true">
                                         <a href="/medicationroute/list" class="kt-menu__link ">
                                             <span class="kt-menu__link-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
-                                                        <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <path d="M5,5 L5,15 C5,15.5948613 5.25970314,16.1290656 5.6719139,16.4954176 C5.71978107,16.5379595 5.76682388,16.5788906 5.81365532,16.6178662 C5.82524933,16.6294602 15,7.45470952 15,7.45470952 C15,6.9962515 15,6.17801499 15,5 L5,5 Z M5,3 L15,3 C16.1045695,3 17,3.8954305 17,5 L17,15 C17,17.209139 15.209139,19 13,19 L7,19 C4.790861,19 3,17.209139 3,15 L3,5 C3,3.8954305 3.8954305,3 5,3 Z" fill="#000000" fill-rule="nonzero" transform="translate(10.000000, 11.000000) rotate(-315.000000) translate(-10.000000, -11.000000) " />
+                                                        <path d="M20,22 C21.6568542,22 23,20.6568542 23,19 C23,17.8954305 22,16.2287638 20,14 C18,16.2287638 17,17.8954305 17,19 C17,20.6568542 18.3431458,22 20,22 Z" fill="#000000" opacity="0.3" />
                                                     </g>
                                                 </svg>
                                             </span><span class="kt-menu__link-text">Vías de administración</span>
                                         </a>
                                     </li>
 
-                                     <li class="kt-menu__item " aria-haspopup="true">
+                                    <li class="kt-menu__item " aria-haspopup="true">
                                         <a href="/countries/list" class="kt-menu__link ">
                                             <span class="kt-menu__link-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
-                                                        <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
+                                                        <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
                                                     </g>
                                                 </svg>
                                             </span><span class="kt-menu__link-text">Países</span>
                                         </a>
                                     </li>
 
-                                      <li class="kt-menu__item " aria-haspopup="true">
+                                    <li class="kt-menu__item " aria-haspopup="true">
                                         <a href="/marker/list" class="kt-menu__link ">
                                             <span class="kt-menu__link-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
-                                                        <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <path d="M18.4246212,12.6464466 L21.2530483,9.81801948 C21.4483105,9.62275734 21.764893,9.62275734 21.9601551,9.81801948 L22.6672619,10.5251263 C22.862524,10.7203884 22.862524,11.0369709 22.6672619,11.232233 L19.8388348,14.0606602 C19.6435726,14.2559223 19.3269901,14.2559223 19.131728,14.0606602 L18.4246212,13.3535534 C18.2293591,13.1582912 18.2293591,12.8417088 18.4246212,12.6464466 Z M3.22182541,17.9497475 L13.1213203,8.05025253 C13.5118446,7.65972824 14.1450096,7.65972824 14.5355339,8.05025253 L15.9497475,9.46446609 C16.3402718,9.85499039 16.3402718,10.4881554 15.9497475,10.8786797 L6.05025253,20.7781746 C5.65972824,21.1686989 5.02656326,21.1686989 4.63603897,20.7781746 L3.22182541,19.363961 C2.83130112,18.9734367 2.83130112,18.3402718 3.22182541,17.9497475 Z" fill="#000000" opacity="0.3" />
+                                                        <path d="M12.3890873,1.28248558 L12.3890873,1.28248558 C15.150511,1.28248558 17.3890873,3.52106183 17.3890873,6.28248558 L17.3890873,10.7824856 C17.3890873,11.058628 17.1652297,11.2824856 16.8890873,11.2824856 L12.8890873,11.2824856 C12.6129449,11.2824856 12.3890873,11.058628 12.3890873,10.7824856 L12.3890873,1.28248558 Z" fill="#000000" transform="translate(14.889087, 6.282486) rotate(-45.000000) translate(-14.889087, -6.282486) " />
                                                     </g>
                                                 </svg>
                                             </span><span class="kt-menu__link-text">Fabricantes</span>
@@ -401,7 +405,7 @@ else
                                         </a>
                                     </li>
 
-                                 
+
                                 </ul>
                             </div>
                         </div>
@@ -424,23 +428,23 @@ else
 
                         <component type="typeof(App)" render-mode="Server" />
 
-                        <div class="kt-footer  kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
+                        <div style="position: absolute; bottom: 7px !important" class="kt-footer  kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
                             <div class="kt-container  kt-container--fluid ">
                                 <div class="kt-footer__copyright">
                                     2022&nbsp;&copy;&nbsp;
                                     <a style="border-bottom: 1px solid #2a4eff;color: #5d78ff !important;" href="https://soaint.com/" target="_blank"
                                class="kt-link">SOAINT</a>
                                 </div>
-                               @* <div class="kt-footer__menu">
-                                  <a style="border-bottom: 1px solid #2a4eff;color: #5d78ff !important;" href="https://soaint.com/contacto/" target="_blank"class="kt-footer__menu-link kt-link">
-                                      Contacto
-                                  </a>
-                                </div>*@
+                                @* <div class="kt-footer__menu">
+                                    <a style="border-bottom: 1px solid #2a4eff;color: #5d78ff !important;" href="https://soaint.com/contacto/" target="_blank"class="kt-footer__menu-link kt-link">
+                                    Contacto
+                                    </a>
+                                    </div>*@
                             </div>
                         </div>
 
-                        
-  
+
+
                     </div>
 
                 </div>
@@ -489,163 +493,163 @@ else
             <script src="assets/js/pages/components/extended/toastr.js" type="text/javascript"></script>
             <script src="assets/js/jquery-loading-overlay/loadingoverlay.js" type="text/javascript"></script>
 
-          @*  <script src="assets/plugins/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
-            <script src="assets/js/pages/crud/datatables/basic/basic.js" type="text/javascript"></script>
-            <script src="/assets/js/Sve.Blazor.DataTable.js"></script>*@
+            @*  <script src="assets/plugins/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
+                <script src="assets/js/pages/crud/datatables/basic/basic.js" type="text/javascript"></script>
+                <script src="/assets/js/Sve.Blazor.DataTable.js"></script>*@
 
-          <script src="_content/MudBlazor/MudBlazor.min.js"></script>
-            
+            <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
             <script type="text/javascript">
-                
-              function TextEditor(obj) {
-                   ClassicEditor.create( document.querySelector(obj), {
-                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-                        heading: {
-                            options: [
-                               { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                               { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                               { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                             ]
-                           }
-                    }).catch( error => {console.log(error);});
-                }
 
-                function ShowMessage(Msg) {
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "300",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
+                function TextEditor(obj) {
+                     ClassicEditor.create( document.querySelector(obj), {
+                      toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+                          heading: {
+                              options: [
+                                 { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                                 { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                                 { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                               ]
+                             }
+                      }).catch( error => {console.log(error);});
+                  }
 
-                    toastr.success(Msg);
-                }
+                  function ShowMessage(Msg) {
+                      toastr.options = {
+                          "closeButton": false,
+                          "debug": false,
+                          "newestOnTop": false,
+                          "progressBar": false,
+                          "positionClass": "toast-top-right",
+                          "preventDuplicates": false,
+                          "onclick": null,
+                          "showDuration": "300",
+                          "hideDuration": "1000",
+                          "timeOut": "5000",
+                          "extendedTimeOut": "1000",
+                          "showEasing": "swing",
+                          "hideEasing": "linear",
+                          "showMethod": "fadeIn",
+                          "hideMethod": "fadeOut"
+                      };
 
-                function ShowError(Msg) {
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "300",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
+                      toastr.success(Msg);
+                  }
 
-                    toastr.error(Msg);
-                }
+                  function ShowError(Msg) {
+                      toastr.options = {
+                          "closeButton": false,
+                          "debug": false,
+                          "newestOnTop": false,
+                          "progressBar": false,
+                          "positionClass": "toast-top-right",
+                          "preventDuplicates": false,
+                          "onclick": null,
+                          "showDuration": "300",
+                          "hideDuration": "1000",
+                          "timeOut": "5000",
+                          "extendedTimeOut": "1000",
+                          "showEasing": "swing",
+                          "hideEasing": "linear",
+                          "showMethod": "fadeIn",
+                          "hideMethod": "fadeOut"
+                      };
 
-                function ShowWarning(Msg) {
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "300",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
+                      toastr.error(Msg);
+                  }
 
-                    toastr.warning(Msg);
-                }
+                  function ShowWarning(Msg) {
+                      toastr.options = {
+                          "closeButton": false,
+                          "debug": false,
+                          "newestOnTop": false,
+                          "progressBar": false,
+                          "positionClass": "toast-top-right",
+                          "preventDuplicates": false,
+                          "onclick": null,
+                          "showDuration": "300",
+                          "hideDuration": "1000",
+                          "timeOut": "5000",
+                          "extendedTimeOut": "1000",
+                          "showEasing": "swing",
+                          "hideEasing": "linear",
+                          "showMethod": "fadeIn",
+                          "hideMethod": "fadeOut"
+                      };
 
-                function ShowInfo(Msg) {
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "300",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
+                      toastr.warning(Msg);
+                  }
 
-                    toastr.info(Msg);
+                  function ShowInfo(Msg) {
+                      toastr.options = {
+                          "closeButton": false,
+                          "debug": false,
+                          "newestOnTop": false,
+                          "progressBar": false,
+                          "positionClass": "toast-top-right",
+                          "preventDuplicates": false,
+                          "onclick": null,
+                          "showDuration": "300",
+                          "hideDuration": "1000",
+                          "timeOut": "5000",
+                          "extendedTimeOut": "1000",
+                          "showEasing": "swing",
+                          "hideEasing": "linear",
+                          "showMethod": "fadeIn",
+                          "hideMethod": "fadeOut"
+                      };
 
-                }
+                      toastr.info(Msg);
 
-                function ShowLoading() {
-                    try {
-                        $.LoadingOverlay("show");
-                    } catch (err) {
-                    }
-                }
+                  }
 
-                function CloseLoading() {
-                    try {
-                        $.LoadingOverlay("hide");
-                    } catch (err) {
-                    }
-                }
+                  function ShowLoading() {
+                      try {
+                          $.LoadingOverlay("show");
+                      } catch (err) {
+                      }
+                  }
 
-                function InitDateControl() {
-                    $('.datepicker').datepicker(
-                        {
-                            format: 'mm/dd/yyyy',
-                            todayHighlight: true,
-                            templates:
-                            {
-                                leftArrow: '<i class=\"la la-angle-leftId\"></i>',
-                                rightArrow: '<i class=\"la la-angle-right\"></i>'
-                            },
-                        }
-                    ).on('changeDate',
-                        function(ev) {
-                            //console.debug(ev);
-                            //$("input.datepicker[type=text]").val("hello").change();
-                        });
-                }
+                  function CloseLoading() {
+                      try {
+                          $.LoadingOverlay("hide");
+                      } catch (err) {
+                      }
+                  }
 
-                function OpenCloseModal(btnId) {
-                    try {
-                        $(btnId).click();
-                    } catch (err) {
-                    }
-                }
+                  function InitDateControl() {
+                      $('.datepicker').datepicker(
+                          {
+                              format: 'mm/dd/yyyy',
+                              todayHighlight: true,
+                              templates:
+                              {
+                                  leftArrow: '<i class=\"la la-angle-leftId\"></i>',
+                                  rightArrow: '<i class=\"la la-angle-right\"></i>'
+                              },
+                          }
+                      ).on('changeDate',
+                          function(ev) {
+                              //console.debug(ev);
+                              //$("input.datepicker[type=text]").val("hello").change();
+                          });
+                  }
 
-                function StartBoostrapSwitch() {
-                    console.log("StartBoostrapSwitch");
-                    $("[name='boostrapSwitch']").bootstrapSwitch();
-                }
+                  function OpenCloseModal(btnId) {
+                      try {
+                          $(btnId).click();
+                      } catch (err) {
+                      }
+                  }
 
-                function ShowAlert(Header, Msg, Type) {
-                    swal.fire(Header, Msg, Type);
-                }
+                  function StartBoostrapSwitch() {
+                      console.log("StartBoostrapSwitch");
+                      $("[name='boostrapSwitch']").bootstrapSwitch();
+                  }
+
+                  function ShowAlert(Header, Msg, Type) {
+                      swal.fire(Header, Msg, Type);
+                  }
 
             </script>
 

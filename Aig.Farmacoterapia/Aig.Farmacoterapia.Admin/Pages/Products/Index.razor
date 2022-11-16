@@ -10,6 +10,8 @@
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using System.Globalization
+@using Aig.Farmacoterapia.Domain.Specifications.Maker
+@using Aig.Farmacoterapia.Infrastructure.Extensions
 @attribute [Authorize]
 @inject IUnitOfWork _unitOfWork;
 @inject ISystemLogger _systemLogger;
@@ -88,17 +90,35 @@
     <EditForm Model="@modelFilter" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
 
         <div class="row kt-margin-b-20">
-            <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                <label>Medicamento:</label>
+            <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
+                <label style="color: var(--mud-palette-text-secondary);">Medicamento:</label>
                 <input type="text" @bind-value="modelFilter.Term" class="form-control kt-input" placeholder="Reg / Nombre / Principio Activo" data-col-index="0">
             </div>
-            <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
+           
+            <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
                 <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Emisión:" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" @bind-DateRange="dateRange" />
             </div>
-            <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
+            <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
                 <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Expiración:" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" @bind-DateRange="expirationRange" />
             </div>
-            <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
+            <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
+                 <label style="margin-bottom: 0px !important;color: var(--mud-palette-text-secondary);">Medicamento:</label>
+                <MudAutocomplete MaxItems="null" T="AigFabricante" Dense="true" Variant="Variant.Outlined" @bind-Value="modelFilter.Fabricante" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadMarker" ShowProgressIndicator="true" ProgressIndicatorColor="Color.Primary">
+
+                    <ItemTemplate Context="e">
+                        <MudText>
+                            @e.Nombre
+                        </MudText>
+                    </ItemTemplate>
+                    <ItemSelectedTemplate Context="e">
+                        <MudText>
+                            @($"{e.Nombre} / ({e.Pais?.Nombre})")
+                        </MudText>
+                    </ItemSelectedTemplate>
+                </MudAutocomplete>
+            </div>
+          
+            <div class="col-lg-4 kt-margin-b-10-tablet-and-mobile">
                 <div class="row" style="margin-top: 23px;">
                     <div class="col-lg-12" style="margin-top: 2px;">
                         <button type="submit" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
@@ -117,6 +137,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+         <div class="row kt-margin-b-20">
+           
+           
         </div>
     </EditForm>
 
@@ -337,6 +362,9 @@
             filters.Add(new FilteringOption { Field = "startExpirationDate", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartExpirationDate.Value });
             filters.Add(new FilteringOption { Field = "endDateExpirationDate", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndExpirationDate.Value });
         }
+        if (modelFilter.Fabricante != null){
+            filters.Add(new FilteringOption { Field = "maker", Operator = FilteringOperator.Equal, Value = modelFilter.Fabricante.Nombre });
+        }
         var args = new PageSearchArgs(){
             PageIndex = state.Page + 1,
             PageSize = state.PageSize,
@@ -347,6 +375,18 @@
         List = paginatedResult.Data;
         return new TableData<AigMedicamento>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
     }
+
+    private async Task<IEnumerable<AigFabricante>> LoadMarker(string value)
+    {
+        var result = new List<AigFabricante>();
+        var query = _unitOfWork.Repository<AigFabricante>().GetAll();
+        if (!string.IsNullOrEmpty(value))
+            result = await query.WhereByAsync(p => p.Nombre, new MakerSpecification(value));
+        else
+            result = await query.WhereByAsync(p => p.Nombre);
+        return result;
+    }
+
     private async Task OnSearch()
     {
         modelFilter.StartDate = dateRange.Start;

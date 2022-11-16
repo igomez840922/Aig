@@ -40,9 +40,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                   orderByList.Add(new(sortingOption, c => c.Created));
                                   break;
                             case "modified":
-#pragma warning disable CS8603 // Possible null reference return.
                                 orderByList.Add(new(sortingOption, c => c.LastModified));
-#pragma warning restore CS8603 // Possible null reference return.
                                 break;
                             case "numReg":
                                 orderByList.Add(new(sortingOption, c => c.NumReg));
@@ -51,14 +49,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 orderByList.Add(new(sortingOption, c => c.Nombre));
                                 break;
                             case "dateOfIssue":
-#pragma warning disable CS8603 // Possible null reference return.
                                 orderByList.Add(new(sortingOption, c => c.FechaEmision));
-#pragma warning restore CS8603 // Possible null reference return.
                                 break;
                             case "expirationDate":
-#pragma warning disable CS8603 // Possible null reference return.
                                 orderByList.Add(new(sortingOption, c => c.FechaExpiracion));
-#pragma warning restore CS8603 // Possible null reference return.
                                 break;
                         }
                     }
@@ -74,12 +68,17 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                     filterList.Add(expression);
                                 }
                                 break;
+                            case "maker":
+                                {
+                                   
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.Fabricante.Nombre.Contains(((string)filteringOption.Value));
+                                    filterList.Add(expression);
+                                }
+                                break;
                             case "startDateOfIssue":
                                 {
                                     var value = filteringOption.Value.ToString();
-#pragma warning disable CS8604 // Possible null reference argument for parameter 's' in 'DateTime DateTime.Parse(string s, IFormatProvider? provider, DateTimeStyles styles)'.
                                     var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
-#pragma warning restore CS8604 // Possible null reference argument for parameter 's' in 'DateTime DateTime.Parse(string s, IFormatProvider? provider, DateTimeStyles styles)'.
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision >= date;
                                     filterList.Add(expression);
 
@@ -88,9 +87,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                             case "endDateOfIssue":
                                 {
                                     var value = filteringOption.Value.ToString();
-#pragma warning disable CS8604 // Possible null reference argument for parameter 's' in 'DateTime DateTime.Parse(string s, IFormatProvider? provider, DateTimeStyles styles)'.
                                     var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
-#pragma warning restore CS8604 // Possible null reference argument for parameter 's' in 'DateTime DateTime.Parse(string s, IFormatProvider? provider, DateTimeStyles styles)'.
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision <= date;
                                     filterList.Add(expression);
                                 }
@@ -98,9 +95,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                             case "startExpirationDate":
                                 {
                                     var value = filteringOption.Value.ToString();
-#pragma warning disable CS8604 // Possible null reference argument for parameter 's' in 'DateTime DateTime.Parse(string s, IFormatProvider? provider, DateTimeStyles styles)'.
                                     var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
-#pragma warning restore CS8604 // Possible null reference argument for parameter 's' in 'DateTime DateTime.Parse(string s, IFormatProvider? provider, DateTimeStyles styles)'.
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision >= date;
                                     filterList.Add(expression);
 
@@ -109,9 +104,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                             case "endDateExpirationDate":
                                 {
                                     var value = filteringOption.Value.ToString();
-#pragma warning disable CS8604 // Possible null reference argument for parameter 's' in 'DateTime DateTime.Parse(string s, IFormatProvider? provider, DateTimeStyles styles)'.
                                     var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
-#pragma warning restore CS8604 // Possible null reference argument for parameter 's' in 'DateTime DateTime.Parse(string s, IFormatProvider? provider, DateTimeStyles styles)'.
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision <= date;
                                     filterList.Add(expression);
                                 }
@@ -126,9 +119,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 result = await _repository.Entities
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
                                           .PaginatedByAsync(args.PageIndex, args.PageSize);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
             catch (Exception exc)
             {
