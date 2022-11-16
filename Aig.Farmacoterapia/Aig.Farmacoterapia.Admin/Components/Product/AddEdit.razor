@@ -15,7 +15,7 @@
 @inject ISystemLogger _systemLogger;
 
 <style>
-    
+
 </style>
 
 <div class="modal show fade" style="display:block;overflow-y:auto!important;" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
@@ -31,13 +31,13 @@
                 <div class="kt-portlet" style="margin-bottom:0px !important;">
 
                     <EditForm Model="@ModelData" OnValidSubmit="@SaveData" class="kt-form kt-form--label-right">
-                       <FluentValidationValidator />
+                        <FluentValidationValidator />
                         <div class="kt-portlet__body">
-                            
+
                             <div class="row">
-                               
+
                                 <div class="col-lg-12">
-                                   
+
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div>
@@ -156,7 +156,7 @@
                                                     <MudSelectItem Value="@(TipoMedicamento.BT)">Biotecnológicos</MudSelectItem>
                                                     <MudSelectItem Value="@(TipoMedicamento.BI)">Biológicos</MudSelectItem>
                                                 </MudSelect>
-                                                 <div class="error invalid-feedback">
+                                                <div class="error invalid-feedback">
                                                     <ValidationMessage For="@(() => ModelData.TipoMedicamento)" />
                                                 </div>
 
@@ -171,7 +171,7 @@
                                                     <MudSelectItem Value="@(TipoCondicionVenta.UsoHospitalario)">Uso Hospitalario Exclusivo</MudSelectItem>
                                                     <MudSelectItem Value="@(TipoCondicionVenta.VentaPopular)">Venta Popular</MudSelectItem>
                                                 </MudSelect>
-                                                 <div class="error invalid-feedback">
+                                                <div class="error invalid-feedback">
                                                     <ValidationMessage For="@(() => ModelData.CondicionVenta)" />
                                                 </div>
                                             </div>
@@ -205,7 +205,7 @@
 
                                     </div>
 
-                                     <hr />
+                                    <hr />
 
                                     <div class="row">
 
@@ -221,7 +221,7 @@
                                                             <tr>
                                                                 <td>
                                                                     <div>
-                                                                        <InputFile id="fileInput" hidden OnChange="UploadFiles" SuppressOnChangeWhenInvalid="SuppressOnChangeWhenInvalid"/>
+                                                                        <InputFile id="fileInput" hidden OnChange="UploadFiles" SuppressOnChangeWhenInvalid="SuppressOnChangeWhenInvalid" />
                                                                         <MudButton HtmlTag="label"
                                                                                    Variant="Variant.Text"
                                                                                    Color="Color.Primary"
@@ -230,9 +230,9 @@
                                                                                    for="fileInput">
                                                                             Monografía
                                                                         </MudButton>
-                                                                       
+
                                                                     </div>
-                                                                   
+
                                                                 </td>
                                                                 <td>
                                                                     <div>
@@ -256,10 +256,18 @@
                                                                         }
                                                                     </div>
                                                                 </td>
+                                                                @if (fileLoading)
+                                                                {
+                                                                    <td>
+                                                                        <div>
+                                                                            <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
+                                                                        </div>
+                                                                    </td>
+                                                                }
                                                             </tr>
 
                                                         </table>
-                                                        
+
                                                     </td>
 
                                                     <td style="padding-left: 5px;">
@@ -301,6 +309,14 @@
                                                                         }
                                                                     </div>
                                                                 </td>
+                                                                @if (prospectusLoading)
+                                                                {
+                                                                    <td>
+                                                                        <div>
+                                                                            <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
+                                                                        </div>
+                                                                    </td>
+                                                                }
                                                             </tr>
 
                                                         </table>
@@ -308,11 +324,12 @@
                                                 </tr>
 
                                             </table>
+
                                             @if (showFileInputAlert)
                                             {
                                                 <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo de fichero para la monografía es de 5 MB </MudAlert>
                                             }
-                                             @if (showProspectusFileInputAlert)
+                                            @if (showProspectusFileInputAlert)
                                             {
                                                 <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo de fichero para el prospecto es de 5 MB </MudAlert>
                                             }
@@ -320,13 +337,13 @@
 
                                     </div>
 
-                                     <hr />
+                                    <hr />
 
                                     <div class="row">
 
-                                        <div class="col-lg-4">
-                                            <table class="divInputFile" cellspacing="0" cellpadding="0">
+                                        <div class="col-lg-6">
 
+                                            <table class="divInputFile" cellspacing="0" cellpadding="0">
                                                 <tr>
                                                     <td>
                                                         <div>
@@ -346,7 +363,7 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div>
+                                                        <div style="padding:0px; margin: 0px;">
 
                                                             @if (!showPictureFileInputAlert && !string.IsNullOrEmpty(ModelData.PictureData))
                                                             {
@@ -361,6 +378,14 @@
                                                             }
                                                         </div>
                                                     </td>
+                                                    @if (pictureLoading)
+                                                    {
+                                                        <td>
+                                                            <div>
+                                                                <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
+                                                            </div>
+                                                        </td>
+                                                    }
                                                 </tr>
 
                                             </table>
@@ -372,7 +397,7 @@
 
                                     </div>
 
-                                     <hr />
+                                    <hr />
 
                                     <div class="row" style="margin-top:5px">
 
@@ -409,19 +434,19 @@
 
                                     </div>
 
-                                   <div class="row" style="margin-top:10px">
+                                    <div class="row" style="margin-top:10px">
                                         <div class="col-lg-12">
                                             <div>
                                                 <label>Excipientes</label>
                                                 <textarea rows="4" id="excipientes" class="form-control" @bind="ModelData.Excipientes" @bind:event="oninput" />
-                                                 <div class="error invalid-feedback">
+                                                <div class="error invalid-feedback">
                                                     <ValidationMessage For="@(() => ModelData.Excipientes)" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                     <div class="row" style="margin-top:10px">
+                                    <div class="row" style="margin-top:10px">
 
                                         <div class="col-lg-12">
                                             <div>
@@ -435,7 +460,7 @@
 
                                     </div>
 
-                                   <div class="row" style="margin-top:10px">
+                                    <div class="row" style="margin-top:10px">
                                         <div class="col-lg-12">
                                             <div>
                                                 <label>Descripción del Envase</label>
@@ -479,22 +504,28 @@
     private IBrowserFile _file;
     private IBrowserFile _prospectusFile;
     private IBrowserFile _imageFile;
-    private bool showFileInputAlert=false;
-    private bool showProspectusFileInputAlert=false;
-    private bool showPictureFileInputAlert=false;
-    
-    private void CloseFileInputAlert(bool value)=> showFileInputAlert = value;
-    
+    private bool showFileInputAlert = false;
+    private bool showProspectusFileInputAlert = false;
+    private bool showPictureFileInputAlert = false;
+    protected bool fileLoading { get; set; } = false;
+    protected bool prospectusLoading { get; set; } = false;
+    protected bool pictureLoading { get; set; } = false;
+
+    private void CloseFileInputAlert(bool value) => showFileInputAlert = value;
+
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
         _file = e.File;
         if (_file != null)
         {
             try
-            {   showFileInputAlert = false;
+            {
+                fileLoading = true;
+                showFileInputAlert = false;
                 long maxFileSize = 1048576 * 5;//5MB
                 var extension = Path.GetExtension(_file.Name);
-                if (_file.Size <= maxFileSize){
+                if (_file.Size <= maxFileSize)
+                {
                     var buffer = new byte[_file.Size];
                     var stream = _file.OpenReadStream(maxAllowedSize: maxFileSize);
                     var request = new UploadObject
@@ -513,6 +544,7 @@
             {
                 _systemLogger.Error(ex);
             }
+            finally { fileLoading = false; }
         }
     }
 
@@ -532,20 +564,23 @@
         if (_prospectusFile != null)
         {
             try
-            {   
+            {
+                prospectusLoading = true;
                 showProspectusFileInputAlert = false;
                 long maxFileSize = 1048576 * 5;//5MB
-                var extension = Path.GetExtension(_file.Name);
-                 if (_file.Size <= maxFileSize){
-                   var buffer = new byte[_prospectusFile.Size];
-                   var stream = _prospectusFile.OpenReadStream(maxAllowedSize: maxFileSize);
-                   var request = new UploadObject{
-                        FileName = $"{Guid.NewGuid()}{extension}",
-                        Data = stream,
-                        Size = _prospectusFile.Size,
-                        UploadType = UploadType.DataSheet,
-                        Extension = extension
-                    };
+                var extension = Path.GetExtension(_prospectusFile.Name);
+                if (_prospectusFile.Size <= maxFileSize)
+                {
+                    var buffer = new byte[_prospectusFile.Size];
+                    var stream = _prospectusFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                    var request = new UploadObject
+                        {
+                            FileName = $"{Guid.NewGuid()}{extension}",
+                            Data = stream,
+                            Size = _prospectusFile.Size,
+                            UploadType = UploadType.Prospectus,
+                            Extension = extension
+                        };
                     ModelData.ProspectusURL = await _uploadService.UploadAsync(request);
                 }
                 else { showProspectusFileInputAlert = true; }
@@ -555,6 +590,7 @@
             {
                 _systemLogger.Error(ex);
             }
+            finally { prospectusLoading = false; }
 
         }
     }
@@ -566,24 +602,27 @@
             _prospectusFile = null;
             ModelData.ProspectusURL = null;
         }
+
     }
 
     private async Task UploadPictureFiles(InputFileChangeEventArgs e)
     {
-         _imageFile = e.File;
+        _imageFile = e.File;
         if (_imageFile != null)
         {
             try
-            {   
+            {
+                pictureLoading = true;
                 showPictureFileInputAlert = false;
                 long maxFileSize = 1048576 * 1;//1MB
                 var extension = Path.GetExtension(_imageFile.Name);
                 var format = "image/png";
-                 if (_imageFile.Size <= maxFileSize){
-                   var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
-                   var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
-                   var data=Convert.ToBase64String(await GetDataAsync(stream));
-                   ModelData.PictureData = $"data:{format};base64,{data}";
+                if (_imageFile.Size <= maxFileSize)
+                {
+                    var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
+                    var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                    var data = Convert.ToBase64String(await GetDataAsync(stream));
+                    ModelData.PictureData = $"data:{format};base64,{data}";
                 }
                 else { showPictureFileInputAlert = true; }
 
@@ -592,6 +631,7 @@
             {
                 _systemLogger.Error(ex);
             }
+            finally { pictureLoading = false; }
 
         }
     }
@@ -608,11 +648,11 @@
         return data;
     }
 
-      
+
     private async Task DeletePictureAsync()
     {
         _imageFile = null;
-         ModelData.PictureData = null;
+        ModelData.PictureData = null;
     }
 
     private async Task<IEnumerable<AigFormaFarmaceutica>> LoadPharmaceutical(string value)

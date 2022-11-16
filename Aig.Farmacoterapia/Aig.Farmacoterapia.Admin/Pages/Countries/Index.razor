@@ -19,11 +19,11 @@
 <div class="kt-portlet__head kt-portlet__head--lg">
     <div class="kt-portlet__head-label">
         <span class="kt-portlet__head-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <rect x="0" y="0" width="24" height="24"></rect>
-                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
-                    <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                    <rect x="0" y="0" width="24" height="24" />
+                    <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
+                    <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
                 </g>
             </svg>
         </span>
@@ -52,7 +52,7 @@
                 <label>Nombre:</label>
                 <input type="text" @bind-value="searchString" class="form-control kt-input" placeholder="" data-col-index="0">
             </div>
-          
+
             <div class="col-lg-5 kt-margin-b-10-tablet-and-mobile">
                 <div class="row" style="margin-top: 23px;">
                     <div class="col-lg-12" style="margin-top: 3px;">
@@ -111,7 +111,7 @@
                     </span>
                 </MudTd>
             </RowTemplate>
-           
+
             <NoRecordsContent>
                 <MudText>No se encontraron elementos</MudText>
             </NoRecordsContent>
@@ -128,15 +128,15 @@
 
 @if (addEditDialogIsOpen)
 {
-    <AddEdit ModelData="@modelData" OnClose="@OnEventAddEditClose"></AddEdit>
+        <AddEdit ModelData="@modelData" OnClose="@OnEventAddEditClose"></AddEdit>
 }
 
-@if(deleteDialogIsOpen)
+@if (deleteDialogIsOpen)
 {
-   <DeleteConfirmDialog Caption="Eliminar"
+       <DeleteConfirmDialog Caption="Eliminar"
                    Message="¿Confirma que desea de eliminar el artículo?"
                    OnClose="@OnDeleteDialogClose">
-    </DeleteConfirmDialog>
+        </DeleteConfirmDialog>
 }
 
 @code {
@@ -152,7 +152,7 @@
     {
         try
         {
-            searchString= string.Empty;
+            searchString = string.Empty;
         }
         catch (Exception ex)
         {
@@ -162,7 +162,7 @@
         base.OnInitialized();
     }
     private async Task<TableData<AigPais>> DoFetchData(TableState state)
-    {   
+    {
         StateHasChanged();
         var sorting = new List<SortingOption>();
         var filters = new List<FilteringOption>();
@@ -172,14 +172,15 @@
             sorting = new() { new SortingOption { Field = state.SortLabel, Direction = sortDirection } };
         }
         if (!string.IsNullOrEmpty(searchString))
-            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString});
+            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString });
 
-        var args = new PageSearchArgs(){
-            PageIndex = state.Page + 1,
-            PageSize = state.PageSize,
-            SortingOptions = sorting,
-            FilteringOptions = filters
-        };
+        var args = new PageSearchArgs()
+            {
+                PageIndex = state.Page + 1,
+                PageSize = state.PageSize,
+                SortingOptions = sorting,
+                FilteringOptions = filters
+            };
         var paginatedResult = await _repository.ListAsync(args);
         List = paginatedResult.Data;
         return new TableData<AigPais>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
@@ -212,7 +213,7 @@
     private async Task OnEventAddEditClose(long id)
     {
         addEditDialogIsOpen = false;
-        if (id>0)
+        if (id > 0)
             table.ReloadServerData();
     }
     private async Task OnDelete(AigPais data)
@@ -221,17 +222,18 @@
         deleteDialogIsOpen = true;
     }
     private async Task OnDeleteDialogClose(bool isOk)
-    {        
+    {
         if (isOk)
         {
             await _unitOfWork.Repository<AigPais>().DeleteAsync(modelData);
-            if (_unitOfWork.Commit()){
+            if (_unitOfWork.Commit())
+            {
                 await JS.InvokeVoidAsync("ShowMessage", "Elemento eliminado correctamente");
                 await JS.InvokeVoidAsync("OpenCloseModal", "#btnCloseDeleteModal");
                 await table.ReloadServerData();
             }
             else
-               await JS.InvokeVoidAsync("ShowError", "DataDeleteError");
+                await JS.InvokeVoidAsync("ShowError", "DataDeleteError");
         }
         deleteDialogIsOpen = false;
     }
