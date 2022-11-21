@@ -403,5 +403,170 @@ namespace DataModel
         private string vencidosDescrip;
         public string VencidosDescrip { get => vencidosDescrip; set => SetProperty(ref vencidosDescrip, value); }
 
+        /////////////////////
+        ///
+
+        // Cuenta con un área para: Materia Prima / Material Acondicionamiento / Productos Terminados
+        // MATERIA PRIMA
+        private enumAUD_TipoSeleccion areaMateriaPrima;
+        public enumAUD_TipoSeleccion AreaMateriaPrima { get => areaMateriaPrima; set => SetProperty(ref areaMateriaPrima, value); }
+
+        // Observaciones
+        private string areaMateriaPrimaDesc;
+        [StringLength(500)]
+        public string AreaMateriaPrimaDesc { get => areaMateriaPrimaDesc; set => SetProperty(ref areaMateriaPrimaDesc, value); }
+
+        //Material Acondicionamiento
+        private enumAUD_TipoSeleccion areaMaterialAcondicionado;
+        public enumAUD_TipoSeleccion AreaMaterialAcondicionado { get => areaMaterialAcondicionado; set => SetProperty(ref areaMaterialAcondicionado, value); }
+
+        // Observaciones
+        private string areaMaterialAcondicionadoDesc;
+        [StringLength(500)]
+        public string AreaMaterialAcondicionadoDesc { get => areaMaterialAcondicionadoDesc; set => SetProperty(ref areaMaterialAcondicionadoDesc, value); }
+
+        //Productos Terminados
+        private enumAUD_TipoSeleccion areaProductoTerminado;
+        public enumAUD_TipoSeleccion AreaProductoTerminado { get => areaProductoTerminado; set => SetProperty(ref areaProductoTerminado, value); }
+
+        // Observaciones
+        private string areaProductoTerminadoDesc;
+        [StringLength(500)]
+        public string AreaProductoTerminadoDesc { get => areaProductoTerminadoDesc; set => SetProperty(ref areaProductoTerminadoDesc, value); }
+
+
+        // Capacidad suficiente para permitir el almacenamiento ordenado de los productos y que facilite el manejo y circulación en el área   
+        private enumAUD_TipoSeleccion capacidadAlmacenamientoOrdenado;
+        public enumAUD_TipoSeleccion CapacidadAlmacenamientoOrdenado { get => capacidadAlmacenamientoOrdenado; set => SetProperty(ref capacidadAlmacenamientoOrdenado, value); }
+
+        // Observaciones
+        private string capacidadAlmacenamientoOrdenadoDesc;
+        [StringLength(500)]
+        public string CapacidadAlmacenamientoOrdenadoDesc { get => capacidadAlmacenamientoOrdenadoDesc; set => SetProperty(ref capacidadAlmacenamientoOrdenadoDesc, value); }
+
+
+        //Area Seca
+        private enumAUD_TipoSeleccion areaSeca;
+        public enumAUD_TipoSeleccion AreaSeca { get => areaSeca; set => SetProperty(ref areaSeca, value); }
+
+        // Observaciones
+        private string areaSecaDesc;
+        [StringLength(500)]
+        public string AreaSecaDesc { get => areaSecaDesc; set => SetProperty(ref areaSecaDesc, value); }
+
+        //Control Tempratura y Humedad
+        private enumAUD_TipoSeleccion controlTempHumedad;
+        public enumAUD_TipoSeleccion ControlTempHumedad { get => controlTempHumedad; set => SetProperty(ref controlTempHumedad, value); }
+
+        // Observaciones
+        private string controlTempHumedadDesc;
+        [StringLength(500)]
+        public string ControlTempHumedadDesc { get => controlTempHumedadDesc; set => SetProperty(ref controlTempHumedadDesc, value); }
+
+
+        //Registro de Tempratura y Humedad
+        private enumAUD_TipoSeleccion registroTempHumedad;
+        public enumAUD_TipoSeleccion RegistroTempHumedad { get => registroTempHumedad; set => SetProperty(ref registroTempHumedad, value); }
+
+        // Observaciones
+        private string registroTempHumedadDesc;
+        [StringLength(500)]
+        public string RegistroTempHumedadDesc { get => registroTempHumedadDesc; set => SetProperty(ref registroTempHumedadDesc, value); }
+
+
+        //Registro de Tempratura y Humedad
+        private enumAUD_TipoSeleccion letrerosVisibleTempHumedad;
+        public enumAUD_TipoSeleccion LetrerosVisibleTempHumedad { get => letrerosVisibleTempHumedad; set => SetProperty(ref letrerosVisibleTempHumedad, value); }
+
+        // Observaciones
+        private string letrerosVisibleTempHumedadDesc;
+        [StringLength(500)]
+        public string LetrerosVisibleTempHumedadDesc { get => letrerosVisibleTempHumedadDesc; set => SetProperty(ref letrerosVisibleTempHumedadDesc, value); }
+
+
+        // Recepción y despacho protegida de las inclemencias del tiempo. 
+        private enumAUD_TipoSeleccion recepDespachoProtegida;
+        public enumAUD_TipoSeleccion RecepDespachoProtegida { get => recepDespachoProtegida; set => SetProperty(ref recepDespachoProtegida, value); }
+
+        // Observaciones
+        private string recepDespachoProtegidaDesc;
+        [StringLength(500)]
+        public string RecepDespachoProtegidaDesc { get => recepDespachoProtegidaDesc; set => SetProperty(ref recepDespachoProtegidaDesc, value); }
+
+        // Áreas de cuarentena: identificadas y de acceso restringido
+        private enumAUD_TipoSeleccion areaCuarentenaIdentif;
+        public enumAUD_TipoSeleccion AreaCuarentenaIdentif { get => areaCuarentenaIdentif; set => SetProperty(ref areaCuarentenaIdentif, value); }
+
+        // Observaciones
+        private string areaCuarentenaIdentifDesc;
+        [StringLength(500)]
+        public string AreaCuarentenaIdentifDesc { get => areaCuarentenaIdentifDesc; set => SetProperty(ref areaCuarentenaIdentifDesc, value); }
+
+        // Área para almacenar productos rechazados, retirados o devueltos
+        private enumAUD_TipoSeleccion areaProductosRechazados;
+        public enumAUD_TipoSeleccion AreaProductosRechazados { get => areaProductosRechazados; set => SetProperty(ref areaProductosRechazados, value); }
+
+        // Observaciones
+        private string areaProductosRechazadosDesc;
+        [StringLength(500)]
+        public string AreaProductosRechazadosDesc { get => areaProductosRechazadosDesc; set => SetProperty(ref areaProductosRechazadosDesc, value); }
+
+
+        // Área para almacenar sustancias con riesgo a fuego o explosión
+        private enumAUD_TipoSeleccion areaAlmacenProdRiesgoExplosion;
+        public enumAUD_TipoSeleccion AreaAlmacenProdRiesgoExplosion { get => areaAlmacenProdRiesgoExplosion; set => SetProperty(ref areaAlmacenProdRiesgoExplosion, value); }
+
+        // Observaciones
+        private string areaAlmacenProdRiesgoExplosionDesc;
+        [StringLength(500)]
+        public string AreaAlmacenProdRiesgoExplosionDesc { get => areaAlmacenProdRiesgoExplosionDesc; set => SetProperty(ref areaAlmacenProdRiesgoExplosionDesc, value); }
+
+
+        // Área de almacenamiento para Etiquetas, material impreso
+        private enumAUD_TipoSeleccion areaAlmEtiquetasMatImpreso;
+        public enumAUD_TipoSeleccion AreaAlmEtiquetasMatImpreso { get => areaAlmEtiquetasMatImpreso; set => SetProperty(ref areaAlmEtiquetasMatImpreso, value); }
+
+        // Observaciones
+        private string areaAlmEtiquetasMatImpresoDesc;
+        [StringLength(500)]
+        public string AreaAlmEtiquetasMatImpresoDesc { get => areaAlmEtiquetasMatImpresoDesc; set => SetProperty(ref areaAlmEtiquetasMatImpresoDesc, value); }
+
+
+        // Existen advertencias o prohibiciones de: no comer, no beber, no fumar,  no guardar plantas comidas y bebidas
+        private enumAUD_TipoSeleccion advertenciaNoComerBeberEtc;
+        public enumAUD_TipoSeleccion AdvertenciaNoComerBeberEtc { get => advertenciaNoComerBeberEtc; set => SetProperty(ref advertenciaNoComerBeberEtc, value); }
+
+        // Observaciones
+        private string advertenciaNoComerBeberEtcDesc;
+        [StringLength(500)]
+        public string AdvertenciaNoComerBeberEtcDesc { get => advertenciaNoComerBeberEtcDesc; set => SetProperty(ref advertenciaNoComerBeberEtcDesc, value); }
+
+
+        // Los servicios sanitarios no comunican directamente
+        // MATERIA PRIMA
+        private enumAUD_TipoSeleccion servSanitarioNoComDirect;
+        public enumAUD_TipoSeleccion ServSanitarioNoComDirect { get => servSanitarioNoComDirect; set => SetProperty(ref servSanitarioNoComDirect, value); }
+
+        // Observaciones
+        private string servSanitarioNoComDirectDesc;
+        [StringLength(500)]
+        public string ServSanitarioNoComDirectDesc { get => servSanitarioNoComDirectDesc; set => SetProperty(ref servSanitarioNoComDirectDesc, value); }
+
+        // Señalización de las vías o rutas de evacuación en casos de siniestro o catástrofe
+        // MATERIA PRIMA
+        private enumAUD_TipoSeleccion senalRutasEvacuacion;
+        public enumAUD_TipoSeleccion SenalRutasEvacuacion { get => senalRutasEvacuacion; set => SetProperty(ref senalRutasEvacuacion, value); }
+
+        // Observaciones
+        private string senalRutasEvacuacionDesc;
+        [StringLength(500)]
+        public string SenalRutasEvacuacionDesc { get => senalRutasEvacuacionDesc; set => SetProperty(ref senalRutasEvacuacionDesc, value); }
+
+        // Señalización de las vías o rutas de evacuación en casos de siniestro o catástrofe
+        // MATERIA PRIMA
+        private enumAUD_TipoSeleccion ctrIncendio;
+        public enumAUD_TipoSeleccion CtrIncendio { get => ctrIncendio; set => SetProperty(ref ctrIncendio, value); }
+
+        
     }
 }

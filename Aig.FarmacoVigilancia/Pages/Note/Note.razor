@@ -118,7 +118,6 @@
                                                             <th>@languageContainerService.Keys["NumNota"]</th>
                                                             <th>@languageContainerService.Keys["Evaluator"]</th>
                                                             <th>@languageContainerService.Keys["NoteType"]</th> 
-                                                            <th>@languageContainerService.Keys["Description"]</th>
                                                             <th>@languageContainerService.Keys["Institute"]</th>
                                                             <th>@languageContainerService.Keys["Addressee"]</th>
                                                             <th></th>
@@ -132,7 +131,6 @@
                                                                 <td>@(dt.NumNota)</td>
                                                                 <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
                                                                 <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoNota))</td>
-                                                                <td>@(dt.Descripcion)</td>
                                                                 <td>@(dt.InstitucionDestino?.Nombre ?? "")</td>
                                                                 <td>@(dt.Destinatario)</td>
                                                                 <td style="text-align:right">

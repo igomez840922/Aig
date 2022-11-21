@@ -130,7 +130,12 @@ namespace DataModel
         private AUD_InspRetiroRetencionTB? inspRetiroRetencion;
         public virtual AUD_InspRetiroRetencionTB? InspRetiroRetencion { get => inspRetiroRetencion; set => SetProperty(ref inspRetiroRetencion, value); }
 
-        
+        //Formulario de Apertura Fabricante
+        private long? inspAperFabricanteId;
+        public long? InspAperFabricanteId { get => inspAperFabricanteId; set => SetProperty(ref inspAperFabricanteId, value); }
+        private AUD_InspAperFabricanteTB? inspAperFabricante;
+        public virtual AUD_InspAperFabricanteTB? InspAperFabricante { get => inspAperFabricante; set => SetProperty(ref inspAperFabricante, value); }
+
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
         private List<AttachmentTB> lAttachments;

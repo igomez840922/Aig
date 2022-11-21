@@ -67,6 +67,7 @@ namespace Aig.FarmacoVigilancia.Services
                     ws.Cell(1, 7).Value = "Nombre Comercial";
                     ws.Cell(1, 8).Value = "Laboratorio";
 
+                    var rowCount = 1;
                     for (int row = 1; row <= model.Ldata.Count; row++)
                     {
                         var prod = model.Ldata[row - 1];
@@ -76,26 +77,28 @@ namespace Aig.FarmacoVigilancia.Services
                             {
                                 var prodChild = prod.LProductos[rowChild - 1];
 
-                                ws.Cell(rowChild + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
-                                ws.Cell(rowChild + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
-                                ws.Cell(rowChild + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
-                                ws.Cell(rowChild + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
-                                ws.Cell(rowChild + 1, 5).Value = prodChild.RegSanitario;
-                                ws.Cell(rowChild + 1, 6).Value = prod.PrincActivo;
-                                ws.Cell(rowChild + 1, 7).Value = prodChild.NomComercial;
-                                ws.Cell(rowChild + 1, 8).Value = prodChild.Laboratorio?.Nombre??"";
+                                ws.Cell(rowCount + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(rowCount + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(rowCount + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(rowCount + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
+                                ws.Cell(rowCount + 1, 5).Value = prodChild.RegSanitario;
+                                ws.Cell(rowCount + 1, 6).Value = prod.PrincActivo;
+                                ws.Cell(rowCount + 1, 7).Value = prodChild.NomComercial;
+                                ws.Cell(rowCount + 1, 8).Value = prodChild.Laboratorio?.Nombre??"";
+                                rowCount++;
                             }
                         }
                         else
                         {
-                            ws.Cell(row + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
-                            ws.Cell(row + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
-                            ws.Cell(row + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
-                            ws.Cell(row + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
-                            ws.Cell(row + 1, 5).Value = "";
-                            ws.Cell(row + 1, 6).Value = prod.PrincActivo;
-                            ws.Cell(row + 1, 7).Value = "";
-                            ws.Cell(row + 1, 8).Value = "";
+                            ws.Cell(rowCount + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(rowCount + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(rowCount + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(rowCount + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
+                            ws.Cell(rowCount + 1, 5).Value = "";
+                            ws.Cell(rowCount + 1, 6).Value = prod.PrincActivo;
+                            ws.Cell(rowCount + 1, 7).Value = "";
+                            ws.Cell(rowCount + 1, 8).Value = "";
+                            rowCount++;
                         }
                     }
 
