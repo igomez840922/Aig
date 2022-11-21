@@ -13,24 +13,6 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosEstablecimiento: SystemId
     {
-        ////Provincia
-        //private long? provinciaEstablecId;
-        //public long? ProvinciaEstablecId { get => provinciaEstablecId; set => SetProperty(ref provinciaEstablecId, value); }
-        //private ProvinciaTB? provinciaEstablec;
-        //public virtual ProvinciaTB? ProvinciaEstablec { get => provinciaEstablec; set => SetProperty(ref provinciaEstablec, value); }
-
-        ////distrito
-        //private long? distritoEstablecId;
-        //public long? DistritoEstablecId { get => distritoEstablecId; set => SetProperty(ref distritoEstablecId, value); }
-        //private DistritoTB? distritoEstablec;
-        //public virtual DistritoTB? DistritoEstablec { get => distritoEstablec; set => SetProperty(ref distritoEstablec, value); }
-
-        ////distrito
-        //private long? corregimientoEstablecId;
-        //public long? CorregimientoEstablecId { get => corregimientoEstablecId; set => SetProperty(ref corregimientoEstablecId, value); }
-        //private CorregimientoTB? corregimientoEstablec;
-        //public virtual CorregimientoTB? CorregimientoEstablec { get => corregimientoEstablec; set => SetProperty(ref corregimientoEstablec, value); }
-
         //provincia
         private string provincia;
         [StringLength(250)]

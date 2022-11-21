@@ -26,7 +26,8 @@ namespace Aig.FarmacoVigilancia.Services
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_NotaTB>()
                               where data.Deleted == false &&
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Descripcion.Contains(model.Filter)))&&
-                              (model.FromDate == null ? true : (data.Fecha >= model.FromDate && data.Fecha <= model.FromDate)) &&
+                              (model.FromDate == null ? true : (data.Fecha >= model.FromDate)) &&
+                              (model.ToDate == null ? true : (data.Fecha <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
                               (model.NotaType == null ? true : (data.TipoNota == model.NotaType))
                               orderby data.CreatedDate
@@ -34,8 +35,9 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_NotaTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Descripcion.Contains(model.Filter))) &&
-                               (model.FromDate == null ? true : (data.Fecha >= model.FromDate && data.Fecha <= model.FromDate)) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Descripcion.Contains(model.Filter))) &&
+                              (model.FromDate == null ? true : (data.Fecha >= model.FromDate)) &&
+                              (model.ToDate == null ? true : (data.Fecha <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
                                (model.NotaType == null ? true : (data.TipoNota == model.NotaType))
                               select data).Count();  

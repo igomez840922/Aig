@@ -78,6 +78,13 @@ namespace DataModel
         [StringLength(500)]
         public string RampaCargaDescargaDesc { get => rampaCargaDescargaDesc; set => SetProperty(ref rampaCargaDescargaDesc, value); }
 
+        // Los productos dispuestos para el despacho están colocados sobre tarimas u otro mobiliario
+        private enumAUD_TipoSeleccion productosTarimas;
+        public enumAUD_TipoSeleccion ProductosTarimas { get => productosTarimas; set => SetProperty(ref productosTarimas, value); }
+        private string productosTarimasDesc;
+        [StringLength(500)]
+        public string ProductosTarimasDesc { get => productosTarimasDesc; set => SetProperty(ref productosTarimasDesc, value); }
+
 
     }
 

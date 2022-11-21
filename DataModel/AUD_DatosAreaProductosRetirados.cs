@@ -42,5 +42,21 @@ namespace DataModel
         [StringLength(500)]
         public string AseguradaDesc { get => aseguradaDesc; set => SetProperty(ref aseguradaDesc, value); }
 
+        //Se lleva un registro de los productos a destruir y de los productos ya destruidos
+        private enumAUD_TipoSeleccion registroProdDestruidos;
+        public enumAUD_TipoSeleccion RegistroProdDestruidos { get => registroProdDestruidos; set => SetProperty(ref registroProdDestruidos, value); }
+        private string registroProdDestruidosDesc;
+        [StringLength(500)]
+        public string RegistroProdDestruidosDesc { get => registroProdDestruidosDesc; set => SetProperty(ref registroProdDestruidosDesc, value); }
+
+
+        //Cuenta con un área de cuarentena
+        private enumAUD_TipoSeleccion areaCuarentena;
+        public enumAUD_TipoSeleccion AreaCuarentena { get => areaCuarentena; set => SetProperty(ref areaCuarentena, value); }
+        private string areaCuarentenaDesc;
+        [StringLength(500)]
+        public string AreaCuarentenaDesc { get => areaCuarentenaDesc; set => SetProperty(ref areaCuarentenaDesc, value); }
+
+
     }
 }

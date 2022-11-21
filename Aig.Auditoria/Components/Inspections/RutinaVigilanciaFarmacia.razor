@@ -1,0 +1,894 @@
+﻿@using DataModel.Helper;
+
+<div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModal">@(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))</h5>
+                <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <EditForm Model="@Inspeccion" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+                    <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["Generales de la Farmacia"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#regenteInfo" role="tab">@languageContainerService.Keys["ApplicantInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#farmaceuticoTurnoInfo" role="tab">@languageContainerService.Keys["RegentInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#condCaractLocalInfo" role="tab">@languageContainerService.Keys["Condiciones y Características del Local"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#transportInfo" role="tab">@languageContainerService.Keys["Transporte"]</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#conclusionInfo" role="tab">@languageContainerService.Keys["ConclusionInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#inspectorsApprovals" role="tab" @onclick="(e)=>{OnShowSignasure();}">@languageContainerService.Keys["InspectorsApprovals"]</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="generalInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Generales de la Farmacia"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["StartDate"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputDate class="form-control" @bind-Value="Inspeccion.FechaInicio" />
+                                            <ValidationMessage For=@(() => Inspeccion.FechaInicio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Status"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
+                                                @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
+                                                {
+                                                    if (dt != enum_StatusInspecciones.None)
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.StatusInspecciones) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Establishments"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect class="form-control"
+                                                         ValueExpression="@(() => Inspeccion.EstablecimientoId)"
+                                                         Value="@Inspeccion.EstablecimientoId"
+                                                         ValueChanged="@((long? value) => OnEstablishmentChange(value))">
+                                                @if (lEstablecimientos != null)
+                                                {
+                                                    foreach (var dt in lEstablecimientos)
+                                                    {
+                                                        <option value="@dt.Id">@dt.Nombre</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["Dispone de letrero visible con su nombre"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.LetreroVisibleNombre" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.LetreroVisibleNombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <h5>@languageContainerService.Keys["Actividades"]</h5>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Adquisición al por mayor, venta al por menor de productos farmacéuticos y dispensación de medicamentos mediante la presentación de prescripción médica"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.ActAdquisicionPorMayor" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.ActAdquisicionPorMayor) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Dispensación de medicamentos mediante la presentación de prescripción médica"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.ActDispMedicamento" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.ActDispMedicamento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Manejo de Sustancias Controladas (si maneja, utilizar el acta para tal fin)"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.ActManejoSustControlada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.ActManejoSustControlada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Número de Licencia de Operación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.NumLicOperacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.NumLicOperacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Vigente hasta"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputDate class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.FechaExpLicOperacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.FechaExpLicOperacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["La licencia de Operación esta visible y legible a los clientes "]</label>
+                                </div>
+                                 <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.ActManejoSustControlada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.ActManejoSustControlada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"></div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Provincia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Provincia" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Provincia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Distrito"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Distrito" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Distrito) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Corregimiento"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Corregimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Corregimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Ubication"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Ubicacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Ubicacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["BusinessPhone"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Telefono" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Telefono) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Email"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Correo" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Correo) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Atendidos Por"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.AtendidosPor" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.AtendidosPor) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Con el cargo de"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Cargo" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Cargo) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Horario de Operación coincide con la Licencia de Operación"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.HorarioOperCoincideLicOper" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.HorarioOperCoincideLicOper) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"></div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Observación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="6" class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Observacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.Observacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["DNFDParticipants"]</label>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["FullName"]</th>
+                                                    <th>@languageContainerService.Keys["IdentificationCard"]</th>
+                                                    <th>@languageContainerService.Keys["RegisterNumber"]</th>
+                                                    <th>@languageContainerService.Keys["Charge"]</th>
+                                                    <th style="text-align:right;">
+                                                        <button type="button" @onclick="(e)=>{OpenParticipant();}"
+                                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                                            @languageContainerService.Keys["Add"]
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.LParticipantes != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.LParticipantes)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.NombreCompleto</td>
+                                                            <td>@dt.CedulaIdentificacion</td>
+                                                            <td>@dt.RegistroNumero</td>
+                                                            <td>@dt.Cargo</td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveParticipant(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="regenteInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Datos Generales del Regente Farmaceutico"]</h4>
+                             <div class="row clearfix">
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["No. Registro"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.NumRegistro" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.NumRegistro) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Provincia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.Provincia" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.Provincia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Distrito"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.Distrito" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.Distrito) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Corregimiento"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.Corregimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.Corregimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Ubication"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.Ubicacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.Ubicacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["PhoneNumber"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.TelefonoMovil" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.TelefonoMovil) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Email"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.Email" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.Email) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Horario de Regencia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.HorarioRegencia" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.HorarioRegencia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Labora en otra empresa:"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.LaboraOtraEmpresa" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.LaboraOtraEmpresa) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Horario"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.LaboraOtraEmpresaHora" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.LaboraOtraEmpresaHora) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["El regente está presente al momento de la inspección"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.PresenteEnInspeccion" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.PresenteEnInspeccion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Observaciones"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="6" class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegente.Observacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegente.Observacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="tab-pane" id="farmaceuticoTurnoInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Farmaceutico de Turno"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["No. Registro"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.NumRegistro" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.NumRegistro) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Provincia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Provincia" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Provincia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Distrito"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Distrito" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Distrito) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Corregimiento"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Corregimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Corregimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Ubication"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Ubicacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Ubicacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["PhoneNumber"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.TelefonoMovil" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.TelefonoMovil) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Email"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Email" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Email) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Horario"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Horario" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.Horario) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Labora en otra empresa"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.LaboraOtraEmpresa" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico.LaboraOtraEmpresa) />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="regentInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Personal Técnico en Farmacia"]</h4>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["FullName"]</th>
+                                                    <th>@languageContainerService.Keys["IdentificationCard"]</th>
+                                                    <th>@languageContainerService.Keys["RegisterNumber"]</th>
+                                                    <th style="text-align:right;">
+                                                        <button type="button" @onclick="(e)=>{OpenPersonalTec();}"
+                                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                                            @languageContainerService.Keys["Add"]
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion.InspRutinaVigFarmacia.DatosPersonalTecnico.LPersonalTecnico != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspRutinaVigFarmacia.DatosPersonalTecnico.LPersonalTecnico)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.Nombre</td>
+                                                            <td>@dt.Cedula</td>
+                                                            <td>@dt.NumRegistro</td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemovePersonalTec(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>@languageContainerService.Keys["Expediente Personal de cada Colaborador "]</h4>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["FullName"]</th>
+                                                    <th>@languageContainerService.Keys["IdentificationCard"]</th>
+                                                    <th>@languageContainerService.Keys["Expediente"]</th>
+                                                    <th>@languageContainerService.Keys["No. Expediente"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                    <th style="text-align:right;">
+                                                        <button type="button" @onclick="(e)=>{OpenExpColaborador();}"
+                                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                                            @languageContainerService.Keys["Add"]
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion.InspRutinaVigFarmacia.DatosExpedienteColaborador.LColaboradores != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspRutinaVigFarmacia.DatosExpedienteColaborador.LColaboradores)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.Nombre</td>
+                                                            <td>@dt.Cedula</td>
+                                                            <td>@(dt.TieneExpediente?"Si":"No")</td>
+                                                            <td>@dt.NumExpediente</td>
+                                                            <td>@dt.ExpedienteDesc</td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveExpColaborador(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="condCaractLocalInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Condiciones y Características del Local"]</h4>
+                            
+                        </div>
+                        <div class="tab-pane" id="transportInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Transporte"]</h4>
+                       
+                        </div>
+
+                        <div class="tab-pane" id="conclusionInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["ConclusionInfo"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["El local cumple  o no cumple con los requisitos mínimos para operar"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CumpleRequisitosMinOperacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Observaciones"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="8" class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.ObservacionesFinales" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.ObservacionesFinales) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
+                            <h4>@languageContainerService.Keys["InspectorsApprovals"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["FinishedDate"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
+                                            @*<InputDate class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.FechaFinalizacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.FechaFinalizacion) />*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (Inspeccion != null && Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.LParticipantes.Count > 0 && showSignasure)
+                            {
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Representante Legal de la Empresa"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.NombreRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.NombreRepresentanteLegal) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CargoRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CargoRepresentanteLegal) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CedulaRepresentanteLegal" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CedulaRepresentanteLegal) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad5" OnSignatureChange="OnSignatureChange5"
+                                                                      MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-8">
+                                                <label for="password">@languageContainerService.Keys["Regente Farmaceutico"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.NombreRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.NombreRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.RegistroRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.RegistroRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CargoRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CargoRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CedulaRegente" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CedulaRegente) />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad6" OnSignatureChange="OnSignatureChange6"
+                                                                      MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg6">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
+                                    </div>
+                                    @foreach (var dt in Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.LParticipantes)
+                                    {
+                                        <div class="col-sm-6">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12">
+                                                    <label for="password">@dt.NombreCompleto</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["RegisterNumber"]:@dt.RegistroNumero</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["IdentificationCard"]:@dt.CedulaIdentificacion</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Signature"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <SignaturePad @ref="signaturePad" OnSignatureChange="(e)=>{OnSignatureChange(dt);}"
+                                                                          MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                <SignaturePadFooter>
+                                                                    <SignaturePadClear>
+                                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="(e)=>{RemoveSignatureImg(dt);}">@languageContainerService.Keys["Clear"]</button>
+                                                                    </SignaturePadClear>
+                                                                </SignaturePadFooter>
+                                                            </SignaturePad>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+
+                    <br><br>
+                    <div class="modal-footer">
+
+                        @if (Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending)
+                        {
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                        }
+
+                        <button type="button" class="btn btn-danger waves-effect"
+                        @onclick="(e)=>{Cancel();}">
+                            @languageContainerService.Keys["Cancel"]
+                        </button>
+                    </div>
+
+
+                </EditForm>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@if (OpenHourModal)
+{
+    <Aig.Auditoria.Components.OpenHours.AddEditOpenHoursComponent HorarioApertura="@DatosHorario"></Aig.Auditoria.Components.OpenHours.AddEditOpenHoursComponent>
+}
+@if (showParticipant)
+{
+    <Aig.Auditoria.Components.Participants.AddEditParticipantComponent Participante="@participante"></Aig.Auditoria.Components.Participants.AddEditParticipantComponent>
+}
+@if (showTechnicalPerson)
+{
+    <Aig.Auditoria.Components.TechnicalPersonal.AddEditComponent PersonalTecnico="@personalTecnico"></Aig.Auditoria.Components.TechnicalPersonal.AddEditComponent>
+}
+
+<div class="modal-backdrop fade show"></div>

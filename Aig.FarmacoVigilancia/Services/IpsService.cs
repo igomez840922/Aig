@@ -25,7 +25,8 @@ namespace Aig.FarmacoVigilancia.Services
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_IpsTB>()
                               where data.Deleted == false &&
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NoInforme.Contains(model.Filter) || data.RegSanitario.Contains(model.Filter) || data.NomComercial.Contains(model.Filter) || data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
-                              (model.FromDate==null?true:(data.FechaRecepcion >= model.FromDate && data.FechaRecepcion <= model.FromDate)) &&
+                              (model.FromDate==null?true:(data.FechaRecepcion >= model.FromDate)) &&
+                              (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
                               (model.RegisterId == null ? true : (data.RegistradorId == model.RegisterId)) &&
                               (model.IpsStatusRevision == null ? true : (data.StatusRevision == model.IpsStatusRevision))
@@ -35,8 +36,9 @@ namespace Aig.FarmacoVigilancia.Services
                 model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
                                where data.Deleted == false &&
                                (string.IsNullOrEmpty(model.Filter) ? true : (data.NoInforme.Contains(model.Filter) || data.RegSanitario.Contains(model.Filter) || data.NomComercial.Contains(model.Filter) || data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate && data.FechaRecepcion <= model.FromDate)) &&
-                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                              (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
                                (model.RegisterId == null ? true : (data.RegistradorId == model.RegisterId)) &&
                                (model.IpsStatusRevision == null ? true : (data.StatusRevision == model.IpsStatusRevision))
                                select data).Count();  
