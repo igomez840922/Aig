@@ -102,7 +102,7 @@
                 <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Expiración:" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" @bind-DateRange="expirationRange" />
             </div>
             <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
-                 <label style="margin-bottom: 0px !important;color: var(--mud-palette-text-secondary);">Medicamento:</label>
+                 <label style="margin-bottom: 0px !important;color: var(--mud-palette-text-secondary);">Fabricante:</label>
                 <MudAutocomplete MaxItems="null" T="AigFabricante" Dense="true" Variant="Variant.Outlined" @bind-Value="modelFilter.Fabricante" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadMarker" ShowProgressIndicator="true" ProgressIndicatorColor="Color.Primary">
 
                     <ItemTemplate Context="e">
@@ -184,6 +184,20 @@
                                 Eliminar
                             </a> 
                             <div class="dropdown-divider ng-star-inserted"></div>
+                            @if (!string.IsNullOrEmpty(context.DataSheetURL))
+                            {
+                                <a class="dropdown-item" href="@context.DataSheetURL">
+                                    <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
+                                    Monografía
+                                </a>
+                            }
+                             @if (!string.IsNullOrEmpty(context.ProspectusURL))
+                            {
+                                <a class="dropdown-item" href="@context.ProspectusURL">
+                                    <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
+                                    Prospecto
+                                </a>
+                            }
                         </span>
                     </span>
                 </MudTd>
@@ -196,34 +210,43 @@
 
                             <div style="background-color: #f2eefc;" _ngcontent-lil-c210="" class="py-4 d-flex ng-star-inserted">
 
+
                                 <div _ngcontent-lil-c210="" class="mx-4">
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Creado:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @context.Created
-                                        </span>
+
+                                        @if (!string.IsNullOrEmpty(@context.PictureData))
+                                        {
+                                            <a target="_blank" href="@context.PictureData" download>
+                                                <img src="@context.PictureData" Width="150" Height="110" Elevation="25" Class="rounded-lg" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <img src="/assets/media/no-image.png" Width="150" Height="110" Elevation="25" Class="rounded-lg" />
+                                        }
+
                                     </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Creado por:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.CreatedBy) ? @context.CreatedBy : "<Ninguno>")
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Modificado:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(@context.LastModified!=null ? @context.LastModified : "<Ninguna>")
-                                        </span>
-                                    </div>
+
                                 </div>
 
                                 <div _ngcontent-lil-c210="" class="mx-4">
+                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
+
+                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                            Vigente:
+                                        </span>
+                                        @if (@context.Vigente)
+                                        {
+                                            <span class="fa fa-check-circle" aria-hidden="true" style="font-size: 15px;color:#1BC5BD">
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-times-circle" aria-hidden="true" style="font-size: 15px;color:#EE2D41">
+                                            </span>
+                                        }
+
+                                    </div>
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
                                         <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
                                             Fabricante:
@@ -264,7 +287,7 @@
                                             Vía de Administración:
                                         </span>
                                         <span _ngcontent-lil-c210="" class="text-dark-50">
-                                           @(context.ViaAdministracion!=null ? context.ViaAdministracion?.Nombre : "<Ninguna>")
+                                            @(context.ViaAdministracion!=null ? context.ViaAdministracion?.Nombre : "<Ninguna>")
                                         </span>
                                     </div>
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
@@ -273,6 +296,33 @@
                                         </span>
                                         <span _ngcontent-lil-c210="" class="text-dark-50">
                                             @(!string.IsNullOrEmpty(@context.Excipientes) ? @context.Excipientes : "<Ninguno>")
+                                        </span>
+                                    </div>
+                                </div>
+
+                                 <div _ngcontent-lil-c210="" class="mx-4">
+                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                            Creado:
+                                        </span>
+                                        <span _ngcontent-lil-c210="" class="text-dark-50">
+                                            @context.Created
+                                        </span>
+                                    </div>
+                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                            Creado por:
+                                        </span>
+                                        <span _ngcontent-lil-c210="" class="text-dark-50">
+                                            @(!string.IsNullOrEmpty(@context.CreatedBy) ? @context.CreatedBy : "<Ninguno>")
+                                        </span>
+                                    </div>
+                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                            Modificado:
+                                        </span>
+                                        <span _ngcontent-lil-c210="" class="text-dark-50">
+                                            @(@context.LastModified!=null ? @context.LastModified : "<Ninguna>")
                                         </span>
                                     </div>
                                 </div>

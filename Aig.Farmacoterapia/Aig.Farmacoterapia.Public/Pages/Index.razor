@@ -1,0 +1,122 @@
+﻿@page "/"
+@*@layout MainLayout*@
+@using System.Linq
+@using Aig.Farmacoterapia.Application.Dashboard.Event
+@using Aig.Farmacoterapia.Application.Dashboard.Model
+@using System.Globalization
+@using Aig.Farmacoterapia.Application.Medicament.Model
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using BlazorComponentBus
+@inject ISystemLogger _systemLogger;
+@inject IMedicamentRepository _repository;
+
+
+@if (loading)
+{
+    <MudOverlay Visible="loading" DarkBackground="true" Absolute="true">
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    </MudOverlay>
+}
+else
+{
+    <div class="col-xl-9 col-lg-9">
+        <div class="pro-ful-tab">
+
+          @*  <div class="row">
+                <div class="col-12">
+                    <MudPagination style="float: right;margin-bottom: 10px;" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Color="Color.Info"  MiddleCount="3" Count="@paginatedResult.TotalPages" />
+                </div>
+
+            </div>*@
+
+            <div class="product-tab-content">
+                <div class="tab-content" id="myTabContent">
+
+                    @if (paginatedResult != null && paginatedResult.Data.Count > 0)
+                    {
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                @foreach (var context in paginatedResult.Data)
+                                {
+
+                                    <div class="col-xl-3 cl-lg-3 col-md-6">
+                                        <div class="product-03-wrapper grey-2-bg pos-rel text-center mb-30">
+                                            <div class="product-02-img pos-rel">
+                                                <a href="product-details.html">
+                                                    <img src="assets/img/products/f-01.png" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-text">
+
+                                                <h4><a href="product-details.html">@context.Nombre</a></h4>
+                                                <h5>@context.Principio</h5>
+                                                <span>
+                                                    @(!string.IsNullOrEmpty(@context.FormaFarmaceutica?.Nombre) ? @context.FormaFarmaceutica?.Nombre : "-")
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-12">
+                    <MudPagination style="float: right;margin-bottom: 10px;" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Color="Color.Info"  MiddleCount="3" Count="@paginatedResult.TotalPages" />
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}
+@code {
+    protected bool loading { get; set; } = true;
+    private MudPagination _mudPagination;
+    private PaginatedResult<AigMedicamento> paginatedResult;
+    protected async override Task OnInitializedAsync()
+    {
+        //Subscribe Search Event
+        Bus.Subscribe<SearchChangeEvent>(SearchChangeEventHandler);
+        paginatedResult = new PaginatedResult<AigMedicamento>();
+        await DoFetchData();
+        base.OnInitialized();
+    }
+    private void SearchChangeEventHandler(MessageArgs args)
+    {
+        var message = args.GetMessage<SearchChangeEvent>();
+        if (message is SearchChangeEvent)
+        {
+            var value = message.Filter;
+            ;
+        }
+    }
+    private async Task DoFetchData()
+    {
+        loading = true;
+        var sorting =new List<SortingOption>(){ new SortingOption { Field = "Name", Direction = SortingDirection.ASC } };
+        var filters = new List<FilteringOption>();
+        //if (!string.IsNullOrEmpty(searchString))
+        //    filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString });
+        var args = new PageSearchArgs() {
+                PageIndex = paginatedResult.CurrentPage,
+                PageSize = paginatedResult.PageSize,
+                SortingOptions = sorting,
+                FilteringOptions = filters
+            };
+        paginatedResult = await _repository.ListAsync(args);
+        loading = false;
+        StateHasChanged();
+    }
+    private  async Task PageChanged(int i){
+        paginatedResult.CurrentPage = i;
+        await DoFetchData();
+    }
+}

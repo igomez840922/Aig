@@ -83,10 +83,7 @@
     </EditForm>
 
     @if (paginatedResult != null && paginatedResult.Data.Count > 0)
-    {    @* @if (loading)
-             {
-               <MudProgressLinear style="margin-bottom: 2px !important;margin-top: 0px !importan" Color="Color.Primary" Indeterminate="true" Class="my-7" />
-             }*@
+    {   
          <div style="padding: 0px !important;" class="kt-container kt-container--fluid  kt-grid__item kt-grid__item--fluid">
            
              
@@ -181,7 +178,7 @@
                 }
 
             </div>
-             <MudPagination SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@paginatedResult.TotalPages" Class="pa-4"/>
+             <MudPagination Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@paginatedResult.TotalPages" Class="pa-4"/>
         </div>
     }
 
