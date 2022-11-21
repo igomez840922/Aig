@@ -154,6 +154,7 @@ namespace Aig.Farmacoterapia.Infrastructure
         }
         private static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
             return services;

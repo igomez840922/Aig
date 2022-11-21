@@ -186,14 +186,14 @@
                             <div class="dropdown-divider ng-star-inserted"></div>
                             @if (!string.IsNullOrEmpty(context.DataSheetURL))
                             {
-                                <a class="dropdown-item" href="@context.DataSheetURL">
+                                <a target="_blank" class="dropdown-item" href="@context.DataSheetURL">
                                     <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
                                     Monografía
                                 </a>
                             }
                              @if (!string.IsNullOrEmpty(context.ProspectusURL))
                             {
-                                <a class="dropdown-item" href="@context.ProspectusURL">
+                                <a target="_blank" class="dropdown-item" href="@context.ProspectusURL">
                                     <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
                                     Prospecto
                                 </a>

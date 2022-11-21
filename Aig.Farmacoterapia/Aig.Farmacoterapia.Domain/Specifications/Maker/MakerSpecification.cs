@@ -10,7 +10,7 @@ namespace Aig.Farmacoterapia.Domain.Specifications.Maker
         {
             Includes.Add(a => a.Pais);
             if(!string.IsNullOrEmpty(value))
-                Criteria = p => p.Nombre.ToLower().StartsWith(value.ToLower());
+                Criteria = p => p.Nombre.ToLower().Contains(value.ToLower());
         }
 
         public MakerSpecification(List<Expression<Func<AigFabricante, bool>>> filters)
