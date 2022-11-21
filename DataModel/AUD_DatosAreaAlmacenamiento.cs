@@ -14,6 +14,13 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosAreaAlmacenamiento : SystemId
     {
+        //Dispone de área de Almacenamiento?
+        private enumAUD_TipoSeleccion disponeAlmacenamiento;
+        public enumAUD_TipoSeleccion DisponeAlmacenamiento { get => disponeAlmacenamiento; set => SetProperty(ref disponeAlmacenamiento, value); }
+        //Describa el lugar donde se almacenan y las medidas de seguridad
+        private string disponeAlmacenamientoDesc;
+        [StringLength(500)]
+        public string DisponeAlmacenamientoDesc { get => disponeAlmacenamientoDesc; set => SetProperty(ref disponeAlmacenamientoDesc, value); }
 
         //Está identificada
         private enumAUD_TipoSeleccion identificada;
@@ -292,6 +299,7 @@ namespace DataModel
         public string SistMonitorTemperaturaDesc { get => sistMonitorTemperaturaDesc; set => SetProperty(ref sistMonitorTemperaturaDesc, value); }
 
 
+
         // Se mantiene registro del monitoreo de la temperatura y humedad de esta área?
         private enumAUD_TipoSeleccion sistRegistroTemperatura;
         public enumAUD_TipoSeleccion SistRegistroTemperatura { get => sistRegistroTemperatura; set => SetProperty(ref sistRegistroTemperatura, value); }
@@ -363,6 +371,37 @@ namespace DataModel
         private string senalFlujoLogicoOpeDesc;
         public string SenalFlujoLogicoOpeDesc { get => senalFlujoLogicoOpeDesc; set => SetProperty(ref senalFlujoLogicoOpeDesc, value); }
 
+
+        // Los productos cumplen con las normas de etiquetado?
+        private enumAUD_TipoSeleccion normasEtiquetado;
+        public enumAUD_TipoSeleccion NormasEtiquetado { get => normasEtiquetado; set => SetProperty(ref normasEtiquetado, value); }
+        private string normasEtiquetadoDesc;
+        public string NormasEtiquetadoDesc { get => normasEtiquetadoDesc; set => SetProperty(ref normasEtiquetadoDesc, value); }
+
+        // Existe un sistema de codificación que permite la rápida ubicación del producto?
+        private enumAUD_TipoSeleccion sitemaCodificacion;
+        public enumAUD_TipoSeleccion SitemaCodificacion { get => sitemaCodificacion; set => SetProperty(ref sitemaCodificacion, value); }
+        private string sitemaCodificacionDesc;
+        public string SitemaCodificacionDesc { get => sitemaCodificacionDesc; set => SetProperty(ref sitemaCodificacionDesc, value); }
+
+
+        // El establecimiento utiliza el sistema FIFO/FEFO para el almacenamiento?
+        private enumAUD_TipoSeleccion sitemaFifoFefo;
+        public enumAUD_TipoSeleccion SitemaFifoFefo { get => sitemaFifoFefo; set => SetProperty(ref sitemaFifoFefo, value); }
+        private string sitemaFifoFefoDesc;
+        public string SitemaFifoFefoDesc { get => sitemaFifoFefoDesc; set => SetProperty(ref sitemaFifoFefoDesc, value); }
+
+        // Dispone de un área destinada exclusivamente para almacenar materiales y productos de limpieza.?
+        private enumAUD_TipoSeleccion areaAlmacenProdLimp;
+        public enumAUD_TipoSeleccion AreaAlmacenProdLimp { get => areaAlmacenProdLimp; set => SetProperty(ref areaAlmacenProdLimp, value); }
+        private string areaAlmacenProdLimpDesc;
+        public string AreaAlmacenProdLimpDesc { get => areaAlmacenProdLimpDesc; set => SetProperty(ref areaAlmacenProdLimpDesc, value); }
+
+        // Esta área es exclusiva para almacenar medicamentos y otros productos para la salud humana y no están mezclados o juntos con otros productos (alimentos, hidrocarburos, plaguicidas, otros) que pudieran afectar adversamente a los mismos?
+        private enumAUD_TipoSeleccion areaExclusivaMedicam;
+        public enumAUD_TipoSeleccion AreaExclusivaMedicam { get => areaExclusivaMedicam; set => SetProperty(ref areaExclusivaMedicam, value); }
+        private string areaExclusivaMedicamDesc;
+        public string AreaExclusivaMedicamDesc { get => areaExclusivaMedicamDesc; set => SetProperty(ref areaExclusivaMedicamDesc, value); }
 
 
 
@@ -567,6 +606,15 @@ namespace DataModel
         private enumAUD_TipoSeleccion ctrIncendio;
         public enumAUD_TipoSeleccion CtrIncendio { get => ctrIncendio; set => SetProperty(ref ctrIncendio, value); }
 
-        
+
+        // De acuerdo al criterio técnico del Farmacéutico inspector, la capacidad del área es suficiente para almacenar productos, manejo adecuado de productos y circulación del personal Sí  No  , de ser negativa la respuesta, indicar motivo
+        private enumAUD_TipoSeleccion criterioTecInspector;
+        public enumAUD_TipoSeleccion CriterioTecInspector { get => criterioTecInspector; set => SetProperty(ref criterioTecInspector, value); }
+        // Observaciones
+        private string criterioTecInspectorDesc;
+        [StringLength(500)]
+        public string CriterioTecInspectorDesc { get => criterioTecInspectorDesc; set => SetProperty(ref criterioTecInspectorDesc, value); }
+
+
     }
 }

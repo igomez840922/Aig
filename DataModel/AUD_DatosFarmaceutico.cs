@@ -1,5 +1,4 @@
-﻿using DataBindable;
-using DataModel.Helper;
+﻿using DataModel.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    /// <summary>
-    /// Datos del Regente
-    /// </summary>
-    public class AUD_DatosRegente : SystemId
+    public class AUD_DatosFarmaceutico : SystemId
     {
         //Regente - Nombre
         private string nombre;
@@ -28,7 +24,7 @@ namespace DataModel
         private string cedula;
         [StringLength(250)]
         public string Cedula { get => cedula; set => SetProperty(ref cedula, value); }
-               
+
         //provincia
         private string provincia;
         [StringLength(250)]
@@ -43,7 +39,7 @@ namespace DataModel
         private string corregimiento;
         [StringLength(250)]
         public string Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
-                
+
         //ubicacion
         private string ubicacion;
         [StringLength(500)]
@@ -74,10 +70,9 @@ namespace DataModel
         private string firma;
         public string Firma { get => firma; set => SetProperty(ref firma, value); }
 
-
         //Horario Regencia
-        private string horarioRegencia;
-        public string HorarioRegencia { get => horarioRegencia; set => SetProperty(ref horarioRegencia, value); }
+        private string horario;
+        public string Horario { get => horario; set => SetProperty(ref horario, value); }
 
         //Labora en otra empresa:: 
         private enumAUD_TipoSeleccion laboraOtraEmpresa;
@@ -89,12 +84,7 @@ namespace DataModel
         public string LaboraOtraEmpresaHora { get => laboraOtraEmpresaHora; set => SetProperty(ref laboraOtraEmpresaHora, value); }
 
 
-        //El regente está presente al momento de la inspección
-        private enumAUD_TipoSeleccion presenteEnInspeccion;
-        public enumAUD_TipoSeleccion PresenteEnInspeccion { get => presenteEnInspeccion; set => SetProperty(ref presenteEnInspeccion, value); }
-
-        private string observacion;
-        public string Observacion { get => observacion; set => SetProperty(ref observacion, value); }
 
     }
+
 }

@@ -29,6 +29,12 @@ namespace DataModel
         private string observacionesFinales;
         public string ObservacionesFinales { get => observacionesFinales; set => SetProperty(ref observacionesFinales, value); }
 
+        //CRITERIO TÉCNICO DEL INSPECTOR
+        private string criterioTecnicoInspector;
+        public string CriterioTecnicoInspector { get => criterioTecnicoInspector; set => SetProperty(ref criterioTecnicoInspector, value); }
+
+
+
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
         private List<AttachmentTB> lAttachments;
         public List<AttachmentTB> LAttachments { get => lAttachments; set => SetProperty(ref lAttachments, value); }

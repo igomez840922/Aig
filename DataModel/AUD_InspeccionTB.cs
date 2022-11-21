@@ -110,19 +110,23 @@ namespace DataModel
         ///////////////////////
         /// LOS FORMULARIOS
 
+        //Rutina o Vigilancia de Farmacia
+        private long? inspRutinaVigFarmaciaId;
+        public long? InspRutinaVigFarmaciaId { get => inspRutinaVigFarmaciaId; set => SetProperty(ref inspRutinaVigFarmaciaId, value); }
+        private AUD_InspRutinaVigFarmaciaTB? inspRutinaVigFarmacia;
+        public virtual AUD_InspRutinaVigFarmaciaTB? InspRutinaVigFarmacia { get => inspRutinaVigFarmacia; set => SetProperty(ref inspRutinaVigFarmacia, value); }
+
         //Formulario de Apertura y Cambio de Ubicación de Agencia
         private long? inspAperCambUbicAgenId;
         public long? InspAperCambUbicAgenId { get => inspAperCambUbicAgenId; set => SetProperty(ref inspAperCambUbicAgenId, value); }
         private AUD_InspAperCambUbicAgenTB? inspAperCambUbicAgen;
         public virtual AUD_InspAperCambUbicAgenTB? InspAperCambUbicAgen { get => inspAperCambUbicAgen; set => SetProperty(ref inspAperCambUbicAgen, value); }
 
-
         //Formulario de Apertura y Cambio de Ubicación de Farmacias
         private long? inspAperCambUbicFarmId;
         public long? InspAperCambUbicFarmId { get => inspAperCambUbicFarmId; set => SetProperty(ref inspAperCambUbicFarmId, value); }
         private AUD_InspAperCambUbicFarmTB? inspAperCambUbicFarm;
         public virtual AUD_InspAperCambUbicFarmTB? InspAperCambUbicFarm { get => inspAperCambUbicFarm; set => SetProperty(ref inspAperCambUbicFarm, value); }
-
 
         //Formulario de Retiro y Retencion de Productos
         private long? inspRetiroRetencionId;

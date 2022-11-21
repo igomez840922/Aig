@@ -139,7 +139,18 @@ namespace DataModel.Helper
 		[Description("No")]
 		No = 2,
 	}
-       
+
+    public enum enumAUD_TipoIluminacion
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Mala")]
+        Mala = 1,
+        [Description("Poca")]
+        Poca = 2,
+        [Description("Buena")]
+        Buena = 3,
+    }
 
     public enum enum_StatusInspecciones
     {

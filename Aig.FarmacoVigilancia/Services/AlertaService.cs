@@ -24,8 +24,9 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_AlertaTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter)))&&
-                              (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate && data.FechaRecepcion <= model.FromDate)) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter)))&&
+                              (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                              (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
                               (model.AlertaNotaType == null ? true : (data.TipoAlerta == model.AlertaNotaType)) &&
                               (model.AlertaNotaStatus == null ? true : (data.Estado == model.AlertaNotaStatus))
@@ -34,8 +35,9 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter))) &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate && data.FechaRecepcion <= model.FromDate)) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter))) &&
+                              (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                              (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
                                (model.AlertaNotaType == null ? true : (data.TipoAlerta == model.AlertaNotaType)) &&
                                (model.AlertaNotaStatus == null ? true : (data.Estado == model.AlertaNotaStatus))
