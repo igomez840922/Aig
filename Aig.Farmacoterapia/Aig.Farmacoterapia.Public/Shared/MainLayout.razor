@@ -1,0 +1,326 @@
+﻿@using Aig.Farmacoterapia.Application.Dashboard.Event
+@using Aig.Farmacoterapia.Application.Medicament.Model
+@using Blazored.FluentValidation
+@inherits LayoutComponentBase
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+<PageTitle>Aig.Farmacoterapia.Public</PageTitle>
+
+<style>
+    .mud-icon-button {
+        padding: 0 !important
+    }
+
+    .header-02-search .header-search-form button {
+        color: #ededed !important;
+        right: 2px !important;
+        top: 5px !important;
+        transition: all 0.3s ease 0s !important;
+        cursor: pointer !important;
+        height: 40px !important;
+        width: 40px !important;
+        background: #4e97fd !important;
+        border-radius: 50% !important;
+    }
+
+   .header-02-search .header-search-form button:hover {
+        color: #ededed !important;
+     }
+   .header-02-search .header-search-form input {
+    padding: 20px 60px 20px 20px !important;
+}
+.filterLabel{
+    font-size: 16px;
+    color: #848181;
+    position: relative;
+    font-weight: 400;
+    margin: 2px 0 0 5px;
+}
+.shop-menu ul li a {
+    color: #fff !important;
+}
+.shop-menu ul li a:hover {
+    color: #fff !important;
+}
+</style>
+
+<header>
+    <div class="header-top-area pl-165 pr-165" style="background-color: #4e97fd !important;">
+        <div class="container-fluid" style="margin-top: 20px !important;">
+            <div class="row">
+                <div class="col-xl-8 col-lg-6 col-md-6">
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="header-top-right text-md-right">
+                        <div class="shop-menu">
+                            <ul>
+                                <li>
+                                    <a target="__blank"
+                                       title="Portal Regional de Notificación en línea de Sospecha de Reacciones Adversas a Medicamentos de uso humano"
+                                       href="http://notificacentroamerica.net/n/Pages/mapa.aspx#no-back-button">
+                                        <i class="fa fa-bell"></i>
+                                        Noti-FACEDRA
+                                    </a>
+                                </li>
+                               <li>
+                                    <a target="__blank"
+                                       title="Notas de seguridad de medicamentos"
+                                       href="https://www.minsa.gob.pa/informacion-salud/alertas-y-comunicados">
+                                        <i class="fa fa-comment"></i>
+                                        Notas de seguridad
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sticky-header" class="main-menu-area menu-01 pl-165 pr-165">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-3">
+                    <div class="logo">
+                        <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="header-search header-02-search" style="margin-top: 15px;">
+                        <EditForm Model="this" class="header-search-form" OnValidSubmit="OnSearch">
+                            <FluentValidationValidator />
+                            <input type="text" @bind-value="modelFilter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante">
+                            <button type="submit"><i class="far fa-search"></i></button>
+                        </EditForm>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+<main>
+
+    <div style="padding-top: 50px !important" class="shhop-full-area pt-100 pb-100 pr-60 pl-60">
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-xl-3 custom-col-2">
+                    <div class="category-sidebar cat-side mb-30">
+
+                        <div class="panel panel-default funkyradio divshadow">
+                            <div>
+                                <div class="panel-body" id="menuleft">
+
+                                    <div style="margin:0 auto;padding-bottom:3px;margin-top:-5px;margin-bottom:10px;border-bottom:1px solid #adcdec;">
+                                        <span style="text-align:center;font-size:12pt;font-weight:bold;color:#265a98;">Filtros</span>
+                                    </div>
+
+
+                                    <div style="display:flex;margin-left: 5px;">
+                                        <label style="font-size: 16px;color: #848181;padding: 3px 10px 0px 0;">Si</label>
+                                        <label style="font-size: 16px;color: #848181;padding: 3px 3px 0 0;">No</label>
+                                    </div>
+
+
+
+                                    <div style="display:flex">
+                                        <div>
+                                            @*<MudCheckBox T="bool" CheckedChanged="@((e)=>Toggle(e))" Color="Color.Info"></MudCheckBox>*@
+                                            <MudCheckBox @bind-Checked="@modelFilter.MedicalPrescription" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotMedicalPrescription" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel"> Prescripción Médica </label>
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.HospitalUse" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotHospitalUse" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel"> Uso Hospitalario </label>
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.PopularSale" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotPopularSale" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel"> Venta Popular </label>
+                                    </div>
+
+                                    <div style="margin-top:2px;border-top:1px solid #adcdec;margin-bottom:10px"></div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.ChemicalSynthesis" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotChemicalSynthesis" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Síntisis Química </label>
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.Orphans" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotOrphans" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Huérfanos</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.Homeopathic" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotHomeopathic" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Homeopáticos</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.Phytopharmaceuticals" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotPhytopharmaceuticals" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Fitofármacos</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.Biotechnological" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotBiotechnological" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Biotecnológicos</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.Biological" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotBiological" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Biológicos</label>
+
+                                    </div>
+                                    <div style="margin-top:2px;border-top:1px solid #adcdec;margin-bottom:10px"></div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.Generic" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotGeneric" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Genérico</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.Reference" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotReference" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Referencia</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.Interchangeable" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <div>
+                                            <MudCheckBox @bind-Checked="@modelFilter.NotInterchangeable" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel">Intercambiable</label>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                @Body
+
+            </div>
+
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    <div class="footer-bottom-area mr-70 ml-70 pt-25 pb-25">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    @* <div class="footer-bottom-link f-right">
+                        <ul>
+                        <li><a href="#">Home </a></li>
+                        <li><a href="#"> About Us</a></li>
+                        <li><a href="#">Our Product</a></li>
+                        <li><a href="#">Service </a></li>
+                        </ul>
+                        </div>*@
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="copyright">
+                        <p>
+                            Copyright
+                            <i class="far fa-copyright"></i> @DateTime.Now.Year <a href="https://soaint.com/">SOAINT</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<MudThemeProvider />
+
+@code {
+
+    protected HomeFilter modelFilter = new HomeFilter();
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
+    //private async void Toggle(bool toggled){; }
+    private void OnSearch()
+    {
+        Bus.Publish(new SearchChangeEvent { Filter = modelFilter });
+    }
+
+}
