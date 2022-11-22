@@ -9,7 +9,7 @@ namespace Aig.Farmacoterapia.Domain.Specifications.Medicament
         public PharmaceuticalSpecification(string value)
         {
             if (!string.IsNullOrEmpty(value))
-                Criteria = p => p.Nombre.ToLower().StartsWith(value.ToLower());
+                Criteria = p => p.Nombre.ToLower().Contains(value.ToLower());
         }
         public PharmaceuticalSpecification(List<Expression<Func<AigFormaFarmaceutica, bool>>> filters)
         {

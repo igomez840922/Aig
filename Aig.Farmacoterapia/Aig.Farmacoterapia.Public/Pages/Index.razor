@@ -8,15 +8,18 @@
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Interfaces
+@using Aig.Farmacoterapia.Infrastructure.Configuration
 @using BlazorComponentBus
+@using Microsoft.Extensions.Options
 @inject ISystemLogger _systemLogger;
 @inject IMedicamentRepository _repository;
+@inject IOptions<AppConfiguration> _config;
 
 
 @if (loading)
 {
-    <MudOverlay Visible="loading" DarkBackground="true" Absolute="true">
-        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    <MudOverlay Visible="loading" LightBackground="true" Absolute="true">
+        <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate="true" />
     </MudOverlay>
 }
 else
@@ -44,13 +47,27 @@ else
                                     <div class="col-xl-3 cl-lg-3 col-md-6">
                                         <div class="product-03-wrapper grey-2-bg pos-rel text-center mb-30">
                                             <div class="product-02-img pos-rel">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/products/f-01.png" alt="">
-                                                </a>
+@*
+                                                 <a href="@($"{_config.Value?.BaseUrl}{context.ProspectusURL}")">
+                                                    Monografía
+                                                  </a>*@
+                                                @if (!string.IsNullOrEmpty(@context.PictureData))
+                                                {  
+                                                    <a target="_blank" href="/details/@context.Id">
+                                                        <img src="@context.PictureData" Width="150" Height="130" Elevation="25" Class="rounded-lg" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                   <a href="/details/@context.Id">
+                                                     <img src="assets/img/products/no-image.png" Width="150" Height="130" alt="">
+                                                  </a>
+                                                }
+
                                             </div>
                                             <div class="product-text">
 
-                                                <h4><a href="product-details.html">@context.Nombre</a></h4>
+                                                <h4><a href="/details/@context.Id">@context.Nombre</a></h4>
                                                 <h5>@context.Principio</h5>
                                                 <span>
                                                     @(!string.IsNullOrEmpty(@context.FormaFarmaceutica?.Nombre) ? @context.FormaFarmaceutica?.Nombre : "-")
@@ -101,7 +118,7 @@ else
     private async Task DoFetchData()
     {
         loading = true;
-        var sorting =new List<SortingOption>(){ new SortingOption { Field = "Name", Direction = SortingDirection.ASC } };
+        var sorting =new List<SortingOption>(){ new SortingOption { Field = "name", Direction = SortingDirection.ASC } };
         var filters = new List<FilteringOption>();
         //if (!string.IsNullOrEmpty(searchString))
         //    filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString });
