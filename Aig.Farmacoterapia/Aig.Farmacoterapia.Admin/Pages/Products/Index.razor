@@ -37,43 +37,43 @@
     <div class="kt-portlet__head-toolbar">
         <div class="kt-portlet__head-wrapper">
             <div class="kt-portlet__head-actions">
-               @* <div class="dropdown dropdown-inline">
-                    <button type="button"
-                            class="btn btn-default btn-icon-sm dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="la la-download"></i> Exportar
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <ul class="kt-nav">
-                            <li class="kt-nav__section kt-nav__section--first">
-                                <span class="kt-nav__section-text">Seleccionar</span>
-                            </li>
-                            <li class="kt-nav__item">
-                                <a href="#" class="kt-nav__link">
-                                    <i class="kt-nav__link-icon la la-print"></i>
-                                    <span class="kt-nav__link-text">Imprimir</span>
-                                </a>
-                            </li>
-                            <li class="kt-nav__item">
-                                <a href="#" class="kt-nav__link">
-                                    <i class="kt-nav__link-icon la la-file-excel-o"></i>
-                                    <span class="kt-nav__link-text">Excel</span>
-                                </a>
-                            </li>
-                            <li class="kt-nav__item">
-                                <a href="#" class="kt-nav__link">
-                                    <i class="kt-nav__link-icon la la-file-text-o"></i>
-                                    <span class="kt-nav__link-text">CSV</span>
-                                </a>
-                            </li>
-                            <li class="kt-nav__item">
-                                <a href="#" class="kt-nav__link">
-                                    <i class="kt-nav__link-icon la la-file-pdf-o"></i>
-                                    <span class="kt-nav__link-text">PDF</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                @* <div class="dropdown dropdown-inline">
+                <button type="button"
+                class="btn btn-default btn-icon-sm dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="la la-download"></i> Exportar
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                <ul class="kt-nav">
+                <li class="kt-nav__section kt-nav__section--first">
+                <span class="kt-nav__section-text">Seleccionar</span>
+                </li>
+                <li class="kt-nav__item">
+                <a href="#" class="kt-nav__link">
+                <i class="kt-nav__link-icon la la-print"></i>
+                <span class="kt-nav__link-text">Imprimir</span>
+                </a>
+                </li>
+                <li class="kt-nav__item">
+                <a href="#" class="kt-nav__link">
+                <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                <span class="kt-nav__link-text">Excel</span>
+                </a>
+                </li>
+                <li class="kt-nav__item">
+                <a href="#" class="kt-nav__link">
+                <i class="kt-nav__link-icon la la-file-text-o"></i>
+                <span class="kt-nav__link-text">CSV</span>
+                </a>
+                </li>
+                <li class="kt-nav__item">
+                <a href="#" class="kt-nav__link">
+                <i class="kt-nav__link-icon la la-file-pdf-o"></i>
+                <span class="kt-nav__link-text">PDF</span>
+                </a>
+                </li>
+                </ul>
+                </div>
                 </div>
                 &nbsp;*@
                 <a href="#" class="btn btn-outline-brand btn-square" @onclick="() => OnEdit(0)" data-toggle="modal" data-target="#modal_createedit">
@@ -94,7 +94,7 @@
                 <label style="color: var(--mud-palette-text-secondary);">Medicamento:</label>
                 <input type="text" @bind-value="modelFilter.Term" class="form-control kt-input" placeholder="Reg / Nombre / Principio Activo" data-col-index="0">
             </div>
-           
+
             <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
                 <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Emisión:" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" @bind-DateRange="dateRange" />
             </div>
@@ -102,7 +102,7 @@
                 <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Expiración:" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" @bind-DateRange="expirationRange" />
             </div>
             <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
-                 <label style="margin-bottom: 0px !important;color: var(--mud-palette-text-secondary);">Fabricante:</label>
+                <label style="margin-bottom: 0px !important;color: var(--mud-palette-text-secondary);">Fabricante:</label>
                 <MudAutocomplete MaxItems="null" T="AigFabricante" Dense="true" Variant="Variant.Outlined" @bind-Value="modelFilter.Fabricante" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadMarker" ShowProgressIndicator="true" ProgressIndicatorColor="Color.Primary">
 
                     <ItemTemplate Context="e">
@@ -117,7 +117,7 @@
                     </ItemSelectedTemplate>
                 </MudAutocomplete>
             </div>
-          
+
             <div class="col-lg-4 kt-margin-b-10-tablet-and-mobile">
                 <div class="row" style="margin-top: 23px;">
                     <div class="col-lg-12" style="margin-top: 2px;">
@@ -139,9 +139,7 @@
             </div>
         </div>
 
-         <div class="row kt-margin-b-20">
-           
-           
+        <div class="row kt-margin-b-20">
         </div>
     </EditForm>
 
@@ -156,7 +154,7 @@
                 <MudTh style="width:350px;"><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigMedicamento">Medicamento</MudTableSortLabel></MudTh>
                 <MudTh style="width:350px;">Principio Activo</MudTh>
                 <MudTh>Fabricante</MudTh>
-                 <MudTh style="width:20px;"><MudTableSortLabel T="AigMedicamento" SortLabel="created">Creado</MudTableSortLabel></MudTh>
+                <MudTh style="width:20px;"><MudTableSortLabel T="AigMedicamento" SortLabel="created">Creado</MudTableSortLabel></MudTh>
                 <MudTh style="width:5px;"></MudTh>
             </HeaderContent>
             <RowTemplate>
@@ -164,36 +162,36 @@
                     <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
                 </MudTd>
                 <MudTd DataLabel="No. Registro">@context.NumReg</MudTd>
-                <MudTd DataLabel="Fech. Emisión">@(string.Format("{0:dd/MM/yyyy}",context.FechaEmision))</MudTd>
-                <MudTd DataLabel="Fech. Expiración">@(string.Format("{0:dd/MM/yyyy}",context.FechaExpiracion))</MudTd>
-                <MudTd DataLabel="Medicamento">@context.Nombre</MudTd>
-                <MudTd DataLabel="Principio Activo">@context.Principio</MudTd>
-                <MudTd DataLabel="Fabricante">@context.Fabricante?.Nombre</MudTd>
-                <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}",context.Created))</MudTd>
-                <MudTd>
-                    <span class="dropdown">
-                        <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                            <i class="flaticon-more-1 kt-font-brand"></i>
-                        </a>
-                        <span class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#" @onclick="() => OnEdit(context.Id)" data-toggle="modal" data-target="#modal_createedit" >
-                                <i class="la la-edit"></i> Editar
-                            </a> 
-                            <a class="dropdown-item" href="#" @onclick="() => OnDelete(context)" data-toggle="modal">
-                                <i class="la la-trash"></i> 
-                                Eliminar
-                            </a> 
-                            <div class="dropdown-divider ng-star-inserted"></div>
-                            @if (!string.IsNullOrEmpty(context.DataSheetURL))
+                <MudTd DataLabel="Fech. Emisión">@(string.Format("{0:dd/MM/yyyy}", context.FechaEmision))</MudTd>
+                    <MudTd DataLabel="Fech. Expiración">@(string.Format("{0:dd/MM/yyyy}", context.FechaExpiracion))</MudTd>
+                    <MudTd DataLabel="Medicamento">@context.Nombre</MudTd>
+                    <MudTd DataLabel="Principio Activo">@context.Principio</MudTd>
+                    <MudTd DataLabel="Fabricante">@context.Fabricante?.Nombre</MudTd>
+                    <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
+                    <MudTd>
+                        <span class="dropdown">
+                            <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
+                                <i class="flaticon-more-1 kt-font-brand"></i>
+                            </a>
+                            <span class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#" @onclick="() => OnEdit(context.Id)" data-toggle="modal" data-target="#modal_createedit">
+                                    <i class="la la-edit"></i> Editar
+                                </a>
+                                <a class="dropdown-item" href="#" @onclick="() => OnDelete(context)" data-toggle="modal">
+                                    <i class="la la-trash"></i>
+                                    Eliminar
+                                </a>
+                                <div class="dropdown-divider ng-star-inserted"></div>
+                                @if (!string.IsNullOrEmpty(context.DataSheetURL))
                             {
-                                <a class="dropdown-item" href="@context.DataSheetURL">
+                                <a target="_blank" class="dropdown-item" href="@context.DataSheetURL">
                                     <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
                                     Monografía
                                 </a>
                             }
-                             @if (!string.IsNullOrEmpty(context.ProspectusURL))
+                            @if (!string.IsNullOrEmpty(context.ProspectusURL))
                             {
-                                <a class="dropdown-item" href="@context.ProspectusURL">
+                                <a target="_blank" class="dropdown-item" href="@context.ProspectusURL">
                                     <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
                                     Prospecto
                                 </a>
@@ -287,7 +285,7 @@
                                             Vía de Administración:
                                         </span>
                                         <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(context.ViaAdministracion!=null ? context.ViaAdministracion?.Nombre : "<Ninguna>")
+                                            @(context.ViaAdministracion != null ? context.ViaAdministracion?.Nombre : "<Ninguna>")
                                         </span>
                                     </div>
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
@@ -300,7 +298,7 @@
                                     </div>
                                 </div>
 
-                                 <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="mx-4">
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
                                         <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
                                             Creado:
@@ -322,7 +320,7 @@
                                             Modificado:
                                         </span>
                                         <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(@context.LastModified!=null ? @context.LastModified : "<Ninguna>")
+                                            @(@context.LastModified != null ? @context.LastModified : "<Ninguna>")
                                         </span>
                                     </div>
                                 </div>
@@ -336,9 +334,9 @@
             <NoRecordsContent>
                 <MudText>No se encontraron elementos</MudText>
             </NoRecordsContent>
-             <LoadingContent>
-            <MudText>Cargando...</MudText>
-        </LoadingContent>
+            <LoadingContent>
+                <MudText>Cargando...</MudText>
+            </LoadingContent>
             <PagerContent>
                 <MudTablePager Class="primary" InfoFormat="{first_item}-{last_item} de {all_items}" PageSizeOptions="new int[] {10, 25, 50, 100, 250 }" RowsPerPageString="Filas" />
             </PagerContent>
@@ -351,11 +349,11 @@
 {
     <AddEdit ModelData="@modelData" OnClose="@OnEventAddEditClose"></AddEdit>
 }
-@if(deleteDialogIsOpen)
+@if (deleteDialogIsOpen)
 {
-   <DeleteConfirmDialog Caption="Eliminar"
-                   Message="¿Confirma que desea de eliminar el artículo?"
-                   OnClose="@OnDeleteDialogClose">
+    <DeleteConfirmDialog Caption="Eliminar"
+                         Message="¿Confirma que desea de eliminar el artículo?"
+                         OnClose="@OnDeleteDialogClose">
     </DeleteConfirmDialog>
 }
 @code {
@@ -377,11 +375,11 @@
     protected async override Task OnInitializedAsync()
     {
         try
-        {  
+        {
 
             modelFilter = new MedicamentFilter();
             dateRange = new DateRange();
-            expirationRange= new DateRange();
+            expirationRange = new DateRange();
 
         }
         catch (Exception ex)
@@ -394,33 +392,38 @@
 
     private async Task<TableData<AigMedicamento>> DoFetchData(TableState state)
     {
-        
+
         StateHasChanged();
         var sorting = new List<SortingOption>();
         var filters = new List<FilteringOption>();
-        if (state.SortDirection != SortDirection.None){
+        if (state.SortDirection != SortDirection.None)
+        {
             var sortDirection = state.SortDirection == SortDirection.Descending ? SortingDirection.DESC : SortingDirection.ASC;
             sorting = new() { new SortingOption { Field = state.SortLabel, Direction = sortDirection } };
         }
         if (!string.IsNullOrEmpty(modelFilter.Term))
             filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = modelFilter.Term });
-        if (modelFilter.StartDate != null && modelFilter.EndDate != null){
+        if (modelFilter.StartDate != null && modelFilter.EndDate != null)
+        {
             filters.Add(new FilteringOption { Field = "startDateOfIssue", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartDate.Value });
             filters.Add(new FilteringOption { Field = "endDateOfIssue", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndDate.Value });
         }
-        if (modelFilter.StartExpirationDate != null && modelFilter.EndExpirationDate != null){
+        if (modelFilter.StartExpirationDate != null && modelFilter.EndExpirationDate != null)
+        {
             filters.Add(new FilteringOption { Field = "startExpirationDate", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartExpirationDate.Value });
             filters.Add(new FilteringOption { Field = "endDateExpirationDate", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndExpirationDate.Value });
         }
-        if (modelFilter.Fabricante != null){
+        if (modelFilter.Fabricante != null)
+        {
             filters.Add(new FilteringOption { Field = "maker", Operator = FilteringOperator.Equal, Value = modelFilter.Fabricante.Nombre });
         }
-        var args = new PageSearchArgs(){
-            PageIndex = state.Page + 1,
-            PageSize = state.PageSize,
-            SortingOptions = sorting,
-            FilteringOptions = filters
-        };
+        var args = new PageSearchArgs()
+            {
+                PageIndex = state.Page + 1,
+                PageSize = state.PageSize,
+                SortingOptions = sorting,
+                FilteringOptions = filters
+            };
         var paginatedResult = await _repository.ListAsync(args);
         List = paginatedResult.Data;
         return new TableData<AigMedicamento>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
@@ -466,7 +469,7 @@
     private async Task OnEventAddEditClose(long id)
     {
         addEditDialogIsOpen = false;
-         if (id>0)
+        if (id > 0)
             table.ReloadServerData();
     }
     private async Task OnDelete(AigMedicamento data)
@@ -475,17 +478,18 @@
         deleteDialogIsOpen = true;
     }
     private async Task OnDeleteDialogClose(bool isOk)
-    {        
+    {
         if (isOk)
         {
             await _unitOfWork.Repository<AigMedicamento>().DeleteAsync(modelData);
-            if (_unitOfWork.Commit()){
+            if (_unitOfWork.Commit())
+            {
                 await JS.InvokeVoidAsync("ShowMessage", "Elemento eliminado correctamente");
                 await JS.InvokeVoidAsync("OpenCloseModal", "#btnCloseDeleteModal");
                 table.ReloadServerData();
             }
             else
-               await JS.InvokeVoidAsync("ShowError", "DataDeleteError");
+                await JS.InvokeVoidAsync("ShowError", "DataDeleteError");
         }
         deleteDialogIsOpen = false;
     }

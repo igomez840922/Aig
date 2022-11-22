@@ -68,40 +68,49 @@ namespace Aig.Auditoria.Components.Inspections
 
         protected async Task SelectInspectionType(enumAUD_TipoActa tipoActa)
         {
-            AUD_InspeccionTB data = null;
-            switch (tipoActa)
-            {
-                case enumAUD_TipoActa.RR:
-                    {
-                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() };
-                        break;
-                    }
-                case enumAUD_TipoActa.AF:
-                case enumAUD_TipoActa.CUF:
-                    {
-                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB() };
-                        break;
-                    }
-                case enumAUD_TipoActa.AA:
-                case enumAUD_TipoActa.CUA:
-                    {
-                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperCambUbicAgen = new AUD_InspAperCambUbicAgenTB() };
-                        break;
-                    }
-                case DataModel.Helper.enumAUD_TipoActa.AFM:
-                case DataModel.Helper.enumAUD_TipoActa.AFC:
-                    {
-                        data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperFabricante = new AUD_InspAperFabricanteTB() };
-                        break;
-                    }
-                default:
-                    {
-                        return;
-                    }
-            }
+            try {
+                AUD_InspeccionTB data = null;
+                switch (tipoActa)
+                {
+                    case enumAUD_TipoActa.RR:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() };
+                            break;
+                        }
+                    case enumAUD_TipoActa.AF:
+                    case enumAUD_TipoActa.CUF:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB() };
+                            break;
+                        }
+                    case enumAUD_TipoActa.AA:
+                    case enumAUD_TipoActa.CUA:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperCambUbicAgen = new AUD_InspAperCambUbicAgenTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.AFM:
+                    case DataModel.Helper.enumAUD_TipoActa.AFC:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperFabricante = new AUD_InspAperFabricanteTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.VF:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRutinaVigFarmacia = new AUD_InspRutinaVigFarmaciaTB() };
+                            break;
+                        }
+                    default:
+                        {
+                            return;
+                        }
+                }
 
-            bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = data });
-            await this.InvokeAsync(StateHasChanged);
+                bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = data });
+                await this.InvokeAsync(StateHasChanged);
+            }
+            catch(Exception ex) { }
+            
         }
 
        

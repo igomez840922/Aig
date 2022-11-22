@@ -19,18 +19,32 @@
                             <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["Generales de la Farmacia"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#regenteInfo" role="tab">@languageContainerService.Keys["ApplicantInfo"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#regenteInfo" role="tab">@languageContainerService.Keys["Datos Generales del Regente Farmaceutico"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#farmaceuticoTurnoInfo" role="tab">@languageContainerService.Keys["RegentInfo"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#farmaceuticoTurnoInfo" role="tab">@languageContainerService.Keys["Farmaceutico de Turno"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#condCaractLocalInfo" role="tab">@languageContainerService.Keys["Condiciones y Características del Local"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#personalTecInfo" role="tab">@languageContainerService.Keys["Personal Técnico en Farmacia"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transportInfo" role="tab">@languageContainerService.Keys["Transporte"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#estructuraFarmaciaInfo" role="tab">@languageContainerService.Keys["Estructura de la Farmacia"]</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#equipoRegFarmaciaInfo" role="tab">@languageContainerService.Keys["Equipo y Registro de la Farmacia"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#verifAnuncioVisibleInfo" role="tab">@languageContainerService.Keys["Verificar Anuncio Visible Legible"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#regMovExistInfo" role="tab">@languageContainerService.Keys["Registro de Movimiento de Existencia"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#areaAlmacenInfo" role="tab">@languageContainerService.Keys["Area de Almacenamiento de Producto Farmaceutico"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#procedimientoInfo" role="tab">@languageContainerService.Keys["Procedimientos"]</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#conclusionInfo" role="tab">@languageContainerService.Keys["ConclusionInfo"]</a>
                         </li>
@@ -329,7 +343,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="tab-pane" id="regenteInfo" role="tabpanel">
                             <h4>@languageContainerService.Keys["Datos Generales del Regente Farmaceutico"]</h4>
@@ -566,7 +579,7 @@
                                 
                             </div>
                         </div>
-                        <div class="tab-pane" id="regentInfo" role="tabpanel">
+                        <div class="tab-pane" id="personalTecInfo" role="tabpanel">
                             <h4>@languageContainerService.Keys["Personal Técnico en Farmacia"]</h4>
                             <div class="row clearfix">
                                 <!--begin::Section-->
@@ -651,18 +664,1326 @@
 
                             </div>
                         </div>
-                        <div class="tab-pane" id="condCaractLocalInfo" role="tabpanel">
-                            <h4>@languageContainerService.Keys["Condiciones y Características del Local"]</h4>
-                            
+                        <div class="tab-pane" id="estructuraFarmaciaInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Material"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["La farmacia estructuralmente tiene relación directa o conexión con clínica"]</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.RelacionDirectaClinica" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.RelacionDirectaClinica) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["El espacio Físico de 20mts2 (incluye área de consulta farmacéutica, área de asesoría bibliográfica, área administrativa del farmacéutico)."]</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EspacioFisicoAdecuado" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EspacioFisicoAdecuado) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Cumple con el espacio adecuado para la movilización del personal "]</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EspacioAdecuadoMoviliza" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EspacioAdecuadoMoviliza) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                               </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Tipo de techo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.TipoTecho" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.TipoTecho) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Estado"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EstadoTecho" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EstadoTecho) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Tipo de paredes"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.TipoParedes" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.TipoParedes) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Estado"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EstadoParedes" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EstadoParedes) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Tipo de piso"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.TipoPiso" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.TipoPiso) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Estado"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EstadoPiso" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.EstadoPiso) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["El ambiente externo del establecimiento presenta un riesgo mínimo de cualquier contaminación"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.RiesgoContaminacion" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.RiesgoContaminacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["De ser SI ¿Por qué?"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="6" class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.RiesgoContaminacionDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.Material.RiesgoContaminacionDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>@languageContainerService.Keys["Area Fisica de la Farmacia"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Iluminación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.Iluminacion" class="form-control">
+                                                @foreach (enumAUD_TipoIluminacion dt in Enum.GetValues(typeof(enumAUD_TipoIluminacion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.Iluminacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8"></div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Mobiliario para medicamentos"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MobiliarioMedicamento" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MobiliarioMedicamento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Tipo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MobiliarioMedicamentoTipo" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MobiliarioMedicamentoTipo) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Estado"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MobiliarioMedicamentoEstado" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MobiliarioMedicamentoEstado) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Muebles separados de las paredes, pisos y techos "]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MueblesSeparados" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                    <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MueblesSeparados) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Muebles ordenados, limpios y libres de polvo"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MueblesOrdenados" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.MueblesOrdenados) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Vencidos en los muebles o estanterías"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.VencidosMueblesEstantes" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.VencidosMueblesEstantes) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Área de alimento del personal, separada"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaAlimentoSeparada" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaAlimentoSeparada) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Área administrativa del farmacéutico, debidamente identificada"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaAdministIdentif" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaAdministIdentif) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Área de asesoría farmacéutica, delimitada e identificada"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaAsesoriaIdentif" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaAsesoriaIdentif) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Área bibliográfica, debidamente identificada"]</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Texto"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaBibliografTxtIdentif" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaBibliografTxtIdentif) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Internet"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaBibliografIntIdentif" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaBibliografIntIdentif) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Área delimitada, segregada e identificada de productos vencidos (devolución)"]</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaProdVencidosIdentif" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.AreaProdVencidosIdentif) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Sanitario para el personal"]</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.SanitarioPersonal" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.SanitarioPersonal) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Señalizaciones o avisos"]</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["No Comer"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.NoComer" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.NoComer) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["No Fumar"]</label>
+                                 <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.NoFumar" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.NoFumar) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["No guardar plantas, ni comidas"]</label>
+                                 <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.NoGuardarPlantasComidasBebidas" class="form-control">
+                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                            {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEstructuraFarmacia.AreaFisica.NoGuardarPlantasComidasBebidas) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                        <div class="tab-pane" id="equipoRegFarmaciaInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Equipo y Registro de la Farmacia"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Aire acondicionado adecuado para mantener las condiciones de almacenamiento"]</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.AireAcondAdecuado" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.AireAcondAdecuado) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Aire acondicionado adecuado para mantener las condiciones de almacenamiento"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.AireAcondAdecuado" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.AireAcondAdecuado) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8"></div>
+                                <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Higrotermómetro"]</label>
+                                        <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.Higrotermometro" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.Higrotermometro) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Temperatura"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.HigrotermometroTempVal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.HigrotermometroTempVal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Humedad"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.HigrotermometroHumVal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.HigrotermometroHumVal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Formato de registro de Temperatura y Humedad de relativa (mínimo dos veces al día)"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.RegistroTempHumedad" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.RegistroTempHumedad) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Refrigeradora para productos que requieren condiciones especiales de temperatura"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.RefrigProdCondEspecial" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.RefrigProdCondEspecial) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8"></div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Termómetro para el refrigerador"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.TermometRefri" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.TermometRefri) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Temperatura"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.TermometRefriTempVal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.TermometRefriTempVal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Humedad"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.TermometRefriHumVal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.TermometRefriHumVal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Formato de registro de temperatura de la refrigeradora"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.RegistroTempRefri" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.RegistroTempRefri) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Cuenta con programa de calibración de equipos, como equipo para la medición de Temperatura y Humedad relativa"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.ProgCalibracionEquipo" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.ProgCalibracionEquipo) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Cuenta con programa de mantenimiento preventivo de cualquier defecto o condiciones no adecuadas de las estructuras"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.ProgMantenimPrevent" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.ProgMantenimPrevent) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Extintor contra incendios (vigentes y aprobado por el cuerpo de bomberos)"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.ExtintorIncendio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.ExtintorIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Alarmas contra incendios o detector de humo"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.AlarmIncendio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.AlarmIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                </div>
+                                <div class="col-sm-4">
+                                     <label>@languageContainerService.Keys["Luces de emergencia"]</label>
+                                   <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.LucesEmergencia" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.LucesEmergencia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                     <label>@languageContainerService.Keys["Control de fauna nociva"]</label>
+                                   <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.ControlFaunaNociva" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosEquipoRegistroFarmacia.ControlFaunaNociva) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane" id="transportInfo" role="tabpanel">
-                            <h4>@languageContainerService.Keys["Transporte"]</h4>
-                       
+                        <div class="tab-pane" id="verifAnuncioVisibleInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Verificar Anuncio Visible y Legible"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["El usuario que adquiera un medicamento de los regulados que se venden sin receta medica lo hace bajo su responsabilidad. Art. 151. De la Ley 1 del 10 de enero de 2001"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAnuncioFarmacia.VentaSinRecetaBajoResponsabilidad" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAnuncioFarmacia.VentaSinRecetaBajoResponsabilidad) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Prohibición a establecimiento farmacéuticos la venta de bebidas alcohólicas.  Art 1. Ley 17.  De 12 de septiembre de 2014"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAnuncioFarmacia.ProhibVentaBebidaAlcoholica" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAnuncioFarmacia.ProhibVentaBebidaAlcoholica) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Prohibición de expendio, cobro y exposición de bebidas alcohólicas. Art 2. Ley 17. De 12 de septiembre de 2014"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAnuncioFarmacia.ProhibExposicionBebidaAlcoholica" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAnuncioFarmacia.ProhibExposicionBebidaAlcoholica) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Tabla de Promedio y Precio Mínimo Unitario de la Canasta Básica de Medicamento. Resolución 774. De 7 de octubre de 2019"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAnuncioFarmacia.PrecioMinUnitCanastaBasic" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAnuncioFarmacia.PrecioMinUnitCanastaBasic) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="regMovExistInfo" role="tabpanel">
+                             <h4>@languageContainerService.Keys["Registro de Movimiento de Existencia"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Se encuentra el Libro Récord en el establecimiento a disposición del inspector"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.LibroRecordDisposicion" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.LibroRecordDisposicion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["El establecimiento cuenta con Libro Récord numerado y foliado por la DNFD"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.LibroRecordNumeradoFoliado" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.LibroRecordNumeradoFoliado) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Libro Record para el registro de recetas corrientes está al día hasta el"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.LibroRecordNumeradoFoliado" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.LibroRecordNumeradoFoliado) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Esta anota las recetas corriente y Antibióticos dispensadas en este libro"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.AnotaRecetaCorrienteAntiEnLibro" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.AnotaRecetaCorrienteAntiEnLibro) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Todas las recetas se encuentran archivadas en orden cronológico, mensual o trimestral"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.RecetaarchivadaOrdenCronolog" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosRegMovimientoExistenciaFarmacia.RecetaarchivadaOrdenCronolog) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="areaAlmacenInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Area de Almacenamineto de Productos Farmaceuticos"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Identificada y Delimitada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.IdentificadaDelimitada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.IdentificadaDelimitada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                     <label for="password">@languageContainerService.Keys["Posee espacio físico adecuado para el movimiento y operación del personal"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.EspacioAdecuadoMovOperacional" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.EspacioAdecuadoMovOperacional) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                     <label for="password">@languageContainerService.Keys["Aire acondicionado adecuado para mantener las condiciones de almacenamiento"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.AireAcondAdecMantAlmacen" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.AireAcondAdecMantAlmacen) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"></div>
+                                <div class="col-sm-4">
+                                     <label for="password">@languageContainerService.Keys["Higrotermómetro"]</label>
+                                     <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.Higrotermometro" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.Higrotermometro) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                     <label for="password">@languageContainerService.Keys["Temperatura"]</label>
+                                     <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.HigrotermometroTempVal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.HigrotermometroTempVal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                     <label for="password">@languageContainerService.Keys["Humedad"]</label>
+                                     <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.HigrotermometroHumVal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.HigrotermometroHumVal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Formato de registro de Temperatura y Humedad de relativa"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.RegistroTempHumedad" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.RegistroTempHumedad) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Refrigeradora para productos que requieren condiciones especiales de temperatura"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.RefrigProdCondEspecial" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.RefrigProdCondEspecial) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"></div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Termómetro para el refrigerador"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.TermometRefri" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.TermometRefri) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Temperatura"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.TermometRefriTempVal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.TermometRefriTempVal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Humedad"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.TermometRefriHumVal" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.TermometRefriHumVal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Formato de registro de temperatura"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.RegistroTempRefri" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.RegistroTempRefri) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Los productos farmacéuticos se almacenan sobre anaqueles, racks, tarimas o pallets (circular)"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                   <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProdSobreAnaquelesRacksEtc" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProdSobreAnaquelesRacksEtc) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"></div>
+                                <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Separados de pisos, paredes y techos"]</label>
+                                     <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.MueblesSeparados" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.MueblesSeparados) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                     <label for="password">@languageContainerService.Keys["Posee buena iluminación"]</label>
+                                     <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.Iluminacion" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.Iluminacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">    
+                                    <label for="password">@languageContainerService.Keys["Existe un sistema de inventario que permita determinar la vigencia de los productos farmacéutico (FIFO/FEFO)"]</label>
+                                 </div>
+                                <div class="col-sm-4">
+                                     <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.SitemaFifoFefo" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.SitemaFifoFefo) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Extintor contra incendios (vigentes y aprobado por el Cuerpo de Bomberos)"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ExtintorIncendio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ExtintorIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Alarmas contra incendios o detector de humo"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.AlarmIncendio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.AlarmIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"></div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Luces de emergencia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.LucesEmergencia" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.LucesEmergencia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Control de fauna nociva "]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ControlFaunaNociva" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ControlFaunaNociva) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Área de vencidos o deteriorados, separado e identificado"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.AreaVencidos" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.AreaVencidos) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Área de desperdicios, identificada y delimitada"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.AreaDesperdicios" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.AreaDesperdicios) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>@languageContainerService.Keys["Productos Inflamables-Alcohol"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Se encuentra separada, ventilada "]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.SeparaVentilada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.SeparaVentilada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Extintor contra incendios (vigentes y aprobado por el cuerpo de bomberos)"]</label>
+                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.ExtintorIncendio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.ExtintorIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"></div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Alarma contra incendio o detector de humo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.AlarmIncendio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.AlarmIncendio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Luces de emergencia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.LucesEmergencia" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.LucesEmergencia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Kit de emergencia para el manejo de derrame de sustancias peligrosas o corrosivas"]</label>
+                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.KitEmergenciaManejoDerrame" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosAlmacenProductosFarmacia.ProductosInflamables.KitEmergenciaManejoDerrame) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="procedimientoInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["Procedimientos"]</h4>
+                            <div class="row clearfix">
+                                  <div class="col-sm-12">
+                                       <label for="password">@languageContainerService.Keys["El establecimiento debe tener los procedimientos básicos de las principales actividades que realiza el personal; cada una por separado"]</label>
+                                   </div> 
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ProcPrincActRealizaPersonal" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ProcPrincActRealizaPersonal) />
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-sm-12">
+                                   </div> 
+                                <div class="col-sm-4">
+                                          <label for="password">@languageContainerService.Keys["Almacenamiento de los productos farmacéuticos"]</label>
+                                 <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.AlmacenamProdFarmaceuticos" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.AlmacenamProdFarmaceuticos) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                          <label for="password">@languageContainerService.Keys["Retiro y reemplazo de productos vencidos"]</label>
+                                 <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.RetiroReemplazo" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.RetiroReemplazo) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                          <label for="password">@languageContainerService.Keys["Limpieza de las áreas "]</label>
+                                 <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.LimpiezaAreas" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.LimpiezaAreas) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                          <label for="password">@languageContainerService.Keys["Programa de Capacitación"]</label>
+                                 <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ProgramaCapacitacion" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ProgramaCapacitacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                          <label for="password">@languageContainerService.Keys["Transporte de medicamentos Cadena de Frío"]</label>
+                                 <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.TransporteMedicamentoCadFrio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.TransporteMedicamentoCadFrio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                          <label for="password">@languageContainerService.Keys["Manejo de los productos de cadena de frío"]</label>
+                                 <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ManejoMedicamentoCadFrio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ManejoMedicamentoCadFrio) />
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div class="col-sm-4">
+                                          <label for="password">@languageContainerService.Keys["Control de Fauna"]</label>
+                                 <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ControlFauna" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ControlFauna) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Expediente para el archivo cronológico de la inspección y auditoria realizadas por la DNFD"]</label>
+                                </div>
+                                <div class="col-sm-4">
+                                 <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ExpArchivoCronologInspAudit" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosProcedimientoFarmacia.ExpArchivoCronologInspAudit) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="tab-pane" id="conclusionInfo" role="tabpanel">
                             <h4>@languageContainerService.Keys["ConclusionInfo"]</h4>
                             <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Criterio Técnico del Inspector"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="8" class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CriterioTecnicoInspector" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.CriterioTecnicoInspector) />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-6">
                                     <label for="password">@languageContainerService.Keys["El local cumple  o no cumple con los requisitos mínimos para operar"]</label>
                                     <div class="form-group">
@@ -889,6 +2210,10 @@
 @if (showTechnicalPerson)
 {
     <Aig.Auditoria.Components.TechnicalPersonal.AddEditComponent PersonalTecnico="@personalTecnico"></Aig.Auditoria.Components.TechnicalPersonal.AddEditComponent>
+}
+@if (showExpColaborador)
+{
+    <Aig.Auditoria.Components.ColaboratorFile.AddEditComponent ExpedienteColaborador="@expedienteColaborador"></Aig.Auditoria.Components.ColaboratorFile.AddEditComponent>
 }
 
 <div class="modal-backdrop fade show"></div>

@@ -13,7 +13,7 @@ namespace DataModel
         public AUD_DatosEstructuraFarmacia()
         {
             Material = new AUD_DatosEstructuraFarmaciaMaterial();
-            AreaFisica = new AUD_DatosEstructuraFarmaciaMaterial();
+            AreaFisica = new AUD_DatosEstructuraFarmaciaAreaFisica();
         }
 
         //Material
@@ -23,9 +23,9 @@ namespace DataModel
 
 
         //ÁREA FÍSICA DE LA FARMACIA
-        private AUD_DatosEstructuraFarmaciaMaterial areaFisica;
+        private AUD_DatosEstructuraFarmaciaAreaFisica areaFisica;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosEstructuraFarmaciaMaterial AreaFisica { get => areaFisica; set => SetProperty(ref areaFisica, value); }
+        public AUD_DatosEstructuraFarmaciaAreaFisica AreaFisica { get => areaFisica; set => SetProperty(ref areaFisica, value); }
 
     }
 

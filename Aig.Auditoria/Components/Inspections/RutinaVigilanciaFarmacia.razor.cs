@@ -305,7 +305,7 @@ namespace Aig.Auditoria.Components.Inspections
         //EXPEDIENTE COLABORADOR
         protected async Task OpenExpColaborador()
         {
-            //bus.Subscribe<Aig.Auditoria.Events.TechnicalPersonal.TechnicalPersonalAddEdit_CloseEvent>(TechnicalPersonalAddEdit_CloseEventHandler);
+            bus.Subscribe<Aig.Auditoria.Events.ColaboratorFile.ColaboratorFileAddEdit_CloseEvent>(ColaboratorFileAddEdit_CloseEventHandler);
 
             expedienteColaborador = new ExpedienteColaborador();
             showExpColaborador = true;
@@ -324,6 +324,22 @@ namespace Aig.Auditoria.Components.Inspections
 
                 this.InvokeAsync(StateHasChanged);
             }
+        }
+        private void ColaboratorFileAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            showSignasure = false;
+            showExpColaborador = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.ColaboratorFile.ColaboratorFileAddEdit_CloseEvent>(ColaboratorFileAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.ColaboratorFile.ColaboratorFileAddEdit_CloseEvent>();
+
+            if (message.Data != null)
+            {
+                Inspeccion.InspRutinaVigFarmacia.DatosExpedienteColaborador.LColaboradores.Add(message.Data);
+            }
+
+            this.InvokeAsync(StateHasChanged);
         }
 
 

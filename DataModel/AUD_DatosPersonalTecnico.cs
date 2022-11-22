@@ -16,7 +16,6 @@ namespace DataModel
 
         //Lista de Personal Tecnico
         private List<PersonalTecnico> lPersonalTecnico;
-        [StringLength(250)]
         public List<PersonalTecnico> LPersonalTecnico { get => lPersonalTecnico; set => SetProperty(ref lPersonalTecnico, value); }
 
     }
