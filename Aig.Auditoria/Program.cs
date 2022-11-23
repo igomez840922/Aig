@@ -112,6 +112,11 @@ else
     app.UseHsts();
 }
 
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapBlazorHub(options => options.WebSockets.CloseTimeout = new TimeSpan(0, 30, 0));
+//});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

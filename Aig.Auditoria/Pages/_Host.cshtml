@@ -222,6 +222,9 @@ else
         <script src="assets/js/Mobsites.Blazor.SignaturePad/bundle.js"></script>
         <script src="assets/js/BlazorDownloadFile/BlazorDownloadFileScript.js"></script>
         <script src="radzen/Radzen.Blazor.js"></script>
+        <script>
+            Blazor.defaultReconnectionHandler._reconnectCallback = function (d) { document.location.reload(); }
+        </script>
                 
         <script>
             var KTAppOptions = {
