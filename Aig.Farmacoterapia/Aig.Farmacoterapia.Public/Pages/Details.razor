@@ -14,6 +14,7 @@
 @inject ISystemLogger _systemLogger;
 @inject IUnitOfWork _unitOfWork;
 @inject IOptions<AppConfiguration> _config;
+@inject NavigationManager _navigation;
 <style>
     .product-details-img {
         background-color: #f8f8f8 !important;
@@ -353,13 +354,17 @@ else
     }
     private void SearchChangeEventHandler(MessageArgs args)
     {
-        var message = args.GetMessage<SearchChangeEvent>();
-        if (message is SearchChangeEvent)
+        var path= _navigation.ToBaseRelativePath(_navigation.Uri);
+        if (path.Contains("details"))
         {
-            var value = message.Filter;
-            ;
+            var homeUrl = "./";
+            var message = args.GetMessage<SearchChangeEvent>();
+            if (message is SearchChangeEvent && !string.IsNullOrEmpty(message.Filter))
+                homeUrl = $"./?term={message.Filter}";
+            _navigation.NavigateTo(homeUrl);
         }
     }
+
     private async Task<AigMedicamento> DoFetchData()
     {
         loading = true;

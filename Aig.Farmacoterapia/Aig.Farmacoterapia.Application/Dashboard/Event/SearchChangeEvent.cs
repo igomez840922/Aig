@@ -9,6 +9,6 @@ namespace Aig.Farmacoterapia.Application.Dashboard.Event
 {
     public class SearchChangeEvent
     {
-        public HomeFilter Filter { get; set; } = new HomeFilter();
+        public string Filter { get; set; } = string.Empty;
     }
 }
