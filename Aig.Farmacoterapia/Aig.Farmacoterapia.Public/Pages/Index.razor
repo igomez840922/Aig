@@ -24,16 +24,30 @@
 }
 else
 {
+
     <div class="col-xl-9 col-lg-9">
         <div class="pro-ful-tab">
-
-          @*  <div class="row">
-                <div class="col-12">
-                    <MudPagination style="float: right;margin-bottom: 10px;" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Color="Color.Info"  MiddleCount="3" Count="@paginatedResult.TotalPages" />
+            <div class="row">
+                <div class="col-xl-4 col-lg-3 col-md-3">
+                    <div class="product-02-tab" style="margin-bottom: 15px;">
+                        <ul class="nav justify-content-start product-nav" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">
+                                    <i class="fas fa-th-large"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">
+                                    <i class="fas fa-bars"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-            </div>*@
-
+            </div>
             <div class="product-tab-content">
                 <div class="tab-content" id="myTabContent">
 
@@ -47,21 +61,18 @@ else
                                     <div class="col-xl-3 cl-lg-3 col-md-6">
                                         <div class="product-03-wrapper grey-2-bg pos-rel text-center mb-30">
                                             <div class="product-02-img pos-rel">
-@*
-                                                 <a href="@($"{_config.Value?.BaseUrl}{context.ProspectusURL}")">
-                                                    Monografía
-                                                  </a>*@
+
                                                 @if (!string.IsNullOrEmpty(@context.PictureData))
-                                                {  
+                                                {
                                                     <a target="_blank" href="/details/@context.Id">
-                                                        <img src="@context.PictureData" Width="150" Height="130" Elevation="25" Class="rounded-lg" />
+                                                        <img src="@context.PictureData" Width="350" Height="250" Elevation="25" Class="rounded-lg" />
                                                     </a>
                                                 }
                                                 else
                                                 {
-                                                   <a href="/details/@context.Id">
-                                                     <img src="assets/img/products/no-image.png" Width="150" Height="130" alt="">
-                                                  </a>
+                                                    <a href="/details/@context.Id">
+                                                        <img src="assets/img/products/no-image.png" Width="350" Height="250" alt="">
+                                                    </a>
                                                 }
 
                                             </div>
@@ -79,16 +90,69 @@ else
                             </div>
                         </div>
 
-                    }
+                  
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                         @foreach (var context in paginatedResult.Data)
+                         {
+                             <div class="row">
+                                    <div class="col-2">
+                                        <div class="product">
+                                            <div class="product-img">
+                                               
+                                                @if (!string.IsNullOrEmpty(@context.PictureData))
+                                                {
+                                                    <a target="_blank" href="/details/@context.Id">
+                                                        <img src="@context.PictureData" Width="250" Height="200" Elevation="25" Class="rounded-lg" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="/details/@context.Id">
+                                                        <img src="assets/img/products/no-image.png" Width="250" Height="200" alt="">
+                                                    </a>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="product-list-content">
+                                            <div class="product-text">
+                                                <h4><a href="/details/@context.Id">@context.Nombre</a></h4>
+                                                <h5>@context.Principio</h5>
+                                                <span>
+                                                    @(!string.IsNullOrEmpty(@context.FormaFarmaceutica?.Nombre) ? @context.FormaFarmaceutica?.Nombre : "-") /
+                                                    @(!string.IsNullOrEmpty(@context.ViaAdministracion?.Nombre) ? @context.ViaAdministracion?.Nombre : "-")
+                                                </span>
+                                               
+                                              
+                                            </div>
+                                            
+                                            <p>
+                                              @context.Envase
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                 <hr style="margin: 0 0 1rem 0 !important;" />
+                        }
+                       
+                    </div>
+
+                  }
 
                 </div>
             </div>
 
-             <div class="row">
-                <div class="col-12">
-                    <MudPagination style="float: right;margin-bottom: 10px;" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Color="Color.Info"  MiddleCount="3" Count="@paginatedResult.TotalPages" />
-                </div>
+            <div class="d-flex flex-column align-center" style="margin-bottom: 10px;">
+                <MudPagination Size="Size.Large" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Color="Color.Info" Count="@paginatedResult.TotalPages" />
+            </div>
 
+            <div class="row">
+                <div class="col-12" style="text-align: center;">
+                    <span style="text-align:center; color: #6c757d !important;font-size: 16px;"> @($"{paginatedResult.StartIndex+1} al {paginatedResult.EndIndex+1} de {paginatedResult.TotalCount }")</span>
+                </div>
             </div>
 
         </div>
@@ -102,26 +166,69 @@ else
     {
         //Subscribe Search Event
         Bus.Subscribe<SearchChangeEvent>(SearchChangeEventHandler);
-        paginatedResult = new PaginatedResult<AigMedicamento>();
+        paginatedResult = new PaginatedResult<AigMedicamento>(){PageSize=20};
         await DoFetchData();
         base.OnInitialized();
     }
-    private void SearchChangeEventHandler(MessageArgs args)
+    private async void SearchChangeEventHandler(MessageArgs args)
     {
         var message = args.GetMessage<SearchChangeEvent>();
         if (message is SearchChangeEvent)
         {
-            var value = message.Filter;
-            ;
+            // await InvokeAsync(async () => await DoFetchData(message.Filter));
+            await InvokeAsync(async () =>{
+                loading = true;
+                await DoFetchData(message.Filter);
+                this.StateHasChanged();
+            });
         }
     }
-    private async Task DoFetchData()
+
+     //public bool? MedicalPrescription { get; set; } = null;
+     //   public bool? HospitalUse { get; set; } = null;
+     //   public bool? PopularSale { get; set; } = null;
+       
+    private async Task DoFetchData(HomeFilter search=null)
     {
         loading = true;
         var sorting =new List<SortingOption>(){ new SortingOption { Field = "name", Direction = SortingDirection.ASC } };
         var filters = new List<FilteringOption>();
-        //if (!string.IsNullOrEmpty(searchString))
-        //    filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString });
+        if (search != null)
+        {
+           if (!string.IsNullOrEmpty(search.Term))
+              filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = search.Term });
+           if (search.MedicalPrescription!=null)
+              filters.Add(new FilteringOption { Field = "MedicalPrescription", Operator = FilteringOperator.Equal, Value =search.MedicalPrescription.Value?"CP":"SP" });
+           if (search.HospitalUse!=null)
+              filters.Add(new FilteringOption { Field = "HospitalUse", Operator = search.HospitalUse.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="UH" });
+           if (search.PopularSale!=null)
+              filters.Add(new FilteringOption { Field = "PopularSale", Operator = search.PopularSale.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="VP" });
+          
+          if (search.ChemicalSynthesis!=null)
+              filters.Add(new FilteringOption { Field = "ChemicalSynthesis", Operator = search.ChemicalSynthesis.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="SI" });
+           if (search.Radiopharmaceuticals!=null)
+              filters.Add(new FilteringOption { Field = "Radiopharmaceuticals", Operator = search.Radiopharmaceuticals.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="RA" });
+           if (search.Orphans!=null)
+              filters.Add(new FilteringOption { Field = "Orphans", Operator = search.Orphans.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="HU" });
+           if (search.Homeopathic!=null)
+              filters.Add(new FilteringOption { Field = "Homeopathic", Operator = search.Homeopathic.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="HO" });
+           if (search.Phytopharmaceuticals!=null)
+              filters.Add(new FilteringOption { Field = "Phytopharmaceuticals", Operator = search.Phytopharmaceuticals.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="FF" });
+          if (search.Biotechnological!=null)
+              filters.Add(new FilteringOption { Field = "Biotechnological", Operator = search.Biotechnological.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="BT" });
+          if (search.Biological!=null)
+              filters.Add(new FilteringOption { Field = "Biological", Operator = search.Biological.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="BI" });
+          
+          if (search.Interchangeable!=null)
+              filters.Add(new FilteringOption { Field = "Interchangeable", Operator = search.Interchangeable.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="I" });
+          if (search.Reference!=null)
+              filters.Add(new FilteringOption { Field = "Referencia", Operator = search.Reference.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="R" });
+          if (search.Generic!=null)
+              filters.Add(new FilteringOption { Field = "Generic", Operator = search.Generic.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="G" });
+          if (search.Mark!=null)
+              filters.Add(new FilteringOption { Field = "Mark", Operator = search.Mark.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="M" });
+          
+        }
         var args = new PageSearchArgs() {
                 PageIndex = paginatedResult.CurrentPage,
                 PageSize = paginatedResult.PageSize,

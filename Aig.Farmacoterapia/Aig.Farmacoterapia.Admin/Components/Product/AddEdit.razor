@@ -136,14 +136,16 @@
                                             <div>
                                                 <label>Clasificación</label>
                                                 <MudSelect T="string" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.TipoEquivalencia">
-                                                    <MudSelectItem Value="@(TipoEquivalencia.Referencia)">De Referencia</MudSelectItem>
-                                                    <MudSelectItem Value="@(TipoEquivalencia.Intercambiable)">Intercambiable</MudSelectItem>
-                                                    <MudSelectItem Value="@(TipoEquivalencia.Generico)">Genérico</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoEquivalencia.Referencia)">Medicamento de Referencia</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoEquivalencia.Intercambiable)">Medicamento Intercambiable</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoEquivalencia.Generico)">Medicamento Genérico</MudSelectItem>
+                                                    <MudSelectItem Value="@(TipoEquivalencia.DeMarca)">Medicamento de Marca</MudSelectItem>
                                                 </MudSelect>
                                                 <div class="error invalid-feedback">
                                                     <ValidationMessage For="@(() => ModelData.TipoEquivalencia)" />
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="col-lg-4">
                                             <div>

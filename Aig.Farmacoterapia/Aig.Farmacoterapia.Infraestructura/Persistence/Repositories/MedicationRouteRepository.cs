@@ -39,14 +39,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                         switch (sortingOption.Field)
                         {
                             case "name":
-#pragma warning disable CS8603 // Possible null reference return.
                                 orderByList.Add(new(sortingOption, c => c.Nombre));
-#pragma warning restore CS8603 // Possible null reference return.
                                 break;
                             case "status":
-#pragma warning disable CS8603 // Possible null reference return.
                                 orderByList.Add(new(sortingOption, c => c.Estado));
-#pragma warning restore CS8603 // Possible null reference return.
                                 break;
                         }
                     }
@@ -59,9 +55,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                         {
                             case "term":
                                 {
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-                                    Expression<Func<AigViaAdministracion, bool>> expression = f => f.Nombre.Contains((string)filteringOption.Value);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
+                                    Expression<Func<AigViaAdministracion, bool>> expression = f => f.Nombre.ToLower().Contains((string)filteringOption.Value);
                                     filterList.Add(expression);
                                 }
                                 break;
@@ -76,9 +70,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 result = await _repository.Entities
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
                                           .PaginatedByAsync(args.PageIndex, args.PageSize);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
             catch (Exception exc)
             {

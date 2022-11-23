@@ -137,11 +137,7 @@ namespace Aig.Farmacoterapia.Domain.Common
 
         public List<T> Data { get; set; }
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         internal PaginatedResult(bool succeeded, List<T> data = default, List<string> messages = null, int count = 0, int page = 1, int pageSize = 10)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         {
             Data = data;
             CurrentPage = page;
@@ -153,16 +149,12 @@ namespace Aig.Farmacoterapia.Domain.Common
 
         public static PaginatedResult<T> Failure(List<string> messages)
         {
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             return new PaginatedResult<T>(false, default, messages);
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
 
         public static PaginatedResult<T> Success(List<T> data, int count, int page, int pageSize)
         {
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             return new PaginatedResult<T>(true, data, null, count, page, pageSize);
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
 
         public int CurrentPage { get; set; }
@@ -172,8 +164,12 @@ namespace Aig.Farmacoterapia.Domain.Common
         public int TotalCount { get; set; }
         public int PageSize { get; set; }
 
-        public bool HasPreviousPage => CurrentPage > 1;
+        public int StartIndex => (CurrentPage - 1) * PageSize;
+        public int EndIndex => Math.Min(StartIndex + PageSize - 1, TotalCount - 1);
 
+        public bool HasPreviousPage => CurrentPage > 1;
         public bool HasNextPage => CurrentPage < TotalPages;
+      
+
     }
 }
