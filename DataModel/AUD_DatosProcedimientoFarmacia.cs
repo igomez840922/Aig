@@ -18,6 +18,10 @@ namespace DataModel
         public enumAUD_TipoSeleccion AlmacenamProdFarmaceuticos { get => almacenamProdFarmaceuticos; set => SetProperty(ref almacenamProdFarmaceuticos, value); }
 
         //Limpieza de las áreas
+        private enumAUD_TipoSeleccion retiroReemplazo;
+        public enumAUD_TipoSeleccion RetiroReemplazo { get => retiroReemplazo; set => SetProperty(ref retiroReemplazo, value); }
+
+        //Limpieza de las áreas
         private enumAUD_TipoSeleccion limpiezaAreas;
         public enumAUD_TipoSeleccion LimpiezaAreas { get => limpiezaAreas; set => SetProperty(ref limpiezaAreas, value); }
 

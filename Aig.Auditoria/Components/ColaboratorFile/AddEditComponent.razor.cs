@@ -13,7 +13,7 @@ namespace Aig.Auditoria.Components.ColaboratorFile
         IProfileService profileService { get; set; }
         bool OpenDialog { get; set; }
         [Parameter]
-        public DataModel.PersonalTecnico PersonalTecnico { get; set; } = null;
+        public DataModel.ExpedienteColaborador ExpedienteColaborador { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -48,7 +48,7 @@ namespace Aig.Auditoria.Components.ColaboratorFile
         protected async Task FetchData()
         {
             OpenDialog = true;
-            PersonalTecnico = PersonalTecnico != null ? PersonalTecnico : new DataModel.PersonalTecnico();
+            ExpedienteColaborador = ExpedienteColaborador != null ? ExpedienteColaborador : new DataModel.ExpedienteColaborador();
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -57,7 +57,7 @@ namespace Aig.Auditoria.Components.ColaboratorFile
         {
             //bus.UnSubscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
             OpenDialog = false;
-            await bus.Publish(new Aig.Auditoria.Events.TechnicalPersonal.TechnicalPersonalAddEdit_CloseEvent { Data = PersonalTecnico });
+            await bus.Publish(new Aig.Auditoria.Events.ColaboratorFile.ColaboratorFileAddEdit_CloseEvent { Data = ExpedienteColaborador });
             bus.UnSubscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             await this.InvokeAsync(StateHasChanged);
         }
@@ -66,7 +66,7 @@ namespace Aig.Auditoria.Components.ColaboratorFile
         {
             //bus.UnSubscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
             OpenDialog = false;
-            await bus.Publish(new Aig.Auditoria.Events.TechnicalPersonal.TechnicalPersonalAddEdit_CloseEvent { Data = null });
+            await bus.Publish(new Aig.Auditoria.Events.ColaboratorFile.ColaboratorFileAddEdit_CloseEvent { Data = null });
             bus.UnSubscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             await this.InvokeAsync(StateHasChanged);
         }

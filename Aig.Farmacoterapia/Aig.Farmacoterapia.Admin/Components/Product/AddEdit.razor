@@ -22,7 +22,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">@(ModelData.Id > 0? "Editar" :"Nuevo")</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">@(ModelData.Id > 0 ? "Editar" : "Nuevo")</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="@Cancel">
                 </button>
             </div>
@@ -243,17 +243,17 @@
                                                                         @if (!showFileInputAlert && !string.IsNullOrEmpty(ModelData.DataSheetURL))
                                                                         {
                                                                             <MudButton Variant="Variant.Text"
-                                                                                   Color="Color.Info"
-                                                                                   StartIcon="@Icons.Filled.RemoveRedEye"
-                                                                                   Size="Size.Small"
-                                                                                   Link="@(ModelData.DataSheetURL)" Target="_blank">
+                                                                                       Color="Color.Info"
+                                                                                       StartIcon="@Icons.Filled.RemoveRedEye"
+                                                                                       Size="Size.Small"
+                                                                                       Link="@(ModelData.DataSheetURL)" Target="_blank">
                                                                                 Ver
                                                                             </MudButton>
                                                                             <MudButton Variant="Variant.Text"
-                                                                                   Color="Color.Error"
-                                                                                   StartIcon="@Icons.Filled.Delete"
-                                                                                   Size="Size.Small"
-                                                                                   OnClick="DeleteDataSheetAsync">
+                                                                                       Color="Color.Error"
+                                                                                       StartIcon="@Icons.Filled.Delete"
+                                                                                       Size="Size.Small"
+                                                                                       OnClick="DeleteDataSheetAsync">
                                                                                 Eliminar
                                                                             </MudButton>
                                                                         }
@@ -296,17 +296,17 @@
                                                                         @if (!showProspectusFileInputAlert && !string.IsNullOrEmpty(ModelData.ProspectusURL))
                                                                         {
                                                                             <MudButton Variant="Variant.Text"
-                                                                                   Color="Color.Info"
-                                                                                   StartIcon="@Icons.Filled.RemoveRedEye"
-                                                                                   Size="Size.Small"
-                                                                                   Link="@(ModelData.ProspectusURL)" Target="_blank">
+                                                                                       Color="Color.Info"
+                                                                                       StartIcon="@Icons.Filled.RemoveRedEye"
+                                                                                       Size="Size.Small"
+                                                                                       Link="@(ModelData.ProspectusURL)" Target="_blank">
                                                                                 Ver
                                                                             </MudButton>
                                                                             <MudButton Variant="Variant.Text"
-                                                                                   Color="Color.Error"
-                                                                                   StartIcon="@Icons.Filled.Delete"
-                                                                                   Size="Size.Small"
-                                                                                   OnClick="DeleteProspectusAsync">
+                                                                                       Color="Color.Error"
+                                                                                       StartIcon="@Icons.Filled.Delete"
+                                                                                       Size="Size.Small"
+                                                                                       OnClick="DeleteProspectusAsync">
                                                                                 Eliminar
                                                                             </MudButton>
                                                                         }
@@ -354,11 +354,11 @@
                                                             @if (string.IsNullOrEmpty(ModelData.PictureData))
                                                             {
                                                                 <MudButton HtmlTag="label"
-                                                                       Variant="Variant.Text"
-                                                                       Color="Color.Primary"
-                                                                       Size="Size.Small"
-                                                                       StartIcon="@Icons.Filled.CloudUpload"
-                                                                       for="imagefileInput">
+                                                                           Variant="Variant.Text"
+                                                                           Color="Color.Primary"
+                                                                           Size="Size.Small"
+                                                                           StartIcon="@Icons.Filled.CloudUpload"
+                                                                           for="imagefileInput">
                                                                     Foto
                                                                 </MudButton>
                                                             }
@@ -372,10 +372,10 @@
                                                             {
                                                                 <img src="@ModelData.PictureData" Width="80" Height="50" Elevation="25" Class="rounded-lg ma-4" />
                                                                 <MudButton Style="padding-right: 15px;" Variant="Variant.Text"
-                                                                       Color="Color.Error"
-                                                                       StartIcon="@Icons.Filled.Delete"
-                                                                       Size="Size.Small"
-                                                                       OnClick="DeletePictureAsync">
+                                                                           Color="Color.Error"
+                                                                           StartIcon="@Icons.Filled.Delete"
+                                                                           Size="Size.Small"
+                                                                           OnClick="DeletePictureAsync">
                                                                     Eliminar
                                                                 </MudButton>
                                                             }

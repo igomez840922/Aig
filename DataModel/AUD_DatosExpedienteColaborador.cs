@@ -16,7 +16,6 @@ namespace DataModel
 
         //Lista de Personal Tecnico
         private List<ExpedienteColaborador> lColaboradores;
-        [StringLength(250)]
         public List<ExpedienteColaborador> LColaboradores { get => lColaboradores; set => SetProperty(ref lColaboradores, value); }
 
     }
