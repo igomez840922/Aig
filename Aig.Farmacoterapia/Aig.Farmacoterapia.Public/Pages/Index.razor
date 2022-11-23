@@ -10,11 +10,12 @@
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Aig.Farmacoterapia.Infrastructure.Configuration
 @using BlazorComponentBus
+@using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.Extensions.Options
 @inject ISystemLogger _systemLogger;
 @inject IMedicamentRepository _repository;
 @inject IOptions<AppConfiguration> _config;
-
+@inject NavigationManager _navigation;
 
 @if (loading)
 {
@@ -24,6 +25,145 @@
 }
 else
 {
+      <div class="col-xl-3 custom-col-2">
+                    <div class="category-sidebar cat-side mb-30">
+
+                        <div class="panel panel-default funkyradio divshadow">
+                            <div>
+                                <div class="panel-body" id="menuleft">
+
+                                    <span style="text-align:center;font-size:12pt;font-weight:bold;color:#9b9b9b;">Filtros</span>
+                                   
+                                    <button title="Borrar filtros" @onclick="() => OnClean()" class="action-btn f-right" href="#"><i class="fa fa-times"></i></button>
+                                    <button title="Aplicar filtros" @onclick="() => OnSearch()" class="action-btn f-right" href="#"><i class="fa fa-check"></i></button>
+                                    <hr style=" margin: 10px 0 10px 0!important;border-bottom: 1px solid #adcdec;"/>
+                                       
+                                     <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox  TriState="true" @bind-Checked="@modelFilter.MedicalPrescription" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel"> Prescripción Médica </label>
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.HospitalUse" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        <label class="filterLabel"> Uso Hospitalario </label>
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.PopularSale" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        
+                                        <label class="filterLabel"> Venta Popular </label>
+                                    </div>
+
+                                    <div style="margin-top:2px;border-top:1px solid #adcdec;margin-bottom:10px"></div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.ChemicalSynthesis" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel">Síntisis Química </label>
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Orphans" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        
+                                        <label class="filterLabel">Huérfanos</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Homeopathic" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel">Homeopáticos</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox  TriState="true" @bind-Checked="@modelFilter.Phytopharmaceuticals" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel">Fitofármacos</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Biotechnological" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel">Biotecnológicos</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Biological" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel">Biológicos</label>
+
+                                    </div>
+                                    <div style="margin-top:2px;border-top:1px solid #adcdec;margin-bottom:10px"></div>
+
+                                   
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Reference" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        
+                                        <label class="filterLabel">Referencia</label>
+
+                                    </div>
+
+                                    <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Interchangeable" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel">Intercambiable</label>
+
+                                    </div>
+
+                                     <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Generic" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        
+                                        <label class="filterLabel">Genérico</label>
+
+                                    </div>
+
+                                      <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Mark" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel">Medicamento de Marca</label>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
 
     <div class="col-xl-9 col-lg-9">
         <div class="pro-ful-tab">
@@ -160,6 +300,7 @@ else
 }
 @code {
     protected bool loading { get; set; } = true;
+    protected HomeFilter modelFilter = new HomeFilter();
     private MudPagination _mudPagination;
     private PaginatedResult<AigMedicamento> paginatedResult;
     protected async override Task OnInitializedAsync()
@@ -167,7 +308,17 @@ else
         //Subscribe Search Event
         Bus.Subscribe<SearchChangeEvent>(SearchChangeEventHandler);
         paginatedResult = new PaginatedResult<AigMedicamento>(){PageSize=20};
-        await DoFetchData();
+
+        var uri = _navigation.ToAbsoluteUri(_navigation.Uri);
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("term", out var _term)){
+            modelFilter.Term = _term;
+            await DoFetchData(modelFilter);
+        }
+        else
+        {
+           await DoFetchData();
+        }
+        StateHasChanged();
         base.OnInitialized();
     }
     private async void SearchChangeEventHandler(MessageArgs args)
@@ -178,7 +329,8 @@ else
             // await InvokeAsync(async () => await DoFetchData(message.Filter));
             await InvokeAsync(async () =>{
                 loading = true;
-                await DoFetchData(message.Filter);
+                modelFilter.Term = message.Filter;
+                await DoFetchData(modelFilter);
                 this.StateHasChanged();
             });
         }
@@ -242,5 +394,19 @@ else
     private  async Task PageChanged(int i){
         paginatedResult.CurrentPage = i;
         await DoFetchData();
+    }
+     private async Task OnClean()
+    {
+         await DoFetchData();
+    }
+     private async Task OnSearch()
+    {  
+         await DoFetchData(modelFilter);
+        //var path= _navigation.ToBaseRelativePath(_navigation.Uri);
+        //if (!string.IsNullOrEmpty(path))
+        //{modelFilter= new HomeFilter();
+        //   _navigation.NavigateTo("./"); 
+        //}
+
     }
 }
