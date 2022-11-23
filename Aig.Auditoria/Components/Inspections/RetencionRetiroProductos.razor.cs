@@ -34,6 +34,11 @@ namespace Aig.Auditoria.Components.Inspections
         [Parameter]
         public DataModel.AUD_InspeccionTB Inspeccion { get; set; } = null;
         List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
+        AUD_EstablecimientoTB selectedEstablecimiento
+        {
+            get { return null; }
+            set { Inspeccion.Establecimiento = value; }
+        }
         enum_StatusInspecciones StatusInspecciones { get; set; } =  enum_StatusInspecciones.Pending;
 
         
@@ -95,9 +100,9 @@ namespace Aig.Auditoria.Components.Inspections
             if(Inspeccion!=null)
             {
                 if (signaturePad9 != null)
-                    signaturePad9.Image = Inspeccion.InspRetiroRetencion.DatosConclusiones.FirmaRepresentanteLegal;
+                    signaturePad9.Image = Inspeccion.InspRetiroRetencion.DatosAtendidosPor.Firma;
                 if (signaturePad10 != null)
-                    signaturePad10.Image = Inspeccion.InspRetiroRetencion.DatosConclusiones.FirmaRegente;
+                    signaturePad10.Image = Inspeccion.InspRetiroRetencion.DatosRegente.Firma;
 
 
                 foreach (var partic in Inspeccion.InspRetiroRetencion.DatosConclusiones.LParticipantes)
@@ -177,7 +182,9 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 Inspeccion.InspRetiroRetencion.LProductos = Inspeccion.InspRetiroRetencion.LProductos != null ? Inspeccion.InspRetiroRetencion.LProductos : new List<AUD_ProdRetiroRetencionTB>();
 
-                Inspeccion.InspRetiroRetencion.LProductos.Add(message.Product);
+                if(!Inspeccion.InspRetiroRetencion.LProductos.Contains(message.Product))
+                    Inspeccion.InspRetiroRetencion.LProductos.Add(message.Product);
+
                 this.InvokeAsync(StateHasChanged);
             }
         }
@@ -224,11 +231,11 @@ namespace Aig.Auditoria.Components.Inspections
         }
 
         //ADD PARTICIPANTE
-        protected async Task OpenParticipant()
+        protected async Task OpenParticipant(Participante _participante=null)
         {
             bus.Subscribe<Aig.Auditoria.Events.Participants.ParticipantsAddEdit_CloseEvent>(ParticipantsAddEdit_CloseEventHandler);
 
-            participante= new Participante();
+            participante= _participante!=null? _participante: new Participante();
             showParticipant = true;
 
             await this.InvokeAsync(StateHasChanged);
@@ -259,7 +266,8 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (message.Data != null)
             {
-                Inspeccion.InspRetiroRetencion.DatosConclusiones.LParticipantes.Add(message.Data);
+                if (!Inspeccion.InspRetiroRetencion.DatosConclusiones.LParticipantes.Contains(message.Data))
+                    Inspeccion.InspRetiroRetencion.DatosConclusiones.LParticipantes.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);
@@ -274,11 +282,11 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspRetiroRetencion.DatosConclusiones.FirmaRepresentanteLegal = await signaturePad9.ToDataURL(signatureType);
+            Inspeccion.InspRetiroRetencion.DatosAtendidosPor.Firma = await signaturePad9.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg9()
         {
-            Inspeccion.InspRetiroRetencion.DatosConclusiones.FirmaRepresentanteLegal = null;
+            Inspeccion.InspRetiroRetencion.DatosAtendidosPor.Firma = null;
             signaturePad9.Image = null;
         }
         protected async Task OnSignatureChange10(ChangeEventArgs eventArgs)
@@ -288,11 +296,11 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspRetiroRetencion.DatosConclusiones.FirmaRegente = await signaturePad10.ToDataURL(signatureType);
+            Inspeccion.InspRetiroRetencion.DatosRegente.Firma = await signaturePad10.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg10()
         {
-            Inspeccion.InspRetiroRetencion.DatosConclusiones.FirmaRegente = null;
+            Inspeccion.InspRetiroRetencion.DatosRegente.Firma = null;
             signaturePad10.Image = null;
         }
 
@@ -317,6 +325,7 @@ namespace Aig.Auditoria.Components.Inspections
         {
             Inspeccion.EstablecimientoId = Id;
             Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.Ubicacion ?? "";
+            Inspeccion.Establecimiento = lEstablecimientos.Find(x => x.Id == Id);
         }
 
         ////////

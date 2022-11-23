@@ -25,11 +25,13 @@ namespace DataModel
         //nombre del producto
         private string nombre;
         [StringLength(250)]
+        [Required(ErrorMessage = "requerido")]
         public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
         //presentacion comercial
         private string presentacionComercial;
         [StringLength(250)]
+        [Required(ErrorMessage = "requerido")]
         public string PresentacionComercial { get => presentacionComercial; set => SetProperty(ref presentacionComercial, value); }
 
         //fabricante
@@ -49,6 +51,7 @@ namespace DataModel
         //lote
         private string lote;
         [StringLength(250)]
+        [Required(ErrorMessage = "requerido")]
         public string Lote { get => lote; set => SetProperty(ref lote, value); }
 
         //fecha de Expiración
@@ -79,6 +82,7 @@ namespace DataModel
         //Registro Sanitario
         private string regSanitario;
         [StringLength(250)]
+        [Required(ErrorMessage = "requerido")]
         public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
 
 

@@ -20,13 +20,13 @@ namespace DataModel
 		//nombre de establecimiento
 		private string nombre; 
 		[StringLength(250)]
-		[Required(ErrorMessage = "RequiredField")]
+		[Required(ErrorMessage = "requerido")]
 		public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
 		//Numero de Licencia -- debe ser campo unico
 		private string numLicencia;
 		[StringLength(250)]
-		[Required(ErrorMessage = "RequiredField")]
+		[Required(ErrorMessage = "requerido")]
 		public string NumLicencia { get => numLicencia; set => SetProperty(ref numLicencia, value); }
 
 		//Año
@@ -92,7 +92,7 @@ namespace DataModel
 
 		//Provincia
 		private long? provinciaId;
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
 		private ProvinciaTB? provincia;
 		public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
@@ -138,7 +138,7 @@ namespace DataModel
 		//correo electronico
 		private string email;
 		[StringLength(250)]
-		[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "InvalidEmail")]
+		[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
 		public string Email { get => email; set => SetProperty(ref email, value); }
 
 		//horarios del establecimiento

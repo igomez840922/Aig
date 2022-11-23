@@ -16,13 +16,13 @@ namespace DataModel
         //dia
         private string dias;
         [StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string Dias { get => dias; set => SetProperty(ref dias, value); }
 
         //horario Inicio
         private string horarios;
         [StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string Horarios { get => horarios; set => SetProperty(ref horarios, value); }
 
 

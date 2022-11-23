@@ -28,13 +28,13 @@ namespace DataModel
 
         private string nomComercial;
         [StringLength(500)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string NomComercial { get => nomComercial; set => SetProperty(ref nomComercial, value); }
 
         //Principio Activo
         private string princActivo;
         [StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string PrincActivo { get => princActivo; set => SetProperty(ref princActivo, value); }
 
         //Titular
@@ -52,7 +52,7 @@ namespace DataModel
 
         private string regSanitario;
         [StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
 
         // Estatus Recepcion: Aceptado, Rechazado

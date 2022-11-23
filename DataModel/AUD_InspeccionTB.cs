@@ -49,7 +49,7 @@ namespace DataModel
 
         //Establecimiento
         private long? establecimientoId;
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public long? EstablecimientoId { get => establecimientoId; set => SetProperty(ref establecimientoId, value); }
         private AUD_EstablecimientoTB? establecimiento;
         public virtual AUD_EstablecimientoTB? Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
@@ -98,7 +98,7 @@ namespace DataModel
         //participante Establecimiento Cargo
         private string particEstablecimientoEmail;
         [StringLength(250)]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "InvalidEmail")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
         public string ParticEstablecimientoEmail { get => particEstablecimientoEmail; set => SetProperty(ref particEstablecimientoEmail, value); }
 
         //participante Establecimiento Identificacion

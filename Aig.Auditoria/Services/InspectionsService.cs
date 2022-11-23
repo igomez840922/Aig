@@ -24,7 +24,7 @@ namespace Aig.Auditoria.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)) || (data.InspRetiroRetencion != null && data.InspRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter)))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None? data.StatusInspecciones == model.StatusInspecciones : true) &&
                                (model.FromDate !=null? data.FechaInicio >= model.FromDate:true) &&
@@ -34,7 +34,7 @@ namespace Aig.Auditoria.Services
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)) || (data.InspRetiroRetencion != null && data.InspRetiroRetencion.SeccionOficinaRegional.Contains(model.Filter)))) &&
+                                (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
                                (model.FromDate != null ? data.FechaInicio >= model.FromDate : true) &&
@@ -75,6 +75,10 @@ namespace Aig.Auditoria.Services
             {
                 if (result.InspRetiroRetencion != null)
                 {
+                    DalService.DBContext.Entry(result.InspRetiroRetencion).Property(b => b.DatosRegente).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRetiroRetencion).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRetiroRetencion).Property(b => b.DatosAtendidosPor).IsModified = true;
+
                     DalService.DBContext.Entry(result.InspRetiroRetencion).Property(b => b.DatosConclusiones).IsModified = true;
                     DalService.DBContext.SaveChanges();
                 }
@@ -92,6 +96,56 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosAreaProductosControlados).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosAreaAlmacenamiento).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
+                if (result.InspAperCambUbicAgen != null)
+                {
+                    //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosEstablecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosSolicitante).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosRegente).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosCondicionesLocal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
+                if (result.InspAperFabricante != null)
+                {
+                    //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosEstablecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosSolicitante).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosRegente).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosDocumentacion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosProcedimientoPrograma).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosAutoInspeccion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosProdAnalisisContrato).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosReclamoProductoRetirado).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosLocal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosAreaProduccion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosEquipos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosAreaLabCtrCalidad).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosAreaAlmacenamiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosAreaAuxiliares).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
+                if (result.InspRutinaVigFarmacia != null)
+                {
+                    //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;                    
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosGeneralesFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRegente).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosFarmaceutico).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosPersonalTecnico).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosExpedienteColaborador).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosEstructuraFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosEquipoRegistroFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosAnuncioFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRegMovimientoExistenciaFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosAlmacenProductosFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosProcedimientoFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosConclusiones).IsModified = true;
                     DalService.DBContext.SaveChanges();
                 }
             }
