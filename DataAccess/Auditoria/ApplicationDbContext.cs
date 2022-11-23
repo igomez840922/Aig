@@ -136,6 +136,18 @@ namespace DataAccess.Auditoria
       .Property(e => e.DatosConclusiones)
       .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
+            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
+     .Property(e => e.DatosRegente)
+     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
+
+            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
+     .Property(e => e.DatosRepresentLegal)
+     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
+
+            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
+    .Property(e => e.DatosAtendidosPor)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
+
             ///////////////////////////////////////////
             ///
 

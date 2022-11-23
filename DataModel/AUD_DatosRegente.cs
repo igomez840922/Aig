@@ -28,7 +28,12 @@ namespace DataModel
         private string cedula;
         [StringLength(250)]
         public string Cedula { get => cedula; set => SetProperty(ref cedula, value); }
-               
+
+        //Regente de Cargo
+        private string cargo;
+        [StringLength(250)]
+        public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
+
         //provincia
         private string provincia;
         [StringLength(250)]
@@ -67,7 +72,7 @@ namespace DataModel
         //correo electronico
         private string email;
         [StringLength(250)]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "InvalidEmail")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
         public string Email { get => email; set => SetProperty(ref email, value); }
 
         //El establecimiento se compromete al fiel cumplimiento del Artículo 386 del Decreto Ejecutivo 115 De 16 de agosto de 2022? Firma de Regente Farmacéutico

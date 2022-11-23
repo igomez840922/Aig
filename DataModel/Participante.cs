@@ -11,7 +11,7 @@ namespace DataModel
     {
         //Inspector 1 Nombre
         private string nombreCompleto;
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string NombreCompleto { get => nombreCompleto; set => SetProperty(ref nombreCompleto, value); }
 

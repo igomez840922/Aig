@@ -14,7 +14,7 @@ namespace DataModel
 	{
         private string description;
         [System.ComponentModel.DataAnnotations.StringLength(500)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string Description { get => description; set => SetProperty(ref description, value); }
 
         private string fileName;

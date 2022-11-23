@@ -38,7 +38,7 @@ namespace DataModel
 
         private string princActivo;
         [StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string PrincActivo { get => princActivo; set => SetProperty(ref princActivo, value); }
 
 

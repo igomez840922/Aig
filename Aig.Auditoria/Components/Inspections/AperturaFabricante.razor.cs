@@ -216,11 +216,11 @@ namespace Aig.Auditoria.Components.Inspections
         ///
 
         //ADD PARTICIPANTE
-        protected async Task OpenParticipant()
+        protected async Task OpenParticipant(Participante _participante=null)
         {
             bus.Subscribe<Aig.Auditoria.Events.Participants.ParticipantsAddEdit_CloseEvent>(ParticipantsAddEdit_CloseEventHandler);
 
-            participante = new Participante();
+            participante = _participante!=null? _participante: new Participante();
             showParticipant = true;
 
             await this.InvokeAsync(StateHasChanged);
@@ -251,7 +251,8 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (message.Data != null)
             {
-                Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.Add(message.Data);
+                if(!Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.Contains(message.Data))
+                    Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);

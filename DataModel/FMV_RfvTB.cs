@@ -14,7 +14,7 @@ namespace DataModel
         //nombre
         private string nombreCompleto;
         [StringLength(500)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string NombreCompleto { get => nombreCompleto; set => SetProperty(ref nombreCompleto, value); }
 
 

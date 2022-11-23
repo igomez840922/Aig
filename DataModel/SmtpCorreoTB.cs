@@ -12,19 +12,19 @@ namespace DataModel
 		//nombre
 		private string usuario;
 		[StringLength(250)]
-		[Required(ErrorMessage = "RequiredField")]
+		[Required(ErrorMessage = "requerido")]
 		public string Usuario { get => usuario; set => SetProperty(ref usuario, value); }
 
 		//contraseña
 		private string contrasena;
 		[StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string Contrasena { get => contrasena; set => SetProperty(ref contrasena, value); }
 
         //servidor smtp
         private string smtpServidor;
         [StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string SmtpServidor { get => smtpServidor; set => SetProperty(ref smtpServidor, value); }
 
         //puerto servidor smtp
@@ -34,7 +34,7 @@ namespace DataModel
         //cuenta de Correo
         private string correo;
         [StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string Correo { get => correo; set => SetProperty(ref correo, value); }
 
 

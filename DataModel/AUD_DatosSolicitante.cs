@@ -46,7 +46,7 @@ namespace DataModel
         //correo electronico
         private string email;
         [StringLength(250)]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "InvalidEmail")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
         public string Email { get => email; set => SetProperty(ref email, value); }
 
         //Solicitante Profesion

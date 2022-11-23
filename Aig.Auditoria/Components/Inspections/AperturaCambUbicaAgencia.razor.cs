@@ -216,12 +216,12 @@ namespace Aig.Auditoria.Components.Inspections
 		///
 
 		//ADD PARTICIPANTE
-		protected async Task OpenParticipant()
+		protected async Task OpenParticipant(Participante _participante = null)
 		{
 			bus.Subscribe<Aig.Auditoria.Events.Participants.ParticipantsAddEdit_CloseEvent>(ParticipantsAddEdit_CloseEventHandler);
 
-			participante = new Participante();
-			showParticipant = true;
+            participante = _participante != null ? _participante : new Participante();
+            showParticipant = true;
 
 			await this.InvokeAsync(StateHasChanged);
 		}
@@ -251,7 +251,8 @@ namespace Aig.Auditoria.Components.Inspections
 
 			if (message.Data != null)
 			{
-				Inspeccion.InspAperCambUbicAgen.DatosConclusiones.LParticipantes.Add(message.Data);
+				if (!Inspeccion.InspAperCambUbicAgen.DatosConclusiones.LParticipantes.Contains(message.Data))
+                    Inspeccion.InspAperCambUbicAgen.DatosConclusiones.LParticipantes.Add(message.Data);
 			}
 
 			this.InvokeAsync(StateHasChanged);

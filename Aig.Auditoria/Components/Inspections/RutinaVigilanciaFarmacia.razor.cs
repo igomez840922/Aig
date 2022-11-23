@@ -221,11 +221,11 @@ namespace Aig.Auditoria.Components.Inspections
         ///
 
         //AGREGA PARTICIPANTE
-        protected async Task OpenParticipant()
+        protected async Task OpenParticipant(Participante _participante=null)
         {
             bus.Subscribe<Aig.Auditoria.Events.Participants.ParticipantsAddEdit_CloseEvent>(ParticipantsAddEdit_CloseEventHandler);
 
-            participante = new Participante();
+            participante = _participante!=null? _participante: new Participante();
             showParticipant = true;
 
             await this.InvokeAsync(StateHasChanged);
@@ -256,18 +256,19 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (message.Data != null)
             {
-                Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.LParticipantes.Add(message.Data);
+                if(!Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.LParticipantes.Contains(message.Data))
+                    Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.LParticipantes.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);
         }
 
         //AGREGA PERSONAL TECNICO
-        protected async Task OpenPersonalTec()
+        protected async Task OpenPersonalTec(PersonalTecnico _personalTecnico=null)
         {
             bus.Subscribe<Aig.Auditoria.Events.TechnicalPersonal.TechnicalPersonalAddEdit_CloseEvent>(TechnicalPersonalAddEdit_CloseEventHandler);
 
-            personalTecnico = new PersonalTecnico();
+            personalTecnico = _personalTecnico!=null? _personalTecnico: new PersonalTecnico();
             showTechnicalPerson = true;
 
             await this.InvokeAsync(StateHasChanged);
@@ -296,18 +297,19 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (message.Data != null)
             {
-                Inspeccion.InspRutinaVigFarmacia.DatosPersonalTecnico.LPersonalTecnico.Add(message.Data);
+                if(Inspeccion.InspRutinaVigFarmacia.DatosPersonalTecnico.LPersonalTecnico.Contains(message.Data))
+                    Inspeccion.InspRutinaVigFarmacia.DatosPersonalTecnico.LPersonalTecnico.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);
         }
 
         //EXPEDIENTE COLABORADOR
-        protected async Task OpenExpColaborador()
+        protected async Task OpenExpColaborador(ExpedienteColaborador _expedienteColaborador=null)
         {
             bus.Subscribe<Aig.Auditoria.Events.ColaboratorFile.ColaboratorFileAddEdit_CloseEvent>(ColaboratorFileAddEdit_CloseEventHandler);
 
-            expedienteColaborador = new ExpedienteColaborador();
+            expedienteColaborador = _expedienteColaborador!=null? _expedienteColaborador: new ExpedienteColaborador();
             showExpColaborador = true;
 
             await this.InvokeAsync(StateHasChanged);
@@ -336,7 +338,8 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (message.Data != null)
             {
-                Inspeccion.InspRutinaVigFarmacia.DatosExpedienteColaborador.LColaboradores.Add(message.Data);
+                if(!Inspeccion.InspRutinaVigFarmacia.DatosExpedienteColaborador.LColaboradores.Contains(message.Data))
+                    Inspeccion.InspRutinaVigFarmacia.DatosExpedienteColaborador.LColaboradores.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);

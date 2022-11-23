@@ -13,7 +13,7 @@ namespace DataModel
         //num de licencia o aviso de operaciones
         private string nombreCompleto;
         [StringLength(500)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string NombreCompleto { get => nombreCompleto; set => SetProperty(ref nombreCompleto, value); }
 
         private string cargo;
@@ -26,7 +26,7 @@ namespace DataModel
         public string Telefono { get => telefono; set => SetProperty(ref telefono, value); }
 
         private string correo;
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "InvalidEmail")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
         [StringLength(250)]
         public string Correo { get => correo; set => SetProperty(ref correo, value); }
 

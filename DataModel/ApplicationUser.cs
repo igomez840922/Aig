@@ -26,8 +26,8 @@ namespace DataModel
 
         }
 
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "InvalidEmail")]
-        [Required(ErrorMessage = "RequiredField")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
+        [Required(ErrorMessage = "requerido")]
         public override string Email {
             get { return base.Email; }
             set { base.Email = value; }
@@ -65,12 +65,12 @@ namespace DataModel
         //public string Email { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string Password { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        [Required(ErrorMessage = "RequiredField")]
-        [Compare(nameof(Password), ErrorMessage = "ConfirmationPasswordNotMatch")]
+        [Required(ErrorMessage = "requerido")]
+        [Compare(nameof(Password), ErrorMessage = "no coincide")]
         public string PasswordConfirm { get; set; }
 
         public long? UserProfileId { get; set; }

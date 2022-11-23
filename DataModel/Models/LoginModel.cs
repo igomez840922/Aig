@@ -7,9 +7,9 @@ namespace DataModel.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string UserName { get; set; }
-		[Required(ErrorMessage = "RequiredField")]
+		[Required(ErrorMessage = "requerido")]
 		public string Password { get; set; }
         public bool RememberMe { get; set; }
 

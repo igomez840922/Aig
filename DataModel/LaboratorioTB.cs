@@ -14,7 +14,7 @@ namespace DataModel
         //nombre de establecimiento
         private string nombre;
         [StringLength(250)]
-        [Required(ErrorMessage = "RequiredField")]
+        [Required(ErrorMessage = "requerido")]
         public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
         private enum_LaboratoryType tipoLaboratorio;

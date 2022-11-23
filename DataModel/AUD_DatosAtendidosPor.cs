@@ -1,5 +1,4 @@
-﻿using DataModel.Helper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataModel
-{
-    public class AUD_DatosFarmaceutico : SystemId
+{    
+    public class AUD_DatosAtendidosPor : SystemId
     {
         //Regente - Nombre
         private string nombre;
@@ -24,6 +23,12 @@ namespace DataModel
         private string cedula;
         [StringLength(250)]
         public string Cedula { get => cedula; set => SetProperty(ref cedula, value); }
+
+
+        private string cargo;
+        [StringLength(250)]
+        public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
+
 
         //provincia
         private string provincia;
@@ -69,22 +74,6 @@ namespace DataModel
         //El establecimiento se compromete al fiel cumplimiento del Artículo 386 del Decreto Ejecutivo 115 De 16 de agosto de 2022? Firma de Regente Farmacéutico
         private string firma;
         public string Firma { get => firma; set => SetProperty(ref firma, value); }
-
-        //Horario Regencia
-        private string horario;
-        public string Horario { get => horario; set => SetProperty(ref horario, value); }
-
-        //Labora en otra empresa:: 
-        private enumAUD_TipoSeleccion laboraOtraEmpresa;
-        public enumAUD_TipoSeleccion LaboraOtraEmpresa { get => laboraOtraEmpresa; set => SetProperty(ref laboraOtraEmpresa, value); }
-        private string laboraOtraEmpresaDesc;
-        public string LaboraOtraEmpresaDesc { get => laboraOtraEmpresaDesc; set => SetProperty(ref laboraOtraEmpresaDesc, value); }
-
-        private string laboraOtraEmpresaHora;
-        public string LaboraOtraEmpresaHora { get => laboraOtraEmpresaHora; set => SetProperty(ref laboraOtraEmpresaHora, value); }
-
-
-
     }
 
 }
