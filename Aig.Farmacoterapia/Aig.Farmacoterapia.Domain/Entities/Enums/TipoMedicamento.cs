@@ -8,6 +8,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Enums
 {
     public static class TipoMedicamento
     {
+        public const string OT = "OT"; // Otro
         public const string SI = "SI"; // Síntisis Química
         public const string RA = "RA"; // Radiofármacos
         public const string HU = "HU"; // Huérfanos

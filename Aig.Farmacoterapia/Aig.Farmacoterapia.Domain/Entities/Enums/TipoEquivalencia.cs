@@ -11,5 +11,6 @@ namespace Aig.Farmacoterapia.Domain.Entities.Enums
         public const string Intercambiable = "I";//Intercambiable
         public const string Referencia = "R";//Referencia
         public const string Generico = "G"; //Generico
+        public const string DeMarca = "M"; //Medicamento de Marca
     }
 }

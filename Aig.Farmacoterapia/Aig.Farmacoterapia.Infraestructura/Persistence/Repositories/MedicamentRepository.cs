@@ -63,8 +63,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                             case "term":
                                 {
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.NumReg.Contains((string)filteringOption.Value) ||
-                                    f.Nombre.Contains((string)filteringOption.Value) ||
-                                    f.Principio.Contains((string)filteringOption.Value);
+                                    f.Nombre.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
+                                    f.Principio.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
+                                    f.Fabricante.Nombre.ToLower().Contains(((string)filteringOption.Value).ToLower());
                                     filterList.Add(expression);
                                 }
                                 break;
@@ -109,6 +110,52 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                     filterList.Add(expression);
                                 }
                                 break;
+                            case "MedicalPrescription":
+                                {
+                                    var value = filteringOption.Value.ToString();
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.CondicionVenta == value;
+                                    filterList.Add(expression);
+                                }
+                                break;
+                            case "HospitalUse":
+                            case "PopularSale":
+                                {
+                                    var value = filteringOption.Value.ToString();
+                                    Expression<Func<AigMedicamento, bool>> expression = filteringOption.Operator == FilteringOperator.Equal ?
+                                        f => f.CondicionVenta == value :
+                                        f => f.CondicionVenta != value;
+                                    filterList.Add(expression);
+                                }
+                                break;
+                            case "ChemicalSynthesis":
+                            case "Radiopharmaceuticals":
+                            case "Orphans":
+                            case "Homeopathic":
+                            case "Phytopharmaceuticals":
+                            case "Biotechnological":
+                            case "Biological":
+                                {
+                                    var value = filteringOption.Value.ToString();
+                                    Expression<Func<AigMedicamento, bool>> expression = filteringOption.Operator == FilteringOperator.Equal ?
+                                        f => f.TipoMedicamento == value :
+                                        f => f.TipoMedicamento != value;
+                                    filterList.Add(expression);
+                                }
+                                break;
+                            case "Interchangeable":
+                            case "Referencia":
+                            case "Generic":
+                            case "Mark":
+                                {
+                                    var value = filteringOption.Value.ToString();
+                                    Expression<Func<AigMedicamento, bool>> expression = filteringOption.Operator == FilteringOperator.Equal ?
+                                        f => f.TipoEquivalencia == value :
+                                        f => f.TipoEquivalencia != value;
+                                    filterList.Add(expression);
+                                }
+                                break;
+
+
                         }
                     }
                 }

@@ -3,9 +3,36 @@
 @using Blazored.FluentValidation
 @inherits LayoutComponentBase
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject NavigationManager _navigation;
 <PageTitle>Aig.Farmacoterapia.Public</PageTitle>
 
 <style>
+.product-list-content p {
+    margin:0 !important;
+}
+.product-text {
+    margin:0 !important;
+}
+.product-03-wrapper {
+    padding: 10px 10px 35px 10px !important;
+}
+.action-btn {
+    height: 25px !important;
+    width: 25px !important;
+    line-height: 0px !important;
+}
+.category-sidebar {
+
+    background: #f8f8f8 !important;
+}
+
+    .product-text span {
+    /*color: #e4573d;*/
+      color: #4e97fd !important;
+      font-weight: normal !important;
+   
+}
+
     .mud-icon-button {
         padding: 0 !important
     }
@@ -21,9 +48,9 @@
         background: #4e97fd !important;
         border-radius: 50% !important;
     }
-
+ 
    .header-02-search .header-search-form button:hover {
-        color: #ededed !important;
+        background: #e4573d !important;
      }
    .header-02-search .header-search-form input {
     padding: 20px 60px 20px 20px !important;
@@ -54,6 +81,12 @@
                         <div class="shop-menu">
                             <ul>
                                 <li>
+                                    <a href="/">
+                                        <i class="fa fa-home"></i>
+                                        Inicio
+                                    </a>
+                                </li>
+                                <li>
                                     <a target="__blank"
                                        title="Portal Regional de Notificación en línea de Sospecha de Reacciones Adversas a Medicamentos de uso humano"
                                        href="http://notificacentroamerica.net/n/Pages/mapa.aspx#no-back-button">
@@ -80,15 +113,16 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-3">
-                    <div class="logo">
-                        <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
+                    <div class="logo" style="margin-top: 30px;">
+                        <a href="/"><img src="assets/img/logo/logo.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-9">
                     <div class="header-search header-02-search" style="margin-top: 15px;">
                         <EditForm Model="this" class="header-search-form" OnValidSubmit="OnSearch">
                             <FluentValidationValidator />
-                            <input type="text" @bind-value="modelFilter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante">
+                           <input type="text" @bind-value="modelFilter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante"  @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
+                           @* <input type="text" placeholder="Buscar por registro / nombre / principio activo / fabricante" @bind-value="@modelFilter.Term" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()" />*@
                             <button type="submit"><i class="far fa-search"></i></button>
                         </EditForm>
                     </div>
@@ -114,46 +148,32 @@
                             <div>
                                 <div class="panel-body" id="menuleft">
 
-                                    <div style="margin:0 auto;padding-bottom:3px;margin-top:-5px;margin-bottom:10px;border-bottom:1px solid #adcdec;">
-                                        <span style="text-align:center;font-size:12pt;font-weight:bold;color:#265a98;">Filtros</span>
-                                    </div>
-
-
-                                    <div style="display:flex;margin-left: 5px;">
-                                        <label style="font-size: 16px;color: #848181;padding: 3px 10px 0px 0;">Si</label>
-                                        <label style="font-size: 16px;color: #848181;padding: 3px 3px 0 0;">No</label>
-                                    </div>
-
-
-
-                                    <div style="display:flex">
+                                    <span style="text-align:center;font-size:12pt;font-weight:bold;color:#9b9b9b;">Filtros</span>
+                                   
+                                    <button title="Borrar filtros" @onclick="() => OnClean()" class="action-btn f-right" href="#"><i class="fa fa-times"></i></button>
+                                    <button title="Aplicar filtros" @onclick="() => OnSearch()" class="action-btn f-right" href="#"><i class="fa fa-check"></i></button>
+                                    <hr style=" margin: 10px 0 10px 0!important;border-bottom: 1px solid #adcdec;"/>
+                                       
+                                     <div style="display:flex">
                                         <div>
-                                            @*<MudCheckBox T="bool" CheckedChanged="@((e)=>Toggle(e))" Color="Color.Info"></MudCheckBox>*@
-                                            <MudCheckBox @bind-Checked="@modelFilter.MedicalPrescription" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox  TriState="true" @bind-Checked="@modelFilter.MedicalPrescription" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotMedicalPrescription" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                       
                                         <label class="filterLabel"> Prescripción Médica </label>
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.HospitalUse" Color="Color.Info"></MudCheckBox>
-                                        </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotHospitalUse" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.HospitalUse" Color="Color.Info"></MudCheckBox>
                                         </div>
                                         <label class="filterLabel"> Uso Hospitalario </label>
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.PopularSale" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.PopularSale" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotPopularSale" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                        
                                         <label class="filterLabel"> Venta Popular </label>
                                     </div>
 
@@ -161,104 +181,95 @@
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.ChemicalSynthesis" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.ChemicalSynthesis" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotChemicalSynthesis" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                       
                                         <label class="filterLabel">Síntisis Química </label>
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.Orphans" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Orphans" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotOrphans" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                        
                                         <label class="filterLabel">Huérfanos</label>
 
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.Homeopathic" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Homeopathic" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotHomeopathic" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                       
                                         <label class="filterLabel">Homeopáticos</label>
 
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.Phytopharmaceuticals" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox  TriState="true" @bind-Checked="@modelFilter.Phytopharmaceuticals" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotPhytopharmaceuticals" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                       
                                         <label class="filterLabel">Fitofármacos</label>
 
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.Biotechnological" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Biotechnological" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotBiotechnological" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                       
                                         <label class="filterLabel">Biotecnológicos</label>
 
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.Biological" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Biological" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotBiological" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                       
                                         <label class="filterLabel">Biológicos</label>
 
                                     </div>
                                     <div style="margin-top:2px;border-top:1px solid #adcdec;margin-bottom:10px"></div>
 
-                                    <div style="display:flex">
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.Generic" Color="Color.Info"></MudCheckBox>
-                                        </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotGeneric" Color="Color.Info"></MudCheckBox>
-                                        </div>
-                                        <label class="filterLabel">Genérico</label>
-
-                                    </div>
+                                   
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.Reference" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Reference" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotReference" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                        
                                         <label class="filterLabel">Referencia</label>
 
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.Interchangeable" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Interchangeable" Color="Color.Info"></MudCheckBox>
                                         </div>
-                                        <div>
-                                            <MudCheckBox @bind-Checked="@modelFilter.NotInterchangeable" Color="Color.Info"></MudCheckBox>
-                                        </div>
+                                       
                                         <label class="filterLabel">Intercambiable</label>
 
                                     </div>
 
+                                     <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Generic" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                        
+                                        <label class="filterLabel">Genérico</label>
 
+                                    </div>
+
+                                      <div style="display:flex">
+                                        <div>
+                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Mark" Color="Color.Info"></MudCheckBox>
+                                        </div>
+                                       
+                                        <label class="filterLabel">Medicamento de Marca</label>
+
+                                    </div>
 
 
                                 </div>
@@ -319,8 +330,23 @@
     }
     //private async void Toggle(bool toggled){; }
     private void OnSearch()
-    {
+    {  
+        Bus.Publish(new SearchChangeEvent { Filter = modelFilter });
+        //var path= _navigation.ToBaseRelativePath(_navigation.Uri);
+        //if (!string.IsNullOrEmpty(path))
+        //{modelFilter= new HomeFilter();
+        //   _navigation.NavigateTo("./"); 
+        //}
+        
+    }
+    private void OnSearchChanged()
+    {  //Bus.Publish(new SearchChangeEvent { Filter = modelFilter });
+        if (string.IsNullOrEmpty(modelFilter.Term)) {
+             Bus.Publish(new SearchChangeEvent { Filter = modelFilter });
+        }
+    }
+    private void OnClean()
+    {   modelFilter = new HomeFilter();
         Bus.Publish(new SearchChangeEvent { Filter = modelFilter });
     }
-
 }
