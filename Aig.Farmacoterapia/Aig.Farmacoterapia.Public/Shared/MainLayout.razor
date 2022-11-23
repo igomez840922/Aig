@@ -332,11 +332,11 @@
     private void OnSearch()
     {  
         Bus.Publish(new SearchChangeEvent { Filter = modelFilter });
-        var path= _navigation.ToBaseRelativePath(_navigation.Uri);
-        if (!string.IsNullOrEmpty(path))
-        {modelFilter= new HomeFilter();
-           _navigation.NavigateTo("./"); 
-        }
+        //var path= _navigation.ToBaseRelativePath(_navigation.Uri);
+        //if (!string.IsNullOrEmpty(path))
+        //{modelFilter= new HomeFilter();
+        //   _navigation.NavigateTo("./"); 
+        //}
         
     }
     private void OnSearchChanged()
