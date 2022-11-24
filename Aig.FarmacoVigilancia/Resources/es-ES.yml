@@ -28,7 +28,7 @@ FilesType: Archivos
 AccessData: Datos de Acceso
 PersonalAccess: Datos Personales
 UserName: Nombre de Usuario
-Password: Constraseña
+Password: Contraseña
 ConfirmPassword: Confirmar Contraseña
 Email: Correo
 PhoneNumber: Telefono
@@ -176,7 +176,7 @@ EditDistrict: Editar Distrito
 Corregimientos: Corregimientos
 NewCorregimiento: Nuevo Corregimiento
 EditCorregimiento: Editar Corregimiento
-PharmacoVigilanceSystem: Sistema de FarmacoVigilancia
+PharmacoVigilanceSystem: Centro Nacional de Farmacovigilancia
 PMR: Plan de Manejo de Riesgo
 ActivePrinciple: Principio Activo
 CommercialName: Nombre Comercial
