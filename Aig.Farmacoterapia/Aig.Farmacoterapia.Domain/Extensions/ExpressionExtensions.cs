@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Aig.Farmacoterapia.Domain.Extensions
 {
-    public static class PredicateBuilder
+    public static class ExpressionBuilder
     {
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
         {
@@ -25,7 +25,7 @@ namespace Aig.Farmacoterapia.Domain.Extensions
             ParameterExpression p = left.Parameters.First();
             SubstExpressionVisitor visitor = new SubstExpressionVisitor
             {
-                Subst = {[right.Parameters.First()] = p}
+                Subst = { [right.Parameters.First()] = p }
             };
 
             Expression body = Expression.OrElse(left.Body, visitor.Visit(right.Body));

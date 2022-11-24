@@ -4,9 +4,13 @@
 @inherits LayoutComponentBase
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @inject NavigationManager _navigation;
+@inject IJSRuntime jsRuntime;
 <PageTitle>Aig.Farmacoterapia.Public</PageTitle>
 
 <style>
+    .mud-typography-body1{
+        margin-left:3px !important;
+    }
 .product-list-content p {
     margin:0 !important;
 }
@@ -17,8 +21,8 @@
     padding: 10px 10px 35px 10px !important;
 }
 .action-btn {
-    height: 25px !important;
-    width: 25px !important;
+    height: 30px !important;
+    width: 30px !important;
     line-height: 0px !important;
 }
 .category-sidebar {
@@ -119,12 +123,19 @@
                 </div>
                 <div class="col-9">
                     <div class="header-search header-02-search" style="margin-top: 15px;">
-                        <EditForm Model="this" class="header-search-form" OnValidSubmit="OnSearch">
-                            <FluentValidationValidator />
+                       @*  <EditForm Model="this" class="header-search-form">
                            <input type="text" @bind-value="Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante"  @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
-                           @* <input type="text" placeholder="Buscar por registro / nombre / principio activo / fabricante" @bind-value="@modelFilter.Term" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()" />*@
-                            <button type="submit"><i class="far fa-search"></i></button>
-                        </EditForm>
+                           <input type="text" placeholder="Buscar por registro / nombre / principio activo / fabricante" @bind-value="@modelFilter.Term" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()" />
+                            <button type="button" @onclick="() => OnSearch()"><i class="far fa-search"></i></button>
+                            </EditForm>*@
+
+                     
+                            <EditForm Model="this" class="header-search-form" OnValidSubmit="OnSearch">
+                                <FluentValidationValidator />
+                                <input type="text" @bind-value="filter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
+                                <button type="submit"><i class="far fa-search"></i></button>
+                            </EditForm>
+                          
                     </div>
                 </div>
             </div>
@@ -140,9 +151,11 @@
         <div class="container-fluid">
 
             <div class="row">
-
-               
-                @Body
+@*
+                <CascadingValue Value="@filter" Name="Filter">
+                    @Body
+                </CascadingValue>*@
+              @Body
 
             </div>
 
@@ -183,32 +196,46 @@
 <MudThemeProvider />
 
 @code {
-
-    public string Term { get; set; } = string.Empty;
+   
+    protected HomeFilter filter { get; set; } = new HomeFilter();
     protected async override Task OnInitializedAsync()
-    {
+    {   
+        Bus.Subscribe<SearchTermEvent>(SearchChangeEventHandler);
         base.OnInitialized();
     }
-    //private async void Toggle(bool toggled){; }
-    private void OnSearch()
-    {  
-        Bus.Publish(new SearchChangeEvent { Filter = Term });
-        //var path= _navigation.ToBaseRelativePath(_navigation.Uri);
-        //if (!string.IsNullOrEmpty(path))
-        //{modelFilter= new HomeFilter();
-        //   _navigation.NavigateTo("./"); 
-        //}
-
-    }
-    private void OnSearchChanged()
-    {  //Bus.Publish(new SearchChangeEvent { Filter = modelFilter });
-        if (string.IsNullOrEmpty(Term)) {
-            Bus.Publish(new SearchChangeEvent { Filter = Term });
+     private void SearchChangeEventHandler(MessageArgs args)
+    {
+        var message = args.GetMessage<SearchTermEvent>();
+        if (message is SearchTermEvent)
+        {
+           filter = new HomeFilter(){Term=message.Term};
+           Bus.Publish(new SearchChangeEvent { Filter = filter });
+           this.InvokeAsync(StateHasChanged);
         }
     }
-    private void OnClean()
+
+    private void OnSearch()
     {
-        Term = string.Empty;
-        Bus.Publish(new SearchChangeEvent { Filter = Term });
+        var path= _navigation.ToBaseRelativePath(_navigation.Uri);
+        if (path.Contains("details")){
+            var homeUrl = "./";
+            if (!string.IsNullOrEmpty(filter.Term))
+                homeUrl = $"./?term={filter.Term}";
+                _navigation.NavigateTo(homeUrl,true);
+        }
+       else
+         Bus.Publish(new SearchChangeEvent { Filter = filter });
+    }
+
+    private void OnSearchChanged()
+    {  
+       if (string.IsNullOrEmpty(filter.Term)) {
+            Bus.Publish(new SearchChangeEvent { Filter = filter });
+       }
+    }
+
+    private void OnClean() {
+        filter = new HomeFilter();
+        Bus.Publish(new SearchChangeEvent { Filter = filter });
     }
 }

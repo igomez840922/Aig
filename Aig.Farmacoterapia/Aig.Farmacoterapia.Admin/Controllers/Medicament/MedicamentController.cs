@@ -36,7 +36,7 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Identity
                         }
                     } : new List<FilteringOption>()
                 };
-                return await _repository.ListAsync(searchArgs);
+                return await _repository.AdminListAsync(searchArgs);
             }
             catch (Exception ex) {
                 _systemLogger.Error(ex.Message);
