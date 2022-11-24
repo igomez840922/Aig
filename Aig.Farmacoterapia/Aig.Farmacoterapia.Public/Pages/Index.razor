@@ -9,6 +9,7 @@
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Aig.Farmacoterapia.Infrastructure.Configuration
+@using Aig.Farmacoterapia.Public.Converter
 @using BlazorComponentBus
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.Extensions.Options
@@ -16,6 +17,7 @@
 @inject IMedicamentRepository _repository;
 @inject IOptions<AppConfiguration> _config;
 @inject NavigationManager _navigation;
+@inject IJSRuntime jsRuntime;
 
 @if (loading)
 {
@@ -32,87 +34,83 @@ else
                             <div>
                                 <div class="panel-body" id="menuleft">
 
-                                    <span style="text-align:center;font-size:12pt;font-weight:bold;color:#9b9b9b;">Filtros</span>
+                                    <span style="margin-left: 3px;text-align:center;font-size:12pt;font-weight:bold;color:#9b9b9b;">Filtros</span>
+                                    <button type="button" title="Borrar filtros" @onclick="() => OnClean()" class="action-btn f-right" href="#"><i class="fa fa-trash"></i></button>
+                                    <button  type="button" title="Aplicar filtros" @onclick="() => OnSearch()" class="action-btn f-right" href="#"><i class="fa fa-filter"></i></button>
+                                    
+                                    <MudCheckBox  style="margin-top: 5px;" @bind-Checked="@search.Or" Color="Color.Warning" Converter="@(new CustomStringToBoolConverter())">@(@search.Or)</MudCheckBox>
                                    
-                                    <button title="Borrar filtros" @onclick="() => OnClean()" class="action-btn f-right" href="#"><i class="fa fa-times"></i></button>
-                                    <button title="Aplicar filtros" @onclick="() => OnSearch()" class="action-btn f-right" href="#"><i class="fa fa-check"></i></button>
-                                    <hr style=" margin: 10px 0 10px 0!important;border-bottom: 1px solid #adcdec;"/>
+                                    <hr style=" margin: 0px 0 10px 0!important;border-bottom: 1px solid #adcdec;"/>
                                        
                                      <div style="display:flex">
                                         <div>
-                                            <MudCheckBox  TriState="true" @bind-Checked="@modelFilter.MedicalPrescription" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox  TriState="true" @bind-Checked="@search.MedicalPrescription" Color="Color.Info">  Prescripción Médica </MudCheckBox>
                                         </div>
                                        
-                                        <label class="filterLabel"> Prescripción Médica </label>
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.HospitalUse" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.HospitalUse" Color="Color.Info">Uso Hospitalario </MudCheckBox>
                                         </div>
-                                        <label class="filterLabel"> Uso Hospitalario </label>
+                                       
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.PopularSale" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.PopularSale" Color="Color.Info">Venta Popular</MudCheckBox>
                                         </div>
                                         
-                                        <label class="filterLabel"> Venta Popular </label>
+                                       
                                     </div>
 
                                     <div style="margin-top:2px;border-top:1px solid #adcdec;margin-bottom:10px"></div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.ChemicalSynthesis" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.ChemicalSynthesis" Color="Color.Info">Síntesis Química </MudCheckBox>
                                         </div>
                                        
-                                        <label class="filterLabel">Síntisis Química </label>
+                                       
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Orphans" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.Orphans" Color="Color.Info">Huérfanos</MudCheckBox>
                                         </div>
                                         
-                                        <label class="filterLabel">Huérfanos</label>
+                                        
 
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Homeopathic" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.Homeopathic" Color="Color.Info">Homeopáticos</MudCheckBox>
                                         </div>
                                        
-                                        <label class="filterLabel">Homeopáticos</label>
-
+                                       
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox  TriState="true" @bind-Checked="@modelFilter.Phytopharmaceuticals" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox  TriState="true" @bind-Checked="@search.Phytopharmaceuticals" Color="Color.Info">Fitofármacos</MudCheckBox>
                                         </div>
                                        
-                                        <label class="filterLabel">Fitofármacos</label>
-
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Biotechnological" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.Biotechnological" Color="Color.Info">Biotecnológicos</MudCheckBox>
                                         </div>
                                        
-                                        <label class="filterLabel">Biotecnológicos</label>
-
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Biological" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.Biological" Color="Color.Info">Biológicos</MudCheckBox>
                                         </div>
                                        
-                                        <label class="filterLabel">Biológicos</label>
+                                       
 
                                     </div>
                                     <div style="margin-top:2px;border-top:1px solid #adcdec;margin-bottom:10px"></div>
@@ -121,38 +119,31 @@ else
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Reference" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.Reference" Color="Color.Info">Referencia</MudCheckBox>
                                         </div>
                                         
-                                        <label class="filterLabel">Referencia</label>
-
+                                       
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Interchangeable" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.Interchangeable" Color="Color.Info">Medicamento Intercambiable</MudCheckBox>
                                         </div>
                                        
-                                        <label class="filterLabel">Intercambiable</label>
-
                                     </div>
 
                                      <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Generic" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.Generic" Color="Color.Info">Medicamento Genérico</MudCheckBox>
                                         </div>
-                                        
-                                        <label class="filterLabel">Genérico</label>
-
+                                    
                                     </div>
 
                                       <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@modelFilter.Mark" Color="Color.Info"></MudCheckBox>
+                                            <MudCheckBox TriState="true" @bind-Checked="@search.Mark" Color="Color.Info">Medicamento de Marca</MudCheckBox>
                                         </div>
                                        
-                                        <label class="filterLabel">Medicamento de Marca</label>
-
                                     </div>
 
 
@@ -190,6 +181,18 @@ else
             </div>
             <div class="product-tab-content">
                 <div class="tab-content" id="myTabContent">
+
+                    @if (paginatedResult == null || paginatedResult.Data.Count == 0)
+                    {
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 offset-lg-3 offset-xl-3">
+                                <div class="section-title text-center mb-65">
+                                    <h2>No se encontraron resultados</h2>
+                                    <p>Intente cambiar los parámetros de búsqueda </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
 
                     @if (paginatedResult != null && paginatedResult.Data.Count > 0)
                     {
@@ -299,87 +302,80 @@ else
     </div>
 }
 @code {
+
+    private HomeFilter search { get; set; }=new HomeFilter();
     protected bool loading { get; set; } = true;
-    protected HomeFilter modelFilter = new HomeFilter();
     private MudPagination _mudPagination;
     private PaginatedResult<AigMedicamento> paginatedResult;
+    public string customstr { get; set; } = "OR";
     protected async override Task OnInitializedAsync()
-    {
-        //Subscribe Search Event
-        Bus.Subscribe<SearchChangeEvent>(SearchChangeEventHandler);
+    { 
+        //search = new HomeFilter();
         paginatedResult = new PaginatedResult<AigMedicamento>(){PageSize=20};
-
+        Bus.Subscribe<SearchChangeEvent>(SearchChangeEventHandler);
         var uri = _navigation.ToAbsoluteUri(_navigation.Uri);
-        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("term", out var _term)){
-            modelFilter.Term = _term;
-            await DoFetchData(modelFilter);
+       if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("term", out var _term)){
+            await jsRuntime.InvokeVoidAsync("window.history.replaceState", null, "", "/");
+            Bus.Publish(new SearchTermEvent { Term = _term });
         }
-        else
-        {
-           await DoFetchData();
-        }
-        StateHasChanged();
+        else await DoFetchData();
         base.OnInitialized();
     }
-    private async void SearchChangeEventHandler(MessageArgs args)
+
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+    }
+    private void SearchChangeEventHandler(MessageArgs args)
     {
         var message = args.GetMessage<SearchChangeEvent>();
         if (message is SearchChangeEvent)
         {
-            // await InvokeAsync(async () => await DoFetchData(message.Filter));
-            await InvokeAsync(async () =>{
-                loading = true;
-                modelFilter.Term = message.Filter;
-                await DoFetchData(modelFilter);
-                this.StateHasChanged();
-            });
+            search = message.Filter;
+            DoFetchData();
         }
+  
     }
 
-     //public bool? MedicalPrescription { get; set; } = null;
-     //   public bool? HospitalUse { get; set; } = null;
-     //   public bool? PopularSale { get; set; } = null;
-       
-    private async Task DoFetchData(HomeFilter search=null)
+    private async Task DoFetchData()
     {
         loading = true;
         var sorting =new List<SortingOption>(){ new SortingOption { Field = "name", Direction = SortingDirection.ASC } };
         var filters = new List<FilteringOption>();
         if (search != null)
         {
-           if (!string.IsNullOrEmpty(search.Term))
-              filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = search.Term });
-           if (search.MedicalPrescription!=null)
-              filters.Add(new FilteringOption { Field = "MedicalPrescription", Operator = FilteringOperator.Equal, Value =search.MedicalPrescription.Value?"CP":"SP" });
-           if (search.HospitalUse!=null)
-              filters.Add(new FilteringOption { Field = "HospitalUse", Operator = search.HospitalUse.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="UH" });
-           if (search.PopularSale!=null)
-              filters.Add(new FilteringOption { Field = "PopularSale", Operator = search.PopularSale.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="VP" });
-          
-          if (search.ChemicalSynthesis!=null)
-              filters.Add(new FilteringOption { Field = "ChemicalSynthesis", Operator = search.ChemicalSynthesis.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="SI" });
-           if (search.Radiopharmaceuticals!=null)
-              filters.Add(new FilteringOption { Field = "Radiopharmaceuticals", Operator = search.Radiopharmaceuticals.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="RA" });
-           if (search.Orphans!=null)
-              filters.Add(new FilteringOption { Field = "Orphans", Operator = search.Orphans.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="HU" });
-           if (search.Homeopathic!=null)
-              filters.Add(new FilteringOption { Field = "Homeopathic", Operator = search.Homeopathic.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="HO" });
-           if (search.Phytopharmaceuticals!=null)
-              filters.Add(new FilteringOption { Field = "Phytopharmaceuticals", Operator = search.Phytopharmaceuticals.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="FF" });
-          if (search.Biotechnological!=null)
-              filters.Add(new FilteringOption { Field = "Biotechnological", Operator = search.Biotechnological.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="BT" });
-          if (search.Biological!=null)
-              filters.Add(new FilteringOption { Field = "Biological", Operator = search.Biological.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="BI" });
-          
-          if (search.Interchangeable!=null)
-              filters.Add(new FilteringOption { Field = "Interchangeable", Operator = search.Interchangeable.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="I" });
-          if (search.Reference!=null)
-              filters.Add(new FilteringOption { Field = "Referencia", Operator = search.Reference.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="R" });
-          if (search.Generic!=null)
-              filters.Add(new FilteringOption { Field = "Generic", Operator = search.Generic.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="G" });
-          if (search.Mark!=null)
-              filters.Add(new FilteringOption { Field = "Mark", Operator = search.Mark.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="M" });
-          
+            if (!string.IsNullOrEmpty(search.Term))
+                filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = search.Term });
+            if (search.MedicalPrescription!=null)
+                filters.Add(new FilteringOption { Field = "MedicalPrescription", Operator = FilteringOperator.Equal, Value =search.MedicalPrescription.Value?"CP":"SP" });
+            if (search.HospitalUse!=null)
+                filters.Add(new FilteringOption { Field = "HospitalUse", Operator = search.HospitalUse.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="UH" });
+            if (search.PopularSale!=null)
+                filters.Add(new FilteringOption { Field = "PopularSale", Operator = search.PopularSale.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="VP" });
+
+            if (search.ChemicalSynthesis!=null)
+                filters.Add(new FilteringOption { Field = "ChemicalSynthesis", Operator = search.ChemicalSynthesis.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="SI" });
+            if (search.Radiopharmaceuticals!=null)
+                filters.Add(new FilteringOption { Field = "Radiopharmaceuticals", Operator = search.Radiopharmaceuticals.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="RA" });
+            if (search.Orphans!=null)
+                filters.Add(new FilteringOption { Field = "Orphans", Operator = search.Orphans.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="HU" });
+            if (search.Homeopathic!=null)
+                filters.Add(new FilteringOption { Field = "Homeopathic", Operator = search.Homeopathic.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="HO" });
+            if (search.Phytopharmaceuticals!=null)
+                filters.Add(new FilteringOption { Field = "Phytopharmaceuticals", Operator = search.Phytopharmaceuticals.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="FF" });
+            if (search.Biotechnological!=null)
+                filters.Add(new FilteringOption { Field = "Biotechnological", Operator = search.Biotechnological.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="BT" });
+            if (search.Biological!=null)
+                filters.Add(new FilteringOption { Field = "Biological", Operator = search.Biological.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="BI" });
+
+            if (search.Interchangeable!=null)
+                filters.Add(new FilteringOption { Field = "Interchangeable", Operator = search.Interchangeable.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="I" });
+            if (search.Reference!=null)
+                filters.Add(new FilteringOption { Field = "Referencia", Operator = search.Reference.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="R" });
+            if (search.Generic!=null)
+                filters.Add(new FilteringOption { Field = "Generic", Operator = search.Generic.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="G" });
+            if (search.Mark!=null)
+                filters.Add(new FilteringOption { Field = "Mark", Operator = search.Mark.Value? FilteringOperator.Equal:FilteringOperator.NotEqual, Value ="M" });
         }
         var args = new PageSearchArgs() {
                 PageIndex = paginatedResult.CurrentPage,
@@ -387,26 +383,22 @@ else
                 SortingOptions = sorting,
                 FilteringOptions = filters
             };
-        paginatedResult = await _repository.ListAsync(args);
+        paginatedResult = await _repository.ListAsync(args,search.Or=="Algunos"?LogicalOperator.Or:LogicalOperator.And);
         loading = false;
-        StateHasChanged();
+        await RefresView();
     }
     private  async Task PageChanged(int i){
         paginatedResult.CurrentPage = i;
         await DoFetchData();
     }
      private async Task OnClean()
-    {
+    {    
+         search = new HomeFilter();
          await DoFetchData();
     }
      private async Task OnSearch()
     {  
-         await DoFetchData(modelFilter);
-        //var path= _navigation.ToBaseRelativePath(_navigation.Uri);
-        //if (!string.IsNullOrEmpty(path))
-        //{modelFilter= new HomeFilter();
-        //   _navigation.NavigateTo("./"); 
-        //}
-
+         await DoFetchData();
     }
+
 }

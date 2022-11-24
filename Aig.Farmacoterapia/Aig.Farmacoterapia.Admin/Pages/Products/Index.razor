@@ -16,7 +16,6 @@
 @inject IUnitOfWork _unitOfWork;
 @inject ISystemLogger _systemLogger;
 @inject IMedicamentRepository _repository;
-
 @inject IJSRuntime JS
 
 <div class="kt-portlet__head kt-portlet__head--lg">
@@ -424,7 +423,7 @@
                 SortingOptions = sorting,
                 FilteringOptions = filters
             };
-        var paginatedResult = await _repository.ListAsync(args);
+        var paginatedResult = await _repository.AdminListAsync(args);
         List = paginatedResult.Data;
         return new TableData<AigMedicamento>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
     }

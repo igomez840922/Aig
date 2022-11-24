@@ -12,6 +12,7 @@ namespace Aig.Farmacoterapia.Application.Medicament.Model
     public class HomeFilter : BaseFilter
     {
         public HomeFilter():base() {}
+        public string Or { get; set; } = "Algunos";
         public bool? MedicalPrescription { get; set; } = null;
         public bool? HospitalUse { get; set; } = null;
         public bool? PopularSale { get; set; } = null;

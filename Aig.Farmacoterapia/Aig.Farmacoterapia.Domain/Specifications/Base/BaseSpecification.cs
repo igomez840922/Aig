@@ -1,11 +1,13 @@
 ﻿using Aig.Farmacoterapia.Domain.Extensions;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using linqKit=LinqKit;
 using System.Linq.Expressions;
 
 namespace Aig.Farmacoterapia.Domain.Specifications.Base
 {
     public abstract class BaseSpecification<T> : ISpecification<T> where T : class, IEntity
     {
+        public linqKit.ExpressionStarter<T> Expression { get; set; }
         public Expression<Func<T, bool>> Criteria { get; set; }
         public List<Expression<Func<T, object>>> Includes { get; } = new();
         public List<string> IncludeStrings { get; } = new();
