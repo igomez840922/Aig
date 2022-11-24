@@ -307,6 +307,14 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.Establecimiento.Distrito?.Nombre ?? "");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Corregimiento");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.Establecimiento.Corregimiento?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ubicación");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.Establecimiento.Ubicacion);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Teléfono / Celular");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.Establecimiento.Telefono1);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("NOMBRE DE SOLICITANTE");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperCambUbicFarm.DatosSolicitante.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("NOMBRE DE SOLICITANTE");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperCambUbicFarm.DatosSolicitante.Nombre);
 
 
                                 table.Cell().AlignLeft().Text(" ");
