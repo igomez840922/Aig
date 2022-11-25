@@ -19,14 +19,15 @@
                             <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#applicantInfo" role="tab">@languageContainerService.Keys["ApplicantInfo"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#establecimientoInfo" role="tab">@languageContainerService.Keys["Generalidades del Establecimiento y Solicitante"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#regentInfo" role="tab">@languageContainerService.Keys["RegentInfo"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#regentInfo" role="tab">@languageContainerService.Keys["Datos Sobre el Regente Farmaceutico"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#condCaractLocalInfo" role="tab">@languageContainerService.Keys["Condiciones y Características del Local"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#condCaractLocalInfo" role="tab">@languageContainerService.Keys["Condiciones y Características del Establecimiento"]</a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#transportInfo" role="tab">@languageContainerService.Keys["Transporte"]</a>
                         </li>                       
@@ -35,12 +36,12 @@
                             <a class="nav-link" data-toggle="tab" href="#conclusionInfo" role="tab">@languageContainerService.Keys["ConclusionInfo"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#inspectorsApprovals" role="tab" @onclick="(e)=>{OnShowSignasure();}">@languageContainerService.Keys["InspectorsApprovals"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#inspectorsApprovals" role="tab" @onclick="(e)=>{OnShowSignasure();}">@languageContainerService.Keys["Firmas"]</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="generalInfo" role="tabpanel">
-                            <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
+                            <h5>@languageContainerService.Keys["GeneralInfo"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-4">
                                     <label>@languageContainerService.Keys["StartDate"]</label>
@@ -51,7 +52,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-4">
                                     <label for="password">@languageContainerService.Keys["Status"]</label>
                                     <div class="form-group">
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                @*<div class="col-sm-4">
                                     <label>@languageContainerService.Keys["Recibo de Pago"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -77,40 +77,8 @@
                                             <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.ReciboPago) />
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-4">
-                                    <label for="password">@languageContainerService.Keys["Establishments"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Inspeccion.EstablecimientoId
-                                                            AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
-                                                            Data=@lEstablecimientos TextProperty="Nombre" ValueProperty="Id"
-                                                            Change=@(args => {OnEstablishmentChange((args!=null?(long)args:null));}) />
-
-                                            <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-8">
-                                    <label>@languageContainerService.Keys["Location"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.UbicacionEstablecimiento" />
-                                            <ValidationMessage For=@(() => Inspeccion.UbicacionEstablecimiento) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label>@languageContainerService.Keys["BusinessPhone"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.TelefonoEstablecimiento" />
-                                            <ValidationMessage For=@(() => Inspeccion.TelefonoEstablecimiento) />
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>*@
+                            
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
@@ -161,18 +129,65 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-                        <div class="tab-pane" id="applicantInfo" role="tabpanel">
-                            <h4>@languageContainerService.Keys["ApplicantInfo"]</h4>
+                        <div class="tab-pane" id="establecimientoInfo" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Generalidades del Establecimiento"]</h5>                            
                             <div class="row clearfix">
                                 <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Establishments"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Inspeccion.EstablecimientoId
+                                                            AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                            Data=@lEstablecimientos TextProperty="Nombre" ValueProperty="Id"
+                                                            Change=@(args => {OnEstablishmentChange((args!=null?(long)args:null));}) />
+
+                                            <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Location"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.UbicacionEstablecimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.UbicacionEstablecimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["BusinessPhone"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.TelefonoEstablecimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.TelefonoEstablecimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>@languageContainerService.Keys["Información del Solicitante"]</h5>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-8">
                                     <label>@languageContainerService.Keys["FullName"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Nombre" />
                                             <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Tipo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Tipo" class="form-control">
+                                                @foreach (enumAUD_TipoSolicitante dt in Enum.GetValues(typeof(enumAUD_TipoSolicitante)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Tipo) />
                                         </div>
                                     </div>
                                 </div>
@@ -203,6 +218,70 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Email"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Email" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Email) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Residencia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect class="form-control" @bind-Value="@Inspeccion.InspAperCambUbicAgen.DatosSolicitante.PaisResidencia">
+                                                <option value=""></option>
+                                                @if (lPaises != null)
+                                                {
+                                                    foreach (var dt in lPaises)
+                                                    {
+                                                        <option value="@dt.Nombre">@dt.Nombre</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.PaisResidencia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Provincia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Provincia" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Provincia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Distrito"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Distrito" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Distrito) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Corregimiento"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Corregimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Corregimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Address"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Direccion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Direccion) />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-4">
                                     <label>@languageContainerService.Keys["MobilePhone"]</label>
                                     <div class="form-group">
@@ -222,24 +301,6 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label>@languageContainerService.Keys["ResidencePhone"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.TelefonoResid" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.TelefonoResid) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label>@languageContainerService.Keys["Email"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Email" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Email) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
                                     <label>@languageContainerService.Keys["Profession"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -248,20 +309,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Address"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Direccion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Direccion) />
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
                         <div class="tab-pane" id="regentInfo" role="tabpanel">
-                            <h4>@languageContainerService.Keys["RegentInfo"]</h4>
+                             <h5>@languageContainerService.Keys["RegentInfo"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-8">
                                     <label>@languageContainerService.Keys["FullName"]</label>
@@ -271,7 +323,7 @@
                                             <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.Nombre) />
                                         </div>
                                     </div>
-                                </div>
+                                </div>                                
                                 <div class="col-sm-4">
                                     <label>@languageContainerService.Keys["SuitabilityRegistrationNumber"]</label>
                                     <div class="form-group">
@@ -291,6 +343,70 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Email"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.Email" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.Email) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Residencia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect class="form-control" @bind-Value="@Inspeccion.InspAperCambUbicAgen.DatosRegente.PaisResidencia">
+                                                <option value=""></option>
+                                                @if (lPaises != null)
+                                                {
+                                                    foreach (var dt in lPaises)
+                                                    {
+                                                        <option value="@dt.Nombre">@dt.Nombre</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.PaisResidencia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Provincia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.Provincia" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.Provincia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Distrito"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.Distrito" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.Distrito) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Corregimiento"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.Corregimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.Corregimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Address"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.Ubicacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.Ubicacion) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
                                     <label>@languageContainerService.Keys["MobilePhone"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -308,38 +424,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <label>@languageContainerService.Keys["ResidencePhone"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.TelefonoResid" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.TelefonoResid) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label>@languageContainerService.Keys["Email"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.Email" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.Email) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Address"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.Ubicacion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.Ubicacion) />
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
                         <div class="tab-pane" id="condCaractLocalInfo" role="tabpanel">
-                            <h4>@languageContainerService.Keys["Condiciones y Características del Local"]</h4>
+                            <h5>@languageContainerService.Keys["Condiciones y Características del Establecimiento"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["El local está ubicado en área residencial? (está prohibido operar en unifamiliares habitadas o en áreas no clasificadas para la actividad comercial o áreas residenciales)"]</label>
@@ -450,11 +539,12 @@
                                 </div>
                             </div>
                             
-                            <h4>@languageContainerService.Keys["Área Administrativa"]</h4>
+
+                            <h5>@languageContainerService.Keys["Área Administrativa"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Dispone de área administrativa?"]</label>
-                                </div>  
+                                </div>
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Select"]</label>
                                     <div class="form-group">
@@ -478,10 +568,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                                 <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Área administrativa Identificada?"]</label>
-                                </div>  
+
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Identificada?"]</label>
+                                </div>
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Select"]</label>
                                     <div class="form-group">
@@ -505,10 +595,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                                 <div class="col-sm-12">
+
+                                <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Dirección de área administrativa?"]</label>
-                                </div>  
+                                </div>
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Select"]</label>
                                     <div class="form-group">
@@ -532,10 +622,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                                 <div class="col-sm-12">
+
+                                <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Dispone de servicios sanitarios y lavamanos?"]</label>
-                                </div>  
+                                </div>
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Select"]</label>
                                     <div class="form-group">
@@ -559,16 +649,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+
                             </div>
-                        
-                            <h4>@languageContainerService.Keys["Área de Recepción de Productos"]</h4>
-                             <div class="row clearfix">
-                                 <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Delimitada"]</label>
-                                </div>
+
+
+                            <h5>@languageContainerService.Keys["Área de Recepción de Productos"]</h5>
+                            <div class="row clearfix">
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Delimitada"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreasRecProducto.Delimitada" class="form-control">
@@ -591,11 +679,8 @@
                                     </div>
                                 </div>
 
-                                 <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Identificada"]</label>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                               <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Identificada"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreasRecProducto.Identificada" class="form-control">
@@ -617,12 +702,9 @@
                                         </div>
                                     </div>
                                 </div>
-                             
-                                  <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Limpia"]</label>
-                                </div>
+
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Limpia"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreasRecProducto.Limpia" class="form-control">
@@ -644,12 +726,9 @@
                                         </div>
                                     </div>
                                 </div>
-                             
-                                 <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Separada"]</label>
-                                </div>
+
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Separada"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreasRecProducto.Separada" class="form-control">
@@ -671,12 +750,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                                 <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Ordenada"]</label>
-                                </div>
+
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Ordenada"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreasRecProducto.Ordenada" class="form-control">
@@ -703,7 +779,7 @@
                                     <label>@languageContainerService.Keys["Dispone de estructuras en ésta área? (Tarimas, mesa de trabajo)"]</label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Tarimas"]</label>
+                                    <label for="password">@languageContainerService.Keys["Select"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreasRecProducto.DisponeEstructurasTarimas" class="form-control">
@@ -716,7 +792,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                @*<div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Mesas de Trabajo"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -729,8 +805,8 @@
                                             <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreasRecProducto.DisponeEstructurasMesas) />
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
+                                </div>*@
+                                <div class="col-sm-9">
                                     <label>@languageContainerService.Keys["Description"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -796,7 +872,8 @@
 
                             </div>
 
-                            <h4>@languageContainerService.Keys["Área de Almacenamiento"]</h4>
+                        
+                            <h5>@languageContainerService.Keys["Área de Almacenamiento"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Claramente Identificada?"]</label>
@@ -960,12 +1037,13 @@
                                     </div>
                                 </div>
 
+                            </div>
 
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Son adecuadas las condiciones de piso"]</label>
-                                </div>
+                            <h5>@languageContainerService.Keys["Son adecuadas las condiciones"]</h5>
+                            <div class="row clearfix">
+
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Piso"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CondPiso" class="form-control">
@@ -988,12 +1066,8 @@
                                     </div>
                                 </div>
 
-
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Son adecuadas las condiciones de techos"]</label>
-                                </div>
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Techos"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CondTecho" class="form-control">
@@ -1017,11 +1091,8 @@
                                 </div>
 
 
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Son adecuadas las condiciones de paredes"]</label>
-                                </div>
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Paredes"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CondParedes" class="form-control">
@@ -1044,11 +1115,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Son adecuadas las condiciones de iluminación"]</label>
-                                </div>
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Iluminación"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.Iluminacion" class="form-control">
@@ -1071,11 +1139,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Son adecuadas las condiciones de luces de emergencia"]</label>
-                                </div>
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Luces de Emergencia"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.LucesEmergencias" class="form-control">
@@ -1098,11 +1163,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Son adecuadas las condiciones de ventilación"]</label>
-                                </div>
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Condiciones de ventilación"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CondVentilacion" class="form-control">
@@ -1125,11 +1187,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Son adecuadas las condiciones de suministros eléctricos"]</label>
-                                </div>
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <label for="password">@languageContainerService.Keys["Suministros eléctricos"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CondSumElectricos" class="form-control">
@@ -1152,9 +1211,10 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Disponen de suficiente equipo para el control de incendios : Extintores "]</label>
-                                </div>
+                            </div>
+
+                            <h5>@languageContainerService.Keys["Disponen de suficiente equipo para el control de incendios"]</h5>
+                            <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Extintores"]</label>
                                     <div class="form-group">
@@ -1169,6 +1229,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioExtintoresDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioExtintoresDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Alarmas"]</label>
                                     <div class="form-group">
@@ -1180,6 +1250,15 @@
                                                 }
                                             </InputSelect>
                                             <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioAlarma) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioAlarmaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioAlarmaDesc) />
                                         </div>
                                     </div>
                                 </div>
@@ -1197,6 +1276,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioDetectHumoDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioDetectHumoDesc) />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Duchas"]</label>
                                     <div class="form-group">
@@ -1208,6 +1296,15 @@
                                                 }
                                             </InputSelect>
                                             <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioDuchas) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioDuchasDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioDuchasDesc) />
                                         </div>
                                     </div>
                                 </div>
@@ -1225,6 +1322,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioManguerasDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioManguerasDesc) />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Otros"]</label>
                                     <div class="form-group">
@@ -1239,16 +1345,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                 <div class="col-sm-9">
                                     <label>@languageContainerService.Keys["Description"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioDesc) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioOtrosDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.CtrIncendioOtrosDesc) />
                                         </div>
                                     </div>
                                 </div>
-
+                                
 
                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Existe señalización de rutas de evacuación en caso de siniestros?"]</label>
@@ -1276,7 +1382,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Existe salida de emergencia identificada del local?"]</label>
                                 </div>
@@ -1304,10 +1409,10 @@
                                     </div>
                                 </div>
 
+                            </div>
 
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Dispone de estructuras donde almacenen los productos?"]</label>
-                                </div>
+                            <h5>@languageContainerService.Keys["Dispone de estructuras donde almacenen los productos"]</h5>
+                            <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Anaqueles"]</label>
                                     <div class="form-group">
@@ -1322,6 +1427,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Observación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreAnaquelesDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreAnaquelesDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Racks"]</label>
                                     <div class="form-group">
@@ -1336,6 +1451,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Observación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreRacksDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreRacksDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Tarimas"]</label>
                                     <div class="form-group">
@@ -1350,6 +1475,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Observación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreTarimasDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreTarimasDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Estantes"]</label>
                                     <div class="form-group">
@@ -1364,6 +1499,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Observación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreEstantesDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreEstantesDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Palets"]</label>
                                     <div class="form-group">
@@ -1378,6 +1523,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Observación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobrePaletsDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobrePaletsDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Tablillas"]</label>
                                     <div class="form-group">
@@ -1392,6 +1547,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Observación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreTablillasDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreTablillasDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Otros"]</label>
                                     <div class="form-group">
@@ -1406,12 +1571,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Description"]</label>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Observación"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreDescrip" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreDescrip) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreOtrosDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.ProdSobreOtrosDesc) />
                                         </div>
                                     </div>
                                 </div>
@@ -1470,6 +1635,62 @@
                                     </div>
                                 </div>
 
+
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Cuenta con área de desperdicios?"]</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.AreaDesperdicio" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.AreaDesperdicio) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.AreaDesperdicioDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.AreaDesperdicioDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["El área de almacenamiento está libre de polvo?"]</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.AlmacenLibrePolvo" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.AlmacenLibrePolvo) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.AlmacenLibrePolvoDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.AlmacenLibrePolvoDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Existe un sistema para monitorear la temperatura y humedad  relativa  de acuerdo a las especificaciones de almacenamiento  del fabricante?"]</label>
                                 </div>
@@ -1523,7 +1744,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Temperatura actual?"]</label>
@@ -1650,7 +1870,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                @*<div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["No Beber"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -1691,8 +1911,8 @@
                                             <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.NoGuardarPlantasComidasBebidas) />
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12">
+                                </div>*@
+                                <div class="col-sm-9">
                                     <label>@languageContainerService.Keys["Description"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -1732,7 +1952,8 @@
 
                             </div>
 
-                            <h4>@languageContainerService.Keys["Área para Productos Retirados"]</h4>
+
+                            <h5>@languageContainerService.Keys["Área de Productos Retirados"]</h5>
                             <div class="row clearfix">
                                 
                                 <div class="col-sm-3">
@@ -1833,7 +2054,8 @@
 
                             </div>
 
-                            <h4>@languageContainerService.Keys["Área de cuarentena para productos"]</h4>
+
+                            <h5>@languageContainerService.Keys["Área de cuarentena para productos"]</h5>
                             <div class="row clearfix">
 
                                 <div class="col-sm-3">
@@ -1932,7 +2154,33 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12">
+                                 <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Las condiciones del área que pueden afectar los productos"]</label>                                    
+                                 </div>
+                                 <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Select"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProductosCuarentena.CondicionesArea" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProductosCuarentena.CondicionesArea) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProductosCuarentena.CondicionesAreaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProductosCuarentena.CondicionesAreaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Señale las condiciones del área  que pueden afectar los productos"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -1940,10 +2188,11 @@
                                             <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProductosCuarentena.CondicionesArea) />
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
 
-                            <h4>@languageContainerService.Keys["Área de despacho de productos"]</h4>
+
+                            <h5>@languageContainerService.Keys["Área de despacho de productos"]</h5>
                             <div class="row clearfix">
                             
                                 <div class="col-sm-3">
@@ -2125,7 +2374,7 @@
 
                             </div>
                         
-                            <h4>@languageContainerService.Keys["Área de almacenamiento de productos que requieren cadena de frío"]</h4>
+                            <h5>@languageContainerService.Keys["Área de almacenamiento de productos que requieren cadena de frío"]</h5>
                             <div class="row clearfix">
 
                                 <div class="col-sm-3">
@@ -2200,17 +2449,20 @@
                                     </div>
                                 </div>
 
+                                <div class="col-sm-12">
+                                    <label for="password">@languageContainerService.Keys["Se mantiene monitoreo de la temperatura y humedad de esta área"]</label>
+                                </div>
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Temperatura"]</label>
+                                    <label for="password">@languageContainerService.Keys["Select"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.Temperatura" class="form-control">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.RegistroMonitoreoTemp" class="form-control">
                                                 @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.Temperatura) />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.RegistroMonitoreoTemp) />
                                         </div>
                                     </div>
                                 </div>
@@ -2218,8 +2470,8 @@
                                     <label>@languageContainerService.Keys["Description"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.TemperaturaDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.TemperaturaDesc) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.RegistroMonitoreoTempDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.RegistroMonitoreoTempDesc) />
                                         </div>
                                     </div>
                                 </div>
@@ -2300,19 +2552,19 @@
                                 </div>
 
                                 <div class="col-sm-12">
-                                    <label for="password">@languageContainerService.Keys["Se mantiene registro del monitoreo de la temperatura?"]</label>
+                                    <label for="password">@languageContainerService.Keys["El área de almacenamiento con temperatura controlada posee sistema de alarma"]</label>
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Select"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.RegistroMonitoreoTemp" class="form-control">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.SistemaAlarma" class="form-control">
                                                 @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.RegistroMonitoreoTemp) />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.SistemaAlarma) />
                                         </div>
                                     </div>
                                 </div>
@@ -2320,164 +2572,16 @@
                                     <label>@languageContainerService.Keys["Description"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.RegistroMonitoreoTempDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.RegistroMonitoreoTempDesc) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.SistemaAlarmaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoFrio.SistemaAlarmaDesc) />
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <h4>@languageContainerService.Keys["Área de almacén de desperdicios que se generan y no pueden ser colocados en el área de almacenamiento"]</h4>
-                            <div class="row clearfix">
-
-                                <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Delimitada"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Delimitada" class="form-control">
-                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
-                                                {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                }
-                                            </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Delimitada) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <label>@languageContainerService.Keys["Description"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.DelimitadaDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.DelimitadaDesc) />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Identificada"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Identificada" class="form-control">
-                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
-                                                {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                }
-                                            </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Identificada) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <label>@languageContainerService.Keys["Description"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.IdentificadaDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.IdentificadaDesc) />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Limpia"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Limpia" class="form-control">
-                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
-                                                {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                }
-                                            </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Limpia) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <label>@languageContainerService.Keys["Description"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.LimpiaDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.LimpiaDesc) />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Asegurada"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Asegurada" class="form-control">
-                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
-                                                {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                }
-                                            </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Asegurada) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <label>@languageContainerService.Keys["Description"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.AseguradaDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.AseguradaDesc) />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Separada"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Separada" class="form-control">
-                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
-                                                {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                }
-                                            </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Separada) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <label>@languageContainerService.Keys["Description"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.SeparadaDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.SeparadaDesc) />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Ordenada"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Ordenada" class="form-control">
-                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
-                                                {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                }
-                                            </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Ordenada) />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <label>@languageContainerService.Keys["Description"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.OrdenadaDesc" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.OrdenadaDesc) />
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <h4>@languageContainerService.Keys["Área de Almacenamiento de productos volatiles"]</h4>
+                        
+                            <h5>@languageContainerService.Keys["Área de Almacenamiento de productos volatiles"]</h5>
                             <div class="row clearfix">
 
                                 <div class="col-sm-3">
@@ -2653,7 +2757,8 @@
 
                             </div>
 
-                            <h4>@languageContainerService.Keys["Área de Almacenamiento de Plaguicidas de Uso doméstico y Salud Pública"]</h4>
+
+                            <h5>@languageContainerService.Keys["Área de Almacenamiento de Plaguicidas de Uso doméstico y Salud Pública"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Delimitada"]</label>
@@ -2753,7 +2858,8 @@
 
                             </div>
 
-                            <h4>@languageContainerService.Keys["Área de Almacenamiento de Materia Prima para la Industria Farmacéutica"]</h4>
+
+                           <h5>@languageContainerService.Keys["Área de Almacenamiento de Materia Prima para la Industria Farmacéutica"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Delimitada"]</label>
@@ -2853,7 +2959,8 @@
 
                             </div>
                         
-                            <h4>@languageContainerService.Keys["Área de Almacenamiento de Productos sujetos a Control"]</h4>
+
+                            <h5>@languageContainerService.Keys["Área de Almacenamiento de Productos sujetos a Control"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Delimitada"]</label>
@@ -2951,6 +3058,30 @@
                                     </div>
                                 </div>
 
+                                 <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Independiente"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProdSujetosControl.Independiente" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProdSujetosControl.Independiente) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProdSujetosControl.IndependienteDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProdSujetosControl.IndependienteDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="password">@languageContainerService.Keys["Asegurada"]</label>
                                     <div class="form-group">
@@ -2976,7 +3107,7 @@
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Iluminación y Vnetilación"]</label>
+                                    <label for="password">@languageContainerService.Keys["Iluminación y Ventilación"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProdSujetosControl.Iluminacion" class="form-control">
@@ -3028,7 +3159,7 @@
 
 
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Monitora Temperatura"]</label>
+                                    <label for="password">@languageContainerService.Keys["Monitorea Temperatura"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProdSujetosControl.MonitorTemperatura" class="form-control">
@@ -3053,7 +3184,7 @@
 
 
                                 <div class="col-sm-3">
-                                    <label for="password">@languageContainerService.Keys["Monitora Humedad"]</label>
+                                    <label for="password">@languageContainerService.Keys["Monitorea Humedad"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaProdSujetosControl.MonitorHumedad" class="form-control">
@@ -3103,9 +3234,162 @@
 
                             </div>
 
+
+                            <h5>@languageContainerService.Keys["Área de almacén de desperdicios que se generan y no pueden ser colocados en el área de almacenamiento"]</h5>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Delimitada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Delimitada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Delimitada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.DelimitadaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.DelimitadaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Identificada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Identificada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Identificada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.IdentificadaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.IdentificadaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Limpia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Limpia" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Limpia) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.LimpiaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.LimpiaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Asegurada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Asegurada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Asegurada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.AseguradaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.AseguradaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Separada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Separada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Separada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.SeparadaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.SeparadaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="password">@languageContainerService.Keys["Ordenada"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Ordenada" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.Ordenada) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>@languageContainerService.Keys["Description"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.OrdenadaDesc" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamientoDesperdicio.OrdenadaDesc) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+
                         </div>
+
+                        
                         <div class="tab-pane" id="transportInfo" role="tabpanel">
-                            <h4>@languageContainerService.Keys["Transporte"]</h4>
+                            <h5>@languageContainerService.Keys["Transporte"]</h5>
                             <div class="row clearfix">
                                 
                                 <div class="col-sm-12">
@@ -3298,7 +3582,7 @@
                                 </div>
 
                             </div>
-                            <h4>@languageContainerService.Keys["Vehiculos Motorizados"]</h4>
+                            <h5>@languageContainerService.Keys["Vehiculos Motorizados"]</h5>
                             <div class="row clearfix">
 
                                 <div class="col-sm-12">
@@ -3494,10 +3778,9 @@
 
                             </div>
                         </div>
-                       
-                        
+
                         <div class="tab-pane" id="conclusionInfo" role="tabpanel">
-                            <h4>@languageContainerService.Keys["ConclusionInfo"]</h4>
+                            <h5>@languageContainerService.Keys["ConclusionInfo"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <label for="password">@languageContainerService.Keys["El local cumple  o no cumple con los requisitos mínimos para operar"]</label>
@@ -3523,7 +3806,7 @@
                             </div>
                         </div>
                             <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
-                            <h5>@languageContainerService.Keys["Concluciones y Firmas"]</h5>
+                            <h5>@languageContainerService.Keys["Firmas"]</h5>
                             <div class="row clearfix">
                                 <div class="col-sm-4">
                                     <label>@languageContainerService.Keys["Fecha de Finalización"]</label>
@@ -3689,7 +3972,6 @@
                             }
 
                         </div>
-                   
                     </div>
 
                     <br><br>

@@ -134,26 +134,38 @@ namespace DataModel
         // Extintores
         private enumAUD_TipoSeleccion ctrIncendioExtintores;
         public enumAUD_TipoSeleccion CtrIncendioExtintores { get => ctrIncendioExtintores; set => SetProperty(ref ctrIncendioExtintores, value); }
+        private string ctrIncendioExtintoresDesc;
+        public string CtrIncendioExtintoresDesc { get => ctrIncendioExtintoresDesc; set => SetProperty(ref ctrIncendioExtintoresDesc, value); }
 
         // Alarma
         private enumAUD_TipoSeleccion ctrIncendioAlarma;
         public enumAUD_TipoSeleccion CtrIncendioAlarma { get => ctrIncendioAlarma; set => SetProperty(ref ctrIncendioAlarma, value); }
+        private string ctrIncendioAlarmaDesc;
+        public string CtrIncendioAlarmaDesc { get => ctrIncendioAlarmaDesc; set => SetProperty(ref ctrIncendioAlarmaDesc, value); }
 
         // Detectores de Humo
         private enumAUD_TipoSeleccion ctrIncendioDetectHumo;
         public enumAUD_TipoSeleccion CtrIncendioDetectHumo { get => ctrIncendioDetectHumo; set => SetProperty(ref ctrIncendioDetectHumo, value); }
+        private string ctrIncendioDetectHumoDesc;
+        public string CtrIncendioDetectHumoDesc { get => ctrIncendioDetectHumoDesc; set => SetProperty(ref ctrIncendioDetectHumoDesc, value); }
 
         // Duchas
         private enumAUD_TipoSeleccion ctrIncendioDuchas;
         public enumAUD_TipoSeleccion CtrIncendioDuchas { get => ctrIncendioDuchas; set => SetProperty(ref ctrIncendioDuchas, value); }
+        private string ctrIncendioDuchasDesc;
+        public string CtrIncendioDuchasDesc { get => ctrIncendioDuchasDesc; set => SetProperty(ref ctrIncendioDuchasDesc, value); }
 
         // Mangueras
         private enumAUD_TipoSeleccion ctrIncendioMangueras;
         public enumAUD_TipoSeleccion CtrIncendioMangueras { get => ctrIncendioMangueras; set => SetProperty(ref ctrIncendioMangueras, value); }
+        private string ctrIncendioManguerasDesc;
+        public string CtrIncendioManguerasDesc { get => ctrIncendioManguerasDesc; set => SetProperty(ref ctrIncendioManguerasDesc, value); }
 
         // Otros
         private enumAUD_TipoSeleccion ctrIncendioOtros;
         public enumAUD_TipoSeleccion CtrIncendioOtros { get => ctrIncendioOtros; set => SetProperty(ref ctrIncendioOtros, value); }
+        private string ctrIncendioOtrosDesc;
+        public string CtrIncendioOtrosDesc { get => ctrIncendioOtrosDesc; set => SetProperty(ref ctrIncendioOtrosDesc, value); }
 
         // Observaciones
         private string ctrIncendioDesc;
@@ -210,24 +222,44 @@ namespace DataModel
         //Los productos farmacéuticos se almacenan sobre anaqueles, racks, tarimas o pallets 
         private enumAUD_TipoSeleccion prodSobreAnaqueles;
         public enumAUD_TipoSeleccion ProdSobreAnaqueles { get => prodSobreAnaqueles; set => SetProperty(ref prodSobreAnaqueles, value); }
-               
+        private string prodSobreAnaquelesDesc;
+        public string ProdSobreAnaquelesDesc { get => prodSobreAnaquelesDesc; set => SetProperty(ref prodSobreAnaquelesDesc, value); }
+
+
         private enumAUD_TipoSeleccion prodSobreRacks;
         public enumAUD_TipoSeleccion ProdSobreRacks { get => prodSobreRacks; set => SetProperty(ref prodSobreRacks, value); }
+        private string prodSobreRacksDesc;
+        public string ProdSobreRacksDesc { get => prodSobreRacksDesc; set => SetProperty(ref prodSobreRacksDesc, value); }
+
 
         private enumAUD_TipoSeleccion prodSobreTarimas;
         public enumAUD_TipoSeleccion ProdSobreTarimas { get => prodSobreTarimas; set => SetProperty(ref prodSobreTarimas, value); }
+        private string prodSobreTarimasDesc;
+        public string ProdSobreTarimasDesc { get => prodSobreTarimasDesc; set => SetProperty(ref prodSobreTarimasDesc, value); }
+
 
         private enumAUD_TipoSeleccion prodSobrePalets;
         public enumAUD_TipoSeleccion ProdSobrePalets { get => prodSobrePalets; set => SetProperty(ref prodSobrePalets, value); }
+        private string prodSobrePaletsDesc;
+        public string ProdSobrePaletsDesc { get => prodSobrePaletsDesc; set => SetProperty(ref prodSobrePaletsDesc, value); }
+
 
         private enumAUD_TipoSeleccion prodSobreOtros;
         public enumAUD_TipoSeleccion ProdSobreOtros { get => prodSobreOtros; set => SetProperty(ref prodSobreOtros, value); }
 
+        private string prodSobreOtrosDesc;
+        public string ProdSobreOtrosDesc { get => prodSobreOtrosDesc; set => SetProperty(ref prodSobreOtrosDesc, value); }
+
         private enumAUD_TipoSeleccion prodSobreEstantes;
         public enumAUD_TipoSeleccion ProdSobreEstantes { get => prodSobreEstantes; set => SetProperty(ref prodSobreEstantes, value); }
 
+        private string prodSobreEstantesDesc;
+        public string ProdSobreEstantesDesc { get => prodSobreEstantesDesc; set => SetProperty(ref prodSobreEstantesDesc, value); }
+
         private enumAUD_TipoSeleccion prodSobreTablillas;
         public enumAUD_TipoSeleccion ProdSobreTablillas { get => prodSobreTablillas; set => SetProperty(ref prodSobreTablillas, value); }
+        private string prodSobreTablillasDesc;
+        public string ProdSobreTablillasDesc { get => prodSobreTablillasDesc; set => SetProperty(ref prodSobreTablillasDesc, value); }
 
         // Debe mostrar las opciones Sí/No.  Debe desplegar un área de texto para las observaciones.
         private string prodSobreDescrip;
@@ -615,6 +647,25 @@ namespace DataModel
         [StringLength(500)]
         public string CriterioTecInspectorDesc { get => criterioTecInspectorDesc; set => SetProperty(ref criterioTecInspectorDesc, value); }
 
+
+        // Los muebles son colocados manteniendo un pie de distancia de las paredes y del techo
+        private enumAUD_TipoSeleccion areaDesperdicio;
+        public enumAUD_TipoSeleccion AreaDesperdicio { get => areaDesperdicio; set => SetProperty(ref areaDesperdicio, value); }
+
+        // Observaciones
+        private string areaDesperdicioDesc;
+        [StringLength(500)]
+        public string AreaDesperdicioDesc { get => areaDesperdicioDesc; set => SetProperty(ref areaDesperdicioDesc, value); }
+
+
+        // Los muebles son colocados manteniendo un pie de distancia de las paredes y del techo
+        private enumAUD_TipoSeleccion almacenLibrePolvo;
+        public enumAUD_TipoSeleccion AlmacenLibrePolvo { get => almacenLibrePolvo; set => SetProperty(ref almacenLibrePolvo, value); }
+
+        // Observaciones
+        private string almacenLibrePolvoDesc;
+        [StringLength(500)]
+        public string AlmacenLibrePolvoDesc { get => almacenLibrePolvoDesc; set => SetProperty(ref almacenLibrePolvoDesc, value); }
 
     }
 }

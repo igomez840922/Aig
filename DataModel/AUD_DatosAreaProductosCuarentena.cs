@@ -43,10 +43,19 @@ namespace DataModel
         public string AseguradaDesc { get => aseguradaDesc; set => SetProperty(ref aseguradaDesc, value); }
 
 
-        //condiciones del area
-        private string condicionesArea;
+        //Está asegurada
+        private enumAUD_TipoSeleccion condicionesArea;
+        public enumAUD_TipoSeleccion CondicionesArea { get => condicionesArea; set => SetProperty(ref condicionesArea, value); }
+        //Describa el lugar donde se almacenan y las medidas de seguridad
+        private string condicionesAreaDesc;
         [StringLength(500)]
-        public string CondicionesArea { get => condicionesArea; set => SetProperty(ref condicionesArea, value); }
+        public string CondicionesAreaDesc { get => condicionesAreaDesc; set => SetProperty(ref condicionesAreaDesc, value); }
+
+
+        ////condiciones del area
+        //private string condicionesArea;
+        //[StringLength(500)]
+        //public string CondicionesArea { get => condicionesArea; set => SetProperty(ref condicionesArea, value); }
 
     }
 
