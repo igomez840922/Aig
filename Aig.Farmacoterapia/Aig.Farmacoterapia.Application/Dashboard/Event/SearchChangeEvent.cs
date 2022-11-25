@@ -14,5 +14,6 @@ namespace Aig.Farmacoterapia.Application.Dashboard.Event
     public class SearchTermEvent
     {
         public string Term { get; set; }
+        public bool Refresh { get; set; } = true;
     }
 }

@@ -89,6 +89,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="wwwroot\files\datasheet\" />
     <Folder Include="wwwroot\files\users\" />
   </ItemGroup>
