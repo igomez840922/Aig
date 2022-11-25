@@ -226,7 +226,24 @@
 
                                 </div>
 
+                                
                                 <div _ngcontent-lil-c210="" class="mx-4">
+                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                            Registro sanitario:
+                                        </span>
+                                        <span _ngcontent-lil-c210="" class="text-dark-50">
+                                            @(!string.IsNullOrEmpty(@context.NumReg) ? @context.NumReg : "<Ninguno>")
+                                        </span>
+                                    </div>
+                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                            Revisiones :
+                                        </span>
+                                        <span _ngcontent-lil-c210="" class="text-dark-50">
+                                            @(!string.IsNullOrEmpty(@context.NumRen) ? @context.NumRen : "<Ninguna>")
+                                        </span>
+                                    </div>
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
 
                                         <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
@@ -244,6 +261,11 @@
                                         }
 
                                     </div>
+                                </div>
+
+                                <div _ngcontent-lil-c210="" class="mx-4">
+                                    
+                                    
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
                                         <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
                                             Fabricante:
@@ -276,7 +298,7 @@
                                             Concentración:
                                         </span>
                                         <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(context.Concentracion) ? context.Concentracion : "<Ninguna")
+                                            @(!string.IsNullOrEmpty(context.Concentracion) ? context.Concentracion : "<Ninguna>")
                                         </span>
                                     </div>
                                     <div _ngcontent-lil-c210="" class="d-flex mb-2">
@@ -375,7 +397,6 @@
     {
         try
         {
-
             modelFilter = new MedicamentFilter();
             dateRange = new DateRange();
             expirationRange = new DateRange();
@@ -447,6 +468,7 @@
         modelFilter.EndExpirationDate = dateRange.End;
         await table.ReloadServerData();
     }
+
     private async Task OnReset()
     {
         modelFilter = new MedicamentFilter();

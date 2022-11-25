@@ -38,7 +38,8 @@ else
                                     <button type="button" title="Borrar filtros" @onclick="() => OnClean()" class="action-btn f-right" href="#"><i class="fa fa-trash"></i></button>
                                     <button  type="button" title="Aplicar filtros" @onclick="() => OnSearch()" class="action-btn f-right" href="#"><i class="fa fa-filter"></i></button>
                                     
-                                    <MudCheckBox  style="margin-top: 5px;" @bind-Checked="@search.Or" Color="Color.Warning" Converter="@(new CustomStringToBoolConverter())">@(@search.Or)</MudCheckBox>
+                                    <MudCheckBox  style="margin-top: 5px;" @bind-Checked="@search.Or" Color="Color.Success" UnCheckedColor="Color.Error"  Converter="@(new CustomStringToBoolConverter())">@(@search.Or)</MudCheckBox>
+
                                    
                                     <hr style=" margin: 0px 0 10px 0!important;border-bottom: 1px solid #adcdec;"/>
                                        
@@ -311,14 +312,22 @@ else
     protected async override Task OnInitializedAsync()
     { 
         //search = new HomeFilter();
+       
         paginatedResult = new PaginatedResult<AigMedicamento>(){PageSize=20};
         Bus.Subscribe<SearchChangeEvent>(SearchChangeEventHandler);
         var uri = _navigation.ToAbsoluteUri(_navigation.Uri);
-       if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("term", out var _term)){
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("term", out var _term))
+        {
             await jsRuntime.InvokeVoidAsync("window.history.replaceState", null, "", "/");
             Bus.Publish(new SearchTermEvent { Term = _term });
         }
-        else await DoFetchData();
+        else
+        {  
+            Bus.Publish(new SearchTermEvent { Term = string.Empty , Refresh=false});
+            await DoFetchData();
+           
+        }
+      
         base.OnInitialized();
     }
 

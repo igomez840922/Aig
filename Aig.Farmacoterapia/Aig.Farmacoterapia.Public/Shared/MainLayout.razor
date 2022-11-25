@@ -200,6 +200,7 @@
     protected HomeFilter filter { get; set; } = new HomeFilter();
     protected async override Task OnInitializedAsync()
     {   
+       
         Bus.Subscribe<SearchTermEvent>(SearchChangeEventHandler);
         base.OnInitialized();
     }
@@ -209,7 +210,8 @@
         if (message is SearchTermEvent)
         {
            filter = new HomeFilter(){Term=message.Term};
-           Bus.Publish(new SearchChangeEvent { Filter = filter });
+           if(message.Refresh)
+             Bus.Publish(new SearchChangeEvent { Filter = filter });
            this.InvokeAsync(StateHasChanged);
         }
     }

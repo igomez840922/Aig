@@ -44,6 +44,9 @@ namespace Aig.Farmacoterapia.Admin.Models
         public virtual DbSet<Farmaceutico> Farmaceuticos { get; set; } = null!;
         public virtual DbSet<FarmaceuticoCo> FarmaceuticoCos { get; set; } = null!;
         public virtual DbSet<FormaFarmaceutica> FormaFarmaceuticas { get; set; } = null!;
+        public virtual DbSet<NewExipiente> NewExipientes { get; set; } = null!;
+        public virtual DbSet<NewPresentacione> NewPresentaciones { get; set; } = null!;
+        public virtual DbSet<NewRegistro> NewRegistros { get; set; } = null!;
         public virtual DbSet<Paise> Paises { get; set; } = null!;
         public virtual DbSet<Parametro> Parametros { get; set; } = null!;
         public virtual DbSet<ParametroCosmetico> ParametroCosmeticos { get; set; } = null!;
@@ -55,6 +58,7 @@ namespace Aig.Farmacoterapia.Admin.Models
         public virtual DbSet<Publicidad> Publicidads { get; set; } = null!;
         public virtual DbSet<RegistrosCo> RegistrosCos { get; set; } = null!;
         public virtual DbSet<Registrospublicidad> Registrospublicidads { get; set; } = null!;
+        public virtual DbSet<Registrossanitario> Registrossanitarios { get; set; } = null!;
         public virtual DbSet<Renovacioncambio> Renovacioncambios { get; set; } = null!;
         public virtual DbSet<Representante> Representantes { get; set; } = null!;
         public virtual DbSet<RepresentanteCo> RepresentanteCos { get; set; } = null!;
@@ -76,7 +80,8 @@ namespace Aig.Farmacoterapia.Admin.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=localhost;database=new_schema;user=root;password=Adm123+-*", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.30-mysql"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseMySql("server=localhost;database=new_schema;user=root;password=Adm123+-*;persist security info=False;connect timeout=300", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.30-mysql"));
             }
         }
 
@@ -1523,6 +1528,150 @@ namespace Aig.Farmacoterapia.Admin.Models
                     .HasColumnName("nombre_ff");
             });
 
+            modelBuilder.Entity<NewExipiente>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("new_exipientes");
+
+                entity.Property(e => e.ConcentracionExcipiente)
+                    .HasColumnType("text")
+                    .HasColumnName("concentracion_excipiente");
+
+                entity.Property(e => e.DescripcionExcipiente)
+                    .HasColumnType("text")
+                    .HasColumnName("descripcion_excipiente");
+
+                entity.Property(e => e.IdEvaluacion).HasColumnName("id_evaluacion");
+
+                entity.Property(e => e.IdProducto).HasColumnName("id_producto");
+
+                entity.Property(e => e._).HasColumnName("#");
+            });
+
+            modelBuilder.Entity<NewPresentacione>(entity =>
+            {
+                entity.HasKey(e => e._)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("new_presentaciones");
+
+                entity.Property(e => e._)
+                    .ValueGeneratedNever()
+                    .HasColumnName("#");
+
+                entity.Property(e => e.DescripcionPresenta)
+                    .HasColumnType("text")
+                    .HasColumnName("descripcion_presenta");
+
+                entity.Property(e => e.DescripcionPresentacion)
+                    .HasColumnType("text")
+                    .HasColumnName("descripcion_presentacion");
+
+                entity.Property(e => e.IdEvaluacion).HasColumnName("id_evaluacion");
+
+                entity.Property(e => e.IdRegistroSanitario).HasColumnName("id_registro_sanitario");
+            });
+
+            modelBuilder.Entity<NewRegistro>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("new_registros");
+
+                entity.Property(e => e.CondicionVenta)
+                    .HasColumnType("text")
+                    .HasColumnName("condicion_venta");
+
+                entity.Property(e => e.DescripcionEnvases)
+                    .HasColumnType("text")
+                    .HasColumnName("descripcion_envases");
+
+                entity.Property(e => e.FabricanteCorreo)
+                    .HasColumnType("text")
+                    .HasColumnName("fabricante_correo");
+
+                entity.Property(e => e.FabricanteDireccion)
+                    .HasColumnType("text")
+                    .HasColumnName("fabricante_direccion");
+
+                entity.Property(e => e.FabricanteIso2)
+                    .HasColumnType("text")
+                    .HasColumnName("fabricante_iso2");
+
+                entity.Property(e => e.FabricanteIso3)
+                    .HasColumnType("text")
+                    .HasColumnName("fabricante_iso3");
+
+                entity.Property(e => e.FabricanteNombre)
+                    .HasColumnType("text")
+                    .HasColumnName("fabricante_nombre");
+
+                entity.Property(e => e.FabricantePais)
+                    .HasColumnType("text")
+                    .HasColumnName("fabricante_pais");
+
+                entity.Property(e => e.FechaExpedicion)
+                    .HasColumnType("text")
+                    .HasColumnName("fecha_expedicion");
+
+                entity.Property(e => e.FechaExpiracion)
+                    .HasColumnType("text")
+                    .HasColumnName("fecha_expiracion");
+
+                entity.Property(e => e.FormaFarmaceutica)
+                    .HasColumnType("text")
+                    .HasColumnName("forma_farmaceutica");
+
+                entity.Property(e => e.IdEvaluacion).HasColumnName("id_evaluacion");
+
+                entity.Property(e => e.IdProducto).HasColumnName("id_producto");
+
+                entity.Property(e => e.IdRegistroSanitario).HasColumnName("id_registro_sanitario");
+
+                entity.Property(e => e.NombreAcondicionadorPrimario)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_acondicionador_primario");
+
+                entity.Property(e => e.NombreAcondicionadorSecundario)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_acondicionador_secundario");
+
+                entity.Property(e => e.NombreDistribuidorNacional)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_distribuidor_nacional");
+
+                entity.Property(e => e.NombreProducto)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_producto");
+
+                entity.Property(e => e.NombreTitular)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_titular");
+
+                entity.Property(e => e.NumeroRegistroSanitario).HasColumnName("numero_registro_sanitario");
+
+                entity.Property(e => e.Principio)
+                    .HasColumnType("text")
+                    .HasColumnName("principio");
+
+                entity.Property(e => e.RenovNumero).HasColumnName("renov_numero");
+
+                entity.Property(e => e.RenovTexto)
+                    .HasColumnType("text")
+                    .HasColumnName("renov_texto");
+
+                entity.Property(e => e.TipoMedicamento)
+                    .HasColumnType("text")
+                    .HasColumnName("tipo_medicamento");
+
+                entity.Property(e => e.ViaAdministracion)
+                    .HasColumnType("text")
+                    .HasColumnName("via_administracion");
+
+                entity.Property(e => e._).HasColumnName("#");
+            });
+
             modelBuilder.Entity<Paise>(entity =>
             {
                 entity.HasKey(e => e.CodigoPais)
@@ -2004,6 +2153,91 @@ namespace Aig.Farmacoterapia.Admin.Models
                 entity.Property(e => e.Registro)
                     .HasMaxLength(45)
                     .HasColumnName("registro");
+            });
+
+            modelBuilder.Entity<Registrossanitario>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("registrossanitarios");
+
+                entity.Property(e => e.Activos)
+                    .HasColumnType("text")
+                    .HasColumnName("activos");
+
+                entity.Property(e => e.CondicionVenta)
+                    .HasColumnType("text")
+                    .HasColumnName("condicion_venta");
+
+                entity.Property(e => e.DescripcionEnvases)
+                    .HasColumnType("text")
+                    .HasColumnName("descripcion_envases");
+
+                entity.Property(e => e.EstadoRegistro).HasColumnName("estado_registro");
+
+                entity.Property(e => e.Fabricante)
+                    .HasColumnType("text")
+                    .HasColumnName("fabricante");
+
+                entity.Property(e => e.FechaExpedicion)
+                    .HasColumnType("text")
+                    .HasColumnName("fecha_expedicion");
+
+                entity.Property(e => e.FechaExpiracion)
+                    .HasColumnType("text")
+                    .HasColumnName("fecha_expiracion");
+
+                entity.Property(e => e.IdEvaluacion).HasColumnName("id_evaluacion");
+
+                entity.Property(e => e.IdRegistroSanitario).HasColumnName("id_registro_sanitario");
+
+                entity.Property(e => e.NombreAcondicionadorPrimario)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_acondicionador_primario");
+
+                entity.Property(e => e.NombreAcondicionadorSecundario)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_acondicionador_secundario");
+
+                entity.Property(e => e.NombreDistribuidorNacional)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_distribuidor_nacional");
+
+                entity.Property(e => e.NombreProducto)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_producto");
+
+                entity.Property(e => e.NombreTitular)
+                    .HasColumnType("text")
+                    .HasColumnName("nombre_titular");
+
+                entity.Property(e => e.NumeroRegistroSanitario).HasColumnName("numero_registro_sanitario");
+
+                entity.Property(e => e.PaisFabricante)
+                    .HasColumnType("text")
+                    .HasColumnName("pais_fabricante");
+
+                entity.Property(e => e.Presentacion)
+                    .HasColumnType("text")
+                    .HasColumnName("presentacion");
+
+                entity.Property(e => e.RenovacionRegistroNumeracion)
+                    .HasColumnType("text")
+                    .HasColumnName("renovacion_registro_numeracion");
+
+                entity.Property(e => e.TipoProducto)
+                    .HasColumnType("text")
+                    .HasColumnName("tipo_producto");
+
+                entity.Property(e => e.ViaAdministracion)
+                    .HasColumnType("text")
+                    .HasColumnName("via_administracion");
+
+                entity.Property(e => e.VidaUtil)
+                    .HasColumnType("text")
+                    .HasColumnName("vida_util");
+
+                entity.Property(e => e._).HasColumnName("#");
             });
 
             modelBuilder.Entity<Renovacioncambio>(entity =>
