@@ -166,7 +166,7 @@ namespace Aig.Auditoria.Pages.Inspections
       
         private async Task DownloadPdf(long Id)
         {            
-            Stream stream = await pdfGenerationService.GenerateRetentionReceptionPDF(Id);
+            Stream stream = await pdfGenerationService.GenerateInspectionPDF(Id);
 
             if(stream != null)
             {
@@ -192,7 +192,7 @@ namespace Aig.Auditoria.Pages.Inspections
 
                     builder.TextBody = "Inspección #" + data.NumActa + " - " + DataModel.Helper.Helper.GetDescription(data.TipoActa);
 
-                    var stream = await pdfGenerationService.GenerateRetentionReceptionPDF(data.Id);
+                    var stream = await pdfGenerationService.GenerateInspectionPDF(data.Id);
                     if (stream != null)
                     {
                         builder.Attachments.Add("inspeccion.pdf", stream);

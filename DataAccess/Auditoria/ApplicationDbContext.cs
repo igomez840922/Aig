@@ -129,6 +129,11 @@ namespace DataAccess.Auditoria
        .Property(e => e.DatosConclusiones)
        .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
+            modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+    .Property(e => e.DatosAtendidosPor)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
+
+
             ///////////////////////////////////////////
             ///
 
@@ -175,6 +180,9 @@ namespace DataAccess.Auditoria
      .Property(e => e.DatosConclusiones)
      .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
+            modelBuilder.Entity<AUD_InspAperCambUbicAgenTB>()
+     .Property(e => e.DatosAtendidosPor)
+     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
 
             ///////////////////////////////////////////
             ///

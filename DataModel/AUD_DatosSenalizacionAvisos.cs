@@ -41,6 +41,15 @@ namespace DataModel
         private bool areaAsesoriaFarmaceutica;
         public bool AreaAsesoriaFarmaceutica { get => areaAsesoriaFarmaceutica; set => SetProperty(ref areaAsesoriaFarmaceutica, value); }
 
+        //Área de Asesoría Bibliografia texto.
+        private bool areaConsultasBibliograficasTxt;
+        public bool AreaConsultasBibliograficasTxt { get => areaConsultasBibliograficasTxt; set => SetProperty(ref areaConsultasBibliograficasTxt, value); }
+
+        //Área de Asesoría Bibliografia internet.
+        private bool areaConsultasBibliograficasInt;
+        public bool AreaConsultasBibliograficasInt { get => areaConsultasBibliograficasInt; set => SetProperty(ref areaConsultasBibliograficasInt, value); }
+
+
         //Área de consultas bibliográficas
         private bool areaConsultasBibliograficas;
         public bool AreaConsultasBibliograficas { get => areaConsultasBibliograficas; set => SetProperty(ref areaConsultasBibliograficas, value); }

@@ -99,9 +99,9 @@ namespace Aig.Auditoria.Components.Inspections
                 }
 
                 if (signaturePad5 != null)
-                    signaturePad5.Image = Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRepresentanteLegal;
+                    signaturePad5.Image = Inspeccion.InspAperCambUbicFarm.DatosAtendidosPor.Firma;
                 if (signaturePad6 != null)
-                    signaturePad6.Image = Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRegente;
+                    signaturePad6.Image = Inspeccion.InspAperCambUbicFarm.DatosRegente.Firma;
 
                 foreach (var partic in Inspeccion.InspAperCambUbicFarm.DatosConclusiones.LParticipantes)
                 {
@@ -203,11 +203,11 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRepresentanteLegal = await signaturePad5.ToDataURL(signatureType);
+            Inspeccion.InspAperCambUbicFarm.DatosAtendidosPor.Firma = await signaturePad5.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg5()
         {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRepresentanteLegal = null;
+            Inspeccion.InspAperCambUbicFarm.DatosAtendidosPor.Firma = null;
             signaturePad5.Image = null;
         }
         protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
@@ -217,11 +217,11 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRegente = await signaturePad6.ToDataURL(signatureType);
+            Inspeccion.InspAperCambUbicFarm.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg6()
         {
-            Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FirmaRegente = null;
+            Inspeccion.InspAperCambUbicFarm.DatosRegente.Firma = null;
             signaturePad6.Image = null;
         }
 

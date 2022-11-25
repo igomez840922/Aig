@@ -101,5 +101,10 @@ namespace DataModel
         private string observacion;
         public string Observacion { get => observacion; set => SetProperty(ref observacion, value); }
 
+        //Pais Residencia
+        private string paisResidencia;
+        public string PaisResidencia { get => paisResidencia; set => SetProperty(ref paisResidencia, value); }
+
+
     }
 }

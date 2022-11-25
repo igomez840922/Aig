@@ -140,6 +140,16 @@ namespace DataModel.Helper
 		No = 2,
 	}
 
+    public enum enumAUD_TipoSolicitante
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Propietario")]
+        Prop = 1,
+        [Description("Representante Legal")]
+        Rep = 2,
+    }
+
     public enum enumAUD_TipoIluminacion
     {
         [Description("N/A")]

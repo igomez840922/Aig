@@ -99,9 +99,9 @@ namespace Aig.Auditoria.Components.Inspections
 				}
 
 				if (signaturePad5 != null)
-					signaturePad5.Image = Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FirmaRepresentanteLegal;
+					signaturePad5.Image = Inspeccion.InspAperCambUbicAgen.DatosAtendidosPor.Firma;
 				if (signaturePad6 != null)
-					signaturePad6.Image = Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FirmaRegente;
+					signaturePad6.Image = Inspeccion.InspAperCambUbicAgen.DatosRegente.Firma;
 
 				foreach (var partic in Inspeccion.InspAperCambUbicAgen.DatosConclusiones.LParticipantes)
 				{
@@ -175,11 +175,11 @@ namespace Aig.Auditoria.Components.Inspections
 			{
 				var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
 			}
-			Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FirmaRepresentanteLegal = await signaturePad5.ToDataURL(signatureType);
+			Inspeccion.InspAperCambUbicAgen.DatosAtendidosPor.Firma = await signaturePad5.ToDataURL(signatureType);
 		}
 		protected async Task RemoveSignatureImg5()
 		{
-			Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FirmaRepresentanteLegal = null;
+            Inspeccion.InspAperCambUbicAgen.DatosAtendidosPor.Firma = null;
 			signaturePad5.Image = null;
 		}
 		protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
@@ -189,11 +189,11 @@ namespace Aig.Auditoria.Components.Inspections
 			{
 				var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
 			}
-			Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FirmaRegente = await signaturePad6.ToDataURL(signatureType);
+			Inspeccion.InspAperCambUbicAgen.DatosRegente.Firma= await signaturePad6.ToDataURL(signatureType);
 		}
 		protected async Task RemoveSignatureImg6()
 		{
-			Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FirmaRegente = null;
+            Inspeccion.InspAperCambUbicAgen.DatosRegente.Firma = null;
 			signaturePad6.Image = null;
 		}
 

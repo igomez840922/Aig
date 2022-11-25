@@ -98,13 +98,18 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
 
-       
+        //Datos Atendidos Por
+        private AUD_DatosAtendidosPor datosAtendidosPor;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosAtendidosPor DatosAtendidosPor { get => datosAtendidosPor; set => SetProperty(ref datosAtendidosPor, value); }
+
+
         /// <summary>
         /// Conclusión de Inspección
         /// </summary>
         /// 
 
-        
 
-	}
+
+    }
 }
