@@ -96,6 +96,7 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosAreaProductosControlados).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosAreaAlmacenamiento).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosAtendidosPor).IsModified = true;
                     DalService.DBContext.SaveChanges();
                 }
                 if (result.InspAperCambUbicAgen != null)
@@ -107,6 +108,7 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosRepresentLegal).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosCondicionesLocal).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosAtendidosPor).IsModified = true;
                     DalService.DBContext.SaveChanges();
                 }
                 if (result.InspAperFabricante != null)

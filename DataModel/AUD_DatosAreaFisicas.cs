@@ -32,6 +32,17 @@ namespace DataModel
         //Muebles separados de las paredes, pisos, y techos
         private bool mueblesSeparadosPared;
         public bool MueblesSeparadosPared { get => mueblesSeparadosPared; set => SetProperty(ref mueblesSeparadosPared, value); }
+        private string mueblesSeparadosParedDesc;
+        public string MueblesSeparadosParedDesc { get => mueblesSeparadosParedDesc; set => SetProperty(ref mueblesSeparadosParedDesc, value); }
+
+
+        // Debe dar breve explicación del por qué.
+        private string tipoMoviliario;
+        public string TipoMoviliario { get => tipoMoviliario; set => SetProperty(ref tipoMoviliario, value); }
+        // Debe dar breve explicación del por qué.
+        private string tipoMoviliarioEstado;
+        public string TipoMoviliarioEstado { get => tipoMoviliarioEstado; set => SetProperty(ref tipoMoviliarioEstado, value); }
+       
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DataBindable;
+using DataModel.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -57,6 +58,27 @@ namespace DataModel
         //Solicitante Profesion
         private string direccion;
         public string Direccion { get => direccion; set => SetProperty(ref direccion, value); }
+
+        //Pais Residencia
+        private string paisResidencia;
+        public string PaisResidencia { get => paisResidencia; set => SetProperty(ref paisResidencia, value); }
+
+        //Provincia
+        private string provincia;
+        public string Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+
+        //Distrito
+        private string distrito;
+        public string Distrito { get => distrito; set => SetProperty(ref distrito, value); }
+
+        //Corregimiento
+        private string corregimiento;
+        public string Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
+
+        //tipo de solicitante
+        private enumAUD_TipoSolicitante tipo;
+        public enumAUD_TipoSolicitante Tipo { get => tipo; set => SetProperty(ref tipo, value); }
+
 
     }
 }
