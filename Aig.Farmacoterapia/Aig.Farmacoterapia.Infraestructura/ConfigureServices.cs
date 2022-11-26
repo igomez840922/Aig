@@ -1,4 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Infrastructure.Application;
 using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Files;
 using Aig.Farmacoterapia.Infrastructure.Identity;
@@ -143,17 +144,18 @@ namespace Aig.Farmacoterapia.Infrastructure
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services
-                .AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
-                .AddTransient<IMedicamentRepository, MedicamentRepository>()
-                .AddTransient<IContryRepository, ContryRepository>()
-                .AddTransient<IPharmaceuticalRepository, PharmaceuticalRepository>()
-                .AddTransient<IMedicationRouteRepository, MedicationRouteRepository>()
-                .AddTransient<IMakerRepository, MakerRepository>()
-                .AddTransient<IUnitOfWork, UnitOfWork>()
-                .AddTransient<IUploadService, UploadService>();
+                .AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
+                .AddScoped<IMedicamentRepository, MedicamentRepository>()
+                .AddScoped<IContryRepository, ContryRepository>()
+                .AddScoped<IPharmaceuticalRepository, PharmaceuticalRepository>()
+                .AddScoped<IMedicationRouteRepository, MedicationRouteRepository>()
+                .AddScoped<IMakerRepository, MakerRepository>()
+                .AddScoped<IUnitOfWork, UnitOfWork>()
+                .AddScoped<IUploadService, UploadService>();
         }
         private static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<AppState>();
             services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();

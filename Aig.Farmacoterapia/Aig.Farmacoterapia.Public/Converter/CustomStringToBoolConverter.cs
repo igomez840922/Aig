@@ -2,6 +2,7 @@
 
 namespace Aig.Farmacoterapia.Public.Converter
 {
+   
     public class CustomStringToBoolConverter : BoolConverter<string>
     {
 

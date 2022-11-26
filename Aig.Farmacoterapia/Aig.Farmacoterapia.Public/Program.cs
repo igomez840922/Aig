@@ -22,7 +22,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddControllers();
 
 //For Components Comunucations Pul-Sub
-builder.Services.AddScoped<ComponentBus>();
+//builder.Services.AddScoped<ComponentBus>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
