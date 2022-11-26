@@ -11,6 +11,15 @@ namespace DataModel
     public class AUD_DatosAreaProdSujetosControl : SystemId
     {
         //Está identificada
+        private enumAUD_TipoSeleccion independiente;
+        public enumAUD_TipoSeleccion Independiente { get => independiente; set => SetProperty(ref independiente, value); }
+        //Describa el lugar donde se almacenan y las medidas de seguridad
+        private string independienteDesc;
+        [StringLength(500)]
+        public string IndependienteDesc { get => independienteDesc; set => SetProperty(ref independienteDesc, value); }
+
+
+        //Está identificada
         private enumAUD_TipoSeleccion identificada;
         public enumAUD_TipoSeleccion Identificada { get => identificada; set => SetProperty(ref identificada, value); }
         //Describa el lugar donde se almacenan y las medidas de seguridad

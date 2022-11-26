@@ -87,6 +87,16 @@ namespace DataModel
         [StringLength(500)]
         public string RegistroMonitoreoTempDesc { get => registroMonitoreoTempDesc; set => SetProperty(ref registroMonitoreoTempDesc, value); }
 
+
+        // Existe rampa para carga y descarga (cuando sea necesario)
+        private enumAUD_TipoSeleccion sistemaAlarma;
+        public enumAUD_TipoSeleccion SistemaAlarma { get => sistemaAlarma; set => SetProperty(ref sistemaAlarma, value); }
+
+        // Observaciones
+        private string sistemaAlarmaDesc;
+        [StringLength(500)]
+        public string SistemaAlarmaDesc { get => sistemaAlarmaDesc; set => SetProperty(ref sistemaAlarmaDesc, value); }
+
     }
 
 }
