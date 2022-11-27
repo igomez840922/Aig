@@ -49,8 +49,7 @@ namespace DataModel
         private string separadaDesc;
         [StringLength(500)]
         public string SeparadaDesc { get => separadaDesc; set => SetProperty(ref separadaDesc, value); }
-
-
+                
         // ¿Dispone de estructuras en esta área? (Tarimas, mesa de trabajo)
         private enumAUD_TipoSeleccion temperatura;
         public enumAUD_TipoSeleccion Temperatura { get => temperatura; set => SetProperty(ref temperatura, value); }

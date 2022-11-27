@@ -41,7 +41,7 @@
                             <a class="nav-link" data-toggle="tab" href="#conclusionInfo" role="tab">@languageContainerService.Keys["ConclusionInfo"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#inspectorsApprovals" role="tab" @onclick="(e)=>{OnShowSignasure();}">@languageContainerService.Keys["InspectorsApprovals"]</a>
+                            <a class="nav-link" data-toggle="tab" href="#inspectorsApprovals" role="tab" @onclick="(e)=>{OnShowSignasure();}">@languageContainerService.Keys["Firmas"]</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -52,7 +52,7 @@
                                     <label>@languageContainerService.Keys["StartDate"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Inspeccion.FechaInicio" />
+                                            <RadzenDatePicker TValue="DateTime" @bind-Value="Inspeccion.FechaInicio" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
                                             <ValidationMessage For=@(() => Inspeccion.FechaInicio) />
                                         </div>
                                     </div>
@@ -3011,7 +3011,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
-                            <h4>@languageContainerService.Keys["InspectorsApprovals"]</h4>
+                            <h4>@languageContainerService.Keys["Firmas"]</h4>
                             <div class="row clearfix">
                                 <div class="col-sm-4">
                                     <label>@languageContainerService.Keys["FinishedDate"]</label>

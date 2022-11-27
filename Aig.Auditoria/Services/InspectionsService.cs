@@ -109,6 +109,7 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosCondicionesLocal).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosConclusiones).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosAtendidosPor).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosActProd).IsModified = true;
                     DalService.DBContext.SaveChanges();
                 }
                 if (result.InspAperFabricante != null)

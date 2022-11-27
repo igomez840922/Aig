@@ -1,6 +1,6 @@
 ﻿
 /*Radzen contlrol*/
-input[type="text"].rz-inputtext {
+span.rz-calendar > input[type="text"].rz-inputtext {
     display: block !important;
     width: 100% !important;
     height: calc(1.5em + 1.3rem + 2px) !important;
@@ -15,11 +15,10 @@ input[type="text"].rz-inputtext {
     border-radius: 4px !important;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
 }
-
-.rz-dropdown {
+div.form-line > div.rz-dropdown {
     display: block !important;
     width: 100% !important;
-    height: calc(1.5em + 1.3rem + 2px) !important;
+    min-height: calc(1.5em + 1.3rem + 2px) !important;
     padding: 0.65rem 1rem !important;
     font-size: 1rem !important;
     font-weight: 400 !important;

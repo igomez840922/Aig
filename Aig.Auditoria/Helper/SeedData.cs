@@ -138,17 +138,23 @@ namespace Aig.Auditoria.Helper
                     }
                 }
 
-                //var prob = dalService.First<ProvinciaTB>();
-                //if (dalService.Count<AUD_EstablecimientoTB>() <= 0)
-                //{
-                //    AUD_EstablecimientoTB data = null;
-                //    for (int i = 0; i < 25; i++)
-                //    {
-                //        data = new AUD_EstablecimientoTB() { Nombre = "Establecimiento_" + i.ToString(), NumLicencia = "LicNum_" + i.ToString(), ProvinciaId = prob.Id };
-                //        dalService.Save(data);
-                //    }                    
-                //}
+                if (dalService.Count<ActividadEstablecimientoTB>() <= 0)
+                {
+                    var ldata = new List<ActividadEstablecimientoTB>() { new ActividadEstablecimientoTB() {Nombre= "Importación" }, new ActividadEstablecimientoTB() { Nombre = "Exportación" }, new ActividadEstablecimientoTB() { Nombre = "Reexportación" }, new ActividadEstablecimientoTB() { Nombre = "Almacenamiento" }, new ActividadEstablecimientoTB() { Nombre = "Distribución" }, new ActividadEstablecimientoTB() { Nombre = "Transporte" }, new ActividadEstablecimientoTB() { Nombre = "Comercialización al por mayor de materia prima para la industria farmacéutica" } };
+                    foreach (var data in ldata)
+                    {
+                        dalService.Save(data);
+                    }
+                }
 
+                if (dalService.Count<ProductoEstablecimientoTB>() <= 0)
+                {
+                    var ldata = new List<ProductoEstablecimientoTB>() { new ProductoEstablecimientoTB() { Nombre = "Materia prima para la industria farmacéutica" }, new ProductoEstablecimientoTB() { Nombre = "Medicamentos" }, new ProductoEstablecimientoTB() { Nombre = "Suplementos vitamínicos con propiedad terapéutica" }, new ProductoEstablecimientoTB() { Nombre = "Cosméticos" }, new ProductoEstablecimientoTB() { Nombre = "Plaguicidas de uso doméstico" }, new ProductoEstablecimientoTB() { Nombre = "Desinfectantes de uso doméstico y hospitalario" }};
+                    foreach (var data in ldata)
+                    {
+                        dalService.Save(data);
+                    }
+                }
 
                 //Probando Inspecciones
                 //if (await inspeccionService.Count() <= 0)

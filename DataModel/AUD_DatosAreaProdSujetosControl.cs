@@ -85,6 +85,15 @@ namespace DataModel
         public string IdentificadaVencidosDesc { get => identificadaVencidosDesc; set => SetProperty(ref identificadaVencidosDesc, value); }
 
         //Está ordenada
+        private enumAUD_TipoSeleccion monitorTemperaturaHumedad;
+        public enumAUD_TipoSeleccion MonitorTemperaturaHumedad { get => monitorTemperaturaHumedad; set => SetProperty(ref monitorTemperaturaHumedad, value); }
+        //Describa el lugar donde se almacenan y las medidas de seguridad
+        private string monitorTemperaturaHumedadDesc;
+        [StringLength(500)]
+        public string MonitorTemperaturaHumedadDesc { get => monitorTemperaturaHumedadDesc; set => SetProperty(ref monitorTemperaturaHumedadDesc, value); }
+
+
+        //Está ordenada
         private enumAUD_TipoSeleccion monitorTemperatura;
         public enumAUD_TipoSeleccion MonitorTemperatura { get => monitorTemperatura; set => SetProperty(ref monitorTemperatura, value); }
         //Describa el lugar donde se almacenan y las medidas de seguridad
@@ -105,8 +114,13 @@ namespace DataModel
         public enumAUD_TipoSeleccion MantineRegistro { get => mantineRegistro; set => SetProperty(ref mantineRegistro, value); }
 
         private string mantineRegistroDesc;
-        [StringLength(500)]
         public string MantineRegistroDesc { get => mantineRegistroDesc; set => SetProperty(ref mantineRegistroDesc, value); }
+
+        private string respnsableArea;
+        public string RespnsableArea { get => respnsableArea; set => SetProperty(ref respnsableArea, value); }
+
+        private string lugarDesc;
+        public string LugarDesc { get => lugarDesc; set => SetProperty(ref lugarDesc, value); }
 
     }
 

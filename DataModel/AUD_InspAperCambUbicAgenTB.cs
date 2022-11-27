@@ -16,6 +16,8 @@ namespace DataModel
             DatosRegente = new AUD_DatosRegente();
             DatosRepresentLegal = new AUD_DatosRepresentLegal();
             DatosCondicionesLocal = new AUD_DatosCondicionesLocal();
+            DatosAtendidosPor = new AUD_DatosAtendidosPor();
+            DatosActProd = new AUD_DatosActProd();
 
             DatosConclusiones = new AUD_DatosConclusiones();
         }
@@ -61,6 +63,11 @@ namespace DataModel
         private AUD_DatosAtendidosPor datosAtendidosPor;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosAtendidosPor DatosAtendidosPor { get => datosAtendidosPor; set => SetProperty(ref datosAtendidosPor, value); }
+
+        //Datos Actividades y Productos
+        private AUD_DatosActProd datosActProd;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosActProd DatosActProd { get => datosActProd; set => SetProperty(ref datosActProd, value); }
 
     }
 }

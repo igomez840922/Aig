@@ -26,6 +26,7 @@ namespace DataModel
             DatosAreaProductosControlados = new AUD_DatosAreaProductosControlados();
             DatosAreaAlmacenamiento = new AUD_DatosAreaAlmacenamiento();
             DatosConclusiones = new AUD_DatosConclusiones();
+            DatosAtendidosPor = new AUD_DatosAtendidosPor();
         }
 
         private AUD_InspeccionTB inspeccion;

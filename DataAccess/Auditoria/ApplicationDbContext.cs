@@ -184,6 +184,10 @@ namespace DataAccess.Auditoria
      .Property(e => e.DatosAtendidosPor)
      .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
 
+            modelBuilder.Entity<AUD_InspAperCambUbicAgenTB>()
+    .Property(e => e.DatosActProd)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosActProd>(x));
+
             ///////////////////////////////////////////
             ///
 
@@ -331,6 +335,7 @@ namespace DataAccess.Auditoria
         }
        
         public virtual DbSet<AttachmentTB> Attachment { get; set; }
+        public virtual DbSet<ActividadEstablecimientoTB> ActividadEstablecimiento { get; set; }
         public virtual DbSet<AUD_EstablecimientoTB> AUD_Establecimiento { get; set; }
         public virtual DbSet<AUD_InspAperFabricanteTB> AUD_InspAperFabricante { get; set; }
         public virtual DbSet<AUD_InspAperCambUbicAgenTB> AUD_InspAperCambUbicAgen { get; set; }
@@ -342,6 +347,7 @@ namespace DataAccess.Auditoria
         public virtual DbSet<CorregimientoTB> Corregimiento { get; set; }
         public virtual DbSet<DistritoTB> Distrito { get; set; }
         public virtual DbSet<PaisTB> Pais { get; set; }
+        public virtual DbSet<ProductoEstablecimientoTB> ProductoEstablecimiento { get; set; }
         public virtual DbSet<ProvinciaTB> Provincia { get; set; }
         public virtual DbSet<SmtpCorreoTB> SmtpCorreo { get; set; }
         public virtual DbSet<UserProfileTB> UserProfile { get; set; }
