@@ -1,81 +1,123 @@
 ﻿@using Aig.Farmacoterapia.Application.Dashboard.Event
 @using Aig.Farmacoterapia.Application.Medicament.Model
+@using Aig.Farmacoterapia.Infrastructure.Application
 @using Blazored.FluentValidation
 @inherits LayoutComponentBase
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @inject NavigationManager _navigation;
-@inject IJSRuntime jsRuntime;
-<PageTitle>Aig.Farmacoterapia.Public</PageTitle>
+@inject AppState _appState;
+
+<PageTitle>Medicamentos</PageTitle>
 
 <style>
-    .mud-typography-body1{
-        margin-left:3px !important;
-    }
+.product-text h5 {
+   
+    margin-top: 8px;
+}
+.product-text h4 a {
+    text-decoration: underline !important;
+}
+
+
+#scrollUp {
+    margin-bottom: 10px !important;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+#scrollUp:hover {
+	 background: #e4573d !important;
+}
+.product-02-tab ul li a {
+    border: 1px solid #e4e4e4 !important;
+}
+
+.product-03-wrapper .product-text h4 {
+    font-size: 17px !important;
+}
+
+.mud-typography-body1 {
+    margin-left: 3px !important;
+}
+
 .product-list-content p {
-    margin:0 !important;
+    margin: 0 !important;
 }
+
 .product-text {
-    margin:0 !important;
+    margin: 0 !important;
 }
+
 .product-03-wrapper {
     padding: 10px 10px 35px 10px !important;
 }
+
 .action-btn {
     height: 30px !important;
     width: 30px !important;
     line-height: 0px !important;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }
+
 .category-sidebar {
-
-    background: #f8f8f8 !important;
+   /*background: #f8f8f8 !important;*/ 
+    border: 1px solid #e4e4e4 !important;
+}
+.header-search-form input {
+    background: #fff !important;
+  
 }
 
-    .product-text span {
+.product-text span {
     /*color: #e4573d;*/
-      color: #4e97fd !important;
-      font-weight: normal !important;
-   
+    color: #4e97fd !important;
+    font-weight: normal !important;
 }
 
-    .mud-icon-button {
-        padding: 0 !important
-    }
+.my-mud-icon-button .mud-icon-button {
+    padding: 0 !important;
+}
 
-    .header-02-search .header-search-form button {
-        color: #ededed !important;
-        right: 2px !important;
-        top: 5px !important;
-        transition: all 0.3s ease 0s !important;
-        cursor: pointer !important;
-        height: 40px !important;
-        width: 40px !important;
-        background: #4e97fd !important;
-        border-radius: 50% !important;
-    }
- 
-   .header-02-search .header-search-form button:hover {
-        background: #e4573d !important;
-     }
-   .header-02-search .header-search-form input {
+.header-02-search .header-search-form button {
+    color: #ededed !important;
+    right: 2px !important;
+    top: 5px !important;
+    transition: all 0.3s ease 0s !important;
+    cursor: pointer !important;
+    height: 40px !important;
+    width: 40px !important;
+    background: #4e97fd !important;
+    border-radius: 50% !important;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.header-02-search .header-search-form button:hover {
+    background: #e4573d !important;
+}
+
+.header-02-search .header-search-form input {
     padding: 20px 60px 20px 20px !important;
+    border: 1px solid #e4e4e4 !important;
 }
-.filterLabel{
+
+.filterLabel {
     font-size: 16px;
     color: #848181;
     position: relative;
     font-weight: 400;
     margin: 2px 0 0 5px;
 }
+
 .shop-menu ul li a {
     color: #fff !important;
 }
+
 .shop-menu ul li a:hover {
     color: #fff !important;
 }
 </style>
 
 <header>
-    <div class="header-top-area pl-165 pr-165" style="background-color: #4e97fd !important;">
+    <div class="header-top-area pl-165 pr-165" style="background-color: #4e97fd !important;box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);">
         <div class="container-fluid" style="margin-top: 20px !important;">
             <div class="row">
                 <div class="col-xl-8 col-lg-6 col-md-6">
@@ -117,22 +159,16 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-3">
-                    <div class="logo" style="margin-top: 30px;">
+                    <div class="logo" style="margin-top: 20px;">
                         <a href="/"><img src="assets/img/logo/logo.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-9">
                     <div class="header-search header-02-search" style="margin-top: 15px;">
-                       @*  <EditForm Model="this" class="header-search-form">
-                           <input type="text" @bind-value="Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante"  @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
-                           <input type="text" placeholder="Buscar por registro / nombre / principio activo / fabricante" @bind-value="@modelFilter.Term" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()" />
-                            <button type="button" @onclick="() => OnSearch()"><i class="far fa-search"></i></button>
-                            </EditForm>*@
-
                      
                             <EditForm Model="this" class="header-search-form" OnValidSubmit="OnSearch">
                                 <FluentValidationValidator />
-                                <input type="text" @bind-value="filter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
+                                <input type="text" @bind-value="@_searchText" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
                                 <button type="submit"><i class="far fa-search"></i></button>
                             </EditForm>
                           
@@ -170,7 +206,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-xl-6 col-lg-6 col-md-6">
+                <div class="col-xl-5 col-lg-5 col-md-5">
                     @* <div class="footer-bottom-link f-right">
                         <ul>
                         <li><a href="#">Home </a></li>
@@ -180,11 +216,11 @@
                         </ul>
                         </div>*@
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6">
+                <div class="col-xl-7 col-lg-7 col-md-7">
                     <div class="copyright">
                         <p>
                             Copyright
-                            <i class="far fa-copyright"></i> @DateTime.Now.Year <a href="https://soaint.com/">SOAINT</a>
+                            <i class="far fa-copyright"></i> @DateTime.Now.Year <a target="_blank" href="https://soaint.com/">SOAINT</a>
                         </p>
                     </div>
                 </div>
@@ -196,48 +232,28 @@
 <MudThemeProvider />
 
 @code {
-   
-    protected HomeFilter filter { get; set; } = new HomeFilter();
+
+    protected string _searchText { get; set; } = string.Empty;
     protected async override Task OnInitializedAsync()
-    {   
-       
-        Bus.Subscribe<SearchTermEvent>(SearchChangeEventHandler);
+    {    
         base.OnInitialized();
     }
-     private void SearchChangeEventHandler(MessageArgs args)
-    {
-        var message = args.GetMessage<SearchTermEvent>();
-        if (message is SearchTermEvent)
-        {
-           filter = new HomeFilter(){Term=message.Term};
-           if(message.Refresh)
-             Bus.Publish(new SearchChangeEvent { Filter = filter });
-           this.InvokeAsync(StateHasChanged);
-        }
-    }
-
+   
     private void OnSearch()
     {
         var path= _navigation.ToBaseRelativePath(_navigation.Uri);
-        if (path.Contains("details")){
-            var homeUrl = "./";
-            if (!string.IsNullOrEmpty(filter.Term))
-                homeUrl = $"./?term={filter.Term}";
-                _navigation.NavigateTo(homeUrl,true);
+        if (path.Contains("details")) {  
+            _appState.SetSerachWithoutEvent(_searchText);
+             _navigation.NavigateTo("./");
         }
-       else
-         Bus.Publish(new SearchChangeEvent { Filter = filter });
+        else
+           _appState.SetSerachText(_searchText);
     }
 
     private void OnSearchChanged()
     {  
-       if (string.IsNullOrEmpty(filter.Term)) {
-            Bus.Publish(new SearchChangeEvent { Filter = filter });
-       }
-    }
-
-    private void OnClean() {
-        filter = new HomeFilter();
-        Bus.Publish(new SearchChangeEvent { Filter = filter });
+        if (string.IsNullOrEmpty(_searchText)) {
+            _appState.SetSerachText(_searchText);
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Aig.Farmacoterapia.Application.Dashboard.Event
 {
     public class SearchChangeEvent
     {
-        public HomeFilter Filter { get; set; }
+        public string SearchText { get; set; }
     }
     public class SearchTermEvent
     {

@@ -8,8 +8,10 @@
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Interfaces
+@using Aig.Farmacoterapia.Infrastructure.Application
 @using Aig.Farmacoterapia.Infrastructure.Configuration
 @using Aig.Farmacoterapia.Public.Converter
+@using Aig.Farmacoterapia.Public.Extensions
 @using BlazorComponentBus
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.Extensions.Options
@@ -17,7 +19,8 @@
 @inject IMedicamentRepository _repository;
 @inject IOptions<AppConfiguration> _config;
 @inject NavigationManager _navigation;
-@inject IJSRuntime jsRuntime;
+@inject AppState _appState;
+@implements IDisposable;
 
 @if (loading)
 {
@@ -38,28 +41,29 @@ else
                                     <button type="button" title="Borrar filtros" @onclick="() => OnClean()" class="action-btn f-right" href="#"><i class="fa fa-trash"></i></button>
                                     <button  type="button" title="Aplicar filtros" @onclick="() => OnSearch()" class="action-btn f-right" href="#"><i class="fa fa-filter"></i></button>
                                     
-                                    <MudCheckBox  style="margin-top: 5px;" @bind-Checked="@search.Or" Color="Color.Success" UnCheckedColor="Color.Error"  Converter="@(new CustomStringToBoolConverter())">@(@search.Or)</MudCheckBox>
-
+                                    <div>
+                                        <MudSwitch   style="margin-top: 5px;" @bind-Checked="@search.Or" Color="Color.Info" UnCheckedColor="Color.Error"  Converter="@(new CustomStringToBoolConverter())">@(@search.Or)</MudSwitch >
+                                    </div>
                                    
                                     <hr style=" margin: 0px 0 10px 0!important;border-bottom: 1px solid #adcdec;"/>
                                        
                                      <div style="display:flex">
                                         <div>
-                                            <MudCheckBox  TriState="true" @bind-Checked="@search.MedicalPrescription" Color="Color.Info">  Prescripción Médica </MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button"  TriState="true" @bind-Checked="@search.MedicalPrescription" Color="Color.Error"  UnCheckedColor="Color.Info" >  Prescripción Médica </MudCheckBox>
                                         </div>
                                        
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.HospitalUse" Color="Color.Info">Uso Hospitalario </MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button" TriState="true" @bind-Checked="@search.HospitalUse"  Color="Color.Error"  UnCheckedColor="Color.Info">Uso Hospitalario </MudCheckBox>
                                         </div>
                                        
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.PopularSale" Color="Color.Info">Venta Popular</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button"  TriState="true" @bind-Checked="@search.PopularSale"  Color="Color.Error"  UnCheckedColor="Color.Info">Venta Popular</MudCheckBox>
                                         </div>
                                         
                                        
@@ -69,7 +73,7 @@ else
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.ChemicalSynthesis" Color="Color.Info">Síntesis Química </MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button" TriState="true" @bind-Checked="@search.ChemicalSynthesis"  Color="Color.Error"  UnCheckedColor="Color.Info">Síntesis Química </MudCheckBox>
                                         </div>
                                        
                                        
@@ -77,7 +81,7 @@ else
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.Orphans" Color="Color.Info">Huérfanos</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button" TriState="true" @bind-Checked="@search.Orphans"  Color="Color.Error"  UnCheckedColor="Color.Info">Huérfanos</MudCheckBox>
                                         </div>
                                         
                                         
@@ -86,7 +90,7 @@ else
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.Homeopathic" Color="Color.Info">Homeopáticos</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button"  TriState="true" @bind-Checked="@search.Homeopathic"  Color="Color.Error"  UnCheckedColor="Color.Info">Homeopáticos</MudCheckBox>
                                         </div>
                                        
                                        
@@ -94,21 +98,21 @@ else
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox  TriState="true" @bind-Checked="@search.Phytopharmaceuticals" Color="Color.Info">Fitofármacos</MudCheckBox>
+                                            <MudCheckBox  Class="my-mud-icon-button"  TriState="true" @bind-Checked="@search.Phytopharmaceuticals"  Color="Color.Error"  UnCheckedColor="Color.Info">Fitofármacos</MudCheckBox>
                                         </div>
                                        
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.Biotechnological" Color="Color.Info">Biotecnológicos</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button"  TriState="true" @bind-Checked="@search.Biotechnological"  Color="Color.Error"  UnCheckedColor="Color.Info">Biotecnológicos</MudCheckBox>
                                         </div>
                                        
                                     </div>
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.Biological" Color="Color.Info">Biológicos</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button" TriState="true" @bind-Checked="@search.Biological"  Color="Color.Error"  UnCheckedColor="Color.Info">Biológicos</MudCheckBox>
                                         </div>
                                        
                                        
@@ -120,7 +124,7 @@ else
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.Reference" Color="Color.Info">Medicamento de Referencia</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button" TriState="true" @bind-Checked="@search.Reference"  Color="Color.Error"  UnCheckedColor="Color.Info">Medicamento de Referencia</MudCheckBox>
                                         </div>
                                         
                                        
@@ -128,21 +132,21 @@ else
 
                                     <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.Interchangeable" Color="Color.Info">Medicamento Intercambiable</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button" TriState="true" @bind-Checked="@search.Interchangeable"  Color="Color.Error"  UnCheckedColor="Color.Info">Medicamento Intercambiable</MudCheckBox>
                                         </div>
                                        
                                     </div>
 
                                      <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.Generic" Color="Color.Info">Medicamento Genérico</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button" TriState="true" @bind-Checked="@search.Generic"  Color="Color.Error"  UnCheckedColor="Color.Info">Medicamento Genérico</MudCheckBox>
                                         </div>
                                     
                                     </div>
 
                                       <div style="display:flex">
                                         <div>
-                                            <MudCheckBox TriState="true" @bind-Checked="@search.Mark" Color="Color.Info">Medicamento de Marca</MudCheckBox>
+                                            <MudCheckBox Class="my-mud-icon-button" TriState="true" @bind-Checked="@search.Mark"  Color="Color.Error"  UnCheckedColor="Color.Info">Medicamento de Marca</MudCheckBox>
                                         </div>
                                        
                                     </div>
@@ -161,7 +165,7 @@ else
         <div class="pro-ful-tab">
             <div class="row">
                 <div class="col-xl-4 col-lg-3 col-md-3">
-                    <div class="product-02-tab" style="margin-bottom: 15px;">
+                    <div class="product-02-tab" style="margin: 0 10px 10px 10px !important;">
                         <ul class="nav justify-content-start product-nav" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -180,14 +184,14 @@ else
                 </div>
 
             </div>
-            <div class="product-tab-content">
+            <div class="product-tab-content" style="padding: 10px !important; margin: 10px !important; border: 1px solid #e4e4e4 !important;">
                 <div class="tab-content" id="myTabContent">
 
                     @if (paginatedResult == null || paginatedResult.Data.Count == 0)
                     {
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 offset-lg-3 offset-xl-3">
-                                <div class="section-title text-center mb-65">
+                                <div class="section-title text-center" style="padding: 50px !important;">
                                     <h2>No se encontraron resultados</h2>
                                     <p>Intente cambiar los parámetros de búsqueda </p>
                                 </div>
@@ -201,32 +205,39 @@ else
                             <div class="row">
                                 @foreach (var context in paginatedResult.Data)
                                 {
-
+                              
                                     <div class="col-xl-3 cl-lg-3 col-md-6">
-                                        <div class="product-03-wrapper grey-2-bg pos-rel text-center mb-30">
+                                        <div style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;" class="product-03-wrapper pos-rel text-center mb-30">
                                             <div class="product-02-img pos-rel">
 
                                                 @if (!string.IsNullOrEmpty(@context.PictureData))
                                                 {
                                                     <a target="_blank" href="/details/@context.Id">
-                                                        <img src="@context.PictureData" Width="350" Height="250" Elevation="25" Class="rounded-lg" />
+                                                        <img src="@context.PictureData" Width="150" Height="150" />
                                                     </a>
                                                 }
                                                 else
                                                 {
-                                                    <a href="/details/@context.Id">
-                                                        <img src="assets/img/products/no-image.png" Width="350" Height="250" alt="">
+                                                    <a target="_blank" href="/details/@context.Id">
+                                                        <img src="assets/img/products/no-image.png" Width="150" Height="140" >
                                                     </a>
                                                 }
 
                                             </div>
                                             <div class="product-text">
-
-                                                <h4><a href="/details/@context.Id">@context.Nombre</a></h4>
-                                                <h5>@context.Principio</h5>
+                                               
+                                                <h4>
+                                                    <a target="_blank" href="/details/@context.Id">@context.Nombre</a>
+                                                </h4>
+                                              
                                                 <span>
-                                                    @(!string.IsNullOrEmpty(@context.FormaFarmaceutica?.Nombre) ? @context.FormaFarmaceutica?.Nombre : "-")
+                                                    @context.Principio
                                                 </span>
+
+                                                 <h5>
+                                                   @(!string.IsNullOrEmpty(@context.FormaFarmaceutica?.Nombre) ? @context.FormaFarmaceutica?.Nombre : "-")
+                                                </h5>
+
                                             </div>
                                         </div>
                                     </div>
@@ -239,8 +250,8 @@ else
                          @foreach (var context in paginatedResult.Data)
                          {
                              <div class="row">
-                                    <div class="col-2">
-                                        <div class="product">
+                                    <div class="col-3">
+                                        <div class="product" style="box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px; margin: 5px 5px 15px 5px;">
                                             <div class="product-img">
                                                
                                                 @if (!string.IsNullOrEmpty(@context.PictureData))
@@ -251,18 +262,22 @@ else
                                                 }
                                                 else
                                                 {
-                                                    <a href="/details/@context.Id">
-                                                        <img src="assets/img/products/no-image.png" Width="250" Height="200" alt="">
+                                                    <a target="_blank" href="/details/@context.Id">
+                                                        <img src="assets/img/products/no-image.png" Width="250" Height="230" alt="">
                                                     </a>
                                                 }
 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-10">
+                                    <div class="col-9">
                                         <div class="product-list-content">
                                             <div class="product-text">
-                                                <h4><a href="/details/@context.Id">@context.Nombre</a></h4>
+                                                <h4>
+                                                    <a target="_blank" href="/details/@context.Id">
+                                                        @context.Nombre
+                                                    </a>
+                                                </h4>
                                                 <h5>@context.Principio</h5>
                                                 <span>
                                                     @(!string.IsNullOrEmpty(@context.FormaFarmaceutica?.Nombre) ? @context.FormaFarmaceutica?.Nombre : "-") /
@@ -289,16 +304,19 @@ else
                 </div>
             </div>
 
-            <div class="d-flex flex-column align-center" style="margin-bottom: 10px;">
-                <MudPagination Size="Size.Large" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Color="Color.Info" Count="@paginatedResult.TotalPages" />
-            </div>
+            @if (paginatedResult != null && paginatedResult.Data.Count > 0)
+            {
 
-            <div class="row">
-                <div class="col-12" style="text-align: center;">
-                    <span style="text-align:center; color: #6c757d !important;font-size: 16px;"> @($"{paginatedResult.StartIndex+1} al {paginatedResult.EndIndex+1} de {paginatedResult.TotalCount }")</span>
+                <div class="d-flex flex-column align-center" style="margin-bottom: 10px;">
+                    <MudPagination Size="Size.Large" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Color="Color.Info" Count="@paginatedResult.TotalPages" />
                 </div>
-            </div>
 
+                <div class="row">
+                    <div class="col-12" style="text-align: center;">
+                        <span style="text-align:center; color: #6c757d !important;font-size: 16px;"> @($"{paginatedResult.StartIndex+1} al {paginatedResult.EndIndex+1} de {paginatedResult.TotalCount }")</span>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 }
@@ -311,50 +329,38 @@ else
     public string customstr { get; set; } = "OR";
     protected async override Task OnInitializedAsync()
     { 
-        //search = new HomeFilter();
-       
+        _appState.OnChange-= SerachTextHasChanged;
+        _appState.OnChange+= SerachTextHasChanged;
         paginatedResult = new PaginatedResult<AigMedicamento>(){PageSize=20};
-        Bus.Subscribe<SearchChangeEvent>(SearchChangeEventHandler);
-        var uri = _navigation.ToAbsoluteUri(_navigation.Uri);
-        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("term", out var _term))
-        {
-            await jsRuntime.InvokeVoidAsync("window.history.replaceState", null, "", "/");
-            Bus.Publish(new SearchTermEvent { Term = _term });
-        }
-        else
-        {  
-            Bus.Publish(new SearchTermEvent { Term = string.Empty , Refresh=false});
-            await DoFetchData();
-           
-        }
-      
+        await DoFetchData();
         base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        _appState.OnChange -= SerachTextHasChanged;
+    }
+
+    public void SerachTextHasChanged()
+    {   
+        Task.Run(async () => await  DoFetchData());
     }
 
     private async Task RefresView()
     {
         await this.InvokeAsync(StateHasChanged);
     }
-    private void SearchChangeEventHandler(MessageArgs args)
-    {
-        var message = args.GetMessage<SearchChangeEvent>();
-        if (message is SearchChangeEvent)
-        {
-            search = message.Filter;
-            DoFetchData();
-        }
-  
-    }
-
+    
     private async Task DoFetchData()
     {
         loading = true;
+        await RefresView();
         var sorting =new List<SortingOption>(){ new SortingOption { Field = "name", Direction = SortingDirection.ASC } };
         var filters = new List<FilteringOption>();
+        if (!string.IsNullOrEmpty(_appState.SerachText))
+                filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = _appState.SerachText });
         if (search != null)
         {
-            if (!string.IsNullOrEmpty(search.Term))
-                filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = search.Term });
             if (search.MedicalPrescription!=null)
                 filters.Add(new FilteringOption { Field = "MedicalPrescription", Operator = FilteringOperator.Equal, Value =search.MedicalPrescription.Value?"CP":"SP" });
             if (search.HospitalUse!=null)
@@ -392,7 +398,7 @@ else
                 SortingOptions = sorting,
                 FilteringOptions = filters
             };
-        paginatedResult = await _repository.ListAsync(args,search.Or=="Algunos"?LogicalOperator.Or:LogicalOperator.And);
+        paginatedResult = await _repository.ListAsync(args,search?.Or=="Algunos"?LogicalOperator.Or:LogicalOperator.And);
         loading = false;
         await RefresView();
     }
@@ -409,5 +415,5 @@ else
     {  
          await DoFetchData();
     }
-
+   
 }
