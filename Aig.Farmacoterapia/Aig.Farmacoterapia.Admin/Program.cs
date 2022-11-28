@@ -44,6 +44,13 @@ app.UseMiddleware<BlazorCookieLoginMiddleware<ApplicationUser>>();
 app.MapControllers();
 app.ConfigureSwagger();
 app.MapBlazorHub();
+//app.UseEndpoints(endpoints =>
+//    // other settings go here
+//    endpoints.MapBlazorHub(options => {
+//        options.WebSockets.CloseTimeout = new TimeSpan(1, 1, 1);
+//        options.LongPolling.PollTimeout = new TimeSpan(1, 0, 0);
+//    })
+//);
 app.MapFallbackToPage("/_Host");
 
 //Save initial data...

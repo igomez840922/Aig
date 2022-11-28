@@ -115,12 +115,14 @@ namespace Aig.Farmacoterapia.Infrastructure
                 options.UseSqlServer(conn, sqlServerOptionsAction:
                     sqlOptions =>
                     {
+                        options.EnableDetailedErrors();
                         sqlOptions.EnableRetryOnFailure();
-                        sqlOptions.CommandTimeout(120);
+                        sqlOptions.CommandTimeout(180);
                         //sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
                     });
             });
 
+          
             //services.AddDbContext<ApplicationDbContext>(options =>
             //{
             //    options.UseMySql(conn, ServerVersion.AutoDetect(conn), mySqlOptionsAction:
@@ -128,7 +130,7 @@ namespace Aig.Farmacoterapia.Infrastructure
             //        {
             //            options.EnableDetailedErrors();
             //            sqlOptions.EnableRetryOnFailure();
-            //            sqlOptions.CommandTimeout(120);
+            //            sqlOptions.CommandTimeout(180);
             //        });
             //});
 
