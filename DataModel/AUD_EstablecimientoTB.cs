@@ -239,6 +239,14 @@ namespace DataModel
 
         private List<AUD_InspeccionTB> lInspections;
         public virtual List<AUD_InspeccionTB> LInspections { get => lInspections; set => SetProperty(ref lInspections, value); }
-    
-	}
+
+
+		private string nameAndRegNum;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string NameAndRegNum { 
+			get { return string.Format("{0} - {1}", NumLicencia, Nombre); } 
+			set => SetProperty(ref nameAndRegNum, value); 
+		}
+
+    }
 }

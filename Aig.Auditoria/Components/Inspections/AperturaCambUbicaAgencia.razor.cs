@@ -20,13 +20,19 @@ namespace Aig.Auditoria.Components.Inspections
 		ICountriesService countriesService { get; set; }
 		[Inject]
 		IPdfGenerationService pdfGenerationService { get; set; }
-		[Parameter]
+        [Inject]
+        IActividadEstablecimientoService actividadEstablecimientoService { get; set; }
+        [Inject]
+        IProductoEstablecimientoService productoEstablecimientoService { get; set; }
+        [Parameter]
 		public DataModel.AUD_InspeccionTB Inspeccion { get; set; }
 		List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
 		List<PaisTB> lPaises { get; set; }
+        List<ActividadEstablecimientoTB> lActividadEstablecimiento { get; set; }
+        List<ProductoEstablecimientoTB> lProductoEstablecimiento { get; set; }
 
 
-		bool showSignasure { get; set; } = false;
+        bool showSignasure { get; set; } = false;
 		List<SignaturePad> lSignaturePads { get; set; } = new List<SignaturePad>();
 		SignaturePad signaturePad
 		{
@@ -78,6 +84,9 @@ namespace Aig.Auditoria.Components.Inspections
 		//Fill Data
 		protected async Task FetchData()
 		{
+			lActividadEstablecimiento = lActividadEstablecimiento != null && lActividadEstablecimiento.Count > 0 ? lActividadEstablecimiento : await actividadEstablecimientoService.GetAll();
+            lProductoEstablecimiento = lProductoEstablecimiento != null && lProductoEstablecimiento.Count > 0 ? lProductoEstablecimiento : await productoEstablecimientoService.GetAll();
+            
 			if (lEstablecimientos == null || lEstablecimientos.Count < 1)
 			{
 				lEstablecimientos = await establecimientoService.GetAll();
@@ -88,8 +97,8 @@ namespace Aig.Auditoria.Components.Inspections
 			}
 
 			if (Inspeccion != null)
-			{
-				if (Inspeccion.EstablecimientoId == null)
+			{				
+                if (Inspeccion.EstablecimientoId == null)
 				{
 					Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
 					if (Inspeccion.EstablecimientoId != null)

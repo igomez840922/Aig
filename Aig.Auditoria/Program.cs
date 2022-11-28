@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Concurrent;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -96,6 +97,8 @@ builder.Services.AddScoped<ISmtpCorreoService, SmtpCorreoService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAttachmentsService, AttachmentsService>();
 builder.Services.AddScoped<IPdfGenerationService, PdfGenerationService>();
+builder.Services.AddScoped<IProductoEstablecimientoService, ProductoEstablecimientoService>();
+builder.Services.AddScoped<IActividadEstablecimientoService, ActividadEstablecimientoService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

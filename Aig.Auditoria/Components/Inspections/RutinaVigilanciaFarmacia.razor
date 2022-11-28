@@ -60,7 +60,7 @@
                                     <label>@languageContainerService.Keys["StartDate"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Inspeccion.FechaInicio" />
+                                            <RadzenDatePicker TValue="DateTime" @bind-Value="Inspeccion.FechaInicio" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
                                             <ValidationMessage For=@(() => Inspeccion.FechaInicio) />
                                         </div>
                                     </div>

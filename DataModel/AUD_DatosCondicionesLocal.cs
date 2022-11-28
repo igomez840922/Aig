@@ -113,7 +113,10 @@ namespace DataModel
 		public AUD_DatosAreaVehiculosMotorizado AreaVehiculosMotorizado { get => areaVehiculosMotorizado; set => SetProperty(ref areaVehiculosMotorizado, value); }
 
 
-		//Conclusión de Inspección
+        // Procedimiento
+        private enumAUD_TipoSeleccion procedimiento;
+        public enumAUD_TipoSeleccion Procedimiento { get => procedimiento; set => SetProperty(ref procedimiento, value); }
+        
 
-	}
+    }
 }

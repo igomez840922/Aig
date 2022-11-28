@@ -88,7 +88,7 @@ namespace Aig.Auditoria.Components.Inspections
             }
 
             if (Inspeccion != null)
-            {
+            {               
                 if (Inspeccion.EstablecimientoId == null)
                 {
                     Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;

@@ -330,6 +330,14 @@ namespace DataModel
         [StringLength(500)]
         public string SistMonitorTemperaturaDesc { get => sistMonitorTemperaturaDesc; set => SetProperty(ref sistMonitorTemperaturaDesc, value); }
 
+        //Se mantiene monitoreo de la temperatura y humedad de esta área
+        private enumAUD_TipoSeleccion sistMonitorTempHumArea;
+        public enumAUD_TipoSeleccion SistMonitorTempHumArea { get => sistMonitorTempHumArea; set => SetProperty(ref sistMonitorTempHumArea, value); }
+
+        // Observaciones
+        private string sistMonitorTempHumAreaDesc;
+        [StringLength(500)]
+        public string SistMonitorTempHumAreaDesc { get => sistMonitorTempHumAreaDesc; set => SetProperty(ref sistMonitorTempHumAreaDesc, value); }
 
 
         // Se mantiene registro del monitoreo de la temperatura y humedad de esta área?
@@ -369,12 +377,19 @@ namespace DataModel
         [StringLength(500)]
         public string TempAlmacenamientoAdecuadaDesc { get => tempAlmacenamientoAdecuadaDesc; set => SetProperty(ref tempAlmacenamientoAdecuadaDesc, value); }
 
+
         //Existe un sistema para el control de fauna nociva (Cebadera y certificado de fumigación).
         private enumAUD_TipoSeleccion controlFaunaNociva;
         public enumAUD_TipoSeleccion ControlFaunaNociva { get => controlFaunaNociva; set => SetProperty(ref controlFaunaNociva, value); }
         // Debe mostrar las opciones Sí/No.  Debe desplegar un área de texto para las observaciones.
         private string controlFaunaNocivaDescrip;
         public string ControlFaunaNocivaDescrip { get => controlFaunaNocivaDescrip; set => SetProperty(ref controlFaunaNocivaDescrip, value); }
+
+        //Existe letrero visible que identifique los rangos de temperatura y humedad
+        private enumAUD_TipoSeleccion letreroVisibleIdentTempHum;
+        public enumAUD_TipoSeleccion LetreroVisibleIdentTempHum { get => letreroVisibleIdentTempHum; set => SetProperty(ref letreroVisibleIdentTempHum, value); }
+        private string letreroVisibleIdentTempHumDesc;
+        public string LetreroVisibleIdentTempHumDesc { get => letreroVisibleIdentTempHumDesc; set => SetProperty(ref letreroVisibleIdentTempHumDesc, value); }
 
         //No Comer
         private enumAUD_TipoSeleccion noComer;

@@ -53,58 +53,26 @@ namespace Aig.Auditoria.Helper
 
         public async Task Invoke(HttpContext context, SignInManager<TUser> signInMgr)
         {
-            if (context.Request.Path == "/login" && context.Request.Query.ContainsKey("key"))
-            {
-                var key = Guid.Parse(context.Request.Query["key"]);
-                var info = Logins[key];
+            try {
+                if (context.Request.Path == "/login" && context.Request.Query.ContainsKey("key"))
+                {
+                    var key = Guid.Parse(context.Request.Query["key"]);
+                    var info = Logins[key];
 
-                var result = await signInMgr.PasswordSignInAsync(info.UserName, info.Password, info.RememberMe, lockoutOnFailure: false);
+                    var result = await signInMgr.PasswordSignInAsync(info.UserName, info.Password, info.RememberMe, lockoutOnFailure: false);
 
-                //Uncache password for security:
-                info.Password = null;
-
-                if (result.Succeeded)
-                {
-                    Logins.Remove(key);
-                    context.Response.Redirect("./");
-                    return;
-                }
-                else if (result.RequiresTwoFactor)
-                {
-                    context.Response.Redirect("./loginwith2fa/" + key);
-                    return;
-                }
-                else if (result.IsLockedOut)
-                {
-                    info.Error = "You are locked out. Please contact support.";
-                }
-                else
-                {
-                    info.Error = "Login failed. Check your username and password.";
-                    await _next.Invoke(context);
-                }
-            }
-            else if (context.Request.Path.StartsWithSegments("/loginwith2fa"))
-            {
-                var key = Guid.Parse(context.Request.Path.Value.Split('/').Last());
-                var info = Logins[key];
-
-                if (string.IsNullOrEmpty(info.TwoFactorCode))
-                {
-                    //user is opening 2FA first time...
-                    //...Get user model and cache it for the 2FA-View:
-                    var user = await signInMgr.GetTwoFactorAuthenticationUserAsync();
-                    //info.User = user;
-                }
-                else
-                {
-                    //user has submitted 2FA, check:
-                    var result = await signInMgr.TwoFactorAuthenticatorSignInAsync(info.TwoFactorCode, info.RememberMe, info.RememberMachine);
+                    //Uncache password for security:
+                    info.Password = null;
 
                     if (result.Succeeded)
                     {
                         Logins.Remove(key);
-                        context.Response.Redirect(info.ReturnUrl);
+                        context.Response.Redirect("./");
+                        return;
+                    }
+                    else if (result.RequiresTwoFactor)
+                    {
+                        context.Response.Redirect("./loginwith2fa/" + key);
                         return;
                     }
                     else if (result.IsLockedOut)
@@ -113,19 +81,55 @@ namespace Aig.Auditoria.Helper
                     }
                     else
                     {
-                        info.Error = "Invalid authenticator code";
+                        info.Error = "Login failed. Check your username and password.";
+                        await _next.Invoke(context);
                     }
                 }
-            }
-            else if (context.Request.Path.StartsWithSegments("/logout"))
-            {
-                await signInMgr.SignOutAsync();
-                context.Response.Redirect("./login");
-                return;
-            }
+                else if (context.Request.Path.StartsWithSegments("/loginwith2fa"))
+                {
+                    var key = Guid.Parse(context.Request.Path.Value.Split('/').Last());
+                    var info = Logins[key];
 
-            //Continue http middleware chain:
-            await _next.Invoke(context);
+                    if (string.IsNullOrEmpty(info.TwoFactorCode))
+                    {
+                        //user is opening 2FA first time...
+                        //...Get user model and cache it for the 2FA-View:
+                        var user = await signInMgr.GetTwoFactorAuthenticationUserAsync();
+                        //info.User = user;
+                    }
+                    else
+                    {
+                        //user has submitted 2FA, check:
+                        var result = await signInMgr.TwoFactorAuthenticatorSignInAsync(info.TwoFactorCode, info.RememberMe, info.RememberMachine);
+
+                        if (result.Succeeded)
+                        {
+                            Logins.Remove(key);
+                            context.Response.Redirect(info.ReturnUrl);
+                            return;
+                        }
+                        else if (result.IsLockedOut)
+                        {
+                            info.Error = "You are locked out. Please contact support.";
+                        }
+                        else
+                        {
+                            info.Error = "Invalid authenticator code";
+                        }
+                    }
+                }
+                else if (context.Request.Path.StartsWithSegments("/logout"))
+                {
+                    await signInMgr.SignOutAsync();
+                    context.Response.Redirect("./login");
+                    return;
+                }
+
+                //Continue http middleware chain:
+                await _next.Invoke(context);
+            }
+            catch (Exception ex) {
+            }            
         }
     }
 
