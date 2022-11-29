@@ -60,6 +60,9 @@ namespace DataModel
         private List<FMV_NotaTB> lNotas;
         public virtual List<FMV_NotaTB> LNotas { get => lNotas; set => SetProperty(ref lNotas, value); }
 
+        private List<FMV_RamTB> lRams;
+        public virtual List<FMV_RamTB> LRams { get => lRams; set => SetProperty(ref lRams, value); }
+
         //private List<FMV_IpsProductTB> lIpsProducts;
         //public virtual List<FMV_IpsProductTB> LIpsProducts { get => lIpsProducts; set => SetProperty(ref lIpsProducts, value); }
     }

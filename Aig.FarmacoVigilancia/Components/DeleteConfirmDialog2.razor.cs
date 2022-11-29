@@ -4,24 +4,23 @@ using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
 namespace Aig.FarmacoVigilancia.Components
-{
-    public partial class DeleteConfirmDialog
+{    
+    public partial class DeleteConfirmDialog2
     {
         [Inject]
         IProfileService profileService { get; set; }
-        bool OpenDialog { get; set; }
-        string Caption { get; set; }
-        string Message { get; set; }
+
+        [Parameter]
+        public string Caption { get; set; } = "Confirmar Desición";
+        [Parameter]
+        public string Message { get; set; } = "Está seguro desea eliminar el dato seleccionado?";
 
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<DeleteConfirmationOpenEvent>(DeleteConfirmationOpenEventHandler);
-
             base.OnInitialized();
         }
 
@@ -34,11 +33,11 @@ namespace Aig.FarmacoVigilancia.Components
         }
 
         //CHANGE LANGUAJE
-        protected async Task getUserLanguaje(string? language = null)
+        protected async Task getUserLanguaje(string language = null)
         {
             language = string.IsNullOrEmpty(language) ? await profileService.GetLanguage() : language;
             languageContainerService.SetLanguage(System.Globalization.CultureInfo.GetCultureInfo(language));
-            await this.InvokeAsync(StateHasChanged);
+            this.InvokeAsync(StateHasChanged);
         }
         private void LanguageChangeEventHandler(MessageArgs args)
         {
@@ -47,36 +46,18 @@ namespace Aig.FarmacoVigilancia.Components
             getUserLanguaje(message.Language);
         }
 
-        //OPEN MODAL TO ADD/Edit new payment order
-        private void DeleteConfirmationOpenEventHandler(MessageArgs args)
-        {
-            var message = args.GetMessage<DeleteConfirmationOpenEvent>();
-
-            Caption = message.Caption;
-            Message = message.Message;
-
-            OpenDialog = true;
-
-            this.InvokeAsync(StateHasChanged);
-        }
-
-
         /// <summary>
         /// Saving Data
         /// </summary>
 
         protected async Task OptionYes()
         {
-            OpenDialog = false;
-
             await bus.Publish(new DeleteConfirmationCloseEvent { YesNo = true });
         }
 
         protected async Task OptionNo()
         {
-            OpenDialog = false;
             await bus.Publish(new DeleteConfirmationCloseEvent { YesNo = false });
-            await this.InvokeAsync(StateHasChanged);
         }
 
     }

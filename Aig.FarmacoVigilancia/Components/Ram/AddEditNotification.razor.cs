@@ -1,27 +1,24 @@
-﻿using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
-using Aig.FarmacoVigilancia.Events.Language;
+﻿using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
+using DataModel;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
-namespace Aig.FarmacoVigilancia.Components
-{
-    public partial class DeleteConfirmDialog
+namespace Aig.FarmacoVigilancia.Components.Ram
+{    
+    public partial class AddEditNotification
     {
         [Inject]
         IProfileService profileService { get; set; }
-        bool OpenDialog { get; set; }
-        string Caption { get; set; }
-        string Message { get; set; }
+        
+        [Parameter]
+        public DataModel.FMV_RamNotificacionTB Notification { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<DeleteConfirmationOpenEvent>(DeleteConfirmationOpenEventHandler);
-
             base.OnInitialized();
         }
 
@@ -30,6 +27,7 @@ namespace Aig.FarmacoVigilancia.Components
             if (firstRender)
             {
                 await getUserLanguaje();
+                await FetchData();
             }
         }
 
@@ -47,35 +45,27 @@ namespace Aig.FarmacoVigilancia.Components
             getUserLanguaje(message.Language);
         }
 
-        //OPEN MODAL TO ADD/Edit new payment order
-        private void DeleteConfirmationOpenEventHandler(MessageArgs args)
+        //Fill Data
+        protected async Task FetchData()
         {
-            var message = args.GetMessage<DeleteConfirmationOpenEvent>();
-
-            Caption = message.Caption;
-            Message = message.Message;
-
-            OpenDialog = true;
-
-            this.InvokeAsync(StateHasChanged);
+            
+            await this.InvokeAsync(StateHasChanged);
         }
-
+                
 
         /// <summary>
         /// Saving Data
         /// </summary>
 
-        protected async Task OptionYes()
-        {
-            OpenDialog = false;
-
-            await bus.Publish(new DeleteConfirmationCloseEvent { YesNo = true });
+        protected async Task SaveData()
+        {  
+            await bus.Publish(new Aig.FarmacoVigilancia.Events.RamNotification.AddEdit_CloseEvent { Data = Notification });
+            await this.InvokeAsync(StateHasChanged);
         }
 
-        protected async Task OptionNo()
+        protected async Task Cancel()
         {
-            OpenDialog = false;
-            await bus.Publish(new DeleteConfirmationCloseEvent { YesNo = false });
+            await bus.Publish(new Aig.FarmacoVigilancia.Events.RamNotification.AddEdit_CloseEvent { Data = null });
             await this.InvokeAsync(StateHasChanged);
         }
 

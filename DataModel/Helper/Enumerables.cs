@@ -234,6 +234,262 @@ namespace DataModel.Helper
         [Description("Facedra")]
         Facedra = 3,
     }
+    public enum enumFMV_RAMNotificationType
+    {
+        [Description("Médico")]
+        MED = 0,
+        [Description("Farmacéutico")]
+        FAR = 1,
+        [Description("Otro Profesional del la Salud")]
+        OPS = 2,
+        [Description("Paciente")]
+        PAC = 3,
+        [Description("Industria Farmacéutica")]
+        INF = 4,
+    }
+    public enum enumFMV_RAMOrganizationType
+    {
+        [Description("No hay Información")]
+        HHI = 0,
+        [Description("CSS")]
+        CSS = 1,
+        [Description("MINSA")]
+        MINSA = 2,
+        [Description("Patronatos")]
+        PAT = 3,
+        [Description("Clínica Hospital Privado")]
+        CHP = 4,
+        [Description("Farmacia Privada")]
+        FAP = 5,
+        [Description("Industria Farmacéutica")]
+        IFA = 6,
+        [Description("No Aplica")]
+        NA = 7,
+    }
+
+    public enum enumFMV_RAMStatus
+    {
+        [Description("Sin Evaluar")]
+        SEVA = 0,
+        [Description("Evaluada")]
+        EVA = 1,
+        [Description("Tramitada")]
+        TRA = 2,
+        [Description("Sin Tramitar")]
+        STRA = 3,
+    }
+
+    public enum enumFMV_RAMDesenlace
+    {
+        [Description("Desconocido")]
+        DESC = 0,
+        [Description("Recuperado con Secuelas")]
+        RCSEC = 1,
+        [Description("Recuperado sin Secuelas")]
+        RSSEC = 2,
+        [Description("En Recuperación")]
+        REC = 3,
+        [Description("No Recuperado")]
+        NREC = 4,
+        [Description("Muerte")]
+        MUE = 5,
+    }
+
+    public enum enumFMV_RAMConductaDosis
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Disminuyó la dosis")]
+        DISDOSIS = 1,
+        [Description("No Disminuyó la dosis")]
+        NODISDOSIS = 2,
+    }
+
+    public enum enumFMV_RAMEvolucionDosis
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Desapareció la reacción al disminuir la dosis")]
+        DESREACC = 1,
+        [Description("Permance la reacción al disminuir la dosis")]
+        PERREACC = 2,
+    }
+
+    public enum enumFMV_RAMConductaTerapia
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Suspendió la terapia")]
+        SUSTERAPIA = 1,
+        [Description("Mantuvo la terapia")]
+        MANTERAPIA = 2,
+    }
+
+    public enum enumFMV_RAMEvolucionTerapia
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Desapareció la reacción al suspender el uso del medicamento sospechoso")]
+        DESREACC = 1,
+        [Description("Permanece la reacción al suspender el uso del medicamento sospechoso")]
+        PERREACC = 2,
+    }
+
+    public enum enumFMV_RAMConsecuenciaReexposicion
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Reapareció la reacción luego de reexposición")]
+        REAP = 1,
+        [Description("No Reaparece la reacción luego de reexposición")]
+        NREAP = 2,
+    }
+
+    public enum enumFMV_RAMSecuenciaTemp
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Compatible")]
+        COMP = 1,
+        [Description("InCompatible")]
+        INCOMP = 2,
+        [Description("Compatible pero no Coherente")]
+        COMPNOCOHE = 3,
+        [Description("No hay Información")]
+        NHI = 4,
+        [Description("RAM aparecida por retirada del fármaco")]
+        RAMAPAR = 5,
+    }
+
+    public enum enumFMV_RAMConocimientoPrev
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("RAM bien conocida")]
+        BIENCONOCIDA = 1,
+        [Description("RAM conocida en referencias ocasionales")]
+        CONOCIDAREF = 2,
+        [Description("Desconocida")]
+        DESCONOCIDA = 3,
+        [Description("Existe información en contra de la relación fármaco-RAM")]
+        EXISTEINFO = 4,
+    }
+
+    public enum enumFMV_RAMEfectoRetirada
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("RAM mejora")]
+        MEJORADA = 1,
+        [Description("RAM no mejora")]
+        NOMEJORADA = 2,
+        [Description("No RETI y RAM no mejora")]
+        NORETINOMEJORADA = 3,
+        [Description("No RETI y RAM mejora")]
+        NORETIMEJORADA = 4,
+        [Description("No hay Información")]
+        NOINFO = 5,
+        [Description("RAM mortal o irreversible")]
+        MORTALIRREV = 6,
+        [Description("No RETI y RAM mejora por tolerancia")]
+        NORETIMEJORTOLE = 7,
+        [Description("No RETI y RAM mejora por tratamiento")]
+        NORETIMEJORTRAT = 8,
+    }
+
+    public enum enumFMV_RAMEfectoReexposicion
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Reexposición positiva")]
+        POSIT = 1,
+        [Description("Reexposición negativa")]
+        NEGAT = 2,
+        [Description("No hay reexposición o información suficiente")]
+        NOINFO = 3,
+        [Description("RAM mortal o irreversible")]
+        MORTAL = 4,
+        [Description("Reacción previa similar con otras especialidades farmacéuticas con el mismo principio activo")]
+        SIMILARESPECIAL = 5,
+        [Description("Reacción previa similar con otro fármaco con mismo mecanismo de acción o reactividad cruzada\r\n")]
+        SIMILARFARMACO = 6,
+    }
+
+    public enum enumFMV_RAMCausaAlternat
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Explicación alternativa más verosímil")]
+        VEROSIMIL = 1,
+        [Description("ALTER igual o menor")]
+        IGUALMENOR = 2,
+        [Description("No hay información")]
+        NOINFO = 3,
+        [Description("Se descarta")]
+        DESCAR = 4,
+    }
+
+    public enum enumFMV_RAMFactContribuyente
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Factores que pueden haber contribuido a la presentación de la RAM")]
+        SIFACT = 1,
+        [Description("No hay factores contribuyentes")]
+        NOFACT = 2,
+    }
+
+    public enum enumFMV_RAMExploracionContemp
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Existen exploraciones complementarias")]
+        EXISTE = 1,
+        [Description("No hay exploraciones complementarias")]
+        NOEXISTE = 2,
+    }
+
+    public enum enumFMV_RAMIntensidad
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Ocasiona la muerte")]
+        MUERTE = 1,
+        [Description("Pueda poner en peligro la vida")]
+        PELIGROVIDA = 2,
+        [Description("Requiere o prolonga una hospitalización")]
+        HOSPITALIZACION = 3,
+        [Description("Produce una anomalía congénita o defecto al nacer")]
+        ANOMALIACONGE = 4,
+        [Description("Provoca una incapacidad persistente significativa")]
+        INCAPSIG = 5,
+        [Description("Enfermedad o síndrome médicamente significativo o importante")]
+        SINDROMESIG = 6,
+        [Description("Interfiere con las actividades habituales. Requieren intervención o tratamiento médico")]
+        INTERFACT = 7,
+        [Description("Fácilmente tolerado. No requieren terapia ni intervención médica")]
+        TOLERADO = 8,
+    }
+
+    public enum enumSexo
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Masculino")]
+        MAS = 1,
+        [Description("Femenino")]
+        FEM = 2,
+    }
+
+    public enum enumOpcionSiNo
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Si")]
+        Si = 1,
+        [Description("No")]
+        No = 2,
+    }
 
     public enum enumFMV_IpsPresentaCD
     {
