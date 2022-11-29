@@ -1,14 +1,11 @@
 ﻿using System.Reflection;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
-using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence
@@ -33,7 +30,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.Created = DateTime.Now; ;
+                        entry.Entity.Created = DateTime.Now;
                         entry.Entity.CreatedBy = _currentUserService.UserName;
                         break;
                     case EntityState.Modified:

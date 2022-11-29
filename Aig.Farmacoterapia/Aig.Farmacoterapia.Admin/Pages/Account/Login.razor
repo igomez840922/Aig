@@ -134,13 +134,18 @@
         var user = (await AuthStat).User;
         if (user.Identity is {IsAuthenticated: true })
             navigationManager.NavigateTo("./");
-         else loading = false;
+        else loading = false;
+    }
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
     }
     private async Task SubmitValidForm()
     {
         try
         {
             loading = true;
+            await RefresView();
             var usr = await userManager.FindByNameAsync(LoginRequest.UserName);
             if (usr == null){
                 Error = this.InvalidUser;
@@ -164,7 +169,10 @@
         catch (Exception ex){
             Error = ex.Message;
         }
-        //finally {loading = false;}
+        finally {
+            loading = false;
+            await RefresView();
+        }
     }
    
 }
