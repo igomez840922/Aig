@@ -55,7 +55,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                         {
                             case "term":
                                 {
-                                    Expression<Func<AigViaAdministracion, bool>> expression = f => f.Nombre.ToLower().Contains((string)filteringOption.Value);
+                                    Expression<Func<AigViaAdministracion, bool>> expression = f => f.Nombre.ToLower().Contains(((string)filteringOption.Value).ToLower());
                                     filterList.Add(expression);
                                 }
                                 break;

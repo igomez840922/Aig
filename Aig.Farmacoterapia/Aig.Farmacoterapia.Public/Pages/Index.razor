@@ -21,6 +21,7 @@
 @inject NavigationManager _navigation;
 @inject AppState _appState;
 @implements IDisposable;
+@inject IDialogService DialogService
 
 @if (loading)
 {
@@ -321,7 +322,8 @@ else
     </div>
 }
 @code {
-
+    
+   
     private HomeFilter search { get; set; }=new HomeFilter();
     protected bool loading { get; set; } = true;
     private MudPagination _mudPagination;

@@ -42,9 +42,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 orderByList.Add(new(sortingOption, c => c.Created));
                              break;
                             case "modified":
-#pragma warning disable CS8603 // Possible null reference return.
                                 orderByList.Add(new(sortingOption, c => c.LastModified));
-#pragma warning restore CS8603 // Possible null reference return.
                                 break;
                             case "name":
                                 orderByList.Add(new(sortingOption, c => c.Nombre));
@@ -63,7 +61,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                         {
                             case "term":
                                 {
-                                    Expression<Func<AigFormaFarmaceutica, bool>> expression = f => f.Nombre.Contains((string)filteringOption.Value);
+                                    Expression<Func<AigFormaFarmaceutica, bool>> expression = f => f.Nombre.ToLower().Contains(((string)filteringOption.Value).ToLower());
                                     filterList.Add(expression);
                                 }
                                 break;
@@ -78,9 +76,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 result = await _repository.Entities
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
                                           .PaginatedByAsync(args.PageIndex, args.PageSize);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
             catch (Exception exc)
             {

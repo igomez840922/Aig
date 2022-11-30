@@ -39,10 +39,10 @@
     <div class="kt-portlet__head-toolbar">
         <div class="kt-portlet__head-wrapper">
             <div class="kt-portlet__head-actions">
-                <a href="#" class="btn btn-outline-brand btn-square" @onclick="() => OnAdd()" data-toggle="modal" data-target="#modal_createedit">
+                <button disabled="@(loading)" href="#" class="btn btn-outline-brand btn-square" @onclick="() => OnAdd()" data-toggle="modal" data-target="#modal_createedit">
                     <i class="la la-plus"></i>
                     Nuevo
-                </a>
+                </button>
             </div>
         </div>
     </div>
@@ -62,14 +62,14 @@
             <div class="col-lg-5 kt-margin-b-10-tablet-and-mobile">
                 <div class="row" style="margin-top: 23px;">
                     <div class="col-lg-12" style="margin-top: 3px;">
-                        <button type="submit" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
+                        <button disabled="@(loading)" type="submit" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
                             <span>
                                 <i class="la la-search"></i>
                                 <span>Buscar</span>
                             </span>
                         </button>
                         &nbsp;&nbsp;
-                        <button type="button" @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
+                        <button disabled="@(loading)" type="button" @onclick="() => OnReset()" class="btn btn-outline-brand btn-square" style="padding: 5px 10px 5px 10px;">
                             <span>
                                 <i class="la la-close"></i>
                                 <span>Eliminar</span>
@@ -102,9 +102,9 @@
                                 <div class="kt-portlet__head-toolbar">
 
                                     <span class="dropdown">
-                                        <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
+                                        <button disabled="@(loading)" href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
                                             <i class="flaticon-more-1 kt-font-brand"></i>
-                                        </a>
+                                        </button>
                                         <span class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)">
                                                 <i class="la la-edit"></i> 
@@ -177,7 +177,7 @@
                 }
 
             </div>
-             <MudPagination Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@paginatedResult.TotalPages" Class="pa-4"/>
+             <MudPagination HorizontalAlignment="HorizontalAlignment.Center" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@paginatedResult.TotalPages" Class="pa-4"/>
         </div>
     }
 
@@ -213,8 +213,7 @@
     protected bool editDialogIsOpen = false;
     protected bool editPasswordDialogIsOpen = false;
     protected bool deleteDialogIsOpen = false;
-    protected bool loading { get; set; } = true;
-
+    protected bool loading { get; set; } = false;
     protected async override Task OnInitializedAsync()
     {
         try
@@ -234,10 +233,11 @@
     private async Task DoFetchData()
     {
         loading = true;
+        StateHasChanged();
         var sorting =new List<SortingOption>(){ new SortingOption { Field = "Name", Direction = SortingDirection.ASC } };
         var filters = new List<FilteringOption>();
         if (!string.IsNullOrEmpty(searchString))
-            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString });
+            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString.Trim() });
         var args = new PageSearchArgs() {
                 PageIndex = paginatedResult.CurrentPage,
                 PageSize = paginatedResult.PageSize,
