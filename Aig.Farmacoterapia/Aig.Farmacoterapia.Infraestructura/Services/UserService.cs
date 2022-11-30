@@ -70,9 +70,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                             case "term":
                                 {
                                     Expression<Func<ApplicationUser, bool>> expression = f =>
-                                    f.FirstName.StartsWith((string)filteringOption.Value) ||
-                                    f.LastName.StartsWith((string)filteringOption.Value) ||
-                                    f.UserName.Contains((string)filteringOption.Value);
+                                    f.FirstName.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
+                                    f.LastName.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
+                                    f.UserName.ToLower().Contains(((string)filteringOption.Value).ToLower());
                                     filterList.Add(expression);
                                 }
                                 break;

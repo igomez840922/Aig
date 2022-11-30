@@ -168,9 +168,9 @@
             <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
             <MudTd>
                 <span class="dropdown">
-                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
+                    <button  disabled="@(loading)"  href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
                         <i class="flaticon-more-1 kt-font-brand"></i>
-                    </a>
+                    </button>
                     <span class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="#" @onclick="() => OnEdit(context.Id)" data-toggle="modal" data-target="#modal_createedit">
                             <i class="la la-edit"></i> Editar
@@ -434,7 +434,7 @@
                 sorting = new() { new SortingOption { Field = state.SortLabel, Direction = sortDirection } };
             }
             if (!string.IsNullOrEmpty(modelFilter.Term))
-                filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = modelFilter.Term });
+                filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = modelFilter.Term.Trim() });
             if (modelFilter.StartDate != null && modelFilter.EndDate != null)
             {
                 filters.Add(new FilteringOption { Field = "startDateOfIssue", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartDate.Value });

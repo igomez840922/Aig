@@ -6,7 +6,7 @@
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @inject NavigationManager _navigation;
 @inject AppState _appState;
-
+@inject IDialogService DialogService
 <PageTitle>Medicamentos</PageTitle>
 
 <style>
@@ -120,9 +120,9 @@
     <div class="header-top-area pl-165 pr-165" style="background-color: #4e97fd !important;box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);">
         <div class="container-fluid" style="margin-top: 20px !important;">
             <div class="row">
-                <div class="col-xl-8 col-lg-6 col-md-6">
-                </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
+                </div>
+                <div class="col-xl-8 col-lg-6 col-md-6">
                     <div class="header-top-right text-md-right">
                         <div class="shop-menu">
                             <ul>
@@ -146,6 +146,15 @@
                                        href="https://www.minsa.gob.pa/informacion-salud/alertas-y-comunicados">
                                         <i class="fa fa-comment"></i>
                                         Notas de seguridad
+                                    </a>
+                                </li>
+                                <li>
+                                   
+                                    <a target="__blank"
+                                       title="Notas de seguridad de medicamentos"
+                                       href="/disclaimer">
+                                        <i class="fa fa-info"></i>
+                                        Descargo de Resonsabilidad
                                     </a>
                                 </li>
                             </ul>
@@ -256,4 +265,5 @@
             _appState.SetSerachText(_searchText);
         }
     }
+       
 }
