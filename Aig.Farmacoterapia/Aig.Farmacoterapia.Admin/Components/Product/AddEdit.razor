@@ -531,7 +531,7 @@
                 fileLoading = true;
                 showFileInputAlert = false;
                 await RefresView();
-                long maxFileSize = 1048576 * 30;//20MB
+                long maxFileSize = 1048576 * 50;//50MB
                 var extension = Path.GetExtension(_file.Name);
                 if (_file.Size <= maxFileSize)
                 {
@@ -577,7 +577,7 @@
                 prospectusLoading = true;
                 showProspectusFileInputAlert = false;
                 await RefresView();
-                long maxFileSize = 1048576 * 20;//20MB
+                long maxFileSize = 1048576 * 50;//50MB
                 var extension = Path.GetExtension(_prospectusFile.Name);
                 if (_prospectusFile.Size <= maxFileSize)
                 {
