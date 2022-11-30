@@ -44,9 +44,7 @@
 
 <div class="kt-portlet__body">
 
-    <MudOverlay Visible="@loading" LightBackground="true" Absolute="true">
-    </MudOverlay>
-
+   
     <EditForm Model="this" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
 
         <div class="row kt-margin-b-20">
@@ -169,9 +167,10 @@
         base.OnInitialized();
     }
 
-       private async Task RefresView()
+    private async Task RefresView()
     {
         await this.InvokeAsync(StateHasChanged);
+        await Bus.Publish<bool>(loading);
     }
     private async Task<TableData<AigFabricante>> DoFetchData(TableState state)
     {

@@ -49,10 +49,7 @@
 </div>
 
 <div class="kt-portlet__body">
-     
-    <MudOverlay Visible="@loading" LightBackground="true" Absolute="true">
-    </MudOverlay>
-    
+   
     <EditForm Model="this" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
 
         <div class="row kt-margin-b-20">
@@ -232,10 +229,15 @@
         base.OnInitialized();
     }
 
+      private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+        await Bus.Publish<bool>(loading);
+    }
     private async Task DoFetchData()
     {
         loading = true;
-        StateHasChanged();
+        await RefresView();
         var sorting =new List<SortingOption>(){ new SortingOption { Field = "Name", Direction = SortingDirection.ASC } };
         var filters = new List<FilteringOption>();
         if (!string.IsNullOrEmpty(searchString))
@@ -248,7 +250,7 @@
             };
         paginatedResult = await _userService.ListAsync(args);
         loading = false;
-        StateHasChanged();
+        await RefresView();
     }
 
   

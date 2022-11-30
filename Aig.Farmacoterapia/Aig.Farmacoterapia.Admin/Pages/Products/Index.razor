@@ -86,9 +86,7 @@
 
 <div class="kt-portlet__body">
 
-    <MudOverlay Visible="@loading" LightBackground="true" Absolute="true">
-    </MudOverlay>
-
+   
     <EditForm Model="@modelFilter" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
 
         <div class="row kt-margin-b-20">
@@ -417,9 +415,11 @@
         base.OnInitialized();
     }
 
-    private async Task RefresView()
-    {
+    private async Task RefresView(bool state)
+    {    
+        loading = state;
         await this.InvokeAsync(StateHasChanged);
+        await Bus.Publish<bool>(state);
     }
     private async Task<TableData<AigMedicamento>> DoFetchData(TableState state)
     {
@@ -427,8 +427,7 @@
         try
         {
             
-            loading = true;
-            await RefresView();
+            await RefresView(true);
             var sorting = new List<SortingOption>();
             var filters = new List<FilteringOption>();
             if (state.SortDirection != SortDirection.None)
@@ -467,19 +466,22 @@
         catch (Exception ex){
             _systemLogger.Error(ex.Message);
         }
-        finally{loading = false;await RefresView();}
+        finally{ await RefresView(false);}
         return result;
         
     }
 
     private async Task<IEnumerable<AigFabricante>> LoadMarker(string value)
-    {
+    {  
+        await RefresView(true);
         var result = new List<AigFabricante>();
         var query = _unitOfWork.Repository<AigFabricante>().GetAll();
         if (!string.IsNullOrEmpty(value))
             result = await query.WhereByAsync(p => p.Nombre, new MakerSpecification(value));
         else
             result = await query.WhereByAsync(p => p.Nombre);
+        loading = false;
+        await RefresView(false);
         return result;
     }
 

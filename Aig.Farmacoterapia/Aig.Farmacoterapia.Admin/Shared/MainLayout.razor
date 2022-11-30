@@ -7,12 +7,21 @@
     </div>
 </div>
 
+ <MudOverlay  ZIndex="9999" Visible="@loading" DarkBackground="true" Absolute="true">
+ </MudOverlay>
+
 <MudThemeProvider/>
 
 @code {
-
+    protected bool loading = false;
     protected async override Task OnInitializedAsync()
     {
+        Bus.Subscribe<bool>(OverlayChangeEventHandler);
         base.OnInitialized();
+    }
+    private void OverlayChangeEventHandler(MessageArgs args)
+    {
+        loading  = args.GetMessage<bool>();
+        this.InvokeAsync(StateHasChanged);
     }
 }
