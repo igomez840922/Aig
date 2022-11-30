@@ -94,7 +94,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 {
                                     var value = filteringOption.Value.ToString();
                                     var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision >= date;
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaExpiracion >= date;
                                     filterList.Add(expression);
 
                                 }
@@ -103,7 +103,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 {
                                     var value = filteringOption.Value.ToString();
                                     var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision <= date;
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.FechaExpiracion <= date;
                                     filterList.Add(expression);
                                 }
                                 break;

@@ -142,230 +142,230 @@
         </div>
     </EditForm>
 
-    <div class="table-responsive">
-        <MudTable @ref="table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigMedicamento>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
+    <MudTable @ref="table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigMedicamento>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
 
-            <HeaderContent>
-                <MudTh style="width:5px;"></MudTh>
-                <MudTh style="width:60px;"><MudTableSortLabel SortLabel="numReg" T="AigMedicamento">Registro</MudTableSortLabel></MudTh>
-                <MudTh style="width:100px;"><MudTableSortLabel SortLabel="dateOfIssue" T="AigMedicamento">Expedido</MudTableSortLabel></MudTh>
-                <MudTh style="width:100px;"><MudTableSortLabel SortLabel="expirationDate" T="AigMedicamento">Vence</MudTableSortLabel></MudTh>
-                <MudTh style="width:350px;"><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigMedicamento">Medicamento</MudTableSortLabel></MudTh>
-                <MudTh style="width:350px;">Principio Activo</MudTh>
-                <MudTh>Fabricante</MudTh>
-                <MudTh style="width:20px;"><MudTableSortLabel T="AigMedicamento" SortLabel="created">Creado</MudTableSortLabel></MudTh>
-                <MudTh style="width:5px;"></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd>
-                    <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
-                </MudTd>
-                <MudTd DataLabel="No. Registro">@context.NumReg</MudTd>
-                <MudTd DataLabel="Fech. Emisión">@(string.Format("{0:dd/MM/yyyy}", context.FechaEmision))</MudTd>
-                    <MudTd DataLabel="Fech. Expiración">@(string.Format("{0:dd/MM/yyyy}", context.FechaExpiracion))</MudTd>
-                    <MudTd DataLabel="Medicamento">@context.Nombre</MudTd>
-                    <MudTd DataLabel="Principio Activo">@context.Principio</MudTd>
-                    <MudTd DataLabel="Fabricante">@context.Fabricante?.Nombre</MudTd>
-                    <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
-                    <MudTd>
-                        <span class="dropdown">
-                            <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                                <i class="flaticon-more-1 kt-font-brand"></i>
+        <HeaderContent>
+            <MudTh style="width:5px;"></MudTh>
+            <MudTh style="width:60px;"><MudTableSortLabel SortLabel="numReg" T="AigMedicamento">Registro</MudTableSortLabel></MudTh>
+            <MudTh style="width:100px;"><MudTableSortLabel SortLabel="dateOfIssue" T="AigMedicamento">Emisión</MudTableSortLabel></MudTh>
+            <MudTh style="width:100px;"><MudTableSortLabel SortLabel="expirationDate" T="AigMedicamento">Expiración</MudTableSortLabel></MudTh>
+            <MudTh style="width:350px;"><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigMedicamento">Medicamento</MudTableSortLabel></MudTh>
+            <MudTh style="width:350px;">Principio Activo</MudTh>
+            <MudTh>Fabricante</MudTh>
+            <MudTh style="width:20px;"><MudTableSortLabel T="AigMedicamento" SortLabel="created">Creado</MudTableSortLabel></MudTh>
+            <MudTh style="width:5px;"></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>
+                <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
+            </MudTd>
+            <MudTd DataLabel="No. Registro">@context.NumReg</MudTd>
+            <MudTd DataLabel="Fech. Emisión">@(string.Format("{0:dd/MM/yyyy}", context.FechaEmision))</MudTd>
+            <MudTd DataLabel="Fech. Expiración">@(string.Format("{0:dd/MM/yyyy}", context.FechaExpiracion))</MudTd>
+            <MudTd DataLabel="Medicamento">@context.Nombre</MudTd>
+            <MudTd DataLabel="Principio Activo">@context.Principio</MudTd>
+            <MudTd DataLabel="Fabricante">@context.Fabricante?.Nombre</MudTd>
+            <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
+            <MudTd>
+                <span class="dropdown">
+                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
+                        <i class="flaticon-more-1 kt-font-brand"></i>
+                    </a>
+                    <span class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#" @onclick="() => OnEdit(context.Id)" data-toggle="modal" data-target="#modal_createedit">
+                            <i class="la la-edit"></i> Editar
+                        </a>
+                        <a class="dropdown-item" href="#" @onclick="() => OnDelete(context)" data-toggle="modal">
+                            <i class="la la-trash"></i>
+                            Eliminar
+                        </a>
+                        <div class="dropdown-divider ng-star-inserted"></div>
+                        @if (!string.IsNullOrEmpty(context.DataSheetURL))
+                        {
+                            <a target="_blank" class="dropdown-item" href="@context.DataSheetURL">
+                                <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
+                                Monografía
                             </a>
-                            <span class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#" @onclick="() => OnEdit(context.Id)" data-toggle="modal" data-target="#modal_createedit">
-                                    <i class="la la-edit"></i> Editar
-                                </a>
-                                <a class="dropdown-item" href="#" @onclick="() => OnDelete(context)" data-toggle="modal">
-                                    <i class="la la-trash"></i>
-                                    Eliminar
-                                </a>
-                                <div class="dropdown-divider ng-star-inserted"></div>
-                                @if (!string.IsNullOrEmpty(context.DataSheetURL))
-                            {
-                                <a target="_blank" class="dropdown-item" href="@context.DataSheetURL">
-                                    <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
-                                    Monografía
-                                </a>
-                            }
-                            @if (!string.IsNullOrEmpty(context.ProspectusURL))
-                            {
-                                <a target="_blank" class="dropdown-item" href="@context.ProspectusURL">
-                                    <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
-                                    Prospecto
-                                </a>
-                            }
-                        </span>
+                        }
+                        @if (!string.IsNullOrEmpty(context.ProspectusURL))
+                        {
+                            <a target="_blank" class="dropdown-item" href="@context.ProspectusURL">
+                                <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
+                                Prospecto
+                            </a>
+                        }
                     </span>
-                </MudTd>
-            </RowTemplate>
-            <ChildRowContent>
-                @if (context.ShowDetails)
-                {
-                    <MudTr>
-                        <td colspan="9">
+                </span>
+            </MudTd>
+        </RowTemplate>
+        <ChildRowContent>
+            @if (context.ShowDetails)
+            {
+                <MudTr>
+                    <td colspan="9">
 
-                            <div style="background-color: #f2eefc;" _ngcontent-lil-c210="" class="py-4 d-flex ng-star-inserted">
+                        <div style="background-color: #f2eefc;" _ngcontent-lil-c210="" class="py-4 d-flex ng-star-inserted">
 
 
-                                <div _ngcontent-lil-c210="" class="mx-4">
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                            <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
 
-                                        @if (!string.IsNullOrEmpty(@context.PictureData))
-                                        {
-                                            <a target="_blank" href="@context.PictureData" download>
-                                                <img src="@context.PictureData" Width="150" Height="110" Elevation="25" Class="rounded-lg" />
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <img src="/assets/media/no-image.png" Width="150" Height="110" Elevation="25" Class="rounded-lg" />
-                                        }
+                                    @if (!string.IsNullOrEmpty(@context.PictureData))
+                                    {
+                                        <a target="_blank" href="@context.PictureData" download>
+                                            <img src="@context.PictureData" Width="150" Height="110" Elevation="25" Class="rounded-lg" />
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <img src="/assets/media/no-image.png" Width="150" Height="110" Elevation="25" Class="rounded-lg" />
+                                    }
 
-                                    </div>
-
-                                </div>
-
-                                
-                                <div _ngcontent-lil-c210="" class="mx-4">
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Registro sanitario:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.NumReg) ? @context.NumReg : "<Ninguno>")
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Revisiones :
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.NumRen) ? @context.NumRen : "<Ninguna>")
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Vigente:
-                                        </span>
-                                        @if (@context.Vigente)
-                                        {
-                                            <span class="fa fa-check-circle" aria-hidden="true" style="font-size: 15px;color:#1BC5BD">
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span class="fa fa-times-circle" aria-hidden="true" style="font-size: 15px;color:#EE2D41">
-                                            </span>
-                                        }
-
-                                    </div>
-                                </div>
-
-                                <div _ngcontent-lil-c210="" class="mx-4">
-                                    
-                                    
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Fabricante:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.Fabricante?.Nombre) ? @context.Fabricante?.Nombre : "<Ninguno>")
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Dirección:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.Fabricante?.Direccion) ? @context.Fabricante?.Direccion : "<Ninguno>")
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            País:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.Fabricante?.Pais?.Nombre) ? @context.Fabricante?.Pais?.Nombre : "<Ninguno>")
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div _ngcontent-lil-c210="" class="mx-4">
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Concentración:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(context.Concentracion) ? context.Concentracion : "<Ninguna>")
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Vía de Administración:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(context.ViaAdministracion != null ? context.ViaAdministracion?.Nombre : "<Ninguna>")
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Excipientes:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.Excipientes) ? @context.Excipientes : "<Ninguno>")
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div _ngcontent-lil-c210="" class="mx-4">
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Creado:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @context.Created
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Creado por:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(!string.IsNullOrEmpty(@context.CreatedBy) ? @context.CreatedBy : "<Ninguno>")
-                                        </span>
-                                    </div>
-                                    <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                        <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                            Modificado:
-                                        </span>
-                                        <span _ngcontent-lil-c210="" class="text-dark-50">
-                                            @(@context.LastModified != null ? @context.LastModified : "<Ninguna>")
-                                        </span>
-                                    </div>
                                 </div>
 
                             </div>
 
-                        </td>
-                    </MudTr>
-                }
-            </ChildRowContent>
-            <NoRecordsContent>
-                <MudText>No se encontraron elementos</MudText>
-            </NoRecordsContent>
-            <LoadingContent>
-                <MudText>Cargando...</MudText>
-            </LoadingContent>
-           
-             <PagerContent>
-                <MudTablePager Class="primary" InfoFormat="{first_item}-{last_item} de {all_items}" PageSizeOptions="new int[] {10, 25, 50, 100, 250 }" RowsPerPageString="Filas" />
-             </PagerContent>
-     
-        </MudTable>
-    </div>
 
+                            <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Registro sanitario:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.NumReg) ? @context.NumReg : "<Ninguno>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Revisiones :
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.NumRen) ? @context.NumRen : "<Ninguna>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Vigente:
+                                    </span>
+                                    @if (@context.Vigente)
+                                    {
+                                        <span class="fa fa-check-circle" aria-hidden="true" style="font-size: 15px;color:#1BC5BD">
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fa fa-times-circle" aria-hidden="true" style="font-size: 15px;color:#EE2D41">
+                                        </span>
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div _ngcontent-lil-c210="" class="mx-4">
+
+
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Fabricante:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Fabricante?.Nombre) ? @context.Fabricante?.Nombre : "<Ninguno>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Dirección:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Fabricante?.Direccion) ? @context.Fabricante?.Direccion : "<Ninguno>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        País:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Fabricante?.Pais?.Nombre) ? @context.Fabricante?.Pais?.Nombre : "<Ninguno>")
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Concentración:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(context.Concentracion) ? context.Concentracion : "<Ninguna>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Vía de Administración:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(context.ViaAdministracion != null ? context.ViaAdministracion?.Nombre : "<Ninguna>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Excipientes:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Excipientes) ? @context.Excipientes : "<Ninguno>")
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Creado:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @context.Created
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Creado por:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.CreatedBy) ? @context.CreatedBy : "<Ninguno>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Modificado:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(@context.LastModified != null ? @context.LastModified : "<Ninguna>")
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </td>
+                </MudTr>
+            }
+        </ChildRowContent>
+        <NoRecordsContent>
+            <MudText>No se encontraron elementos</MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>Cargando...</MudText>
+        </LoadingContent>
+
+        <PagerContent>
+            <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" Class="primary" InfoFormat="{first_item}-{last_item} de {all_items}" PageSizeOptions="new int[] {10, 25, 50, 100, 250 }" RowsPerPageString="Filas" />
+        </PagerContent>
+
+    </MudTable>
+
+
+  
 </div>
 
 @if (addEditDialogIsOpen)
@@ -423,6 +423,7 @@
         var result=new TableData<AigMedicamento>();
         try
         {
+            
             loading = true;
             await RefresView();
             var sorting = new List<SortingOption>();
@@ -463,7 +464,7 @@
         catch (Exception ex){
             _systemLogger.Error(ex.Message);
         }
-        finally{loading = false; await RefresView();}
+        finally{loading = false;await RefresView();}
         return result;
         
     }
@@ -483,15 +484,16 @@
     {
         modelFilter.StartDate = dateRange.Start;
         modelFilter.EndDate = dateRange.End;
-        modelFilter.StartExpirationDate = dateRange.Start;
-        modelFilter.EndExpirationDate = dateRange.End;
+        modelFilter.StartExpirationDate = expirationRange.Start;
+        modelFilter.EndExpirationDate = expirationRange.End;
         await table.ReloadServerData();
     }
 
     private async Task OnReset()
     {
         modelFilter = new MedicamentFilter();
-        dateRange = new DateRange();
+         dateRange = new DateRange();
+            expirationRange = new DateRange();
         await table.ReloadServerData();
     }
 
