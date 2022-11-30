@@ -251,7 +251,7 @@
     private void OnSearch()
     {
         var path= _navigation.ToBaseRelativePath(_navigation.Uri);
-        if (path.Contains("details")) {  
+        if (path.Contains("details")||path.Contains("disclaimer")) {  
             _appState.SetSerachWithoutEvent(_searchText);
              _navigation.NavigateTo("./");
         }

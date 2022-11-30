@@ -516,6 +516,11 @@
 
     private void CloseFileInputAlert(bool value) => showFileInputAlert = value;
 
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+    }
+
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
         _file = e.File;
@@ -525,6 +530,7 @@
             {
                 fileLoading = true;
                 showFileInputAlert = false;
+                await RefresView();
                 long maxFileSize = 1048576 * 20;//20MB
                 var extension = Path.GetExtension(_file.Name);
                 if (_file.Size <= maxFileSize)
@@ -547,7 +553,7 @@
             {
                 _systemLogger.Error(ex);
             }
-            finally { fileLoading = false; }
+            finally { fileLoading = false;  await RefresView();}
         }
     }
 
@@ -570,6 +576,7 @@
             {
                 prospectusLoading = true;
                 showProspectusFileInputAlert = false;
+                await RefresView();
                 long maxFileSize = 1048576 * 20;//20MB
                 var extension = Path.GetExtension(_prospectusFile.Name);
                 if (_prospectusFile.Size <= maxFileSize)
@@ -593,7 +600,7 @@
             {
                 _systemLogger.Error(ex);
             }
-            finally { prospectusLoading = false; }
+            finally { prospectusLoading = false;  await RefresView();}
 
         }
     }
@@ -617,6 +624,7 @@
             {
                 pictureLoading = true;
                 showPictureFileInputAlert = false;
+                await RefresView();
                 long maxFileSize = 1048576 * 10;//10 MB
                 var extension = Path.GetExtension(_imageFile.Name);
                 var format = "image/png";
@@ -634,7 +642,7 @@
             {
                 _systemLogger.Error(ex);
             }
-            finally { pictureLoading = false; }
+            finally { pictureLoading = false;  await RefresView();}
 
         }
     }
