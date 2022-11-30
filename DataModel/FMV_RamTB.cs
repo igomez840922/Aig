@@ -34,10 +34,12 @@ namespace DataModel
 
 
         private string farmacoSospechosoComercial;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string FarmacoSospechosoComercial { get => farmacoSospechosoComercial; set => SetProperty(ref farmacoSospechosoComercial, value); }
 
         private string farmacoSospechosoDci;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string FarmacoSospechosoDci { get => farmacoSospechosoDci; set => SetProperty(ref farmacoSospechosoDci, value); }
 
@@ -68,6 +70,7 @@ namespace DataModel
         public string IdFacedra { get => idFacedra; set => SetProperty(ref idFacedra, value); }
 
         private string codigoCNFV;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string CodigoCNFV { get => codigoCNFV; set => SetProperty(ref codigoCNFV, value); }
 

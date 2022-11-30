@@ -10,11 +10,11 @@
 		<EditForm id="loginform" class="kt-form" OnValidSubmit="OnLogin" Model="loginRequest">
 			<DataAnnotationsValidator />
 										<div class="form-group">
-                <InputText class="form-control" type="text" name="email" autocomplete="off" placeholder="@languageContainerService.Keys["UserName"]" @bind-Value="loginRequest.UserName" style="background:none!important;background-color:white!important;" />
+                <InputText class="form-control" type="text" autocomplete="off" placeholder="@languageContainerService.Keys["UserName"]" @bind-Value="loginRequest.UserName" style="background:none!important;background-color:white!important;" />
 				<ValidationMessage For="@(() => loginRequest.UserName)" />
 										</div>
 										<div class="form-group">
-                <InputText class="form-control form-control-last" type="password" autocomplete="off" placeholder="@languageContainerService.Keys["Password"]" name="Password" @bind-Value="loginRequest.Password" style="background:none!important;background-color:white!important;" />
+                <InputText class="form-control form-control-last" type="password" autocomplete="off" placeholder="@languageContainerService.Keys["Password"]" @bind-Value="loginRequest.Password" style="background:none!important;background-color:white!important;" />
 				<ValidationMessage For="@(() => loginRequest.Password)" />
                 						</div>
 										<div class="row kt-login__extra">

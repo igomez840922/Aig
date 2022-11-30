@@ -281,18 +281,20 @@ namespace DataModel.Helper
 
     public enum enumFMV_RAMDesenlace
     {
+        [Description("N/A")]
+        NA = 0,
         [Description("Desconocido")]
-        DESC = 0,
+        DESC = 1,
         [Description("Recuperado con Secuelas")]
-        RCSEC = 1,
+        RCSEC = 2,
         [Description("Recuperado sin Secuelas")]
-        RSSEC = 2,
+        RSSEC = 3,
         [Description("En Recuperación")]
-        REC = 3,
+        REC = 4,
         [Description("No Recuperado")]
-        NREC = 4,
+        NREC = 5,
         [Description("Muerte")]
-        MUE = 5,
+        MUE = 6,
     }
 
     public enum enumFMV_RAMConductaDosis
@@ -471,6 +473,53 @@ namespace DataModel.Helper
         TOLERADO = 8,
     }
 
+    public enum enumFMV_FfTipoIncidenciaCaso
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Inicial")]
+        INI = 1,
+        [Description("Seguimiento")]
+        SEG = 2,
+    }
+
+    public enum enumFMV_FfAcciones
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Pendiente")]
+        PEND = 1,
+        [Description("No Requerido")]
+        NOREQ = 2,
+        [Description("Realizado")]
+        REAL = 3,
+        [Description("Solicitado")]
+        SOL = 4,
+    }
+    public enum enumFMV_FfResultControlCal
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("En Espera")]
+        ESP = 1,
+        [Description("No Satisfactorio")]
+        NOSAT = 2,
+        [Description("Satisfactorio")]
+        SAT = 3,
+    }
+
+    public enum enumFMV_FfRecomendAccRegulat
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("No Requerido")]
+        NOREQ = 1,
+        [Description("Suspensión y retiro de lote(s)")]
+        SUSPRETLOT = 2,
+        [Description("Suspensión de Registro Sanitario")]
+        SUSPREGSAN = 3,
+    }
+
     public enum enumSexo
     {
         [Description("N/A")]
@@ -489,6 +538,8 @@ namespace DataModel.Helper
         Si = 1,
         [Description("No")]
         No = 2,
+        [Description("No Sabe")]
+        NoSabe = 2,
     }
 
     public enum enumFMV_IpsPresentaCD

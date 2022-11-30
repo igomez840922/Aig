@@ -26,6 +26,7 @@ namespace DataModel
 
         // Código Externo
         private string codExterno;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string CodExterno { get => codExterno; set => SetProperty(ref codExterno, value); }
 
@@ -57,6 +58,7 @@ namespace DataModel
 
         // Número de ingreso a Vigiflow
         private string numIngresoVigiflow;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string NumIngresoVigiflow { get => numIngresoVigiflow; set => SetProperty(ref numIngresoVigiflow, value); }
 

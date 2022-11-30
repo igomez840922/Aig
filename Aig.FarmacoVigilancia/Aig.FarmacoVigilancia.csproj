@@ -56,6 +56,7 @@
     <PackageReference Include="MimeKit" Version="3.4.2" />
     <PackageReference Include="Mobsites.Blazor.SignaturePad" Version="1.1.7" />
     <PackageReference Include="QuestPDF" Version="2022.9.1" />
+    <PackageReference Include="Radzen.Blazor" Version="4.3.10" />
   </ItemGroup>
 
   <ItemGroup>

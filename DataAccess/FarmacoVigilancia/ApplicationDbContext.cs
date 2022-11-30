@@ -153,6 +153,18 @@ namespace DataAccess.FarmacoVigilancia
           .HasForeignKey(e => e.EvaluadorId)
           .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+         .HasMany(e => e.LFf)
+         .WithOne(e => e.Evaluador)
+         .HasForeignKey(e => e.EvaluadorId)
+         .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+         .HasMany(e => e.LFt)
+         .WithOne(e => e.Evaluador)
+         .HasForeignKey(e => e.EvaluadorId)
+         .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<InstitucionDestinoTB>()
            .HasMany(e => e.LNotas)
            .WithOne(e => e.InstitucionDestino)
@@ -168,6 +180,18 @@ namespace DataAccess.FarmacoVigilancia
            .WithOne(e => e.Ram)
            .HasForeignKey(e => e.RamId)
            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FMV_FfTB>()
+          .HasMany(e => e.LNotificaciones)
+          .WithOne(e => e.Ff)
+          .HasForeignKey(e => e.FfId)
+          .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FMV_FtTB>()
+          .HasMany(e => e.LNotificaciones)
+          .WithOne(e => e.Ft)
+          .HasForeignKey(e => e.FtId)
+          .OnDelete(DeleteBehavior.Cascade);
 
             ///////////////////////////////
             ///
@@ -188,6 +212,24 @@ namespace DataAccess.FarmacoVigilancia
               .Property(e => e.AccionesRegulatoria)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamAccionesRegulatoria>(x));
 
+            ///////////////////////////////
+            ///
+            //JSON Serialization
+            modelBuilder.Entity<FMV_FfNotificacionTB>()
+              .Property(e => e.FallaReportada)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FfNotificacionFallaReportada>(x));
+
+            ///////////////////////////////
+            ///
+            //JSON Serialization
+            modelBuilder.Entity<FMV_FtNotificacionTB>()
+              .Property(e => e.FallaReportada)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtNotificacionFallaReportada>(x));
+
+            modelBuilder.Entity<FMV_FtNotificacionTB>()
+              .Property(e => e.EvaluacionCausalidad)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtEvaluacionCausalidad>(x));
+
 
             ///////////////////////////////
             ///
@@ -200,6 +242,10 @@ namespace DataAccess.FarmacoVigilancia
         public virtual DbSet<FMV_PmrTB> FMV_Pmr { get; set; }
         public virtual DbSet<FMV_RamNotificacionTB> FMV_RamNotificacion { get; set; }
         public virtual DbSet<FMV_RamTB> FMV_Ram { get; set; }
+        public virtual DbSet<FMV_FtNotificacionTB> FMV_FtNotificacion { get; set; }
+        public virtual DbSet<FMV_FtTB> FMV_Ft { get; set; }
+        public virtual DbSet<FMV_FfNotificacionTB> FMV_FfNotificacion { get; set; }
+        public virtual DbSet<FMV_FfTB> FMV_Ff { get; set; }        
         public virtual DbSet<FMV_IpsTB> MV_Ips { get; set; }
         public virtual DbSet<FMV_RfvTB> FMV_Rfv { get; set; }
         public virtual DbSet<FMV_OrigenAlertaTB> FMV_OrigenAlerta { get; set; }
