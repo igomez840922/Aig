@@ -44,6 +44,9 @@
 
 <div class="kt-portlet__body">
 
+    <MudOverlay Visible="@loading" LightBackground="true" Absolute="true">
+    </MudOverlay>
+
     <EditForm Model="this" OnValidSubmit="OnSearch" class="kt-form kt-form--fit kt-margin-b-20">
 
         <div class="row kt-margin-b-20">
