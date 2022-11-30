@@ -14,7 +14,7 @@
 @inject ISystemLogger _systemLogger;
 @inject IUnitOfWork _unitOfWork;
 @inject IOptions<AppConfiguration> _config;
-
+@inject NavigationManager _navigation;
 <style>
     .product-details-wrapper {
     padding-left: 0px !important;
@@ -363,6 +363,10 @@ else
     protected async override Task OnInitializedAsync()
     {
         item = await DoFetchData();
+        if (item == null){
+            item = new AigMedicamento();
+            _navigation.NavigateTo("./NotFound");
+        }
         base.OnInitialized();
     }
     
@@ -370,11 +374,8 @@ else
     {
         loading = true;
         var result = await _unitOfWork.Repository<AigMedicamento>().GetByIdAsync(product);
-        if (result == null)
-            result = new AigMedicamento();
         loading = false;
         return result;
-
     }
 
     private string GetSaleCondition(string value)
@@ -385,6 +386,7 @@ else
             "CP" => "Con prescripción médica",
             "UH" => "Uso hospitalario exclusivo",
             "VP" => "Venta popular",
+             _ => string.Empty
         };
     }
     private string GetEquivalence(string value)
