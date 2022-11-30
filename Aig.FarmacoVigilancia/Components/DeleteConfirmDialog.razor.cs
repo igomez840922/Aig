@@ -12,7 +12,6 @@ namespace Aig.FarmacoVigilancia.Components
     {
         [Inject]
         IProfileService profileService { get; set; }
-
         bool OpenDialog { get; set; }
         string Caption { get; set; }
         string Message { get; set; }

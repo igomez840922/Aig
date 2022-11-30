@@ -1,0 +1,526 @@
+﻿@using DataModel.Helper;
+
+
+<!-- Modal Creat/Edit -->
+@if (Notification != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Notification != null && Notification.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["Notification"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Notification" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+                        <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Procedencia de Notificación"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#evaCalidadInfo" role="tab">@languageContainerService.Keys["Falla Reportada"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#obsInfoNotif" role="tab">@languageContainerService.Keys["Observaciones"]</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="procNotifica" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Procedencia de Notificación"]</h5>
+                                <div class="row clearfix">
+
+                                     <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Presentación"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.Presentacion" />
+                                                <ValidationMessage For=@(() => Notification.Presentacion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["ATC"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.Atc" />
+                                                <ValidationMessage For=@(() => Notification.Atc) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>
+                                            @languageContainerService.Keys["Sub-grupo Terapéutico"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.SubGrupoTer" />
+                                                <ValidationMessage For=@(() => Notification.SubGrupoTer) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>
+                                            @languageContainerService.Keys["Fabricante"]
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.Fabricante" />
+                                                <ValidationMessage For=@(() => Notification.Fabricante) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>
+                                            @languageContainerService.Keys["Lote"]
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.Lote" />
+                                                <ValidationMessage For=@(() => Notification.Lote) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>
+                                            @languageContainerService.Keys["Fecha de Expira"]
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.Expira" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.Expira) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>
+                                            @languageContainerService.Keys["Registro Sanitario"]
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.RegSanitario" />
+                                                <ValidationMessage For=@(() => Notification.RegSanitario) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">
+                                            @languageContainerService.Keys["Tipo de Notificador"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Notification.TipoNotificador" class="form-control">
+                                                @foreach (enumFMV_RAMNotificationType dt in Enum.GetValues(typeof(enumFMV_RAMNotificationType)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Notification.TipoNotificador) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">
+                                            @languageContainerService.Keys["Tipo de Organización/Institución"]
+                                        </label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Notification.TipoOrgInst" class="form-control">
+                                                @foreach (enumFMV_RAMOrganizationType dt in Enum.GetValues(typeof(enumFMV_RAMOrganizationType)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Notification.TipoOrgInst) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Provincia/Región/Origen"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.ProvRegionOrigen" />
+                                                <ValidationMessage For=@(() => Notification.ProvRegionOrigen) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Nombre de Organización/Institución"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.NombreOrgInst" />
+                                                <ValidationMessage For=@(() => Notification.NombreOrgInst) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Notificador"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Notification.Notificador" />
+                                                <ValidationMessage For=@(() => Notification.Notificador) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Incidendia de Caso"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.IncidenciaCaso" class="form-control">
+                                                    @foreach (enumFMV_FfTipoIncidenciaCaso dt in Enum.GetValues(typeof(enumFMV_FfTipoIncidenciaCaso)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.IncidenciaCaso) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="evaCalidadInfo" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Falla Reportada"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Olor"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.Olor" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.Olor) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Color"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.Color" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.Color) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Sabor"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.Sabor" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.Sabor) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Separación de Fases"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.SepFases" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.SepFases) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Partículas Extrañas"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.ParExtrana" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.ParExtrana) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Contaminación"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.Contaminacion" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.Contaminacion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Problemas de Disolución"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.ProDisolucion" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.ProDisolucion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Problemas de Desintegración"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.ProDesintegracion" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.ProDesintegracion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Otros"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.FallaReportada.Otros" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.Otros) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label>@languageContainerService.Keys["Detalle de Falla Reportada"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="8" class="form-control" @bind-Value="Notification.FallaReportada.DetFallaReport" />
+                                                <ValidationMessage For=@(() => Notification.FallaReportada.DetFallaReport) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="obsInfoNotif" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Observaciones"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Revisión de RS (Especificaciones, inserto, otro)"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.RevisionRs" class="form-control">
+                                                    @foreach (enumFMV_FfAcciones dt in Enum.GetValues(typeof(enumFMV_FfAcciones)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.RevisionRs) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Monitoreo"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.Monitoreo" class="form-control">
+                                                    @foreach (enumFMV_FfAcciones dt in Enum.GetValues(typeof(enumFMV_FfAcciones)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.Monitoreo) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Notificacion al RFV"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.NotificacionRFV" class="form-control">
+                                                    @foreach (enumFMV_FfAcciones dt in Enum.GetValues(typeof(enumFMV_FfAcciones)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.NotificacionRFV) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Control de Calidad"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.ControlCalidad" class="form-control">
+                                                    @foreach (enumFMV_FfAcciones dt in Enum.GetValues(typeof(enumFMV_FfAcciones)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.ControlCalidad) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Resultados de Control de Calidad"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.ResultControlCalidad" class="form-control">
+                                                    @foreach (enumFMV_FfResultControlCal dt in Enum.GetValues(typeof(enumFMV_FfResultControlCal)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.ResultControlCalidad) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Investigación de Campo"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.InvestCampo" class="form-control">
+                                                    @foreach (enumFMV_FfAcciones dt in Enum.GetValues(typeof(enumFMV_FfAcciones)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.InvestCampo) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Investigación al DAC"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.InvestDAC" class="form-control">
+                                                    @foreach (enumFMV_FfAcciones dt in Enum.GetValues(typeof(enumFMV_FfAcciones)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.InvestDAC) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Acciones Regulatorias Recomendadas"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.AccRegRecomendada" class="form-control">
+                                                    @foreach (enumFMV_FfRecomendAccRegulat dt in Enum.GetValues(typeof(enumFMV_FfRecomendAccRegulat)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.AccRegRecomendada) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Grado"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                               <InputNumber class="form-control" @bind-Value="Notification.Grado" />
+                                                <ValidationMessage For=@(() => Notification.Grado) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>
+                                            @languageContainerService.Keys["Fecha de Trámite"]
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.FechaTramite) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>
+                                            @languageContainerService.Keys["Fecha de Evaluación"]
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.FechaEvalua" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.FechaEvalua) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Estatus"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Notification.Estatus" class="form-control">
+                                                    @foreach (enumFMV_RAMStatus dt in Enum.GetValues(typeof(enumFMV_RAMStatus)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Notification.Estatus) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-12">
+                                        <label>@languageContainerService.Keys["Resoluciones Emitidas"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                               <InputTextArea rows="6" class="form-control" @bind-Value="Notification.ResolEmitidas" />
+                                                <ValidationMessage For=@(() => Notification.ResolEmitidas) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label>@languageContainerService.Keys["Observaciones"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="6" class="form-control" @bind-Value="Notification.Observaciones" />
+                                                <ValidationMessage For=@(() => Notification.Observaciones) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+}
+

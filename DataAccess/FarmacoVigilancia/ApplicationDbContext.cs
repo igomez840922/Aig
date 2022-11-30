@@ -147,6 +147,24 @@ namespace DataAccess.FarmacoVigilancia
            .HasForeignKey(e => e.EvaluadorId)
            .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+          .HasMany(e => e.LRams)
+          .WithOne(e => e.Evaluador)
+          .HasForeignKey(e => e.EvaluadorId)
+          .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+         .HasMany(e => e.LFf)
+         .WithOne(e => e.Evaluador)
+         .HasForeignKey(e => e.EvaluadorId)
+         .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+         .HasMany(e => e.LFt)
+         .WithOne(e => e.Evaluador)
+         .HasForeignKey(e => e.EvaluadorId)
+         .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<InstitucionDestinoTB>()
            .HasMany(e => e.LNotas)
            .WithOne(e => e.InstitucionDestino)
@@ -157,24 +175,82 @@ namespace DataAccess.FarmacoVigilancia
             .Property(e => e.IpsData)
             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_IpsData>(x));
 
-            //modelBuilder.Entity<FMV_IpsTB>()
-            //  .HasMany(e => e.LProducts)
-            //  .WithOne(e => e.Ips)
-            //  .HasForeignKey(e => e.IpsId)
-            //  .OnDelete(DeleteBehavior.Cascade);                        
+            modelBuilder.Entity<FMV_RamTB>()
+           .HasMany(e => e.LNotificaciones)
+           .WithOne(e => e.Ram)
+           .HasForeignKey(e => e.RamId)
+           .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<FMV_FfTB>()
+          .HasMany(e => e.LNotificaciones)
+          .WithOne(e => e.Ff)
+          .HasForeignKey(e => e.FfId)
+          .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FMV_FtTB>()
+          .HasMany(e => e.LNotificaciones)
+          .WithOne(e => e.Ft)
+          .HasForeignKey(e => e.FtId)
+          .OnDelete(DeleteBehavior.Cascade);
+
+            ///////////////////////////////
+            ///
+            //JSON Serialization
+            modelBuilder.Entity<FMV_RamNotificacionTB>()
+              .Property(e => e.EvaluacionCalidadInfo)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamEvaluacionCalidadInfo>(x));
+
+            modelBuilder.Entity<FMV_RamNotificacionTB>()
+              .Property(e => e.EvaluacionCausalidad)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamEvaluacionCausalidad>(x));
+
+            modelBuilder.Entity<FMV_RamNotificacionTB>()
+              .Property(e => e.ObservacionInfoNotifica)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamObservacionInfoNotifica>(x));
+
+            modelBuilder.Entity<FMV_RamNotificacionTB>()
+              .Property(e => e.AccionesRegulatoria)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamAccionesRegulatoria>(x));
+
+            ///////////////////////////////
+            ///
+            //JSON Serialization
+            modelBuilder.Entity<FMV_FfNotificacionTB>()
+              .Property(e => e.FallaReportada)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FfNotificacionFallaReportada>(x));
+
+            ///////////////////////////////
+            ///
+            //JSON Serialization
+            modelBuilder.Entity<FMV_FtNotificacionTB>()
+              .Property(e => e.FallaReportada)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtNotificacionFallaReportada>(x));
+
+            modelBuilder.Entity<FMV_FtNotificacionTB>()
+              .Property(e => e.EvaluacionCausalidad)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtEvaluacionCausalidad>(x));
+
+
+            ///////////////////////////////
+            ///
             base.OnModelCreating(modelBuilder);
         }
        
-        public virtual DbSet<AttachmentTB> Attachment { get; set; }
+        //public virtual DbSet<AttachmentTB> Attachment { get; set; }
         public virtual DbSet<PersonalTrabajadorTB> PersonalTrabajador { get; set; }
-        public virtual DbSet<FMV_PmrTB> PmrTB { get; set; }
-        public virtual DbSet<FMV_PmrProductoTB> Ram { get; set; }
-        public virtual DbSet<FMV_IpsTB> Ips { get; set; }
-        public virtual DbSet<FMV_RfvTB> Rfv { get; set; }
-        public virtual DbSet<FMV_OrigenAlertaTB> OrigenAlerta { get; set; }
-        public virtual DbSet<FMV_AlertaTB> Alerta { get; set; }
-        public virtual DbSet<FMV_NotaTB> Nota { get; set; }
+        public virtual DbSet<FMV_PmrProductoTB> FMV_PmrProducto { get; set; }
+        public virtual DbSet<FMV_PmrTB> FMV_Pmr { get; set; }
+        public virtual DbSet<FMV_RamNotificacionTB> FMV_RamNotificacion { get; set; }
+        public virtual DbSet<FMV_RamTB> FMV_Ram { get; set; }
+        public virtual DbSet<FMV_FtNotificacionTB> FMV_FtNotificacion { get; set; }
+        public virtual DbSet<FMV_FtTB> FMV_Ft { get; set; }
+        public virtual DbSet<FMV_FfNotificacionTB> FMV_FfNotificacion { get; set; }
+        public virtual DbSet<FMV_FfTB> FMV_Ff { get; set; }        
+        public virtual DbSet<FMV_IpsTB> MV_Ips { get; set; }
+        public virtual DbSet<FMV_RfvTB> FMV_Rfv { get; set; }
+        public virtual DbSet<FMV_OrigenAlertaTB> FMV_OrigenAlerta { get; set; }
+        public virtual DbSet<FMV_AlertaTB> FMV_Alerta { get; set; }
+        public virtual DbSet<FMV_NotaTB> FMV_Nota { get; set; }
         public virtual DbSet<InstitucionDestinoTB> InstitucionDestino { get; set; }
         public virtual DbSet<LaboratorioTB> Laboratorio { get; set; }
         public virtual DbSet<CorregimientoTB> Corregimiento { get; set; }

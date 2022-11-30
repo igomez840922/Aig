@@ -11,21 +11,45 @@ namespace DataModel
     //Notificaciones de Reacciones Adversas a Medicamentos
     public class FMV_RamTB:SystemId
     {
-        private FMV_AlertaTB alerta;
-        public virtual FMV_AlertaTB Alerta { get => alerta; set => SetProperty(ref alerta, value); }
+        public FMV_RamTB()
+        {
+            LNotificaciones = new List<FMV_RamNotificacionTB>();
+        }
+
+        // Fecha de recibido (CNFV)
+        private DateTime? fechaRecibidoCNFV;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaRecibidoCNFV { get => fechaRecibidoCNFV; set => SetProperty(ref fechaRecibidoCNFV, value); }
+
+        // Fecha de entrega al evaluador
+        private DateTime? fechaEntregaEva;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaEntregaEva { get => fechaEntregaEva; set => SetProperty(ref fechaEntregaEva, value); }
+
+        // Evaluador
+        private long? evaluadorId;
+        public long? EvaluadorId { get => evaluadorId; set => SetProperty(ref evaluadorId, value); }
+        private PersonalTrabajadorTB? evaluador;
+        public virtual PersonalTrabajadorTB? Evaluador { get => evaluador; set => SetProperty(ref evaluador, value); }
 
 
         private string farmacoSospechosoComercial;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string FarmacoSospechosoComercial { get => farmacoSospechosoComercial; set => SetProperty(ref farmacoSospechosoComercial, value); }
 
         private string farmacoSospechosoDci;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string FarmacoSospechosoDci { get => farmacoSospechosoDci; set => SetProperty(ref farmacoSospechosoDci, value); }
 
         private string atc;
         [StringLength(250)]
         public string Atc { get => atc; set => SetProperty(ref atc, value); }
+
+        private string atc2;
+        [StringLength(250)]
+        public string Atc2 { get => atc2; set => SetProperty(ref atc2, value); }
 
         private string subGrupoTerapeutico;
         [StringLength(250)]
@@ -46,14 +70,22 @@ namespace DataModel
         public string IdFacedra { get => idFacedra; set => SetProperty(ref idFacedra, value); }
 
         private string codigoCNFV;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string CodigoCNFV { get => codigoCNFV; set => SetProperty(ref codigoCNFV, value); }
 
+        // Valores Únicos - Código del CNFV. Total=2. 1, 0
+        /*FÓRMULA: Si la cantidad de valores totales en toda la columna [codCNFV] es mayor que 1 entonces [valUnicos]=0 si no: [valUnicos]=1 */
+        //Total
+        private int valUnico;
+        public int ValUnico { 
+            get { return LNotificaciones?.Count > 1 ? 0 : 1; }
+            set => SetProperty(ref valUnico, value); 
+        }
 
-        private List<FMV_RamProductTB> lProducts;
-        [StringLength(250)]
-        public List<FMV_RamProductTB> LProducts { get => lProducts; set => SetProperty(ref lProducts, value); }
-
+        //PROCEDENCIA DE NOTIFICACION - Lista de Procedencias
+        private List<FMV_RamNotificacionTB> lNotificaciones;
+        public virtual List<FMV_RamNotificacionTB> LNotificaciones { get => lNotificaciones; set => SetProperty(ref lNotificaciones, value); }
 
     }
 }
