@@ -103,6 +103,7 @@ builder.Services.AddScoped<INoteService, NoteService>();
 builder.Services.AddScoped<IRamService, RamService>();
 builder.Services.AddScoped<IFFService, FFService>();
 builder.Services.AddScoped<IFTService, FTService>();
+builder.Services.AddScoped<IESAVIService, ESAVIService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

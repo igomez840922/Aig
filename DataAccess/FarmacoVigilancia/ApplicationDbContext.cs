@@ -165,6 +165,12 @@ namespace DataAccess.FarmacoVigilancia
          .HasForeignKey(e => e.EvaluadorId)
          .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<PersonalTrabajadorTB>()
+        .HasMany(e => e.LEsavi)
+        .WithOne(e => e.Evaluador)
+        .HasForeignKey(e => e.EvaluadorId)
+        .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<InstitucionDestinoTB>()
            .HasMany(e => e.LNotas)
            .WithOne(e => e.InstitucionDestino)
@@ -191,6 +197,12 @@ namespace DataAccess.FarmacoVigilancia
           .HasMany(e => e.LNotificaciones)
           .WithOne(e => e.Ft)
           .HasForeignKey(e => e.FtId)
+          .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FMV_EsaviTB>()
+          .HasMany(e => e.LNotificaciones)
+          .WithOne(e => e.Esavi)
+          .HasForeignKey(e => e.EsaviId)
           .OnDelete(DeleteBehavior.Cascade);
 
             ///////////////////////////////
@@ -250,6 +262,8 @@ namespace DataAccess.FarmacoVigilancia
         public virtual DbSet<FMV_RfvTB> FMV_Rfv { get; set; }
         public virtual DbSet<FMV_OrigenAlertaTB> FMV_OrigenAlerta { get; set; }
         public virtual DbSet<FMV_AlertaTB> FMV_Alerta { get; set; }
+        public virtual DbSet<FMV_EsaviNotificacionTB> FMV_EsaviNotificacion { get; set; }
+        public virtual DbSet<FMV_EsaviTB> FMV_Esavi { get; set; }
         public virtual DbSet<FMV_NotaTB> FMV_Nota { get; set; }
         public virtual DbSet<InstitucionDestinoTB> InstitucionDestino { get; set; }
         public virtual DbSet<LaboratorioTB> Laboratorio { get; set; }

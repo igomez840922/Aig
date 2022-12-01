@@ -69,6 +69,9 @@ namespace DataModel
         private List<FMV_FtTB> lFt;
         public virtual List<FMV_FtTB> LFt { get => lFt; set => SetProperty(ref lFt, value); }
 
+        private List<FMV_EsaviTB> lEsavi;
+        public virtual List<FMV_EsaviTB> LEsavi { get => lEsavi; set => SetProperty(ref lEsavi, value); }
+
         //private List<FMV_IpsProductTB> lIpsProducts;
         //public virtual List<FMV_IpsProductTB> LIpsProducts { get => lIpsProducts; set => SetProperty(ref lIpsProducts, value); }
     }

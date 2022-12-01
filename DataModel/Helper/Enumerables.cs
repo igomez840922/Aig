@@ -233,19 +233,25 @@ namespace DataModel.Helper
         Papel = 2,
         [Description("Facedra")]
         Facedra = 3,
+        [Description("PAI")]
+        Pai = 4,
     }
     public enum enumFMV_RAMNotificationType
     {
+        [Description("No Reportado")]
+        NOREP = 0,
         [Description("Médico")]
-        MED = 0,
+        MED = 1,
         [Description("Farmacéutico")]
-        FAR = 1,
+        FAR = 2,
         [Description("Otro Profesional del la Salud")]
-        OPS = 2,
+        OPS = 3,
         [Description("Paciente")]
-        PAC = 3,
+        PAC = 4,
         [Description("Industria Farmacéutica")]
-        INF = 4,
+        INF = 5,
+        [Description("Enfermera")]
+        ENF = 6,
     }
     public enum enumFMV_RAMOrganizationType
     {
@@ -519,6 +525,112 @@ namespace DataModel.Helper
         [Description("Suspensión de Registro Sanitario")]
         SUSPREGSAN = 3,
     }
+
+    public enum enumFMV_EsaviClasificacion
+    {
+        [Description("No hay ESAVI")]
+        NA = 0,
+        [Description("Si hay ESAVI")]
+        SIESAVI = 1,
+        [Description("Estudio Clínico")]
+        ESTUDCLIN = 2,
+        [Description("Literatura")]
+        LITERAT = 3,
+    }
+
+    public enum enumFMV_EsaviSOC
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Embarazo, puerperio y enfermedades perinatales")]
+        EMB = 1,
+        [Description("Exploraciones complementarias")]
+        EXPLCOM = 2,
+        [Description("Infecciones e infestaciones")]
+        INFECC = 3,
+        [Description("Lesiones traumáticas, intoxicaciones y complicaciones de procedimientos terapéuticos")]
+        LESIO = 4,
+        [Description("Neoplasias benignas, malignas y no especificadas (incl quistes y pólipos)")]
+        NEOPLA = 5,
+        [Description("Problemas relativos a productos")]
+        PRORELAT = 6,
+        [Description("Procedimientos médicos y quirúrgicos")]
+        PROCMEDQUI = 7,
+        [Description("Trastornos cardíacos")]
+        TRANSCARD = 8,
+        [Description("Trastornos congénitos, familiares y genéticos")]
+        TRANSCONG = 9,
+        [Description("Trastornos de la piel y del tejido subcutáneo")]
+        TRANSPIEL = 10,
+        [Description("Trastornos de la sangre y del sistema linfático")]
+        TRANSSANG = 11,
+        [Description("Trastornos del aparato reproductor y de la mama")]
+        TRANSREP = 12,
+        [Description("Trastornos del metabolismo y de la nutrición")]
+        TRANSMET = 13,
+        [Description("Trastornos del oído y del laberinto")]
+        TRANSOIDO = 14,
+        [Description("Trastornos del sistema inmunológico")]
+        TRANSINMU = 15,
+        [Description("Trastornos del sistema nervioso")]
+        TRANSSISNERV = 16,
+        [Description("Trastornos endocrinos")]
+        TRANSENDO = 17,
+        [Description("Trastornos gastrointestinales")]
+        TRANSGASTRO = 18,
+        [Description("Trastornos generales y alteraciones en el lugar de administración")]
+        TRANSGENERAL = 19,
+        [Description("Trastornos hepatobiliares")]
+        TRANSHEPATO = 20,
+        [Description("Trastornos musculoesqueléticos y del tejido conjuntivo")]
+        TRANSMUSC = 21,
+        [Description("Trastornos oculares")]
+        TRANSOCULA = 22,
+        [Description("Trastornos psiquiátricos")]
+        TRANSPSIQ = 23,
+        [Description("Trastornos renales y urinarios")]
+        TRANSRENA = 24,
+        [Description("Trastornos respiratorios, torácicos y mediastínicos")]
+        TRANSRESPI = 25,
+    }
+
+    public enum enumFMV_EsaviOtroCriterio
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Eventos nuevos o no descritos (inesperados)")]
+        NUEVO = 1,
+        [Description("Ocurrencia de eventos por encima de la tasa esperada o de gravedad inusual")]
+        OCURRENCIA = 2,
+        [Description("Clúster o conglomerados de casos")]
+        CLUSTER = 3,
+        [Description("Poblaciones vulnerables")]
+        VULNERA = 4,
+        [Description("Casos de interés especial")]
+        ESPECIAL = 5,
+    }
+    public enum enumFMV_EsaviProbabilidadAsociacion
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Consistente con la vacuna")]
+        VAC = 1,
+        [Description("Consistente con un defecto de calidad de la vacuna")]
+        DEFVAC = 2,
+        [Description("Consistente con un error de inmunización")]
+        ERRORINMU = 3,
+        [Description("Consistente con reacción relacionada con la ansiedad")]
+        REARELAANSI = 4,
+        [Description("Indeterminado. La relación temporal es consistente pero no hay suficiente evidencia de que el evento causante es la vacuna")]
+        INDETER1 = 5,
+        [Description("Indeterminado. Los factores de calificación dan como resultado tendencias contradictorias de coherencia e inconsistencia con la asociación causal a la inmunización.")]
+        INDETER2 = 6,
+        [Description("Inconsistente")]
+        INCONSIST = 7,
+        [Description("Inclasificable")]
+        INCLASIF = 8,
+    }
+    
 
     public enum enumSexo
     {
