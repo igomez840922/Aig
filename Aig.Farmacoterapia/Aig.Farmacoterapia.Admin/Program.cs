@@ -4,6 +4,7 @@ using Aig.Farmacoterapia.Application.Common.Middleware;
 using Aig.Farmacoterapia.Infrastructure;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Aig.Farmacoterapia.Infrastructure.SeedData;
+using BlazorComponentBus;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.FileProviders;
 using MudBlazor.Services;
@@ -21,6 +22,9 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 //For api controllers
 builder.Services.AddControllers();
+
+//For Components Comunucations Pul-Sub
+builder.Services.AddScoped<ComponentBus>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

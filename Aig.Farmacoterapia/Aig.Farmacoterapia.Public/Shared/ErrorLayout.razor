@@ -6,6 +6,7 @@
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @inject NavigationManager _navigation;
 @inject AppState _appState;
+@inject IDialogService DialogService
 <PageTitle>Medicamentos</PageTitle>
 
 <style>
@@ -163,29 +164,7 @@
             </div>
         </div>
     </div>
-    <div id="sticky-header" class="main-menu-area menu-01 pl-165 pr-165">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-3">
-                    <div class="logo" style="margin-top: 20px;">
-                        <a href="/"><img src="assets/img/logo/logo.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="col-9">
-                    <div class="header-search header-02-search" style="margin-top: 15px;">
-                     
-                            <EditForm Model="this" class="header-search-form" OnValidSubmit="OnSearch">
-                                <FluentValidationValidator />
-                                <input type="text" @bind-value="@_searchText" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
-                                <button type="submit"><i class="far fa-search"></i></button>
-                            </EditForm>
-                          
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  
 </header>
 
 
@@ -244,8 +223,8 @@
    
     private void OnSearch()
     {
-        var path= _navigation.ToBaseRelativePath(_navigation.Uri).ToLower();
-        if (path.Contains("details")||path.Contains("disclaimer")||path.Contains("notfound")) {  
+        var path= _navigation.ToBaseRelativePath(_navigation.Uri);
+        if (path.Contains("details")||path.Contains("disclaimer")) {  
             _appState.SetSerachWithoutEvent(_searchText);
              _navigation.NavigateTo("./");
         }
