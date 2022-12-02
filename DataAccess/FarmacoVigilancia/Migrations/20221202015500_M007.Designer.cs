@@ -4,6 +4,7 @@ using DataAccess.FarmacoVigilancia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.FarmacoVigilancia.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221202015500_M007")]
+    partial class M007
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -653,7 +655,7 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                     b.ToTable("FMV_Ff");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_FtTB", b =>
+            modelBuilder.Entity("DataModel.FMV_FtNotificacionTB", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -661,7 +663,7 @@ namespace DataAccess.FarmacoVigilancia.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("ATC")
+                    b.Property<string>("Atc")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -669,20 +671,8 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("CodCNFV")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("CodExt")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DatosPaciente")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
@@ -696,24 +686,17 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                     b.Property<string>("EvaluacionCausalidad")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("EvaluadorId")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("Expira")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Fabricante")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
-                    b.Property<DateTime?>("FechaEntregaEva")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("FallaReportada")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("FechaEvalua")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FechaExp")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime?>("FechaRecibidoCNFV")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("FechaTramite")
@@ -722,28 +705,19 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
+                    b.Property<long>("FtId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("IncidenciaCaso")
                         .HasColumnType("int");
 
-                    b.Property<long?>("InstitucionDestinoId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("InstitucionId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Lote")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("NombreComercial")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("NombreDci")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                    b.Property<string>("NombreOrgInst")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Notificador")
                         .HasMaxLength(350)
@@ -753,17 +727,17 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("OtrasEspecificaciones")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Presentacion")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
-                    b.Property<long?>("ProvinciaId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("ProvRegionOrigen")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("RegSanitario")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -771,17 +745,14 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("SubGrupoTerapeutico")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<long?>("TipoInstitucionId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("TipoNotificacion")
-                        .HasColumnType("int");
+                    b.Property<string>("SubGrupoTer")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<int>("TipoNotificador")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoOrgInst")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -789,13 +760,65 @@ namespace DataAccess.FarmacoVigilancia.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FtId");
+
+                    b.ToTable("FMV_FtNotificacion");
+                });
+
+            modelBuilder.Entity("DataModel.FMV_FtTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("CodCNFV")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("CodExt")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("EvaluadorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("FarmacoSospechosoComercial")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("FarmacoSospechosoDci")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime?>("FechaEntregaEva")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaRecibidoCNFV")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("EvaluadorId");
-
-                    b.HasIndex("InstitucionDestinoId");
-
-                    b.HasIndex("ProvinciaId");
-
-                    b.HasIndex("TipoInstitucionId");
 
                     b.ToTable("FMV_Ft");
                 });
@@ -2089,6 +2112,17 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                     b.Navigation("TipoInstitucion");
                 });
 
+            modelBuilder.Entity("DataModel.FMV_FtNotificacionTB", b =>
+                {
+                    b.HasOne("DataModel.FMV_FtTB", "Ft")
+                        .WithMany("LNotificaciones")
+                        .HasForeignKey("FtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ft");
+                });
+
             modelBuilder.Entity("DataModel.FMV_FtTB", b =>
                 {
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
@@ -2096,25 +2130,7 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                         .HasForeignKey("EvaluadorId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
-                        .WithMany()
-                        .HasForeignKey("InstitucionDestinoId");
-
-                    b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithMany()
-                        .HasForeignKey("ProvinciaId");
-
-                    b.HasOne("DataModel.TipoInstitucionTB", "TipoInstitucion")
-                        .WithMany()
-                        .HasForeignKey("TipoInstitucionId");
-
                     b.Navigation("Evaluador");
-
-                    b.Navigation("InstitucionDestino");
-
-                    b.Navigation("Provincia");
-
-                    b.Navigation("TipoInstitucion");
                 });
 
             modelBuilder.Entity("DataModel.FMV_IpsTB", b =>
@@ -2307,6 +2323,11 @@ namespace DataAccess.FarmacoVigilancia.Migrations
                 });
 
             modelBuilder.Entity("DataModel.FMV_EsaviTB", b =>
+                {
+                    b.Navigation("LNotificaciones");
+                });
+
+            modelBuilder.Entity("DataModel.FMV_FtTB", b =>
                 {
                     b.Navigation("LNotificaciones");
                 });

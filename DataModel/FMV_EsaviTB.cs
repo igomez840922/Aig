@@ -59,18 +59,31 @@ namespace DataModel
         public enumFMV_RAMNotificationType TipoNotificacion { get => tipoNotificacion; set => SetProperty(ref tipoNotificacion, value); }
 
         // Tipo de Organización/Institución: CSS, Minsa, Patronatos, Clinica_Hospital_Privados, Farmacias_Privadas, Industria Farmacéutica, No_hay_información, No_aplica
-        private enumFMV_RAMOrganizationType tipoOrgInst;
-        public enumFMV_RAMOrganizationType TipoOrgInst { get => tipoOrgInst; set => SetProperty(ref tipoOrgInst, value); }
+        //private enumFMV_RAMOrganizationType tipoOrgInst;
+        //public enumFMV_RAMOrganizationType TipoOrgInst { get => tipoOrgInst; set => SetProperty(ref tipoOrgInst, value); }
+        private long? tipoInstitucionId;
+        public long? TipoInstitucionId { get => tipoInstitucionId; set => SetProperty(ref tipoInstitucionId, value); }
+        private TipoInstitucionTB? tipoInstitucion;
+        public virtual TipoInstitucionTB? TipoInstitucion { get => tipoInstitucion; set => SetProperty(ref tipoInstitucion, value); }
+
 
         // Provincia/Región/Origen: Los valores de la lista varia según las filas
-        private string provRegionOrigen;
-        [StringLength(250)]
-        public string ProvRegionOrigen { get => provRegionOrigen; set => SetProperty(ref provRegionOrigen, value); }
+        //private string provRegionOrigen;
+        //[StringLength(250)]
+        //public string ProvRegionOrigen { get => provRegionOrigen; set => SetProperty(ref provRegionOrigen, value); }
+        private long? provinciaId;
+        public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
+        private ProvinciaTB? provincia;
+        public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
 
-        // Nombre de Organización/Institución: Los valores de la lista varia según las filas 
-        private string nombreOrgInst;
-        [StringLength(250)]
-        public string NombreOrgInst { get => nombreOrgInst; set => SetProperty(ref nombreOrgInst, value); }
+        //// Nombre de Organización/Institución: Los valores de la lista varia según las filas 
+        //private string nombreOrgInst;
+        //[StringLength(250)]
+        //public string NombreOrgInst { get => nombreOrgInst; set => SetProperty(ref nombreOrgInst, value); }
+        private long? institucionId;
+        public long? InstitucionId { get => institucionId; set => SetProperty(ref institucionId, value); }
+        private InstitucionDestinoTB? institucionDestino;
+        public virtual InstitucionDestinoTB? InstitucionDestino { get => institucionDestino; set => SetProperty(ref institucionDestino, value); }
 
         // Otros diagnosticos
         private string otrosDiagnosticos;

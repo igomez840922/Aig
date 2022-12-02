@@ -27,6 +27,32 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                <label for="password">@languageContainerService.Keys["InstitutionType"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@InstitucionDestino.TipoInstitucionId
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@lTipoInstitucion TextProperty="Nombre" ValueProperty="Id"
+                                                        Change=@(args => {OnChangeInstitutionType((args!=null?(long)args:null));}) />
+
+                                        <ValidationMessage For=@(() => InstitucionDestino.TipoInstitucionId) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="password">@languageContainerService.Keys["Province"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@InstitucionDestino.ProvinciaId
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@lProvincias TextProperty="Nombre" ValueProperty="Id"
+                                                        Change=@(args => {OnChangeProvince((args!=null?(long)args:null));}) />
+
+                                        <ValidationMessage For=@(() => InstitucionDestino.TipoInstitucionId) />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">

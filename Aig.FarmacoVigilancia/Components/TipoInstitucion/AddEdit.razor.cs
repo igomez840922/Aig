@@ -1,22 +1,27 @@
 ﻿using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
+using DataModel;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
-namespace Aig.FarmacoVigilancia.Components.FT
+namespace Aig.FarmacoVigilancia.Components.TipoInstitucion
 {
-    public partial class AddEditNotification
+    public partial class AddEdit
     {
         [Inject]
+        ITipoInstitucionService mainService { get; set; }
+        [Inject]
         IProfileService profileService { get; set; }
-
         [Parameter]
-        public DataModel.FMV_FtNotificacionTB Notification { get; set; } = null;
+        public DataModel.TipoInstitucionTB Data { get; set; }
+        
 
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+
             base.OnInitialized();
         }
 
@@ -46,26 +51,33 @@ namespace Aig.FarmacoVigilancia.Components.FT
         //Fill Data
         protected async Task FetchData()
         {
-
+            
             await this.InvokeAsync(StateHasChanged);
         }
 
-
-        /// <summary>
-        /// Saving Data
-        /// </summary>
-
+        //Save Data and Close
         protected async Task SaveData()
         {
-            await bus.Publish(new Aig.FarmacoVigilancia.Events.FTNotification.AddEdit_CloseEvent { Data = Notification });
+            var result = await mainService.Save(Data);
+            if (result != null)
+            {
+                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                Data = result;
+
+                await bus.Publish(new Aig.FarmacoVigilancia.Events.TipoInstitucion.AddEdit_CloseEvent { Data = Data });
+            }
+            else
+                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+        }
+
+        //Cancel and Close
+        protected async Task Cancel()
+        {
+            await bus.Publish(new Aig.FarmacoVigilancia.Events.TipoInstitucion.AddEdit_CloseEvent { Data = null });
             await this.InvokeAsync(StateHasChanged);
         }
 
-        protected async Task Cancel()
-        {
-            await bus.Publish(new Aig.FarmacoVigilancia.Events.FTNotification.AddEdit_CloseEvent { Data = null });
-            await this.InvokeAsync(StateHasChanged);
-        }
+        
 
     }
 

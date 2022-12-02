@@ -28,5 +28,15 @@ namespace DataModel
 
         private List<DistritoTB> lDistritos;
         public virtual List<DistritoTB> LDistritos { get => lDistritos; set => SetProperty(ref lDistritos, value); }
+
+
+        private List<InstitucionDestinoTB> lInstitucion;
+        public virtual List<InstitucionDestinoTB> LInstitucion { get => lInstitucion; set => SetProperty(ref lInstitucion, value); }
+
+        private List<FMV_EsaviTB> lEsavi;
+        public virtual List<FMV_EsaviTB> LEsavi { get => lEsavi; set => SetProperty(ref lEsavi, value); }
+
+        private List<FMV_FfTB> lFf;
+        public virtual List<FMV_FfTB> LFf { get => lFf; set => SetProperty(ref lFf, value); }
     }
 }

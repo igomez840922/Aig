@@ -24,7 +24,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_FfTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodCNFV.Contains(model.Filter) || data.CodExt.Contains(model.Filter) || data.FarmacoSospechosoComercial.Contains(model.Filter) || data.FarmacoSospechosoDci.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodCNFV.Contains(model.Filter) || data.CodExt.Contains(model.Filter) || data.NombreComercial.Contains(model.Filter) || data.NombreDci.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
                               (model.FromDate==null?true:(data.FechaRecibidoCNFV >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId ))
@@ -33,7 +33,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_FfTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.CodCNFV.Contains(model.Filter) || data.CodExt.Contains(model.Filter) || data.FarmacoSospechosoComercial.Contains(model.Filter) || data.FarmacoSospechosoDci.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.CodCNFV.Contains(model.Filter) || data.CodExt.Contains(model.Filter) || data.NombreComercial.Contains(model.Filter) || data.NombreDci.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
@@ -195,18 +195,14 @@ namespace Aig.FarmacoVigilancia.Services
         }
 
         public async Task<FMV_FfTB> Save(FMV_FfTB data)
-        {            
-            if (data.LNotificaciones != null)
-            {
-                foreach (var item in data.LNotificaciones)
-                {
-                    //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;
-                    DalService.DBContext.Entry(item).Property(b => b.FallaReportada).IsModified = true;
-                }
-            }
-
+        {
             var result = DalService.Save(data);
-
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.FallaReportada).IsModified = true;
+                DalService.DBContext.Entry(result).Property(b => b.OtrasEspecificaciones).IsModified = true;
+                DalService.DBContext.SaveChanges();
+            }
             return result;           
         }
 

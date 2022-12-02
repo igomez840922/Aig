@@ -17,9 +17,19 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
         IWorkerPersonService evaluatorService { get; set; }
         [Inject]
         IPdfGenerationService pdfGenerationService { get; set; }
+        [Inject]
+        ITipoInstitucionService tipoInstitucionService { get; set; }
+        [Inject]
+        IProvicesService provicesService { get; set; }
+        [Inject]
+        IDestinyInstituteService destinyInstituteService { get; set; }
+
         [Parameter]
         public DataModel.FMV_EsaviTB Data { get; set; }
         List<PersonalTrabajadorTB> lEvaluators { get; set; }
+        List<TipoInstitucionTB> lTipoInstitucion { get; set; }
+        List<ProvinciaTB> lProvincias { get; set; }
+        List<InstitucionDestinoTB> lInstitucionDestino { get; set; }
 
         bool OpenAddEditNotification { get; set; } = false;
         FMV_EsaviNotificacionTB Notificacion { get; set; } = null;
@@ -59,7 +69,10 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
         protected async Task FetchData()
         {
             lEvaluators = lEvaluators != null && lEvaluators.Count > 0 ? lEvaluators : await evaluatorService.GetAll();
+            lTipoInstitucion = lTipoInstitucion!=null && lTipoInstitucion.Count > 0? lTipoInstitucion:await tipoInstitucionService.GetAll();
+            lProvincias = lProvincias!=null && lProvincias.Count > 0? lProvincias: await provicesService.GetAll();
 
+            lInstitucionDestino = await destinyInstituteService.FindAll(x => (Data.TipoInstitucionId != null ? x.TipoInstitucionId == Data.TipoInstitucionId : true) && (Data.ProvinciaId != null ? x.ProvinciaId == Data.ProvinciaId : true));
             await this.InvokeAsync(StateHasChanged);
         }
 
@@ -130,6 +143,21 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
             Data.Evaluador = lEvaluators.Where(x => x.Id == Id).FirstOrDefault();
         }
 
+        protected async Task OnChangeTipoInstitucion(long? Id)
+        {
+            Data.TipoInstitucionId = Id;
+            Data.TipoInstitucion = lTipoInstitucion.Where(x => x.Id == Id).FirstOrDefault();
+            await FetchData();
+        }
+
+        protected async Task OnChangeProvincia(long? Id)
+        {
+            Data.ProvinciaId = Id;
+            Data.Provincia = lProvincias.Where(x => x.Id == Id).FirstOrDefault();
+            await FetchData();
+        }
+
+        
     }
 
 }

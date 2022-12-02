@@ -36,7 +36,7 @@
                                         </label>
                                         <div class="form-group">
                                             <InputSelect @bind-Value="Notification.HayEsavi" class="form-control">
-                                                @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                @foreach (enumFMV_EsaviClasificacion dt in Enum.GetValues(typeof(enumFMV_EsaviClasificacion)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <label>@languageContainerService.Keys["ESAVI"]</label>
+                                        <label>@languageContainerService.Keys["ESAVI "]</label>
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <InputText class="form-control" @bind-Value="Notification.EsaviDescripcion" />
@@ -218,7 +218,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Reg. Sanitario"]</label>
                                         <div class="form-group">
                                             <div class="form-line">

@@ -113,7 +113,7 @@
                                                             <th>@languageContainerService.Keys["Evaluator"]</th>
                                                             <th>@languageContainerService.Keys["Tipo Notificador"]</th>
                                                             <th>@languageContainerService.Keys["Organizacion"]</th>
-                                                            <th>@languageContainerService.Keys["Provincia/Región/Origen"]</th>
+                                                            <th>@languageContainerService.Keys["Provincia"]</th>
                                                             <th>@languageContainerService.Keys["Nombre de Organización"]</th>
                                                             <th>@languageContainerService.Keys["Medicamentos Concomitante"]</th>
                                                             <th>@languageContainerService.Keys["Detalles del Caso"]</th>
@@ -135,9 +135,9 @@
                                                                 <td>@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
                                                                 <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
                                                                 <td>@DataModel.Helper.Helper.GetDescription(dt.TipoNotificacion)</td>
-                                                                <td>@DataModel.Helper.Helper.GetDescription(dt.TipoOrgInst)</td>
-                                                                <td>@dt.ProvRegionOrigen</td>
-                                                                <td>@dt.NombreOrgInst</td>
+                                                                <td>@(dt.TipoInstitucion?.Nombre??"")</td>
+                                                                <td>@(dt.Provincia?.Nombre ?? "")</td>
+                                                                <td>@(dt.InstitucionDestino?.Nombre ?? "")</td>
                                                                 <td>@dt.MedicamentoContaminante</td>
                                                                 <td>@dt.DetallesCaso</td>
                                                                 <td>@(dt.FechaEvalua?.ToString("dd/MM/yyyy") ?? "")</td>

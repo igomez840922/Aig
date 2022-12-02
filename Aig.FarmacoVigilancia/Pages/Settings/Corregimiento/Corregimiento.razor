@@ -60,7 +60,7 @@
                                                 <label>@languageContainerService.Keys["Country"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputSelect class="form-control"
+                                                       @* <InputSelect class="form-control"
                                                                      ValueExpression="@(() => IdPais)"
                                                                      Value="@IdPais"
                                                                      ValueChanged="@((long value) => OnCountryChange(value))">
@@ -72,7 +72,13 @@
                                                                     <option value="@dt.Id">@dt.Nombre</option>
                                                                 }
                                                             }
-                                                        </InputSelect>
+                                                        </InputSelect>*@
+
+                                                        <RadzenDropDown AllowClear="true" TValue="long" Class="form-control" @bind-Value=@dataModel.Parent3Id
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@LPaises TextProperty="Nombre" ValueProperty="Id"
+                                                                        Change=@(args => {OnCountryChange((args!=null?(long)args:0));}) />
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,7 +86,7 @@
                                                 <label>@languageContainerService.Keys["Provinces"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputSelect class="form-control"
+                                                        @*<InputSelect class="form-control"
                                                                      ValueExpression="@(() => IdProvincia)"
                                                                      Value="@IdProvincia"
                                                                      ValueChanged="@((long value) => OnProvincesChange(value))">
@@ -92,7 +98,11 @@
                                                                     <option value="@dt.Id">@dt.Nombre</option>
                                                                 }
                                                             }
-                                                        </InputSelect>
+                                                        </InputSelect>*@
+                                                        <RadzenDropDown AllowClear="true" TValue="long" Class="form-control" @bind-Value=@dataModel.Parent2Id
+                                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                        Data=@LProvincias TextProperty="Nombre" ValueProperty="Id"
+                                                                        Change=@(args => {OnProvincesChange((args!=null?(long)args:0));}) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -100,7 +110,7 @@
                                                 <label>@languageContainerService.Keys["District"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputSelect class="form-control"
+                                                        @*<InputSelect class="form-control"
                                                                      ValueExpression="@(() => IdDistrito)"
                                                                      Value="@IdDistrito"
                                                                      ValueChanged="@((long value) => OnDistrictChange(value))">
@@ -112,7 +122,11 @@
                                                                     <option value="@dt.Id">@dt.Nombre</option>
                                                                 }
                                                             }
-                                                        </InputSelect>
+                                                        </InputSelect>*@
+                                                        <RadzenDropDown AllowClear="true" TValue="long" Class="form-control" @bind-Value=@dataModel.ParentId
+                                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                        Data=@LDistritos TextProperty="Nombre" ValueProperty="Id"
+                                                                        Change=@(args => {OnDistrictChange((args!=null?(long)args:0));}) />
                                                     </div>
                                                 </div>
                                             </div>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    public class FMV_FfNotificacionFallaReportada:SystemId
+    public class FMV_FfFallaReportada:SystemId
     {
         // Olor
         private enumOpcionSiNo olor;
