@@ -91,7 +91,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram
         {
             bus.Subscribe<Aig.FarmacoVigilancia.Events.RamNotification.AddEdit_CloseEvent>(Notification_AddEditCloseEventHandlerHandler);
 
-            Notificacion = notificacion != null ? notificacion : new FMV_RamNotificacionTB();
+            Notificacion = notificacion != null ? notificacion : new FMV_RamNotificacionTB() {RamId=Data.Id};
             OpenAddEditNotification = true;
 
             await this.InvokeAsync(StateHasChanged);

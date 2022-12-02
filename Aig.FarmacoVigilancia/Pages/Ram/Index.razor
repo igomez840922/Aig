@@ -1,7 +1,11 @@
 ﻿@page "/ram"
 @layout BackendLayout
 @attribute [Authorize]
-
+<style>
+.modal-dialog.modal-custom {
+    max-width: 1240px !important;
+}
+</style>
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
     @*<div class="kt-subheader  kt-grid__item" id="kt_subheader">
     <div class="kt-container  kt-container--fluid ">
@@ -100,25 +104,23 @@
                                                 <table class="table rounded table-striped">
                                                     <thead class=thead-light>
                                                         <tr>
-                                                            <th>@languageContainerService.Keys["EntryDate"]</th>
-                                                            <th>@languageContainerService.Keys["TramitDate"]</th>
-                                                            <th>@languageContainerService.Keys["ActivePrinciple"]</th>
-                                                            <th>@languageContainerService.Keys["EvaluatorDate"]</th>
-                                                            <th>@languageContainerService.Keys["Evaluator"]</th>
-                                                            <th>@languageContainerService.Keys["Status"]</th>
+                                                            <th>@languageContainerService.Keys["Fecha de Recibido"]</th>
+                                                            <th>@languageContainerService.Keys["Fecha de entrega "]</th>
+                                                            <th>@languageContainerService.Keys["Evaluador"]</th>
+                                                            <th>@languageContainerService.Keys["ATC"]</th>
+                                                            <th>@languageContainerService.Keys["Ram"]</th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @foreach (var dt in dataModel.Ldata)
                                                         {
-                                                            @*<tr>
-                                                                <td scope="row">@(dt.FechaEntrada?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                <td>@(dt.FechaTramite?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                <td>@(dt.PrincActivo)</td>
-                                                                <td>@(dt.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
-                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.Status))</td>
+                                                            <tr>
+                                                                <td scope="row">@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                <td>@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                <td>@(dt.Evaluador?.NombreCompleto)</td>
+                                                                <td>@(dt.Atc)</td>
+                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.RamType))</td>
                                                                 <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -129,7 +131,7 @@
                                                                     </div>
                                                                     <!-- /btn-group -->
                                                                 </td>
-                                                            </tr>*@
+                                                            </tr>
                                                         }
                                                     </tbody>
                                                 </table>

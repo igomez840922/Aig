@@ -28,17 +28,167 @@
                             <div class="tab-pane active" id="generalInfo" role="tabpanel">
                                 <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
                                 <div class="row clearfix">
-                               
+
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["Fecha de Recibido"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Data.FechaRecibidoCNFV" />
+                                                <ValidationMessage For=@(() => Data.FechaRecibidoCNFV) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["Fecha de entrega"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputDate class="form-control" @bind-Value="Data.FechaEntregaEva" />
+                                                <ValidationMessage For=@(() => Data.FechaEntregaEva) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["Evaluador"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect class="form-control" @bind-Value="Data.EvaluadorId">
+                                                    <option value=""></option>
+                                                    @if (lEvaluators?.Count != null)
+                                                    {
+                                                        foreach (var dt in lEvaluators)
+                                                        {
+                                                            <option value="@dt.Id">@dt.NombreCompleto</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Data.EvaluadorId) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["Fármaco Sospechoso (Comercial)"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Data.FarmacoSospechosoComercial" />
+                                                <ValidationMessage For=@(() => Data.FarmacoSospechosoComercial) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                                
+
+                                <div class="row clearfix">
+
+                                    
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["Fármaco Sospechoso (DCI)"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Data.FarmacoSospechosoDci" />
+                                                <ValidationMessage For=@(() => Data.FarmacoSospechosoDci) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["ATC"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Data.Atc" />
+                                                <ValidationMessage For=@(() => Data.Atc) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["Sub-grupo Terapéutico"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Data.SubGrupoTerapeutico" />
+                                                <ValidationMessage For=@(() => Data.SubGrupoTerapeutico) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["¿Hay RAM?"]</label>
+
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Data.RamType" class="form-control">
+                                                @foreach (enumFMV_RAMType dt in Enum.GetValues(typeof(enumFMV_RAMType)))
+                                                {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Data.RamType) />
+                                    </div>
+                                </div>
+
+                              
+
                             </div>
+
+                            <div class="row clearfix">
+
+                                  <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["Origen de Notificación"]</label>
+
+                                    <div class="form-group">
+                                        <InputSelect @bind-Value="Data.RamOrigenType" class="form-control">
+                                            @foreach (enumFMV_RAMOrigenType dt in Enum.GetValues(typeof(enumFMV_RAMOrigenType)))
+                                                {
+                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Data.RamOrigenType) />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["Código Noti-Facedra"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Data.CodigoCNFV" />
+                                            <ValidationMessage For=@(() => Data.CodigoCNFV) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["ID Facedra"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Data.IdFacedra" />
+                                            <ValidationMessage For=@(() => Data.IdFacedra) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["Código del CNFV"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Data.CodigoCNFV" />
+                                            <ValidationMessage For=@(() => Data.IdFacedra) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
                             <div class="tab-pane" id="products" role="tabpanel">
                                 <h4>@languageContainerService.Keys["Notificaciones"]</h4>
                                 <div class="row clearfix">
                                     <div class="col-9" style="text-align:left;">
                                     </div>
                                     <div class="col-3" style="text-align:right;">
-                                        <button type="button" @onclick="(e)=>{OpenProduct();}"
+                                        <button style="margin-bottom: 10px;" type="button" @onclick="(e)=>{OpenProduct();}"
                                                 class="btn btn-sm btn-outline-primary waves-effect">
                                             @languageContainerService.Keys["Add"]
                                         </button>
@@ -50,27 +200,34 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["NumberOfHealthRegister"]</th>
-                                                    <th>@languageContainerService.Keys["CommercialName"]</th>
-                                                    <th>@languageContainerService.Keys["Laboratory"]</th>
+                                                    <th>@languageContainerService.Keys["Código Externo"]</th>
+                                                    <th>@languageContainerService.Keys["Tipo de Notificador"]</th>
+                                                    <th>@languageContainerService.Keys["Organización"]</th>
+                                                    <th>@languageContainerService.Keys["Origen"]</th>
+                                                    <th>@languageContainerService.Keys["Fecha de Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Estado"]</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+
+
                                                 @if (Data != null && Data.LNotificaciones != null)
                                                 {
                                                     @foreach (var dt in Data.LNotificaciones)
                                                     {
-                                                       @* <tr>
-                                                            <td scope="row">@dt.RegSanitario</td>
-                                                            <td>@dt.NomComercial</td>
-                                                            <td>@(dt.Laboratorio?.Nombre ?? "")</td>
+                                                        <tr>
+                                                            <td scope="row">@dt.CodExterno</td>
+                                                            <td>@dt.TipoNotificador</td>
+                                                            <td>@(dt.NombreOrgInst)</td>
+                                                            <td>@(dt.ProvRegionOrigen)</td>
+                                                            <td>@(dt.FechaEvaluacion?.ToString("dd/MM/yyyy"))</td>
+                                                            <td>@(dt.Estatus)</td>
                                                             <td style="text-align:right">
-                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveProduct(dt);}">@languageContainerService.Keys["Delete"]</button>
-
-                                                                <!-- /btn-group -->
+                                                               <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenProduct(dt);}">@languageContainerService.Keys["Edit"]</button>
                                                             </td>
-                                                        </tr>*@
+                                                        </tr>
                                                     }
                                                 }
                                             </tbody>
