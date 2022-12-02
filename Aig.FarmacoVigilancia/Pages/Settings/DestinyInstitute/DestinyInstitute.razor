@@ -70,6 +70,8 @@
                                                         <tr>
                                                             <th>@languageContainerService.Keys["Name"]</th>
                                                             <th>@languageContainerService.Keys["Description"]</th>
+                                                            <th>@languageContainerService.Keys["InstitutionType"]</th>
+                                                            <th>@languageContainerService.Keys["Province"]</th>
                                                            <th></th>
                                                         </tr>
                                                     </thead>
@@ -79,6 +81,8 @@
                                                             <tr>
                                                                 <td>@(dt.Nombre)</td>
                                                                 <td>@(dt.Descripcion)</td>
+                                                                <td>@(dt.TipoInstitucion?.Nombre??"")</td>
+                                                                <td>@(dt.Provincia?.Nombre ?? "")</td>
                                                                 <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>

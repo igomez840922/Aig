@@ -21,8 +21,16 @@ namespace Aig.FarmacoVigilancia.Components.FT
         public DataModel.FMV_FtTB Data { get; set; }
         List<PersonalTrabajadorTB> lEvaluators { get; set; }
 
-        bool OpenAddEditNotification { get; set; } = false;
-        FMV_FtNotificacionTB Notificacion { get; set; } = null;
+        [Inject]
+        ITipoInstitucionService tipoInstitucionService { get; set; }
+        [Inject]
+        IProvicesService provicesService { get; set; }
+        [Inject]
+        IDestinyInstituteService destinyInstituteService { get; set; }
+
+        List<TipoInstitucionTB> lTipoInstitucion { get; set; }
+        List<ProvinciaTB> lProvincias { get; set; }
+        List<InstitucionDestinoTB> lInstitucionDestino { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
@@ -59,6 +67,10 @@ namespace Aig.FarmacoVigilancia.Components.FT
         protected async Task FetchData()
         {
             lEvaluators = lEvaluators != null && lEvaluators.Count > 0 ? lEvaluators : await evaluatorService.GetAll();
+            lTipoInstitucion = lTipoInstitucion != null && lTipoInstitucion.Count > 0 ? lTipoInstitucion : await tipoInstitucionService.GetAll();
+            lProvincias = lProvincias != null && lProvincias.Count > 0 ? lProvincias : await provicesService.GetAll();
+
+            lInstitucionDestino = await destinyInstituteService.FindAll(x => (Data.TipoInstitucionId != null ? x.TipoInstitucionId == Data.TipoInstitucionId : true) && (Data.ProvinciaId != null ? x.ProvinciaId == Data.ProvinciaId : true));
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -83,53 +95,27 @@ namespace Aig.FarmacoVigilancia.Components.FT
         {
             await bus.Publish(new Aig.FarmacoVigilancia.Events.FT.AddEdit_CloseEvent { Data = null });
             await this.InvokeAsync(StateHasChanged);
-        }
-
-        //Add New Product
-        protected async Task OpenProduct(FMV_FtNotificacionTB notificacion = null)
-        {
-            bus.Subscribe<Aig.FarmacoVigilancia.Events.FTNotification.AddEdit_CloseEvent>(Notification_AddEditCloseEventHandlerHandler);
-
-            Notificacion = notificacion != null ? notificacion : new FMV_FtNotificacionTB();
-            OpenAddEditNotification = true;
-
-            await this.InvokeAsync(StateHasChanged);
-        }
-        //Remove Product
-        protected async Task RemoveProduct(FMV_FtNotificacionTB notificacion)
-        {
-            if (notificacion != null)
-            {
-                Data.LNotificaciones.Remove(notificacion);
-                this.InvokeAsync(StateHasChanged);
-            }
-        }
-        //ON CLOSE PRODUCT MODAL 
-        private void Notification_AddEditCloseEventHandlerHandler(MessageArgs args)
-        {
-            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.FTNotification.AddEdit_CloseEvent>(Notification_AddEditCloseEventHandlerHandler);
-
-            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.FTNotification.AddEdit_CloseEvent>();
-
-            Notificacion = null;
-            OpenAddEditNotification = false;
-            if (message.Data != null)
-            {
-                Data.LNotificaciones = Data.LNotificaciones != null ? Data.LNotificaciones : new List<FMV_FtNotificacionTB>();
-
-                if (!Data.LNotificaciones.Contains(message.Data))
-                    Data.LNotificaciones.Add(message.Data);
-            }
-
-            this.InvokeAsync(StateHasChanged);
-        }
-
+        }              
+      
         protected async Task OnEvaluatorChange(long? Id)
         {
             Data.EvaluadorId = Id;
             Data.Evaluador = lEvaluators.Where(x => x.Id == Id).FirstOrDefault();
         }
 
+        protected async Task OnChangeTipoInstitucion(long? Id)
+        {
+            Data.TipoInstitucionId = Id;
+            Data.TipoInstitucion = lTipoInstitucion.Where(x => x.Id == Id).FirstOrDefault();
+            await FetchData();
+        }
+
+        protected async Task OnChangeProvincia(long? Id)
+        {
+            Data.ProvinciaId = Id;
+            Data.Provincia = lProvincias.Where(x => x.Id == Id).FirstOrDefault();
+            await FetchData();
+        }
     }
 
 }

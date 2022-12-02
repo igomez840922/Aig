@@ -17,6 +17,9 @@
     <None Remove="Resources\en-US.yml" />
     <None Remove="Resources\es-ES.yml" />
     <None Remove="Resources\RFV.xlsx" />
+    <None Remove="Resources\TabInstOrg.xlsx" />
+    <None Remove="Resources\TabProvinciasOrigenIF.xlsx" />
+    <None Remove="Resources\TabTipoOrganizacion.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +29,9 @@
     <EmbeddedResource Include="Resources\paises.json" />
     <EmbeddedResource Include="Resources\provincias.json" />
     <EmbeddedResource Include="Resources\RFV.xlsx" />
+    <EmbeddedResource Include="Resources\TabInstOrg.xlsx" />
+    <EmbeddedResource Include="Resources\TabProvinciasOrigenIF.xlsx" />
+    <EmbeddedResource Include="Resources\TabTipoOrganizacion.xlsx" />
   </ItemGroup>
 
   <ItemGroup>

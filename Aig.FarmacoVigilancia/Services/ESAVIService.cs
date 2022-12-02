@@ -24,7 +24,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_EsaviTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodCNFV.Contains(model.Filter) || data.CodExt.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoNotiFacedra.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodCNFV.Contains(model.Filter) || data.CodExt.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) || data.InstitucionDestino.Nombre.Contains(model.Filter)))&&
                               (model.FromDate==null?true:(data.FechaRecibidoCNFV >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId ))
@@ -33,7 +33,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_EsaviTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.CodCNFV.Contains(model.Filter) || data.CodExt.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoNotiFacedra.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodCNFV.Contains(model.Filter) || data.CodExt.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) || data.InstitucionDestino.Nombre.Contains(model.Filter))) &&
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))

@@ -28,9 +28,9 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.Corregimiento
         List<ProvinciaTB> LProvincias { get; set; }
         List<DistritoTB> LDistritos { get; set; }
 
-        long IdPais { get; set; }
-        long IdProvincia { get; set; }
-        long IdDistrito { get; set; }
+        //long IdPais { get; set; }
+        //long IdProvincia { get; set; }
+        //long IdDistrito { get; set; }
 
         GenericModel<CorregimientoTB> dataModel { get; set; } = new GenericModel<CorregimientoTB>()
         { Data = new CorregimientoTB() };
@@ -159,32 +159,26 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.Corregimiento
         
         protected async Task OnCountryChange(long Id)
         {
-            IdPais = Id;
-            LProvincias = LPaises.Where(x => x.Id == IdPais).FirstOrDefault()?.LProvincia;
-            IdProvincia = 0;
-            IdDistrito = 0;
-            dataModel.ParentId = IdDistrito > 0 ? IdDistrito : 0;
-            dataModel.Parent2Id = IdProvincia > 0 ? IdProvincia : 0;
-            dataModel.Parent3Id = IdPais > 0 ? IdPais : 0;
+            dataModel.ParentId =  0;
+            dataModel.Parent2Id = 0;
+            dataModel.Parent3Id = Id;
+            LDistritos = null;
+            LProvincias = LPaises.Where(x => x.Id == Id).FirstOrDefault()?.LProvincia;            
             await FetchData();
         }
         protected async Task OnProvincesChange(long Id)
         {
-            IdProvincia = Id;
-            LDistritos = LProvincias.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos;
-            dataModel.ParentId = IdDistrito > 0 ? IdDistrito : 0;
-            dataModel.Parent2Id = IdProvincia > 0 ? IdProvincia : 0;
-            dataModel.Parent3Id = IdPais > 0 ? IdPais : 0;
+            dataModel.ParentId = 0;
+            dataModel.Parent2Id = Id;
+            LDistritos = LPaises.Where(x => x.Id == dataModel.Parent3Id).FirstOrDefault()?.LProvincia.Where(x => x.Id == dataModel.Parent2Id).FirstOrDefault()?.LDistritos;
             await FetchData();
         }
         protected async Task OnDistrictChange(long Id)
         {
-            IdDistrito = Id;
-            dataModel.ParentId = IdDistrito > 0 ? IdDistrito : 0;
-            dataModel.Parent2Id = IdProvincia > 0 ? IdProvincia : 0;
-            dataModel.Parent3Id = IdPais > 0 ? IdPais : 0;
+            dataModel.ParentId = Id;
             await FetchData();
         }
+    
     }
 
 }

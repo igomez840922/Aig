@@ -4,6 +4,7 @@ using Aig.FarmacoVigilancia.Events.OrigenAlerta;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
+using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -15,6 +16,13 @@ namespace Aig.FarmacoVigilancia.Components.DestinyInstitute
         IDestinyInstituteService destinyInstituteService { get; set; }
         [Inject]
         IProfileService profileService { get; set; }
+        [Inject]
+        IProvicesService provinceService { get; set; }
+        [Inject]
+        ITipoInstitucionService tipoInstitucionService { get; set; }
+
+        List<ProvinciaTB> lProvincias {  get; set; }
+        List<TipoInstitucionTB> lTipoInstitucion { get; set; }
 
         [Parameter]
         public DataModel.InstitucionDestinoTB InstitucionDestino { get; set; }
@@ -54,13 +62,15 @@ namespace Aig.FarmacoVigilancia.Components.DestinyInstitute
         //Fill Data
         protected async Task FetchData()
         {
+            lProvincias = lProvincias != null ? lProvincias : await provinceService.GetAll();
+            lTipoInstitucion = lTipoInstitucion!=null ? lTipoInstitucion :await tipoInstitucionService.GetAll();
+
             await this.InvokeAsync(StateHasChanged);
         }
 
         //Save Data and Close
         protected async Task SaveData()
         {
-
             var result = await destinyInstituteService.Save(InstitucionDestino);
             if (result != null)
             {
@@ -80,6 +90,18 @@ namespace Aig.FarmacoVigilancia.Components.DestinyInstitute
             await this.InvokeAsync(StateHasChanged);
         }
 
+
+        protected async Task OnChangeInstitutionType(long? Id)
+        {
+            InstitucionDestino.TipoInstitucionId = Id;
+            InstitucionDestino.TipoInstitucion = lTipoInstitucion.Where(x => x.Id == Id).FirstOrDefault();
+        }
+
+        protected async Task OnChangeProvince(long? Id)
+        {
+            InstitucionDestino.ProvinciaId = Id;
+            InstitucionDestino.Provincia = lProvincias.Where(x => x.Id == Id).FirstOrDefault();
+        }
     }
 
 }

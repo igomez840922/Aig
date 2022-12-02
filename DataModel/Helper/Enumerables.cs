@@ -651,7 +651,7 @@ namespace DataModel.Helper
         [Description("No")]
         No = 2,
         [Description("No Sabe")]
-        NoSabe = 2,
+        NoSabe = 3,
     }
 
     public enum enumFMV_IpsPresentaCD

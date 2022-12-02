@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataModel.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace DataModel
     {
         public FMV_FtTB()
         {
-            LNotificaciones = new List<FMV_FtNotificacionTB>();
+            OtrasEspecificaciones = new FMV_FfOtrasEspecificaciones();
+            DatosPaciente = new FMV_FtDatosPaciente();
+            EvaluacionCausalidad = new FMV_FtEvaluacionCausalidad();
         }
 
         // Código del CNFV
@@ -41,19 +44,130 @@ namespace DataModel
         private PersonalTrabajadorTB? evaluador;
         public virtual PersonalTrabajadorTB? Evaluador { get => evaluador; set => SetProperty(ref evaluador, value); }
 
-        private string farmacoSospechosoComercial;
+        private string nombreComercial;
         [Required(ErrorMessage = "requerido")]
         [StringLength(300)]
-        public string FarmacoSospechosoComercial { get => farmacoSospechosoComercial; set => SetProperty(ref farmacoSospechosoComercial, value); }
+        public string NombreComercial { get => nombreComercial; set => SetProperty(ref nombreComercial, value); }
 
-        private string farmacoSospechosoDci;
+        private string nombreDci;
         [Required(ErrorMessage = "requerido")]
         [StringLength(300)]
-        public string FarmacoSospechosoDci { get => farmacoSospechosoDci; set => SetProperty(ref farmacoSospechosoDci, value); }
+        public string NombreDci { get => nombreDci; set => SetProperty(ref nombreDci, value); }
 
-        //PROCEDENCIA DE NOTIFICACION - Lista de Notificaciones
-        private List<FMV_FtNotificacionTB> lNotificaciones;
-        public virtual List<FMV_FtNotificacionTB> LNotificaciones { get => lNotificaciones; set => SetProperty(ref lNotificaciones, value); }
+        private string presentacion;
+        [StringLength(500)]
+        public string Presentacion { get => presentacion; set => SetProperty(ref presentacion, value); }
+
+        private string atc;
+        [StringLength(250)]
+        public string ATC { get => atc; set => SetProperty(ref atc, value); }
+
+        // ATC 2do Nivel
+        /*
+            FÓRMULA: Extraer de [act] los 3 primeros caracteres. Ej. act=A01AB22 => atc2=A01 
+        */
+        private string atc2;
+        [StringLength(250)]
+        public string Atc2 { get => atc2; set => SetProperty(ref atc2, value); }
+
+        // Subgrupo terapéutico
+        /*
+            FÓRMULA: Si [atc2] existe en [atc] entonces subGrupoTer= subgrupo terapéutico
+                     sino: subGrupoTer=""
+        */
+        private string subGrupoTerapeutico;
+        [StringLength(500)]
+        public string SubGrupoTerapeutico { get => subGrupoTerapeutico; set => SetProperty(ref subGrupoTerapeutico, value); }
+
+        private string fabricante;
+        [StringLength(500)]
+        public string Fabricante { get => fabricante; set => SetProperty(ref fabricante, value); }
+
+        private string lote;
+        [StringLength(500)]
+        public string Lote { get => lote; set => SetProperty(ref lote, value); }
+
+        private string fechaExp;
+        [StringLength(500)]
+        public string FechaExp { get => fechaExp; set => SetProperty(ref fechaExp, value); }
+
+        private string regSanitario;
+        [StringLength(250)]
+        public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
+
+        // Tipo de notificador: Médico, Farmacéutico, Enfermera, Otro profesional de salud, Paciente, Insdustria Farmacéutica
+        private enumFMV_RAMNotificationType tipoNotificador;
+        public enumFMV_RAMNotificationType TipoNotificador { get => tipoNotificador; set => SetProperty(ref tipoNotificador, value); }
+
+        //Tipo de Notificacion
+        private enumFMV_RAMNotificationType tipoNotificacion;
+        public enumFMV_RAMNotificationType TipoNotificacion { get => tipoNotificacion; set => SetProperty(ref tipoNotificacion, value); }
+
+        private long? tipoInstitucionId;
+        public long? TipoInstitucionId { get => tipoInstitucionId; set => SetProperty(ref tipoInstitucionId, value); }
+        private TipoInstitucionTB? tipoInstitucion;
+        public virtual TipoInstitucionTB? TipoInstitucion { get => tipoInstitucion; set => SetProperty(ref tipoInstitucion, value); }
+
+        private long? provinciaId;
+        public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
+        private ProvinciaTB? provincia;
+        public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+
+        private long? institucionId;
+        public long? InstitucionId { get => institucionId; set => SetProperty(ref institucionId, value); }
+        private InstitucionDestinoTB? institucionDestino;
+        public virtual InstitucionDestinoTB? InstitucionDestino { get => institucionDestino; set => SetProperty(ref institucionDestino, value); }
+
+        // Notificador
+        private string notificador;
+        [StringLength(350)]
+        public string Notificador { get => notificador; set => SetProperty(ref notificador, value); }
+
+        // Incidendia de caso: Total=2. Inicial, Seguimiento
+        private enumFMV_FfTipoIncidenciaCaso incidenciaCaso;
+        public enumFMV_FfTipoIncidenciaCaso IncidenciaCaso { get => incidenciaCaso; set => SetProperty(ref incidenciaCaso, value); }
+
+
+        //TAB OTRAS ESPECIFICACIONES
+        private FMV_FfOtrasEspecificaciones otrasEspecificaciones;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public FMV_FfOtrasEspecificaciones OtrasEspecificaciones { get => otrasEspecificaciones; set => SetProperty(ref otrasEspecificaciones, value); }
+
+        //TAB DATOS DEL PACIENTE
+        private FMV_FtDatosPaciente datosPaciente;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public FMV_FtDatosPaciente DatosPaciente { get => datosPaciente; set => SetProperty(ref datosPaciente, value); }
+               
+        //TAB EVALUACION DE CAUSALIDAD
+        private FMV_FtEvaluacionCausalidad evaluacionCausalidad;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public FMV_FtEvaluacionCausalidad EvaluacionCausalidad { get => evaluacionCausalidad; set => SetProperty(ref evaluacionCausalidad, value); }
+
+
+        //TAB CONCLUSIONES
+        // Fecha de trámite
+        private DateTime? fechaTramite;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaTramite { get => fechaTramite; set => SetProperty(ref fechaTramite, value); }
+
+        // Fecha de evaluación
+        private DateTime? fechaEvalua;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaEvalua { get => fechaEvalua; set => SetProperty(ref fechaEvalua, value); }
+
+        // Estatus: Total=3. Por Tramitar, Tramitada, Evaluada
+        private enumFMV_RAMStatus estatus;
+        public enumFMV_RAMStatus Estatus { get => estatus; set => SetProperty(ref estatus, value); }
+
+        // Resoluciones emitidas
+        private string resolEmitidas;
+        [StringLength(500)]
+        public string ResolEmitidas { get => resolEmitidas; set => SetProperty(ref resolEmitidas, value); }
+
+        // Observaciones
+        private string observaciones;
+        [StringLength(500)]
+        public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
 
     }
 }

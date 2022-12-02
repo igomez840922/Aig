@@ -104,6 +104,7 @@ builder.Services.AddScoped<IRamService, RamService>();
 builder.Services.AddScoped<IFFService, FFService>();
 builder.Services.AddScoped<IFTService, FTService>();
 builder.Services.AddScoped<IESAVIService, ESAVIService>();
+builder.Services.AddScoped<ITipoInstitucionService, TipoInstitucionService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

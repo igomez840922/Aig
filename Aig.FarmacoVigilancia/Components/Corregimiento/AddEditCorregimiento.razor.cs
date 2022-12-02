@@ -30,7 +30,7 @@ namespace Aig.FarmacoVigilancia.Components.Corregimiento
 
         long IdPais { get; set; }
         long IdProvincia { get; set; }
-        long IdDistrito { get; set; }
+        //long IdDistrito { get; set; }
         DataModel.CorregimientoTB Corregimiento { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
@@ -60,7 +60,7 @@ namespace Aig.FarmacoVigilancia.Components.Corregimiento
 
             IdPais = Corregimiento?.Distrito?.Provincia?.Pais?.Id ?? 0;
             IdProvincia = 0;
-            IdDistrito = 0;
+            //IdDistrito = 0;
             if (IdPais > 0)
             {
                 LProvincias = LPaises.Where(x => x.Id == IdPais).FirstOrDefault()?.LProvincia?.ToList();
@@ -68,7 +68,7 @@ namespace Aig.FarmacoVigilancia.Components.Corregimiento
                 if (IdProvincia > 0)
                 {
                     LDistrito = LProvincias.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos?.ToList();
-                    IdDistrito = LDistrito.Where(x => x.Id == (Corregimiento.DistritoId ?? 0)).FirstOrDefault()?.Id ?? 0;
+                    //IdDistrito = LDistrito.Where(x => x.Id == (Corregimiento.DistritoId ?? 0)).FirstOrDefault()?.Id ?? 0;
                 }
             }
 
@@ -111,10 +111,10 @@ namespace Aig.FarmacoVigilancia.Components.Corregimiento
         protected async Task SaveData()
         {
             Corregimiento.Distrito = null;
-            Corregimiento.DistritoId = IdDistrito;
-            if (Corregimiento.DistritoId!=null && Corregimiento.DistritoId > 0)
+            //Corregimiento.DistritoId = IdDistrito;
+            if (Corregimiento.DistritoId.HasValue)
             {
-                Corregimiento.Distrito = await districtService.Get(IdDistrito);
+                Corregimiento.Distrito = await districtService.Get(Corregimiento.DistritoId.Value);
             }
             var result = await corregimientoService.Save(Corregimiento);
             if (result != null)
@@ -140,27 +140,52 @@ namespace Aig.FarmacoVigilancia.Components.Corregimiento
         }
 
 
+        //protected async Task OnCountryChange(long Id)
+        //{
+        //    IdPais = Id;
+        //    LProvincias = LPaises.Where(x => x.Id == IdPais).FirstOrDefault()?.LProvincia;
+        //    IdProvincia = LProvincias?.FirstOrDefault()?.Id ?? 0;
+        //    LDistrito = LProvincias.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos;
+        //    IdDistrito = LDistrito?.FirstOrDefault()?.Id ?? 0;
+        //    Corregimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+        //}
+        //protected async Task OnProvincesChange(long Id)
+        //{
+        //    IdProvincia = Id;
+        //    LDistrito = LProvincias.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos;
+        //    IdDistrito = LDistrito?.FirstOrDefault()?.Id ?? 0; 
+        //    Corregimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+        //}
+        //protected async Task OnDistrictChange(long Id)
+        //{
+        //    IdDistrito = Id;
+        //    Corregimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+        //}
+
+
         protected async Task OnCountryChange(long Id)
         {
+            Corregimiento.DistritoId = null;
+            IdProvincia = 0;
             IdPais = Id;
-            LProvincias = LPaises.Where(x => x.Id == IdPais).FirstOrDefault()?.LProvincia;
-            IdProvincia = LProvincias?.FirstOrDefault()?.Id ?? 0;
-            LDistrito = LProvincias.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos;
-            IdDistrito = LDistrito?.FirstOrDefault()?.Id ?? 0;
-            Corregimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+            LDistrito = null;
+            LProvincias = LPaises.Where(x => x.Id == Id).FirstOrDefault()?.LProvincia;
+            await this.InvokeAsync(StateHasChanged);
         }
         protected async Task OnProvincesChange(long Id)
         {
+            Corregimiento.DistritoId = null;
             IdProvincia = Id;
-            LDistrito = LProvincias.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos;
-            IdDistrito = LDistrito?.FirstOrDefault()?.Id ?? 0; 
-            Corregimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+            LDistrito = LPaises.Where(x => x.Id == IdPais).FirstOrDefault()?.LProvincia.Where(x => x.Id == IdProvincia).FirstOrDefault()?.LDistritos;
+            await this.InvokeAsync(StateHasChanged);
         }
-        protected async Task OnDistrictChange(long Id)
+        protected async Task OnDistrictChange(long? Id)
         {
-            IdDistrito = Id;
-            Corregimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
+            //IdDistrito = Id;
+            Corregimiento.DistritoId = Id;
+            await this.InvokeAsync(StateHasChanged);
         }
+
     }
 
 }

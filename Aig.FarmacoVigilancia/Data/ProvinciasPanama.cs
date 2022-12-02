@@ -22,5 +22,17 @@
         public List<Provincium> provincia { get; set; }
     }
 
+    public class ProvinciaTipoOrga
+    {
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public int idTipoOrg { get; set; }
+    }
 
+    public class OrganizacionProvinciaTipoOrga
+    {
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public int idProvinciaTipoOrga { get; set; }
+    }
 }

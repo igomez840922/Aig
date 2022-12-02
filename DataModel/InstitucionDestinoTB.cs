@@ -11,6 +11,17 @@ namespace DataModel
 {
     public class InstitucionDestinoTB : SystemId
     {
+
+        private long? tipoInstitucionId;
+        public long? TipoInstitucionId { get => tipoInstitucionId; set => SetProperty(ref tipoInstitucionId, value); }
+        private TipoInstitucionTB? tipoInstitucion;
+        public virtual TipoInstitucionTB? TipoInstitucion { get => tipoInstitucion; set => SetProperty(ref tipoInstitucion, value); }
+
+        private long? provinciaId;
+        public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
+        private ProvinciaTB? provincia;
+        public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+
         //nombre de establecimiento
         private string nombre;
         [StringLength(250)]
@@ -23,7 +34,13 @@ namespace DataModel
 
 
         private List<FMV_NotaTB> lNotas;
-        public virtual List<FMV_NotaTB> LNotas { get => lNotas; set => SetProperty(ref lNotas, value); }       
+        public virtual List<FMV_NotaTB> LNotas { get => lNotas; set => SetProperty(ref lNotas, value); }
+
+        private List<FMV_EsaviTB> lEsavi;
+        public virtual List<FMV_EsaviTB> LEsavi { get => lEsavi; set => SetProperty(ref lEsavi, value); }
+
+        private List<FMV_FfTB> lFf;
+        public virtual List<FMV_FfTB> LFf { get => lFf; set => SetProperty(ref lFf, value); }
 
     }
 }
