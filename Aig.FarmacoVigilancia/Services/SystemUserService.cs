@@ -1,5 +1,5 @@
 ﻿using DataAccess;
-using DataAccess.FarmacoVigilancia;
+using DataAccess;
 using DataModel;
 using DataModel.Models;
 using Microsoft.AspNetCore.Identity;

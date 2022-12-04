@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+
+
+<MudThemeProvider Theme="_currentTheme" />
+<MudSnackbarProvider />
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+    <div class="d-flex flex-column mud-width-full">
+        <MudPaper Elevation="25" Class="pa-8" Width="100%">
+            @*<MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" Style="width:100px; height:100px;" />*@
+            <MudImage Fluid="true" Src="img/nuevo_logo3.jpg" Alt="flag" Class="rounded-lg" />
+            @Body
+        </MudPaper>
+
+        <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true" Class="mt-6 my-6">@languageContainerService.Keys["PharmaciesAndDrugsAuditSystem"]</MudText>
+    </div>
+
+</MudContainer>
+
+<MudOverlay @bind-Visible="showOverlay" DarkBackground="true" ZIndex="9999" AutoClose="false" >
+    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+</MudOverlay>

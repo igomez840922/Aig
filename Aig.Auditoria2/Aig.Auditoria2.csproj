@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\en-US.yml" />
+    <None Remove="Resources\es-ES.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\en-US.yml" />
+    <EmbeddedResource Include="Resources\es-ES.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Applications\Chat\Chat.razor" />
+    <None Include="Pages\Applications\Chat\ChatChannels.razor" />
+    <None Include="Pages\Applications\Chat\ChatUsers.razor" />
+    <None Include="Pages\Applications\Chat\User.razor" />
+    <None Include="Pages\Applications\Chat\UserMessage.razor" />
+    <None Include="Pages\Applications\Email\Email.razor" />
+    <None Include="Pages\Applications\Email\EmailNavList.razor" />
+    <None Include="Pages\Applications\Email\Inbox.razor" />
+    <None Include="Pages\Counter.razor" />
+    <None Include="Pages\FetchData.razor" />
+    <None Include="Pages\Index.razor" />
+    <None Include="Pages\Pages\Authentication\Forgot.razor" />
+    <None Include="Pages\Pages\Authentication\Login.razor" />
+    <None Include="Pages\Pages\Authentication\Register.razor" />
+    <None Include="Pages\Pages\Authentication\Reset.razor" />
+    <None Include="Pages\Pages\Utility\Faq.razor" />
+    <None Include="Pages\Pages\Utility\WasmLoading.razor" />
+    <None Include="Pages\Personal\Account.razor" />
+    <None Include="Pages\Personal\Dashboard.razor" />
+    <None Include="Shared\LoginLayout.razor" />
+    <None Include="Shared\MainLayout.razor" />
+    <None Include="Shared\NavMenu.razor" />
+    <None Include="Shared\PersonCard.razor" />
+    <None Include="Shared\SurveyPrompt.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AKSoftware.Localization.MultiLanguages" Version="5.8.0" />
+    <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.5.0" />
+    <PackageReference Include="BlazorComponentBus" Version="2.2.0" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.11" PrivateAssets="all" />
+    <PackageReference Include="Mobsites.Blazor.SignaturePad" Version="1.1.7" />
+    <PackageReference Include="MudBlazor" Version="6.1.2" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="1.0.7" />
+    <PackageReference Include="System.Net.Http.Json" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataModel\DataModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

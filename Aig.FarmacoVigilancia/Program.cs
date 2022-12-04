@@ -4,7 +4,7 @@ using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using BlazorDownloadFile;
 using Blazored.LocalStorage;
-using DataAccess.FarmacoVigilancia;
+using DataAccess;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;

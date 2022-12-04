@@ -7,12 +7,12 @@ namespace DataModel.DTO
 {
     public class RegisterDTO
     {
-        [Required]
+        [Required(ErrorMessage = "requerido")]
         public string UserName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "requerido")]
         public string Password { get; set; }
-        [Required]
-        [Compare(nameof(Password), ErrorMessage = "Passwords do not match!")]
+        [Required(ErrorMessage = "requerido")]
+        [Compare(nameof(Password), ErrorMessage = "no coincide")]
         public string PasswordConfirm { get; set; }
     }
 }

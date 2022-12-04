@@ -5,16 +5,21 @@ using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using BlazorDownloadFile;
 using Blazored.LocalStorage;
-using DataAccess.Auditoria;
+using DataAccess;
 using DataModel;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Collections.Concurrent;
+using System.Configuration;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 ///
@@ -44,14 +49,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
 
+////For Localstorage
+//builder.Services.AddScoped<IProfileService, ProfileService>();
+//builder.Services.AddBlazoredLocalStorage();
+
 //For API CONTROLLERS
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
-
-////For Localstorage
-//builder.Services.AddScoped<IProfileService, ProfileService>();
-//builder.Services.AddBlazoredLocalStorage();
 
 //For Components Comunucations Pul-Sub
 builder.Services.AddScoped<ComponentBus>();
@@ -114,11 +119,6 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapBlazorHub(options => options.WebSockets.CloseTimeout = new TimeSpan(0, 30, 0));
-//});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

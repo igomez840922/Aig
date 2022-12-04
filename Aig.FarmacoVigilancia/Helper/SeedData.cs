@@ -2,7 +2,7 @@
 using Aig.FarmacoVigilancia.Data;
 using ClosedXML.Excel;
 using DataAccess;
-using DataAccess.FarmacoVigilancia;
+using DataAccess;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

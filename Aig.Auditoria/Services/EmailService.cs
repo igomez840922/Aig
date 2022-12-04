@@ -1,5 +1,5 @@
 ﻿using DataAccess;
-using DataAccess.Auditoria;
+using DataAccess;
 using DataModel;
 using MailKit;
 using MailKit.Net.Smtp;

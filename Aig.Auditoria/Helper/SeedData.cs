@@ -2,7 +2,7 @@
 using Aig.Auditoria.Pages.Settings.Country;
 using Aig.Auditoria.Services;
 using DataAccess;
-using DataAccess.Auditoria;
+using DataAccess;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

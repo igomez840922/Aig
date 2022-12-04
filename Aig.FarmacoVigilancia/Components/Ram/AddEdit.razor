@@ -49,7 +49,21 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Evaluator"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Data.EvaluadorId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@lEvaluators TextProperty="NombreCompleto" ValueProperty="Id"
+                                                                Change=@(args => {OnEvaluatorChange((args!=null?(long)args:null));}) />
+
+                                                <ValidationMessage For=@(() => Data.EvaluadorId) />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="col-sm-3">
                                         <label>@languageContainerService.Keys["Evaluador"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -66,7 +80,7 @@
                                                 <ValidationMessage For=@(() => Data.EvaluadorId) />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
 
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["Fármaco Sospechoso (Comercial)"]</label>
@@ -153,8 +167,8 @@
                                     <label>@languageContainerService.Keys["Código Noti-Facedra"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Data.CodigoCNFV" />
-                                            <ValidationMessage For=@(() => Data.CodigoCNFV) />
+                                            <InputText class="form-control" @bind-Value="Data.CodigoNotiFacedra" />
+                                                <ValidationMessage For=@(() => Data.CodigoNotiFacedra) />
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +188,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <InputText class="form-control" @bind-Value="Data.CodigoCNFV" />
-                                            <ValidationMessage For=@(() => Data.IdFacedra) />
+                                                <ValidationMessage For=@(() => Data.CodigoCNFV) />
                                         </div>
                                     </div>
                                 </div>

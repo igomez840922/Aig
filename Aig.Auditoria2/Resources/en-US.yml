@@ -1,0 +1,205 @@
+﻿HelloWorld: Hello World!
+WelcomeMessage: Welcome Message
+InvalidEmail: Invalid Email
+RequiredField: Required Field
+ConfirmationPasswordNotMatch: Confirmation Password Not Match
+Payments: Payments
+Payouts: Payouts
+Refunds: Refunds
+Settlements: Settlements
+Pending: Pending
+Completed: Completed
+Cancelled: Cancelled
+Declined: Declined
+Dashboard: Dashboard
+Hi: Hi
+Profile: Profile
+logIn: Log In
+SignOut: Sign Out
+English: English
+Spanish: Spanish
+Settings: Settings
+SystemUsers: System Users
+Update: Update
+New: New
+Search: Search
+Picture: Picture
+FilesType: Files Type
+AccessData: Access Data
+PersonalAccess: Personal Access
+UserName: UserName
+Password: Password
+ConfirmPassword: Confirm Password
+Email: Email
+PhoneNumber: Phone Number
+DataSaveSuccessfully: Data has been Saved Sucessfully
+DataSaveError: Data could not be Saved
+DataDeleteSuccessfully: Data has been Deleted Sucessfully
+DataDeleteError: Data could not be Deleted
+DeleteConfirmation: Delete Confirmation
+AreYouSureToDeleteItem: Are you sure you want to delete the selected item?
+ChangePassword: Change Password
+NewPassword: New Password
+Edit: Edit
+Delete: Delete
+Save: Save
+Cancel: Cancel
+FirstName: First Name
+SecondName: Second Name
+SureName: Sure Name
+SecondSurName: Second SurName
+Yes: Yes
+No: No
+GeneralData: General Data
+GateWays: GateWays
+FiatCurrency: Fiat Currency
+CryptoCurrency: Crypto Currency
+Name: Name
+Code: Code
+Description: Description
+SandBoxUrl: SandBox Url
+ProductionUrl: Production Url
+SandBox: SandBox
+Production: Production
+ClientId: Client Id
+ClientSecret: Client Secret
+GrantType: Grant Type
+AccessToken: Access Token
+ApiKey: Api Key
+Environment: Environment
+Disabled: Disabled
+TaxPercent: Tax Percent
+Actions: Actions
+Clients: Clients
+FullName: Full Name
+PosSystems: Pos Systems
+Operations: Operations
+ApiSecret: Api Secret
+Company: Company
+Details: Details
+ClientsTotals: Clients Totals
+PosSystemsTotals: PosSystems Totals
+OperationsTotals : Operations Totals
+Transactions: Transactions
+TransactionsAmount: Transactions Amount
+PublicKey: Public Key
+PrivateKey: Private Key
+MerchantId: Merchant Id
+LoginToYourAccount: Login To Your Account
+LoginToSystem: Login To System
+RememberMe: Remember me
+ForgetPassword: Forget Password
+SignIn: Sign In
+AuditorysystemAig: Auditory System AIG
+PharmaciesAndDrugsAuditSystem: Pharmacies and Drugs Audit System
+Establishments: Establishments
+Inspections: Inspections
+QualityAudit: Quality Audit
+RecalledProducts: Recalled Products
+RetentionAndWithdrawalOfPharmaceuticalProducts: Retention And Withdrawal Of Pharmaceutical Products
+SelectInspectionType: Select Inspection Type
+Select: Select
+NewInspection: New Inspection
+EditInspection: Edit Inspection
+StartDate: Start Date
+GeneralInfo: General Info
+Section: Section/Regional Office
+OperLicenseNumber: Operational License Number
+Products: Products
+AddProduct: Add Product
+CommercialPresentation: Comercial Presentation
+Country: Country
+Lot: Lot
+ExpDate: Exp. Date
+AmountWithheld: Amount Withheld
+AmountWithdrawal: Amount Withdrawal
+ProductDestiny: Destiny
+Manufacturer: Manufacturer
+None: None
+ActNumber: Act Number
+Type: Type
+LicNumber: Lic. Number
+Institute: Institute
+EditEstablishments: Edit Establishment
+NewEstablishments: New Establishment
+Status: Status
+NoMaquina: Machine Number
+Province: Province
+District: District
+Address: Address
+Countries: Countries
+NewCountry: New Country
+EditCountry: Edit Country
+NewProduct: New Product
+EditProduct: Edit Product
+EmailServer: Email Server
+SmtpServer: Smtp Server
+SmtpPort: Smtp Port
+EmailAccount: Email Account
+ProductName: Product Name
+RetentionReason: Retention Reason
+NumberOfHealthRegister: Number of Health Register
+Add: Add
+Attachments: Attachments
+File: File
+UploadAttachment: Upload Attachment
+YouExceedMaximumSizeOf: You has been exceed the Maximum size of
+IspectionType: Ispection Type
+ViewAttachemnt: View Attachemnt
+InspectionDate: Inspection Date
+InspectionType: Inspection Type
+NoticeOperation: Notice Operation
+LegalRepresentation: Legal Representation
+DNFDParticipants: DNFD Participants
+Identification: Identification
+EstablishmentParticipants: Establishment Participants
+Position: Position
+Location: Location
+SignatureBytheMinistryofHealth: Signature by the Ministry of Health
+SignatureBytheEstablishment: Signature by the Establishment
+Clear: Clear
+RegNum: Register Number
+Download: Download
+DateOfRecord: Date of Record
+All: All
+FromDate: From Date
+ToDate: To Date
+FromExpDate: From Exp. Date
+ToExpDate: To Exp. Date
+WeWereServedBy: We Were Served By
+Ubication: Ubication
+Provinces: Provinces
+NewProvince: New Province
+Districts: Districts
+NewDistrict: New District
+EditDistrict: Edit District
+Corregimientos: Corregimientos
+NewCorregimiento: New Corregimiento
+EditCorregimiento: Edit Corregimiento
+Signature: Signature
+ApplicantName: Applicant's Name
+ApplicantInfo: Applicant Info
+Nationality: Nationality
+MobilePhone: Mobile Phone
+OfficePhone: Office Phone
+ResidencePhone: Residence Phone
+BusinessPhone: Business Phone
+Profession: Profession
+RegentInfo: Regent Info
+SuitabilityRegistrationNumber: Suitability Registration Number
+IdentificationCard: Identification Card
+PharmacyOrganizationalStructure: Pharmacy Organizational Structure
+YouHaveYourIdentificationSign: You have your Identification Sign
+PharmacyInfrastructure: Pharmacy Infrastructure
+PharmacyPhysicalArea: Pharmacy Physical Area
+Questions: Questions
+ControlledProductsArea: Controlled Products Area
+MedicationStorageArea: Medication Storage Area
+ConclusionInfo: Conclusion Info
+InspectorsApprovals: Inspectors Approvals
+RegisterNumber: Register Number
+Charge: Charge
+Time: Time
+Days: Days
+FinishedDate: Finished Date
+Signatures: Signatures

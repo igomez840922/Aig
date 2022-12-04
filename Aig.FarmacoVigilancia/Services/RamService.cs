@@ -1,4 +1,4 @@
-﻿using DataAccess.FarmacoVigilancia;
+﻿using DataAccess;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
@@ -195,8 +195,9 @@ namespace Aig.FarmacoVigilancia.Services
         }
 
         public async Task<FMV_RamTB> Save(FMV_RamTB data)
-        {            
-            if (data.LNotificaciones != null)
+        {
+            var result = DalService.Save(data);
+            if (result != null && data.LNotificaciones != null)
             {
                 foreach (var item in data.LNotificaciones)
                 {
@@ -205,10 +206,9 @@ namespace Aig.FarmacoVigilancia.Services
                     DalService.DBContext.Entry(item).Property(b => b.EvaluacionCausalidad).IsModified = true;
                     DalService.DBContext.Entry(item).Property(b => b.ObservacionInfoNotifica).IsModified = true;
                     DalService.DBContext.Entry(item).Property(b => b.AccionesRegulatoria).IsModified = true;
+                    DalService.DBContext.SaveChanges();
                 }
             }
-
-            var result = DalService.Save(data);
 
             return result;           
         }

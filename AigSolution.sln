@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Auditoria", "Aig.Audito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.FarmacoVigilancia", "Aig.FarmacoVigilancia\Aig.FarmacoVigilancia.csproj", "{97EEB9BF-A40A-4A7B-888B-C06C396B1166}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Auditoria2", "Aig.Auditoria2\Aig.Auditoria2.csproj", "{D74C8CA3-02D9-4158-9C21-6636EF1D6208}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agi.API", "Agi.API\Agi.API.csproj", "{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{97EEB9BF-A40A-4A7B-888B-C06C396B1166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97EEB9BF-A40A-4A7B-888B-C06C396B1166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97EEB9BF-A40A-4A7B-888B-C06C396B1166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D74C8CA3-02D9-4158-9C21-6636EF1D6208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D74C8CA3-02D9-4158-9C21-6636EF1D6208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D74C8CA3-02D9-4158-9C21-6636EF1D6208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D74C8CA3-02D9-4158-9C21-6636EF1D6208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -778,11 +778,11 @@
                                     </div>
                                 </div>
 
-                                 <div class="col-sm-6">
+                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Observaciones"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                          <textarea rows="2" id="active_principles" class="form-control" @bind="Notification.AccionesRegulatoria.Observaciones" @bind:event="oninput" /> 
+                                          <textarea rows="8" id="active_principles" class="form-control" @bind="Notification.AccionesRegulatoria.Observaciones" @bind:event="oninput" /> 
                                             <ValidationMessage For=@(() => Notification.AccionesRegulatoria.Observaciones) />
                                         </div>
                                     </div>

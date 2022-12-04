@@ -125,7 +125,11 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             this.InvokeAsync(StateHasChanged);
         }
 
-
+        protected async Task OnEvaluatorChange(long? Id)
+        {
+            Data.EvaluadorId = Id;
+            Data.Evaluador = lEvaluators.Where(x => x.Id == Id).FirstOrDefault();
+        }
 
     }
 
