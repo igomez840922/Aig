@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Public", "Aig.Farmacoterapia.Public\Aig.Farmacoterapia.Public.csproj", "{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aig.Farmacoterapia.Api", "Aig.Farmacoterapia.Api\Aig.Farmacoterapia.Api.csproj", "{D500B40A-C924-4E6E-82BA-682F7C0E6257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

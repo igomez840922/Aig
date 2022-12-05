@@ -8,16 +8,21 @@ using System.Text;
 using TokenResponse = Aig.Farmacoterapia.Infrastructure.Identity.TokenResponse;
 using TokenRequest = Aig.Farmacoterapia.Infrastructure.Identity.TokenRequest;
 using Aig.Farmacoterapia.Infrastructure.Interfaces;
+using Aig.Farmacoterapia.Infrastructure.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services
 {
-    public class IdentityService : ITokenService
+    public class TokenService : ITokenService
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public IdentityService( UserManager<ApplicationUser> userManager)
+        private readonly IOptions<AppConfiguration>  _appConfig;
+        public TokenService(UserManager<ApplicationUser> userManager, IOptions<AppConfiguration> appConfig)
         {
             _userManager = userManager;
+            _appConfig = appConfig;
         }
+       
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -26,7 +31,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 return await Result<TokenResponse>.FailAsync("User Not Found.");
             }
 
-            string secret = "S0M3RAN0MS3CR3T!1!MAG1C!1!";
+            string secret = _appConfig.Value.Secret;
             string audience = "AudienceClientJwt";
             string issuer = "IssuerClientJwt";
 

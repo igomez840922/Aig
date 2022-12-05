@@ -23,11 +23,19 @@ namespace Aig.Farmacoterapia.Infrastructure
 {
     public static class ConfigureServices
     {
+        internal static AppConfiguration GetApplicationSettings(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var applicationSettingsConfiguration = configuration.GetSection(nameof(AppConfiguration));
+            services.Configure<AppConfiguration>(applicationSettingsConfiguration);
+            return applicationSettingsConfiguration.Get<AppConfiguration>();
+        }
         private static IServiceCollection AddUserService(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<ITokenService, IdentityService>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
             return services;
         }
@@ -55,12 +63,14 @@ namespace Aig.Farmacoterapia.Infrastructure
 
             return services;
         }
-        internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
+        internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            var appConfig = services.GetApplicationSettings(configuration);
             services.AddAuthentication().AddJwtBearer("JwtClient", options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters(){
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("S0M3RAN0MS3CR3T!1!MAG1C!1!")),
+                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("S0M3RAN0MS3CR3T!1!MAG1C!1!")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appConfig.Secret)),
                     ValidAudience = "AudienceClientJwt",
                     ValidIssuer = "IssuerClientJwt",
                     ValidateIssuerSigningKey = true,
@@ -167,14 +177,14 @@ namespace Aig.Farmacoterapia.Infrastructure
         {
             //Log4net
             XmlConfigurator.Configure(new FileInfo("log4net.config"));
-
+            services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             AddDatabase(services, configuration);
             AddIdentity(services);
             AddUserService(services);
             AddInfrastructure(services);
             AddSharedInfrastructure(services, configuration);
             AddRepositories(services);
-            AddJwtAuthentication(services);
+            AddJwtAuthentication(services, configuration);
             RegisterSwagger(services);
 
             return services;
