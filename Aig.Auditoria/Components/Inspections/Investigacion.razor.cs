@@ -8,8 +8,8 @@ using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
 namespace Aig.Auditoria.Components.Inspections
-{    
-    public partial class AperturaFabricante
+{   
+    public partial class Investigacion
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -26,7 +26,6 @@ namespace Aig.Auditoria.Components.Inspections
         List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
         List<PaisTB> lPaises { get; set; }
 
-        enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.Pending;
 
         bool showSignasure { get; set; } = false;
         List<SignaturePad> lSignaturePads { get; set; } = new List<SignaturePad>();
@@ -45,6 +44,7 @@ namespace Aig.Auditoria.Components.Inspections
         bool showParticipant { get; set; } = false;
         Participante participante { get; set; } = null;
 
+        enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.Pending;
 
         protected async override Task OnInitializedAsync()
         {
@@ -59,6 +59,7 @@ namespace Aig.Auditoria.Components.Inspections
             if (firstRender)
             {
                 StatusInspecciones = Inspeccion?.StatusInspecciones ?? enum_StatusInspecciones.Pending;
+
                 await getUserLanguaje();
                 await FetchData();
             }
@@ -81,7 +82,6 @@ namespace Aig.Auditoria.Components.Inspections
         //Fill Data
         protected async Task FetchData()
         {
-
             if (lEstablecimientos == null || lEstablecimientos.Count < 1)
             {
                 lEstablecimientos = await establecimientoService.GetAll();
@@ -103,15 +103,15 @@ namespace Aig.Auditoria.Components.Inspections
                 }
 
                 if (signaturePad5 != null)
-                    signaturePad5.Image = Inspeccion.InspAperFabricante.DatosConclusiones.FirmaRepresentanteLegal;
+                    signaturePad5.Image = Inspeccion.InspInvestigacion.DatosAtendidosPor.Firma;
                 if (signaturePad6 != null)
-                    signaturePad6.Image = Inspeccion.InspAperFabricante.DatosConclusiones.FirmaRegente;
+                    signaturePad6.Image = Inspeccion.InspInvestigacion.DatosRepresentLegal.Firma;
 
-                foreach (var partic in Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes)
+                foreach (var partic in Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes)
                 {
                     try
                     {
-                        lSignaturePads[Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.IndexOf(partic)].Image = partic.Firma;
+                        lSignaturePads[Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes.IndexOf(partic)].Image = partic.Firma;
                     }
                     catch (Exception ex) { }
                 }
@@ -153,12 +153,15 @@ namespace Aig.Auditoria.Components.Inspections
             Inspeccion.EstablecimientoId = Id;
             Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.Ubicacion ?? "";
             Inspeccion.TelefonoEstablecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.Telefono1 ?? "";
+            Inspeccion.LicenseNumber = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.NumLicencia ?? "";
+            Inspeccion.AvisoOperacion = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.AvisoOperaciones ?? "";
+
         }
 
-
+        
         protected async Task OnShowSignasure()
         {
-            if (!showSignasure && Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.Count > 0)
+            if (!showSignasure && Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes.Count > 0)
             {
                 lSignaturePads.Clear();
                 showSignasure = true;
@@ -179,11 +182,11 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspAperFabricante.DatosConclusiones.FirmaRepresentanteLegal = await signaturePad5.ToDataURL(signatureType);
+            Inspeccion.InspInvestigacion.DatosAtendidosPor.Firma = await signaturePad5.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg5()
         {
-            Inspeccion.InspAperFabricante.DatosConclusiones.FirmaRepresentanteLegal = null;
+            Inspeccion.InspInvestigacion.DatosAtendidosPor.Firma = null;
             signaturePad5.Image = null;
         }
         protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
@@ -193,11 +196,11 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspAperFabricante.DatosConclusiones.FirmaRegente = await signaturePad6.ToDataURL(signatureType);
+            Inspeccion.InspInvestigacion.DatosRepresentLegal.Firma = await signaturePad6.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg6()
         {
-            Inspeccion.InspAperFabricante.DatosConclusiones.FirmaRegente = null;
+            Inspeccion.InspInvestigacion.DatosRepresentLegal.Firma = null;
             signaturePad6.Image = null;
         }
 
@@ -207,24 +210,24 @@ namespace Aig.Auditoria.Components.Inspections
         protected async Task OnSignatureChange(Participante _participante)
         {
             await RemoveSignatureImg(_participante);
-            var _signaturePad = lSignaturePads[Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.IndexOf(_participante)];
+            var _signaturePad = lSignaturePads[Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes.IndexOf(_participante)];
             _participante.Firma = await _signaturePad.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg(Participante _participante)
         {
             _participante.Firma = null;
-            var _signaturePad = lSignaturePads[Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.IndexOf(_participante)];
+            var _signaturePad = lSignaturePads[Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes.IndexOf(_participante)];
             _signaturePad.Image = null;
         }
 
         ///
 
         //ADD PARTICIPANTE
-        protected async Task OpenParticipant(Participante _participante=null)
+        protected async Task OpenParticipant(Participante _participante = null)
         {
             bus.Subscribe<Aig.Auditoria.Events.Participants.ParticipantsAddEdit_CloseEvent>(ParticipantsAddEdit_CloseEventHandler);
 
-            participante = _participante!=null? _participante: new Participante();
+            participante = _participante != null ? _participante : new Participante();
             showParticipant = true;
 
             await this.InvokeAsync(StateHasChanged);
@@ -236,7 +239,7 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 try
                 {
-                    Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.Remove(_participante);
+                    Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes.Remove(_participante);
                 }
                 catch { }
 
@@ -255,8 +258,8 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (message.Data != null)
             {
-                if(!Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.Contains(message.Data))
-                    Inspeccion.InspAperFabricante.DatosConclusiones.LParticipantes.Add(message.Data);
+                if (!Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes.Contains(message.Data))
+                    Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);

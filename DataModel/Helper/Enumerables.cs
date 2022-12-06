@@ -43,7 +43,7 @@ namespace DataModel.Helper
         AF = 1,
         [Description("Cambio de ubicación de Farmacia")]
         CUF = 2,
-        [Description("Apertura  de Agencia")]
+        [Description("Apertura de Agencia")]
         AA = 3,
         [Description("Cambio de Ubicación de Agencia")]
         CUA = 4,

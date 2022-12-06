@@ -39,6 +39,15 @@ namespace DataModel
         [StringLength(500)]
         public string DescPuestosDesc { get => descPuestosDesc; set => SetProperty(ref descPuestosDesc, value); }
 
+        // Regente Farmaceutico
+        private enumAUD_TipoSeleccion regenteFarmaceutico;
+        public enumAUD_TipoSeleccion RegenteFarmaceutico { get => regenteFarmaceutico; set => SetProperty(ref regenteFarmaceutico, value); }
+        // Observaciones
+        private string regenteFarmaceuticoDesc;
+        [StringLength(500)]
+        public string RegenteFarmaceuticoDesc { get => regenteFarmaceuticoDesc; set => SetProperty(ref regenteFarmaceuticoDesc, value); }
+
+
         // Responsable de investigación y desarrollo
         private enumAUD_TipoSeleccion respInvDesarrollo;
         public enumAUD_TipoSeleccion RespInvDesarrollo { get => respInvDesarrollo; set => SetProperty(ref respInvDesarrollo, value); }

@@ -2173,10 +2173,10 @@
                     <br><br>
                     <div class="modal-footer">
 
-                        @if (Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending)
+                        @if (StatusInspecciones == enum_StatusInspecciones.Pending)
                         {
                             <button type="submit"
-                                class="btn btn-info waves-effect">
+                                    class="btn btn-info waves-effect">
                                 @languageContainerService.Keys["Save"]
                             </button>
                         }

@@ -33,6 +33,9 @@ namespace DataModel
         private string criterioTecnicoInspector;
         public string CriterioTecnicoInspector { get => criterioTecnicoInspector; set => SetProperty(ref criterioTecnicoInspector, value); }
 
+        //Inconformidades o desviaciones detectadas
+        private string inconformidades;
+        public string Inconformidades { get => inconformidades; set => SetProperty(ref inconformidades, value); }
 
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.

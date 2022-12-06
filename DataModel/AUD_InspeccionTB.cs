@@ -70,9 +70,9 @@ namespace DataModel
         public string LicenseNumber { get => licenseNumber; set => SetProperty(ref licenseNumber, value); }
 
         //aviso de operaciones
-        private string avisoOperación;
+        private string avisoOperacion;
         [StringLength(250)]
-        public string AvisoOperación { get => avisoOperación; set => SetProperty(ref avisoOperación, value); }
+        public string AvisoOperacion { get => avisoOperacion; set => SetProperty(ref avisoOperacion, value); }
 
         //representante legal
         private string repreLegal;
@@ -139,6 +139,13 @@ namespace DataModel
         public long? InspAperFabricanteId { get => inspAperFabricanteId; set => SetProperty(ref inspAperFabricanteId, value); }
         private AUD_InspAperFabricanteTB? inspAperFabricante;
         public virtual AUD_InspAperFabricanteTB? InspAperFabricante { get => inspAperFabricante; set => SetProperty(ref inspAperFabricante, value); }
+
+        //Formulario de Investigaciones
+        private long? inspInvestigacionId;
+        public long? InspInvestigacionId { get => inspInvestigacionId; set => SetProperty(ref inspInvestigacionId, value); }
+        private AUD_InspInvestigacionTB? inspInvestigacion;
+        public virtual AUD_InspInvestigacionTB? InspInvestigacion { get => inspInvestigacion; set => SetProperty(ref inspInvestigacion, value); }
+
 
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.

@@ -3971,6 +3971,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Fecha de Finalización"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
+                                            @*<InputDate class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FechaFinalizacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FechaFinalizacion) />*@
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Observaciones"]</label>
                                     <div class="form-group">
@@ -3984,19 +3994,7 @@
                         </div>
                             <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
                             <h5>@languageContainerService.Keys["Firmas"]</h5>
-                            <div class="row clearfix">
-                                <div class="col-sm-4">
-                                    <label>@languageContainerService.Keys["Fecha de Finalización"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
-                                            @*<InputDate class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FechaFinalizacion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosConclusiones.FechaFinalizacion) />*@
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            
                             @if (Inspeccion != null && Inspeccion.InspAperCambUbicAgen.DatosConclusiones.LParticipantes.Count > 0 && showSignasure)
                             {
                                 <div class="row clearfix">
@@ -4154,7 +4152,7 @@
                     <br><br>
                     <div class="modal-footer">
 
-                        @if (Inspeccion?.StatusInspecciones == enum_StatusInspecciones.Pending)
+                        @if (StatusInspecciones == enum_StatusInspecciones.Pending)
                         {
                             <button type="submit"
                                     class="btn btn-info waves-effect">

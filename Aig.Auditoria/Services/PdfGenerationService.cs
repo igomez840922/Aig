@@ -53,6 +53,17 @@ namespace Aig.Auditoria.Services
 
                             return await GenerateAperturaCambioUbicacionAgencia(inspection);
                         }
+                    case DataModel.Helper.enumAUD_TipoActa.INV:
+                        {                            
+                            return await GenerateInvestigaciones(inspection);
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.AFM:
+                    case DataModel.Helper.enumAUD_TipoActa.AFC:
+                        {
+                            inspection.InspAperFabricante.DatosSolicitante = inspection.InspAperFabricante.DatosSolicitante != null ? inspection.InspAperFabricante.DatosSolicitante : new AUD_DatosSolicitante();
+
+                            return await GenerateAperturaFabricantesMedicamentos(inspection);
+                        }
                 }
             }
             catch { }
@@ -112,7 +123,7 @@ namespace Aig.Auditoria.Services
                                   }
 
                                   column.Item().Text(string.Format("Siendo las {0} del día {1} de {2} de {3}, actuando en representación de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, procedimos a efectuar la {4}, de los productos a continuación descritos y que fueron localizados en el establecimiento denominado: {5}, ubicado en: {6}, con Aviso de Operación No. {7} y Licencia de operación {8}/DNFD. Y cuyo Representante Legal es {9} con documento de identidad personal N° {10}. Por la Dirección Nacional de Farmacia y Drogas, participamos: {11}. Y fuimos atendidos por: {12}, con cargo {13} cip: {14}\r\n",
-                                      inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.ToString("dd"), Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.ToString("yyyy"), DataModel.Helper.Helper.GetDescription(inspection.InspRetiroRetencion.RetiroRetencionType), inspection.Establecimiento?.Nombre??"", inspection.UbicacionEstablecimiento,inspection.AvisoOperación, inspection.LicenseNumber, inspection.InspRetiroRetencion.DatosRepresentLegal.Nombre, inspection.InspRetiroRetencion.DatosRepresentLegal.Cedula, participantes, inspection.InspRetiroRetencion.DatosAtendidosPor.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor.Cargo, inspection.InspRetiroRetencion.DatosAtendidosPor.Cedula));
+                                      inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.ToString("dd"), Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.ToString("yyyy"), DataModel.Helper.Helper.GetDescription(inspection.InspRetiroRetencion.RetiroRetencionType), inspection.Establecimiento?.Nombre??"", inspection.UbicacionEstablecimiento,inspection.AvisoOperacion, inspection.LicenseNumber, inspection.InspRetiroRetencion.DatosRepresentLegal.Nombre, inspection.InspRetiroRetencion.DatosRepresentLegal.Cedula, participantes, inspection.InspRetiroRetencion.DatosAtendidosPor.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor.Cargo, inspection.InspRetiroRetencion.DatosAtendidosPor.Cedula));
 
                                   column.Item().Table(table =>
                                   {
@@ -267,7 +278,6 @@ namespace Aig.Auditoria.Services
             catch { }
             return null;
         }
-
 
         //generamos el pdf del Acta de Apertura o Cambio de Ubicacion de Farmacia
         private async Task<Stream> GenerateAperturaCambioUbicacionFarmacia(AUD_InspeccionTB inspection)
@@ -950,7 +960,7 @@ namespace Aig.Auditoria.Services
             catch { }
             return null;
         }
-        //generamos el pdf del Acta de Apertura o Cambio de Ubicacion de Farmacia
+        //generamos el pdf del Acta de Apertura o Cambio de Ubicacion de Agencia
         private async Task<Stream> GenerateAperturaCambioUbicacionAgencia(AUD_InspeccionTB inspection)
         {
             try
@@ -2053,6 +2063,1118 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).Text("Fundamento Legal").Bold();
                             column.Item().Text("Ley 66 de 10 de noviembre de 1947 \r\nLey 1 de 10 de enero de 2001 \r\nLey 17 de 12 de septiembre de 2014 \r\nLey 24 de 29 de enero de 1963 \r\nDecreto Ejecutivo 115 de 16 de agosto de 2022 \r\nResolución No. 774 de 7 de octubre de 2019");
+
+                        });
+
+                        page.Footer().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            });
+
+                        });
+
+                    });
+                })
+                  .GeneratePdf();
+
+                Stream stream = new MemoryStream(byteArray);
+
+                return stream;
+            }
+            catch { }
+            return null;
+        }
+        //generamos el pdf del Acta de Apertura o Cambio de Ubicacion de Agencia
+        private async Task<Stream> GenerateInvestigaciones(AUD_InspeccionTB inspection)
+        {
+            try
+            {
+                //var inspection = DalService.Get<AUD_InspeccionTB>(InspectionId);
+
+                // code in your main method
+                var byteArray = QuestPDF.Fluent.Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(5, Unit.Millimetre);
+                        page.PageColor(Colors.White);
+                        page.DefaultTextStyle(x => x.FontSize(8));
+                        //page.DefaultTextStyle(x => x.Color("Black"));
+
+                        var path = System.IO.Path.Combine(env.WebRootPath, "img", "pdf", "Header.png");
+
+                        page.Header().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().Image(path);
+                                header.Cell().AlignCenter().Text("");
+                                header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
+                            });
+
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("Departamento de Auditorías de Calidad a Establecimientos Farmacéuticos y No Farmacéuticos");
+                            table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA DE INSPECCIÓN").Bold();
+                        });
+
+                        page.Content().PaddingVertical(15).Column(column =>
+                        {
+                            column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
+                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
+
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN:{0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO:{0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
+
+                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Nombre del establecimiento:{0}", inspection.Establecimiento.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Ubicación:{0}", inspection.UbicacionEstablecimiento));
+                            column.Item().AlignLeft().Text(string.Format("Num. de Lic.:{0}", inspection.LicenseNumber));
+                            column.Item().AlignLeft().Text(string.Format("Aviso de Operación:{0}", inspection.AvisoOperacion));
+
+                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Siendo las {0} del {1} de {2} de {3}; actuando como colaboradores de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, procedimos a realizar inspección al establecimiento antes descrito, para verificar {4}", 
+                                inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.Year, inspection.InspInvestigacion.DetalleVerificacion));
+
+                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Al llegar al establecimiento fuimos atendidos por {0} con cargo de {1}, y documento de identidad personal N° {2}. A quien se le informó el motivo de la visita.",
+    inspection.InspInvestigacion.DatosAtendidosPor.Nombre, inspection.InspInvestigacion.DatosAtendidosPor.Cargo, inspection.InspInvestigacion.DatosAtendidosPor.Cedula));
+
+                            column.Item().PaddingVertical(10).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas, participaron:");
+                            if (inspection.InspInvestigacion.DatosConclusiones.LParticipantes != null)
+                            {
+                                column.Item().Table(tbl =>
+                                {
+                                    tbl.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.7);
+                                        columns.RelativeColumn((float)0.3);
+                                    });
+
+                                    tbl.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignLeft().Text("Nombre").Bold();
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignLeft().Text("No. Idoneidad").Bold();
+                                    });
+
+                                    foreach (var participant in inspection.InspInvestigacion.DatosConclusiones.LParticipantes)
+                                    {
+                                        tbl.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(participant.NombreCompleto);
+                                        tbl.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(participant.RegistroNumero);
+                                    }
+                                });                                
+                            }
+
+                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("A continuación, se describen los detalles de la inspección:\r\n{0}", inspection.InspInvestigacion.DetalleInspeccion));
+                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Se adjunta acta de retención y retiro de productos: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.AdjuntaActaRetencion)));
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONES GENERALES").Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspInvestigacion.DatosConclusiones.ObservacionesFinales);
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("SEGÚN CRITERIO TÉCNICO SE CONCLUYE QUE").Bold();
+                                });
+
+                                if (inspection.InspInvestigacion.DatosConclusiones.CumpleRequisitosMinOperacion)
+                                {
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                }
+                                else
+                                {
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes"));
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
+                                });
+
+                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                if (!string.IsNullOrEmpty(inspection.InspInvestigacion.DatosAtendidosPor?.Firma))
+                                {
+                                    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                    //var contents = new StreamContent(new MemoryStream(bytes));
+                                    byte[] data = Convert.FromBase64String(inspection.InspInvestigacion.DatosAtendidosPor.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignLeft().Image(memoryStream);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignLeft().Text("");
+                                }
+                                //if (!string.IsNullOrEmpty(inspection.InspInvestigacion.DatosRepresentLegal?.Firma))
+                                //{
+                                //    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                //    //var contents = new StreamContent(new MemoryStream(bytes));
+                                //    byte[] data = Convert.FromBase64String(inspection.InspInvestigacion.DatosRepresentLegal.Firma.Split("image/png;base64,")[1]);
+                                //    MemoryStream memoryStream = new MemoryStream(data);
+                                //    table.Cell().AlignLeft().Image(memoryStream);
+                                //}
+                                //else
+                                //{
+                                //    table.Cell().AlignLeft().Text("");
+                                //}
+                                
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspInvestigacion.DatosAtendidosPor?.Nombre, inspection.InspInvestigacion.DatosAtendidosPor?.Cedula));
+                                //table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspInvestigacion.DatosRepresentLegal?.Nombre, inspection.InspInvestigacion.DatosRepresentLegal?.Cedula));
+
+                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                if (inspection.InspInvestigacion.DatosConclusiones.LParticipantes != null)
+                                {
+                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+
+                                    foreach (var participant in inspection.InspInvestigacion.DatosConclusiones.LParticipantes)
+                                    {
+                                        table.Cell().Table(tbl =>
+                                        {
+                                            tbl.ColumnsDefinition(columns =>
+                                            {
+                                                columns.RelativeColumn(1);
+                                            });
+                                            if (!string.IsNullOrEmpty(participant.Firma))
+                                            {
+                                                byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
+                                                MemoryStream memoryStream = new MemoryStream(data);
+                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                            }
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+
+                                        });
+                                    }
+                                }
+
+                            });
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspInvestigacion.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+
+                        });
+
+                        page.Footer().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            });
+
+                        });
+
+                    });
+                })
+                  .GeneratePdf();
+
+                Stream stream = new MemoryStream(byteArray);
+
+                return stream;
+            }
+            catch { }
+            return null;
+        }
+        //generamos el pdf del Acta de Apertura o Cambio de Ubicacion de Agencia
+        private async Task<Stream> GenerateAperturaFabricantesMedicamentos(AUD_InspeccionTB inspection)
+        {
+            try
+            {
+                //var inspection = DalService.Get<AUD_InspeccionTB>(InspectionId);
+
+                // code in your main method
+                var byteArray = QuestPDF.Fluent.Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(5, Unit.Millimetre);
+                        page.PageColor(Colors.White);
+                        page.DefaultTextStyle(x => x.FontSize(8));
+                        //page.DefaultTextStyle(x => x.Color("Black"));
+
+                        var path = System.IO.Path.Combine(env.WebRootPath, "img", "pdf", "Header.png");
+
+                        page.Header().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().Image(path);
+                                header.Cell().AlignCenter().Text("");
+                                header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
+                            });
+
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("Departamento de Auditorías de Calidad a Establecimientos Farmacéuticos y No Farmacéuticos");
+                            table.Cell().ColumnSpan(3).AlignCenter().Text("Evaluación Técnica por Apertura a Fabricante de Medicamentos".ToUpper()).Bold();
+                        });
+
+                        page.Content().PaddingVertical(15).Column(column =>
+                        {
+                            column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
+                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
+
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN:{0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO:{0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
+
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.3);
+                                    columns.RelativeColumn((float)0.7);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("GENERALIDADES DE LA FARMACIA Y SOLICITANTE").Bold();
+                                });
+
+                                //Establecimiento
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("NOMBRE DEL ESTABLECIMIENTO");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.Establecimiento.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Provincia");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.Establecimiento.Provincia?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Distrito");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.Establecimiento.Distrito?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Corregimiento");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.Establecimiento.Corregimiento?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ubicación");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.UbicacionEstablecimiento);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Teléfono / Celular");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0} / {1}", inspection.Establecimiento.Telefono1, inspection.Establecimiento.Telefono2));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Correo Electronico");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0}", inspection.Establecimiento.Email));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("REGENTE FARMACEUTICO");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosRegente.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cédula de Identidad Personal");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosRegente.Cedula);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Num. Registro");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosRegente.NumRegistro);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("REPRESENTANTE LEGAL");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosRepresentLegal.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cédula de Identidad Personal");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosRepresentLegal.Cedula);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("PRODUCTOS QUE FABRICA");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.TipoProductos);
+
+                            });
+                                                        
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.4);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PERSONAL").Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PUNTO POR EVALUAR");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text(" ");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIÓN");
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Regente Farmacéutico");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosDocumentacion.RegenteFarmaceutico));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosDocumentacion.RegenteFarmaceuticoDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Responsable de investigación y desarrollo");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosDocumentacion.RespInvDesarrollo));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosDocumentacion.RespInvDesarrolloDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Responsable de producción");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosDocumentacion.RespProduccion));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosDocumentacion.RespProduccionDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Responsable de control de calidad");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosDocumentacion.RespControlCalidad));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosDocumentacion.RespControlCalidadDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Responsable de garantía de la calidad");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosDocumentacion.RespGarantiaCalidad));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosDocumentacion.RespGarantiaCalidadDesc);
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.4);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("INSTALACIONES").Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PUNTO POR EVALUAR");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text(" ");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIÓN");
+                                });
+
+                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Area Externa");
+
+                                //Area Externa
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("El establecimiento se encuentra identificado exteriormente, mediante letrero?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaExterna.Identificada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaExterna.IdentificadaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Está diseñado el edificio de tal manera que facilite la limpieza, mantenimiento y ejecución apropiada de las operaciones?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaExterna.DisenoFacilitaLimpMant));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaExterna.DisenoFacilitaLimpMantDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Las vías de acceso interno a las instalaciones ¿están pavimentadas o construidas de manera tal que el polvo no sea fuente de contaminación en el interior de la planta?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaExterna.ViaAccesoInternoInst));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaExterna.ViaAccesoInternoInstDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existen fuentes de contaminación ambiental en el área circundante al edificio? En caso afirmativo, ¿se adoptan medidas de resguardo? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaExterna.FuentesContaminaAmbiental));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaExterna.FuentesContaminaAmbientalDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Está diseñado y equipado el edificio de tal forma que ofrezca la máxima protección contra el ingreso de insectos y animales? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaExterna.ProteccionContraAnimales));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaExterna.ProteccionContraAnimalesDesc);
+
+                                ///////////////
+                                ///////////////
+                                ///
+                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Area Internas");
+
+                                //Area Internas
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Está diseñado el edificio, de tal manera que permita el flujo de materiales, procesos y personal evitando la confusión, contaminación y errores? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaInterna.DisenoPermiteFlujoMat));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaInterna.DisenoPermiteFlujoMatDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Están las áreas de acceso restringido debidamente delimitadas e identificadas? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaInterna.AreaRetringDelimitada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaInterna.AreaRetringDelimitadaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se utilizan como áreas de paso las áreas de producción, almacenamiento y control de calidad?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaInterna.AreaPasoComoAlmacen));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaInterna.AreaPasoComoAlmacenDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Las condiciones de iluminación, temperatura, humedad y ventilación, para la producción y almacenamiento, están acordes con los requerimientos del producto? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaInterna.CondIlumTemHum));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaInterna.CondIlumTemHumDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Las tuberías, artefactos lumínicos, puntos de ventilación y otros servicios, están diseñados y ubicados, de tal forma que faciliten la limpieza? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaInterna.TuberiaArtefactosFacilLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaInterna.TuberiaArtefactosFacilLimpiezaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Dispone el edificio de extintores adecuados a las áreas y se encuentran estos ubicados en lugares estratégicos? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaInterna.DisponeExtintores));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaInterna.DisponeExtintoresDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Señalización de rutas de evacuación y salidas de emergencia? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaInterna.SenalRutaEvacuacion));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaInterna.SenalRutaEvacuacionDesc);
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.3);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(8).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("AREA DE ALMACENAMIENTO").Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Punto por evaluar".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Materia Prima");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Material de Acondicionamiento");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Producto Terminado");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Producto a Granel");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Inflamables");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Rechazados");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Devoluciones");
+                                });
+
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Están debidamente identificadas? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.Identificada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.Identificada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.Identificada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.Identificada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.Identificada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.Identificada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.Identificada));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Los pisos, paredes, techos de los almacenes están construidos de tal forma que no afectan la calidad de los materiales y productos que se almacenan y permite la fácil limpieza?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.PisoParedesTechosCalidad));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.PisoParedesTechosCalidad));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.PisoParedesTechosCalidad));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.PisoParedesTechosCalidad));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.PisoParedesTechosCalidad));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.PisoParedesTechosCalidad));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.PisoParedesTechosCalidad));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tienen las áreas de almacenamiento suficiente capacidad para permitir el almacenamiento ordenado de las diferentes categorías de materiales y productos?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.CapacidadSuficiente));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.CapacidadSuficiente));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.CapacidadSuficiente));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.CapacidadSuficiente));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.CapacidadSuficiente));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.CapacidadSuficiente));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.CapacidadSuficiente));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Las instalaciones eléctricas están diseñadas y ubicadas de tal forma que facilitan la limpieza? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.InstElectFacilitaLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.InstElectFacilitaLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.InstElectFacilitaLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.InstElectFacilitaLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.InstElectFacilitaLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.InstElectFacilitaLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.InstElectFacilitaLimpieza));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.InstrumentoMedHumTemp));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.InstrumentoMedHumTemp));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.InstrumentoMedHumTemp));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.InstrumentoMedHumTemp));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.InstrumentoMedHumTemp));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.InstrumentoMedHumTemp));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.InstrumentoMedHumTemp));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Para las materias primas y productos que requieren condiciones especiales de enfriamiento, existe cámara fría?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.ExisteCamaraFria));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.ExisteCamaraFria));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.ExisteCamaraFria));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.ExisteCamaraFria));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.ExisteCamaraFria));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.ExisteCamaraFria));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.ExisteCamaraFria));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Están protegidas de las condiciones ambientales las áreas de recepción y despacho? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.ProtegidaCondiAmbientales));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.ProtegidaCondiAmbientales));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.ProtegidaCondiAmbientales));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.ProtegidaCondiAmbientales));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.ProtegidaCondiAmbientales));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.ProtegidaCondiAmbientales));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.ProtegidaCondiAmbientales));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área de despacho de producto terminado?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.ExisteAreaDespachoProd));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.ExisteAreaDespachoProd));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.ExisteAreaDespachoProd));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.ExisteAreaDespachoProd));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.ExisteAreaDespachoProd));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.ExisteAreaDespachoProd));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.ExisteAreaDespachoProd));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Las áreas donde se almacenan materiales y productos sometidos a cuarentena están claramente definidas y marcadas, el acceso a las mismas está limitado sólo al personal autorizado? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.AreaCuarentenaDefinida));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.AreaCuarentenaDefinida));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.AreaCuarentenaDefinida));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.AreaCuarentenaDefinida));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.AreaCuarentenaDefinida));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.AreaCuarentenaDefinida));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.AreaCuarentenaDefinida));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("El muestreo de materia prima se efectúa en área separada o en el área de pesaje o dispensado? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.MuestreoMateriaPrima));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.MuestreoMateriaPrima));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.MuestreoMateriaPrima));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.MuestreoMateriaPrima));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.MuestreoMateriaPrima));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.MuestreoMateriaPrima));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.MuestreoMateriaPrima));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se utilizan materias primas psicotrópicas o estupefacientes? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.MateriaPrimaPsicotropica));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.MateriaPrimaPsicotropica));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.MateriaPrimaPsicotropica));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.MateriaPrimaPsicotropica));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.MateriaPrimaPsicotropica));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.MateriaPrimaPsicotropica));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.MateriaPrimaPsicotropica));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existen áreas separadas, bajo llave, de acceso restringido e identificadas para almacenar materias primas y productos psicotrópicos y estupefacientes?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.AreaBajoLlaveStupefacientes));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.AreaBajoLlaveStupefacientes));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.AreaBajoLlaveStupefacientes));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.AreaBajoLlaveStupefacientes));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.AreaBajoLlaveStupefacientes));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.AreaBajoLlaveStupefacientes));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.AreaBajoLlaveStupefacientes));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuenta el laboratorio con áreas de almacenamiento separadas para productos rechazados, retirados y devueltos? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.AreaProdRechazados));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.AreaProdRechazados));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.AreaProdRechazados));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.AreaProdRechazados));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.AreaProdRechazados));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.AreaProdRechazados));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.AreaProdRechazados));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tienen estas áreas acceso restringido y bajo llave?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.AreaProdRechazadosRestring));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.AreaProdRechazadosRestring));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.AreaProdRechazadosRestring));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.AreaProdRechazadosRestring));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.AreaProdRechazadosRestring));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.AreaProdRechazadosRestring));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.AreaProdRechazadosRestring));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área separada y de acceso restringido para almacenar material impreso (etiquetas, estuches, insertos y envases impresos)? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.AlmacenMaterialImpreso));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.AlmacenMaterialImpreso));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.AlmacenMaterialImpreso));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.AlmacenMaterialImpreso));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.AlmacenMaterialImpreso));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.AlmacenMaterialImpreso));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.AlmacenMaterialImpreso));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Está identificada?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.AlmacenMaterialImpresoIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.AlmacenMaterialImpresoIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.AlmacenMaterialImpresoIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.AlmacenMaterialImpresoIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.AlmacenMaterialImpresoIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.AlmacenMaterialImpresoIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.AlmacenMaterialImpresoIdentif));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área para almacenamiento de productos inflamables y explosivos alejada de las otras instalaciones, es ventilada y cuenta con medidas de seguridad contra incendios o explosiones según la legislación nacional?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMateriaPrima.AlmacenProdInflamables));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaMaterialAcondicionamiento.AlmacenProdInflamables));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoTerminado.AlmacenProdInflamables));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoAGranel.AlmacenProdInflamables));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoInflamable.AlmacenProdInflamables));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaProductoRechazados.AlmacenProdInflamables));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAlmacenamiento.AreaDevoluciones.AlmacenProdInflamables));
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.4);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Área de Dispensado de Materia Prima".ToUpper()).Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Punto por evaluar".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text(" ");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIÓN");
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área separada e identificada, para llevar a cabo las operaciones de dispensación? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaDispensado.Existe));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaDispensado.Existe);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tiene paredes, pisos, techos lisos y curvas sanitarias? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaDispensado.ParedesPisosTechos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaDispensado.ParedesPisosTechosDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuenta con un sistema de inyección y extracción de aire que garanticen la no contaminación cruzada y seguridad del operario? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaDispensado.SistInyExtAire));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaDispensado.SistInyExtAireDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se mide la presión diferencial?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaDispensado.MedPresionDif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaDispensado.MedPresionDifDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se toman las precauciones necesarias cuando se trabaja con materias primas fotosensibles?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaDispensado.PrecausionesNecesarioas));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaDispensado.PrecausionesNecesarioasDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se cuenta con sistemas para la extracción localizada de polvos, cuando aplique?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaDispensado.SistExtracPolvo));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaDispensado.SistExtracPolvoDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área adyacente al área de dispensado, que se encuentre delimitada e identificada en donde se coloquen las materias primas que serán pesadas o medidas y las materias primas dispensadas que se utilizarán en la producción?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaDispensado.AreaAdyacente));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaDispensado.AreaAdyacenteDesc);
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.4);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.3);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Área de Producción").Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Punto por evaluar".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Líquidos");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Semisólidos");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Sólidos");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones");
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuenta con esclusas?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.Exclusas));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.Exclusas));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.Exclusas));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.ExclusasDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("El laboratorio cuenta con áreas de tamaño, diseño y servicios (aire comprimido, agua, luz, ventilación, etc.) para efectuar los procesos de producción que corresponden? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.DisenoTamanoProcesos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.DisenoTamanoProcesos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.DisenoTamanoProcesos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.DisenoTamanoProcesosDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Están identificadas y separadas las áreas para la producción de sólidos, líquidos y semisólidos?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.IndentificadaSeparada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.IndentificadaSeparada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.IndentificadaSeparada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.IndentificadaSeparadaDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tienen paredes, pisos y techos lisos con curvas sanitarias de tal forma que permitan la fácil limpieza y sanitización? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.ParedesPisosTechos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.ParedesPisosTechos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.ParedesPisosTechos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.ParedesPisosTechosDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Las tuberías y puntos de ventilación son de material que permitan su fácil limpieza y están correctamente ubicados?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.TuberiasPtosVentFacilLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.TuberiasPtosVentFacilLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.TuberiasPtosVentFacilLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.TuberiasPtosVentFacilLimpiezaDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Están las tomas de gases y fluidos identificados y no son intercambiables?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.TomasGasesIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.TomasGasesIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.TomasGasesIdentif));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.TomasGasesIdentifDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Disponen de sistemas de inyección y extracción de aire?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.SistInyExtAire));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.SistInyExtAire));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.SistInyExtAire));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.SistInyExtAireDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuentan con equipo de control de aire, que permita el manejo de los diferenciales de presión de acuerdo a los requerimientos de cada área?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.EquipoControlAire));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.EquipoControlAire));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.EquipoControlAire));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.EquipoControlAireDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Las condiciones de temperatura y humedad relativa se ajustan a los requerimientos de los productos que en ella se realizan?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.CondHumTempAjustaReq));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.CondHumTempAjustaReq));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.CondHumTempAjustaReq));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.CondHumTempAjustaReqDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se toman las precauciones necesarias cuando se trabaja con materias primas fotosensibles? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.PrecNecMatFotosensible));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.PrecNecMatFotosensible));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.PrecNecMatFotosensible));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.PrecNecMatFotosensibleDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Están identificadas y separadas las áreas para el empaque primario de sólidos, líquidos y semisólidos? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.AreaEmpaqueIdentSeparada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.AreaEmpaqueIdentSeparada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.AreaEmpaqueIdentSeparada));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.AreaEmpaqueIdentSeparadaDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Están las tomas de gases y fluidos identificados?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.TomasGasesFluidosIdent));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.TomasGasesFluidosIdent));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.TomasGasesFluidosIdent));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.TomasGasesFluidosIdentDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Las instalaciones tienen curvas sanitarias y servicios para el trabajo que allí se ejecuta? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.CurvasSanitarias));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.CurvasSanitarias));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.CurvasSanitarias));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.CurvasSanitariasDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área exclusiva para el lavado de equipos móviles, recipientes y utensilios?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.AreaLavadoEquipMoviles));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.AreaLavadoEquipMoviles));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.AreaLavadoEquipMoviles));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.AreaLavadoEquipMovilesDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área separada, identificada, limpia y ordenada para colocar equipo limpio que no se esté utilizando?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.AreaEquiposLimpios));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.AreaEquiposLimpios));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.AreaEquiposLimpios));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.AreaEquiposLimpiosDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Está el área de empaque secundario separada e identificada? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.AreaEmpaqueSecundario));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.AreaEmpaqueSecundario));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.AreaEmpaqueSecundario));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.AreaEmpaqueSecundarioDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("El área tiene el tamaño de acuerdo con su capacidad y línea de producción, con el fin de evitar confusiones?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.TamanoAdecuado));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.TamanoAdecuado));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.TamanoAdecuado));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.TamanoAdecuadoDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tienen paredes, pisos y techos lisos de tal forma que permitan la fácil limpieza y sanitización?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.FacilLimpiezaSanitizacion));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.FacilLimpiezaSanitizacion));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.FacilLimpiezaSanitizacion));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.FacilLimpiezaSanitizacionDesc));
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Qué sistema utilizan para el tratamiento de agua?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.SisTrataminetoAgua));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.SisTrataminetoAgua));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoSemiSolido.SisTrataminetoAgua));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaProduccion.TipoLiquido.SisTrataminetoAguaDesc));
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.4);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Áreas Auxiliares".ToUpper()).Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Punto por evaluar".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text(" ");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIÓN");
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Están los servicios sanitarios accesibles a las áreas de trabajo y no se comunican directamente con las áreas de producción? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.ServSanitarioAccesible));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.ServSanitarioAccesibleDesc);
+                                
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Los vestidores están comunicados directamente con las áreas de producción?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.VestidoresComunicaProd));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.VestidoresComunicaProdDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Los vestidores y servicios sanitarios están Identificados correctamente");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.VestidoresIdentificados));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.VestidoresIdentificadosDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("La cantidad de servicios sanitarios para hombres y mujeres está de acuerdo con el número de trabajadores? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.CantidadServicioSanitarios));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.CantidadServicioSanitariosDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuentan con lavamanos y duchas provistas de agua?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.LavadosDuchasProvistasAgua));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.LavadosDuchasProvistasAguaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Dispone de espejos, toallas de papel o secador eléctrico de manos, jaboneras con jabón líquido desinfectante y papel higiénico?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.DisponeEspejos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.DisponeEspejosDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Casilleros, zapateras y las bancas necesarias (no de madera)?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.CasillerosZapaterosNecesario));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.CasillerosZapaterosNecesarioDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se prohíbe mantener, guardar, preparar y consumir alimentos en esta área, manteniendo rótulos que indiquen esta disposición?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.ProhibeConsumirAlimentos));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.ProhibeConsumirAlimentosDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se prohíbe fumar en estas áreas (rótulo)?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.ProhibeFumar));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.ProhibeFumarDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuentan con un comedor separado de las demás áreas productivas e identificada, en buenas condiciones de orden y limpieza?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.ComedorSeparado));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.ComedorSeparadoDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuentan con un área de lavandería separada y exclusiva para el lavado y secado de los uniformes utilizados por el personal? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.AreaLavanderia));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.AreaLavanderiaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área destinada para investigación y desarrollo de sus productos?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaAuxiliares.AreaInvestigaciones));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaAuxiliares.AreaInvestigacionesDesc);
+
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.4);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Control de Calidad".ToUpper()).Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Punto por evaluar".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text(" ");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIÓN");
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existe un área destinada para el laboratorio de control de calidad que se encuentra identificada y separada del área de producción?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.Existe));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.ExisteDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tiene paredes lisas que faciliten su limpieza?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.Limpia));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.LimpiaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tiene una campana de extracción para los vapores nocivos?");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.CampanaExtraccion));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.CampanaExtraccionDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tiene suficiente iluminación y ventilación? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.IluminacionVentilacion));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.IluminacionVentilacionDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Dispone de suficiente espacio para evitar confusiones y contaminación cruzada? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EspacioSuficiente));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EspacioSuficienteDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Dispone de area de microbiología? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.AreaMicrobiologia));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.AreaMicrobiologiaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Dispone de area de fisicoquímicas? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.AreaFisicoQuimica));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.AreaFisicoQuimicaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Dispone de area de instrumental? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.AreaInstrumental));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.AreaInstrumentalDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Dispone de area de lavado de cristalería y utensilios? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.AreaLavadoUtensilios));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.AreaLavadoUtensiliosDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existen equipos de seguridad como duchas? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EquipoSegDucha));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EquipoSegDuchaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existen equipos de seguridad como lava ojos ? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EquipoSegLavaOjo));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EquipoSegLavaOjoDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existen equipos de seguridad como extintores? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EquipoSegExtintores));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EquipoSegExtintoresDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Existen equipos de seguridad como elementos de protección? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EquipoSegElemProtec));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosAreaLabCtrCalidad.EquipoSegElemProtecDesc);
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.4);
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Equipos".ToUpper()).Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Punto por evaluar".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text(" ");
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIÓN");
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Está el equipo utilizado en la producción diseñado y construido de acuerdo a la operación que en él se realice? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosEquipos.DisenoConstAcordeOpera));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosEquipos.DisenoConstAcordeOperaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("La ubicación del equipo facilita su limpieza, así como la del área en la que se encuentra? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosEquipos.UbicacionFacilitaLimpieza));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosEquipos.UbicacionFacilitaLimpiezaDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Si el equipo es muy pesado, está diseñado para que se pueda ejecutar su limpieza, sanitización o esterilización en el área de producción? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosEquipos.EquipoPesado));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosEquipos.EquipoPesadoDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Son las superficies de los equipos que tienen contacto directo con las materias primas, productos en proceso, de acero inoxidable de acuerdo a su uso u otro material que no sea reactivo, aditivo y adsorbente? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosEquipos.SuperficieContactDirecto));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosEquipos.SuperficieContactDirectoDesc);
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Los soportes de los equipos que lo requieran son de acero inoxidable u otro material que no contamine? ");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.DatosEquipos.SoporteAceroInox));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosEquipos.SoporteAceroInoxDesc);
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Procedimientos Operativos Estándares:")).Bold();
+                            column.Item().AlignLeft().Text(string.Format("El establecimiento se compromete a que los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos, estén completos y acorde con la Normativa vigente y según las actividades a las que se dedicará el establecimiento.  De igual forma el establecimiento deberá tener a disposición de la Autoridad Reguladora los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos cuando esta lo solicite y al momento de Auditoría de Buenas prácticas de Fabricación."));
+
+                            column.Item().PaddingVertical(10).AlignCenter().Text(string.Format("CRITERIO TÉCNICO")).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el GUÍA DE VERIFICACIÓN DEL REGLAMENTO TECNICO CENTROAMERICANO RTCA 11.03.42:07 REGLAMENTO TÉCNICO SOBRE BUENAS PRÁCTICAS DE MANUFACTURA PARA LA INDUSTRIA FARMACÉUTICA. PRODUCTOS FARMACÉUTICOS Y MEDICAMENTOS DE USO HUMANO, por el cual se reglamentan las Buenas Prácticas de Manufactura de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.Establecimiento.Nombre, inspection.UbicacionEstablecimiento,(inspection.InspAperFabricante.DatosConclusiones.CumpleRequisitosMinOperacion? "SÍ CUMPLE": "NO CUMPLE"), inspection.InspAperFabricante.TipoProductos, inspection.InspAperFabricante.DatosConclusiones.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.InspAperFabricante.DatosConclusiones.FechaFinalizacion?.ToString("MM")??"01")), inspection.InspAperFabricante.DatosConclusiones.FechaFinalizacion?.Year.ToString()??""));
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONES GENERALES").Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosConclusiones.ObservacionesFinales);
+
+                            });
+
+                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricante.DatosConclusiones.ObservacionesFinales);
+
+                            });
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes"));
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
+                                });
+
+                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                if (!string.IsNullOrEmpty(inspection.InspAperFabricante.DatosRegente?.Firma))
+                                {
+                                    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                    //var contents = new StreamContent(new MemoryStream(bytes));
+                                    byte[] data = Convert.FromBase64String(inspection.InspAperFabricante.DatosRegente.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignLeft().Image(memoryStream);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignLeft().Text("");
+                                }
+                                if (!string.IsNullOrEmpty(inspection.InspAperFabricante.DatosRepresentLegal?.Firma))
+                                {
+                                    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                    //var contents = new StreamContent(new MemoryStream(bytes));
+                                    byte[] data = Convert.FromBase64String(inspection.InspAperFabricante.DatosRepresentLegal.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignLeft().Image(memoryStream);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignLeft().Text("");
+                                }
+
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspAperFabricante.DatosRegente?.Nombre, inspection.InspAperFabricante.DatosRegente?.Cedula));
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspAperFabricante.DatosRepresentLegal?.Nombre, inspection.InspAperFabricante.DatosRepresentLegal?.Cedula));
+
+                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                if (inspection.InspAperFabricante.DatosConclusiones.LParticipantes != null)
+                                {
+                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+
+                                    foreach (var participant in inspection.InspAperFabricante.DatosConclusiones.LParticipantes)
+                                    {
+                                        table.Cell().Table(tbl =>
+                                        {
+                                            tbl.ColumnsDefinition(columns =>
+                                            {
+                                                columns.RelativeColumn(1);
+                                            });
+                                            if (!string.IsNullOrEmpty(participant.Firma))
+                                            {
+                                                byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
+                                                MemoryStream memoryStream = new MemoryStream(data);
+                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                            }
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+
+                                        });
+                                    }
+                                }
+
+                            });
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspAperFabricante.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 

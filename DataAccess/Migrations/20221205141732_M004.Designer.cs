@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205141732_M004")]
+    partial class M004
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,10 +199,6 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("AreaControlado")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("AvisoOperaciones")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -521,15 +519,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DatosAreaAuxiliares")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaDispensado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaExterna")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaInterna")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DatosAreaLabCtrCalidad")

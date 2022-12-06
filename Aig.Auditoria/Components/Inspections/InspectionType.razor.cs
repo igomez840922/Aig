@@ -17,7 +17,7 @@ namespace Aig.Auditoria.Components.Inspections
         [Inject]
         IProfileService profileService { get; set; }
 
-       
+
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
@@ -98,6 +98,11 @@ namespace Aig.Auditoria.Components.Inspections
                     case DataModel.Helper.enumAUD_TipoActa.VF:
                         {
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRutinaVigFarmacia = new AUD_InspRutinaVigFarmaciaTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.INV:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspInvestigacion = new AUD_InspInvestigacionTB() };
                             break;
                         }
                     default:

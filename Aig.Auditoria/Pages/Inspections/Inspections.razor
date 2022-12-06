@@ -138,7 +138,7 @@
                                                                 <td>@(DataModel.Helper.Helper.GetDescription(dt.StatusInspecciones))</td>
                                         <td>@dt.FechaInicio.ToString("dd/MM/yyyy hh:mm tt")</td>
                                                                 <td scope="row">@dt.LicenseNumber</td>
-                                                                <td scope="row">@dt.AvisoOperación</td>
+                                                                <td scope="row">@dt.AvisoOperacion</td>
                                         <td >@(dt.Establecimiento?.Nombre??"")</td>
                                         <td style="text-align:right">
                                             <div class="btn-group">
@@ -234,6 +234,11 @@
             {
                 <Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia>
                  break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.INV:
+            {
+                <Aig.Auditoria.Components.Inspections.Investigacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.Investigacion>
+                break;
             }
         default:
         {

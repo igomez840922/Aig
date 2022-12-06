@@ -68,6 +68,7 @@ namespace Aig.Auditoria.Components.Inspections
         {
             if (firstRender)
             {
+                StatusInspecciones = Inspeccion?.StatusInspecciones ?? enum_StatusInspecciones.Pending;
                 await getUserLanguaje();
                 await FetchData();
             }
@@ -90,8 +91,7 @@ namespace Aig.Auditoria.Components.Inspections
         //Fill Data
         protected async Task FetchData()
         {
-            StatusInspecciones = Inspeccion?.StatusInspecciones ?? enum_StatusInspecciones.Pending;
-
+            
             if (lEstablecimientos == null || lEstablecimientos.Count < 1)
             {
                 lEstablecimientos = await establecimientoService.GetAll();

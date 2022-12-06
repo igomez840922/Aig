@@ -29,8 +29,13 @@ namespace DataModel
 		[Required(ErrorMessage = "requerido")]
 		public string NumLicencia { get => numLicencia; set => SetProperty(ref numLicencia, value); }
 
-		//Año
-		private int periodo;
+        //Aviso Operaciones
+        private string avisoOperaciones;
+        [StringLength(250)]
+        public string AvisoOperaciones { get => avisoOperaciones; set => SetProperty(ref avisoOperaciones, value); }
+
+        //Año
+        private int periodo;
 		public int Periodo { get => periodo; set => SetProperty(ref periodo, value); }
 
         //tipo de establecimiento
