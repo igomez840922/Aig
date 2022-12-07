@@ -147,6 +147,12 @@ namespace DataModel
         public virtual AUD_InspInvestigacionTB? InspInvestigacion { get => inspInvestigacion; set => SetProperty(ref inspInvestigacion, value); }
 
 
+        //Gui BPM Fabribacante Medicamento
+        private long? inspGuiBPMFabMedicamentoId;
+        public long? InspGuiBPMFabMedicamentoId { get => inspGuiBPMFabMedicamentoId; set => SetProperty(ref inspGuiBPMFabMedicamentoId, value); }
+        private AUD_InspGuiBPMFabMedicamentoTB? inspGuiBPMFabMedicamento;
+        public virtual AUD_InspGuiBPMFabMedicamentoTB? InspGuiBPMFabMedicamento { get => inspGuiBPMFabMedicamento; set => SetProperty(ref inspGuiBPMFabMedicamento, value); }
+
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
         private List<AttachmentTB> lAttachments;
