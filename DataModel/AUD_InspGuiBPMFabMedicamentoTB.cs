@@ -4532,6 +4532,14 @@ namespace DataModel
         private string nombre;
         public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
+        // provincia
+        private string provincia;
+        public string Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+
+        // corregimiento
+        private string corregimiento;
+        public string Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
+
         // direccion
         private string direccion;
         public string Direccion { get => direccion; set => SetProperty(ref direccion, value); }
@@ -4571,8 +4579,13 @@ namespace DataModel
     {
         public ContenidoTablas()
         {
+            IsHeader=false;
             LSubContenido = new List<SubContenidoTablas>();
         }
+
+        private bool isHeader;
+        public bool IsHeader { get => isHeader; set => SetProperty(ref isHeader, value); }
+
 
         private decimal puntosMax;
         public decimal PuntosMax { get => puntosMax; set => SetProperty(ref puntosMax, value); }
@@ -4592,6 +4605,14 @@ namespace DataModel
         // Evaluacion
         private enumAUD_TipoSeleccion evaluacion;
         public enumAUD_TipoSeleccion Evaluacion { get => evaluacion; set => SetProperty(ref evaluacion, value); }
+
+        // Evaluacion
+        private enumAUD_TipoSeleccion evaluacion2;
+        public enumAUD_TipoSeleccion Evaluacion2 { get => evaluacion2; set => SetProperty(ref evaluacion2, value); }
+
+        // Evaluacion
+        private enumAUD_TipoSeleccion evaluacion3;
+        public enumAUD_TipoSeleccion Evaluacion3 { get => evaluacion3; set => SetProperty(ref evaluacion3, value); }
 
         // Criterio
         private string criterio;
@@ -4614,9 +4635,17 @@ namespace DataModel
         private string titulo;
         public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
 
+        // Criterio
+        private string criterio;
+        public string Criterio { get => criterio; set => SetProperty(ref criterio, value); }
+
         // seleccion
         private enumAUD_TipoSeleccion seleccion;
         public enumAUD_TipoSeleccion Seleccion { get => seleccion; set => SetProperty(ref seleccion, value); }
+
+        // Evaluacion
+        private enumAUD_TipoSeleccion evaluacion;
+        public enumAUD_TipoSeleccion Evaluacion { get => evaluacion; set => SetProperty(ref evaluacion, value); }
 
 
         // descripcion

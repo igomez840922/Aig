@@ -106,6 +106,26 @@ builder.Services.AddScoped<IProductoEstablecimientoService, ProductoEstablecimie
 builder.Services.AddScoped<IActividadEstablecimientoService, ActividadEstablecimientoService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
+//Connection Configurations
+builder.Services.AddServerSideBlazor(options =>
+{
+    options.DetailedErrors = true;
+    options.DisconnectedCircuitMaxRetained = 100;
+    options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);
+    options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
+    options.MaxBufferedUnacknowledgedRenderBatches = 10;
+})
+    .AddHubOptions(options =>
+    {
+        options.ClientTimeoutInterval = TimeSpan.FromSeconds(60);
+        options.EnableDetailedErrors = true;
+        options.HandshakeTimeout = TimeSpan.FromSeconds(10);
+        options.KeepAliveInterval = TimeSpan.FromSeconds(10);
+        options.MaximumParallelInvocationsPerClient = 1;
+        options.MaximumReceiveMessageSize = 32 * 1024;
+        options.StreamBufferCapacity = 10;
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -130,6 +150,8 @@ app.MapControllers();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+app.UseWebSockets();
 
 //Save initial data...
 Aig.Auditoria.Helper.SeedData.UpdateMigrations(app.Services).Wait();

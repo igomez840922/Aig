@@ -132,6 +132,7 @@ app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
+
 //Save initial data...
 Aig.FarmacoVigilancia.Helper.SeedData.UpdateMigrations(app.Services).Wait();
 Aig.FarmacoVigilancia.Helper.SeedData.SeedRoles(app.Services).Wait();

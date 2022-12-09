@@ -91,6 +91,11 @@ namespace DataAccess
             .WithOne(e => e.Inspeccion)
             .HasForeignKey<AUD_InspeccionTB>(e => e.InspGuiBPMFabMedicamentoId);
 
+            modelBuilder.Entity<AUD_InspeccionTB>()
+           .HasOne(e => e.InspAperturaCosmetArtesanal)
+           .WithOne(e => e.Inspeccion)
+           .HasForeignKey<AUD_InspeccionTB>(e => e.InspAperturaCosmetArtesanalId);
+
             ///////////////////////////////////////////
             ///
 
@@ -543,6 +548,33 @@ namespace DataAccess
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
             modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+.Property(e => e.DatosConclusiones)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+
+            ///////////////////////////////////////////
+            ///
+
+            modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
+.Property(e => e.GeneralesEmpresa)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
+
+            modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
+.Property(e => e.Propietario)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
+
+            modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
+.Property(e => e.Documentacion)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
+.Property(e => e.Locales)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
+.Property(e => e.AreaAlmacenamiento)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
 .Property(e => e.DatosConclusiones)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 

@@ -627,7 +627,8 @@
                             </div>
 
                         </div>
-                         <div class="tab-pane" id="cap2" role="tabpanel">
+                        
+                        <div class="tab-pane" id="cap2" role="tabpanel">
                             <h5>@languageContainerService.Keys["ALMACENES"]</h5>
                             
                             <h5>@languageContainerService.Keys["A - Condiciones Externas de los Almacenes"]</h5>
@@ -1444,7 +1445,8 @@
 
 
                          </div>
-                          <div class="tab-pane" id="cap3" role="tabpanel">
+                          
+                        <div class="tab-pane" id="cap3" role="tabpanel">
 
                             <h5>@languageContainerService.Keys["SISTEMAS CRITICOS DE APOYO"]</h5>
 
@@ -1882,7 +1884,7 @@
                                                        
                           </div>
 
-                          <div class="tab-pane" id="cap4" role="tabpanel">
+                         <div class="tab-pane" id="cap4" role="tabpanel">
                             <h5>@languageContainerService.Keys["ÁREAS DE PRODUCCIÓN"]</h5>
 
                             <h5>@languageContainerService.Keys["4.1.A Condiciones Externas"]</h5>
@@ -2843,15 +2845,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <label>@languageContainerService.Keys["Inconformidades o desviaciones detectadas"]</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <InputTextArea rows="8" class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.Inconformidades" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.Inconformidades) />
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
@@ -2866,8 +2859,8 @@
                                                 <label for="password">@languageContainerService.Keys["Representante Legal de la Empresa"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.NombreRepresentanteLegal" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.NombreRepresentanteLegal) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Nombre" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Nombre) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2875,8 +2868,8 @@
                                                 <label for="password">@languageContainerService.Keys["Charge"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CargoRepresentanteLegal" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CargoRepresentanteLegal) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cargo" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cargo) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2884,8 +2877,8 @@
                                                 <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CedulaRepresentanteLegal" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CedulaRepresentanteLegal) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cedula" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cedula) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2914,8 +2907,8 @@
                                                 <label for="password">@languageContainerService.Keys["Regente Farmaceutico"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.NombreRegente" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.NombreRegente) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Nombre" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Nombre) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2923,8 +2916,8 @@
                                                 <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.RegistroRegente" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.RegistroRegente) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.NumRegistro" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.NumRegistro) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2932,8 +2925,8 @@
                                                 <label for="password">@languageContainerService.Keys["Charge"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CargoRegente" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CargoRegente) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cargo" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cargo) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2941,8 +2934,8 @@
                                                 <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CedulaRegente" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CedulaRegente) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cedula" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cedula) />
                                                     </div>
                                                 </div>
                                             </div>

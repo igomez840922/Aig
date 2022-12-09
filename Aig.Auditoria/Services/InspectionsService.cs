@@ -73,6 +73,62 @@ namespace Aig.Auditoria.Services
             var result = DalService.Save(data);
             if(result != null)
             {
+                if (result.InspAperturaCosmetArtesanal != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.GeneralesEmpresa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.Propietario).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.Documentacion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.Locales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.AreaAlmacenamiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
+                if (result.InspGuiBPMFabMedicamento != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AuditoriaSanitaria).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.RepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.RegenteFarmaceutico).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.OtrosFuncionarios).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.GeneralesEmpresa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.RespProduccion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.RespControlCalidad).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.RequisitosLegales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.ClasifActComerciales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.ClasifEstablecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.ClasifEstablecimiento2).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.GenEstructuraOrganizativa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.CondExtAlmacenas).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.CondIntAlmacenas).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AreaRecepMateriaPrima).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AlmacenMateriaPrima).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AlmacenMatAcondicionamineto).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.RecepProductoTerminado).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AlmacenProductoTerminado).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.ProductoDevueltoRechazado).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.DistProductoTerminado).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.ManejoQuejaReclamos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.RetiroProcMercado).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.SistemaInstAgua).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.OsmosisInversa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.SistemaDeIonizacion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.CalibraVerifEquipo).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.Validaciones).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.MantAreaEquipos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AreaProdCondExternas).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AreaProdCondInternas).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AreaOrganizaDocumentacion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AreaDispensionOrdFab).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.FabProdDesinfectante).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.FabPlaguicida).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.FabCosmeticos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AreaEnvasado).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AreaEtiquetadoEmpaque).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.LabControlCalidad).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.AnalisisContrato).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.InspeccionAudito).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiBPMFabMedicamento).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
                 if (result.InspInvestigacion != null)
                 {
                     DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosEstablecimiento).IsModified = true;
