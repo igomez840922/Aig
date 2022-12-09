@@ -23,9 +23,9 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
         IWorkerPersonService workerPersonService { get; set; }
         [Inject]
         ILabsService labsService { get; set; }
-        List<PersonalTrabajadorTB> lPersons { get; set; }
-        List<LaboratorioTB> Labs { get; set; }
-        
+        List<PersonalTrabajadorTB> lPersons { get; set; } = new List<PersonalTrabajadorTB>();
+        List<LaboratorioTB> Labs { get; set; } = new List<LaboratorioTB>();
+
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
 

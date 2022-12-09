@@ -39,14 +39,24 @@ namespace DataModel
         [StringLength(250)]
         public string TerminoWhoArt { get => terminoWhoArt; set => SetProperty(ref terminoWhoArt, value); }
 
-        // SOC
-        private enumFMV_EsaviSOC soc;
-        public enumFMV_EsaviSOC SOC { get => soc; set => SetProperty(ref soc, value); }
+        //// SOC
+        //private enumFMV_EsaviSOC soc;
+        //public enumFMV_EsaviSOC SOC { get => soc; set => SetProperty(ref soc, value); }
+        // SOC: Los valores de la lista varia según las filas 
+        private long? socId;
+        public long? SocId { get => socId; set => SetProperty(ref socId, value); }
+        // SOC: Los valores de la lista varia según las filas 
+        private string soc;
+        public string Soc { get => soc; set => SetProperty(ref soc, value); }
 
-        //Intensidad de la ESAV
-        private string intensidad;
-        [StringLength(250)]
-        public string Intensidad { get => intensidad; set => SetProperty(ref intensidad, value); }
+        ////Intensidad de la ESAV
+        //private string intensidad;
+        //[StringLength(250)]
+        //public string Intensidad { get => intensidad; set => SetProperty(ref intensidad, value); }
+        private long? intensidadEsaviId;
+        public long? IntensidadEsaviId { get => intensidadEsaviId; set => SetProperty(ref intensidadEsaviId, value); }
+        private IntensidadEsaviTB? intensidadEsavi;
+        public virtual IntensidadEsaviTB? IntensidadEsavi { get => intensidadEsavi; set => SetProperty(ref intensidadEsavi, value); }
 
         //Gravedad
         private string gravedad;
@@ -83,15 +93,25 @@ namespace DataModel
         [StringLength(250)]
         public string VacunaComercial { get => vacunaComercial; set => SetProperty(ref vacunaComercial, value); }
 
-        //Descripción de Vacuna
-        private string descripVacuna;
-        [StringLength(500)]
-        public string DescripVacuna { get => descripVacuna; set => SetProperty(ref descripVacuna, value); }
+        ////Descripción de Vacuna
+        //private string descripVacuna;
+        //[StringLength(500)]
+        //public string DescripVacuna { get => descripVacuna; set => SetProperty(ref descripVacuna, value); }
+        private long? tipoVacunaId;
+        public long? TipoVacunaId { get => tipoVacunaId; set => SetProperty(ref tipoVacunaId, value); }
+        private TipoVacunaTB? tipoVacuna;
+        public virtual TipoVacunaTB? TipoVacuna { get => tipoVacuna; set => SetProperty(ref tipoVacuna, value); }
 
-        //Fabricante
-        private string fabricante;
-        [StringLength(250)]
-        public string Fabricante { get => fabricante; set => SetProperty(ref fabricante, value); }
+
+        ////Fabricante
+        //private string fabricante;
+        //[StringLength(250)]
+        //public string Fabricante { get => fabricante; set => SetProperty(ref fabricante, value); }
+        private long? laboratorioId;
+        public long? LaboratorioId { get => laboratorioId; set => SetProperty(ref laboratorioId, value); }
+        private LaboratorioTB? laboratorio;
+        public virtual LaboratorioTB? Laboratorio { get => laboratorio; set => SetProperty(ref laboratorio, value); }
+
 
         //Fabricante
         private string lote;

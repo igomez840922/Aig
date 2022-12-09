@@ -27,6 +27,9 @@ namespace DataModel
         public string TerWhoArt { get => terWhoArt; set => SetProperty(ref terWhoArt, value); }
 
         // SOC: Los valores de la lista varia según las filas 
+        private long? socId;
+        public long? SocId { get => socId; set => SetProperty(ref socId, value); }
+        // SOC: Los valores de la lista varia según las filas 
         private string soc;
         public string Soc { get => soc; set => SetProperty(ref soc, value); }
 

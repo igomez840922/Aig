@@ -22,7 +22,7 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
         IPdfGenerationService pdfGenerationService { get; set; }
         [Parameter]
         public DataModel.FMV_PmrTB Pmr { get; set; }
-        List<PersonalTrabajadorTB> lEvaluators { get; set; }
+        List<PersonalTrabajadorTB> lEvaluators { get; set; } = new List<PersonalTrabajadorTB>();    
 
         bool OpenAddEditProduct { get; set; }=false;
         FMV_PmrProductoTB AddProduct { get; set; } = null;

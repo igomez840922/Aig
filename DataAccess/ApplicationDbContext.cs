@@ -691,11 +691,11 @@ namespace DataAccess
             .Property(e => e.IpsData)
             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_IpsData>(x));
 
-            modelBuilder.Entity<FMV_RamTB>()
-           .HasMany(e => e.LNotificaciones)
-           .WithOne(e => e.Ram)
-           .HasForeignKey(e => e.RamId)
-           .OnDelete(DeleteBehavior.Cascade);
+           // modelBuilder.Entity<FMV_RamTB>()
+           //.HasMany(e => e.LNotificaciones)
+           //.WithOne(e => e.Ram)
+           //.HasForeignKey(e => e.RamId)
+           //.OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<FMV_EsaviTB>()
           .HasMany(e => e.LNotificaciones)
@@ -751,22 +751,59 @@ namespace DataAccess
        .HasForeignKey(e => e.InstitucionId)
        .OnDelete(DeleteBehavior.NoAction);
 
+
+            modelBuilder.Entity<TipoInstitucionTB>()
+     .HasMany(e => e.LRam)
+     .WithOne(e => e.TipoInstitucion)
+     .HasForeignKey(e => e.TipoInstitucionId)
+     .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProvinciaTB>()
+        .HasMany(e => e.LRam)
+        .WithOne(e => e.Provincia)
+        .HasForeignKey(e => e.ProvinciaId)
+        .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<InstitucionDestinoTB>()
+       .HasMany(e => e.LRam)
+       .WithOne(e => e.InstitucionDestino)
+       .HasForeignKey(e => e.InstitucionId)
+       .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<IntensidadEsaviTB>()
+       .HasMany(e => e.LEsaviNotificacion)
+       .WithOne(e => e.IntensidadEsavi)
+       .HasForeignKey(e => e.IntensidadEsaviId)
+       .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<TipoVacunaTB>()
+      .HasMany(e => e.LEsaviNotificacion)
+      .WithOne(e => e.TipoVacuna)
+      .HasForeignKey(e => e.TipoVacunaId)
+      .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<LaboratorioTB>()
+              .HasMany(e => e.LEsaviNotificacion)
+              .WithOne(e => e.Laboratorio)
+              .HasForeignKey(e => e.LaboratorioId)
+              .OnDelete(DeleteBehavior.NoAction);
+
             ///////////////////////////////
             ///
             //JSON Serialization
-            modelBuilder.Entity<FMV_RamNotificacionTB>()
+            modelBuilder.Entity<FMV_RamTB>()
               .Property(e => e.EvaluacionCalidadInfo)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamEvaluacionCalidadInfo>(x));
 
-            modelBuilder.Entity<FMV_RamNotificacionTB>()
+            modelBuilder.Entity<FMV_RamTB>()
               .Property(e => e.EvaluacionCausalidad)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamEvaluacionCausalidad>(x));
 
-            modelBuilder.Entity<FMV_RamNotificacionTB>()
+            modelBuilder.Entity<FMV_RamTB>()
               .Property(e => e.ObservacionInfoNotifica)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamObservacionInfoNotifica>(x));
 
-            modelBuilder.Entity<FMV_RamNotificacionTB>()
+            modelBuilder.Entity<FMV_RamTB>()
               .Property(e => e.AccionesRegulatoria)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamAccionesRegulatoria>(x));
 
@@ -840,9 +877,12 @@ namespace DataAccess
         public virtual DbSet<FMV_EsaviNotificacionTB> FMV_EsaviNotificacion { get; set; }
         public virtual DbSet<FMV_EsaviTB> FMV_Esavi { get; set; }
         public virtual DbSet<FMV_NotaTB> FMV_Nota { get; set; }
+        public virtual DbSet<FMV_SocTB> FMV_Soc { get; set; }
         public virtual DbSet<InstitucionDestinoTB> InstitucionDestino { get; set; }
         public virtual DbSet<LaboratorioTB> Laboratorio { get; set; }
         public virtual DbSet<TipoInstitucionTB> TipoInstitucion { get; set; }
+        public virtual DbSet<IntensidadEsaviTB> IntensidadEsavi { get; set; }
+        public virtual DbSet<TipoVacunaTB> TipoVacuna { get; set; }
 
     }
 }

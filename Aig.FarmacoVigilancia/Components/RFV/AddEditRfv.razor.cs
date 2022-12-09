@@ -20,7 +20,7 @@ namespace Aig.FarmacoVigilancia.Components.RFV
         ILabsService labsService { get; set; }
         [Parameter]
         public DataModel.FMV_RfvTB Rfv { get; set; }
-        List<LaboratorioTB> Labs { get; set; }
+        List<LaboratorioTB> Labs { get; set; } = new List<LaboratorioTB>();
 
         protected async override Task OnInitializedAsync()
         {

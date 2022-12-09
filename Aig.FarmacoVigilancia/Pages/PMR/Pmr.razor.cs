@@ -22,7 +22,7 @@ namespace Aig.FarmacoVigilancia.Pages.PMR
         IWorkerPersonService workerPersonService { get; set; }
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
-        List<PersonalTrabajadorTB> lPersons { get; set; }
+        List<PersonalTrabajadorTB> lPersons { get; set; } = new List<PersonalTrabajadorTB>();
         GenericModel<FMV_PmrTB> dataModel { get; set; } = new GenericModel<FMV_PmrTB>()
         { Data = new FMV_PmrTB() };
 

@@ -364,8 +364,8 @@
                                                             <td>@DataModel.Helper.Helper.GetDescription(dt.Desenlace)</td>
                                                             <td>@dt.EsaviDescripcion</td>
                                                             <td>@dt.TerminoWhoArt</td>
-                                                            <td>@DataModel.Helper.Helper.GetDescription(dt.SOC)</td>
-                                                            <td>@dt.Intensidad</td>
+                                                            <td>@dt.Soc</td>
+                                                            <td>@(string.Format("{0} {1}", dt.IntensidadEsavi?.Nombre ?? "", dt.IntensidadEsavi?.Gravedad ?? ""))</td>
                                                             <td>@dt.Gravedad</td>
                                                             <td>@DataModel.Helper.Helper.GetDescription(dt.OtrosCriterios)</td>
                                                             <td>@dt.ElegibilidadGravedad</td>
@@ -373,8 +373,8 @@
                                                             <td>@dt.ElegibleEvaluacionCausal</td>
                                                             <td>@DataModel.Helper.Helper.GetDescription(dt.ProbabilidadAsociacion)</td>
                                                             <td>@dt.VacunaComercial</td>
-                                                            <td>@dt.DescripVacuna</td>
-                                                            <td>@dt.Fabricante</td>
+                                                            <td>@(dt.TipoVacuna?.Nombre??"")</td>
+                                                            <td>@(dt.Laboratorio?.Nombre??"")</td>
                                                             <td>@dt.Lote</td>
                                                             <td>@(dt.FechaExp?.ToString("dd/MM/yyyy"))</td>
                                                             <td>@dt.RegSanitario</td>

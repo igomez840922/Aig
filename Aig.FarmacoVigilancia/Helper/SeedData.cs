@@ -136,7 +136,6 @@ namespace Aig.FarmacoVigilancia.Helper
                     }
                 }
 
-
                 if (dalService.Count<TipoInstitucionTB>() <= 0)
                 {
                     List<TipoInstitucionTB> ltipoInstitucion = new List<TipoInstitucionTB>();
@@ -415,7 +414,151 @@ namespace Aig.FarmacoVigilancia.Helper
                     lab = new PersonalTrabajadorTB() { NombreCompleto = "Miguel Díaz" , Evaluador = true, Registrador = true, Tramitador = true };
                     dalService.Save(lab);
                 }
-                                
+                if (dalService.Count<FMV_SocTB>() <= 0)
+                {
+                    FMV_SocTB lab = new FMV_SocTB() { Nombre = "Circunstancias sociales" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Embarazo, puerperio y enfermedades perinatales" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Exploraciones complementarias" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Infecciones e infestaciones" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Lesiones traumáticas, intoxicaciones y complicaciones de procedimientos terapéuticos" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Neoplasias benignas, malignas y no especificadas (incl quistes y pólipos)" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Problemas relativos a productos" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Procedimientos médicos y quirúrgicos" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos cardiacos" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos congénitos, familiares y genéticos" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos de la piel y del tejido subcutáneo" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos de la sangre y del sistema linfático" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos del aparato reproductor y de la mama" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos del metabolismo y de la nutrición" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos del oído y del laberinto" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos del sistema inmunológico" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos del sistema nervioso" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos endocrinos" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos gastrointestinales" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos generales y alteraciones en el lugar de administración" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos hepatobiliares" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos musculoesqueléticos y del tejido conjuntivo" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos oculares" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos psiquiátricos" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos renales y urinarios" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos respiratorios, torácicos y mediastínicos" };
+                    dalService.Save(lab);
+                    lab = new FMV_SocTB() { Nombre = "Trastornos vasculares" };
+                    dalService.Save(lab);
+
+                }
+                if (dalService.Count<IntensidadEsaviTB>() <= 0)
+                {
+                    IntensidadEsaviTB lab = new IntensidadEsaviTB() { Nombre = "Ocasiona la  muerte", Gravedad= "Grave" };
+                    dalService.Save(lab);
+                    lab = new IntensidadEsaviTB() { Nombre = "Pueda poner en peligro la vida", Gravedad = "Grave" };
+                    dalService.Save(lab);
+                    lab = new IntensidadEsaviTB() { Nombre = "Requiere o prolonga una hospitalización", Gravedad = "Grave" };
+                    dalService.Save(lab);
+                    lab = new IntensidadEsaviTB() { Nombre = "Produce una anomalía congénita o defecto al nacer", Gravedad = "Grave" };
+                    dalService.Save(lab);
+                    lab = new IntensidadEsaviTB() { Nombre = "Provoca una incapacidad persistente significativa", Gravedad = "Grave" };
+                    dalService.Save(lab);
+                    lab = new IntensidadEsaviTB() { Nombre = "Enfermedad o síndrome médicamente significativo o importante", Gravedad = "Grave" };
+                    dalService.Save(lab);
+                    lab = new IntensidadEsaviTB() { Nombre = "Interfiere con las actividades habituales. Requieren intervención o tratamiento médico", Gravedad = "Moderada" };
+                    dalService.Save(lab);
+                    lab = new IntensidadEsaviTB() { Nombre = "Fácilmente tolerado. No requieren terapia ni intervención médica.", Gravedad = "Leve" };
+                    dalService.Save(lab);
+
+                }
+                if (dalService.Count<TipoVacunaTB>() <= 0)
+                {
+                    TipoVacunaTB lab = new TipoVacunaTB() { Nombre = "Vacuna de ARNm frente a COVID‑19 (con nucleósidos modificados)"};
+                    dalService.Save(lab); 
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna frente a COVID-19 (ChAdOx1-S [recombinante])" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna adsorbida de toxoide tetánico, toxoide diftérico reducido y pertussis acelular" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antidiftérica y antitetánica adsorbida" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antidiftérica, antitetánica, antitosferina (acelular, compuesta), antihepatitis B (ADN recombinante), antipoliomielítica (inactivada) y anti-Haemophilus influenzae tipo B (conjugada, adsorbida)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antidiftérica, antitetánica, antitosferina (acelular, compuesta), antipoliomielítica (inactivada) y anti-Haemophilus influenzae tipo B (conjugada, adsorbida)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antidiftérica, antitetánica, antitosferina (acelular, compuesta), y antipoliomielítica (inactivada)." };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antigripal inactivada fraccionada tetravalente" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antihepatitis A (inactivada) y Antígeno de superficie de Hepatitis B (ADNr - adsorbida)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antimeningocócica tetravalente de antígenos conjugados " };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antimeningocócica  polisacárida (serogrupos A,C y W-135) Conjugada con toxoide diftérico" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antineumocócica polisacárida (13-valente)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antineumocócica polisacárida (23-valente)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antirrábica, celular inactivada" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna antitifoídica (antigeno purificado)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna conjugada   de   polisacárido   neumocócico   y   proteína   D   de Haemophilus influenzae No Tipificable (NTHi), adsorbido" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna contra Hepatitis A (Virus completo inactivado)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna contra Hepatitis B (Antígeno Purificado)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna de virus vivos atenuados contra rotavirus" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna de virus vivos atenuados contra sarampión, parotiditis y rubéola" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna de virus vivos atenuados contra sarampión, parotiditis, rubéola y varicela" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna de virus vivos atenuados de varicela " };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna del virus vivo atenuado del Bacillus Calmette-Guérin (BCG)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna pentavalente de virus vivos (ADN recombinante) contra Rotavirus" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna recombinante bivalente contra el virus del papiloma humano, Tipos 16 y 18" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna Recombinante de Meningococo del Grupo B" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna recombinante nueve valente contra el virus del papiloma humano, Tipos (6, 11, 16, 18, 31, 33, 45, 52, y 58)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna recombinante tetravalente contra el virus del papiloma humano, Tipos (6, 11, 16 y 18)" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna tetravalente de virus vivos atenuados (ADN recombinante) contra dengue" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna trivalente contra el virus de la poliomielitis inactivada" };
+                    dalService.Save(lab);
+                    lab = new TipoVacunaTB() { Nombre = "Vacuna viva atenuada contra la fiebre amarilla " };
+                    dalService.Save(lab);
+
+
+                }
 
             }
 

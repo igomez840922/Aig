@@ -58,6 +58,9 @@ namespace DataModel
         private List<FMV_RfvTB> lRfv;
         public virtual List<FMV_RfvTB> LRfv { get => lRfv; set => SetProperty(ref lRfv, value); }
 
+        private List<FMV_EsaviNotificacionTB> lEsaviNotificacion;
+        public virtual List<FMV_EsaviNotificacionTB> LEsaviNotificacion { get => lEsaviNotificacion; set => SetProperty(ref lEsaviNotificacion, value); }
 
+        
     }
 }

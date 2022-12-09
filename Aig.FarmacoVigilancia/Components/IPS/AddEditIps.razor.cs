@@ -22,8 +22,8 @@ namespace Aig.FarmacoVigilancia.Components.IPS
         ILabsService labsService { get; set; }
         [Parameter]
         public DataModel.FMV_IpsTB Ips { get; set; }
-        List<PersonalTrabajadorTB> lPersons { get; set; }
-        List<LaboratorioTB> Labs { get; set; }
+        List<PersonalTrabajadorTB> lPersons { get; set; } = new List<PersonalTrabajadorTB>();
+        List<LaboratorioTB> Labs { get; set; } = new List<LaboratorioTB>();
 
         protected async override Task OnInitializedAsync()
         {
