@@ -169,8 +169,8 @@
                                     <label>@languageContainerService.Keys["Vigente hasta"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.FechaExpLicOperacion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.FechaExpLicOperacion) />
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.FechaExpLicOperacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                   <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosGeneralesFarmacia.FechaExpLicOperacion) />
                                         </div>
                                     </div>
                                 </div>
@@ -2012,8 +2012,6 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
-                                            @*<InputDate class="form-control" @bind-Value="Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.FechaFinalizacion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.DatosConclusiones.FechaFinalizacion) />*@
                                         </div>
                                     </div>
                                 </div>

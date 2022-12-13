@@ -4,11 +4,12 @@ using BlazorComponentBus;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Globalization;
 
 namespace Aig.FarmacoVigilancia.Components.ESAVI
 {
     public partial class AddEdit
-    {
+    {        
         [Inject]
         IESAVIService esaviService { get; set; }
         [Inject]

@@ -73,6 +73,26 @@ namespace Aig.Auditoria.Services
             var result = DalService.Save(data);
             if(result != null)
             {
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.GeneralesEmpresa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRegente).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.GenEstablecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaRecepProductos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenamiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaProdDevueltos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaDespachoProductos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmCadenaFrio).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaDesperdicio).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaSustanciasControladas).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Procedimientos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Transporte).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.ActividadDistribucion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.InventarioMedicamento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
                 if (result.InspAperturaCosmetArtesanal != null)
                 {
                     DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.GeneralesEmpresa).IsModified = true;

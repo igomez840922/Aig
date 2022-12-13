@@ -68,5 +68,7 @@ namespace DataModel
         private string profesion;
         public string Profesion { get => profesion; set => SetProperty(ref profesion, value); }
 
+        
+
     }
 }

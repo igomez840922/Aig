@@ -34,7 +34,8 @@
                                         <label>@languageContainerService.Keys["ReceptionDateCNFV"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Alerta.FechaRecepcion" />
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Alerta.FechaRecepcion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+
                                                 <ValidationMessage For=@(() => Alerta.FechaRecepcion) />
                                             </div>
                                         </div>
@@ -43,7 +44,7 @@
                                         <label>@languageContainerService.Keys["EvaluatorDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Alerta.FechaEntregaEvaluador" />
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Alerta.FechaEntregaEvaluador" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Alerta.FechaEntregaEvaluador) />
                                             </div>
                                         </div>
@@ -52,7 +53,7 @@
                                         <label>@languageContainerService.Keys["EvaluationDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Alerta.FechaEvaluacion" />
+                                               <RadzenDatePicker TValue="DateTime?" @bind-Value="Alerta.FechaEvaluacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Alerta.FechaEvaluacion) />
                                             </div>
                                         </div>

@@ -21,7 +21,7 @@
                                 <label>@languageContainerService.Keys["Date"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputDate class="form-control" @bind-Value="Nota.Fecha" />
+                                        <RadzenDatePicker TValue="DateTime?" @bind-Value="Nota.Fecha" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                         <ValidationMessage For=@(() => Nota.Fecha) />
                                     </div>
                                 </div>

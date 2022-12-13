@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221211005831_M017")]
+    partial class M017
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -699,9 +701,6 @@ namespace DataAccess.Migrations
                     b.Property<long?>("InspRetiroRetencionId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("InspRutinaVigAgenciaId")
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("InspRutinaVigFarmaciaId")
                         .HasColumnType("bigint");
 
@@ -791,10 +790,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("InspRetiroRetencionId")
                         .IsUnique()
                         .HasFilter("[InspRetiroRetencionId] IS NOT NULL");
-
-                    b.HasIndex("InspRutinaVigAgenciaId")
-                        .IsUnique()
-                        .HasFilter("[InspRutinaVigAgenciaId] IS NOT NULL");
 
                     b.HasIndex("InspRutinaVigFarmaciaId")
                         .IsUnique()
@@ -1241,88 +1236,6 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AUD_InspRetiroRetencion");
-                });
-
-            modelBuilder.Entity("DataModel.AUD_InspRutinaVigAgenciaTB", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<string>("ActividadDistribucion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaAlmCadenaFrio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaAlmacenamiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaDespachoProductos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaDesperdicio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaProdDevueltos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaRecepProductos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaSustanciasControladas")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DatosConclusiones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosRegente")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosRepresentLegal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("GenEstablecimiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GeneralesEmpresa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("InventarioAlAzar")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InventarioCompleto")
-                        .HasColumnType("int");
-
-                    b.Property<string>("InventarioMedicamento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Procedimientos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Transporte")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AUD_InspRutinaVigAgenciaTB");
                 });
 
             modelBuilder.Entity("DataModel.AUD_InspRutinaVigFarmaciaTB", b =>
@@ -3644,10 +3557,6 @@ namespace DataAccess.Migrations
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspRetiroRetencionId");
 
-                    b.HasOne("DataModel.AUD_InspRutinaVigAgenciaTB", "InspRutinaVigAgencia")
-                        .WithOne("Inspeccion")
-                        .HasForeignKey("DataModel.AUD_InspeccionTB", "InspRutinaVigAgenciaId");
-
                     b.HasOne("DataModel.AUD_InspRutinaVigFarmaciaTB", "InspRutinaVigFarmacia")
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspRutinaVigFarmaciaId");
@@ -3669,8 +3578,6 @@ namespace DataAccess.Migrations
                     b.Navigation("InspInvestigacion");
 
                     b.Navigation("InspRetiroRetencion");
-
-                    b.Navigation("InspRutinaVigAgencia");
 
                     b.Navigation("InspRutinaVigFarmacia");
                 });
@@ -4098,11 +4005,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Inspeccion");
 
                     b.Navigation("LProductos");
-                });
-
-            modelBuilder.Entity("DataModel.AUD_InspRutinaVigAgenciaTB", b =>
-                {
-                    b.Navigation("Inspeccion");
                 });
 
             modelBuilder.Entity("DataModel.AUD_InspRutinaVigFarmaciaTB", b =>

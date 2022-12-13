@@ -78,7 +78,7 @@
                                 <label for="password">@languageContainerService.Keys["NotificationDate"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputDate class="form-control" @bind-Value="Rfv.FechaNotificacion" />
+                                        <RadzenDatePicker TValue="DateTime?" @bind-Value="Rfv.FechaNotificacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                         <ValidationMessage For=@(() => Rfv.FechaNotificacion) />
                                     </div>
                                 </div>

@@ -32,7 +32,7 @@
                                         <label>@languageContainerService.Keys["EntryDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Pmr.FechaEntrada" />
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Pmr.FechaEntrada" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Pmr.FechaEntrada) />
                                             </div>
                                         </div>
@@ -41,7 +41,7 @@
                                         <label>@languageContainerService.Keys["TramitDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Pmr.FechaTramite" />
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Pmr.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Pmr.FechaTramite) />
                                             </div>
                                         </div>
@@ -50,7 +50,7 @@
                                         <label>@languageContainerService.Keys["EvaluatorDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Pmr.FechaEntregaEvaluador" />
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Pmr.FechaEntregaEvaluador" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Pmr.FechaEntregaEvaluador) />
                                             </div>
                                         </div>

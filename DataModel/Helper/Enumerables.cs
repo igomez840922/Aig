@@ -67,9 +67,9 @@ namespace DataModel.Helper
         BPMFM = 13,
         [Description("Guía BPM – Acondicionadores de Medicamentos")]
         BPMAM = 14,
-        [Description("Guía BPM – Fabricantes Cosméticos y Desinfectantes")]
+        [Description("Guía BPM – Fabricantes de Cosméticos y Desinfectantes")]
         BPMCD = 15,
-        [Description("Guía BPM – Fabricantes de Naturales Medicinales")]
+        [Description("Guía BPM – Fabricantes de Productos Naturales Medicinales")]
         BPMMN = 16,
         [Description("Guía de BPA")]
         BPA = 17,

@@ -117,8 +117,8 @@
                                     <label>@languageContainerService.Keys["Fecha de Evaluación"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Notification.FechaEvaluacion" />
-                                            <ValidationMessage For=@(() => Notification.FechaEvaluacion) />
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.FechaEvaluacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.FechaEvaluacion) />
                                         </div>
                                     </div>
                                 </div>
@@ -146,8 +146,8 @@
                                     <label>@languageContainerService.Keys["Fecha de Tratamiento"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Notification.EvaluacionCalidadInfo.FechaTratamiento" />
-                                            <ValidationMessage For=@(() => Notification.EvaluacionCalidadInfo.FechaTratamiento) />
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.EvaluacionCalidadInfo.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.EvaluacionCalidadInfo.FechaTratamiento) />
                                         </div>
                                     </div>
                                 </div>
@@ -155,8 +155,8 @@
                                     <label>@languageContainerService.Keys["Fecha de RAM"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Notification.EvaluacionCalidadInfo.FechaRam" />
-                                            <ValidationMessage For=@(() => Notification.EvaluacionCalidadInfo.FechaRam) />
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.EvaluacionCalidadInfo.FechaRam" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.EvaluacionCalidadInfo.FechaRam) />
                                         </div>
                                     </div>
                                 </div>

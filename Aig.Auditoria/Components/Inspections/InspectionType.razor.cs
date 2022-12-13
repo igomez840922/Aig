@@ -100,6 +100,11 @@ namespace Aig.Auditoria.Components.Inspections
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRutinaVigFarmacia = new AUD_InspRutinaVigFarmaciaTB() };
                             break;
                         }
+                    case DataModel.Helper.enumAUD_TipoActa.VA:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRutinaVigAgencia = new AUD_InspRutinaVigAgenciaTB() };
+                            break;
+                        }
                     case DataModel.Helper.enumAUD_TipoActa.INV:
                         {
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspInvestigacion = new AUD_InspInvestigacionTB() };
@@ -113,6 +118,11 @@ namespace Aig.Auditoria.Components.Inspections
                     case DataModel.Helper.enumAUD_TipoActa.AECA:
                         {
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperturaCosmetArtesanal = new AUD_InspAperturaCosmetArtesanalTB () };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.BPMMN:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabNatMedicina = new AUD_InspGuiBPMFabNatMedicinaTB() };
                             break;
                         }
                     default:

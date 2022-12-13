@@ -112,6 +112,9 @@ namespace DataModel
         public string FirmaRegente { get => firmaRegente; set => SetProperty(ref firmaRegente, value); }
 
 
+        //Se re-programará otra inspección para verificar observaciones. 
+        private bool reprogramaInspeccion;
+        public bool ReprogramaInspeccion { get => reprogramaInspeccion; set => SetProperty(ref reprogramaInspeccion, value); }
 
     }
 }

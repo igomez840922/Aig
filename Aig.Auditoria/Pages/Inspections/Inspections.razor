@@ -95,14 +95,14 @@
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["FromDate"]</label>
                                                 <div class="form-line">
-                                                    <InputDate class="form-control" @bind-Value="dataModel.FromDate" @oninput="(e)=>{ try{dataModel.FromDate = DateTime.Parse((string)e.Value);}catch{dataModel.FromDate =null;} OnFilter();}" />
+                                                    <RadzenDatePicker TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                 </div>
 
                                             </div>
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["ToDate"]</label>
                                                 <div class="form-line">
-                                                    <InputDate class="form-control" @bind-Value="dataModel.ToDate" @oninput="(e)=>{ try{dataModel.ToDate = DateTime.Parse((string)e.Value);}catch{dataModel.ToDate =null;} OnFilter();}" />
+                                                    <RadzenDatePicker TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                 </div>
 
                                             </div>
@@ -235,6 +235,11 @@
                 <Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia>
                  break;
             }
+        case DataModel.Helper.enumAUD_TipoActa.VA:
+            {
+                <Aig.Auditoria.Components.Inspections.RutinaVigilanciaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaAgencia>
+                break;
+            }
         case DataModel.Helper.enumAUD_TipoActa.INV:
             {
                 <Aig.Auditoria.Components.Inspections.Investigacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.Investigacion>
@@ -248,6 +253,11 @@
         case DataModel.Helper.enumAUD_TipoActa.AECA:
             {
                 <Aig.Auditoria.Components.Inspections.AperturaCosmetArtesanal Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCosmetArtesanal>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.BPMMN:
+            {
+                <Aig.Auditoria.Components.Inspections.GuiaBPMProductosNatMedicinales Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.GuiaBPMProductosNatMedicinales>
                 break;
             }
         default:

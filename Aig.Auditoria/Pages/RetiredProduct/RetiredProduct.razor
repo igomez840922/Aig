@@ -75,14 +75,14 @@
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["FromExpDate"]</label>
                                                 <div class="form-line">
-                                                    <InputDate class="form-control" @bind-Value="dataModel.FromDate" @oninput="(e)=>{ try{dataModel.FromDate = DateTime.Parse((string)e.Value);}catch{dataModel.FromDate =null;} OnFilter();}" />
+                                                    <RadzenDatePicker TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                 </div>
 
                                             </div>
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["ToExpDate"]</label>
                                                 <div class="form-line">
-                                                    <InputDate class="form-control" @bind-Value="dataModel.ToDate" @oninput="(e)=>{ try{dataModel.ToDate = DateTime.Parse((string)e.Value);}catch{dataModel.ToDate =null;} OnFilter();}" />
+                                                    <RadzenDatePicker TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                 </div>
 
                                             </div>

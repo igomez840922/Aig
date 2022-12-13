@@ -105,6 +105,13 @@ namespace DataModel
         private string paisResidencia;
         public string PaisResidencia { get => paisResidencia; set => SetProperty(ref paisResidencia, value); }
 
+        //Otras Funciones
+        private string otrasFunciones;
+        public string OtrasFunciones { get => otrasFunciones; set => SetProperty(ref otrasFunciones, value); }
+
+        private enumAUD_TipoSeleccion presenteEnLocal;
+        public enumAUD_TipoSeleccion PresenteEnLocal { get => presenteEnLocal; set => SetProperty(ref presenteEnLocal, value); }
 
     }
+
 }

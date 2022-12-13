@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221213041251_M018")]
+    partial class M018
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1251,41 +1253,8 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("ActividadDistribucion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaAlmCadenaFrio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaAlmacenamiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaDespachoProductos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaDesperdicio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaProdDevueltos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaRecepProductos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaSustanciasControladas")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DatosConclusiones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosRegente")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosRepresentLegal")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
@@ -1296,26 +1265,11 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
-                    b.Property<string>("GenEstablecimiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GeneralesEmpresa")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("InventarioAlAzar")
                         .HasColumnType("int");
 
                     b.Property<int>("InventarioCompleto")
                         .HasColumnType("int");
-
-                    b.Property<string>("InventarioMedicamento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Procedimientos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Transporte")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");

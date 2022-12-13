@@ -158,6 +158,18 @@ namespace DataModel
         private AUD_InspAperturaCosmetArtesanalTB? inspAperturaCosmetArtesanal;
         public virtual AUD_InspAperturaCosmetArtesanalTB? InspAperturaCosmetArtesanal { get => inspAperturaCosmetArtesanal; set => SetProperty(ref inspAperturaCosmetArtesanal, value); }
 
+        //Fabricantes Naturales medicinales
+        private long? inspGuiBPMFabNatMedicinaId;
+        public long? InspGuiBPMFabNatMedicinaId { get => inspGuiBPMFabNatMedicinaId; set => SetProperty(ref inspGuiBPMFabNatMedicinaId, value); }
+        private AUD_InspGuiBPMFabNatMedicinaTB? inspGuiBPMFabNatMedicina;
+        public virtual AUD_InspGuiBPMFabNatMedicinaTB? InspGuiBPMFabNatMedicina { get => inspGuiBPMFabNatMedicina; set => SetProperty(ref inspGuiBPMFabNatMedicina, value); }
+
+
+        //Rutina o Vigilancia de Agencia
+        private long? inspRutinaVigAgenciaId;
+        public long? InspRutinaVigAgenciaId { get => inspRutinaVigAgenciaId; set => SetProperty(ref inspRutinaVigAgenciaId, value); }
+        private AUD_InspRutinaVigAgenciaTB? inspRutinaVigAgencia;
+        public virtual AUD_InspRutinaVigAgenciaTB? InspRutinaVigAgencia { get => inspRutinaVigAgencia; set => SetProperty(ref inspRutinaVigAgencia, value); }
 
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.

@@ -6,11 +6,15 @@ using BlazorDownloadFile;
 using Blazored.LocalStorage;
 using DataAccess;
 using DataModel;
+using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Radzen.Blazor;
+using System.Globalization;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -141,5 +145,11 @@ Aig.FarmacoVigilancia.Helper.SeedData.UpdateMigrations(app.Services).Wait();
 Aig.FarmacoVigilancia.Helper.SeedData.SeedRoles(app.Services).Wait();
 Aig.FarmacoVigilancia.Helper.SeedData.SeedUsers(app.Services).Wait();
 Aig.FarmacoVigilancia.Helper.SeedData.SeedFirstData(app.Services).Wait();
+
+
+//cultura en español
+CultureInfo.CurrentCulture = new CultureInfo("es");
+CultureInfo.CurrentUICulture = new CultureInfo("es");
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es");
 
 app.Run();
