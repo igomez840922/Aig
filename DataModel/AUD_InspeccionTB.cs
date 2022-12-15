@@ -146,11 +146,11 @@ namespace DataModel
         private AUD_InspInvestigacionTB? inspInvestigacion;
         public virtual AUD_InspInvestigacionTB? InspInvestigacion { get => inspInvestigacion; set => SetProperty(ref inspInvestigacion, value); }
 
-        //Gui BPM Fabribacante Medicamento
-        private long? inspGuiBPMFabMedicamentoId;
-        public long? InspGuiBPMFabMedicamentoId { get => inspGuiBPMFabMedicamentoId; set => SetProperty(ref inspGuiBPMFabMedicamentoId, value); }
-        private AUD_InspGuiBPMFabCosmeticoMedTB? inspGuiBPMFabMedicamento;
-        public virtual AUD_InspGuiBPMFabCosmeticoMedTB? InspGuiBPMFabMedicamento { get => inspGuiBPMFabMedicamento; set => SetProperty(ref inspGuiBPMFabMedicamento, value); }
+        //Gui BPM Fabribacante Cosmetico Medicamento
+        private long? inspGuiBPMFabCosmeticoMedId;
+        public long? InspGuiBPMFabCosmeticoMedId { get => inspGuiBPMFabCosmeticoMedId; set => SetProperty(ref inspGuiBPMFabCosmeticoMedId, value); }
+        private AUD_InspGuiBPMFabCosmeticoMedTB? inspGuiBPMFabCosmeticoMed;
+        public virtual AUD_InspGuiBPMFabCosmeticoMedTB? InspGuiBPMFabCosmeticoMed { get => inspGuiBPMFabCosmeticoMed; set => SetProperty(ref inspGuiBPMFabCosmeticoMed, value); }
 
         //Apertura Cosméticos Artesanales
         private long? inspAperturaCosmetArtesanalId;

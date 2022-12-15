@@ -103,9 +103,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
                                                     {
                                                         <tr>
                                                             <td scope="row">@dt.NombreCompleto</td>
@@ -137,8 +137,8 @@
                                     <label>@languageContainerService.Keys["FullName"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Nombre" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Nombre) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Nombre) />
                                         </div>
                                     </div>
                                 </div>
@@ -146,8 +146,8 @@
                                     <label>@languageContainerService.Keys["IdentificationCard"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cedula" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cedula) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Cedula) />
                                         </div>
                                     </div>
                                 </div>   
@@ -155,8 +155,8 @@
                                     <label>@languageContainerService.Keys["Num. Registro"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.NumRegistro" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.NumRegistro) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.NumRegistro" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.NumRegistro) />
                                         </div>
                                     </div>
                                 </div>                            
@@ -168,8 +168,8 @@
                                     <label>@languageContainerService.Keys["FullName"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Nombre" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Nombre) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Nombre) />
                                         </div>
                                     </div>
                                 </div>
@@ -177,8 +177,8 @@
                                     <label>@languageContainerService.Keys["IdentificationCard"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cedula" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cedula) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Cedula) />
                                         </div>
                                     </div>
                                 </div>    
@@ -186,8 +186,8 @@
                                     <label>@languageContainerService.Keys["Num. Registro"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.NumRegistro" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.NumRegistro) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.NumRegistro" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.NumRegistro) />
                                         </div>
                                     </div>
                                 </div>                                 
@@ -214,9 +214,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.OtrosFuncionarios.LPersona != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.OtrosFuncionarios.LPersona)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona)
                                                     {
                                                         <tr>
                                                             <td scope="row">@dt.Nombre</td>
@@ -262,8 +262,8 @@
                                     <label>@languageContainerService.Keys["Ciudad"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Ciudad" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Ciudad) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Ciudad" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Ciudad) />
                                         </div>
                                     </div>
                                 </div>
@@ -289,8 +289,8 @@
                                     <label>@languageContainerService.Keys["Correo"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Email" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Email) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Email" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Email) />
                                         </div>
                                     </div>
                                 </div>
@@ -302,8 +302,8 @@
                                     <label>@languageContainerService.Keys["FullName"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RespProduccion.Nombre" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RespProduccion.Nombre) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RespProduccion.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RespProduccion.Nombre) />
                                         </div>
                                     </div>
                                 </div>
@@ -311,8 +311,8 @@
                                     <label>@languageContainerService.Keys["IdentificationCard"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RespProduccion.Cedula" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RespProduccion.Cedula) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RespProduccion.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RespProduccion.Cedula) />
                                         </div>
                                     </div>
                                 </div>    
@@ -320,8 +320,8 @@
                                     <label>@languageContainerService.Keys["Profesión"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RespProduccion.Profesion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RespProduccion.Profesion) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RespProduccion.Profesion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RespProduccion.Profesion) />
                                         </div>
                                     </div>
                                 </div>                                 
@@ -333,8 +333,8 @@
                                     <label>@languageContainerService.Keys["FullName"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RespControlCalidad.Nombre" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RespControlCalidad.Nombre) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Nombre) />
                                         </div>
                                     </div>
                                 </div>
@@ -342,8 +342,8 @@
                                     <label>@languageContainerService.Keys["IdentificationCard"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RespControlCalidad.Cedula" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RespControlCalidad.Cedula) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Cedula) />
                                         </div>
                                     </div>
                                 </div>    
@@ -351,8 +351,8 @@
                                     <label>@languageContainerService.Keys["Profesión"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RespControlCalidad.Profesion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RespControlCalidad.Profesion) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Profesion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Profesion) />
                                         </div>
                                     </div>
                                 </div>                                 
@@ -374,10 +374,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.RequisitosLegales.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.RequisitosLegales.LContenido != null)
                                                 {
                                                     var i = 0;
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.RequisitosLegales.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.RequisitosLegales.LContenido)
                                                     {
                                                         i++;
                                                         <tr>
@@ -408,8 +408,8 @@
                                     <label>@languageContainerService.Keys[" "]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputTextArea rows="6" class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.Observaciones" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.Observaciones) />
+                                            <InputTextArea rows="6" class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.Observaciones" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.Observaciones) />
                                         </div>
                                     </div>
                                 </div>
@@ -419,13 +419,13 @@
                                     <label for="password">@languageContainerService.Keys["¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.ProcesoVigilanciaSanit" class="form-control">
+                                            <InputSelect @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.ProcesoVigilanciaSanit" class="form-control">
                                                 @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.ProcesoVigilanciaSanit) />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.ProcesoVigilanciaSanit) />
                                         </div>
                                     </div>
                                 </div>
@@ -433,8 +433,8 @@
                                     <label>@languageContainerService.Keys["Fecha de la última visita"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.FechaUltimaVista" ShowTime="false" HourFormat="12" DateFormat="dd/MM/yyyy" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.FechaUltimaVista) />
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.FechaUltimaVista" ShowTime="false" HourFormat="12" DateFormat="dd/MM/yyyy" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.FechaUltimaVista) />
                                         </div>
                                     </div>
                                 </div>
@@ -453,9 +453,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.ClasifActComerciales.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.ClasifActComerciales.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.ClasifActComerciales.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.ClasifActComerciales.LContenido)
                                                     {
                                                         <tr>
                                                             <td scope="row">@dt.Titulo</td>
@@ -489,9 +489,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.ClasifEstablecimiento.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.ClasifEstablecimiento.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento.LContenido)
                                                     {
                                                         <tr>
                                                             <td scope="row">@dt.Titulo</td>
@@ -524,9 +524,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.ClasifEstablecimiento2.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento2.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.ClasifEstablecimiento2.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento2.LContenido)
                                                     {
                                                         <tr>
                                                             <td scope="row">@dt.Titulo</td>
@@ -571,9 +571,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.GenEstructuraOrganizativa.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.GenEstructuraOrganizativa.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.GenEstructuraOrganizativa.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.GenEstructuraOrganizativa.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -649,9 +649,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.CondExtAlmacenas.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.CondExtAlmacenas.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.CondExtAlmacenas.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.CondExtAlmacenas.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -721,9 +721,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.CondIntAlmacenas.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.CondIntAlmacenas.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.CondIntAlmacenas.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.CondIntAlmacenas.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -793,9 +793,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AreaRecepMateriaPrima.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AreaRecepMateriaPrima.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AreaRecepMateriaPrima.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AreaRecepMateriaPrima.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -865,9 +865,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AlmacenMateriaPrima.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenMateriaPrima.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AlmacenMateriaPrima.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenMateriaPrima.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -937,9 +937,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AlmacenMatAcondicionamineto.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenMatAcondicionamineto.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AlmacenMatAcondicionamineto.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenMatAcondicionamineto.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1009,9 +1009,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.RecepProductoTerminado.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.RecepProductoTerminado.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.RecepProductoTerminado.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.RecepProductoTerminado.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1069,8 +1069,8 @@
                                     <label>@languageContainerService.Keys["Temperatura"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.AlmacenProductoTerminado.Temperatura" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.AlmacenProductoTerminado.Temperatura) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.Temperatura" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.Temperatura) />
                                         </div>
                                     </div>
                                 </div>
@@ -1078,8 +1078,8 @@
                                     <label>@languageContainerService.Keys["Humedad"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.AlmacenProductoTerminado.Humedad" />
-                    <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.AlmacenProductoTerminado.Humedad) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.Humedad" />
+                    <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.Humedad) />
                                         </div>
                                     </div>
                                 </div>
@@ -1101,9 +1101,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AlmacenProductoTerminado.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AlmacenProductoTerminado.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1173,9 +1173,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.ProductoDevueltoRechazado.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.ProductoDevueltoRechazado.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.ProductoDevueltoRechazado.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.ProductoDevueltoRechazado.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1245,9 +1245,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.DistProductoTerminado.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.DistProductoTerminado.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.DistProductoTerminado.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.DistProductoTerminado.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1317,9 +1317,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.ManejoQuejaReclamos.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.ManejoQuejaReclamos.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.ManejoQuejaReclamos.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.ManejoQuejaReclamos.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1389,9 +1389,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.RetiroProcMercado.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.RetiroProcMercado.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.RetiroProcMercado.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.RetiroProcMercado.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1468,9 +1468,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.SistemaInstAgua.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.SistemaInstAgua.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.SistemaInstAgua.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.SistemaInstAgua.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1540,9 +1540,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.OsmosisInversa.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.OsmosisInversa.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.OsmosisInversa.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.OsmosisInversa.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1612,9 +1612,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.SistemaDeIonizacion.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.SistemaDeIonizacion.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.SistemaDeIonizacion.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.SistemaDeIonizacion.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1684,9 +1684,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.CalibraVerifEquipo.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.CalibraVerifEquipo.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.CalibraVerifEquipo.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.CalibraVerifEquipo.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1756,9 +1756,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.Validaciones.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.Validaciones.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.Validaciones.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.Validaciones.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1828,9 +1828,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.MantAreaEquipos.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.MantAreaEquipos.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.MantAreaEquipos.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.MantAreaEquipos.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1905,9 +1905,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AreaProdCondExternas.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AreaProdCondExternas.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AreaProdCondExternas.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AreaProdCondExternas.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -1978,9 +1978,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AreaProdCondInternas.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AreaProdCondInternas.LContenido != null)
                                                 {
-                                @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AreaProdCondInternas.LContenido)
+                                @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AreaProdCondInternas.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2051,9 +2051,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AreaOrganizaDocumentacion.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AreaOrganizaDocumentacion.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AreaOrganizaDocumentacion.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AreaOrganizaDocumentacion.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2112,8 +2112,8 @@
                                     <label>@languageContainerService.Keys["Temperatura"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.AreaDispensionOrdFab.Temperatura" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.AreaDispensionOrdFab.Temperatura) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.Temperatura" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.Temperatura) />
                                         </div>
                                     </div>
                                 </div>
@@ -2121,8 +2121,8 @@
                                     <label>@languageContainerService.Keys["Humedad"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.AreaDispensionOrdFab.Humedad" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.AreaDispensionOrdFab.Humedad) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.Humedad" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.Humedad) />
                                         </div>
                                     </div>
                                 </div>
@@ -2144,9 +2144,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AreaDispensionOrdFab.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AreaDispensionOrdFab.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2205,8 +2205,8 @@
                                     <label>@languageContainerService.Keys["Temperatura"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.FabProdDesinfectante.Temperatura" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.FabProdDesinfectante.Temperatura) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante.Temperatura" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante.Temperatura) />
                                         </div>
                                     </div>
                                 </div>
@@ -2228,9 +2228,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.FabProdDesinfectante.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.FabProdDesinfectante.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2301,9 +2301,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.FabPlaguicida.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.FabPlaguicida.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.FabPlaguicida.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.FabPlaguicida.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2374,9 +2374,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.FabCosmeticos.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.FabCosmeticos.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.FabCosmeticos.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.FabCosmeticos.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2452,9 +2452,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AreaEnvasado.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AreaEnvasado.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AreaEnvasado.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AreaEnvasado.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2525,9 +2525,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AreaEtiquetadoEmpaque.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AreaEtiquetadoEmpaque.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AreaEtiquetadoEmpaque.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AreaEtiquetadoEmpaque.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2604,9 +2604,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.LabControlCalidad.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.LabControlCalidad.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.LabControlCalidad.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.LabControlCalidad.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2677,9 +2677,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.AnalisisContrato.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.AnalisisContrato.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.AnalisisContrato.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.AnalisisContrato.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2754,9 +2754,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.InspeccionAudito.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.InspeccionAudito.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.InspeccionAudito.LContenido)
+                                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.InspeccionAudito.LContenido)
                                                     {
                                                         <tr>
                                                             <td>@dt.PuntosMax</td>
@@ -2818,11 +2818,11 @@
                                     <label for="password">@languageContainerService.Keys["El local cumple  o no cumple con los requisitos mínimos para operar"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
+                                            <InputSelect @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.CumpleRequisitosMinOperacion) />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.CumpleRequisitosMinOperacion) />
                                         </div>
                                     </div>
                                 </div>
@@ -2830,7 +2830,7 @@
                                     <label>@languageContainerService.Keys["FinishedDate"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
                                         </div>
                                     </div>
                                 </div>
@@ -2838,8 +2838,8 @@
                                     <label>@languageContainerService.Keys["Observaciones"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputTextArea rows="8" class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.ObservacionesFinales" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.ObservacionesFinales) />
+                                            <InputTextArea rows="8" class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.ObservacionesFinales" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.ObservacionesFinales) />
                                         </div>
                                     </div>
                                 </div>
@@ -2848,7 +2848,7 @@
                         <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
                             <h5>@languageContainerService.Keys["Firmas"]</h5>
 
-                            @if (Inspeccion != null && Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes.Count > 0 && showSignasure)
+                            @if (Inspeccion != null && Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes.Count > 0 && showSignasure)
                             {
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
@@ -2857,8 +2857,8 @@
                                                 <label for="password">@languageContainerService.Keys["Representante Legal de la Empresa"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Nombre" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Nombre) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Nombre" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Nombre) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2866,8 +2866,8 @@
                                                 <label for="password">@languageContainerService.Keys["Charge"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cargo" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cargo) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Cargo" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Cargo) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2875,8 +2875,8 @@
                                                 <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cedula" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Cedula) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Cedula" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Cedula) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2905,8 +2905,8 @@
                                                 <label for="password">@languageContainerService.Keys["Regente Farmaceutico"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Nombre" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Nombre) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Nombre" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Nombre) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2914,8 +2914,8 @@
                                                 <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.NumRegistro" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.NumRegistro) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.NumRegistro" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.NumRegistro) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2923,8 +2923,8 @@
                                                 <label for="password">@languageContainerService.Keys["Charge"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cargo" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cargo) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Cargo" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Cargo) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2932,8 +2932,8 @@
                                                 <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cedula" />
-                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Cedula) />
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Cedula" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Cedula) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -2960,7 +2960,7 @@
                                     <div class="col-sm-12">
                                         <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
                                     </div>
-                                    @foreach (var dt in Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes)
+                                    @foreach (var dt in Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
                                     {
                                         <div class="col-sm-6">
                                             <div class="row clearfix">

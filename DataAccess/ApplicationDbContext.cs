@@ -87,9 +87,9 @@ namespace DataAccess
              .HasForeignKey<AUD_InspeccionTB>(e => e.InspInvestigacionId);
 
             modelBuilder.Entity<AUD_InspeccionTB>()
-            .HasOne(e => e.InspGuiBPMFabMedicamento)
+            .HasOne(e => e.InspGuiBPMFabCosmeticoMed)
             .WithOne(e => e.Inspeccion)
-            .HasForeignKey<AUD_InspeccionTB>(e => e.InspGuiBPMFabMedicamentoId);
+            .HasForeignKey<AUD_InspeccionTB>(e => e.InspGuiBPMFabCosmeticoMedId);
 
             modelBuilder.Entity<AUD_InspeccionTB>()
            .HasOne(e => e.InspAperturaCosmetArtesanal)
