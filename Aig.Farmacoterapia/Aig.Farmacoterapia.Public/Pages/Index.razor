@@ -317,8 +317,8 @@
 </div>
 
 @code {
-    
-   
+
+
     private HomeFilter search { get; set; }=new HomeFilter();
     protected bool loading { get; set; } = true;
     private MudPagination _mudPagination;
@@ -347,7 +347,7 @@
     {
         await this.InvokeAsync(StateHasChanged);
     }
-    
+
     private async Task DoFetchData()
     {
         loading = true;
@@ -355,7 +355,7 @@
         var sorting =new List<SortingOption>(){ new SortingOption { Field = "name", Direction = SortingDirection.ASC } };
         var filters = new List<FilteringOption>();
         if (!string.IsNullOrEmpty(_appState.SerachText))
-                filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = _appState.SerachText });
+            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = _appState.SerachText });
         if (search != null)
         {
             if (search.MedicalPrescription!=null)
@@ -393,9 +393,10 @@
                 PageIndex = paginatedResult.CurrentPage,
                 PageSize = paginatedResult.PageSize,
                 SortingOptions = sorting,
-                FilteringOptions = filters
-            };
-        paginatedResult = await _repository.ListAsync(args,search?.Or=="Algunos"?LogicalOperator.Or:LogicalOperator.And);
+                FilteringOptions = filters,
+                LogicalOperator = search?.Or == "Algunos" ? LogicalOperator.Or : LogicalOperator.And
+    };
+        paginatedResult = await _repository.ListAsync(args);
         loading = false;
         await RefresView();
     }

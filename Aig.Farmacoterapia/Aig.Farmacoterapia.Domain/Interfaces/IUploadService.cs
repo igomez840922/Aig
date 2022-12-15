@@ -1,4 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Aig.Farmacoterapia.Domain.Interfaces
     {
         Task<string> UploadAsync(UploadObject request);
         Task<bool> DeleteAsync(string relativePath);
-    
+        Task<byte[]> GetFileAsync(string file, UploadType uploadType);
+
     }
 }

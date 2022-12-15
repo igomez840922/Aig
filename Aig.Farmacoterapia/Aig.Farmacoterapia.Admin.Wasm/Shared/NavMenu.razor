@@ -1,0 +1,10 @@
+﻿<MudNavMenu>
+    <MudNavLink Icon="@Icons.Material.Filled.Dashboard" Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+    <MudNavLink Href="/servers" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.LocalPharmacy">Medicamentos</MudNavLink>
+    <MudNavGroup Icon="@Icons.Material.Filled.Settings" Title="Configuración" Expanded="true">
+        <MudNavLink Icon="@Icons.Material.Filled.FormatColorFill" Href="/" Match="NavLinkMatch.Prefix">Formas Farmacéuticas</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.MedicationLiquid" Href="/fetchdata" Match="NavLinkMatch.Prefix">Vías de administración</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.AssistantPhoto" Href="/counter" Match="NavLinkMatch.Prefix">Países</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Groups" Href="/counter" Match="NavLinkMatch.Prefix">Usuarios</MudNavLink>
+    </MudNavGroup>
+</MudNavMenu>

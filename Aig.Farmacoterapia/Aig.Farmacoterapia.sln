@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Public", "Aig.Farmacoterapia.Public\Aig.Farmacoterapia.Public.csproj", "{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aig.Farmacoterapia.Api", "Aig.Farmacoterapia.Api\Aig.Farmacoterapia.Api.csproj", "{D500B40A-C924-4E6E-82BA-682F7C0E6257}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Api", "Aig.Farmacoterapia.Api\Aig.Farmacoterapia.Api.csproj", "{D500B40A-C924-4E6E-82BA-682F7C0E6257}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wasm", "Wasm", "{4F98853E-9D56-4C3E-BAE7-142A4E3044D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Admin.Wasm", "Aig.Farmacoterapia.Admin.Wasm\Aig.Farmacoterapia.Admin.Wasm.csproj", "{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +49,17 @@ Global
 		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D500B40A-C924-4E6E-82BA-682F7C0E6257} = {4F98853E-9D56-4C3E-BAE7-142A4E3044D9}
+		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730} = {4F98853E-9D56-4C3E-BAE7-142A4E3044D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FF36EE9-0CDF-4DF7-94A7-781076A6399D}

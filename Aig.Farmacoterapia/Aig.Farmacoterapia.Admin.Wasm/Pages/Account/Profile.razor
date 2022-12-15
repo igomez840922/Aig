@@ -1,0 +1,102 @@
+﻿@page "/profile"
+@attribute [Authorize]
+@using Aig.Farmacoterapia.Admin.Wasm.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
+@using Blazored.FluentValidation
+
+<MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+    <MudTabPanel Icon="@Icons.Material.Filled.Api" Text="Datos Generales">
+
+        <MudGrid>
+            <MudItem md="2"/>
+          
+            <MudItem md="8">
+                <EditForm Model="@_profileUserModel" OnValidSubmit="ProfileSubmitAsync">
+                    <MudCard>
+                        <MudCardContent>
+
+                            <FluentValidationValidator />
+                            <MudGrid>
+                                <MudItem sm="12" md="8">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _profileUserModel.Email)" @bind-Value="_profileUserModel.Email" Label="Correo" />
+                                </MudItem>
+                                <MudItem sm="12" md="8">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _profileUserModel.FirstName)" @bind-Value="_profileUserModel.FirstName" Label="Nombre" />
+                                </MudItem>
+                                <MudItem sm="12" md="8">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _profileUserModel.LastName)" @bind-Value="_profileUserModel.LastName" Label="Apellido" />
+                                </MudItem>
+                                <MudItem sm="12" md="8">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" T="string" Label="Teléfono" @bind-Value="_profileUserModel.PhoneNumber" For="@(() => _profileUserModel.PhoneNumber)" />
+                                </MudItem>
+                             
+                            </MudGrid>
+
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Guardar</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </EditForm>
+            </MudItem>
+
+            <MudItem md="2"/>
+
+        </MudGrid>
+
+    </MudTabPanel>
+    <MudTabPanel Text="Cambiar Contraseña">
+        <MudText>Content Two</MudText>
+    </MudTabPanel>
+</MudTabs>
+
+
+@code {
+    public UpdateProfileRequest _profileUserModel { get; set; } = new UpdateProfileRequest();
+    public ChangePasswordRequest _changePasswordModel { get; set; } = new ChangePasswordRequest();
+    private IBrowserFile _file;
+    protected async Task ProfileSubmitAsync()
+    {
+        var response = await _accountManager.UpdateProfileAsync(_profileUserModel);
+        if (response.Succeeded)
+        {
+            await _authenticationManager.Logout();
+            _snackBar.Add("Tu perfil ha sido actualizado. Por favor inicie sesión para continuar.", Severity.Success);
+            _navigationManager.NavigateTo("/");
+        }
+        else
+        {
+            foreach (var message in response.Messages)
+            {
+                _snackBar.Add(message, Severity.Error);
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        var state = await _stateProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+        _profileUserModel.UserId = user.GetUserId();
+        _profileUserModel.Email = user.GetEmail();
+        _profileUserModel.FirstName = user.GetFirstName();
+        _profileUserModel.LastName = user.GetLastName();
+        _profileUserModel.PhoneNumber = user.GetPhoneNumber();
+
+        //var data = await _accountManager.GetProfilePictureAsync(_userId);
+        //if (data.Succeeded)
+        //{
+        //    ImageDataUrl = data.Data;
+        //}
+        //if (_profileModel.FirstName.Length > 0)
+        //{
+        //    _firstLetterOfName = _profileModel.FirstName[0];
+        //}
+    }
+
+}

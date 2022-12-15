@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Application.Common.Validation;
-using Aig.Farmacoterapia.Application.Login.Model;
 using Aig.Farmacoterapia.Domain.Entities;
 using FluentValidation;
 

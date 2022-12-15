@@ -23,6 +23,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Identity
             get { return string.Format("{0} {1}", FirstName, LastName); }
             set { }
         }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
         public bool IsActive { get; set; } = true;
+
     }
 }

@@ -14,6 +14,7 @@ using System.Text;
 using System.Linq.Expressions;
 using System.Text.Encodings.Web;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
+using Aig.Farmacoterapia.Domain.Identity;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services
 {
@@ -21,6 +22,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMailService _mailService;
         private readonly ICurrentUserService _currentUserService;
         private readonly ISystemLogger _logger;
@@ -28,6 +30,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         public UserService(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
+            SignInManager<ApplicationUser> signInManager,
             IMailService mailService,
             ICurrentUserService currentUserService,
             ISystemLogger logger)
@@ -36,6 +39,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             _roleManager = roleManager;
             _mailService = mailService;
             _currentUserService = currentUserService;
+            _signInManager = signInManager;
             _logger = logger;
         }
 
@@ -199,6 +203,61 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             else
             {
                 return await Result.FailAsync(string.Format("Email {0} is already registered.", request.Email));
+            }
+        }
+
+        public async Task<IResult> ChangePasswordAsync(ChangePasswordRequest model)
+        {
+            var user = await this._userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return await Result.FailAsync("User Not Found.");
+            }
+
+            var identityResult = await this._userManager.ChangePasswordAsync(
+                user,
+                model.Password,
+                model.NewPassword);
+            var errors = identityResult.Errors.Select(e => e.Description.ToString()).ToList();
+            return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
+        }
+
+        public async Task<IResult> UpdateProfileAsync(UpdateProfileRequest request)
+        {
+        
+            //    if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
+            //    {
+            //        var userWithSamePhoneNumber = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == request.PhoneNumber);
+            //        if (userWithSamePhoneNumber != null)
+            //        {
+            //            return await Result.FailAsync(string.Format("Phone number {0} is already used.", request.PhoneNumber));
+            //        }
+            //    }
+
+            var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
+            if (userWithSameEmail == null || userWithSameEmail.Id == request.UserId)
+            {
+                var user = await _userManager.FindByIdAsync(request.UserId);
+                if (user == null)
+                {
+                    return await Result.FailAsync("User Not Found.");
+                }
+                user.FirstName = request.FirstName;
+                user.LastName = request.LastName;
+                user.PhoneNumber = request.PhoneNumber;
+                var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+                if (request.PhoneNumber != phoneNumber)
+                {
+                    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, request.PhoneNumber);
+                }
+                var identityResult = await _userManager.UpdateAsync(user);
+                var errors = identityResult.Errors.Select(e => e.Description.ToString()).ToList();
+                await _signInManager.RefreshSignInAsync(user);
+                return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
+            }
+            else
+            {
+                return await Result.FailAsync(string.Format("Email {0} is already used.", request.Email));
             }
         }
 

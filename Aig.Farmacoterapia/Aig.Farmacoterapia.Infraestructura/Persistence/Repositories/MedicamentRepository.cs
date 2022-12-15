@@ -171,7 +171,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
             }
             return result;
         }
-        public async Task<PaginatedResult<AigMedicamento>> ListAsync(PageSearchArgs args, LogicalOperator logicalOperator = LogicalOperator.Or)
+        public async Task<PaginatedResult<AigMedicamento>> ListAsync(PageSearchArgs args)
         {
             if (args == null) throw new Exception();
             var result = new PaginatedResult<AigMedicamento>(new List<AigMedicamento>());
@@ -275,7 +275,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 if (orderByList.Count == 0)
                     orderByList.Add(new(new() { Direction = SortingDirection.ASC }, c => c.Created));
 
-                var filterSpec = new MedicamentSpecification(filterList, logicalOperator);
+                var filterSpec = new MedicamentSpecification(filterList, args.LogicalOperator);
                 result = await _repository.Entities
                                           .OrderBy(orderByList)
                                           .WhereBy2(filterSpec)

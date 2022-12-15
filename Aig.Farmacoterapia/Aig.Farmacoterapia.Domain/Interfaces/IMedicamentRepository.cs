@@ -11,6 +11,6 @@ namespace Aig.Farmacoterapia.Domain.Interfaces
     public interface IMedicamentRepository
     {
         Task<PaginatedResult<AigMedicamento>> AdminListAsync(PageSearchArgs args);
-        Task<PaginatedResult<AigMedicamento>> ListAsync(PageSearchArgs args, LogicalOperator logicalOperator = LogicalOperator.Or);
+        Task<PaginatedResult<AigMedicamento>> ListAsync(PageSearchArgs args);
     }
 }

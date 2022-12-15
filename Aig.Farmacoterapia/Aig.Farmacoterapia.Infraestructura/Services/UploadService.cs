@@ -1,4 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Aig.Farmacoterapia.Domain.Extensions;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Microsoft.AspNetCore.Hosting;
@@ -23,8 +24,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             if (request.Data == null) return string.Empty;
             if (request.Data.Length > 0) {
                 var folder = request.UploadType.ToDescriptionString();
-                var folderName = Path.Combine("files", folder);
-                var pathToSave = Path.Combine(_environment.WebRootPath, folderName);
+                var folderName = Path.Combine("Files", folder);
+                //var pathToSave = Path.Combine(_environment.WebRootPath, folderName);
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 bool exists = Directory.Exists(pathToSave);
                 if (!exists) Directory.CreateDirectory(pathToSave);
                 var fileName = request.FileName.Trim('"');
@@ -43,10 +45,17 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             else
                 return string.Empty;
         }
-
-#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+        public async Task<byte[]> GetFileAsync( string fileName, UploadType uploadType)
+        {
+            var folder = uploadType.ToDescriptionString();
+            var folderName = Path.Combine("Files", folder);
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            var fullPath = Path.Combine(pathToSave, fileName);
+            if (File.Exists(fullPath))
+                return await File.ReadAllBytesAsync(fullPath);
+            return Array.Empty<byte>();
+        }
         public async Task<bool> DeleteAsync(string relativePath)
-#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
             if (string.IsNullOrEmpty(relativePath)) return false;
             var path= Path.Combine(_environment.WebRootPath, relativePath);
