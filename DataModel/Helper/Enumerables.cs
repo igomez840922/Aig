@@ -770,4 +770,33 @@ namespace DataModel.Helper
         Distributor = 1,
     }
 
+    //////////////////////////////
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum enum_TipoInspeccionDispFinal
+    {
+        [Description("Verificación del inventario")]
+        VerifInventario = 0,
+        [Description("Disposición Final")]
+        DispFinal = 1,
+    }
+
+    public enum enum_TipoProductDispFinal
+    {
+        [Description("Controlado")]
+        Controlado = 0,
+        [Description("No Controlado")]
+        NoControlado = 1,
+    }
+    public enum enum_TipoVerificacionDispFinal
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Total")]
+        Total = 1,
+        [Description("Parcial")]
+        Parcial = 2,
+    }
+
 }

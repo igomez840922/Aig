@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    public class AUD_InspGuiBPMFabMedicamentoTB : SystemId
+    //Fabricante de Cosmeticos y Descinfectantes
+    public class AUD_InspGuiBPMFabCosmeticoMedTB : SystemId
     {
-        public AUD_InspGuiBPMFabMedicamentoTB()
+        public AUD_InspGuiBPMFabCosmeticoMedTB()
         {
             AuditoriaSanitaria = new AUD_AuditoriaSanitaria();
 
@@ -4877,6 +4878,11 @@ namespace DataModel
         private string titulo;
         public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
 
+        // Capitulo
+        private string capitulo;
+        public string Capitulo { get => capitulo; set => SetProperty(ref capitulo, value); }
+
+
         // Articulo
         private string articulo;
         public string Articulo { get => articulo; set => SetProperty(ref articulo, value); }
@@ -4892,6 +4898,23 @@ namespace DataModel
         // Evaluacion
         private enumAUD_TipoSeleccion evaluacion3;
         public enumAUD_TipoSeleccion Evaluacion3 { get => evaluacion3; set => SetProperty(ref evaluacion3, value); }
+
+        // Evaluacion
+        private enumAUD_TipoSeleccion evaluacion4;
+        public enumAUD_TipoSeleccion Evaluacion4 { get => evaluacion4; set => SetProperty(ref evaluacion4, value); }
+
+        // Evaluacion
+        private enumAUD_TipoSeleccion evaluacion5;
+        public enumAUD_TipoSeleccion Evaluacion5 { get => evaluacion5; set => SetProperty(ref evaluacion5, value); }
+
+        // Evaluacion
+        private enumAUD_TipoSeleccion evaluacion6;
+        public enumAUD_TipoSeleccion Evaluacion6 { get => evaluacion6; set => SetProperty(ref evaluacion6, value); }
+
+        // Evaluacion
+        private enumAUD_TipoSeleccion evaluacion7;
+        public enumAUD_TipoSeleccion Evaluacion7 { get => evaluacion7; set => SetProperty(ref evaluacion7, value); }
+
 
         // Criterio
         private string criterio;

@@ -106,6 +106,21 @@ namespace DataAccess
          .WithOne(e => e.Inspeccion)
          .HasForeignKey<AUD_InspeccionTB>(e => e.InspRutinaVigAgenciaId);
 
+            modelBuilder.Entity<AUD_InspeccionTB>()
+        .HasOne(e => e.InspCierreOperacion)
+        .WithOne(e => e.Inspeccion)
+        .HasForeignKey<AUD_InspeccionTB>(e => e.InspCierreOperacionId);
+
+            modelBuilder.Entity<AUD_InspeccionTB>()
+       .HasOne(e => e.InspDisposicionFinal)
+       .WithOne(e => e.Inspeccion)
+       .HasForeignKey<AUD_InspeccionTB>(e => e.InspDisposicionFinalId);
+
+            modelBuilder.Entity<AUD_InspeccionTB>()
+    .HasOne(e => e.InspGuiaBPMFabricanteMed)
+    .WithOne(e => e.Inspeccion)
+    .HasForeignKey<AUD_InspeccionTB>(e => e.InspGuiaBPMFabricanteMedId);
+
             ///////////////////////////////////////////
             ///
 
@@ -393,171 +408,171 @@ namespace DataAccess
             ///////////////////////////////////////////
             ///
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AuditoriaSanitaria)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_AuditoriaSanitaria>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.RepresentLegal)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
             
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.RegenteFarmaceutico)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.OtrosFuncionarios)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_OtrosFuncionarios>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.GeneralesEmpresa)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.RespProduccion)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.RespControlCalidad)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.RequisitosLegales)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.ClasifActComerciales)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.ClasifEstablecimiento)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.ClasifEstablecimiento2)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.GenEstructuraOrganizativa)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.CondExtAlmacenas)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.CondIntAlmacenas)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
            
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AreaRecepMateriaPrima)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AlmacenMateriaPrima)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AlmacenMatAcondicionamineto)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.RecepProductoTerminado)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AlmacenProductoTerminado)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.ProductoDevueltoRechazado)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.DistProductoTerminado)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.ManejoQuejaReclamos)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.RetiroProcMercado)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.SistemaInstAgua)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.OsmosisInversa)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.SistemaDeIonizacion)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.CalibraVerifEquipo)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.Validaciones)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.MantAreaEquipos)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AreaProdCondExternas)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AreaProdCondInternas)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AreaOrganizaDocumentacion)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AreaDispensionOrdFab)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.FabProdDesinfectante)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.FabPlaguicida)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.FabCosmeticos)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AreaEnvasado)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AreaEtiquetadoEmpaque)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.LabControlCalidad)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.AnalisisContrato)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.InspeccionAudito)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
-            modelBuilder.Entity<AUD_InspGuiBPMFabMedicamentoTB>()
+            modelBuilder.Entity<AUD_InspGuiBPMFabCosmeticoMedTB>()
 .Property(e => e.DatosConclusiones)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
@@ -857,6 +872,38 @@ namespace DataAccess
 .Property(e => e.DatosConclusiones)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
+            ///////////////////////////////////////////
+            ///
+
+            modelBuilder.Entity<AUD_InspCierreOperacionTB>()
+.Property(e => e.GeneralesEmpresa)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
+
+            modelBuilder.Entity<AUD_InspCierreOperacionTB>()
+.Property(e => e.DatosResponsable)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
+
+            modelBuilder.Entity<AUD_InspCierreOperacionTB>()
+.Property(e => e.DatosConclusiones)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+
+            ///////////////////////////////////////////
+            ///
+            modelBuilder.Entity<AUD_InspDisposicionFinalTB>()
+.Property(e => e.GeneralesEmpresa)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
+
+            modelBuilder.Entity<AUD_InspDisposicionFinalTB>()
+.Property(e => e.DatosResponsable)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
+
+            modelBuilder.Entity<AUD_InspDisposicionFinalTB>()
+.Property(e => e.InventarioMedicamento)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_InventarioMedicamento>(x));
+
+            modelBuilder.Entity<AUD_InspDisposicionFinalTB>()
+.Property(e => e.DatosConclusiones)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
 
             /////////////////////////////////////////////////

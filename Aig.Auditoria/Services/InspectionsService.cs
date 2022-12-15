@@ -73,6 +73,21 @@ namespace Aig.Auditoria.Services
             var result = DalService.Save(data);
             if(result != null)
             {
+                if (result.InspDisposicionFinal != null)
+                {
+                    DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.GeneralesEmpresa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.DatosResponsable).IsModified = true;
+                    DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.InventarioMedicamento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
+                if (result.InspDisposicionFinal != null)
+                {
+                    DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.GeneralesEmpresa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.DatosResponsable).IsModified = true;
+                    DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
                 if (result.InspRutinaVigAgencia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.GeneralesEmpresa).IsModified = true;

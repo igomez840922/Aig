@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221213155233_M020")]
+    partial class M020
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -690,78 +692,6 @@ namespace DataAccess.Migrations
                     b.ToTable("AUD_InspCierreOperacionTB");
                 });
 
-            modelBuilder.Entity("DataModel.AUD_InspDisposicionFinalTB", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<bool>("Adjunta")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Coincide")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DatosConclusiones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosResponsable")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("GeneralesEmpresa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InventarioMedicamento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NumNotaSDGSA")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("NumReciboPago")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<decimal>("PesoDestruir")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("SolicitudCierre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TipoInspeccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoProduct")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoVerificacion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AUD_InspDisposicionFinalTB");
-                });
-
             modelBuilder.Entity("DataModel.AUD_InspeccionTB", b =>
                 {
                     b.Property<long>("Id")
@@ -808,16 +738,10 @@ namespace DataAccess.Migrations
                     b.Property<long?>("InspCierreOperacionId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("InspDisposicionFinalId")
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("InspGuiBPMFabMedicamentoId")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("InspGuiBPMFabNatMedicinaId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("InspGuiaBPMFabricanteMedId")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("InspInvestigacionId")
@@ -907,10 +831,6 @@ namespace DataAccess.Migrations
                         .IsUnique()
                         .HasFilter("[InspCierreOperacionId] IS NOT NULL");
 
-                    b.HasIndex("InspDisposicionFinalId")
-                        .IsUnique()
-                        .HasFilter("[InspDisposicionFinalId] IS NOT NULL");
-
                     b.HasIndex("InspGuiBPMFabMedicamentoId")
                         .IsUnique()
                         .HasFilter("[InspGuiBPMFabMedicamentoId] IS NOT NULL");
@@ -918,10 +838,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("InspGuiBPMFabNatMedicinaId")
                         .IsUnique()
                         .HasFilter("[InspGuiBPMFabNatMedicinaId] IS NOT NULL");
-
-                    b.HasIndex("InspGuiaBPMFabricanteMedId")
-                        .IsUnique()
-                        .HasFilter("[InspGuiaBPMFabricanteMedId] IS NOT NULL");
 
                     b.HasIndex("InspInvestigacionId")
                         .IsUnique()
@@ -942,44 +858,7 @@ namespace DataAccess.Migrations
                     b.ToTable("AUD_Inspeccion");
                 });
 
-            modelBuilder.Entity("DataModel.AUD_InspGuiaBPMFabricanteMedTB", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("FechaUltimaVista")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Observaciones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProcesoVigilanciaSanit")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AUD_InspGuiaBPMFabricanteMedTB");
-                });
-
-            modelBuilder.Entity("DataModel.AUD_InspGuiBPMFabCosmeticoMedTB", b =>
+            modelBuilder.Entity("DataModel.AUD_InspGuiBPMFabMedicamentoTB", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -1139,7 +1018,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AUD_InspGuiBPMFabCosmeticoMedTB");
+                    b.ToTable("AUD_InspGuiBPMFabMedicamentoTB");
                 });
 
             modelBuilder.Entity("DataModel.AUD_InspGuiBPMFabNatMedicinaTB", b =>
@@ -3808,21 +3687,13 @@ namespace DataAccess.Migrations
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspCierreOperacionId");
 
-                    b.HasOne("DataModel.AUD_InspDisposicionFinalTB", "InspDisposicionFinal")
-                        .WithOne("Inspeccion")
-                        .HasForeignKey("DataModel.AUD_InspeccionTB", "InspDisposicionFinalId");
-
-                    b.HasOne("DataModel.AUD_InspGuiBPMFabCosmeticoMedTB", "InspGuiBPMFabMedicamento")
+                    b.HasOne("DataModel.AUD_InspGuiBPMFabMedicamentoTB", "InspGuiBPMFabMedicamento")
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspGuiBPMFabMedicamentoId");
 
                     b.HasOne("DataModel.AUD_InspGuiBPMFabNatMedicinaTB", "InspGuiBPMFabNatMedicina")
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspGuiBPMFabNatMedicinaId");
-
-                    b.HasOne("DataModel.AUD_InspGuiaBPMFabricanteMedTB", "InspGuiaBPMFabricanteMed")
-                        .WithOne("Inspeccion")
-                        .HasForeignKey("DataModel.AUD_InspeccionTB", "InspGuiaBPMFabricanteMedId");
 
                     b.HasOne("DataModel.AUD_InspInvestigacionTB", "InspInvestigacion")
                         .WithOne("Inspeccion")
@@ -3852,13 +3723,9 @@ namespace DataAccess.Migrations
 
                     b.Navigation("InspCierreOperacion");
 
-                    b.Navigation("InspDisposicionFinal");
-
                     b.Navigation("InspGuiBPMFabMedicamento");
 
                     b.Navigation("InspGuiBPMFabNatMedicina");
-
-                    b.Navigation("InspGuiaBPMFabricanteMed");
 
                     b.Navigation("InspInvestigacion");
 
@@ -4272,22 +4139,12 @@ namespace DataAccess.Migrations
                     b.Navigation("Inspeccion");
                 });
 
-            modelBuilder.Entity("DataModel.AUD_InspDisposicionFinalTB", b =>
-                {
-                    b.Navigation("Inspeccion");
-                });
-
             modelBuilder.Entity("DataModel.AUD_InspeccionTB", b =>
                 {
                     b.Navigation("LAttachments");
                 });
 
-            modelBuilder.Entity("DataModel.AUD_InspGuiaBPMFabricanteMedTB", b =>
-                {
-                    b.Navigation("Inspeccion");
-                });
-
-            modelBuilder.Entity("DataModel.AUD_InspGuiBPMFabCosmeticoMedTB", b =>
+            modelBuilder.Entity("DataModel.AUD_InspGuiBPMFabMedicamentoTB", b =>
                 {
                     b.Navigation("Inspeccion");
                 });

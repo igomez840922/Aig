@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221213221254_M022")]
+    partial class M022
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -817,9 +819,6 @@ namespace DataAccess.Migrations
                     b.Property<long?>("InspGuiBPMFabNatMedicinaId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("InspGuiaBPMFabricanteMedId")
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("InspInvestigacionId")
                         .HasColumnType("bigint");
 
@@ -919,10 +918,6 @@ namespace DataAccess.Migrations
                         .IsUnique()
                         .HasFilter("[InspGuiBPMFabNatMedicinaId] IS NOT NULL");
 
-                    b.HasIndex("InspGuiaBPMFabricanteMedId")
-                        .IsUnique()
-                        .HasFilter("[InspGuiaBPMFabricanteMedId] IS NOT NULL");
-
                     b.HasIndex("InspInvestigacionId")
                         .IsUnique()
                         .HasFilter("[InspInvestigacionId] IS NOT NULL");
@@ -940,43 +935,6 @@ namespace DataAccess.Migrations
                         .HasFilter("[InspRutinaVigFarmaciaId] IS NOT NULL");
 
                     b.ToTable("AUD_Inspeccion");
-                });
-
-            modelBuilder.Entity("DataModel.AUD_InspGuiaBPMFabricanteMedTB", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("FechaUltimaVista")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Observaciones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProcesoVigilanciaSanit")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AUD_InspGuiaBPMFabricanteMedTB");
                 });
 
             modelBuilder.Entity("DataModel.AUD_InspGuiBPMFabCosmeticoMedTB", b =>
@@ -3820,10 +3778,6 @@ namespace DataAccess.Migrations
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspGuiBPMFabNatMedicinaId");
 
-                    b.HasOne("DataModel.AUD_InspGuiaBPMFabricanteMedTB", "InspGuiaBPMFabricanteMed")
-                        .WithOne("Inspeccion")
-                        .HasForeignKey("DataModel.AUD_InspeccionTB", "InspGuiaBPMFabricanteMedId");
-
                     b.HasOne("DataModel.AUD_InspInvestigacionTB", "InspInvestigacion")
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspInvestigacionId");
@@ -3857,8 +3811,6 @@ namespace DataAccess.Migrations
                     b.Navigation("InspGuiBPMFabMedicamento");
 
                     b.Navigation("InspGuiBPMFabNatMedicina");
-
-                    b.Navigation("InspGuiaBPMFabricanteMed");
 
                     b.Navigation("InspInvestigacion");
 
@@ -4280,11 +4232,6 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.AUD_InspeccionTB", b =>
                 {
                     b.Navigation("LAttachments");
-                });
-
-            modelBuilder.Entity("DataModel.AUD_InspGuiaBPMFabricanteMedTB", b =>
-                {
-                    b.Navigation("Inspeccion");
                 });
 
             modelBuilder.Entity("DataModel.AUD_InspGuiBPMFabCosmeticoMedTB", b =>

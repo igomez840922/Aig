@@ -112,7 +112,7 @@ namespace Aig.Auditoria.Components.Inspections
                         }
                     case DataModel.Helper.enumAUD_TipoActa.BPMCD:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabMedicamento = new AUD_InspGuiBPMFabMedicamentoTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabMedicamento = new AUD_InspGuiBPMFabCosmeticoMedTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.AECA:
@@ -125,6 +125,17 @@ namespace Aig.Auditoria.Components.Inspections
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabNatMedicina = new AUD_InspGuiBPMFabNatMedicinaTB() };
                             break;
                         }
+                    case DataModel.Helper.enumAUD_TipoActa.COP:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspDisposicionFinal = new AUD_InspDisposicionFinalTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.DFP:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspDisposicionFinal = new AUD_InspDisposicionFinalTB() };
+                            break;
+                        }
+
                     default:
                         {
                             return;

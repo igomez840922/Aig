@@ -260,6 +260,16 @@
                 <Aig.Auditoria.Components.Inspections.GuiaBPMProductosNatMedicinales Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.GuiaBPMProductosNatMedicinales>
                 break;
             }
+        case DataModel.Helper.enumAUD_TipoActa.COP:
+            {
+                <Aig.Auditoria.Components.Inspections.CierreOperacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.CierreOperacion>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.DFP:
+            {
+                <Aig.Auditoria.Components.Inspections.DisposicionFinal Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.DisposicionFinal>
+                break;
+            }
         default:
         {
             break;

@@ -1056,6 +1056,7 @@ namespace DataModel
     public class AUD_InvProducto : SystemId
     {
         private string nombre;
+        [Required(ErrorMessage = "requerido")]
         public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
 
@@ -1079,6 +1080,15 @@ namespace DataModel
 
         private enumAUD_TipoSeleccion registroSistema;
         public enumAUD_TipoSeleccion RegistroSistema { get => registroSistema; set => SetProperty(ref registroSistema, value); }
+
+        private int cantidad;
+        public int Cantidad { get => cantidad; set => SetProperty(ref cantidad, value); }
+
+        private string presentacion;
+        public string Presentacion { get => presentacion; set => SetProperty(ref presentacion, value); }
+
+        private string motivos;
+        public string Motivos { get => motivos; set => SetProperty(ref motivos, value); }
 
     }
 
