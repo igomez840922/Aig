@@ -45,15 +45,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram
 
         protected async override Task OnInitializedAsync()
         {
-            Data.EvaluacionCausalidad.Stemp = GetSTEMP(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.SecTemporal));
-            Data.EvaluacionCausalidad.Cprev = GetCPREV(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.ConPrevio));
-            Data.EvaluacionCausalidad.Reti = GetRETI(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.EfecRetirada));
-            Data.EvaluacionCausalidad.Reex = GetRETI(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.EfecReexposicion));
-            Data.EvaluacionCausalidad.Alter = GetALTER(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.CausasAlter));
-            Data.EvaluacionCausalidad.Facon = GetFACON(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.FactContribuyentes));
-            Data.EvaluacionCausalidad.Xplc = GetXPLC(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.ExpComplementarias));
-            Data.EvaluacionCausalidad.Gravedad = GetGRAVEDAD(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.IntRam));
-
+          
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             base.OnInitialized();
@@ -273,6 +265,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             Data.EvaluacionCalidadInfo.ConductaTerapia = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMConductaTerapia>(value);
             UpdateIncongruenciaCondTerapiaEvo();
             UpdateIncongruenciaCondSuspTerapiaReex();
+            UpdateIncongruenciaCondMantTerapiaReex();
         }
         private void OnEvoTerapiaChange(ChangeEventArgs args)
         {
@@ -308,6 +301,8 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             var value = args.Value.ToString();
             Data.EvaluacionCalidadInfo.Reexposicion = DataModel.Helper.Helper.ParseEnum<enumOpcionSiNo>(value);
             UpdateIncongruenciaCondSuspTerapiaReex();
+            UpdateIncongruenciaCondMantTerapiaReex();
+            UpdateIncongruenciaConReex();
         }
 
         private void UpdateIncongruenciaCondSuspTerapiaReex()
@@ -326,6 +321,47 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex = value;
         }
 
+        private void UpdateIncongruenciaCondMantTerapiaReex()
+        {
+
+            // Incongruencia Conducta_Mantuvo la terapia/ REEX
+            /*
+                FÓRMULA: Si [conductaTerapia]="" y [reexposicion]="" entonces [incongruenciaCondMantTerapiaReex]=""
+                         sino: Si [conductaTerapia]="Mantuvo la terapia" y [reexposicion]="No" entonces [incongruenciaCondMantTerapiaReex]="Incongruente"
+                               sino entonces [incongruenciaCondMantTerapiaReex]=""
+            */
+
+            var value = string.Empty;
+            if (Data.EvaluacionCalidadInfo.ConductaTerapia == enumFMV_RAMConductaTerapia.MANTERAPIA && Data.EvaluacionCalidadInfo.Reexposicion == enumOpcionSiNo.No)
+                value = "Incongruente";
+            Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex = value;
+        }
+        private void OnConReexposicionChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCalidadInfo.ConReexposicion = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMConsecuenciaReexposicion>(value);
+            UpdateIncongruenciaConReex();
+        }
+        
+
+        private void UpdateIncongruenciaConReex()
+        {
+            // Incongruencia Reexposición/Consecuencia de REEX
+            /*
+                FÓRMULA: Si [reexposicion]="" y [conReexposicion]="" entonces [incongruenciaConReex]=""
+                         sino: Si [reexposicion]="No" entonces
+                                    Si [conReexposicion]="Reapareció la reacción luego de reexposición" o [conReexposicion]="No reapareció la reacción luego de reexposición" entonces [incongruenciaConReex]="Incongruente"
+                                    sino entonces [incongruenciaConReex]=""
+            */
+
+            var value = string.Empty;
+            if(Data.EvaluacionCalidadInfo.Reexposicion == enumOpcionSiNo.No)
+            {
+                if (Data.EvaluacionCalidadInfo.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.REAP || Data.EvaluacionCalidadInfo.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.NREAP)
+                    value = "Incongruente";
+            }
+            Data.ObservacionInfoNotifica.IncongruenciaConReex = value;
+        }
 
         //-----------------------Nomenclators--------------------------------
 

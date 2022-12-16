@@ -499,12 +499,19 @@
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["Consecuencia de Reexposición"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.ConReexposicion" class="form-control">
+                                            
+                                               <select class="form-control" value="@Data.EvaluacionCalidadInfo.ConReexposicion" @onchange="OnConReexposicionChange">
+                                             @foreach (enumFMV_RAMConsecuenciaReexposicion dt in Enum.GetValues(typeof(enumFMV_RAMConsecuenciaReexposicion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                           </select>
+                                          @*  <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.ConReexposicion" class="form-control">
                                                 @foreach (enumFMV_RAMConsecuenciaReexposicion dt in Enum.GetValues(typeof(enumFMV_RAMConsecuenciaReexposicion)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
-                                            </InputSelect>
+                                            </InputSelect>*@
                                             <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.ConReexposicion) />
                                         </div>
                                     </div>
