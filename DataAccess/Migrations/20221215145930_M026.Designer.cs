@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221215145930_M026")]
+    partial class M026
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -811,7 +813,7 @@ namespace DataAccess.Migrations
                     b.Property<long?>("InspDisposicionFinalId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("InspGuiBPMFabCosmeticoMedId")
+                    b.Property<long?>("InspGuiBPMFabMedicamentoId")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("InspGuiBPMFabNatMedicinaId")
@@ -911,9 +913,9 @@ namespace DataAccess.Migrations
                         .IsUnique()
                         .HasFilter("[InspDisposicionFinalId] IS NOT NULL");
 
-                    b.HasIndex("InspGuiBPMFabCosmeticoMedId")
+                    b.HasIndex("InspGuiBPMFabMedicamentoId")
                         .IsUnique()
-                        .HasFilter("[InspGuiBPMFabCosmeticoMedId] IS NOT NULL");
+                        .HasFilter("[InspGuiBPMFabMedicamentoId] IS NOT NULL");
 
                     b.HasIndex("InspGuiBPMFabNatMedicinaId")
                         .IsUnique()
@@ -3917,9 +3919,9 @@ namespace DataAccess.Migrations
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspDisposicionFinalId");
 
-                    b.HasOne("DataModel.AUD_InspGuiBPMFabCosmeticoMedTB", "InspGuiBPMFabCosmeticoMed")
+                    b.HasOne("DataModel.AUD_InspGuiBPMFabCosmeticoMedTB", "InspGuiBPMFabMedicamento")
                         .WithOne("Inspeccion")
-                        .HasForeignKey("DataModel.AUD_InspeccionTB", "InspGuiBPMFabCosmeticoMedId");
+                        .HasForeignKey("DataModel.AUD_InspeccionTB", "InspGuiBPMFabMedicamentoId");
 
                     b.HasOne("DataModel.AUD_InspGuiBPMFabNatMedicinaTB", "InspGuiBPMFabNatMedicina")
                         .WithOne("Inspeccion")
@@ -3959,7 +3961,7 @@ namespace DataAccess.Migrations
 
                     b.Navigation("InspDisposicionFinal");
 
-                    b.Navigation("InspGuiBPMFabCosmeticoMed");
+                    b.Navigation("InspGuiBPMFabMedicamento");
 
                     b.Navigation("InspGuiBPMFabNatMedicina");
 

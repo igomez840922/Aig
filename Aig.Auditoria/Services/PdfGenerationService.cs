@@ -3292,7 +3292,7 @@ namespace Aig.Auditoria.Services
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
 
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
-                            foreach (var participant in inspection.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes)
+                            foreach (var participant in inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
                             {
                                 column.Item().AlignLeft().Text(string.Format("Lic. {0}", participant.NombreCompleto));
                             }
@@ -3307,11 +3307,11 @@ namespace Aig.Auditoria.Services
                                     columns.RelativeColumn();
                                 });
 
-                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Representante Legal: {0}", inspection.InspGuiBPMFabMedicamento.RepresentLegal.Nombre));
-                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("C.I.P : {0}", inspection.InspGuiBPMFabMedicamento.RepresentLegal.Cedula));
-                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabMedicamento.RepresentLegal.Firma))
+                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Representante Legal: {0}", inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Nombre));
+                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("C.I.P : {0}", inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Cedula));
+                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma))
                                 {
-                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabMedicamento.RepresentLegal.Firma.Split("image/png;base64,")[1]);
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
                                     table.Cell().AlignMiddle().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
@@ -3330,11 +3330,11 @@ namespace Aig.Auditoria.Services
                                     columns.RelativeColumn();
                                 });
 
-                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Lic: {0}", inspection.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Nombre));
-                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Registro : {0}", inspection.InspGuiBPMFabMedicamento.RegenteFarmaceutico.NumRegistro));
-                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Firma))
+                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Lic: {0}", inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Nombre));
+                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Registro : {0}", inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.NumRegistro));
+                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma))
                                 {
-                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
                                     table.Cell().AlignMiddle().AlignLeft().Image(memoryStream);
                                 }
@@ -3345,25 +3345,25 @@ namespace Aig.Auditoria.Services
                             });
 
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Otros funcionarios de la empresa:"));
-                            foreach (var persona in inspection.InspGuiBPMFabMedicamento.OtrosFuncionarios.LPersona)
+                            foreach (var persona in inspection.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona)
                             {
                                 column.Item().AlignLeft().Text(string.Format("Lic. {0}", persona.Nombre));
                             }
 
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.InspGuiBPMFabMedicamento.GeneralesEmpresa.Nombre));
-                            column.Item().AlignLeft().Text(string.Format("Dirección: {0}", inspection.InspGuiBPMFabMedicamento.GeneralesEmpresa.Direccion));
-                            column.Item().AlignLeft().Text(string.Format("Ciudad: {0}", inspection.InspGuiBPMFabMedicamento.GeneralesEmpresa.Ciudad));
-                            column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiBPMFabMedicamento.GeneralesEmpresa.Telefono));
-                            column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiBPMFabMedicamento.GeneralesEmpresa.Email));
+                            column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Dirección: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Direccion));
+                            column.Item().AlignLeft().Text(string.Format("Ciudad: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Ciudad));
+                            column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Telefono));
+                            column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Email));
 
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("RESPONSABLE DE PRODUCCIÓN:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabMedicamento.RespProduccion.Nombre));
-                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabMedicamento.RespProduccion.Profesion));
+                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespProduccion.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespProduccion.Profesion));
 
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("RESPONSABLE DE CONTROL DE CALIDAD:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabMedicamento.RespControlCalidad.Nombre));
-                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabMedicamento.RespControlCalidad.Profesion));
+                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Profesion));
 
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("REQUISITOS LEGALES:".ToUpper())).Bold();
                             column.Item().Table(table =>
@@ -3386,7 +3386,7 @@ namespace Aig.Auditoria.Services
                                 });
 
                                 var i = 0;
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.RequisitosLegales.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RequisitosLegales.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(i>0?"":"6.1.1");
@@ -3413,12 +3413,12 @@ namespace Aig.Auditoria.Services
                             });
 
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Observaciones:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format(inspection.InspGuiBPMFabMedicamento.Observaciones));
+                            column.Item().AlignLeft().Text(string.Format(inspection.InspGuiBPMFabCosmeticoMed.Observaciones));
 
                             column.Item().AlignLeft().Text(string.Format("¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"));
-                            column.Item().AlignLeft().Text(string.Format(DataModel.Helper.Helper.GetDescription(inspection.InspGuiBPMFabMedicamento.ProcesoVigilanciaSanit)));
+                            column.Item().AlignLeft().Text(string.Format(DataModel.Helper.Helper.GetDescription(inspection.InspGuiBPMFabCosmeticoMed.ProcesoVigilanciaSanit)));
 
-                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiBPMFabMedicamento.FechaUltimaVista?.ToString("dd/MM/yyyy")??""));
+                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiBPMFabCosmeticoMed.FechaUltimaVista?.ToString("dd/MM/yyyy")??""));
 
                             column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
                             column.Item().Table(table =>
@@ -3434,7 +3434,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
                                 });
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.ClasifActComerciales.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifActComerciales.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
@@ -3454,7 +3454,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
                                 });
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.ClasifEstablecimiento.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
@@ -3475,7 +3475,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
                                 });
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.ClasifEstablecimiento2.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento2.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
@@ -3518,7 +3518,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("A- Generalidades - Estructura Organizativa".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
                                 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.GenEstructuraOrganizativa.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.GenEstructuraOrganizativa.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3582,7 +3582,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("A - Condiciones Externas de los Almacenes".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.CondExtAlmacenas.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CondExtAlmacenas.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3612,7 +3612,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("B - Condiciones Internas de los Almacenes".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.CondIntAlmacenas.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CondIntAlmacenas.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3642,7 +3642,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("C - Área de Recepción de Materia Prima ".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AreaRecepMateriaPrima.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaRecepMateriaPrima.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3672,7 +3672,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("CH - Almacén de Materia Prima".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AlmacenMateriaPrima.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenMateriaPrima.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3702,7 +3702,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("D - Área de almacenamiento de Materiales de Acondicionamiento, Empaque y Envase".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AlmacenMatAcondicionamineto.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenMatAcondicionamineto.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3732,7 +3732,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("E - Recepción de Producto Terminado (De producción al almacén)".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.RecepProductoTerminado.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RecepProductoTerminado.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3762,7 +3762,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("E.1 - Almacén de Producto Terminado".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AlmacenProductoTerminado.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3792,7 +3792,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("F - Área de productos Devueltos y/o Rechazados".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.ProductoDevueltoRechazado.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ProductoDevueltoRechazado.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3822,7 +3822,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("G - Distribución de Productos Terminados".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.DistProductoTerminado.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.DistProductoTerminado.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3852,7 +3852,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("H - Manejo de quejas y reclamos de productos comercializados".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.ManejoQuejaReclamos.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ManejoQuejaReclamos.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3882,7 +3882,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("I - Retiro de Productos del Mercado".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.RetiroProcMercado.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RetiroProcMercado.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3945,7 +3945,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.1 Sistemas e Instalaciones de Agua".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.SistemaInstAgua.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.SistemaInstAgua.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -3975,7 +3975,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.1.1 OSMOSIS INVERSA".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.OsmosisInversa.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.OsmosisInversa.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4005,7 +4005,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.1.2 SISTEMA DE DEIONIZACION".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.SistemaDeIonizacion.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.SistemaDeIonizacion.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4035,7 +4035,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.2 Calibraciones y Verificaciones de equipo".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.CalibraVerifEquipo.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CalibraVerifEquipo.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4065,7 +4065,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.3 Validaciones".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.Validaciones.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.Validaciones.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4095,7 +4095,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.4 Mantenimiento de áreas y equipos".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.MantAreaEquipos.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.MantAreaEquipos.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4158,7 +4158,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.1.A Condiciones Externas".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AreaProdCondExternas.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaProdCondExternas.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4188,7 +4188,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.1.B Condiciones Internas".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AreaProdCondInternas.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaProdCondInternas.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4218,7 +4218,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.2 Organización y Documentación".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AreaOrganizaDocumentacion.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaOrganizaDocumentacion.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4248,7 +4248,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.3 Área de Dispensación de Ordenes de Fabricación".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AreaDispensionOrdFab.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4278,7 +4278,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.4.1 Fabricación de Productos Desinfectantes".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.FabProdDesinfectante.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4308,7 +4308,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.5.1 Fabricación de Plaguicidas ".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.FabPlaguicida.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabPlaguicida.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4338,7 +4338,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.6.1 Fabricación de Cosméticos".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.FabCosmeticos.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabCosmeticos.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4402,7 +4402,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("5.1 Área de Envasado".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AreaEnvasado.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaEnvasado.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4432,7 +4432,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("5.2. Área de Etiquetado y Empaque".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AreaEtiquetadoEmpaque.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaEtiquetadoEmpaque.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4496,7 +4496,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("6.1 Laboratorio de Control de Calidad".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.LabControlCalidad.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.LabControlCalidad.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4526,7 +4526,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("6.2 Análisis por Contrato".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.AnalisisContrato.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AnalisisContrato.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4590,7 +4590,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text(" ".ToUpper());
                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
 
-                                foreach (var dat in inspection.InspGuiBPMFabMedicamento.InspeccionAudito.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.InspeccionAudito.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
@@ -4634,7 +4634,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONES GENERALES").Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspGuiBPMFabMedicamento.DatosConclusiones.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.ObservacionesFinales);
 
                             });
 
@@ -4649,11 +4649,11 @@ namespace Aig.Auditoria.Services
                                 });
 
                                 table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
-                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabMedicamento.RegenteFarmaceutico?.Firma))
+                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
-                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
                                     table.Cell().AlignLeft().Image(memoryStream);
                                 }
@@ -4661,11 +4661,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
-                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabMedicamento.RepresentLegal?.Firma))
+                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
-                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabMedicamento.RepresentLegal.Firma.Split("image/png;base64,")[1]);
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
                                     table.Cell().AlignLeft().Image(memoryStream);
                                 }
@@ -4674,15 +4674,15 @@ namespace Aig.Auditoria.Services
                                     table.Cell().AlignLeft().Text("");
                                 }
 
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabMedicamento.RegenteFarmaceutico?.Nombre, inspection.InspGuiBPMFabMedicamento.RegenteFarmaceutico?.Cedula));
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabMedicamento.RepresentLegal?.Nombre, inspection.InspGuiBPMFabMedicamento.RepresentLegal?.Cedula));
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Nombre, inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Cedula));
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal?.Nombre, inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal?.Cedula));
 
                                 table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
-                                if (inspection.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes != null)
+                                if (inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes != null)
                                 {
                                     table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
-                                    foreach (var participant in inspection.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes)
+                                    foreach (var participant in inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
                                     {
                                         table.Cell().Table(tbl =>
                                         {
@@ -4704,7 +4704,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspGuiBPMFabMedicamento.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+                            column.Item().PaddingVertical(10).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 

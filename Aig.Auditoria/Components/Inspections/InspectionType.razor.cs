@@ -112,7 +112,7 @@ namespace Aig.Auditoria.Components.Inspections
                         }
                     case DataModel.Helper.enumAUD_TipoActa.BPMCD:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabMedicamento = new AUD_InspGuiBPMFabCosmeticoMedTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabCosmeticoMed = new AUD_InspGuiBPMFabCosmeticoMedTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.AECA:

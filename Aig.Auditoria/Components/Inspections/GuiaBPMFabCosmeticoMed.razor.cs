@@ -9,7 +9,7 @@ using Aig.Auditoria.Events.Language;
 
 namespace Aig.Auditoria.Components.Inspections
 {
-    public partial class GuiBPMFabMedicamento
+    public partial class GuiaBPMFabCosmeticoMed
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -105,15 +105,15 @@ namespace Aig.Auditoria.Components.Inspections
                 }
 
                 if (signaturePad5 != null)
-                    signaturePad5.Image = Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Firma;
+                    signaturePad5.Image = Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma;
                 if (signaturePad6 != null)
-                    signaturePad6.Image = Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Firma;
+                    signaturePad6.Image = Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma;
 
-                foreach (var partic in Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes)
+                foreach (var partic in Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
                 {
                     try
                     {
-                        lSignaturePads[Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes.IndexOf(partic)].Image = partic.Firma;
+                        lSignaturePads[Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes.IndexOf(partic)].Image = partic.Firma;
                     }
                     catch (Exception ex) { }
                 }
@@ -156,17 +156,17 @@ namespace Aig.Auditoria.Components.Inspections
             var establecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault();
             Inspeccion.UbicacionEstablecimiento = establecimiento?.Ubicacion ?? "";
             Inspeccion.TelefonoEstablecimiento = establecimiento?.Telefono1 ?? "";
-            Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
-            Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
-            Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
-            Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
-            Inspeccion.InspGuiBPMFabMedicamento.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
+            Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
+            Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
+            Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
+            Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
+            Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
         }
 
 
         protected async Task OnShowSignasure()
         {
-            if (!showSignasure && Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes.Count > 0)
+            if (!showSignasure && Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes.Count > 0)
             {
                 lSignaturePads.Clear();
                 showSignasure = true;
@@ -187,11 +187,11 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
+            Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg5()
         {
-            Inspeccion.InspGuiBPMFabMedicamento.RepresentLegal.Firma = null;
+            Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma = null;
             signaturePad5.Image = null;
         }
         protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
@@ -201,11 +201,11 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Firma = await signaturePad6.ToDataURL(signatureType);
+            Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma = await signaturePad6.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg6()
         {
-            Inspeccion.InspGuiBPMFabMedicamento.RegenteFarmaceutico.Firma = null;
+            Inspeccion.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma = null;
             signaturePad6.Image = null;
         }
 
@@ -215,13 +215,13 @@ namespace Aig.Auditoria.Components.Inspections
         protected async Task OnSignatureChange(Participante _participante)
         {
             await RemoveSignatureImg(_participante);
-            var _signaturePad = lSignaturePads[Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes.IndexOf(_participante)];
+            var _signaturePad = lSignaturePads[Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes.IndexOf(_participante)];
             _participante.Firma = await _signaturePad.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg(Participante _participante)
         {
             _participante.Firma = null;
-            var _signaturePad = lSignaturePads[Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes.IndexOf(_participante)];
+            var _signaturePad = lSignaturePads[Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes.IndexOf(_participante)];
             _signaturePad.Image = null;
         }
 
@@ -244,7 +244,7 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 try
                 {
-                    Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes.Remove(_participante);
+                    Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes.Remove(_participante);
                 }
                 catch { }
 
@@ -263,8 +263,8 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (message.Data != null)
             {
-                if (!Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes.Contains(message.Data))
-                    Inspeccion.InspGuiBPMFabMedicamento.DatosConclusiones.LParticipantes.Add(message.Data);
+                if (!Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes.Contains(message.Data))
+                    Inspeccion.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);
@@ -287,7 +287,7 @@ namespace Aig.Auditoria.Components.Inspections
             {
                 try
                 {
-                    Inspeccion.InspGuiBPMFabMedicamento.OtrosFuncionarios.LPersona.Remove(_datosPersona);
+                    Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona.Remove(_datosPersona);
                 }
                 catch { }
 
@@ -305,8 +305,8 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (message.Data != null)
             {
-                if (!Inspeccion.InspGuiBPMFabMedicamento.OtrosFuncionarios.LPersona.Contains(message.Data))
-                    Inspeccion.InspGuiBPMFabMedicamento.OtrosFuncionarios.LPersona.Add(message.Data);
+                if (!Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona.Contains(message.Data))
+                    Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);

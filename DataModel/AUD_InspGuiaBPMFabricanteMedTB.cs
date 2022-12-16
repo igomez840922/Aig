@@ -20,6 +20,9 @@ namespace DataModel
             RespControlCalidad = new DatosPersona();
             RequisitosLegales = new AUD_ContenidoTablas();
 
+            DatosConclusiones = new AUD_DatosConclusiones();
+
+
             InicializaData();
         }
 
@@ -78,8 +81,6 @@ namespace DataModel
         // Fecha de la última visita
         private DateTime? fechaUltimaVista;
         public DateTime? FechaUltimaVista { get => fechaUltimaVista; set => SetProperty(ref fechaUltimaVista, value); }
-
-
 
 
         //CLASIFICACION DE ACTIVIDADES
@@ -216,6 +217,13 @@ namespace DataModel
         private AUD_ContenidoTablas prodCitostatico;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoTablas ProdCitostatico { get => prodCitostatico; set => SetProperty(ref prodCitostatico, value); }
+
+
+        //Datos Conclusión de Inspección
+        private AUD_DatosConclusiones datosConclusiones;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
+
 
         private void InicializaData()
         {
