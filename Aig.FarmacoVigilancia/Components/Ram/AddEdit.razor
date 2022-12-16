@@ -353,24 +353,36 @@
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["Conducta sobre Dosis"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.ConductaDosis" class="form-control">
+                                              <select class="form-control" value="@Data.EvaluacionCalidadInfo.ConductaDosis" @onchange="OnConductaDosisChange">
+                                             @foreach (enumFMV_RAMConductaDosis dt in Enum.GetValues(typeof(enumFMV_RAMConductaDosis)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                           </select>
+                                            @*<InputSelect @bind-Value="Data.EvaluacionCalidadInfo.ConductaDosis" class="form-control">
                                                 @foreach (enumFMV_RAMConductaDosis dt in Enum.GetValues(typeof(enumFMV_RAMConductaDosis)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
-                                            </InputSelect>
+                                            </InputSelect>*@
                                             <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.ConductaDosis) />
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["Conducta sobre Terapia"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.ConductaTerapia" class="form-control">
+                                             <select class="form-control" value="@Data.EvaluacionCalidadInfo.ConductaTerapia" @onchange="OnConductaTerapiaChange">
+                                             @foreach (enumFMV_RAMConductaTerapia dt in Enum.GetValues(typeof(enumFMV_RAMConductaTerapia)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                           </select>
+                                           @* <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.ConductaTerapia" class="form-control">
                                                 @foreach (enumFMV_RAMConductaTerapia dt in Enum.GetValues(typeof(enumFMV_RAMConductaTerapia)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
-                                            </InputSelect>
+                                            </InputSelect>*@
                                             <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.ConductaTerapia) />
                                         </div>
                                     </div>
@@ -378,24 +390,36 @@
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["Evolución sobre Dosis"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.EvoDosis" class="form-control">
+                                             <select class="form-control" value="@Data.EvaluacionCalidadInfo.EvoDosis" @onchange="OnEvoDosisChange">
+                                             @foreach (enumFMV_RAMEvolucionDosis dt in Enum.GetValues(typeof(enumFMV_RAMEvolucionDosis)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                           </select>
+                                           @* <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.EvoDosis" class="form-control">
                                                 @foreach (enumFMV_RAMEvolucionDosis dt in Enum.GetValues(typeof(enumFMV_RAMEvolucionDosis)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
-                                            </InputSelect>
+                                            </InputSelect>*@
                                             <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.EvoDosis) />
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["Evolución sobre Terapia"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.EvoTerapia" class="form-control">
+                                              <select class="form-control" value="@Data.EvaluacionCalidadInfo.EvoTerapia" @onchange="OnEvoTerapiaChange">
+                                             @foreach (enumFMV_RAMEvolucionTerapia dt in Enum.GetValues(typeof(enumFMV_RAMEvolucionTerapia)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                           </select>
+                                          @*  <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.EvoTerapia" class="form-control">
                                                 @foreach (enumFMV_RAMEvolucionTerapia dt in Enum.GetValues(typeof(enumFMV_RAMEvolucionTerapia)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
-                                            </InputSelect>
+                                            </InputSelect>*@
                                             <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.EvoTerapia) />
                                         </div>
                                     </div>
@@ -456,12 +480,18 @@
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["Reexposición"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.Reexposicion" class="form-control">
+                                              <select class="form-control" value="@Data.EvaluacionCalidadInfo.Reexposicion" @onchange="OnReexposicionChange">
+                                             @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                           </select>
+                                           @* <InputSelect @bind-Value="Data.EvaluacionCalidadInfo.Reexposicion" class="form-control">
                                                 @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
-                                            </InputSelect>
+                                            </InputSelect>*@
                                             <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.Reexposicion) />
                                         </div>
                                     </div>
@@ -890,7 +920,7 @@
                                         <label>@languageContainerService.Keys["Incongruencia Conducta_No Disminuyó Dosis /Evolución"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo" />
+                                                <InputText  disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo" />
                                                 <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo) />
                                             </div>
                                         </div>
@@ -900,7 +930,7 @@
                                         <label>@languageContainerService.Keys["Incongruencia Conducta_Mantuvo la Terapia/Evolución"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo" />
+                                                <InputText  disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo" />
                                                 <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo) />
                                             </div>
                                         </div>
@@ -910,7 +940,7 @@
                                         <label>@languageContainerService.Keys["Incongruencia Conducta_Suspendió la terapia/ REEX"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex" />
+                                                <InputText  disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex" />
                                                 <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex) />
                                             </div>
                                         </div>
@@ -922,7 +952,7 @@
                                         <label>@languageContainerService.Keys["Incongruencia Conducta_Mantuvo la terapia/ REEX"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex" />
+                                                <InputText  disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex" />
                                                 <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex) />
                                             </div>
                                         </div>
@@ -932,7 +962,7 @@
                                         <label>@languageContainerService.Keys["Incongruencia Reexposición/Consecuencia de REEX"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaConReex" />
+                                                <InputText  disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaConReex" />
                                                 <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaConReex) />
                                             </div>
                                         </div>

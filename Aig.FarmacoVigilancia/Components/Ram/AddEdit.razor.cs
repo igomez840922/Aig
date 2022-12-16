@@ -59,9 +59,10 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             base.OnInitialized();
         }
 
+
         //-----------------------Nomenclators--------------------------------
-      
-     
+
+
         public void OnAtcChanged()
         {
             Data.SubGrupoTerapeutico = GetATC2doNivel(Data.Atc);
@@ -233,6 +234,99 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             Data.EvaluacionCausalidad.IntRam = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMIntensidad>(value);
             Data.EvaluacionCausalidad.Gravedad = GetGRAVEDAD(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.IntRam));
         }
+        private void OnConductaDosisChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCalidadInfo.ConductaDosis = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMConductaDosis>(value);
+            UpdateIncongruenciaCondDosisEvo();
+        }
+        private void OnEvoDosisChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCalidadInfo.EvoDosis = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMEvolucionDosis>(value);
+            UpdateIncongruenciaCondDosisEvo();
+        }
+
+        private void UpdateIncongruenciaCondDosisEvo()
+        {
+            // Incongruencia Conducta_No Disminuyó Dosis /Evolución.
+            /*
+                FÓRMULA: Si [conductaDosis]="" y [evoDosis]="" entonces [incongruenciaCondDosisEvo]=""
+                         sino: Si [conductaDosis]="No disminuyó la dosis" entonces
+                                    Si [evoDosis]="Desapareció la reacción al disminuir la dosis" o [evoDosis]="Permanece la reacción al disminuir la dosis" entonces [incongruenciaCondDosisEvo]="Incongruente"
+                                    sino entonces [incongruenciaCondDosisEvo]=""
+            */
+            var value = string.Empty;
+            if (Data.EvaluacionCalidadInfo.ConductaDosis== enumFMV_RAMConductaDosis.NODISDOSIS) {
+                if (Data.EvaluacionCalidadInfo.EvoDosis== enumFMV_RAMEvolucionDosis.DESREACC || 
+                    Data.EvaluacionCalidadInfo.EvoDosis == enumFMV_RAMEvolucionDosis.PERREACC)
+                {
+                    value = "Incongruente";
+                }
+            }
+            Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo = value;
+        }
+
+        private void OnConductaTerapiaChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCalidadInfo.ConductaTerapia = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMConductaTerapia>(value);
+            UpdateIncongruenciaCondTerapiaEvo();
+            UpdateIncongruenciaCondSuspTerapiaReex();
+        }
+        private void OnEvoTerapiaChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCalidadInfo.EvoTerapia = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMEvolucionTerapia>(value);
+            UpdateIncongruenciaCondTerapiaEvo();
+        }
+        
+        private void UpdateIncongruenciaCondTerapiaEvo()
+        {
+
+            // Incongruencia Conducta_Mantuvo la Terapia/Evolución
+            /*
+                FÓRMULA: Si [conductaTerapia]="" y [evoTerapia]="" entonces [incongruenciaCondTerapiaEvo]=""
+                         sino: Si [conductaTerapia]="Mantuvo la terapia" entonces
+                                    Si [evoTerapia]="Desapareció la reacción al suspender el uso de medicamento sospechoso" o [evoTerapia]="Permanece la reacción al suspender el uso de medicamento sospechoso" entonces [incongruenciaCondTerapiaEvo]="Incongruente"
+                                    sino entonces [incongruenciaCondTerapiaEvo]=""
+            */
+
+            var value = string.Empty;
+            if (Data.EvaluacionCalidadInfo.ConductaTerapia == enumFMV_RAMConductaTerapia.MANTERAPIA){
+                if (Data.EvaluacionCalidadInfo.EvoTerapia ==enumFMV_RAMEvolucionTerapia.DESREACC||
+                    Data.EvaluacionCalidadInfo.EvoTerapia == enumFMV_RAMEvolucionTerapia.PERREACC)
+                {
+                    value = "Incongruente";
+                }
+            }
+            Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo = value;
+        }
+
+        private void OnReexposicionChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCalidadInfo.Reexposicion = DataModel.Helper.Helper.ParseEnum<enumOpcionSiNo>(value);
+            UpdateIncongruenciaCondSuspTerapiaReex();
+        }
+
+        private void UpdateIncongruenciaCondSuspTerapiaReex()
+        {
+
+            // Incongruencia Conducta_Suspendió la terapia/ REEX
+            /*
+                FÓRMULA: Si [conductaTerapia]="" y [reexposicion]="" entonces [incongruenciaCondSuspTerapiaReex]=""
+                         sino: Si [conductaTerapia]="Suspendió la terapia" y [reexposicion]="Sí" entonces [incongruenciaCondSuspTerapiaReex]="Incongruente"
+                               sino entonces [incongruenciaCondSuspTerapiaReex]=""
+            */
+
+            var value = string.Empty;
+            if (Data.EvaluacionCalidadInfo.ConductaTerapia == enumFMV_RAMConductaTerapia.SUSTERAPIA && Data.EvaluacionCalidadInfo.Reexposicion == enumOpcionSiNo.Si)
+                value = "Incongruente";
+            Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex = value;
+        }
+
+
         //-----------------------Nomenclators--------------------------------
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
