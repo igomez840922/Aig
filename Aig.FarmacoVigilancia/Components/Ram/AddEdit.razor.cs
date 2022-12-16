@@ -51,21 +51,49 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             base.OnInitialized();
         }
 
+        //-----------------------RAM Rules--------------------------------
 
-        //-----------------------Nomenclators--------------------------------
+        #region RAM Rules
 
+        private void OnRamTypeChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.RamType = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMType>(value);
+            UpdateGrado0();
+        }
+        void OnFechaTratamientoChange(DateTime? value, string name, string format)
+        {
+            UpdateGrado0();
+        }
+        void OnRAMDateChange(DateTime? value, string name, string format)
+        {
+            UpdateGrado0();
+        }
+        private void UpdateGrado0()
+        {   // Grado 0
+            /* FÓRMULA: Si [farSosDCI]="", [hayRam]="", [fechaTratamiento]="" y [hayRam]="" entonces grado0=""
+                         sino: Si [farSosDCI]!="", [hayRam]="Sí hay RAM" entonces
+                                    Si [fechaTratamiento]="" o [hayRam]="" entonces grado0=Grado 0
+                                    sino: grado0=""
+            */
+            var value = string.Empty;
+            if (Data.RamType == enumFMV_RAMType.SiRam && Data.EvaluacionCalidadInfo.FechaTratamiento == null && Data.EvaluacionCalidadInfo.FechaRam == null)
+                value = "Grado 0";
+            Data.EvaluacionCalidadInfo.Grado = value;
+        }
 
         public void OnAtcChanged()
         {
             Data.SubGrupoTerapeutico = GetATC2doNivel(Data.Atc);
         }
 
-        private string GetATC2doNivel(string term){
+        private string GetATC2doNivel(string term)
+        {
             string value = string.Empty;
             if (string.IsNullOrEmpty(term)) return value;
             var search = term.Trim();
-            if(search.Length>3)
-               search = term.Trim()[..3].ToString();
+            if (search.Length > 3)
+                search = term.Trim()[..3].ToString();
             var result = Helper.Helper.GetNomenclatorValue("ATC2doNivel.json");
             if (string.IsNullOrEmpty(result)) return value;
             var jsonData = JsonSerializer.Deserialize<List<ATC2doNivelModel>>(result);
@@ -249,8 +277,9 @@ namespace Aig.FarmacoVigilancia.Components.Ram
                                     sino entonces [incongruenciaCondDosisEvo]=""
             */
             var value = string.Empty;
-            if (Data.EvaluacionCalidadInfo.ConductaDosis== enumFMV_RAMConductaDosis.NODISDOSIS) {
-                if (Data.EvaluacionCalidadInfo.EvoDosis== enumFMV_RAMEvolucionDosis.DESREACC || 
+            if (Data.EvaluacionCalidadInfo.ConductaDosis == enumFMV_RAMConductaDosis.NODISDOSIS)
+            {
+                if (Data.EvaluacionCalidadInfo.EvoDosis == enumFMV_RAMEvolucionDosis.DESREACC ||
                     Data.EvaluacionCalidadInfo.EvoDosis == enumFMV_RAMEvolucionDosis.PERREACC)
                 {
                     value = "Incongruente";
@@ -273,7 +302,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             Data.EvaluacionCalidadInfo.EvoTerapia = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMEvolucionTerapia>(value);
             UpdateIncongruenciaCondTerapiaEvo();
         }
-        
+
         private void UpdateIncongruenciaCondTerapiaEvo()
         {
 
@@ -286,8 +315,9 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             */
 
             var value = string.Empty;
-            if (Data.EvaluacionCalidadInfo.ConductaTerapia == enumFMV_RAMConductaTerapia.MANTERAPIA){
-                if (Data.EvaluacionCalidadInfo.EvoTerapia ==enumFMV_RAMEvolucionTerapia.DESREACC||
+            if (Data.EvaluacionCalidadInfo.ConductaTerapia == enumFMV_RAMConductaTerapia.MANTERAPIA)
+            {
+                if (Data.EvaluacionCalidadInfo.EvoTerapia == enumFMV_RAMEvolucionTerapia.DESREACC ||
                     Data.EvaluacionCalidadInfo.EvoTerapia == enumFMV_RAMEvolucionTerapia.PERREACC)
                 {
                     value = "Incongruente";
@@ -342,7 +372,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             Data.EvaluacionCalidadInfo.ConReexposicion = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMConsecuenciaReexposicion>(value);
             UpdateIncongruenciaConReex();
         }
-        
+
 
         private void UpdateIncongruenciaConReex()
         {
@@ -355,7 +385,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             */
 
             var value = string.Empty;
-            if(Data.EvaluacionCalidadInfo.Reexposicion == enumOpcionSiNo.No)
+            if (Data.EvaluacionCalidadInfo.Reexposicion == enumOpcionSiNo.No)
             {
                 if (Data.EvaluacionCalidadInfo.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.REAP || Data.EvaluacionCalidadInfo.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.NREAP)
                     value = "Incongruente";
@@ -363,7 +393,10 @@ namespace Aig.FarmacoVigilancia.Components.Ram
             Data.ObservacionInfoNotifica.IncongruenciaConReex = value;
         }
 
-        //-----------------------Nomenclators--------------------------------
+
+        #endregion
+
+        //-----------------------RAM Rules--------------------------------
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

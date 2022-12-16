@@ -140,12 +140,18 @@
                                         <label>@languageContainerService.Keys["¿Hay RAM?"]</label>
 
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.RamType" class="form-control">
+                                              <select class="form-control" value="@Data.RamType" @onchange="OnRamTypeChange">
+                                             @foreach (enumFMV_RAMType dt in Enum.GetValues(typeof(enumFMV_RAMType)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                           </select>
+                                           @* <InputSelect @bind-Value="Data.RamType" class="form-control">
                                                 @foreach (enumFMV_RAMType dt in Enum.GetValues(typeof(enumFMV_RAMType)))
                                                 {
                                                 <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
-                                        </InputSelect>
+                                        </InputSelect>*@
                                         <ValidationMessage For=@(() => Data.RamType) />
                                     </div>
                                 </div>                              
@@ -312,7 +318,7 @@
                                         <label>@languageContainerService.Keys["Fecha de Tratamiento"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.EvaluacionCalidadInfo.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker  Change="@(args => OnFechaTratamientoChange(args, "Calendar", "MM/dd/yyyy"))" TValue="DateTime?" @bind-Value="Data.EvaluacionCalidadInfo.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.FechaTratamiento) />
                                             </div>
                                         </div>
@@ -321,7 +327,7 @@
                                         <label>@languageContainerService.Keys["Fecha de RAM"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.EvaluacionCalidadInfo.FechaRam" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker  Change="@(args => OnRAMDateChange(args, "Calendar", "MM/dd/yyyy"))"  TValue="DateTime?" @bind-Value="Data.EvaluacionCalidadInfo.FechaRam" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.FechaRam) />
                                             </div>
                                         </div>
@@ -465,7 +471,7 @@
                                         <label>@languageContainerService.Keys["Grado"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.EvaluacionCalidadInfo.Grado" />
+                                                <InputText disabled="disabled" class="form-control" @bind-Value="Data.EvaluacionCalidadInfo.Grado" />
                                                 <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.Grado) />
                                             </div>
                                         </div>
