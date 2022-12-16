@@ -1,0 +1,22 @@
+[
+  {
+    "CPREV": "RAM bien conocida",
+    "Descripcion": "RAM bien conocida a partir de las publicaciones habituales de referencia, estudios epidemiológicos y/o a partir del perfil farmacológico del fármaco sospechoso",
+    "Puntuacion": 2
+  },
+  {
+    "CPREV": "RAM conocida en referencias ocasionales",
+    "Descripcion": "RAM documentada en fuentes de información ocasionales",
+    "Puntuacion": 1
+  },
+  {
+    "CPREV": "RAM desconocida",
+    "Descripcion": "RAM no reportadas en las fuentes de información consultadas",
+    "Puntuacion": 0
+  },
+  {
+    "CPREV": "Existe información en contra de la relación fármaco-RAM",
+    "Descripcion": "La aparición de la RAM está en contra de la relación fármaco-RAM",
+    "Puntuacion": -1
+  }
+]

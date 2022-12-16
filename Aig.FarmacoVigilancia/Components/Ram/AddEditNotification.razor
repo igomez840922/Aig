@@ -592,8 +592,9 @@
                                     <label>@languageContainerService.Keys["Probabilidad"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                              <InputText class="form-control" @bind-Value="Notification.EvaluacionCausalidad.Probabilidad" /> 
-                                            <ValidationMessage For=@(() => Notification.EvaluacionCausalidad.Probabilidad) />
+                                            <input disabled="disabled"  class="form-control" type="text" value="@Notification.EvaluacionCausalidad.Probabilidad">
+                                            @*  <InputText class="form-control" @bind-Value="Notification.EvaluacionCausalidad.Probabilidad" />
+                                            <ValidationMessage For=@(() => Notification.EvaluacionCausalidad.Probabilidad) /> *@
                                         </div>
                                     </div>
                                 </div>

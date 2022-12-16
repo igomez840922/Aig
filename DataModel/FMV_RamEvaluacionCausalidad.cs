@@ -163,8 +163,13 @@ namespace DataModel
             FÓRMULA: Si [stemp]="", [cprev]="", [reti]="", [reex]="", [alter]="", [facon]="" y [xplc]="" entonces [puntuacion]=""
                      sino entonces [puntuacion]=[stemp]+[cprev]+[reti]+[reex]+[alter]+[facon]+[xplc]
         */
-        private int puntuacion;
-        public int Puntuacion { get => puntuacion; set => SetProperty(ref puntuacion, value); }
+        //private int puntuacion;
+        //public int Puntuacion { get => puntuacion; set => SetProperty(ref puntuacion, value); }
+
+        public int Puntuacion
+        {
+            get { return (stemp + cprev + reti + reex + alter + facon + xplc);}
+        }
 
         // Probabilidad
         /*
@@ -176,8 +181,24 @@ namespace DataModel
                                              sino: Si [xplc]>=8 entonces [probabilidad]="Definida"
                                                    sino entonces [probabilidad]="ERROR"
         */
-        private string probabilidad;
-        public string Probabilidad { get => probabilidad; set => SetProperty(ref probabilidad, value); }
+        //private string probabilidad;
+        //public string Probabilidad { get => probabilidad; set => SetProperty(ref probabilidad, value); }
+
+        public string Probabilidad
+        {
+            get {
+
+                return Puntuacion switch
+                {
+                    <= 0=> "Improbable",
+                    > 0 and < 4 => "Condicional",
+                    >= 4 and < 6 => "Posible",
+                    >= 6 and < 8 => "Probable",
+                    >= 8 => "Definida",
+                };
+
+            }
+        }
 
 
         // Intensidad de la RAM. Total=9. Ocasiona la muerte, Pueda poner en peligro la vida, Requiere o prolonga una hospitalización, Produce una anomalía congénita o defecto al nacer

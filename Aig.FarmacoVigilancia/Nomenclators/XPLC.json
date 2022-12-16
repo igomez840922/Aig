@@ -1,0 +1,12 @@
+[
+  {
+    "XPLC": "No hay exploraciones complementarias",
+    "Descripcion": "",
+    "Puntuacion": 0
+  },
+  {
+    "XPLC": "Existen exploraciones complementarias",
+    "Descripcion": "Las exploraciones complementarias encaminadas a establecer el diagnóstico diferencial pueden ser de gran ayuda para evaluar la relación de causalidad. Ejm: determinación de los niveles séricos del fármaco, biopsias, exploraciones radiológicas, pruebas de alergias, alteraciones enzimáticas, etc.,",
+    "Puntuacion": 1
+  }
+]

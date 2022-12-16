@@ -37,6 +37,10 @@ namespace DataModel.Helper
             return null; // could also return string.Empty
         }
 
-        
+        public static T ParseEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
+
     }
 }

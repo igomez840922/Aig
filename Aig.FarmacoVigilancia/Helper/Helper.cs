@@ -1,4 +1,6 @@
-﻿namespace Aig.FarmacoVigilancia.Helper
+﻿using System.Reflection;
+
+namespace Aig.FarmacoVigilancia.Helper
 {
     public static class Helper
     {
@@ -58,6 +60,16 @@
             }
 
             return "";
+        }
+
+        public static string GetNomenclatorValue(string file)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = $"{assembly.GetName().Name}.Nomenclators.{file}";
+            using var stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream == null) return string.Empty;
+            using var reader = new StreamReader(stream);
+            return reader.ReadToEnd();
         }
 
     }

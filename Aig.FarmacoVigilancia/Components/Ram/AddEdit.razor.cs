@@ -1,9 +1,12 @@
 ﻿using Aig.FarmacoVigilancia.Events.Language;
+using Aig.FarmacoVigilancia.Nomenclators;
 using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
 using DataModel;
+using DataModel.Helper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Text.Json;
 
 namespace Aig.FarmacoVigilancia.Components.Ram
 {   
@@ -42,11 +45,195 @@ namespace Aig.FarmacoVigilancia.Components.Ram
 
         protected async override Task OnInitializedAsync()
         {
+            Data.EvaluacionCausalidad.Stemp = GetSTEMP(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.SecTemporal));
+            Data.EvaluacionCausalidad.Cprev = GetCPREV(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.ConPrevio));
+            Data.EvaluacionCausalidad.Reti = GetRETI(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.EfecRetirada));
+            Data.EvaluacionCausalidad.Reex = GetRETI(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.EfecReexposicion));
+            Data.EvaluacionCausalidad.Alter = GetALTER(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.CausasAlter));
+            Data.EvaluacionCausalidad.Facon = GetFACON(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.FactContribuyentes));
+            Data.EvaluacionCausalidad.Xplc = GetXPLC(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.ExpComplementarias));
+            Data.EvaluacionCausalidad.Gravedad = GetGRAVEDAD(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.IntRam));
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-
             base.OnInitialized();
         }
+
+        //-----------------------Nomenclators--------------------------------
+      
+     
+        public void OnAtcChanged()
+        {
+            Data.SubGrupoTerapeutico = GetATC2doNivel(Data.Atc);
+        }
+
+        private string GetATC2doNivel(string term){
+            string value = string.Empty;
+            if (string.IsNullOrEmpty(term)) return value;
+            var search = term.Trim();
+            if(search.Length>3)
+               search = term.Trim()[..3].ToString();
+            var result = Helper.Helper.GetNomenclatorValue("ATC2doNivel.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<ATC2doNivelModel>>(result);
+            ATC2doNivelModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.ATC2doNivel.ToLower().StartsWith(search.ToLower()))) != null)
+                value = find.Subgrupo;
+            return value;
+        }
+
+        private void OnSecTemporalChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCausalidad.SecTemporal = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMSecuenciaTemp>(value);
+            Data.EvaluacionCausalidad.Stemp = GetSTEMP(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.SecTemporal));
+        }
+        private int GetSTEMP(string term)
+        {
+            int value = 0;
+            if (string.IsNullOrEmpty(term)) return value;
+            var result = Helper.Helper.GetNomenclatorValue("STEMP.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<STEMPModel>>(result);
+            STEMPModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.STEMP.ToLower() == term.ToLower())) != null)
+                value = find.Puntuacion;
+            return value;
+        }
+
+        private void OnConPrevioChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCausalidad.ConPrevio = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMConocimientoPrev>(value);
+            Data.EvaluacionCausalidad.Cprev = GetCPREV(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.ConPrevio));
+        }
+
+        private int GetCPREV(string term)
+        {
+            int value = 0;
+            if (string.IsNullOrEmpty(term)) return value;
+            var result = Helper.Helper.GetNomenclatorValue("CPREV.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<CPREVModel>>(result);
+            CPREVModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.CPREV.ToLower() == term.ToLower())) != null)
+                value = find.Puntuacion;
+            return value;
+        }
+        private void OnEfecRetiradaChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCausalidad.EfecRetirada = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMEfectoRetirada>(value);
+            Data.EvaluacionCausalidad.Reti = GetRETI(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.EfecRetirada));
+        }
+
+        private int GetRETI(string term)
+        {
+            int value = 0;
+            if (string.IsNullOrEmpty(term)) return value;
+            var result = Helper.Helper.GetNomenclatorValue("RETI.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<RETIModel>>(result);
+            RETIModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.RETI.ToLower() == term.ToLower())) != null)
+                value = find.Puntuacion;
+            return value;
+        }
+        private void OnEfecReexposicionChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCausalidad.EfecReexposicion = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMEfectoReexposicion>(value);
+            Data.EvaluacionCausalidad.Reex = GetREEXP(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.EfecReexposicion));
+        }
+        private int GetREEXP(string term)
+        {
+            int value = 0;
+            if (string.IsNullOrEmpty(term)) return value;
+            var result = Helper.Helper.GetNomenclatorValue("REEXP.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<REEXPModel>>(result);
+            REEXPModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.REEXP.ToLower() == term.ToLower())) != null)
+                value = find.Puntuacion;
+            return value;
+        }
+        private void OnCausasAlterChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCausalidad.CausasAlter = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMCausaAlternat>(value);
+            Data.EvaluacionCausalidad.Alter = GetALTER(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.CausasAlter));
+        }
+        private int GetALTER(string term)
+        {
+            int value = 0;
+            if (string.IsNullOrEmpty(term)) return value;
+            var result = Helper.Helper.GetNomenclatorValue("ALTER.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<ALTERModel>>(result);
+            ALTERModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.ALTER.ToLower() == term.ToLower())) != null)
+                value = find.Puntuacion;
+            return value;
+        }
+        private int GetFACON(string term)
+        {
+            int value = 0;
+            if (string.IsNullOrEmpty(term)) return value;
+            var result = Helper.Helper.GetNomenclatorValue("FACON.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<FACONModel>>(result);
+            FACONModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.FACON.ToLower() == term.ToLower())) != null)
+                value = find.Puntuacion;
+            return value;
+        }
+        private void OnFactContribuyentesChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCausalidad.FactContribuyentes = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMFactContribuyente>(value);
+            Data.EvaluacionCausalidad.Facon = GetFACON(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.FactContribuyentes));
+        }
+
+        private int GetXPLC(string term)
+        {
+            int value = 0;
+            if (string.IsNullOrEmpty(term)) return value;
+            var result = Helper.Helper.GetNomenclatorValue("XPLC.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<XPLCModel>>(result);
+            XPLCModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.XPLC.ToLower() == term.ToLower())) != null)
+                value = find.Puntuacion;
+            return value;
+        }
+
+        private void OnExpComplementariasChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCausalidad.ExpComplementarias = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMExploracionContemp>(value);
+            Data.EvaluacionCausalidad.Xplc = GetXPLC(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.ExpComplementarias));
+        }
+
+        private string GetGRAVEDAD(string term)
+        {
+            string value = string.Empty;
+            if (string.IsNullOrEmpty(term)) return value;
+            var result = Helper.Helper.GetNomenclatorValue("GRAVEDAD.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<GRAVEDADModel>>(result);
+            GRAVEDADModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.RAM.ToLower() == term.ToLower())) != null)
+                value = find.Gravedad;
+            return value;
+        }
+
+        private void OnIntRamChange(ChangeEventArgs args)
+        {
+            var value = args.Value.ToString();
+            Data.EvaluacionCausalidad.IntRam = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMIntensidad>(value);
+            Data.EvaluacionCausalidad.Gravedad = GetGRAVEDAD(DataModel.Helper.Helper.GetDescription(Data.EvaluacionCausalidad.IntRam));
+        }
+        //-----------------------Nomenclators--------------------------------
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
