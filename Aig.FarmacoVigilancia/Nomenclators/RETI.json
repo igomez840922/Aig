@@ -1,0 +1,42 @@
+[
+  {
+    "RETI": "RAM mejora",
+    "Descripcion": "El acontecimiento mejora con la retira del medicamento, independientemente de que se haya empleado un tratamiento o de que haya habido una administración única",
+    "Puntuacion": 2
+  },
+  {
+    "RETI": "RAM no mejora",
+    "Descripcion": "La RAM no mejora con la retirada del fármaco.  Nota: Si se trata de RAM mortales o irreversibles, véase RAM mortales o irreversibles.",
+    "Puntuacion": -2
+  },
+  {
+    "RETI": "No RETI y RAM no mejora",
+    "Descripcion": "No se retira el fármaco y la RAM no mejora",
+    "Puntuacion": 1
+  },
+  {
+    "RETI": "No RETI y RAM mejora",
+    "Descripcion": "No se retira el fármaco y la RAM mejora",
+    "Puntuacion": -2
+  },
+  {
+    "RETI": "No hay información",
+    "Descripcion": "En el formulario no hay información de la retirada o no del fármaco",
+    "Puntuacion": 0
+  },
+  {
+    "RETI": "RAM mortal o irreversible",
+    "Descripcion": "Este apartado incluye los casos de muerte, malformaciones congénitas y secuelas permanentes",
+    "Puntuacion": 0
+  },
+  {
+    "RETI": "No RETI y RAM mejora por tolerancia",
+    "Descripcion": "No se retira el fármaco y la RAM mejora por tolerancia",
+    "Puntuacion": 1
+  },
+  {
+    "RETI": "No RETI y RAM mejora por tratamiento",
+    "Descripcion": "No se retira el fármaco y RAM mejora por el tratamiento",
+    "Puntuacion": 1
+  }
+]

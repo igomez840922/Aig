@@ -1,0 +1,12 @@
+[
+  {
+    "FACON": "No hay factores contribuyentes",
+    "Descripcion": "",
+    "Puntuacion": 0
+  },
+  {
+    "FACON": "Factores que pueden haber contribuido a la presentación de la RAM",
+    "Descripcion": "Información adicional disponible sobre factores del paciente, factores de riesgo, interacciones con otros medicamentos o factores de su enfermedad que pueden haber contribuido a la presentación de la RAM",
+    "Puntuacion": 1
+  }
+]

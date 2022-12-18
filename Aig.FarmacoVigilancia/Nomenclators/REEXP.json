@@ -1,0 +1,32 @@
+[
+  {
+    "REEXP": "Reexposición positiva",
+    "Descripcion": "Luego de la REEXP aparece la RAM",
+    "Puntuacion": 3
+  },
+  {
+    "REEXP": "Reexposición negativa",
+    "Descripcion": "Luego de la REEXP no aparece la RAM",
+    "Puntuacion": -1
+  },
+  {
+    "REEXP": "No hay reexposición o información suficiente",
+    "Descripcion": "No hay REEXP o ningún tipo de información de la misma",
+    "Puntuacion": 0
+  },
+  {
+    "REEXP": "RAM mortal o irreversible",
+    "Descripcion": "Este apartado incluye los casos de muerte, malformaciones congénitas y secuelas permanentes",
+    "Puntuacion": 0
+  },
+  {
+    "REEXP": "Reacción previa similar con otras especialidades farmacéuticas con el mismo principio activo",
+    "Descripcion": "RAM previa similar con otras especialidades farmacéuticas con el mismo principio activo",
+    "Puntuacion": 1
+  },
+  {
+    "REEXP": "Reacción previa similar con otro fármaco con mismo mecanismo de acción o reactividad cruzada",
+    "Descripcion": "RAM previa similar con otro fármaco con mismo mecanismo de acción o reactividad cruzada",
+    "Puntuacion": 1
+  }
+]

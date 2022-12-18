@@ -1,0 +1,34 @@
+[
+  {
+    "RAM": "Ocasiona la muerte",
+    "Gravedad": "Grave"
+  },
+  {
+    "RAM": "Pueda poner en peligro la vida",
+    "Gravedad": "Grave"
+  },
+  {
+    "RAM": "Requiere o prolonga una hospitalización",
+    "Gravedad": "Grave"
+  },
+  {
+    "RAM": "Produce una anomalía congénita o defecto al nacer",
+    "Gravedad": "Grave"
+  },
+  {
+    "RAM": "Provoca una incapacidad persistente significativa",
+    "Gravedad": "Grave"
+  },
+  {
+    "RAM": "Enfermedad o síndrome médicamente significativo o importante",
+    "Gravedad": "Grave"
+  },
+  {
+    "RAM": "Interfiere con las actividades habituales. Requieren intervención o tratamiento médico",
+    "Gravedad": "Moderada"
+  },
+  {
+    "RAM": "Fácilmente tolerado. No requieren terapia ni intervención médica",
+    "Gravedad": "Leve"
+  }
+]
