@@ -38,6 +38,11 @@ namespace DataModel.Helper
             return null; // could also return string.Empty
         }
 
+        public static T ParseEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
+
         public static List<EnumDataType> GetEnumList<T>(this T e) where T : IConvertible
         {
             if (e is Enum)
