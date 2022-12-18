@@ -98,6 +98,11 @@ namespace Aig.Auditoria.Services
                             return await GenerateDisposicionFinalProd(inspection);
                             break;
                         }
+                    case DataModel.Helper.enumAUD_TipoActa.BPMFM:
+                        {
+                            return await GenerateGuiaFabricantesMedicamentos(inspection);
+                            break;
+                        }
                 }
             }
             catch { }
@@ -145,7 +150,7 @@ namespace Aig.Auditoria.Services
                               table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA DE RETENCIÓN Y/O RETIRO DE PRODUCTOS FARMACÉUTICOS").Bold();
                           });
                                                    
-                          page.Content().PaddingVertical(15).Column(column =>
+                          page.Content().PaddingVertical(8).Column(column =>
                               {
                                   string participantes = "";
                                   if (inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes!=null)
@@ -209,7 +214,7 @@ namespace Aig.Auditoria.Services
                                   
                                   });
 
-                                  column.Item().PaddingVertical(10).Text(string.Format("Los productos retenidos y retirados del establecimiento se mantendrán bajo custodia en las instalaciones de la Dirección Nacional de Farmacia y Drogas, hasta culminar las investigaciones.\r\nLos productos farmacéuticos que se mantengan retenidos en el local no podrán ser movidos del lugar donde se fijó su ubicación al momento de levantar este documento.\r\n"));
+                                  column.Item().PaddingVertical(5).Text(string.Format("Los productos retenidos y retirados del establecimiento se mantendrán bajo custodia en las instalaciones de la Dirección Nacional de Farmacia y Drogas, hasta culminar las investigaciones.\r\nLos productos farmacéuticos que se mantengan retenidos en el local no podrán ser movidos del lugar donde se fijó su ubicación al momento de levantar este documento.\r\n"));
 
                                   ////////////////////////////
                                   ///
@@ -278,7 +283,7 @@ namespace Aig.Auditoria.Services
 
                                   });
 
-                                  column.Item().PaddingVertical(10).Text(" ");
+                                  column.Item().PaddingVertical(5).Text(" ");
                                   column.Item().AlignBottom().Table(table =>
                                   {
                                       table.ColumnsDefinition(columns =>
@@ -354,7 +359,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE FARMACIA").Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -363,7 +368,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}",DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -420,7 +425,7 @@ namespace Aig.Auditoria.Services
                                 });
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -461,7 +466,7 @@ namespace Aig.Auditoria.Services
                                 });
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -521,7 +526,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -560,7 +565,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -597,7 +602,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -690,7 +695,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -740,7 +745,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -851,7 +856,7 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -867,7 +872,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -890,10 +895,10 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Text("OBSERVACIÓN:").Bold();
+                            column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
                             column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
 
-                            column.Item().PaddingVertical(10).Text("DE NO CUMPLIR CON LOS REQUISITOS MÍNIMOS ESTRUCTURALES EN ESTA ACTA, EL USUARIO DEBERÁ SUBSANAR TODOS LOS PUNTOS PENDIENTES, PARA SU DEBIDA VERIFICACIÓN EN UNA SEGUNDA INSPECCIÓN. DE REINCIDIR EN LAS DESVIACIONES IDENTIFICADAS EN LA PRIMERA INSPECCIÓN, SE PROCEDERÁ A LA DEVOLUCIÓN DE LA SOLICITUD Y EL INTERESADO DEBERÁ REINICIAR EL TRÁMITE CON TODOS LOS REQUISITOS ESTABLECIDOS PARA EL MISMO").Bold();
+                            column.Item().PaddingVertical(5).Text("DE NO CUMPLIR CON LOS REQUISITOS MÍNIMOS ESTRUCTURALES EN ESTA ACTA, EL USUARIO DEBERÁ SUBSANAR TODOS LOS PUNTOS PENDIENTES, PARA SU DEBIDA VERIFICACIÓN EN UNA SEGUNDA INSPECCIÓN. DE REINCIDIR EN LAS DESVIACIONES IDENTIFICADAS EN LA PRIMERA INSPECCIÓN, SE PROCEDERÁ A LA DEVOLUCIÓN DE LA SOLICITUD Y EL INTERESADO DEBERÁ REINICIAR EL TRÁMITE CON TODOS LOS REQUISITOS ESTABLECIDOS PARA EL MISMO").Bold();
 
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
@@ -1035,7 +1040,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE AGENCIA DISTRIBUIDORA").Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -1045,7 +1050,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1102,7 +1107,7 @@ namespace Aig.Auditoria.Services
                                 });
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1143,7 +1148,7 @@ namespace Aig.Auditoria.Services
                                 });
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1179,7 +1184,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1215,7 +1220,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1267,7 +1272,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1443,7 +1448,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1479,7 +1484,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1518,7 +1523,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1565,7 +1570,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1616,7 +1621,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1664,7 +1669,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1699,7 +1704,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1734,7 +1739,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1805,7 +1810,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1840,7 +1845,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1859,7 +1864,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1906,7 +1911,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1961,7 +1966,7 @@ namespace Aig.Auditoria.Services
 
 
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -1977,7 +1982,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2024,10 +2029,10 @@ namespace Aig.Auditoria.Services
                                 }
                             });
                             
-                            column.Item().PaddingVertical(10).Text("OBSERVACIÓN:").Bold();
+                            column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
                             column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
 
-                            column.Item().PaddingVertical(10).Text("COMO PARTE DE LOS REQUISITOS PARA LA EMISIÓN DE LA LICENCIA DE OPERACIÓN, LAS DESVIACIONES OBSERVADAS EN LA INSPECCIÓN, DEBERÁN SER SUBSANADAS EN UN TERMINO NO MAYOR A 20 DÍAS, DENTRO DE LOS CUALES DEBEN NOTIFICAR A LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS. PARA REALIZAR LA INSPECCIÓN DEFINITIVA").Bold();
+                            column.Item().PaddingVertical(5).Text("COMO PARTE DE LOS REQUISITOS PARA LA EMISIÓN DE LA LICENCIA DE OPERACIÓN, LAS DESVIACIONES OBSERVADAS EN LA INSPECCIÓN, DEBERÁN SER SUBSANADAS EN UN TERMINO NO MAYOR A 20 DÍAS, DENTRO DE LOS CUALES DEBEN NOTIFICAR A LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS. PARA REALIZAR LA INSPECCIÓN DEFINITIVA").Bold();
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes"));
                             column.Item().Table(table =>
@@ -2168,7 +2173,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA DE INSPECCIÓN").Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -2176,18 +2181,18 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Nombre del establecimiento:{0}", inspection.Establecimiento.Nombre));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Nombre del establecimiento:{0}", inspection.Establecimiento.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Ubicación:{0}", inspection.UbicacionEstablecimiento));
                             column.Item().AlignLeft().Text(string.Format("Num. de Lic.:{0}", inspection.LicenseNumber));
                             column.Item().AlignLeft().Text(string.Format("Aviso de Operación:{0}", inspection.AvisoOperacion));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Siendo las {0} del {1} de {2} de {3}; actuando como colaboradores de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, procedimos a realizar inspección al establecimiento antes descrito, para verificar {4}", 
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Siendo las {0} del {1} de {2} de {3}; actuando como colaboradores de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, procedimos a realizar inspección al establecimiento antes descrito, para verificar {4}", 
                                 inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.Year, inspection.InspInvestigacion.DetalleVerificacion));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Al llegar al establecimiento fuimos atendidos por {0} con cargo de {1}, y documento de identidad personal N° {2}. A quien se le informó el motivo de la visita.",
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Al llegar al establecimiento fuimos atendidos por {0} con cargo de {1}, y documento de identidad personal N° {2}. A quien se le informó el motivo de la visita.",
     inspection.InspInvestigacion.DatosAtendidosPor.Nombre, inspection.InspInvestigacion.DatosAtendidosPor.Cargo, inspection.InspInvestigacion.DatosAtendidosPor.Cedula));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas, participaron:");
+                            column.Item().PaddingVertical(5).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas, participaron:");
                             if (inspection.InspInvestigacion.DatosConclusiones.LParticipantes != null)
                             {
                                 column.Item().Table(tbl =>
@@ -2212,10 +2217,10 @@ namespace Aig.Auditoria.Services
                                 });                                
                             }
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("A continuación, se describen los detalles de la inspección:\r\n{0}", inspection.InspInvestigacion.DetalleInspeccion));
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Se adjunta acta de retención y retiro de productos: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.AdjuntaActaRetencion)));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("A continuación, se describen los detalles de la inspección:\r\n{0}", inspection.InspInvestigacion.DetalleInspeccion));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Se adjunta acta de retención y retiro de productos: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.AdjuntaActaRetencion)));
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2231,7 +2236,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2390,7 +2395,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("Evaluación Técnica por Apertura a Fabricante de Medicamentos".ToUpper()).Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -2399,7 +2404,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2445,7 +2450,7 @@ namespace Aig.Auditoria.Services
 
                             });
                                                         
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2484,7 +2489,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2560,7 +2565,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2743,7 +2748,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2790,7 +2795,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2927,7 +2932,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -2995,7 +3000,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -3066,7 +3071,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -3105,13 +3110,13 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Procedimientos Operativos Estándares:")).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Procedimientos Operativos Estándares:")).Bold();
                             column.Item().AlignLeft().Text(string.Format("El establecimiento se compromete a que los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos, estén completos y acorde con la Normativa vigente y según las actividades a las que se dedicará el establecimiento.  De igual forma el establecimiento deberá tener a disposición de la Autoridad Reguladora los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos cuando esta lo solicite y al momento de Auditoría de Buenas prácticas de Fabricación."));
 
-                            column.Item().PaddingVertical(10).AlignCenter().Text(string.Format("CRITERIO TÉCNICO")).Bold();
+                            column.Item().PaddingVertical(5).AlignCenter().Text(string.Format("CRITERIO TÉCNICO")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el GUÍA DE VERIFICACIÓN DEL REGLAMENTO TECNICO CENTROAMERICANO RTCA 11.03.42:07 REGLAMENTO TÉCNICO SOBRE BUENAS PRÁCTICAS DE MANUFACTURA PARA LA INDUSTRIA FARMACÉUTICA. PRODUCTOS FARMACÉUTICOS Y MEDICAMENTOS DE USO HUMANO, por el cual se reglamentan las Buenas Prácticas de Manufactura de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.Establecimiento.Nombre, inspection.UbicacionEstablecimiento,(inspection.InspAperFabricante.DatosConclusiones.CumpleRequisitosMinOperacion? "SÍ CUMPLE": "NO CUMPLE"), inspection.InspAperFabricante.TipoProductos, inspection.InspAperFabricante.DatosConclusiones.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.InspAperFabricante.DatosConclusiones.FechaFinalizacion?.ToString("MM")??"01")), inspection.InspAperFabricante.DatosConclusiones.FechaFinalizacion?.Year.ToString()??""));
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -3127,7 +3132,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -3280,7 +3285,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("Guía de Laboratorio Fabricante de Fabricantes Cosmeticos Desinfectantes y Plaguicidas".ToUpper()).Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -3289,15 +3294,15 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
                             foreach (var participant in inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
                             {
                                 column.Item().AlignLeft().Text(string.Format("Lic. {0}", participant.NombreCompleto));
                             }
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Por la Empresa:"));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Por la Empresa:"));
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -3344,28 +3349,28 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Otros funcionarios de la empresa:"));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Otros funcionarios de la empresa:"));
                             foreach (var persona in inspection.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona)
                             {
                                 column.Item().AlignLeft().Text(string.Format("Lic. {0}", persona.Nombre));
                             }
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Dirección: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Direccion));
                             column.Item().AlignLeft().Text(string.Format("Ciudad: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Ciudad));
                             column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Telefono));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Email));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("RESPONSABLE DE PRODUCCIÓN:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("RESPONSABLE DE PRODUCCIÓN:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespProduccion.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespProduccion.Profesion));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("RESPONSABLE DE CONTROL DE CALIDAD:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("RESPONSABLE DE CONTROL DE CALIDAD:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Profesion));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("REQUISITOS LEGALES:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("REQUISITOS LEGALES:".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -3412,15 +3417,15 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Observaciones:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format(inspection.InspGuiBPMFabCosmeticoMed.Observaciones));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Observaciones:".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(inspection.InspGuiBPMFabCosmeticoMed.Observaciones);
 
                             column.Item().AlignLeft().Text(string.Format("¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"));
                             column.Item().AlignLeft().Text(string.Format(DataModel.Helper.Helper.GetDescription(inspection.InspGuiBPMFabCosmeticoMed.ProcesoVigilanciaSanit)));
 
                             column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiBPMFabCosmeticoMed.FechaUltimaVista?.ToString("dd/MM/yyyy")??""));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -3440,7 +3445,7 @@ namespace Aig.Auditoria.Services
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
                                 }
                             });
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("CLASIFICACIÓN DEL ESTABLECIMIENTO:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CLASIFICACIÓN DEL ESTABLECIMIENTO:".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -3483,7 +3488,7 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).Table(table =>
+                            column.Item().PaddingVertical(5).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -3547,7 +3552,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Table(table =>
+                            column.Item().PaddingVertical(5).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -3910,7 +3915,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Table(table =>
+                            column.Item().PaddingVertical(5).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -4123,7 +4128,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Table(table =>
+                            column.Item().PaddingVertical(5).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -4367,7 +4372,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Table(table =>
+                            column.Item().PaddingVertical(5).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -4461,7 +4466,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Table(table =>
+                            column.Item().PaddingVertical(5).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -4555,7 +4560,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Table(table =>
+                            column.Item().PaddingVertical(5).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -4622,7 +4627,7 @@ namespace Aig.Auditoria.Services
 
 
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -4704,7 +4709,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 
@@ -4776,7 +4781,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("Evaluación Técnica por Apertura para la Elaboración de Cosméticos Artesanales".ToUpper()).Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -4785,7 +4790,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Datos Generales:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Datos Generales:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.InspAperturaCosmetArtesanal.GeneralesEmpresa.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Provincia: {0}", inspection.InspAperturaCosmetArtesanal.GeneralesEmpresa.Provincia));
                             column.Item().AlignLeft().Text(string.Format("Corregimiento: {0}", inspection.InspAperturaCosmetArtesanal.GeneralesEmpresa.Corregimiento));
@@ -4793,11 +4798,11 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspAperturaCosmetArtesanal.GeneralesEmpresa.Telefono));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspAperturaCosmetArtesanal.GeneralesEmpresa.Email));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Propietario Artesano:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Propietario Artesano:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspAperturaCosmetArtesanal.Propietario.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspAperturaCosmetArtesanal.Propietario.Cedula));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Documentación:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Documentación:".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -4821,7 +4826,7 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Locales:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Locales:".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -4845,7 +4850,7 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Áreas de Almacenamiento:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Áreas de Almacenamiento:".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -4878,13 +4883,13 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignCenter().Text(string.Format("CRITERIO TÉCNICO")).Bold();
+                            column.Item().PaddingVertical(5).AlignCenter().Text(string.Format("CRITERIO TÉCNICO")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo N° 875 del 18 de noviembre de 2021, que reglamenta la elaboración de productos cosméticos arsenales en la República de Panamá.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1} {2} con los requisitos mínimos para la elaboración de productos cosméticos arsenales.",inspection.InspAperturaCosmetArtesanal.GeneralesEmpresa.Nombre, inspection.InspAperturaCosmetArtesanal.GeneralesEmpresa.Direccion, (inspection.InspAperturaCosmetArtesanal.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE")));
                             //0- Nombere, 1- Ubicacion, 2-Cumple 
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Dado en la ciudad de Panamá a los Dado en la ciudad de Panamá a los {0} días del mes de {1} de {2}.", inspection.InspAperturaCosmetArtesanal.DatosConclusiones.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.InspAperturaCosmetArtesanal.DatosConclusiones.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.InspAperturaCosmetArtesanal.DatosConclusiones.FechaFinalizacion?.Year.ToString() ?? ""));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Dado en la ciudad de Panamá a los Dado en la ciudad de Panamá a los {0} días del mes de {1} de {2}.", inspection.InspAperturaCosmetArtesanal.DatosConclusiones.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.InspAperturaCosmetArtesanal.DatosConclusiones.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.InspAperturaCosmetArtesanal.DatosConclusiones.FechaFinalizacion?.Year.ToString() ?? ""));
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -4900,7 +4905,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -4969,7 +4974,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspAperturaCosmetArtesanal.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspAperturaCosmetArtesanal.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 
@@ -5041,7 +5046,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("GUÍA DE VERIFICACIÓN DEL REGLAMENTO TÉCNICO CENTROAMERICANO (RTCA) 11.03.69:13 PRODUCTOS FARMACÉUTICOS. PRODUCTOS NATURALES MEDICINALES PARA USO HUMANO. BUENAS PRÁCTICAS DE MANUFACTURA".ToUpper()).Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -5049,43 +5054,43 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("CRITERIOS DE EVALUACIÓN:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CRITERIOS DE EVALUACIÓN:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Los diferentes ítems a evaluar de la Guía de Verificación de Buenas Prácticas de Manufactura (BPM) de Productos Naturales Medicinales para uso Humano, se clasificarán como críticos, calificables e informativos."));
                             
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("CRÍTICO:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CRÍTICO:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Es aquel que, en atención a las BPM, afecta en forma grave e inadmisible la calidad y /o seguridad de los productos y la seguridad de los trabajadores, en su interacción con los productos y procesos."));
                             
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("CALIFICABLE:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CALIFICABLE:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Aquellos ítems que no son considerados como críticos, pero deben ser evaluados y valorados para el cumplimiento del presente reglamento"));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("INFORMATIVO:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("INFORMATIVO:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Suministra información de la organización y aspectos relacionados con las BPM, pero no afecta la calidad ni la seguridad de los productos o de los trabajadores en su interacción con los productos y procesos. No se contabiliza para el puntaje total."));
                             
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Los criterios CRÍTICOS y CALIFICABLES se calificarán como cumple (100%), no cumple (0%) o no aplica, según corresponda"));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Los criterios CRÍTICOS y CALIFICABLES se calificarán como cumple (100%), no cumple (0%) o no aplica, según corresponda"));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("CRITERIOS PARA LA EMISIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE MANUFACTURA".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CRITERIOS PARA LA EMISIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE MANUFACTURA".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Para la emisión del certificado de Buenas Prácticas de Manufactura (BPM) el laboratorio debe obtener un porcentaje de cumplimiento del 95% al 100% para los criterios calificados como críticos y un mínimo del 80 % de los ítems clasificados como calificables en la guía de verificación. Para alcanzar el 100% de cumplimiento para todas las no conformidades críticas y calificables, el laboratorio debe presentar un plan de mejora cuyos plazos de cumplimiento serán aprobados por la autoridad reguladora, según el riesgo sanitario y verificado en inspecciones posteriores. De no cumplir los plazos establecidos en el plan de mejora, se cancelará el certificado de BPM."));
 
                             column.Item().AlignLeft().Text(string.Format("El plan de mejora se deberá presentar en el plazo que defina la autoridad reguladora, posterior a la entrega del Informe de no conformidades detectadas durante la evaluación técnica"));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("NOTAS:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("NOTAS:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("1) Para el caso de Guatemala y Panamá, el plazo será de 30 días calendario. El incumplimiento a esta disposición será objeto de la sanción correspondiente."));
                             column.Item().AlignLeft().Text(string.Format("2) Para el caso de Honduras, deberán presentar el plan de mejora en los plazos establecidos, pero este no estará sujeto a la aprobación por parte de la autoridad reguladora."));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("VIGENCIA DEL CERTIFICADO DE BUENAS PRÁCTICAS DE MANUFACTURA (BPM)".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("VIGENCIA DEL CERTIFICADO DE BUENAS PRÁCTICAS DE MANUFACTURA (BPM)".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("El certificado de BPM tendrá una vigencia de 2 años, esto no exime que la autoridad reguladora desarrolle auditorías durante el período de vigencia."));
 
 
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("DATOS GENERALES:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("DATOS GENERALES:".ToUpper())).Bold();
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
                             foreach (var participant in inspection.InspGuiBPMFabNatMedicina.DatosConclusiones.LParticipantes)
                             {
                                 column.Item().AlignLeft().Text(string.Format("Lic. {0}", participant.NombreCompleto));
                             }
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Por la Empresa:"));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Por la Empresa:"));
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -5132,13 +5137,13 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Otros funcionarios de la empresa:"));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Otros funcionarios de la empresa:"));
                             foreach (var persona in inspection.InspGuiBPMFabNatMedicina.OtrosFuncionarios.LPersona)
                             {
                                 column.Item().AlignLeft().Text(string.Format("Lic. {0}", persona.Nombre));
                             }
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("DATOS DEL ESTABLECIMIENTO:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("DATOS DEL ESTABLECIMIENTO:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.InspGuiBPMFabNatMedicina.GeneralesEmpresa.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Dirección: {0}", inspection.InspGuiBPMFabNatMedicina.GeneralesEmpresa.Direccion));
                             column.Item().AlignLeft().Text(string.Format("Ciudad: {0}", inspection.InspGuiBPMFabNatMedicina.GeneralesEmpresa.Ciudad));
@@ -5148,7 +5153,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Motivo de la Inspección: {0}", inspection.InspGuiBPMFabNatMedicina.MotivoInspeccion));
 
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Datos Recolectados:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Datos Recolectados:".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -6785,7 +6790,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -6867,7 +6872,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspGuiBPMFabNatMedicina.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspGuiBPMFabNatMedicina.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 
@@ -6939,7 +6944,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("INSPECCIÓN DE RUTINA O VIGILANCIA A AGENCIAS DISTRIBUIDORAS".ToUpper()).Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -6947,7 +6952,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("DATOS GENERALES:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("DATOS GENERALES:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre del Establecimiento: {0}", inspection.InspRutinaVigAgencia.GeneralesEmpresa.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Nº de Licencia de operación: {0}, Fecha de vencimiento: {1}", inspection.InspRutinaVigAgencia.GeneralesEmpresa.NumLicOperacion, inspection.InspRutinaVigAgencia.GeneralesEmpresa.FechaVencLicOperacion?.ToString("dd/MM/yyyy")??""));
                             column.Item().AlignLeft().Text(string.Format("Provincia: {0}, Distrito: {1}, Corregimiento: {2}", inspection.InspRutinaVigAgencia.GeneralesEmpresa.Provincia, inspection.InspRutinaVigAgencia.GeneralesEmpresa.Distrito, inspection.InspRutinaVigAgencia.GeneralesEmpresa.Corregimiento));
@@ -6955,22 +6960,22 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Horario de Operación: {0}", inspection.InspRutinaVigAgencia.GeneralesEmpresa.HorarioOperacion));
                             column.Item().AlignLeft().Text(string.Format("Teléfono(s): {0}, Correo electrónico: {1}", inspection.InspRutinaVigAgencia.GeneralesEmpresa.Telefono, inspection.InspRutinaVigAgencia.GeneralesEmpresa.Email));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Datos del Regente:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Datos del Regente:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre del Regente: {0}", inspection.InspRutinaVigAgencia.DatosRegente.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Nº de Registro: {0}", inspection.InspRutinaVigAgencia.DatosRegente.NumRegistro));
                             column.Item().AlignLeft().Text(string.Format("Horario de Regencia: {0}", inspection.InspRutinaVigAgencia.DatosRegente.HorarioRegencia));
                             column.Item().AlignLeft().Text(string.Format("Otras Funciones del Regente Dentro de la Empresa: {0}", inspection.InspRutinaVigAgencia.DatosRegente.OtrasFunciones));
                             column.Item().AlignLeft().Text(string.Format("Se Encontraba el Regente Farmacéutico en el Local: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.DatosRegente.PresenteEnLocal) ));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Propietario o Representante Legal:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Propietario o Representante Legal:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspRutinaVigAgencia.DatosRepresentLegal.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Número de Cédula: {0}", inspection.InspRutinaVigAgencia.DatosRepresentLegal.Cedula));
                             column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspRutinaVigAgencia.DatosRepresentLegal.Profesion));
                             column.Item().AlignLeft().Text(string.Format("Dirección del área administrativa: {0}", inspection.InspRutinaVigAgencia.DatosRepresentLegal.Ubicacion));
 
-                            column.Item().PaddingVertical(10).AlignCenter().Text(string.Format("GENERALIDADES DEL ESTABLECIMIENTO".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignCenter().Text(string.Format("GENERALIDADES DEL ESTABLECIMIENTO".ToUpper())).Bold();
                             
-                            //column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Área:"));
+                            //column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Área:"));
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -7302,7 +7307,7 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignCenter().Text(string.Format("REPORTE DE INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignCenter().Text(string.Format("REPORTE DE INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO".ToUpper())).Bold();
 
                             column.Item().Table(table =>
                             {
@@ -7336,7 +7341,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            column.Item().PaddingVertical(10).AlignTop().Table(table =>
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
@@ -7352,7 +7357,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).AlignCenter().Text(string.Format("CRITERIO TÉCNICO")).Bold();
+                            column.Item().PaddingVertical(5).AlignCenter().Text(string.Format("CRITERIO TÉCNICO")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Según criterio técnico se concluye que, el local {0} con los requisitos mínimos para operar:", (inspection.InspRutinaVigAgencia.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE")));
                             column.Item().AlignLeft().Text(string.Format("Se re-programará otra inspección para verificar observaciones: {0}", (inspection.InspRutinaVigAgencia.DatosConclusiones.ReprogramaInspeccion?"Si":"No" )));
 
@@ -7422,7 +7427,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspRutinaVigAgencia.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspRutinaVigAgencia.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 
@@ -7494,7 +7499,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA DE CIERRE DE OPERACIONES DE ESTABLECIMIENTOS FARMACEUTICOS".ToUpper()).Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -7502,19 +7507,19 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("DATOS GENERALES:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("DATOS GENERALES:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre del Establecimiento: {0}", inspection.InspCierreOperacion.GeneralesEmpresa.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Nº de Licencia de Operación: {0}, Fecha de vencimiento: {1}", inspection.InspCierreOperacion.GeneralesEmpresa.NumLicOperacion, inspection.InspCierreOperacion.GeneralesEmpresa.FechaVencLicOperacion?.ToString("dd/MM/yyyy") ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Provincia: {0}, Distrito: {1}, Corregimiento: {2}", inspection.InspCierreOperacion.GeneralesEmpresa.Provincia, inspection.InspCierreOperacion.GeneralesEmpresa.Distrito, inspection.InspCierreOperacion.GeneralesEmpresa.Corregimiento));
                             column.Item().AlignLeft().Text(string.Format("Ubicación: {0}", inspection.InspCierreOperacion.GeneralesEmpresa.Direccion));
                             column.Item().AlignLeft().Text(string.Format("Teléfono(s): {0}, Correo electrónico: {1}", inspection.InspCierreOperacion.GeneralesEmpresa.Telefono, inspection.InspCierreOperacion.GeneralesEmpresa.Email));
 
-                            //column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Datos del Responsable del Establecimiento:".ToUpper())).Bold();
+                            //column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Datos del Responsable del Establecimiento:".ToUpper())).Bold();
                             //column.Item().AlignLeft().Text(string.Format("Nombre del Responsable: {0}", inspection.InspCierreOperacion.DatosResponsable.Nombre));
                             //column.Item().AlignLeft().Text(string.Format("Nº de Cédula: {0}", inspection.InspCierreOperacion.DatosResponsable.Cedula));
                             //column.Item().AlignLeft().Text(string.Format("Cargo: {0}", inspection.InspCierreOperacion.DatosResponsable.Cargo));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Siendo las {0} del {1} de {2} de {3}, y actuando como colaboradores de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, los suscritos:",
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Siendo las {0} del {1} de {2} de {3}, y actuando como colaboradores de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, los suscritos:",
                                 inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.Year));
 
                             if (inspection.InspCierreOperacion.DatosConclusiones.LParticipantes != null)
@@ -7546,13 +7551,13 @@ namespace Aig.Auditoria.Services
                             }
                             column.Item().AlignLeft().Text(string.Format("Procedimos a efectuar inspección al establecimiento antes señalado, para constatar “in situ” el CIERRE DE OPERACIONES, para dar respuesta a solicitud de {0}", inspection.InspCierreOperacion.SolicitudCierre));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Observaciones sobre la ubicación:  {0}", inspection.InspCierreOperacion.ObservacionUbicacion));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Observaciones sobre la ubicación:  {0}", inspection.InspCierreOperacion.ObservacionUbicacion));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Observaciones sobre el destino de los productos farmacéuticos (incluir los sujetos a control especial y el libro de registro):  {0}", inspection.InspCierreOperacion.DestinoProductos));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Observaciones sobre el destino de los productos farmacéuticos (incluir los sujetos a control especial y el libro de registro):  {0}", inspection.InspCierreOperacion.DestinoProductos));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format("Por lo cual, concluyen las operaciones del establecimiento que fueron autorizadas a través de licencia de operación N° {0}, y se procederá a cerrar el expediente  que reposa en la Dirección Nacional de Farmacia y Drogas.", inspection.InspCierreOperacion.GeneralesEmpresa.NumLicOperacion));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Por lo cual, concluyen las operaciones del establecimiento que fueron autorizadas a través de licencia de operación N° {0}, y se procederá a cerrar el expediente  que reposa en la Dirección Nacional de Farmacia y Drogas.", inspection.InspCierreOperacion.GeneralesEmpresa.NumLicOperacion));
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Los abajo firmantes damos fe de lo antes descrito"));
+                            column.Item().PaddingVertical(5).Text(string.Format("Los abajo firmantes damos fe de lo antes descrito"));
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -7604,7 +7609,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspCierreOperacion.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspCierreOperacion.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 
@@ -7676,7 +7681,7 @@ namespace Aig.Auditoria.Services
                             table.Cell().ColumnSpan(3).AlignCenter().Text("DISPOSICIÓN FINAL DE DESECHOS FARMACÉUTICOS".ToUpper()).Bold();
                         });
 
-                        page.Content().PaddingVertical(15).Column(column =>
+                        page.Content().PaddingVertical(8).Column(column =>
                         {
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
@@ -7684,7 +7689,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text(" ");
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
                             column.Item().AlignLeft().Text(string.Format("Siendo las {0} del {1} de {2} de {3}, los suscritos:",
                                 inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.Year));
                             if (inspection.InspDisposicionFinal.DatosConclusiones.LParticipantes != null)
@@ -7717,14 +7722,14 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Disposición final solicitado por: {0}", inspection.InspDisposicionFinal.SolicitudCierre));
                             column.Item().AlignLeft().Text(string.Format("N° de nota de SDGSA: {0}", inspection.InspDisposicionFinal.NumNotaSDGSA));
 
-                            column.Item().PaddingVertical(10).AlignCenter().Text(" ").Bold();
+                            column.Item().PaddingVertical(5).AlignCenter().Text(" ").Bold();
 
                             column.Item().AlignLeft().Text(string.Format("La solicitud corresponde al expediente con recibo de pago N°: {0}", inspection.InspDisposicionFinal.NumReciboPago));
                             column.Item().AlignLeft().Text(string.Format("El peso de los productos a destruir es: {0} (Kg)", inspection.InspDisposicionFinal.PesoDestruir));
                             column.Item().AlignLeft().Text(string.Format("Adjunto lista de productos: {0}", inspection.InspDisposicionFinal.Adjunta?"Si":"No"));
                             column.Item().AlignLeft().Text(string.Format("Total: {0} cajas/tarimas/bultos", inspection.InspDisposicionFinal.Total));
 
-                            column.Item().PaddingVertical(10).AlignCenter().Text(string.Format("Lista de Productos".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignCenter().Text(string.Format("Lista de Productos".ToUpper())).Bold();
 
                             column.Item().Table(table =>
                             {
@@ -7751,13 +7756,13 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).AlignCenter().Text(string.Format("Conclusiones".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignCenter().Text(string.Format("Conclusiones".ToUpper())).Bold();
 
                             column.Item().AlignLeft().Text(string.Format("Luego de realizar {0} de los desechos farmacéuticos, se encontró que la existencia física {1} coincide con el registro en la lista que adjuntó el establecimiento a la solicitud.", DataModel.Helper.Helper.GetDescription(inspection.InspDisposicionFinal.TipoInspeccion), inspection.InspDisposicionFinal.Coincide?"Si":"No"));
 
-                            column.Item().PaddingVertical(10).AlignLeft().Text("La Dirección Nacional de Farmacia y Drogas y sus colaboradores quedan relevados de cualquier compromiso y responsabilidad que pudiera derivarse de la destrucción de estos desechos farmacéuticos o del manejo inadecuado de los mismos");
+                            column.Item().PaddingVertical(5).AlignLeft().Text("La Dirección Nacional de Farmacia y Drogas y sus colaboradores quedan relevados de cualquier compromiso y responsabilidad que pudiera derivarse de la destrucción de estos desechos farmacéuticos o del manejo inadecuado de los mismos");
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Los abajo firmantes damos fe de lo antes descrito"));
+                            column.Item().PaddingVertical(5).Text(string.Format("Los abajo firmantes damos fe de lo antes descrito"));
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -7808,7 +7813,1507 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
-                            column.Item().PaddingVertical(10).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspDisposicionFinal.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspDisposicionFinal.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+
+                        });
+
+                        page.Footer().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            });
+
+                        });
+
+                    });
+                })
+                  .GeneratePdf();
+
+                Stream stream = new MemoryStream(byteArray);
+
+                return stream;
+            }
+            catch { }
+            return null;
+        }
+        //generamos el pdf de BPM Guia Fabricante de Cosmeticos y Desinfectantes
+        private async Task<Stream> GenerateGuiaFabricantesMedicamentos(AUD_InspeccionTB inspection)
+        {
+            try
+            {
+                //var inspection = DalService.Get<AUD_InspeccionTB>(InspectionId);
+
+                // code in your main method
+                var byteArray = QuestPDF.Fluent.Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(5, Unit.Millimetre);
+                        page.PageColor(Colors.White);
+                        page.DefaultTextStyle(x => x.FontSize(8));
+                        //page.DefaultTextStyle(x => x.Color("Black"));
+
+                        var path = System.IO.Path.Combine(env.WebRootPath, "img", "pdf", "Header.png");
+
+                        page.Header().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().Image(path);
+                                header.Cell().AlignCenter().Text("");
+                                header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
+                            });
+
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("Departamento de Auditorías de Calidad a Establecimientos Farmacéuticos y No Farmacéuticos");
+                            table.Cell().ColumnSpan(3).AlignCenter().Text("GUÍA DE VERIFICACIÓN DEL REGLAMENTO TECNICO CENTROAMERICANO RTCA 11.03.42:07 REGLAMENTO TÉCNICO SOBRE BUENAS PRÁCTICAS DE MANUFACTURA PARA LA INDUSTRIA FARMACÉUTICA. PRODUCTOS FARMACÉUTICOS Y MEDICAMENTOS DE USO HUMANO.".ToUpper()).Bold();
+                        });
+
+                        page.Content().PaddingVertical(8).Column(column =>
+                        {
+                            column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
+                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
+
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
+
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("I. INTRODUCCIÓN".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("El RTCA 11.03.42:07 Reglamento Técnico sobre Buenas Prácticas de Manufactura para la Industria Farmacéutica. Productos Farmacéuticos y Medicamentos de Uso Humano, establece que la verificación de su cumplimiento le corresponde a la Autoridad Reguladora de cada Estado Parte, lo que implica la revisión de todos los elementos relacionados con las BPM implementados en la industria, destinados a garantizar la producción de lotes uniformes de productos farmacéuticos con el fin de asegurar la calidad, seguridad y eficacia de los mismos."));
+                            column.Item().AlignLeft().Text(string.Format("El presente documento consiste en el instrumento oficial para verificar el cumplimiento de las BPM en la industria farmacéutica, por parte de la Autoridad Reguladora de cada Estado Parte, con el cual se pretende homologar y armonizar los criterios de inspección y establecer una lista de puntos a verificar de todas las operaciones y procesos de la industria. Puede sertambién de utilidad para los laboratorios fabricantes en lo que respecta a la autoinspección."));
+                            column.Item().AlignLeft().Text(string.Format("Cada ítem tiene asignada una calificación con la finalidad de que las inspecciones a realizar, respondan a criterios uniformes de evaluación, dichos criterios se definen en el glosario del presente documento"));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("II. OBJETIVO".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Establecer los criterios de evaluación a seguir por parte de la Autoridad Reguladora, para verificar el cumplimiento del RTCA 11.03.42:07Reglamento Técnico sobre Buenas Prácticas de Manufactura para la Industria Farmacéutica. Productos Farmacéuticos y Medicamentos de Uso Humano. "));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("III. ALCANCE".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Esta guía es de aplicación a todos los laboratorios farmacéuticos establecidos en el territorio de los Estados Parte."));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("IV. DOCUMENTOS A CONSULTAR".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("El RTCA 11.03.42:07 Reglamento Técnico sobre Buenas Prácticas de Manufactura para la Industria Farmacéutica. Productos Farmacéuticos y Medicamentos de Uso Humano"));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("V. RESPONSABLE".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Autoridad Reguladora de cada Estado Parte."));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("VI. GLOSARIO".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("CRITERIO CRÍTICO: aquel que en atención a las recomendaciones de las Buenas Prácticas de Manufactura, afecta en forma grave e inadmisible la calidad, seguridad de los productos y la seguridad de los trabajadores, en su interacción con los productos y procesos."));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("CRITERIO MAYOR: aquel que en atención a las recomendaciones de las Buenas Prácticas de Manufactura, puede afectar en forma grave la calidad, seguridad de los productos y seguridad de los trabajadores, en su interacción con los productos y procesos."));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("CRITERIO MENOR: aquel que en atención a las recomendaciones de las Buenas Prácticas de Manufactura, puede afectar en forma leve la calidad, seguridad de los productos y seguridad de los trabajadores, en su interacción con los productos y procesos."));
+
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
+                            foreach (var participant in inspection.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes)
+                            {
+                                column.Item().AlignLeft().Text(string.Format("Lic. {0}", participant.NombreCompleto));
+                            }
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Por la Empresa:"));
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Representante Legal: {0}", inspection.InspGuiaBPMFabricanteMed.RepresentLegal.Nombre));
+                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("C.I.P : {0}", inspection.InspGuiaBPMFabricanteMed.RepresentLegal.Cedula));
+                                if (!string.IsNullOrEmpty(inspection.InspGuiaBPMFabricanteMed.RepresentLegal.Firma))
+                                {
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiaBPMFabricanteMed.RepresentLegal.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignMiddle().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignMiddle().AlignLeft().Text("");
+                                }
+                            });
+                            column.Item().AlignLeft().Text(string.Format("Regente farmacéutico /Director Técnico y número de Registro:"));
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Lic: {0}", inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Nombre));
+                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Registro : {0}", inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.NumRegistro));
+                                if (!string.IsNullOrEmpty(inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Firma))
+                                {
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignMiddle().AlignLeft().Image(memoryStream);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignMiddle().AlignLeft().Text("");
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Otros funcionarios de la empresa:"));
+                            foreach (var persona in inspection.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona)
+                            {
+                                column.Item().AlignLeft().Text(string.Format("Lic. {0}", persona.Nombre));
+                            }
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Dirección: {0}", inspection.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Direccion));
+                            column.Item().AlignLeft().Text(string.Format("Ciudad: {0}", inspection.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Ciudad));
+                            column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Telefono));
+                            column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Email));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("RESPONSABLE DE PRODUCCIÓN:".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiaBPMFabricanteMed.RespProduccion.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiaBPMFabricanteMed.RespProduccion.Profesion));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("RESPONSABLE DE CONTROL DE CALIDAD:".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiaBPMFabricanteMed.RespControlCalidad.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiaBPMFabricanteMed.RespControlCalidad.Profesion));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("REQUISITOS LEGALES:".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.6);
+                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.1);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("6.1".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("De la autorización de funcionamiento".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
+                                });
+
+                                var i = 0;
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.RequisitosLegales.LContenido)
+                                {
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(i > 0 ? "" : "6.1.1");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                    {
+                                        tbl.ColumnsDefinition(columns =>
+                                        {
+                                            columns.RelativeColumn(7);
+                                            columns.RelativeColumn(3);
+                                        });
+
+                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
+                                        foreach (var subdt in dat.LSubContenido)
+                                        {
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
+                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
+                                        }
+                                    });
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                    i++;
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Observaciones:".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(inspection.InspGuiaBPMFabricanteMed.Observaciones);
+
+                            column.Item().AlignLeft().Text(string.Format("¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"));
+                            column.Item().AlignLeft().Text(string.Format(DataModel.Helper.Helper.GetDescription(inspection.InspGuiaBPMFabricanteMed.ProcesoVigilanciaSanit)));
+
+                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiaBPMFabricanteMed.FechaUltimaVista?.ToString("dd/MM/yyyy") ?? ""));
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.2);
+                                    columns.RelativeColumn((float)0.3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Objetivos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ClasifActComerciales.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Clasificación del Establecimiento".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.2);
+                                    columns.RelativeColumn((float)0.3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Objetivos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ClasifEstablecimiento.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Organización y Personal".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ClasifEstablecimiento.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Edificios e Instalaciones".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.EdifInstalaciones.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Almacenes".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Materia Prima".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Material Acondic.".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Producto A Granel".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Producto Terminado".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Inflamables".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Rechazados".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Devoluciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.EdifInstalaciones.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion2));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion3));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion4));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion5));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion6));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion7));
+
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Area de Dispensado de Materia Prima".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.AreaDispMatPrima.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Area de Producción".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Líquidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Semisólidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Sólidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.AreaDispMatPrima.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion2));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion3));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Area de Acondicionamiento para Empaque Secundario".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.AreaAcondicionamiento.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Equipos".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Líquidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Semisólidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Sólidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.EquiposGeneralidades.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion2));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion3));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.Equipos.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Materiales y Productos".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.MatProducts.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Documentación".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.Documentacion.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Producción".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Líquidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Semisólidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Sólidos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.Produccion.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion2));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion3));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Garantía de Calidad".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.GarantiaCalidad.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Control de Calidad".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ControlCalidad.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Producción y Análisis por Contrato".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ProdAnalisisContrato.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Validación".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ValGenerales.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Quejas y Reclamos".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.QuejasReclamos.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Autoinspección y Auditoría de Calidad".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.AutoInspecAuditCal.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Fabricación de Productos Farmacéuticos Estériles".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Esterilización Terminal".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Filtración Esterilizante".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Llenado Aséptico".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion2));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion3));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_Gen.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Esterilización Terminal".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Filtración Esterilizante".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Llenado Aséptico".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A2.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion2));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion3));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A3.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Fabricación de Productos Farmacéuticos Lactímicos".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.Lactamicos.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Fabricación de Productos con Hormonas y Productos Citostáticos".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)4);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                });
+
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ProdCitostatico.LContenido)
+                                {
+                                    if (dat.IsHeader)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                    }
+                                }
+                            });
+
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONES GENERALES").Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspGuiaBPMFabricanteMed.DatosConclusiones.ObservacionesFinales);
+
+                            });
+
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes"));
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
+                                });
+
+                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                if (!string.IsNullOrEmpty(inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico?.Firma))
+                                {
+                                    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                    //var contents = new StreamContent(new MemoryStream(bytes));
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignLeft().Image(memoryStream);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignLeft().Text("");
+                                }
+                                if (!string.IsNullOrEmpty(inspection.InspGuiaBPMFabricanteMed.RepresentLegal?.Firma))
+                                {
+                                    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                    //var contents = new StreamContent(new MemoryStream(bytes));
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiaBPMFabricanteMed.RepresentLegal.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignLeft().Image(memoryStream);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignLeft().Text("");
+                                }
+
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico?.Nombre, inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico?.Cedula));
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiaBPMFabricanteMed.RepresentLegal?.Nombre, inspection.InspGuiaBPMFabricanteMed.RepresentLegal?.Cedula));
+
+                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                if (inspection.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes != null)
+                                {
+                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+
+                                    foreach (var participant in inspection.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes)
+                                    {
+                                        table.Cell().Table(tbl =>
+                                        {
+                                            tbl.ColumnsDefinition(columns =>
+                                            {
+                                                columns.RelativeColumn(1);
+                                            });
+                                            if (!string.IsNullOrEmpty(participant.Firma))
+                                            {
+                                                byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
+                                                MemoryStream memoryStream = new MemoryStream(data);
+                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                            }
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+
+                                        });
+                                    }
+                                }
+
+                            });
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspGuiaBPMFabricanteMed.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 

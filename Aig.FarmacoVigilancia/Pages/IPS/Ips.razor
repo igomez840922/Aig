@@ -59,14 +59,14 @@
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["From"] @languageContainerService.Keys["ReceptionDate"]</label>
                                                 <div class="form-line">
-                                                    <RadzenDatePicker TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                     <ValidationMessage For=@(() => dataModel.FromDate) />
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["To"] @languageContainerService.Keys["ReceptionDate"]</label>
                                                 <div class="form-line">
-                                                    <RadzenDatePicker TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                     <ValidationMessage For=@(() => dataModel.ToDate) />
                                                 </div>
                                             </div>

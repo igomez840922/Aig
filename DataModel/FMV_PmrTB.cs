@@ -10,6 +10,11 @@ namespace DataModel
 {
     public class FMV_PmrTB:SystemId
     {
+        public FMV_PmrTB() {
+            PmrProducto=new FMV_PmrProductoTB();
+            Adjunto=new AttachmentData();
+        }
+
         //status del acta
         private enumFMV_StatusPMR status;
         public enumFMV_StatusPMR Status { get => status; set => SetProperty(ref status, value); }
@@ -42,8 +47,19 @@ namespace DataModel
         public string PrincActivo { get => princActivo; set => SetProperty(ref princActivo, value); }
 
 
-        private List<FMV_PmrProductoTB> lProductos;
-        public virtual List<FMV_PmrProductoTB> LProductos { get => lProductos; set => SetProperty(ref lProductos, value); }
+        //private List<FMV_PmrProductoTB> lProductos;
+        //public virtual List<FMV_PmrProductoTB> LProductos { get => lProductos; set => SetProperty(ref lProductos, value); }
+
+        //Producto
+        private long? pmrProductoId;
+        public long? PmrProductoId { get => pmrProductoId; set => SetProperty(ref pmrProductoId, value); }
+        private FMV_PmrProductoTB? pmrProducto;
+        public virtual FMV_PmrProductoTB? PmrProducto { get => pmrProducto; set => SetProperty(ref pmrProducto, value); }
+
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
     }
 }

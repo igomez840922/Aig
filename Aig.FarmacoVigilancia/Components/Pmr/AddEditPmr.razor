@@ -23,6 +23,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#products" role="tab">@languageContainerService.Keys["Products"]</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="generalInfo" role="tabpanel">
@@ -32,17 +35,8 @@
                                         <label>@languageContainerService.Keys["EntryDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Pmr.FechaEntrada" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Pmr.FechaEntrada" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Pmr.FechaEntrada) />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label>@languageContainerService.Keys["TramitDate"]</label>
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Pmr.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
-                                                <ValidationMessage For=@(() => Pmr.FechaTramite) />
                                             </div>
                                         </div>
                                     </div>
@@ -50,8 +44,17 @@
                                         <label>@languageContainerService.Keys["EvaluatorDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Pmr.FechaEntregaEvaluador" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Pmr.FechaEntrada" TValue="DateTime?" @bind-Value="Pmr.FechaEntregaEvaluador" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Pmr.FechaEntregaEvaluador) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["TramitDate"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Pmr.FechaEntregaEvaluador" TValue="DateTime?" @bind-Value="Pmr.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Pmr.FechaTramite) />
                                             </div>
                                         </div>
                                     </div>
@@ -112,8 +115,53 @@
 
                             </div>
                             <div class="tab-pane" id="products" role="tabpanel">
-                                <h4>@languageContainerService.Keys["Products"]</h4>
+                                <h4>@languageContainerService.Keys["Datos del Producto"]</h4>
                                 <div class="row clearfix">
+
+                                    <div class="col-sm-8">
+                                        <label>@languageContainerService.Keys["CommercialName"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Pmr.PmrProducto.NomComercial" />
+                                                <ValidationMessage For=@(() => Pmr.PmrProducto.NomComercial) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["NumberOfHealthRegister"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Pmr.PmrProducto.RegSanitario" />
+                                                <ValidationMessage For=@(() => Pmr.PmrProducto.RegSanitario) />
+                                            </div>
+                                        </div>
+                                    </div>                               
+
+                                    <div class="col-sm-8">
+                                        <label for="password">@languageContainerService.Keys["Laboratory"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                @* <InputSelect @bind-Value="Product.LaboratorioId" class="form-control">
+                                            @if (lLaboratorio != null)
+                                            {
+                                            foreach (var dt in lLaboratorio)
+                                            {
+                                            <option value="@dt.Id">@dt.Nombre</option>
+                                            }
+                                            }
+                                            </InputSelect>*@
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Pmr.PmrProducto.LaboratorioId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@lLaboratorio TextProperty="Nombre" ValueProperty="Id" />
+
+                                                <ValidationMessage For=@(() => Pmr.PmrProducto.LaboratorioId) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                @*<div class="row clearfix">
                                     <div class="col-9" style="text-align:left;">
                                     </div>
                                     <div class="col-3" style="text-align:right;">
@@ -123,7 +171,6 @@
                                         </button>
                                     </div>
                                 </div>
-                                <!--begin::Section-->
                                 <div class="kt-section">
                                     <div class="table-responsive">
                                         <table class="table rounded table-striped">
@@ -156,7 +203,56 @@
                                         </table>
                                     </div>
                                 </div>
+                            *@
                             </div>
+                            <div class="tab-pane" id="attachments" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Attachments"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-9" style="text-align:left;">
+                                    </div>
+                                    <div class="col-3" style="text-align:right;">
+                                        <button type="button" @onclick="(e)=>{OpenAttachment();}"
+                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                            @languageContainerService.Keys["Add"]
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="kt-section">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Description"]</th>
+                                                    <th>@languageContainerService.Keys["File"]</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Pmr != null && Pmr.Adjunto != null)
+                                                {
+                                                    @foreach (var dt in Pmr.Adjunto.LAttachments)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.Description</td>
+                                                            <td>
+                                                                <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                            </td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        
                         </div>
 
                         <br>
@@ -189,6 +285,10 @@
 @if (OpenAddEditProduct)
 {
     <Aig.FarmacoVigilancia.Components.PmrProduct.AddEditProductComponent  Product="AddProduct"></Aig.FarmacoVigilancia.Components.PmrProduct.AddEditProductComponent>
+}
+@if (openAttachment)
+{
+    <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
 }
 
 <div class="modal-backdrop fade show"></div>

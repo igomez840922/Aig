@@ -25,6 +25,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#alertnoteInfo" role="tab">@languageContainerService.Keys["AlertInfo"]</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="generalInfo" role="tabpanel">
@@ -34,7 +37,7 @@
                                         <label>@languageContainerService.Keys["ReceptionDateCNFV"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Alerta.FechaRecepcion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Alerta.FechaRecepcion" ShowTime="false" DateFormat="dd/MM/yyyy" />
 
                                                 <ValidationMessage For=@(() => Alerta.FechaRecepcion) />
                                             </div>
@@ -44,7 +47,7 @@
                                         <label>@languageContainerService.Keys["EvaluatorDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Alerta.FechaEntregaEvaluador" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Alerta.FechaRecepcion" TValue="DateTime?" @bind-Value="Alerta.FechaEntregaEvaluador" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Alerta.FechaEntregaEvaluador) />
                                             </div>
                                         </div>
@@ -53,7 +56,7 @@
                                         <label>@languageContainerService.Keys["EvaluationDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                               <RadzenDatePicker TValue="DateTime?" @bind-Value="Alerta.FechaEvaluacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Alerta.FechaEntregaEvaluador" TValue="DateTime?" @bind-Value="Alerta.FechaEvaluacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Alerta.FechaEvaluacion) />
                                             </div>
                                         </div>
@@ -62,16 +65,9 @@
                                         <label for="password">@languageContainerService.Keys["Evaluator"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputSelect class="form-control" @bind-Value="Alerta.EvaluadorId">
-                                                    <option value=""></option>
-                                                    @if (LPerson != null)
-                                                    {
-                                                        foreach (var dt in LPerson.Where(x => x.Evaluador))
-                                                        {
-                                                            <option value="@dt.Id">@dt.NombreCompleto</option>
-                                                        }
-                                                    }
-                                                </InputSelect>
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Alerta.EvaluadorId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@(LPerson?.Where(x=>x.Evaluador)) TextProperty="NombreCompleto" ValueProperty="Id" />
                                                 <ValidationMessage For=@(() => Alerta.EvaluadorId) />
                                             </div>
                                         </div>
@@ -135,7 +131,7 @@
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <label>@languageContainerService.Keys["Description"]</label>
+                                        <label>@languageContainerService.Keys["Título/Descripción"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <InputTextArea rows="6" class="form-control" @bind-Value="Alerta.Descripcion" />
@@ -200,6 +196,16 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
+                                        <label for="password">@languageContainerService.Keys["Monitoreo"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Alerta.Monitoreo" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Alerta.Monitoreo) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["OtrasConsideraciones"]</label>
                                         <div class="form-group">
                                             <InputSelect @bind-Value="Alerta.OtrasConsideraciones" class="form-control">
@@ -209,13 +215,27 @@
                                             <ValidationMessage For=@(() => Alerta.OtrasConsideraciones) />
                                         </div>
                                     </div>
+                                    @if (Alerta.OtrasConsideraciones)
+                                    {
+                                        <div class="col-sm-12">
+                                            <label>@languageContainerService.Keys["Descripcion"]</label>
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <InputTextArea rows="6" class="form-control" @bind-Value="Alerta.OtrasDescripcion" />
+                                                    <ValidationMessage For=@(() => Alerta.OtrasDescripcion) />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                   
+
                                 </div>
                             </div>
                             <div class="tab-pane" id="alertnoteInfo" role="tabpanel">
-                                <h4>@languageContainerService.Keys["AlertNoteInfo"]</h4>
+                                <h4>@languageContainerService.Keys["Información de la Alerta"]</h4>
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
-                                        <label>@languageContainerService.Keys["NumNota"]</label>
+                                        <label>@languageContainerService.Keys["Número de la Alerta"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <InputText class="form-control" @bind-Value="Alerta.NumNota" />
@@ -249,6 +269,52 @@
 
                                 </div>
                             </div>
+                            <div class="tab-pane" id="attachments" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Attachments"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-9" style="text-align:left;">
+                                    </div>
+                                    <div class="col-3" style="text-align:right;">
+                                        <button type="button" @onclick="(e)=>{OpenAttachment();}"
+                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                            @languageContainerService.Keys["Add"]
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="kt-section">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Description"]</th>
+                                                    <th>@languageContainerService.Keys["File"]</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Alerta != null && Alerta.Adjunto != null)
+                                                {
+                                                    @foreach (var dt in Alerta.Adjunto.LAttachments)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.Description</td>
+                                                            <td>
+                                                                <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                            </td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -275,6 +341,11 @@
             </div>
         </div>
     </div>
+
+    @if (openAttachment)
+    {
+        <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
+    }
 
 }
 

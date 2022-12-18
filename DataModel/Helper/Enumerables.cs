@@ -97,17 +97,17 @@ namespace DataModel.Helper
 		DispFinalDesechosFarmaceuticos = 6,
 	}
 
-	public enum enumAUD_TipoTramite
-	{
-		[Description("Ninguna")]
-		None = 0,
-		[Description("Apertura")]
-		Apertura = 1,
-		[Description("Renovación")]
-		Renovacion = 2,
-		[Description("Modificación")]
-		Modificacion = 3,
-	}
+	//public enum enumAUD_TipoTramite
+	//{
+	//	[Description("Ninguna")]
+	//	None = 0,
+	//	[Description("Apertura")]
+	//	Apertura = 1,
+	//	[Description("Renovación")]
+	//	Renovacion = 2,
+	//	[Description("Modificación")]
+	//	Modificacion = 3,
+	//}
 
 	public enum enumAUD_TipoSector
 	{
@@ -115,9 +115,9 @@ namespace DataModel.Helper
 		None = 0,
 		[Description("Privado")]
 		Privado = 1,
-		[Description("Público")]
-		Publico = 2
-	}
+		[Description("Estatal")]
+        Estatal = 2,
+    }
 
 	public enum enumAUD_StatusEstablecimiento
 	{
@@ -127,10 +127,30 @@ namespace DataModel.Helper
 		Operando = 1,
 		[Description("Cerrado")]
 		Cerrado = 2,
-	}
+        [Description("Cierre Temporal")]
+        CerradoTemp = 3,
+        [Description("Cancelado")]
+        Cancelado = 4,
+        [Description("Vencido")]
+        Vencido = 5, 
+        [Description("Resolucion")]
+        Resolucion = 6,
+    }
 
-	
-	public enum enumAUD_TipoSeleccion
+    public enum enumAUD_ClasifEstablecimiento
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Apertura")]
+        Apertura = 1,
+        [Description("Renovación")]
+        Renovacion = 2,
+        [Description("Modificación")]
+        Modificacion = 3,
+    }
+
+
+    public enum enumAUD_TipoSeleccion
 	{
 		[Description("N/A")]
 		NA = 0,
@@ -709,16 +729,16 @@ namespace DataModel.Helper
 
     public enum enumFMV_AlertType
     {
-        [Description("Alerta de Calidad")]
-        AlertaCalidad = 0,
+        //[Description("Alerta de Calidad")]
+        //AlertaCalidad = 0,       
+        //[Description("Nota Informativa")]
+        //NotaInformativa = 2,
         [Description("Nota de Seguridad")]
-        NotaSeguridad = 1,
-        [Description("Nota Informativa")]
-        NotaInformativa = 2,
+        NotaSeguridad = 0,
         [Description("Boletines")]
-        Boletines = 3,
+        Boletines = 1,
         [Description("Comunicado")]
-        Comunicado = 4,
+        Comunicado = 2,
     }
 
     public enum enumFMV_AlertaNotaStatus

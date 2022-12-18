@@ -1,0 +1,2382 @@
+﻿@using DataModel.Helper;
+
+<div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModal">@(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))</h5>
+                <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <EditForm Model="@Inspeccion" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+                    <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#datosGenerales" role="tab">@languageContainerService.Keys["Datos Generales"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#generalidades" role="tab">@languageContainerService.Keys["Generalidades"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap1" role="tab">@languageContainerService.Keys["Organización y Personal"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap2" role="tab">@languageContainerService.Keys["Edificios e Instalaciones"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap3" role="tab">@languageContainerService.Keys["Equipos"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap4" role="tab">@languageContainerService.Keys["Materiales y Productos"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap5" role="tab">@languageContainerService.Keys["Documentación"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap6" role="tab">@languageContainerService.Keys["Producción"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap7" role="tab">@languageContainerService.Keys["Garantía de Calidad"]</a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap8" role="tab">@languageContainerService.Keys["Control de Calidad"]</a>
+                        </li> 
+                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap9" role="tab">@languageContainerService.Keys["Producción y Análisis por Contrato"]</a>
+                        </li> 
+                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap10" role="tab">@languageContainerService.Keys["Validación"]</a>
+                        </li>  
+                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap11" role="tab">@languageContainerService.Keys["Quejas y Reclamos"]</a>
+                        </li>  
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap12" role="tab">@languageContainerService.Keys["Autoinspección y Auditoría de Calidad"]</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap13" role="tab">@languageContainerService.Keys["Fabricación de Productos Farmacéuticos Estériles"]</a>
+                        </li> 
+                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap14" role="tab">@languageContainerService.Keys["Fabricación de Productos Farmacéuticos Lactímicos"]</a>
+                        </li> 
+                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cap15" role="tab">@languageContainerService.Keys["Fabricación de Productos con Hormonas y Productos Citostáticos"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#conclusionInfo" role="tab">@languageContainerService.Keys["ConclusionInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#inspectorsApprovals" role="tab" @onclick="(e)=>{OnShowSignasure();}">@languageContainerService.Keys["Firmas"]</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="datosGenerales" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Datos Generales"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["StartDate"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDatePicker TValue="DateTime" @bind-Value="Inspeccion.FechaInicio" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
+                                            <ValidationMessage For=@(() => Inspeccion.FechaInicio) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Status"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
+                                                @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
+                                                {
+                                                    if (dt != enum_StatusInspecciones.None)
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.StatusInspecciones) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                            <h5>@languageContainerService.Keys["Participantes en la Inspección por DNFD"]</h5>                           
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["FullName"]</th>
+                                                    <th>@languageContainerService.Keys["IdentificationCard"]</th>
+                                                    <th>@languageContainerService.Keys["RegisterNumber"]</th>
+                                                    <th>@languageContainerService.Keys["Charge"]</th>
+                                                    <th style="text-align:right;">
+                                                        <button type="button" @onclick="(e)=>{OpenParticipant();}"
+                                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                                            @languageContainerService.Keys["Add"]
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.NombreCompleto</td>
+                                                            <td>@dt.CedulaIdentificacion</td>
+                                                            <td>@dt.RegistroNumero</td>
+                                                            <td>@dt.Cargo</td>
+                                                            <td style="text-align:right">
+                                                                <div class="btn-group">
+                                                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{OpenParticipant(dt);}" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{RemoveParticipant(dt);}"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                                       
+                            <h5>@languageContainerService.Keys["Participantes por la Empresa"]</h5>
+                            <h5>@languageContainerService.Keys["Representante Legal"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["IdentificationCard"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Cedula) />
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["Num. Registro"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.NumRegistro" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.NumRegistro) />
+                                        </div>
+                                    </div>
+                                </div>                            
+                            </div>
+
+                            <h5>@languageContainerService.Keys["Regente farmacéutico /Director Técnico"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["IdentificationCard"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Cedula) />
+                                        </div>
+                                    </div>
+                                </div>    
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["Num. Registro"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.NumRegistro" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.NumRegistro) />
+                                        </div>
+                                    </div>
+                                </div>                                 
+                            </div>                        
+
+                            <h5>@languageContainerService.Keys["Otros funcionarios de la empresa"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["FullName"]</th>
+                                                    <th>@languageContainerService.Keys["IdentificationCard"]</th>
+                                                    <th>@languageContainerService.Keys["RegisterNumber"]</th>
+                                                    <th>@languageContainerService.Keys["Charge"]</th>
+                                                    <th style="text-align:right;">
+                                                        <button type="button" @onclick="(e)=>{OpenPersona();}"
+                                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                                            @languageContainerService.Keys["Add"]
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.Nombre</td>
+                                                            <td>@dt.Cedula</td>
+                                                            <td>@dt.NumRegistro</td>
+                                                            <td>@dt.Cargo</td>
+                                                            <td style="text-align:right">
+                                                                <div class="btn-group">
+                                                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{OpenPersona(dt);}" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{RemovePersona(dt);}"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                        </div>
+                        
+                        <div class="tab-pane" id="generalidades" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Datos del Establecimiento"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-8">
+                                    <label for="password">@languageContainerService.Keys["Establishments"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Inspeccion.EstablecimientoId
+                                                            AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                            Data=@lEstablecimientos TextProperty="Nombre" ValueProperty="Id"
+                                                            Change=@(args => {OnEstablishmentChange((args!=null?(long)args:null));}) />
+                                                <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Ciudad"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Ciudad" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Ciudad) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Location"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.UbicacionEstablecimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.UbicacionEstablecimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["BusinessPhone"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.TelefonoEstablecimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.TelefonoEstablecimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Correo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Email" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.GeneralesEmpresa.Email) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h5>@languageContainerService.Keys["Responsable de Producción"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RespProduccion.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RespProduccion.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["IdentificationCard"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RespProduccion.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RespProduccion.Cedula) />
+                                        </div>
+                                    </div>
+                                </div>    
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["Profesión"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RespProduccion.Profesion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RespProduccion.Profesion) />
+                                        </div>
+                                    </div>
+                                </div>                                 
+                            </div> 
+
+                            <h5>@languageContainerService.Keys["Responsable de Control de Calidad"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RespControlCalidad.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RespControlCalidad.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["IdentificationCard"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RespControlCalidad.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RespControlCalidad.Cedula) />
+                                        </div>
+                                    </div>
+                                </div>    
+                                <div class="col-sm-3">
+                                    <label>@languageContainerService.Keys["Profesión"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RespControlCalidad.Profesion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RespControlCalidad.Profesion) />
+                                        </div>
+                                    </div>
+                                </div>                                 
+                            </div> 
+
+                            <h5>@languageContainerService.Keys["Requisitos Legales"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["6.1"]</th>
+                                                    <th>@languageContainerService.Keys[""]</th>
+                                                    <th>@languageContainerService.Keys["De la autorización de funcionamiento"]</th>
+                                                    <th>@languageContainerService.Keys["Criterios"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales.LContenido != null)
+                                                {
+                                                    var i = 0;
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales.LContenido)
+                                                    {
+                                                        i++;
+                                                        <tr>
+                                                            <td scope="row"></td>
+                                                            <td>@(i > 1 ? "" : "6.1.1")</td>
+                                                            <td>@dt.Titulo</td>
+                                                            <td>@dt.Criterio</td>
+                                                            <td>
+                                                                <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                    {
+                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                    }
+                                                                </InputSelect>
+                                                            </td>                                                            
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>@languageContainerService.Keys["Observaciones"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys[" "]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="6" class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.Observaciones" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.Observaciones) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">                                
+                                <div class="col-sm-8">
+                                    <label for="password">@languageContainerService.Keys["¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.ProcesoVigilanciaSanit" class="form-control">
+                                                @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.ProcesoVigilanciaSanit) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Fecha de la última visita"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.FechaUltimaVista" ShowTime="false" HourFormat="12" DateFormat="dd/MM/yyyy" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.FechaUltimaVista) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>@languageContainerService.Keys["Clasificación de la Actividad Comercial"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Objetivos"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Titulo</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else                                                        
+                                                        {
+                                                            <tr>
+                                                                <td scope="row">@dt.Titulo</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <h5>@languageContainerService.Keys["Clasificación del Establecimiento"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Objetivos"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.ClasifEstablecimiento.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.ClasifEstablecimiento.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Titulo</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td scope="row">@dt.Titulo</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                        <div class="tab-pane" id="cap1" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Organización y Personal"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.OrganizacionPersonal.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.OrganizacionPersonal.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="tab-pane" id="cap2" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Edificios e Instalaciones"]</h5>                            
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.EdifInstalaciones.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.EdifInstalaciones.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>@languageContainerService.Keys["Almacenes"]</h5>                            
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Materia Prima"]</th>
+                                                    <th>@languageContainerService.Keys["Material Acondic."]</th>
+                                                    <th>@languageContainerService.Keys["Producto A Granel"]</th>
+                                                    <th>@languageContainerService.Keys["Producto Terminado"]</th>
+                                                    <th>@languageContainerService.Keys["Inflamables"]</th>
+                                                    <th>@languageContainerService.Keys["Rechazados"]</th>
+                                                    <th>@languageContainerService.Keys["Devoluciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.EdifInstalaciones.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.EdifInstalaciones.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion2" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion3" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion4" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion5" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion6" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion7" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>@languageContainerService.Keys["Area de Dispensado de Materia Prima"]</h5>                            
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.AreaDispMatPrima.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.AreaDispMatPrima.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>@languageContainerService.Keys["Area de Producción"]</h5>                            
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Líquidos"]</th>
+                                                    <th>@languageContainerService.Keys["Semisólidos"]</th>
+                                                    <th>@languageContainerService.Keys["Sólidos"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.AreaProduccion.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.AreaProduccion.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion2" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion3" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>@languageContainerService.Keys["Area de Acondicionamiento para Empaque Secundario"]</h5>                            
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.AreaAcondicionamiento.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.AreaAcondicionamiento.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                         </div>
+                          
+                        <div class="tab-pane" id="cap3" role="tabpanel">
+
+                            <h5>@languageContainerService.Keys["Equipos"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Líquidos"]</th>
+                                                    <th>@languageContainerService.Keys["Semisólidos"]</th>
+                                                    <th>@languageContainerService.Keys["Sólidos"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.EquiposGeneralidades.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.EquiposGeneralidades.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion2" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion3" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.Equipos.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.Equipos.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                  
+                          </div>
+
+                         <div class="tab-pane" id="cap4" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Materiales y Productos"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.MatProducts.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.MatProducts.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap5" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Documentación"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.Documentacion.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.Documentacion.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap6" role="tabpanel">
+                            
+                            <h5>@languageContainerService.Keys["Producción"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Líquidos"]</th>
+                                                    <th>@languageContainerService.Keys["Semisólidos"]</th>
+                                                    <th>@languageContainerService.Keys["Sólidos"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.Produccion.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.Produccion.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion2" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion3" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="tab-pane" id="cap7" role="tabpanel">
+                            
+                            <h5>@languageContainerService.Keys["Garantía de Calidad"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.GarantiaCalidad.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.GarantiaCalidad.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap8" role="tabpanel">
+                            
+                            <h5>@languageContainerService.Keys["Control de Calidad"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.ControlCalidad.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.ControlCalidad.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap9" role="tabpanel">
+                            
+                            <h5>@languageContainerService.Keys["Producción y Análisis por Contrato"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.ProdAnalisisContrato.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.ProdAnalisisContrato.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap10" role="tabpanel">
+                            
+                            <h5>@languageContainerService.Keys["Validación"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.ValGenerales.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.ValGenerales.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap11" role="tabpanel">
+                            
+                            <h5>@languageContainerService.Keys["Quejas y Reclamos"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.QuejasReclamos.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.QuejasReclamos.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap12" role="tabpanel">
+                            
+                            <h5>@languageContainerService.Keys["Autoinspección y Auditoría de Calidad"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.AutoInspecAuditCal.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.AutoInspecAuditCal.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap13" role="tabpanel">
+                            
+                            <h5>@languageContainerService.Keys["Fabricación de Productos Farmacéuticos Estériles"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Esterilización Terminal"]</th>
+                                                    <th>@languageContainerService.Keys["Filtración Esterilizante"]</th>
+                                                    <th>@languageContainerService.Keys["Llenado Aséptico"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                 <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion2" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                 <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion3" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Validación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_Gen.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_Gen.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Esterilización Terminal"]</th>
+                                                    <th>@languageContainerService.Keys["Filtración Esterilizante"]</th>
+                                                    <th>@languageContainerService.Keys["Llenado Aséptico"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A2.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A2.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion2" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion3" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Validación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A3.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.FabProdFarmEsteril_A3.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="cap14" role="tabpanel">
+
+                            <h5>@languageContainerService.Keys["Fabricación de Productos Farmacéuticos Lactímicos"]</h5>                           
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Validación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.Lactamicos.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.Lactamicos.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="tab-pane" id="cap15" role="tabpanel">
+
+                            <h5>@languageContainerService.Keys["Fabricación de Productos con Hormonas y Productos Citostáticos"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Cap."]</th>
+                                                    <th>@languageContainerService.Keys["Art."]</th>
+                                                    <th>@languageContainerService.Keys["Título"]</th>
+                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th>@languageContainerService.Keys["Validación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.ProdCitostatico.LContenido != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.ProdCitostatico.LContenido)
+                                                    {
+                                                        @if (dt.IsHeader)
+                                                        {
+                                                            <tr>
+                                                                <th>@dt.Capitulo</th>
+                                                                <th>@dt.Articulo</th>
+                                                                <th>@dt.Titulo</th>
+                                                                <th>@dt.Criterio</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>@dt.Capitulo</td>
+                                                                <td>@dt.Articulo</td>
+                                                                <td>@dt.Titulo</td>
+                                                                <td>@dt.Criterio</td>
+                                                                <td>
+                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                        {
+                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                        }
+                                                                    </InputSelect>
+                                                                </td>
+                                                                <td>
+                                                                    <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="tab-pane" id="conclusionInfo" role="tabpanel">
+                            <h5>@languageContainerService.Keys["ConclusionInfo"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["El local cumple  o no cumple con los requisitos mínimos para operar"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.CumpleRequisitosMinOperacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["FinishedDate"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Observaciones"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="8" class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.ObservacionesFinales" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.ObservacionesFinales) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Firmas"]</h5>
+
+                            @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes.Count > 0 && showSignasure)
+                            {
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["Representante Legal de la Empresa"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Nombre" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Nombre) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Cargo" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Cargo) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Cedula" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RepresentLegal.Cedula) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad5" OnSignatureChange="OnSignatureChange5"
+                                                                      MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-8">
+                                                <label for="password">@languageContainerService.Keys["Regente Farmaceutico"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Nombre" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Nombre) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.NumRegistro" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.NumRegistro) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Cargo" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Cargo) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Cedula" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Cedula) />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad6" OnSignatureChange="OnSignatureChange6"
+                                                                      MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg6">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
+                                    </div>
+                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes)
+                                    {
+                                        <div class="col-sm-6">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12">
+                                                    <label for="password">@dt.NombreCompleto</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["RegisterNumber"]:@dt.RegistroNumero</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["IdentificationCard"]:@dt.CedulaIdentificacion</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Signature"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <SignaturePad @ref="signaturePad" OnSignatureChange="(e)=>{OnSignatureChange(dt);}"
+                                                                          MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                <SignaturePadFooter>
+                                                                    <SignaturePadClear>
+                                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="(e)=>{RemoveSignatureImg(dt);}">@languageContainerService.Keys["Clear"]</button>
+                                                                    </SignaturePadClear>
+                                                                </SignaturePadFooter>
+                                                            </SignaturePad>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+
+                    <br><br>
+                    <div class="modal-footer">
+
+                        @if (StatusInspecciones == enum_StatusInspecciones.Pending)
+                        {
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                        }
+
+                        <button type="button" class="btn btn-danger waves-effect"
+                        @onclick="(e)=>{Cancel();}">
+                            @languageContainerService.Keys["Cancel"]
+                        </button>
+                    </div>
+
+
+                </EditForm>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@if (OpenHourModal)
+{
+    <Aig.Auditoria.Components.OpenHours.AddEditOpenHoursComponent HorarioApertura="@DatosHorario"></Aig.Auditoria.Components.OpenHours.AddEditOpenHoursComponent>
+}
+@if (showParticipant)
+{
+    <Aig.Auditoria.Components.Participants.AddEditParticipantComponent Participante="@participante"></Aig.Auditoria.Components.Participants.AddEditParticipantComponent>
+}
+@if (showPersona)
+{
+    <Aig.Auditoria.Components.DatosPersona.DatosPersonaComponent DatosPersona="@datosPersona"></Aig.Auditoria.Components.DatosPersona.DatosPersonaComponent>
+}
+
+<div class="modal-backdrop fade show"></div>

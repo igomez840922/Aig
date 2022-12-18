@@ -45,15 +45,38 @@
                                         <ValidationMessage For=@(() => Establecimiento.Nombre) />
                                     </div>
                                 </div>
-                            </div>                           
-                        </div>
-                        <div class="row clearfix">
+                            </div> 
                             <div class="col-sm-4">
                                 <label for="password">@languageContainerService.Keys["LicNumber"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <InputText class="form-control" @bind-Value="Establecimiento.NumLicencia" />
                                         <ValidationMessage For=@(() => Establecimiento.NumLicencia) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Licencia Expedida"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDatePicker TValue="DateTime?" @bind-Value="Establecimiento.FechaExpedida" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Licencia Expira"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDatePicker TValue="DateTime?" @bind-Value="Establecimiento.FechaExpiracion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["Aviso de Operaciones"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Establecimiento.AvisoOperaciones" />
+                                        <ValidationMessage For=@(() => Establecimiento.AvisoOperaciones) />
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +106,29 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["Período"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputNumber class="form-control" @bind-Value="Establecimiento.Periodo" />
+                                        <ValidationMessage For=@(() => Establecimiento.Periodo) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Status"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputSelect @bind-Value="Establecimiento.Status" class="form-control">
+                                            @foreach (enumAUD_StatusEstablecimiento dt in Enum.GetValues(typeof(enumAUD_StatusEstablecimiento)))
+                                            {
+                                                <option value="@dt">@DataModel.Helper.Helper.GetDescription(dt)</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For=@(() => Establecimiento.Status) />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-4">
@@ -154,7 +199,18 @@
                                     </div>
                                 </div>
                             </div>                           
-                        </div>                       
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="password">@languageContainerService.Keys["Horario"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Establecimiento.HorariosEstablecimiento" />
+                                        <ValidationMessage For=@(() => Establecimiento.HorariosEstablecimiento) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row clearfix">
                             <div class="col-sm-4">
                                 <label for="password">@languageContainerService.Keys["PhoneNumber"] 1</label>
@@ -185,17 +241,30 @@
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <div class="col-sm-4">
-                                <label>@languageContainerService.Keys["Status"]</label>
+                            <div class="col-sm-8">
+                                <label for="password">@languageContainerService.Keys["Representante Legal"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputSelect @bind-Value="Establecimiento.Status" class="form-control">
-                                            @foreach (enumAUD_StatusEstablecimiento dt in Enum.GetValues(typeof(enumAUD_StatusEstablecimiento)))
-                                            {
-                                                <option value="@dt">@DataModel.Helper.Helper.GetDescription(dt)</option>
-                                            }
-                                        </InputSelect>
-                                        <ValidationMessage For=@(() => Establecimiento.Status) />
+                                        <InputText class="form-control" @bind-Value="Establecimiento.RepLegalNombre" />
+                                        <ValidationMessage For=@(() => Establecimiento.RepLegalNombre) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["Identificación"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Establecimiento.RepLegalCedula" />
+                                        <ValidationMessage For=@(() => Establecimiento.RepLegalCedula) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <label for="password">@languageContainerService.Keys["Nombre de Sociedad"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Establecimiento.NombreSociedad" />
+                                        <ValidationMessage For=@(() => Establecimiento.NombreSociedad) />
                                     </div>
                                 </div>
                             </div>

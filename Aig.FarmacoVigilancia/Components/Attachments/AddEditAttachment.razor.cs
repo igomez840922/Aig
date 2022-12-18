@@ -4,6 +4,7 @@ using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
+using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
@@ -21,10 +22,9 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
         [Inject]
         IWebHostEnvironment env { get; set; }
 
-        DataModel.AttachmentTB attachment { get; set; } = null;
+        [Parameter]
+        public DataModel.AttachmentTB attachment { get; set; } = null;
 
-
-        bool OpenDialog { get; set; } = false;
         IBrowserFile selectedFile { get; set; }
 
         int maxFileSize { get; set; } = 1024 * 1024 * 10;
@@ -34,9 +34,6 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
-            bus.UnSubscribe<AttachmentsAddEdit_OpenEvent>(AttachmentsAddEdit_OpenEventHandler);
-            bus.Subscribe<AttachmentsAddEdit_OpenEvent>(AttachmentsAddEdit_OpenEventHandler);
-            
             base.OnInitialized();
         }
 
@@ -45,7 +42,7 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
             if (firstRender)
             {
                 await getUserLanguaje();
-                //await FetchData();
+                await FetchData();
             }
         }
 
@@ -63,16 +60,12 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
             getUserLanguaje(message.Language);
         }
 
-        //OPEN MODAL TO ADD/Edit 
-        private void AttachmentsAddEdit_OpenEventHandler(MessageArgs args)
+        //Fill Data
+        protected async Task FetchData()
         {
-            var message = args.GetMessage<AttachmentsAddEdit_OpenEvent>();
-
-            attachment = new DataModel.AttachmentTB();
-
-            OpenDialog = true;
-
-            this.InvokeAsync(StateHasChanged);
+            attachment = attachment!=null? attachment : new DataModel.AttachmentTB();
+                        
+            await this.InvokeAsync(StateHasChanged);
         }
 
         /// <summary>
@@ -102,8 +95,7 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
 
                     attachment.AbsolutePath = path;
                     attachment.Url = string.Format("/files/{0}", fileName);
-
-                    OpenDialog = false;
+                    attachment.FileName = fileName;
 
                     await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = attachment });
                     return;
@@ -117,7 +109,6 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
         //Cancel and Close
         protected async Task Cancel()
         {
-            OpenDialog = false;
             await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = null });
         }
         private void OnFileSelection(InputFileChangeEventArgs e)

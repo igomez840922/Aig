@@ -17,7 +17,15 @@ using System.Threading.Tasks;
 namespace Aig.FarmacoVigilancia.Helper
 {
     public static class SeedData
-    {        
+    {
+        public static async Task SeedAll(IServiceProvider serviceProvider)
+        {
+            await Aig.FarmacoVigilancia.Helper.SeedData.UpdateMigrations(serviceProvider);
+            await Aig.FarmacoVigilancia.Helper.SeedData.SeedRoles(serviceProvider);
+            await Aig.FarmacoVigilancia.Helper.SeedData.SeedUsers(serviceProvider);
+            await Aig.FarmacoVigilancia.Helper.SeedData.SeedFirstData(serviceProvider);
+        }
+
         public static async Task UpdateMigrations(IServiceProvider serviceProvider)
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -252,6 +260,30 @@ namespace Aig.FarmacoVigilancia.Helper
                             
                         }
                     }
+                
+                    //Instituciones por Tipo de Notas
+                    var LInstituciones = new List<InstitucionDestinoTB>() {
+                        new InstitucionDestinoTB() { Nombre = "CSS", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
+                        new InstitucionDestinoTB() { Nombre = "MINSA", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
+                        new InstitucionDestinoTB() { Nombre = "Hospitales/Patronatos/Centros Especializados", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
+                        new InstitucionDestinoTB() { Nombre = "Clínica/Hospital Privados", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
+                        new InstitucionDestinoTB() { Nombre = "Farmacias Privadas", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
+                        new InstitucionDestinoTB() { Nombre = "Industria Farmacéutica", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
+                        new InstitucionDestinoTB() { Nombre = "Dirección", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Administración", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Asesoría Legal", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "CTC", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Registro Sanitario", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Sebeq", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Modificaciones", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Control de Calidad", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Departamento de Auditoría", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                };
+                    foreach(var inst in LInstituciones) 
+                    { dalService.Save(inst); }
+                    
+
                 }
 
                 //if (dalService.Count<InstitucionDestinoTB>() <= 0)

@@ -17,7 +17,7 @@ namespace DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -321,11 +321,10 @@ namespace DataAccess.Migrations
                     b.Property<string>("Observaciones")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Periodo")
+                    b.Property<int?>("Periodo")
                         .HasColumnType("int");
 
                     b.Property<long?>("ProvinciaId")
-                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<string>("RepLegalCedula")
@@ -1050,9 +1049,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Produccion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QuejasGenerales")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuejasReclamos")
@@ -1888,6 +1884,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("ActualizaMonografias")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Adjunto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("ConsentFirmado")
                         .HasColumnType("bit");
 
@@ -1925,6 +1924,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("Monitoreo")
+                        .HasColumnType("bit");
+
                     b.Property<string>("NumNota")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
@@ -1937,6 +1939,10 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("OtrasConsideraciones")
                         .HasColumnType("bit");
+
+                    b.Property<string>("OtrasDescripcion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Producto")
                         .HasMaxLength(300)
@@ -2615,6 +2621,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<string>("Adjunto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -2622,11 +2631,12 @@ namespace DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Descripcion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Destinatario")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
@@ -2640,10 +2650,14 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
-                    b.Property<long?>("InstitucionDestinoId")
+                    b.Property<long?>("InstitucionDestinoTBId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Instituciones")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NumNota")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -2657,7 +2671,10 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("EvaluadorId");
 
-                    b.HasIndex("InstitucionDestinoId");
+                    b.HasIndex("InstitucionDestinoTBId");
+
+                    b.HasIndex("NumNota")
+                        .IsUnique();
 
                     b.ToTable("FMV_Nota");
                 });
@@ -2727,9 +2744,6 @@ namespace DataAccess.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<long>("PmrId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("RegSanitario")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -2742,8 +2756,6 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("LaboratorioId");
 
-                    b.HasIndex("PmrId");
-
                     b.ToTable("FMV_PmrProducto");
                 });
 
@@ -2754,6 +2766,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Adjunto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -2779,6 +2794,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
+                    b.Property<long?>("PmrProductoId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("PrincActivo")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -2793,6 +2811,10 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EvaluadorId");
+
+                    b.HasIndex("PmrProductoId")
+                        .IsUnique()
+                        .HasFilter("[PmrProductoId] IS NOT NULL");
 
                     b.ToTable("FMV_Pmr");
                 });
@@ -3114,6 +3136,9 @@ namespace DataAccess.Migrations
 
                     b.Property<long?>("TipoInstitucionId")
                         .HasColumnType("bigint");
+
+                    b.Property<int?>("TipoNota")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -3874,9 +3899,7 @@ namespace DataAccess.Migrations
 
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
                         .WithMany()
-                        .HasForeignKey("ProvinciaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProvinciaId");
 
                     b.Navigation("Corregimiento");
 
@@ -4180,14 +4203,11 @@ namespace DataAccess.Migrations
                         .HasForeignKey("EvaluadorId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
+                    b.HasOne("DataModel.InstitucionDestinoTB", null)
                         .WithMany("LNotas")
-                        .HasForeignKey("InstitucionDestinoId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("InstitucionDestinoTBId");
 
                     b.Navigation("Evaluador");
-
-                    b.Navigation("InstitucionDestino");
                 });
 
             modelBuilder.Entity("DataModel.FMV_PmrProductoTB", b =>
@@ -4197,15 +4217,7 @@ namespace DataAccess.Migrations
                         .HasForeignKey("LaboratorioId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("DataModel.FMV_PmrTB", "Pmr")
-                        .WithMany("LProductos")
-                        .HasForeignKey("PmrId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Laboratorio");
-
-                    b.Navigation("Pmr");
                 });
 
             modelBuilder.Entity("DataModel.FMV_PmrTB", b =>
@@ -4215,7 +4227,13 @@ namespace DataAccess.Migrations
                         .HasForeignKey("EvaluadorId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("DataModel.FMV_PmrProductoTB", "PmrProducto")
+                        .WithOne("Pmr")
+                        .HasForeignKey("DataModel.FMV_PmrTB", "PmrProductoId");
+
                     b.Navigation("Evaluador");
+
+                    b.Navigation("PmrProducto");
                 });
 
             modelBuilder.Entity("DataModel.FMV_RamNotificacionTB", b =>
@@ -4439,9 +4457,9 @@ namespace DataAccess.Migrations
                     b.Navigation("LAlertas");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_PmrTB", b =>
+            modelBuilder.Entity("DataModel.FMV_PmrProductoTB", b =>
                 {
-                    b.Navigation("LProductos");
+                    b.Navigation("Pmr");
                 });
 
             modelBuilder.Entity("DataModel.InstitucionDestinoTB", b =>

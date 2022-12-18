@@ -135,7 +135,12 @@ namespace Aig.Auditoria.Components.Inspections
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspDisposicionFinal = new AUD_InspDisposicionFinalTB() };
                             break;
                         }
-
+                    case DataModel.Helper.enumAUD_TipoActa.BPMFM:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiaBPMFabricanteMed = new AUD_InspGuiaBPMFabricanteMedTB() };
+                            break;
+                        }
+                        
                     default:
                         {
                             return;

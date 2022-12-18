@@ -10,6 +10,12 @@ namespace DataModel
 {   
     public class FMV_NotaTB : SystemId
     {
+        public FMV_NotaTB()
+        {
+            Adjunto = new AttachmentData();
+            Instituciones = new FMV_NotaInstitucion();
+        }
+
         //Fecha
         private DateTime? fecha;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -18,6 +24,7 @@ namespace DataModel
         //Numero de Nota
         private string numNota;
         [StringLength(250)]
+        [Required(ErrorMessage = "requerido")]
         public string NumNota { get => numNota; set => SetProperty(ref numNota, value); }
 
         // Evaluador
@@ -28,23 +35,36 @@ namespace DataModel
                 
         //Tipo de Nota o Alerta
         private enumFMV_NoteType tipoNota;
+        [Required(ErrorMessage = "requerido")]
         public enumFMV_NoteType TipoNota { get => tipoNota; set => SetProperty(ref tipoNota, value); }
 
         //Descripcion
         private string descripcion;
+        [Required(ErrorMessage = "requerido")]
         public string Descripcion { get => descripcion; set => SetProperty(ref descripcion, value); }
 
-        // Institucion Destino
-        private long? institucionDestinoId;
-        public long? InstitucionDestinoId { get => institucionDestinoId; set => SetProperty(ref institucionDestinoId, value); }
-        private InstitucionDestinoTB? institucionDestino;
-        public virtual InstitucionDestinoTB? InstitucionDestino { get => institucionDestino; set => SetProperty(ref institucionDestino, value); }
+        //// Institucion Destino
+        //private long? institucionDestinoId;
+        //public long? InstitucionDestinoId { get => institucionDestinoId; set => SetProperty(ref institucionDestinoId, value); }
+        //private InstitucionDestinoTB? institucionDestino;
+        //public virtual InstitucionDestinoTB? InstitucionDestino { get => institucionDestino; set => SetProperty(ref institucionDestino, value); }
 
 
         //Destinatario
         private string destinatario;
-        [StringLength(250)]
+        [StringLength(500)]
         public string Destinatario { get => destinatario; set => SetProperty(ref destinatario, value); }
+
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
+
+
+        //Instituciones
+        private FMV_NotaInstitucion instituciones;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual FMV_NotaInstitucion Instituciones { get => instituciones; set => SetProperty(ref instituciones, value); }
 
     }
 

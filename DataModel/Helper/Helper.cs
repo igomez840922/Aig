@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataModel.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -37,6 +38,22 @@ namespace DataModel.Helper
             return null; // could also return string.Empty
         }
 
-        
+        public static List<EnumDataType> GetEnumList<T>(this T e) where T : IConvertible
+        {
+            if (e is Enum)
+            {
+                Type type = e.GetType();
+
+                var list = new List<EnumDataType>();
+                foreach(System.Enum dt in Enum.GetValues(type))
+                {
+                    list.Add(new EnumDataType() { mEnum= dt });
+                }
+                return list;
+            }
+
+            return null; // could also return string.Empty
+        }
+
     }
 }

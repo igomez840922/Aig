@@ -175,17 +175,23 @@ namespace Aig.FarmacoVigilancia.Pages.Alert
 
         private async Task DownloadPdf(long Id)
         {
-            Stream stream = await pdfGenerationService.GenerateAlertPDF(Id);
-
-            if (stream != null)
-            {
-                await blazorDownloadFileService.DownloadFile("ALERTA_SEGURIDAD.pdf", stream, "application/actet-stream");
-            }
-
+            //Stream stream = await pdfGenerationService.GenerateAlertPDF(Id);
             //if (stream != null)
             //{
-            //    await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "inspeccion.pdf", stream);
+            //    await blazorDownloadFileService.DownloadFile("ALERTA_SEGURIDAD.pdf", stream, "application/actet-stream");
             //}
+
+            var data = await alertaService.Get(Id);
+            if (data?.Adjunto?.LAttachments?.Count > 0)
+            {
+                foreach (var attachment in data.Adjunto.LAttachments)
+                {
+                    Stream stream = await pdfGenerationService.GetStreamsFromFile(attachment.AbsolutePath);
+                    if(stream!=null)
+                        await blazorDownloadFileService.DownloadFile(attachment.FileName, stream, "application/actet-stream");
+                }                
+            }
+            
         }
 
     }

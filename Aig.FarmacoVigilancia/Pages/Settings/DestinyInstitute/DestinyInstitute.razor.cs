@@ -18,6 +18,10 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.DestinyInstitute
         IProfileService profileService { get; set; }
         [Inject]
         IDestinyInstituteService destinyInstituteService { get; set; }
+        [Inject]
+        ITipoInstitucionService tipoInstitucionService { get; set; }
+
+        List<TipoInstitucionTB> lTipoInstituciones { get; set; } = new List<TipoInstitucionTB>();
 
         GenericModel<InstitucionDestinoTB> dataModel { get; set; } = new GenericModel<InstitucionDestinoTB>()
         { Data = new InstitucionDestinoTB() };
@@ -49,6 +53,8 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.DestinyInstitute
 
         protected async Task FetchData()
         {
+            lTipoInstituciones = lTipoInstituciones != null && lTipoInstituciones.Count > 0 ? lTipoInstituciones : await tipoInstitucionService.GetAll();
+            
             dataModel.ErrorMsg = null;
             dataModel.Data = null;
             var data = await destinyInstituteService.FindAll(dataModel);

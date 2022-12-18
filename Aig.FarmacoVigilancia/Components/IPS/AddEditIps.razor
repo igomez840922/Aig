@@ -38,7 +38,7 @@
                                         <label>@languageContainerService.Keys["ReceptionDateCNFV"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.FechaRecepcion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.FechaRecepcion" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaRecepcion) />
                                             </div>
                                         </div>
@@ -47,7 +47,7 @@
                                         <label>@languageContainerService.Keys["DeliveryDateRegister"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.FechaRegistrador" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.FechaRegistrador" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaRegistrador) />
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@
                                         <label for="password">@languageContainerService.Keys["InitialPeriod"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.IpsData.PeriodoIni" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.PeriodoIni" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.PeriodoIni) />
                                             </div>
                                         </div>
@@ -154,7 +154,7 @@
                                         <label for="password">@languageContainerService.Keys["EndPeriod"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.IpsData.PeriodoFin" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.PeriodoFin" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.PeriodoFin) />
                                             </div>
                                         </div>
@@ -165,7 +165,7 @@
                                         <label for="password">@languageContainerService.Keys["RigisteredDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.IpsData.FechaRegistro" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaRegistro" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaRegistro) />
                                             </div>
                                         </div>
@@ -186,7 +186,7 @@
                                         <label for="password">@languageContainerService.Keys["Asignación para PreEvaluación"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.IpsData.FechaAsigPreEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaAsigPreEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaAsigPreEva) />
                                             </div>
                                         </div>
@@ -248,7 +248,7 @@
                                         <label for="password">@languageContainerService.Keys["AuthDatePanama"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.IpsData.FechaAutPan" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaAutPan" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaAutPan) />
                                             </div>
                                         </div>
@@ -259,7 +259,7 @@
                                         <label for="password">@languageContainerService.Keys["PreEvaluationDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.IpsData.FechaPreEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaPreEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaPreEva) />
                                             </div>
                                         </div>
@@ -292,7 +292,7 @@
                                         <label for="password">@languageContainerService.Keys["AsignEvaluationDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.FechaAsigEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.FechaAsigEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaAsigEva) />
                                             </div>
                                         </div>
@@ -622,7 +622,7 @@
                                         <label>@languageContainerService.Keys["ReviewDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Ips.FechaRev" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.FechaRev" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaRev) />
                                             </div>
                                         </div>

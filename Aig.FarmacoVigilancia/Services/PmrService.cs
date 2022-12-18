@@ -22,7 +22,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  = (from data in DalService.DBContext.Set<FMV_PmrTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.PmrProducto.NomComercial.Contains(model.Filter) || data.PmrProducto.RegSanitario.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
                               (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
@@ -31,9 +31,9 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_PmrTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
-                              (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
-                              (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.PmrProducto.NomComercial.Contains(model.Filter) || data.PmrProducto.RegSanitario.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
+                               (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
                                (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
                                select data).Count();  
             }
@@ -73,35 +73,47 @@ namespace Aig.FarmacoVigilancia.Services
                     for (int row = 1; row <= model.Ldata.Count; row++)
                     {
                         var prod = model.Ldata[row - 1];
-                        if(prod.LProductos!=null && prod.LProductos.Count > 0)
-                        {
-                            for (int rowChild = 1; rowChild <= prod.LProductos.Count; rowChild++)
-                            {
-                                var prodChild = prod.LProductos[rowChild - 1];
+                        //var prodChild = prod.LProductos[rowChild - 1];
 
-                                ws.Cell(rowCount + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
-                                ws.Cell(rowCount + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
-                                ws.Cell(rowCount + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
-                                ws.Cell(rowCount + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
-                                ws.Cell(rowCount + 1, 5).Value = prodChild.RegSanitario;
-                                ws.Cell(rowCount + 1, 6).Value = prod.PrincActivo;
-                                ws.Cell(rowCount + 1, 7).Value = prodChild.NomComercial;
-                                ws.Cell(rowCount + 1, 8).Value = prodChild.Laboratorio?.Nombre??"";
-                                rowCount++;
-                            }
-                        }
-                        else
-                        {
-                            ws.Cell(rowCount + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
-                            ws.Cell(rowCount + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
-                            ws.Cell(rowCount + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
-                            ws.Cell(rowCount + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
-                            ws.Cell(rowCount + 1, 5).Value = "";
-                            ws.Cell(rowCount + 1, 6).Value = prod.PrincActivo;
-                            ws.Cell(rowCount + 1, 7).Value = "";
-                            ws.Cell(rowCount + 1, 8).Value = "";
-                            rowCount++;
-                        }
+                        ws.Cell(rowCount + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(rowCount + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(rowCount + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(rowCount + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
+                        ws.Cell(rowCount + 1, 5).Value = prod.PmrProducto?.RegSanitario??"";
+                        ws.Cell(rowCount + 1, 6).Value = prod.PrincActivo;
+                        ws.Cell(rowCount + 1, 7).Value = prod.PmrProducto?.NomComercial??"";
+                        ws.Cell(rowCount + 1, 8).Value = prod.PmrProducto?.Laboratorio?.Nombre ?? "";
+                        rowCount++;
+
+                        //if(prod.LProductos!=null && prod.LProductos.Count > 0)
+                        //{
+                        //    for (int rowChild = 1; rowChild <= prod.LProductos.Count; rowChild++)
+                        //    {
+                        //        var prodChild = prod.LProductos[rowChild - 1];
+
+                        //        ws.Cell(rowCount + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
+                        //        ws.Cell(rowCount + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
+                        //        ws.Cell(rowCount + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
+                        //        ws.Cell(rowCount + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
+                        //        ws.Cell(rowCount + 1, 5).Value = prodChild.RegSanitario;
+                        //        ws.Cell(rowCount + 1, 6).Value = prod.PrincActivo;
+                        //        ws.Cell(rowCount + 1, 7).Value = prodChild.NomComercial;
+                        //        ws.Cell(rowCount + 1, 8).Value = prodChild.Laboratorio?.Nombre??"";
+                        //        rowCount++;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    ws.Cell(rowCount + 1, 1).Value = prod.FechaEntrada?.ToString("dd/MM/yyyy") ?? "";
+                        //    ws.Cell(rowCount + 1, 2).Value = prod.FechaEntregaEvaluador?.ToString("dd/MM/yyyy") ?? "";
+                        //    ws.Cell(rowCount + 1, 3).Value = prod.FechaTramite?.ToString("dd/MM/yyyy") ?? "";
+                        //    ws.Cell(rowCount + 1, 4).Value = prod.Evaluador?.NombreCompleto ?? "";
+                        //    ws.Cell(rowCount + 1, 5).Value = "";
+                        //    ws.Cell(rowCount + 1, 6).Value = prod.PrincActivo;
+                        //    ws.Cell(rowCount + 1, 7).Value = "";
+                        //    ws.Cell(rowCount + 1, 8).Value = "";
+                        //    rowCount++;
+                        //}
                     }
 
                         MemoryStream XLSStream = new();
@@ -133,6 +145,11 @@ namespace Aig.FarmacoVigilancia.Services
         public async Task<FMV_PmrTB> Save(FMV_PmrTB data)
         {
             var result = DalService.Save(data);
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.Adjunto).IsModified = true;
+                DalService.DBContext.SaveChanges();
+            }
             return result;           
         }
 

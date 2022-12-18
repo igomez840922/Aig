@@ -45,7 +45,7 @@
                                         <label>@languageContainerService.Keys["Fecha de Recibido"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaRecibidoCNFV" ShowTime="false" DateFormat="dd/MM/yyyy"  />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaRecibidoCNFV" ShowTime="false" DateFormat="dd/MM/yyyy"  />
                                                 <ValidationMessage For=@(() => Data.FechaRecibidoCNFV) />
                                             </div>
                                         </div>
@@ -55,7 +55,7 @@
                                         <label>@languageContainerService.Keys["Fecha de entrega"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaEntregaEva) />
                                             </div>
                                         </div>
@@ -282,7 +282,7 @@
                                         <label>@languageContainerService.Keys["Fecha de Evaluación"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaEvaluacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEvaluacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaEvaluacion) />
                                             </div>
                                         </div>
@@ -311,7 +311,7 @@
                                         <label>@languageContainerService.Keys["Fecha de Tratamiento"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.EvaluacionCalidadInfo.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.EvaluacionCalidadInfo.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.FechaTratamiento) />
                                             </div>
                                         </div>
@@ -320,7 +320,7 @@
                                         <label>@languageContainerService.Keys["Fecha de RAM"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.EvaluacionCalidadInfo.FechaRam" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.EvaluacionCalidadInfo.FechaRam" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.FechaRam) />
                                             </div>
                                         </div>

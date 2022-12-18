@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 using MimeKit;
 using System;
 using Org.BouncyCastle.Utilities;
+using System.Collections;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -548,6 +549,24 @@ namespace Aig.FarmacoVigilancia.Services
                 Stream stream = new MemoryStream(byteArray);
 
                 return stream;
+            }
+            catch { }
+            return null;
+        }
+
+        public async Task<Stream> GetStreamsFromFile(string filePath)
+        {
+            try
+            {
+                if(File.Exists(filePath))
+                {
+                    MemoryStream ms = new MemoryStream();
+                    using (FileStream fStream = new FileStream(filePath, FileMode.Open))
+                    {
+                        fStream.CopyTo(ms);
+                    }                    
+                    return ms;
+                }               
             }
             catch { }
             return null;

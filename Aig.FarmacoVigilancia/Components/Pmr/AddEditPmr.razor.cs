@@ -1,5 +1,6 @@
 ﻿using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.PMR;
+using Aig.FarmacoVigilancia.Pages.Alert;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
@@ -7,6 +8,7 @@ using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
+using System.Net.Mail;
 
 namespace Aig.FarmacoVigilancia.Components.Pmr
 {    
@@ -20,12 +22,21 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
         IWorkerPersonService evaluatorService { get; set; }
         [Inject]
         IPdfGenerationService pdfGenerationService { get; set; }
+
+        [Inject]
+        ILabsService labsService { get; set; }
+        List<LaboratorioTB> lLaboratorio { get; set; } = new List<LaboratorioTB>();
+
+
         [Parameter]
         public DataModel.FMV_PmrTB Pmr { get; set; }
         List<PersonalTrabajadorTB> lEvaluators { get; set; } = new List<PersonalTrabajadorTB>();    
 
         bool OpenAddEditProduct { get; set; }=false;
         FMV_PmrProductoTB AddProduct { get; set; } = null;
+
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -61,10 +72,9 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
         //Fill Data
         protected async Task FetchData()
         {
-            if (lEvaluators == null || lEvaluators.Count < 1)
-            {
-                lEvaluators = await evaluatorService.GetAll();
-            }
+            lLaboratorio = lLaboratorio!=null && lLaboratorio.Count > 0? lLaboratorio : await labsService.GetAll();
+            lEvaluators = lEvaluators != null && lEvaluators.Count > 0 ? lEvaluators : await evaluatorService.GetAll();
+           
 
             if (Pmr != null)
             {               
@@ -108,45 +118,45 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
             await this.InvokeAsync(StateHasChanged);
         }
 
-        //Add New Product
-        protected async Task OpenProduct(FMV_PmrProductoTB product = null)
-        {
+        ////Add New Product
+        //protected async Task OpenProduct(FMV_PmrProductoTB product = null)
+        //{
             
-            bus.Subscribe<Aig.FarmacoVigilancia.Events.PmrProduct.AddEdit_CloseEvent>(Product_AddEditCloseEventHandlerHandler);
+        //    bus.Subscribe<Aig.FarmacoVigilancia.Events.PmrProduct.AddEdit_CloseEvent>(Product_AddEditCloseEventHandlerHandler);
 
-            AddProduct = product != null ? product : new FMV_PmrProductoTB();
-            OpenAddEditProduct = true;
+        //    AddProduct = product != null ? product : new FMV_PmrProductoTB();
+        //    OpenAddEditProduct = true;
 
-            await bus.Publish(new Aig.FarmacoVigilancia.Events.PmrProduct.AddEdit_OpenEvent { Data = AddProduct });
-            await this.InvokeAsync(StateHasChanged);
-        }
-        //Remove Product
-        protected async Task RemoveProduct(FMV_PmrProductoTB product)
-        {
-            if (product != null)
-            {
-                Pmr.LProductos.Remove(product);
-                this.InvokeAsync(StateHasChanged);
-            }
-        }
-        //ON CLOSE PRODUCT MODAL 
-        private void Product_AddEditCloseEventHandlerHandler(MessageArgs args)
-        {
-            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.PmrProduct.AddEdit_CloseEvent>(Product_AddEditCloseEventHandlerHandler);
+        //    await bus.Publish(new Aig.FarmacoVigilancia.Events.PmrProduct.AddEdit_OpenEvent { Data = AddProduct });
+        //    await this.InvokeAsync(StateHasChanged);
+        //}
+        ////Remove Product
+        //protected async Task RemoveProduct(FMV_PmrProductoTB product)
+        //{
+        //    if (product != null)
+        //    {
+        //        Pmr.LProductos.Remove(product);
+        //        this.InvokeAsync(StateHasChanged);
+        //    }
+        //}
+        ////ON CLOSE PRODUCT MODAL 
+        //private void Product_AddEditCloseEventHandlerHandler(MessageArgs args)
+        //{
+        //    bus.UnSubscribe<Aig.FarmacoVigilancia.Events.PmrProduct.AddEdit_CloseEvent>(Product_AddEditCloseEventHandlerHandler);
 
-            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.PmrProduct.AddEdit_CloseEvent>();
+        //    var message = args.GetMessage<Aig.FarmacoVigilancia.Events.PmrProduct.AddEdit_CloseEvent>();
 
-            AddProduct = null;
-            OpenAddEditProduct = false;
-            if (message.Data != null)
-            {
-                Pmr.LProductos = Pmr.LProductos != null ? Pmr.LProductos : new List<FMV_PmrProductoTB>();
+        //    AddProduct = null;
+        //    OpenAddEditProduct = false;
+        //    if (message.Data != null)
+        //    {
+        //        Pmr.LProductos = Pmr.LProductos != null ? Pmr.LProductos : new List<FMV_PmrProductoTB>();
 
-                Pmr.LProductos.Add(message.Data);
-            }
+        //        Pmr.LProductos.Add(message.Data);
+        //    }
 
-            this.InvokeAsync(StateHasChanged);
-        }
+        //    this.InvokeAsync(StateHasChanged);
+        //}
                 
         protected async Task OnEvaluatorChange(long? Id)
         {
@@ -154,7 +164,49 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
             Pmr.Evaluador = lEvaluators.Where(x => x.Id == Id).FirstOrDefault();
         }
 
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
 
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+
+                Pmr.Adjunto.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Pmr.Adjunto = Pmr.Adjunto != null ? Pmr.Adjunto : new AttachmentData();
+                Pmr.Adjunto.LAttachments = Pmr.Adjunto.LAttachments != null ? Pmr.Adjunto.LAttachments : new List<AttachmentTB>();
+                Pmr.Adjunto.LAttachments.Add(message.Attachment);
+            }
+            this.InvokeAsync(StateHasChanged);
+        }
     }
 
 }

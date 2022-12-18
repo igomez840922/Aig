@@ -32,6 +32,10 @@ namespace DataModel
         private string descripcion;
         public string Descripcion { get => descripcion; set => SetProperty(ref descripcion, value); }
 
+        //Tipo de Nota o Alerta
+        private enumFMV_NoteType? tipoNota;
+        public enumFMV_NoteType? TipoNota { get => tipoNota; set => SetProperty(ref tipoNota, value); }
+
 
         private List<FMV_NotaTB> lNotas;
         public virtual List<FMV_NotaTB> LNotas { get => lNotas; set => SetProperty(ref lNotas, value); }

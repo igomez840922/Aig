@@ -1010,10 +1010,6 @@ namespace DataAccess
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMFabricanteMedTB>()
-.Property(e => e.QuejasGenerales)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
-
-            modelBuilder.Entity<AUD_InspGuiaBPMFabricanteMedTB>()
 .Property(e => e.QuejasReclamos)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
 
@@ -1055,6 +1051,11 @@ namespace DataAccess
             /// ////////////////////////////////////////////////
             ///
 
+            //numero de nota unico
+            modelBuilder.Entity<FMV_NotaTB>()
+        .HasIndex(e => e.NumNota).IsUnique();
+
+
             modelBuilder.Entity<PersonalTrabajadorTB>()
                .HasMany(e => e.LPmr)
                .WithOne(e => e.Evaluador)
@@ -1085,11 +1086,16 @@ namespace DataAccess
               .HasForeignKey(e => e.TramitadorId)
               .OnDelete(DeleteBehavior.NoAction);
 
+            //modelBuilder.Entity<FMV_PmrTB>()
+            //   .HasMany(e => e.LProductos)
+            //   .WithOne(e => e.Pmr)
+            //   .HasForeignKey(e => e.PmrId)
+            //   .OnDelete(DeleteBehavior.Cascade);
+                              
             modelBuilder.Entity<FMV_PmrTB>()
-               .HasMany(e => e.LProductos)
-               .WithOne(e => e.Pmr)
-               .HasForeignKey(e => e.PmrId)
-               .OnDelete(DeleteBehavior.Cascade);
+              .HasOne(e => e.PmrProducto)
+              .WithOne(e => e.Pmr)
+              .HasForeignKey<FMV_PmrTB>(e => e.PmrProductoId);
 
             modelBuilder.Entity<LaboratorioTB>()
               .HasMany(e => e.LProductos)
@@ -1151,11 +1157,11 @@ namespace DataAccess
         .HasForeignKey(e => e.EvaluadorId)
         .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<InstitucionDestinoTB>()
-           .HasMany(e => e.LNotas)
-           .WithOne(e => e.InstitucionDestino)
-           .HasForeignKey(e => e.InstitucionDestinoId)
-           .OnDelete(DeleteBehavior.NoAction);
+           // modelBuilder.Entity<InstitucionDestinoTB>()
+           //.HasMany(e => e.LNotas)
+           //.WithOne(e => e.InstitucionDestino)
+           //.HasForeignKey(e => e.InstitucionDestinoId)
+           //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<FMV_IpsTB>()
             .Property(e => e.IpsData)
@@ -1302,6 +1308,34 @@ namespace DataAccess
             modelBuilder.Entity<FMV_FtTB>()
               .Property(e => e.EvaluacionCausalidad)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtEvaluacionCausalidad>(x));
+
+            ///////////////////////////////////////////
+            ///
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_AlertaTB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+           
+            ///////////////////////////////////////////
+            ///
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_NotaTB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
+            modelBuilder.Entity<FMV_NotaTB>()
+             .Property(e => e.Instituciones)
+             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_NotaInstitucion>(x));
+
+            ///////////////////////////////////////////
+            ///
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_PmrTB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
 
             ///////////////////////////////
             ///

@@ -57,7 +57,7 @@
                                             @languageContainerService.Keys["Fecha de Recibido (CNFV)"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaRecibidoCNFV" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaRecibidoCNFV" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaRecibidoCNFV) />
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaEntregaEva) />
                                             </div>
                                         </div>
@@ -526,7 +526,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaTramite) />
                                             </div>
                                         </div>
@@ -537,7 +537,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaEvalua" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEvalua" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaEvalua) />
                                             </div>
                                         </div>

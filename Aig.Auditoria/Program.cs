@@ -156,11 +156,8 @@ app.MapFallbackToPage("/_Host");
 
 app.UseWebSockets();
 
-//Save initial data...
-Aig.Auditoria.Helper.SeedData.UpdateMigrations(app.Services).Wait();
-Aig.Auditoria.Helper.SeedData.SeedRoles(app.Services).Wait();
-Aig.Auditoria.Helper.SeedData.SeedUsers(app.Services).Wait();
-Aig.Auditoria.Helper.SeedData.SeedFirstData(app.Services).Wait();
+//Check and Save initial data...
+Aig.Auditoria.Helper.SeedData.SeedAll(app.Services);
 
 //cultura en español
 CultureInfo.CurrentCulture = new CultureInfo("es");

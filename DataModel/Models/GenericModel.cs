@@ -63,7 +63,7 @@ namespace DataModel.Models
         public enumFMV_NoteType? NotaType { get; set; } = null;
         public enum_LaboratoryType? LaboratoryType { get; set; } = null;
 
-
+        public long? NParentId { get; set; }
 
     }
 

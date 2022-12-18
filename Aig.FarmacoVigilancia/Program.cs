@@ -140,12 +140,8 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 
-//Save initial data...
-Aig.FarmacoVigilancia.Helper.SeedData.UpdateMigrations(app.Services).Wait();
-Aig.FarmacoVigilancia.Helper.SeedData.SeedRoles(app.Services).Wait();
-Aig.FarmacoVigilancia.Helper.SeedData.SeedUsers(app.Services).Wait();
-Aig.FarmacoVigilancia.Helper.SeedData.SeedFirstData(app.Services).Wait();
-
+//Check and Save initial data...
+Aig.FarmacoVigilancia.Helper.SeedData.SeedAll(app.Services);
 
 //cultura en español
 CultureInfo.CurrentCulture = new CultureInfo("es");

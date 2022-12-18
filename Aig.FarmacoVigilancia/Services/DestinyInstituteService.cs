@@ -36,13 +36,17 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  = (from data in DalService.DBContext.Set<InstitucionDestinoTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter)))
-                              orderby data.Nombre
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter))) &&
+                              (model.NParentId == null ? true : (data.TipoInstitucionId == model.NParentId)) &&
+                              (model.NotaType == null ? true : (data.TipoNota == model.NotaType))
+                                orderby data.Nombre
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<InstitucionDestinoTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter)))
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter))) &&
+                              (model.NParentId == null ? true : (data.TipoInstitucionId == model.NParentId)) &&
+                              (model.NotaType == null ? true : (data.TipoNota == model.NotaType))
                                select data).Count();  
             }
             catch (Exception ex)
