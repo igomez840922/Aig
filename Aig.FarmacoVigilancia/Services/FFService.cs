@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using System.Linq.Expressions;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -14,6 +15,18 @@ namespace Aig.FarmacoVigilancia.Services
         public FFService(IDalService dalService)
         {
             DalService = dalService;
+        }
+
+        public async Task<List<FMV_FfTB>> FindAll(Expression<Func<FMV_FfTB, bool>> match)
+        {
+            try
+            {
+                return DalService.FindAll(match);
+            }
+            catch (Exception ex)
+            { }
+
+            return null;
         }
 
         public async Task<GenericModel<FMV_FfTB>> FindAll(GenericModel<FMV_FfTB> model)
@@ -109,7 +122,7 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 8).Value = prod.Presentacion;
                         ws.Cell(row + 1, 9).Value = prod.ATC;
                         ws.Cell(row + 1, 10).Value = prod.SubGrupoTerapeutico;
-                        ws.Cell(row + 1, 11).Value = prod.Fabricante;
+                        ws.Cell(row + 1, 11).Value = prod.Fabricant?.Nombre??"";
                         ws.Cell(row + 1, 12).Value = prod.Lote;
                         ws.Cell(row + 1, 13).Value = prod.FechaExp;
                         ws.Cell(row + 1, 14).Value = prod.RegSanitario;

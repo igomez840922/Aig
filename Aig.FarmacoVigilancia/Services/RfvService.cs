@@ -24,7 +24,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_RfvTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter) || data.Cargo.Contains(model.Filter) || data.DireccionFisica.Contains(model.Filter) || data.Telefonos.Contains(model.Filter) || data.Correos.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter) || data.DireccionFisica.Contains(model.Filter) || data.Telefonos.Contains(model.Filter) || data.Correos.Contains(model.Filter)))&&
                               (model.LabId == null ? true : (data.LaboratorioId == model.LabId )) &&
                               (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType))
                               orderby data.CreatedDate
@@ -32,9 +32,10 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_RfvTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter) || data.Cargo.Contains(model.Filter) || data.DireccionFisica.Contains(model.Filter) || data.Telefonos.Contains(model.Filter) || data.Correos.Contains(model.Filter))) &&
-                               (model.LabId == null ? true : (data.LaboratorioId == model.LabId)) &&
-                               (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType))
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter) || data.DireccionFisica.Contains(model.Filter) || data.Telefonos.Contains(model.Filter) || data.Correos.Contains(model.Filter))) &&
+                              (model.LabId == null ? true : (data.LaboratorioId == model.LabId)) &&
+                              (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType))
+                               orderby data.CreatedDate
                                select data).Count();  
             }
             catch (Exception ex)
@@ -81,7 +82,7 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 3).Value = DataModel.Helper.Helper.GetDescription(prod.Laboratorio?.TipoLaboratorio ?? enum_LaboratoryType.Laboratory);
                         ws.Cell(row + 1, 4).Value = DataModel.Helper.Helper.GetDescription(prod.Laboratorio?.TipoUbicacion ?? enum_UbicationType.Local);
                         ws.Cell(row + 1, 5).Value = prod.NombreCompleto;
-                        ws.Cell(row + 1, 6).Value = prod.Cargo;
+                        ws.Cell(row + 1, 6).Value = DataModel.Helper.Helper.GetDescription(prod.TipoCargo);
                         ws.Cell(row + 1, 7).Value = prod.DireccionFisica;
                         ws.Cell(row + 1, 8).Value = prod.Telefonos;
                         ws.Cell(row + 1, 9).Value = prod.Correos;
@@ -119,6 +120,11 @@ namespace Aig.FarmacoVigilancia.Services
         public async Task<FMV_RfvTB> Save(FMV_RfvTB data)
         {
             var result = DalService.Save(data);
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.Adjunto).IsModified = true;
+                DalService.DBContext.SaveChanges();
+            }
             return result;           
         }
 

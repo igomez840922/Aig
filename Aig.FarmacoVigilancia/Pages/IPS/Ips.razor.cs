@@ -28,6 +28,8 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
 
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
+        [Inject]
+        IPdfGenerationService pdfGenerationService { get; set; }
 
         GenericModel<FMV_IpsTB> dataModel { get; set; } = new GenericModel<FMV_IpsTB>()
         { Data = new FMV_IpsTB() };
@@ -171,6 +173,28 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
                 await blazorDownloadFileService.DownloadFile("INFORMES_PERIODICOS_SEGURIDAD.xlsx", stream, "application/actet-stream");
             }
         }
+
+        private async Task DownloadPdf(long Id)
+        {
+            //Stream stream = await pdfGenerationService.GenerateAlertPDF(Id);
+            //if (stream != null)
+            //{
+            //    await blazorDownloadFileService.DownloadFile("ALERTA_SEGURIDAD.pdf", stream, "application/actet-stream");
+            //}
+
+            var data = await ipsService.Get(Id);
+            if (data?.Adjunto?.LAttachments?.Count > 0)
+            {
+                foreach (var attachment in data.Adjunto.LAttachments)
+                {
+                    Stream stream = await pdfGenerationService.GetStreamsFromFile(attachment.AbsolutePath);
+                    if (stream != null)
+                        await blazorDownloadFileService.DownloadFile(attachment.FileName, stream, "application/actet-stream");
+                }
+            }
+
+        }
+
 
     }
 

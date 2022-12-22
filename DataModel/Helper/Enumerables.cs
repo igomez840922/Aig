@@ -149,7 +149,6 @@ namespace DataModel.Helper
         Modificacion = 3,
     }
 
-
     public enum enumAUD_TipoSeleccion
 	{
 		[Description("N/A")]
@@ -251,10 +250,10 @@ namespace DataModel.Helper
         ServicioWeb = 1,
         [Description("En Papel")]
         Papel = 2,
-        [Description("Facedra")]
-        Facedra = 3,
-        [Description("PAI")]
-        Pai = 4,
+        //[Description("Facedra")]
+        //Facedra = 3,
+        //[Description("PAI")]
+        //Pai = 4,
     }
     public enum enumFMV_RAMNotificationType
     {
@@ -339,7 +338,7 @@ namespace DataModel.Helper
         NA = 0,
         [Description("Desapareció la reacción al disminuir la dosis")]
         DESREACC = 1,
-        [Description("Permance la reacción al disminuir la dosis")]
+        [Description("Permanece la reacción al disminuir la dosis")]
         PERREACC = 2,
     }
 
@@ -357,9 +356,9 @@ namespace DataModel.Helper
     {
         [Description("N/A")]
         NA = 0,
-        [Description("Desapareció la reacción al suspender el uso del medicamento sospechoso")]
+        [Description("Desaparece la reacción adversa")]
         DESREACC = 1,
-        [Description("Permanece la reacción al suspender el uso del medicamento sospechoso")]
+        [Description("Permanece la reacción adversa")]
         PERREACC = 2,
     }
 
@@ -709,14 +708,14 @@ namespace DataModel.Helper
 
     public enum enumFMV_IpsTipoPresentaiones
     {
-        [Description("No Presentado")]
-        NotPresent = 0,
-        [Description("Presentado")]
-        Presented = 1,
+        //[Description("No Presentado")]
+        //NotPresent = 0,
+        //[Description("Presentado")]
+        //Presented = 1,
         [Description("Si")]
-        Yes = 2,
+        Yes = 1,
         [Description("No")]
-        No = 3,
+        No = 0,
     }
 
     public enum enumFMV_IpsStatusRevision
@@ -788,6 +787,8 @@ namespace DataModel.Helper
         Laboratory = 0,
         [Description("Distribuidora")]
         Distributor = 1,
+        [Description("Fabricante")]
+        Manufacturer = 3,
     }
 
     //////////////////////////////
@@ -818,5 +819,20 @@ namespace DataModel.Helper
         [Description("Parcial")]
         Parcial = 2,
     }
+
+    public enum enum_Cargos
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Responsable de Farmacovigilancia")]
+        ResFV = 1,
+        [Description("Representante de Farmacovigilancia")]
+        RepFV = 2,
+        [Description("Suplente de Responsable de Farmacovigilancia")]
+        SupResFV = 3,
+        [Description("Suplente de Representante de Farmacovigilancia")]
+        SupRepFV = 4,
+    }
+
 
 }

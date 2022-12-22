@@ -141,8 +141,11 @@
                                                             <th>@languageContainerService.Keys["ActivePrinciple"]</th>
                                             <th>@languageContainerService.Keys["Laboratory"]</th>
                                                             <th>@languageContainerService.Keys["NumberOfHealthRegister"]</th>
+                                                            <th>@languageContainerService.Keys["Período"]</th>
+                                                            <th>@languageContainerService.Keys["Prioridad"]</th>
+                                                            <th>@languageContainerService.Keys["Asignación a Evaluador"]</th>
+                                                            <th>@languageContainerService.Keys["Evaluator"]</th>
                                                             <th>@languageContainerService.Keys["ReviewDate"]</th>
-                                            <th>@languageContainerService.Keys["Evaluator"]</th>
                                             <th>@languageContainerService.Keys["Status"]</th>
                                                             <th>@languageContainerService.Keys["ReportNumber"]</th>
                                             <th></th>
@@ -158,14 +161,21 @@
                                                         <td>@(dt.PrincActivo)</td>
                                                         <td>@(dt.Laboratorio?.Nombre ?? "")</td>
                                                         <td>@(dt.RegSanitario)</td>
+                                                                <td>@(dt.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy"))<br/>@(dt.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy"))</td>
+                                                                <td>@(dt.Prioridad ? "Si" : "No")</td>
+                                                                <td>@(dt.FechaAsigEva?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
                                                         <td>@(dt.FechaRev?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                        <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
                                                         <td>@(DataModel.Helper.Helper.GetDescription(dt.StatusRevision))</td>
                                                         <td>@(dt.NoInforme)</td>
                                                         <td style="text-align:right">
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                         <div class="dropdown-menu">
+                                                                            @if (dt.Adjunto?.LAttachments?.Count > 0)
+                                                                            {
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => DownloadPdf(dt.Id)"><i class="fa fa-file-pdf"></i>@languageContainerService.Keys["Download"]</a>
+                                                                            }
                                                         <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
                                                         <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
                                                     </div>

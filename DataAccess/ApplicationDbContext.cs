@@ -1055,6 +1055,21 @@ namespace DataAccess
             modelBuilder.Entity<FMV_NotaTB>()
         .HasIndex(e => e.NumNota).IsUnique();
 
+            //Codigo CNFV
+            modelBuilder.Entity<FMV_RamTB>()
+        .HasIndex(e => e.CodigoCNFV).IsUnique();
+
+            //ID Facedra
+            modelBuilder.Entity<FMV_RamTB>()
+        .HasIndex(e => e.IdFacedra).IsUnique();
+
+            //Codigo Noti-Facedra
+            modelBuilder.Entity<FMV_RamTB>()
+        .HasIndex(e => e.CodigoNotiFacedra).IsUnique();
+
+            //Codigo Externo
+            modelBuilder.Entity<FMV_RamTB>()
+        .HasIndex(e => e.CodExterno).IsUnique();
 
             modelBuilder.Entity<PersonalTrabajadorTB>()
                .HasMany(e => e.LPmr)
@@ -1115,6 +1130,18 @@ namespace DataAccess
              .HasForeignKey(e => e.LaboratorioId)
              .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<LaboratorioTB>()
+             .HasMany(e => e.LFf)
+             .WithOne(e => e.Fabricant)
+             .HasForeignKey(e => e.FabricanteId)
+             .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<LaboratorioTB>()
+             .HasMany(e => e.LFt)
+             .WithOne(e => e.Fabricant)
+             .HasForeignKey(e => e.FabricanteId)
+             .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<FMV_OrigenAlertaTB>()
              .HasMany(e => e.LAlertas)
              .WithOne(e => e.OrigenAlerta)
@@ -1173,11 +1200,11 @@ namespace DataAccess
            //.HasForeignKey(e => e.RamId)
            //.OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<FMV_EsaviTB>()
-          .HasMany(e => e.LNotificaciones)
-          .WithOne(e => e.Esavi)
-          .HasForeignKey(e => e.EsaviId)
-          .OnDelete(DeleteBehavior.Cascade);
+          //  modelBuilder.Entity<FMV_EsaviTB>()
+          //.HasMany(e => e.LNotificaciones)
+          //.WithOne(e => e.Esavi)
+          //.HasForeignKey(e => e.EsaviId)
+          //.OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<TipoInstitucionTB>()
          .HasMany(e => e.LInstituciones)
@@ -1334,6 +1361,38 @@ namespace DataAccess
 
             //JSON Serialization
             modelBuilder.Entity<FMV_PmrTB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
+			///////////////////////////////////////////
+			///
+
+			//JSON Serialization
+			modelBuilder.Entity<FMV_IpsTB>()
+			  .Property(e => e.Adjunto)
+			  .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
+            ///////////////////////////////////////////
+            ///
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_RfvTB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
+            ///////////////////////////////////////////
+            ///
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_FfTB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
+            ///////////////////////////////////////////
+            ///
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_FtTB>()
               .Property(e => e.Adjunto)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
 

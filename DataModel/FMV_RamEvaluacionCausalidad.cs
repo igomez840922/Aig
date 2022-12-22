@@ -18,9 +18,9 @@ namespace DataModel
         private string viaAdministracion;
         public string ViaAdministracion { get => viaAdministracion; set => SetProperty(ref viaAdministracion, value); }
 
-        // RAM
-        private string ram;
-        public string Ram { get => ram; set => SetProperty(ref ram, value); }
+        //// RAM
+        //private string ram;
+        //public string Ram { get => ram; set => SetProperty(ref ram, value); }
 
         // TERMINO WHOArt (LLT)
         private string terWhoArt;

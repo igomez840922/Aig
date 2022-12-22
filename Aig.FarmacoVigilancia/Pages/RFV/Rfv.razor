@@ -117,7 +117,7 @@
                                                             <tr>
                                                                 <td scope="row">@(dt.Laboratorio?.Nombre??"")</td>
                                                                 <td>@(dt.NombreCompleto)</td>
-                                                                <td>@(dt.Cargo)</td>
+                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoCargo))</td>
                                                                 <td>@(dt.DireccionFisica)</td>
                                                                 <td>@(dt.Telefonos)</td>
                                                                 <td>@(dt.Correos)</td>
@@ -127,6 +127,10 @@
                                                             <div class="btn-group">
                                                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                                 <div class="dropdown-menu">
+                                                                            @if (dt.Adjunto?.LAttachments?.Count > 0)
+                                                                            {
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => DownloadPdf(dt.Id)"><i class="fa fa-file-pdf"></i>@languageContainerService.Keys["Download"]</a>
+                                                                            }
                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
                                                             </div>

@@ -1,5 +1,6 @@
 ﻿using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Nomenclators;
+using Aig.FarmacoVigilancia.Pages.Note;
 using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
 using DataModel;
@@ -84,25 +85,12 @@ namespace Aig.FarmacoVigilancia.Components.Ram
 
         public void OnAtcChanged()
         {
-            Data.SubGrupoTerapeutico = GetATC2doNivel(Data.Atc);
+            Data.SubGrupoTerapeutico = "";
+            Data.Atc = Data.Atc.Replace(" ","");
+            if (!string.IsNullOrEmpty(Data.Atc) && Data.Atc.Length >= 3)
+                Data.SubGrupoTerapeutico = Helper.Helper.GetATC2doNivel(Data.Atc);
         }
-
-        private string GetATC2doNivel(string term)
-        {
-            string value = string.Empty;
-            if (string.IsNullOrEmpty(term)) return value;
-            var search = term.Trim();
-            if (search.Length > 3)
-                search = term.Trim()[..3].ToString();
-            var result = Helper.Helper.GetNomenclatorValue("ATC2doNivel.json");
-            if (string.IsNullOrEmpty(result)) return value;
-            var jsonData = JsonSerializer.Deserialize<List<ATC2doNivelModel>>(result);
-            ATC2doNivelModel find;
-            if ((find = jsonData!.FirstOrDefault(p => p.ATC2doNivel.ToLower().StartsWith(search.ToLower()))) != null)
-                value = find.Subgrupo;
-            return value;
-        }
-
+                
         private void OnSecTemporalChange(ChangeEventArgs args)
         {
             var value = args.Value.ToString();
@@ -437,6 +425,50 @@ namespace Aig.FarmacoVigilancia.Components.Ram
         //Save Data and Close
         protected async Task SaveData()
         {
+            //verificar CodigoCNFV
+            if (!string.IsNullOrEmpty(Data.CodigoCNFV))
+            {
+                var tmpData = (await ramService.FindAll(x => x.CodigoCNFV.Contains(Data.CodigoCNFV) && x.Id != Data.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de CNFV ya existe"]);
+                    return;
+                }
+            }
+
+            //verificar Cod Externo
+            if (!string.IsNullOrEmpty(Data.CodExterno))
+            {
+                var tmpData = (await ramService.FindAll(x => x.CodExterno.Contains(Data.CodExterno) && x.Id != Data.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de Externo ya existe"]);
+                    return;
+                }
+            }
+
+            //verificar Id Facedra
+            if (!string.IsNullOrEmpty(Data.IdFacedra))
+            {
+                var tmpData = (await ramService.FindAll(x => x.IdFacedra.Contains(Data.IdFacedra) && x.Id != Data.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de ID Facedra ya existe"]);
+                    return;
+                }
+            }
+
+            //verificar Codigo NotiFacedra
+            if (!string.IsNullOrEmpty(Data.CodigoNotiFacedra))
+            {
+                var tmpData = (await ramService.FindAll(x => x.CodigoNotiFacedra.Contains(Data.CodigoNotiFacedra) && x.Id != Data.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de NotiFacedra ya existe"]);
+                    return;
+                }
+            }
+
             var result = await ramService.Save(Data);
             if (result != null)
             {

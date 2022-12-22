@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using System.Linq.Expressions;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -15,6 +16,17 @@ namespace Aig.FarmacoVigilancia.Services
         {
             DalService = dalService;
         }
+        public async Task<List<FMV_RamTB>> FindAll(Expression<Func<FMV_RamTB, bool>> match)
+        {
+            try
+            {
+                return DalService.FindAll(match);
+            }
+            catch (Exception ex)
+            { }
+
+            return null;
+        }
 
         public async Task<GenericModel<FMV_RamTB>> FindAll(GenericModel<FMV_RamTB> model)
         {
@@ -24,7 +36,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_RamTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.SubGrupoTerapeutico.Contains(model.Filter) || data.Atc.Contains(model.Filter) || data.FarmacoSospechosoDci.Contains(model.Filter) || data.FarmacoSospechosoComercial.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.Ram.Contains(model.Filter) || data.SubGrupoTerapeutico.Contains(model.Filter) || data.Atc.Contains(model.Filter) || data.FarmacoSospechosoDci.Contains(model.Filter) || data.FarmacoSospechosoComercial.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
                               (model.FromDate==null?true:(data.FechaRecibidoCNFV >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId ))
@@ -33,7 +45,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_RamTB>()
                                where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.SubGrupoTerapeutico.Contains(model.Filter) || data.Atc.Contains(model.Filter) || data.FarmacoSospechosoDci.Contains(model.Filter) || data.FarmacoSospechosoComercial.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.Ram.Contains(model.Filter) || data.SubGrupoTerapeutico.Contains(model.Filter) || data.Atc.Contains(model.Filter) || data.FarmacoSospechosoDci.Contains(model.Filter) || data.FarmacoSospechosoComercial.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
@@ -178,7 +190,7 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 37).Value = data.EvaluacionCalidadInfo.Grado;
                         ws.Cell(row + 1, 38).Value = data.EvaluacionCausalidad.Iniciales;
                         ws.Cell(row + 1, 39).Value = data.EvaluacionCausalidad.ViaAdministracion;
-                        ws.Cell(row + 1, 40).Value = data.EvaluacionCausalidad.Ram;
+                        ws.Cell(row + 1, 40).Value = data.Ram;//data.EvaluacionCausalidad.Ram;
                         ws.Cell(row + 1, 41).Value = data.EvaluacionCausalidad.TerWhoArt;
                         ws.Cell(row + 1, 42).Value = data.EvaluacionCausalidad.Soc;
                         ws.Cell(row + 1, 43).Value = data.EvaluacionCausalidad.Concomitantes;

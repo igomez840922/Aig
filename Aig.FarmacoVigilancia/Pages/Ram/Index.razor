@@ -110,9 +110,15 @@
                                                         <tr>
                                                             <th>@languageContainerService.Keys["Fecha de Recibido"]</th>
                                                             <th>@languageContainerService.Keys["Fecha de entrega "]</th>
+                                                            <th>@languageContainerService.Keys["Código del CNFV"]</th>
+                                                            <th>@languageContainerService.Keys["Código Externo"]</th>
+                                                            <th>@languageContainerService.Keys["Código Noti-Facedra"]</th>
+                                                            <th>@languageContainerService.Keys["Código ID Facedra"]</th>
                                                             <th>@languageContainerService.Keys["Evaluador"]</th>
-                                                            <th>@languageContainerService.Keys["ATC"]</th>
+                                                            <th>@languageContainerService.Keys["Fármaco Sospechoso"]</th>
+                                                            @*<th>@languageContainerService.Keys["ATC"]</th>*@
                                                             <th>@languageContainerService.Keys["Ram"]</th>
+                                                            <th>@languageContainerService.Keys["Gravedad"]</th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>
@@ -122,9 +128,15 @@
                                                             <tr>
                                                                 <td scope="row">@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
                                                                 <td>@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                <td>@(dt.CodigoCNFV)</td>
+                                                                <td>@(dt.CodExterno)</td>
+                                                                <td>@(dt.CodigoNotiFacedra)</td>
+                                                                <td>@(dt.IdFacedra)</td>
                                                                 <td>@(dt.Evaluador?.NombreCompleto)</td>
-                                                                <td>@(dt.Atc)</td>
-                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.RamType))</td>
+                                                                <td>@(dt.FarmacoSospechosoDci)</td>
+                                                                @*<td>@(dt.Atc)</td>*@
+                                                                <td>@(dt.Ram)</td>
+                                                                <td>@(dt.EvaluacionCausalidad?.Gravedad??"")</td>
                                                                 <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>

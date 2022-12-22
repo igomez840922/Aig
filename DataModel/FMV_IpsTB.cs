@@ -10,8 +10,14 @@ namespace DataModel
 {
     public class FMV_IpsTB : SystemId
     {
-        //Fecha de Recepcion en CNFV
-        private DateTime? fechaRecepcion;
+		public FMV_IpsTB()
+		{
+			IpsData = new FMV_IpsData();
+			Adjunto = new AttachmentData();
+		}
+
+		//Fecha de Recepcion en CNFV
+		private DateTime? fechaRecepcion;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FechaRecepcion { get => fechaRecepcion; set => SetProperty(ref fechaRecepcion, value); }
 
@@ -120,5 +126,26 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public FMV_IpsData IpsData { get => ipsData; set => SetProperty(ref ipsData, value); }
 
+		//Ficheros Adjuntos
+		private AttachmentData adjunto;
+		[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+		public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
+
+
+        public void UpdateRule()
+        {
+            Prioridad = false;
+
+            if (IpsData != null)
+            {
+                if (IpsData.Innovador || IpsData.Biologico || IpsData.ReqIntercam)
+                {
+                    if (IpsData.FechaAutPan.HasValue && ((DateTime.Now - IpsData.FechaAutPan.Value).TotalDays / 365) < 5)
+                    {
+                        Prioridad = true;
+                    }
+                }
+            }
+        }
     }
 }

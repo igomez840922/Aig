@@ -11,6 +11,11 @@ namespace DataModel
     //Responsables de Farmaco Vigilancia
     public class FMV_RfvTB:SystemId
     {
+        public FMV_RfvTB()
+        {
+            Adjunto = new AttachmentData();
+        }
+
         //nombre
         private string nombreCompleto;
         [StringLength(500)]
@@ -18,10 +23,13 @@ namespace DataModel
         public string NombreCompleto { get => nombreCompleto; set => SetProperty(ref nombreCompleto, value); }
 
 
-        //cargo
-        private string cargo;
-        [StringLength(250)]
-        public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
+        ////cargo
+        //private string cargo;
+        //[StringLength(250)]
+        //public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
+        private enum_Cargos tipoCargo;
+        public enum_Cargos TipoCargo { get => tipoCargo; set => SetProperty(ref tipoCargo, value); }
+
 
 
         //direccion
@@ -61,6 +69,11 @@ namespace DataModel
         public long? LaboratorioId { get => laboratorioId; set => SetProperty(ref laboratorioId, value); }
         private LaboratorioTB? laboratorio;
         public virtual LaboratorioTB? Laboratorio { get => laboratorio; set => SetProperty(ref laboratorio, value); }
+
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
     }
 }

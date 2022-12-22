@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using Aig.FarmacoVigilancia.Nomenclators;
+using System.Reflection;
+using System.Text.Json;
 
 namespace Aig.FarmacoVigilancia.Helper
 {
@@ -70,6 +72,22 @@ namespace Aig.FarmacoVigilancia.Helper
             if (stream == null) return string.Empty;
             using var reader = new StreamReader(stream);
             return reader.ReadToEnd();
+        }
+
+        public static string GetATC2doNivel(string term)
+        {
+            string value = string.Empty;
+            if (string.IsNullOrEmpty(term)) return value;
+            var search = term.Trim();
+            if (search.Length > 3)
+                search = term.Trim()[..3].ToString();
+            var result = GetNomenclatorValue("ATC2doNivel.json");
+            if (string.IsNullOrEmpty(result)) return value;
+            var jsonData = JsonSerializer.Deserialize<List<ATC2doNivelModel>>(result);
+            ATC2doNivelModel find;
+            if ((find = jsonData!.FirstOrDefault(p => p.ATC2doNivel.ToLower().StartsWith(search.ToLower()))) != null)
+                value = find.Subgrupo;
+            return value;
         }
 
     }

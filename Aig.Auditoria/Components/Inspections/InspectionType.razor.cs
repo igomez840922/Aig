@@ -127,7 +127,7 @@ namespace Aig.Auditoria.Components.Inspections
                         }
                     case DataModel.Helper.enumAUD_TipoActa.COP:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspDisposicionFinal = new AUD_InspDisposicionFinalTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspCierreOperacion = new AUD_InspCierreOperacionTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.DFP:

@@ -20,28 +20,32 @@
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Procedencia de Notificación"]</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#evaCalidadInfo" role="tab">@languageContainerService.Keys["Evaluación de la Calidad de la Información"]</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#evaCausalidadInfo" role="tab">@languageContainerService.Keys["Evaluación de la Causalidad"]</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#obsInfoNotif" role="tab">@languageContainerService.Keys["Observación sobre Información de la Notificación"]</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#accionRegulat" role="tab">@languageContainerService.Keys["Acciones Regulatorias"]</a>
-                            </li>
+                            @if (Data.RamType != enumFMV_RAMType.NoRam)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Procedencia de Notificación"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#evaCalidadInfo" role="tab">@languageContainerService.Keys["Evaluación de la Calidad de la Información"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#evaCausalidadInfo" role="tab">@languageContainerService.Keys["Evaluación de la Causalidad"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#obsInfoNotif" role="tab">@languageContainerService.Keys["Observación sobre Información de la Notificación"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#accionRegulat" role="tab">@languageContainerService.Keys["Acciones Regulatorias"]</a>
+                                </li>
+                            }
+                           
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="generalInfo" role="tabpanel">
                                 <h4>@languageContainerService.Keys["GeneralInfo"]</h4>
                                 <div class="row clearfix">
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Fecha de Recibido"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -51,11 +55,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Fecha de entrega"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Data.FechaRecibidoCNFV" TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaEntregaEva) />
                                             </div>
                                         </div>
@@ -203,12 +207,13 @@
                             </div>
 
                         </div>
+                            
                             <div class="tab-pane" id="procNotifica" role="tabpanel">
                                 <h5>@languageContainerService.Keys["Procedencia de Notificación"]</h5>
 
                                 <div class="row clearfix">
 
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Código Externo"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -232,6 +237,19 @@
                                             <ValidationMessage For=@(() => Data.TipoNotificacion) />
                                         </div>
                                     </div>
+                                    @if(Data.TipoNotificacion== enumFMV_RAMNotificationType.OPS)
+                                    {
+                                        <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Especifique"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                    <InputText class="form-control" @bind-Value="Data.TipoNotificacionDesc" />
+                                                <ValidationMessage For=@(() => Data.TipoNotificacionDesc) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+
                                     <div class="col-sm-4">
                                         <label for="password">
                                             @languageContainerService.Keys["Tipo de Organización"]
@@ -273,9 +291,7 @@
                                         </div>
                                     </div>
 
-
-
-                                    <div class="col-sm-2">
+                                   @* <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Número de Ingreso"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -283,9 +299,9 @@
                                                 <ValidationMessage For=@(() => Data.NumIngresoVigiflow) />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Fecha de Evaluación"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -295,7 +311,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Estado"]</label>
                                         <div class="form-group">
                                             <InputSelect @bind-Value="Data.Estatus" class="form-control">
@@ -461,7 +477,7 @@
                                         <label>@languageContainerService.Keys["Edad"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputNumber class="form-control" @bind-Value="Data.EvaluacionCalidadInfo.Edad" />
+                                                <InputText class="form-control" @bind-Value="Data.EvaluacionCalidadInfo.Edad" />
                                                 <ValidationMessage For=@(() => Data.EvaluacionCalidadInfo.Edad) />
                                             </div>
                                         </div>
@@ -587,17 +603,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["RAM"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.EvaluacionCausalidad.Ram" />
-                                                <ValidationMessage For=@(() => Data.EvaluacionCausalidad.Ram) />
+                                                <InputText class="form-control" @bind-Value="Data.Ram" />
+                                                <ValidationMessage For=@(() => Data.Ram) />
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["TERMINO WHOArt (LLT)"]</label>
                                         <div class="form-group">
                                             <div class="form-line">

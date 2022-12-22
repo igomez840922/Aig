@@ -1,6 +1,7 @@
 ﻿using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
+using System.Linq.Expressions;
 
 namespace Aig.FarmacoVigilancia.Services
 {
@@ -8,6 +9,7 @@ namespace Aig.FarmacoVigilancia.Services
     {
         Task<Stream> ExportToExcel(GenericModel<FMV_FfTB> model);
 
+        Task<List<FMV_FfTB>> FindAll(Expression<Func<FMV_FfTB, bool>> match);
         Task<GenericModel<FMV_FfTB>> FindAll(GenericModel<FMV_FfTB> model);
         Task<List<FMV_FfTB>> GetAll();
         Task<FMV_FfTB> Get(long id);

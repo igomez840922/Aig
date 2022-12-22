@@ -10,10 +10,10 @@ namespace DataModel
 {
     public class FMV_EsaviNotificacionTB:SystemId
     {
-        private long esaviId;
-        public long EsaviId { get => esaviId; set => SetProperty(ref esaviId, value); }
-        private FMV_EsaviTB esavi;
-        public virtual FMV_EsaviTB Esavi { get => esavi; set => SetProperty(ref esavi, value); }
+        //private long esaviId;
+        //public long EsaviId { get => esaviId; set => SetProperty(ref esaviId, value); }
+        //private FMV_EsaviTB esavi;
+        //public virtual FMV_EsaviTB Esavi { get => esavi; set => SetProperty(ref esavi, value); }
 
 
         // Hay Esavi?

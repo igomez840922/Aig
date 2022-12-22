@@ -104,22 +104,15 @@
                                                 <table class="table rounded table-striped">
                                                     <thead class=thead-light>
                                                         <tr>
-                                                            <th>@languageContainerService.Keys["Origen de Notificación"]</th>
+                                                            <th>@languageContainerService.Keys["Código CNFV"]</th>
                                                             <th>@languageContainerService.Keys["Código Noti-Facedra"]</th>
                                                             <th>@languageContainerService.Keys["ID Facedra"]</th>
                                                             <th>@languageContainerService.Keys["Cod. Externo"]</th>
+                                                            <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
+                                                            <th>@languageContainerService.Keys["ESAVI"]</th>
+                                                            <th>@languageContainerService.Keys["Evaluator"]</th>
                                                             <th>@languageContainerService.Keys["Fecha de Recibido (CNFV)"]</th>
                                                             <th>@languageContainerService.Keys["Fecha Entrega al Evaluador"]</th>
-                                                            <th>@languageContainerService.Keys["Evaluator"]</th>
-                                                            <th>@languageContainerService.Keys["Tipo Notificador"]</th>
-                                                            <th>@languageContainerService.Keys["Organizacion"]</th>
-                                                            <th>@languageContainerService.Keys["Provincia"]</th>
-                                                            <th>@languageContainerService.Keys["Nombre de Organización"]</th>
-                                                            <th>@languageContainerService.Keys["Medicamentos Concomitante"]</th>
-                                                            <th>@languageContainerService.Keys["Detalles del Caso"]</th>
-                                                            <th>@languageContainerService.Keys["Fecha de Evaluación"]</th>
-                                                            <th>@languageContainerService.Keys["Estatus"]</th>
-                                                            <th>@languageContainerService.Keys["Observaciones"]</th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>
@@ -127,22 +120,15 @@
                                                         @foreach (var dt in dataModel.Ldata)
                                                         {
                                                             <tr>
-                                                                <td scope="row">@DataModel.Helper.Helper.GetDescription(dt.OrigenNotificacion)</td>
+                                                                <td>@dt.CodCNFV</td>
                                                                 <td>@dt.CodigoNotiFacedra</td>
                                                                 <td>@dt.IdFacedra</td>
                                                                 <td>@dt.CodExt</td>
+                                                                <td>@dt.VacunaComercial</td>
+                                                                <td>@dt.EsaviDescripcion</td>
+                                                                <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
                                                                 <td>@(dt.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "")</td>
                                                                 <td>@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
-                                                                <td>@DataModel.Helper.Helper.GetDescription(dt.TipoNotificacion)</td>
-                                                                <td>@(dt.TipoInstitucion?.Nombre??"")</td>
-                                                                <td>@(dt.Provincia?.Nombre ?? "")</td>
-                                                                <td>@(dt.InstitucionDestino?.Nombre ?? "")</td>
-                                                                <td>@dt.MedicamentoContaminante</td>
-                                                                <td>@dt.DetallesCaso</td>
-                                                                <td>@(dt.FechaEvalua?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                <td>@DataModel.Helper.Helper.GetDescription(dt.Estatus)</td>
-                                                                <td>@dt.Observaciones</td>
                                                         <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>

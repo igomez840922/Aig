@@ -1,12 +1,14 @@
 ﻿using Aig.FarmacoVigilancia.Events.IPS;
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.PMR;
+using Aig.FarmacoVigilancia.Pages.Alert;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Net.Mail;
 
 namespace Aig.FarmacoVigilancia.Components.IPS
 {    
@@ -24,6 +26,9 @@ namespace Aig.FarmacoVigilancia.Components.IPS
         public DataModel.FMV_IpsTB Ips { get; set; }
         List<PersonalTrabajadorTB> lPersons { get; set; } = new List<PersonalTrabajadorTB>();
         List<LaboratorioTB> Labs { get; set; } = new List<LaboratorioTB>();
+
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -67,6 +72,9 @@ namespace Aig.FarmacoVigilancia.Components.IPS
             {
                 Labs = await labsService.GetAll();
             }
+
+            if (Ips != null)
+                Ips.UpdateRule();
 
             //if (Pmr != null)
             //{
@@ -118,6 +126,50 @@ namespace Aig.FarmacoVigilancia.Components.IPS
             await this.InvokeAsync(StateHasChanged);
         }
 
+
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+
+                Ips.Adjunto.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Ips.Adjunto = Ips.Adjunto != null ? Ips.Adjunto : new AttachmentData();
+                Ips.Adjunto.LAttachments = Ips.Adjunto.LAttachments != null ? Ips.Adjunto.LAttachments : new List<AttachmentTB>();
+                Ips.Adjunto.LAttachments.Add(message.Attachment);
+            }
+            this.InvokeAsync(StateHasChanged);
+        }
     }
 
 }

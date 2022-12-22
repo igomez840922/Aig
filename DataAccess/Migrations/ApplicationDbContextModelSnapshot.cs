@@ -2016,9 +2016,6 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<long>("EsaviId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("FechaEsavi")
                         .HasColumnType("datetime2");
 
@@ -2084,8 +2081,6 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EsaviId");
-
                     b.HasIndex("IntensidadEsaviId");
 
                     b.HasIndex("LaboratorioId");
@@ -2117,6 +2112,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("CodigoNotiFacedra")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -2130,14 +2126,42 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Desenlace")
+                        .HasColumnType("int");
+
                     b.Property<int>("DetallesCaso")
                         .HasColumnType("int");
 
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("DosisEsavi")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("DosisViaAdmin")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<int>("Edad")
                         .HasColumnType("int");
+
+                    b.Property<string>("ElegibilidadGravedad")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ElegibilidadOtroCriterio")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ElegibleEvaluacionCausal")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("EsaviDescripcion")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<int>("Estatus")
                         .HasColumnType("int");
@@ -2148,22 +2172,43 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("FechaEntregaEva")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("FechaEsavi")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("FechaEvalua")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaExp")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("FechaRecibidoCNFV")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("FechaVacunacion")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Gravedad")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("HayEsavi")
+                        .HasColumnType("int");
 
                     b.Property<string>("HistoriaClinica")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("IdFacedra")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Indicaciones")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("InicialesPersona")
                         .HasMaxLength(200)
@@ -2172,11 +2217,29 @@ namespace DataAccess.Migrations
                     b.Property<long?>("InstitucionId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("IntensidadEsaviId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("InvDetalleCaso")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("LaboratorioId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Lote")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<string>("MedicamentoContaminante")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("NombreCompletoPersona")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Notificador")
+                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -2187,15 +2250,35 @@ namespace DataAccess.Migrations
                     b.Property<int>("OrigenNotificacion")
                         .HasColumnType("int");
 
+                    b.Property<int>("OtrosCriterios")
+                        .HasColumnType("int");
+
                     b.Property<string>("OtrosDiagnosticos")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<int>("ProbabilidadAsociacion")
+                        .HasColumnType("int");
+
                     b.Property<long?>("ProvinciaId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("RegSanitario")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<int>("Sexo")
                         .HasColumnType("int");
+
+                    b.Property<string>("Soc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("SocId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TerminoWhoArt")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<long?>("TipoInstitucionId")
                         .HasColumnType("bigint");
@@ -2203,8 +2286,15 @@ namespace DataAccess.Migrations
                     b.Property<int>("TipoNotificacion")
                         .HasColumnType("int");
 
+                    b.Property<long?>("TipoVacunaId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("VacunaComercial")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("Id");
 
@@ -2212,9 +2302,15 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("InstitucionId");
 
+                    b.HasIndex("IntensidadEsaviId");
+
+                    b.HasIndex("LaboratorioId");
+
                     b.HasIndex("ProvinciaId");
 
                     b.HasIndex("TipoInstitucionId");
+
+                    b.HasIndex("TipoVacunaId");
 
                     b.ToTable("FMV_Esavi");
                 });
@@ -2230,6 +2326,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("ATC")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Adjunto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Atc2")
                         .HasMaxLength(250)
@@ -2259,9 +2358,8 @@ namespace DataAccess.Migrations
                     b.Property<long?>("EvaluadorId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Fabricante")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                    b.Property<long?>("FabricanteId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("FallaReportada")
                         .HasColumnType("nvarchar(max)");
@@ -2306,6 +2404,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Notificador")
+                        .IsRequired()
                         .HasMaxLength(350)
                         .HasColumnType("nvarchar(350)");
 
@@ -2351,6 +2450,8 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("EvaluadorId");
 
+                    b.HasIndex("FabricanteId");
+
                     b.HasIndex("InstitucionId");
 
                     b.HasIndex("ProvinciaId");
@@ -2371,6 +2472,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("ATC")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Adjunto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Atc2")
                         .HasMaxLength(250)
@@ -2406,9 +2510,8 @@ namespace DataAccess.Migrations
                     b.Property<long?>("EvaluadorId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Fabricante")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                    b.Property<long?>("FabricanteId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("FechaEntregaEva")
                         .HasColumnType("datetime2");
@@ -2453,6 +2556,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Notificador")
+                        .IsRequired()
                         .HasMaxLength(350)
                         .HasColumnType("nvarchar(350)");
 
@@ -2498,6 +2602,8 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("EvaluadorId");
 
+                    b.HasIndex("FabricanteId");
+
                     b.HasIndex("InstitucionDestinoId");
 
                     b.HasIndex("ProvinciaId");
@@ -2514,6 +2620,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Adjunto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("ConfecConNormativa")
                         .HasColumnType("bit");
@@ -2902,7 +3011,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("CodExterno")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -2912,6 +3020,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("CodigoNotiFacedra")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -2959,6 +3068,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("IdFacedra")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -2974,6 +3084,10 @@ namespace DataAccess.Migrations
 
                     b.Property<long?>("ProvinciaId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("Ram")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("RamOrigenType")
                         .HasColumnType("int");
@@ -2991,12 +3105,29 @@ namespace DataAccess.Migrations
                     b.Property<int>("TipoNotificacion")
                         .HasColumnType("int");
 
+                    b.Property<string>("TipoNotificacionDesc")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CodExterno")
+                        .IsUnique()
+                        .HasFilter("[CodExterno] IS NOT NULL");
+
+                    b.HasIndex("CodigoCNFV")
+                        .IsUnique();
+
+                    b.HasIndex("CodigoNotiFacedra")
+                        .IsUnique();
+
                     b.HasIndex("EvaluadorId");
+
+                    b.HasIndex("IdFacedra")
+                        .IsUnique();
 
                     b.HasIndex("InstitucionId");
 
@@ -3015,9 +3146,8 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("Cargo")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<string>("Adjunto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Correos")
                         .HasMaxLength(500)
@@ -3056,6 +3186,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("Telefonos")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("TipoCargo")
+                        .HasColumnType("int");
 
                     b.Property<int>("TipoUbicacion")
                         .HasColumnType("int");
@@ -4045,12 +4178,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataModel.FMV_EsaviNotificacionTB", b =>
                 {
-                    b.HasOne("DataModel.FMV_EsaviTB", "Esavi")
-                        .WithMany("LNotificaciones")
-                        .HasForeignKey("EsaviId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DataModel.IntensidadEsaviTB", "IntensidadEsavi")
                         .WithMany("LEsaviNotificacion")
                         .HasForeignKey("IntensidadEsaviId")
@@ -4065,8 +4192,6 @@ namespace DataAccess.Migrations
                         .WithMany("LEsaviNotificacion")
                         .HasForeignKey("TipoVacunaId")
                         .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Esavi");
 
                     b.Navigation("IntensidadEsavi");
 
@@ -4087,6 +4212,14 @@ namespace DataAccess.Migrations
                         .HasForeignKey("InstitucionId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("DataModel.IntensidadEsaviTB", "IntensidadEsavi")
+                        .WithMany()
+                        .HasForeignKey("IntensidadEsaviId");
+
+                    b.HasOne("DataModel.LaboratorioTB", "Laboratorio")
+                        .WithMany()
+                        .HasForeignKey("LaboratorioId");
+
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
                         .WithMany("LEsavi")
                         .HasForeignKey("ProvinciaId")
@@ -4097,13 +4230,23 @@ namespace DataAccess.Migrations
                         .HasForeignKey("TipoInstitucionId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("DataModel.TipoVacunaTB", "TipoVacuna")
+                        .WithMany()
+                        .HasForeignKey("TipoVacunaId");
+
                     b.Navigation("Evaluador");
 
                     b.Navigation("InstitucionDestino");
 
+                    b.Navigation("IntensidadEsavi");
+
+                    b.Navigation("Laboratorio");
+
                     b.Navigation("Provincia");
 
                     b.Navigation("TipoInstitucion");
+
+                    b.Navigation("TipoVacuna");
                 });
 
             modelBuilder.Entity("DataModel.FMV_FfTB", b =>
@@ -4111,6 +4254,11 @@ namespace DataAccess.Migrations
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
                         .WithMany("LFf")
                         .HasForeignKey("EvaluadorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("DataModel.LaboratorioTB", "Fabricant")
+                        .WithMany("LFf")
+                        .HasForeignKey("FabricanteId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
@@ -4130,6 +4278,8 @@ namespace DataAccess.Migrations
 
                     b.Navigation("Evaluador");
 
+                    b.Navigation("Fabricant");
+
                     b.Navigation("InstitucionDestino");
 
                     b.Navigation("Provincia");
@@ -4142,6 +4292,11 @@ namespace DataAccess.Migrations
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
                         .WithMany("LFt")
                         .HasForeignKey("EvaluadorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("DataModel.LaboratorioTB", "Fabricant")
+                        .WithMany("LFt")
+                        .HasForeignKey("FabricanteId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
@@ -4157,6 +4312,8 @@ namespace DataAccess.Migrations
                         .HasForeignKey("TipoInstitucionId");
 
                     b.Navigation("Evaluador");
+
+                    b.Navigation("Fabricant");
 
                     b.Navigation("InstitucionDestino");
 
@@ -4447,11 +4604,6 @@ namespace DataAccess.Migrations
                     b.Navigation("LCorregimientos");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_EsaviTB", b =>
-                {
-                    b.Navigation("LNotificaciones");
-                });
-
             modelBuilder.Entity("DataModel.FMV_OrigenAlertaTB", b =>
                 {
                     b.Navigation("LAlertas");
@@ -4481,6 +4633,10 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.LaboratorioTB", b =>
                 {
                     b.Navigation("LEsaviNotificacion");
+
+                    b.Navigation("LFf");
+
+                    b.Navigation("LFt");
 
                     b.Navigation("LIps");
 

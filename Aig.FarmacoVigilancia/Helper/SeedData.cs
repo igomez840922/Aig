@@ -404,7 +404,20 @@ namespace Aig.FarmacoVigilancia.Helper
                                 rfv.LaboratorioId = lLabs.Where(x => x.IdEmpresa == data.Cell(3).GetValue<int>()).FirstOrDefault()?.Id ?? null;
                                 rfv.Laboratorio = lLabs.Where(x => x.IdEmpresa == data.Cell(3).GetValue<int>()).FirstOrDefault() ?? null;
                                 rfv.NombreCompleto = data.Cell(4).GetValue<string>();
-                                rfv.Cargo = data.Cell(5).GetValue<string>();
+                                //rfv.Cargo = data.Cell(5).GetValue<string>();
+                                var cargo = data.Cell(5).GetValue<string>();
+                                if (!string.IsNullOrEmpty(cargo))
+                                {
+                                    if(cargo.Contains("Responsable", StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        rfv.TipoCargo = DataModel.Helper.enum_Cargos.ResFV;
+                                    }
+                                    if (cargo.Contains("Representante", StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        rfv.TipoCargo = DataModel.Helper.enum_Cargos.RepFV;
+                                    }
+                                }
+
                                 rfv.DireccionFisica = data.Cell(6).GetValue<string>();
                                 rfv.Telefonos = data.Cell(7).GetValue<string>();
                                 rfv.Correos = data.Cell(8).GetValue<string>();

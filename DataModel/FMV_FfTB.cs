@@ -14,6 +14,7 @@ namespace DataModel
         {
             FallaReportada = new FMV_FfFallaReportada();
             OtrasEspecificaciones = new FMV_FfOtrasEspecificaciones();
+            Adjunto= new AttachmentData();
         }
 
         // Código del CNFV
@@ -78,9 +79,14 @@ namespace DataModel
         [StringLength(500)]
         public string SubGrupoTerapeutico { get => subGrupoTerapeutico; set => SetProperty(ref subGrupoTerapeutico, value); }
 
-        private string fabricante;
-        [StringLength(500)]
-        public string Fabricante { get => fabricante; set => SetProperty(ref fabricante, value); }
+        //private string fabricante;
+        //[StringLength(500)]
+        //public string Fabricante { get => fabricante; set => SetProperty(ref fabricante, value); }
+        //Laboratorio
+        private long? fabricanteId;
+        public long? FabricanteId { get => fabricanteId; set => SetProperty(ref fabricanteId, value); }
+        private LaboratorioTB? fabricant;
+        public virtual LaboratorioTB? Fabricant { get => fabricant; set => SetProperty(ref fabricant, value); }
 
         private string lote;
         [StringLength(500)]
@@ -120,6 +126,7 @@ namespace DataModel
         // Notificador
         private string notificador;
         [StringLength(350)]
+        [Required(ErrorMessage = "requerido")]
         public string Notificador { get => notificador; set => SetProperty(ref notificador, value); }
 
         // Incidendia de caso: Total=2. Inicial, Seguimiento
@@ -164,6 +171,11 @@ namespace DataModel
         private string observaciones;
         [StringLength(500)]
         public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
+
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
     }
 }

@@ -66,10 +66,12 @@ namespace DataModel
         public enumFMV_RAMOrigenType RamOrigenType { get => ramOrigenType; set => SetProperty(ref ramOrigenType, value); }
 
         private string codigoNotiFacedra;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string CodigoNotiFacedra { get => codigoNotiFacedra; set => SetProperty(ref codigoNotiFacedra, value); }
 
         private string idFacedra;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string IdFacedra { get => idFacedra; set => SetProperty(ref idFacedra, value); }
 
@@ -93,7 +95,7 @@ namespace DataModel
 
         // Código Externo
         private string codExterno;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string CodExterno { get => codExterno; set => SetProperty(ref codExterno, value); }
 
@@ -119,6 +121,12 @@ namespace DataModel
         private enumFMV_RAMNotificationType tipoNotificacion;
         public enumFMV_RAMNotificationType TipoNotificacion { get => tipoNotificacion; set => SetProperty(ref tipoNotificacion, value); }
 
+        //Tipo de Notificacion
+        private string tipoNotificacionDesc;
+        [StringLength(300)]
+        public string TipoNotificacionDesc { get => tipoNotificacionDesc; set => SetProperty(ref tipoNotificacionDesc, value); }
+
+
         private long? tipoInstitucionId;
         public long? TipoInstitucionId { get => tipoInstitucionId; set => SetProperty(ref tipoInstitucionId, value); }
         private TipoInstitucionTB? tipoInstitucion;
@@ -134,8 +142,10 @@ namespace DataModel
         private InstitucionDestinoTB? institucionDestino;
         public virtual InstitucionDestinoTB? InstitucionDestino { get => institucionDestino; set => SetProperty(ref institucionDestino, value); }
 
-
-
+        // RAM
+        private string ram;
+        [StringLength(500)]
+        public string Ram { get => ram; set => SetProperty(ref ram, value); }
 
         // Número de ingreso a Vigiflow
         private string numIngresoVigiflow;
