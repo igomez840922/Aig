@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,10 @@ namespace DataModel
 {   
     public class FMV_AlertaTB : SystemId
     {
+        public FMV_AlertaTB() {
+            Adjunto = new AttachmentData();
+        }
+
         //Fecha de Recepcion en CNFV
         private DateTime? fechaRecepcion;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -72,9 +77,16 @@ namespace DataModel
         private bool suspencCancelRegSanitario;
         public bool SuspencCancelRegSanitario { get => suspencCancelRegSanitario; set => SetProperty(ref suspencCancelRegSanitario, value); }
 
+        private bool monitoreo;
+        public bool Monitoreo { get => monitoreo; set => SetProperty(ref monitoreo, value); }
 
         private bool otrasConsideraciones;
         public bool OtrasConsideraciones { get => otrasConsideraciones; set => SetProperty(ref otrasConsideraciones, value); }
+
+        //Otras Descripcion
+        private string otrasDescripcion;
+        [StringLength(500)]
+        public string OtrasDescripcion { get => otrasDescripcion; set => SetProperty(ref otrasDescripcion, value); }
 
 
         //Estatus de Nota o Alerta
@@ -89,6 +101,11 @@ namespace DataModel
         //Observaciones
         private string observaciones;
         public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
+
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
     }
 

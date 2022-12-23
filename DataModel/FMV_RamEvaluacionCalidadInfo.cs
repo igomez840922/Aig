@@ -58,8 +58,9 @@ namespace DataModel
         public enumSexo Sexo { get => sexo; set => SetProperty(ref sexo, value); }
 
         // Edad (Años). null
-        private int edad;
-        public int Edad { get => edad; set => SetProperty(ref edad, value); }
+        private string edad;
+        [StringLength(100)]
+        public string Edad { get => edad; set => SetProperty(ref edad, value); }
 
         // Historia Clínica, null
         private string histClinica;

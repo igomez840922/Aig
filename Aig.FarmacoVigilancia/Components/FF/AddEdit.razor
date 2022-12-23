@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["FF"]</h5>
+                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["Nueva"]) @languageContainerService.Keys["FF"]</h5>
                     <button type="button" class="close" @onclick="(e)=>{Cancel();}"
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -24,10 +24,13 @@
                                 <a class="nav-link" data-toggle="tab" href="#products" role="tab">@languageContainerService.Keys["Fallas Reportadas"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#otrasEspecInfo" role="tab">@languageContainerService.Keys["Otras Especificaciones"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#otrasEspecInfo" role="tab">@languageContainerService.Keys["Acciones y Resultados"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#observaInfo" role="tab">@languageContainerService.Keys["Conclusiones"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#observaInfo" role="tab">@languageContainerService.Keys["Estatus"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -57,7 +60,7 @@
                                             @languageContainerService.Keys["Fecha de Recibido (CNFV)"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaRecibidoCNFV" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaRecibidoCNFV" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaRecibidoCNFV) />
                                         </div>
                                     </div>
@@ -68,7 +71,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Data.FechaRecibidoCNFV" TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaEntregaEva) />
                                             </div>
                                         </div>
@@ -120,7 +123,8 @@
                                         <label>@languageContainerService.Keys["ATC"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.ATC" />
+                                                @*  <InputText class="form-control" @bind-Value="Data.Atc" />*@
+                                                <input type="text" class="form-control" @bind-value="@Data.ATC" @bind-value:event="oninput" @onkeyup="() => OnAtcChanged()">
                                                 <ValidationMessage For=@(() => Data.ATC) />
                                             </div>
                                         </div>
@@ -129,7 +133,7 @@
                                         <label>@languageContainerService.Keys["Sub-Grupo Terapéutico"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.SubGrupoTerapeutico" />
+                                                <InputText disabled="disabled" class="form-control" @bind-Value="Data.SubGrupoTerapeutico" />
                                                 <ValidationMessage For=@(() => Data.SubGrupoTerapeutico) />
                                             </div>
                                         </div>
@@ -138,8 +142,12 @@
                                         <label>@languageContainerService.Keys["Fabricante"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.Fabricante" />
-                                                <ValidationMessage For=@(() => Data.Fabricante) />
+                                                @*<InputText class="form-control" @bind-Value="Data.Fabricante" />
+                                                <ValidationMessage For=@(() => Data.Fabricante) />*@
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Data.FabricanteId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@Labs TextProperty="Nombre" ValueProperty="Id" />
+                                                <ValidationMessage For=@(() => Data.FabricanteId) />
                                             </div>
                                         </div>
                                     </div>
@@ -377,7 +385,7 @@
 
                             </div>
                             <div class="tab-pane" id="otrasEspecInfo" role="tabpanel">
-                                <h5>@languageContainerService.Keys["Otras Especificaciones"]</h5>
+                                <h5>@languageContainerService.Keys["Acciones y Resultados"]</h5>
                                 <div class="row clearfix">
                                     <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Revisión de RS (Especificaciones, inserto, otro)"]</label>
@@ -504,7 +512,7 @@
 
                             </div>
                             <div class="tab-pane" id="observaInfo" role="tabpanel">
-                                <h5>@languageContainerService.Keys["Conclusiones"]</h5>
+                                <h5>@languageContainerService.Keys["Estatus"]</h5>
                                 <div class="row clearfix">
                                     <div class="col-sm-4">
                                         <label for="password">
@@ -526,7 +534,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaTramite) />
                                             </div>
                                         </div>
@@ -537,7 +545,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Data.FechaEvalua" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEvalua" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaEvalua) />
                                             </div>
                                         </div>
@@ -578,6 +586,53 @@
 
                                 </div>
                             </div>
+                            <div class="tab-pane" id="attachments" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Attachments"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-9" style="text-align:left;">
+                                    </div>
+                                    <div class="col-3" style="text-align:right;">
+                                        <button type="button" @onclick="(e)=>{OpenAttachment();}"
+                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                            @languageContainerService.Keys["Add"]
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="kt-section">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Description"]</th>
+                                                    <th>@languageContainerService.Keys["File"]</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Data != null && Data.Adjunto != null)
+                                                {
+                                                    @foreach (var dt in Data.Adjunto.LAttachments)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.Description</td>
+                                                            <td>
+                                                                <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                            </td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <br>
@@ -603,6 +658,12 @@
             </div>
         </div>
     </div>
+
+
+    @if (openAttachment)
+    {
+        <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
+    }
 
 }
 

@@ -33,6 +33,7 @@
                                     <i class="flaticon-more"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="https://www.minsa.gob.pa/informacion-salud/alertas-y-comunicados" target="_blank" class="dropdown-item"><i class="fa fa-link"></i>@languageContainerService.Keys["MINSA"]</a>
                                     <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ExportToExcel()"><i class="fa fa-file-excel"></i>@languageContainerService.Keys["Export"]</a>
                                     <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
                                     <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
@@ -59,14 +60,14 @@
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["From"] @languageContainerService.Keys["Date"]</label>
                                                 <div class="form-line">
-                                                    <InputDate class="form-control" @bind-Value="dataModel.FromDate" @bind-Value:format="dd/MM/yyyy" @oninput="(e)=>{ try{dataModel.FromDate = DateTime.Parse((string)e.Value);}catch{dataModel.FromDate =null;} OnFilter();}" />
+                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                     <ValidationMessage For=@(() => dataModel.FromDate) />
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["To"] @languageContainerService.Keys["Date"]</label>
                                                 <div class="form-line">
-                                                    <InputDate class="form-control" @bind-Value="dataModel.ToDate" @bind-Value:format="dd/MM/yyyy" @oninput="(e)=>{ try{dataModel.ToDate = DateTime.Parse((string)e.Value);}catch{dataModel.ToDate =null;} OnFilter();}" />
+                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                     <ValidationMessage For=@(() => dataModel.ToDate) />
                                                 </div>
                                             </div>
@@ -75,16 +76,9 @@
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["Evaluator"]</label>
                                                 <div class="form-line">
-                                                    <InputSelect class="form-control" @bind-Value="dataModel.EvaluatorId" @oninput="(e)=>{ try{dataModel.EvaluatorId = long.Parse((string)e.Value);}catch{dataModel.EvaluatorId =null;} OnFilter();}">
-                                                        <option value="">@languageContainerService.Keys["All"]</option>
-                                                        @if (LPerson != null)
-                                                        {
-                                                            foreach (var dt in LPerson.Where(x => x.Evaluador))
-                                                            {
-                                                                <option value="@dt.Id">@dt.NombreCompleto</option>
-                                                            }
-                                                        }
-                                                    </InputSelect>
+                                                    <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@dataModel.EvaluatorId
+                                                                    AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                    Data=@(LPerson?.Where(x=>x.Evaluador)) TextProperty="NombreCompleto" ValueProperty="Id" Change=@(args => { OnFilter();}) />
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
@@ -131,13 +125,25 @@
                                                                 <td>@(dt.NumNota)</td>
                                                                 <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
                                                                 <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoNota))</td>
-                                                                <td>@(dt.InstitucionDestino?.Nombre ?? "")</td>
+                                                                <td>
+                                                                    @if (dt.Instituciones!=null && dt.Instituciones.LInstituciones != null)
+                                                                    {
+                                                                        foreach (var inst in dt.Instituciones.LInstituciones)
+                                                                        {
+                                                                            <span>@inst.Nombre - </span>
+                                                                        }
+                                                                    }
+                                                                    
+                                                                </td>
                                                                 <td>@(dt.Destinatario)</td>
                                                                 <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => DownloadPdf(dt.Id)"><i class="fa fa-file-pdf"></i>@languageContainerService.Keys["Download"]</a>
+                                                                            @if (dt.Adjunto?.LAttachments?.Count > 0)
+                                                                            {
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => DownloadPdf(dt.Id)"><i class="fa fa-file-pdf"></i>@languageContainerService.Keys["Download"]</a>
+                                                                            }
                                                                             <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
                                                                             <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
                                                                         </div>

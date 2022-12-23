@@ -53,6 +53,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Tipo de Nota"]</label>
+                                <div class="form-group">
+                                    <InputSelect @bind-Value="InstitucionDestino.TipoNota" class="form-control">
+                                        <option value="">@languageContainerService.Keys["Ninguna"]</option>
+                                        @foreach (enumFMV_NoteType dt in Enum.GetValues(typeof(enumFMV_NoteType)))
+                                        {
+                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For=@(() => InstitucionDestino.TipoNota) />
+                                </div>
+                            </div>
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">

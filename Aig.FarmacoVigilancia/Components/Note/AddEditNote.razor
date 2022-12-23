@@ -1,4 +1,6 @@
 ﻿@using DataModel.Helper;
+@using DataModel;
+
 @if (Nota != null)
 {
     <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
@@ -21,7 +23,7 @@
                                 <label>@languageContainerService.Keys["Date"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputDate class="form-control" @bind-Value="Nota.Fecha" />
+                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Nota.Fecha" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                         <ValidationMessage For=@(() => Nota.Fecha) />
                                     </div>
                                 </div>
@@ -39,16 +41,9 @@
                                 <label for="password">@languageContainerService.Keys["Evaluator"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputSelect class="form-control" @bind-Value="Nota.EvaluadorId">
-                                            <option value=""></option>
-                                            @if (LPerson != null)
-                                            {
-                                                foreach (var dt in LPerson.Where(x => x.Evaluador))
-                                                {
-                                                    <option value="@dt.Id">@dt.NombreCompleto</option>
-                                                }
-                                            }
-                                        </InputSelect>
+                                        <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Nota.EvaluadorId
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(LPerson?.Where(x=>x.Evaluador)) TextProperty="NombreCompleto" ValueProperty="Id" />
                                         <ValidationMessage For=@(() => Nota.EvaluadorId) />
                                     </div>
                                 </div>
@@ -56,25 +51,31 @@
                             <div class="col-sm-3">
                                 <label for="password">@languageContainerService.Keys["NoteType"]</label>
                                 <div class="form-group">
-                                    <InputSelect @bind-Value="Nota.TipoNota" class="form-control">
+                                   @* <InputSelect @bind-Value="Nota.TipoNota" class="form-control">
                                         <option value="">@languageContainerService.Keys["Select"]</option>
                                         @foreach (enumFMV_NoteType dt in Enum.GetValues(typeof(enumFMV_NoteType)))
                                         {
                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                         }
-                                    </InputSelect>
-                                    <ValidationMessage For=@(() => Nota.TipoNota) />
+                                    </InputSelect>*@
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="enumFMV_NoteType" Class="form-control" @bind-Value=@Nota.TipoNota
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(DataModel.Helper.Helper.GetEnumList(enumFMV_NoteType.Interna)) TextProperty="Name" ValueProperty="mEnum" Change=@(args => { OnTipoNotaChange();}) />
+                                        <ValidationMessage For=@(() => Nota.TipoNota) />
+                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
                         <div class="row clearfix">
                             
 
-                            <div class="col-sm-6">
-                                <label for="password">@languageContainerService.Keys["DestinyInstitute"]</label>
+                            <div class="col-sm-12">
+                                <label for="password">@languageContainerService.Keys["Instituciones de Destino"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputSelect class="form-control" @bind-Value="Nota.InstitucionDestinoId">
+                                       @* <InputSelect class="form-control" @bind-Value="Nota.InstitucionDestinoId">
                                             <option value="">@languageContainerService.Keys["Select"]</option>
                                             @if (LInstitucionDestino != null)
                                             {
@@ -83,17 +84,20 @@
                                                     <option value="@dt.Id">@dt.Nombre</option>
                                                 }
                                             }
-                                        </InputSelect>
-                                        <ValidationMessage For=@(() => Nota.InstitucionDestinoId) />
+                                        </InputSelect>*@
+
+                                        <RadzenDropDown AllowClear="true" Multiple="true" Chips="true" MaxSelectedLabels="20" Class="form-control" TValue="List<InstitucionDestinoTB>" @bind-Value=@Nota.Instituciones.LInstituciones
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(LInstitucionDestinoFiltered?.Where(x=>!x.Deleted)) TextProperty="Nombre" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <label>@languageContainerService.Keys["Addressee"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="Nota.Destinatario" />
+                                        <InputTextArea rows="3" class="form-control" @bind-Value="Nota.Destinatario" />
                                         <ValidationMessage For=@(() => Nota.Destinatario) />
                                     </div>
                                 </div>
@@ -106,7 +110,7 @@
                                 <label>@languageContainerService.Keys["Description"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputTextArea rows="6" class="form-control" @bind-Value="Nota.Descripcion" />
+                                        <InputTextArea rows="8" class="form-control" @bind-Value="Nota.Descripcion" />
                                         <ValidationMessage For=@(() => Nota.Descripcion) />
                                     </div>
                                 </div>
@@ -138,6 +142,10 @@
         </div>
     </div>
 
+    @if (openAttachment)
+    {
+        <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
+    }
 }
 
 <div class="modal-backdrop fade show"></div>

@@ -68,6 +68,18 @@ namespace DataModel
         //El establecimiento se compromete al fiel cumplimiento del Artículo 386 del Decreto Ejecutivo 115 De 16 de agosto de 2022? Firma de Regente Farmacéutico
         private string firma;
         public string Firma { get => firma; set => SetProperty(ref firma, value); }
+
+        //Profesion
+        private string profesion;
+        public string Profesion { get => profesion; set => SetProperty(ref profesion, value); }
+
+        //dirección del Area Administrativa
+        private string dirAreaAdministrativa;
+        public string DirAreaAdministrativa { get => dirAreaAdministrativa; set => SetProperty(ref dirAreaAdministrativa, value); }
+
+        //Profesion
+        private string cargo;
+        public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
     }
 
 }

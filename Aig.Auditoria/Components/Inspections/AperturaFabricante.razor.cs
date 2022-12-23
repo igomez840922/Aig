@@ -2,6 +2,7 @@
 using Aig.Auditoria.Services;
 using BlazorComponentBus;
 using DataModel;
+using DataModel.Helper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
@@ -25,6 +26,7 @@ namespace Aig.Auditoria.Components.Inspections
         List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
         List<PaisTB> lPaises { get; set; }
 
+        enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.Pending;
 
         bool showSignasure { get; set; } = false;
         List<SignaturePad> lSignaturePads { get; set; } = new List<SignaturePad>();
@@ -56,6 +58,7 @@ namespace Aig.Auditoria.Components.Inspections
         {
             if (firstRender)
             {
+                StatusInspecciones = Inspeccion?.StatusInspecciones ?? enum_StatusInspecciones.Pending;
                 await getUserLanguaje();
                 await FetchData();
             }
@@ -78,6 +81,7 @@ namespace Aig.Auditoria.Components.Inspections
         //Fill Data
         protected async Task FetchData()
         {
+
             if (lEstablecimientos == null || lEstablecimientos.Count < 1)
             {
                 lEstablecimientos = await establecimientoService.GetAll();

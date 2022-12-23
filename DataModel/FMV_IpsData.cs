@@ -148,5 +148,8 @@ namespace DataModel
         // Observaciones
         private string observaciones;
         public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
+    
+        
+    
     }
 }

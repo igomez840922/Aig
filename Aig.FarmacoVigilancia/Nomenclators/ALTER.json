@@ -1,0 +1,22 @@
+[
+  {
+    "ALTER": "Explicación alternativa más verosímil",
+    "Descripcion": "Una patología de base u otra medicación tomada simultáneamente más verosímil que el fármaco sospechoso",
+    "Puntuacion": -3
+  },
+  {
+    "ALTER": "ALTER igual o menor",
+    "Descripcion": "Explicación alternativa con una verosimilitud igual o menor a la del fármaco sospechoso",
+    "Puntuacion": -1
+  },
+  {
+    "ALTER": "No hay información ",
+    "Descripcion": "No hay información suficiente en el formulario para poder evaluar la existencia de causas alternativas aunque estas se puedan sospechar",
+    "Puntuacion": 0
+  },
+  {
+    "ALTER": "Se descarta",
+    "Descripcion": "Se dispone de los datos necesarios para descartar una explicación alternativa",
+    "Puntuacion": 1
+  }
+]

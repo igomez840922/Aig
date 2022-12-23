@@ -1,10 +1,12 @@
-﻿using DataAccess.FarmacoVigilancia;
+﻿using DataAccess;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
 using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using System.Linq.Expressions;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -14,6 +16,18 @@ namespace Aig.FarmacoVigilancia.Services
         public ESAVIService(IDalService dalService)
         {
             DalService = dalService;
+        }
+
+        public async Task<List<FMV_EsaviTB>> FindAll(Expression<Func<FMV_EsaviTB, bool>> match)
+        {
+            try
+            {
+                return DalService.FindAll(match);
+            }
+            catch (Exception ex)
+            { }
+
+            return null;
         }
 
         public async Task<GenericModel<FMV_EsaviTB>> FindAll(GenericModel<FMV_EsaviTB> model)
@@ -49,137 +63,139 @@ namespace Aig.FarmacoVigilancia.Services
         {
             try
             {
-                //model.PagIdx = 0; model.PagAmt = int.MaxValue;
+                model.PagIdx = 0; model.PagAmt = int.MaxValue;
+                model = await FindAll(model);
 
-                //model = await FindAll(model);
+                if (model.Ldata != null && model.Ldata.Count > 0)
+                {
+                    var wb = new XLWorkbook();
+                    wb.Properties.Author = "ESAVI".ToUpper();
+                    wb.Properties.Title = "ESAVI".ToUpper();
+                    wb.Properties.Subject = "ESAVI".ToUpper();
 
-                //if (model.Ldata != null && model.Ldata.Count > 0)
-                //{
-                //    var wb = new XLWorkbook();
-                //    wb.Properties.Author = "INFORMES_PERIODICOS_SEGURIDAD";
-                //    wb.Properties.Title = "INFORMES_PERIODICOS_SEGURIDAD";
-                //    wb.Properties.Subject = "INFORMES_PERIODICOS_SEGURIDAD";
+                    var ws = wb.Worksheets.Add("ESAVI".ToUpper());
 
-                //    var ws = wb.Worksheets.Add("INFORMES_PERIODICOS_SEGURIDAD");
+                    ws.Cell(1, 1).Value = "Origen de la Notificación";
+                    ws.Cell(1, 2).Value = "Código de Notifacedra";
+                    ws.Cell(1, 3).Value = "ID de Facedra";
+                    ws.Cell(1, 4).Value = "Código Externo";
+                    ws.Cell(1, 5).Value = "Código del CNFV";
+                    ws.Cell(1, 6).Value = "Fecha de Recibido (CNFV)";
+                    ws.Cell(1, 7).Value = "Fecha Entrega a Evaluador";
+                    ws.Cell(1, 8).Value = "Evaluador"; 
+                    ws.Cell(1, 9).Value = "Notificacior";
+                    ws.Cell(1, 10).Value = "Tipo de Notificador";
+                    ws.Cell(1, 11).Value = "Tipo de Organización";
+                    ws.Cell(1, 12).Value = "Provincia";
+                    ws.Cell(1, 13).Value = "Organización";
+                    ws.Cell(1, 14).Value = "Otros Diagnosticos";
+                    ws.Cell(1, 15).Value = "Sexo";
+                    ws.Cell(1, 16).Value = "Edad";
+                    ws.Cell(1, 17).Value = "Historia Clínica";
+                    ws.Cell(1, 18).Value = "Datos del Laboratorio";
+                    ws.Cell(1, 19).Value = "Nombre Completo de la Persona";
+                    ws.Cell(1, 20).Value = "Iniciales de Paciente";
+                    ws.Cell(1, 21).Value = "Cedula";
+                    ws.Cell(1, 22).Value = "Medicamentos Concominante";
+                    ws.Cell(1, 23).Value = "Detalles del Caso";
+                    ws.Cell(1, 24).Value = "Fecha de Evaluación";
+                    ws.Cell(1, 25).Value = "Estatus";
+                    ws.Cell(1, 26).Value = "Observaciones";
+                    ws.Cell(1, 27).Value = "Hay ESAVI?";
+                    ws.Cell(1, 28).Value = "Fecha de ESAVI";
+                    ws.Cell(1, 29).Value = "Desenlace";
+                    ws.Cell(1, 30).Value = "ESAVI";
+                    ws.Cell(1, 31).Value = "Termino WhoArt (LLC)";
+                    ws.Cell(1, 32).Value = "SOC";
+                    ws.Cell(1, 33).Value = "Intensidad de la ESAVI";
+                    ws.Cell(1, 34).Value = "Gravedad";
+                    ws.Cell(1, 35).Value = "Otros Criterios";
+                    ws.Cell(1, 36).Value = "Elegibilidad por Gravedad";
+                    ws.Cell(1, 37).Value = "Elegibilidad por Otro Criterio";
+                    ws.Cell(1, 38).Value = "Elegibilidad por Evaluacion de Causalidad";
+                    ws.Cell(1, 39).Value = "Probabilidad de Asosiación Causal con la Inmunización";
+                    ws.Cell(1, 40).Value = "Vacuna Sospechosa (Comercial)";
+                    ws.Cell(1, 41).Value = "Descripción de Vacuna";
+                    ws.Cell(1, 42).Value = "DFabricante";
+                    ws.Cell(1, 43).Value = "Lote";
+                    ws.Cell(1, 44).Value = "Expira";
+                    ws.Cell(1, 45).Value = "Reg. Sanitario";
+                    ws.Cell(1, 46).Value = "Fecha de Vacunación";
+                    ws.Cell(1, 47).Value = "Indicaciones";
+                    ws.Cell(1, 48).Value = "Dosis y Via de Administración";
+                    ws.Cell(1, 49).Value = "Dosis en que se presenta el ESAVI";
 
-                //    ws.Cell(1, 1).Value = "Fecha de recepción en CNFV";
-                //    ws.Cell(1, 2).Value = "Fecha de entrega al registrador";
-                //    ws.Cell(1, 3).Value = "Registrador";
-                //    ws.Cell(1, 4).Value = "Nombre comercial";
-                //    ws.Cell(1, 5).Value = "Principio Activo";
-                //    ws.Cell(1, 6).Value = "Titular";
-                //    ws.Cell(1, 7).Value = "No. Registro Sanitario";
-                //    ws.Cell(1, 8).Value = "Presenta CD";
-                //    ws.Cell(1, 9).Value = "Periodo que cubre";
-                //    ws.Cell(1, 10).Value = "Fecha de Registro";
-                //    ws.Cell(1, 11).Value = "Estatus de Recepción";
-                //    ws.Cell(1, 12).Value = "Fecha de Asignación para Pre-Evaluación";
-                //    ws.Cell(1, 13).Value = "Tramitador";
-                //    ws.Cell(1, 14).Value = "Innovador";
-                //    ws.Cell(1, 15).Value = "Biológico";
-                //    ws.Cell(1, 16).Value = "Requiere Intercambiabilidad";
-                //    ws.Cell(1, 17).Value = "Fecha de autorización en Panamá";
-                //    ws.Cell(1, 18).Value = "Fecha de Pre-Evaluación";
-                //    ws.Cell(1, 19).Value = "Estatus de Registro";
-                //    ws.Cell(1, 20).Value = "Prioridad";
-                //    ws.Cell(1, 21).Value = "Fecha de Asignación para Evaluación";
-                //    ws.Cell(1, 22).Value = "Evaluador";
-                //    ws.Cell(1, 23).Value = "Resumen Ejecutivo";
-                //    ws.Cell(1, 24).Value = "Resumen Ejecutivo Traducido";
-                //    ws.Cell(1, 25).Value = "Tabla de contenido";
-                //    ws.Cell(1, 26).Value = "Introducción";
-                //    ws.Cell(1, 27).Value = "Situación Mundial de Autorización de comercialización";
-                //    ws.Cell(1, 28).Value = "Medidas adoptadas por ARNs o TRS";
-                //    ws.Cell(1, 29).Value = "Cambios a la información de seguridad";
-                //    ws.Cell(1, 30).Value = "Monografía/Inserto";
-                //    ws.Cell(1, 31).Value = "Exposición estimada y patrones de uso";
-                //    ws.Cell(1, 32).Value = "Presentación de casos (RAMs reportadas)";
-                //    ws.Cell(1, 33).Value = "Resumen de hallazgos significantes de seguridad";
-                //    ws.Cell(1, 34).Value = "Otra información relacionada";
-                //    ws.Cell(1, 35).Value = "Falta de eficacia en ensayos clínicos controlados";
-                //    ws.Cell(1, 36).Value = "Revisión de señales";
-                //    ws.Cell(1, 37).Value = "Evaluación de señales y riesgos";
-                //    ws.Cell(1, 38).Value = "Evaluación del beneficio";
-                //    ws.Cell(1, 39).Value = "Análisis de beneficio/riesgo";
-                //    ws.Cell(1, 40).Value = "Conclusiones y acciones";
-                //    ws.Cell(1, 41).Value = "Anexos y Apendices";
-                //    ws.Cell(1, 42).Value = "Ha cambiado el balance B/R?";
-                //    ws.Cell(1, 43).Value = "Hay propuestas de un plan de acción?";
-                //    ws.Cell(1, 44).Value = "Solicitud de información al fabricante";
-                //    ws.Cell(1, 45).Value = "Fecha de revisión";
-                //    ws.Cell(1, 46).Value = "Estatus de Revisión";
-                //    ws.Cell(1, 47).Value = "IPS confeccionado conforme a normativa?";
-                //    ws.Cell(1, 48).Value = "No. de Informe";
-                //    ws.Cell(1, 49).Value = "OBSERVACIONES";
+                    var row = 1;
+                    foreach (var data in model.Ldata)
+                    {
+                        //foreach (var prod in data.LNotificaciones)
+                        //{
 
-                //    for (int row = 1; row <= model.Ldata.Count; row++)
-                //    {
-                //        var prod = model.Ldata[row - 1];
-                //        ws.Cell(row + 1, 1).Value = prod.FechaRecepcion?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 2).Value = prod.FechaRegistrador?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 3).Value = prod.Registrador?.NombreCompleto ?? "";
-                //        ws.Cell(row + 1, 4).Value = prod.NomComercial;
-                //        ws.Cell(row + 1, 5).Value = prod.PrincActivo;
-                //        ws.Cell(row + 1, 6).Value = prod.Laboratorio?.Nombre??"";
-                //        ws.Cell(row + 1, 7).Value = prod.RegSanitario;
-                //        ws.Cell(row + 1, 8).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData.PresentaCd);
-                //        ws.Cell(row + 1, 9).Value = prod.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy") ?? "" + " " + prod.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 10).Value = prod.IpsData?.FechaRegistro?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 11).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRecepcion);
-                //        ws.Cell(row + 1, 12).Value = prod.IpsData?.FechaAsigPreEva?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 13).Value = prod.Tramitador?.NombreCompleto ?? "";
-                //        ws.Cell(row + 1, 14).Value = prod.IpsData !=null && prod.IpsData.Innovador?"Si":"No";
-                //        ws.Cell(row + 1, 15).Value = prod.IpsData != null && prod.IpsData.Biologico ? "Si" : "No";
-                //        ws.Cell(row + 1, 16).Value = prod.IpsData != null && prod.IpsData.ReqIntercam ? "Si" : "No";
-                //        ws.Cell(row + 1, 17).Value = prod.IpsData?.FechaAutPan?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 18).Value = prod.IpsData?.FechaPreEva?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 19).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRegistro);
-                //        ws.Cell(row + 1, 20).Value = prod.Prioridad ? "Si" : "No";
-                //        ws.Cell(row + 1, 21).Value = prod.FechaAsigEva?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 22).Value = prod.Evaluador?.NombreCompleto ?? "";
-                //        ws.Cell(row + 1, 23).Value = DataModel.Helper.Helper.GetDescription(prod.ResumenEjec);
-                //        ws.Cell(row + 1, 24).Value = DataModel.Helper.Helper.GetDescription(prod.ResumenEjecTrad);
-                //        ws.Cell(row + 1, 25).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.TablaContenido?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 26).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.Introduccion ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 27).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SitMunAutCom ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 28).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.MedAdoptada ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 29).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.CamInfoSeg ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 30).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.Monografia ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 31).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ExpEstimada ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 32).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PresCasos ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 33).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ResHallazgo ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 34).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.OtraInfRel ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 35).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.FaltaEficacia ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 36).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.RevisionSenales ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 37).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionSenales ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 38).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionBeneficio ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 39).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.AnaBenRiesgo ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 40).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ConcluAcciones ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 41).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.AnexoApendice ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 42).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.CambioBalance ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 43).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PropPlanAccion ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 44).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SolInfoFabricante ?? enumFMV_IpsTipoPresentaiones.No);
-                //        ws.Cell(row + 1, 45).Value = prod.FechaRev?.ToString("dd/MM/yyyy") ?? "";
-                //        ws.Cell(row + 1, 46).Value = DataModel.Helper.Helper.GetDescription(prod.StatusRevision);
-                //        ws.Cell(row + 1, 47).Value = prod.ConfecConNormativa ? "Si" : "No";
-                //        ws.Cell(row + 1, 48).Value = prod.NoInforme;
-                //        ws.Cell(row + 1, 49).Value = prod.IpsData?.Observaciones?? "";
-                //    }
+                        //}
+                        ws.Cell(row + 1, 1).Value = DataModel.Helper.Helper.GetDescription(data.OrigenNotificacion);
+                        ws.Cell(row + 1, 2).Value = data.CodigoNotiFacedra;
+                        ws.Cell(row + 1, 3).Value = data.IdFacedra;
+                        ws.Cell(row + 1, 4).Value = data.CodExt;
+                        ws.Cell(row + 1, 5).Value = data.CodCNFV;
+                        ws.Cell(row + 1, 6).Value = data.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(row + 1, 7).Value = data.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(row + 1, 8).Value = data.Evaluador?.NombreCompleto ?? "";
+                        ws.Cell(row + 1, 9).Value = data.Notificador;
+                        ws.Cell(row + 1, 10).Value = DataModel.Helper.Helper.GetDescription(data.TipoNotificacion);
+                        ws.Cell(row + 1, 11).Value = data.TipoInstitucion?.Nombre ?? "";
+                        ws.Cell(row + 1, 12).Value = data.Provincia?.Nombre ?? "";
+                        ws.Cell(row + 1, 13).Value = data.InstitucionDestino?.Nombre ?? "";
+                        ws.Cell(row + 1, 14).Value = data.OtrosDiagnosticos;
+                        ws.Cell(row + 1, 15).Value = DataModel.Helper.Helper.GetDescription(data.Sexo);
+                        ws.Cell(row + 1, 16).Value = data.Edad;
+                        ws.Cell(row + 1, 17).Value = data.HistoriaClinica;
+                        ws.Cell(row + 1, 18).Value = data.DatosLab;
+                        ws.Cell(row + 1, 19).Value = data.NombreCompletoPersona;
+                        ws.Cell(row + 1, 20).Value = data.InicialesPersona;
+                        ws.Cell(row + 1, 21).Value = data.Cedula;
+                        ws.Cell(row + 1, 22).Value = data.MedicamentoContaminante;
+                        ws.Cell(row + 1, 23).Value = DataModel.Helper.Helper.GetDescription(data.DetallesCaso);
+                        ws.Cell(row + 1, 24).Value = data.FechaEvalua?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(row + 1, 25).Value = DataModel.Helper.Helper.GetDescription(data.Estatus);
+                        ws.Cell(row + 1, 26).Value = data.Observaciones;
+                        ws.Cell(row + 1, 27).Value = DataModel.Helper.Helper.GetDescription(data.HayEsavi);
+                        ws.Cell(row + 1, 28).Value = data.FechaEsavi?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(row + 1, 29).Value = DataModel.Helper.Helper.GetDescription(data.Desenlace);
+                        ws.Cell(row + 1, 30).Value = data.EsaviDescripcion;
+                        ws.Cell(row + 1, 31).Value = data.TerminoWhoArt;
+                        ws.Cell(row + 1, 32).Value = data.Soc;// DataModel.Helper.Helper.GetDescription(prod.SOC);
+                        ws.Cell(row + 1, 33).Value = string.Format("{0} {1}", data.IntensidadEsavi?.Nombre ?? "", data.IntensidadEsavi?.Gravedad ?? ""); //prod.Intensidad;
+                        ws.Cell(row + 1, 34).Value = data.Gravedad;
+                        ws.Cell(row + 1, 35).Value = DataModel.Helper.Helper.GetDescription(data.OtrosCriterios);
+                        ws.Cell(row + 1, 36).Value = data.ElegibilidadGravedad;
+                        ws.Cell(row + 1, 37).Value = data.ElegibilidadOtroCriterio;
+                        ws.Cell(row + 1, 38).Value = data.ElegibleEvaluacionCausal;
+                        ws.Cell(row + 1, 39).Value = DataModel.Helper.Helper.GetDescription(data.ProbabilidadAsociacion);
+                        ws.Cell(row + 1, 40).Value = data.VacunaComercial;
+                        ws.Cell(row + 1, 41).Value = data.TipoVacuna?.Nombre ?? ""; //prod.DescripVacuna;
+                        ws.Cell(row + 1, 42).Value = data.Laboratorio?.Nombre ?? ""; //prod.DescripVacuna;
+                        ws.Cell(row + 1, 43).Value = data.Lote;
+                        ws.Cell(row + 1, 44).Value = data.FechaExp?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(row + 1, 45).Value = data.RegSanitario;
+                        ws.Cell(row + 1, 46).Value = data.FechaVacunacion?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(row + 1, 47).Value = data.Indicaciones;
+                        ws.Cell(row + 1, 48).Value = data.DosisViaAdmin;
+                        ws.Cell(row + 1, 49).Value = data.DosisEsavi;
 
-                //    MemoryStream XLSStream = new();
-                //    wb.SaveAs(XLSStream);
+                        row++;
+                    }
 
-                //    return XLSStream;
-                //}
-           
-            
+                    MemoryStream XLSStream = new();
+                    wb.SaveAs(XLSStream);
+
+                    return XLSStream;
+                }
             }
             catch (Exception ex)
             { }
 
             return null;
         }
-
 
         public async Task<List<FMV_EsaviTB>> GetAll()
         {

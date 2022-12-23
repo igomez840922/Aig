@@ -19,6 +19,8 @@ namespace Aig.FarmacoVigilancia.Pages.FT
         IWorkerPersonService workerPersonService { get; set; }
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
+        [Inject]
+        IPdfGenerationService pdfGenerationService { get; set; }
         List<PersonalTrabajadorTB> lPersons { get; set; }
         GenericModel<FMV_FtTB> dataModel { get; set; } = new GenericModel<FMV_FtTB>()
         { Data = new FMV_FtTB() };
@@ -168,6 +170,28 @@ namespace Aig.FarmacoVigilancia.Pages.FT
                 await blazorDownloadFileService.DownloadFile("SOSPECHAS_FALLAS_TERAPEUTICAS.xlsx", stream, "application/actet-stream");
             }
         }
+
+        private async Task DownloadPdf(long Id)
+        {
+            //Stream stream = await pdfGenerationService.GenerateAlertPDF(Id);
+            //if (stream != null)
+            //{
+            //    await blazorDownloadFileService.DownloadFile("ALERTA_SEGURIDAD.pdf", stream, "application/actet-stream");
+            //}
+
+            var data = await ftService.Get(Id);
+            if (data?.Adjunto?.LAttachments?.Count > 0)
+            {
+                foreach (var attachment in data.Adjunto.LAttachments)
+                {
+                    Stream stream = await pdfGenerationService.GetStreamsFromFile(attachment.AbsolutePath);
+                    if (stream != null)
+                        await blazorDownloadFileService.DownloadFile(attachment.FileName, stream, "application/actet-stream");
+                }
+            }
+
+        }
+
 
     }
 

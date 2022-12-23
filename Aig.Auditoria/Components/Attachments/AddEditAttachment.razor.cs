@@ -102,6 +102,7 @@ namespace Aig.Auditoria.Components.Attachments
 
                     attachment.AbsolutePath = path;
                     attachment.Url = string.Format("/files/{0}", fileName);
+                    attachment.FileName = fileName;
 
                     OpenDialog = false;
 

@@ -117,8 +117,8 @@
                                     <label>@languageContainerService.Keys["Fecha de Evaluación"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Notification.FechaEvaluacion" />
-                                            <ValidationMessage For=@(() => Notification.FechaEvaluacion) />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Notification.FechaEvaluacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.FechaEvaluacion) />
                                         </div>
                                     </div>
                                 </div>
@@ -146,8 +146,8 @@
                                     <label>@languageContainerService.Keys["Fecha de Tratamiento"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Notification.EvaluacionCalidadInfo.FechaTratamiento" />
-                                            <ValidationMessage For=@(() => Notification.EvaluacionCalidadInfo.FechaTratamiento) />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Notification.EvaluacionCalidadInfo.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.EvaluacionCalidadInfo.FechaTratamiento) />
                                         </div>
                                     </div>
                                 </div>
@@ -155,8 +155,8 @@
                                     <label>@languageContainerService.Keys["Fecha de RAM"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputDate class="form-control" @bind-Value="Notification.EvaluacionCalidadInfo.FechaRam" />
-                                            <ValidationMessage For=@(() => Notification.EvaluacionCalidadInfo.FechaRam) />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Notification.EvaluacionCalidadInfo.FechaRam" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Notification.EvaluacionCalidadInfo.FechaRam) />
                                         </div>
                                     </div>
                                 </div>
@@ -378,15 +378,15 @@
                                     </div>
                                 </div>
 
-                                  <div class="col-sm-2">
+                                  @*<div class="col-sm-2">
                                     <label>@languageContainerService.Keys["RAM"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                              <InputText class="form-control" @bind-Value="Notification.EvaluacionCausalidad.Ram" /> 
-                                            <ValidationMessage For=@(() => Notification.EvaluacionCausalidad.Ram) />
+                                              <InputText class="form-control" @bind-Value="Notification.Ram" /> 
+                                            <ValidationMessage For=@(() => Notification.Ram) />
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
 
                                  <div class="col-sm-3">
                                     <label>@languageContainerService.Keys["TERMINO WHOArt (LLT)"]</label>
@@ -592,8 +592,9 @@
                                     <label>@languageContainerService.Keys["Probabilidad"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                              <InputText class="form-control" @bind-Value="Notification.EvaluacionCausalidad.Probabilidad" /> 
-                                            <ValidationMessage For=@(() => Notification.EvaluacionCausalidad.Probabilidad) />
+                                            <input disabled="disabled"  class="form-control" type="text" value="@Notification.EvaluacionCausalidad.Probabilidad">
+                                            @*  <InputText class="form-control" @bind-Value="Notification.EvaluacionCausalidad.Probabilidad" />
+                                            <ValidationMessage For=@(() => Notification.EvaluacionCausalidad.Probabilidad) /> *@
                                         </div>
                                     </div>
                                 </div>
@@ -778,11 +779,11 @@
                                     </div>
                                 </div>
 
-                                 <div class="col-sm-6">
+                                 <div class="col-sm-12">
                                     <label>@languageContainerService.Keys["Observaciones"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                          <textarea rows="2" id="active_principles" class="form-control" @bind="Notification.AccionesRegulatoria.Observaciones" @bind:event="oninput" /> 
+                                          <textarea rows="8" id="active_principles" class="form-control" @bind="Notification.AccionesRegulatoria.Observaciones" @bind:event="oninput" /> 
                                             <ValidationMessage For=@(() => Notification.AccionesRegulatoria.Observaciones) />
                                         </div>
                                     </div>

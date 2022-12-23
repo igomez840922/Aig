@@ -1,0 +1,412 @@
+﻿@using DataModel.Helper;
+
+<div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModal">@(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))</h5>
+                <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <EditForm Model="@Inspeccion" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+                    <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#applicantInfo" role="tab">@languageContainerService.Keys["Datos de Investigación"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#conclusionInfo" role="tab">@languageContainerService.Keys["ConclusionInfo"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#inspectorsApprovals" role="tab" @onclick="(e)=>{OnShowSignasure();}">@languageContainerService.Keys["Firmas"]</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="generalInfo" role="tabpanel">
+                            <h5>@languageContainerService.Keys["GeneralInfo"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["StartDate"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDatePicker TValue="DateTime" @bind-Value="Inspeccion.FechaInicio" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
+                                            <ValidationMessage For=@(() => Inspeccion.FechaInicio) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Status"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
+                                                @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
+                                                {
+                                                    if (dt != enum_StatusInspecciones.None)
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.StatusInspecciones) />
+                                        </div>
+                                    </div>
+                                </div>                               
+                            </div>
+                            
+                            <h5>@languageContainerService.Keys["Datos del Establecimiento"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Establishments"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Inspeccion.EstablecimientoId
+                                                            AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                            Data=@lEstablecimientos TextProperty="NameAndRegNum" ValueProperty="Id"
+                                                            Change=@(args => {OnEstablishmentChange((args!=null?(long)args:null));}) />
+                                            <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Num. Licencia"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.LicenseNumber" />
+                                            <ValidationMessage For=@(() => Inspeccion.LicenseNumber) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Aviso de Operaciones"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.AvisoOperacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.AvisoOperacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["Location"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.UbicacionEstablecimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.UbicacionEstablecimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["BusinessPhone"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.TelefonoEstablecimiento" />
+                                            <ValidationMessage For=@(() => Inspeccion.TelefonoEstablecimiento) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h5>@languageContainerService.Keys["Atendidos Por"]</h5>
+                            <div class="row clearfix">
+                                <div class="col-sm-8">
+                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DatosAtendidosPor.Nombre" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosAtendidosPor.Nombre) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Identification"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DatosAtendidosPor.Cedula" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosAtendidosPor.Cedula) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Cargo"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DatosAtendidosPor.Cargo" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosAtendidosPor.Cargo) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Num. Registro"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DatosAtendidosPor.NumRegistro" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosAtendidosPor.NumRegistro) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
+                            <div class="row clearfix">
+                                <!--begin::Section-->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["FullName"]</th>
+                                                    <th>@languageContainerService.Keys["IdentificationCard"]</th>
+                                                    <th>@languageContainerService.Keys["RegisterNumber"]</th>
+                                                    <th>@languageContainerService.Keys["Charge"]</th>
+                                                    <th style="text-align:right;">
+                                                        <button type="button" @onclick="(e)=>{OpenParticipant();}"
+                                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                                            @languageContainerService.Keys["Add"]
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Inspeccion != null && Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes != null)
+                                                {
+                                                    @foreach (var dt in Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.NombreCompleto</td>
+                                                            <td>@dt.CedulaIdentificacion</td>
+                                                            <td>@dt.RegistroNumero</td>
+                                                            <td>@dt.Cargo</td>
+                                                            <td style="text-align:right">
+                                                                <div class="btn-group">
+                                                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{OpenParticipant(dt);}" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{RemoveParticipant(dt);}"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="applicantInfo" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Datos de Investigación"]</h5>
+                            <div class="row clearfix">                                
+
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Motivo de Investigación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="6" class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DetalleVerificacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DetalleVerificacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Detalles de la Inspección"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="10" class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DetalleInspeccion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DetalleInspeccion) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="password">@languageContainerService.Keys["Se adjunta acta de retención y retiro de productos"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspInvestigacion.AdjuntaActaRetencion" class="form-control">
+                                                @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.AdjuntaActaRetencion) />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>                           
+                            
+                        </div>
+                        
+                        <div class="tab-pane" id="conclusionInfo" role="tabpanel">
+                            <h4>@languageContainerService.Keys["ConclusionInfo"]</h4>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label for="password">@languageContainerService.Keys["El local cumple  o no cumple con los requisitos mínimos para operar"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputSelect @bind-Value="Inspeccion.InspInvestigacion.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Si</option>
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosConclusiones.CumpleRequisitosMinOperacion) />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Fecha de Finalización"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspInvestigacion.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Observaciones"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputTextArea rows="8" class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DatosConclusiones.ObservacionesFinales" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosConclusiones.ObservacionesFinales) />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
+                            <h5>@languageContainerService.Keys["Firmas"]</h5>
+                           
+                            @if (Inspeccion != null && Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes.Count > 0 && showSignasure)
+                            {
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h5>@languageContainerService.Keys["Por el Establecimiento"]</h5>
+                                        <div class="row clearfix">
+                                            <div class="col-sm-12">
+                                                <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DatosAtendidosPor.Nombre" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosAtendidosPor.Nombre) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DatosAtendidosPor.Cargo" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosAtendidosPor.Cargo) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspInvestigacion.DatosAtendidosPor.Cedula" />
+                                                        <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DatosAtendidosPor.Cedula) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad @ref="signaturePad5" OnSignatureChange="OnSignatureChange5"
+                                                                      MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                            <SignaturePadFooter>
+                                                                <SignaturePadClear>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
+                                                                </SignaturePadClear>
+                                                            </SignaturePadFooter>
+                                                        </SignaturePad>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    
+                                    <div class="col-sm-12">
+                                        <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
+                                    </div>
+                                    @foreach (var dt in Inspeccion.InspInvestigacion.DatosConclusiones.LParticipantes)
+                                    {
+
+                                        <div class="col-sm-6">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12">
+                                                    <label for="password">@dt.NombreCompleto</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["RegisterNumber"]:@dt.RegistroNumero</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["IdentificationCard"]:@dt.CedulaIdentificacion</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Signature"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <SignaturePad @ref="signaturePad" OnSignatureChange="(e)=>{OnSignatureChange(dt);}"
+                                                                          MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                <SignaturePadFooter>
+                                                                    <SignaturePadClear>
+                                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="(e)=>{RemoveSignatureImg(dt);}">@languageContainerService.Keys["Clear"]</button>
+                                                                    </SignaturePadClear>
+                                                                </SignaturePadFooter>
+                                                            </SignaturePad>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+
+                    <br><br>
+                    <div class="modal-footer">
+
+                        @if (StatusInspecciones == enum_StatusInspecciones.Pending)
+                        {
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                        }
+
+                        <button type="button" class="btn btn-danger waves-effect"
+                                @onclick="(e)=>{Cancel();}">
+                            @languageContainerService.Keys["Cancel"]
+                        </button>
+                    </div>
+
+
+                </EditForm>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@if (showParticipant)
+{
+    <Aig.Auditoria.Components.Participants.AddEditParticipantComponent Participante="@participante"></Aig.Auditoria.Components.Participants.AddEditParticipantComponent>
+}
+
+<div class="modal-backdrop fade show"></div>

@@ -43,7 +43,7 @@ namespace DataModel.Helper
         AF = 1,
         [Description("Cambio de ubicación de Farmacia")]
         CUF = 2,
-        [Description("Apertura  de Agencia")]
+        [Description("Apertura de Agencia")]
         AA = 3,
         [Description("Cambio de Ubicación de Agencia")]
         CUA = 4,
@@ -67,16 +67,16 @@ namespace DataModel.Helper
         BPMFM = 13,
         [Description("Guía BPM – Acondicionadores de Medicamentos")]
         BPMAM = 14,
-        [Description("Guía BPM – Fabricantes Cosméticos y Desinfectantes")]
+        [Description("Guía BPM – Fabricantes de Cosméticos y Desinfectantes")]
         BPMCD = 15,
-        [Description("Guía BPM – Fabricantes de Naturales Medicinales")]
+        [Description("Guía BPM – Fabricantes de Productos Naturales Medicinales")]
         BPMMN = 16,
         [Description("Guía de BPA")]
         BPA = 17,
         [Description("Apertura – Cosméticos Artesanales")]
         AECA = 18,
-        [Description("Rutina o vigilancia de Establecimiento No Farmacéutico")]
-        VENF = 19,
+        //[Description("Rutina o vigilancia de Establecimiento No Farmacéutico")]
+        //VENF = 19,
     }
 
     public enum enumAUD_ClasificacionTramite
@@ -97,17 +97,17 @@ namespace DataModel.Helper
 		DispFinalDesechosFarmaceuticos = 6,
 	}
 
-	public enum enumAUD_TipoTramite
-	{
-		[Description("Ninguna")]
-		None = 0,
-		[Description("Apertura")]
-		Apertura = 1,
-		[Description("Renovación")]
-		Renovacion = 2,
-		[Description("Modificación")]
-		Modificacion = 3,
-	}
+	//public enum enumAUD_TipoTramite
+	//{
+	//	[Description("Ninguna")]
+	//	None = 0,
+	//	[Description("Apertura")]
+	//	Apertura = 1,
+	//	[Description("Renovación")]
+	//	Renovacion = 2,
+	//	[Description("Modificación")]
+	//	Modificacion = 3,
+	//}
 
 	public enum enumAUD_TipoSector
 	{
@@ -115,9 +115,9 @@ namespace DataModel.Helper
 		None = 0,
 		[Description("Privado")]
 		Privado = 1,
-		[Description("Público")]
-		Publico = 2
-	}
+		[Description("Estatal")]
+        Estatal = 2,
+    }
 
 	public enum enumAUD_StatusEstablecimiento
 	{
@@ -127,10 +127,29 @@ namespace DataModel.Helper
 		Operando = 1,
 		[Description("Cerrado")]
 		Cerrado = 2,
-	}
+        [Description("Cierre Temporal")]
+        CerradoTemp = 3,
+        [Description("Cancelado")]
+        Cancelado = 4,
+        [Description("Vencido")]
+        Vencido = 5, 
+        [Description("Resolucion")]
+        Resolucion = 6,
+    }
 
-	
-	public enum enumAUD_TipoSeleccion
+    public enum enumAUD_ClasifEstablecimiento
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Apertura")]
+        Apertura = 1,
+        [Description("Renovación")]
+        Renovacion = 2,
+        [Description("Modificación")]
+        Modificacion = 3,
+    }
+
+    public enum enumAUD_TipoSeleccion
 	{
 		[Description("N/A")]
 		NA = 0,
@@ -231,10 +250,10 @@ namespace DataModel.Helper
         ServicioWeb = 1,
         [Description("En Papel")]
         Papel = 2,
-        [Description("Facedra")]
-        Facedra = 3,
-        [Description("PAI")]
-        Pai = 4,
+        //[Description("Facedra")]
+        //Facedra = 3,
+        //[Description("PAI")]
+        //Pai = 4,
     }
     public enum enumFMV_RAMNotificationType
     {
@@ -319,7 +338,7 @@ namespace DataModel.Helper
         NA = 0,
         [Description("Desapareció la reacción al disminuir la dosis")]
         DESREACC = 1,
-        [Description("Permance la reacción al disminuir la dosis")]
+        [Description("Permanece la reacción al disminuir la dosis")]
         PERREACC = 2,
     }
 
@@ -337,9 +356,9 @@ namespace DataModel.Helper
     {
         [Description("N/A")]
         NA = 0,
-        [Description("Desapareció la reacción al suspender el uso del medicamento sospechoso")]
+        [Description("Desaparece la reacción adversa")]
         DESREACC = 1,
-        [Description("Permanece la reacción al suspender el uso del medicamento sospechoso")]
+        [Description("Permanece la reacción adversa")]
         PERREACC = 2,
     }
 
@@ -689,14 +708,14 @@ namespace DataModel.Helper
 
     public enum enumFMV_IpsTipoPresentaiones
     {
-        [Description("No Presentado")]
-        NotPresent = 0,
-        [Description("Presentado")]
-        Presented = 1,
+        //[Description("No Presentado")]
+        //NotPresent = 0,
+        //[Description("Presentado")]
+        //Presented = 1,
         [Description("Si")]
-        Yes = 2,
+        Yes = 1,
         [Description("No")]
-        No = 3,
+        No = 0,
     }
 
     public enum enumFMV_IpsStatusRevision
@@ -709,16 +728,16 @@ namespace DataModel.Helper
 
     public enum enumFMV_AlertType
     {
-        [Description("Alerta de Calidad")]
-        AlertaCalidad = 0,
+        //[Description("Alerta de Calidad")]
+        //AlertaCalidad = 0,       
+        //[Description("Nota Informativa")]
+        //NotaInformativa = 2,
         [Description("Nota de Seguridad")]
-        NotaSeguridad = 1,
-        [Description("Nota Informativa")]
-        NotaInformativa = 2,
+        NotaSeguridad = 0,
         [Description("Boletines")]
-        Boletines = 3,
+        Boletines = 1,
         [Description("Comunicado")]
-        Comunicado = 4,
+        Comunicado = 2,
     }
 
     public enum enumFMV_AlertaNotaStatus
@@ -768,6 +787,52 @@ namespace DataModel.Helper
         Laboratory = 0,
         [Description("Distribuidora")]
         Distributor = 1,
+        [Description("Fabricante")]
+        Manufacturer = 3,
     }
+
+    //////////////////////////////
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum enum_TipoInspeccionDispFinal
+    {
+        [Description("Verificación del inventario")]
+        VerifInventario = 0,
+        [Description("Disposición Final")]
+        DispFinal = 1,
+    }
+
+    public enum enum_TipoProductDispFinal
+    {
+        [Description("Controlado")]
+        Controlado = 0,
+        [Description("No Controlado")]
+        NoControlado = 1,
+    }
+    public enum enum_TipoVerificacionDispFinal
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Total")]
+        Total = 1,
+        [Description("Parcial")]
+        Parcial = 2,
+    }
+
+    public enum enum_Cargos
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Responsable de Farmacovigilancia")]
+        ResFV = 1,
+        [Description("Representante de Farmacovigilancia")]
+        RepFV = 2,
+        [Description("Suplente de Responsable de Farmacovigilancia")]
+        SupResFV = 3,
+        [Description("Suplente de Representante de Farmacovigilancia")]
+        SupRepFV = 4,
+    }
+
 
 }

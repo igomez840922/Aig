@@ -1,4 +1,4 @@
-﻿using DataAccess.FarmacoVigilancia;
+﻿using DataAccess;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
@@ -204,13 +204,11 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 if (result.IpsData != null)
                 {
-                    //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;
-                    DalService.DBContext.Entry(result).Property(b => b.IpsData).IsModified = true;
-                    DalService.DBContext.SaveChanges();
+                    DalService.DBContext.Entry(result).Property(b => b.IpsData).IsModified = true;					
                 }
-            }
-            
-
+				DalService.DBContext.Entry(result).Property(b => b.Adjunto).IsModified = true;
+				DalService.DBContext.SaveChanges();
+			}
             return result;           
         }
 

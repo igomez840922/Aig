@@ -1,4 +1,4 @@
-﻿using DataAccess.FarmacoVigilancia;
+﻿using DataAccess;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
@@ -80,10 +80,12 @@ namespace Aig.FarmacoVigilancia.Services
                     ws.Cell(1, 12).Value = "Consentimiento Informado";
                     ws.Cell(1, 13).Value = "Suspensión y retiro de lote(s)";
                     ws.Cell(1, 14).Value = "Registro Sanitario (Suspensión/Cancelación)";
-                    ws.Cell(1, 15).Value = "Otras";
-                    ws.Cell(1, 16).Value = "Número de nota";
-                    ws.Cell(1, 17).Value = "Estatus";
-                    ws.Cell(1, 18).Value = "Observaciones";
+                    ws.Cell(1, 15).Value = "Monitoreo";
+                    ws.Cell(1, 16).Value = "Otras";
+                    ws.Cell(1, 17).Value = "Otras Descripción";
+                    ws.Cell(1, 18).Value = "Número de nota";
+                    ws.Cell(1, 19).Value = "Estatus";
+                    ws.Cell(1, 20).Value = "Observaciones";
 
                     for (int row = 1; row <= model.Ldata.Count; row++)
                     {//FechaRecepcion
@@ -102,10 +104,12 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 12).Value = prod.ConsentFirmado ? "Si" : "No";
                         ws.Cell(row + 1, 13).Value = prod.SuspencionRetiroLote ? "Si" : "No";
                         ws.Cell(row + 1, 14).Value = prod.SuspencCancelRegSanitario ? "Si" : "No";
-                        ws.Cell(row + 1, 15).Value = prod.OtrasConsideraciones ? "Si" : "No";
-                        ws.Cell(row + 1, 16).Value = prod.NumNota;
-                        ws.Cell(row + 1, 17).Value = DataModel.Helper.Helper.GetDescription(prod.Estado);
-                        ws.Cell(row + 1, 18).Value = prod.Observaciones;
+                        ws.Cell(row + 1, 15).Value = prod.Monitoreo ? "Si" : "No";
+                        ws.Cell(row + 1, 16).Value = prod.OtrasConsideraciones ? "Si" : "No";
+                        ws.Cell(row + 1, 17).Value = prod.OtrasDescripcion;
+                        ws.Cell(row + 1, 18).Value = prod.NumNota;
+                        ws.Cell(row + 1, 19).Value = DataModel.Helper.Helper.GetDescription(prod.Estado);
+                        ws.Cell(row + 1, 20).Value = prod.Observaciones;
                     }
 
                     MemoryStream XLSStream = new();
@@ -137,6 +141,11 @@ namespace Aig.FarmacoVigilancia.Services
         public async Task<FMV_AlertaTB> Save(FMV_AlertaTB data)
         {
             var result = DalService.Save(data);
+            if(result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.Adjunto).IsModified = true;
+                DalService.DBContext.SaveChanges();
+            }
             return result;           
         }
 

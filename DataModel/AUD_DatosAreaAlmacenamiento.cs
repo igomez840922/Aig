@@ -14,6 +14,41 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosAreaAlmacenamiento : SystemId
     {
+        public AUD_DatosAreaAlmacenamiento()
+        {
+            AreaMateriaPrima = new AUD_AlmacenAreas();
+            AreaMaterialAcondicionamiento = new AUD_AlmacenAreas();
+            AreaProductoTerminado = new AUD_AlmacenAreas();
+            AreaProductoAGranel=new AUD_AlmacenAreas();
+            AreaProductoInflamable=new AUD_AlmacenAreas();
+            AreaProductoRechazados = new AUD_AlmacenAreas();
+            AreaDevoluciones = new AUD_AlmacenAreas();
+
+        }
+
+        //Areas de Almacenamiento
+        private AUD_AlmacenAreas areaMateriaPrima;
+        public AUD_AlmacenAreas AreaMateriaPrima { get => areaMateriaPrima; set => SetProperty(ref areaMateriaPrima, value); }
+
+        private AUD_AlmacenAreas areaMaterialAcondicionamiento;
+        public AUD_AlmacenAreas AreaMaterialAcondicionamiento { get => areaMaterialAcondicionamiento; set => SetProperty(ref areaMaterialAcondicionamiento, value); }
+
+        private AUD_AlmacenAreas areaProductoTerminado;
+        public AUD_AlmacenAreas AreaProductoTerminado { get => areaProductoTerminado; set => SetProperty(ref areaProductoTerminado, value); }
+
+        private AUD_AlmacenAreas areaProductoAGranel;
+        public AUD_AlmacenAreas AreaProductoAGranel { get => areaProductoAGranel; set => SetProperty(ref areaProductoAGranel, value); }
+
+        private AUD_AlmacenAreas areaProductoInflamable;
+        public AUD_AlmacenAreas AreaProductoInflamable { get => areaProductoInflamable; set => SetProperty(ref areaProductoInflamable, value); }
+
+        private AUD_AlmacenAreas areaProductoRechazados;
+        public AUD_AlmacenAreas AreaProductoRechazados { get => areaProductoRechazados; set => SetProperty(ref areaProductoRechazados, value); }
+
+        private AUD_AlmacenAreas areaDevoluciones;
+        public AUD_AlmacenAreas AreaDevoluciones { get => areaDevoluciones; set => SetProperty(ref areaDevoluciones, value); }
+                
+
         //Dispone de área de Almacenamiento?
         private enumAUD_TipoSeleccion disponeAlmacenamiento;
         public enumAUD_TipoSeleccion DisponeAlmacenamiento { get => disponeAlmacenamiento; set => SetProperty(ref disponeAlmacenamiento, value); }
@@ -492,16 +527,6 @@ namespace DataModel
         /////////////////////
         ///
 
-        // Cuenta con un área para: Materia Prima / Material Acondicionamiento / Productos Terminados
-        // MATERIA PRIMA
-        private enumAUD_TipoSeleccion areaMateriaPrima;
-        public enumAUD_TipoSeleccion AreaMateriaPrima { get => areaMateriaPrima; set => SetProperty(ref areaMateriaPrima, value); }
-
-        // Observaciones
-        private string areaMateriaPrimaDesc;
-        [StringLength(500)]
-        public string AreaMateriaPrimaDesc { get => areaMateriaPrimaDesc; set => SetProperty(ref areaMateriaPrimaDesc, value); }
-
         //Material Acondicionamiento
         private enumAUD_TipoSeleccion areaMaterialAcondicionado;
         public enumAUD_TipoSeleccion AreaMaterialAcondicionado { get => areaMaterialAcondicionado; set => SetProperty(ref areaMaterialAcondicionado, value); }
@@ -510,15 +535,6 @@ namespace DataModel
         private string areaMaterialAcondicionadoDesc;
         [StringLength(500)]
         public string AreaMaterialAcondicionadoDesc { get => areaMaterialAcondicionadoDesc; set => SetProperty(ref areaMaterialAcondicionadoDesc, value); }
-
-        //Productos Terminados
-        private enumAUD_TipoSeleccion areaProductoTerminado;
-        public enumAUD_TipoSeleccion AreaProductoTerminado { get => areaProductoTerminado; set => SetProperty(ref areaProductoTerminado, value); }
-
-        // Observaciones
-        private string areaProductoTerminadoDesc;
-        [StringLength(500)]
-        public string AreaProductoTerminadoDesc { get => areaProductoTerminadoDesc; set => SetProperty(ref areaProductoTerminadoDesc, value); }
 
 
         // Capacidad suficiente para permitir el almacenamiento ordenado de los productos y que facilite el manejo y circulación en el área   
@@ -683,4 +699,79 @@ namespace DataModel
         public string AlmacenLibrePolvoDesc { get => almacenLibrePolvoDesc; set => SetProperty(ref almacenLibrePolvoDesc, value); }
 
     }
+
+    public class AUD_AlmacenAreas : SystemId
+    {
+        //Están debidamente identificadas
+        private enumAUD_TipoSeleccion identificada;
+        public enumAUD_TipoSeleccion Identificada { get => identificada; set => SetProperty(ref identificada, value); }
+
+        //Los pisos, paredes, techos de los almacenes están construidos de tal forma que no afectan la calidad de los materiales y productos que se almacenan y permite la fácil limpieza
+        private enumAUD_TipoSeleccion pisoParedesTechosCalidad;
+        public enumAUD_TipoSeleccion PisoParedesTechosCalidad { get => pisoParedesTechosCalidad; set => SetProperty(ref pisoParedesTechosCalidad, value); }
+
+        //Tienen las áreas de almacenamiento suficiente capacidad para permitir el almacenamiento ordenado de las diferentes categorías de materiales y productos?
+        private enumAUD_TipoSeleccion capacidadSuficiente;
+        public enumAUD_TipoSeleccion CapacidadSuficiente { get => capacidadSuficiente; set => SetProperty(ref capacidadSuficiente, value); }
+
+        //Las instalaciones eléctricas están diseñadas y ubicadas de tal forma que facilitan la limpieza?
+        private enumAUD_TipoSeleccion instElectFacilitaLimpieza;
+        public enumAUD_TipoSeleccion InstElectFacilitaLimpieza { get => instElectFacilitaLimpieza; set => SetProperty(ref instElectFacilitaLimpieza, value); }
+
+        //Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?
+        private enumAUD_TipoSeleccion instrumentoMedHumTemp;
+        public enumAUD_TipoSeleccion InstrumentoMedHumTemp { get => instrumentoMedHumTemp; set => SetProperty(ref instrumentoMedHumTemp, value); }
+
+        //Para las materias primas y productos que requieren condiciones especiales de enfriamiento, existe cámara fría?
+        private enumAUD_TipoSeleccion existeCamaraFria;
+        public enumAUD_TipoSeleccion ExisteCamaraFria { get => existeCamaraFria; set => SetProperty(ref existeCamaraFria, value); }
+
+        //Están protegidas de las condiciones ambientales las áreas de recepción y despacho
+        private enumAUD_TipoSeleccion protegidaCondiAmbientales;
+        public enumAUD_TipoSeleccion ProtegidaCondiAmbientales { get => protegidaCondiAmbientales; set => SetProperty(ref protegidaCondiAmbientales, value); }
+
+        //Existe un área de despacho de producto terminado? 
+        private enumAUD_TipoSeleccion existeAreaDespachoProd;
+        public enumAUD_TipoSeleccion ExisteAreaDespachoProd { get => existeAreaDespachoProd; set => SetProperty(ref existeAreaDespachoProd, value); }
+
+        //Las áreas donde se almacenan materiales y productos sometidos a cuarentena están claramente definidas y marcadas, el acceso a las mismas está limitado sólo al personal autorizado? 
+        private enumAUD_TipoSeleccion areaCuarentenaDefinida;
+        public enumAUD_TipoSeleccion AreaCuarentenaDefinida { get => areaCuarentenaDefinida; set => SetProperty(ref areaCuarentenaDefinida, value); }
+
+        //El muestreo de materia prima se efectúa en área separada o en el área de pesaje o dispensado? 
+        private enumAUD_TipoSeleccion muestreoMateriaPrima;
+        public enumAUD_TipoSeleccion MuestreoMateriaPrima { get => muestreoMateriaPrima; set => SetProperty(ref muestreoMateriaPrima, value); }
+
+        //Se utilizan materias primas psicotrópicas o estupefacientes? 
+        private enumAUD_TipoSeleccion materiaPrimaPsicotropica;
+        public enumAUD_TipoSeleccion MateriaPrimaPsicotropica { get => materiaPrimaPsicotropica; set => SetProperty(ref materiaPrimaPsicotropica, value); }
+
+        //Existen áreas separadas, bajo llave, de acceso restringido e identificadas para almacenar materias primas y productos psicotrópicos y estupefacientes
+        private enumAUD_TipoSeleccion areaBajoLlaveStupefacientes;
+        public enumAUD_TipoSeleccion AreaBajoLlaveStupefacientes { get => areaBajoLlaveStupefacientes; set => SetProperty(ref areaBajoLlaveStupefacientes, value); }
+
+        //Cuenta el laboratorio con áreas de almacenamiento separadas para productos rechazados, retirados y devueltos? 
+        private enumAUD_TipoSeleccion areaProdRechazados;
+        public enumAUD_TipoSeleccion AreaProdRechazados { get => areaProdRechazados; set => SetProperty(ref areaProdRechazados, value); }
+
+        //Tienen estas áreas acceso restringido y bajo llave?
+        private enumAUD_TipoSeleccion areaProdRechazadosRestring;
+        public enumAUD_TipoSeleccion AreaProdRechazadosRestring { get => areaProdRechazadosRestring; set => SetProperty(ref areaProdRechazadosRestring, value); }
+
+        //Existe un área separada y de acceso restringido para almacenar material impreso (etiquetas, estuches, insertos y envases impresos)?
+        private enumAUD_TipoSeleccion almacenMaterialImpreso;
+        public enumAUD_TipoSeleccion AlmacenMaterialImpreso { get => almacenMaterialImpreso; set => SetProperty(ref almacenMaterialImpreso, value); }
+
+        //Está identificada?
+        private enumAUD_TipoSeleccion almacenMaterialImpresoIdentif;
+        public enumAUD_TipoSeleccion AlmacenMaterialImpresoIdentif { get => almacenMaterialImpresoIdentif; set => SetProperty(ref almacenMaterialImpresoIdentif, value); }
+
+        //Existe un área para almacenamiento de productos inflamables y explosivos alejada de las otras instalaciones, es ventilada y cuenta con medidas de seguridad contra incendios o explosiones según la legislación nacional?
+        private enumAUD_TipoSeleccion almacenProdInflamables;
+        public enumAUD_TipoSeleccion AlmacenProdInflamables { get => almacenProdInflamables; set => SetProperty(ref almacenProdInflamables, value); }
+
+    }
+
+    
+
 }

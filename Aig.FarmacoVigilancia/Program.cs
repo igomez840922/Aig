@@ -4,13 +4,17 @@ using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using BlazorDownloadFile;
 using Blazored.LocalStorage;
-using DataAccess.FarmacoVigilancia;
+using DataAccess;
 using DataModel;
+using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Radzen.Blazor;
+using System.Globalization;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -105,6 +109,9 @@ builder.Services.AddScoped<IFFService, FFService>();
 builder.Services.AddScoped<IFTService, FTService>();
 builder.Services.AddScoped<IESAVIService, ESAVIService>();
 builder.Services.AddScoped<ITipoInstitucionService, TipoInstitucionService>();
+builder.Services.AddScoped<ISocService, SocService>();
+builder.Services.AddScoped<IIntensidadEsaviService, IntensidadEsaviService>();
+builder.Services.AddScoped<ITipoVacunaService, TipoVacunaService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
@@ -132,10 +139,13 @@ app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-//Save initial data...
-Aig.FarmacoVigilancia.Helper.SeedData.UpdateMigrations(app.Services).Wait();
-Aig.FarmacoVigilancia.Helper.SeedData.SeedRoles(app.Services).Wait();
-Aig.FarmacoVigilancia.Helper.SeedData.SeedUsers(app.Services).Wait();
-Aig.FarmacoVigilancia.Helper.SeedData.SeedFirstData(app.Services).Wait();
+
+//Check and Save initial data...
+Aig.FarmacoVigilancia.Helper.SeedData.SeedAll(app.Services);
+
+//cultura en español
+CultureInfo.CurrentCulture = new CultureInfo("es");
+CultureInfo.CurrentUICulture = new CultureInfo("es");
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es");
 
 app.Run();

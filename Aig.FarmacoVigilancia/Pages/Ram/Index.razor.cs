@@ -21,7 +21,7 @@ namespace Aig.FarmacoVigilancia.Pages.Ram
         IWorkerPersonService workerPersonService { get; set; }
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
-        List<PersonalTrabajadorTB> lPersons { get; set; }
+        List<PersonalTrabajadorTB> lPersons { get; set; } = new List<PersonalTrabajadorTB>();
         GenericModel<FMV_RamTB> dataModel { get; set; } = new GenericModel<FMV_RamTB>()
         { Data = new FMV_RamTB() };
 

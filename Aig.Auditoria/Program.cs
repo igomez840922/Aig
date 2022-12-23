@@ -5,16 +5,24 @@ using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using BlazorDownloadFile;
 using Blazored.LocalStorage;
-using DataAccess.Auditoria;
+using DataAccess;
 using DataModel;
+using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Radzen.Blazor;
 using System.Collections.Concurrent;
+using System.Configuration;
+using System.Globalization;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 ///
@@ -44,14 +52,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
 
+////For Localstorage
+//builder.Services.AddScoped<IProfileService, ProfileService>();
+//builder.Services.AddBlazoredLocalStorage();
+
 //For API CONTROLLERS
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
-
-////For Localstorage
-//builder.Services.AddScoped<IProfileService, ProfileService>();
-//builder.Services.AddBlazoredLocalStorage();
 
 //For Components Comunucations Pul-Sub
 builder.Services.AddScoped<ComponentBus>();
@@ -101,6 +109,26 @@ builder.Services.AddScoped<IProductoEstablecimientoService, ProductoEstablecimie
 builder.Services.AddScoped<IActividadEstablecimientoService, ActividadEstablecimientoService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
+////Connection Configurations
+//builder.Services.AddServerSideBlazor(options =>
+//{
+//    options.DetailedErrors = true;
+//    options.DisconnectedCircuitMaxRetained = 100;
+//    options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);
+//    options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
+//    options.MaxBufferedUnacknowledgedRenderBatches = 10;
+//})
+//    .AddHubOptions(options =>
+//    {
+//        options.ClientTimeoutInterval = TimeSpan.FromSeconds(60);
+//        options.EnableDetailedErrors = true;
+//        options.HandshakeTimeout = TimeSpan.FromSeconds(10);
+//        options.KeepAliveInterval = TimeSpan.FromSeconds(10);
+//        options.MaximumParallelInvocationsPerClient = 1;
+//        options.MaximumReceiveMessageSize = 32 * 1024;
+//        options.StreamBufferCapacity = 10;
+//    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -115,11 +143,6 @@ else
     app.UseHsts();
 }
 
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapBlazorHub(options => options.WebSockets.CloseTimeout = new TimeSpan(0, 30, 0));
-//});
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -131,10 +154,14 @@ app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-//Save initial data...
-Aig.Auditoria.Helper.SeedData.UpdateMigrations(app.Services).Wait();
-Aig.Auditoria.Helper.SeedData.SeedRoles(app.Services).Wait();
-Aig.Auditoria.Helper.SeedData.SeedUsers(app.Services).Wait();
-Aig.Auditoria.Helper.SeedData.SeedFirstData(app.Services).Wait();
+app.UseWebSockets();
+
+//Check and Save initial data...
+Aig.Auditoria.Helper.SeedData.SeedAll(app.Services);
+
+//cultura en español
+CultureInfo.CurrentCulture = new CultureInfo("es");
+CultureInfo.CurrentUICulture = new CultureInfo("es");
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es");
 
 app.Run();

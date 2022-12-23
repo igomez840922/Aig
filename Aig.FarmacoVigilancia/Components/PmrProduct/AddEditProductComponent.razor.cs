@@ -13,7 +13,7 @@ namespace Aig.FarmacoVigilancia.Components.PmrProduct
         IProfileService profileService { get; set; }
         [Inject]
         ILabsService labsService { get; set; }
-        List<LaboratorioTB> lLaboratorio { get; set; }
+        List<LaboratorioTB> lLaboratorio { get; set; } = new List<LaboratorioTB>(); 
 
         [Parameter]
         public DataModel.FMV_PmrProductoTB Product { get; set; } = null;

@@ -1,6 +1,7 @@
 ﻿using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
+using DataModel;
 using Microsoft.AspNetCore.Components;
 
 namespace Aig.FarmacoVigilancia.Components.ESAVI
@@ -9,9 +10,25 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
     {
         [Inject]
         IProfileService profileService { get; set; }
+        
 
         [Parameter]
         public DataModel.FMV_EsaviNotificacionTB Notification { get; set; } = null;
+
+        [Inject]
+        ISocService socService { get; set; }
+        List<FMV_SocTB> lSoc { get; set; } = new List<FMV_SocTB>();
+
+        [Inject]
+        IIntensidadEsaviService intensidadEsaviService { get; set; }
+        List<IntensidadEsaviTB> lintensidad { get; set; } = new List<IntensidadEsaviTB>();
+        [Inject]
+        ITipoVacunaService tipoVacunaService { get; set; }
+        List<TipoVacunaTB> ltipoVacuna { get; set; } = new List<TipoVacunaTB>();
+        [Inject]
+        ILabsService labsService { get; set; }
+        List<LaboratorioTB> lLaboratorios { get; set; } = new List<LaboratorioTB>();
+
 
         protected async override Task OnInitializedAsync()
         {
@@ -46,6 +63,11 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
         //Fill Data
         protected async Task FetchData()
         {
+            lSoc = lSoc != null && lSoc.Count > 0 ? lSoc : await socService.GetAll();
+
+            lintensidad = lintensidad != null && lintensidad.Count > 0 ? lintensidad : await intensidadEsaviService.GetAll();
+            ltipoVacuna = ltipoVacuna != null && ltipoVacuna.Count > 0? ltipoVacuna :await tipoVacunaService.GetAll();
+            lLaboratorios = lLaboratorios!=null && lLaboratorios.Count > 0 ? lLaboratorios :await labsService.GetAll();
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -67,6 +89,38 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
             await this.InvokeAsync(StateHasChanged);
         }
 
+        protected async Task OnSocChange(long? Id)
+        {
+            var soc = lSoc.Where(x => x.Id == Id).FirstOrDefault();
+
+            Notification.Soc = soc?.Nombre ?? "";
+
+            //await FetchData();
+        }
+        protected async Task OnIntensidadChange(long? Id)
+        {
+            var dat = lintensidad.Where(x => x.Id == Id).FirstOrDefault();
+
+            Notification.IntensidadEsavi = dat;
+
+            //await FetchData();
+        }
+        protected async Task OnTipoVacunaChange(long? Id)
+        {
+            var dat = ltipoVacuna.Where(x => x.Id == Id).FirstOrDefault();
+
+            Notification.TipoVacuna = dat;
+
+            //await FetchData();
+        }
+        protected async Task OnLaboratorioChange(long? Id)
+        {
+            var dat = lLaboratorios.Where(x => x.Id == Id).FirstOrDefault();
+
+            Notification.Laboratorio = dat;
+
+            //await FetchData();
+        }
     }
 
 }

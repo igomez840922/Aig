@@ -50,7 +50,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.FechaEsavi" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Notification.FechaEsavi" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Notification.FechaEsavi) />
                                             </div>
                                         </div>
@@ -92,21 +92,36 @@
                                             @languageContainerService.Keys["SOC"]
                                         </label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Notification.SOC" class="form-control">
+                                            @*<InputSelect @bind-Value="Notification.SOC" class="form-control">
                                                 @foreach (enumFMV_EsaviSOC dt in Enum.GetValues(typeof(enumFMV_EsaviSOC)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Notification.SOC) />
+                                            <ValidationMessage For=@(() => Notification.SOC) />*@
+                                            <div class="form-line">
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Notification.SocId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@lSoc TextProperty="Nombre" ValueProperty="Id"
+                                                                Change=@(args => {OnSocChange((args!=null?(long)args:null));}) />
+
+                                                <ValidationMessage For=@(() => Notification.SocId) />
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Intensidad de la ESAVI"]</label>
                                         <div class="form-group">
-                                            <div class="form-line">
+                                            @*<div class="form-line">
                                                 <InputText class="form-control" @bind-Value="Notification.Intensidad" />
                                                 <ValidationMessage For=@(() => Notification.Intensidad) />
+                                            </div>*@
+                                            <div class="form-line">
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Notification.IntensidadEsaviId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@lintensidad TextProperty="FullName" ValueProperty="Id"
+                                                                Change=@(args => {OnIntensidadChange((args!=null?(long)args:null));}) />
+                                                <ValidationMessage For=@(() => Notification.IntensidadEsaviId) />
                                             </div>
                                         </div>
                                     </div>
@@ -190,11 +205,34 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-8">
-                                        <label>@languageContainerService.Keys["Descripción de Vacuna"]</label>
+                                        <label>@languageContainerService.Keys["Tipo de Vacuna"]</label>
                                         <div class="form-group">
-                                            <div class="form-line">
+                                           @* <div class="form-line">
                                                 <InputText class="form-control" @bind-Value="Notification.DescripVacuna" />
                                                 <ValidationMessage For=@(() => Notification.DescripVacuna) />
+                                            </div>*@
+                                            <div class="form-line">
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Notification.TipoVacunaId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@ltipoVacuna TextProperty="Nombre" ValueProperty="Id"
+                                                                Change=@(args => {OnTipoVacunaChange((args!=null?(long)args:null));}) />
+                                                <ValidationMessage For=@(() => Notification.TipoVacunaId) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Fabricante"]</label>
+                                        <div class="form-group">
+                                            @* <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Notification.DescripVacuna" />
+                                        <ValidationMessage For=@(() => Notification.DescripVacuna) />
+                                        </div>*@
+                                            <div class="form-line">
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Notification.LaboratorioId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@lLaboratorios TextProperty="Nombre" ValueProperty="Id"
+                                                                Change=@(args => {OnLaboratorioChange((args!=null?(long)args:null));}) />
+                                                <ValidationMessage For=@(() => Notification.LaboratorioId) />
                                             </div>
                                         </div>
                                     </div>
@@ -213,7 +251,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.FechaExp" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Notification.FechaExp" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Notification.FechaExp) />
                                             </div>
                                         </div>
@@ -233,7 +271,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Notification.FechaVacunacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Notification.FechaVacunacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Notification.FechaVacunacion) />
                                             </div>
                                         </div>

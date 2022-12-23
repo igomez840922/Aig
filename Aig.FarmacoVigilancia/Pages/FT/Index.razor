@@ -23,7 +23,7 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                @languageContainerService.Keys["FF"]
+                                @languageContainerService.Keys["FT"]
                             </h3>
                         </div>
                         <div class="kt-portlet__head-toolbar">
@@ -61,14 +61,14 @@
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["From"] @languageContainerService.Keys["EntryDate"]</label>
                                                 <div class="form-line">
-                                                    <InputDate class="form-control" @bind-Value="dataModel.FromDate" @bind-Value:format="dd/MM/yyyy" @oninput="(e)=>{ try{dataModel.FromDate = DateTime.Parse((string)e.Value);}catch{dataModel.FromDate =null;} OnFilter();}" />
+                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                     <ValidationMessage For=@(() => dataModel.FromDate) />
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <label>@languageContainerService.Keys["To"] @languageContainerService.Keys["EntryDate"]</label>
                                                 <div class="form-line">
-                                                    <InputDate class="form-control" @bind-Value="dataModel.ToDate" @bind-Value:format="dd/MM/yyyy" @oninput="(e)=>{ try{dataModel.ToDate = DateTime.Parse((string)e.Value);}catch{dataModel.ToDate =null;} OnFilter();}" />
+                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                     <ValidationMessage For=@(() => dataModel.ToDate) />
                                                 </div>
                                             </div>
@@ -129,6 +129,10 @@
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                                         <div class="dropdown-menu">
+                                                                            @if (dt.Adjunto?.LAttachments?.Count > 0)
+                                                                            {
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => DownloadPdf(dt.Id)"><i class="fa fa-file-pdf"></i>@languageContainerService.Keys["Download"]</a>
+                                                                            }
                                                                             <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
                                                                             <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
                                                                         </div>

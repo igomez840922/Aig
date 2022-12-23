@@ -1,0 +1,378 @@
+[
+  {
+    "ATC2doNivel": "A01",
+    "Subgrupo": "Preparados estomatológicos"
+  },
+  {
+    "ATC2doNivel": "A02",
+    "Subgrupo": "Agentes para el tratamiento de alteraciones causadas por ácidos"
+  },
+  {
+    "ATC2doNivel": "A03",
+    "Subgrupo": "Agentes contra padecimientos funcionales gastrointestinales"
+  },
+  {
+    "ATC2doNivel": "A04",
+    "Subgrupo": "Antieméticos y antinauseosos"
+  },
+  {
+    "ATC2doNivel": "A05",
+    "Subgrupo": "Terapia biliar y hepática"
+  },
+  {
+    "ATC2doNivel": "A06",
+    "Subgrupo": "Medicamentos para el estreñimiento"
+  },
+  {
+    "ATC2doNivel": "A07",
+    "Subgrupo": "Antidiarreicos, agentes antiinflamatorios/antiinfecciosos  intestinales"
+  },
+  {
+    "ATC2doNivel": "A08",
+    "Subgrupo": "Preparados contra la obesidad, excluidos productos  dietéticos"
+  },
+  {
+    "ATC2doNivel": "A09",
+    "Subgrupo": "Digestivos, incluido enzimas"
+  },
+  {
+    "ATC2doNivel": "A10",
+    "Subgrupo": "Medicamentos usados en diabetes"
+  },
+  {
+    "ATC2doNivel": "A11",
+    "Subgrupo": "Vitaminas"
+  },
+  {
+    "ATC2doNivel": "A12",
+    "Subgrupo": "Suplementos minerales"
+  },
+  {
+    "ATC2doNivel": "A13",
+    "Subgrupo": "Tónicos"
+  },
+  {
+    "ATC2doNivel": "A14",
+    "Subgrupo": "Agentes anabólicos para uso sistémicos"
+  },
+  {
+    "ATC2doNivel": "A15",
+    "Subgrupo": "Estimulantes del apetito"
+  },
+  {
+    "ATC2doNivel": "A16",
+    "Subgrupo": "Otros productos para el tracto alimentario y metabolismo"
+  },
+  {
+    "ATC2doNivel": "B01",
+    "Subgrupo": "Agentes antitrombóticos"
+  },
+  {
+    "ATC2doNivel": "B02",
+    "Subgrupo": "Antihemorrágicos"
+  },
+  {
+    "ATC2doNivel": "B03",
+    "Subgrupo": "Preparaciones antianémicas"
+  },
+  {
+    "ATC2doNivel": "B05",
+    "Subgrupo": "Sustitutos de sangre y soluciones de perfusión"
+  },
+  {
+    "ATC2doNivel": "B06",
+    "Subgrupo": "Otros agentes hematológicos"
+  },
+  {
+    "ATC2doNivel": "C01",
+    "Subgrupo": "Terapia Cardiaca"
+  },
+  {
+    "ATC2doNivel": "C02",
+    "Subgrupo": "Antihipertensivos"
+  },
+  {
+    "ATC2doNivel": "C03",
+    "Subgrupo": "Diuréticos"
+  },
+  {
+    "ATC2doNivel": "C04",
+    "Subgrupo": "Vasodilatadores periféricos"
+  },
+  {
+    "ATC2doNivel": "C05",
+    "Subgrupo": "Vasoprotectores"
+  },
+  {
+    "ATC2doNivel": "C07",
+    "Subgrupo": "Agentes beta-bloqueantes"
+  },
+  {
+    "ATC2doNivel": "C08",
+    "Subgrupo": "Bloqueantes de canales de calcio"
+  },
+  {
+    "ATC2doNivel": "C09",
+    "Subgrupo": "Agentes que actúan sobre el sistema renina-angiotensina"
+  },
+  {
+    "ATC2doNivel": "C10",
+    "Subgrupo": "Agentes modificadores de los lípidos"
+  },
+  {
+    "ATC2doNivel": "D01",
+    "Subgrupo": "Antifúngicos para uso dermatológico"
+  },
+  {
+    "ATC2doNivel": "D02",
+    "Subgrupo": "Emolientes y protectores"
+  },
+  {
+    "ATC2doNivel": "D03",
+    "Subgrupo": "Preparados para el tratamiento de heridas y úlceras"
+  },
+  {
+    "ATC2doNivel": "D04",
+    "Subgrupo": "Antipruríticos, incluidos antihistamínicoss, anestésicos, etc."
+  },
+  {
+    "ATC2doNivel": "D05",
+    "Subgrupo": "Antipsoriáticos"
+  },
+  {
+    "ATC2doNivel": "D06",
+    "Subgrupo": "Antibióticos y quimioterápicos para uso dermatológico"
+  },
+  {
+    "ATC2doNivel": "D07",
+    "Subgrupo": "Preparados dermatológicos con corticosteroides"
+  },
+  {
+    "ATC2doNivel": "D08",
+    "Subgrupo": "Antisépticos y desinfectantes"
+  },
+  {
+    "ATC2doNivel": "D09",
+    "Subgrupo": "Apósitos con medicamentos"
+  },
+  {
+    "ATC2doNivel": "D10",
+    "Subgrupo": "Preparaciones anti-acné"
+  },
+  {
+    "ATC2doNivel": "D11",
+    "Subgrupo": "Otros preparados dermatológicos"
+  },
+  {
+    "ATC2doNivel": "G01",
+    "Subgrupo": "Antiinfecciosos y antisépticos ginecológicos"
+  },
+  {
+    "ATC2doNivel": "G02",
+    "Subgrupo": "Otros ginecológicos"
+  },
+  {
+    "ATC2doNivel": "G03",
+    "Subgrupo": "Hormonas sexuales y moduladores del sistema genital"
+  },
+  {
+    "ATC2doNivel": "G04",
+    "Subgrupo": "Urológicos"
+  },
+  {
+    "ATC2doNivel": "H01",
+    "Subgrupo": "Hormonas hipofisiarias e hipotalámicas y  sus análogos"
+  },
+  {
+    "ATC2doNivel": "H02",
+    "Subgrupo": "Corticosteroides para uso sistémico"
+  },
+  {
+    "ATC2doNivel": "H03",
+    "Subgrupo": "Terapia tiroidea"
+  },
+  {
+    "ATC2doNivel": "H04",
+    "Subgrupo": "Hormonas pancreáticas"
+  },
+  {
+    "ATC2doNivel": "H05",
+    "Subgrupo": "Homeostasis del calcio"
+  },
+  {
+    "ATC2doNivel": "J01",
+    "Subgrupo": "Antibacterianos para uso sistémico"
+  },
+  {
+    "ATC2doNivel": "J02",
+    "Subgrupo": "Antimicóticos de uso sistémico"
+  },
+  {
+    "ATC2doNivel": "J04",
+    "Subgrupo": "Antimicobacterianos"
+  },
+  {
+    "ATC2doNivel": "J05",
+    "Subgrupo": "Antivirales para uso sistémico"
+  },
+  {
+    "ATC2doNivel": "J06",
+    "Subgrupo": "Sueros inmunes e inmunoglobulinas"
+  },
+  {
+    "ATC2doNivel": "J07",
+    "Subgrupo": "Vacunas"
+  },
+  {
+    "ATC2doNivel": "L01",
+    "Subgrupo": "Agentes antineoplásicos"
+  },
+  {
+    "ATC2doNivel": "L02",
+    "Subgrupo": "Terapia endocrina"
+  },
+  {
+    "ATC2doNivel": "L03",
+    "Subgrupo": "Inmunoestimulantes"
+  },
+  {
+    "ATC2doNivel": "L04",
+    "Subgrupo": "Inmunosupresores"
+  },
+  {
+    "ATC2doNivel": "M01",
+    "Subgrupo": "Productos antiinflamatorios y antirreumáticos"
+  },
+  {
+    "ATC2doNivel": "M02",
+    "Subgrupo": "Productos tópicos para el dolor articular y muscular"
+  },
+  {
+    "ATC2doNivel": "M03",
+    "Subgrupo": "Relajantes musculares"
+  },
+  {
+    "ATC2doNivel": "M04",
+    "Subgrupo": "Preparados antigotosos"
+  },
+  {
+    "ATC2doNivel": "M05",
+    "Subgrupo": "Medicamentos para el tratamiento de enfermedades óseas"
+  },
+  {
+    "ATC2doNivel": "M09",
+    "Subgrupo": "Otros medicamentos para trastornos del sistema músculo-esquelético"
+  },
+  {
+    "ATC2doNivel": "N01",
+    "Subgrupo": "Anestésicos"
+  },
+  {
+    "ATC2doNivel": "N02",
+    "Subgrupo": "Analgésicos"
+  },
+  {
+    "ATC2doNivel": "N03",
+    "Subgrupo": "Antiepilépticos"
+  },
+  {
+    "ATC2doNivel": "N04",
+    "Subgrupo": "Medicamentos para el Parkinson"
+  },
+  {
+    "ATC2doNivel": "N05",
+    "Subgrupo": "Psicolépticos"
+  },
+  {
+    "ATC2doNivel": "N06",
+    "Subgrupo": "Psicoanalépticos"
+  },
+  {
+    "ATC2doNivel": "N07",
+    "Subgrupo": "Otros medicamentos que actúan sobre el sistema nervioso"
+  },
+  {
+    "ATC2doNivel": "P01",
+    "Subgrupo": "Antiprotozoarios"
+  },
+  {
+    "ATC2doNivel": "P02",
+    "Subgrupo": "Antihelmínticos"
+  },
+  {
+    "ATC2doNivel": "P03",
+    "Subgrupo": "Ectoparasiticidas, incluidos escabicidas, insecticidas y repelentes"
+  },
+  {
+    "ATC2doNivel": "R01",
+    "Subgrupo": "Preparaciones para uso nasal"
+  },
+  {
+    "ATC2doNivel": "R02",
+    "Subgrupo": "Preparados para la garganta"
+  },
+  {
+    "ATC2doNivel": "R03",
+    "Subgrupo": "Medicamentos para enfermedades obstructivas de las vías respiratorias"
+  },
+  {
+    "ATC2doNivel": "R05",
+    "Subgrupo": "Preparados para la tos y el resfriado"
+  },
+  {
+    "ATC2doNivel": "R06",
+    "Subgrupo": "Antihistamínicos para uso sistémico"
+  },
+  {
+    "ATC2doNivel": "R07",
+    "Subgrupo": "Otros productos para el sistema respiratorio"
+  },
+  {
+    "ATC2doNivel": "S01",
+    "Subgrupo": "Oftalmológicos"
+  },
+  {
+    "ATC2doNivel": "S02",
+    "Subgrupo": "Otológicos"
+  },
+  {
+    "ATC2doNivel": "S03",
+    "Subgrupo": "Preparaciones oftalmológicas y otológicas"
+  },
+  {
+    "ATC2doNivel": "V01",
+    "Subgrupo": "Alergenos"
+  },
+  {
+    "ATC2doNivel": "V03",
+    "Subgrupo": "Todos las otros productos terapéuticos"
+  },
+  {
+    "ATC2doNivel": "V04",
+    "Subgrupo": "Agentes diagnósticos"
+  },
+  {
+    "ATC2doNivel": "V06",
+    "Subgrupo": "Nutrientes generales"
+  },
+  {
+    "ATC2doNivel": "V07",
+    "Subgrupo": "Todos los otros productos no terapéuticos"
+  },
+  {
+    "ATC2doNivel": "V08",
+    "Subgrupo": "Medios de contraste"
+  },
+  {
+    "ATC2doNivel": "V09",
+    "Subgrupo": "Radiofármacos para diagnóstico"
+  },
+  {
+    "ATC2doNivel": "V10",
+    "Subgrupo": "Radiofármacos terapéuticos"
+  },
+  {
+    "ATC2doNivel": "V20",
+    "Subgrupo": "Vendajes quirúrgicos"
+  }
+]

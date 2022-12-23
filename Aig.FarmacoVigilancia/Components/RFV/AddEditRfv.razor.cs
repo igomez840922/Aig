@@ -1,6 +1,7 @@
 ﻿using Aig.FarmacoVigilancia.Events.IPS;
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.PMR;
+using Aig.FarmacoVigilancia.Pages.Alert;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
@@ -20,7 +21,11 @@ namespace Aig.FarmacoVigilancia.Components.RFV
         ILabsService labsService { get; set; }
         [Parameter]
         public DataModel.FMV_RfvTB Rfv { get; set; }
-        List<LaboratorioTB> Labs { get; set; }
+        List<LaboratorioTB> Labs { get; set; } = new List<LaboratorioTB>();
+
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
+
 
         protected async override Task OnInitializedAsync()
         {
@@ -91,6 +96,49 @@ namespace Aig.FarmacoVigilancia.Components.RFV
             await this.InvokeAsync(StateHasChanged);
         }
 
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+
+                Rfv.Adjunto.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Rfv.Adjunto = Rfv.Adjunto != null ? Rfv.Adjunto : new AttachmentData();
+                Rfv.Adjunto.LAttachments = Rfv.Adjunto.LAttachments != null ? Rfv.Adjunto.LAttachments : new List<AttachmentTB>();
+                Rfv.Adjunto.LAttachments.Add(message.Attachment);
+            }
+            this.InvokeAsync(StateHasChanged);
+        }
     }
 
 }

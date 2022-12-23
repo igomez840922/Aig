@@ -9,5 +9,6 @@ namespace Aig.FarmacoVigilancia.Services
         Task<Stream> GenerateRetentionReceptionPDF(long InspectionId);
         Task<Stream> GenerateNotePDF(long IdNote);
         Task<Stream> GenerateAlertPDF(long IdAlert);
+        Task<Stream> GetStreamsFromFile(string filePath);
     }
 }

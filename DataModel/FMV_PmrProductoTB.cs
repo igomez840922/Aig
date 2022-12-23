@@ -9,8 +9,6 @@ namespace DataModel
 {
     public class FMV_PmrProductoTB:SystemId
     {
-        private long pmrId;
-        public long PmrId { get => pmrId; set => SetProperty(ref pmrId, value); }
         private FMV_PmrTB pmr;
         public virtual FMV_PmrTB Pmr { get => pmr; set => SetProperty(ref pmr, value); }
 

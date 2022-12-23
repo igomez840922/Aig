@@ -37,8 +37,6 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <RadzenDatePicker TValue="DateTime" @bind-Value="Inspeccion.FechaInicio" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
-                                            @*<InputDate class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion) />*@
                                         </div>
                                     </div>                                    
                                 </div>
@@ -127,8 +125,8 @@
                                     <label>@languageContainerService.Keys["NoticeOperation"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputText class="form-control" @bind-Value="Inspeccion.AvisoOperación" />
-                                            <ValidationMessage For=@(() => Inspeccion.AvisoOperación) />
+                                            <InputText class="form-control" @bind-Value="Inspeccion.AvisoOperacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.AvisoOperacion) />
                                         </div>
                                     </div>
                                 </div>
@@ -431,8 +429,6 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspRetiroRetencion.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
-                                            @*<InputDate class="form-control" @bind-Value="Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion" />
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion) />*@
                                         </div>
                                     </div>
                                 </div>
@@ -595,11 +591,12 @@
                     <br><br>
                     <div class="modal-footer">
 
-                        @if (StatusInspecciones == enum_StatusInspecciones.Pending){
-                        <button type="submit"
-                                class="btn btn-info waves-effect">
-                            @languageContainerService.Keys["Save"]
-                        </button>
+                        @if (StatusInspecciones == enum_StatusInspecciones.Pending)
+                        {
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
                         }
                         
                         <button type="button" class="btn btn-danger waves-effect"

@@ -1,4 +1,4 @@
-﻿using DataAccess.FarmacoVigilancia;
+﻿using DataAccess;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +6,7 @@ using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using BlazorDownloadFile;
+using System.Linq.Expressions;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -15,6 +16,18 @@ namespace Aig.FarmacoVigilancia.Services
         public NoteService(IDalService dalService)
         {
             DalService = dalService;
+        }
+
+        public async Task<List<FMV_NotaTB>> FindAll(Expression<Func<FMV_NotaTB, bool>> match)
+        {
+            try
+            {
+                return DalService.FindAll(match);
+            }
+            catch (Exception ex)
+            { }
+
+            return null;
         }
 
         public async Task<GenericModel<FMV_NotaTB>> FindAll(GenericModel<FMV_NotaTB> model)
@@ -112,6 +125,12 @@ namespace Aig.FarmacoVigilancia.Services
         public async Task<FMV_NotaTB> Save(FMV_NotaTB data)
         {
             var result = DalService.Save(data);
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.Adjunto).IsModified = true;
+                DalService.DBContext.Entry(result).Property(b => b.Instituciones).IsModified = true;
+                DalService.DBContext.SaveChanges();
+            }
             return result;           
         }
 

@@ -4,11 +4,12 @@ using BlazorComponentBus;
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Globalization;
 
 namespace Aig.FarmacoVigilancia.Components.ESAVI
 {
     public partial class AddEdit
-    {
+    {        
         [Inject]
         IESAVIService esaviService { get; set; }
         [Inject]
@@ -23,6 +24,18 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
         IProvicesService provicesService { get; set; }
         [Inject]
         IDestinyInstituteService destinyInstituteService { get; set; }
+        [Inject]
+        ISocService socService { get; set; }
+        List<FMV_SocTB> lSoc { get; set; } = new List<FMV_SocTB>();
+        [Inject]
+        IIntensidadEsaviService intensidadEsaviService { get; set; }
+        List<IntensidadEsaviTB> lintensidad { get; set; } = new List<IntensidadEsaviTB>();
+        [Inject]
+        ITipoVacunaService tipoVacunaService { get; set; }
+        List<TipoVacunaTB> ltipoVacuna { get; set; } = new List<TipoVacunaTB>();
+        [Inject]
+        ILabsService labsService { get; set; }
+        List<LaboratorioTB> lLaboratorios { get; set; } = new List<LaboratorioTB>();
 
         [Parameter]
         public DataModel.FMV_EsaviTB Data { get; set; }
@@ -71,6 +84,10 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
             lEvaluators = lEvaluators != null && lEvaluators.Count > 0 ? lEvaluators : await evaluatorService.GetAll();
             lTipoInstitucion = lTipoInstitucion!=null && lTipoInstitucion.Count > 0? lTipoInstitucion:await tipoInstitucionService.GetAll();
             lProvincias = lProvincias!=null && lProvincias.Count > 0? lProvincias: await provicesService.GetAll();
+            lSoc = lSoc != null && lSoc.Count > 0 ? lSoc : await socService.GetAll();
+            lintensidad = lintensidad != null && lintensidad.Count > 0 ? lintensidad : await intensidadEsaviService.GetAll();
+            ltipoVacuna = ltipoVacuna != null && ltipoVacuna.Count > 0 ? ltipoVacuna : await tipoVacunaService.GetAll();
+            lLaboratorios = lLaboratorios != null && lLaboratorios.Count > 0 ? lLaboratorios : await labsService.GetAll();
 
             lInstitucionDestino = await destinyInstituteService.FindAll(x => (Data.TipoInstitucionId != null ? x.TipoInstitucionId == Data.TipoInstitucionId : true) && (Data.ProvinciaId != null ? x.ProvinciaId == Data.ProvinciaId : true));
             await this.InvokeAsync(StateHasChanged);
@@ -79,6 +96,47 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
         //Save Data and Close
         protected async Task SaveData()
         {
+            //verificar CodigoCNFV
+            if (!string.IsNullOrEmpty(Data.CodCNFV))
+            {
+                var tmpData = (await esaviService.FindAll(x => x.CodCNFV.Contains(Data.CodCNFV) && x.Id != Data.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de CNFV ya existe"]);
+                    return;
+                }
+            }
+            //verificar Cod Externo
+            if (!string.IsNullOrEmpty(Data.CodExt))
+            {
+                var tmpData = (await esaviService.FindAll(x => x.CodExt.Contains(Data.CodExt) && x.Id != Data.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código Externo ya existe"]);
+                    return;
+                }
+            }
+            //verificar Cod Externo
+            if (!string.IsNullOrEmpty(Data.IdFacedra))
+            {
+                var tmpData = (await esaviService.FindAll(x => x.IdFacedra.Contains(Data.IdFacedra) && x.Id != Data.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El ID Facedra ya existe"]);
+                    return;
+                }
+            }
+            //verificar Cod Externo
+            if (!string.IsNullOrEmpty(Data.CodigoNotiFacedra))
+            {
+                var tmpData = (await esaviService.FindAll(x => x.CodigoNotiFacedra.Contains(Data.CodigoNotiFacedra) && x.Id != Data.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código Noti-Facedra ya existe"]);
+                    return;
+                }
+            }
+
             var result = await esaviService.Save(Data);
             if (result != null)
             {
@@ -98,44 +156,44 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
             await this.InvokeAsync(StateHasChanged);
         }
 
-        //Add New Product
-        protected async Task OpenProduct(FMV_EsaviNotificacionTB notificacion = null)
-        {
-            bus.Subscribe<Aig.FarmacoVigilancia.Events.ESAVINotification.AddEdit_CloseEvent>(Notification_AddEditCloseEventHandlerHandler);
+        ////Add New Product
+        //protected async Task OpenProduct(FMV_EsaviNotificacionTB notificacion = null)
+        //{
+        //    bus.Subscribe<Aig.FarmacoVigilancia.Events.ESAVINotification.AddEdit_CloseEvent>(Notification_AddEditCloseEventHandlerHandler);
 
-            Notificacion = notificacion != null ? notificacion : new FMV_EsaviNotificacionTB();
-            OpenAddEditNotification = true;
+        //    Notificacion = notificacion != null ? notificacion : new FMV_EsaviNotificacionTB();
+        //    OpenAddEditNotification = true;
 
-            await this.InvokeAsync(StateHasChanged);
-        }
-        //Remove Product
-        protected async Task RemoveProduct(FMV_EsaviNotificacionTB notificacion)
-        {
-            if (notificacion != null)
-            {
-                Data.LNotificaciones.Remove(notificacion);
-                this.InvokeAsync(StateHasChanged);
-            }
-        }
-        //ON CLOSE PRODUCT MODAL 
-        private void Notification_AddEditCloseEventHandlerHandler(MessageArgs args)
-        {
-            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.ESAVINotification.AddEdit_CloseEvent>(Notification_AddEditCloseEventHandlerHandler);
+        //    await this.InvokeAsync(StateHasChanged);
+        //}
+        ////Remove Product
+        //protected async Task RemoveProduct(FMV_EsaviNotificacionTB notificacion)
+        //{
+        //    if (notificacion != null)
+        //    {
+        //        Data.LNotificaciones.Remove(notificacion);
+        //        this.InvokeAsync(StateHasChanged);
+        //    }
+        //}
+        ////ON CLOSE PRODUCT MODAL 
+        //private void Notification_AddEditCloseEventHandlerHandler(MessageArgs args)
+        //{
+        //    bus.UnSubscribe<Aig.FarmacoVigilancia.Events.ESAVINotification.AddEdit_CloseEvent>(Notification_AddEditCloseEventHandlerHandler);
 
-            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.ESAVINotification.AddEdit_CloseEvent>();
+        //    var message = args.GetMessage<Aig.FarmacoVigilancia.Events.ESAVINotification.AddEdit_CloseEvent>();
 
-            Notificacion = null;
-            OpenAddEditNotification = false;
-            if (message.Data != null)
-            {
-                Data.LNotificaciones = Data.LNotificaciones != null ? Data.LNotificaciones : new List<FMV_EsaviNotificacionTB>();
+        //    Notificacion = null;
+        //    OpenAddEditNotification = false;
+        //    if (message.Data != null)
+        //    {
+        //        Data.LNotificaciones = Data.LNotificaciones != null ? Data.LNotificaciones : new List<FMV_EsaviNotificacionTB>();
 
-                if (!Data.LNotificaciones.Contains(message.Data))
-                    Data.LNotificaciones.Add(message.Data);
-            }
+        //        if (!Data.LNotificaciones.Contains(message.Data))
+        //            Data.LNotificaciones.Add(message.Data);
+        //    }
 
-            this.InvokeAsync(StateHasChanged);
-        }
+        //    this.InvokeAsync(StateHasChanged);
+        //}
 
         protected async Task OnEvaluatorChange(long? Id)
         {
@@ -157,7 +215,39 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
             await FetchData();
         }
 
-        
+        protected async Task OnSocChange(long? Id)
+        {
+            var soc = lSoc.Where(x => x.Id == Id).FirstOrDefault();
+
+            Data.Soc = soc?.Nombre ?? "";
+
+            //await FetchData();
+        }
+        protected async Task OnIntensidadChange(long? Id)
+        {
+            var dat = lintensidad.Where(x => x.Id == Id).FirstOrDefault();
+
+            Data.IntensidadEsavi = dat;
+            Data.Gravedad = dat?.Gravedad ?? "";
+
+            //await FetchData();
+        }
+        protected async Task OnTipoVacunaChange(long? Id)
+        {
+            var dat = ltipoVacuna.Where(x => x.Id == Id).FirstOrDefault();
+
+            Data.TipoVacuna = dat;
+
+            //await FetchData();
+        }
+        protected async Task OnLaboratorioChange(long? Id)
+        {
+            var dat = lLaboratorios.Where(x => x.Id == Id).FirstOrDefault();
+
+            Data.Laboratorio = dat;
+
+            //await FetchData();
+        }
     }
 
 }

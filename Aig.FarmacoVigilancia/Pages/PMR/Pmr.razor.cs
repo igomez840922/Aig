@@ -22,7 +22,11 @@ namespace Aig.FarmacoVigilancia.Pages.PMR
         IWorkerPersonService workerPersonService { get; set; }
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
-        List<PersonalTrabajadorTB> lPersons { get; set; }
+        List<PersonalTrabajadorTB> lPersons { get; set; } = new List<PersonalTrabajadorTB>();
+
+        [Inject]
+        IPdfGenerationService pdfGenerationService { get; set; }
+
         GenericModel<FMV_PmrTB> dataModel { get; set; } = new GenericModel<FMV_PmrTB>()
         { Data = new FMV_PmrTB() };
 
@@ -160,6 +164,28 @@ namespace Aig.FarmacoVigilancia.Pages.PMR
                 await blazorDownloadFileService.DownloadFile("PLAN_MANEJO_RIESGO.xlsx", stream, "application/actet-stream");
             }
         }
+
+        private async Task DownloadPdf(long Id)
+        {
+            //Stream stream = await pdfGenerationService.GenerateAlertPDF(Id);
+            //if (stream != null)
+            //{
+            //    await blazorDownloadFileService.DownloadFile("ALERTA_SEGURIDAD.pdf", stream, "application/actet-stream");
+            //}
+
+            var data = await pmrService.Get(Id);
+            if (data?.Adjunto?.LAttachments?.Count > 0)
+            {
+                foreach (var attachment in data.Adjunto.LAttachments)
+                {
+                    Stream stream = await pdfGenerationService.GetStreamsFromFile(attachment.AbsolutePath);
+                    if (stream != null)
+                        await blazorDownloadFileService.DownloadFile(attachment.FileName, stream, "application/actet-stream");
+                }
+            }
+
+        }
+
 
     }
 

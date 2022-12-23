@@ -32,6 +32,10 @@ namespace DataModel
         private string descripcion;
         public string Descripcion { get => descripcion; set => SetProperty(ref descripcion, value); }
 
+        //Tipo de Nota o Alerta
+        private enumFMV_NoteType? tipoNota;
+        public enumFMV_NoteType? TipoNota { get => tipoNota; set => SetProperty(ref tipoNota, value); }
+
 
         private List<FMV_NotaTB> lNotas;
         public virtual List<FMV_NotaTB> LNotas { get => lNotas; set => SetProperty(ref lNotas, value); }
@@ -41,6 +45,9 @@ namespace DataModel
 
         private List<FMV_FfTB> lFf;
         public virtual List<FMV_FfTB> LFf { get => lFf; set => SetProperty(ref lFf, value); }
+
+        private List<FMV_RamTB> lRam;
+        public virtual List<FMV_RamTB> LRam { get => lRam; set => SetProperty(ref lRam, value); }
 
     }
 }

@@ -70,9 +70,9 @@ namespace DataModel
         public string LicenseNumber { get => licenseNumber; set => SetProperty(ref licenseNumber, value); }
 
         //aviso de operaciones
-        private string avisoOperación;
+        private string avisoOperacion;
         [StringLength(250)]
-        public string AvisoOperación { get => avisoOperación; set => SetProperty(ref avisoOperación, value); }
+        public string AvisoOperacion { get => avisoOperacion; set => SetProperty(ref avisoOperacion, value); }
 
         //representante legal
         private string repreLegal;
@@ -139,6 +139,55 @@ namespace DataModel
         public long? InspAperFabricanteId { get => inspAperFabricanteId; set => SetProperty(ref inspAperFabricanteId, value); }
         private AUD_InspAperFabricanteTB? inspAperFabricante;
         public virtual AUD_InspAperFabricanteTB? InspAperFabricante { get => inspAperFabricante; set => SetProperty(ref inspAperFabricante, value); }
+
+        //Formulario de Investigaciones
+        private long? inspInvestigacionId;
+        public long? InspInvestigacionId { get => inspInvestigacionId; set => SetProperty(ref inspInvestigacionId, value); }
+        private AUD_InspInvestigacionTB? inspInvestigacion;
+        public virtual AUD_InspInvestigacionTB? InspInvestigacion { get => inspInvestigacion; set => SetProperty(ref inspInvestigacion, value); }
+
+        //Gui BPM Fabribacante Cosmetico Medicamento
+        private long? inspGuiBPMFabCosmeticoMedId;
+        public long? InspGuiBPMFabCosmeticoMedId { get => inspGuiBPMFabCosmeticoMedId; set => SetProperty(ref inspGuiBPMFabCosmeticoMedId, value); }
+        private AUD_InspGuiBPMFabCosmeticoMedTB? inspGuiBPMFabCosmeticoMed;
+        public virtual AUD_InspGuiBPMFabCosmeticoMedTB? InspGuiBPMFabCosmeticoMed { get => inspGuiBPMFabCosmeticoMed; set => SetProperty(ref inspGuiBPMFabCosmeticoMed, value); }
+
+        //Apertura Cosméticos Artesanales
+        private long? inspAperturaCosmetArtesanalId;
+        public long? InspAperturaCosmetArtesanalId { get => inspAperturaCosmetArtesanalId; set => SetProperty(ref inspAperturaCosmetArtesanalId, value); }
+        private AUD_InspAperturaCosmetArtesanalTB? inspAperturaCosmetArtesanal;
+        public virtual AUD_InspAperturaCosmetArtesanalTB? InspAperturaCosmetArtesanal { get => inspAperturaCosmetArtesanal; set => SetProperty(ref inspAperturaCosmetArtesanal, value); }
+
+        //Fabricantes Naturales medicinales
+        private long? inspGuiBPMFabNatMedicinaId;
+        public long? InspGuiBPMFabNatMedicinaId { get => inspGuiBPMFabNatMedicinaId; set => SetProperty(ref inspGuiBPMFabNatMedicinaId, value); }
+        private AUD_InspGuiBPMFabNatMedicinaTB? inspGuiBPMFabNatMedicina;
+        public virtual AUD_InspGuiBPMFabNatMedicinaTB? InspGuiBPMFabNatMedicina { get => inspGuiBPMFabNatMedicina; set => SetProperty(ref inspGuiBPMFabNatMedicina, value); }
+
+        //Rutina o Vigilancia de Agencia
+        private long? inspRutinaVigAgenciaId;
+        public long? InspRutinaVigAgenciaId { get => inspRutinaVigAgenciaId; set => SetProperty(ref inspRutinaVigAgenciaId, value); }
+        private AUD_InspRutinaVigAgenciaTB? inspRutinaVigAgencia;
+        public virtual AUD_InspRutinaVigAgenciaTB? InspRutinaVigAgencia { get => inspRutinaVigAgencia; set => SetProperty(ref inspRutinaVigAgencia, value); }
+
+        //Cierre de Operaciones
+        private long? inspCierreOperacionId;
+        public long? InspCierreOperacionId { get => inspCierreOperacionId; set => SetProperty(ref inspCierreOperacionId, value); }
+        private AUD_InspCierreOperacionTB? inspCierreOperacion;
+        public virtual AUD_InspCierreOperacionTB? InspCierreOperacion { get => inspCierreOperacion; set => SetProperty(ref inspCierreOperacion, value); }
+
+        //Disposicion Final de Productos
+        private long? inspDisposicionFinalId;
+        public long? InspDisposicionFinalId { get => inspDisposicionFinalId; set => SetProperty(ref inspDisposicionFinalId, value); }
+        private AUD_InspDisposicionFinalTB? inspDisposicionFinal;
+        public virtual AUD_InspDisposicionFinalTB? InspDisposicionFinal { get => inspDisposicionFinal; set => SetProperty(ref inspDisposicionFinal, value); }
+
+
+        //Disposicion Final de Productos
+        private long? inspGuiaBPMFabricanteMedId;
+        public long? InspGuiaBPMFabricanteMedId { get => inspGuiaBPMFabricanteMedId; set => SetProperty(ref inspGuiaBPMFabricanteMedId, value); }
+        private AUD_InspGuiaBPMFabricanteMedTB? inspGuiaBPMFabricanteMed;
+        public virtual AUD_InspGuiaBPMFabricanteMedTB? InspGuiaBPMFabricanteMed { get => inspGuiaBPMFabricanteMed; set => SetProperty(ref inspGuiaBPMFabricanteMed, value); }
 
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.

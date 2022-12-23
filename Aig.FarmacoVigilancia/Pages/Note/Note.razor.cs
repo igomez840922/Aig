@@ -10,6 +10,7 @@ using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.Nota;
 using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
+using System.IO;
 
 namespace Aig.FarmacoVigilancia.Pages.Note
 {   
@@ -23,7 +24,7 @@ namespace Aig.FarmacoVigilancia.Pages.Note
         IWorkerPersonService personService { get; set; }
         [Inject]
         IDestinyInstituteService destinyInstituteService { get; set; }
-        List<PersonalTrabajadorTB> LPerson { get; set; }
+        List<PersonalTrabajadorTB> LPerson { get; set; } = new List<PersonalTrabajadorTB>();
         List<InstitucionDestinoTB> LInstitucionDestino { get; set; }
 
         [Inject]
@@ -179,17 +180,23 @@ namespace Aig.FarmacoVigilancia.Pages.Note
 
         private async Task DownloadPdf(long Id)
         {
-            Stream stream = await pdfGenerationService.GenerateNotePDF(Id);
-
-            if (stream != null)
-            {
-                await blazorDownloadFileService.DownloadFile("NOTA_SEGURIDAD.pdf", stream, "application/actet-stream");
-            }
-
+            //Stream stream = await pdfGenerationService.GenerateAlertPDF(Id);
             //if (stream != null)
             //{
-            //    await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "inspeccion.pdf", stream);
+            //    await blazorDownloadFileService.DownloadFile("ALERTA_SEGURIDAD.pdf", stream, "application/actet-stream");
             //}
+
+            var data = await noteService.Get(Id);
+            if (data?.Adjunto?.LAttachments?.Count > 0)
+            {
+                foreach (var attachment in data.Adjunto.LAttachments)
+                {
+                    Stream stream = await pdfGenerationService.GetStreamsFromFile(attachment.AbsolutePath);
+                    if (stream != null)
+                        await blazorDownloadFileService.DownloadFile(attachment.FileName, stream, "application/actet-stream");
+                }
+            }
+
         }
 
     }

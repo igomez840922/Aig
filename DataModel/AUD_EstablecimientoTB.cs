@@ -17,37 +17,37 @@ namespace DataModel
 	/// </summary>
 	public class AUD_EstablecimientoTB: SystemId
 	{
-		//nombre de establecimiento
-		private string nombre; 
+        //nombre de establecimiento -- NOMB_ESTA
+        private string nombre; 
 		[StringLength(250)]
 		[Required(ErrorMessage = "requerido")]
 		public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
-		//Numero de Licencia -- debe ser campo unico
-		private string numLicencia;
+        //Numero de Licencia -- debe ser campo unico -- LICENCIA_N
+        private string numLicencia;
 		[StringLength(250)]
 		[Required(ErrorMessage = "requerido")]
 		public string NumLicencia { get => numLicencia; set => SetProperty(ref numLicencia, value); }
 
-		//Año
-		private int periodo;
-		public int Periodo { get => periodo; set => SetProperty(ref periodo, value); }
+        //Aviso Operaciones
+        private string avisoOperaciones;
+        [StringLength(250)]
+        public string AvisoOperaciones { get => avisoOperaciones; set => SetProperty(ref avisoOperaciones, value); }
 
-        //tipo de establecimiento
-        //private long? tipoEstablecimientoId;
-        //public long? TipoEstablecimientoId { get => tipoEstablecimientoId; set => SetProperty(ref tipoEstablecimientoId, value); }
-        //private AUD_TipoEstablecimientoTB? tipoEstablecimiento;
-        //public virtual AUD_TipoEstablecimientoTB? TipoEstablecimiento { get => tipoEstablecimiento; set => SetProperty(ref tipoEstablecimiento, value); }
+        //Año -- PER_ODO
+        private int? periodo;
+		public int? Periodo { get => periodo; set => SetProperty(ref periodo, value); }
+
+        //TIPO_ESTAB
         private enumAUD_TipoEstablecimiento tipoEstablecimiento;
         public enumAUD_TipoEstablecimiento TipoEstablecimiento { get => tipoEstablecimiento; set => SetProperty(ref tipoEstablecimiento, value); }
 
+        //clasificacion -- CLASIF
+        private enumAUD_ClasifEstablecimiento clasificacion;
+		public enumAUD_ClasifEstablecimiento Clasificacion { get => clasificacion; set => SetProperty(ref clasificacion, value); }
 
-        //clasificacion
-        private enumAUD_TipoTramite clasificacion;
-		public enumAUD_TipoTramite Clasificacion { get => clasificacion; set => SetProperty(ref clasificacion, value); }
-
-		//sector
-		private enumAUD_TipoSector sector;
+        //sector -- SECTOR
+        private enumAUD_TipoSector sector;
 		public enumAUD_TipoSector Sector { get => sector; set => SetProperty(ref sector, value); }
 
 		//institución
@@ -55,12 +55,12 @@ namespace DataModel
 		[StringLength(250)]
 		public string Institucion { get => institucion; set => SetProperty(ref institucion, value); }
 
-		//fecha expedicion
-		private DateTime? fechaexpedida;
+        //fecha expedicion -- EXPEDIDA
+        private DateTime? fechaexpedida;
 		public DateTime? FechaExpedida { get => fechaexpedida; set => SetProperty(ref fechaexpedida, value); }
 
-		//fecha expiracion
-		private DateTime? fechaExpiracion;
+        //fecha expiracion -- EXPIRA
+        private DateTime? fechaExpiracion;
 		public DateTime? FechaExpiracion { get => fechaExpiracion; set => SetProperty(ref fechaExpiracion, value); }
 
 		//fecha modificacion
@@ -72,8 +72,8 @@ namespace DataModel
 		public DateTime? FechaVigencia { get => fechaVigencia; set => SetProperty(ref fechaVigencia, value); }
 
 
-		//fecha vigencia inicial
-		private DateTime? fechaVigenciaIni;
+        //fecha vigencia inicial -- VIGENCIA
+        private DateTime? fechaVigenciaIni;
 		public DateTime? FechaVigenciaIni { get => fechaVigenciaIni; set => SetProperty(ref fechaVigenciaIni, value); }
 
 		//fecha vigencia final
@@ -90,32 +90,25 @@ namespace DataModel
 		private DateTime? fechaDuplicado;
 		public DateTime? FechaDuplicado { get => fechaDuplicado; set => SetProperty(ref fechaDuplicado, value); }
 
-		//Provincia
-		private long? provinciaId;
-        [Required(ErrorMessage = "requerido")]
+        //Provincia -- PROV
+        private long? provinciaId;
         public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
 		private ProvinciaTB? provincia;
 		public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
-		//private string provincia;
-		//public virtual string Provincia { get => provincia; set => SetProperty(ref provincia, value); }
 
-		//distrito
-		private long? distritoId;
+        //distrito -- DISTRITO
+        private long? distritoId;
 		public long? DistritoId { get => distritoId; set => SetProperty(ref distritoId, value); }
 		private DistritoTB? distrito;
 		public virtual DistritoTB? Distrito { get => distrito; set => SetProperty(ref distrito, value); }
-		//private string distrito;
-		//public virtual string Distrito { get => distrito; set => SetProperty(ref distrito, value); }
 
-		//distrito
-		private long? corregimientoId;
+        //distrito -- CORREG
+        private long? corregimientoId;
 		public long? CorregimientoId { get => corregimientoId; set => SetProperty(ref corregimientoId, value); }
 		private CorregimientoTB? corregimiento;
 		public virtual CorregimientoTB? Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
-		//private string corregimiento;
-        //public virtual string Corregimiento { get => corregimiento; set => SetProperty(ref corregimiento, value); }
 
-        //ubicacion
+        //ubicacion -- UBICACI_N_
         private string ubicacion;
 		[StringLength(500)]
 		public string Ubicacion { get => ubicacion; set => SetProperty(ref ubicacion, value); }
@@ -125,8 +118,8 @@ namespace DataModel
 		[StringLength(500)]
 		public string Direccion { get => direccion; set => SetProperty(ref direccion, value); }
 
-		//telefono1
-		private string telefono1;
+        //telefono1 -- N__TEL_FON
+        private string telefono1;
 		[StringLength(250)]
 		public string Telefono1 { get => telefono1; set => SetProperty(ref telefono1, value); }
 
@@ -141,8 +134,9 @@ namespace DataModel
 		[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
 		public string Email { get => email; set => SetProperty(ref email, value); }
 
-		//horarios del establecimiento
-		private string horariosEstablecimiento;
+        //horarios del establecimiento -- HORARIO__E
+        [StringLength(300)]
+        private string horariosEstablecimiento;
 		public string HorariosEstablecimiento { get => horariosEstablecimiento; set => SetProperty(ref horariosEstablecimiento, value); }
 
         //area de controlados
@@ -164,8 +158,8 @@ namespace DataModel
 		[StringLength(250)]
 		public string SolicitanteLicCedula { get => solicitanteLicCedula; set => SetProperty(ref solicitanteLicCedula, value); }
 
-		//Estatus
-		private enumAUD_StatusEstablecimiento status;
+        //Estatus -- STATUS
+        private enumAUD_StatusEstablecimiento status;
 		public enumAUD_StatusEstablecimiento Status { get => status; set => SetProperty(ref status, value); }
 
 		//fecha de cierre
@@ -173,13 +167,13 @@ namespace DataModel
 		public DateTime? FechaCierre { get => fechaCierre; set => SetProperty(ref fechaCierre, value); }
 
 
-		//Representante legal
-		private string repLegalNombre;
+        //Representante legal -- REPR_O__PR
+        private string repLegalNombre;
 		[StringLength(250)]
 		public string RepLegalNombre { get => repLegalNombre; set => SetProperty(ref repLegalNombre, value); }
 
-		//Representante legal cedula
-		private string repLegalCedula;
+        //Representante legal cedula -- CED_REP
+        private string repLegalCedula;
 		[StringLength(250)]
 		public string RepLegalCedula { get => repLegalCedula; set => SetProperty(ref repLegalCedula, value); }
 
@@ -188,8 +182,8 @@ namespace DataModel
 		[StringLength(250)]
 		public string CorregidorNombre { get => corregidorNombre; set => SetProperty(ref corregidorNombre, value); }
 
-		//nombre de establecimiento
-		private string nombreSociedad;
+        //nombre de establecimiento -- NOMB__SOCI
+        private string nombreSociedad;
 		[StringLength(250)]
 		public string NombreSociedad { get => nombreSociedad; set => SetProperty(ref nombreSociedad, value); }
 

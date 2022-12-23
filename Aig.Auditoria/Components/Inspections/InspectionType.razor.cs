@@ -17,7 +17,7 @@ namespace Aig.Auditoria.Components.Inspections
         [Inject]
         IProfileService profileService { get; set; }
 
-       
+
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
@@ -100,6 +100,47 @@ namespace Aig.Auditoria.Components.Inspections
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRutinaVigFarmacia = new AUD_InspRutinaVigFarmaciaTB() };
                             break;
                         }
+                    case DataModel.Helper.enumAUD_TipoActa.VA:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRutinaVigAgencia = new AUD_InspRutinaVigAgenciaTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.INV:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspInvestigacion = new AUD_InspInvestigacionTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.BPMCD:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabCosmeticoMed = new AUD_InspGuiBPMFabCosmeticoMedTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.AECA:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperturaCosmetArtesanal = new AUD_InspAperturaCosmetArtesanalTB () };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.BPMMN:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabNatMedicina = new AUD_InspGuiBPMFabNatMedicinaTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.COP:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspCierreOperacion = new AUD_InspCierreOperacionTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.DFP:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspDisposicionFinal = new AUD_InspDisposicionFinalTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.BPMFM:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiaBPMFabricanteMed = new AUD_InspGuiaBPMFabricanteMedTB() };
+                            break;
+                        }
+                        
                     default:
                         {
                             return;

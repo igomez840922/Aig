@@ -1,0 +1,27 @@
+[
+ {
+   "STEMP": "Compatible",
+   "Descripcion": "La ingesta del fármaco es anterior a la aparición del acontecimiento descrito y la secuencia temporal es coherente con el mecanismo de acción del fármaco y con el proceso fisiopatológico supuesto de la RAM",
+   "Puntuacion": 2
+ },
+  {
+    "STEMP": "Compatible pero no coherente",
+    "Descripcion": "La ingesta del fármaco es anterior a la aparición del acontecimiento,pero no totalmente coherente con el mecanismo de acción y/o el proceso fisiopatológico",
+    "Puntuacion": 1
+  },
+  {
+    "STEMP": "No hay información",
+    "Descripcion": "La información obtenida del formulario es insuficiente para evaluar la secuencia temporal",
+    "Puntuacion": 0
+  },
+  {
+    "STEMP": "Incompatible",
+    "Descripcion": "Según los datos que aparecen en el formulario, la secuencia temporal va en contra de la relación de causalidad, o bien esta es incompatible con el mecanismo de acción y/o proceso fisiopatológico",
+    "Puntuacion": -1
+  },
+  {
+    "STEMP": "RAM aparecida por retirada del fármaco",
+    "Descripción": "La RAM aparece después que el fármaco ha sido retirado",
+    "Puntuacion": -2
+  }
+]

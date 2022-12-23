@@ -15,17 +15,22 @@ namespace DataModel
             DatosSolicitante = new AUD_DatosSolicitante();
             DatosRegente = new AUD_DatosRegente();
             DatosRepresentLegal = new AUD_DatosRepresentLegal();
-            DatosDocumentacion = new AUD_DatosDocumentacion();
             DatosProcedimientoPrograma = new AUD_DatosProcedimientoPrograma();
             DatosAutoInspeccion = new AUD_DatosAutoInspeccion();
             DatosProdAnalisisContrato = new AUD_DatosProdAnalisisContrato();
             DatosReclamoProductoRetirado = new AUD_DatosReclamoProductoRetirado();
             DatosLocal = new AUD_DatosLocal();
-            DatosAreaProduccion = new AUD_DatosAreaProduccion();
-            DatosEquipos = new AUD_DatosEquipos();
-            DatosAreaLabCtrCalidad = new AUD_DatosAreaLabCtrCalidad();
+
+            DatosDocumentacion = new AUD_DatosDocumentacion();
+            DatosAreaInterna = new AUD_DatosAreaInterna();
+            DatosAreaExterna = new AUD_DatosAreaExterna();
             DatosAreaAlmacenamiento = new AUD_DatosAreaAlmacenamiento();
-            DatosAreaAuxiliares=new AUD_DatosAreaAuxiliares();
+            DatosAreaProduccion = new AUD_DatosAreaProduccion();
+            DatosAreaAuxiliares = new AUD_DatosAreaAuxiliares();
+            DatosEquipos = new AUD_DatosEquipos();
+
+            DatosAreaDispensado = new AUD_DatosAreaDispensado();
+            DatosAreaLabCtrCalidad = new AUD_DatosAreaLabCtrCalidad();
 
             DatosConclusiones = new AUD_DatosConclusiones();
         }
@@ -63,6 +68,17 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosDocumentacion DatosDocumentacion { get => datosDocumentacion; set => SetProperty(ref datosDocumentacion, value); }
 
+        //Datos Area Interna
+        private AUD_DatosAreaInterna datosAreaInterna;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosAreaInterna DatosAreaInterna { get => datosAreaInterna; set => SetProperty(ref datosAreaInterna, value); }
+
+        private AUD_DatosAreaExterna datosAreaExterna;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosAreaExterna DatosAreaExterna { get => datosAreaExterna; set => SetProperty(ref datosAreaExterna, value); }
+
+
+
         //Procedimientos y Programas
         private AUD_DatosProcedimientoPrograma datosProcedimientoPrograma;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
@@ -87,6 +103,12 @@ namespace DataModel
         private AUD_DatosLocal datosLocal;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosLocal DatosLocal { get => datosLocal; set => SetProperty(ref datosLocal, value); }
+
+        // Area Dispensados
+        private AUD_DatosAreaDispensado datosAreaDispensado;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosAreaDispensado DatosAreaDispensado { get => datosAreaDispensado; set => SetProperty(ref datosAreaDispensado, value); }
+
 
         // Area Producción
         private AUD_DatosAreaProduccion datosAreaProduccion;

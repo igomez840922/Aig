@@ -23,11 +23,17 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#specificInfo" role="tab">@languageContainerService.Keys["SpecificInfo"]</a>
                             </li>
-                             <li class="nav-item">
+                            @if(Ips.Prioridad){
+                                <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#resumeInfo" role="tab">@languageContainerService.Keys["ResumeInfo"]</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#revisionInfo" role="tab">@languageContainerService.Keys["RevisionInfo"]</a>
+                            </li>
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -38,7 +44,7 @@
                                         <label>@languageContainerService.Keys["ReceptionDateCNFV"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.FechaRecepcion" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.FechaRecepcion" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaRecepcion) />
                                             </div>
                                         </div>
@@ -47,7 +53,7 @@
                                         <label>@languageContainerService.Keys["DeliveryDateRegister"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.FechaRegistrador" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Ips.FechaRecepcion" TValue="DateTime?" @bind-Value="Ips.FechaRegistrador" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaRegistrador) />
                                             </div>
                                         </div>
@@ -56,7 +62,7 @@
                                         <label for="password">@languageContainerService.Keys["Register"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputSelect class="form-control" @bind-Value="Ips.RegistradorId">
+                                                @*<InputSelect class="form-control" @bind-Value="Ips.RegistradorId">
                                                     <option value=""></option>
                                                     @if (lPersons != null)
                                                     {
@@ -65,7 +71,10 @@
                                                             <option value="@dt.Id">@dt.NombreCompleto</option>
                                                         }
                                                     }
-                                                </InputSelect>
+                                                </InputSelect>*@
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Ips.RegistradorId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@(lPersons.Where(x=>x.Registrador)) TextProperty="NombreCompleto" ValueProperty="Id" />
                                                 <ValidationMessage For=@(() => Ips.RegistradorId) />
                                             </div>
                                         </div>
@@ -103,7 +112,7 @@
                                         <label for="password">@languageContainerService.Keys["Laboratory"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputSelect class="form-control" @bind-Value="Ips.LaboratorioId">
+                                                @*<InputSelect class="form-control" @bind-Value="Ips.LaboratorioId">
                                                     <option value=""></option>
                                                     @if (Labs != null)
                                                     {
@@ -112,7 +121,10 @@
                                                             <option value="@dt.Id">@dt.Nombre</option>
                                                         }
                                                     }
-                                                </InputSelect>
+                                                </InputSelect>*@
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Ips.LaboratorioId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@Labs TextProperty="Nombre" ValueProperty="Id" />
                                                 <ValidationMessage For=@(() => Ips.LaboratorioId) />
                                             </div>
                                         </div>
@@ -139,7 +151,7 @@
                                         <label for="password">@languageContainerService.Keys["InitialPeriod"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.PeriodoIni" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.PeriodoIni" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.PeriodoIni) />
                                             </div>
                                         </div>
@@ -148,7 +160,7 @@
                                         <label for="password">@languageContainerService.Keys["EndPeriod"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.PeriodoFin" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Ips.IpsData.PeriodoIni" TValue="DateTime?" @bind-Value="Ips.IpsData.PeriodoFin" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.PeriodoFin) />
                                             </div>
                                         </div>
@@ -159,7 +171,7 @@
                                         <label for="password">@languageContainerService.Keys["RigisteredDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.FechaRegistro" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaRegistro" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaRegistro) />
                                             </div>
                                         </div>
@@ -180,7 +192,7 @@
                                         <label for="password">@languageContainerService.Keys["Asignación para PreEvaluación"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.FechaAsigPreEva" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Ips.IpsData.FechaRegistro" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaAsigPreEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaAsigPreEva) />
                                             </div>
                                         </div>
@@ -189,7 +201,7 @@
                                         <label for="password">@languageContainerService.Keys["Tramitator"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputSelect class="form-control" @bind-Value="Ips.TramitadorId">
+                                                @*<InputSelect class="form-control" @bind-Value="Ips.TramitadorId">
                                                     <option value=""></option>
                                                     @if (lPersons != null)
                                                     {
@@ -198,7 +210,10 @@
                                                             <option value="@dt.Id">@dt.NombreCompleto</option>
                                                         }
                                                     }
-                                                </InputSelect>
+                                                </InputSelect>*@
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Ips.TramitadorId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@(lPersons.Where(x => x.Tramitador)) TextProperty="NombreCompleto" ValueProperty="Id" />
                                                 <ValidationMessage For=@(() => Ips.TramitadorId) />
                                             </div>
                                         </div>
@@ -208,7 +223,7 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["Innovator"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.IpsData.Innovador" class="form-control">
+                                            <InputSelect @bind-Value="Ips.IpsData.Innovador" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
@@ -218,7 +233,7 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["Biologic"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.IpsData.Biologico" class="form-control">
+                                            <InputSelect @bind-Value="Ips.IpsData.Biologico" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
@@ -228,7 +243,7 @@
                                      <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["InterchangeRequired"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.IpsData.ReqIntercam" class="form-control">
+                                            <InputSelect @bind-Value="Ips.IpsData.ReqIntercam" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
@@ -239,7 +254,7 @@
                                         <label for="password">@languageContainerService.Keys["AuthDatePanama"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.FechaAutPan" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaAutPan" ShowTime="false" DateFormat="dd/MM/yyyy" Change="@(args => Ips.UpdateRule())" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaAutPan) />
                                             </div>
                                         </div>
@@ -250,7 +265,7 @@
                                         <label for="password">@languageContainerService.Keys["PreEvaluationDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.IpsData.FechaPreEva" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaPreEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaPreEva) />
                                             </div>
                                         </div>
@@ -283,7 +298,7 @@
                                         <label for="password">@languageContainerService.Keys["AsignEvaluationDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.FechaAsigEva" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Ips.IpsData.FechaPreEva" TValue="DateTime?" @bind-Value="Ips.FechaAsigEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaAsigEva) />
                                             </div>
                                         </div>
@@ -292,7 +307,7 @@
                                         <label for="password">@languageContainerService.Keys["Evaluator"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputSelect class="form-control" @bind-Value="Ips.EvaluadorId">
+                                                @*<InputSelect class="form-control" @bind-Value="Ips.EvaluadorId">
                                                     <option value=""></option>
                                                     @if (lPersons != null)
                                                     {
@@ -301,7 +316,10 @@
                                                             <option value="@dt.Id">@dt.NombreCompleto</option>
                                                         }
                                                     }
-                                                </InputSelect>
+                                                </InputSelect>*@
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Ips.EvaluadorId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@(lPersons.Where(x => x.Evaluador)) TextProperty="NombreCompleto" ValueProperty="Id" />
                                                 <ValidationMessage For=@(() => Ips.EvaluadorId) />
                                             </div>
                                         </div>
@@ -610,7 +628,7 @@
                                         <label>@languageContainerService.Keys["ReviewDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputDate class="form-control" @bind-Value="Ips.FechaRev" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Ips.FechaAsigEva" TValue="DateTime?" @bind-Value="Ips.FechaRev" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaRev) />
                                             </div>
                                         </div>
@@ -627,6 +645,8 @@
                                             <ValidationMessage For=@(() => Ips.StatusRevision) />
                                         </div>
                                     </div>
+                                    @if(Ips.StatusRevision == enumFMV_IpsStatusRevision.Evaluated)
+                                    {
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["IPSMadeAccordingRegulations"]</label>
                                         <div class="form-group">
@@ -636,7 +656,8 @@
                                             </InputSelect>
                                             <ValidationMessage For=@(() => Ips.ConfecConNormativa) />
                                         </div>
-                                    </div>
+                                    </div>                                        
+                                    }
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["ReportNumber"]</label>
                                         <div class="form-group">
@@ -660,7 +681,53 @@
 
                                 </div>
                             </div>
-                        
+                            <div class="tab-pane" id="attachments" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Attachments"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-9" style="text-align:left;">
+                                    </div>
+                                    <div class="col-3" style="text-align:right;">
+                                        <button type="button" @onclick="(e)=>{OpenAttachment();}"
+                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                            @languageContainerService.Keys["Add"]
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="kt-section">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Description"]</th>
+                                                    <th>@languageContainerService.Keys["File"]</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Ips != null && Ips.Adjunto != null)
+                                                {
+                                                    @foreach (var dt in Ips.Adjunto.LAttachments)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.Description</td>
+                                                            <td>
+                                                                <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                            </td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <br>
@@ -686,6 +753,11 @@
             </div>
         </div>
     </div>
+
+    @if (openAttachment)
+    {
+        <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
+    }
 
 }
 
