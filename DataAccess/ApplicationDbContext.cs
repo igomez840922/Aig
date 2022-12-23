@@ -1396,6 +1396,19 @@ namespace DataAccess
               .Property(e => e.Adjunto)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
 
+            ///////////////////////////////////////////
+            ///
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_NotaDestinoTB>()
+              .Property(e => e.NotaClasificacion)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_NotaClasificacion>(x));
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_NotaDestinoTB>()
+              .Property(e => e.NotaContactos)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_NotaContactos>(x));
+
             ///////////////////////////////
             ///
 
@@ -1441,6 +1454,7 @@ namespace DataAccess
         public virtual DbSet<FMV_EsaviTB> FMV_Esavi { get; set; }
         public virtual DbSet<FMV_NotaTB> FMV_Nota { get; set; }
         public virtual DbSet<FMV_SocTB> FMV_Soc { get; set; }
+        public virtual DbSet<FMV_NotaDestinoTB> FMV_NotaDestino { get; set; }
         public virtual DbSet<InstitucionDestinoTB> InstitucionDestino { get; set; }
         public virtual DbSet<LaboratorioTB> Laboratorio { get; set; }
         public virtual DbSet<TipoInstitucionTB> TipoInstitucion { get; set; }

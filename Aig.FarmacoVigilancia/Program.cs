@@ -112,6 +112,7 @@ builder.Services.AddScoped<ITipoInstitucionService, TipoInstitucionService>();
 builder.Services.AddScoped<ISocService, SocService>();
 builder.Services.AddScoped<IIntensidadEsaviService, IntensidadEsaviService>();
 builder.Services.AddScoped<ITipoVacunaService, TipoVacunaService>();
+builder.Services.AddScoped<INotaDestinoService, NotaDestinoService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

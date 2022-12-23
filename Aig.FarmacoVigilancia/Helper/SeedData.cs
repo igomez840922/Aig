@@ -279,6 +279,18 @@ namespace Aig.FarmacoVigilancia.Helper
                         new InstitucionDestinoTB() { Nombre = "Control de Calidad", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
                         new InstitucionDestinoTB() { Nombre = "Departamento de Auditoría", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
                         new InstitucionDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
+                        new InstitucionDestinoTB() { Nombre = "Dirección", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "Asesoría Legal", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "CTC", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "Registro Sanitario", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "Sebeq", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "Modificaciones", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "Control de Calidad", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "Departamento de Auditoría", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
+                        new InstitucionDestinoTB() { Nombre = "Profesionales de la salud y pacientes", TipoNota = DataModel.Helper.enumFMV_NoteType.Circular },
+                        new InstitucionDestinoTB() { Nombre = "Industria Farmacéutica", TipoNota = DataModel.Helper.enumFMV_NoteType.Circular },
+                        new InstitucionDestinoTB() { Nombre = "CSS/MINSA/Otros", TipoNota = DataModel.Helper.enumFMV_NoteType.Monitoreo },
                 };
                     foreach(var inst in LInstituciones) 
                     { dalService.Save(inst); }

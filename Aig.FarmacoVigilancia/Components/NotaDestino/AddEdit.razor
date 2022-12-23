@@ -1,0 +1,141 @@
+﻿@using DataModel.Helper;
+@using DataModel;
+
+@if (Data != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["Nuevo"]) @languageContainerService.Keys["Destinatario de Nota"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Data" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+                        <h5>@languageContainerService.Keys["GeneralInfo"]</h5>
+                        <div class="row clearfix">                            
+                            <div class="col-sm-8">
+                                <label>@languageContainerService.Keys["Nombre de la Institución"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.Nombre" />
+                                        <ValidationMessage For=@(() => Data.Nombre) />
+                                    </div>
+                                </div>
+                            </div>                            
+
+                            <div class="col-sm-12">
+                                <label for="password">@languageContainerService.Keys["Tipo de Notas Asociadas"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+
+                                        <RadzenDropDown AllowClear="true" Multiple="true" Chips="true" MaxSelectedLabels="20" Class="form-control" TValue="List<NotaClasificacion>" @bind-Value=@Data.NotaClasificacion.LClasificaciones
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(LClasificaciones) TextProperty="Nombre" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5>@languageContainerService.Keys["Contactos Asociados"]</h5>
+                        <div class="row clearfix">
+                            <div class="col-9" style="text-align:left;">
+                            </div>
+                            <div class="col-3" style="text-align:right;">
+                                <button type="button" @onclick="(e)=>{OpenContact();}"
+                                        class="btn btn-sm btn-outline-primary waves-effect">
+                                    @languageContainerService.Keys["Add"]
+                                </button>
+                            </div>
+                        </div>
+                        <!--begin::Section-->
+                        <div class="kt-section">
+                            <div class="table-responsive">
+                                <table class="table rounded table-striped">
+                                    <thead class=thead-light>
+                                        <tr>
+                                            <th>@languageContainerService.Keys["Nombre"]</th>
+                                            <th>@languageContainerService.Keys["Telefono"]</th>
+                                            <th>@languageContainerService.Keys["Correo"]</th>
+                                            <th>@languageContainerService.Keys["Descripción"]</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Data != null && Data.NotaContactos.LContactos != null)
+                                        {
+                                            @foreach (var dt in Data.NotaContactos.LContactos)
+                                            {
+                                                <tr>
+                                                    <td scope="row">@dt.Nombre</td>
+                                                    <td>@dt.Telefono</td>
+                                                    <td>@dt.Email</td>
+                                                    <td>@dt.Descripcion</td>                                                    
+                                                    <td style="text-align:right">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{OpenContact(dt);}" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{RemoveContact(dt);}"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        
+                        
+                        @* <div class="row clearfix">
+
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Description"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputTextArea rows="8" class="form-control" @bind-Value="Nota.Descripcion" />
+                                        <ValidationMessage For=@(() => Nota.Descripcion) />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>*@
+
+                        <br>
+                        <div class="modal-footer">
+
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    @if (OpenAddEditContacto)
+    {
+        <Aig.FarmacoVigilancia.Components.Contacto.AddEdit datoContacto="@datoContacto"></Aig.FarmacoVigilancia.Components.Contacto.AddEdit>
+    }
+}
+
+<div class="modal-backdrop fade show"></div>
