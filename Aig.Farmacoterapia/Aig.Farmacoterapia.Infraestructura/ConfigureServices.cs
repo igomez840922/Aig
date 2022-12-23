@@ -128,7 +128,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                                 #else
                                     c.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                                     c.Response.ContentType = "application/json";
-                                    var result = JsonConvert.SerializeObject(Result.Fail(localizer["An unhandled error has occurred."]));
+                                    var result = JsonConvert.SerializeObject(Result.Fail("An unhandled error has occurred."));
                                     return c.Response.WriteAsync(result);
                                 #endif
                            }
