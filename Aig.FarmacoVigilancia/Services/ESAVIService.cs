@@ -180,7 +180,7 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 46).Value = data.FechaVacunacion?.ToString("dd/MM/yyyy") ?? "";
                         ws.Cell(row + 1, 47).Value = data.Indicaciones;
                         ws.Cell(row + 1, 48).Value = data.DosisViaAdmin;
-                        ws.Cell(row + 1, 49).Value = data.DosisEsavi;
+                        ws.Cell(row + 1, 49).Value = DataModel.Helper.Helper.GetDescription(data.DosisPresenta);
 
                         row++;
                     }

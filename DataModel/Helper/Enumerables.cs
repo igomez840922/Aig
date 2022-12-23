@@ -834,5 +834,18 @@ namespace DataModel.Helper
         SupRepFV = 4,
     }
 
+    public enum enumFMV_DosisNumero
+    {
+        [Description("No Reportado")]
+        NA = 0,
+        [Description("1ra")]
+        PRI = 1,
+        [Description("2da")]
+        SEG = 2,
+        [Description("3ra")]
+        TER = 3,
+        [Description("4ra")]
+        CTA = 4,
+    }
 
 }

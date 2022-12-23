@@ -229,6 +229,7 @@ namespace DataModel
 
         //Vacuna Sospechosa (Comercial)
         private string vacunaComercial;
+        [Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string VacunaComercial { get => vacunaComercial; set => SetProperty(ref vacunaComercial, value); }
 
@@ -282,9 +283,11 @@ namespace DataModel
         public string DosisViaAdmin { get => dosisViaAdmin; set => SetProperty(ref dosisViaAdmin, value); }
 
         //Dosis en que se presenta el ESAVI
-        private string dosisEsavi;
-        [StringLength(200)]
-        public string DosisEsavi { get => dosisEsavi; set => SetProperty(ref dosisEsavi, value); }
+        //private string dosisEsavi;
+        //[StringLength(200)]
+        //public string DosisEsavi { get => dosisEsavi; set => SetProperty(ref dosisEsavi, value); }        
+        private enumFMV_DosisNumero dosisPresenta;
+        public enumFMV_DosisNumero DosisPresenta { get => dosisPresenta; set => SetProperty(ref dosisPresenta, value); }
 
     }
 }
