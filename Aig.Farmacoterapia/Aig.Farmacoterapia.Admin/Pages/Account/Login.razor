@@ -62,7 +62,7 @@
              }
 
             <button class="btn btn-brand kt-login__btn-primary" type="submit">
-               <span> Entrar </span>
+               <span>Entrar</span>
              </button>
         </div>
        
@@ -87,7 +87,7 @@
         await base.OnInitializedAsync();
         var user = (await AuthStat).User;
         if (user.Identity is {IsAuthenticated: true })
-            navigationManager.NavigateTo("./");
+            navigationManager.NavigateTo("./",true);
         else loading = false;
     }
     private async Task RefresView()

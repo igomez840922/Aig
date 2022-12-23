@@ -16,21 +16,32 @@ namespace Aig.Farmacoterapia.Application.Features.Account.Commands
         public TokenRequest Model { get; set; }
         public LoginCommand(TokenRequest model) => Model = model;
     }
-    public class RefreshTokenCommand: IRequest<Result<TokenResponse>>
-    { 
+    public class RefreshTokenCommand : IRequest<Result<TokenResponse>>
+    {
         public RefreshTokenRequest Model { get; set; }
         public RefreshTokenCommand(RefreshTokenRequest model) => Model = model;
     }
+    public class UpdateProfileCommand : IRequest<IResult>
+    {
+        public UpdateProfileRequest Model { get; set; }
+        public UpdateProfileCommand(UpdateProfileRequest model) => Model = model;
+    }
+
     internal class AccountCommandHandler :
-        IRequestHandler<LoginCommand, Result<TokenResponse>>,
-        IRequestHandler<RefreshTokenCommand, Result<TokenResponse>>
+    IRequestHandler<LoginCommand, Result<TokenResponse>>,
+    IRequestHandler<RefreshTokenCommand, Result<TokenResponse>>,
+    IRequestHandler<UpdateProfileCommand, IResult>
     {
         private readonly ITokenService _identityService;
+        private readonly IUserService _userService;
+        private readonly IUploadService _uploadService;
         private readonly ISystemLogger _logger;
 
-        public AccountCommandHandler(ITokenService identityService, ISystemLogger logger)
+        public AccountCommandHandler(ITokenService identityService, IUserService userService, IUploadService uploadService, ISystemLogger logger)
         {
             _identityService = identityService;
+            _userService = userService;
+            _uploadService = uploadService;
             _logger = logger;
         }
 
@@ -62,6 +73,23 @@ namespace Aig.Farmacoterapia.Application.Features.Account.Commands
             }
             return answer;
         }
-
+        public async Task<IResult> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
+        {
+            IResult answer = new Result();
+            try
+            {
+                if (request.Model.UploadRequest!=null && !string.IsNullOrEmpty(await _uploadService.UploadAsync(request.Model.UploadRequest)))
+                    request.Model.ProfilePicture = request.Model.UploadRequest.FileName;
+                answer = await _userService.UpdateProfileAsync(request.Model);
+            }
+            catch (Exception exc)
+            {
+                _logger.Error("Requested operation failed", exc);
+                return Result.Fail(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
     }
+
 }
+

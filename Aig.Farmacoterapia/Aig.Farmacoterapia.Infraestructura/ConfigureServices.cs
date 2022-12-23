@@ -240,6 +240,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddScoped<IPharmaceuticalRepository, PharmaceuticalRepository>()
                 .AddScoped<IMedicationRouteRepository, MedicationRouteRepository>()
                 .AddScoped<IMakerRepository, MakerRepository>()
+                .AddScoped<IStudiesRepository, StudiesRepository>()
                 .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddScoped<IUploadService, UploadService>();
         }

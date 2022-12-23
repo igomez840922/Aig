@@ -15,6 +15,9 @@ namespace Aig.Farmacoterapia.Domain.Entities.Enums
         [Description(@"prospectus")]
         Prospectus,
 
+        [Description(@"studies")]
+        Studies,
+
         [Description(@"users")]
         Users,
     }

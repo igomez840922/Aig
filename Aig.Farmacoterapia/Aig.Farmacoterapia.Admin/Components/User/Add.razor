@@ -152,26 +152,14 @@
         {
             try
             {   
-                //showPictureFileInputAlert = false;
-                //long maxFileSize = 1048576 * 1;//1MB
-                //var extension = Path.GetExtension(_imageFile.Name);
-                //var format = "image/png";
-                //if (_imageFile.Size <= maxFileSize){
-                //    var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
-                //    var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
-                //    var data=Convert.ToBase64String(await GetDataAsync(stream));
-                //    ModelData.ProfilePicture = $"data:{format};base64,{data}";
-                //}
-                //else { showPictureFileInputAlert = true; }
-
-                showPictureFileInputAlert = false;
+               showPictureFileInputAlert = false;
                 long maxFileSize = 1048576 * 1;//1MB
                 var format = "image/png";
-                if (_imageFile.Size <= maxFileSize){
-                    var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
-                    var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
-                    var request = new UploadObject
-                        {
+                if (_imageFile.Size <= maxFileSize)
+                {
+                     var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
+                     var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                     var request = new UploadObject{
                             FileName = $"{Guid.NewGuid()}.png",
                             Data = stream,
                             Size = _imageFile.Size,
@@ -189,11 +177,14 @@
         }
     }
 
-    private async Task DeletePictureAsync()
+   
+     private async Task DeletePictureAsync()
     {
-        _imageFile = null;
+        await _uploadService.DeleteAsync(ModelData.ProfilePicture);
+         _imageFile = null;
         ModelData.ProfilePicture = null;
     }
+
     protected async override Task OnInitializedAsync()
     {   
         base.OnInitialized();

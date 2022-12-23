@@ -242,6 +242,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 {
                     return await Result.FailAsync("User Not Found.");
                 }
+                if (!string.IsNullOrEmpty(request.ProfilePicture))
+                   user.ProfilePicture = request.ProfilePicture;
                 user.FirstName = request.FirstName;
                 user.LastName = request.LastName;
                 user.PhoneNumber = request.PhoneNumber;

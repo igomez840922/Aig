@@ -1,0 +1,163 @@
+﻿@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@using System.Globalization
+@inject IJSRuntime JsRuntime
+@inject IUnitOfWork _unitOfWork;
+@inject ISystemLogger _systemLogger;
+
+<div class="kt-portlet__head kt-portlet__head--lg" style="padding: 10px 30px 10px 30px !important">
+    <div class="kt-portlet__head-label">
+        <span class="kt-portlet__head-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect x="0" y="0" width="24" height="24"></rect>
+                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"></rect>
+                    <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"></path>
+                </g>
+            </svg>
+        </span>
+        <h3 class="kt-portlet__head-title">
+            Medicamentos
+        </h3>
+    </div>
+    <div class="kt-portlet__head-toolbar">
+        <div class="kt-portlet__head-wrapper">
+            <div class="kt-portlet__head-actions">
+                <button disabled="@(loading)" href="#" class="btn btn-outline-brand btn-square" @onclick="() => OnEdit(string.Empty)" data-toggle="modal" data-target="#modal_createedit">
+                    <i class="la la-plus"></i>
+                    Nuevo
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kt-portlet__body">
+    <MudTable Items="@List" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@loading" LoadingProgressColor="Color.Info">
+        <HeaderContent>
+            <MudTh style="width:300px;">Medicamento</MudTh>
+            <MudTh style="width:100px;">Factura</MudTh>
+            <MudTh style="widt:80px;">Lote</MudTh>
+            <MudTh style="width:80px;">Cantidad</MudTh>
+            <MudTh style="width:100px;">Fech.Vencimiento</MudTh>
+            <MudTh style="width:100px;">Fech.Asignación</MudTh>
+            <MudTh style="width:100px;">Fech.Evaluación</MudTh>
+            <MudTh style="widt:100px;">Fabricante</MudTh>
+            <MudTh style="widt:100px;">Acondicionador</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Medicamento">@context.Medicamento</MudTd>
+            <MudTd DataLabel="Factura">@context.Factura</MudTd>
+            <MudTd DataLabel="Lote">@context.Lote</MudTd>
+            <MudTd DataLabel="Cantidad">@context.Cantidad</MudTd>
+            <MudTd DataLabel="Fech.Emisión">@(string.Format("{0:dd/MM/yyyy}", context.Vencimiento))</MudTd>
+            <MudTd DataLabel="Fech.Asignación">@(string.Format("{0:dd/MM/yyyy}", context.FechaAsignacion))</MudTd>
+            <MudTd DataLabel="Fech.Evaluación">@(string.Format("{0:dd/MM/yyyy}", context.FechaEvaluacion))</MudTd>
+            <MudTd DataLabel="Fabricante">@context.Fabricante</MudTd>
+            <MudTd DataLabel="Acondicionador">@context.Acondicionador</MudTd>
+            <MudTd>
+                <span class="dropdown">
+                    <button disabled="@(loading)" href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
+                        <i class="flaticon-more-1 kt-font-brand"></i>
+                    </button>
+                    <span class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#" @onclick="() => OnEdit(context.Id)" data-toggle="modal" data-target="#modal_createedit">
+                            <i class="la la-edit"></i> Editar
+                        </a>
+                        <a class="dropdown-item" href="#" @onclick="() => OnDelete(context)" data-toggle="modal">
+                            <i class="la la-trash"></i>
+                            Eliminar
+                        </a>
+                    </span>
+                </span>
+            </MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>No se encontraron elementos</MudText>
+        </NoRecordsContent>
+    </MudTable>
+</div>
+
+@if (addEditDialogIsOpen)
+{
+    <AddEditProduct Parent="@Parent" ModelData="@modelData" OnClose="@OnEventAddEditClose"></AddEditProduct>
+}
+@if (deleteDialogIsOpen)
+{
+    <DeleteConfirmDialog Caption="Eliminar"
+                     Message="¿Confirma que desea de eliminar el artículo?"
+                     OnClose="@OnDeleteDialogClose">
+    </DeleteConfirmDialog>
+}
+@code {
+
+
+    [Parameter] public long Parent { get; set; }
+    [Parameter] public List<AigMedicamentoEstudio> List { get; set; }
+    protected AigMedicamentoEstudio modelData = new AigMedicamentoEstudio();
+    protected bool addEditDialogIsOpen = false;
+    protected bool deleteDialogIsOpen = false;
+    protected bool loading = false;
+
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
+
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    private async Task OnEventAddEditClose(string id)
+    {
+        addEditDialogIsOpen = false;
+        if (!string.IsNullOrEmpty(id))
+            RefresView();
+    }
+
+    private async Task OnEdit(string id)
+    {
+
+        var result = List.Where(p => p.Id == id).FirstOrDefault();
+        if (result == null)
+            result = new AigMedicamentoEstudio();
+        modelData = result;
+        addEditDialogIsOpen = true;
+
+    }
+
+    private async Task OnDelete(AigMedicamentoEstudio data)
+    {
+        modelData = data;
+        deleteDialogIsOpen = true;
+    }
+
+    private async Task OnDeleteDialogClose(bool isOk)
+    {
+        if (isOk)
+        {
+            var result = await _unitOfWork.Repository<AigEstudios>().GetByIdAsync(Parent);
+            if (result != null)
+            {
+                result.Medicamentos!.RemoveAll(p => p.Id == modelData.Id);
+                await _unitOfWork.Repository<AigEstudios>().UpdateAsync(result);
+                if (_unitOfWork.Commit())
+                {
+                    await JsRuntime.InvokeVoidAsync("ShowMessage", "Elemento eliminado correctamente");
+                    await JsRuntime.InvokeVoidAsync("OpenCloseModal", "#btnCloseDeleteModal");
+                    await RefresView();
+                }
+                else
+                    await JsRuntime.InvokeVoidAsync("ShowError", "Error durante la operación");
+            }
+            else
+                await JsRuntime.InvokeVoidAsync("ShowError", "Error durante la operación");
+        }
+        deleteDialogIsOpen = false;
+    }
+}

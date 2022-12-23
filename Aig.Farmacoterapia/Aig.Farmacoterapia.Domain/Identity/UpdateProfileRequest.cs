@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aig.Farmacoterapia.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,7 @@ namespace Aig.Farmacoterapia.Domain.Identity
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
+        public string? ProfilePicture { get; set; }
+        public UploadObject? UploadRequest { get; set; }
     }
 }

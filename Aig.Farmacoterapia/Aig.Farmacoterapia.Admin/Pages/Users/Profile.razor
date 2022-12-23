@@ -257,18 +257,17 @@
                 var format = "image/png";
                 if (_imageFile.Size <= maxFileSize)
                 {
-                    var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
-                    var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
-                    var request = new UploadObject
-                        {
+                    var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 400);
+                    var stream= imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                    var request = new UploadObject{
                             FileName = $"{Guid.NewGuid()}.png",
                             Data = stream,
                             Size = _imageFile.Size,
                             UploadType = UploadType.Users,
                             Extension = ".png"
                         };
-
                     ModelData.ProfilePicture = await _uploadService.UploadAsync(request);
+
                 }
                 else { showPictureFileInputAlert = true; }
             }
@@ -281,6 +280,7 @@
 
     private async Task DeletePictureAsync()
     {
+        await _uploadService.DeleteAsync(ModelData.ProfilePicture);
         _imageFile = null;
         ModelData.ProfilePicture = null;
     }

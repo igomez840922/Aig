@@ -21,7 +21,6 @@ namespace Aig.Farmacoterapia.Api.Controllers
             _mediator = mediator;
             _uploadService = uploadService;
             _userService = userService;
-
         }
 
         [HttpPost("login")]
@@ -33,13 +32,8 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpGet("avatar/{image}")]
         public async Task<FileStreamResult> GetAvatar(string image) => await _mediator.Send(new GetAvatarQuery(image));
 
-
         [HttpPost("updateprofile")]
-        public async Task<IActionResult> UpdateProfile(UpdateProfileRequest model)
-        {
-            var response = await _userService.UpdateProfileAsync(model);
-            return Ok(response);
-        }
+        public async Task<IActionResult> UpdateProfile(UpdateProfileRequest model) => Ok(await _mediator.Send(new UpdateProfileCommand(model)));
 
         [HttpPut("changepassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordRequest model)

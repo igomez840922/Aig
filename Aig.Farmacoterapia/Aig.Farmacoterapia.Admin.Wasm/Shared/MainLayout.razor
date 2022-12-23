@@ -38,11 +38,19 @@
                     }
 
                 </ActivatorContent>
+
+
                 <ChildContent>
+                    <MudMenuItem Icon="@Icons.Material.Outlined.Person" Href="/profile">Profile</MudMenuItem>
+                     <MudDivider Class="mb-2" />
+                    <MudMenuItem Icon="@Icons.Material.Outlined.Login" OnClick="Logout">Salir</MudMenuItem>
+                </ChildContent>
+
+               @* <ChildContent>
                     <MudDivider Class="mb-2" />
                     <MudListItem Text="Perfil" Icon="@Icons.Material.Outlined.Person" Href="/profile" />
                     <MudListItem Text="Salir" Icon="@Icons.Material.Outlined.Login" OnClick="Logout" />
-                </ChildContent>
+                </ChildContent>*@
             </MudMenu>
         </AuthorizeView>
 
