@@ -1,15 +1,16 @@
 ﻿@page "/login"
+@using Aig.Farmacoterapia.Domain.Identity
 @using Aig.Farmacoterapia.Infrastructure.Identity
 @using Blazored.FluentValidation
 @using Microsoft.AspNetCore.Identity
 @using Aig.Farmacoterapia.Application.Common.Middleware
-@using Aig.Farmacoterapia.Application.Login.Model
 @using Aig.Farmacoterapia.Domain.Interfaces
 @layout AccountLayout
 @attribute [AllowAnonymous]
 @inject NavigationManager navigationManager
 @inject UserManager<ApplicationUser> userManager
 @inject SignInManager<ApplicationUser> signInManager
+@inject ISystemLogger _systemLogger;
 @inject IJSRuntime JS
 
 <style>
@@ -61,7 +62,7 @@
              }
 
             <button class="btn btn-brand kt-login__btn-primary" type="submit">
-               <span> Entrar </span>
+               <span>Entrar</span>
              </button>
         </div>
        
@@ -69,54 +70,6 @@
 
 </div>
 
-@* 
-<div class="kt-login__signin">
-    <div class="kt-login__head">
-        <h3 class="kt-login__title">Entrar en su cuenta</h3>
-    </div>
-
-
-  <div class="kt-login__form">
-        
-        <EditForm Model="@LoginRequest" OnValidSubmit="@SubmitValidForm">
-            <FluentValidationValidator />
-            <div class="input-group">
-                <label class="text-danger">@Error</label>
-            </div>
-            <div class="form-group is-invalid">
-                <InputText class="form-control" type="text" autocomplete="off" placeholder="Usuario"
-                           name="UserName" @bind-Value="LoginRequest.UserName"/>
-                <div class="error invalid-feedback">
-                    <ValidationMessage For="@(() => LoginRequest.UserName)"/>
-                </div>
-            </div>
-            <div class="form-group validate is-invalid">
-                <InputText class="form-control" type="password" autocomplete="off" placeholder="Contraseña"
-                           name="Password" @bind-Value="LoginRequest.Password"/>
-                <div class="error invalid-feedback">
-                    <ValidationMessage For="@(() => LoginRequest.Password)"/>
-                </div>
-            </div>
-            <div class="row kt-login__extra">
-                <div class="col">
-                    <label class="kt-checkbox">
-                        <InputCheckbox type="checkbox" name="remember" @bind-Value="LoginRequest.RememberMe"/>
-                        Recuerdame
-                        <span></span>
-                    </label>
-                    
-                </div>
-                 
-            </div>
-           <div class="kt-login__actions">
-                <button id="kt_login_signin_submit" class="btn btn-brand kt-login__btn-primary"
-                        type="submit">Entrar</button>
-            </div>
-        </EditForm>
-
-    </div>
-</div>
-*@
 
 @code{
 
@@ -130,10 +83,11 @@
 
     protected override async Task OnInitializedAsync()
     {
+        //_systemLogger.Info("On initialized..");
         await base.OnInitializedAsync();
         var user = (await AuthStat).User;
         if (user.Identity is {IsAuthenticated: true })
-            navigationManager.NavigateTo("./");
+            navigationManager.NavigateTo("./",true);
         else loading = false;
     }
     private async Task RefresView()

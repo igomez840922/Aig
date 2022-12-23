@@ -55,9 +55,9 @@ namespace Aig.Farmacoterapia.Domain.Common
     }
     public class Result<T> : Result, IResult<T>
     {
-#pragma warning disable CS8618 // Non-nullable property 'Data' must contain a non-null value when exiting constructor. Consider declaring the property as nullable.
+
         public Result() { }
-#pragma warning restore CS8618 // Non-nullable property 'Data' must contain a non-null value when exiting constructor. Consider declaring the property as nullable.
+
         public T Data { get; set; }
         public new static Result<T> Fail()
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Aig.Farmacoterapia.Application.Login.Model;
+using Aig.Farmacoterapia.Domain.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -62,9 +62,7 @@ namespace Aig.Farmacoterapia.Application.Common.Middleware
                 var result = await signInMgr.PasswordSignInAsync(info.UserName, info.Password, info.RememberMe, lockoutOnFailure: false);
 
                 //Uncache password for security:
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 info.Password = null;
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
                 if (result.Succeeded)
                 {
@@ -89,9 +87,7 @@ namespace Aig.Farmacoterapia.Application.Common.Middleware
             }
             else if (context.Request.Path.StartsWithSegments("/loginwith2fa"))
             {
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 var key = Guid.Parse(context.Request.Path.Value.Split('/').Last());
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 var info = Logins[key];
 
                 if (string.IsNullOrEmpty(info.TwoFactorCode))

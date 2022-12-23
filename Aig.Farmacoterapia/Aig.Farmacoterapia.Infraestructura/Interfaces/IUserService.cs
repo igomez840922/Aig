@@ -1,4 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Identity;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using System;
@@ -21,6 +22,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Interfaces
         Task<IResult> SaveAsync(ApplicationUser data);
         Task<IResult> DeleteDeleteAsync(string id);
         Task<IResult> RegisterAsync(RegisterRequest request, string origin);
+        Task<IResult> UpdateProfileAsync(UpdateProfileRequest model);
+        Task<IResult> ChangePasswordAsync(ChangePasswordRequest model);
         Task<IResult> ToggleUserStatusAsync(string userId, bool activate);
         Task<IResult<UserRolesResponse>> GetRolesAsync(string id);
         Task<IResult> UpdateRolesAsync(UpdateUserRolesRequest request);

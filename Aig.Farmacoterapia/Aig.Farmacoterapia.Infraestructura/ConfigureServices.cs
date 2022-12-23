@@ -1,4 +1,5 @@
-﻿using Aig.Farmacoterapia.Domain.Interfaces;
+﻿using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Application;
 using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Files;
@@ -11,19 +12,31 @@ using Aig.Farmacoterapia.Infrastructure.Services;
 using log4net.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using System.Net;
+using System.Security.Claims;
 using System.Text;
 
 namespace Aig.Farmacoterapia.Infrastructure
 {
     public static class ConfigureServices
     {
-        private static IServiceCollection AddUserService(this IServiceCollection services)
+        public static AppConfiguration GetApplicationSettings(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var applicationSettingsConfiguration = configuration.GetSection(nameof(AppConfiguration));
+            services.Configure<AppConfiguration>(applicationSettingsConfiguration);
+            return applicationSettingsConfiguration.Get<AppConfiguration>();
+        }
+        public static IServiceCollection AddUserService(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
@@ -31,7 +44,7 @@ namespace Aig.Farmacoterapia.Infrastructure
             services.AddScoped<IUserService, UserService>();
             return services;
         }
-        private static IServiceCollection AddIdentity(this IServiceCollection services)
+        public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<ApplicationUser>(options =>
@@ -55,22 +68,97 @@ namespace Aig.Farmacoterapia.Infrastructure
 
             return services;
         }
-        internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
+        //public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
+        //{
+        //    var appConfig = services.GetApplicationSettings(configuration);
+        //    services.AddAuthentication().AddJwtBearer("JwtClient", options =>
+        //    {
+        //        options.TokenValidationParameters = new TokenValidationParameters(){
+        //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appConfig.Secret)),
+        //            ValidAudience = appConfig.Audience,
+        //            ValidIssuer = appConfig.Issuer,
+        //            ValidateIssuerSigningKey = true,
+        //            ValidateLifetime = true,
+        //            ValidateIssuer = true,
+        //            ValidateAudience = true,
+        //            ClockSkew = TimeSpan.Zero
+        //        };
+        //    });
+        //    return services;
+        //}
+        public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuthentication().AddJwtBearer("JwtClient", options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters(){
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("S0M3RAN0MS3CR3T!1!MAG1C!1!")),
-                    ValidAudience = "AudienceClientJwt",
-                    ValidIssuer = "IssuerClientJwt",
-                    ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
+            var key = Encoding.UTF8.GetBytes(services.GetApplicationSettings(configuration).Secret);
+            services.AddAuthentication(authentication =>
+                {
+                    //authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    //authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+               .AddJwtBearer("JwtClient", options =>
+               {
+                   options.RequireHttpsMetadata = false;
+                   options.SaveToken = true;
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuerSigningKey = true,
+                       IssuerSigningKey = new SymmetricSecurityKey(key),
+                       ValidateIssuer = false,
+                       ValidateAudience = false,
+                       RoleClaimType = ClaimTypes.Role,
+                       ClockSkew = TimeSpan.Zero
+                   };
+                   options.Events = new JwtBearerEvents
+                   {
+                       OnAuthenticationFailed = c =>
+                       {
+                           if (c.Exception is SecurityTokenExpiredException)
+                           {
+                               c.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                               c.Response.ContentType = "application/json";
+                               var result = JsonConvert.SerializeObject(Result.Fail("The Token is expired."));
+                               return c.Response.WriteAsync(result);
+                           }
+                           else
+                           {
+                                #if DEBUG
+                                    c.NoResult();
+                                    c.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                                    c.Response.ContentType = "text/plain";
+                                    return c.Response.WriteAsync(c.Exception.ToString());
+                                #else
+                                    c.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                                    c.Response.ContentType = "application/json";
+                                    var result = JsonConvert.SerializeObject(Result.Fail(localizer["An unhandled error has occurred."]));
+                                    return c.Response.WriteAsync(result);
+                                #endif
+                           }
+                       },
+                       OnChallenge = context =>
+                       {
+                           context.HandleResponse();
+                           if (!context.Response.HasStarted)
+                           {
+                               context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                               context.Response.ContentType = "application/json";
+                               var result = JsonConvert.SerializeObject(Result.Fail("You are not Authorized."));
+                               return context.Response.WriteAsync(result);
+                           }
+
+                           return Task.CompletedTask;
+                       },
+                       OnForbidden = context =>
+                       {
+                           context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                           context.Response.ContentType = "application/json";
+                           var result = JsonConvert.SerializeObject(Result.Fail("You are not authorized to access this resource."));
+                           return context.Response.WriteAsync(result);
+                       },
+                   };
+               });
             return services;
         }
-        internal static void RegisterSwagger(this IServiceCollection services)
+
+        public static void RegisterSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -107,7 +195,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                 options.DisplayRequestDuration();
             });
         }
-        private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             var conn = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -136,14 +224,14 @@ namespace Aig.Farmacoterapia.Infrastructure
 
             return services;
         }
-        private static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
             services.AddSingleton<ISystemLogger, SystemLogger>();
 
             return services;
         }
-        private static IServiceCollection AddRepositories(this IServiceCollection services)
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services
                 .AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
@@ -152,11 +240,14 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddScoped<IPharmaceuticalRepository, PharmaceuticalRepository>()
                 .AddScoped<IMedicationRouteRepository, MedicationRouteRepository>()
                 .AddScoped<IMakerRepository, MakerRepository>()
+                .AddScoped<IStudiesRepository, StudiesRepository>()
                 .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddScoped<IUploadService, UploadService>();
         }
-        private static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
-        {
+        public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        {   
+            //Log4net
+            XmlConfigurator.Configure(new FileInfo("log4net.config"));
             services.AddScoped<AppState>();
             services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
@@ -165,16 +256,13 @@ namespace Aig.Farmacoterapia.Infrastructure
         }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //Log4net
-            XmlConfigurator.Configure(new FileInfo("log4net.config"));
-
+            AddSharedInfrastructure(services, configuration);
             AddDatabase(services, configuration);
             AddIdentity(services);
             AddUserService(services);
             AddInfrastructure(services);
-            AddSharedInfrastructure(services, configuration);
             AddRepositories(services);
-            AddJwtAuthentication(services);
+            AddJwtAuthentication(services, configuration);
             RegisterSwagger(services);
 
             return services;

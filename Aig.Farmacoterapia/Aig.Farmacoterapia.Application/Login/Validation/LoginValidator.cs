@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Application.Common.Validation;
-using Aig.Farmacoterapia.Application.Login.Model;
+using Aig.Farmacoterapia.Domain.Identity;
 using FluentValidation;
 
 namespace Aig.Farmacoterapia.Application.Login.Validation
@@ -17,4 +17,6 @@ namespace Aig.Farmacoterapia.Application.Login.Validation
             IsNotEmpty(c => c.Password, "Debes ingresar tu contraseña");
         }
     }
+
+  
 }

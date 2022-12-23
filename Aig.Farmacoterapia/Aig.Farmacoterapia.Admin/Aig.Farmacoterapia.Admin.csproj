@@ -90,10 +90,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Files\datasheet\" />
-    <Folder Include="Files\prospectus\" />
-    <Folder Include="Files\studies\" />
-    <Folder Include="Files\users\" />
     <Folder Include="Models\" />
     <Folder Include="Files\" />
   </ItemGroup>

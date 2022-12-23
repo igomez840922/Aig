@@ -1,0 +1,123 @@
+﻿@using Aig.Farmacoterapia.Admin.Wasm.Extensions
+@using Microsoft.AspNetCore.Components.Authorization
+@inherits LayoutComponentBase
+@implements IDisposable;
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<style>
+    .footer_copyright {
+        position: fixed;
+        bottom: 0;
+        left: 48%;
+        right: 0;
+        height: 30px;
+    }
+</style>
+<MudLayout>
+    <MudAppBar Elevation="8">
+        <MudImage Src="media/logo2.png" Style="margin-right:30px" />
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="MudBlazor.Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudSpacer />
+
+        <AuthorizeView>
+            <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+                <ActivatorContent>
+                    @if (string.IsNullOrEmpty(_avatar))
+                    {
+                        <MudAvatar Color="Color.Tertiary">
+                            @_name?[..1]?.ToUpper()
+                        </MudAvatar>
+                        <MudText Style="margin: 7px 10px 7px 10px;">@_name</MudText>
+                    }
+                    else
+                    {
+                        <MudAvatar Image="@_avatar"></MudAvatar>
+                        <MudText Style="margin: 7px 10px 7px 10px;">@_name</MudText>
+                    }
+
+                </ActivatorContent>
+
+
+                <ChildContent>
+                    <MudMenuItem Icon="@Icons.Material.Outlined.Person" Href="/profile">Profile</MudMenuItem>
+                     <MudDivider Class="mb-2" />
+                    <MudMenuItem Icon="@Icons.Material.Outlined.Login" OnClick="Logout">Salir</MudMenuItem>
+                </ChildContent>
+
+               @* <ChildContent>
+                    <MudDivider Class="mb-2" />
+                    <MudListItem Text="Perfil" Icon="@Icons.Material.Outlined.Person" Href="/profile" />
+                    <MudListItem Text="Salir" Icon="@Icons.Material.Outlined.Login" OnClick="Logout" />
+                </ChildContent>*@
+            </MudMenu>
+        </AuthorizeView>
+
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="8">
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+            @Body
+        </MudContainer>
+        <MudPaper Elevation="0" Class="footer_copyright">
+            @DateTime.Now.Year &nbsp;&copy;&nbsp;
+            <MudLink Target="_blank" Href="https://soaint.com" Typo="Typo.body2">SOAINT</MudLink>
+        </MudPaper>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+
+    bool _drawerOpen = true;
+    private string _avatar { get; set; }
+    private string _name { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        _interceptor.RegisterEvent();
+        await base.OnInitializedAsync();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await LoadDataAsync();
+        }
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        var user =await _authenticationManager.CurrentUser();
+        if (user == null) return;
+        if (user.Identity?.IsAuthenticated == true){
+            _name = $"{user.GetFirstName()} {user.GetLastName()}";
+            _avatar = $"{_appConfiguration.ApiUrl}{await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL)}";
+            _snackBar.Add(string.Format($"Hola {user.GetFirstName()}"), Severity.Success);
+        }
+     }
+       private void Logout()
+        {
+            var parameters = new DialogParameters
+            {
+                {nameof(Dialogs.Logout.ContentText), "Está seguro que desea cerrar la sesión?"},
+                {nameof(Dialogs.Logout.ButtonText), "Aceptar"},
+                {nameof(Dialogs.Logout.Color), Color.Error},
+            };
+
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+            _dialogService.Show<Dialogs.Logout>("Cerrar la sesión", parameters, options);
+        }
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+     public void Dispose()
+    {
+       _interceptor.DisposeEvent();
+    }
+}

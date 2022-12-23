@@ -229,7 +229,7 @@
                                                                                    Variant="Variant.Text"
                                                                                    Color="Color.Primary"
                                                                                    Size="Size.Small"
-                                                                                   StartIcon="@Icons.Filled.CloudUpload"
+                                                                                   StartIcon="@Icons.Filled.AttachFile"
                                                                                    for="fileInput">
                                                                             Monografía
                                                                         </MudButton>
@@ -284,7 +284,7 @@
                                                                                    Variant="Variant.Text"
                                                                                    Color="Color.Primary"
                                                                                    Size="Size.Small"
-                                                                                   StartIcon="@Icons.Filled.CloudUpload"
+                                                                                   StartIcon="@Icons.Filled.AttachFile"
                                                                                    for="prospectusfileInput">
                                                                             Prospecto
                                                                         </MudButton>
@@ -357,7 +357,7 @@
                                                                            Variant="Variant.Text"
                                                                            Color="Color.Primary"
                                                                            Size="Size.Small"
-                                                                           StartIcon="@Icons.Filled.CloudUpload"
+                                                                           StartIcon="@Icons.Filled.Photo"
                                                                            for="imagefileInput">
                                                                     Foto
                                                                 </MudButton>
@@ -535,7 +535,6 @@
                 var extension = Path.GetExtension(_file.Name);
                 if (_file.Size <= maxFileSize)
                 {
-                    var buffer = new byte[_file.Size];
                     var stream = _file.OpenReadStream(maxAllowedSize: maxFileSize);
                     var request = new UploadObject
                         {
@@ -548,6 +547,7 @@
                     ModelData.DataSheetURL = await _uploadService.UploadAsync(request);
                 }
                 else { showFileInputAlert = true; }
+
             }
             catch (Exception ex)
             {
@@ -559,12 +559,9 @@
 
     private async Task DeleteDataSheetAsync()
     {
-        if (await _uploadService.DeleteAsync(ModelData.DataSheetURL))
-        {
-            _file = null;
-            ModelData.DataSheetURL = null;
-        }
-
+        await _uploadService.DeleteAsync(ModelData.DataSheetURL);
+        _file = null;
+        ModelData.DataSheetURL = null;
     }
 
     private async Task UploadProspectusFiles(InputFileChangeEventArgs e)
@@ -581,7 +578,6 @@
                 var extension = Path.GetExtension(_prospectusFile.Name);
                 if (_prospectusFile.Size <= maxFileSize)
                 {
-                    var buffer = new byte[_prospectusFile.Size];
                     var stream = _prospectusFile.OpenReadStream(maxAllowedSize: maxFileSize);
                     var request = new UploadObject
                         {
@@ -607,12 +603,10 @@
 
     private async Task DeleteProspectusAsync()
     {
-        if (await _uploadService.DeleteAsync(ModelData.ProspectusURL))
-        {
-            _prospectusFile = null;
-            ModelData.ProspectusURL = null;
-        }
-
+        await _uploadService.DeleteAsync(ModelData.ProspectusURL);
+        _prospectusFile = null;
+         ModelData.ProspectusURL = null;
+        
     }
 
     private async Task UploadPictureFiles(InputFileChangeEventArgs e)

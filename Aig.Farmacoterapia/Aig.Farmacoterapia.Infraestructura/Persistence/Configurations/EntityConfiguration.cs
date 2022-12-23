@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Aig.Farmacoterapia.Domain.Entities;
+using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -14,7 +15,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
         IEntityTypeConfiguration<AigPais>,
         IEntityTypeConfiguration<AigFormaFarmaceutica>,
         IEntityTypeConfiguration<AigViaAdministracion>,
-        IEntityTypeConfiguration<ApplicationUser>
+        IEntityTypeConfiguration<ApplicationUser>,
+        IEntityTypeConfiguration<AigEstudios>
     {
 
         public void Configure(EntityTypeBuilder<AigMedicamento> builder)
@@ -70,5 +72,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             builder.Ignore(c => c.PasswordConfirm);
             builder.Ignore(c => c.FullName);
         }
+
+        public void Configure(EntityTypeBuilder<AigEstudios> builder)
+        {
+            builder.HasKey(k => new { k.Id });
+            builder.Ignore(c => c.ShowDetails);
+            builder.Property(e => e.Medicamentos).HasJsonConversion();
+        }
+
     }
 }

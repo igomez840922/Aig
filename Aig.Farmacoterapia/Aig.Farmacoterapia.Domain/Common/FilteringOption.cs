@@ -19,7 +19,7 @@ namespace Aig.Farmacoterapia.Domain.Common
         StartsWith,
         EndsWith
     }
-    public enum LogicalOperator { And, Or }
+    public enum LogicalOperator {Or, And}
     public class FilteringOption
     {
         public string Field { get; set; }
