@@ -10,12 +10,12 @@ namespace DataModel
     {
         public FMV_NotaInstitucion()
         {
-            LInstituciones = new List<InstitucionDestinoTB>();
+            LInstituciones = new List<FMV_NotaDestinoTB>();
         }
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
-        private List<InstitucionDestinoTB> lInstituciones;
-        public virtual List<InstitucionDestinoTB> LInstituciones { get => lInstituciones; set => SetProperty(ref lInstituciones, value); }
+        private List<FMV_NotaDestinoTB> lInstituciones;
+        public virtual List<FMV_NotaDestinoTB> LInstituciones { get => lInstituciones; set => SetProperty(ref lInstituciones, value); }
 
 
     }

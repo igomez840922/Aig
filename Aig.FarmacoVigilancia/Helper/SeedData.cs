@@ -261,80 +261,71 @@ namespace Aig.FarmacoVigilancia.Helper
                         }
                     }
                 
-                    //Instituciones por Tipo de Notas
-                    var LInstituciones = new List<InstitucionDestinoTB>() {
-                        new InstitucionDestinoTB() { Nombre = "CSS", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
-                        new InstitucionDestinoTB() { Nombre = "MINSA", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
-                        new InstitucionDestinoTB() { Nombre = "Hospitales/Patronatos/Centros Especializados", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
-                        new InstitucionDestinoTB() { Nombre = "Clínica/Hospital Privados", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
-                        new InstitucionDestinoTB() { Nombre = "Farmacias Privadas", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
-                        new InstitucionDestinoTB() { Nombre = "Industria Farmacéutica", TipoNota = DataModel.Helper.enumFMV_NoteType.Externa },
-                        new InstitucionDestinoTB() { Nombre = "Dirección", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Administración", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Asesoría Legal", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "CTC", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Registro Sanitario", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Sebeq", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Modificaciones", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Control de Calidad", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Departamento de Auditoría", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia", TipoNota = DataModel.Helper.enumFMV_NoteType.Interna },
-                        new InstitucionDestinoTB() { Nombre = "Dirección", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "Asesoría Legal", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "CTC", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "Registro Sanitario", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "Sebeq", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "Modificaciones", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "Control de Calidad", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "Departamento de Auditoría", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia", TipoNota = DataModel.Helper.enumFMV_NoteType.HojaTramite },
-                        new InstitucionDestinoTB() { Nombre = "Profesionales de la salud y pacientes", TipoNota = DataModel.Helper.enumFMV_NoteType.Circular },
-                        new InstitucionDestinoTB() { Nombre = "Industria Farmacéutica", TipoNota = DataModel.Helper.enumFMV_NoteType.Circular },
-                        new InstitucionDestinoTB() { Nombre = "CSS/MINSA/Otros", TipoNota = DataModel.Helper.enumFMV_NoteType.Monitoreo },
-                };
-                    foreach(var inst in LInstituciones) 
-                    { dalService.Save(inst); }
-                    
-
                 }
 
-                //if (dalService.Count<InstitucionDestinoTB>() <= 0)
-                //{
-                //    InstitucionDestinoTB data = new InstitucionDestinoTB() { Nombre = "CSS" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "MINSA" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Hospitales/Patronatos/Centros Especializados" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Clínica/Hospital Privados" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Farmacias Privadas" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Industria Farmacéutica" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Dirección" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Administración" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Asesoría Legal" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "CTC" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Registro Sanitario" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Sebeq" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Modificaciones" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Control de Calidad" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Departamento de Auditoría" };
-                //    dalService.Save(data);
-                //    data = new InstitucionDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia" };
-                //    dalService.Save(data);
-                //}
+                if (dalService.Count<FMV_NotaDestinoTB>() <= 0)
+                {
+                    //Instituciones por Tipo de Notas
+                    var LInstituciones = new List<FMV_NotaDestinoTB>() {
+                        new FMV_NotaDestinoTB() { Nombre = "CSS", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Externa }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "MINSA",NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Externa }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Hospitales/Patronatos/Centros Especializados", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Externa }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Clínica/Hospital Privados", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Externa }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Farmacias Privadas", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Externa }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Industria Farmacéutica", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Externa }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Circular }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Dirección", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Administración", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Asesoría Legal", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "CTC", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Registro Sanitario", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Sebeq", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Modificaciones", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Control de Calidad", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Departamento de Auditoría", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Interna }, new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.HojaTramite }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "Profesionales de la salud y pacientes", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Circular }, } } },
+                        new FMV_NotaDestinoTB() { Nombre = "CSS/MINSA/Otros", NotaClasificacion = new FMV_NotaClasificacion(){ LClasificaciones = new List<NotaClasificacion>(){ new NotaClasificacion() { NoteType = DataModel.Helper.enumFMV_NoteType.Monitoreo }, } } },
+                };
+                    foreach (var inst in LInstituciones)
+                    { dalService.Save(inst); }
+                }
+                    //if (dalService.Count<InstitucionDestinoTB>() <= 0)
+                    //{
+                    //    InstitucionDestinoTB data = new InstitucionDestinoTB() { Nombre = "CSS" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "MINSA" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Hospitales/Patronatos/Centros Especializados" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Clínica/Hospital Privados" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Farmacias Privadas" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Industria Farmacéutica" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Dirección" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Administración" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Asesoría Legal" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "CTC" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Registro Sanitario" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Sebeq" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Modificaciones" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Control de Calidad" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Departamento de Auditoría" };
+                    //    dalService.Save(data);
+                    //    data = new InstitucionDestinoTB() { Nombre = "Centro Nacional de Farmacovigilancia" };
+                    //    dalService.Save(data);
+                    //}
 
-                if (dalService.Count<FMV_OrigenAlertaTB>() <= 0)
+                    if (dalService.Count<FMV_OrigenAlertaTB>() <= 0)
                 {
                     FMV_OrigenAlertaTB data = new FMV_OrigenAlertaTB() { Nombre = "EMA" };
                     dalService.Save(data);

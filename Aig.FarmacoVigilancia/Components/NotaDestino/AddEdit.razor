@@ -40,6 +40,16 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Descripción"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputTextArea rows="6" class="form-control" @bind-Value="Data.Descripcion" />
+                                        <ValidationMessage For=@(() => Data.Descripcion) />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <h5>@languageContainerService.Keys["Contactos Asociados"]</h5>
                         <div class="row clearfix">

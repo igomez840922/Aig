@@ -21,6 +21,29 @@ namespace DataModel
         [Required(ErrorMessage = "requerido")]
         public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
+        private string descripcion;
+        [StringLength(500)]
+        public string Descripcion { get => descripcion; set => SetProperty(ref descripcion, value); }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string NotasAsociadas { 
+            get {
+                string desc = null;
+                if(NotaClasificacion?.LClasificaciones?.Count > 0)
+                {
+                    foreach(var nt in NotaClasificacion.LClasificaciones)
+                    {
+                        desc += nt.Nombre + " - ";
+                    }
+
+                    desc.Remove(desc.LastIndexOf('-'));
+                }
+                return desc;
+            }
+            set { }
+        }
+
+
         //Tipos de Notas
         private FMV_NotaClasificacion notaClasificacion;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]

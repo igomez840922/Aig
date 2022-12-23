@@ -20,12 +20,12 @@ namespace Aig.FarmacoVigilancia.Components.Note
         [Inject]
         IWorkerPersonService personService { get; set; }
         [Inject]
-        IDestinyInstituteService destinyInstituteService { get; set; }
+        INotaDestinoService destinyInstituteService { get; set; }
         [Parameter]
         public DataModel.FMV_NotaTB Nota { get; set; }
         List<PersonalTrabajadorTB> LPerson { get; set; }
-        List<InstitucionDestinoTB> LInstitucionDestino { get; set; }
-        List<InstitucionDestinoTB> LInstitucionDestinoFiltered { get; set; } 
+        List<FMV_NotaDestinoTB> LInstitucionDestino { get; set; }
+        List<FMV_NotaDestinoTB> LInstitucionDestinoFiltered { get; set; } 
 
         bool openAttachment { get; set; } = false;
         AttachmentTB attachment { get; set; } = null;
@@ -171,7 +171,7 @@ namespace Aig.FarmacoVigilancia.Components.Note
             {
                 if(Nota!=null && Nota.TipoNota != null)
                 {
-                    LInstitucionDestinoFiltered =  LInstitucionDestino.Where(x => x.TipoNota == Nota.TipoNota).ToList();
+                    LInstitucionDestinoFiltered =  LInstitucionDestino.Where(x => x.NotaClasificacion.LClasificaciones.Any(o=>o.NoteType == Nota.TipoNota)).ToList();
                 }
             }
             catch { }
