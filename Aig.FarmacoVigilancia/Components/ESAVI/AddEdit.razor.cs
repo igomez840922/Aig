@@ -2,6 +2,7 @@
 using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
 using DataModel;
+using DocumentFormat.OpenXml.InkML;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Globalization;
@@ -230,6 +231,7 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
             Data.IntensidadEsavi = dat;
             Data.Gravedad = dat?.Gravedad ?? "";
 
+            CheckOtrosCritSeleccion();            
             //await FetchData();
         }
         protected async Task OnTipoVacunaChange(long? Id)
@@ -247,6 +249,35 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
             Data.Laboratorio = dat;
 
             //await FetchData();
+        }
+
+        protected async Task CheckOtrosCritSeleccion()
+        {
+            Data.ElegibleEvaluacionCausal = "Regular";
+            switch (Data.InvDetalleCaso)
+            {
+                case DataModel.Helper.enumOpcionSiNo.Si:
+                    {
+                        if(Data.Gravedad!=null && Data.Gravedad.Contains("Grave"))
+                        {
+                            Data.ElegibleEvaluacionCausal = "Prioridad";
+                        }
+
+                        switch (Data.OtrosCriterios)
+                        {
+                            case DataModel.Helper.enumFMV_EsaviOtroCriterio.NA:
+                                {
+                                    break;
+                                }
+                            default:
+                                {
+                                    Data.ElegibleEvaluacionCausal = "Prioridad";
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+            }
         }
     }
 

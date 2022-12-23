@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["Nueva"]) @languageContainerService.Keys["ESAVI"]</h5>
+                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["Nuevo"]) @languageContainerService.Keys["ESAVI"]</h5>
                     <button type="button" class="close" @onclick="(e)=>{Cancel();}"
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -121,7 +121,7 @@
                                             @languageContainerService.Keys["Investigación y Detalles del Caso"]
                                         </label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.InvDetalleCaso" class="form-control">
+                                            <InputSelect @bind-Value="Data.InvDetalleCaso" class="form-control" @onclick="(e)=>{CheckOtrosCritSeleccion();}">
                                                 @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -428,7 +428,7 @@
                                                 <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Data.IntensidadEsaviId
                                                                 AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
                                                                 Data=@lintensidad TextProperty="FullName" ValueProperty="Id"
-                                                                Change=@(args => {OnIntensidadChange((args!=null?(long)args:null));}) />
+                                                                Change=@(args => {OnIntensidadChange((args!=null?(long)args:null));CheckOtrosCritSeleccion();}) />
                                                 <ValidationMessage For=@(() => Data.IntensidadEsaviId) />
                                             </div>
                                         </div>
@@ -437,8 +437,9 @@
                                         <label>@languageContainerService.Keys["Gravedad"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.Gravedad" />
-                                                <ValidationMessage For=@(() => Data.Gravedad) />
+                                                @*<InputText class="form-control" @bind-Value="Data.Gravedad" @bind-value:event="oninput" @onkeyup="() => OnAtcChanged()"/>*@
+                                                <input type="text" class="form-control" @bind-value="@Data.Gravedad" @bind-value:event="oninput" @onkeyup="() => CheckOtrosCritSeleccion()">
+                                                    <ValidationMessage For=@(() => Data.Gravedad) />
                                             </div>
                                         </div>
                                     </div>
@@ -447,7 +448,7 @@
                                             @languageContainerService.Keys["Otros Criterios de Selección"]
                                         </label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Data.OtrosCriterios" class="form-control">
+                                            <InputSelect @bind-Value="Data.OtrosCriterios" class="form-control" @onclick="(e)=>{CheckOtrosCritSeleccion();}">
                                                 @foreach (enumFMV_EsaviOtroCriterio dt in Enum.GetValues(typeof(enumFMV_EsaviOtroCriterio)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -475,7 +476,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <label>@languageContainerService.Keys["Elegibilidad por Evaluacion de Causalidad"]</label>
+                                        <label>@languageContainerService.Keys["Elegibe para Evaluación de Causalidad"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <InputText class="form-control" @bind-Value="Data.ElegibleEvaluacionCausal" />
@@ -602,13 +603,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Dosis en que se presenta el ESAVI"]</label>
                                         <div class="form-group">
-                                            <div class="form-line">
+                                            <InputSelect @bind-Value="Data.DosisPresenta" class="form-control">
+                                                @foreach (enumFMV_DosisNumero dt in Enum.GetValues(typeof(enumFMV_DosisNumero)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Data.DosisPresenta) />
+                                            @*<div class="form-line">
                                                 <InputTextArea rows="6" class="form-control" @bind-Value="Data.DosisEsavi" />
                                                 <ValidationMessage For=@(() => Data.DosisEsavi) />
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
 
