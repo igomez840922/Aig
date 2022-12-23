@@ -559,12 +559,9 @@
 
     private async Task DeleteDataSheetAsync()
     {
-        if (await _uploadService.DeleteAsync(ModelData.DataSheetURL))
-        {
-            _file = null;
-            ModelData.DataSheetURL = null;
-        }
-
+        await _uploadService.DeleteAsync(ModelData.DataSheetURL);
+        _file = null;
+        ModelData.DataSheetURL = null;
     }
 
     private async Task UploadProspectusFiles(InputFileChangeEventArgs e)
@@ -606,12 +603,10 @@
 
     private async Task DeleteProspectusAsync()
     {
-        if (await _uploadService.DeleteAsync(ModelData.ProspectusURL))
-        {
-            _prospectusFile = null;
-            ModelData.ProspectusURL = null;
-        }
-
+        await _uploadService.DeleteAsync(ModelData.ProspectusURL);
+        _prospectusFile = null;
+         ModelData.ProspectusURL = null;
+        
     }
 
     private async Task UploadPictureFiles(InputFileChangeEventArgs e)
