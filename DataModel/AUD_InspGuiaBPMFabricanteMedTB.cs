@@ -310,7 +310,7 @@ namespace DataModel
                         },
                     new ContenidoTablas()
                         {
-                            Titulo = "¿EProducto a granel?",
+                            Titulo = "¿Producto a granel?",
                             Criterio = "Informativo",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -6414,14 +6414,6 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Si se utilizan máquinas automáticas para controlar dimensiones, pesos, etiquetas, prospectos, códigos de barras, se verifica su correcto funcionamiento (cuando aplique)?",
-                        Criterio = "MAYOR",
-                        Capitulo="",
-                        Articulo="",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "¿Las unidades descartadas por sistemas automáticos, en caso de reintegrarse a la línea son previamente inspeccionadas y autorizadas por personal con responsabilidad asignada (cuando aplique)?",
                         Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",

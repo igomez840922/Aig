@@ -73,6 +73,35 @@ namespace Aig.Auditoria.Services
             var result = DalService.Save(data);
             if(result != null)
             {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.AuditoriaSanitaria).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RegenteFarmaceutico).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.OtrosFuncionarios).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.GeneralesEmpresa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RespProduccion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RespControlCalidad).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RequisitosLegales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ClasifActComerciales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ClasifEstablecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.OrganizacionPersonal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.EdifInstalaciones).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.Almacenes).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.AreaAcondicionamiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.EquiposGeneralidades).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.MatProducts).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.Documentacion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.Acondicionamiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.GarantiaCalidad).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ControlCalidad).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ProdAnalisisContrato).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ValGenerales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.QuejasReclamos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.AutoInspecAuditCal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.SaveChanges();
+                }
                 if (result.InspGuiaBPMFabricanteMed != null)
                 {
                     DalService.DBContext.Entry(result.InspGuiaBPMFabricanteMed).Property(b => b.AuditoriaSanitaria).IsModified = true;

@@ -189,6 +189,12 @@ namespace DataModel
         private AUD_InspGuiaBPMFabricanteMedTB? inspGuiaBPMFabricanteMed;
         public virtual AUD_InspGuiaBPMFabricanteMedTB? InspGuiaBPMFabricanteMed { get => inspGuiaBPMFabricanteMed; set => SetProperty(ref inspGuiaBPMFabricanteMed, value); }
 
+        //Disposicion Final de Productos
+        private long? inspGuiaBPMLabAcondicionadorId;
+        public long? InspGuiaBPMLabAcondicionadorId { get => inspGuiaBPMLabAcondicionadorId; set => SetProperty(ref inspGuiaBPMLabAcondicionadorId, value); }
+        private AUD_InspGuiaBPMLabAcondicionadorTB? inspGuiaBPMLabAcondicionador;
+        public virtual AUD_InspGuiaBPMLabAcondicionadorTB? InspGuiaBPMLabAcondicionador { get => inspGuiaBPMLabAcondicionador; set => SetProperty(ref inspGuiaBPMLabAcondicionador, value); }
+
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
         private List<AttachmentTB> lAttachments;
