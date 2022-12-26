@@ -1,0 +1,94 @@
+﻿@using DataModel.Helper;
+
+
+<!-- Modal Creat/Edit -->
+@if (Participante != null && OpenDialog)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog  modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Participante != null && Participante.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["Participante"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Participante" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+
+                        <div class="row clearfix">
+                            <div class="col-sm-9">
+                                <label>@languageContainerService.Keys["FullName"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Participante.NombreCompleto" />
+                                        <ValidationMessage For=@(() => Participante.NombreCompleto) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Participante.CedulaIdentificacion" />
+                                        <ValidationMessage For=@(() => Participante.CedulaIdentificacion) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Participante.RegistroNumero" />
+                                        <ValidationMessage For=@(() => Participante.RegistroNumero) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>@languageContainerService.Keys["Charge"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Participante.Cargo" />
+                                        <ValidationMessage For=@(() => Participante.Cargo) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>@languageContainerService.Keys["Area Evaluada"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Participante.AreaEvaluada" />
+                                        <ValidationMessage For=@(() => Participante.AreaEvaluada) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br><br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+}
+

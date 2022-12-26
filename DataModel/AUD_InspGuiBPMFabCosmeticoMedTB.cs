@@ -4836,6 +4836,19 @@ namespace DataModel
         private string horarioOperacion;
         public string HorarioOperacion { get => horarioOperacion; set => SetProperty(ref horarioOperacion, value); }
 
+        // Nº de Licencia Especial de Sustancias Controladas 
+        private string numLicEspecial;
+        public string NumLicEspecial { get => numLicEspecial; set => SetProperty(ref numLicEspecial, value); }
+
+        // Fecha de vencimiento Lic Especial
+        private DateTime? fechaVencLicEspecial;
+        public DateTime? FechaVencLicEspecial { get => fechaVencLicEspecial; set => SetProperty(ref fechaVencLicEspecial, value); }
+
+        // Actividad comercial aprobada
+        private string actComercialAprobada;
+        public string ActComercialAprobada { get => actComercialAprobada; set => SetProperty(ref actComercialAprobada, value); }
+
+
     }
 
     public class AUD_ContenidoTablas : SystemId
@@ -4931,6 +4944,12 @@ namespace DataModel
 
         private bool isQuestion;
         public bool IsQuestion { get => isQuestion; set => SetProperty(ref isQuestion, value); }
+
+        private string temperatura;
+        public string Temperatura { get => temperatura; set => SetProperty(ref temperatura, value); }
+
+        private string humedad;
+        public string Humedad { get => humedad; set => SetProperty(ref humedad, value); }
 
     }
 

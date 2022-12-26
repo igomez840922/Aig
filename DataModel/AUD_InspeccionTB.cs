@@ -196,6 +196,13 @@ namespace DataModel
         public virtual AUD_InspGuiaBPMLabAcondicionadorTB? InspGuiaBPMLabAcondicionador { get => inspGuiaBPMLabAcondicionador; set => SetProperty(ref inspGuiaBPMLabAcondicionador, value); }
 
 
+        //GUIA DE BUENAS PRACTICAS
+        private long? inspGuiaBPM_BpaId;
+        public long? InspGuiaBPM_BpaId { get => inspGuiaBPM_BpaId; set => SetProperty(ref inspGuiaBPM_BpaId, value); }
+        private AUD_InspGuiaBPM_BpaTB? inspGuiaBPM_Bpa;
+        public virtual AUD_InspGuiaBPM_BpaTB? InspGuiaBPM_Bpa { get => inspGuiaBPM_Bpa; set => SetProperty(ref inspGuiaBPM_Bpa, value); }
+
+
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
         private List<AttachmentTB> lAttachments;
         public virtual List<AttachmentTB> LAttachments { get => lAttachments; set => SetProperty(ref lAttachments, value); }

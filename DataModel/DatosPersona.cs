@@ -68,7 +68,9 @@ namespace DataModel
         private string profesion;
         public string Profesion { get => profesion; set => SetProperty(ref profesion, value); }
 
-        
+        //Area Evaluada
+        private string areaEvaluada;
+        public string AreaEvaluada { get => areaEvaluada; set => SetProperty(ref areaEvaluada, value); }
 
     }
 }

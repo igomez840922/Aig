@@ -34,6 +34,10 @@ namespace DataModel
         private string firma;
         public string Firma { get => firma; set => SetProperty(ref firma, value); }
 
-       
+        //Area Evaluada
+        private string areaEvaluada;
+        public string AreaEvaluada { get => areaEvaluada; set => SetProperty(ref areaEvaluada, value); }
+
+
     }
 }

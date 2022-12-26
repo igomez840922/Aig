@@ -848,4 +848,22 @@ namespace DataModel.Helper
         CTA = 4,
     }
 
+    public enum enum_PropositoInspec
+    {
+        [Description("Solicitud")]
+        Solicitud = 0,
+        [Description("Mudanza")]
+        Mudanza = 1,
+        [Description("Queja o reclamo")]
+        QuejaReclamo = 2,
+        [Description("Investigación")]
+        Investigacion = 3,
+        [Description("Rutina")]
+        Rutina = 4,
+        [Description("Modificación de actividad")]
+        ModActividad = 5,
+        [Description("Ampliación o modificación de área")]
+        AmpModArea = 6,
+    }
+
 }
