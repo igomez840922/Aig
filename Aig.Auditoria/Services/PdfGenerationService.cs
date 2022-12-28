@@ -3460,19 +3460,22 @@ namespace Aig.Auditoria.Services
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
-                                    columns.RelativeColumn((float)0.9);
-                                    columns.RelativeColumn((float)0.1);
+                                    columns.RelativeColumn((float)0.5);
+                                    columns.RelativeColumn((float)0.2);
+                                    columns.RelativeColumn((float)0.3);
                                 });
                                 table.Header(header =>
                                 {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Adquisición de Materias primas y materiales".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Objetivos".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
                                 });
 
                                 foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                 }
                             });
                             column.Item().Table(table =>
@@ -8157,7 +8160,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
                                 });
 
-                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ClasifEstablecimiento.LContenido)
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.OrganizacionPersonal.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {
@@ -8889,7 +8892,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
                                 });
 
-                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.QuejasReclamos.LContenido)
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.QuejasGenerales.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {

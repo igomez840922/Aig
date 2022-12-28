@@ -11161,11 +11161,11 @@ namespace DataModel
                     },
                 }
             };
-            /////////////
-            QuejasReclamos = new AUD_ContenidoTablas() {
-                LContenido = new List<ContenidoTablas>()
-                { }
-            };
+            ///////////////
+            //QuejasReclamos = new AUD_ContenidoTablas() {
+            //    LContenido = new List<ContenidoTablas>()
+            //    { }
+            //};
             /////////////
             AutoInspecAuditCal = new AUD_ContenidoTablas()
             {

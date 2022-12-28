@@ -189,7 +189,7 @@ namespace DataModel
                             Titulo = "Se puede comprobar que los productos que maneja y cuya competencia corresponde a la Dirección Nacional de Farmacia y Drogas, son los autorizados en la Licencia de Operación.",
                             Criterio = "Crítico",
                             Capitulo="599, 386, 668",
-                            Articulo="Ley 1 Art. 172 Ley 24 Art. 12",
+                            Articulo="Ley 1 Art. 172, Ley 24 Art. 12",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
                     new ContenidoTablas()
@@ -204,7 +204,7 @@ namespace DataModel
                     new ContenidoTablas()
                         {
                             Titulo = "La documentación que maneja el establecimiento farmacéutico se mantiene en archivos físicos o digitales dentro del establecimiento y permanecen en custodia.",
-                            Criterio = "CRITICO",
+                            Criterio = "Crítico",
                             Capitulo="403",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
@@ -221,6 +221,14 @@ namespace DataModel
                         {
                             Titulo = "Cuenta el establecimiento farmacéutico con organigrama",
                             Criterio = "Mayor",
+                            Capitulo="403",
+                            Articulo="",
+                            Evaluacion = enumAUD_TipoSeleccion.NA
+                        },
+                    new ContenidoTablas()
+                        {
+                            Titulo = "Cuenta el establecimiento farmacéutico con Manual de Procedimientos",
+                            Criterio = "Crítico",
                             Capitulo="403",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
@@ -373,7 +381,7 @@ namespace DataModel
                         {
                             Titulo = "Los registros de distribución contienen la siguiente información:\r\n-Nombre, presentación y forma farmacéutica\r\n-Número de lote\r\n-Nombre y dirección del consignatario (incluyendo los productos de exportación)\r\n-Fecha y cantidad despachada\r\n-Número de factura o documentación de embarque según sea el caso\r\n-Nombre del laboratorio fabricante\r\nSea en carpeta o archivos electrónicos. \r\n",
                             Criterio = "Crítico",
-                            Capitulo="403 441 ",
+                            Capitulo="403, 441",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -381,7 +389,15 @@ namespace DataModel
                         {
                             Titulo = "Los registros de distribución se mantienen actualizados",
                             Criterio = "Crítico",
-                            Capitulo="403 457",
+                            Capitulo="403",
+                            Articulo="",
+                            Evaluacion = enumAUD_TipoSeleccion.NA
+                        },
+                    new ContenidoTablas()
+                        {
+                            Titulo = "El Establecimiento Farmacéutico cuenta con procedimientos operativos para retirar y reemplazar los productos de los comercios a los que distribuyen.",
+                            Criterio = "Crítico",
+                            Capitulo="403, 457",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -397,7 +413,7 @@ namespace DataModel
                         {
                             Titulo = "El establecimiento posee un registro de quejas y reclamos, la investigación de estas; y la comunicación a las autoridades correspondientes.",
                             Criterio = "Crítico",
-                            Capitulo="456 459 ",
+                            Capitulo="456, 459",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -405,7 +421,7 @@ namespace DataModel
                         {
                             Titulo = "El sistema de quejas y reclamos contempla la comunicación al distribuidor o laboratorio fabricante sobre la medida que se adopte.",
                             Criterio = "Crítico",
-                            Capitulo="456 459",
+                            Capitulo="456, 459",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -750,7 +766,7 @@ namespace DataModel
                         {
                             Titulo = "El área de despacho de productos se mantiene limpia, ordenada y libre de materiales extraños",
                             Criterio = "Mayor",
-                            Capitulo="429 ",
+                            Capitulo="429",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -790,14 +806,6 @@ namespace DataModel
                         },
                     new ContenidoTablas()
                         {
-                            Titulo = "",
-                            Criterio = "",
-                            Capitulo="",
-                            Articulo="",
-                            Evaluacion = enumAUD_TipoSeleccion.NA
-                        },
-                    new ContenidoTablas()
-                        {
                             Titulo = "identificada",
                             Criterio = "Mayor",
                             Capitulo="423",
@@ -824,7 +832,7 @@ namespace DataModel
                         {
                             Titulo = "delimitada",
                             Criterio = "Crítico",
-                            Capitulo="423, 424 ",
+                            Capitulo="423, 424",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -847,7 +855,7 @@ namespace DataModel
                     new ContenidoTablas()
                         {
                             Titulo = "El establecimiento utiliza el sistema FIFO/FEFO para el almacenamiento",
-                            Criterio = "423  ",
+                            Criterio = "423",
                             Capitulo="",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
@@ -872,7 +880,7 @@ namespace DataModel
                         {
                             Titulo = "Se registran los controles cronológicos de temperatura y humedad en el área. ",
                             Criterio = "Crítico",
-                            Capitulo="424, 453",
+                            Capitulo="424",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -1008,7 +1016,7 @@ namespace DataModel
                         {
                             Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa",
                             Criterio = "Mayor",
-                            Capitulo="424",
+                            Capitulo="423",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA,                            
                         },
@@ -1016,7 +1024,7 @@ namespace DataModel
                         {
                             Titulo = "Existen etiquetas que demuestran la vigencia de la calibración de los instrumentos para el monitoreo de la T° y HR del área de almacenamiento.",
                             Criterio = "Crítico",
-                            Capitulo="423",
+                            Capitulo="424",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -1024,7 +1032,7 @@ namespace DataModel
                         {
                             Titulo = "El establecimiento farmacéutico utiliza un sistema interno de codificación que permita la localización de los productos del fabricante en el mercado",
                             Criterio = "Crítico",
-                            Capitulo="",
+                            Capitulo="423",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -1162,7 +1170,7 @@ namespace DataModel
                         {
                             Titulo = "Esta área permanece bajo llave y la misma está bajo la responsabilidad del Regente Farmacéutico.",
                             Criterio = "Crítico",
-                            Capitulo="80, 81,82",
+                            Capitulo="80, 81, 82",
                             Articulo="Ley 14 Art. 16",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -1194,40 +1202,40 @@ namespace DataModel
                         {
                             Titulo = "Las sustancias controladas que se encuentran almacenadas poseen registro sanitario o en situaciones excepcionales han sido autorizadas por DNFD.",
                             Criterio = "Crítico",
-                            Capitulo="",
-                            Articulo="",
+                            Capitulo="11",
+                            Articulo="Ley 1 Art. 40",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
                     new ContenidoTablas()
                         {
                             Titulo = "Durante la inspección se observan vales de sustancias controladas, estos se encuentran o están totalmente en blanco, pero firmados por el regente.",
                             Criterio = "Crítico",
-                            Capitulo="Ley 1   Art 40",
-                            Articulo="",
+                            Capitulo="",
+                            Articulo="Ley 14 Art. 31",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
                     new ContenidoTablas()
                         {
                             Titulo = "Las cantidades físicas de las sustancias controladas que se encuentran en el establecimiento en comparación con los registros (libros o sistemas automatizados), coinciden.",
                             Criterio = "Crítico",
-                            Capitulo="Ley 14 Art. 31",
-                            Articulo="",
+                            Capitulo="33",
+                            Articulo="Ley 14 Art. 31",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
                     new ContenidoTablas()
                         {
                             Titulo = "El establecimiento cumple con la prohibición de alguna forma de publicidad y propaganda acerca de las sustancias controladas.",
                             Criterio = "Mayor",
-                            Capitulo="Ley 14 Art. 52",
-                            Articulo="",
+                            Capitulo="",
+                            Articulo="Ley 14 Art. 52",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
                     new ContenidoTablas()
                         {
                             Titulo = "El establecimiento cumple con la prohibición del manejo de muestras médicas de productos con contenido psicotrópico y estupefaciente.",
                             Criterio = "Crítico",
-                            Capitulo="Ley 14 Art. 26",
-                            Articulo="",
+                            Capitulo="",
+                            Articulo="Ley 14 Art. 26",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
                     new ContenidoTablas()
@@ -1284,7 +1292,7 @@ namespace DataModel
                         {
                             Titulo = "Se almacenan en áreas separadas, segregadas, delimitadas e identificadas",
                             Criterio = "Crítico",
-                            Capitulo="200 426 ",
+                            Capitulo="200, 426",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -1292,7 +1300,7 @@ namespace DataModel
                         {
                             Titulo = "Los Plaguicidas de uso doméstico y de salud pública se almacenan de manera que no contaminan los productos farmacéuticos y se almacenan sobre tarimas y el área está ventilada",
                             Criterio = "",
-                            Capitulo="199 426 ",
+                            Capitulo="199, 426",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
@@ -1465,7 +1473,7 @@ namespace DataModel
                             Titulo = "Se lleva un registro de los procesos de destrucción ya realizados, incluyendo productos en ensayos clínicos.",
                             Criterio = "Crítico",
                             Capitulo="432, 435, 438",
-                            Articulo="Ley N° 1 Art. 67 D.E. 249 Art. 6 ",
+                            Articulo="Ley N° 1 Art. 67, D.E. 249 Art. 6 ",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
                     new ContenidoTablas()
@@ -1736,7 +1744,7 @@ namespace DataModel
                         {
                             Titulo = "Los productos farmacéuticos retirados durante el tránsito son separados, empaquetados de manera segura y claramente etiquetados.",
                             Criterio = "Crítico",
-                            Capitulo="432, 443, 449 ",
+                            Capitulo="432, 443, 449",
                             Articulo="",
                             Evaluacion = enumAUD_TipoSeleccion.NA,
                         },

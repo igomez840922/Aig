@@ -54,6 +54,15 @@ namespace DataModel
         private AUD_EstablecimientoTB? establecimiento;
         public virtual AUD_EstablecimientoTB? Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
 
+        //Datos del Representante Legal
+        private string nombreEstablecimiento;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string NombreEstablecimiento {
+            get { return Establecimiento?.NameAndRegNum ?? ""; }
+            set { SetProperty(ref nombreEstablecimiento, value); }
+        }
+
+
         //ubicacion del establecimiento
         private string ubicacionEstablecimiento;
         [StringLength(500)]

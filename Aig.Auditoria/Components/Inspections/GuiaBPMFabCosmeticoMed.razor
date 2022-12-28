@@ -368,7 +368,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["6.1"]</th>
                                                     <th>@languageContainerService.Keys[""]</th>
-                                                    <th>@languageContainerService.Keys["De la autorización de funcionamiento"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["De la autorización de funcionamiento"]</th>
                                                     <th>@languageContainerService.Keys["Criterios"]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                 </tr>
@@ -448,7 +448,7 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Adquisición de Materias primas y materiales"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["Adquisición de Materias primas y materiales"]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                 </tr>
                                             </thead>
@@ -484,8 +484,9 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Laboratorio Fabricante de:"]</th>
+                                                    <th  width="40%">@languageContainerService.Keys["Laboratorio Fabricante de:"]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -503,6 +504,9 @@
                                                                     }
                                                                 </InputSelect>
                                                             </td>
+                                                            <td>
+                                                                <InputText class="form-control" @bind-Value="dt.Observaciones" />
+                                                            </td>
                                                         </tr>
                                                     }
                                                 }
@@ -518,7 +522,7 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Fabrican y Analizan Productos a Terceros?"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["Fabrican y Analizan Productos a Terceros?"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                 </tr>
@@ -563,7 +567,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["A- Generalidades - Estructura Organizativa"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["A- Generalidades - Estructura Organizativa"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -589,7 +593,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                <td>@subdt.Titulo</td>
+                                                                                <td width="60%">@subdt.Titulo</td>
                                                                                 <td>
                                                                                     <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -641,7 +645,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["A - Condiciones Externas de los Almacenes"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["A - Condiciones Externas de los Almacenes"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -666,7 +670,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                <td>@subdt.Titulo</td>
+                                                                                <td width="60%">@subdt.Titulo</td>
                                                                                 <td>
                                                                                     <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -713,7 +717,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["B - Condiciones Internas de los Almacenes"]</th>
+                                                    <th  width="40%">@languageContainerService.Keys["B - Condiciones Internas de los Almacenes"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -738,7 +742,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                <td>@subdt.Titulo</td>
+                                                                                <td width="60%">@subdt.Titulo</td>
                                                                                 <td>
                                                                                     <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -785,7 +789,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["C- Área de Recepción de Materia Prima"]</th>
+                                                    <th  width="40%">@languageContainerService.Keys["C- Área de Recepción de Materia Prima"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -810,7 +814,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                <td>@subdt.Titulo</td>
+                                                                                <td width="60%">@subdt.Titulo</td>
                                                                                 <td>
                                                                                     <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -857,7 +861,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["CH - Almacén de Materia Prima"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["CH - Almacén de Materia Prima"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -882,7 +886,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                <td>@subdt.Titulo</td>
+                                                                                <td width="60%">@subdt.Titulo</td>
                                                                                 <td>
                                                                                     <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -929,7 +933,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["D - Área de almacenamiento de Materiales de Acondicionamiento, Empaque y Envase"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["D - Área de almacenamiento de Materiales de Acondicionamiento, Empaque y Envase"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -954,7 +958,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                <td>@subdt.Titulo</td>
+                                                                                <td width="60%">@subdt.Titulo</td>
                                                                                 <td>
                                                                                     <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1001,7 +1005,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["E - Recepción de Producto Terminado (De producción al almacén)"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["E - Recepción de Producto Terminado (De producción al almacén)"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1026,7 +1030,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                <td>@subdt.Titulo</td>
+                                                                                <td width="60%">@subdt.Titulo</td>
                                                                                 <td>
                                                                                     <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1093,7 +1097,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["E.1 - Almacén de Producto Terminado"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["E.1 - Almacén de Producto Terminado"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1118,7 +1122,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1165,7 +1169,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["F - Área de productos Devueltos y/o Rechazados"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["F - Área de productos Devueltos y/o Rechazados"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1190,7 +1194,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1237,7 +1241,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["G - Distribución de Productos Terminados"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["G - Distribución de Productos Terminados"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1262,7 +1266,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1309,7 +1313,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["H - Manejo de quejas y reclamos de productos comercializados"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["H - Manejo de quejas y reclamos de productos comercializados"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1334,7 +1338,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1381,7 +1385,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["I - Retiro de Productos del Mercado"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["I - Retiro de Productos del Mercado"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1406,7 +1410,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1460,7 +1464,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["3.1 Sistemas e Instalaciones de Agua"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["3.1 Sistemas e Instalaciones de Agua"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1485,7 +1489,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1532,7 +1536,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["3.1.1 OSMOSIS INVERSA"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["3.1.1 OSMOSIS INVERSA"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1557,7 +1561,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1604,7 +1608,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["3.1.2 SISTEMA DE DEIONIZACION"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["3.1.2 SISTEMA DE DEIONIZACION"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1629,7 +1633,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1676,7 +1680,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["3.2 Calibraciones y Verificaciones de equipo"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["3.2 Calibraciones y Verificaciones de equipo"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1701,7 +1705,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1748,7 +1752,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["3.3 Validaciones"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["3.3 Validaciones"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1773,7 +1777,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1820,7 +1824,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["3.4 Mantenimiento de áreas y equipos"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["3.4 Mantenimiento de áreas y equipos"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1845,7 +1849,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1897,7 +1901,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["4.1.A Condiciones Externas"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["4.1.A Condiciones Externas"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1923,7 +1927,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -1970,7 +1974,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["4.1.B Condiciones Internas"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["4.1.B Condiciones Internas"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -1996,7 +2000,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2043,7 +2047,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["4.2 Organización y Documentación"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["4.2 Organización y Documentación"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2069,7 +2073,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2136,7 +2140,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["4.3 Área de Dispensación de Ordenes de Fabricación"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["4.3 Área de Dispensación de Ordenes de Fabricación"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2162,7 +2166,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2220,7 +2224,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["4.4.1 Fabricación de Productos Desinfectantes"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["4.4.1 Fabricación de Productos Desinfectantes"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2246,7 +2250,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2293,7 +2297,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["4.5.1 Fabricación de Plaguicidas"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["4.5.1 Fabricación de Plaguicidas"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2319,7 +2323,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2366,7 +2370,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["4.6.1 Fabricación de Cosméticos"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["4.6.1 Fabricación de Cosméticos"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2392,7 +2396,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2444,7 +2448,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["5.1 Área de Envasado"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["5.1 Área de Envasado"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2470,7 +2474,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2517,7 +2521,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["5.2. Área de Etiquetado y Empaque"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["5.2. Área de Etiquetado y Empaque"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2543,7 +2547,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2596,7 +2600,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["6.1 Laboratorio de Control de Calidad"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["6.1 Laboratorio de Control de Calidad"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2622,7 +2626,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2669,7 +2673,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["6.2 Análisis por Contrato"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["6.2 Análisis por Contrato"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2695,7 +2699,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -2746,7 +2750,7 @@
                                                 <tr>
                                                     <th>@languageContainerService.Keys["Pto. Máximo"]</th>
                                                     <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
-                                                    <th>@languageContainerService.Keys["Inspecciones y Auditoría"]</th>
+                                                    <th width="40%">@languageContainerService.Keys["Inspecciones y Auditoría"]</th>
                                                     <th>@languageContainerService.Keys["Art."]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Criterio"]</th>
@@ -2772,7 +2776,7 @@
                                                                             @foreach (var subdt in dt.LSubContenido)
                                                                             {
                                                                                 <tr>
-                                                                                    <td>@subdt.Titulo</td>
+                                                                                    <td width="60%">@subdt.Titulo</td>
                                                                                     <td>
                                                                                         <InputSelect @bind-Value="subdt.Seleccion" class="form-control">
                                                                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))

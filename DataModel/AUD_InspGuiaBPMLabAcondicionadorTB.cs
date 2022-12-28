@@ -195,7 +195,7 @@ namespace DataModel
                     new ContenidoTablas()
                         {
                             Titulo = "El laboratorio fabricante posee permiso sanitario de funcionamiento o licencia sanitaria, autorizada por la autoridad reguladora del país.",
-                            Criterio = "CRITICO",
+                            Criterio = "CRÍTICO",
                             Capitulo="6.1",
                             Articulo="6.1.1",
                             Evaluacion = enumAUD_TipoSeleccion.NA
@@ -203,7 +203,7 @@ namespace DataModel
                     new ContenidoTablas()
                         {
                             Titulo = "El permiso sanitario de funcionamiento o licencia de operación se encuentra vigente",
-                            Criterio = "CRITICO",
+                            Criterio = "CRÍTICO",
                             Evaluacion = enumAUD_TipoSeleccion.NA
                         },
                     new ContenidoTablas()
@@ -327,13 +327,13 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Acondicionan y analizan productos a terceros?",
-                        Criterio = "Informativo",
+                        Criterio = "CRÍTICO",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
                     },
                     new ContenidoTablas()
                     {
                         Titulo = "¿Cuáles y de qué empresa(s)?. Anexar Listado ",
-                        Criterio = "Informativo",
+                        Criterio = "CRÍTICO",
                         Evaluacion = enumAUD_TipoSeleccion.NA
                     },
                     new ContenidoTablas()
@@ -358,7 +358,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "ORGANIZACIÓN",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="7.1",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -375,7 +375,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe independencia de responsabilidades entre producción y control de la calidad?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -391,7 +391,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Dispone de un Director técnico / Regente Farmacéutico? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="7.1.3",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -456,7 +456,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Las unidades de producción, control de calidad, garantía de calidad e investigación y desarrollo, están a cargo de profesionales farmacéuticos o profesionales calificados?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="7.2.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -473,7 +473,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Cumple el responsable de la Dirección de Producción (Acondicionamiento) con las siguientes responsabilidades:",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="7.3.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -854,7 +854,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Utiliza diariamente el personal dedicado a la producción (Acondicionamiento), que este en contacto directo con el producto terminado, uniforme completo:",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="7.5.5",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -862,7 +862,7 @@ namespace DataModel
                     },
                     new ContenidoTablas()
                     {
-                        Titulo = "Gorro que cubra la totalidad del cabello,",
+                        Titulo = "Gorro que cubra la totalidad del cabello",
                         Criterio = "",
                         Capitulo="",
                         Articulo="",
@@ -895,7 +895,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿El personal utiliza el uniforme de acuerdo al área de trabajo? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -912,7 +912,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Comer, beber, fumar, masticar, así como guardar comida, bebida, cigarrillos, medicamentos personales",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -920,7 +920,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Utilizar maquillaje, joyas, relojes, teléfonos celulares, radio localizadores, u otro elemento ajeno al área",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -928,7 +928,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Llevar barba o bigote al descubierto durante la jornada de trabajo en los procesos de dispensado, producción y subdivisión",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -936,7 +936,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Salir fuera del áreade producción con el uniforme de trabajo",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1048,7 +1048,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Está diseñado el edificio, de tal manera que permita el flujo de materiales, procesos y personal evitando la confusión, contaminación y errores?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.1.6",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1072,7 +1072,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Las áreas de producción (Acondicionamiento) y almacenamiento no se utilizan como áreas de paso?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.1.7",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1088,7 +1088,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Las condiciones de iluminación, temperatura, humedad y ventilación, para la producción y almacenamiento, están acordes con los requerimientos del producto?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.1.9",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1096,7 +1096,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los equipos y materiales están ubicados de forma que eviten el riesgo de confusión, contaminación cruzada y omisión entre los distintos productos y sus componentes en cualquiera de las operaciones de producción, control y almacenamiento?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.1.10",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1193,7 +1193,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1209,7 +1209,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los productos que requieren condiciones especiales de enfriamiento, se encuentran en cámara fría?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1217,7 +1217,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1257,7 +1257,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Las áreas donde se almacenan materiales y productos sometidos a cuarentena están claramente definidas y marcadas, el acceso a las mismas está limitado sólo al personal autorizado?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.2.5",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1280,7 +1280,7 @@ namespace DataModel
                     },
                      new ContenidoTablas()
                     {
-                        Titulo = "El área de muestreo cumple con las \r\nsiguientes características",
+                        Titulo = "El área de muestreo cumple con las \r\nsiguientes características:",
                         Criterio = "",
                         Capitulo="",
                         Articulo="",
@@ -1290,7 +1290,7 @@ namespace DataModel
                      new ContenidoTablas()
                     {
                         Titulo = "a) Las paredes, pisos y techos son lisos y con \r\ncurvas sanitarias\r\n",
-                        Criterio = "",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1298,7 +1298,7 @@ namespace DataModel
                       new ContenidoTablas()
                     {
                         Titulo = "b) Existen controles de limpieza, \r\ntemperatura y humedad dentro del área de \r\nmuestreo.",
-                        Criterio = "",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1306,7 +1306,7 @@ namespace DataModel
                        new ContenidoTablas()
                     {
                         Titulo = "c) La iluminación es suficiente para el \r\ndesempeño del proceso.",
-                        Criterio = "",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1314,7 +1314,7 @@ namespace DataModel
                          new ContenidoTablas()
                     {
                         Titulo = "d) El sistema de aire es independiente.",
-                        Criterio = "",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1330,7 +1330,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Tienen estas áreas acceso restringido y bajo llave?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1346,7 +1346,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros de la ejecución de estos procedimientos?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1394,7 +1394,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen áreas separadas, bajo llave, de acceso restringido e identificadas para almacenar materias primas y productos psicotrópicos y estupefacientes?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.2.10",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1402,7 +1402,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un área separada y de acceso restringido para almacenar material impreso (etiquetas, estuches, insertos y envases impresos)?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.2.12, 10.3.4",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1433,7 +1433,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Las áreas de acondicionamiento (elaboración):",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.4.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -1538,7 +1538,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Las áreas de Empaque Primario:",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.4.3",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -1635,7 +1635,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un área exclusiva para el lavado de equipos móviles, \r\nrecipientes y utensilios? Si aplica:",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="8.4.4",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -1643,7 +1643,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Las instalaciones tienen curvas sanitarias y servicios para el \r\ntrabajo que allí se ejecuta?\r\n",
-                        Criterio = "",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1651,7 +1651,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se encuentra en buenas condiciones de orden y limpieza?",
-                        Criterio = "",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1659,7 +1659,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿El piso de esta área cuenta con desnivel hacia el desagüe, para \r\nevitar que se acumule el agua? Si aplica",
-                        Criterio = "",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1667,7 +1667,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un área separada, identificada, limpia y ordenada para \r\ncolocar equipo limpio que no se esté utilizando?\r\n",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="8.4.5",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -1675,7 +1675,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "a) ¿Tienen paredes, pisos y techos lisos que permitan la fácil \r\nlimpieza y sanitización?",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -1683,7 +1683,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "b) ¿No son utilizadas como áreas de paso?",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -1798,7 +1798,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un área destinada para el laboratorio de control de calidad que se encuentra identificada y separada del área de producción?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.6.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1856,7 +1856,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Están los servicios sanitarios accesibles a las áreas de trabajo y no se comunican directamente con las áreas de producción?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.7.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1864,7 +1864,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los vestidores están comunicados directamente con las áreas de producción? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1937,7 +1937,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Están separados los vestidores de los servicios sanitarios, manteniendo un flujo adecuado.",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1985,7 +1985,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Cuentan con un área de lavandería separada y exclusiva para el lavado y secado de los uniformes utilizados por el personal?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="8.7.3",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -1993,7 +1993,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Poseen procedimientos escritos para realizar el lavado y secado por separado de uniformes por tipo de área no estéril, estériles y mantenimiento?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2009,7 +2009,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Dispone de un área destinada al almacenamiento del equipo obsoleto o en mal estado que no interviene en los procesos de producción?",
-                        Criterio = "MAYOR",
+                        Criterio = "MENOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2033,7 +2033,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Está el equipo utilizado en la producción diseñado y construido de acuerdo a la operación que en él se realice?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="9.1.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2171,7 +2171,7 @@ namespace DataModel
                         Titulo = "Se identifican todos los equipos limpios con una etiqueta que indique la \r\nsiguiente información:",
                         Criterio = "",
                         Capitulo="",
-                        Articulo="",
+                        Articulo="9.1.5",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
                         IsHeader=true,
                     },
@@ -2210,7 +2210,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros?",
-                        Criterio = "MAYOR",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2218,7 +2218,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Las superficies de trabajo, que tienen contacto con productos en proceso \r\n(acondicionamiento), son de acero inoxidable u otro material no reactivo?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="9.1.7",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2226,15 +2226,15 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los filtros empleados en los equipos son descartables? En caso de \r\nacondicionamiento primario?",
-                        Criterio = "CRITICO",
+                        Criterio = "INFORMATIVO",
                         Capitulo="",
-                        Articulo="",
+                        Articulo="9.1.7",
                         Evaluacion = enumAUD_TipoSeleccion.NA
                     },
                     new ContenidoTablas()
                     {
                         Titulo = "¿Si los filtros no son descartables, se les da el debido mantenimiento?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2242,7 +2242,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2250,7 +2250,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se registran los cambios de los filtros? ",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2258,7 +2258,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los soportes de los equipos que lo requieran son de acero inoxidable u \r\notro material que no contamine?",
-                        Criterio = "CRITICO",
+                        Criterio = "MENOR",
                         Capitulo="",
                         Articulo="9.1.8",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2275,15 +2275,15 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se realiza calibración de los instrumentos de medición y dispositivos de \r\nregistro o cualquier otro que lo requiera?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
-                        Articulo="9.1.2",
+                        Articulo="9.2.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA
                     },
                     new ContenidoTablas()
                     {
                         Titulo = "¿Tienen registros escritos de las inspecciones?",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2291,7 +2291,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Tienen registros escritos de las verificaciones? ",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2299,7 +2299,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Tienen registros escritos de las calibraciones?",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2307,7 +2307,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los instrumentos están correctamente rotulados indicando la fecha de \r\ncalibración?",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2315,7 +2315,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se realiza la calibración de cada equipo y dispositivos usando patrones de \r\nreferencia certificados?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="9.2.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2404,7 +2404,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los recipientes o contenedores de materiales se encuentran cerrados e identificados? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="10.1.3",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2468,7 +2468,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Permanece cada lote de materiales en cuarentena mientras no sea muestreado, examinado y analizado por control de calidad?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="10.0.7",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2476,7 +2476,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Control de calidad emite la aprobación o rechazo de los materiales y productos? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2501,7 +2501,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "a) Nombre y código del material.",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2509,7 +2509,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "b) Número de ingreso.",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2517,7 +2517,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "c) Situación del material.",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2525,7 +2525,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "d) Nombre del proveedor.",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2542,7 +2542,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los envases y cierres son hechos de material que no sea reactivo, aditivo y adsorbente al producto? En caso de acondicionamiento primario",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="10.3.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2550,7 +2550,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los requerimientos de los envases y cierres están sustentados en los estudios de formulación y pruebas de estabilidad? En caso de acondicionamiento primario",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2558,7 +2558,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los envases y cierres son adquiridos de proveedores aprobados? En caso de acondicionamiento primario",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2616,7 +2616,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los productos terminados se encuentran en cuarentena hasta su aprobación final?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="10.5.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2632,7 +2632,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los productos terminados son comercializados solamente después de su aprobación?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="10.5.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2647,20 +2647,20 @@ namespace DataModel
                     },
                     new ContenidoTablas()
                     {
+                        Titulo = "¿Existen procedimientos escritos para el manejo de materiales, productos intermedios, a granel y productos terminados que han sido rechazados?",
+                        Criterio = "MAYOR",
+                        Capitulo="",
+                        Articulo="10.6.1",
+                        Evaluacion = enumAUD_TipoSeleccion.NA
+                    },
+                    new ContenidoTablas()
+                    {
                         Titulo = "MATERIALES Y PRODUCTOS RECHAZADOS",
                         Criterio = "",
                         Capitulo="10.6",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
                         IsHeader = true,
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "¿Existen procedimientos escritos para el manejo de materiales, productos intermedios, a granel y productos terminados que han sido rechazados?",
-                        Criterio = "MAYOR",
-                        Capitulo="",
-                        Articulo="10.6.1",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
                     },
                     new ContenidoTablas()
                     {
@@ -2897,7 +2897,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Están las especificaciones, fórmulas, métodos e instrucciones de fabricación y procedimientos en forma impresa, debidamente revisadas y aprobadas?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="11.1.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -2921,7 +2921,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Las modificaciones están autorizadas?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3098,7 +3098,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un archivo histórico identificado para almacenar los originales de los documentos obsoletos?",
-                        Criterio = "MAYOR",
+                        Criterio = "MENOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3124,7 +3124,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "a) Materia prima.",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3132,7 +3132,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "b) Material de acondicionamiento.",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3140,7 +3140,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "c) Productos intermedios o granel.",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3148,7 +3148,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "d) Producto terminado",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3285,7 +3285,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Disponen de una fórmula maestra para cada producto?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="11.2.4",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3293,7 +3293,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Está la fórmula maestra actualizada y autorizada?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3414,7 +3414,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Coinciden las fórmulas maestras de todos los productos fabricados con las presentadas en la documentación para obtención del registro sanitario?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="11.2.6",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3422,7 +3422,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Si se hace cambio de la fórmula cuali-cuantitativa, estos cambios son comunicados y aprobados por la Autoridad Reguladora competente?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3770,7 +3770,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Queda registrada y justificada cualquier desviación de los procedimientos, por un evento atípico que afecta la calidad del producto?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3810,7 +3810,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se extiende la investigación a otros lotes producidos y a otros productos que puedan estar asociados con la discrepancia encontrada?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3842,7 +3842,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se lleva registro correlativo/ secuencial y rastreable de cada producción?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA
@@ -3979,7 +3979,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Existen procedimientos o instrucciones escritas para el manejo de materiales, graneles y productos en las operaciones de:",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="12.1.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4052,7 +4052,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se llevan registro de la ejecución de estos?",
-                        Criterio = "INFORMATIVO",
+                        Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4084,7 +4084,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "En un área de producción ¿se lleva a cabo una sola operación de un determinado producto? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="12.1.6",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4092,7 +4092,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se evita la mezcla de productos diferentes o lotes distintos del mismo producto mediante separación física entre las líneas de envasado?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4100,7 +4100,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿En el área de empaque secundario existen líneas identificadas, definidas y separadas para cada producto que se está empacando?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4174,7 +4174,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="12.2.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4182,7 +4182,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Para evitar la contaminación cruzada se tiene: ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="12.2.3",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4255,14 +4255,14 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se verifica la eficacia de las medidas destinadas a prevenir la contaminación cruzada?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
                     },
                     new ContenidoTablas()
                     {
-                        Titulo = "CONTROLES EN PROCESO ",
+                        Titulo = "CONTROLES EN PROCESO",
                         Criterio = "",
                         Capitulo="12.3",
                         Articulo="",
@@ -4272,7 +4272,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Antes de iniciar las operaciones de producción, ¿se realiza el despeje del área, se verifica que los equipos estén limpios y libres de materiales, productos y documentos de una operación anterior y cualquier otro material extraño al proceso de producción?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="12.3.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4280,7 +4280,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4288,7 +4288,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se realizan controles durante el proceso en las distintas etapas de producción? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="12.3.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4304,7 +4304,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Estos controles no ponen en riesgo la producción del producto?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4312,7 +4312,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se realizan controles en línea durante el envasado y empaque?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="12.3.3",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4345,7 +4345,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "c) Verificar que el código o número de lote y la fecha de expiración sean los correctos y legibles.",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4377,7 +4377,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Las unidades descartadas por sistemas automáticos, en caso de reintegrarse a la línea son previamente inspeccionadas y autorizadas por personal con responsabilidad asignada (cuando aplique)?",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4400,7 +4400,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "En caso de que estos controles microbiológicos se salgan de los límites específicos ¿se realiza alguna medida correctiva?",
-                        Criterio = "MAYOR",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4424,7 +4424,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros de todo lo que se efectuó?",
-                        Criterio = "MAYOR",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4432,7 +4432,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se llevan los controles ambientales durante el proceso, cuando estos sean requeridos (temperatura, humedad)?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="12.3.5",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4440,7 +4440,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4656,7 +4656,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe una política de calidad definida y está documentada?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="13.1.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4712,7 +4712,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "El sistema de garantía de calidad asegura que:",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="13.1.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4721,7 +4721,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "a) ¿Los medicamentos se diseñan y desarrollan de forma que se tenga en cuenta lo requerido por las buenas prácticas de manufactura?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4889,7 +4889,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Tiene control de calidad toda la documentación para asegurar la calidad de los materiales y los productos? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="14.1.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4905,7 +4905,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿El laboratorio fabricante cuenta con una unidad de control de calidad?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="14.1.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4921,7 +4921,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿La unidad de control de calidad es independiente de producción?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="14.1.3",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -4937,7 +4937,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Esta unidad está bajo el cargo de un profesional farmacéutico o un profesional calificado?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5034,7 +5034,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Cada lote de producto terminado es aprobado por la persona responsable, previa evaluación de las especificaciones establecidas, incluyendo las condiciones de producción, análisis en proceso y la documentación para su aprobación final?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="14.1.5",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5098,7 +5098,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se indica en el mismo cuales operaciones son realizadas en forma interna y \r\ncuales por servicios contratados?",
-                        Criterio = "MAYOR",
+                        Criterio = "INFORMATIVO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5114,7 +5114,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Fecha de su última calibración",
-                        Criterio = "MAYOR",
+                        Criterio = "INFORMATIVO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5156,7 +5156,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "a) ¿Especificaciones escritas de los materiales, producto semielaborado y producto terminado?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5172,7 +5172,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "d) ¿Procedimientos escritos de control de calidad y resultados de las pruebas de materiales, productos, áreas y personal?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5180,7 +5180,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros de los informes o certificados analíticos de las pruebas de materiales, productos, áreas y personal?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5308,7 +5308,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "k) ¿Procedimientos escritos y programa de sanitización de áreas?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5316,7 +5316,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5494,6 +5494,126 @@ namespace DataModel
                         Evaluacion = enumAUD_TipoSeleccion.NA,
                         IsHeader=true,
                     },
+
+                    // ***** INICIO DE LAS CORRECCIONES *****
+
+                    new ContenidoTablas()
+                    {
+                        Titulo = "a) Acondicionamiento",
+                        Criterio = "MAYOR",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "b) Manejo",
+                        Criterio = "MAYOR",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "c) Almacenamiento",
+                        Criterio = "MAYOR",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "f) Liberación del producto.",
+                        Criterio = "MAYOR",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "¿Se establece en el contrato la persona responsable de autorizar la liberación de cada lote para su comercialización?",
+                        Criterio = "MAYOR",
+                        Capitulo="",
+                        Articulo="15.1.4",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "El contrato a terceros tiene la siguiente información:",
+                        Criterio = "MAYOR",
+                        Capitulo="",
+                        Articulo="15.1.5",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                        IsHeader=true,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "a) ¿Es redactado por personas competentes y autorizadas?",
+                        Criterio = "",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "b) ¿Aceptación de los términos del contrato por las partes?",
+                        Criterio = "",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "c) ¿Cumplimiento de las Buenas Prácticas de Manufactura?",
+                        Criterio = "",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "d) ¿Abarca acondicionamiento o cualquier otra gestión técnica relacionada con estos?",
+                        Criterio = "",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "e) ¿Describe el manejo de material de acondicionamiento, y producto terminado, en caso sean rechazados?",
+                        Criterio = "",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "f) ¿Permite el ingreso del contratante a las instalaciones del contratista (contratado), para auditorías?",
+                        Criterio = "",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "g) ¿Permite el ingreso del contratista (contratado) a las instalaciones del contratante?",
+                        Criterio = "",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoTablas()
+                    {
+                        Titulo = "h) ¿Existe una lista de los productos o servicios de objeto del contrato?",
+                        Criterio = "",
+                        Capitulo="",
+                        Articulo="",
+                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                    },
+
+                    // ***** FIN DE LAS CORRECCIONES *****
+
+                    /* ***** INICIO DEL CÓDIGO ANTES DE LA CORRECCIÓN *****
                     new ContenidoTablas()
                     {
                         Titulo = "a) Fabricación.",
@@ -5557,7 +5677,10 @@ namespace DataModel
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
-                    },
+                    }, 
+
+                    ***** FIN DEL CÓDIGO ANTES DE LA CORRECCIÓN ***** */
+
                     new ContenidoTablas()
                     {
                         Titulo = "DEL CONTRATANTE",
@@ -5677,7 +5800,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un plan maestro de validación?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="16.1.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5758,7 +5881,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Garantía de calidad da seguimiento a las actividades del programa?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5766,7 +5889,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "El programa de validación incluye:",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5856,7 +5979,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen equipos conformados por personal calificado en los diferentes aspectos a validar?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="16.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5881,7 +6004,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Los protocolos de validación están aprobados?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="16.3",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5914,7 +6037,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "c) Informe final aprobado de resultados y conclusiones.",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5948,7 +6071,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "a) Equipos de producción y control de calidad. ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5956,7 +6079,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "e) Procedimientos de limpieza. ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5964,7 +6087,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "i) Instalaciones. ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -5972,7 +6095,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "j) Sistemas informáticos (cuando aplique).",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6022,7 +6145,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se establecen los criterios para evaluar los cambios que dan origen a una revalidación? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="16.7",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6052,7 +6175,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "GENERALIDADES",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="17.1",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6061,7 +6184,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "Existen procedimientos escritos sobre el manejo de:",
-                        Criterio = "MAYOR",
+                        Criterio = "",
                         Capitulo="",
                         Articulo="17.1.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6086,7 +6209,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un sistema para retirar del mercado en forma rápida y efectiva un producto cuando tenga un defecto o exista sospecha de ello, según procedimiento?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6289,7 +6412,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un responsable de la coordinación del proceso de retiro de un producto del mercado y es totalmente independiente del departamento de ventas?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="17.3.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6384,7 +6507,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Realiza el laboratorio fabricante autoinspecciones y auditorias periódicas?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="18.1.1",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6392,7 +6515,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Tiene el laboratorio fabricante un procedimiento y programa de autoinspecciones que contempla todos los aspectos de las buenas prácticas de manufactura?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="18.1.2",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6425,7 +6548,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "c) Conclusiones",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6433,7 +6556,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "d) Acciones correctivas y preventivas",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6449,7 +6572,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existe un programa de seguimiento a las acciones correctivas y preventivas?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6481,7 +6604,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿El personal que realiza las autoinspecciones está calificado y capacitado en buenas prácticas de manufactura? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="18.1.5",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6489,7 +6612,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se ha documentado esa capacitación?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6530,7 +6653,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Existen registros de las auditorías?",
-                        Criterio = "CRITICO",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,
@@ -6619,7 +6742,7 @@ namespace DataModel
                     new ContenidoTablas()
                     {
                         Titulo = "¿Se da seguimiento a las acciones correctivas y preventivas de las inspecciones de la Autoridad Reguladora?",
-                        Criterio = "",
+                        Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="",
                         Evaluacion = enumAUD_TipoSeleccion.NA,

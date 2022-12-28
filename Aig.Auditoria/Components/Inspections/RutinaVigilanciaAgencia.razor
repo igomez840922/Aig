@@ -162,6 +162,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <label>@languageContainerService.Keys["Horario de Operación"]</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <InputText class="form-control" @bind-Value="Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.HorarioOperacion" />
+                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.HorarioOperacion) />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <h5>@languageContainerService.Keys["Propietario o Representante Legal"]</h5>

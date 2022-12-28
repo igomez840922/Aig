@@ -78,6 +78,18 @@
                             <div class="row clearfix">
 
                                 <div class="col-sm-4">
+                                    <label>@languageContainerService.Keys["Establishments"]</label>
+                                            <div class="input-group">
+                                                @*<input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />*@
+                                        <InputText disbled class="form-control" @bind-Value="Inspeccion.NombreEstablecimiento" disabled=@(true) readonly="readonly" />
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchEstablishment();}"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                    <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
+                                        </div>
+
+                               @* <div class="col-sm-4">
                                     <label for="password">@languageContainerService.Keys["Establishments"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -85,22 +97,10 @@
                                                             AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
                                                             Data=@lEstablecimientos TextProperty="Nombre" ValueProperty="Id"
                                                             Change=@(args => {OnEstablishmentChange((args!=null?(long)args:null));}) />
-                                            @*<InputSelect class="form-control"
-                                                         ValueExpression="@(() => Inspeccion.EstablecimientoId)"
-                                                         Value="@Inspeccion.EstablecimientoId"
-                                                         ValueChanged="@((long? value) => OnEstablishmentChange(value))">
-                                                @if (lEstablecimientos != null)
-                                                {
-                                                    foreach (var dt in lEstablecimientos)
-                                                    {
-                                                        <option value="@dt.Id">@dt.Nombre</option>
-                                                    }
-                                                }
-                                            </InputSelect>*@
                                             <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                                 <div class="col-sm-8">
                                     <label>@languageContainerService.Keys["Location"]</label>
                                     <div class="form-group">
@@ -618,6 +618,11 @@
 @if (showParticipant)
 {
     <Aig.Auditoria.Components.Participants.AddEditParticipantComponent Participante="@participante"></Aig.Auditoria.Components.Participants.AddEditParticipantComponent>
+}
+
+@if (showSearchEstablishment)
+{
+    <Aig.Auditoria.Components.Establishments.SearchComponent></Aig.Auditoria.Components.Establishments.SearchComponent>
 }
 
 <Aig.Auditoria.Components.RetiredProduct.AddEditProductComponent></Aig.Auditoria.Components.RetiredProduct.AddEditProductComponent>
