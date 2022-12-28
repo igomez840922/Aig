@@ -107,6 +107,7 @@ builder.Services.AddScoped<IAttachmentsService, AttachmentsService>();
 builder.Services.AddScoped<IPdfGenerationService, PdfGenerationService>();
 builder.Services.AddScoped<IProductoEstablecimientoService, ProductoEstablecimientoService>();
 builder.Services.AddScoped<IActividadEstablecimientoService, ActividadEstablecimientoService>();
+builder.Services.AddScoped<ICorrespondenciaService, CorrespondenciaService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 ////Connection Configurations

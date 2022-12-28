@@ -85,6 +85,17 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
+                                    <label>@languageContainerService.Keys["Establishments"]</label>
+                                    <div class="input-group">
+                                        @*<input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />*@
+                                        <InputText disbled class="form-control" @bind-Value="Inspeccion.NombreEstablecimiento" disabled=@(true) readonly="readonly" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchEstablishment();}"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
+                                </div>
+                                @*<div class="col-sm-6">
                                     <label for="password">@languageContainerService.Keys["Establishments"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -96,7 +107,7 @@
                                             <ValidationMessage For=@(() => Inspeccion.EstablecimientoId) />
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                                 <div class="col-sm-6">
                                     <label for="password">@languageContainerService.Keys["Dispone de letrero visible con su nombre"]</label>
                                     <div class="form-group">
@@ -2221,6 +2232,10 @@
 @if (showExpColaborador)
 {
     <Aig.Auditoria.Components.ColaboratorFile.AddEditComponent ExpedienteColaborador="@expedienteColaborador"></Aig.Auditoria.Components.ColaboratorFile.AddEditComponent>
+}
+@if (showSearchEstablishment)
+{
+    <Aig.Auditoria.Components.Establishments.SearchComponent></Aig.Auditoria.Components.Establishments.SearchComponent>
 }
 
 <div class="modal-backdrop fade show"></div>

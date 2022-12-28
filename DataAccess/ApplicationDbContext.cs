@@ -1595,6 +1595,7 @@ namespace DataAccess
         public virtual DbSet<ProvinciaTB> Provincia { get; set; }
         public virtual DbSet<SmtpCorreoTB> SmtpCorreo { get; set; }
         public virtual DbSet<UserProfileTB> UserProfile { get; set; }
+        public virtual DbSet<AUD_CorrespondenciaTB> AUD_Correspondencia { get; set; }
 
 
         /////////////////////////////////////////////////

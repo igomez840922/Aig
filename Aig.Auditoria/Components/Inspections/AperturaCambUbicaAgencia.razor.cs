@@ -3,6 +3,7 @@ using Aig.Auditoria.Services;
 using BlazorComponentBus;
 using DataModel;
 using DataModel.Helper;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
@@ -27,7 +28,7 @@ namespace Aig.Auditoria.Components.Inspections
         IProductoEstablecimientoService productoEstablecimientoService { get; set; }
         [Parameter]
 		public DataModel.AUD_InspeccionTB Inspeccion { get; set; }
-		List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
+		//List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
 		List<PaisTB> lPaises { get; set; }
         List<ActividadEstablecimientoTB> lActividadEstablecimiento { get; set; }
         List<ProductoEstablecimientoTB> lProductoEstablecimiento { get; set; }
@@ -51,8 +52,10 @@ namespace Aig.Auditoria.Components.Inspections
 		bool showParticipant { get; set; } = false;
 		Participante participante { get; set; } = null;
 
+        bool showSearchEstablishment { get; set; } = false;
 
-		protected async override Task OnInitializedAsync()
+
+        protected async override Task OnInitializedAsync()
 		{
 			//Subscribe Component to Language Change Event
 			bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
@@ -90,10 +93,10 @@ namespace Aig.Auditoria.Components.Inspections
 			lActividadEstablecimiento = lActividadEstablecimiento != null && lActividadEstablecimiento.Count > 0 ? lActividadEstablecimiento : await actividadEstablecimientoService.GetAll();
             lProductoEstablecimiento = lProductoEstablecimiento != null && lProductoEstablecimiento.Count > 0 ? lProductoEstablecimiento : await productoEstablecimientoService.GetAll();
             
-			if (lEstablecimientos == null || lEstablecimientos.Count < 1)
-			{
-				lEstablecimientos = await establecimientoService.GetAll();
-			}
+			//if (lEstablecimientos == null || lEstablecimientos.Count < 1)
+			//{
+			//	lEstablecimientos = await establecimientoService.GetAll();
+			//}
 			if (lPaises == null || lPaises.Count < 1)
 			{
 				lPaises = await countriesService.GetAll();
@@ -101,14 +104,14 @@ namespace Aig.Auditoria.Components.Inspections
 
 			if (Inspeccion != null)
 			{				
-                if (Inspeccion.EstablecimientoId == null)
-				{
-					Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
-					if (Inspeccion.EstablecimientoId != null)
-					{
-						Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
-					}
-				}
+				//if (Inspeccion.EstablecimientoId == null)
+				//{
+				//	Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
+				//	if (Inspeccion.EstablecimientoId != null)
+				//	{
+				//		Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
+				//	}
+				//}
 
 				if (signaturePad5 != null)
 					signaturePad5.Image = Inspeccion.InspAperCambUbicAgen.DatosAtendidosPor.Firma;
@@ -156,12 +159,12 @@ namespace Aig.Auditoria.Components.Inspections
 		}
 
 
-		protected async Task OnEstablishmentChange(long? Id)
-		{
-			Inspeccion.EstablecimientoId = Id;
-			Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.Ubicacion ?? "";
-			Inspeccion.TelefonoEstablecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.Telefono1 ?? "";
-		}
+		//protected async Task OnEstablishmentChange(long? Id)
+		//{
+		//	Inspeccion.EstablecimientoId = Id;
+		//	Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.Ubicacion ?? "";
+		//	Inspeccion.TelefonoEstablecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault()?.Telefono1 ?? "";
+		//}
 
 		
 		protected async Task OnShowSignasure()
@@ -270,7 +273,35 @@ namespace Aig.Auditoria.Components.Inspections
 			this.InvokeAsync(StateHasChanged);
 		}
 
+        /////////
+        ///        
+        protected async Task OpenSearchEstablishment()
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
 
-	}
+            showSearchEstablishment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void Establishments_SearchEventHandler(MessageArgs args)
+        {
+            showSearchEstablishment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Establishments.SearchEvent>();
+
+            if (message.Data != null)
+            {
+                Inspeccion.EstablecimientoId = message.Data.Id;
+                Inspeccion.Establecimiento = message.Data;
+                Inspeccion.UbicacionEstablecimiento = message.Data.Ubicacion;
+                Inspeccion.TelefonoEstablecimiento = message.Data.Telefono1 ?? "";
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
+    }
 
 }

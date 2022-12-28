@@ -23,7 +23,7 @@ namespace Aig.Auditoria.Components.Inspections
         IPdfGenerationService pdfGenerationService { get; set; }
         [Parameter]
         public DataModel.AUD_InspeccionTB Inspeccion { get; set; }
-        List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
+        //List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
         List<PaisTB> lPaises { get; set; }
 
         enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.Pending;
@@ -49,6 +49,7 @@ namespace Aig.Auditoria.Components.Inspections
         bool showInvProduct { get; set; } = false;
         DataModel.AUD_InvProducto producto { get; set; } = null;
 
+        bool showSearchEstablishment { get; set; } = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -86,10 +87,10 @@ namespace Aig.Auditoria.Components.Inspections
         protected async Task FetchData()
         {
 
-            if (lEstablecimientos == null || lEstablecimientos.Count < 1)
-            {
-                lEstablecimientos = await establecimientoService.GetAll();
-            }
+            //if (lEstablecimientos == null || lEstablecimientos.Count < 1)
+            //{
+            //    lEstablecimientos = await establecimientoService.GetAll();
+            //}
             if (lPaises == null || lPaises.Count < 1)
             {
                 lPaises = await countriesService.GetAll();
@@ -97,14 +98,14 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (Inspeccion != null)
             {
-                if (Inspeccion.EstablecimientoId == null)
-                {
-                    Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
-                    if (Inspeccion.EstablecimientoId != null)
-                    {
-                        Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
-                    }
-                }
+                //if (Inspeccion.EstablecimientoId == null)
+                //{
+                //    Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
+                //    if (Inspeccion.EstablecimientoId != null)
+                //    {
+                //        Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
+                //    }
+                //}
 
                 if (signaturePad5 != null)
                     signaturePad5.Image = Inspeccion.InspDisposicionFinal.DatosResponsable.Firma;
@@ -152,23 +153,23 @@ namespace Aig.Auditoria.Components.Inspections
         }
 
 
-        protected async Task OnEstablishmentChange(long? Id)
-        {
-            Inspeccion.EstablecimientoId = Id;
-            var establecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault();
-            Inspeccion.UbicacionEstablecimiento = establecimiento?.Ubicacion ?? "";
-            Inspeccion.TelefonoEstablecimiento = establecimiento?.Telefono1 ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.NumLicOperacion = establecimiento?.NumLicencia ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.FechaVencLicOperacion = establecimiento?.FechaExpiracion ?? null;
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Provincia = establecimiento?.Provincia?.Nombre ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Distrito = establecimiento?.Distrito?.Nombre ?? "";
-            Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Corregimiento = establecimiento?.Corregimiento?.Nombre ?? "";
-        }
+        //protected async Task OnEstablishmentChange(long? Id)
+        //{
+        //    Inspeccion.EstablecimientoId = Id;
+        //    var establecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault();
+        //    Inspeccion.UbicacionEstablecimiento = establecimiento?.Ubicacion ?? "";
+        //    Inspeccion.TelefonoEstablecimiento = establecimiento?.Telefono1 ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.NumLicOperacion = establecimiento?.NumLicencia ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.FechaVencLicOperacion = establecimiento?.FechaExpiracion ?? null;
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Provincia = establecimiento?.Provincia?.Nombre ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Distrito = establecimiento?.Distrito?.Nombre ?? "";
+        //    Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Corregimiento = establecimiento?.Corregimiento?.Nombre ?? "";
+        //}
 
         protected async Task OnShowSignasure()
         {
@@ -320,6 +321,45 @@ namespace Aig.Auditoria.Components.Inspections
             }
         }
 
+        /////////
+        ///        
+        protected async Task OpenSearchEstablishment()
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            showSearchEstablishment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void Establishments_SearchEventHandler(MessageArgs args)
+        {
+            showSearchEstablishment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Establishments.SearchEvent>();
+
+            if (message.Data != null)
+            {
+                Inspeccion.EstablecimientoId = message.Data.Id;
+                Inspeccion.Establecimiento = message.Data;
+                Inspeccion.UbicacionEstablecimiento = message.Data.Ubicacion;
+                Inspeccion.TelefonoEstablecimiento = message.Data.Telefono1 ?? "";
+
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.NumLicOperacion = message.Data?.NumLicencia ?? "";
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.FechaVencLicOperacion = message.Data?.FechaExpiracion ?? null;
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Email = message.Data?.Email ?? "";
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Telefono = message.Data?.Telefono1 ?? "";
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Nombre = message.Data?.Nombre ?? "";
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Direccion = message.Data?.Ubicacion ?? "";
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Ciudad = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Provincia = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Distrito = message.Data?.Distrito?.Nombre ?? "";
+                Inspeccion.InspDisposicionFinal.GeneralesEmpresa.Corregimiento = message.Data?.Corregimiento?.Nombre ?? "";
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
 
     }
 

@@ -23,7 +23,7 @@ namespace Aig.Auditoria.Components.Inspections
         IPdfGenerationService pdfGenerationService { get; set; }
         [Parameter]
         public DataModel.AUD_InspeccionTB Inspeccion { get; set; }
-        List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
+        //List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
         List<PaisTB> lPaises { get; set; }
 
         enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.Pending;
@@ -49,6 +49,7 @@ namespace Aig.Auditoria.Components.Inspections
         bool showInvProduct { get; set; } = false;
         DataModel.AUD_InvProducto producto { get; set; } = null;
 
+        bool showSearchEstablishment { get; set; } = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -86,10 +87,10 @@ namespace Aig.Auditoria.Components.Inspections
         protected async Task FetchData()
         {
 
-            if (lEstablecimientos == null || lEstablecimientos.Count < 1)
-            {
-                lEstablecimientos = await establecimientoService.GetAll();
-            }
+            //if (lEstablecimientos == null || lEstablecimientos.Count < 1)
+            //{
+            //    lEstablecimientos = await establecimientoService.GetAll();
+            //}
             if (lPaises == null || lPaises.Count < 1)
             {
                 lPaises = await countriesService.GetAll();
@@ -97,14 +98,14 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (Inspeccion != null)
             {
-                if (Inspeccion.EstablecimientoId == null)
-                {
-                    Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
-                    if (Inspeccion.EstablecimientoId != null)
-                    {
-                        Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
-                    }
-                }
+                //if (Inspeccion.EstablecimientoId == null)
+                //{
+                //    Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
+                //    if (Inspeccion.EstablecimientoId != null)
+                //    {
+                //        Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
+                //    }
+                //}
 
                 if (signaturePad5 != null)
                     signaturePad5.Image = Inspeccion.InspRutinaVigAgencia.DatosRepresentLegal.Firma;
@@ -152,23 +153,23 @@ namespace Aig.Auditoria.Components.Inspections
         }
 
 
-        protected async Task OnEstablishmentChange(long? Id)
-        {
-            Inspeccion.EstablecimientoId = Id;
-            var establecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault();
-            Inspeccion.UbicacionEstablecimiento = establecimiento?.Ubicacion ?? "";
-            Inspeccion.TelefonoEstablecimiento = establecimiento?.Telefono1 ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.NumLicOperacion = establecimiento?.NumLicencia ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.FechaVencLicOperacion = establecimiento?.FechaExpiracion ?? null;
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Provincia = establecimiento?.Provincia?.Nombre ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Distrito = establecimiento?.Distrito?.Nombre ?? "";
-            Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Corregimiento = establecimiento?.Corregimiento?.Nombre ?? "";
-        }
+        //protected async Task OnEstablishmentChange(long? Id)
+        //{
+        //    Inspeccion.EstablecimientoId = Id;
+        //    var establecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault();
+        //    Inspeccion.UbicacionEstablecimiento = establecimiento?.Ubicacion ?? "";
+        //    Inspeccion.TelefonoEstablecimiento = establecimiento?.Telefono1 ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.NumLicOperacion = establecimiento?.NumLicencia ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.FechaVencLicOperacion = establecimiento?.FechaExpiracion ?? null;
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Provincia = establecimiento?.Provincia?.Nombre ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Distrito = establecimiento?.Distrito?.Nombre ?? "";
+        //    Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Corregimiento = establecimiento?.Corregimiento?.Nombre ?? "";
+        //}
 
 
         protected async Task OnShowSignasure()
@@ -319,6 +320,45 @@ namespace Aig.Auditoria.Components.Inspections
 
                 this.InvokeAsync(StateHasChanged);
             }
+        }
+
+        /////////
+        ///        
+        protected async Task OpenSearchEstablishment()
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            showSearchEstablishment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void Establishments_SearchEventHandler(MessageArgs args)
+        {
+            showSearchEstablishment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Establishments.SearchEvent>();
+
+            if (message.Data != null)
+            {
+                Inspeccion.EstablecimientoId = message.Data.Id;
+                Inspeccion.Establecimiento = message.Data;
+                Inspeccion.UbicacionEstablecimiento = message.Data?.Ubicacion ?? "";
+                Inspeccion.TelefonoEstablecimiento = message.Data?.Telefono1 ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.NumLicOperacion = message.Data?.NumLicencia ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.FechaVencLicOperacion = message.Data?.FechaExpiracion ?? null;
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Email = message.Data?.Email ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Telefono = message.Data?.Telefono1 ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Nombre = message.Data?.Nombre ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Direccion = message.Data?.Ubicacion ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Ciudad = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Provincia = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Distrito = message.Data?.Distrito?.Nombre ?? "";
+                Inspeccion.InspRutinaVigAgencia.GeneralesEmpresa.Corregimiento = message.Data?.Corregimiento?.Nombre ?? "";
+            }
+
+            this.InvokeAsync(StateHasChanged);
         }
 
 

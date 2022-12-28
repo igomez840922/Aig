@@ -4,6 +4,7 @@ using Aig.Auditoria.Services;
 using BlazorComponentBus;
 using DataModel;
 using DataModel.Helper;
+using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
@@ -24,7 +25,7 @@ namespace Aig.Auditoria.Components.Inspections
         IPdfGenerationService pdfGenerationService { get; set; }
         [Parameter]
         public DataModel.AUD_InspeccionTB Inspeccion { get; set; }
-        List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
+        //List<AUD_EstablecimientoTB> lEstablecimientos { get; set; }
         List<PaisTB> lPaises { get; set; }
 
         enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.Pending;
@@ -48,6 +49,7 @@ namespace Aig.Auditoria.Components.Inspections
         bool showPersona { get; set; } = false;
         DataModel.DatosPersona datosPersona { get; set; } = null;
 
+        bool showSearchEstablishment { get; set; } = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -85,10 +87,10 @@ namespace Aig.Auditoria.Components.Inspections
         protected async Task FetchData()
         {
 
-            if (lEstablecimientos == null || lEstablecimientos.Count < 1)
-            {
-                lEstablecimientos = await establecimientoService.GetAll();
-            }
+            //if (lEstablecimientos == null || lEstablecimientos.Count < 1)
+            //{
+            //    lEstablecimientos = await establecimientoService.GetAll();
+            //}
             if (lPaises == null || lPaises.Count < 1)
             {
                 lPaises = await countriesService.GetAll();
@@ -96,15 +98,15 @@ namespace Aig.Auditoria.Components.Inspections
 
             if (Inspeccion != null)
             {
-                if (Inspeccion.EstablecimientoId == null)
-                {
-                    Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
-                    if (Inspeccion.EstablecimientoId != null)
-                    {
-                        Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
-                    }
-                    await OnEstablishmentChange(Inspeccion.EstablecimientoId);
-                }
+                //if (Inspeccion.EstablecimientoId == null)
+                //{
+                //    Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
+                //    if (Inspeccion.EstablecimientoId != null)
+                //    {
+                //        Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
+                //    }
+                //    await OnEstablishmentChange(Inspeccion.EstablecimientoId);
+                //}
 
                 if (signaturePad5 != null)
                     signaturePad5.Image = Inspeccion.InspAperturaCosmetArtesanal.Propietario.Firma;                
@@ -149,21 +151,20 @@ namespace Aig.Auditoria.Components.Inspections
             await this.InvokeAsync(StateHasChanged);
         }
 
-
-        protected async Task OnEstablishmentChange(long? Id)
-        {
-            Inspeccion.EstablecimientoId = Id;
-            var establecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault();
-            Inspeccion.UbicacionEstablecimiento = establecimiento?.Ubicacion ?? "";
-            Inspeccion.TelefonoEstablecimiento = establecimiento?.Telefono1 ?? "";
-            Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
-            Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
-            Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
-            Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
-            Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
-            Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Provincia = establecimiento?.Provincia?.Nombre ?? "";
-            Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Corregimiento = establecimiento?.Corregimiento?.Nombre ?? "";
-        }
+        //protected async Task OnEstablishmentChange(long? Id)
+        //{
+        //    Inspeccion.EstablecimientoId = Id;
+        //    var establecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault();
+        //    Inspeccion.UbicacionEstablecimiento = establecimiento?.Ubicacion ?? "";
+        //    Inspeccion.TelefonoEstablecimiento = establecimiento?.Telefono1 ?? "";
+        //    Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
+        //    Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
+        //    Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
+        //    Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
+        //    Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
+        //    Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Provincia = establecimiento?.Provincia?.Nombre ?? "";
+        //    Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Corregimiento = establecimiento?.Corregimiento?.Nombre ?? "";
+        //}
 
 
         protected async Task OnShowSignasure()
@@ -257,7 +258,42 @@ namespace Aig.Auditoria.Components.Inspections
             this.InvokeAsync(StateHasChanged);
         }
 
-        
+        /////////
+        ///        
+        protected async Task OpenSearchEstablishment()
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            showSearchEstablishment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void Establishments_SearchEventHandler(MessageArgs args)
+        {
+            showSearchEstablishment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Establishments.SearchEvent>();
+
+            if (message.Data != null)
+            {
+                Inspeccion.EstablecimientoId = message.Data.Id;
+                Inspeccion.Establecimiento = message.Data;
+                Inspeccion.UbicacionEstablecimiento = message.Data.Ubicacion;
+                Inspeccion.TelefonoEstablecimiento = message.Data.Telefono1 ?? "";
+                Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Email = message.Data?.Email ?? "";
+                Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Telefono = message.Data?.Telefono1 ?? "";
+                Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Nombre = message.Data?.Nombre ?? "";
+                Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Direccion = message.Data?.Ubicacion ?? "";
+                Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Ciudad = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Provincia = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspAperturaCosmetArtesanal.GeneralesEmpresa.Corregimiento = message.Data?.Corregimiento?.Nombre ?? "";
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
 
     }
 

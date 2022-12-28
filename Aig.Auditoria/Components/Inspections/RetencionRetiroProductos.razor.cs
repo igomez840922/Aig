@@ -347,8 +347,7 @@ namespace Aig.Auditoria.Components.Inspections
 
 
         /////////
-        ///
-        
+        ///        
         protected async Task OpenSearchEstablishment()
         {
             bus.Subscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
