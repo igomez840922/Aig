@@ -1,0 +1,287 @@
+﻿@page "/inspecciones"
+@using DataModel.Helper;
+@layout BackendLayout
+@attribute [Authorize]
+
+@if (!OpenAddEdit)
+{
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @languageContainerService.Keys["Inspections"]
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="dropdown dropdown-inline">
+                                    <button type="button" class="btn btn-hover-brand btn-elevate-hover btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="flaticon-more"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
+                                        <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
+                                        <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ExportToExcel()"><i class="fa fa-file-excel"></i>@languageContainerService.Keys["Export"]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm Model="@dataModel" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
+                                            <DataAnnotationsValidator />
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label>@languageContainerService.Keys["Search"]</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />
+                                                        <div class="input-group-append">
+                                                            <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["IspectionType"]</label>
+                                                    <div class="form-line">
+                                                        <InputSelect @bind-Value="dataModel.TipoActa" class="form-control" @onclick="OnFilter">
+
+                                                            <option value="@enumAUD_TipoActa.None">@languageContainerService.Keys["All"]</option>
+
+                                                            @foreach (enumAUD_TipoActa dt in Enum.GetValues(typeof(enumAUD_TipoActa)))
+                                                            {
+                                                                if (dt != enumAUD_TipoActa.None)
+                                                                {
+                                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                }
+                                                            }
+                                                        </InputSelect>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Status"]</label>
+                                                    <div class="form-line">
+                                                        <InputSelect @bind-Value="dataModel.StatusInspecciones" class="form-control" @onclick="OnFilter">
+                                                            <option value="@enum_StatusInspecciones.None">@languageContainerService.Keys["All"]</option>
+
+                                                            @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
+                                                            {
+                                                                if (dt != enum_StatusInspecciones.None)
+                                                                {
+                                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                }
+                                                            }
+                                                        </InputSelect>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["FromDate"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["ToDate"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Min="dataModel.FromDate" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </EditForm>
+                                    </div>
+
+                                    @if (dataModel != null && dataModel.Ldata != null && dataModel.Ldata.Count > 0)
+                                    {
+                                        <div class="kt-portlet__body">
+                                            <!--begin::Section-->
+                                            <div class="kt-section">
+                                                <div class="table-responsive">
+                                                    <table class="table rounded table-striped">
+                                                        <thead class=thead-light>
+                                                            <tr>
+                                                                <th>@languageContainerService.Keys["ActNumber"]</th>
+                                                                <th>@languageContainerService.Keys["IspectionType"]</th>
+                                                                <th>@languageContainerService.Keys["Status"]</th>
+                                                                <th>@languageContainerService.Keys["DateOfRecord"]</th>
+                                                                <th>@languageContainerService.Keys["LicNumber"]</th>
+                                                                <th>@languageContainerService.Keys["NoticeOperation"]</th>
+                                                                <th>@languageContainerService.Keys["Establishments"]</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var dt in dataModel.Ldata)
+                                                            {
+                                                                <tr>
+                                                                    <td scope="row">@dt.NumActa</td>
+                                                                    <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoActa))</td>
+                                                                    <td>@(DataModel.Helper.Helper.GetDescription(dt.StatusInspecciones))</td>
+                                                                    <td>@dt.FechaInicio.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                                                    <td scope="row">@dt.LicenseNumber</td>
+                                                                    <td scope="row">@dt.AvisoOperacion</td>
+                                                                    <td>@(dt.Establecimiento?.Nombre ?? "")</td>
+                                                                    <td style="text-align:right">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                            <div class="dropdown-menu">
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => SendEmailNotification(dt.Id)"><i class="fa fa-paper-plane"></i>@languageContainerService.Keys["Email"]</a>
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => DownloadPdf(dt.Id)"><i class="fa fa-file-pdf"></i>@languageContainerService.Keys["Download"]</a>
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- /btn-group -->
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--end::Section-->
+                                        </div>
+                                        <div class="kt-portlet__foot">
+                                            <BlazorPager CurrentPage="@(dataModel.PagIdx + 1)"
+                                                         PageCount="@dataModel.PagesCount"
+                                                         VisiblePages="@(dataModel.PagesCount>3?4:dataModel.PagesCount)"
+                                                         ShowFirstLast="true"
+                                                         ShowPageNumbers="true"
+                                                         FirstText="<<"
+                                                         LastText=">>"
+                                                         NextText=">"
+                                                         PreviousText="<"
+                                                         OnPageChanged="(async e => {
+						                     if (dataModel.PagesCount < e)
+							                    return;
+						                    dataModel.PagIdx = e - 1;
+						                    await FetchData();})">
+                                            </BlazorPager>
+                                        </div>
+
+                                    }
+                                    <!--end::Form-->
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    @*<Aig.Auditoria.Components.Inspections.InspectionBase Inspeccion="dataModel.Data"></Aig.Auditoria.Components.Inspections.InspectionBase>*@
+    switch (dataModel.Data.TipoActa)
+    {
+        case DataModel.Helper.enumAUD_TipoActa.RR:
+            {
+                <Aig.Auditoria.Components.Inspections.RetencionRetiroProductos Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RetencionRetiroProductos>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.AF:
+        case DataModel.Helper.enumAUD_TipoActa.CUF:
+            {
+                <Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.AA:
+        case DataModel.Helper.enumAUD_TipoActa.CUA:
+            {
+                <Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.AFM:
+        case DataModel.Helper.enumAUD_TipoActa.AFC:
+            {
+                <Aig.Auditoria.Components.Inspections.AperturaFabricante Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaFabricante>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.VF:
+            {
+                <Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.VA:
+            {
+                <Aig.Auditoria.Components.Inspections.RutinaVigilanciaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaAgencia>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.INV:
+            {
+                <Aig.Auditoria.Components.Inspections.Investigacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.Investigacion>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.BPMCD:
+            {
+                <Aig.Auditoria.Components.Inspections.GuiaBPMFabCosmeticoMed Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.GuiaBPMFabCosmeticoMed>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.AECA:
+            {
+                <Aig.Auditoria.Components.Inspections.AperturaCosmetArtesanal Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCosmetArtesanal>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.BPMMN:
+            {
+                <Aig.Auditoria.Components.Inspections.GuiaBPMProductosNatMedicinales Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.GuiaBPMProductosNatMedicinales>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.COP:
+            {
+                <Aig.Auditoria.Components.Inspections.CierreOperacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.CierreOperacion>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.DFP:
+            {
+                <Aig.Auditoria.Components.Inspections.DisposicionFinal Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.DisposicionFinal>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.BPMFM:
+            {
+                <Aig.Auditoria.Components.Inspections.GuiaBPMFabMedicamentos Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.GuiaBPMFabMedicamentos>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.BPMAM:
+            {
+                <Aig.Auditoria.Components.Inspections.GuiaBPMLabAcondicionador Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.GuiaBPMLabAcondicionador>
+                break;
+            }
+        case DataModel.Helper.enumAUD_TipoActa.BPA:
+            {
+                <Aig.Auditoria.Components.Inspections.GuiaBPM_BPA Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.GuiaBPM_BPA>
+                break;
+            }
+        default:
+            {
+                break;
+            }
+    }
+}
+
+
+@if (DeleteDialog)
+{
+    <Aig.Auditoria.Components.DeleteConfirmDialog2></Aig.Auditoria.Components.DeleteConfirmDialog2>
+}
+
+@if (OpenNew)
+{
+    <Aig.Auditoria.Components.Inspections.InspectionType></Aig.Auditoria.Components.Inspections.InspectionType>
+}

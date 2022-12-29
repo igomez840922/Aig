@@ -60,13 +60,13 @@ namespace Aig.Auditoria.Components.InvProduct
 
         protected async Task SaveData()
         {
-            await bus.Publish(new CloseEvent { Data = Product });
+            await bus.Publish(new Aig.Auditoria.Events.InvProduct.CloseEvent { Data = Product });
             await this.InvokeAsync(StateHasChanged);
         }
 
         protected async Task Cancel()
         {
-            await bus.Publish(new CloseEvent { Data = null });
+            await bus.Publish(new Aig.Auditoria.Events.InvProduct.CloseEvent { Data = null });
             await this.InvokeAsync(StateHasChanged);
         }
     }

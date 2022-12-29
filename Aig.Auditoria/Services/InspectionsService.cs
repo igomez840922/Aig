@@ -3,6 +3,8 @@ using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
+using ClosedXML.Excel;
+using DataModel.Helper;
 
 namespace Aig.Auditoria.Services
 {    
@@ -46,6 +48,57 @@ namespace Aig.Auditoria.Services
             { }
 
             return model;
+        }
+
+        public async Task<Stream> ExportToExcel(GenericModel<AUD_InspeccionTB> model)
+        {
+            try
+            {
+                model.PagIdx = 0; model.PagAmt = int.MaxValue;
+
+                model = await FindAll(model);
+
+
+                if (model.Ldata != null && model.Ldata.Count > 0)
+                {
+                    var wb = new XLWorkbook();
+                    wb.Properties.Author = "Inspeccion";
+                    wb.Properties.Title = "Inspeccion";
+                    wb.Properties.Subject = "Inspeccion";
+
+                    var ws = wb.Worksheets.Add("Inspeccion");
+
+                    ws.Cell(1, 1).Value = "Número de Acta";
+                    ws.Cell(1, 2).Value = "Tipo de Inspección";
+                    ws.Cell(1, 3).Value = "Estatus";
+                    ws.Cell(1, 4).Value = "Fecha del Acta";
+                    ws.Cell(1, 5).Value = "Número de Licencia";
+                    ws.Cell(1, 6).Value = "Aviso de Operaciones";
+                    ws.Cell(1, 7).Value = "Establecimientos";
+
+                    for (int row = 1; row <= model.Ldata.Count; row++)
+                    {
+                        var prod = model.Ldata[row - 1];
+
+                        ws.Cell(row + 1, 1).Value = prod.NumActa;
+                        ws.Cell(row + 1, 2).Value = DataModel.Helper.Helper.GetDescription(prod.TipoActa);
+                        ws.Cell(row + 1, 3).Value = DataModel.Helper.Helper.GetDescription(prod.StatusInspecciones);
+                        ws.Cell(row + 1, 4).Value = prod.FechaInicio.ToString("dd/MM/yyyy hh:mm tt");
+                        ws.Cell(row + 1, 5).Value = prod.LicenseNumber;
+                        ws.Cell(row + 1, 6).Value = prod.AvisoOperacion;
+                        ws.Cell(row + 1, 7).Value = prod.Establecimiento?.Nombre ?? "";
+                    }
+
+                    MemoryStream XLSStream = new();
+                    wb.SaveAs(XLSStream);
+
+                    return XLSStream;
+                }
+            }
+            catch (Exception ex)
+            { }
+
+            return null;
         }
 
         public async Task<List<AUD_InspeccionTB>> GetAll()

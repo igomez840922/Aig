@@ -6,6 +6,7 @@ namespace Aig.Auditoria.Services
 {
     public interface IInspectionsService
     {
+        Task<Stream> ExportToExcel(GenericModel<AUD_InspeccionTB> model);
         Task<GenericModel<AUD_InspeccionTB>> FindAll(GenericModel<AUD_InspeccionTB> model);
         Task<List<AUD_InspeccionTB>> GetAll();
         Task<AUD_InspeccionTB> Get(long id);

@@ -6,6 +6,7 @@ namespace Aig.Auditoria.Services
 {
     public interface ICorrespondenciaService
     {
+        Task<Stream> ExportToExcel(GenericModel<AUD_CorrespondenciaTB> model);
         Task<GenericModel<AUD_CorrespondenciaTB>> FindAll(GenericModel<AUD_CorrespondenciaTB> model);
         Task<List<AUD_CorrespondenciaTB>> GetAll();
         Task<AUD_CorrespondenciaTB> Get(long id);

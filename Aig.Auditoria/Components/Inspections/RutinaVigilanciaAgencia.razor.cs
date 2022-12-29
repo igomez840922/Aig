@@ -318,8 +318,8 @@ namespace Aig.Auditoria.Components.Inspections
                 if (!Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.LProductos.Contains(message.Data))
                     Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.LProductos.Add(message.Data);
 
-                this.InvokeAsync(StateHasChanged);
             }
+            this.InvokeAsync(StateHasChanged);
         }
 
         /////////

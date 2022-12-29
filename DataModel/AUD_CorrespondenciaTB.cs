@@ -40,6 +40,12 @@ namespace DataModel
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FechaRevision { get => fechaRevision; set => SetProperty(ref fechaRevision, value); }
 
+        //Nombre de persona que realiza la revision
+        private string nombreRevision;
+        [StringLength(300)]
+        public string NombreRevision { get => nombreRevision; set => SetProperty(ref nombreRevision, value); }
+
+
         //Observaciones
         private string observaciones;
         public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }

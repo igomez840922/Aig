@@ -10686,7 +10686,7 @@ namespace Aig.Auditoria.Services
                             });
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                            column.Item().AlignLeft().Text(string.Format("4. DEL TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("4. TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>

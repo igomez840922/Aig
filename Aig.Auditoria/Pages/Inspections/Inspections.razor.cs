@@ -204,6 +204,15 @@ namespace Aig.Auditoria.Pages.Inspections
             catch (Exception ex) { }
         }
 
+        protected async Task ExportToExcel()
+        {
+            Stream stream = await inspeccionService.ExportToExcel(dataModel);
+            if (stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("inspecciones.xlsx", stream, "application/actet-stream");
+            }
+        }
+
     }
 
 }

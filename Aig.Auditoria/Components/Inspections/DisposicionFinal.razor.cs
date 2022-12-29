@@ -317,8 +317,8 @@ namespace Aig.Auditoria.Components.Inspections
                 if (!Inspeccion.InspDisposicionFinal.InventarioMedicamento.LProductos.Contains(message.Data))
                     Inspeccion.InspDisposicionFinal.InventarioMedicamento.LProductos.Add(message.Data);
 
-                this.InvokeAsync(StateHasChanged);
             }
+            this.InvokeAsync(StateHasChanged);
         }
 
         /////////

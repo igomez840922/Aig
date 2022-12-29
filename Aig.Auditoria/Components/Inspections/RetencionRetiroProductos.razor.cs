@@ -187,8 +187,8 @@ namespace Aig.Auditoria.Components.Inspections
                 if(!Inspeccion.InspRetiroRetencion.LProductos.Contains(message.Product))
                     Inspeccion.InspRetiroRetencion.LProductos.Add(message.Product);
 
-                this.InvokeAsync(StateHasChanged);
             }
+            this.InvokeAsync(StateHasChanged);
         }
           
         //Add New Attachment
@@ -228,8 +228,8 @@ namespace Aig.Auditoria.Components.Inspections
                 Inspeccion.LAttachments = Inspeccion.LAttachments != null ? Inspeccion.LAttachments : new List<AttachmentTB>();
 
                 Inspeccion.LAttachments.Add(message.Attachment);
-                this.InvokeAsync(StateHasChanged);
             }
+            this.InvokeAsync(StateHasChanged);
         }
 
         //ADD PARTICIPANTE

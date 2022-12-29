@@ -25,6 +25,7 @@
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
                                         <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
+                                        <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ExportToExcel()"><i class="fa fa-file-excel"></i>@languageContainerService.Keys["Export"]</a>
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +46,20 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["FromDate"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
 
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["ToDate"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Min="dataModel.FromDate" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </EditForm>
                                     </div>
