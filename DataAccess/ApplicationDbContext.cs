@@ -1623,6 +1623,9 @@ namespace DataAccess
         public virtual DbSet<TipoInstitucionTB> TipoInstitucion { get; set; }
         public virtual DbSet<IntensidadEsaviTB> IntensidadEsavi { get; set; }
         public virtual DbSet<TipoVacunaTB> TipoVacuna { get; set; }
+        public virtual DbSet<FMV_ContactosTB> FMV_Contactos { get; set; }
+
+        
 
     }
 }
