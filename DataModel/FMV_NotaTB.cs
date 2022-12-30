@@ -14,6 +14,7 @@ namespace DataModel
         {
             Adjunto = new AttachmentData();
             Instituciones = new FMV_NotaInstitucion();
+            NotaContactos=new FMV_NotaContactos();
         }
 
         //Fecha
@@ -38,6 +39,11 @@ namespace DataModel
         [Required(ErrorMessage = "requerido")]
         public enumFMV_NoteType TipoNota { get => tipoNota; set => SetProperty(ref tipoNota, value); }
 
+        //Asunto
+        private string asunto;
+        [StringLength(500)]
+        public string Asunto { get => asunto; set => SetProperty(ref asunto, value); }
+
         //Descripcion
         private string descripcion;
         [Required(ErrorMessage = "requerido")]
@@ -49,12 +55,6 @@ namespace DataModel
         //private InstitucionDestinoTB? institucionDestino;
         //public virtual InstitucionDestinoTB? InstitucionDestino { get => institucionDestino; set => SetProperty(ref institucionDestino, value); }
 
-
-        //Destinatario
-        private string destinatario;
-        [StringLength(500)]
-        public string Destinatario { get => destinatario; set => SetProperty(ref destinatario, value); }
-
         //Ficheros Adjuntos
         private AttachmentData adjunto;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
@@ -65,6 +65,12 @@ namespace DataModel
         private FMV_NotaInstitucion instituciones;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual FMV_NotaInstitucion Instituciones { get => instituciones; set => SetProperty(ref instituciones, value); }
+
+
+        //loa destinatarios ... correos de destinos
+        private FMV_NotaContactos notaContactos;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual FMV_NotaContactos NotaContactos { get => notaContactos; set => SetProperty(ref notaContactos, value); }
 
     }
 

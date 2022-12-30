@@ -22,8 +22,9 @@ namespace Aig.FarmacoVigilancia.Components.NotaDestino
         [Parameter]
         public DataModel.FMV_NotaDestinoTB Data { get; set; }
         
-        bool OpenAddEditContacto { get; set; } = false;
-        DataModel.Contacto datoContacto { get; set; } = null;
+        bool OpenNuevoContacto { get; set; } = false;
+        bool OpenSearchContacto { get; set; } = false;
+        DataModel.FMV_ContactosTB datoContacto { get; set; } = null;
 
         List<NotaClasificacion> LClasificaciones { get; set; } = new List<NotaClasificacion>();
 
@@ -96,17 +97,26 @@ namespace Aig.FarmacoVigilancia.Components.NotaDestino
 
 
         //Add New Contact
-        protected async Task OpenContact( DataModel.Contacto contacto = null)
+        protected async Task OpenNewContact(DataModel.FMV_ContactosTB contacto = null)
         {
-            bus.Subscribe<Aig.FarmacoVigilancia.Events.Contacto.CloseEvent>(Contacto_AddEditCloseEventHandlerHandler);
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Contacts.ContactsEvent>(Contacto_AddEditCloseEventHandlerHandler);
 
-            datoContacto = contacto != null ? contacto : new DataModel.Contacto();
-            OpenAddEditContacto = true;
+            datoContacto = contacto != null ? contacto : new DataModel.FMV_ContactosTB();
+            OpenNuevoContacto = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+
+        protected async Task OpenContact()
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Contacts.ContactsEvent>(Contacto_AddEditCloseEventHandlerHandler);
+
+            OpenSearchContacto = true;
 
             await this.InvokeAsync(StateHasChanged);
         }
         //Remove Product
-        protected async Task RemoveContact(DataModel.Contacto contacto)
+        protected async Task RemoveContact(DataModel.FMV_ContactosTB contacto)
         {
             if (contacto != null)
             {
@@ -117,15 +127,16 @@ namespace Aig.FarmacoVigilancia.Components.NotaDestino
         //ON CLOSE PRODUCT MODAL 
         private void Contacto_AddEditCloseEventHandlerHandler(MessageArgs args)
         {
-            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Contacto.CloseEvent>(Contacto_AddEditCloseEventHandlerHandler);
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Contacts.ContactsEvent>(Contacto_AddEditCloseEventHandlerHandler);
 
-            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Contacto.CloseEvent>();
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Contacts.ContactsEvent>();
 
             datoContacto = null;
-            OpenAddEditContacto = false;
+            OpenSearchContacto = false;
+            OpenNuevoContacto = false;
             if (message.Data != null)
             {
-                Data.NotaContactos.LContactos = Data.NotaContactos.LContactos != null ? Data.NotaContactos.LContactos  : new List<DataModel.Contacto>();
+                Data.NotaContactos.LContactos = Data.NotaContactos.LContactos != null ? Data.NotaContactos.LContactos  : new List<DataModel.FMV_ContactosTB>();
 
                 if (!Data.NotaContactos.LContactos.Contains(message.Data))
                     Data.NotaContactos.LContactos.Add(message.Data);

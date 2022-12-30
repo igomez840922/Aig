@@ -38,7 +38,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_NotaTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Descripcion.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
                               (model.FromDate == null ? true : (data.Fecha >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.Fecha <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
@@ -48,7 +48,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_NotaTB>()
                                where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Descripcion.Contains(model.Filter))) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
                               (model.FromDate == null ? true : (data.Fecha >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.Fecha <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
@@ -83,17 +83,30 @@ namespace Aig.FarmacoVigilancia.Services
                     ws.Cell(1, 3).Value = "Evaluador";
                     ws.Cell(1, 4).Value = "Tipo de Nota";
                     ws.Cell(1, 5).Value = "Descripción";
-                    ws.Cell(1, 6).Value = "Destinatario";
+                    ws.Cell(1, 6).Value = "Destinatarios";
 
+                    string Destinatarios = null;
                     for (int row = 1; row <= model.Ldata.Count; row++)
-                    {//FechaRecepcion
+                    {
                         var prod = model.Ldata[row - 1];
+
+                        Destinatarios = "";
+
+                        if (prod.NotaContactos != null)
+                        {
+                            foreach (var dest in prod.NotaContactos.LContactos)
+                            {
+                                Destinatarios += dest.Correo + "; ";
+                            }
+                        }
+
+                        //FechaRecepcion
                         ws.Cell(row + 1, 1).Value = prod.Fecha?.ToString("dd/MM/yyyy") ?? "";
                         ws.Cell(row + 1, 2).Value = prod.NumNota;
                         ws.Cell(row + 1, 3).Value = prod.Evaluador?.NombreCompleto ?? "";
                         ws.Cell(row + 1, 4).Value = DataModel.Helper.Helper.GetDescription(prod.TipoNota);
                         ws.Cell(row + 1, 5).Value = prod.Descripcion;
-                        ws.Cell(row + 1, 6).Value = prod.Destinatario;
+                        ws.Cell(row + 1, 6).Value = Destinatarios;
                     }
 
                     MemoryStream XLSStream = new();
@@ -127,6 +140,7 @@ namespace Aig.FarmacoVigilancia.Services
             var result = DalService.Save(data);
             if (result != null)
             {
+                DalService.DBContext.Entry(result).Property(b => b.NotaContactos).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.Adjunto).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.Instituciones).IsModified = true;
                 DalService.DBContext.SaveChanges();

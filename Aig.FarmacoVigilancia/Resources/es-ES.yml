@@ -288,3 +288,5 @@ ESAVI: Eventos Supuestamente Atribuibles a la Vacunación o Inmunización
 InstitutionType: Tipo de Institución
 InstitutionsType: Tipo de Instituciones
 Export: Exportar
+EmailSentSuccessfully: Correo enviado Satisfactoriamente
+EmailSentError: Correo no pudo ser enviado

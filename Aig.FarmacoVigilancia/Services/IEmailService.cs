@@ -6,7 +6,7 @@ namespace Aig.FarmacoVigilancia.Services
 {
     public interface IEmailService
     {
-        Task SendEmailAsync(string email, string subject, BodyBuilder bodyBuilder);
+        Task<bool> SendEmailAsync(List<string> lEmails, string subject, BodyBuilder bodyBuilder);
     }
 }
 

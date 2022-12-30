@@ -607,6 +607,35 @@ namespace Aig.FarmacoVigilancia.Helper
 
 
                 }
+                if (dalService.Count<FMV_ContactosTB>() <= 0)
+                {
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.FarmacoVigilancia.Resources.Contactos.xlsx"))
+                    {
+                        try
+                        {
+                            using var wbook = new XLWorkbook(stream);
+                            var ws1 = wbook.Worksheet(1);
+                            for (int row = 2; row < ws1.RowCount(); row++)
+                            {
+                                FMV_ContactosTB contact = new FMV_ContactosTB();
+                                var data = ws1.Row(row);
+
+                                var val = data.Cell(1).GetValue<string>();
+                                if (string.IsNullOrEmpty(val))
+                                    break;
+
+                                contact.Instalacion = data.Cell(1).GetValue<string>();
+                                contact.Nombre = data.Cell(2).GetValue<string>();
+                                contact.Cargo = data.Cell(3).GetValue<string>();
+                                contact.Telefono = data.Cell(4).GetValue<string>();
+                                contact.Correo = data.Cell(5).GetValue<string>();
+
+                                dalService.Save(contact);
+                            }
+                        }
+                        catch { }
+                    }
+                }
 
             }
 

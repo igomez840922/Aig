@@ -287,3 +287,5 @@ ESAVI: Events Supposedly Attributable to Vaccination or Immunization
 InstitutionType: Institution Type
 InstitutionsType: Institutions Type
 Export: Export
+EmailSentSuccessfully: Email has been Sent Sucessfully
+EmailSentError: Email could not be Sent

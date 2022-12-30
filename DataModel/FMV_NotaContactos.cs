@@ -11,12 +11,12 @@ namespace DataModel
     {
         public FMV_NotaContactos()
         {
-            LContactos = new List<Contacto>();
+            LContactos = new List<FMV_ContactosTB>();
         }
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
-        private List<Contacto> lContactos;
-        public virtual List<Contacto> LContactos { get => lContactos; set => SetProperty(ref lContactos, value); }
+        private List<FMV_ContactosTB> lContactos;
+        public virtual List<FMV_ContactosTB> LContactos { get => lContactos; set => SetProperty(ref lContactos, value); }
 
     }
 }

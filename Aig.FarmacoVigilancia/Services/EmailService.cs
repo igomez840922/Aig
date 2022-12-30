@@ -5,6 +5,7 @@ using MailKit;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MimeKit.Utils;
+using static Duende.IdentityServer.Models.IdentityResources;
 
 namespace Aig.FarmacoVigilancia.Services
 {
@@ -18,7 +19,7 @@ namespace Aig.FarmacoVigilancia.Services
         }
         
 
-        public async Task SendEmailAsync(string email, string subject, BodyBuilder bodyBuilder)
+        public async Task<bool> SendEmailAsync(List<string> lEmails, string subject, BodyBuilder bodyBuilder)
         {
             try
             {
@@ -26,7 +27,10 @@ namespace Aig.FarmacoVigilancia.Services
 
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress("Notificaciones MINSA", smtpConfig.Correo));
-                message.To.Add(new MailboxAddress("Usuario", email));
+                foreach (var address in lEmails)
+                {
+                    message.To.Add(new MailboxAddress(address, address));
+                }                
                 message.Subject = subject;
                 message.Body = bodyBuilder.ToMessageBody();
                 //message.Body = new TextPart("html")
@@ -48,8 +52,9 @@ namespace Aig.FarmacoVigilancia.Services
             }
             catch (Exception ex)
             {
-               // throw ex;
+                return false;
             }
+            return true;
         }
 
     }

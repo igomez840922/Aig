@@ -2,12 +2,15 @@
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.Nota;
 using Aig.FarmacoVigilancia.Pages.Alert;
+using Aig.FarmacoVigilancia.Pages.Note;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using DataModel;
+using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 
 namespace Aig.FarmacoVigilancia.Components.Note
 {    
@@ -29,6 +32,10 @@ namespace Aig.FarmacoVigilancia.Components.Note
 
         bool openAttachment { get; set; } = false;
         AttachmentTB attachment { get; set; } = null;
+
+        bool OpenNuevoContacto { get; set; } = false;
+        bool OpenSearchContacto { get; set; } = false;
+        DataModel.FMV_ContactosTB datoContacto { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -72,6 +79,7 @@ namespace Aig.FarmacoVigilancia.Components.Note
             {
                 LInstitucionDestino = await destinyInstituteService.GetAll();
             }
+            Nota.NotaContactos = Nota.NotaContactos!=null? Nota.NotaContactos:new FMV_NotaContactos();
 
             await OnTipoNotaChange();
 
@@ -181,6 +189,81 @@ namespace Aig.FarmacoVigilancia.Components.Note
             this.InvokeAsync(StateHasChanged);
         }
 
+
+        //Add New Contact
+        protected async Task OpenNewContact(DataModel.FMV_ContactosTB contacto = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Contacts.ContactsEvent>(Contacto_AddEditCloseEventHandlerHandler);
+
+            datoContacto = contacto != null ? contacto : new DataModel.FMV_ContactosTB();
+            OpenNuevoContacto = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+
+        protected async Task OpenContact()
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Contacts.ContactsEvent>(Contacto_AddEditCloseEventHandlerHandler);
+
+            OpenSearchContacto = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //Remove Product
+        protected async Task RemoveContact(DataModel.FMV_ContactosTB contacto)
+        {
+            if (contacto != null)
+            {
+                Nota.NotaContactos.LContactos.Remove(contacto);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE PRODUCT MODAL 
+        private void Contacto_AddEditCloseEventHandlerHandler(MessageArgs args)
+        {
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Contacts.ContactsEvent>(Contacto_AddEditCloseEventHandlerHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Contacts.ContactsEvent>();
+
+            datoContacto = null;
+            OpenSearchContacto = false;
+            OpenNuevoContacto = false;
+            if (message.Data != null)
+            {
+                Nota.NotaContactos.LContactos = Nota.NotaContactos.LContactos != null ? Nota.NotaContactos.LContactos : new List<DataModel.FMV_ContactosTB>();
+
+                if (!Nota.NotaContactos.LContactos.Contains(message.Data) && Nota.NotaContactos.LContactos.Find(x => x.Correo == message.Data.Correo) == null)
+                {
+                    message.Data.IsManual = true;
+                    Nota.NotaContactos.LContactos.Add(message.Data);
+                }
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
+        void OnChangeInstitutes(object value)
+        {
+            UpdateContacts();
+        }
+        protected async Task UpdateContacts()
+        {
+            Nota.NotaContactos.LContactos.RemoveAll(x => !x.IsManual);
+            if (Nota.Instituciones.LInstituciones!=null && Nota.Instituciones.LInstituciones.Count > 0)
+            {
+                foreach(var dest in Nota.Instituciones.LInstituciones)
+                {
+                    foreach (var contact in dest.NotaContactos.LContactos)
+                    {
+                        if(!string.IsNullOrEmpty(contact.Correo) && Nota.NotaContactos.LContactos.Find(x=>x.Correo == contact.Correo) == null)
+                        {
+                            Nota.NotaContactos.LContactos.Add(contact);
+                        }
+                    }
+                }
+            }
+            this.InvokeAsync(StateHasChanged);
+        }
     }
 
 }

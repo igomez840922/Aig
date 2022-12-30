@@ -48,6 +48,10 @@ namespace DataModel
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
         public string CorreoSec { get => correoSec; set => SetProperty(ref correoSec, value); }
 
+        private bool isManual;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public bool IsManual { get => isManual; set => SetProperty(ref isManual, value); }
+
 
     }
 }

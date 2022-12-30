@@ -266,7 +266,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                         page.Content().PaddingVertical(15).Column(column =>
                         {
-                            column.Item().Text(string.Format("Para: {0}", note.Destinatario?.ToUpper() ??""));
+                            //column.Item().Text(string.Format("Para: {0}", note.Destinatario?.ToUpper() ??""));
 
                             column.Item().PaddingVertical(20).Text(string.Format("De: {0}{1}", "MAGISTRA ELVIA C. LAU\r\n", "Directora Nacional de Farmacias y Drogas"));
 

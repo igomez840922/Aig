@@ -98,12 +98,12 @@
 
                                                 <RadzenDropDown AllowClear="true" Multiple="true" Chips="true" MaxSelectedLabels="20" Class="form-control" TValue="List<FMV_NotaDestinoTB>" @bind-Value=@Nota.Instituciones.LInstituciones
                                                                 AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
-                                                                Data=@(LInstitucionDestinoFiltered?.Where(x=>!x.Deleted)) TextProperty="Nombre" />
+                                                                Data=@(LInstitucionDestinoFiltered?.Where(x=>!x.Deleted)) TextProperty="Nombre" Change="@(args => OnChangeInstitutes(args))" />
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-12">
+                                    @*<div class="col-sm-12">
                                         <label>@languageContainerService.Keys["Addressee"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -111,16 +111,81 @@
                                                 <ValidationMessage For=@(() => Nota.Destinatario) />
                                             </div>
                                         </div>
+                                    </div>*@
+
+                                </div>
+
+
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <label>@languageContainerService.Keys["Destinatarios"]</label>
+                                        <div class="table-responsive">
+                                            <table class="table rounded table-striped">
+                                                <thead class=thead-light>
+                                                    <tr>
+                                                        <th>@languageContainerService.Keys["Name"]</th>
+                                                        <th>@languageContainerService.Keys["Inst./Región"]</th>
+                                                        <th>@languageContainerService.Keys["Cargo"]</th>
+                                                        <th>@languageContainerService.Keys["Telefono"]</th>
+                                                        <th>@languageContainerService.Keys["Correo"]</th>
+                                                        <th style="text-align:right;">
+                                                            <button type="button" @onclick="(e)=>{OpenNewContact();}"
+                                                                    class="btn btn-sm btn-outline-primary waves-effect">
+                                                                @languageContainerService.Keys["New"]
+                                                            </button>
+                                                            <button type="button" @onclick="(e)=>{OpenContact();}"
+                                                                    class="btn btn-sm btn-outline-primary waves-effect">
+                                                                @languageContainerService.Keys["Search"]
+                                                            </button>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Nota != null && Nota.NotaContactos?.LContactos != null)
+                                                    {
+                                                        @foreach (var dt in Nota.NotaContactos.LContactos)
+                                                        {
+                                                            <tr>
+                                                                <td scope="row">@dt.Nombre</td>
+                                                                <td>@dt.Instalacion</td>
+                                                                <td>@dt.Cargo</td>
+                                                                <td>@dt.Telefono</td>
+                                                                <td>@dt.Correo</td>
+                                                                <td style="text-align:right">
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveContact(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                                    </div>
+                                                                    <!-- /btn-group -->
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+
                                     </div>
 
                                 </div>
+
                                 <div class="row clearfix">
+
+                                     <div class="col-sm-12">
+                                        <label>@languageContainerService.Keys["Asunto"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Nota.Asunto" />
+                                                <ValidationMessage For=@(() => Nota.Asunto) />
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="col-sm-12">
                                         <label>@languageContainerService.Keys["Description"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputTextArea rows="8" class="form-control" @bind-Value="Nota.Descripcion" />
+                                                <InputTextArea rows="10" class="form-control" @bind-Value="Nota.Descripcion" />
                                                 <ValidationMessage For=@(() => Nota.Descripcion) />
                                             </div>
                                         </div>
@@ -206,6 +271,14 @@
     @if (openAttachment)
     {
         <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
+    }
+    @if (OpenSearchContacto)
+    {
+        <Aig.FarmacoVigilancia.Components.Contacts.SearchComponent></Aig.FarmacoVigilancia.Components.Contacts.SearchComponent>
+    }
+    @if (OpenNuevoContacto)
+    {
+        <Aig.FarmacoVigilancia.Components.Contacts.AddEditComponent datoContacto="datoContacto"></Aig.FarmacoVigilancia.Components.Contacts.AddEditComponent>
     }
 }
 

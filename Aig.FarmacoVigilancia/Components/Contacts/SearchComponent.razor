@@ -1,5 +1,136 @@
-﻿<h3>SearchComponent</h3>
+﻿@using DataModel.Helper;
 
-@code {
+
+<!-- Modal Creat/Edit -->
+@if (dataModel != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@languageContainerService.Keys["Buscar Contacto"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="kt-portlet">
+                                <div class="kt-portlet__head">
+                                    <div class="kt-portlet__head-label">
+                                        <h3 class="kt-portlet__head-title">
+                                            @languageContainerService.Keys["Contactos"]
+                                        </h3>
+                                    </div>
+                                    <div class="kt-portlet__head-toolbar">
+                                        
+                                    </div>
+                                </div>
+                                <div class="kt-portlet__body kt-portlet__body--fit">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="kt-portlet__body">
+                                                <EditForm Model="@dataModel" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
+                                                    <DataAnnotationsValidator />
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>@languageContainerService.Keys["Search"]</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />
+                                                                <div class="input-group-append">
+                                                                    <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </EditForm>
+                                            </div>
+
+                                            @if (dataModel != null && dataModel.Ldata != null && dataModel.Ldata.Count > 0)
+                                            {
+                                                <div class="kt-portlet__body">
+                                                    <!--begin::Section-->
+                                                    <div class="kt-section">
+                                                        <div class="table-responsive">
+                                                            <table class="table rounded table-striped">
+                                                                <thead class=thead-light>
+                                                                    <tr>
+                                                                        <th>@languageContainerService.Keys["Name"]</th>
+                                                                        <th>@languageContainerService.Keys["Inst./Región"]</th>
+                                                                        <th>@languageContainerService.Keys["Cargo"]</th>
+                                                                        <th>@languageContainerService.Keys["Telefono"]</th>
+                                                                        <th>@languageContainerService.Keys["Correo"]</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var dt in dataModel.Ldata)
+                                                                    {
+                                                                        <tr>
+                                                                            <td scope="row">@dt.Nombre</td>
+                                                                            <td scope="row">@dt.Instalacion</td>
+                                                                            <td scope="row">@dt.Cargo</td>
+                                                                            <td scope="row">@dt.Telefono</td>
+                                                                            <td scope="row">@dt.Correo</td>
+                                                                            <td style="text-align:right">
+                                                                                <div class="btn-group">
+                                                                                    <button type="button" class="btn btn-secondary" @onclick="(e)=>{SelectData(dt);}">@languageContainerService.Keys["Select"]</button>
+
+                                                                                </div>
+                                                                                <!-- /btn-group -->
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Section-->
+                                                </div>
+                                                <div class="kt-portlet__foot">
+                                                    <BlazorPager CurrentPage="@(dataModel.PagIdx + 1)"
+                                                                 PageCount="@dataModel.PagesCount"
+                                                                 VisiblePages="@(dataModel.PagesCount>3?4:dataModel.PagesCount)"
+                                                                 ShowFirstLast="true"
+                                                                 ShowPageNumbers="true"
+                                                                 FirstText="<<"
+                                                                 LastText=">>"
+                                                                 NextText=">"
+                                                                 PreviousText="<"
+                                                                 OnPageChanged="(async e => {
+						                     if (dataModel.PagesCount < e)
+							                    return;
+						                    dataModel.PagIdx = e - 1;
+						                    await FetchData();})">
+                                                    </BlazorPager>
+                                                </div>
+
+                                            }
+                                            <!--end::Form-->
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect"
+                    @onclick="(e)=>{Cancel();}">
+                        @languageContainerService.Keys["Cancel"]
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 }
+

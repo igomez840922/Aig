@@ -111,9 +111,9 @@
                                                             <th>@languageContainerService.Keys["Date"]</th>
                                                             <th>@languageContainerService.Keys["NumNota"]</th>
                                                             <th>@languageContainerService.Keys["Evaluator"]</th>
-                                                            <th>@languageContainerService.Keys["NoteType"]</th> 
+                                                            <th>@languageContainerService.Keys["NoteType"]</th>
                                                             <th>@languageContainerService.Keys["Institute"]</th>
-                                                            <th>@languageContainerService.Keys["Addressee"]</th>
+                                                            <th>@languageContainerService.Keys["Asunto"]</th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>
@@ -133,13 +133,14 @@
                                                                             <span>@inst.Nombre - </span>
                                                                         }
                                                                     }
-                                                                    
+
                                                                 </td>
-                                                                <td>@(dt.Destinatario)</td>
+                                                                <td>@dt.Asunto</td>
                                                                 <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                                         <div class="dropdown-menu">
+                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => SendEmailNotification(dt.Id)"><i class="fa fa-paper-plane"></i>@languageContainerService.Keys["Email"]</a>
                                                                             @if (dt.Adjunto?.LAttachments?.Count > 0)
                                                                             {
                                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => DownloadPdf(dt.Id)"><i class="fa fa-file-pdf"></i>@languageContainerService.Keys["Download"]</a>

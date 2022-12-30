@@ -7,7 +7,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["Nuevo"]) @languageContainerService.Keys["Destinatario de Nota"]</h5>
+                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["Nueva"]) @languageContainerService.Keys["Institución para Notas"]</h5>
                     <button type="button" class="close" @onclick="(e)=>{Cancel();}"
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -40,8 +40,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-12">
+                            @*<div class="col-sm-12">
                                 <label>@languageContainerService.Keys["Descripción"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
@@ -49,30 +48,31 @@
                                         <ValidationMessage For=@(() => Data.Descripcion) />
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
+
                         <h5>@languageContainerService.Keys["Contactos Asociados"]</h5>
-                        <div class="row clearfix">
-                            <div class="col-9" style="text-align:left;">
-                            </div>
-                            <div class="col-3" style="text-align:right;">
-                                <button type="button" @onclick="(e)=>{OpenContact();}"
-                                        class="btn btn-sm btn-outline-primary waves-effect">
-                                    @languageContainerService.Keys["Add"]
-                                </button>
-                            </div>
-                        </div>
                         <!--begin::Section-->
                         <div class="kt-section">
                             <div class="table-responsive">
                                 <table class="table rounded table-striped">
                                     <thead class=thead-light>
                                         <tr>
-                                            <th>@languageContainerService.Keys["Nombre"]</th>
+                                            <th>@languageContainerService.Keys["Name"]</th>
+                                            <th>@languageContainerService.Keys["Inst./Región"]</th>
+                                            <th>@languageContainerService.Keys["Cargo"]</th>
                                             <th>@languageContainerService.Keys["Telefono"]</th>
                                             <th>@languageContainerService.Keys["Correo"]</th>
-                                            <th>@languageContainerService.Keys["Descripción"]</th>
-                                            <th></th>
+                                            <th style="text-align:right;">
+                                                <button type="button" @onclick="(e)=>{OpenNewContact();}"
+                                                        class="btn btn-sm btn-outline-primary waves-effect">
+                                                    @languageContainerService.Keys["New"]
+                                                </button>
+                                                <button type="button" @onclick="(e)=>{OpenContact();}"
+                                                        class="btn btn-sm btn-outline-primary waves-effect">
+                                                    @languageContainerService.Keys["Search"]
+                                                </button>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,17 +82,16 @@
                                             {
                                                 <tr>
                                                     <td scope="row">@dt.Nombre</td>
+                                                    <td>@dt.Instalacion</td>
+                                                    <td>@dt.Cargo</td>
                                                     <td>@dt.Telefono</td>
-                                                    <td>@dt.Email</td>
-                                                    <td>@dt.Descripcion</td>                                                    
+                                                    <td>@dt.Correo</td>
                                                     <td style="text-align:right">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{OpenContact(dt);}" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
-                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{RemoveContact(dt);}"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
-                                                            </div>
+                                                            <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveContact(dt);}">@languageContainerService.Keys["Delete"]</button>
+
                                                         </div>
+                                                        <!-- /btn-group -->
                                                     </td>
                                                 </tr>
                                             }
@@ -142,9 +141,13 @@
         </div>
     </div>
 
-    @if (OpenAddEditContacto)
+    @if (OpenSearchContacto)
     {
-        <Aig.FarmacoVigilancia.Components.Contacto.AddEdit datoContacto="@datoContacto"></Aig.FarmacoVigilancia.Components.Contacto.AddEdit>
+        <Aig.FarmacoVigilancia.Components.Contacts.SearchComponent></Aig.FarmacoVigilancia.Components.Contacts.SearchComponent>
+    }
+    @if (OpenNuevoContacto)
+    {
+        <Aig.FarmacoVigilancia.Components.Contacts.AddEditComponent datoContacto="datoContacto"></Aig.FarmacoVigilancia.Components.Contacts.AddEditComponent>
     }
 }
 

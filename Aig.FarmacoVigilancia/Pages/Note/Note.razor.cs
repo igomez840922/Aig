@@ -11,6 +11,7 @@ using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.Nota;
 using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
 using System.IO;
+using MimeKit;
 
 namespace Aig.FarmacoVigilancia.Pages.Note
 {   
@@ -31,6 +32,8 @@ namespace Aig.FarmacoVigilancia.Pages.Note
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
         [Inject]
         IPdfGenerationService pdfGenerationService { get; set; }
+        [Inject]
+        IEmailService emailService { get; set; }
 
 
         GenericModel<FMV_NotaTB> dataModel { get; set; } = new GenericModel<FMV_NotaTB>()
@@ -197,6 +200,47 @@ namespace Aig.FarmacoVigilancia.Pages.Note
                 }
             }
 
+        }
+
+        private async Task SendEmailNotification(long Id)
+        {
+            try
+            {
+                var data = await noteService.Get(Id);
+                if (data != null && data.NotaContactos?.LContactos?.Count>0)
+                {
+                    var subject = "Nota #: " + data.NumNota + " - " + data.Asunto;
+
+                    var builder = new BodyBuilder();
+
+                    builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
+
+                    if (data.Adjunto?.LAttachments?.Count > 0)
+                    {
+                        foreach(var attch in data.Adjunto.LAttachments)
+                        {
+                            var stream = await pdfGenerationService.GetStreamsFromFile(attch.AbsolutePath);
+                            if (stream != null)
+                            {
+                                builder.Attachments.Add("adjunto.pdf", stream);
+                            }
+                        }
+                    }
+
+                    List<string> lEmails = (from email in data.NotaContactos.LContactos
+                                            select email.Correo).ToList();
+
+                   if( await emailService.SendEmailAsync(lEmails, subject, builder))
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["EmailSentSuccessfully"]);
+                        return;
+                    }
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["EmailSentError"]);
+
+                }
+
+            }
+            catch (Exception ex) { }
         }
 
     }

@@ -1518,6 +1518,10 @@ namespace DataAccess
              .Property(e => e.Instituciones)
              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_NotaInstitucion>(x));
 
+            modelBuilder.Entity<FMV_NotaTB>()
+              .Property(e => e.NotaContactos)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_NotaContactos>(x));
+
             ///////////////////////////////////////////
             ///
 
