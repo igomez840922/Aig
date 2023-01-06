@@ -18,7 +18,7 @@
     <!--end::Fonts -->
 
     <base href="~/" />
-    @if (Request.Path.Value.Contains("/login"))
+    @if (Request.Path.Value.Contains("/login") || Request.Path.Value.Contains("/registro"))
     {
             <!--begin::Page Custom Styles(used by this page) -->
             <link href="assets/css/pages/login/login-5.css" rel="stylesheet" type="text/css" />
@@ -67,7 +67,7 @@
 </head>
 
 
-@if (Request.Path.Value.Contains("/login"))
+@if (Request.Path.Value.Contains("/login") || Request.Path.Value.Contains("/registro"))
 {
         <body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
             <component type="typeof(App)" render-mode="Server" />

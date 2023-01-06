@@ -107,6 +107,11 @@ namespace Aig.FarmacoVigilancia.Components.IPS
                 Ips.Registrador = lPersons?.Where(x => x.Id == Ips.RegistradorId.Value).FirstOrDefault();
             }
 
+            if(Ips.EstatusRecepcion == DataModel.Helper.enumFMV_IpsStatusRecepcion.Rejected)
+            {
+                Ips.StatusRevision = DataModel.Helper.enumFMV_IpsStatusRevision.Rejected;
+            }
+
             var result = await ipsService.Save(Ips);
             if (result != null)
             {

@@ -49,6 +49,10 @@ namespace DataModel
         //Observaciones
         private string observaciones;
         public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
+                
+        //Dpto y Seccion
+        private enumUserRoleType dptoSeccionType;
+        public enumUserRoleType DptoSeccionType { get => dptoSeccionType; set => SetProperty(ref dptoSeccionType, value); }
 
         //Dpto y Seccion
         private string dptoSeccion;
@@ -58,7 +62,15 @@ namespace DataModel
         //Nombre a quien va dirigido
         private string nombreDirigido;
         [StringLength(300)]
+        [Required(ErrorMessage = "requerido")]
         public string NombreDirigido { get => nombreDirigido; set => SetProperty(ref nombreDirigido, value); }
+
+        //Correo a quien va dirigido
+        private string emailDirigido;
+        [StringLength(250)]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
+        [Required(ErrorMessage = "requerido")]
+        public string EmailDirigido { get => emailDirigido; set => SetProperty(ref emailDirigido, value); }
 
         //Nombre quien Recibe
         private string nombreRecibido;

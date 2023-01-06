@@ -6,6 +6,7 @@ using BlazorComponentBus;
 using Castle.Core;
 using DataModel;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
@@ -17,12 +18,22 @@ namespace Aig.Auditoria.Components.Correspondencia
         IProfileService profileService { get; set; }
         [Inject]
         ICorrespondenciaService correspondenciaService { get; set; }
+        [Inject]
+        AuthenticationStateProvider authenticationStateAsync { get; set; }
+
         bool OpenDialog { get; set; }
         [Parameter]
         public DataModel.AUD_CorrespondenciaTB Correspondencia { get; set; } = null;
 
         SignaturePad signaturePad5;
         SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = SignaturePad.SupportedSaveAsTypes.png;
+
+        System.Security.Claims.ClaimsPrincipal userClaims { get; set; } = null;
+
+        bool disabledDatosIngresos { get; set; } = false;
+        bool disabledDatosRevision { get; set; } = false;
+        bool disabledDatosRecepcion { get; set; } = false;
+        bool disabledDatosSeguimiento { get; set; } = false;
 
 
         protected async override Task OnInitializedAsync()
@@ -60,13 +71,48 @@ namespace Aig.Auditoria.Components.Correspondencia
             OpenDialog = true;
             Correspondencia = Correspondencia != null ? Correspondencia : new DataModel.AUD_CorrespondenciaTB();
 
-            OnSignatureload();
+            var authstate = await authenticationStateAsync.GetAuthenticationStateAsync();
+            userClaims = authstate.User;
+
+            disabledDatosIngresos = ((userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecAudit)) ?? false) ||
+                                        (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecInspec)) ?? false) ||
+                                           (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecLic)) ?? false) ||
+                                           (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.EvaInsMP)) ?? false)
+                                            );
+
+            disabledDatosRevision = ((userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.SecDepAudit)) ?? false) ||
+                                       (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.SecSecLic)) ?? false) ||
+                                          (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecAudit)) ?? false) ||
+                                          (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecInspec)) ?? false) ||
+                                          (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecLic)) ?? false) ||
+                                          (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.EvaInsMP)) ?? false) 
+                                           );
+
+            disabledDatosRecepcion = ((userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.SecDepAudit)) ?? false) ||
+                                       (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.SecSecLic)) ?? false) ||
+                                          (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecAudit)) ?? false) ||
+                                          (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecInspec)) ?? false) ||
+                                          (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.JefSecLic)) ?? false) ||
+                                          (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.EvaInsMP)) ?? false)
+                                           );
+
+            //OnSignatureload();
 
             await this.InvokeAsync(StateHasChanged);
         }
 
         protected async Task SaveData()
         {
+            switch (Correspondencia.DptoSeccionType)
+            {
+                case enumUserRoleType.None: { break; }
+                default:
+                    {
+                        Correspondencia.DptoSeccion = DataModel.Helper.Helper.GetDescription(Correspondencia.DptoSeccionType);
+                        break;
+                    }
+            }
+
             var result = await correspondenciaService.Save(Correspondencia);
             if (result != null)
             {
@@ -90,28 +136,29 @@ namespace Aig.Auditoria.Components.Correspondencia
             await this.InvokeAsync(StateHasChanged);
         }
 
+               
 
-        protected async Task OnSignatureload()
-        {
-            await Task.Delay(2000);
-            if (signaturePad5 != null)
-                signaturePad5.Image = Correspondencia.FirmaRecibido;
-            await this.InvokeAsync(StateHasChanged);
-        }
-        protected async Task OnSignatureChange5(ChangeEventArgs eventArgs)
-        {
-            RemoveSignatureImg5();
-            if (eventArgs?.Value != null)
-            {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
-            }
-            Correspondencia.FirmaRecibido = await signaturePad5.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg5()
-        {
-            Correspondencia.FirmaRecibido = null;
-            signaturePad5.Image = null;
-        }
+        //protected async Task OnSignatureload()
+        //{
+        //    await Task.Delay(2000);
+        //    if (signaturePad5 != null)
+        //        signaturePad5.Image = Correspondencia.FirmaRecibido;
+        //    await this.InvokeAsync(StateHasChanged);
+        //}
+        //protected async Task OnSignatureChange5(ChangeEventArgs eventArgs)
+        //{
+        //    RemoveSignatureImg5();
+        //    if (eventArgs?.Value != null)
+        //    {
+        //        var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+        //    }
+        //    Correspondencia.FirmaRecibido = await signaturePad5.ToDataURL(signatureType);
+        //}
+        //protected async Task RemoveSignatureImg5()
+        //{
+        //    Correspondencia.FirmaRecibido = null;
+        //    signaturePad5.Image = null;
+        //}
 
     }
 

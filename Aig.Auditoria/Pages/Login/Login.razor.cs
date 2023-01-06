@@ -9,6 +9,7 @@ using Aig.Auditoria.Services;
 using BlazorComponentBus;
 using Aig.Auditoria.Events;
 using Aig.Auditoria.Events.Language;
+using Microsoft.JSInterop;
 
 namespace Aig.Auditoria.Pages.Login
 {
@@ -61,6 +62,7 @@ namespace Aig.Auditoria.Pages.Login
                 if (usr == null)
                 {
                     error = "usuario o contraseña no válidos";
+                    await jsRuntime.InvokeVoidAsync("ShowError", error);
                     return;
                 }
 
@@ -89,9 +91,14 @@ namespace Aig.Auditoria.Pages.Login
             {
                 error = ex.Message;
             }
+            if (string.IsNullOrEmpty(error))
+            {
+                await jsRuntime.InvokeVoidAsync("ShowError", error);
+            }
+
         }
 
-		protected async Task getUserLanguaje(string? language = null)
+        protected async Task getUserLanguaje(string? language = null)
 		{
 			language = string.IsNullOrEmpty(language) ? await profileService.GetLanguage() : language;
 			languageContainerService.SetLanguage(System.Globalization.CultureInfo.GetCultureInfo(language));

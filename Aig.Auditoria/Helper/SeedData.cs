@@ -87,6 +87,168 @@ namespace Aig.Auditoria.Helper
                         await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.Admin));
                     }
                 }
+
+                if (userManager.FindByNameAsync("dmarquinezr@minsa.gob.pa").Result == null)
+                {
+                    ApplicationUser user = new ApplicationUser() { UserProfile = new UserProfileTB() { Languanje = "en-US" } };
+                    user.UserRoleType = enumUserRoleType.SecDepAudit;
+                    user.UserProfile.FirstName = "Damaris";
+                    user.UserProfile.SecondName = "";
+                    user.UserProfile.SureName = "Marquinez";
+                    user.UserProfile.SecondSurName = "";
+                    user.UserName = "dmarquinezr@minsa.gob.pa";
+                    user.Email = "dmarquinezr@minsa.gob.pa";
+                    user.PhoneNumber = "62111111";
+                    user.EmailConfirmed = true;
+                    user.LockoutEnabled = false;
+                    user.PhoneNumberConfirmed = true;
+                    user.TwoFactorEnabled = false;
+
+                    IdentityResult result = await userManager.CreateAsync(user, "123*");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.SecDepAudit));
+                    }
+                }
+
+                if (userManager.FindByNameAsync("licencias@minsa.gob.pa").Result == null)
+                {
+                    ApplicationUser user = new ApplicationUser() { UserProfile = new UserProfileTB() { Languanje = "en-US" } };
+                    user.UserRoleType = enumUserRoleType.SecSecLic;
+                    user.UserProfile.FirstName = "Vielka";
+                    user.UserProfile.SecondName = "";
+                    user.UserProfile.SureName = "Rocha";
+                    user.UserProfile.SecondSurName = "";
+                    user.UserName = "licencias@minsa.gob.pa";
+                    user.Email = "licencias@minsa.gob.pa";
+                    user.PhoneNumber = "62111111";
+                    user.EmailConfirmed = true;
+                    user.LockoutEnabled = false;
+                    user.PhoneNumberConfirmed = true;
+                    user.TwoFactorEnabled = false;
+
+                    IdentityResult result = await userManager.CreateAsync(user, "123*");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.SecSecLic));
+                    }
+                }
+
+                if (userManager.FindByNameAsync("anagonzalez@minsa.gob.pa").Result == null)
+                {
+                    ApplicationUser user = new ApplicationUser() { UserProfile = new UserProfileTB() { Languanje = "en-US" } };
+                    user.UserRoleType = enumUserRoleType.JefDepAudit;
+                    user.UserProfile.FirstName = "Ana";
+                    user.UserProfile.SecondName = "Belén";
+                    user.UserProfile.SureName = "González";
+                    user.UserProfile.SecondSurName = "";
+                    user.UserName = "anagonzalez@minsa.gob.pa";
+                    user.Email = "anagonzalez@minsa.gob.pa";
+                    user.PhoneNumber = "62111111";
+                    user.EmailConfirmed = true;
+                    user.LockoutEnabled = false;
+                    user.PhoneNumberConfirmed = true;
+                    user.TwoFactorEnabled = false;
+
+                    IdentityResult result = await userManager.CreateAsync(user, "123*");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.JefDepAudit));
+                    }
+                }
+
+                if (userManager.FindByNameAsync("ebarriosg@minsa.gob.pa").Result == null)
+                {
+                    ApplicationUser user = new ApplicationUser() { UserProfile = new UserProfileTB() { Languanje = "en-US" } };
+                    user.UserRoleType = enumUserRoleType.JefSecAudit;
+                    user.UserProfile.FirstName = "Eysa";
+                    user.UserProfile.SecondName = "";
+                    user.UserProfile.SureName = "Barrios";
+                    user.UserProfile.SecondSurName = "";
+                    user.UserName = "ebarriosg@minsa.gob.pa";
+                    user.Email = "ebarriosg@minsa.gob.pa";
+                    user.PhoneNumber = "62111111";
+                    user.EmailConfirmed = true;
+                    user.LockoutEnabled = false;
+                    user.PhoneNumberConfirmed = true;
+                    user.TwoFactorEnabled = false;
+
+                    IdentityResult result = await userManager.CreateAsync(user, "123*");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.JefSecAudit));
+                    }
+                }
+
+                if (userManager.FindByNameAsync("jrabrego@minsa.gob.pa").Result == null)
+                {
+                    ApplicationUser user = new ApplicationUser() { UserProfile = new UserProfileTB() { Languanje = "en-US" } };
+                    user.UserRoleType = enumUserRoleType.JefSecInspec;
+                    user.UserProfile.FirstName = "José";
+                    user.UserProfile.SecondName = "";
+                    user.UserProfile.SureName = "Ábrego";
+                    user.UserProfile.SecondSurName = "";
+                    user.UserName = "jrabrego@minsa.gob.pa";
+                    user.Email = "jrabrego@minsa.gob.pa";
+                    user.PhoneNumber = "62111111";
+                    user.EmailConfirmed = true;
+                    user.LockoutEnabled = false;
+                    user.PhoneNumberConfirmed = true;
+                    user.TwoFactorEnabled = false;
+
+                    IdentityResult result = await userManager.CreateAsync(user, "123*");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.JefSecInspec));
+                    }
+                }
+
+                if (userManager.FindByNameAsync("cchevalierm@minsa.gob.pa").Result == null)
+                {
+                    ApplicationUser user = new ApplicationUser() { UserProfile = new UserProfileTB() { Languanje = "en-US" } };
+                    user.UserRoleType = enumUserRoleType.JefSecLic;
+                    user.UserProfile.FirstName = "Carlos";
+                    user.UserProfile.SecondName = "";
+                    user.UserProfile.SureName = "Chevalier";
+                    user.UserProfile.SecondSurName = "";
+                    user.UserName = "cchevalierm@minsa.gob.pa";
+                    user.Email = "cchevalierm@minsa.gob.pa";
+                    user.PhoneNumber = "62111111";
+                    user.EmailConfirmed = true;
+                    user.LockoutEnabled = false;
+                    user.PhoneNumberConfirmed = true;
+                    user.TwoFactorEnabled = false;
+
+                    IdentityResult result = await userManager.CreateAsync(user, "123*");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.JefSecLic));
+                    }
+                }
+
+                if (userManager.FindByNameAsync("nesantamaria@minsa.gob.pa").Result == null)
+                {
+                    ApplicationUser user = new ApplicationUser() { UserProfile = new UserProfileTB() { Languanje = "en-US" } };
+                    user.UserRoleType = enumUserRoleType.EvaInsMP;
+                    user.UserProfile.FirstName = "Nidia";
+                    user.UserProfile.SecondName = "";
+                    user.UserProfile.SureName = "Santamaría";
+                    user.UserProfile.SecondSurName = "";
+                    user.UserName = "nesantamaria@minsa.gob.pa";
+                    user.Email = "nesantamaria@minsa.gob.pa";
+                    user.PhoneNumber = "62111111";
+                    user.EmailConfirmed = true;
+                    user.LockoutEnabled = false;
+                    user.PhoneNumberConfirmed = true;
+                    user.TwoFactorEnabled = false;
+
+                    IdentityResult result = await userManager.CreateAsync(user, "123*");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.EvaInsMP));
+                    }
+                }
+
             }
         }
 

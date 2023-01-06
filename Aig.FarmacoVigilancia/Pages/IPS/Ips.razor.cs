@@ -32,7 +32,7 @@ namespace Aig.FarmacoVigilancia.Pages.IPS
         IPdfGenerationService pdfGenerationService { get; set; }
 
         GenericModel<FMV_IpsTB> dataModel { get; set; } = new GenericModel<FMV_IpsTB>()
-        { Data = new FMV_IpsTB() };
+        { Data = new FMV_IpsTB() , Priority = null };
 
         bool OpenAddEditDialog { get; set; } = false;
 

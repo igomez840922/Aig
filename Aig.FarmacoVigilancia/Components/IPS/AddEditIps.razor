@@ -23,16 +23,22 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#specificInfo" role="tab">@languageContainerService.Keys["SpecificInfo"]</a>
                             </li>
-                            @if(Ips.Prioridad && Ips.EstatusRecepcion != enumFMV_IpsStatusRecepcion.Rejected){
+                            @if( Ips.Prioridad && Ips.EstatusRecepcion != enumFMV_IpsStatusRecepcion.Rejected){
                                 <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#resumeInfo" role="tab">@languageContainerService.Keys["ResumeInfo"]</a>
                             </li>
-                            <li class="nav-item">
+                                <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#revisionInfo" role="tab">@languageContainerService.Keys["RevisionInfo"]</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
-                            </li>
+                                </li>
+                            }
+                            else
+                            {                                
+                                <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#revisionInfo" role="tab">@languageContainerService.Keys["RevisionInfo"]</a>
+                                </li>
                             }
                         </ul>
                         <div class="tab-content">
@@ -264,7 +270,7 @@
                                         <label for="password">@languageContainerService.Keys["PreEvaluationDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaPreEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Ips.IpsData.FechaAsigPreEva" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaPreEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaPreEva) />
                                             </div>
                                         </div>
@@ -272,13 +278,23 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["RecordStatus"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.EstatusRegistro" class="form-control">
-                                                @foreach (enumFMV_IpsStatusRegistro dt in Enum.GetValues(typeof(enumFMV_IpsStatusRegistro)))
-                                                {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                }
-                                            </InputSelect>
-                                            <ValidationMessage For=@(() => Ips.EstatusRegistro) />
+                                            @if (!Ips.Prioridad)
+                                            {
+                                                <InputSelect @bind-Value="Ips.EstatusRegistro" class="form-control">
+                                                    <option value="@(enumFMV_IpsStatusRegistro.Processed)">@(DataModel.Helper.Helper.GetDescription(enumFMV_IpsStatusRegistro.Processed))</option>
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Ips.EstatusRegistro) />
+                                            }
+                                            else
+                                            {
+                                                <InputSelect @bind-Value="Ips.EstatusRegistro" class="form-control">
+                                                    @foreach (enumFMV_IpsStatusRegistro dt in Enum.GetValues(typeof(enumFMV_IpsStatusRegistro)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Ips.EstatusRegistro) />
+                                            }
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -635,13 +651,45 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["ReviewStatus"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.StatusRevision" class="form-control">
-                                                @foreach (enumFMV_IpsStatusRevision dt in Enum.GetValues(typeof(enumFMV_IpsStatusRevision)))
+                                            @if (!Ips.Prioridad)
+                                            {                                               
+                                                    @if (Ips.EstatusRecepcion != enumFMV_IpsStatusRecepcion.Rejected)                                                
                                                 {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                      <InputSelect @bind-Value="Ips.StatusRevision" class="form-control">
+                                                    <option value="@(enumFMV_IpsStatusRevision.Processed)">@(DataModel.Helper.Helper.GetDescription(enumFMV_IpsStatusRevision.Processed))</option>
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Ips.StatusRevision) />
                                                 }
-                                            </InputSelect>
-                                            <ValidationMessage For=@(() => Ips.StatusRevision) />
+                                                else
+                                                {
+                                                    <InputSelect @bind-Value="Ips.StatusRevision" class="form-control">
+                                                        <option value="@(enumFMV_IpsStatusRevision.Rejected)">@(DataModel.Helper.Helper.GetDescription(enumFMV_IpsStatusRevision.Rejected))</option>
+
+                                                    </InputSelect>
+                                                    <ValidationMessage For=@(() => Ips.StatusRevision) />
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @if (Ips.EstatusRecepcion != enumFMV_IpsStatusRecepcion.Rejected)                                                
+                                                {
+                                                     <InputSelect @bind-Value="Ips.StatusRevision" class="form-control">
+                                                    @foreach (enumFMV_IpsStatusRevision dt in Enum.GetValues(typeof(enumFMV_IpsStatusRevision)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                    </InputSelect>
+                                                    <ValidationMessage For=@(() => Ips.StatusRevision) />
+                                                }
+                                                else
+                                                {
+                                                    <InputSelect @bind-Value="Ips.StatusRevision" class="form-control">
+                                                        <option value="@(enumFMV_IpsStatusRevision.Rejected)">@(DataModel.Helper.Helper.GetDescription(enumFMV_IpsStatusRevision.Rejected))</option>
+
+                                                    </InputSelect>
+                                                    <ValidationMessage For=@(() => Ips.StatusRevision) />
+                                                }
+                                        }                                            
                                         </div>
                                     </div>
                                     @if(Ips.StatusRevision == enumFMV_IpsStatusRevision.Evaluated)

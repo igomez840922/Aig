@@ -64,6 +64,7 @@ namespace DataModel.Models
         public enum_LaboratoryType? LaboratoryType { get; set; } = null;
 
         public long? NParentId { get; set; }
+        public int? Priority { get; set; } = null;
 
     }
 

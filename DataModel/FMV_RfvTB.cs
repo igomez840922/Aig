@@ -61,6 +61,7 @@ namespace DataModel
         //Fecha de Notificacion
         private DateTime? fechaNotificacion;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "requerido")]
         public DateTime? FechaNotificacion { get => fechaNotificacion; set => SetProperty(ref fechaNotificacion, value); }
 
 

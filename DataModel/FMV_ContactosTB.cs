@@ -29,6 +29,7 @@ namespace DataModel
         //instlacion / region
         private string instalacion;
         [StringLength(300)]
+        [Required(ErrorMessage = "requerido")]
         public string Instalacion { get => instalacion; set => SetProperty(ref instalacion, value); }
 
         //telefono
@@ -39,6 +40,7 @@ namespace DataModel
         //correo principal
         private string correo;
         [StringLength(300)]
+        [Required(ErrorMessage = "requerido")]
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
         public string Correo { get => correo; set => SetProperty(ref correo, value); }
 

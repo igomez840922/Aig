@@ -14,7 +14,7 @@ namespace DataModel
 
         private string regSanitario;
         [StringLength(250)]
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
 
         private string nomComercial;

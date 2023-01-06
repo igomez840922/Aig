@@ -1578,6 +1578,45 @@ namespace DataAccess
             ///////////////////////////////
             ///
 
+            //Codigo CNFV
+            modelBuilder.Entity<FMV_Ram2TB>()
+        .HasIndex(e => e.CodigoCNFV).IsUnique();
+
+            //ID Facedra
+            modelBuilder.Entity<FMV_Ram2TB>()
+        .HasIndex(e => e.IdFacedra).IsUnique();
+
+            //Codigo Noti-Facedra
+            modelBuilder.Entity<FMV_Ram2TB>()
+        .HasIndex(e => e.CodigoNotiFacedra).IsUnique();
+
+            //Codigo Externo
+            modelBuilder.Entity<FMV_Ram2TB>()
+        .HasIndex(e => e.CodExterno).IsUnique();
+
+            modelBuilder.Entity<FMV_Ram2TB>()
+       .HasMany(e => e.LFarmacos)
+       .WithOne(e => e.Ram)
+       .HasForeignKey(e => e.RamId)
+       .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FMV_RamFarmacoTB>()
+       .HasMany(e => e.LRams)
+       .WithOne(e => e.Farmaco)
+       .HasForeignKey(e => e.FarmacoId)
+       .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FMV_Ram2TB>()
+             .Property(e => e.ObservacionInfoNotifica)
+             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamObservacionInfoNotifica>(x));
+
+            modelBuilder.Entity<FMV_Ram2TB>()
+              .Property(e => e.AccionesRegulatoria)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamAccionesRegulatoria>(x));
+
+
+            ///////////////////////////////
+            ///
 
             base.OnModelCreating(modelBuilder);
         }
@@ -1628,8 +1667,11 @@ namespace DataAccess
         public virtual DbSet<IntensidadEsaviTB> IntensidadEsavi { get; set; }
         public virtual DbSet<TipoVacunaTB> TipoVacuna { get; set; }
         public virtual DbSet<FMV_ContactosTB> FMV_Contactos { get; set; }
+        public virtual DbSet<FMV_Ram2TB> FMV_Ram2 { get; set; }
+        public virtual DbSet<FMV_RamFarmacoTB> FMV_RamFarmaco { get; set; }
+        public virtual DbSet<FMV_RamFarmacoRamTB> FMV_RamFarmacoRam { get; set; }
 
-        
+
 
     }
 }

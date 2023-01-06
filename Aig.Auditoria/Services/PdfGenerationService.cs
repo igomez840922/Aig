@@ -10893,6 +10893,84 @@ namespace Aig.Auditoria.Services
             return null;
         }
 
+
+        ///////////////////////////
+        ///
+
+        public async Task<Stream> GenerateCorrespondencia(long Id)
+        {
+            try
+            {
+                var correspondencia = DalService.Get<AUD_CorrespondenciaTB>(Id);
+
+                // code in your main method
+                var byteArray = QuestPDF.Fluent.Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(5, Unit.Millimetre);
+                        page.PageColor(Colors.White);
+                        page.DefaultTextStyle(x => x.FontSize(8));
+                        //page.DefaultTextStyle(x => x.Color("Black"));
+
+                        var path = System.IO.Path.Combine(env.WebRootPath, "img", "pdf", "Header.png");
+
+                        page.Header().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().Image(path);
+                                header.Cell().AlignCenter().Text("");
+                                header.Cell().AlignCenter().Text("");
+                                //header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
+                            });
+
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
+                            table.Cell().ColumnSpan(3).AlignCenter().Text("Departamento de Auditorías de Calidad a Establecimientos Farmacéuticos y No Farmacéuticos");
+                            //table.Cell().ColumnSpan(3).AlignCenter().Text("Guía para las Buenas Prácticas de Almacenamiento, Distribución y Transporte de Medicamentos y Otros Productos para la Salud Humana".ToUpper()).Bold();
+                        });
+
+                        page.Content().PaddingVertical(20).Column(column =>
+                        {
+                            column.Item().AlignLeft().Text(string.Format("Para: {0} \r\n{1}", correspondencia.NombreDirigido, correspondencia.DptoSeccion));
+                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+
+                            
+                            column.Item().PaddingVertical(10).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Asunto:".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(correspondencia.Asunto);
+                            
+                        });
+
+                        page.Footer().Column(column =>
+                        {
+                            column.Item().AlignLeft().Text("De: ______________________________________");
+                            column.Item().AlignLeft().Text("Ana Belén Gonzáles");
+                            column.Item().AlignLeft().Text("Jefa del Dpto. Auditorías de Calidad a \r\nEstablecimientos Farmacéuticos y NF");
+
+                        });
+
+                    });
+                })
+                  .GeneratePdf();
+
+                Stream stream = new MemoryStream(byteArray);
+
+                return stream;
+            }
+            catch (Exception ex)
+            { }
+            return null;
+        }
+
     }
 
 }

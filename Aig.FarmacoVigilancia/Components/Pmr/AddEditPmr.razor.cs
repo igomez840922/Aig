@@ -98,6 +98,10 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
             {
                 Pmr.Evaluador = await evaluatorService.Get(Pmr.EvaluadorId.Value);
             }
+            if (Pmr.PmrProducto != null && string.IsNullOrEmpty(Pmr.PmrProducto.RegSanitario))
+            {
+                Pmr.PmrProducto.RegSanitario = "Excepción al Registro Sanitario";
+            }
 
             var result = await pmrService.Save(Pmr);
             if (result != null)

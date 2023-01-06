@@ -2,7 +2,6 @@
 using Aig.FarmacoVigilancia.Data;
 using ClosedXML.Excel;
 using DataAccess;
-using DataAccess;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -84,6 +83,9 @@ namespace Aig.FarmacoVigilancia.Helper
                         await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.Admin));
                     }
                 }
+
+                
+
             }
         }
 

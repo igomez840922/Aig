@@ -1,0 +1,96 @@
+﻿@page "/registro"
+@layout AccountLayout
+@attribute [AllowAnonymous]
+
+@if (datoContacto != null)
+{
+    <div class="kt-login__wrapper" style="width:100%!important;">
+        <div class="kt-login__signin">
+            <div class="kt-login__head">
+                <h3 class="kt-login__title">@languageContainerService.Keys["Registro para Notificaciones"]</h3>
+            </div>
+            <div class="kt-login__form">
+                <EditForm id="loginform" class="kt-form" Model="@datoContacto" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+
+                    <div class="row clearfix" style="padding-bottom: 2rem!important;">
+                        <div class="col-sm-12">
+                            <label>@languageContainerService.Keys["Nombre(s) y Apellidos"]</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <InputText class="form-control" @bind-Value="datoContacto.Nombre" />
+                                    <ValidationMessage For=@(() => datoContacto.Nombre) />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix" style="padding-bottom: 2rem!important;">
+                        <div class="col-sm-6">
+                            <label>@languageContainerService.Keys["Profesión"]</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <InputText class="form-control" @bind-Value="datoContacto.Profesion" />
+                                    <ValidationMessage For=@(() => datoContacto.Profesion) />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix" style="padding-bottom: 2rem!important;">
+
+                        <div class="col-sm-6">
+                            <label>@languageContainerService.Keys["Instalación/Región"]</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <InputText class="form-control" @bind-Value="datoContacto.Instalacion" />
+                                    <ValidationMessage For=@(() => datoContacto.Instalacion) />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>@languageContainerService.Keys["Cargo"]</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <InputText class="form-control" @bind-Value="datoContacto.Cargo" />
+                                    <ValidationMessage For=@(() => datoContacto.Cargo) />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix" style="padding-bottom: 2rem!important;">
+
+                        <div class="col-sm-6">
+                            <label for="password">@languageContainerService.Keys["Email"]</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <InputText class="form-control" @bind-Value="datoContacto.Correo" />
+                                    <ValidationMessage For=@(() => datoContacto.Correo) />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="password">@languageContainerService.Keys["Teléfono"]</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <InputText class="form-control" @bind-Value="datoContacto.Telefono" />
+                                    <ValidationMessage For=@(() => datoContacto.Telefono) />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="kt-login__actions">
+                        <button class="btn btn-brand btn-pill btn-elevate" type="submit">@languageContainerService.Keys["Registrarse"]</button>
+                        <button class="btn btn-brand btn-pill btn-danger btn-elevate" type="button" @onclick="(e)=>{Cancel();}">@languageContainerService.Keys["Cancel"]</button>
+                    </div>
+                </EditForm>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    
+}
+

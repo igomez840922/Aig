@@ -12,12 +12,26 @@ namespace DataModel
 {
     public enum enumUserRoleType
     {
-        [Description("User")]
+        [Description("Otros")]
         None = 0,
-        [Description("Admin")]
+        [Description("Administrador")]
         Admin = 1,
-        [Description("PosUser")]
-        Manager = 2,
+        [Description("Usuario del Sistema")]
+        SysUser = 2,
+        [Description("Secretaria - Departamento de Auditorías")]
+        SecDepAudit = 3,
+        [Description("Secretaria - Sección de Licencias")]
+        SecSecLic = 4,
+        [Description("Jefe - Departamento de Auditorías")]
+        JefDepAudit = 5,
+        [Description("Jefe - Sección de Auditorías")]
+        JefSecAudit = 6,
+        [Description("Jefe - Sección de Inspecciones")]
+        JefSecInspec = 7,
+        [Description("Jefe - Sección de Licencias")]
+        JefSecLic = 8,
+        [Description("Evaluador - Inscripción de Materia Prima")]
+        EvaInsMP = 9,
     }
 
     public class ApplicationUser : IdentityUser

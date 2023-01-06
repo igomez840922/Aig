@@ -106,6 +106,11 @@ namespace Aig.FarmacoVigilancia.Components.FT
                 }
             }
 
+            if (Data.RegSanitario != null && string.IsNullOrEmpty(Data.RegSanitario))
+            {
+                Data.RegSanitario = "Excepción al Registro Sanitario";
+            }
+
             var result = await ftService.Save(Data);
             if (result != null)
             {

@@ -30,13 +30,15 @@
                                         <EditForm Model="@Correspondencia" OnValidSubmit="SaveData">
                                             <DataAnnotationsValidator />
 
+                                            @*<AuthorizeView Roles="Client"></AuthorizeView>*@
+
                                             <h5>@languageContainerService.Keys["Datos de Ingreso DNFD"]</h5>
                                             <div class="row clearfix">
                                                 <div class="col-sm-4">
                                                     <label>@languageContainerService.Keys["Fecha de Ingreso"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" @bind-Value="Correspondencia.FechaIngreso" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                            <RadzenDatePicker Disabled="disabledDatosIngresos" TValue="DateTime?" Max="DateTime.Now" @bind-Value="Correspondencia.FechaIngreso" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                             <ValidationMessage For=@(() => Correspondencia.FechaIngreso) />
                                                         </div>
                                                     </div>
@@ -45,7 +47,7 @@
                                                     <label for="password">@languageContainerService.Keys["No. Documento Recibido"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Correspondencia.NumDocRecibido" />
+                                                            <InputText disabled="@disabledDatosIngresos" class="form-control" @bind-Value="Correspondencia.NumDocRecibido" />
                                                             <ValidationMessage For=@(() => Correspondencia.NumDocRecibido) />
                                                         </div>
                                                     </div>
@@ -54,7 +56,7 @@
                                                     <label for="password">@languageContainerService.Keys["Desde (Empresa o Institución, Dpto, otros)"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Correspondencia.Establecimiento" />
+                                                            <InputText disabled="@disabledDatosIngresos" class="form-control" @bind-Value="Correspondencia.Establecimiento" />
                                                             <ValidationMessage For=@(() => Correspondencia.Establecimiento) />
                                                         </div>
                                                     </div>
@@ -63,7 +65,7 @@
                                                     <label for="password">@languageContainerService.Keys["Asunto"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputTextArea rows="4" class="form-control" @bind-Value="Correspondencia.Asunto" />
+                                                            <InputTextArea disabled="@disabledDatosIngresos" rows="4" class="form-control" @bind-Value="Correspondencia.Asunto" />
                                                             <ValidationMessage For=@(() => Correspondencia.Asunto) />
                                                         </div>
                                                     </div>
@@ -72,12 +74,12 @@
                                                     <label for="password">@languageContainerService.Keys["Detalles: Resoluciones (nombre empresa y licencia, o producto) / Destrucciones (controlados o no) / Materia Prima (reingreso)"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputTextArea rows="8" class="form-control" @bind-Value="Correspondencia.Detalles" />
+                                                            <InputTextArea disabled="@disabledDatosIngresos" rows="8" class="form-control" @bind-Value="Correspondencia.Detalles" />
                                                             <ValidationMessage For=@(() => Correspondencia.Detalles) />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
 
                                             <h5>@languageContainerService.Keys["Datos de Revisión"]</h5>
@@ -86,7 +88,7 @@
                                                     <label>@languageContainerService.Keys["Fecha de Revision"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" Min="Correspondencia.FechaIngreso" @bind-Value="Correspondencia.FechaRevision" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                            <RadzenDatePicker Disabled="disabledDatosRevision" TValue="DateTime?" Max="DateTime.Now" Min="Correspondencia.FechaIngreso" @bind-Value="Correspondencia.FechaRevision" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                             <ValidationMessage For=@(() => Correspondencia.FechaRevision) />
                                                         </div>
                                                     </div>
@@ -95,7 +97,7 @@
                                                     <label for="password">@languageContainerService.Keys["Responsable de Revisión"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Correspondencia.NombreRevision" />
+                                                            <InputText disabled="@(disabledDatosRevision)" class="form-control" @bind-Value="Correspondencia.NombreRevision" />
                                                             <ValidationMessage For=@(() => Correspondencia.NombreRevision) />
                                                         </div>
                                                     </div>
@@ -104,7 +106,7 @@
                                                     <label for="password">@languageContainerService.Keys["Observaciones"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputTextArea rows="8" class="form-control" @bind-Value="Correspondencia.Observaciones" />
+                                                            <InputTextArea disabled="@(disabledDatosRevision)" rows="8" class="form-control" @bind-Value="Correspondencia.Observaciones" />
                                                             <ValidationMessage For=@(() => Correspondencia.Observaciones) />
                                                         </div>
                                                     </div>
@@ -118,17 +120,58 @@
                                                     <label for="password">@languageContainerService.Keys["Departamento o Sección Dirigido"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Correspondencia.DptoSeccion" />
-                                                            <ValidationMessage For=@(() => Correspondencia.DptoSeccion) />
+                                                            <InputSelect @bind-Value="Correspondencia.DptoSeccionType" class="form-control">
+                                                                @foreach (DataModel.enumUserRoleType dt in Enum.GetValues(typeof(DataModel.enumUserRoleType)))
+                                                                {
+                                                                    switch (dt)
+                                                                    {
+                                                                        case DataModel.enumUserRoleType.Admin:
+                                                                        case DataModel.enumUserRoleType.SysUser:
+                                                                            break;
+                                                                        default:
+                                                                            {
+                                                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                                break;
+                                                                            }
+                                                                    }                                                                                                                                       
+                                                                }
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Correspondencia.DptoSeccionType) />
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @switch (Correspondencia.DptoSeccionType)
+                                                {
+                                                        case DataModel.enumUserRoleType.None:
+                                                        {
+                                                            <div class="col-sm-4">
+                                                                <label for="password">@languageContainerService.Keys["Departamento o Sección Dirigido"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.DptoSeccion" />
+                                                                        <ValidationMessage For=@(() => Correspondencia.DptoSeccion) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            break;
+                                                        }
+                                                }
+                                                
                                                 <div class="col-sm-8">
                                                     <label for="password">@languageContainerService.Keys["Nombre a quien va Dirigido"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Correspondencia.NombreDirigido" />
+                                                            <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.NombreDirigido" />
                                                             <ValidationMessage For=@(() => Correspondencia.NombreDirigido) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Correo a quien va Dirigido"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.EmailDirigido" />
+                                                            <ValidationMessage For=@(() => Correspondencia.EmailDirigido) />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -136,7 +179,7 @@
                                                     <label>@languageContainerService.Keys["Fecha de Recepción"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" Min="Correspondencia.FechaRevision" @bind-Value="Correspondencia.FechaRecibo" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                            <RadzenDatePicker Disabled="disabledDatosRecepcion" TValue="DateTime?" Max="DateTime.Now" Min="Correspondencia.FechaRevision" @bind-Value="Correspondencia.FechaRecibo" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                             <ValidationMessage For=@(() => Correspondencia.FechaRecibo) />
                                                         </div>
                                                     </div>
@@ -145,12 +188,12 @@
                                                     <label for="password">@languageContainerService.Keys["Nombre de quien Recibe"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Correspondencia.NombreRecibido" />
+                                                            <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.NombreRecibido" />
                                                             <ValidationMessage For=@(() => Correspondencia.NombreRecibido) />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12">
+                                                @*<div class="col-sm-12">
                                                     <label>@languageContainerService.Keys["Firma de quien Recibe"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
@@ -165,15 +208,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @*<div class="col-sm-12">
-                                                    <label for="password">@languageContainerService.Keys["Firma de quien Recibe"]</label>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Correspondencia.FirmaRecibido" />
-                                                            <ValidationMessage For=@(() => Correspondencia.FirmaRecibido) />
-                                                        </div>
-                                                    </div>
-                                                </div>*@
+                                                *@
                                             </div>
 
                                             <h5>@languageContainerService.Keys["Datos de Seguimiento"]</h5>

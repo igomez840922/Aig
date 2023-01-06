@@ -724,6 +724,10 @@ namespace DataModel.Helper
         Pending = 0,
         [Description("Evaluado")]
         Evaluated = 1,
+        [Description("Rechazado")]
+        Rejected = 2,
+        [Description("Tramitado")]
+        Processed = 3,
     }
 
     public enum enumFMV_AlertType

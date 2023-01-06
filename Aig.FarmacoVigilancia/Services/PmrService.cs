@@ -22,7 +22,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  = (from data in DalService.DBContext.Set<FMV_PmrTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.PmrProducto.NomComercial.Contains(model.Filter) || data.PmrProducto.RegSanitario.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.PmrProducto.NomComercial.Contains(model.Filter) || data.PmrProducto.RegSanitario.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) || data.PmrProducto.Laboratorio.Nombre.Contains(model.Filter)))&&
                               (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
@@ -31,8 +31,8 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_PmrTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.PmrProducto.NomComercial.Contains(model.Filter) || data.PmrProducto.RegSanitario.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
-                               (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.PmrProducto.NomComercial.Contains(model.Filter) || data.PmrProducto.RegSanitario.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) || data.PmrProducto.Laboratorio.Nombre.Contains(model.Filter))) &&
+                                (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
                                (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
                                select data).Count();  

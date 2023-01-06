@@ -27,7 +27,7 @@ namespace Aig.Auditoria.Components.Attachments
         bool OpenDialog { get; set; } = false;
         IBrowserFile selectedFile { get; set; }
 
-        int maxFileSize { get; set; } = 1024 * 1024 * 10;
+        int maxFileSize { get; set; } = 1024 * 1024 * 50;
 
         protected async override Task OnInitializedAsync()
         {
@@ -87,7 +87,7 @@ namespace Aig.Auditoria.Components.Attachments
                 {
                     if(selectedFile.Size > maxFileSize)
                     {
-                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["YouExceedMaximumSizeOf"] + " 10MB");
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["YouExceedMaximumSizeOf"] + " 50MB");
                         return;
                     }
 

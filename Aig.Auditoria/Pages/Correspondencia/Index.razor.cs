@@ -14,6 +14,7 @@ using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using BlazorDownloadFile;
+using MimeKit;
 
 namespace Aig.Auditoria.Pages.Correspondencia
 {
@@ -23,9 +24,14 @@ namespace Aig.Auditoria.Pages.Correspondencia
         [Inject]
         IProfileService profileService { get; set; }
         [Inject]
+        ICorrespondenciaService correspondenciaService { get; set; }
+        [Inject]
+        IPdfGenerationService pdfGenerationService { get; set; }
+        [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
         [Inject]
-        ICorrespondenciaService correspondenciaService { get; set; }
+        IEmailService emailService { get; set; }
+
 
         GenericModel<AUD_CorrespondenciaTB> dataModel { get; set; } = new GenericModel<AUD_CorrespondenciaTB>()
         { Data = new AUD_CorrespondenciaTB() };
@@ -172,6 +178,48 @@ namespace Aig.Auditoria.Pages.Correspondencia
                 await blazorDownloadFileService.DownloadFile("correspondencia.xlsx", stream, "application/actet-stream");
             }
         }
+
+
+        private async Task SendEmailNotification(long Id)
+        {
+            try
+            {
+                var data = await correspondenciaService.Get(Id);
+                if (data != null && !string.IsNullOrEmpty(data.EmailDirigido))
+                {
+                    var subject = string.Format("Correspondencia para {0}",data.DptoSeccion);
+
+                    var builder = new BodyBuilder();
+
+                    builder.TextBody = string.Format("Para: {0} \r\nFecha: {1} \r\n\r\nAsunto: {2} \r\n\r\nDe: Ana Belén Gonzáles\r\nJefa del Dpto. Auditorías de Calidad a \r\nEstablecimientos Farmacéuticos y NF", data.DptoSeccion, DateTime.Now.ToString("dd/MM/yyyy"), data.Asunto); 
+
+                    var stream = await pdfGenerationService.GenerateCorrespondencia(data.Id);
+                    if (stream != null)
+                    {
+                        builder.Attachments.Add("correspondencia.pdf", stream);
+                    }
+                    await emailService.SendEmailAsync(data.EmailDirigido, subject, builder);
+                }
+
+            }
+            catch (Exception ex) { }
+        }
+
+        private async Task DownloadPdf(long Id)
+        {
+            Stream stream = await pdfGenerationService.GenerateCorrespondencia(Id);
+
+            if (stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("correspondencia.pdf", stream, "application/actet-stream");
+            }
+
+            //if (stream != null)
+            //{
+            //    await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "inspeccion.pdf", stream);
+            //}
+        }
+
 
     }
 
