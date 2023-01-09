@@ -53,7 +53,8 @@ namespace Aig.Auditoria.Helper
 
         public async Task Invoke(HttpContext context, SignInManager<TUser> signInMgr)
         {
-            try {
+            try
+            {
                 if (context.Request.Path == "/login" && context.Request.Query.ContainsKey("key"))
                 {
                     var key = Guid.Parse(context.Request.Query["key"]);
@@ -128,9 +129,15 @@ namespace Aig.Auditoria.Helper
                 //Continue http middleware chain:
                 await _next.Invoke(context);
             }
-            catch (Exception ex) {
-            }            
+            catch (Exception ex)
+            {
+                await signInMgr?.SignOutAsync();
+                context.Response.Redirect("./login");
+                return;
+            }
+
         }
+
     }
 
 }

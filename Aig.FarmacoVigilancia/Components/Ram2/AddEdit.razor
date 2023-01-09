@@ -1,7 +1,7 @@
 ﻿@using DataModel.Helper;
 
 @if (Data != null)
-{
+{    
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
         <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
@@ -12,7 +12,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    @(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"]: @languageContainerService.Keys["New"])
+                                    @(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["Nueva"]) @languageContainerService.Keys["Notificación"]
                                 </h3>
                             </div>
                             <div class="kt-portlet__head-toolbar">
@@ -28,7 +28,6 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="kt-portlet__body">
-
                                         <EditForm Model="@Data" OnValidSubmit="SaveData">
                                             <DataAnnotationsValidator />
                                             <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
@@ -53,14 +52,17 @@
                                                         <a class="nav-link" data-toggle="tab" href="#labs" role="tab">@languageContainerService.Keys["Datos de Laboratorio"]</a>
                                                     </li>
                                                     <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#evaluac" role="tab">@languageContainerService.Keys["Evaluación de la Causalidad"]</a>
+                                                    </li>
+                                                    <li class="nav-item">
                                                         <a class="nav-link" data-toggle="tab" href="#obsInfoNotif" role="tab">@languageContainerService.Keys["Observación sobre Información de la Notificación"]</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" data-toggle="tab" href="#accionRegulat" role="tab">@languageContainerService.Keys["Acciones Regulatorias"]</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Procedencia de Notificación"]</a>
-                                                    </li> 
+                                                        <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Estatus"]</a>
+                                                    </li>
                                                 }
 
                                             </ul>
@@ -69,7 +71,7 @@
                                                     <h5>@languageContainerService.Keys["GeneralInfo"]</h5>
                                                     <div class="row clearfix">
 
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <label>@languageContainerService.Keys["Fecha de Recibido"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
@@ -79,7 +81,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <label>@languageContainerService.Keys["Fecha de entrega"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
@@ -89,7 +91,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-6">
                                                             <label for="password">@languageContainerService.Keys["Evaluator"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
@@ -162,7 +164,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <label>@languageContainerService.Keys["Código Externo"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
@@ -321,7 +323,7 @@
                                                             <label>@languageContainerService.Keys["Historia Clínica"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                                    <InputTextArea rows="6" id="active_principles" class="form-control" @bind-Value="Data.HistClinica" />
+                                                                    <InputTextArea rows="10" id="active_principles" class="form-control" @bind-Value="Data.HistClinica" />
                                                                     <ValidationMessage For=@(() => Data.HistClinica) />
                                                                 </div>
                                                             </div>
@@ -331,9 +333,11 @@
                                                 </div>
                                                 <div class="tab-pane" id="farmacos" role="tabpanel">
 
-                                                    <h5>@languageContainerService.Keys["Fármacos Sospechosos"]</h5>
                                                     <div class="row clearfix">
-                                                        <div class="col-12" style="text-align:right;">
+                                                         <div class="col-6" style="text-align:left;">
+                                                            <h5>@languageContainerService.Keys["Fármacos Sospechosos"]</h5>                                                    
+                                                        </div>
+                                                        <div class="col-6" style="text-align:right;">
                                                             <button type="button" @onclick="(e)=>{OpenFarmaco();}" class="btn btn-sm btn-outline-primary waves-effect">
                                                                 @languageContainerService.Keys["Add"]
                                                             </button>
@@ -345,8 +349,15 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
-                                                                        <th>@languageContainerService.Keys["Description"]</th>
-                                                                        <th>@languageContainerService.Keys["File"]</th>
+                                                                        <th>@languageContainerService.Keys["Nombre Comercial"]</th>
+                                                                        <th>@languageContainerService.Keys["DCI"]</th>
+                                                                        <th>@languageContainerService.Keys["ATC"]</th>
+                                                                        <th>@languageContainerService.Keys["Sub-Grupo Terapéutico"]</th>
+                                                                        <th>@languageContainerService.Keys["Dosis, Frec., Vía Administ."]</th>
+                                                                        <th>@languageContainerService.Keys["Indicación"]</th>
+                                                                        <th>@languageContainerService.Keys["Cond. Dosis"]</th>
+                                                                        <th>@languageContainerService.Keys["Cond. Terapia"]</th>
+                                                                        <th>@languageContainerService.Keys["Reexposición"]</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
@@ -355,16 +366,26 @@
                                                                     {
                                                                         @foreach (var dt in Data.LFarmacos)
                                                                         {
-                                                                            @*<tr>
-                                                                <td scope="row">@dt.Description</td>
-                                                                <td>
-                                                                <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
-                                                                </td>
-                                                                <td style="text-align:right">
-                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
-
-                                                                </td>
-                                                                </tr>*@
+                                                                            <tr>
+                                                                                <td scope="row">@dt.FarmacoSospechosoComercial</td>
+                                                                                <td>@dt.FarmacoSospechosoDci</td>
+                                                                                <td>@dt.Atc</td>
+                                                                                <td>@dt.SubGrupoTerapeutico</td>
+                                                                                <td>@dt.ViaAdministracion</td>
+                                                                                <td>@dt.Indicacion</td>
+                                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.ConductaDosis))</td>
+                                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.ConductaTerapia))</td>
+                                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.Reexposicion))</td>
+                                                                                <td style="text-align:right">
+                                                                                    <div class="btn-group">
+                                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                                        <div class="dropdown-menu">
+                                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OpenFarmaco(dt)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => RemoveFarmaco(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
                                                                         }
                                                                     }
                                                                 </tbody>
@@ -375,10 +396,12 @@
 
                                                 </div>
                                                 <div class="tab-pane" id="concominantes" role="tabpanel">
-                                                    <h5>@languageContainerService.Keys["Fármacos Concomitantes"]</h5>
                                                     <div class="row clearfix">
-                                                        <div class="col-12" style="text-align:right;">
-                                                            <button type="button" @onclick="(e)=>{OpenFarmaco();}" class="btn btn-sm btn-outline-primary waves-effect">
+                                                        <div class="col-6" style="text-align:left;">
+                                                            <h5>@languageContainerService.Keys["Fármacos Concomitantes"]</h5>
+                                                        </div>
+                                                        <div class="col-6" style="text-align:right;">
+                                                            <button type="button" @onclick="(e)=>{OpenConcominante();}" class="btn btn-sm btn-outline-primary waves-effect">
                                                                 @languageContainerService.Keys["Add"]
                                                             </button>
                                                         </div>
@@ -389,26 +412,33 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
-                                                                        <th>@languageContainerService.Keys["Description"]</th>
-                                                                        <th>@languageContainerService.Keys["File"]</th>
+                                                                        <th>@languageContainerService.Keys["Medicamento"]</th>
+                                                                        <th>@languageContainerService.Keys["Dosis, Frec., Vía Administ."]</th>
+                                                                        <th>@languageContainerService.Keys["Fecha de Tratamineto"]</th>
+                                                                        <th>@languageContainerService.Keys["Indicación"]</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @if (Data != null && Data.LFarmacos != null)
+                                                                    @if (Data != null && Data.Concominantes != null && Data.Concominantes.LProductos != null)
                                                                     {
-                                                                        @foreach (var dt in Data.LFarmacos)
+                                                                        @foreach (var dt in Data.Concominantes.LProductos)
                                                                         {
-                                                                            @*<tr>
-                                                                <td scope="row">@dt.Description</td>
-                                                                <td>
-                                                                <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
-                                                                </td>
-                                                                <td style="text-align:right">
-                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
-
-                                                                </td>
-                                                                </tr>*@
+                                                                            <tr>
+                                                                                <td scope="row">@dt.Nombre</td>
+                                                                                <td>@dt.ViaAdministracion</td>                                                                                
+                                                                                <td>@(dt.FechaTratamiento?.ToString("dd/MM/yyyy")??"")</td>
+                                                                                <td>@dt.Indicacion</td>
+                                                                                <td style="text-align:right">
+                                                                                    <div class="btn-group">
+                                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                                        <div class="dropdown-menu">
+                                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OpenConcominante(dt)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => RemoveConcominante(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
                                                                         }
                                                                     }
                                                                 </tbody>
@@ -418,9 +448,11 @@
 
                                                 </div>
                                                 <div class="tab-pane" id="rams" role="tabpanel">
-                                                    <h5>@languageContainerService.Keys["Reacciones Adversas a Medicamentos"]</h5>
                                                     <div class="row clearfix">
-                                                        <div class="col-12" style="text-align:right;">
+                                                        <div class="col-6" style="text-align:left;">
+                                                        <h5>@languageContainerService.Keys["Reacciones Adversas a Medicamentos"]</h5>
+                                                        </div>
+                                                        <div class="col-6" style="text-align:right;">
                                                             <button type="button" @onclick="(e)=>{OpenFarmacoRam();}" class="btn btn-sm btn-outline-primary waves-effect">
                                                                 @languageContainerService.Keys["Add"]
                                                             </button>
@@ -432,8 +464,16 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
-                                                                        <th>@languageContainerService.Keys["Description"]</th>
-                                                                        <th>@languageContainerService.Keys["File"]</th>
+                                                                        <th>@languageContainerService.Keys["Fármaco"]</th>
+                                                                        <th>@languageContainerService.Keys["RAM"]</th>
+                                                                        <th>@languageContainerService.Keys["Término MEDRA"]</th>
+                                                                        <th>@languageContainerService.Keys["SOC"]</th>
+                                                                        <th>@languageContainerService.Keys["Fecha RAM"]</th>
+                                                                        <th>@languageContainerService.Keys["Descenlace"]</th>
+                                                                        <th>@languageContainerService.Keys["Evo. sobre Dosis"]</th>
+                                                                        <th>@languageContainerService.Keys["Evo. sobre Terapia"]</th>
+                                                                        <th>@languageContainerService.Keys["Consec. Reexposición"]</th>
+                                                                        <th>@languageContainerService.Keys["RAM con una Dosis"]</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
@@ -442,16 +482,34 @@
                                                                     {
                                                                         @foreach (var dt in Data.LFarmacos)
                                                                         {
-                                                                            @*<tr>
-                                                                <td scope="row">@dt.Description</td>
-                                                                <td>
-                                                                <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
-                                                                </td>
-                                                                <td style="text-align:right">
-                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                                            @if (dt.LRams != null)
+                                                                            {
+                                                                                @foreach (var ram in dt.LRams)
+                                                                                {
+                                                                                     <tr>
+                                                                                        <td scope="row">@(ram.Farmaco?.FarmacoSospechosoDci??"")</td>
+                                                                                        <td>@ram.Ram</td>
+                                                                                        <td>@ram.TerWhoArt</td>
+                                                                                        <td>@ram.Soc</td>
+                                                                                        <td>@(ram.FechaRam?.ToString("dd/MM/yyyy")??"")</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.Desenlace))</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.EvoDosis))</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.EvoTerapia))</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.ConReexposicion))</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.RamUnaDosis))</td>
+                                                                                        <td style="text-align:right">
+                                                                                            <div class="btn-group">
+                                                                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                                                <div class="dropdown-menu">
+                                                                                                    <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OpenFarmacoRam(ram)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                                    <a class="dropdown-item" href="javascript:void(0)" @onclick="() => RemoveFarmacoRam(ram)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
 
-                                                                </td>
-                                                                </tr>*@
+                                                                                }
+                                                                            } 
                                                                         }
                                                                     }
                                                                 </tbody>
@@ -477,6 +535,99 @@
 
                                                     </div>
                                                 </div>
+                                                <div class="tab-pane" id="evaluac" role="tabpanel">
+                                                    <div class="row clearfix">
+                                                        <div class="col-6" style="text-align:left;">
+                                                            <h5>@languageContainerService.Keys["Evaluación de la Causalidad"]</h5>
+                                                        </div>
+                                                        <div class="col-6" style="text-align:right;">
+                                                            <button type="button" @onclick="(e)=>{OpenFarmacoRamEval();}" class="btn btn-sm btn-outline-primary waves-effect">
+                                                                @languageContainerService.Keys["Add"]
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <!--begin::Section-->
+                                                    <div class="kt-section">
+                                                        <div class="table-responsive">
+                                                            <table class="table rounded table-striped">
+                                                                <thead class=thead-light>
+                                                                    <tr>
+                                                                        <th>@languageContainerService.Keys["Fármaco"]</th>
+                                                                        <th>@languageContainerService.Keys["RAM"]</th>
+                                                                        <th>@languageContainerService.Keys["Sec. Temporal"]</th>
+                                                                        <th>@languageContainerService.Keys["STEMP"]</th>
+                                                                        <th>@languageContainerService.Keys["Conoc. Previo"]</th>
+                                                                        <th>@languageContainerService.Keys["CPREV"]</th>
+                                                                        <th>@languageContainerService.Keys["Efecto de Retirada"]</th>
+                                                                        <th>@languageContainerService.Keys["RETI"]</th>
+                                                                        <th>@languageContainerService.Keys["Efecto de Reexp."]</th>
+                                                                        <th>@languageContainerService.Keys["REEX"]</th>
+                                                                        <th>@languageContainerService.Keys["Causas Alternativas"]</th>
+                                                                        <th>@languageContainerService.Keys["ALTER"]</th>
+                                                                        <th>@languageContainerService.Keys["Fact. Contribuyentes"]</th>
+                                                                        <th>@languageContainerService.Keys["FACON"]</th>
+                                                                        <th>@languageContainerService.Keys["Expl. Complementarias"]</th>
+                                                                        <th>@languageContainerService.Keys["XPLC"]</th>
+                                                                        <th>@languageContainerService.Keys["Puntuación"]</th>
+                                                                        <th>@languageContainerService.Keys["Probabilidad"]</th>
+                                                                        <th>@languageContainerService.Keys["Intes. de la RAM"]</th>
+                                                                        <th>@languageContainerService.Keys["Gravedad"]</th>
+                                                                        <th>@languageContainerService.Keys["Referencia"]</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if (Data != null && Data.LFarmacos != null)
+                                                                    {
+                                                                        @foreach (var dt in Data.LFarmacos)
+                                                                        {
+                                                                            @if (dt.LRams != null)
+                                                                            {
+                                                                                @foreach (var ram in dt.LRams)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td scope="row">@(ram.Farmaco?.FarmacoSospechosoDci ?? "")</td>
+                                                                                        <td>@ram.Ram</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.SecTemporal))</td>
+                                                                                        <td>@ram.Stemp</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.ConPrevio))</td>
+                                                                                        <td>@ram.Cprev</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.EfecRetirada))</td>
+                                                                                        <td>@ram.Reti</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.EfecReexposicion))</td>
+                                                                                        <td>@ram.Reex</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.CausasAlter))</td>
+                                                                                        <td>@ram.Alter</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.FactContribuyentes))</td>
+                                                                                        <td>@ram.Facon</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.ExpComplementarias))</td>
+                                                                                        <td>@ram.Xplc</td>
+                                                                                        <td>@ram.Puntuacion</td>
+                                                                                        <td>@ram.Probabilidad</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.IntRam))</td>
+                                                                                        <td>@ram.Gravedad</td>
+                                                                                        <td>@ram.Referencia</td>
+                                                                                        <td style="text-align:right">
+                                                                                            <div class="btn-group">
+                                                                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                                                <div class="dropdown-menu">
+                                                                                                    <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OpenFarmacoRamEval(ram)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
                                                 <div class="tab-pane" id="obsInfoNotif" role="tabpanel">
                                                     <h5>@languageContainerService.Keys["Observación sobre Información de la Notificación"]</h5>
 
@@ -635,7 +786,7 @@
 
                                                 </div>
                                                 <div class="tab-pane" id="procNotifica" role="tabpanel">
-                                                    <h5>@languageContainerService.Keys["Procedencia de Notificación"]</h5>
+                                                    <h5>@languageContainerService.Keys["Estatus"]</h5>
 
                                                     <div class="row clearfix">
 
@@ -671,6 +822,11 @@
                                             <br>
                                             <div class="modal-footer">
 
+                                                <button type="submit" @onclick="(e)=>{Exit=true;}"
+                                                        class="btn btn-success waves-effect">
+                                                    @languageContainerService.Keys["SaveExit"]
+                                                </button>
+
                                                 <button type="submit"
                                                         class="btn btn-info waves-effect">
                                                     @languageContainerService.Keys["Save"]
@@ -683,6 +839,7 @@
                                             </div>
 
                                         </EditForm>
+
                                     </div>
                                 </div>
                             </div>
@@ -695,15 +852,19 @@
 }
 
 
-
-
 @if (OpenAddEditFarmaco)
 {
-    @*<AddEditNotification Notification="@Notificacion"></AddEditNotification>*@
+    <Farmaco Data="@Farmaco"></Farmaco>
 }
-@if (OpenAddEditFarmacoRam)
+@if (OpenAddEditFarmacoRam && Data?.LFarmacos?.Count > 0)
 {
-   @* <AddEditNotification Notification="@Notificacion"></AddEditNotification>*@
+    <Ram Data="@FarmacoRam" LFarmaco="@Data.LFarmacos"></Ram>
 }
-
-<div class="modal-backdrop fade show"></div>
+@if (OpenAddEditFarmacoRamEval && FarmacoRam!=null)
+{
+    <EvaCausalidad Data="@FarmacoRam"></EvaCausalidad>
+}
+@if (OpenAddEditConcominante)
+{
+    <Concominante Data="@FarmacoConcominante"></Concominante>
+}

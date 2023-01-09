@@ -9,6 +9,7 @@ using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
 using Aig.FarmacoVigilancia.Events;
 using Aig.FarmacoVigilancia.Events.Language;
+using Microsoft.JSInterop;
 
 namespace Aig.FarmacoVigilancia.Pages.Login
 {
@@ -61,6 +62,7 @@ namespace Aig.FarmacoVigilancia.Pages.Login
                 if (usr == null)
                 {
                     error = "usuario o contraseña no válidos";
+                    await jsRuntime.InvokeVoidAsync("ShowError", error);
                     return;
                 }
 
@@ -88,6 +90,10 @@ namespace Aig.FarmacoVigilancia.Pages.Login
             catch (Exception ex)
             {
                 error = ex.Message;
+            }
+            if (!string.IsNullOrEmpty(error))
+            {
+                await jsRuntime.InvokeVoidAsync("ShowError", error);
             }
         }
 

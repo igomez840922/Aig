@@ -1,10 +1,10 @@
-﻿@page "/ram1"
+﻿@page "/ram"
 @layout BackendLayout
 @attribute [Authorize]
 <style>
-.modal-dialog.modal-custom {
-    max-width: 1240px !important;
-}
+    .modal-dialog.modal-custom {
+        max-width: 1240px !important;
+    }
 </style>
 
 @if (!OpenAddEditDialog)
@@ -66,16 +66,16 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-3">
-                                                    <label>@languageContainerService.Keys["From"] @languageContainerService.Keys["EntryDate"]</label>
+                                                    <label>@languageContainerService.Keys["From"] @languageContainerService.Keys["Fecha de Recibido Inicial"]</label>
                                                     <div class="form-line">
                                                         <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                         <ValidationMessage For=@(() => dataModel.FromDate) />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <label>@languageContainerService.Keys["To"] @languageContainerService.Keys["EntryDate"]</label>
+                                                    <label>@languageContainerService.Keys["To"] @languageContainerService.Keys["Fecha de Recibido Final"]</label>
                                                     <div class="form-line">
-                                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                        <RadzenDatePicker Max="DateTime.Today" Min="dataModel.FromDate" TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                         <ValidationMessage For=@(() => dataModel.ToDate) />
                                                     </div>
                                                 </div>
@@ -94,7 +94,7 @@
                                                     </InputSelect>*@
                                                         <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@dataModel.EvaluatorId
                                                                         AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
-                                                                        Data=@(lPersons.Where(x => x.Evaluador)) TextProperty="NombreCompleto" ValueProperty="Id" />
+                                                                        Data=@(lPersons.Where(x => x.Evaluador)) TextProperty="NombreCompleto" ValueProperty="Id" Change=@(args => {OnFilter();}) />
 
                                                     </div>
                                                 </div>
@@ -112,16 +112,12 @@
                                                         <thead class=thead-light>
                                                             <tr>
                                                                 <th>@languageContainerService.Keys["Fecha de Recibido"]</th>
-                                                                <th>@languageContainerService.Keys["Fecha de entrega "]</th>
+                                                                <th>@languageContainerService.Keys["Fecha de Entrega "]</th>
                                                                 <th>@languageContainerService.Keys["Código del CNFV"]</th>
                                                                 <th>@languageContainerService.Keys["Código Externo"]</th>
                                                                 <th>@languageContainerService.Keys["Código Noti-Facedra"]</th>
                                                                 <th>@languageContainerService.Keys["Código ID Facedra"]</th>
                                                                 <th>@languageContainerService.Keys["Evaluador"]</th>
-                                                                <th>@languageContainerService.Keys["Fármaco Sospechoso"]</th>
-                                                                @*<th>@languageContainerService.Keys["ATC"]</th>*@
-                                                                <th>@languageContainerService.Keys["Ram"]</th>
-                                                                <th>@languageContainerService.Keys["Gravedad"]</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -136,10 +132,6 @@
                                                                     <td>@(dt.CodigoNotiFacedra)</td>
                                                                     <td>@(dt.IdFacedra)</td>
                                                                     <td>@(dt.Evaluador?.NombreCompleto)</td>
-                                                                    <td>@(dt.FarmacoSospechosoDci)</td>
-                                                                    @*<td>@(dt.Atc)</td>*@
-                                                                    <td>@(dt.Ram)</td>
-                                                                    <td>@(dt.EvaluacionCausalidad?.Gravedad ?? "")</td>
                                                                     <td style="text-align:right">
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -194,7 +186,8 @@
 }
 else
 {
-    <Aig.FarmacoVigilancia.Components.Ram.AddEdit Data="@dataModel.Data"></Aig.FarmacoVigilancia.Components.Ram.AddEdit>
+    <Aig.FarmacoVigilancia.Components.Ram2.AddEdit Data="@dataModel.Data"></Aig.FarmacoVigilancia.Components.Ram2.AddEdit>
+
 }
 
 @if (DeleteDialog)

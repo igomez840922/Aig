@@ -12,6 +12,9 @@ namespace DataModel
     {
         public FMV_Ram2TB() {
             LFarmacos = new List<FMV_RamFarmacoTB>();
+            ObservacionInfoNotifica= new FMV_RamObservacionInfoNotifica();
+            AccionesRegulatoria = new FMV_RamAccionesRegulatoria();
+            Concominantes = new FMV_RamConcominantes();
         }
 
         // Fecha de recibido (CNFV)
@@ -150,9 +153,16 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public FMV_RamAccionesRegulatoria AccionesRegulatoria { get => accionesRegulatoria; set => SetProperty(ref accionesRegulatoria, value); }
 
+
+        //FARMACOS CONCOMINANTES
+        private FMV_RamConcominantes concominantes;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public FMV_RamConcominantes Concominantes { get => concominantes; set => SetProperty(ref concominantes, value); }
+
+
         ////////////
         ///
-        
+
         // Fecha de Evaluación
         private DateTime? fechaEvaluacion;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Text.Json;
 using Aig.FarmacoVigilancia.Events.Language;
+using System.Linq;
 
 namespace Aig.FarmacoVigilancia.Components.Ram2
 {    
@@ -28,11 +29,15 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         List<PersonalTrabajadorTB> lEvaluators { get; set; } = new List<PersonalTrabajadorTB>();
         List<FMV_SocTB> lSoc { get; set; } = new List<FMV_SocTB>();
 
+        bool Exit { get; set; } = false;
         bool OpenAddEditFarmaco { get; set; } = false;
         FMV_RamFarmacoTB Farmaco { get; set; } = null;
 
         bool OpenAddEditFarmacoRam { get; set; } = false;
+        bool OpenAddEditFarmacoRamEval { get; set; } = false;
         FMV_RamFarmacoRamTB FarmacoRam { get; set; } = null;
+        bool OpenAddEditConcominante { get; set; } = false;
+        FMV_RamFarmacoConcominante FarmacoConcominante { get; set; } = null;
 
         [Inject]
         ITipoInstitucionService tipoInstitucionService { get; set; }
@@ -57,19 +62,21 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
 
         #region RAM Rules
 
+        private void UpgradeAll()
+        {
+            UpdateGrado0();
+            UpdateIncongruenciaCondDosisEvo();
+            UpdateIncongruenciaCondTerapiaEvo();
+            UpdateIncongruenciaCondSuspTerapiaReex();
+            UpdateIncongruenciaCondMantTerapiaReex();
+            UpdateIncongruenciaConReex();
+        }
+
         private void OnRamTypeChange(ChangeEventArgs args)
         {
             var value = args.Value.ToString();
             Data.RamType = DataModel.Helper.Helper.ParseEnum<enumFMV_RAMType>(value);
-            UpdateGrado0();
-        }
-        void OnFechaTratamientoChange(DateTime? value, string name, string format)
-        {
-            UpdateGrado0();
-        }
-        void OnRAMDateChange(DateTime? value, string name, string format)
-        {
-            UpdateGrado0();
+            UpgradeAll();
         }
         private void UpdateGrado0()
         {   // Grado 0
@@ -84,9 +91,9 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             //Data.Grado = value; 
 
             var value = string.Empty;
-            if (Data.RamType == enumFMV_RAMType.SiRam && Data.LFarmacos.All(x=> x.FechaTratamiento == null) && Data.LFarmacos.All(x=>x.LRams.All(o=>o.FechaRam == null)))
+            if (Data.RamType == enumFMV_RAMType.SiRam && Data.LFarmacos.All(x=> x.FechaTratamiento == null && x.LRams.All(o => o.FechaRam == null)))
                 value = "Grado 0";
-            Data.Grado = value;
+            Data.Grado = string.IsNullOrEmpty(value) ? Data.Grado : value;
         }
 
         private void UpdateIncongruenciaCondDosisEvo()
@@ -107,7 +114,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                     value = "Incongruente";
                 }
             }
-            Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo = value;
+            Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo = string.IsNullOrEmpty(value)? Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo:value;
         }
         private void UpdateIncongruenciaCondTerapiaEvo()
         {
@@ -139,7 +146,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                 }
             }
 
-            Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo = value;
+            Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo = string.IsNullOrEmpty(value) ? Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo : value;
         }
         private void UpdateIncongruenciaCondSuspTerapiaReex()
         {
@@ -159,7 +166,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             {
                 value = "Incongruente";
             }
-            Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex = value;
+            Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex = string.IsNullOrEmpty(value) ? Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex : value;
         }
         private void UpdateIncongruenciaCondMantTerapiaReex()
         {
@@ -179,7 +186,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             {
                 value = "Incongruente";
             }
-            Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex = value;
+            Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex = string.IsNullOrEmpty(value) ? Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex : value;
         }
         private void UpdateIncongruenciaConReex()
         {
@@ -203,7 +210,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                 if(Data.LFarmacos.All(x => x.LRams.All(o=>o.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.REAP)) || Data.LFarmacos.All(x => x.LRams.All(o => o.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.NREAP)))
                 value = "Incongruente";
             }
-            Data.ObservacionInfoNotifica.IncongruenciaConReex = value;
+            Data.ObservacionInfoNotifica.IncongruenciaConReex = string.IsNullOrEmpty(value) ? Data.ObservacionInfoNotifica.IncongruenciaConReex : value;
         }
 
 
@@ -250,60 +257,70 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         //Save Data and Close
         protected async Task SaveData()
         {
-            //verificar CodigoCNFV
-            if (!string.IsNullOrEmpty(Data.CodigoCNFV))
+            try 
             {
-                var tmpData = (await ramService.FindAll(x => x.CodigoCNFV.Contains(Data.CodigoCNFV) && x.Id != Data.Id)).FirstOrDefault();
-                if (tmpData != null)
+                UpgradeAll();
+
+                //verificar CodigoCNFV
+                if (!string.IsNullOrEmpty(Data.CodigoCNFV))
                 {
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de CNFV ya existe"]);
-                    return;
+                    var tmpData = (await ramService.FindAll(x => x.CodigoCNFV.Contains(Data.CodigoCNFV) && x.Id != Data.Id))?.FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de CNFV ya existe"]);
+                        return;
+                    }
                 }
-            }
 
-            //verificar Cod Externo
-            if (!string.IsNullOrEmpty(Data.CodExterno))
-            {
-                var tmpData = (await ramService.FindAll(x => x.CodExterno.Contains(Data.CodExterno) && x.Id != Data.Id)).FirstOrDefault();
-                if (tmpData != null)
+                //verificar Cod Externo
+                if (!string.IsNullOrEmpty(Data.CodExterno))
                 {
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de Externo ya existe"]);
-                    return;
+                    var tmpData = (await ramService.FindAll(x => x.CodExterno.Contains(Data.CodExterno) && x.Id != Data.Id))?.FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de Externo ya existe"]);
+                        return;
+                    }
                 }
-            }
 
-            //verificar Id Facedra
-            if (!string.IsNullOrEmpty(Data.IdFacedra))
-            {
-                var tmpData = (await ramService.FindAll(x => x.IdFacedra.Contains(Data.IdFacedra) && x.Id != Data.Id)).FirstOrDefault();
-                if (tmpData != null)
+                //verificar Id Facedra
+                if (!string.IsNullOrEmpty(Data.IdFacedra))
                 {
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de ID Facedra ya existe"]);
-                    return;
+                    var tmpData = (await ramService.FindAll(x => x.IdFacedra.Contains(Data.IdFacedra) && x.Id != Data.Id))?.FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de ID Facedra ya existe"]);
+                        return;
+                    }
                 }
-            }
 
-            //verificar Codigo NotiFacedra
-            if (!string.IsNullOrEmpty(Data.CodigoNotiFacedra))
-            {
-                var tmpData = (await ramService.FindAll(x => x.CodigoNotiFacedra.Contains(Data.CodigoNotiFacedra) && x.Id != Data.Id)).FirstOrDefault();
-                if (tmpData != null)
+                //verificar Codigo NotiFacedra
+                if (!string.IsNullOrEmpty(Data.CodigoNotiFacedra))
                 {
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de NotiFacedra ya existe"]);
-                    return;
+                    var tmpData = (await ramService.FindAll(x => x.CodigoNotiFacedra.Contains(Data.CodigoNotiFacedra) && x.Id != Data.Id))?.FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de NotiFacedra ya existe"]);
+                        return;
+                    }
                 }
-            }
 
-            var result = await ramService.Save(Data);
-            if (result != null)
-            {
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                Data = result;
+                var result = await ramService.Save(Data);
+                if (result != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                    Data = result;
 
-                await bus.Publish(new Aig.FarmacoVigilancia.Events.Ram2.AddEdit_Event { Data = Data });
+                    if(Exit)
+                        await bus.Publish(new Aig.FarmacoVigilancia.Events.Ram2.AddEdit_Event { Data = Data });
+
+                    Exit = false;
+                }
+                else
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
             }
-            else
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            catch { }
+            
         }
 
         //Cancel and Close
@@ -329,6 +346,9 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             if (farmaco != null)
             {
                 Data.LFarmacos.Remove(farmaco);
+
+
+                UpgradeAll();
                 this.InvokeAsync(StateHasChanged);
             }
         }
@@ -348,6 +368,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                 if (!Data.LFarmacos.Contains(message.Data))
                     Data.LFarmacos.Add(message.Data);
             }
+            UpgradeAll();
 
             this.InvokeAsync(StateHasChanged);
         }
@@ -360,6 +381,15 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
 
             FarmacoRam = farmacoRam != null ? farmacoRam : new FMV_RamFarmacoRamTB();
             OpenAddEditFarmacoRam = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        protected async Task OpenFarmacoRamEval(FMV_RamFarmacoRamTB farmacoRam = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.RamFarmacoRam.AddEdit_Event>(FarmacoRam_AddEditEventHandlerHandler);
+
+            FarmacoRam = farmacoRam != null ? farmacoRam : new FMV_RamFarmacoRamTB();
+            OpenAddEditFarmacoRamEval = true;
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -376,6 +406,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                     farmaco.LRams.Remove(farmacoRam);
                 }
 
+                UpgradeAll();
                 this.InvokeAsync(StateHasChanged);
             }
         }
@@ -386,20 +417,74 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
 
             var message = args.GetMessage<Aig.FarmacoVigilancia.Events.RamFarmacoRam.AddEdit_Event>();
 
-            Farmaco = null;
+            FarmacoRam = null;
             OpenAddEditFarmaco = false;
-            //if (message.Data != null)
-            //{
-            //    Data.LFarmacos = Data.LFarmacos != null ? Data.LFarmacos : new List<FMV_RamFarmacoTB>();
+            OpenAddEditFarmacoRamEval = false;
 
-            //    if (!Data.LFarmacos.Contains(message.Data))
-            //        Data.LFarmacos.Add(message.Data);
-            //}
+            if (message.Data != null)
+            {
+                var farmaco = (from f in Data.LFarmacos
+                               where f.LRams.Contains(message.Data)
+                               select f).FirstOrDefault();
+                if (farmaco != null)
+                {
+                    farmaco.LRams.Remove(message.Data);
+                }
+
+                farmaco = Data.LFarmacos.Find(x => x == message.Data.Farmaco);
+                if (farmaco != null)
+                {
+                    farmaco.LRams.Add(message.Data);
+                }
+            }
+            
+
+            UpgradeAll();
 
             this.InvokeAsync(StateHasChanged);
         }
 
 
+        //Add New Concominante
+        protected async Task OpenConcominante(FMV_RamFarmacoConcominante farmaco = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.RamConcominante.AddEdit_Event>(FarmacoConcominante_AddEditEventHandler);
+
+            FarmacoConcominante = farmaco != null ? farmaco : new FMV_RamFarmacoConcominante();
+            OpenAddEditConcominante = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //Remove Farmaco
+        protected async Task RemoveConcominante(FMV_RamFarmacoConcominante farmaco)
+        {
+            if (farmaco != null)
+            {
+                Data.Concominantes.LProductos.Remove(farmaco);
+
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //on close Farmaco MODAL 
+        private void FarmacoConcominante_AddEditEventHandler(MessageArgs args)
+        {
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.RamConcominante.AddEdit_Event>(Farmaco_AddEditEventHandlerHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.RamConcominante.AddEdit_Event>();
+
+            FarmacoConcominante = null;
+            OpenAddEditConcominante = false;
+            if (message.Data != null)
+            {
+                Data.Concominantes = Data.Concominantes != null ? Data.Concominantes : new FMV_RamConcominantes();
+                Data.Concominantes.LProductos = Data.Concominantes.LProductos != null ? Data.Concominantes.LProductos : new List<FMV_RamFarmacoConcominante>();
+
+                if (!Data.Concominantes.LProductos.Contains(message.Data))
+                    Data.Concominantes.LProductos.Add(message.Data);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
 
 
 

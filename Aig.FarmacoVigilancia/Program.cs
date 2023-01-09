@@ -116,6 +116,7 @@ builder.Services.AddScoped<IAlertaService, AlertaService>();
 builder.Services.AddScoped<IDestinyInstituteService, DestinyInstituteService>();
 builder.Services.AddScoped<INoteService, NoteService>();
 builder.Services.AddScoped<IRamService, RamService>();
+builder.Services.AddScoped<IRamService2, RamService2>();
 builder.Services.AddScoped<IFFService, FFService>();
 builder.Services.AddScoped<IFTService, FTService>();
 builder.Services.AddScoped<IESAVIService, ESAVIService>();

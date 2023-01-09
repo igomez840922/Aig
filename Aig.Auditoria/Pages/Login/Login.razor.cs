@@ -91,7 +91,7 @@ namespace Aig.Auditoria.Pages.Login
             {
                 error = ex.Message;
             }
-            if (string.IsNullOrEmpty(error))
+            if (!string.IsNullOrEmpty(error))
             {
                 await jsRuntime.InvokeVoidAsync("ShowError", error);
             }

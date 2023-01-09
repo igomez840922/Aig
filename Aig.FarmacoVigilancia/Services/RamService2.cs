@@ -335,20 +335,7 @@ namespace Aig.FarmacoVigilancia.Services
 
         public async Task<FMV_Ram2TB> Save(FMV_Ram2TB data)
         {
-            var result = DalService.Save(data);
-            //if (result != null && data.LNotificaciones != null)
-            //{
-            //    foreach (var item in data.LNotificaciones)
-            //    {
-            //        //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;
-            //        DalService.DBContext.Entry(item).Property(b => b.EvaluacionCalidadInfo).IsModified = true;
-            //        DalService.DBContext.Entry(item).Property(b => b.EvaluacionCausalidad).IsModified = true;
-            //        DalService.DBContext.Entry(item).Property(b => b.ObservacionInfoNotifica).IsModified = true;
-            //        DalService.DBContext.Entry(item).Property(b => b.AccionesRegulatoria).IsModified = true;
-            //        DalService.DBContext.SaveChanges();
-            //    }
-            //}
-
+            var result = DalService.Save(data);   
             if(result != null)
             {
                 //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;
@@ -356,6 +343,7 @@ namespace Aig.FarmacoVigilancia.Services
                 //DalService.DBContext.Entry(result).Property(b => b.EvaluacionCausalidad).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.ObservacionInfoNotifica).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.AccionesRegulatoria).IsModified = true;
+                DalService.DBContext.Entry(result).Property(b => b.Concominantes).IsModified = true;
                 DalService.DBContext.SaveChanges();
             }
 

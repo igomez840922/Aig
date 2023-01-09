@@ -15,6 +15,7 @@ namespace DataModel
         private long? farmacoId;
         public long? FarmacoId { get => farmacoId; set => SetProperty(ref farmacoId, value); }
         private FMV_RamFarmacoTB? farmaco;
+        [Required(ErrorMessage = "requerido")]
         [JsonIgnore]
         public virtual FMV_RamFarmacoTB? Farmaco { get => farmaco; set => SetProperty(ref farmaco, value); }
 

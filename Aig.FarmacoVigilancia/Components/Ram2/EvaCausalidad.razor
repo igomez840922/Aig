@@ -1,0 +1,311 @@
+﻿@using DataModel.Helper;
+
+
+<!-- Modal Creat/Edit -->
+@if (Data != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">
+                        @languageContainerService.Keys["Evaluación de la Causalidad"]
+                    </h5>
+                    <button type="button" class="close" @onclick="  (e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Data" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <label>@languageContainerService.Keys["Fármaco"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText disabled="disabled" class="form-control" @bind-Value="Data.Farmaco.FarmacoSospechosoDci" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>@languageContainerService.Keys["RAM"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText disabled="disabled" class="form-control" @bind-Value="Data.Ram" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Secuencia Temporal"]</label>
+                                <div class="form-group">     
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear=" false" TValue="  enumFMV_RAMSecuenciaTemp" Class="form-control" @bind-Value=@Data.SecTemporal
+                                                    AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@(Enum.GetValues(typeof(enumFMV_RAMSecuenciaTemp))) Change=@(args => {OnSecTemporalChange(args);})>
+                                        <Template Context="tContext">
+                                            @(DataModel.Helper.Helper.GetDescription(tContext))
+                                        </Template>
+                                    </RadzenDropDown>
+                                    <ValidationMessage For=@(() => Data.SecTemporal) />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["STEMP"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputNumber disabled="disabled" class="form-control" @bind-Value="Data.Stemp" />
+                                        <ValidationMessage For=@(() => Data.Stemp) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Conocimiento previo"]</label>
+                                <div class="form-group">  
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear=" false" TValue="  enumFMV_RAMConocimientoPrev" Class="form-control" @bind-Value=@Data.ConPrevio
+                                                    AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@(Enum.GetValues(typeof(enumFMV_RAMConocimientoPrev))) Change=@(args => {OnConPrevioChange(args);})>
+                                        <Template Context="tContext">
+                                            @(DataModel.Helper.Helper.GetDescription(tContext))
+                                        </Template>
+                                    </RadzenDropDown>
+                                    <ValidationMessage For=@(() => Data.ConPrevio) />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["CPREV"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputNumber disabled="disabled" class="form-control" @bind-Value="Data.Cprev" />
+                                        <ValidationMessage For=@(() => Data.Cprev) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Efecto de Retirada"]</label>
+                                <div class="form-group">   
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear=" false" TValue="  enumFMV_RAMEfectoRetirada" Class="form-control" @bind-Value=@Data.EfecRetirada
+                                                    AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@(Enum.GetValues(typeof(enumFMV_RAMEfectoRetirada))) Change=@(args => {OnEfecRetiradaChange(args);})>
+                                        <Template Context="tContext">
+                                            @(DataModel.Helper.Helper.GetDescription(tContext))
+                                        </Template>
+                                    </RadzenDropDown>
+                                    <ValidationMessage For=@(() => Data.EfecRetirada) />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["RETI"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputNumber disabled="disabled" class="form-control" @bind-Value="Data.Reti" />
+                                        <ValidationMessage For=@(() => Data.Reti) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Efecto de Reexposición"]</label>
+                                <div class="form-group">
+                                   <div class="form-line">
+                                       <RadzenDropDown AllowClear=" false" TValue="  enumFMV_RAMEfectoReexposicion" Class="form-control" @bind-Value=@Data.EfecReexposicion
+                                                    AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@(Enum.GetValues(typeof(enumFMV_RAMEfectoReexposicion))) Change=@(args => {OnEfecReexposicionChange(args);})>
+                                        <Template Context="tContext">
+                                            @(DataModel.Helper.Helper.GetDescription(tContext))
+                                        </Template>
+                                    </RadzenDropDown>
+                                    <ValidationMessage For=@(() => Data.EfecReexposicion) />
+                                   </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["REEX"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputNumber disabled="disabled" class="form-control" @bind-Value="Data.Reex" />
+                                        <ValidationMessage For=@(() => Data.Reex) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Causas Alternativas"]</label>
+                                <div class="form-group">                                   
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear=" false" TValue="  enumFMV_RAMCausaAlternat" Class="form-control" @bind-Value=@Data.CausasAlter
+                                                    AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@(Enum.GetValues(typeof(enumFMV_RAMCausaAlternat))) Change=@(args => {OnCausasAlterChange(args);})>
+                                        <Template Context="tContext">
+                                            @(DataModel.Helper.Helper.GetDescription(tContext))
+                                        </Template>
+                                    </RadzenDropDown>
+                                    <ValidationMessage For=@(() => Data.CausasAlter) />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["ALTER"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputNumber disabled="disabled" class="form-control" @bind-Value="Data.Alter" />
+                                        <ValidationMessage For=@(() => Data.Alter) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Factores Contribuyentes"]</label>
+                                <div class="form-group">
+                                   <div class="form-line">
+                                       <RadzenDropDown AllowClear=" false" TValue="  enumFMV_RAMFactContribuyente" Class="form-control" @bind-Value=@Data.FactContribuyentes
+                                                    AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@(Enum.GetValues(typeof(enumFMV_RAMFactContribuyente))) Change=@(args => {OnFactContribuyentesChange(args);})>
+                                        <Template Context="tContext">
+                                            @(DataModel.Helper.Helper.GetDescription(tContext))
+                                        </Template>
+                                    </RadzenDropDown>
+                                    <ValidationMessage For=@(() => Data.FactContribuyentes) />
+                                   </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["FACON"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputNumber disabled="disabled" class="form-control" @bind-Value="Data.Facon" />
+                                        <ValidationMessage For=@(() => Data.Facon) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Exploraciones Complementarias"]</label>
+                                <div class="form-group">   
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear=" false" TValue="  enumFMV_RAMExploracionContemp" Class="form-control" @bind-Value=@Data.ExpComplementarias
+                                                        AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(Enum.GetValues(typeof(enumFMV_RAMExploracionContemp))) Change=@(args => {OnExpComplementariasChange(args);})>
+                                            <Template Context="tContext">
+                                                @(DataModel.Helper.Helper.GetDescription(tContext))
+                                            </Template>
+                                        </RadzenDropDown>
+                                        <ValidationMessage For=@(() => Data.ExpComplementarias) />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["XPLC"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputNumber disabled="disabled" class="form-control" @bind-Value="Data.Xplc" />
+                                        <ValidationMessage For=@(() => Data.Xplc) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Puntuación"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input disabled="disabled" class="form-control" type="text" value="@Data.Puntuacion">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Probabilidad"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input disabled="disabled" class="form-control" type="text" value="@Data.Probabilidad">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Intesidad de la RAM"]</label>
+                                <div class="form-group">   
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear=" false" TValue="  enumFMV_RAMIntensidad" Class="form-control" @bind-Value=@Data.IntRam
+                                                        AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(Enum.GetValues(typeof(enumFMV_RAMIntensidad))) Change=@(args => {OnIntRamChange(args);})>
+                                            <Template Context="tContext">
+                                                @(DataModel.Helper.Helper.GetDescription(tContext))
+                                            </Template>
+                                        </RadzenDropDown>
+                                        <ValidationMessage For=@(() => Data.IntRam) />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Gravedad"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText disabled="disabled" class="form-control" @bind-Value="Data.Gravedad" />
+                                        <ValidationMessage For=@(() => Data.Gravedad) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Referencia"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.Referencia" />
+                                        <ValidationMessage For=@(() => Data.Referencia) />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="  (e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+}
+

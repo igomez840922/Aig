@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230109012141_M063")]
+    partial class M063
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3353,9 +3355,6 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("Concominantes")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -3532,7 +3531,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<long?>("FarmacoId")
-                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("FechaRam")
@@ -5174,8 +5172,7 @@ namespace DataAccess.Migrations
                     b.HasOne("DataModel.FMV_RamFarmacoTB", "Farmaco")
                         .WithMany("LRams")
                         .HasForeignKey("FarmacoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Farmaco");
                 });

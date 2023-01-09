@@ -1614,6 +1614,9 @@ namespace DataAccess
               .Property(e => e.AccionesRegulatoria)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamAccionesRegulatoria>(x));
 
+            modelBuilder.Entity<FMV_Ram2TB>()
+             .Property(e => e.Concominantes)
+             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamConcominantes>(x));
 
             ///////////////////////////////
             ///

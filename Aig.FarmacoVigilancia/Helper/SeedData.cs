@@ -406,6 +406,7 @@ namespace Aig.FarmacoVigilancia.Helper
                                     break;
 
                                 rfv.FechaNotificacion = data.Cell(2).GetValue<DateTime?>();
+                                rfv.FechaNotificacion = rfv.FechaNotificacion.HasValue? rfv.FechaNotificacion: DateTime.Now;
                                 rfv.LaboratorioId = lLabs.Where(x => x.IdEmpresa == data.Cell(3).GetValue<int>()).FirstOrDefault()?.Id ?? null;
                                 rfv.Laboratorio = lLabs.Where(x => x.IdEmpresa == data.Cell(3).GetValue<int>()).FirstOrDefault() ?? null;
                                 rfv.NombreCompleto = data.Cell(4).GetValue<string>();
@@ -428,6 +429,7 @@ namespace Aig.FarmacoVigilancia.Helper
                                 rfv.Correos = data.Cell(8).GetValue<string>();
                                 rfv.TipoUbicacion = data.Cell(9).GetValue<string>().Contains("Extranjero") ? DataModel.Helper.enum_UbicationType.Foreign : DataModel.Helper.enum_UbicationType.Local;
                                 rfv.Observaciones = data.Cell(10).GetValue<string>();
+                                 
                                 dalService.Save(rfv);
                             }
                             catch { }                            
