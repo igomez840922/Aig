@@ -15,6 +15,7 @@ namespace DataModel
             ObservacionInfoNotifica= new FMV_RamObservacionInfoNotifica();
             AccionesRegulatoria = new FMV_RamAccionesRegulatoria();
             Concominantes = new FMV_RamConcominantes();
+            Adjunto=new AttachmentData();
         }
 
         // Fecha de recibido (CNFV)
@@ -47,7 +48,7 @@ namespace DataModel
         public string CodigoNotiFacedra { get => codigoNotiFacedra; set => SetProperty(ref codigoNotiFacedra, value); }
 
         private string idFacedra;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string IdFacedra { get => idFacedra; set => SetProperty(ref idFacedra, value); }
 
@@ -159,6 +160,10 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public FMV_RamConcominantes Concominantes { get => concominantes; set => SetProperty(ref concominantes, value); }
 
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
         ////////////
         ///

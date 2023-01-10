@@ -13,6 +13,7 @@ namespace DataModel
         public FMV_EsaviTB()
         {
             //LNotificaciones = new List<FMV_EsaviNotificacionTB>();
+            Adjunto=new AttachmentData();
         }
 
         // Código del CNFV
@@ -288,6 +289,11 @@ namespace DataModel
         //public string DosisEsavi { get => dosisEsavi; set => SetProperty(ref dosisEsavi, value); }        
         private enumFMV_DosisNumero dosisPresenta;
         public enumFMV_DosisNumero DosisPresenta { get => dosisPresenta; set => SetProperty(ref dosisPresenta, value); }
+
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
     }
 }

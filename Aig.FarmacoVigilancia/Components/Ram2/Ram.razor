@@ -52,16 +52,6 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <label>@languageContainerService.Keys["Término MedDRA"]</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="  Data.TerWhoArt" />
-                                        <ValidationMessage For=@(() => Data.TerWhoArt) />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4">
                                 <label>@languageContainerService.Keys["SOC"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
@@ -71,6 +61,22 @@
     Change=@(args => {OnSocChange((args!=null?(long)args:null));}) />
 
                                         <ValidationMessage For=@(() => Data.SocId) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Término MedDRA"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear=" true" TValue="   long?" Class="form-control" @bind-Value=@Data.TerMedraId
+                                                        AllowFiltering="   true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(lTerMedra.Where(x=>x.SocId == Data.SocId)) TextProperty="Nombre" ValueProperty="Id"
+                                                        Change=@(args => {OnTerMedraChange((args!=null?(long)args:null));}) />
+
+                                        <ValidationMessage For=@(() => Data.TerMedraId) />
+                                       @* <InputText class="form-control" @bind-Value="  Data.TerWhoArt" />
+                                        <ValidationMessage For=@(() => Data.TerWhoArt) />*@
                                     </div>
                                 </div>
                             </div>

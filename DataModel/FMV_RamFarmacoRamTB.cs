@@ -25,18 +25,19 @@ namespace DataModel
         [Required(ErrorMessage = "requerido")]
         public string Ram { get => ram; set => SetProperty(ref ram, value); }
 
-
-        // TERMINO WHOArt (LLT) -- Término MedDRA
-        private string terWhoArt;
-        public string TerWhoArt { get => terWhoArt; set => SetProperty(ref terWhoArt, value); }
-
-
         // SOC: Los valores de la lista varia según las filas 
         private long? socId;
         public long? SocId { get => socId; set => SetProperty(ref socId, value); }
         // SOC: Los valores de la lista varia según las filas 
         private string soc;
         public string Soc { get => soc; set => SetProperty(ref soc, value); }
+
+        // SOC: Los valores de la lista varia según las filas 
+        private long? terMedraId;
+        public long? TerMedraId { get => terMedraId; set => SetProperty(ref terMedraId, value); }
+        // TERMINO WHOArt (LLT) -- Término MedDRA
+        private string terWhoArt;
+        public string TerWhoArt { get => terWhoArt; set => SetProperty(ref terWhoArt, value); }
 
 
         // Concomitantes

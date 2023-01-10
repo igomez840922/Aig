@@ -8,6 +8,8 @@ using Microsoft.JSInterop;
 using System.Text.Json;
 using Aig.FarmacoVigilancia.Events.Language;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
+using System.Net.Mail;
 
 namespace Aig.FarmacoVigilancia.Components.Ram2
 {    
@@ -50,6 +52,9 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         List<ProvinciaTB> lProvincias { get; set; } = new List<ProvinciaTB>();
         List<InstitucionDestinoTB> lInstitucionDestino { get; set; } = new List<InstitucionDestinoTB>();
 
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
+
         protected async override Task OnInitializedAsync()
         {
 
@@ -88,12 +93,123 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             //var value = string.Empty;
             //if (Data.RamType == enumFMV_RAMType.SiRam && Data.EvaluacionCalidadInfo.FechaTratamiento == null && Data.EvaluacionCalidadInfo.FechaRam == null)
             //    value = "Grado 0";
-            //Data.Grado = value; 
+            //Data.Grado = value;
+            string I5 = Data.RamType != enumFMV_RAMType.NoRam ? DataModel.Helper.Helper.GetDescription(Data.RamType) : "";
+            string E5 = "";
+            string W5 = "";
+            string X5 = "";
+            string Y5 = "";
+            string Z5 = "";
+            string AA5 = "";
+            string AB5 = "";
+            string AC5 = "";
+            string AD5 = "";
+            string AF5 = Data.Sexo!= enumSexo.NA? DataModel.Helper.Helper.GetDescription(Data.Sexo) : "";
+            string AG5 = Data.Edad;
+            string AJ5 = "";
+            if (Data.LFarmacos != null)
+            {
+                foreach (var farm in Data.LFarmacos)
+                {
+                    E5 += farm.FarmacoSospechosoDci;
+                    W5 += farm.FechaTratamiento?.ToString("dd/MM/yyyy")??"";
+                    if (farm.LRams != null)
+                    {
+                        foreach (var ram in farm.LRams)
+                        {
+                            X5+=ram.FechaRam?.ToString("dd/MM/yyyy") ?? "";
+                            Y5 += ram.Desenlace != enumFMV_RAMDesenlace.NA ? DataModel.Helper.Helper.GetDescription(ram.Desenlace) : "";
+                            AC5 += ram.EvoDosis != enumFMV_RAMEvolucionDosis.NA ? DataModel.Helper.Helper.GetDescription(ram.EvoDosis) : "";
+                            AD5 += ram.EvoTerapia != enumFMV_RAMEvolucionTerapia.NA ? DataModel.Helper.Helper.GetDescription(ram.EvoTerapia) : "";                            
+                        }
+                        Z5 += !string.IsNullOrEmpty(farm.Indicacion) ? farm.Indicacion : "";
+                        AA5 += farm.ConductaDosis != enumFMV_RAMConductaDosis.NA ? DataModel.Helper.Helper.GetDescription(farm.ConductaDosis) : "";
+                        AB5 += farm.ConductaTerapia != enumFMV_RAMConductaTerapia.NA ? DataModel.Helper.Helper.GetDescription(farm.ConductaTerapia) : "";
+                        if (string.IsNullOrEmpty(AJ5) && farm.Reexposicion == enumOpcionSiNo.Si)
+                        {
+                            AJ5 = farm.Reexposicion == enumOpcionSiNo.Si || farm.Reexposicion == enumOpcionSiNo.No ? DataModel.Helper.Helper.GetDescription(farm.Reexposicion) : "";
+                        }
+                    }                    
+                }
+            }
+            
+            string grado0 = "";
+            string grado1 = "";
+            string grado2 = "";
+            string grado3 = "";
+            string grado4 = "";
+            if (string.IsNullOrEmpty(I5)&& string.IsNullOrEmpty(E5) && string.IsNullOrEmpty(W5) && string.IsNullOrEmpty(X5))
+            {
+                grado0 = "";
+            }
+            else if(Data.RamType == enumFMV_RAMType.SiRam && !string.IsNullOrEmpty(E5))
+            {
+                grado0 = "";
+                if ( string.IsNullOrEmpty(W5) || string.IsNullOrEmpty(X5))
+                {
+                    grado0 = "Grado 0"; 
+                }
+            }
 
-            var value = string.Empty;
-            if (Data.RamType == enumFMV_RAMType.SiRam && Data.LFarmacos.All(x=> x.FechaTratamiento == null && x.LRams.All(o => o.FechaRam == null)))
-                value = "Grado 0";
-            Data.Grado = string.IsNullOrEmpty(value) ? Data.Grado : value;
+            //grado1
+            if (string.IsNullOrEmpty(I5) && string.IsNullOrEmpty(E5) && string.IsNullOrEmpty(W5) && string.IsNullOrEmpty(X5))
+            {
+                grado1 = "";
+            }
+            else if(!string.IsNullOrEmpty(Y5) && !string.IsNullOrEmpty(Z5) && !string.IsNullOrEmpty(AA5) && !string.IsNullOrEmpty(AB5))
+            {
+                grado1 = "";                
+            }
+            else if(I5 == DataModel.Helper.Helper.GetDescription(enumFMV_RAMType.SiRam) && !string.IsNullOrEmpty(E5) && !string.IsNullOrEmpty(W5) && !string.IsNullOrEmpty(X5))
+            {
+                grado1 = "Grado 1"; 
+            }
+
+            //grado2
+            if (string.IsNullOrEmpty(I5) && string.IsNullOrEmpty(E5) && string.IsNullOrEmpty(W5) && string.IsNullOrEmpty(X5))
+            {
+                grado2 = "";
+            }
+            else if (!string.IsNullOrEmpty(AC5) && !string.IsNullOrEmpty(AD5) && !string.IsNullOrEmpty(AF5) && !string.IsNullOrEmpty(AG5))
+            {
+                grado2 = "";
+            }
+            else if (I5 == DataModel.Helper.Helper.GetDescription(enumFMV_RAMType.SiRam) && !string.IsNullOrEmpty(E5) && !string.IsNullOrEmpty(W5) && 
+                !string.IsNullOrEmpty(X5) && !string.IsNullOrEmpty(Y5) && !string.IsNullOrEmpty(Z5) && !string.IsNullOrEmpty(AA5) && !string.IsNullOrEmpty(AB5))
+            {
+                grado2 = "Grado 2";
+            }
+
+            //grado3
+            if (string.IsNullOrEmpty(I5) && string.IsNullOrEmpty(E5) && string.IsNullOrEmpty(W5) && string.IsNullOrEmpty(X5))
+            {
+                grado3 = "";
+            }
+            else if (AJ5 == DataModel.Helper.Helper.GetDescription(enumOpcionSiNo.Si))
+            {
+                grado3 = "";
+            }
+            else if (I5 == DataModel.Helper.Helper.GetDescription(enumFMV_RAMType.SiRam) && !string.IsNullOrEmpty(E5) && !string.IsNullOrEmpty(W5) &&
+                !string.IsNullOrEmpty(X5) && !string.IsNullOrEmpty(Y5) && !string.IsNullOrEmpty(Z5) && !string.IsNullOrEmpty(AA5) && !string.IsNullOrEmpty(AB5)
+                && !string.IsNullOrEmpty(AC5) && !string.IsNullOrEmpty(AD5) && !string.IsNullOrEmpty(AF5) && !string.IsNullOrEmpty(AG5))
+            {
+                grado3 = "Grado 3";
+            }
+
+            //grado4
+            if (string.IsNullOrEmpty(I5) && string.IsNullOrEmpty(E5) && string.IsNullOrEmpty(W5) && string.IsNullOrEmpty(X5))
+            {
+                grado4 = "";
+            }
+            else if (I5 == DataModel.Helper.Helper.GetDescription(enumFMV_RAMType.SiRam) && !string.IsNullOrEmpty(E5) && !string.IsNullOrEmpty(W5) &&
+                !string.IsNullOrEmpty(X5) && !string.IsNullOrEmpty(Y5) && !string.IsNullOrEmpty(Z5) && !string.IsNullOrEmpty(AA5) && !string.IsNullOrEmpty(AB5)
+                && !string.IsNullOrEmpty(AC5) && !string.IsNullOrEmpty(AD5) && !string.IsNullOrEmpty(AF5) && !string.IsNullOrEmpty(AG5) && AJ5 == DataModel.Helper.Helper.GetDescription(enumOpcionSiNo.Si))
+            {
+                grado4 = "Grado 4";
+            }
+
+            Data.Grado = !string.IsNullOrEmpty(grado0)? grado0:(!string.IsNullOrEmpty(grado1) ? grado1 :(!string.IsNullOrEmpty(grado2) ? grado2 :(!string.IsNullOrEmpty(grado3) ? grado3 :(!string.IsNullOrEmpty(grado4) ? grado4 : "No Aplica"))));
+           
         }
 
         private void UpdateIncongruenciaCondDosisEvo()
@@ -312,14 +428,13 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                     Data = result;
 
                     if(Exit)
-                        await bus.Publish(new Aig.FarmacoVigilancia.Events.Ram2.AddEdit_Event { Data = Data });
-
-                    Exit = false;
+                        await bus.Publish(new Aig.FarmacoVigilancia.Events.Ram2.AddEdit_Event { Data = Data });                   
                 }
                 else
                     await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
             }
             catch { }
+            finally { Exit = false; }
             
         }
 
@@ -377,12 +492,19 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         //Add New FarmacoRam
         protected async Task OpenFarmacoRam(FMV_RamFarmacoRamTB farmacoRam = null)
         {
-            bus.Subscribe<Aig.FarmacoVigilancia.Events.RamFarmacoRam.AddEdit_Event>(FarmacoRam_AddEditEventHandlerHandler);
+            if(Data.LFarmacos?.Count > 0)
+            {
+                bus.Subscribe<Aig.FarmacoVigilancia.Events.RamFarmacoRam.AddEdit_Event>(FarmacoRam_AddEditEventHandlerHandler);
 
-            FarmacoRam = farmacoRam != null ? farmacoRam : new FMV_RamFarmacoRamTB();
-            OpenAddEditFarmacoRam = true;
+                FarmacoRam = farmacoRam != null ? farmacoRam : new FMV_RamFarmacoRamTB();
+                OpenAddEditFarmacoRam = true;
 
-            await this.InvokeAsync(StateHasChanged);
+                await this.InvokeAsync(StateHasChanged);
+            }
+            else
+            {
+                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Debe agregar al menos un Fármaco Sospechoso"]);
+            }
         }
         protected async Task OpenFarmacoRamEval(FMV_RamFarmacoRamTB farmacoRam = null)
         {
@@ -507,6 +629,54 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             Data.Provincia = lProvincias.Where(x => x.Id == Id).FirstOrDefault();
             await FetchData();
         }
+
+
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+
+                Data.Adjunto.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Data.Adjunto = Data.Adjunto != null ? Data.Adjunto : new AttachmentData();
+                Data.Adjunto.LAttachments = Data.Adjunto.LAttachments != null ? Data.Adjunto.LAttachments : new List<AttachmentTB>();
+
+                Data.Adjunto.LAttachments.Add(message.Attachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
     }
 
 }

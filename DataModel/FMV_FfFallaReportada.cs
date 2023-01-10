@@ -38,6 +38,10 @@ namespace DataModel
         private enumOpcionSiNo proDisolucion;
         public enumOpcionSiNo ProDisolucion { get => proDisolucion; set => SetProperty(ref proDisolucion, value); }
 
+        // Precipitación
+        private enumOpcionSiNo precipitacion;
+        public enumOpcionSiNo Precipitacion { get => precipitacion; set => SetProperty(ref precipitacion, value); }
+
         // Problemas de Desintegración
         private enumOpcionSiNo proDesintegracion;
         public enumOpcionSiNo ProDesintegracion { get => proDesintegracion; set => SetProperty(ref proDesintegracion, value); }

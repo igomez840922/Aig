@@ -48,6 +48,9 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
         bool OpenAddEditNotification { get; set; } = false;
         FMV_EsaviNotificacionTB Notificacion { get; set; } = null;
 
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
+
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
@@ -279,6 +282,55 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
                     }
             }
         }
+
+
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+
+                Data.Adjunto.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Data.Adjunto = Data.Adjunto != null ? Data.Adjunto : new AttachmentData();
+                Data.Adjunto.LAttachments = Data.Adjunto.LAttachments != null ? Data.Adjunto.LAttachments : new List<AttachmentTB>();
+
+                Data.Adjunto.LAttachments.Add(message.Attachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
+
     }
 
 }

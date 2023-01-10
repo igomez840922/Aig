@@ -18,16 +18,16 @@
                         <DataAnnotationsValidator />
                         <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
+                                <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["GeneralInfo"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#products" role="tab">@languageContainerService.Keys["Fallas Reportadas"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#products" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["Fallas Reportadas"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#otrasEspecInfo" role="tab">@languageContainerService.Keys["Acciones y Resultados"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#otrasEspecInfo" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["Acciones y Resultados"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#observaInfo" role="tab">@languageContainerService.Keys["Estatus"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#observaInfo" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["Estatus"]</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
@@ -139,6 +139,24 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Concentración"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText disabled="disabled" class="form-control" @bind-Value="Data.Concentracion" />
+                                                <ValidationMessage For=@(() => Data.Concentracion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Forma Farmaceutica"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText disabled="disabled" class="form-control" @bind-Value="Data.FormaFarmaceutica" />
+                                                <ValidationMessage For=@(() => Data.FormaFarmaceutica) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Fabricante"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -155,7 +173,7 @@
                                         <label>@languageContainerService.Keys["Lotes"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputTextArea rows="4" class="form-control" @bind-Value="Data.Lote" />
+                                                <InputText class="form-control" @bind-Value="Data.Lote" />
                                                 <ValidationMessage For=@(() => Data.Lote) />
                                             </div>
                                         </div>
@@ -164,7 +182,7 @@
                                         <label>@languageContainerService.Keys["Fecha Expiración"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputTextArea rows="4" class="form-control" @bind-Value="Data.FechaExp" />
+                                                <InputText class="form-control" @bind-Value="Data.FechaExp" />
                                                 <ValidationMessage For=@(() => Data.FechaExp) />
                                             </div>
                                         </div>
@@ -173,7 +191,7 @@
                                         <label>@languageContainerService.Keys["Reg. Sanitario"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText rows="4" class="form-control" @bind-Value="Data.RegSanitario" />
+                                                <InputText class="form-control" @bind-Value="Data.RegSanitario" />
                                                 <ValidationMessage For=@(() => Data.RegSanitario) />
                                             </div>
                                         </div>
@@ -344,6 +362,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Problemas de Desintegración"]</label>
                                         <div class="form-group">
@@ -358,6 +377,22 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Precipitación"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Data.FallaReportada.Precipitacion" class="form-control">
+                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                    {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Data.FallaReportada.Precipitacion) />
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Otros"]</label>
                                         <div class="form-group">
@@ -534,7 +569,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Data.FechaEntregaEva" TValue="DateTime?" @bind-Value="Data.FechaTramite" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaTramite) />
                                             </div>
                                         </div>
@@ -545,7 +580,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEvalua" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Data.FechaTramite" TValue="DateTime?" @bind-Value="Data.FechaEvalua" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.FechaEvalua) />
                                             </div>
                                         </div>
@@ -571,6 +606,13 @@
                                             <div class="form-line">
                                                 <InputTextArea rows="8" class="form-control" @bind-Value="Data.ResolEmitidas" />
                                                 <ValidationMessage For=@(() => Data.ResolEmitidas) />
+                                                @if (Data.OtrasEspecificaciones?.AccRegRecomendada != enumFMV_FfRecomendAccRegulat.NA && Data.OtrasEspecificaciones?.AccRegRecomendada != enumFMV_FfRecomendAccRegulat.NOREQ)
+                                                {
+                                                    if (string.IsNullOrEmpty(Data.ResolEmitidas))
+                                                    {
+                                                        <div class="validation-message">@languageContainerService.Keys["pendiente ingresar resolución emitida"]</div>
+                                                    }
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -637,6 +679,11 @@
 
                         <br>
                         <div class="modal-footer">
+
+                             <button type="submit" @onclick="(e)=>{Exit=true;}"
+                                                        class="btn btn-success waves-effect">
+                                                    @languageContainerService.Keys["SaveExit"]
+                                                </button>
 
                             <button type="submit"
                                     class="btn btn-info waves-effect">

@@ -65,6 +65,9 @@
                                                     </li>
                                                 }
 
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
+                                                </li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="generalInfo" role="tabpanel">
@@ -466,8 +469,8 @@
                                                                     <tr>
                                                                         <th>@languageContainerService.Keys["Fármaco"]</th>
                                                                         <th>@languageContainerService.Keys["RAM"]</th>
-                                                                        <th>@languageContainerService.Keys["Término MEDRA"]</th>
                                                                         <th>@languageContainerService.Keys["SOC"]</th>
+                                                                        <th>@languageContainerService.Keys["Término MEDRA"]</th>
                                                                         <th>@languageContainerService.Keys["Fecha RAM"]</th>
                                                                         <th>@languageContainerService.Keys["Descenlace"]</th>
                                                                         <th>@languageContainerService.Keys["Evo. sobre Dosis"]</th>
@@ -489,8 +492,8 @@
                                                                                      <tr>
                                                                                         <td scope="row">@(ram.Farmaco?.FarmacoSospechosoDci??"")</td>
                                                                                         <td>@ram.Ram</td>
-                                                                                        <td>@ram.TerWhoArt</td>
                                                                                         <td>@ram.Soc</td>
+                                                                                        <td>@ram.TerWhoArt</td>
                                                                                         <td>@(ram.FechaRam?.ToString("dd/MM/yyyy")??"")</td>
                                                                                         <td>@(DataModel.Helper.Helper.GetDescription(ram.Desenlace))</td>
                                                                                         <td>@(DataModel.Helper.Helper.GetDescription(ram.EvoDosis))</td>
@@ -537,14 +540,15 @@
                                                 </div>
                                                 <div class="tab-pane" id="evaluac" role="tabpanel">
                                                     <div class="row clearfix">
-                                                        <div class="col-6" style="text-align:left;">
+                                                        <h5>@languageContainerService.Keys["Evaluación de la Causalidad"]</h5>
+                                                        @*<div class="col-6" style="text-align:left;">
                                                             <h5>@languageContainerService.Keys["Evaluación de la Causalidad"]</h5>
                                                         </div>
                                                         <div class="col-6" style="text-align:right;">
                                                             <button type="button" @onclick="(e)=>{OpenFarmacoRamEval();}" class="btn btn-sm btn-outline-primary waves-effect">
                                                                 @languageContainerService.Keys["Add"]
                                                             </button>
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                     <!--begin::Section-->
                                                     <div class="kt-section">
@@ -813,6 +817,53 @@
                                                             </div>
                                                         </div>
 
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="tab-pane" id="attachments" role="tabpanel">
+                                                    <h5>@languageContainerService.Keys["Attachments"]</h5>
+                                                    <div class="row clearfix">
+                                                        <div class="col-9" style="text-align:left;">
+                                                        </div>
+                                                        <div class="col-3" style="text-align:right;">
+                                                            <button type="button" @onclick="(e)=>{OpenAttachment();}"
+                                                                    class="btn btn-sm btn-outline-primary waves-effect">
+                                                                @languageContainerService.Keys["Add"]
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <!--begin::Section-->
+                                                    <div class="kt-section">
+                                                        <div class="table-responsive">
+                                                            <table class="table rounded table-striped">
+                                                                <thead class=thead-light>
+                                                                    <tr>
+                                                                        <th>@languageContainerService.Keys["Description"]</th>
+                                                                        <th>@languageContainerService.Keys["File"]</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if (Data != null && Data.Adjunto != null)
+                                                                    {
+                                                                        @foreach (var dt in Data.Adjunto.LAttachments)
+                                                                        {
+                                                                            <tr>
+                                                                                <td scope="row">@dt.Description</td>
+                                                                                <td>
+                                                                                    <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                                                </td>
+                                                                                <td style="text-align:right">
+                                                                                    <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
 
                                                 </div>

@@ -54,8 +54,16 @@ namespace DataModel
         [StringLength(300)]
         public string NombreDci { get => nombreDci; set => SetProperty(ref nombreDci, value); }
 
+        private string concentracion;
+        [StringLength(250)]
+        public string Concentracion { get => concentracion; set => SetProperty(ref concentracion, value); }
+
+        private string formaFarmaceutica;
+        [StringLength(250)]
+        public string FormaFarmaceutica { get => formaFarmaceutica; set => SetProperty(ref formaFarmaceutica, value); }
+
         private string presentacion;
-        [StringLength(500)]
+        [StringLength(300)]
         public string Presentacion { get => presentacion; set => SetProperty(ref presentacion, value); }
         
         private string atc;
@@ -100,6 +108,7 @@ namespace DataModel
         [StringLength(250)]
         public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
 
+       
         // Tipo de notificador: Médico, Farmacéutico, Enfermera, Otro profesional de salud, Paciente, Insdustria Farmacéutica
         private enumFMV_RAMNotificationType tipoNotificador;
         public enumFMV_RAMNotificationType TipoNotificador { get => tipoNotificador; set => SetProperty(ref tipoNotificador, value); }

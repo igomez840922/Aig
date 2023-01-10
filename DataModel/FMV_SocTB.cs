@@ -16,14 +16,8 @@ namespace DataModel
 		public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
 
-        //private List<FMV_EsaviTB> lEsavi;
-        //public virtual List<FMV_EsaviTB> LEsavi { get => lEsavi; set => SetProperty(ref lEsavi, value); }
-
-        //private List<FMV_FfTB> lFf;
-        //public virtual List<FMV_FfTB> LFf { get => lFf; set => SetProperty(ref lFf, value); }
-
-        //private List<FMV_RamTB> lRam;
-        //public virtual List<FMV_RamTB> LRam { get => lRam; set => SetProperty(ref lRam, value); }
+        private List<FMV_TerMedraTB> lTerMedras;
+        public virtual List<FMV_TerMedraTB> LTerMedras { get => lTerMedras; set => SetProperty(ref lTerMedras, value); }
 
     }
 }

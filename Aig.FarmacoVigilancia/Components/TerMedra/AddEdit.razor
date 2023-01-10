@@ -1,0 +1,69 @@
+﻿@using DataModel.Helper;
+
+@if (Data != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["Término Medra"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Data" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+                        <h5>@languageContainerService.Keys["GeneralInfo"]</h5>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="password">@languageContainerService.Keys["SOC"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Data.SocId
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(LSoc) TextProperty="Nombre" ValueProperty="Id" />
+
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Nombre"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.Nombre" />
+                                        <ValidationMessage For=@(() => Data.Nombre) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       <br>
+                        <div class="modal-footer">
+
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop fade show"></div>
+}
+

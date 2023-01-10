@@ -1,6 +1,7 @@
 ﻿using DataModel.Helper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,8 +46,9 @@ namespace DataModel
         private enumFMV_FfRecomendAccRegulat accRegRecomendada;
         public enumFMV_FfRecomendAccRegulat AccRegRecomendada { get => accRegRecomendada; set => SetProperty(ref accRegRecomendada, value); }
 
-        private int grado;
-        public int Grado { get => grado; set => SetProperty(ref grado, value); }
+        private string grado;
+        [StringLength(250)]
+        public string Grado { get => grado; set => SetProperty(ref grado, value); }
 
     }
 }

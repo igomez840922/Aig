@@ -223,6 +223,11 @@ namespace Aig.FarmacoVigilancia.Services
             //}
 
             var result = DalService.Save(data);
+            if (result != null)
+            {                
+                DalService.DBContext.Entry(result).Property(b => b.Adjunto).IsModified = true;
+                DalService.DBContext.SaveChanges();
+            }
 
             return result;           
         }

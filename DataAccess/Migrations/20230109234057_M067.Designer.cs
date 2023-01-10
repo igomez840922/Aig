@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230109234057_M067")]
+    partial class M067
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2449,9 +2451,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("Adjunto")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Cedula")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -2697,10 +2696,6 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("Concentracion")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -2738,10 +2733,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("FechaTramite")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FormaFarmaceutica")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
@@ -2778,8 +2769,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Presentacion")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<long?>("ProvinciaId")
                         .HasColumnType("bigint");
@@ -3346,9 +3337,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("AccionesRegulatoria")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Adjunto")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Cedula")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
@@ -3589,9 +3577,6 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("Stemp")
                         .HasColumnType("int");
-
-                    b.Property<long?>("TerMedraId")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("TerWhoArt")
                         .HasColumnType("nvarchar(max)");

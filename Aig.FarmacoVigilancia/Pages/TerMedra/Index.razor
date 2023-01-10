@@ -1,9 +1,9 @@
-﻿@page "/configuracion/soc"
+﻿@page "/configuracion/termedra"
 @layout BackendLayout
 @attribute [Authorize]
 
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
-   
+
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 
         <div class="row">
@@ -12,7 +12,7 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                @languageContainerService.Keys["SOC"]
+                                @languageContainerService.Keys["Términos Medra"]
                             </h3>
                         </div>
                         <div class="kt-portlet__head-toolbar">
@@ -34,7 +34,7 @@
                                     <EditForm Model="@dataModel" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
                                         <DataAnnotationsValidator />
                                         <div class="form-group row">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <label>@languageContainerService.Keys["Search"]</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />
@@ -43,7 +43,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <label>@languageContainerService.Keys["SOC"]</label>
+                                                <div class="form-line">
 
+                                                    <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@dataModel.NParentId
+                                                                    AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                    Data=@(LSoc) TextProperty="Nombre" ValueProperty="Id" Change=@(args => {OnFilter();}) />
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </EditForm>
                                 </div>
@@ -57,6 +66,7 @@
                                                 <table class="table rounded table-striped">
                                                     <thead class=thead-light>
                                                         <tr>
+                                                            <th>@languageContainerService.Keys["SOC"]</th>
                                                             <th>@languageContainerService.Keys["Name"]</th>
                                                             <th></th>
                                                         </tr>
@@ -65,6 +75,7 @@
                                                         @foreach (var dt in dataModel.Ldata)
                                                         {
                                                             <tr>
+                                                                <td scope="row">@(dt.Soc?.Nombre??"")</td>
                                                                 <td scope="row">@dt.Nombre</td>
                                                                 <td style="text-align:right">
                                                                     <div class="btn-group">
@@ -119,7 +130,7 @@
 
 @if (OpenAddEditDialog)
 {
-    <Aig.FarmacoVigilancia.Components.SOC.AddEdit Data="@dataModel.Data"></Aig.FarmacoVigilancia.Components.SOC.AddEdit>
+    <Aig.FarmacoVigilancia.Components.TerMedra.AddEdit Data="@dataModel.Data"></Aig.FarmacoVigilancia.Components.TerMedra.AddEdit>
 
 }
 @if (DeleteDialog)

@@ -6,6 +6,7 @@ using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
+using Aig.FarmacoVigilancia.Pages.Note;
 
 namespace Aig.FarmacoVigilancia.Components.Ram2
 {
@@ -16,6 +17,8 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         IProfileService profileService { get; set; }
         [Inject]
         ISocService socService { get; set; }
+        [Inject]
+        ITerMedraService terMedraService { get; set; }
 
         [Parameter]
         public DataModel.FMV_RamFarmacoRamTB Data { get; set; }
@@ -24,6 +27,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         public List<DataModel.FMV_RamFarmacoTB> LFarmaco { get; set; }
 
         List<FMV_SocTB> lSoc { get; set; } = new List<FMV_SocTB>();
+        List<FMV_TerMedraTB> lTerMedra { get; set; } = new List<FMV_TerMedraTB>();
 
 
         protected async override Task OnInitializedAsync()
@@ -71,6 +75,8 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         {
             lSoc = lSoc != null && lSoc.Count > 0 ? lSoc : await socService.GetAll();
 
+            await OnSocChange(Data.SocId);
+
             await this.InvokeAsync(StateHasChanged);
         }
 
@@ -94,11 +100,25 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         protected async Task OnSocChange(long? Id)
         {
             var soc = lSoc.Where(x => x.Id == Id).FirstOrDefault();
-
             Data.Soc = soc?.Nombre ?? "";
+
+            lTerMedra = new List<FMV_TerMedraTB>();
+            if (Id != null)
+            {
+                lTerMedra = await terMedraService.FindAll(x => x.SocId == Id);
+            }
 
             //await FetchData();
         }
+        protected async Task OnTerMedraChange(long? Id)
+        {
+            var term = lTerMedra.Where(x => x.Id == Id).FirstOrDefault();
+
+            Data.TerWhoArt = term?.Nombre ?? "";
+
+            //await FetchData();
+        }
+
         void OnRAMDateChange(DateTime? value, string name, string format)
         {
             //UpdateGrado0();

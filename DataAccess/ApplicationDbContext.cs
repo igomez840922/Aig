@@ -1329,6 +1329,12 @@ namespace DataAccess
           .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<PersonalTrabajadorTB>()
+          .HasMany(e => e.LRams2)
+          .WithOne(e => e.Evaluador)
+          .HasForeignKey(e => e.EvaluadorId)
+          .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PersonalTrabajadorTB>()
          .HasMany(e => e.LFf)
          .WithOne(e => e.Evaluador)
          .HasForeignKey(e => e.EvaluadorId)
@@ -1618,6 +1624,28 @@ namespace DataAccess
              .Property(e => e.Concominantes)
              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamConcominantes>(x));
 
+            //JSON Serialization
+            modelBuilder.Entity<FMV_Ram2TB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+            
+            //////
+            ///
+            modelBuilder.Entity<FMV_SocTB>()
+      .HasMany(e => e.LTerMedras)
+      .WithOne(e => e.Soc)
+      .HasForeignKey(e => e.SocId)
+      .OnDelete(DeleteBehavior.Cascade);
+
+            ///////////////////////////////
+            ///
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_EsaviTB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+            
+            
             ///////////////////////////////
             ///
 
@@ -1673,6 +1701,7 @@ namespace DataAccess
         public virtual DbSet<FMV_Ram2TB> FMV_Ram2 { get; set; }
         public virtual DbSet<FMV_RamFarmacoTB> FMV_RamFarmaco { get; set; }
         public virtual DbSet<FMV_RamFarmacoRamTB> FMV_RamFarmacoRam { get; set; }
+        public virtual DbSet<FMV_TerMedraTB> FMV_TerMedra { get; set; }
 
 
 

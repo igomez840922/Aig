@@ -344,6 +344,7 @@ namespace Aig.FarmacoVigilancia.Services
                 DalService.DBContext.Entry(result).Property(b => b.ObservacionInfoNotifica).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.AccionesRegulatoria).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.Concominantes).IsModified = true;
+                DalService.DBContext.Entry(result).Property(b => b.Adjunto).IsModified = true;
                 DalService.DBContext.SaveChanges();
             }
 

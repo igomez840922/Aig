@@ -26,6 +26,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#evaCalidadInfo" role="tab">@languageContainerService.Keys["Datos del Medicamento"]</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="generalInfo" role="tabpanel">
@@ -621,6 +624,52 @@
                                     </div>
 
                                 </div>
+                            </div>
+                            <div class="tab-pane" id="attachments" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Attachments"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-9" style="text-align:left;">
+                                    </div>
+                                    <div class="col-3" style="text-align:right;">
+                                        <button type="button" @onclick="(e)=>{OpenAttachment();}"
+                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                            @languageContainerService.Keys["Add"]
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="kt-section">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Description"]</th>
+                                                    <th>@languageContainerService.Keys["File"]</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Data != null && Data.Adjunto != null)
+                                                {
+                                                    @foreach (var dt in Data.Adjunto.LAttachments)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.Description</td>
+                                                            <td>
+                                                                <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                            </td>
+                                                            <td style="text-align:right">
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
 
                             @*<div class="tab-pane" id="products" role="tabpanel">
