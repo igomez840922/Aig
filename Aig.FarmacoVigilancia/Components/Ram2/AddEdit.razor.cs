@@ -590,7 +590,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         //on close Farmaco MODAL 
         private void FarmacoConcominante_AddEditEventHandler(MessageArgs args)
         {
-            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.RamConcominante.AddEdit_Event>(Farmaco_AddEditEventHandlerHandler);
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.RamConcominante.AddEdit_Event>(FarmacoConcominante_AddEditEventHandler);
 
             var message = args.GetMessage<Aig.FarmacoVigilancia.Events.RamConcominante.AddEdit_Event>();
 

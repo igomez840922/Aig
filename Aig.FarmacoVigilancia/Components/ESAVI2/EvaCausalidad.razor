@@ -1,0 +1,158 @@
+﻿@using DataModel.Helper;
+
+
+<!-- Modal Creat/Edit -->
+@if (Data != null && Data.EsaviVacuna != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">
+                        @languageContainerService.Keys["Evaluación de la Causalidad"]
+                    </h5>
+                    <button type="button" class="close" @onclick="  (e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Data" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+
+                        <div class="row clearfix">
+                            <div class="col-sm-8">
+                                <label>@languageContainerService.Keys["Tipo de Vacuna"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText disabled="disabled" class="form-control" @bind-Value="Data.EsaviVacuna.TipoVacuna.Nombre" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Vacuna Comercial"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText disabled="disabled" class="form-control" @bind-Value="Data.EsaviVacuna.VacunaComercial" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <label>@languageContainerService.Keys["ESAVI"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText disabled="disabled" class="form-control" @bind-Value="Data.EsaviDescripcion" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Gravedad"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        @*<InputText class="form-control" @bind-Value="Data.Gravedad" @bind-value:event="oninput" @onkeyup="() => OnAtcChanged()"/>*@
+                                        <input type="text" class="form-control" @bind-value="@Data.Gravedad" @bind-value:event="oninput" @onkeyup="() => CheckOtrosCritSeleccion()">
+                                        <ValidationMessage For=@(() => Data.Gravedad) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="password">
+                                    @languageContainerService.Keys["Investigación y Detalles del Caso"]
+                                </label>
+                                <div class="form-group">
+                                    <InputSelect @bind-Value="Data.InvDetalleCaso" class="form-control" @onclick="(e)=>{CheckOtrosCritSeleccion();}">
+                                        @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                        {
+                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For=@(() => Data.InvDetalleCaso) />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="password">
+                                    @languageContainerService.Keys["Otros Criterios de Selección"]
+                                </label>
+                                <div class="form-group">
+                                    <InputSelect @bind-Value="Data.OtrosCriterios" class="form-control" @onclick="(e)=>{CheckOtrosCritSeleccion();}">
+                                        @foreach (enumFMV_EsaviOtroCriterio dt in Enum.GetValues(typeof(enumFMV_EsaviOtroCriterio)))
+                                        {
+                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For=@(() => Data.OtrosCriterios) />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Elegibilidad por Gravedad"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.ElegibilidadGravedad" />
+                                        <ValidationMessage For=@(() => Data.ElegibilidadGravedad) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Elegibilidad por Otro Criterio"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.ElegibilidadOtroCriterio" />
+                                        <ValidationMessage For=@(() => Data.ElegibilidadOtroCriterio) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Elegibe para Evaluación de Causalidad"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.ElegibleEvaluacionCausal" />
+                                        <ValidationMessage For=@(() => Data.ElegibleEvaluacionCausal) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="password">
+                                    @languageContainerService.Keys["Probabilidad de Asosiación Causal con la Inmunización"]
+                                </label>
+                                <div class="form-group">
+                                    <InputSelect @bind-Value="Data.ProbabilidadAsociacion" class="form-control">
+                                        @foreach (enumFMV_EsaviProbabilidadAsociacion dt in Enum.GetValues(typeof(enumFMV_EsaviProbabilidadAsociacion)))
+                                        {
+                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For=@(() => Data.ProbabilidadAsociacion) />
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="  (e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+}
+

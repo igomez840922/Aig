@@ -18,19 +18,19 @@
                         <DataAnnotationsValidator />
                         <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
+                                <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["GeneralInfo"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#otherSpecificationInfo" role="tab">@languageContainerService.Keys["Acciones y Resultados"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#patientInfo" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["Datos del Paciente"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#patientInfo" role="tab">@languageContainerService.Keys["Datos del Paciente"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#evaluacionCausalidad" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["Evaluación de Causalidad"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#evaluacionCausalidad" role="tab">@languageContainerService.Keys["Evaluación de Causalidad"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#otherSpecificationInfo" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["Acciones y Resultados"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#observaInfo" role="tab">@languageContainerService.Keys["Estatus"]</a>
+                                <a class="nav-link" data-toggle="tab" href="#observaInfo" role="tab" @onclick="(e)=>{UpdateGrado();}">@languageContainerService.Keys["Estatus"]</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
@@ -123,6 +123,25 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Concentración"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Data.Concentracion" />
+                                                <ValidationMessage For=@(() => Data.Concentracion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Forma Farmaceutica"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Data.FormaFarmaceutica" />
+                                                <ValidationMessage For=@(() => Data.FormaFarmaceutica) />
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["ATC"]</label>
                                         <div class="form-group">
@@ -163,7 +182,7 @@
                                         <label>@languageContainerService.Keys["Lotes"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputTextArea rows="4" class="form-control" @bind-Value="Data.Lote" />
+                                                <InputText class="form-control" @bind-Value="Data.Lote" />
                                                 <ValidationMessage For=@(() => Data.Lote) />
                                             </div>
                                         </div>
@@ -172,7 +191,7 @@
                                         <label>@languageContainerService.Keys["Fecha Expiración"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputTextArea rows="4" class="form-control" @bind-Value="Data.FechaExp" />
+                                                <InputText class="form-control" @bind-Value="Data.FechaExp" />
                                                 <ValidationMessage For=@(() => Data.FechaExp) />
                                             </div>
                                         </div>
@@ -379,7 +398,7 @@
                                         <label>@languageContainerService.Keys["Grado"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputNumber class="form-control" @bind-Value="Data.OtrasEspecificaciones.Grado" />
+                                                <InputText class="form-control" @bind-Value="Data.OtrasEspecificaciones.Grado" />
                                                 <ValidationMessage For=@(() => Data.OtrasEspecificaciones.Grado) />
                                             </div>
                                         </div>
@@ -446,7 +465,7 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.DatosPaciente.FechaTratInicial" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Data.FechaEntregaEva" TValue="DateTime?" @bind-Value="Data.DatosPaciente.FechaTratInicial" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Data.DatosPaciente.FechaTratInicial) />
                                             </div>
                                         </div>
@@ -489,7 +508,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    @*<div class="col-sm-12">
                                         <label>@languageContainerService.Keys["Concomitantes"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -497,8 +516,63 @@
                                                 <ValidationMessage For=@(() => Data.DatosPaciente.Concomitantes) />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
+                                <div class="row clearfix">
+                                    <div class="col-6" style="text-align:left;">
+                                        <label>@languageContainerService.Keys["Concomitantes"]</label>
+                                    </div>
+                                    <div class="col-6" style="text-align:right;">
+                                        <button type="button" @onclick="(e)=>{OpenConcominante();}" class="btn btn-sm btn-outline-primary waves-effect">
+                                            @languageContainerService.Keys["Add"]
+                                        </button>
+                                    </div>
+
+                                    <!--begin::Section-->
+                                     <div class="col-12">
+                                        <div class="kt-section">
+                                            <div class="table-responsive">
+                                                <table class="table rounded table-striped">
+                                                    <thead class=thead-light>
+                                                        <tr>
+                                                            <th>@languageContainerService.Keys["Medicamento"]</th>
+                                                            <th>@languageContainerService.Keys["Dosis, Frec., Vía Administ."]</th>
+                                                            <th>@languageContainerService.Keys["Fecha de Tratamineto"]</th>
+                                                            <th>@languageContainerService.Keys["Indicación"]</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (Data != null && Data.Concominantes != null && Data.Concominantes.LProductos != null)
+                                                        {
+                                                            @foreach (var dt in Data.Concominantes.LProductos)
+                                                            {
+                                                                <tr>
+                                                                    <td scope="row">@dt.Nombre</td>
+                                                                    <td>@dt.ViaAdministracion</td>
+                                                                    <td>@(dt.FechaTratamiento?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                    <td>@dt.Indicacion</td>
+                                                                    <td style="text-align:right">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                            <div class="dropdown-menu">
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OpenConcominante(dt)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => RemoveConcominante(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                     </div>
+                                    
+                                </div>
+                               
                             </div>
                             <div class="tab-pane" id="evaluacionCausalidad" role="tabpanel">
                                 <h5>@languageContainerService.Keys["Evaluación de Causalidad"]</h5>
@@ -709,6 +783,13 @@
                                             <div class="form-line">
                                                 <InputTextArea rows="8" class="form-control" @bind-Value="Data.ResolEmitidas" />
                                                 <ValidationMessage For=@(() => Data.ResolEmitidas) />
+                                                @if (Data.OtrasEspecificaciones?.AccRegRecomendada != enumFMV_FfRecomendAccRegulat.NA && Data.OtrasEspecificaciones?.AccRegRecomendada != enumFMV_FfRecomendAccRegulat.NOREQ)
+                                                {
+                                                    if (string.IsNullOrEmpty(Data.ResolEmitidas))
+                                                    {
+                                                        <div class="validation-message">@languageContainerService.Keys["pendiente ingresar resolución emitida"]</div>
+                                                    }
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -776,6 +857,11 @@
                         <br>
                         <div class="modal-footer">
 
+                             <button type="submit" @onclick="(e)=>{Exit=true;}"
+                                                        class="btn btn-success waves-effect">
+                                                    @languageContainerService.Keys["SaveExit"]
+                                                </button>
+
                             <button type="submit"
                                     class="btn btn-info waves-effect">
                                 @languageContainerService.Keys["Save"]
@@ -797,6 +883,13 @@
         </div>
     </div>
 
+    
+@if (OpenAddEditConcominante)
+{
+    <Aig.FarmacoVigilancia.Components.Ram2.Concominante Data="@FarmacoConcominante"></Aig.FarmacoVigilancia.Components.Ram2.Concominante>
 }
 
-<div class="modal-backdrop fade show"></div>
+
+    <div class="modal-backdrop fade show"></div>
+}
+

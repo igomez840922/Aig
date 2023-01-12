@@ -1,0 +1,153 @@
+﻿@using DataModel.Helper;
+
+
+<!-- Modal Creat/Edit -->
+@if (Data != null)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["Nueva"]) @languageContainerService.Keys["Vacuna Sospechosa"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Data" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Vacuna Sospechosa (Comercial)"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.VacunaComercial" />
+                                        <ValidationMessage For=@(() => Data.VacunaComercial) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <label>@languageContainerService.Keys["Tipo de Vacuna"]</label>
+                                <div class="form-group">                                   
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Data.TipoVacunaId
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@ltipoVacuna TextProperty="Nombre" ValueProperty="Id"
+                                                        Change=@(args => {OnTipoVacunaChange((args!=null?(long)args:null));}) />
+                                        <ValidationMessage For=@(() => Data.TipoVacunaId) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Fabricante"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Data.LaboratorioId
+                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@lLaboratorios TextProperty="Nombre" ValueProperty="Id"
+                                                        Change=@(args => {OnLaboratorioChange((args!=null?(long)args:null));}) />
+                                        <ValidationMessage For=@(() => Data.LaboratorioId) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Lote"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.Lote" />
+                                        <ValidationMessage For=@(() => Data.Lote) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>
+                                    @languageContainerService.Keys["Expira"]
+                                </label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaExp" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                        <ValidationMessage For=@(() => Data.FechaExp) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Reg. Sanitario"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.RegSanitario" />
+                                        <ValidationMessage For=@(() => Data.RegSanitario) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>
+                                    @languageContainerService.Keys["Fecha de Vacunación"]
+                                </label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaVacunacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                        <ValidationMessage For=@(() => Data.FechaVacunacion) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Indicaciones"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputTextArea rows="6" class="form-control" @bind-Value="Data.Indicaciones" />
+                                        <ValidationMessage For=@(() => Data.Indicaciones) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Dosis y Via de Administración"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputTextArea rows="6" class="form-control" @bind-Value="Data.DosisViaAdmin" />
+                                        <ValidationMessage For=@(() => Data.DosisViaAdmin) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Dosis en que se presenta el ESAVI"]</label>
+                                <div class="form-group">
+                                    <InputSelect @bind-Value="Data.DosisPresenta" class="form-control">
+                                        @foreach (enumFMV_DosisNumero dt in Enum.GetValues(typeof(enumFMV_DosisNumero)))
+                                        {
+                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For=@(() => Data.DosisPresenta) />                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+}
+

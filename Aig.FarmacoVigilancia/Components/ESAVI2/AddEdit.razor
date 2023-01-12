@@ -34,36 +34,27 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
                                                 </li>
-                                                @if (Data.RamType != enumFMV_RAMType.NoRam)
-                                                {
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#patient" role="tab">@languageContainerService.Keys["Paciente"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#farmacos" role="tab">@languageContainerService.Keys["Fármacos Sospechosos"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#concominantes" role="tab">@languageContainerService.Keys["Fármacos Concomitantes"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#rams" role="tab">@languageContainerService.Keys["Reacciones Adversas a Medicamentos"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#labs" role="tab">@languageContainerService.Keys["Datos de Laboratorio"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#evaluac" role="tab">@languageContainerService.Keys["Evaluación de la Causalidad"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#obsInfoNotif" role="tab">@languageContainerService.Keys["Observación sobre Información de la Notificación"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#accionRegulat" role="tab">@languageContainerService.Keys["Acciones Regulatorias"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Estatus"]</a>
-                                                    </li>
-                                                }
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#patient" role="tab">@languageContainerService.Keys["Paciente"]</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#farmacos" role="tab">@languageContainerService.Keys["Vacunas Sospechosas"]</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#concominantes" role="tab">@languageContainerService.Keys["Fármacos Concomitantes"]</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#rams" role="tab">@languageContainerService.Keys["ESAVI"]</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#labs" role="tab">@languageContainerService.Keys["Datos de Laboratorio"]</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#evaluac" role="tab">@languageContainerService.Keys["Evaluación de la Causalidad"]</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Estatus"]</a>
+                                                </li>
 
                                                 <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
@@ -73,9 +64,60 @@
                                                 <div class="tab-pane active" id="generalInfo" role="tabpanel">
                                                     <h5>@languageContainerService.Keys["GeneralInfo"]</h5>
                                                     <div class="row clearfix">
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Fecha de Recibido"]</label>
+                                                        <div class="col-sm-4">
+                                                            <label for="password">
+                                                                @languageContainerService.Keys["Origen de la Notificación"]
+                                                            </label>
+                                                            <div class="form-group">
+                                                                <InputSelect @bind-Value="Data.OrigenNotificacion" class="form-control">
+                                                                    @foreach (enumFMV_RAMOrigenType dt in Enum.GetValues(typeof(enumFMV_RAMOrigenType)))
+                                                                    {
+                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                    }
+                                                                </InputSelect>
+                                                                <ValidationMessage For=@(() => Data.OrigenNotificacion) />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>@languageContainerService.Keys["Código de Notifacedra"]</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <InputText class="form-control" @bind-Value="Data.CodigoNotiFacedra" />
+                                                                    <ValidationMessage For=@(() => Data.CodigoNotiFacedra) />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>@languageContainerService.Keys["ID de Facedra"]</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <InputText class="form-control" @bind-Value="Data.IdFacedra" />
+                                                                    <ValidationMessage For=@(() => Data.IdFacedra) />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>@languageContainerService.Keys["Código Externo"]</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <InputText class="form-control" @bind-Value="Data.CodExt" />
+                                                                    <ValidationMessage For=@(() => Data.CodExt) />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>@languageContainerService.Keys["Código del CNFV"]</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <InputText class="form-control" @bind-Value="Data.CodCNFV" />
+                                                                    <ValidationMessage For=@(() => Data.CodCNFV) />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>
+                                                                @languageContainerService.Keys["Fecha de Recibido (CNFV)"]
+                                                            </label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
                                                                     <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaRecibidoCNFV" ShowTime="false" DateFormat="dd/MM/yyyy" />
@@ -83,9 +125,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Fecha de entrega"]</label>
+                                                        <div class="col-sm-4">
+                                                            <label>
+                                                                @languageContainerService.Keys["Fecha Entrega a Evaluador"]
+                                                            </label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
                                                                     <RadzenDatePicker Max="DateTime.Today" Min="Data.FechaRecibidoCNFV" TValue="DateTime?" @bind-Value="Data.FechaEntregaEva" ShowTime="false" DateFormat="dd/MM/yyyy" />
@@ -93,8 +136,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-4">
                                                             <label for="password">@languageContainerService.Keys["Evaluator"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
@@ -108,89 +150,11 @@
                                                             </div>
                                                         </div>
 
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["¿Hay RAM?"]</label>
-
-                                                            <div class="form-group">
-                                                                <select class="form-control" value="@Data.RamType" @onchange="OnRamTypeChange">
-                                                                    @foreach (enumFMV_RAMType dt in Enum.GetValues(typeof(enumFMV_RAMType)))
-                                                                    {
-                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                                    }
-                                                                </select>
-                                                                <ValidationMessage For=@(() => Data.RamType) />
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Origen de Notificación"]</label>
-
-                                                            <div class="form-group">
-                                                                <InputSelect @bind-Value="Data.RamOrigenType" class="form-control">
-                                                                    @foreach (enumFMV_RAMOrigenType dt in Enum.GetValues(typeof(enumFMV_RAMOrigenType)))
-                                                                    {
-                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                                    }
-                                                                </InputSelect>
-                                                                <ValidationMessage For=@(() => Data.RamOrigenType) />
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Código Noti-Facedra"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.CodigoNotiFacedra" />
-                                                                    <ValidationMessage For=@(() => Data.CodigoNotiFacedra) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["ID Facedra"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.IdFacedra" />
-                                                                    <ValidationMessage For=@(() => Data.IdFacedra) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Código del CNFV"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.CodigoCNFV" />
-                                                                    <ValidationMessage For=@(() => Data.CodigoCNFV) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Código Externo"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.CodExterno" />
-                                                                    <ValidationMessage For=@(() => Data.CodExterno) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Grado"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText disabled="disabled" class="form-control" @bind-Value="Data.Grado" />
-                                                                    <ValidationMessage For=@(() => Data.Grado) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
 
                                                     <h5>@languageContainerService.Keys["Procedencia de la Notificación"]</h5>
                                                     <div class="row clearfix">
+
                                                         <div class="col-sm-4">
                                                             <label for="password">
                                                                 @languageContainerService.Keys["Tipo de Notificador"]
@@ -205,25 +169,21 @@
                                                                 <ValidationMessage For=@(() => Data.TipoNotificacion) />
                                                             </div>
                                                         </div>
-                                                        @if (Data.TipoNotificacion == enumFMV_RAMNotificationType.OPS)
-                                                        {
-                                                            <div class="col-sm-4">
-                                                                <label>@languageContainerService.Keys["Especifique"]</label>
-                                                                <div class="form-group">
-                                                                    <div class="form-line">
-                                                                        <InputText class="form-control" @bind-Value="Data.TipoNotificacionDesc" />
-                                                                        <ValidationMessage For=@(() => Data.TipoNotificacionDesc) />
-                                                                    </div>
+                                                        <div class="col-sm-4">
+                                                            <label>@languageContainerService.Keys["Notificador"]</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <InputText class="form-control" @bind-Value="Data.Notificador" />
+                                                                    <ValidationMessage For=@(() => Data.Notificador) />
                                                                 </div>
                                                             </div>
-                                                        }
-
+                                                        </div>
                                                         <div class="col-sm-4">
                                                             <label for="password">
                                                                 @languageContainerService.Keys["Tipo de Organización"]
                                                             </label>
                                                             <div class="form-group">
-                                                                <div class="form-line">
+                                                                <div class="form-line">                                                               
                                                                     <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Data.TipoInstitucionId
                                                                                     AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
                                                                                     Data=@lTipoInstitucion TextProperty="Nombre" ValueProperty="Id"
@@ -259,8 +219,6 @@
                                                             </div>
                                                         </div>
 
-
-
                                                     </div>
 
                                                 </div>
@@ -269,12 +227,21 @@
                                                     <h5>@languageContainerService.Keys["Patient"]</h5>
                                                     <div class="row clearfix">
 
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-8">
+                                                            <label>@languageContainerService.Keys["Nombre Completo de la Persona"]</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <InputText class="form-control" @bind-Value="Data.NombreCompletoPersona" />
+                                                                    <ValidationMessage For=@(() => Data.NombreCompletoPersona) />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
                                                             <label>@languageContainerService.Keys["Iniciales de Paciente"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.InicialesPaciente" />
-                                                                    <ValidationMessage For=@(() => Data.InicialesPaciente) />
+                                                                    <InputText class="form-control" @bind-Value="Data.InicialesPersona" />
+                                                                    <ValidationMessage For=@(() => Data.InicialesPersona) />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -326,8 +293,18 @@
                                                             <label>@languageContainerService.Keys["Historia Clínica"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                                    <InputTextArea rows="10" id="active_principles" class="form-control" @bind-Value="Data.HistClinica" />
-                                                                    <ValidationMessage For=@(() => Data.HistClinica) />
+                                                                    <InputTextArea rows="8" class="form-control" @bind-Value="Data.HistoriaClinica" />
+                                                                    <ValidationMessage For=@(() => Data.HistoriaClinica) />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12">
+                                                            <label>@languageContainerService.Keys["Otros Diagnosticos"]</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <InputTextArea rows="8" class="form-control" @bind-Value="Data.OtrosDiagnosticos" />
+                                                                    <ValidationMessage For=@(() => Data.OtrosDiagnosticos) />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -338,7 +315,7 @@
 
                                                     <div class="row clearfix">
                                                          <div class="col-6" style="text-align:left;">
-                                                            <h5>@languageContainerService.Keys["Fármacos Sospechosos"]</h5>                                                    
+                                                            <h5>@languageContainerService.Keys["Vacunas Sospechosas"]</h5>
                                                         </div>
                                                         <div class="col-6" style="text-align:right;">
                                                             <button type="button" @onclick="(e)=>{OpenFarmaco();}" class="btn btn-sm btn-outline-primary waves-effect">
@@ -353,32 +330,28 @@
                                                                 <thead class=thead-light>
                                                                     <tr>
                                                                         <th>@languageContainerService.Keys["Nombre Comercial"]</th>
-                                                                        <th>@languageContainerService.Keys["DCI"]</th>
-                                                                        <th>@languageContainerService.Keys["ATC"]</th>
-                                                                        <th>@languageContainerService.Keys["Sub-Grupo Terapéutico"]</th>
-                                                                        <th>@languageContainerService.Keys["Dosis, Frec., Vía Administ."]</th>
-                                                                        <th>@languageContainerService.Keys["Indicación"]</th>
-                                                                        <th>@languageContainerService.Keys["Cond. Dosis"]</th>
-                                                                        <th>@languageContainerService.Keys["Cond. Terapia"]</th>
-                                                                        <th>@languageContainerService.Keys["Reexposición"]</th>
+                                                                        <th>@languageContainerService.Keys["Tipo de Vacuna"]</th>
+                                                                        <th>@languageContainerService.Keys["Fabricante"]</th>
+                                                                        <th>@languageContainerService.Keys["Lote"]</th>
+                                                                        <th>@languageContainerService.Keys["Fecha Exp."]</th>
+                                                                        <th>@languageContainerService.Keys["Reg. Sanitario"]</th>
+                                                                        <th>@languageContainerService.Keys["Fecha Vacunación"]</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @if (Data != null && Data.LFarmacos != null)
+                                                                    @if (Data != null && Data.LVacunas?.Count>0)
                                                                     {
-                                                                        @foreach (var dt in Data.LFarmacos)
+                                                                        @foreach (var dt in Data.LVacunas)
                                                                         {
                                                                             <tr>
-                                                                                <td scope="row">@dt.FarmacoSospechosoComercial</td>
-                                                                                <td>@dt.FarmacoSospechosoDci</td>
-                                                                                <td>@dt.Atc</td>
-                                                                                <td>@dt.SubGrupoTerapeutico</td>
-                                                                                <td>@dt.ViaAdministracion</td>
-                                                                                <td>@dt.Indicacion</td>
-                                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.ConductaDosis))</td>
-                                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.ConductaTerapia))</td>
-                                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.Reexposicion))</td>
+                                                                                <td scope="row">@dt.VacunaComercial</td>
+                                                                                <td>@(dt.TipoVacuna?.Nombre??"")</td>
+                                                                                <td>@(dt.Laboratorio?.Nombre??"")</td>
+                                                                                <td>@dt.Lote</td>
+                                                                                <td>@(dt.FechaExp?.ToString("dd/MM/yyyy"))</td>
+                                                                                <td>@dt.RegSanitario</td>
+                                                                                <td>@(dt.FechaVacunacion?.ToString("dd/MM/yyyy"))</td>
                                                                                 <td style="text-align:right">
                                                                                     <div class="btn-group">
                                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -453,7 +426,7 @@
                                                 <div class="tab-pane" id="rams" role="tabpanel">
                                                     <div class="row clearfix">
                                                         <div class="col-6" style="text-align:left;">
-                                                        <h5>@languageContainerService.Keys["Reacciones Adversas a Medicamentos"]</h5>
+                                                            <h5>@languageContainerService.Keys["ESAVI"]</h5>
                                                         </div>
                                                         <div class="col-6" style="text-align:right;">
                                                             <button type="button" @onclick="(e)=>{OpenFarmacoRam();}" class="btn btn-sm btn-outline-primary waves-effect">
@@ -467,39 +440,40 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
-                                                                        <th>@languageContainerService.Keys["Fármaco"]</th>
-                                                                        <th>@languageContainerService.Keys["RAM"]</th>
+                                                                        <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
+                                                                        <th>@languageContainerService.Keys["ESAVI"]</th>
+                                                                        <th>@languageContainerService.Keys["Hay ESAVI?"]</th>
+                                                                        <th>@languageContainerService.Keys["Fecha de ESAVI"]</th>
+                                                                        <th>@languageContainerService.Keys["Descenlace"]</th>
                                                                         <th>@languageContainerService.Keys["SOC"]</th>
                                                                         <th>@languageContainerService.Keys["Término MEDRA"]</th>
-                                                                        <th>@languageContainerService.Keys["Fecha RAM"]</th>
-                                                                        <th>@languageContainerService.Keys["Descenlace"]</th>
-                                                                        <th>@languageContainerService.Keys["Evo. sobre Dosis"]</th>
-                                                                        <th>@languageContainerService.Keys["Evo. sobre Terapia"]</th>
-                                                                        <th>@languageContainerService.Keys["Consec. Reexposición"]</th>
-                                                                        <th>@languageContainerService.Keys["RAM con una Dosis"]</th>
+                                                                        <th>@languageContainerService.Keys["Intensidad de la ESAVI"]</th>
+                                                                        <th>@languageContainerService.Keys["Gravedad"]</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @if (Data != null && Data.LFarmacos != null)
+                                                                    @if (Data != null && Data.LVacunas?.Count > 0)
                                                                     {
-                                                                        @foreach (var dt in Data.LFarmacos)
+                                                                        @foreach (var dt in Data.LVacunas)
                                                                         {
-                                                                            @if (dt.LRams != null)
+                                                                            @if (dt.LEsavis?.Count>0)
                                                                             {
-                                                                                @foreach (var ram in dt.LRams)
+                                                                                @foreach (var ram in dt.LEsavis)
                                                                                 {
                                                                                      <tr>
-                                                                                        <td scope="row">@(ram.Farmaco?.FarmacoSospechosoDci??"")</td>
-                                                                                        <td>@ram.Ram</td>
+                                                                                        <td scope="row">
+                                                                                            @(ram.EsaviVacuna?.VacunaComercial??"")<br/>
+                                                                                            @(ram.EsaviVacuna?.TipoVacuna?.Nombre?? "")
+                                                                                        </td>
+                                                                                        <td>@ram.EsaviDescripcion</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.HayEsavi))</td>
+                                                                                        <td>@(ram.FechaEsavi?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.Desenlace))</td>
                                                                                         <td>@ram.Soc</td>
                                                                                         <td>@ram.TerWhoArt</td>
-                                                                                        <td>@(ram.FechaRam?.ToString("dd/MM/yyyy")??"")</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.Desenlace))</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.EvoDosis))</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.EvoTerapia))</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.ConReexposicion))</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.RamUnaDosis))</td>
+                                                                                        <td>@(ram.IntensidadEsavi?.Nombre??"")</td>
+                                                                                        <td>@ram.Gravedad</td>
                                                                                         <td style="text-align:right">
                                                                                             <div class="btn-group">
                                                                                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -510,7 +484,6 @@
                                                                                             </div>
                                                                                         </td>
                                                                                     </tr>
-
                                                                                 }
                                                                             } 
                                                                         }
@@ -556,61 +529,40 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
-                                                                        <th>@languageContainerService.Keys["Fármaco"]</th>
-                                                                        <th>@languageContainerService.Keys["RAM"]</th>
-                                                                        <th>@languageContainerService.Keys["Sec. Temporal"]</th>
-                                                                        <th>@languageContainerService.Keys["STEMP"]</th>
-                                                                        <th>@languageContainerService.Keys["Conoc. Previo"]</th>
-                                                                        <th>@languageContainerService.Keys["CPREV"]</th>
-                                                                        <th>@languageContainerService.Keys["Efecto de Retirada"]</th>
-                                                                        <th>@languageContainerService.Keys["RETI"]</th>
-                                                                        <th>@languageContainerService.Keys["Efecto de Reexp."]</th>
-                                                                        <th>@languageContainerService.Keys["REEX"]</th>
-                                                                        <th>@languageContainerService.Keys["Causas Alternativas"]</th>
-                                                                        <th>@languageContainerService.Keys["ALTER"]</th>
-                                                                        <th>@languageContainerService.Keys["Fact. Contribuyentes"]</th>
-                                                                        <th>@languageContainerService.Keys["FACON"]</th>
-                                                                        <th>@languageContainerService.Keys["Expl. Complementarias"]</th>
-                                                                        <th>@languageContainerService.Keys["XPLC"]</th>
-                                                                        <th>@languageContainerService.Keys["Puntuación"]</th>
-                                                                        <th>@languageContainerService.Keys["Probabilidad"]</th>
-                                                                        <th>@languageContainerService.Keys["Intes. de la RAM"]</th>
+                                                                        <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
+                                                                        <th>@languageContainerService.Keys["ESAVI"]</th>
                                                                         <th>@languageContainerService.Keys["Gravedad"]</th>
-                                                                        <th>@languageContainerService.Keys["Referencia"]</th>
+                                                                        <th>@languageContainerService.Keys["Inves. y Detalles del Caso"]</th>
+                                                                        <th>@languageContainerService.Keys["Otros Criterios de Selec."]</th>
+                                                                        <th>@languageContainerService.Keys["Elegibilidad por Gravedad"]</th>
+                                                                        <th>@languageContainerService.Keys["Elegibilidad por Otro Criterio"]</th>
+                                                                        <th>@languageContainerService.Keys["Elegibe para Eval. de Causalidad"]</th>
+                                                                        <th>@languageContainerService.Keys["Prob. de Asosia. Causal con la Inmunización"]</th>
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @if (Data != null && Data.LFarmacos != null)
+                                                                    @if (Data != null && Data.LVacunas?.Count > 0)
                                                                     {
-                                                                        @foreach (var dt in Data.LFarmacos)
+                                                                        @foreach (var dt in Data.LVacunas)
                                                                         {
-                                                                            @if (dt.LRams != null)
+                                                                            @if (dt.LEsavis?.Count>0)
                                                                             {
-                                                                                @foreach (var ram in dt.LRams)
+                                                                                @foreach (var ram in dt.LEsavis)
                                                                                 {
                                                                                     <tr>
-                                                                                        <td scope="row">@(ram.Farmaco?.FarmacoSospechosoDci ?? "")</td>
-                                                                                        <td>@ram.Ram</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.SecTemporal))</td>
-                                                                                        <td>@ram.Stemp</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.ConPrevio))</td>
-                                                                                        <td>@ram.Cprev</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.EfecRetirada))</td>
-                                                                                        <td>@ram.Reti</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.EfecReexposicion))</td>
-                                                                                        <td>@ram.Reex</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.CausasAlter))</td>
-                                                                                        <td>@ram.Alter</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.FactContribuyentes))</td>
-                                                                                        <td>@ram.Facon</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.ExpComplementarias))</td>
-                                                                                        <td>@ram.Xplc</td>
-                                                                                        <td>@ram.Puntuacion</td>
-                                                                                        <td>@ram.Probabilidad</td>
-                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.IntRam))</td>
+                                                                                        <td scope="row">
+                                                                                            @(ram.EsaviVacuna?.VacunaComercial ?? "")<br />
+                                                                                            @(ram.EsaviVacuna?.TipoVacuna?.Nombre ?? "")
+                                                                                        </td>
+                                                                                        <td>@ram.EsaviDescripcion</td>
                                                                                         <td>@ram.Gravedad</td>
-                                                                                        <td>@ram.Referencia</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.InvDetalleCaso))</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.OtrosCriterios))</td>
+                                                                                        <td>@ram.ElegibilidadGravedad</td>
+                                                                                        <td>@ram.ElegibilidadOtroCriterio</td>
+                                                                                        <td>@ram.ElegibleEvaluacionCausal</td>
+                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(ram.ProbabilidadAsociacion))</td>
                                                                                         <td style="text-align:right">
                                                                                             <div class="btn-group">
                                                                                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -631,181 +583,26 @@
                                                     </div>
 
                                                 </div>
-
-                                                <div class="tab-pane" id="obsInfoNotif" role="tabpanel">
-                                                    <h5>@languageContainerService.Keys["Observación sobre Información de la Notificación"]</h5>
-
-                                                    <div class="row clearfix">
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Incongruencia Conducta_No Disminuyó Dosis /Evolución"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo" />
-                                                                    <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Incongruencia Conducta_Mantuvo la Terapia/Evolución"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo" />
-                                                                    <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Incongruencia Conducta_Suspendió la terapia/ REEX"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex" />
-                                                                    <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Incongruencia Conducta_Mantuvo la terapia/ REEX"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex" />
-                                                                    <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Incongruencia Reexposición/Consecuencia de REEX"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText disabled="disabled" class="form-control" @bind-Value="Data.ObservacionInfoNotifica.IncongruenciaConReex" />
-                                                                    <ValidationMessage For=@(() => Data.ObservacionInfoNotifica.IncongruenciaConReex) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="tab-pane" id="accionRegulat" role="tabpanel">
-                                                    <h5>@languageContainerService.Keys["Acciones Regulatorias"]</h5>
-                                                    <div class="row clearfix">
-
-                                                        <div class="col-sm-4">
-                                                            <label>@languageContainerService.Keys["Recomendaciones a Profesionales y Pacientes"]</label>
-                                                            <div class="form-group">
-                                                                <InputSelect @bind-Value="Data.AccionesRegulatoria.RecomendacionProPac" class="form-control">
-                                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
-                                                                    {
-                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                                    }
-                                                                </InputSelect>
-                                                                <ValidationMessage For=@(() => Data.AccionesRegulatoria.RecomendacionProPac) />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Actualización de monografía e inserto"]</label>
-                                                            <div class="form-group">
-                                                                <InputSelect @bind-Value="Data.AccionesRegulatoria.ActMonografia" class="form-control">
-                                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
-                                                                    {
-                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                                    }
-                                                                </InputSelect>
-                                                                <ValidationMessage For=@(() => Data.AccionesRegulatoria.ActMonografia) />
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-2">
-                                                            <label>@languageContainerService.Keys["Consentimiento Informado"]</label>
-                                                            <div class="form-group">
-                                                                <InputSelect @bind-Value="Data.AccionesRegulatoria.ConsInformado" class="form-control">
-                                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
-                                                                    {
-                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                                    }
-                                                                </InputSelect>
-                                                                <ValidationMessage For=@(() => Data.AccionesRegulatoria.ConsInformado) />
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Suspensión y retiro de lote(s)"]</label>
-                                                            <div class="form-group">
-                                                                <InputSelect @bind-Value="Data.AccionesRegulatoria.SuspRetiroLote" class="form-control">
-                                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
-                                                                    {
-                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                                    }
-                                                                </InputSelect>
-                                                                <ValidationMessage For=@(() => Data.AccionesRegulatoria.SuspRetiroLote) />
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="row clearfix">
-
-                                                        <div class="col-sm-4">
-                                                            <label>@languageContainerService.Keys["Registro Sanitario (Suspensión/Cancelación)"]</label>
-                                                            <div class="form-group">
-                                                                <InputSelect @bind-Value="Data.AccionesRegulatoria.RegSanSuspencionCancelacion" class="form-control">
-                                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
-                                                                    {
-                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
-                                                                    }
-                                                                </InputSelect>
-                                                                <ValidationMessage For=@(() => Data.AccionesRegulatoria.RegSanSuspencionCancelacion) />
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Otras"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.AccionesRegulatoria.Otras" />
-                                                                    <ValidationMessage For=@(() => Data.AccionesRegulatoria.Otras) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <label>@languageContainerService.Keys["Observaciones"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputTextArea rows="8" id="active_principles" class="form-control" @bind-Value="Data.AccionesRegulatoria.Observaciones" />
-                                                                    <ValidationMessage For=@(() => Data.AccionesRegulatoria.Observaciones) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
                                                 <div class="tab-pane" id="procNotifica" role="tabpanel">
                                                     <h5>@languageContainerService.Keys["Estatus"]</h5>
 
                                                     <div class="row clearfix">
 
                                                         <div class="col-sm-4">
-                                                            <label>@languageContainerService.Keys["Fecha de Evaluación"]</label>
+                                                            <label>
+                                                                @languageContainerService.Keys["Fecha de Evaluación"]
+                                                            </label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEvaluacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
-                                                                    <ValidationMessage For=@(() => Data.FechaEvaluacion) />
+                                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEvalua" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                                    <ValidationMessage For=@(() => Data.FechaEvalua) />
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-sm-4">
-                                                            <label>@languageContainerService.Keys["Estado"]</label>
+                                                            <label for="password">
+                                                                @languageContainerService.Keys["Estatus"]
+                                                            </label>
                                                             <div class="form-group">
                                                                 <InputSelect @bind-Value="Data.Estatus" class="form-control">
                                                                     @foreach (enumFMV_RAMStatus dt in Enum.GetValues(typeof(enumFMV_RAMStatus)))
@@ -816,9 +613,16 @@
                                                                 <ValidationMessage For=@(() => Data.Estatus) />
                                                             </div>
                                                         </div>
-
+                                                        <div class="col-sm-12">
+                                                            <label>@languageContainerService.Keys["Observaciones"]</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <InputTextArea rows="8" class="form-control" @bind-Value="Data.Observaciones" />
+                                                                    <ValidationMessage For=@(() => Data.Observaciones) />
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div class="tab-pane" id="attachments" role="tabpanel">
@@ -905,19 +709,19 @@
 
 @if (OpenAddEditFarmaco)
 {
-    <Farmaco Data="@Farmaco"></Farmaco>
+    <Vacuna Data="@Vacuna"></Vacuna>
 }
-@if (OpenAddEditFarmacoRam && Data?.LFarmacos?.Count > 0)
+@if (OpenAddEditFarmacoRam && Data?.LVacunas?.Count > 0)
 {
-    <Ram Data="@FarmacoRam" LFarmaco="@Data.LFarmacos"></Ram>
+    <Esavi Data="@EsaviVacunaEsavi" LVacunas="@Data.LVacunas"></Esavi>
 }
-@if (OpenAddEditFarmacoRamEval && FarmacoRam!=null)
+@if (OpenAddEditFarmacoRamEval && EsaviVacunaEsavi != null)
 {
-    <EvaCausalidad Data="@FarmacoRam"></EvaCausalidad>
+    <EvaCausalidad Data="@EsaviVacunaEsavi"></EvaCausalidad>
 }
 @if (OpenAddEditConcominante)
 {
-    <Concominante Data="@FarmacoConcominante"></Concominante>
+    <Aig.FarmacoVigilancia.Components.Ram2.Concominante Data="@FarmacoConcominante"></Aig.FarmacoVigilancia.Components.Ram2.Concominante>
 }
 @if (openAttachment)
 {

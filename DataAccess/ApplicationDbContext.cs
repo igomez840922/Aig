@@ -1504,6 +1504,10 @@ namespace DataAccess
               .Property(e => e.EvaluacionCausalidad)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtEvaluacionCausalidad>(x));
 
+            modelBuilder.Entity<FMV_FtTB>()
+             .Property(e => e.Concominantes)
+             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamConcominantes>(x));
+
             ///////////////////////////////////////////
             ///
 
@@ -1644,8 +1648,33 @@ namespace DataAccess
             modelBuilder.Entity<FMV_EsaviTB>()
               .Property(e => e.Adjunto)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
-            
-            
+
+            ///////////////////////////////
+            ///
+
+            modelBuilder.Entity<FMV_Esavi2TB>()
+      .HasMany(e => e.LVacunas)
+      .WithOne(e => e.Esavi)
+      .HasForeignKey(e => e.EsaviId)
+      .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FMV_EsaviVacunaTB>()
+     .HasMany(e => e.LEsavis)
+     .WithOne(e => e.EsaviVacuna)
+     .HasForeignKey(e => e.EsaviVacunaId)
+     .OnDelete(DeleteBehavior.Cascade);
+                       
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_Esavi2TB>()
+             .Property(e => e.Concominantes)
+             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_RamConcominantes>(x));
+
+            modelBuilder.Entity<FMV_Esavi2TB>()
+              .Property(e => e.Adjunto)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
+
             ///////////////////////////////
             ///
 
@@ -1702,6 +1731,9 @@ namespace DataAccess
         public virtual DbSet<FMV_RamFarmacoTB> FMV_RamFarmaco { get; set; }
         public virtual DbSet<FMV_RamFarmacoRamTB> FMV_RamFarmacoRam { get; set; }
         public virtual DbSet<FMV_TerMedraTB> FMV_TerMedra { get; set; }
+        public virtual DbSet<FMV_Esavi2TB> FMV_Esavi2 { get; set; }
+        public virtual DbSet<FMV_EsaviVacunaTB> FMV_EsaviVacuna { get; set; }
+        public virtual DbSet<FMV_EsaviVacunaEsaviTB> FMV_EsaviVacunaEsavi { get; set; }
 
 
 

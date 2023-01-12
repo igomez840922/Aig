@@ -41,5 +41,8 @@ namespace DataModel
 
         private List<FMV_RamTB> lRam;
         public virtual List<FMV_RamTB> LRam { get => lRam; set => SetProperty(ref lRam, value); }
+
+        private List<FMV_Esavi2TB> lEsavi2;
+        public virtual List<FMV_Esavi2TB> LEsavi2 { get => lEsavi2; set => SetProperty(ref lEsavi2, value); }
     }
 }

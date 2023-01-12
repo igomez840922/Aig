@@ -15,7 +15,8 @@ namespace DataModel
             OtrasEspecificaciones = new FMV_FfOtrasEspecificaciones();
             DatosPaciente = new FMV_FtDatosPaciente();
             EvaluacionCausalidad = new FMV_FtEvaluacionCausalidad();
-            Adjunto=new AttachmentData();
+            Concominantes = new FMV_RamConcominantes();
+            Adjunto = new AttachmentData();
         }
 
         // Código del CNFV
@@ -58,6 +59,14 @@ namespace DataModel
         private string presentacion;
         [StringLength(500)]
         public string Presentacion { get => presentacion; set => SetProperty(ref presentacion, value); }
+
+        private string concentracion;
+        [StringLength(250)]
+        public string Concentracion { get => concentracion; set => SetProperty(ref concentracion, value); }
+
+        private string formaFarmaceutica;
+        [StringLength(250)]
+        public string FormaFarmaceutica { get => formaFarmaceutica; set => SetProperty(ref formaFarmaceutica, value); }
 
         private string atc;
         [StringLength(250)]
@@ -177,6 +186,13 @@ namespace DataModel
         private string observaciones;
         [StringLength(500)]
         public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
+
+
+        //FARMACOS CONCOMINANTES
+        private FMV_RamConcominantes concominantes;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public FMV_RamConcominantes Concominantes { get => concominantes; set => SetProperty(ref concominantes, value); }
+
 
         //Ficheros Adjuntos
         private AttachmentData adjunto;

@@ -225,6 +225,7 @@ namespace Aig.FarmacoVigilancia.Services
                 DalService.DBContext.Entry(result).Property(b => b.OtrasEspecificaciones).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.DatosPaciente).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.EvaluacionCausalidad).IsModified = true;
+                DalService.DBContext.Entry(result).Property(b => b.Concominantes).IsModified = true;
                 DalService.DBContext.SaveChanges();
             }
             return result;

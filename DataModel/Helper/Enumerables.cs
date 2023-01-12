@@ -842,14 +842,18 @@ namespace DataModel.Helper
     {
         [Description("No Reportado")]
         NA = 0,
-        [Description("1ra")]
+        [Description("1ra Dosis")]
         PRI = 1,
-        [Description("2da")]
+        [Description("2da Dosis")]
         SEG = 2,
-        [Description("3ra")]
-        TER = 3,
-        [Description("4ra")]
-        CTA = 4,
+        [Description("Refuerzo # 1")]
+        REF1 = 3,
+        [Description("Refuerzo # 2")]
+        REF2 = 4,
+        [Description("Refuerzo # 3")]
+        REF3 = 5,
+        [Description("Refuerzo # 4")]
+        REF4 = 6,
     }
 
     public enum enum_PropositoInspec

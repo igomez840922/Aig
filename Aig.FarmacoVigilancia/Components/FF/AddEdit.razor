@@ -142,7 +142,7 @@
                                         <label>@languageContainerService.Keys["Concentración"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText disabled="disabled" class="form-control" @bind-Value="Data.Concentracion" />
+                                                <InputText class="form-control" @bind-Value="Data.Concentracion" />
                                                 <ValidationMessage For=@(() => Data.Concentracion) />
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@
                                         <label>@languageContainerService.Keys["Forma Farmaceutica"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText disabled="disabled" class="form-control" @bind-Value="Data.FormaFarmaceutica" />
+                                                <InputText class="form-control" @bind-Value="Data.FormaFarmaceutica" />
                                                 <ValidationMessage For=@(() => Data.FormaFarmaceutica) />
                                             </div>
                                         </div>
@@ -538,7 +538,7 @@
                                         <label>@languageContainerService.Keys["Grado"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputNumber class="form-control" @bind-Value="Data.OtrasEspecificaciones.Grado" />
+                                                <InputText class="form-control" @bind-Value="Data.OtrasEspecificaciones.Grado" />
                                                 <ValidationMessage For=@(() => Data.OtrasEspecificaciones.Grado) />
                                             </div>
                                         </div>
