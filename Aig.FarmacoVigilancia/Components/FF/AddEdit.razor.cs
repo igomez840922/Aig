@@ -231,7 +231,7 @@ namespace Aig.FarmacoVigilancia.Components.FF
             string formaFarm = Data.FormaFarmaceutica;
             string fabricante = Data.Fabricant?.Nombre??"";
             string lotes = Data.Lote;
-            string fechaExp = Data.FechaExp;
+            string fechaExp = Data.FechaExpira?.ToString("dd/MM/yyyy");
             string fallaFarmaceutica = 
                 Data.FallaReportada?.Olor == enumOpcionSiNo.Si?"Si":
                 (Data.FallaReportada?.Color == enumOpcionSiNo.Si ? "Si" :

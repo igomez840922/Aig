@@ -145,7 +145,7 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 10).Value = prod.SubGrupoTerapeutico;
                         ws.Cell(row + 1, 11).Value = prod.Fabricant?.Nombre ?? "";
                         ws.Cell(row + 1, 12).Value = prod.Lote;
-                        ws.Cell(row + 1, 13).Value = prod.FechaExp;
+                        ws.Cell(row + 1, 13).Value = prod.FechaExpira?.ToString("dd/MM/yyyy") ?? ""; ;
                         ws.Cell(row + 1, 14).Value = prod.RegSanitario;
                         ws.Cell(row + 1, 15).Value = DataModel.Helper.Helper.GetDescription(prod.TipoNotificacion);
                         ws.Cell(row + 1, 16).Value = prod.TipoInstitucion?.Nombre;

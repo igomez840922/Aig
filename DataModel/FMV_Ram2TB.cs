@@ -68,9 +68,14 @@ namespace DataModel
         [StringLength(250)]
         public string Grado { get => grado; set => SetProperty(ref grado, value); }
 
+
+        private string farmacosDesc;
+        [StringLength(500)]
+        public string FarmacosDesc { get => farmacosDesc; set => SetProperty(ref farmacosDesc, value); }
+
         /////////////////////////////
         ///PROCEDENCIA DE LA NOTIFICACION
-        
+
         //Tipo de Notificacion
         private enumFMV_RAMNotificationType tipoNotificacion;
         public enumFMV_RAMNotificationType TipoNotificacion { get => tipoNotificacion; set => SetProperty(ref tipoNotificacion, value); }

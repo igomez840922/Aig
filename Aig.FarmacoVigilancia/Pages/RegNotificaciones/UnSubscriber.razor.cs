@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Aig.FarmacoVigilancia.Pages.RegNotificaciones
-{
-    public partial class Index
+{    
+    public partial class UnSubscriber
     {
         [Inject]
         IProfileService profileService { get; set; }
@@ -15,7 +15,7 @@ namespace Aig.FarmacoVigilancia.Pages.RegNotificaciones
 
         bool OpenDialog { get; set; }
         [Parameter]
-        public DataModel.FMV_ContactosTB datoContacto { get; set; } = null;
+        public DataModel.Models.UnSubscribeModel datoContacto { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -50,7 +50,7 @@ namespace Aig.FarmacoVigilancia.Pages.RegNotificaciones
         protected async Task FetchData()
         {
             OpenDialog = true;
-            datoContacto = datoContacto != null ? datoContacto : new DataModel.FMV_ContactosTB();
+            datoContacto = datoContacto != null ? datoContacto : new DataModel.Models.UnSubscribeModel();
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -58,22 +58,20 @@ namespace Aig.FarmacoVigilancia.Pages.RegNotificaciones
         protected async Task SaveData()
         {
             var result = (await contactService.FindAll(x => x.Correo == datoContacto.Correo)).FirstOrDefault();
-            if(result!=null)
+            if (result == null)
             {
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Su correo ya fue registrado anteriormente en nuestro sistema"]);
+                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Su correo no existe en nuestro sistema"]);
                 return;
             }
 
-            result = await contactService.Save(datoContacto);
+            result = await contactService.UnSubscribe(datoContacto);
             if (result != null)
-            {                
+            {
                 OpenDialog = false;
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["Sus datos fueron registrados satisfactoriamente"]);
+
+                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["Sus datos fueron eliminados de nuestro sistema satisfactoriamente"]);
                 datoContacto = null;
                 OpenDialog = false;
-
-                await contactService.SendEmailSubscription(result.Id);
-
 
                 FetchData();
             }
@@ -88,4 +86,5 @@ namespace Aig.FarmacoVigilancia.Pages.RegNotificaciones
             navigationManager.NavigateTo("/registro", true);
         }
     }
+
 }

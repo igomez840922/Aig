@@ -103,10 +103,11 @@ namespace DataModel
         private string lote;
         [StringLength(500)]
         public string Lote { get => lote; set => SetProperty(ref lote, value); }
-
-        private string fechaExp;
-        [StringLength(500)]
-        public string FechaExp { get => fechaExp; set => SetProperty(ref fechaExp, value); }
+               
+        // Fecha de Expiracion
+        private DateTime? fechaExpira;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaExpira { get => fechaExpira; set => SetProperty(ref fechaExpira, value); }
 
         private string regSanitario;
         [StringLength(250)]

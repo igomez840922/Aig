@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230112154824_M073")]
+    partial class M073
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2443,10 +2445,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("VacunasDesc")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EvaluadorId");
@@ -3027,8 +3025,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("FechaEvalua")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaExpira")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("FechaExp")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("FechaRecibidoCNFV")
                         .HasColumnType("datetime2");
@@ -3186,8 +3185,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("FechaEvalua")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaExpira")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("FechaExp")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("FechaRecibidoCNFV")
                         .HasColumnType("datetime2");
@@ -3463,15 +3463,6 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
-                    b.Property<int>("EmailReadStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmailReadTimes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmailStatus")
-                        .HasColumnType("int");
-
                     b.Property<long?>("EvaluadorId")
                         .HasColumnType("bigint");
 
@@ -3709,10 +3700,6 @@ namespace DataAccess.Migrations
 
                     b.Property<long?>("EvaluadorId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("FarmacosDesc")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("FechaEntregaEva")
                         .HasColumnType("datetime2");

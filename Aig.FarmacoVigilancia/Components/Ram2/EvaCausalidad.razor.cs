@@ -80,8 +80,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             await bus.Publish(new Aig.FarmacoVigilancia.Events.RamFarmacoRam.AddEdit_Event { Data = null });
             await this.InvokeAsync(StateHasChanged);
         }
-
-
+                
         ////////////////////
         ///
 

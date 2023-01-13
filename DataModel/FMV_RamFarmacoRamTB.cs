@@ -201,7 +201,7 @@ namespace DataModel
 
         public int Puntuacion
         {
-            get { return (stemp + cprev + reti + reex + alter + facon + xplc); }
+            get { return (Stemp + Cprev + Reti + Reex + Alter + Facon + Xplc); }
         }
 
         // Probabilidad

@@ -15,6 +15,7 @@ namespace DataModel
             Adjunto = new AttachmentData();
             Instituciones = new FMV_NotaInstitucion();
             NotaContactos=new FMV_NotaContactos();
+            Asunto = "Mensaje del Centro Nacional de Farmacovigilancia";
         }
 
         //Fecha
@@ -71,6 +72,20 @@ namespace DataModel
         private FMV_NotaContactos notaContactos;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual FMV_NotaContactos NotaContactos { get => notaContactos; set => SetProperty(ref notaContactos, value); }
+
+
+        //Estado del Email
+        private enumEmailStatus emailStatus;
+        public enumEmailStatus EmailStatus { get => emailStatus; set => SetProperty(ref emailStatus, value); }
+
+
+        //Estado de lectura del Email
+        private enumEmailReadStatus emailReadStatus;
+        public enumEmailReadStatus EmailReadStatus { get => emailReadStatus; set => SetProperty(ref emailReadStatus, value); }
+
+        //Veces que el correo fue leido
+        private int emailReadTimes;
+        public int EmailReadTimes { get => emailReadTimes; set => SetProperty(ref emailReadTimes, value); }
 
     }
 

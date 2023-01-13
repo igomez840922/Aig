@@ -44,7 +44,7 @@
                                                     <a class="nav-link" data-toggle="tab" href="#concominantes" role="tab">@languageContainerService.Keys["Fármacos Concomitantes"]</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#rams" role="tab">@languageContainerService.Keys["ESAVI"]</a>
+                                                    <a class="nav-link" data-toggle="tab" href="#rams" role="tab">@languageContainerService.Keys["ESAVI "]</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#labs" role="tab">@languageContainerService.Keys["Datos de Laboratorio"]</a>
@@ -55,7 +55,6 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Estatus"]</a>
                                                 </li>
-
                                                 <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
                                                 </li>
@@ -224,7 +223,7 @@
                                                 </div>
                                                 <div class="tab-pane" id="patient" role="tabpanel">
 
-                                                    <h5>@languageContainerService.Keys["Patient"]</h5>
+                                                    <h5>@languageContainerService.Keys["Paciente"]</h5>
                                                     <div class="row clearfix">
 
                                                         <div class="col-sm-8">
@@ -275,16 +274,6 @@
                                                                 <div class="form-line">
                                                                     <InputText class="form-control" @bind-Value="Data.Edad" />
                                                                     <ValidationMessage For=@(() => Data.Edad) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <label>@languageContainerService.Keys["Otros Diagnósticos"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.OtrosDiagnosticos" />
-                                                                    <ValidationMessage For=@(() => Data.OtrosDiagnosticos) />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -426,7 +415,7 @@
                                                 <div class="tab-pane" id="rams" role="tabpanel">
                                                     <div class="row clearfix">
                                                         <div class="col-6" style="text-align:left;">
-                                                            <h5>@languageContainerService.Keys["ESAVI"]</h5>
+                                                            <h5>@languageContainerService.Keys["ESAVI "]</h5>
                                                         </div>
                                                         <div class="col-6" style="text-align:right;">
                                                             <button type="button" @onclick="(e)=>{OpenFarmacoRam();}" class="btn btn-sm btn-outline-primary waves-effect">
@@ -441,7 +430,7 @@
                                                                 <thead class=thead-light>
                                                                     <tr>
                                                                         <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
-                                                                        <th>@languageContainerService.Keys["ESAVI"]</th>
+                                                                        <th>@languageContainerService.Keys["ESAVI "]</th>
                                                                         <th>@languageContainerService.Keys["Hay ESAVI?"]</th>
                                                                         <th>@languageContainerService.Keys["Fecha de ESAVI"]</th>
                                                                         <th>@languageContainerService.Keys["Descenlace"]</th>
@@ -530,7 +519,7 @@
                                                                 <thead class=thead-light>
                                                                     <tr>
                                                                         <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
-                                                                        <th>@languageContainerService.Keys["ESAVI"]</th>
+                                                                        <th>@languageContainerService.Keys["ESAVI "]</th>
                                                                         <th>@languageContainerService.Keys["Gravedad"]</th>
                                                                         <th>@languageContainerService.Keys["Inves. y Detalles del Caso"]</th>
                                                                         <th>@languageContainerService.Keys["Otros Criterios de Selec."]</th>

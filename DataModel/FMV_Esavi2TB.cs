@@ -58,6 +58,9 @@ namespace DataModel
         private PersonalTrabajadorTB? evaluador;
         public virtual PersonalTrabajadorTB? Evaluador { get => evaluador; set => SetProperty(ref evaluador, value); }
 
+        private string vacunasDesc;
+        [StringLength(500)]
+        public string VacunasDesc { get => vacunasDesc; set => SetProperty(ref vacunasDesc, value); }
 
         //PROCEDENCIA DE LA NOTIFICACION
 

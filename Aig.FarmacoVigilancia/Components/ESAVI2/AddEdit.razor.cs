@@ -90,57 +90,73 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
         //Save Data and Close
         protected async Task SaveData()
         {
+            try {
+                if (!string.IsNullOrEmpty(Data.CodCNFV))
+                {
+                    var tmpData = (await esaviService.FindAll(x => x.CodCNFV.Contains(Data.CodCNFV) && x.Id != Data.Id)).FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de CNFV ya existe"]);
+                        return;
+                    }
+                }
+                //verificar Cod Externo
+                if (!string.IsNullOrEmpty(Data.CodExt))
+                {
+                    var tmpData = (await esaviService.FindAll(x => x.CodExt.Contains(Data.CodExt) && x.Id != Data.Id)).FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código Externo ya existe"]);
+                        return;
+                    }
+                }
+                //verificar Cod Externo
+                if (!string.IsNullOrEmpty(Data.IdFacedra))
+                {
+                    var tmpData = (await esaviService.FindAll(x => x.IdFacedra.Contains(Data.IdFacedra) && x.Id != Data.Id)).FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El ID Facedra ya existe"]);
+                        return;
+                    }
+                }
+                //verificar Cod Externo
+                if (!string.IsNullOrEmpty(Data.CodigoNotiFacedra))
+                {
+                    var tmpData = (await esaviService.FindAll(x => x.CodigoNotiFacedra.Contains(Data.CodigoNotiFacedra) && x.Id != Data.Id)).FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código Noti-Facedra ya existe"]);
+                        return;
+                    }
+                }
+
+                Data.VacunasDesc = "";
+                if(Data.LVacunas?.Count() > 0)
+                {
+                    foreach(var dt in Data.LVacunas)
+                    {
+                        Data.VacunasDesc += string.Format("** {0} - {1} **", dt.TipoVacuna?.Nombre??"",dt.VacunaComercial);
+                        //Data.VacunasDesc += string.Format("{0} - ", dt.TipoVacuna?.Nombre ?? "");
+                    }
+                }
+
+                var result = await esaviService.Save(Data);
+                if (result != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                    Data = result;
+
+                    if(Exit)
+                        await bus.Publish(new Aig.FarmacoVigilancia.Events.ESAVI2.AddEditEvent { Data = Data });
+                }
+                else
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            }
+            catch { }
+            finally { Exit = false; }
             //verificar CodigoCNFV
-            if (!string.IsNullOrEmpty(Data.CodCNFV))
-            {
-                var tmpData = (await esaviService.FindAll(x => x.CodCNFV.Contains(Data.CodCNFV) && x.Id != Data.Id)).FirstOrDefault();
-                if (tmpData != null)
-                {
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de CNFV ya existe"]);
-                    return;
-                }
-            }
-            //verificar Cod Externo
-            if (!string.IsNullOrEmpty(Data.CodExt))
-            {
-                var tmpData = (await esaviService.FindAll(x => x.CodExt.Contains(Data.CodExt) && x.Id != Data.Id)).FirstOrDefault();
-                if (tmpData != null)
-                {
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código Externo ya existe"]);
-                    return;
-                }
-            }
-            //verificar Cod Externo
-            if (!string.IsNullOrEmpty(Data.IdFacedra))
-            {
-                var tmpData = (await esaviService.FindAll(x => x.IdFacedra.Contains(Data.IdFacedra) && x.Id != Data.Id)).FirstOrDefault();
-                if (tmpData != null)
-                {
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El ID Facedra ya existe"]);
-                    return;
-                }
-            }
-            //verificar Cod Externo
-            if (!string.IsNullOrEmpty(Data.CodigoNotiFacedra))
-            {
-                var tmpData = (await esaviService.FindAll(x => x.CodigoNotiFacedra.Contains(Data.CodigoNotiFacedra) && x.Id != Data.Id)).FirstOrDefault();
-                if (tmpData != null)
-                {
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código Noti-Facedra ya existe"]);
-                    return;
-                }
-            }
-
-            var result = await esaviService.Save(Data);
-            if (result != null)
-            {
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                Data = result;
-
-                await bus.Publish(new Aig.FarmacoVigilancia.Events.ESAVI2.AddEditEvent { Data = Data });
-            }
-            else
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            
         }
 
         //Cancel and Close
@@ -314,6 +330,8 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
 
             if (message.Data != null)
             {
+                Data.LVacunas = Data.LVacunas != null ? Data.LVacunas : new List<FMV_EsaviVacunaTB>();
+
                 var farmaco = (from f in Data.LVacunas
                                where f.LEsavis.Contains(message.Data)
                                select f).FirstOrDefault();

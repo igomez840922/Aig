@@ -772,6 +772,24 @@ namespace DataModel.Helper
         Monitoreo = 4,
     }
 
+    public enum enumEmailStatus
+    {
+        [Description("Por Enviar")]
+        Pending = 0,
+        [Description("Enviado")]
+        Send = 1,
+    }
+
+    public enum enumEmailReadStatus
+    {
+        [Description("NA")]
+        NA = 0,
+        [Description("No Leído")]
+        UnRead = 1,
+        [Description("Leído")]
+        Read = 2,
+
+    }
     //////////////////////////////
     /// <summary>
     /// 

@@ -15,6 +15,9 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_NotaTB> Save(FMV_NotaTB data);
         Task<FMV_NotaTB> Delete(long id);
         Task<int> Count();
+
+        Task<string> SendEmailNote(long id);
+        Task NotifyNoteReaded(long Id);
     }
 
    

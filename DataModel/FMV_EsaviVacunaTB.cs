@@ -11,6 +11,11 @@ namespace DataModel
 {
     public class FMV_EsaviVacunaTB:SystemId
     {
+        public FMV_EsaviVacunaTB()
+        {
+            LEsavis = new List<FMV_EsaviVacunaEsaviTB>();
+        }
+
         //ESAVI
         private long? esaviId;
         public long? EsaviId { get => esaviId; set => SetProperty(ref esaviId, value); }

@@ -191,8 +191,8 @@
                                         <label>@languageContainerService.Keys["Fecha Expiración"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.FechaExp" />
-                                                <ValidationMessage For=@(() => Data.FechaExp) />
+                                                <RadzenDatePicker  TValue="DateTime?" @bind-Value="Data.FechaExpira" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <ValidationMessage For=@(() => Data.FechaExpira) />
                                             </div>
                                         </div>
                                     </div>

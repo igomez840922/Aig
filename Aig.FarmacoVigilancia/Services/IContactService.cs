@@ -15,6 +15,10 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_ContactosTB> Save(FMV_ContactosTB data);
         Task<FMV_ContactosTB> Delete(long id);
         Task<int> Count();
+
+        Task<FMV_ContactosTB> UnSubscribe(UnSubscribeModel data);
+
+        Task<string> SendEmailSubscription(long id);
     }
 
    

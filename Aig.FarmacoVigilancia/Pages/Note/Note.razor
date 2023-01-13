@@ -114,6 +114,8 @@
                                                             <th>@languageContainerService.Keys["NoteType"]</th>
                                                             <th>@languageContainerService.Keys["Institute"]</th>
                                                             <th>@languageContainerService.Keys["Asunto"]</th>
+                                                            <th>@languageContainerService.Keys["Estado del Mensaje"]</th>
+                                                            <th>@languageContainerService.Keys["Mensaje Leído"]</th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>
@@ -136,6 +138,8 @@
 
                                                                 </td>
                                                                 <td>@dt.Asunto</td>
+                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.EmailStatus))</td>
+                                                                <td>@(string.Format("{0} {1}", DataModel.Helper.Helper.GetDescription(dt.EmailReadStatus), dt.EmailReadTimes > 0 ? string.Format("({0})", dt.EmailReadTimes) : ""))</td>
                                                                 <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>

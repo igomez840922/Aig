@@ -1,4 +1,4 @@
-﻿@page "/esavi"
+﻿@page "/esavi1"
 @layout BackendLayout
 @attribute [Authorize]
 
@@ -78,17 +78,7 @@
                                                     <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@dataModel.EvaluatorId
                                                                     AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
                                                                     Data=@lPersons TextProperty="NombreCompleto" ValueProperty="Id"
-                                                                    Change=@(args => {OnFilter();}) />
-                                                    @*<InputSelect class="form-control" @bind-Value="dataModel.EvaluatorId" @oninput="(e)=>{ try{dataModel.EvaluatorId = long.Parse((string)e.Value);}catch{dataModel.EvaluatorId =null;} OnFilter();}">
-                                                    <option value="">@languageContainerService.Keys["All"]</option>
-                                                    @if (lPersons != null)
-                                                    {
-                                                    foreach (var dt in lPersons.Where(x => x.Evaluador))
-                                                    {
-                                                    <option value="@dt.Id">@dt.NombreCompleto</option>
-                                                    }
-                                                    }
-                                                    </InputSelect>*@
+                                                                    Change=@(args => {OnFilter();}) />                                                    
                                                 </div>
                                             </div>
                                         </div>

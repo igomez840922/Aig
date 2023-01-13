@@ -12,6 +12,7 @@ using Aig.FarmacoVigilancia.Events.Nota;
 using Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg;
 using System.IO;
 using MimeKit;
+using static Duende.IdentityServer.Models.IdentityResources;
 
 namespace Aig.FarmacoVigilancia.Pages.Note
 {   
@@ -206,39 +207,16 @@ namespace Aig.FarmacoVigilancia.Pages.Note
         {
             try
             {
-                var data = await noteService.Get(Id);
-                if (data != null && data.NotaContactos?.LContactos?.Count>0)
+                var data = await noteService.SendEmailNote(Id);
+                if (!string.IsNullOrEmpty(data))
                 {
-                    var subject = "Nota #: " + data.NumNota + " - " + data.Asunto;
-
-                    var builder = new BodyBuilder();
-
-                    builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
-
-                    if (data.Adjunto?.LAttachments?.Count > 0)
-                    {
-                        foreach(var attch in data.Adjunto.LAttachments)
-                        {
-                            var stream = await pdfGenerationService.GetStreamsFromFile(attch.AbsolutePath);
-                            if (stream != null)
-                            {
-                                builder.Attachments.Add("adjunto.pdf", stream);
-                            }
-                        }
-                    }
-
-                    List<string> lEmails = (from email in data.NotaContactos.LContactos
-                                            select email.Correo).ToList();
-
-                   if( await emailService.SendEmailAsync(lEmails, subject, builder))
-                    {
-                        await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["EmailSentSuccessfully"]);
-                        return;
-                    }
                     await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["EmailSentError"]);
-
+                    await jsRuntime.InvokeVoidAsync("ShowError", data);
                 }
-
+                else
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["EmailSentSuccessfully"]);
+                }
             }
             catch (Exception ex) { }
         }

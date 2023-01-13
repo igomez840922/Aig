@@ -36,25 +36,51 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
             {
                 case DataModel.Helper.enumOpcionSiNo.Si:
                     {
-                        if (Data.Gravedad != null && Data.Gravedad.Contains("Grave"))
+                        if (Data.Gravedad != null && Data.Gravedad.Contains("Grave",StringComparison.OrdinalIgnoreCase))
                         {
                             Data.ElegibleEvaluacionCausal = "Prioridad";
                         }
-
-                        switch (Data.OtrosCriterios)
+                        else if (Data.Gravedad != null && Data.Gravedad.Contains("otros criterios", StringComparison.OrdinalIgnoreCase))
                         {
-                            case DataModel.Helper.enumFMV_EsaviOtroCriterio.NA:
-                                {
-                                    break;
-                                }
-                            default:
-                                {
-                                    Data.ElegibleEvaluacionCausal = "Prioridad";
-                                    break;
-                                }
+                            Data.ElegibleEvaluacionCausal = "Prioridad";
+                        }
+                        else if (Data.Gravedad != null && Data.Gravedad.Contains("Leve", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Data.ElegibleEvaluacionCausal = "Regular";
+                        }
+                        else if (Data.Gravedad != null && Data.Gravedad.Contains("moderada", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Data.ElegibleEvaluacionCausal = "Regular";
+                        }
+
+
+                        //switch (Data.OtrosCriterios)
+                        //{
+                        //    case DataModel.Helper.enumFMV_EsaviOtroCriterio.NA:
+                        //        {
+                        //            break;
+                        //        }
+                        //    default:
+                        //        {
+                        //            Data.ElegibleEvaluacionCausal = "Prioridad";
+                        //            break;
+                        //        }
+                        //}
+                        break;
+                    }
+                case DataModel.Helper.enumOpcionSiNo.No:
+                    {
+                        if (Data.Gravedad != null && Data.Gravedad.Contains("Grave", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Data.ElegibleEvaluacionCausal = "Regular";
+                        }
+                        else if (Data.Gravedad != null && Data.Gravedad.Contains("otros criterios", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Data.ElegibleEvaluacionCausal = "Regular";
                         }
                         break;
                     }
+
             }
         }
 

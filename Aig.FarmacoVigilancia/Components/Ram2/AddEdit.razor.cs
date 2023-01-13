@@ -222,14 +222,24 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                                     sino entonces [incongruenciaCondDosisEvo]=""
             */
             var value = string.Empty;
-            if (Data.LFarmacos.All(x=>x.ConductaDosis == enumFMV_RAMConductaDosis.NODISDOSIS))
+            if (Data.LFarmacos.All(x => x.ConductaDosis == enumFMV_RAMConductaDosis.DISDOSIS))
             {
-                if (Data.LFarmacos.All(x=>x.LRams.All(o=>o.EvoDosis == enumFMV_RAMEvolucionDosis.DESREACC)) ||
-                    Data.LFarmacos.All(x => x.LRams.All(o => o.EvoDosis == enumFMV_RAMEvolucionDosis.PERREACC)))
-                {
-                    value = "Incongruente";
-                }
+                value = "Falso";
             }
+            else if (Data.LFarmacos.All(x => x.ConductaDosis == enumFMV_RAMConductaDosis.NODISDOSIS))
+            {
+                value = "Incongruente";
+            }
+
+            //if (Data.LFarmacos.All(x=>x.ConductaDosis == enumFMV_RAMConductaDosis.NODISDOSIS))
+            //{
+            //    if (Data.LFarmacos.All(x=>x.LRams.All(o=>o.EvoDosis == enumFMV_RAMEvolucionDosis.DESREACC)) ||
+            //        Data.LFarmacos.All(x => x.LRams.All(o => o.EvoDosis == enumFMV_RAMEvolucionDosis.PERREACC)))
+            //    {
+            //        value = "Incongruente";
+            //    }
+            //}
+
             Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo = string.IsNullOrEmpty(value)? Data.ObservacionInfoNotifica.IncongruenciaCondDosisEvo:value;
         }
         private void UpdateIncongruenciaCondTerapiaEvo()
@@ -243,24 +253,25 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                                     sino entonces [incongruenciaCondTerapiaEvo]=""
             */
 
-            //var value = string.Empty;
-            //if (Data.EvaluacionCalidadInfo.ConductaTerapia == enumFMV_RAMConductaTerapia.MANTERAPIA)
+            
+            var value = string.Empty;
+            if (Data.LFarmacos.All(x => x.ConductaTerapia == enumFMV_RAMConductaTerapia.SUSTERAPIA))
+            {
+                value = "Falso";
+            }
+            else if (Data.LFarmacos.All(x => x.ConductaTerapia == enumFMV_RAMConductaTerapia.MANTERAPIA))
+            {
+                value = "Incongruente";
+            }
+
+            //if (Data.LFarmacos.All(x => x.ConductaTerapia == enumFMV_RAMConductaTerapia.MANTERAPIA))
             //{
-            //    if (Data.EvaluacionCalidadInfo.EvoTerapia == enumFMV_RAMEvolucionTerapia.DESREACC ||
-            //        Data.EvaluacionCalidadInfo.EvoTerapia == enumFMV_RAMEvolucionTerapia.PERREACC)
+            //    if (Data.LFarmacos.All(x => x.LRams.All(o => o.EvoTerapia == enumFMV_RAMEvolucionTerapia.DESREACC)) ||
+            //        Data.LFarmacos.All(x => x.LRams.All(o => o.EvoTerapia == enumFMV_RAMEvolucionTerapia.PERREACC)))
             //    {
             //        value = "Incongruente";
             //    }
             //}
-            var value = string.Empty;
-            if (Data.LFarmacos.All(x => x.ConductaTerapia == enumFMV_RAMConductaTerapia.MANTERAPIA))
-            {
-                if (Data.LFarmacos.All(x => x.LRams.All(o => o.EvoTerapia == enumFMV_RAMEvolucionTerapia.DESREACC)) ||
-                    Data.LFarmacos.All(x => x.LRams.All(o => o.EvoTerapia == enumFMV_RAMEvolucionTerapia.PERREACC)))
-                {
-                    value = "Incongruente";
-                }
-            }
 
             Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo = string.IsNullOrEmpty(value) ? Data.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo : value;
         }
@@ -282,6 +293,15 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             {
                 value = "Incongruente";
             }
+            else if (Data.LFarmacos.All(x => x.Reexposicion == enumOpcionSiNo.No))
+            {
+                Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex = "";
+            }
+
+            //if (Data.LFarmacos.All(x => x.ConductaTerapia == enumFMV_RAMConductaTerapia.SUSTERAPIA) && Data.LFarmacos.All(x => x.Reexposicion == enumOpcionSiNo.Si))
+            //{
+            //    value = "Incongruente";
+            //}
             Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex = string.IsNullOrEmpty(value) ? Data.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex : value;
         }
         private void UpdateIncongruenciaCondMantTerapiaReex()
@@ -302,6 +322,10 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             {
                 value = "Incongruente";
             }
+            else if (Data.LFarmacos.All(x => x.ConductaTerapia == enumFMV_RAMConductaTerapia.SUSTERAPIA) && Data.LFarmacos.All(x => x.Reexposicion == enumOpcionSiNo.Si))
+            {
+                Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex = "";
+            }
             Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex = string.IsNullOrEmpty(value) ? Data.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex : value;
         }
         private void UpdateIncongruenciaConReex()
@@ -321,11 +345,27 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             //        value = "Incongruente";
             //}
             var value = string.Empty;
-            if ( Data.LFarmacos.All(x => x.Reexposicion == enumOpcionSiNo.No))
+
+            bool consecReex = false;
+            foreach(var farm in Data.LFarmacos)
             {
-                if(Data.LFarmacos.All(x => x.LRams.All(o=>o.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.REAP)) || Data.LFarmacos.All(x => x.LRams.All(o => o.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.NREAP)))
+                consecReex = farm.LRams.All(x=>x.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.REAP || x.ConReexposicion == enumFMV_RAMConsecuenciaReexposicion.NREAP);
+                if (consecReex == false)
+                    break;
+            }
+            bool reex = Data.LFarmacos.All(x=>x.Reexposicion== enumOpcionSiNo.No);
+            if (consecReex && reex)
+            {
                 value = "Incongruente";
             }
+            else {
+                reex = Data.LFarmacos.All(x => x.Reexposicion == enumOpcionSiNo.Si);
+                if (consecReex && reex)
+                {
+                    value = "Falso";
+                }
+            }
+           
             Data.ObservacionInfoNotifica.IncongruenciaConReex = string.IsNullOrEmpty(value) ? Data.ObservacionInfoNotifica.IncongruenciaConReex : value;
         }
 
@@ -418,6 +458,16 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                     {
                         await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El código de NotiFacedra ya existe"]);
                         return;
+                    }
+                }
+
+                Data.FarmacosDesc = "";
+                if (Data.LFarmacos?.Count() > 0)
+                {
+                    foreach (var dt in Data.LFarmacos)
+                    {
+                        Data.FarmacosDesc += string.Format("** {0} - {1} **", dt.FarmacoSospechosoDci, dt.FarmacoSospechosoComercial);
+                        //Data.FarmacosDesc += string.Format("{0} - ", dt.FarmacoSospechosoDci);
                     }
                 }
 

@@ -7,15 +7,24 @@ using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using BlazorDownloadFile;
 using System.Linq.Expressions;
+using MimeKit;
+using Microsoft.AspNetCore.Components;
+using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
     public class NoteService : INoteService
     {
         private readonly IDalService DalService;
-        public NoteService(IDalService dalService)
+        private readonly IEmailService emailService;
+        private readonly IPdfGenerationService pdfGenerationService;
+        private readonly NavigationManager navigationManager;
+        public NoteService(IDalService dalService, IEmailService emailService, IPdfGenerationService pdfGenerationService, NavigationManager navigationManager)
         {
             DalService = dalService;
+            this.emailService = emailService;
+            this.pdfGenerationService = pdfGenerationService;
+            this.navigationManager = navigationManager;
         }
 
         public async Task<List<FMV_NotaTB>> FindAll(Expression<Func<FMV_NotaTB, bool>> match)
@@ -82,16 +91,20 @@ namespace Aig.FarmacoVigilancia.Services
                     ws.Cell(1, 2).Value = "Número Nota";
                     ws.Cell(1, 3).Value = "Evaluador";
                     ws.Cell(1, 4).Value = "Tipo de Nota";
-                    ws.Cell(1, 5).Value = "Descripción";
-                    ws.Cell(1, 6).Value = "Destinatarios";
+                    ws.Cell(1, 5).Value = "Institución";
+                    ws.Cell(1, 6).Value = "Asunto";
+                    ws.Cell(1, 7).Value = "Descripción";
+                    ws.Cell(1, 8).Value = "Destinatarios";
+                    ws.Cell(1, 9).Value = "Estado del Mensaje";
+                    ws.Cell(1, 10).Value = "Mensaje Leído";
 
                     string Destinatarios = null;
+                    string Instituciones = null;
                     for (int row = 1; row <= model.Ldata.Count; row++)
                     {
                         var prod = model.Ldata[row - 1];
 
                         Destinatarios = "";
-
                         if (prod.NotaContactos != null)
                         {
                             foreach (var dest in prod.NotaContactos.LContactos)
@@ -100,13 +113,26 @@ namespace Aig.FarmacoVigilancia.Services
                             }
                         }
 
+                        Instituciones = "";
+                        if (prod.Instituciones?.LInstituciones?.Count > 0)
+                        {
+                            foreach (var dest in prod.Instituciones.LInstituciones)
+                            {
+                                Instituciones += dest.Nombre + "; ";
+                            }
+                        }
+
                         //FechaRecepcion
                         ws.Cell(row + 1, 1).Value = prod.Fecha?.ToString("dd/MM/yyyy") ?? "";
                         ws.Cell(row + 1, 2).Value = prod.NumNota;
                         ws.Cell(row + 1, 3).Value = prod.Evaluador?.NombreCompleto ?? "";
                         ws.Cell(row + 1, 4).Value = DataModel.Helper.Helper.GetDescription(prod.TipoNota);
-                        ws.Cell(row + 1, 5).Value = prod.Descripcion;
-                        ws.Cell(row + 1, 6).Value = Destinatarios;
+                        ws.Cell(row + 1, 5).Value = Instituciones;
+                        ws.Cell(row + 1, 6).Value = prod.Asunto;
+                        ws.Cell(row + 1, 7).Value = prod.Descripcion;
+                        ws.Cell(row + 1, 8).Value = Destinatarios;
+                        ws.Cell(row + 1, 9).Value = DataModel.Helper.Helper.GetDescription(prod.EmailStatus);
+                        ws.Cell(row + 1, 10).Value = string.Format("{0} {1}", DataModel.Helper.Helper.GetDescription(prod.EmailReadStatus), prod.EmailReadTimes > 0 ? prod.EmailReadTimes : "");
                     }
 
                     MemoryStream XLSStream = new();
@@ -160,7 +186,74 @@ namespace Aig.FarmacoVigilancia.Services
             catch { }return 0;
         }
 
-        
+        public async Task<string> SendEmailNote(long Id)
+        {
+            try
+            {
+                var data = await Get(Id);
+                if (data?.NotaContactos?.LContactos?.Count > 0)
+                {
+                    var subject = data.Asunto; //"Mensaje del Centro Nacional de Farmacovigilancia";
+
+                    var builder = new BodyBuilder();
+
+                    //builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
+                    builder.TextBody = string.Format("Buen día, adjunto a este correo electrónico encontrará información de interés emitida por el Centro Nacional de Farmacovigilancia\r\n\r\n" +
+                        "Nota #: {0}\r\n{1}\r\n\r\n\r\n" +
+                        "Por favor notifique la lectura de este correo haciendo click en el siguiente enlace {2}.\r\n\r\n\r\n" +
+                        "Para cualquier consulta o información adicional puede contactarnos a través del correo electrónico fvigilancia@minsa.gob.pa.\r\n\r\n" +
+                        "Saludos Cordiales\r\n\r\nCentro Nacional de Farmacovigilancia\r\nDepartamento de Farmacovigilancia\r\nDirección Nacional de Farmacia y Drogas\r\nMinisterio de Salud\r\n\r\n\r\n" +
+                        "Nota: para darse de baja de dicho sistema haga click en el siguiente enlace: {3}", 
+                        data.NumNota, data.Descripcion, string.Format("{0}{1}/{2}", navigationManager.BaseUri, "notarecibida", data.Id), string.Format("{0}{1}", navigationManager.BaseUri, "registrobaja"));
+
+
+                    if (data.Adjunto?.LAttachments?.Count > 0)
+                    {
+                        foreach (var attch in data.Adjunto.LAttachments)
+                        {
+                            FileInfo fi = new FileInfo(attch.AbsolutePath);
+                            var stream = await pdfGenerationService.GetStreamsFromFile(attch.AbsolutePath);
+                            if (stream != null)
+                            {
+                                builder.Attachments.Add(fi.Name, stream);
+                            }
+                        }
+                    }
+
+                    List<string> lEmails = (from email in data.NotaContactos.LContactos
+                                            select email.Correo).ToList();
+
+                    await emailService.SendEmailAsync(lEmails, subject, builder, "Centro Nacional de Farmacovigilancia");
+
+                    data.EmailStatus = enumEmailStatus.Send;
+                    data.EmailReadStatus = data.EmailReadStatus == enumEmailReadStatus.NA? enumEmailReadStatus.UnRead: data.EmailReadStatus;
+                    await Save(data);
+
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return "el correo no pudo ser enviado";
+        }
+
+        public async Task NotifyNoteReaded(long Id)
+        {
+            var result = DalService.Get<FMV_NotaTB>(Id);
+
+            if (result != null)
+            {
+                result.EmailReadStatus = enumEmailReadStatus.Read;
+                result.EmailReadTimes ++;
+                result.EmailStatus = enumEmailStatus.Send;
+
+                await Save(result);
+            }
+        }
+
     }
 
 }

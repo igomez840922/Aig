@@ -127,6 +127,7 @@ builder.Services.AddScoped<ITipoVacunaService, TipoVacunaService>();
 builder.Services.AddScoped<INotaDestinoService, NotaDestinoService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ITerMedraService, TerMedraService>();
+builder.Services.AddScoped<IESAVI2Service, ESAVI2Service>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

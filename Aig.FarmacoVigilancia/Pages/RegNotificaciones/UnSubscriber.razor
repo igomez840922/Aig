@@ -1,0 +1,42 @@
+﻿@page "/registrobaja"
+@layout AccountLayout
+@attribute [AllowAnonymous]
+
+@if (datoContacto != null)
+{
+    <div class="kt-login__wrapper" style="width:100%!important;">
+        <div class="kt-login__signin">
+            <div class="kt-login__head">                
+                <h3 class="kt-login__title">@languageContainerService.Keys["Introduzca su correo electrónico para darse de baja del sistema de notificaciones"]</h3>
+            </div>
+            <div class="kt-login__form">
+                <EditForm id="loginform" class="kt-form" Model="@datoContacto" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+
+                    <div class="row clearfix" style="padding-bottom: 2rem!important;">
+                        <div class="col-sm-12">
+                            <label>@languageContainerService.Keys["Correo"]</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <InputText class="form-control" @bind-Value="datoContacto.Correo" />
+                                    <ValidationMessage For=@(() => datoContacto.Correo) />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="kt-login__actions">
+                        <button class="btn btn-brand btn-pill btn-elevate" type="submit">@languageContainerService.Keys["Darse de Baja"]</button>
+                        <button class="btn btn-brand btn-pill btn-danger btn-elevate" type="button" @onclick="(e)=>{Cancel();}">@languageContainerService.Keys["Registrarse"]</button>
+                    </div>
+                </EditForm>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+}
+

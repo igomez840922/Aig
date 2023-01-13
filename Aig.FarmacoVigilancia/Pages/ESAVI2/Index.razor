@@ -1,14 +1,10 @@
-﻿@page "/ram"
+﻿@page "/esavi"
 @layout BackendLayout
 @attribute [Authorize]
-<style>
-    .modal-dialog.modal-custom {
-        max-width: 1240px !important;
-    }
-</style>
 
 @if (!OpenAddEditDialog)
 {
+
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
         @*<div class="kt-subheader  kt-grid__item" id="kt_subheader">
     <div class="kt-container  kt-container--fluid ">
@@ -30,7 +26,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    @languageContainerService.Keys["Ram"]
+                                    @languageContainerService.Keys["ESAVI"]
                                 </h3>
                             </div>
                             <div class="kt-portlet__head-toolbar">
@@ -66,27 +62,26 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-3">
-                                                    <label>@languageContainerService.Keys["From"] @languageContainerService.Keys["Fecha de Recibido Inicial"]</label>
+                                                    <label>@languageContainerService.Keys["From"] @languageContainerService.Keys["EntryDate"]</label>
                                                     <div class="form-line">
                                                         <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                         <ValidationMessage For=@(() => dataModel.FromDate) />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <label>@languageContainerService.Keys["To"] @languageContainerService.Keys["Fecha de Recibido Final"]</label>
+                                                    <label>@languageContainerService.Keys["To"] @languageContainerService.Keys["EntryDate"]</label>
                                                     <div class="form-line">
-                                                        <RadzenDatePicker Max="DateTime.Today" Min="dataModel.FromDate" TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                         <ValidationMessage For=@(() => dataModel.ToDate) />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <label>@languageContainerService.Keys["Evaluator"]</label>
                                                     <div class="form-line">
-                                                        
                                                         <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@dataModel.EvaluatorId
                                                                         AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
-                                                                        Data=@(lPersons.Where(x => x.Evaluador)) TextProperty="NombreCompleto" ValueProperty="Id" Change=@(args => {OnFilter();}) />
-
+                                                                        Data=@lPersons TextProperty="NombreCompleto" ValueProperty="Id"
+                                                                        Change=@(args => {OnFilter();}) />
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,14 +97,14 @@
                                                     <table class="table rounded table-striped">
                                                         <thead class=thead-light>
                                                             <tr>
-                                                                <th>@languageContainerService.Keys["Fecha de Recibido"]</th>
-                                                                <th>@languageContainerService.Keys["Fecha de Entrega "]</th>
-                                                                <th>@languageContainerService.Keys["Código del CNFV"]</th>
-                                                                <th>@languageContainerService.Keys["Código Externo"]</th>
+                                                                <th>@languageContainerService.Keys["Código CNFV"]</th>
                                                                 <th>@languageContainerService.Keys["Código Noti-Facedra"]</th>
-                                                                <th>@languageContainerService.Keys["Código ID Facedra"]</th>
-                                                                <th>@languageContainerService.Keys["Evaluador"]</th>
-                                                                <th>@languageContainerService.Keys["Fármaco Sospechoso"]</th>
+                                                                <th>@languageContainerService.Keys["ID Facedra"]</th>
+                                                                <th>@languageContainerService.Keys["Cod. Externo"]</th>
+                                                                <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
+                                                                <th>@languageContainerService.Keys["Evaluator"]</th>
+                                                                <th>@languageContainerService.Keys["Fecha de Recibido (CNFV)"]</th>
+                                                                <th>@languageContainerService.Keys["Fecha Entrega al Evaluador"]</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -117,14 +112,14 @@
                                                             @foreach (var dt in dataModel.Ldata)
                                                             {
                                                                 <tr>
-                                                                    <td scope="row">@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                    <td>@dt.CodCNFV</td>
+                                                                    <td>@dt.CodigoNotiFacedra</td>
+                                                                    <td>@dt.IdFacedra</td>
+                                                                    <td>@dt.CodExt</td>
+                                                                    <td>@(dt.VacunasDesc)</td>
+                                                                    <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
+                                                                    <td>@(dt.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "")</td>
                                                                     <td>@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                    <td>@(dt.CodigoCNFV)</td>
-                                                                    <td>@(dt.CodExterno)</td>
-                                                                    <td>@(dt.CodigoNotiFacedra)</td>
-                                                                    <td>@(dt.IdFacedra)</td>
-                                                                    <td>@(dt.Evaluador?.NombreCompleto)</td>
-                                                                    <td>@(dt.FarmacosDesc)</td>
                                                                     <td style="text-align:right">
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -179,12 +174,9 @@
 }
 else
 {
-    <Aig.FarmacoVigilancia.Components.Ram2.AddEdit Data="@dataModel.Data"></Aig.FarmacoVigilancia.Components.Ram2.AddEdit>
-
+    <Aig.FarmacoVigilancia.Components.ESAVI2.AddEdit Data="@dataModel.Data"></Aig.FarmacoVigilancia.Components.ESAVI2.AddEdit>
 }
-
 @if (DeleteDialog)
 {
     <Aig.FarmacoVigilancia.Components.DeleteConfirmDialog2></Aig.FarmacoVigilancia.Components.DeleteConfirmDialog2>
-
 }
