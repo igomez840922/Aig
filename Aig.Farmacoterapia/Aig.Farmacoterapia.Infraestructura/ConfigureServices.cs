@@ -262,7 +262,7 @@ namespace Aig.Farmacoterapia.Infrastructure
         }
         public static IServiceCollection AddHttpClient(this IServiceCollection services, IConfiguration configuration)
         {
-            var apiUrl = services.GetApplicationSettings(configuration).ApiUrl;
+            var apiUrl = services.GetApplicationSettings(configuration).BaseUrl;
             services.AddScoped<HttpClient>(s => {
                 var client = new HttpClient { BaseAddress = new Uri(apiUrl)};
                 client.DefaultRequestHeaders.AcceptLanguage.Clear();

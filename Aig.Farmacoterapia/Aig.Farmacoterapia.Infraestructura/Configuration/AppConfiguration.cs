@@ -8,7 +8,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Configuration
 {
     public class AppConfiguration
     {
-        public string ApiUrl { get; set; }
         public string ApiUsername { get; set; }
         public string ApiPassword { get; set; }
         public string BaseUrl { get; set; }
