@@ -84,7 +84,7 @@
                     <MudCard>
                         <MudCardContent>
 
-                            <FluentValidationValidator  @ref="_fluentValidationValidator" />
+                            <FluentValidationValidator  @ref="_profileFluentValidationValidator" />
                             <MudGrid>
 
 
@@ -146,7 +146,7 @@
 
                         </MudCardContent>
                         <MudCardActions>
-                           <MudButton Disabled="@(!Validated)"  ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Guardar</MudButton>
+                           <MudButton Disabled="@(!_profileValidated)"  ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Actualizar</MudButton>
                         </MudCardActions>
                     </MudCard>
                 </EditForm>
@@ -159,58 +159,93 @@
     </MudTabPanel>
     <MudTabPanel Text="Cambiar Contraseña">
      
+        <MudGrid>
+            <MudItem md="2"/>
+          
+            <MudItem md="8">
+                <EditForm Model="@_changePasswordRequestModel" OnValidSubmit="ChangePasswordAsyncSubmitAsync">
+                    <MudCard>
+                        <MudCardContent>
+
+                            <FluentValidationValidator  @ref="_passwordFluentValidationValidator" />
+                            <MudGrid>
+
+                                <MudItem sm="12" md="8">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _changePasswordRequestModel.NewPassword)" @bind-Value="_changePasswordRequestModel.NewPassword" Label="Contraseña" />
+                                </MudItem>
+                                <MudItem sm="12" md="8">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _changePasswordRequestModel.ConfirmNewPassword)" @bind-Value="_changePasswordRequestModel.ConfirmNewPassword" Label="Confirmar Contraseña" />
+                                </MudItem>
+                               
+                            </MudGrid>
+
+                        </MudCardContent>
+                        <MudCardActions>
+                           <MudButton Disabled="@(!_passwordValidated)"  ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Actualizar</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </EditForm>
+            </MudItem>
+
+            <MudItem md="2"/>
+
+        </MudGrid>
+
+
     </MudTabPanel>
 </MudTabs>
 
 
 @code {
-  
-    private FluentValidationValidator _fluentValidationValidator;
-    private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+
+    private FluentValidationValidator? _profileFluentValidationValidator;
+    private FluentValidationValidator? _passwordFluentValidationValidator;
+    private bool _profileValidated => _profileFluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+    private bool _passwordValidated => _passwordFluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
     public UpdateProfileRequest _profileUserModel { get; set; } = new UpdateProfileRequest();
-    public ChangePasswordRequest _changePasswordModel { get; set; } = new ChangePasswordRequest();
+    public ChangePasswordRequest _changePasswordRequestModel { get; set; } = new ChangePasswordRequest();
     string _profilePicture { get; set; } = string.Empty;
+    private bool _showPictureAlert = false;
     private IBrowserFile _file;
 
-    private async Task<byte[]> GetDataAsync(Stream stream)
-    {
-        byte[] data;
-        await using (var memoryStream = new MemoryStream())
-        {
-            await using var responseStream = stream;
-            await responseStream.CopyToAsync(memoryStream);
-            data = memoryStream.ToArray();
-        }
-        return data;
-    }
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
         _file = e.File;
         if (_file != null)
         {
-            long maxFileSize = 1048576 * 1;//1MB
-            var format = "image/png";
+            _showPictureAlert = false;
+            long maxFileSize = 1048576 * 1;//1 MB
             if (_file.Size <= maxFileSize)
             {
-                //var imageFile = await _file.RequestImageFileAsync(format, 400, 200);
-                //var buffer = new byte[imageFile.Size];
-                //await imageFile.OpenReadStream(maxAllowedSize: maxFileSize).ReadAsync(buffer);
-                //_profileUserModel.UploadRequest = new UploadObject {
-                //        FileName = $"{Guid.NewGuid()}.png",
-                //        Data = buffer,
-                //        Size = imageFile.Size,
-                //        UploadType = UploadType.Users,
-                //        Extension = ".png"
-                //    };
-                //_profilePicture=$"data:{format};base64,{Convert.ToBase64String(buffer)}";
+                var contentType = _file.ContentType;
+                var extension = Path.GetExtension(_file.Name);
+                var imageFile = await _file.RequestImageFileAsync(contentType, 400, 400);
+                var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                var request = new UploadObject{
+                    FileName = $"{Guid.NewGuid()}{extension}",
+                    Data = stream,
+                    Size = imageFile.Size,
+                    UploadType = UploadType.Users,
+                    ContentType = contentType,
+                    Extension = extension,
+                 };
+                if((await _accountManager.UploadProfilePictureAsync(request)).Succeeded) { 
+                    _profileUserModel.ProfilePicture= request.FileName;
+                    var buffer = new byte[imageFile.Size];
+                    await imageFile.OpenReadStream().ReadAsync(buffer);
+                    _profilePicture = $"data:{contentType};base64,{Convert.ToBase64String(buffer)}";
+                }
             }
+            else { _showPictureAlert = true; }
         }
     }
-    private void DeleteAsync()
+
+    private async Task DeleteAsync()
     {
-        _profilePicture= null;
-        _profileUserModel.UploadRequest = new UploadObject();
+        if (!string.IsNullOrEmpty(_profileUserModel.ProfilePicture) && 
+           ((await _accountManager.DeleteProfilePictureAsync(UploadType.Users, _profileUserModel.ProfilePicture)).Succeeded))
+              _profilePicture= null;
     }
 
     protected async Task ProfileSubmitAsync()
@@ -219,7 +254,25 @@
         if (response.Succeeded)
         {
             await _authenticationManager.Logout();
-            _snackBar.Add("Tu perfil ha sido actualizado. Por favor inicie sesión para continuar.", Severity.Success);
+            _snackBar.Add("Tu perfil ha sido actualizado correctamente. Por favor inicie sesión para continuar.", Severity.Success);
+            _navigationManager.NavigateTo("/");
+        }
+        else
+        {
+            foreach (var message in response.Messages)
+            {
+                _snackBar.Add(message, Severity.Error);
+            }
+        }
+    }
+
+    protected async Task ChangePasswordAsyncSubmitAsync()
+    {   
+        var response = await _accountManager.ChangePasswordAsync(_changePasswordRequestModel);
+        if (response.Succeeded)
+        {
+            await _authenticationManager.Logout();
+            _snackBar.Add("Tu contraseña ha sido actualizada correctamente. Por favor inicie sesión para continuar.", Severity.Success);
             _navigationManager.NavigateTo("/");
         }
         else
@@ -246,8 +299,10 @@
         _profileUserModel.FirstName = user.GetFirstName();
         _profileUserModel.LastName = user.GetLastName();
         _profileUserModel.PhoneNumber = user.GetPhoneNumber();
-        //_profileUserModel.UploadRequest = new UploadObject();
-        _profilePicture= $"{_appConfiguration.ApiUrl}{await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL)}";
+         _profileUserModel.ProfilePicture = user.GetAvatar();
+         var picture=await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL);
+         _profilePicture =string.IsNullOrEmpty(picture)?string.Empty: $"{_appConfiguration.ApiUrl}{picture}";
+        _changePasswordRequestModel.UserId = _profileUserModel.UserId;
     }
 
 }

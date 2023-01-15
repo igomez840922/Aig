@@ -1,12 +1,15 @@
 ﻿@using Aig.Farmacoterapia.Application.Dashboard.Event
-@using Aig.Farmacoterapia.Application.Medicament.Model
 @using Aig.Farmacoterapia.Infrastructure.Application
+@using Aig.Farmacoterapia.Public.Components
 @using Blazored.FluentValidation
 @inherits LayoutComponentBase
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @inject NavigationManager _navigation;
 @inject AppState _appState;
+@inject IJSRuntime _jsRuntime
 <PageTitle>Medicamentos</PageTitle>
+
+<MudDialogProvider />
 
 <style>
 .product-text h5 {
@@ -98,6 +101,19 @@
     border: 1px solid #e4e4e4 !important;
 }
 
+.custom-search {
+    color:#fff !important;
+    margin: 5px !important;
+    height: 30px !important;
+    width: 30px !important;
+    background: #9b9b9b !important;
+    border-radius: 50% !important;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+.custom-search:hover {
+    background: #e4573d !important;
+}
+
 .filterLabel {
     font-size: 16px;
     color: #848181;
@@ -149,12 +165,21 @@
                                 </li>
                                 <li>
                                    
-                                    <a target="__blank"
+                                   @*   <a target="__blank"
                                        title="Notas de seguridad de medicamentos"
                                        href="/disclaimer">
                                         <i class="fa fa-info"></i>
-                                        Descargo de Resonsabilidad
+                                        Descargo de Responsabilidad
                                     </a>
+                                   *@
+                                     <a
+                                       title="Notas de seguridad de medicamentos"
+                                       href="javascript:void(0)"
+                                       @onclick="() => InvokeModal()">
+                                        <i class="fa fa-info"></i>
+                                        Descargo de Responsabilidad
+                                    </a>
+
                                 </li>
                             </ul>
                         </div>
@@ -171,16 +196,26 @@
                         <a href="/"><img src="assets/img/logo/logo.png" alt="" /></a>
                     </div>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <div class="header-search header-02-search" style="margin-top: 15px;">
                      
                             <EditForm Model="this" class="header-search-form" OnValidSubmit="OnSearch">
                                 <FluentValidationValidator />
-                                <input type="text" @bind-value="@_searchText" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
+                                <input type="text" @bind-value="@_filter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
                                 <button type="submit"><i class="far fa-search"></i></button>
                             </EditForm>
+                             
                           
                     </div>
+           
+                </div>
+                 <div class="col-1">
+                    <div class="header-search header-02-search" style="margin-top: 15px;">
+                          <button class="custom-search" type="button"  @onclick="() => InvokeFilterModal()">
+                              <i class="fal fa-filter"></i>
+                           </button>
+                    </div>
+           
                 </div>
             </div>
         </div>
@@ -236,28 +271,53 @@
 
 @code {
 
-    protected string _searchText { get; set; } = string.Empty;
+    protected AppFilter _filter { get; set; } = new AppFilter();
     protected async override Task OnInitializedAsync()
     {    
         base.OnInitialized();
     }
-   
+
+
     private void OnSearch()
     {
         var path= _navigation.ToBaseRelativePath(_navigation.Uri).ToLower();
         if (path.Contains("details")||path.Contains("disclaimer")||path.Contains("notfound")) {  
-            _appState.SetSerachWithoutEvent(_searchText);
-             _navigation.NavigateTo("./");
+            _appState.SetSearchText(_filter,false);
+            _navigation.NavigateTo("./");
         }
         else
-           _appState.SetSerachText(_searchText);
+            _appState.SetSearchText(_filter);
     }
 
     private void OnSearchChanged()
     {  
-        if (string.IsNullOrEmpty(_searchText)) {
-            _appState.SetSerachText(_searchText);
+        if (string.IsNullOrEmpty(_filter.Term)) {
+             _appState.SetSearchText(_filter,false);
         }
     }
-       
+
+    private async Task InvokeModal()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = false, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Disclaimer>("DESCARGO DE RESPONSABILIDAD", parameters, options);
+        var result = await dialog.Result;
+    }
+
+    private async Task InvokeFilterModal()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Search>("FILTRO", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            var search= result.Data as AppFilter;
+            if (search != null){
+                _filter = search;
+                 _appState.SetSearchText(search,false);
+                OnSearch();
+            }
+        }
+    }
 }

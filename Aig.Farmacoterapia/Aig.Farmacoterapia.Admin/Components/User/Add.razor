@@ -1,14 +1,20 @@
 ﻿@inject IJSRuntime JsRuntime
+@using Aig.Farmacoterapia.Admin.Extensions
 @using Aig.Farmacoterapia.Application.User
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
 @using Aig.Farmacoterapia.Domain.Interfaces
+@using Aig.Farmacoterapia.Infrastructure.Configuration
 @using Aig.Farmacoterapia.Infrastructure.Identity
 @using Aig.Farmacoterapia.Infrastructure.Interfaces
 @using Blazored.FluentValidation
+@using Microsoft.Extensions.Options
 @inject IUserService _userService;
 @inject IUploadService _uploadService;
+@inject HttpClient _client;
+@inject IOptions<AppConfiguration> _config;
 @inject ISystemLogger _systemLogger;
 
 <div class="modal show fade" style="display:block;overflow-y:auto!important;" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
@@ -31,14 +37,14 @@
                                 <div class="col-lg-3">
                                     <div class="kt-avatar kt-avatar--outline">
 
-                                        @if (string.IsNullOrEmpty(ModelData.ProfilePicture))
+                                        @if (string.IsNullOrEmpty(_profilePicture))
                                         {
                                             <div class="kt-avatar__holder" style="background-image: url(assets/media/users/default.jpg)"></div>
                                         }
                                         else
                                         {
                                              
-                                            <img class="kt-avatar__holder" src="@ModelData.ProfilePicture"/>
+                                            <img class="kt-avatar__holder" src="@_profilePicture"/>
                                         }
                                         <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="avatar">
                                             <i class="fa fa-pen"></i>
@@ -145,6 +151,8 @@
     private IBrowserFile _imageFile;
     private bool showPictureFileInputAlert=false;
     private FluentValidationValidator fluentValidationValidator;
+    string _profilePicture { get; set; } = string.Empty;
+
     private async Task UploadPictureFiles(InputFileChangeEventArgs e)
     {
         _imageFile = e.File;
@@ -157,16 +165,26 @@
                 var format = "image/png";
                 if (_imageFile.Size <= maxFileSize)
                 {
-                     var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
-                     var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
-                     var request = new UploadObject{
-                            FileName = $"{Guid.NewGuid()}.png",
+                    var uploadType = UploadType.Users;
+                    var contentType = _imageFile.ContentType;
+                    var extension = Path.GetExtension(_imageFile.Name);
+                    var imageFile = await _imageFile.RequestImageFileAsync(format, 400, 200);
+                    var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                    var request = new UploadObject
+                        {
+                            FileName = $"{Guid.NewGuid()}{extension}",
                             Data = stream,
-                            Size = _imageFile.Size,
-                            UploadType = UploadType.Users,
-                            Extension = ".png"
+                            Size = imageFile.Size,
+                            UploadType = uploadType,
+                            ContentType = contentType,
+                            Extension = extension,
                         };
-                    ModelData.ProfilePicture = await _uploadService.UploadAsync(request);
+                     var result = await _client.PostFileAsync(request,_config.Value);
+                     if (result.Succeeded)
+                     {    ModelData.ProfilePicture = result.Data;
+                        _profilePicture=$"files/{uploadType.ToDescriptionString()}/{result.Data}";
+                     }
+
                 }
                 else { showPictureFileInputAlert = true; }
             }
@@ -177,12 +195,12 @@
         }
     }
 
-   
      private async Task DeletePictureAsync()
     {
-        await _uploadService.DeleteAsync(ModelData.ProfilePicture);
-         _imageFile = null;
+        await _uploadService.DeleteAsync($"files/users/{ModelData.ProfilePicture}");
+        _imageFile = null;
         ModelData.ProfilePicture = null;
+        _profilePicture = string.Empty;
     }
 
     protected async override Task OnInitializedAsync()
@@ -197,8 +215,6 @@
 
     private async Task SaveData()
     {
-        //var validationResults = fluentValidationValidator.Validate(opts => opts.IncludeAllRuleSets());
-        //if (!validationResults) return;
         var result = await _userService.SaveAsync(ModelData);
         if (!result.Succeeded)
            await JsRuntime.InvokeVoidAsync("ShowError",result.Messages.First());
@@ -206,6 +222,5 @@
            await OnClose.InvokeAsync(ModelData.Id);
            await JsRuntime.InvokeVoidAsync("ShowMessage",result.Messages.First());
         }
-
     }
 }

@@ -10,6 +10,8 @@ using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 using Aig.Farmacoterapia.Domain.Identity;
+using Aig.Farmacoterapia.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services
 {
@@ -66,20 +68,26 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IOptions<AppConfiguration> _appConfig;
+        private readonly ApplicationDbContext _dbContext;
         public IdentityService(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext dbContext,
             IOptions<AppConfiguration> appConfig)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _appConfig = appConfig;
             _appConfig = appConfig;
+            _dbContext = dbContext;
         }
 
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            //var user = await _userManager.FindByEmailAsync(model.Email);
+            var dbset = _dbContext.Set<ApplicationUser>();
+            var user = dbset.Where(p => p.Email == model.Email).FirstOrDefault();
+
             if (user == null)
             {
                 return await Result<TokenResponse>.FailAsync("User Not Found.");
@@ -100,13 +108,21 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
             user.RefreshToken = GenerateRefreshToken();
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
-            await _userManager.UpdateAsync(user);
+           
+            //await _userManager.UpdateAsync(user);
+            Update(user);
 
             var token = await GenerateJwtAsync(user);
             var response = new TokenResponse { Token = token, RefreshToken = user.RefreshToken, TokenExpiryTime = user.RefreshTokenExpiryTime, Avatar = user.ProfilePicture! };
+
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
+        public void Update(ApplicationUser item) 
+        {
+            _dbContext.Entry(item).CurrentValues.SetValues(item);
+            _dbContext.SaveChanges();
+        }
         public async Task<Result<TokenResponse>> GetRefreshTokenAsync(RefreshTokenRequest model)
         {
             if (model is null)
@@ -153,7 +169,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 new(ClaimTypes.Email, user.Email),
                 new(ClaimTypes.Name, user.FirstName),
                 new(ClaimTypes.Surname, user.LastName),
-                new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
+                new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty),
+                new(ClaimTypes.UserData, user.ProfilePicture ?? string.Empty)
             }
             .Union(userClaims)
             .Union(roleClaims)

@@ -46,7 +46,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             return dbPath;
         }
 
-
         //public async Task<string> UploadAsync(UploadObject request)
         //{
         //    var dbPath = string.Empty;
@@ -97,6 +96,19 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         //    return dbPath;
         //}
 
+        public async Task<bool> DeleteAsync(string relativePath)
+        {
+            if (string.IsNullOrEmpty(relativePath)) return false;
+            //var path = Path.Combine(_environment.WebRootPath, relativePath);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                return true;
+            }
+            return false;
+        }
+
         public async Task<byte[]> GetFileAsync(string fileName, UploadType uploadType)
         {
             var folder = uploadType.ToDescriptionString();
@@ -107,14 +119,16 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 return await File.ReadAllBytesAsync(fullPath);
             return Array.Empty<byte>();
         }
-        public async Task<bool> DeleteAsync(string relativePath)
+       
+        public async Task<bool> DeleteAsync(UploadType uploadType, string fileName)
         {
-            if (string.IsNullOrEmpty(relativePath)) return false;
-            //var path = Path.Combine(_environment.WebRootPath, relativePath);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
-            if (File.Exists(path))
-            {
-                File.Delete(path);
+            if (string.IsNullOrEmpty(fileName)) return false;
+            var folder = uploadType.ToDescriptionString();
+            var folderName = Path.Combine("Files", folder);
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            var fullPath = Path.Combine(pathToSave, fileName);
+            if (File.Exists(fullPath)){
+                File.Delete(fullPath);
                 return true;
             }
             return false;

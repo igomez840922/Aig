@@ -20,7 +20,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using System.Globalization;
 using System.Net;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 
@@ -245,13 +247,28 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddScoped<IUploadService, UploadService>();
         }
         public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
-        {   
+        {
             //Log4net
             XmlConfigurator.Configure(new FileInfo("log4net.config"));
             services.AddScoped<AppState>();
             services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
+            return services;
+        }
+        public static void AddInfrastructureMappings(this IServiceCollection services)
+        {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        }
+        public static IServiceCollection AddHttpClient(this IServiceCollection services, IConfiguration configuration)
+        {
+            var apiUrl = services.GetApplicationSettings(configuration).ApiUrl;
+            services.AddScoped<HttpClient>(s => {
+                var client = new HttpClient { BaseAddress = new Uri(apiUrl)};
+                client.DefaultRequestHeaders.AcceptLanguage.Clear();
+                client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
+                return client;
+            });
             return services;
         }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
@@ -264,6 +281,8 @@ namespace Aig.Farmacoterapia.Infrastructure
             AddRepositories(services);
             AddJwtAuthentication(services, configuration);
             RegisterSwagger(services);
+            AddInfrastructureMappings(services);
+            AddHttpClient(services, configuration);
 
             return services;
         }

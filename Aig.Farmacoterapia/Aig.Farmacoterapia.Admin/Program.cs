@@ -1,6 +1,7 @@
 using Aig.Farmacoterapia.Admin.Areas.Identity;
 using Aig.Farmacoterapia.Admin.Data;
 using Aig.Farmacoterapia.Application.Common.Middleware;
+using Aig.Farmacoterapia.Application.Features.Extensions;
 using Aig.Farmacoterapia.Infrastructure;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Aig.Farmacoterapia.Infrastructure.SeedData;
@@ -14,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Injecting services.
 builder.Services.RegisterInfrastructureServices(builder.Configuration);
 builder.Services.AddMudServices();
+builder.Services.AddApplicationLayer();
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

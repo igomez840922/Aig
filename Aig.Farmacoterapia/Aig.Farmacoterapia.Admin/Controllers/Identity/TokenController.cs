@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Aig.Farmacoterapia.Admin.Controllers.Identity
 {
-    [Route("api/identity/token")]
+    [Route("api/identity")]
     [ApiController]
     public class TokenController : ControllerBase
     {
@@ -20,8 +20,8 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Identity
             _systemLogger = systemLogger;
         }
 
-        [HttpPost]
-        public async Task<Result<TokenResponse>> Get(TokenRequest model)
+        [HttpPost("token")]
+        public async Task<Result<TokenResponse>> Token(TokenRequest model)
         {
             try
             {

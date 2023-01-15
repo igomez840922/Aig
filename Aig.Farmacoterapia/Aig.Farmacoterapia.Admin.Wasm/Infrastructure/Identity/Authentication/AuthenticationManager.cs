@@ -41,21 +41,17 @@ namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Identity.Authentication
 
         public async Task<IResult> Login(TokenRequest model)
         {
-            var uri = AppConstants.UserEndpoints.Login;
-            var response = await _httpClient.PostAsJsonAsync(AppConstants.UserEndpoints.Login, model);
+            var uri = AppConstants.AccountEndpoints.Login;
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.AccountEndpoints.Login, model);
             var result = await response.ToResult<TokenResponse>();
             if (result.Succeeded)
             {
                 var token = result.Data.Token;
                 var refreshToken = result.Data.RefreshToken;
-                var userImageURL = AppConstants.UserEndpoints.Avatar(result.Data.Avatar);//result.Data.UserImageURL;
+                var userImageURL = AppConstants.AccountEndpoints.Avatar(result.Data.Avatar);
                 await _localStorage.SetItemAsync(AppConstants.Local.AuthToken, token);
                 await _localStorage.SetItemAsync(AppConstants.Local.RefreshToken, refreshToken);
-                if (!string.IsNullOrEmpty(userImageURL))
-                {
-                    await _localStorage.SetItemAsync(AppConstants.Local.UserImageURL, userImageURL);
-                }
-
+                await _localStorage.SetItemAsync(AppConstants.Local.UserImageURL, string.IsNullOrEmpty(result.Data.Avatar)?string.Empty: userImageURL);
                 await ((AppStateProvider)this._authenticationStateProvider).StateChangedAsync();
 
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -83,7 +79,7 @@ namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Identity.Authentication
             var token = await _localStorage.GetItemAsync<string>(AppConstants.Local.AuthToken);
             var refreshToken = await _localStorage.GetItemAsync<string>(AppConstants.Local.RefreshToken);
 
-            var response = await _httpClient.PostAsJsonAsync(AppConstants.UserEndpoints.Refresh, new RefreshTokenRequest { Token = token, RefreshToken = refreshToken });
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.AccountEndpoints.Refresh, new RefreshTokenRequest { Token = token, RefreshToken = refreshToken });
 
             var result = await response.ToResult<TokenResponse>();
 

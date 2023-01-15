@@ -90,6 +90,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Files\" />
+    <Folder Include="Files\datasheet\" />
+    <Folder Include="Files\prospectus\" />
+    <Folder Include="Files\users\" />
     <Folder Include="Models\" />
   </ItemGroup>
 
@@ -99,12 +103,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Files\users\fcbc2787-f9eb-4821-a732-3ac8580132f4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

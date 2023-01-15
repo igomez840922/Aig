@@ -1,0 +1,46 @@
+﻿
+<MudDialog DisableSidePadding="true">
+    <DialogContent>
+        <MudContainer Style="max-height:650px; overflow-y: scroll">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <p align="justify">
+                        En cumplimiento de la Ley 1 de 10 de enero de 2001, Sobre Medicamentos y otros Productos para la Salud Humana, que señala como uno de sus objetivos el educar al consumidor sobre los efectos que producen los medicamentos para que los utilice en forma racional, indicamos que la información de este sitio web, incluida la información de los productos, está dirigida a profesionales de la salud y público general de Panamá, con el propósito de promover el uso racional de medicamentos en la población panameña. No obstante, esta información se ofrece solamente con carácter formativo y educativo, y no debe ser tomada como consejo médico, diagnóstico o tratamiento; si los usuarios o visitantes del Sitio Web necesitan asesoría médica específica, deben buscar y consultar a un profesional de la salud en el área de interés según las características de cada caso o paciente. El uso y acceso al Sitio Web se realizará bajo exclusiva responsabilidad del usuario.
+                    </p>
+                    <p align="justify">
+                        No se podrá utilizar o reutilizar esta información con fines comerciales sin que medie el consentimiento escrito de titular de comercialización del producto.
+                    </p>
+                    <p align="justify">
+                        Pese a que la Dirección Nacional de Farmacia y Drogas hace todo lo razonablemente posible para asegurarse que la información de esta página web sea exacta, la actualización de esta información depende del titular del producto, por lo que nos reservamos el derecho de hacer cambios en la información una vez el titular realice la actualización, o interrumpir esta página web en cualquier momento sin previo aviso. La Dirección Nacional de Farmacia y Drogas no asume ninguna responsabilidad u obligación por el contenido de la página web. ESTA INFORMACIÓN SE FACILITA «TAL CUAL ES OBTENIDA DE LAS MONOGRAFÍAS E INSERTOS DE LOS MEDICAMENTOS APROBADOS EN ESTA DIRECCIÓN». POR LO QUE NO NOS HACEMOS RESPONSABLES DE NINGUN DAÑO DIRECTO, INCIDENTAL, CONSECUENTE, INDIRECTO O PUNITIVO DERIVADO DEL ACCESO, USO O IMPOSIBILIDAD DE USAR ESTE SITIO, NI DE NINGÚN ERROR U OMISIÓN EN EL CONTENIDO DEL SITIO.
+                    </p>
+                    <p align="justify">
+                        POR SU SALUD, CONSULTE AL FARMACÉUTICO SOBRE EL USO ADECUADO DE LOS MEDICAMENTOS, ESPECIALMENTE LOS QUE PRESENTA LA LEYENDA VENTA BAJO RECETA MÉDICA O FRASE SIMILAR.
+                    </p>
+                    <p align="justify">
+                        Cualquier consulta adicional que requiera de un criterio técnico de la Dirección Nacional y Drogas referente al uso racional de los medicamentos, deberá ser ingresada por medio de los canales correspondientes.
+                    </p>
+                    <h5> Fundamento Legal:</h5>
+                    <p align="justify">
+                        Ley 1 de 10 de enero de 2001, artículos 2, 144, 145, 146,  147, 149 <br/>
+                        Ley 109 de 12 de noviembre de 2019, artículos 3, 4. <br/>
+                        Decreto Ejecutivo 115 de 16 de Agosto de 2022, artículos 2, 357, 365, 645
+                    </p>
+                </div>
+            </div>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary"  @onclick="() => Ok()">Aceptar</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+    private void Ok()
+    {
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+}

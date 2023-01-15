@@ -35,12 +35,11 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpPost("updateprofile")]
         public async Task<IActionResult> UpdateProfile(UpdateProfileRequest model) => Ok(await _mediator.Send(new UpdateProfileCommand(model)));
 
-        [HttpPut("changepassword")]
+        [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordRequest model)
         {
             var response = await _userService.ChangePasswordAsync(model);
             return Ok(response);
         }
-        
     }
 }
