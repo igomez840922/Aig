@@ -59,6 +59,7 @@
     }
     protected void OnSearch()
     {
-       MudDialog.Close(DialogResult.Ok(search));
+        search.Term = string.Empty;
+        MudDialog.Close(DialogResult.Ok(search));
     }
 }

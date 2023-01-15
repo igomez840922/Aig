@@ -89,9 +89,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 result =  await _userManager.Users
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
                                           .PaginatedByAsync(args.PageIndex, args.PageSize);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
             catch (Exception exc)
             {

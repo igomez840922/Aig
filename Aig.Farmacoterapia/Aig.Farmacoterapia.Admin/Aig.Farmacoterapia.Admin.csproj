@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Files\users\**" />
+    <Content Remove="Files\users\**" />
+    <EmbeddedResource Remove="Files\users\**" />
+    <None Remove="Files\users\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\Products\Index - Copy.razor" />
     <Content Remove="Pages\_Host - Copy.cshtml" />
   </ItemGroup>
@@ -93,7 +100,6 @@
     <Folder Include="Files\" />
     <Folder Include="Files\datasheet\" />
     <Folder Include="Files\prospectus\" />
-    <Folder Include="Files\users\" />
     <Folder Include="Models\" />
   </ItemGroup>
 

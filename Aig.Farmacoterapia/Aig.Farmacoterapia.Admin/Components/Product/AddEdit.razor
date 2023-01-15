@@ -560,7 +560,6 @@
                     var result = await _client.PostFileAsync(request,_config.Value);
                     if (result.Succeeded)
                          ModelData.DataSheetURL =result.Data;
-                        //ModelData.DataSheetURL = $"files/{uploadType.ToDescriptionString()}/{result.Data}";
                 }
                 else { showFileInputAlert = true; }
 
@@ -608,7 +607,6 @@
                     var result = await _client.PostFileAsync(request,_config.Value);
                     if (result.Succeeded)
                          ModelData.ProspectusURL =result.Data;
-                        //ModelData.ProspectusURL = $"files/{uploadType.ToDescriptionString()}/{result.Data}";
                 }
                 else { showProspectusFileInputAlert = true; }
             }
