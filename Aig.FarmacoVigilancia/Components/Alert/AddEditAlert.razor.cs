@@ -28,6 +28,8 @@ namespace Aig.FarmacoVigilancia.Components.Alert
         bool openAttachment { get; set; } = false;
         AttachmentTB attachment { get; set; } = null;
 
+        bool showSearchMedicine { get; set; } = false;
+
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
@@ -148,6 +150,35 @@ namespace Aig.FarmacoVigilancia.Components.Alert
                 Alerta.Adjunto.LAttachments = Alerta.Adjunto.LAttachments != null ? Alerta.Adjunto.LAttachments : new List<AttachmentTB>();
 
                 Alerta.Adjunto.LAttachments.Add(message.Attachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
+        //////////////////////
+        ///
+
+        /////////
+        ///        
+        protected async Task OpenSearchMedicine()
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+
+            showSearchMedicine = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void MedicineSearchEventHandler(MessageArgs args)
+        {
+            showSearchMedicine = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>();
+
+            if (message.Data != null)
+            {
+                Alerta.Producto = message.Data.nombre;
             }
 
             this.InvokeAsync(StateHasChanged);

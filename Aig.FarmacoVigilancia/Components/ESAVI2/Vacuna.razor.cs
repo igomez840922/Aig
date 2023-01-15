@@ -22,6 +22,8 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
         ILabsService labsService { get; set; }
         List<LaboratorioTB> lLaboratorios { get; set; } = new List<LaboratorioTB>();
 
+        bool showSearchMedicine { get; set; } = false;
+
         protected async override Task OnInitializedAsync()
         {
 
@@ -105,6 +107,39 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
         {
             await bus.Publish(new Aig.FarmacoVigilancia.Events.ESAVIVacuna.AddEditEvent { Data = null });
             await this.InvokeAsync(StateHasChanged);
+        }
+
+
+        /////////
+        ///        
+        protected async Task OpenSearchMedicine()
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+
+            showSearchMedicine = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void MedicineSearchEventHandler(MessageArgs args)
+        {
+            showSearchMedicine = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>();
+
+            if (message.Data != null)
+            {
+                //Data.RegSanitario = message.Data.numReg;
+                Data.VacunaComercial = message.Data.nombre;
+                //Data.Presentacion = message.Data.presentacion;
+                //Data.Concentracion = message.Data.concentracion;
+                //Data.FormaFarmaceutica = message.Data.formaFarmaceutica?.nombre ?? "";
+                Data.RegSanitario = string.IsNullOrEmpty(message.Data.numReg) ? Data.RegSanitario : message.Data.numReg;
+                //Data.principio = string.IsNullOrEmpty(message.Data.principio) ? Ips.PrincActivo : message.Data.principio;
+            }
+
+            this.InvokeAsync(StateHasChanged);
         }
 
     }

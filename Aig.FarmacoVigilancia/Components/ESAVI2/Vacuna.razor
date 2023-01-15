@@ -22,12 +22,19 @@
                         <div class="row clearfix">
                             <div class="col-sm-4">
                                 <label>@languageContainerService.Keys["Vacuna Sospechosa (Comercial)"]</label>
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <InputText class="form-control" @bind-Value="Data.VacunaComercial" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchMedicine();}"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <ValidationMessage For=@(() => Data.VacunaComercial) />
+                                @*<div class="form-group">
                                     <div class="form-line">
                                         <InputText class="form-control" @bind-Value="Data.VacunaComercial" />
                                         <ValidationMessage For=@(() => Data.VacunaComercial) />
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                             <div class="col-sm-8">
                                 <label>@languageContainerService.Keys["Tipo de Vacuna"]</label>
@@ -151,3 +158,7 @@
 
 }
 
+@if (showSearchMedicine)
+{
+    <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
+}

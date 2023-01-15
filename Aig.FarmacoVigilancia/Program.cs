@@ -128,6 +128,9 @@ builder.Services.AddScoped<INotaDestinoService, NotaDestinoService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ITerMedraService, TerMedraService>();
 builder.Services.AddScoped<IESAVI2Service, ESAVI2Service>();
+builder.Services.AddScoped<IApiConnectionService, ApiConnectionService>();
+builder.Services.AddScoped<ITokenMedService, TokenMedService>();
+builder.Services.AddScoped<IMedicamentosService, MedicamentosService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

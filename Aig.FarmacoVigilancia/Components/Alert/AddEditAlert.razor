@@ -109,12 +109,20 @@
 
                                     <div class="col-sm-6">
                                         <label>@languageContainerService.Keys["Product"]</label>
-                                        <div class="form-group">
+                                        <div class="input-group">
+                                            @*<input type="text" class="form-control" @bind="dataModel.Filter" name="Filter" />*@
+                                            <InputText class="form-control" @bind-Value="Alerta.Producto"/>
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchMedicine();}"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <ValidationMessage For=@(() => Alerta.Producto) />
+                                        @*<div class="form-group">
                                             <div class="form-line">
                                                 <InputText class="form-control" @bind-Value="Alerta.Producto" />
                                                 <ValidationMessage For=@(() => Alerta.Producto) />
                                             </div>
-                                        </div>
+                                        </div>*@
                                     </div>
 
                                 </div>
@@ -346,7 +354,11 @@
     {
         <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
     }
-
+    
+    @if (showSearchMedicine)
+{
+    <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
+}
 }
 
 <div class="modal-backdrop fade show"></div>
