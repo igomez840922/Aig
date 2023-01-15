@@ -176,7 +176,7 @@
                                         <label for="password">@languageContainerService.Keys["RigisteredDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaRegistro" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Ips.FechaRecepcion" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaRegistro" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaRegistro) />
                                             </div>
                                         </div>
@@ -307,9 +307,12 @@
                                             <ValidationMessage For=@(() => Ips.Prioridad) />
                                         </div>
                                     </div>
-                                </div>
+                                </div>                                
+                            </div>
+                            <div class="tab-pane" id="resumeInfo" role="tabpanel">
+                                <h4>@languageContainerService.Keys["ResumeInfo"]</h4>
                                 <div class="row clearfix">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label for="password">@languageContainerService.Keys["AsignEvaluationDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -318,20 +321,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label for="password">@languageContainerService.Keys["Evaluator"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
                                                 @*<InputSelect class="form-control" @bind-Value="Ips.EvaluadorId">
-                                                    <option value=""></option>
-                                                    @if (lPersons != null)
-                                                    {
-                                                        foreach (var dt in lPersons.Where(x => x.Evaluador))
-                                                        {
-                                                            <option value="@dt.Id">@dt.NombreCompleto</option>
-                                                        }
-                                                    }
-                                                </InputSelect>*@
+                                            <option value=""></option>
+                                            @if (lPersons != null)
+                                            {
+                                            foreach (var dt in lPersons.Where(x => x.Evaluador))
+                                            {
+                                            <option value="@dt.Id">@dt.NombreCompleto</option>
+                                            }
+                                            }
+                                            </InputSelect>*@
                                                 <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Ips.EvaluadorId
                                                                 AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
                                                                 Data=@(lPersons.Where(x => x.Evaluador)) TextProperty="NombreCompleto" ValueProperty="Id" />
@@ -339,11 +342,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="resumeInfo" role="tabpanel">
-                                <h4>@languageContainerService.Keys["ResumeInfo"]</h4>
-                                <div class="row clearfix">
                                     <div class="col-sm-4">
                                         <label for="password">@languageContainerService.Keys["ExecutiveResume"]</label>
                                         <div class="form-group">

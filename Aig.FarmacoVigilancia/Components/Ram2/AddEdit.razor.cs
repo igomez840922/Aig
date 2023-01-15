@@ -462,12 +462,18 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                 }
 
                 Data.FarmacosDesc = "";
+                Data.RamDesc = "";
                 if (Data.LFarmacos?.Count() > 0)
                 {
                     foreach (var dt in Data.LFarmacos)
                     {
                         Data.FarmacosDesc += string.Format("** {0} - {1} **", dt.FarmacoSospechosoDci, dt.FarmacoSospechosoComercial);
                         //Data.FarmacosDesc += string.Format("{0} - ", dt.FarmacoSospechosoDci);
+
+                        foreach (var ram in dt.LRams)
+                        {
+                            Data.RamDesc += string.Format("** {0} **", ram.Ram);
+                        }
                     }
                 }
 

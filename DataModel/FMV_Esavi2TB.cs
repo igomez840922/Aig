@@ -62,6 +62,10 @@ namespace DataModel
         [StringLength(500)]
         public string VacunasDesc { get => vacunasDesc; set => SetProperty(ref vacunasDesc, value); }
 
+        private string esaviDesc;
+        [StringLength(500)]
+        public string EsaviDesc { get => esaviDesc; set => SetProperty(ref esaviDesc, value); }
+
         //PROCEDENCIA DE LA NOTIFICACION
 
         //Tipo de Notificacion
@@ -163,5 +167,6 @@ namespace DataModel
         private AttachmentData adjunto;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
+
     }
 }

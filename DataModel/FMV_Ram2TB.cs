@@ -73,6 +73,10 @@ namespace DataModel
         [StringLength(500)]
         public string FarmacosDesc { get => farmacosDesc; set => SetProperty(ref farmacosDesc, value); }
 
+        private string ramDesc;
+        [StringLength(500)]
+        public string RamDesc { get => ramDesc; set => SetProperty(ref ramDesc, value); }
+
         /////////////////////////////
         ///PROCEDENCIA DE LA NOTIFICACION
 

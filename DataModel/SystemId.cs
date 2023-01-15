@@ -46,7 +46,9 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public bool Error { get => error; set => SetProperty(ref error, value); }
 
-
+        private bool viewDetail;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public bool ViewDetail { get => viewDetail; set => SetProperty(ref viewDetail, value); }
     }
 
 }

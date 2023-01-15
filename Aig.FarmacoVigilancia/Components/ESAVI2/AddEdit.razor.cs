@@ -132,12 +132,17 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
                 }
 
                 Data.VacunasDesc = "";
-                if(Data.LVacunas?.Count() > 0)
+                Data.EsaviDesc = "";
+                if (Data.LVacunas?.Count() > 0)
                 {
                     foreach(var dt in Data.LVacunas)
                     {
                         Data.VacunasDesc += string.Format("** {0} - {1} **", dt.TipoVacuna?.Nombre??"",dt.VacunaComercial);
                         //Data.VacunasDesc += string.Format("{0} - ", dt.TipoVacuna?.Nombre ?? "");
+                        foreach (var esav in dt.LEsavis)
+                        {
+                            Data.EsaviDesc += string.Format("** {0} **", esav.EsaviDescripcion);
+                        }
                     }
                 }
 

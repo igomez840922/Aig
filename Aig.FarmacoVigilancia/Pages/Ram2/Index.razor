@@ -99,7 +99,7 @@
                                             <!--begin::Section-->
                                             <div class="kt-section">
                                                 <div class="table-responsive">
-                                                    <table class="table rounded table-striped">
+                                                    <table class="table rounded">
                                                         <thead class=thead-light>
                                                             <tr>
                                                                 <th>@languageContainerService.Keys["Fecha de Recibido"]</th>
@@ -124,11 +124,11 @@
                                                                     <td>@(dt.CodigoNotiFacedra)</td>
                                                                     <td>@(dt.IdFacedra)</td>
                                                                     <td>@(dt.Evaluador?.NombreCompleto)</td>
-                                                                    <td>@(dt.FarmacosDesc)</td>
                                                                     <td style="text-align:right">
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                                             <div class="dropdown-menu">
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() =>dt.ViewDetail=!dt.ViewDetail"><i class="fa fa-eye"></i>@languageContainerService.Keys["Detalle"]</a>
                                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
                                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
                                                                             </div>
@@ -136,6 +136,90 @@
                                                                         <!-- /btn-group -->
                                                                     </td>
                                                                 </tr>
+                                                                @if (dt.LFarmacos?.Count > 0 && dt.ViewDetail)
+                                                                {
+                                                                    <tr class="table-warning">
+                                                                        <td colspan="8" style="padding:0px!important;">
+                                                                            <table class="table">
+                                                                                <thead class=thead-light>
+                                                                                    <tr>
+                                                                                        <th>@languageContainerService.Keys["Fármacos Sospechosos"]</th>
+                                                                                        <th>@languageContainerService.Keys["Reacciones Adversas"]</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    @foreach (var farm in dt.LFarmacos)
+                                                                                    {
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <table class="table table-borderless">
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Nombre Comercial"]</th>
+                                                                                                            <td>@(farm.FarmacoSospechosoComercial)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Nombre DCI"]</th>
+                                                                                                            <td>@(farm.FarmacoSospechosoDci)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["ATC"]</th>
+                                                                                                            <td>@(farm.Atc)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Sub-Grupo Terapéutico"]</th>
+                                                                                                            <td>@(farm.SubGrupoTerapeutico)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Dosis, Frec., Via de Admin."]</th>
+                                                                                                            <td>@(farm.ViaAdministracion)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Indicación"]</th>
+                                                                                                            <td>@(farm.Indicacion)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Fecha de Tratamineto"]</th>
+                                                                                                            <td>@(farm.FechaTratamiento?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </td>
+                                                                                            <td style="vertical-align:top!important;">
+                                                                                                @if (farm.LRams?.Count > 0)
+                                                                                                {
+                                                                                                    <table class="table table-borderless table-striped">
+                                                                                                        <thead class=thead-light>
+                                                                                                            <tr>
+                                                                                                                <th>@languageContainerService.Keys["RAM"]</th>
+                                                                                                                <th>@languageContainerService.Keys["SOC"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Término MedDRA"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Fecha de RAM"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Desenlace"]</th>
+                                                                                                            </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            @foreach (var ram in farm.LRams)
+                                                                                                            {
+                                                                                                                <tr>
+                                                                                                                    <td scope="row">@(ram.Ram)</td>
+                                                                                                                    <td>@(ram.Soc)</td>
+                                                                                                                    <td>@(ram.TerWhoArt)</td>
+                                                                                                                    <td>@(ram.FechaRam?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                                    <td>@(DataModel.Helper.Helper.GetDescription(ram.Desenlace))</td>
+                                                                                                                </tr>
+                                                                                                            }
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                }
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    }
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                }                                                                
                                                             }
                                                         </tbody>
                                                     </table>

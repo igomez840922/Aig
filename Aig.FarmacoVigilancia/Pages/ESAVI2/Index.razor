@@ -94,14 +94,13 @@
                                             <!--begin::Section-->
                                             <div class="kt-section">
                                                 <div class="table-responsive">
-                                                    <table class="table rounded table-striped">
+                                                    <table class="table rounded">
                                                         <thead class=thead-light>
                                                             <tr>
                                                                 <th>@languageContainerService.Keys["Código CNFV"]</th>
                                                                 <th>@languageContainerService.Keys["Código Noti-Facedra"]</th>
                                                                 <th>@languageContainerService.Keys["ID Facedra"]</th>
                                                                 <th>@languageContainerService.Keys["Cod. Externo"]</th>
-                                                                <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
                                                                 <th>@languageContainerService.Keys["Evaluator"]</th>
                                                                 <th>@languageContainerService.Keys["Fecha de Recibido (CNFV)"]</th>
                                                                 <th>@languageContainerService.Keys["Fecha Entrega al Evaluador"]</th>
@@ -116,7 +115,6 @@
                                                                     <td>@dt.CodigoNotiFacedra</td>
                                                                     <td>@dt.IdFacedra</td>
                                                                     <td>@dt.CodExt</td>
-                                                                    <td>@(dt.VacunasDesc)</td>
                                                                     <td>@(dt.Evaluador?.NombreCompleto ?? "")</td>
                                                                     <td>@(dt.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "")</td>
                                                                     <td>@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
@@ -124,6 +122,7 @@
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                                             <div class="dropdown-menu">
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() =>dt.ViewDetail=!dt.ViewDetail"><i class="fa fa-eye"></i>@languageContainerService.Keys["Detalle"]</a>
                                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt.Id)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
                                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
                                                                             </div>
@@ -131,6 +130,166 @@
                                                                         <!-- /btn-group -->
                                                                     </td>
                                                                 </tr>
+                                                                @if (dt.LVacunas?.Count > 0 && dt.ViewDetail)
+                                                                {
+                                                                    <tr class="table-warning">
+                                                                        <td colspan="8" style="padding:0px!important;">
+                                                                            <table class="table">
+                                                                                    <thead class=thead-light>
+                                                                                        <tr>
+                                                                                            <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
+                                                                                            <th>@languageContainerService.Keys["ESAVI"]</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @foreach (var vacun in dt.LVacunas)
+                                                                                        {
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                <table class="table table-borderless">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                            <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
+                                                                                                            <td>@(vacun.VacunaComercial)</td>
+                                                                                                            </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Tipo de Vacuna"]</th>
+                                                                                                            <td>@(vacun.TipoVacuna?.Nombre ?? "")</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Fabricante"]</th>
+                                                                                                            <td>@(vacun.Laboratorio?.Nombre??"")</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Lote"]</th>
+                                                                                                            <td>@(vacun.Lote)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Fecha de Exp"]</th>
+                                                                                                            <td>@(vacun.FechaExp?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Reg. Sanitario"]</th>
+                                                                                                            <td>@(vacun.RegSanitario)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Fecha de Vacunación"]</th>
+                                                                                                            <td>@(vacun.FechaVacunacion?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                        </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                                <td style="vertical-align:top!important;">
+                                                                                                    @if (vacun.LEsavis?.Count > 0)
+                                                                                                    {
+                                                                                                    <table class="table table-borderless table-striped">
+                                                                                                            <thead class=thead-light>
+                                                                                                                <tr>
+                                                                                                                    <th>@languageContainerService.Keys["Hay ESAVI?"]</th>
+                                                                                                                    <th>@languageContainerService.Keys["ESAVI "]</th>
+                                                                                                                    <th>@languageContainerService.Keys["Fecha de ESAVI"]</th>
+                                                                                                                    <th>@languageContainerService.Keys["Desenlace"]</th>
+                                                                                                                    <th>@languageContainerService.Keys["SOC"]</th>
+                                                                                                                    <th>@languageContainerService.Keys["Término MedDRA"]</th>
+                                                                                                                    <th>@languageContainerService.Keys["Intensidad"]</th>
+                                                                                                                    <th>@languageContainerService.Keys["Gravedad"]</th>
+                                                                                                                </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                                @foreach (var esavi in vacun.LEsavis)
+                                                                                                                {
+                                                                                                                    <tr>
+                                                                                                                        <td scope="row">@(DataModel.Helper.Helper.GetDescription(esavi.HayEsavi))</td>
+                                                                                                                        <td>@(esavi.EsaviDescripcion)</td>
+                                                                                                                        <td>@(esavi.FechaEsavi?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                                        <td>@(DataModel.Helper.Helper.GetDescription(esavi.Desenlace))</td>
+                                                                                                                        <td>@(esavi.Soc)</td>
+                                                                                                                        <td>@(esavi.TerWhoArt)</td>
+                                                                                                                        <td>@(esavi.IntensidadEsavi?.Nombre ?? "")</td>
+                                                                                                                        <td>@(esavi.Gravedad)</td>
+                                                                                                                    </tr>
+                                                                                                                }
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    }
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        }
+                                                                                    </tbody>
+                                                                                </table>  
+                                                                        </td>
+                                                                    </tr>
+
+
+                                                                    @*<tr>
+                                                                        <td colspan="9">
+                                                                            <table class="table rounded">
+                                                                                <thead class=thead-light>
+                                                                                    <tr>
+                                                                                        <th>@languageContainerService.Keys["Vacuna Sospechosa"]</th>
+                                                                                        <th>@languageContainerService.Keys["Tipo de Vacuna"]</th>
+                                                                                        <th>@languageContainerService.Keys["Fabricante"]</th>
+                                                                                        <th>@languageContainerService.Keys["Lote"]</th>
+                                                                                        <th>@languageContainerService.Keys["Fecha de Exp."]</th>
+                                                                                        <th>@languageContainerService.Keys["Reg. Sanitario"]</th>
+                                                                                        <th>@languageContainerService.Keys["Fecha de Vacunación"]</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    @foreach (var vacun in dt.LVacunas)
+                                                                                    {
+                                                                                        <tr>
+                                                                                            <td scope="row">@(vacun.VacunaComercial)</td>
+                                                                                            <td>@(vacun.TipoVacuna?.Nombre??"")</td>
+                                                                                            <td>@(vacun.Laboratorio?.Nombre??"")</td>
+                                                                                            <td>@(vacun.Lote)</td>
+                                                                                            <td>@(vacun.FechaExp?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                            <td>@(vacun.RegSanitario)</td>
+                                                                                            <td>@(vacun.FechaVacunacion?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                        </tr>
+                                                                                        @if (vacun.LEsavis?.Count > 0)
+                                                                                        {                                                                                           
+                                                                                            <tr>
+                                                                                                <td colspan="7">
+                                                                                                    <table class="table rounded">
+                                                                                                        <thead class=thead-light>
+                                                                                                            <tr>
+                                                                                                                <th>@languageContainerService.Keys["Hay ESAVI?"]</th>
+                                                                                                                <th>@languageContainerService.Keys["ESAVI "]</th>
+                                                                                                                <th>@languageContainerService.Keys["Fecha de ESAVI"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Desenlace"]</th>
+                                                                                                                <th>@languageContainerService.Keys["SOC"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Término MedDRA"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Intensidad"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Gravedad"]</th>
+                                                                                                            </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            @foreach (var esavi in vacun.LEsavis)
+                                                                                                            {
+                                                                                                                <tr>
+                                                                                                                    <td scope="row">@(DataModel.Helper.Helper.GetDescription(esavi.HayEsavi))</td>
+                                                                                                                    <td>@(esavi.EsaviDescripcion)</td>
+                                                                                                                    <td>@(esavi.FechaEsavi?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                                    <td>@(DataModel.Helper.Helper.GetDescription(esavi.Desenlace))</td>
+                                                                                                                    <td>@(esavi.Soc)</td>
+                                                                                                                    <td>@(esavi.TerWhoArt)</td>
+                                                                                                                    <td>@(esavi.IntensidadEsavi?.Nombre??"")</td>
+                                                                                                                    <td>@(esavi.Gravedad)</td>
+                                                                                                                </tr>
+                                                                                                            }
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        }
+                                                                                    }
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                *@
+                                                                }
                                                             }
                                                         </tbody>
                                                     </table>
