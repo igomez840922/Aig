@@ -97,12 +97,19 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <label>@languageContainerService.Keys["CommercialName"]</label>
-                                        <div class="form-group">
+                                        <div class="input-group">
+                                            <InputText class="form-control" @bind-Value="Ips.NomComercial" />
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchMedicine();}"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <ValidationMessage For=@(() => Ips.NomComercial) />
+                                        @*<div class="form-group">
                                             <div class="form-line">
                                                 <InputText class="form-control" @bind-Value="Ips.NomComercial" />
                                                 <ValidationMessage For=@(() => Ips.NomComercial) />
                                             </div>
-                                        </div>
+                                        </div>*@
                                     </div>
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["ActivePrinciple"]</label>
@@ -804,6 +811,10 @@
         <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
     }
 
+    @if (showSearchMedicine)
+    {
+        <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
+    }
 }
 
 <div class="modal-backdrop fade show"></div>

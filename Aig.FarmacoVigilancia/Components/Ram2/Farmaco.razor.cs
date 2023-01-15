@@ -6,6 +6,7 @@ using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
+using Aig.FarmacoVigilancia.Pages.IPS;
 
 namespace Aig.FarmacoVigilancia.Components.Ram2
 {    
@@ -17,8 +18,9 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         
         [Parameter]
         public DataModel.FMV_RamFarmacoTB Data { get; set; }
-                
-        
+
+        bool showSearchMedicine { get; set; } = false;
+
         protected async override Task OnInitializedAsync()
         {
 
@@ -125,6 +127,35 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
             await this.InvokeAsync(StateHasChanged);
         }
 
+
+        /////////
+        ///        
+        protected async Task OpenSearchMedicine()
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+
+            showSearchMedicine = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void MedicineSearchEventHandler(MessageArgs args)
+        {
+            showSearchMedicine = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>();
+
+            if (message.Data != null)
+            {
+                //Data.RegSanitario = message.Data.numReg;
+                Data.FarmacoSospechosoComercial = message.Data.nombre;
+                Data.ViaAdministracion = message.Data.viaAdministracion?.nombre??"";
+                //Data.principio = string.IsNullOrEmpty(message.Data.principio) ? Ips.PrincActivo : message.Data.principio;
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
 
     }
 

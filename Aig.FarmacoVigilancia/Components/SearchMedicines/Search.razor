@@ -1,0 +1,123 @@
+﻿@using DataModel.Helper;
+
+
+<!-- Modal Creat/Edit -->
+@if (dataRequest != null && OpenDialog)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@languageContainerService.Keys["Buscar Medicamento"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row clearfix">
+                        <div class="col-12">
+                            <div class="kt-portlet__body">
+                                <EditForm Model="@dataRequest" OnValidSubmit="FetchData" class="kt-form kt-form--label-right">
+                                    <DataAnnotationsValidator />
+                                    <div class="form-group row">
+                                        <div class="col-lg-4">
+                                            <label>@languageContainerService.Keys["Search"]</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" @bind="dataRequest.term" name="Filter" />
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </EditForm>
+                            </div>
+
+                            @if (dataModel?.data?.Count > 0)
+                            {
+                                <div class="kt-portlet__body">
+                                    <!--begin::Section-->
+                                    <div class="kt-section">
+                                        <div class="table-responsive">
+                                            <table class="table rounded table-striped">
+                                                <thead class=thead-light>
+                                                    <tr>
+                                                        <th>@languageContainerService.Keys["Num. Registro"]</th>
+                                                        <th>@languageContainerService.Keys["Name"]</th>
+                                                        <th>@languageContainerService.Keys["Envase"]</th>
+                                                        <th>@languageContainerService.Keys["Principio Activo"]</th>
+                                                        <th>@languageContainerService.Keys["Concentración"]</th>
+                                                        <th>@languageContainerService.Keys["Forma Farmaceutica"]</th>
+                                                        <th>@languageContainerService.Keys["Via de Admin."]</th>
+                                                        <th>@languageContainerService.Keys["Fabricante"]</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var dt in dataModel.data)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.numReg</td>
+                                                            <td>@dt.nombre</td>
+                                                            <td>@dt.envase</td>
+                                                            <td>@dt.principio</td>
+                                                            <td>@dt.concentracion</td>
+                                                            <td>@(dt.formaFarmaceutica?.nombre ?? "")</td>
+                                                            <td>@(dt.viaAdministracion?.nombre ?? "")</td>
+                                                            <td>@(dt.fabricante?.nombre ?? "")</td>
+                                                            <td style="text-align:right">
+                                                                <div class="btn-group">
+                                                                    <button type="button" class="btn btn-secondary" @onclick="(e)=>{SelectData(dt);}">@languageContainerService.Keys["Select"]</button>
+
+                                                                </div>
+                                                                <!-- /btn-group -->
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!--end::Section-->
+                                </div>
+                               @* <div class="kt-portlet__foot">
+                                    <BlazorPager CurrentPage="@(dataModel.PagIdx + 1)"
+                                                 PageCount="@dataModel.PagesCount"
+                                                 VisiblePages="@(dataModel.PagesCount>3?4:dataModel.PagesCount)"
+                                                 ShowFirstLast="true"
+                                                 ShowPageNumbers="true"
+                                                 FirstText="<<"
+                                                 LastText=">>"
+                                                 NextText=">"
+                                                 PreviousText="<"
+                                                 OnPageChanged="(async e => {
+						                     if (dataModel.PagesCount < e)
+							                    return;
+						                    dataModel.PagIdx = e - 1;
+						                    await FetchData();})">
+                                    </BlazorPager>
+                                </div>*@
+
+                            }
+                            <!--end::Form-->
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect"
+                    @onclick="(e)=>{Cancel();}">
+                        @languageContainerService.Keys["Cancel"]
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+}
+
