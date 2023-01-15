@@ -1,0 +1,232 @@
+﻿@page "/users"
+@using Aig.Farmacoterapia.Admin.Wasm.Components.User
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers.User
+@using Aig.Farmacoterapia.Domain.Models
+@attribute [Authorize]
+@inject IUserManager _manager;
+
+<PageTitle>Users</PageTitle>
+
+@if (_loading)
+{
+    <div style="position:absolute; top: 45vh;left: 0px; width: 100%; text-align: center">
+        <div align="center" class="cssload-fond">
+            <div class="cssload-container-general">
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_1"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_2"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_3"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_4"> </div></div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<MudCard Elevation="25">
+    <MudCardContent>
+
+        <MudGrid>
+            <MudItem md="12">
+                <MudToolBar Style="height:25px !important;">
+                    <MudText Color="Color.Primary">
+                        <MudIcon Icon="@Icons.Material.Filled.Groups" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                        Usuarios
+                    </MudText>
+                    <MudSpacer />
+                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                       <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => InvokeModal())"/>
+                    </MudTooltip>
+                </MudToolBar>
+            </MudItem>
+        </MudGrid>
+
+    </MudCardContent>
+
+</MudCard>
+
+<EditForm Model="this" OnValidSubmit="OnSearch" style="margin-top:10px !important;" >
+   <MudCard Elevation="25">
+        <MudCardContent>
+
+            <MudGrid>
+
+                <MudItem md="4">
+                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_searchString" Label="Buscar" />
+                </MudItem>
+                <MudItem md="4">
+                    <MudGrid>
+                        <MudItem md="6" Style="margin-top: 10px !important;">
+                            <MudTooltip Text="Buscar" Arrow="true" Placement="Placement.Top" Color="Color.Default">
+                                <MudIconButton Disabled="@(_loading)" Style="margin-right: 8px;" ButtonType="ButtonType.Submit" Icon="@Icons.Material.Filled.Search" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
+                            </MudTooltip>
+                            <MudTooltip Text="Eliminar" Arrow="true" Placement="Placement.Top" Color="Color.Default" Style="margin-top: 10px !important;">
+                                <MudIconButton Disabled="@(_loading)" ButtonType="ButtonType.Button" Icon="@Icons.Material.Filled.Clear" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="()=>OnReset()" />
+                            </MudTooltip>
+                        </MudItem>
+                        <MudItem md="6">
+                        </MudItem>
+                    </MudGrid>
+
+                </MudItem>
+                <MudItem md="4">
+
+                </MudItem>
+
+            </MudGrid>
+
+        </MudCardContent>
+
+    </MudCard>
+</EditForm>
+
+
+@if (_paginatedResult != null && _paginatedResult.Data.Count > 0)
+{
+    <MudGrid Style="margin-top:5px !important;" Spacing="5" >
+        @foreach (var dt in _paginatedResult.Data)
+        {
+            <MudItem>
+                <MudCard Elevation="25" Class="d-flex">
+                    <MudCardHeader>
+                        <CardHeaderAvatar>
+
+                            @if (string.IsNullOrEmpty(dt.ProfilePicture))
+                            {
+
+                                <MudAvatar Size="Size.Large" Color="Color.Secondary"> @dt.FullName?[..1]?.ToUpper() </MudAvatar>
+                            }
+                            else
+                            {
+                                <MudAvatar Size="Size.Large" Image="@dt.ProfilePicture"></MudAvatar>
+                            }
+
+                        </CardHeaderAvatar>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.body1">@dt.FullName</MudText>
+                            <MudText Typo="Typo.body2">
+                                <MudIcon Icon="@Icons.Material.Filled.Email" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                                @dt.Email
+                            </MudText>
+                            <MudText Typo="Typo.body2">
+                                <MudIcon Icon="@Icons.Material.Filled.Phone" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                                @dt.PhoneNumber
+                            </MudText>
+                        </CardHeaderContent>
+                        <CardHeaderActions>
+                            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                                <MudMenuItem Icon="@Icons.Material.Filled.Edit">Editar</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Key">Contraseña</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Delete">Eliminar</MudMenuItem>
+                            </MudMenu>
+                        </CardHeaderActions>
+                    </MudCardHeader>
+                </MudCard>
+            </MudItem>
+
+        }
+    </MudGrid>
+
+    <MudGrid>
+        <MudItem>
+            <MudPagination Selected="@_paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@_paginatedResult.TotalPages" Class="pa-4" />
+        </MudItem>
+    </MudGrid>
+
+}
+
+
+
+@code {
+
+    private PaginatedResult<UserModelOutput> _paginatedResult;
+    private MudTable<UserModelOutput> _table;
+    bool _loading = false;
+    private string _searchString;
+
+    private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        try
+        {
+            _searchString = string.Empty;
+            _paginatedResult = new PaginatedResult<UserModelOutput>();
+            await DoFetchData();
+        }
+        catch (Exception ex)
+        {
+            // _systemLogger.Error(ex.Message);
+        }
+
+        base.OnInitialized();
+    }
+
+    private async Task DoFetchData()
+    {
+
+        await RefresView(true);
+        var sorting = new List<SortingOption>() { new SortingOption { Field = "Name", Direction = SortingDirection.ASC } };
+        var filters = new List<FilteringOption>();
+        if (!string.IsNullOrEmpty(_searchString))
+            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = _searchString.Trim() });
+        var args = new PageSearchArgs()
+            {
+                PageIndex = _paginatedResult.CurrentPage,
+                PageSize = _paginatedResult.PageSize,
+                SortingOptions = sorting,
+                FilteringOptions = filters
+            };
+        _paginatedResult = await _manager.SearchAsync(args);
+        _paginatedResult.Data = _paginatedResult.Data.Select(w => { w.ProfilePicture = string.IsNullOrEmpty(w.ProfilePicture) ? string.Empty : $"{_appConfiguration.ApiUrl}{AppConstants.AccountEndpoints.Avatar(w.ProfilePicture!)}"; return w; }).ToList();
+        await RefresView(false);
+    }
+
+    private async void OnSearch()
+    {
+        await DoFetchData();
+    }
+
+    private async Task PageChanged(int i)
+    {
+        _paginatedResult.CurrentPage = i;
+        await DoFetchData();
+    }
+
+    private async void OnReset()
+    {
+        _searchString = string.Empty;
+        await DoFetchData();
+    }
+
+      private async Task InvokeModal(string id = "")
+        {
+            var parameters = new DialogParameters();
+            //if (id != 0)
+            //{
+            //    var product = _pagedData.FirstOrDefault(c => c.Id == id);
+            //    if (product != null)
+            //    {
+            //        parameters.Add(nameof(AddEditProductModal.AddEditProductModel), new AddEditProductCommand
+            //        {
+            //            Id = product.Id,
+            //            Name = product.Name,
+            //            Description = product.Description,
+            //            Rate = product.Rate,
+            //            BrandId = product.BrandId,
+            //            Barcode = product.Barcode
+            //        });
+            //    }
+            //}
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Add>(string.IsNullOrEmpty(id) ? "Create" : "Edit", parameters, options);
+            var result = await dialog.Result;
+            //if (!result.Cancelled)
+            //{
+            //    OnSearch("");
+            //}
+        }
+}

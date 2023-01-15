@@ -1,0 +1,275 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Admin.Wasm.Extensions
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Identity
+@using Blazored.FluentValidation
+<style>
+    .container-image {
+        border: 1px solid #adb5bd;
+        width: 100px;
+        height: 100px;
+        border-radius: 0.42rem;
+    }
+
+    .outer {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 150px !important;
+        max-height: 150px !important;
+        background-color: transparent;
+        position: relative;
+        background-size: cover;
+        border-radius: 0.42rem;
+    }
+
+    .inner-edit {
+        background-color: #594ae2ff;
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+    }
+
+        .inner-edit:hover {
+            background-color: #5555ff;
+        }
+
+        .inner-edit label {
+            background-color: transparent;
+            cursor: pointer !important;
+            width: 100%;
+            height: 100%;
+        }
+
+            .inner-edit label svg {
+                margin: 3px;
+            }
+
+    .inner-delete {
+        background-color: #E91E63;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        position: absolute;
+        bottom: -10px;
+        right: -10px;
+    }
+
+        .inner-delete label {
+            background-color: transparent;
+            cursor: pointer !important;
+            width: 100%;
+            height: 100%;
+        }
+
+            .inner-delete label svg {
+                margin: 3px;
+            }
+
+    .inputfile {
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        margin-top: 3px;
+    }
+     
+ 
+</style>
+<EditForm Model="@_userModel" OnValidSubmit="SubmitAsync">
+     <FluentValidationValidator @ref="_fluentValidation" />
+    <MudDialog>
+        <TitleContent> Nuevo </TitleContent>
+        <DialogContent>
+   
+            <MudGrid>
+                <MudItem  md="2">
+
+                    <MudGrid>
+
+                        <MudItem md="12">
+                            <MudItem>
+
+                                <div class="container-image">
+
+                                    @if (string.IsNullOrEmpty(_profilePicture))
+                                    {
+                                        <div class="outer" style="background-image: url(/media/user.png);">
+                                            <div class="inner-edit">
+                                                <label>
+                                                    <InputFile Class="inputfile" id="fileInput" OnChange="UploadFiles" />
+                                                    <MudIcon Icon="@Icons.Material.Filled.AttachFile" Style="color:#fff;" />
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="outer" style="background-image: url(@_profilePicture);">
+                                            <div class="inner-edit">
+                                                <label>
+                                                    <InputFile Class="inputfile" id="fileInput" OnChange="UploadFiles" />
+                                                    <MudIcon Icon="@Icons.Material.Filled.AttachFile" Style="color:#fff;" />
+                                                </label>
+                                            </div>
+                                            <div class="inner-delete">
+                                                <label>
+                                                    <MudIcon @onclick="DeleteAsync" Icon="@Icons.Material.Filled.DeleteOutline" Style="color:#fff;" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </MudItem>
+
+                        </MudItem>
+
+                    </MudGrid>
+
+                </MudItem>
+
+                <MudItem md="10">
+                    <MudItem>
+                        <MudGrid>
+
+                            <MudItem xs="12" md="6">
+                                <h6>Datos de acceso</h6>
+                                <MudItem  md="12" Style="padding:3px !important">
+                                    <MudTextField AutoFocus="true" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.UserName)" @bind-Value="_userModel.UserName" Label="Correo" />
+                                </MudItem>
+                                <MudItem md="12" Style="padding:3px !important">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.Password)" @bind-Value="_userModel.Password" Label="Nombre" />
+                                </MudItem>
+                                <MudItem md="12" Style="padding:3px !important">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.ConfirmPassword)" @bind-Value="_userModel.ConfirmPassword" Label="Apellido" />
+                                </MudItem>
+                               
+                            </MudItem>
+
+                            <MudItem xs="12" md="6">
+                                 <h6>Información personal</h6>
+                                <MudItem md="12" Style="padding:3px !important">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.FirstName)" @bind-Value="_userModel.FirstName" Label="Correo" />
+                                </MudItem>
+                                <MudItem  md="12" Style="padding:3px !important">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.LastName)" @bind-Value="_userModel.LastName" Label="Nombre" />
+                                </MudItem>
+                                <MudItem md="12" Style="padding:3px !important">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.PhoneNumber)" @bind-Value="_userModel.PhoneNumber" Label="Apellido" />
+                                </MudItem>
+                            </MudItem>
+
+                        </MudGrid>
+
+                    </MudItem>
+
+                </MudItem>
+
+            </MudGrid>
+        </DialogContent>
+        <DialogActions >
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="()=>Cancel()">Cancel</MudButton>
+           <MudButton Disabled="@(!_validated)" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Actualizar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+@code {
+  
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    private FluentValidationValidator _fluentValidation;
+    private bool _validated => _fluentValidation.Validate(options => { options.IncludeAllRuleSets(); });
+
+    public RegisterRequest _userModel { get; set; } = new RegisterRequest();
+    string _profilePicture { get; set; } = string.Empty;
+    private bool _showPictureAlert = false;
+    private IBrowserFile _file;
+
+    private async Task UploadFiles(InputFileChangeEventArgs e)
+    {
+        //    _file = e.File;
+        //    if (_file != null)
+        //    {
+        //        _showPictureAlert = false;
+        //        long maxFileSize = 1048576 * 1;//1 MB
+        //        if (_file.Size <= maxFileSize)
+        //        {
+        //            var contentType = _file.ContentType;
+        //            var extension = Path.GetExtension(_file.Name);
+        //            var imageFile = await _file.RequestImageFileAsync(_file.ContentType, 400, 400);
+        //            var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+        //            var request = new UploadObject{
+        //                FileName = $"{Guid.NewGuid()}{extension}",
+        //                Data = stream,
+        //                Size = imageFile.Size,
+        //                UploadType = UploadType.Users,
+        //                ContentType = contentType,
+        //                Extension = extension,
+        //             };
+        //            if((await _accountManager.UploadProfilePictureAsync(request)).Succeeded) {
+        //                _profileUserModel.ProfilePicture= request.FileName;
+        //                var buffer = new byte[imageFile.Size];
+        //                await imageFile.OpenReadStream().ReadAsync(buffer);
+        //                _profilePicture = $"data:{contentType};base64,{Convert.ToBase64String(buffer)}";
+        //            }
+        //        }
+        //        else { _showPictureAlert = true; }
+        //    }
+    }
+
+    private async Task DeleteAsync()
+    {
+        //if (!string.IsNullOrEmpty(_profileUserModel.ProfilePicture) &&
+        //   ((await _accountManager.DeleteProfilePictureAsync(UploadType.Users, _profileUserModel.ProfilePicture)).Succeeded))
+        //      _profilePicture= null;
+    }
+
+    protected async Task SubmitAsync()
+    {
+        var d = _userModel;
+        //var response = await _accountManager.UpdateProfileAsync(_profileUserModel);
+        //if (response.Succeeded)
+        //{
+        //    await _authenticationManager.Logout();
+        //    _snackBar.Add("Tu perfil ha sido actualizado correctamente. Por favor inicie sesión para continuar.", Severity.Success);
+        //    _navigationManager.NavigateTo("/");
+        //}
+        //else
+        //{
+        //    foreach (var message in response.Messages)
+        //    {
+        //        _snackBar.Add(message, Severity.Error);
+        //    }
+        //}
+    }
+    public void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+    protected override async Task OnInitializedAsync()
+    {   
+        await LoadDataAsync();
+    }
+    private async Task LoadDataAsync()
+    {
+        //var state = await _stateProvider.GetAuthenticationStateAsync();
+        //var user = state.User;
+        //_profileUserModel.UserId = user.GetUserId();
+        //_profileUserModel.Email = user.GetEmail();
+        //_profileUserModel.FirstName = user.GetFirstName();
+        //_profileUserModel.LastName = user.GetLastName();
+        //_profileUserModel.PhoneNumber = user.GetPhoneNumber();
+        // _profileUserModel.ProfilePicture = user.GetAvatar();
+        // var picture=await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL);
+        // _profilePicture =string.IsNullOrEmpty(picture)?string.Empty: $"{_appConfiguration.ApiUrl}{picture}";
+        //_changePasswordRequestModel.UserId = _profileUserModel.UserId;
+    }
+}

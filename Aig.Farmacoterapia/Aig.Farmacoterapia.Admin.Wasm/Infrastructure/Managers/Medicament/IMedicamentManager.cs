@@ -3,7 +3,7 @@ using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers
+namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers.Medicament
 {
     public interface IMedicamentManager : IManager
     {

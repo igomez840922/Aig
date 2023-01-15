@@ -29,22 +29,6 @@
         padding: 0 !important;
     }
 
-    .pro-details-icon > a {
-        color: #f8f9fa !important;
-        font-size: 25px !important;
-        border: 1px solid #e9e9e9 !important;
-        background-color: #6da5f4 !important;
-        border-radius: 50% !important;
-         box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
-    }
-
-    .pro-details-icon > a:hover {
-        color: #f8f9fa !important;
-        font-size: 25px !important;
-        border: 1px solid #e9e9e9 !important;
-        background-color: #e4573d !important;
-    }
-
     .product-details-wrapper .product-text h4 {
       font-size: 20px !important;
     }
@@ -74,6 +58,7 @@ else
 
                                         @if (!string.IsNullOrEmpty(@item?.PictureData))
                                         {
+
                                             <img src="@item?.PictureData" Width="350" Height="300" Elevation="25" Class="rounded-lg" />
                                         }
                                         else
@@ -94,7 +79,35 @@ else
                                 <div class="container">
                                     <div class="row">
 
-                                        <div class="col-9">
+                                      
+                                        <div class="col-12">
+                                            <div class="f-right">
+
+                                                @if (!string.IsNullOrEmpty(item?.DataSheetURL))
+                                                    {
+
+                                                        <a style="padding: 10px;font-size: 16px;" target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}files/datasheet/{item.DataSheetURL}")">
+                                                            <i style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-pdf"></i>
+                                                            Monografía
+                                                        </a>
+
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(item?.ProspectusURL))
+                                                    {
+                                                        <a style="padding: 10px;font-size: 16px;" target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}files/prospectus/{item.ProspectusURL}")">
+                                                           <i  style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-powerpoint"></i>
+                                                            Prospecto
+                                                        </a>
+                                                 
+                                                    }
+   
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-12">
                                             <div class="pro-02-list-info f-left">
                                                 @if (!string.IsNullOrEmpty(item?.NumReg))
                                                 {
@@ -105,7 +118,7 @@ else
                                                 <h4>
                                                     @if (@item.Vigente)
                                                     {
-                                                        <span title="Virgente" class="fa fa-check-circle" aria-hidden="true" style="cursor: pointer;font-size: 20px;margin-right:7px;">
+                                                        <span title="Vigente" class="fa fa-check-circle" aria-hidden="true" style="cursor: pointer;font-size: 20px;margin-right:7px;">
                                                         </span>
                                                     }
                                                     else
@@ -118,35 +131,13 @@ else
                                                 @if (@item?.FechaExpiracion != null)
                                                 {
                                                     <h5 style="font-size: 12px !important;color: #e4573d !important;">
-                                                        <span style="font-size: 12px !important;color: #e4573d !important;"> Vence:</span>
+                                                        <span style="font-size: 12px !important;color: #e4573d !important;"> Vigencia:</span>
                                                         @(string.Format("{0:dd/MM/yyyy}",item.FechaExpiracion))
                                                     </h5>
                                                 }
                                             </div>
                                         </div>
-                                        <div class="col-3">
-                                            <div class="pro-02-list-info f-right">
-
-                                                <div class="pro-details-icon">
-
-                                                    @if (!string.IsNullOrEmpty(item?.DataSheetURL))
-                                                    {
-                                                        <a target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}{item.DataSheetURL}")">
-                                                            <i class="fa fa-file-pdf"></i>
-                                                        </a>
-                                                    }
-                                                    @if (!string.IsNullOrEmpty(item?.ProspectusURL))
-                                                    {
-                                                        <a target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}{item.ProspectusURL}")">
-                                                            <i class="fa fa-file-powerpoint"></i>
-                                                        </a>
-                                                    }
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-
+                                   
                                     </div>
                                 </div>
 
@@ -174,7 +165,7 @@ else
                                     }
 
                                 </div>
-                                <div class="row">
+                               @* <div class="row">
 
                                     @if (@item?.Excipientes != null)
                                     {
@@ -187,7 +178,7 @@ else
                                             </div>
                                         </div>
                                     }
-                                </div>
+                                </div>*@
                             </div>
 
                             <hr style="margin: 0 0 1rem 0 !important;" />
@@ -196,7 +187,7 @@ else
 
                                 <div class="container">
                                     <div class="row">
-                                        @if (@item?.FormaFarmaceutica != null)
+                                       @* @if (@item?.FormaFarmaceutica != null)
                                         {
                                             <div class="col-6">
                                                 <div class="pro-02-list-info f-left">
@@ -207,7 +198,7 @@ else
 
                                                 </div>
                                             </div>
-                                        }
+                                        }*@
                                         @if (@item?.ViaAdministracion != null)
                                         {
                                             <div class="col-6">
@@ -245,7 +236,7 @@ else
                                                 </p>
                                             </div>
                                         </div>
-
+                                      @*
                                         <div class="col-4">
                                             <div class="pro-02-list-info f-left">
                                                 <span>Tipo</span>
@@ -253,7 +244,7 @@ else
                                                     @GetMedicationType(item?.TipoMedicamento)
                                                 </p>
                                             </div>
-                                        </div>
+                                        </div>*@
 
                                     </div>
                                 </div>
@@ -288,7 +279,7 @@ else
                                                 </div>
                                             </div>
                                         }
-                                        @if (!string.IsNullOrEmpty(item.Fabricante?.Direccion))
+                                      @*  @if (!string.IsNullOrEmpty(item.Fabricante?.Direccion))
                                         {
                                             <div class="col-5">
                                                 <div class="pro-02-list-info f-left">
@@ -298,12 +289,12 @@ else
                                                     </p>
                                                 </div>
                                             </div>
-                                        }
+                                        }*@
 
                                     </div>
                                 </div>
 
-                                @if (!string.IsNullOrEmpty(item.Concentracion) || !string.IsNullOrEmpty(item.Envase))
+                                @if (!string.IsNullOrEmpty(item.Concentracion) || !string.IsNullOrEmpty(item.Envase) || !string.IsNullOrEmpty(item.Presentacion))
                                 {
                                     <hr style="margin: 0 0 1rem 0 !important;" />
                                 }
@@ -332,6 +323,22 @@ else
                                                     <span>Descripción del Envase</span>
                                                     <p>
                                                         @item?.Envase
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                     <div class="row">
+                                        @if (!string.IsNullOrEmpty(item.Presentacion))
+                                        {
+                                            <div class="col-12">
+                                                <div class="pro-02-list-info f-left">
+                                                    <span>Presentación</span>
+                                                    <p>
+                                                        @item?.Presentacion
                                                     </p>
 
                                                 </div>

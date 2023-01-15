@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers
+namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers.Medicament
 {
     public class MedicamentManager : IMedicamentManager
     {

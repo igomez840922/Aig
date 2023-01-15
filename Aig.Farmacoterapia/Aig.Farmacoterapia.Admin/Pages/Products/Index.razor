@@ -183,14 +183,14 @@
                         <div class="dropdown-divider ng-star-inserted"></div>
                         @if (!string.IsNullOrEmpty(context.DataSheetURL))
                         {
-                            <a target="_blank" class="dropdown-item" href="@context.DataSheetURL">
+                             <a target="_blank" class="dropdown-item" href="@($"files/datasheet/{context.ProspectusURL}")">
                                 <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
                                 Monografía
                             </a>
                         }
                         @if (!string.IsNullOrEmpty(context.ProspectusURL))
                         {
-                            <a target="_blank" class="dropdown-item" href="@context.ProspectusURL">
+                            <a target="_blank" class="dropdown-item" href="@($"files/prospectus/{context.ProspectusURL}")">
                                 <i class="fa fa-file-pdf" style="font-size: 14px;"></i>
                                 Prospecto
                             </a>
@@ -439,13 +439,13 @@
                 filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = modelFilter.Term.Trim() });
             if (modelFilter.StartDate != null && modelFilter.EndDate != null)
             {
-                filters.Add(new FilteringOption { Field = "startDateOfIssue", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartDate.Value });
-                filters.Add(new FilteringOption { Field = "endDateOfIssue", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndDate.Value });
+                filters.Add(new FilteringOption { Field = "startDateOfIssue", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartDate.Value.ToString("dd/MM/yyyy") });
+                filters.Add(new FilteringOption { Field = "endDateOfIssue", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndDate.Value.ToString("dd/MM/yyyy") });
             }
             if (modelFilter.StartExpirationDate != null && modelFilter.EndExpirationDate != null)
             {
-                filters.Add(new FilteringOption { Field = "startExpirationDate", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartExpirationDate.Value });
-                filters.Add(new FilteringOption { Field = "endDateExpirationDate", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndExpirationDate.Value });
+                filters.Add(new FilteringOption { Field = "startExpirationDate", Operator = FilteringOperator.GreaterThanEqual, Value = modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
+                filters.Add(new FilteringOption { Field = "endDateExpirationDate", Operator = FilteringOperator.LessThanEqual, Value = modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
             }
             if (modelFilter.Fabricante != null)
             {

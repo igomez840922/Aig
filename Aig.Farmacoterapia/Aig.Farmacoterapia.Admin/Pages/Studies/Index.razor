@@ -306,8 +306,8 @@
                 filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = searchString.Trim() });
             if (evaluationDateRange.Start != null && evaluationDateRange.End != null )
             {
-                filters.Add(new FilteringOption { Field = "startEvaluationDate", Operator = FilteringOperator.GreaterThanEqual, Value = evaluationDateRange.Start });
-                filters.Add(new FilteringOption { Field = "endEvaluationDate", Operator = FilteringOperator.LessThanEqual, Value = evaluationDateRange.End });
+                filters.Add(new FilteringOption { Field = "startEvaluationDate", Operator = FilteringOperator.GreaterThanEqual, Value = evaluationDateRange.Start.Value.ToString() });
+                filters.Add(new FilteringOption { Field = "endEvaluationDate", Operator = FilteringOperator.LessThanEqual, Value = evaluationDateRange.End.Value.ToString() });
             }
             var args = new PageSearchArgs()
                 {

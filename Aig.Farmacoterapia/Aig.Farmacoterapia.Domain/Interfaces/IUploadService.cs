@@ -12,6 +12,7 @@ namespace Aig.Farmacoterapia.Domain.Interfaces
     {
         Task<string> UploadAsync(UploadObject request);
         Task<bool> DeleteAsync(string relativePath);
+        Task<bool> DeleteAsync(UploadType uploadType, string fileName);
         Task<byte[]> GetFileAsync(string file, UploadType uploadType);
 
     }

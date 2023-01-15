@@ -1,16 +1,16 @@
 ﻿using Aig.Farmacoterapia.Domain.Identity;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Admin.Wasm.Infrastructure;
-using System.Threading.Tasks;
+using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 
 namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Managers.Identity.Account
 {
     public interface IAccountManager : IManager
     {
-        Task<IResult> ChangePasswordAsync(ChangePasswordRequest model);
-
         Task<IResult> UpdateProfileAsync(UpdateProfileRequest model);
-
-        Task<IResult<string>> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId);
+        Task<IResult> ChangePasswordAsync(ChangePasswordRequest model);
+        Task<IResult> UploadProfilePictureAsync(UploadObject model);
+        Task<IResult> DeleteProfilePictureAsync(UploadType uploadType, string image);
     }
 }

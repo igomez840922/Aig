@@ -107,6 +107,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
         public async Task<IResult> SaveAsync(ApplicationUser data)
         {
+           
             data.Email = data.UserName;
             var user = await _userManager.FindByIdAsync(data.Id);
             if (user != null) {
@@ -130,7 +131,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 else
                     return await Result.FailAsync(result.Errors.Select(a => a.Description.ToString()).ToList());
             }
-
         }
         public async Task<IResult> ChangePasswordAsync(ApplicationUser data)
         {
@@ -183,14 +183,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     if (!request.AutoConfirmEmail)
                     {
                         var verificationUri = await SendVerificationEmail(user, origin);
-                        var mailRequest = new MailRequest
-                        {
-                            From = "mail@codewithmukesh.com",
-                            To = user.Email,
-                            Body = string.Format("Please confirm your account by <a href='{0}'>clicking here</a>.", verificationUri),
-                            Subject = "Confirm Registration"
-                        };
-                        await _mailService.SendAsync(mailRequest);
+                        //var mailRequest = new MailRequest
+                        //{
+                        //    From = "mail@codewithmukesh.com",
+                        //    To = user.Email,
+                        //    Body = string.Format("Please confirm your account by <a href='{0}'>clicking here</a>.", verificationUri),
+                        //    Subject = "Confirm Registration"
+                        //};
+                        //await _mailService.SendAsync(mailRequest);
                         return await Result<string>.SuccessAsync(user.Id, string.Format("User {0} Registered. Please check your Mailbox to verify!", user.UserName));
                     }
                     return await Result<string>.SuccessAsync(user.Id, string.Format("User {0} Registered.", user.UserName));
@@ -208,18 +208,30 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
         public async Task<IResult> ChangePasswordAsync(ChangePasswordRequest model)
         {
-            var user = await this._userManager.FindByIdAsync(model.UserId);
-            if (user == null)
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user != null)
             {
-                return await Result.FailAsync("User Not Found.");
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.NewPassword);
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                    return await Result<string>.SuccessAsync(user.Id, string.Format("Contraseña actualizada correctamente !"));
+                else
+                    return await Result.FailAsync(result.Errors.Select(a => a.Description.ToString()).ToList());
             }
+            return await Result.FailAsync("Error durante la operación");
 
-            var identityResult = await this._userManager.ChangePasswordAsync(
-                user,
-                model.Password,
-                model.NewPassword);
-            var errors = identityResult.Errors.Select(e => e.Description.ToString()).ToList();
-            return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
+            //var user = await this._userManager.FindByIdAsync(model.UserId);
+            //if (user == null)
+            //{
+            //    return await Result.FailAsync("User Not Found.");
+            //}
+
+            //var identityResult = await this._userManager.ChangePasswordAsync(
+            //    user,
+            //    model.Password,
+            //    model.NewPassword);
+            //var errors = identityResult.Errors.Select(e => e.Description.ToString()).ToList();
+            //return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
         }
 
         public async Task<IResult> UpdateProfileAsync(UpdateProfileRequest request)
@@ -424,7 +436,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 return await Result.FailAsync("An Error has occured!");
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
+            var result = await _userManager.ResetPasswordAsync(user, user.RefreshToken, request.Password);
             if (result.Succeeded)
             {
                 return await Result.SuccessAsync("Password Reset Successful!");

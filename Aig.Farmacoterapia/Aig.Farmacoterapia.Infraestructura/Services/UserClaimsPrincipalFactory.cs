@@ -27,7 +27,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             var identity = await base.GenerateClaimsAsync(user);
             identity.AddClaim(new Claim("id", user.FullName));
             identity.AddClaim(new Claim("fullName", user.FullName));
-            identity.AddClaim(new Claim("avatar", user.ProfilePicture ?? string.Empty));
+            identity.AddClaim(new Claim("avatar", string.IsNullOrEmpty(user.ProfilePicture) ? string.Empty : $"files/users/{user.ProfilePicture}"));
             return identity;
         }
     }
