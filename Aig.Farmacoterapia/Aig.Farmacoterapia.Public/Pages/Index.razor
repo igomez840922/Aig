@@ -121,7 +121,7 @@
     { 
         _appState.OnChange-= SerachTextHasChanged;
         _appState.OnChange+= SerachTextHasChanged;
-        paginatedResult = new PaginatedResult<AigMedicamento>(){PageSize=20};
+        paginatedResult = new PaginatedResult<AigMedicamento>(){PageSize=18};
         await DoFetchData();
         base.OnInitialized();
     }
