@@ -11,6 +11,7 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Media
     [ApiController]
     [Route("api/media")]
     [Authorize(AuthenticationSchemes = "JwtClient")]
+    [DisableRequestSizeLimit]
     public class MediaController : Controller
     {
         private readonly IMediator _mediator;
