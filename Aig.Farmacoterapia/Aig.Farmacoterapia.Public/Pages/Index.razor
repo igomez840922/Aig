@@ -25,10 +25,32 @@
     <MudProgressCircular Size="Size.Large" Color="Color.Default" Indeterminate="true" />
 </MudOverlay>
 
+
 <div class="col-xl-12 col-lg-12">
     <div class="pro-ful-tab">
-       
-        @if (paginatedResult != null && paginatedResult.Data.Count > 0)
+        @*<div class="row">
+            <div class="col-xl-4 col-lg-3 col-md-3">
+                <div class="product-02-tab" style="margin: 0 10px 10px 10px !important;">
+                    <ul class="nav justify-content-start product-nav" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">
+                                <i class="fas fa-th-large"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">
+                                <i class="fas fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>*@
+
+         @if (paginatedResult != null && paginatedResult.Data.Count > 0)
         {
             <div class="row">
                 <div class="col-12" style="text-align: center;">
@@ -36,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-column align-center" style="margin: 10px 0 20px 0 !important;">
+            <div class="d-flex flex-column align-center" style="margin-bottom: 10px;">
                 <MudPagination Size="Size.Medium" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Color="Color.Info" Count="@paginatedResult.TotalPages" />
             </div>
 
@@ -108,6 +130,19 @@
             </div>
         </div>
 
+        @if (paginatedResult != null && paginatedResult.Data.Count > 0)
+        {
+
+            <div class="d-flex flex-column align-center" style="margin-bottom: 10px;">
+                <MudPagination Size="Size.Medium" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Color="Color.Info" Count="@paginatedResult.TotalPages" />
+            </div>
+
+            <div class="row">
+                <div class="col-12" style="text-align: center;">
+                    <span style="text-align:center; color: #6c757d !important;font-size: 16px;"> @($"{paginatedResult.StartIndex+1} al {paginatedResult.EndIndex+1} de {paginatedResult.TotalCount }")</span>
+                </div>
+            </div>
+        }
     </div>
 </div>
 
@@ -152,11 +187,11 @@
         if (!string.IsNullOrEmpty(appFilter.Term))
             filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = appFilter.Term});
         if (!string.IsNullOrEmpty(appFilter.Classification))
-            filters.Add(new FilteringOption { Field = "Classification", Operator = FilteringOperator.Equal, Value =appFilter.Classification });
+             filters.Add(new FilteringOption { Field = "Classification", Operator = FilteringOperator.Equal, Value =appFilter.Classification });
         if (!string.IsNullOrEmpty(appFilter.SaleCondition))
-            filters.Add(new FilteringOption { Field = "SaleCondition", Operator = FilteringOperator.Equal, Value =appFilter.SaleCondition});
+          filters.Add(new FilteringOption { Field = "SaleCondition", Operator = FilteringOperator.Equal, Value =appFilter.SaleCondition});
         if (_appState.Filter !=null)
-            filters.Add(new FilteringOption { Field = "Valid", Operator = FilteringOperator.Equal, Value =appFilter.Valid.ToString()});
+             filters.Add(new FilteringOption { Field = "Valid", Operator = FilteringOperator.Equal, Value =appFilter.Valid.ToString()});
         var args = new PageSearchArgs(){
                 PageIndex = paginatedResult.CurrentPage,
                 PageSize = paginatedResult.PageSize,
@@ -172,8 +207,14 @@
         paginatedResult.CurrentPage = i;
         await DoFetchData();
     }
-    private async Task OnSearch()
+    // private async Task OnClean()
+    //{    
+    //     search = new HomeFilter();
+    //     await DoFetchData();
+    //}
+     private async Task OnSearch()
     {  
          await DoFetchData();
     }
+   
 }
