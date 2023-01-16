@@ -11,6 +11,7 @@ using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
@@ -42,18 +43,30 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = false;
 });
 
-
-builder.Services.Configure<IISServerOptions>(options =>
-{
-    options.MaxRequestBodySize = null; //Max upload file size
-});
+//File size upload
 builder.Services.Configure<KestrelServerOptions>(options =>
 {
-    options.Limits.MaxRequestBodySize = null;//Max upload file size
+    options.Limits.MaxRequestBodySize = long.MaxValue; // if don't set default value is: 30 MB
+});
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.MaxRequestBodySize = long.MaxValue;
+});
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartBodyLengthLimit = long.MaxValue; // if don't set default value is: 128 MB
+    options.MultipartHeadersLengthLimit = int.MaxValue;
+    options.MultipartBoundaryLengthLimit = int.MaxValue;
+    options.MultipartHeadersCountLimit = int.MaxValue;
+});
+builder.Services.AddSignalR(hubOptions =>
+{
+    hubOptions.MaximumReceiveMessageSize = 100 * 1024 * 1024; // 100MB
 });
 
 builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
+builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; }); ;
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
 
 //For API CONTROLLERS
@@ -131,6 +144,7 @@ builder.Services.AddScoped<IESAVI2Service, ESAVI2Service>();
 builder.Services.AddScoped<IApiConnectionService, ApiConnectionService>();
 builder.Services.AddScoped<ITokenMedService, TokenMedService>();
 builder.Services.AddScoped<IMedicamentosService, MedicamentosService>();
+builder.Services.AddScoped<IApiConnectionFileUploadService, ApiConnectionFileUploadService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
