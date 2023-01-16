@@ -18,6 +18,7 @@ namespace Aig.FarmacoVigilancia.Controllers
         }
 
         [HttpPost("UploadFile")]
+        //[DisableRequestSizeLimit]
         public async Task<ActionResult> UploadFile()//([FromForm] IEnumerable<IFormFile> files)
         {
             try

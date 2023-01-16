@@ -62,7 +62,7 @@ builder.Services.Configure<FormOptions>(options =>
 });
 builder.Services.AddSignalR(hubOptions =>
 {
-    hubOptions.MaximumReceiveMessageSize = 100 * 1024 * 1024; // 100MB
+    hubOptions.MaximumReceiveMessageSize = 102400000; // 100MB
 });
 
 builder.Services.AddRazorPages();
