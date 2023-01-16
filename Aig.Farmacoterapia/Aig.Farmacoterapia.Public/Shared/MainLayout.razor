@@ -199,7 +199,7 @@
                 <div class="col-7">
                     <div class="header-search header-02-search" style="margin-top: 15px;">
                      
-                            <EditForm Model="this" class="header-search-form" OnValidSubmit="OnSearch">
+                            <EditForm Model="this" class="header-search-form" OnValidSubmit="InvokenSearch">
                                 <FluentValidationValidator />
                                 <input type="text" @bind-value="@_filter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
                                 <button type="submit"><i class="far fa-search"></i></button>
@@ -277,16 +277,25 @@
         base.OnInitialized();
     }
 
-
+    private void InvokenSearch()
+    {    
+        _filter.Classification = null;
+        _filter.SaleCondition = null;
+        _filter.Valid = true;
+        OnSearch();
+    }
     private void OnSearch()
-    {
+    {  
         var path= _navigation.ToBaseRelativePath(_navigation.Uri).ToLower();
-        if (path.Contains("details")||path.Contains("disclaimer")||path.Contains("notfound")) {  
+        if (path.Contains("details")||path.Contains("disclaimer")||path.Contains("notfound")) {
             _appState.SetSearchText(_filter,false);
             _navigation.NavigateTo("./");
         }
         else
-            _appState.SetSearchText(_filter);
+        {
+             _appState.SetSearchText(_filter);
+        }
+       
     }
 
     private void OnSearchChanged()
