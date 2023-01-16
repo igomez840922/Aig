@@ -17,13 +17,83 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Media
         private readonly IMediator _mediator;
         private readonly IUploadService _uploadService;
         private readonly ISystemLogger _logger;
+        private readonly IWebHostEnvironment _environment;
 
-        public MediaController(IUploadService uploadService, IMediator mediator, ISystemLogger logger)
+        public MediaController(IUploadService uploadService, IMediator mediator, IWebHostEnvironment environment, ISystemLogger logger)
         {
             _uploadService = uploadService;
             _mediator = mediator;
+            _environment = environment;
             _logger = logger;
         }
+
+
+        [HttpPost("chunk")]
+        [AllowAnonymous]
+        [DisableRequestSizeLimit]
+        public async Task<IActionResult> PostFile(IFormFile uploadFile)
+        {
+
+            try
+            {
+
+                if (uploadFile == null || uploadFile.Length == 0) return BadRequest();
+
+                var folder = "datasheet";
+                var folderName = Path.Combine("Files", folder);
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var fullFilePath = Path.Combine(pathToSave, uploadFile.FileName);
+
+                if (!Directory.Exists(pathToSave))
+                    Directory.CreateDirectory(pathToSave);
+
+                using (var fs = new FileStream(fullFilePath, FileMode.Append))
+                    await uploadFile.CopyToAsync(fs);
+
+                return Created(fullFilePath, null);
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+
+
+
+        //[HttpPost("AppendFile/{fragment}")]
+        //[AllowAnonymous]
+        //public async Task<bool> UploadFileChunk(int fragment, IFormFile file)
+        //{
+        //    try
+        //    {
+        //        var folder = "datasheet";
+        //        var folderName = Path.Combine("Files", folder);
+        //        var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+        //        var fullPath = Path.Combine(pathToSave, file.FileName);
+
+        //        // ** let the hosted path 
+        //        //var fileName = @"C:\TEMP\" + file.FileName;
+
+        //        if (fragment == 0 && System.IO.File.Exists(fullPath))
+        //        {
+        //            System.IO.File.Delete(fullPath);
+        //        }
+
+        //        using (var fileStream = new FileStream(fullPath, FileMode.Append, FileAccess.Write, FileShare.None))
+        //        using (var bw = new BinaryWriter(fileStream))
+        //        {
+        //            await file.CopyToAsync(fileStream);
+        //        }
+        //        return true;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        Console.WriteLine("Exception: {0}", exception.Message);
+        //    }
+        //    return false;
+        //}
+
 
         [HttpPost("file")]
         [AllowAnonymous]
@@ -31,8 +101,8 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Media
         {
             try
             {
-              
-                if (file is not null && file.Length>0)
+
+                if (file is not null && file.Length > 0)
                 {
                     var extension = Path.GetExtension(file.FileName);
                     var ms = new MemoryStream();
@@ -61,6 +131,6 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Media
         [HttpPost("upload")]
         public async Task<IActionResult> UploadFile(IFormCollection formData) => Ok(await _mediator.Send(new UploadMediaCommand(formData)));
 
-       
+
     }
 }
