@@ -81,8 +81,9 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
         //Save Data and Close
         protected async Task SaveData()
         {
-            try {
-                
+            try
+            {
+
                 if (selectedFile != null)
                 {
                     _options = _options != null ? _options : new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
@@ -93,62 +94,80 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
                         return;
                     }
 
+                    ////await using FileStream fs = new(path, FileMode.Create);
+                    ////await selectedFile.OpenReadStream().CopyToAsync(fs);
                     //Stream stream = selectedFile.OpenReadStream(maxFileSize);
-                    //var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString(), selectedFile.Name.Split(".").LastOrDefault());
-                    //var path = System.IO.Path.Combine(env.WebRootPath, "files", fileName);
+                    var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString(), selectedFile.Name.Split(".").LastOrDefault());
+                    var path = System.IO.Path.Combine(env.WebRootPath, "files", fileName);
                     ////$"{env.WebRootPath}\\{selectedFile.Name}";
                     //FileStream fs = File.Create(path);
                     //await stream.CopyToAsync(fs);
                     //stream.Close();
                     //fs.Close();
+                                        
+                    await using FileStream writeStream = new(path, FileMode.Create);
+                    using var readStream = selectedFile.OpenReadStream(maxFileSize);
+                    var bytesRead = 0;
+                    var totalRead = 0;
+                    var buffer = new byte[1024 * 10];
 
-                    //attachment.AbsolutePath = path;
-                    //attachment.Url = string.Format("/files/{0}", fileName);
-                    //attachment.FileName = fileName;
+                    while ((bytesRead = await readStream.ReadAsync(buffer)) != 0)
+                    {
+                        totalRead += bytesRead;
 
-                    //await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = attachment });
-                    //return;
+                        await writeStream.WriteAsync(buffer, 0, bytesRead);
+                        //progressPercent = Decimal.Divide(totalRead, file.Size);
+                        //StateHasChanged();
+                    }
+
+                    attachment.AbsolutePath = path;
+                    attachment.Url = string.Format("/files/{0}", fileName);
+                    attachment.FileName = fileName;
+
+                    await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = attachment });
+                    return;
                     //////////////////////////////////
                     ///
 
-                    try
-                    {
-                        //var file = e.File;
+                    //try
+                    //{
+                    //    //var file = e.File;
 
-                        // Just load into .NET memory to show it can be done
-                        // Alternatively it could be saved to disk, or parsed in memory, or similar
-                        var ms = new MemoryStream();
-                        await selectedFile.OpenReadStream(maxFileSize).CopyToAsync(ms);
-                        //status = $"Finished loading {file.Size} bytes from {file.Name}";
-                        var content = new MultipartFormDataContent {{ new ByteArrayContent(ms.GetBuffer()), "\"upload\"", selectedFile.Name }};
-                        var result = await apiConnectionFileUploadService.Client.PostAsync("FileUpload/UploadFile", content);
+                    //    // Just load into .NET memory to show it can be done
+                    //    // Alternatively it could be saved to disk, or parsed in memory, or similar
+                    //    var ms = new MemoryStream();
+                    //    await selectedFile.OpenReadStream(maxFileSize).CopyToAsync(ms);
+                    //    //status = $"Finished loading {file.Size} bytes from {file.Name}";
+                    //    var content = new MultipartFormDataContent { { new ByteArrayContent(ms.GetBuffer()), "\"upload\"", selectedFile.Name } };
+                    //    var result = await apiConnectionFileUploadService.Client.PostAsync("FileUpload/UploadFile", content);
 
-                        var resultContent = await result.Content.ReadAsStringAsync();
-                        var model = JsonSerializer.Deserialize<FileUploadResult>(resultContent, _options);
-                        if (result.IsSuccessStatusCode)
-                        {
-                            attachment.AbsolutePath = model.AbsolutePath;
-                            attachment.Url = model.Url;
-                            attachment.FileName = model.FileName;
+                    //    var resultContent = await result.Content.ReadAsStringAsync();
+                    //    var model = JsonSerializer.Deserialize<FileUploadResult>(resultContent, _options);
+                    //    if (result.IsSuccessStatusCode)
+                    //    {
+                    //        attachment.AbsolutePath = model.AbsolutePath;
+                    //        attachment.Url = model.Url;
+                    //        attachment.FileName = model.FileName;
 
-                            await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = attachment });
-                            return;
-                        }
-                        else
-                        {
-                            //await jsRuntime.InvokeVoidAsync("ShowError", result.Content.); return;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        await jsRuntime.InvokeVoidAsync("ShowError", ex.Message);return;
-                    }
+                    //        await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = attachment });
+                    //        return;
+                    //    }
+                    //    else
+                    //    {
+                    //        //await jsRuntime.InvokeVoidAsync("ShowError", result.Content.); return;
+                    //    }
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    await jsRuntime.InvokeVoidAsync("ShowError", ex.Message); return;
+                    //}
                 }
             }
             catch { }
             await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
-
         }
+
+       
 
         //Cancel and Close
         protected async Task Cancel()

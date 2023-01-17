@@ -62,7 +62,12 @@ builder.Services.Configure<FormOptions>(options =>
 });
 builder.Services.AddSignalR(hubOptions =>
 {
-    hubOptions.MaximumReceiveMessageSize = 100 * 1024 * 1024; // 100MB
+    hubOptions.MaximumReceiveMessageSize = 102400000; // 100MB
+    hubOptions.StreamBufferCapacity = 20; // 100MB
+    hubOptions.ClientTimeoutInterval = new TimeSpan(0,2,0);
+    hubOptions.HandshakeTimeout = new TimeSpan(0, 1, 0);
+    hubOptions.KeepAliveInterval = new TimeSpan(0, 1, 0);
+    hubOptions.EnableDetailedErrors = true;
 });
 
 builder.Services.AddRazorPages();
@@ -147,6 +152,7 @@ builder.Services.AddScoped<IMedicamentosService, MedicamentosService>();
 builder.Services.AddScoped<IApiConnectionFileUploadService, ApiConnectionFileUploadService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -169,7 +175,9 @@ app.UseAuthorization();
 app.UseMiddleware<BlazorCookieLoginMiddleware<ApplicationUser>>();
 app.MapControllers();
 
-app.MapBlazorHub();
+app.MapBlazorHub(); 
+
+
 app.MapFallbackToPage("/_Host");
 
 
