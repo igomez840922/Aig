@@ -24,7 +24,17 @@
 
         <div class="progress-bar" role="progressbar" style="@($"width: {progress}%")" aria-valuenow="@progress" aria-valuemin="0" aria-valuemax="100">  </div>
     </div>
+
+    
 }
+
+<MudButton Style="width:100px" Disabled="@(!canCancel)" Variant="Variant.Text"
+           Color="Color.Info"
+           StartIcon="@Icons.Filled.Cancel"
+           Size="Size.Small"
+           OnClick="CancelUpload">
+    Cancelar
+</MudButton>
 
 
 @code {
@@ -101,7 +111,7 @@
                 var response = await _httpClient.PostAsync("api/media/chunk", content);
                 response.EnsureSuccessStatusCode();
 
-                var fileLocation = response.Headers.Location.ToString();
+                //var fileLocation = response.Headers.Location.ToString();
                 StateHasChanged();
             };
         }
@@ -143,50 +153,13 @@
         upload.FileSizeInBytes = 0;
     }
 
+     public async Task CancelUpload()
+    {
+        hasBeenCancelled = true;
+        await InvokeAsync(StateHasChanged);
+        await Task.Delay(1);
+        cancellation.Cancel();
+        // TODO: Delete uploaded file
+    }
 
-    //async Task OnInputFileChange(InputFileChangeEventArgs e)
-    //{
-    //    const long CHUNKSIZE = 1024 * 500; // 500 kb
-
-    //    var file = e.File;
-    //    long uploadedBytes = 0;
-    //    long totalBytes = file.Size;
-    //    long percent = 0;
-    //    int fragment = 0;
-    //    long chunkSize;
-
-    //    var contentType = file.ContentType;
-    //    var extension = Path.GetExtension(file.Name);
-    //    var fileName = $"{Guid.NewGuid()}{extension}";
-
-    //    using (var inStream = file.OpenReadStream(long.MaxValue))
-    //    {
-    //        _uploading = true;
-    //        while (_uploading)
-    //        {
-    //            chunkSize = CHUNKSIZE;
-    //            if (uploadedBytes + CHUNKSIZE > totalBytes)
-    //            {// remainder
-    //                chunkSize = totalBytes - uploadedBytes;
-    //            }
-    //            var chunk = new byte[chunkSize];
-    //            await inStream.ReadAsync(chunk, 0, chunk.Length);
-    //            // upload this fragment
-    //            using var formFile = new MultipartFormDataContent();
-    //            var fileContent = new StreamContent(new MemoryStream(chunk));
-    //            formFile.Add(fileContent, "file", fileName);
-    //            // post
-    //            var response = await _httpClient.PostAsync($"api/media/AppendFile/{fragment++}", formFile);
-    //            // Update our progress data and UI
-    //            uploadedBytes += chunkSize;
-    //            percent = uploadedBytes * 100 / totalBytes;
-    //            echo = $"Uploaded {percent}%  {uploadedBytes} of {totalBytes} | Fragment: {fragment}";
-    //            if (percent >= 100)
-    //            {// upload complete
-    //                _uploading = false;
-    //            }
-    //            await InvokeAsync(StateHasChanged);
-    //        }
-    //    }
-    //}
 }

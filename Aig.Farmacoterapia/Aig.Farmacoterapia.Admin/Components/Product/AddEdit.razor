@@ -594,7 +594,7 @@
                 if (_prospectusFile.Size <= maxFileSize) {
                     var uploadType = UploadType.Prospectus;
                     var contentType = _prospectusFile.ContentType;
-                    var extension = Path.GetExtension(_file.Name);
+                    var extension = Path.GetExtension(_prospectusFile.Name);
                     var stream = _prospectusFile.OpenReadStream(maxAllowedSize: maxFileSize);
                     var request = new UploadObject{
                             FileName = $"{Guid.NewGuid()}{extension}",

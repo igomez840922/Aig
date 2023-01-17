@@ -50,6 +50,7 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Media
                 using (var fs = new FileStream(fullFilePath, FileMode.Append))
                     await uploadFile.CopyToAsync(fs);
 
+
                 return Created(fullFilePath, null);
             }
             catch
