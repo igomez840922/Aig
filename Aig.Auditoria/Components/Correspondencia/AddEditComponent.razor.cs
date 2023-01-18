@@ -34,7 +34,9 @@ namespace Aig.Auditoria.Components.Correspondencia
         bool disabledDatosRevision { get; set; } = false;
         bool disabledDatosRecepcion { get; set; } = false;
         bool disabledDatosSeguimiento { get; set; } = false;
+        bool disabledDatosEstablecimientos { get; set; } = false;
 
+        bool showSearchEstablishment { get; set; } = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -96,8 +98,10 @@ namespace Aig.Auditoria.Components.Correspondencia
                                           (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.EvaInsMP)) ?? false)
                                            );
 
-            //OnSignatureload();
+            disabledDatosEstablecimientos = ((userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.SecDepAudit)) ?? false) ||
+                                        (userClaims?.IsInRole(DataModel.Helper.Helper.GetDescription(DataModel.enumUserRoleType.SecSecLic)) ?? false));
 
+            
             await this.InvokeAsync(StateHasChanged);
         }
 
@@ -136,7 +140,7 @@ namespace Aig.Auditoria.Components.Correspondencia
             await this.InvokeAsync(StateHasChanged);
         }
 
-               
+
 
         //protected async Task OnSignatureload()
         //{
@@ -159,6 +163,36 @@ namespace Aig.Auditoria.Components.Correspondencia
         //    Correspondencia.FirmaRecibido = null;
         //    signaturePad5.Image = null;
         //}
+
+        /////////
+        ///        
+        protected async Task OpenSearchEstablishment()
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            showSearchEstablishment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void Establishments_SearchEventHandler(MessageArgs args)
+        {
+            showSearchEstablishment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(Establishments_SearchEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Establishments.SearchEvent>();
+
+            if (message.Data != null)
+            {
+                Correspondencia.EstablecimientoNombre = message.Data.Nombre;
+                Correspondencia.EstablecimientoNumLic = message.Data.NumLicencia;
+                Correspondencia.EstablecimientoUbicacion = message.Data.Ubicacion;
+                Correspondencia.EstablecimientoCorregimiento = message.Data.Corregimiento?.Nombre??"";
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
 
     }
 

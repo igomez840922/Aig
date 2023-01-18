@@ -15,10 +15,10 @@ namespace DataModel
         public DateTime? FechaIngreso { get => fechaIngreso; set => SetProperty(ref fechaIngreso, value); }
 
         //Empresa establecimiento
-        private string establecimiento;
+        private string empresa;
         [StringLength(300)]
         [Required(ErrorMessage = "requerido")]
-        public string Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
+        public string Empresa { get => empresa; set => SetProperty(ref empresa, value); }
 
         //Número del documento que se está recibiendo
         private string numDocRecibido;
@@ -99,6 +99,33 @@ namespace DataModel
         private string numDocRespuesta;
         [StringLength(250)]
         public string NumDocRespuesta { get => numDocRespuesta; set => SetProperty(ref numDocRespuesta, value); }
+
+        //DATOS DE ESTABLECIMIENTO
+
+        //Empresa establecimiento
+        private string establecimientoNumLic;
+        [StringLength(250)]
+        public string EstablecimientoNumLic { get => establecimientoNumLic; set => SetProperty(ref establecimientoNumLic, value); }
+
+        //Empresa establecimiento
+        private string establecimientoNombre;
+        [StringLength(300)]
+        public string EstablecimientoNombre { get => establecimientoNombre; set => SetProperty(ref establecimientoNombre, value); }
+
+        //Empresa corregimientp
+        private string establecimientoCorregimiento;
+        [StringLength(300)]
+        public string EstablecimientoCorregimiento { get => establecimientoCorregimiento; set => SetProperty(ref establecimientoCorregimiento, value); }
+
+        //Empresa corregimientp
+        private string establecimientoUbicacion;
+        [StringLength(500)]
+        public string EstablecimientoUbicacion { get => establecimientoUbicacion; set => SetProperty(ref establecimientoUbicacion, value); }
+
+        //Empresa Asignado
+        private string establecimientoAsignado;
+        [StringLength(300)]
+        public string EstablecimientoAsignado { get => establecimientoAsignado; set => SetProperty(ref establecimientoAsignado, value); }
 
     }
 }

@@ -74,7 +74,7 @@
                                 </label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaEsavi" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                        <RadzenDatePicker Max="DateTime.Today" Min="@(Data.EsaviVacuna?.FechaVacunacion??null)" TValue="DateTime?" @bind-Value="Data.FechaEsavi" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                         <ValidationMessage For=@(() => Data.FechaEsavi) />
                                     </div>
                                 </div>

@@ -134,6 +134,12 @@ namespace Aig.Auditoria.Components.Inspections
         //Save Data and Close
         protected async Task SaveData()
         {
+            if (Inspeccion.InspGuiaBPM_Bpa?.DatosConclusiones?.LParticipantes?.Count <= 0)
+            {
+                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
+                return;
+            }
+
             if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
             {
                 Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);

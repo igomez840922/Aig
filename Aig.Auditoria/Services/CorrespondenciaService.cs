@@ -24,7 +24,7 @@ namespace Aig.Auditoria.Services
 
                 model.Ldata  = (from data in DalService.DBContext.Set<AUD_CorrespondenciaTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Establecimiento.Contains(model.Filter) || data.NumDocRecibido.Contains(model.Filter) || data.NombreRecibido.Contains(model.Filter) || data.NumDocRespuesta.Contains(model.Filter) || data.Asunto.Contains(model.Filter))) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Empresa.Contains(model.Filter) || data.NumDocRecibido.Contains(model.Filter) || data.NombreRecibido.Contains(model.Filter) || data.NumDocRespuesta.Contains(model.Filter) || data.Asunto.Contains(model.Filter))) &&
                               (model.FromDate != null ? data.FechaIngreso >= model.FromDate : true) &&
                                (model.ToDate != null ? data.FechaIngreso <= model.ToDate : true)
                                 orderby data.CreatedDate descending
@@ -32,7 +32,7 @@ namespace Aig.Auditoria.Services
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_CorrespondenciaTB>()
                              where data.Deleted == false &&
-                             (string.IsNullOrEmpty(model.Filter) ? true : (data.Establecimiento.Contains(model.Filter) || data.NumDocRecibido.Contains(model.Filter) || data.NombreRecibido.Contains(model.Filter) || data.NumDocRespuesta.Contains(model.Filter) || data.Asunto.Contains(model.Filter))) &&
+                             (string.IsNullOrEmpty(model.Filter) ? true : (data.Empresa.Contains(model.Filter) || data.NumDocRecibido.Contains(model.Filter) || data.NombreRecibido.Contains(model.Filter) || data.NumDocRespuesta.Contains(model.Filter) || data.Asunto.Contains(model.Filter))) &&
                               (model.FromDate != null ? data.FechaIngreso >= model.FromDate : true) &&
                                (model.ToDate != null ? data.FechaIngreso <= model.ToDate : true)
                                select data).Count();  
@@ -74,16 +74,21 @@ namespace Aig.Auditoria.Services
                     ws.Cell(1, 11).Value = "Recibe";
                     ws.Cell(1, 12).Value = "Firma de quien Recibe";
                     ws.Cell(1, 13).Value = "Fecha Recibo";
-                    ws.Cell(1, 14).Value = "Seguimiento";
-                    ws.Cell(1, 15).Value = "Fecha Seguimineto";
-                    ws.Cell(1, 16).Value = "N° de Documento";
+                    ws.Cell(1, 14).Value = "Nombre Establecimiento";
+                    ws.Cell(1, 15).Value = "Num. Licencia";
+                    ws.Cell(1, 16).Value = "Corregimiento";
+                    ws.Cell(1, 17).Value = "Ubicación";
+                    ws.Cell(1, 18).Value = "Asignado";
+                    ws.Cell(1, 19).Value = "Seguimiento";
+                    ws.Cell(1, 20).Value = "Fecha Seguimineto";
+                    ws.Cell(1, 21).Value = "N° de Documento";
 
                     for (int row = 1; row <= model.Ldata.Count; row++)
                     {
                         var prod = model.Ldata[row - 1];
 
                         ws.Cell(row + 1, 1).Value = prod.FechaIngreso?.ToString("dd/MM/yyyy");
-                        ws.Cell(row + 1, 2).Value = prod.Establecimiento;
+                        ws.Cell(row + 1, 2).Value = prod.Empresa;
                         ws.Cell(row + 1, 3).Value = prod.NumDocRecibido;
                         ws.Cell(row + 1, 4).Value = prod.Asunto;
                         ws.Cell(row + 1, 5).Value = prod.Detalles;
@@ -95,9 +100,14 @@ namespace Aig.Auditoria.Services
                         ws.Cell(row + 1, 11).Value = prod.NombreRecibido;
                         ws.Cell(row + 1, 12).Value = "";//prod.FirmaRecibido;
                         ws.Cell(row + 1, 13).Value = prod.FechaRecibo?.ToString("dd/MM/yyyy");
-                        ws.Cell(row + 1, 14).Value = prod.RespuestaCaso;
-                        ws.Cell(row + 1, 15).Value = prod.FechaRespuesta?.ToString("dd/MM/yyyy");
-                        ws.Cell(row + 1, 16).Value = prod.NumDocRespuesta;
+                        ws.Cell(row + 1, 14).Value = prod.EstablecimientoNombre;
+                        ws.Cell(row + 1, 15).Value = prod.EstablecimientoNumLic;
+                        ws.Cell(row + 1, 16).Value = prod.EstablecimientoCorregimiento;
+                        ws.Cell(row + 1, 17).Value = prod.EstablecimientoUbicacion;
+                        ws.Cell(row + 1, 18).Value = prod.EstablecimientoAsignado;
+                        ws.Cell(row + 1, 19).Value = prod.RespuestaCaso;
+                        ws.Cell(row + 1, 20).Value = prod.FechaRespuesta?.ToString("dd/MM/yyyy");
+                        ws.Cell(row + 1, 21).Value = prod.NumDocRespuesta;
                     }
 
                     MemoryStream XLSStream = new();

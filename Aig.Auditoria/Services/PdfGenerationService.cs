@@ -236,16 +236,17 @@ namespace Aig.Auditoria.Services
                                       {
                                           columns.RelativeColumn(1);
                                           columns.RelativeColumn(1);
+                                          columns.RelativeColumn(1);
                                       });
                                       
-                                      table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                      table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                       if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosAtendidosPor.Firma))
                                       {
                                           //var bytes = Convert.FromBase64String(base64encodedstring);
                                           //var contents = new StreamContent(new MemoryStream(bytes));
                                           byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosAtendidosPor.Firma.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
-                                          table.Cell().AlignLeft().Image(memoryStream);
+                                          table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
                                       }
                                       else
                                       {
@@ -257,19 +258,24 @@ namespace Aig.Auditoria.Services
                                           //var contents = new StreamContent(new MemoryStream(bytes));
                                           byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosRegente.Firma.Split("image/png;base64,")[1]);
                                           MemoryStream memoryStream = new MemoryStream(data);
-                                          table.Cell().AlignLeft().Image(memoryStream);
+                                          table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                       }
                                       else
                                       {
                                           table.Cell().AlignLeft().Text("");
                                       }
-                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  Cargo:{2}", inspection.InspRetiroRetencion.DatosAtendidosPor.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor.Cedula, inspection.InspRetiroRetencion.DatosAtendidosPor.Cargo));
-                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  Cargo:{2}  |  No. Registro:{3}", inspection.InspRetiroRetencion.DatosRegente.Nombre, inspection.InspRetiroRetencion.DatosRegente.Cedula, inspection.InspRetiroRetencion.DatosRegente.Cargo, inspection.InspRetiroRetencion.DatosRegente.NumRegistro));
 
-                                      table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                      table.Cell().AlignLeft().Text("");
+
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspRetiroRetencion.DatosAtendidosPor.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor.Cedula, inspection.InspRetiroRetencion.DatosAtendidosPor.Cargo));
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspRetiroRetencion.DatosRegente.Nombre, inspection.InspRetiroRetencion.DatosRegente.Cedula, inspection.InspRetiroRetencion.DatosRegente.Cargo, inspection.InspRetiroRetencion.DatosRegente.NumRegistro));
+
+                                      table.Cell().AlignLeft().Text("");
+
+                                      table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                       if (inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes !=null)
                                       {
-                                          table.Cell().ColumnSpan(2).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+                                          table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
 
                                           foreach (var participant in inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes)
                                           {
@@ -283,9 +289,9 @@ namespace Aig.Auditoria.Services
                                                   {
                                                       byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                       MemoryStream memoryStream = new MemoryStream(data);
-                                                      tbl.Cell().AlignLeft().Image(memoryStream);
+                                                      tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                                   }
-                                                  tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                                  tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                               });
                                           }                                          
@@ -431,7 +437,7 @@ namespace Aig.Auditoria.Services
 
                                 table.Footer(footer =>
                                 {
-                                    footer.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ley 66 de 10 de noviembre de 1947. Código Sanitario de la República de Panamá. (G.O. 10467 de 6 de diciembre de 1947). Artículo 200. Prohíbese ejercer conjuntamente las \r\nprofesiones de médico-cirujano y farmacéutico. A partir de la aprobación de este código, ningún médico que ejerza la profesión podrá ser dueño por sí mismo o por interpuesta persona, accionista o tener participación comercial cualquiera en establecimientos en que se fabriquen, preparen o vendan medicinas y artículos de cualquier clase que se usen para la prevención o curación de enfermedades, corrección de defectos o para el diagnóstico");
+                                    footer.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ley 66 de 10 de noviembre de 1947. Código Sanitario de la República de Panamá. (G.O. 10467 de 6 de diciembre de 1947). Artículo 200. Prohíbese ejercer conjuntamente las profesiones de médico-cirujano y farmacéutico. A partir de la aprobación de este código, ningún médico que ejerza la profesión podrá ser dueño por sí mismo o por interpuesta persona, accionista o tener participación comercial cualquiera en establecimientos en que se fabriquen, preparen o vendan medicinas y artículos de cualquier clase que se usen para la prevención o curación de enfermedades, corrección de defectos o para el diagnóstico");
                                 });
                             });
 
@@ -469,11 +475,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperCambUbicFarm.DatosRegente.Ubicacion);
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Teléfono / Celular");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicFarm.DatosRegente.TelefonoOfic, inspection.InspAperCambUbicFarm.DatosRegente.TelefonoMovil));
-
-                                table.Footer(footer =>
-                                {
-                                    footer.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ley 66 de 10 de noviembre de 1947. Código Sanitario de la República de Panamá. (G.O. 10467 de 6 de diciembre de 1947). Artículo 200. Prohíbese ejercer conjuntamente las \r\nprofesiones de médico-cirujano y farmacéutico. A partir de la aprobación de este código, ningún médico que ejerza la profesión podrá ser dueño por sí mismo o por interpuesta persona, accionista o tener participación comercial cualquiera en establecimientos en que se fabriquen, preparen o vendan medicinas y artículos de cualquier clase que se usen para la prevención o curación de enfermedades, corrección de defectos o para el diagnóstico");
-                                });
+                                                                
                             });
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
@@ -520,20 +522,6 @@ namespace Aig.Auditoria.Services
 
                                 table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text("El establecimiento se compromete al fiel cumplimiento del Artículo 386 del Decreto Ejecutivo 115 De 16 de agosto de 2022.");
                                 
-                                table.Cell().ColumnSpan(1).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Firma del Regente");
-                                if (!string.IsNullOrEmpty(inspection.InspAperCambUbicFarm.DatosRegente.Firma))
-                                {
-                                    //var bytes = Convert.FromBase64String(base64encodedstring);
-                                    //var contents = new StreamContent(new MemoryStream(bytes));
-                                    byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicFarm.DatosRegente.Firma.Split("image/png;base64,")[1]);
-                                    MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().ColumnSpan(2).AlignLeft().Image(memoryStream);
-                                }
-                                else
-                                {
-                                    table.Cell().ColumnSpan(2).Text("");
-                                }
-
                             });
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
@@ -851,19 +839,19 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperCambUbicFarm.DatosAreaAlmacenamiento.VencidosDescrip);
 
                                 table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text("El establecimiento se compromete al fiel cumplimiento del Artículo 639 del Decreto Ejecutivo 115 De 16 de agosto de 2022");
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Firma del Regente");
-                                if (!string.IsNullOrEmpty(inspection.InspAperCambUbicFarm.DatosRegente.Firma))
-                                {
-                                    //var bytes = Convert.FromBase64String(base64encodedstring);
-                                    //var contents = new StreamContent(new MemoryStream(bytes));
-                                    byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicFarm.DatosRegente.Firma.Split("image/png;base64,")[1]);
-                                    MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
-                                }
-                                else
-                                {
-                                    table.Cell().Text("");
-                                }
+                                //table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Firma del Regente");
+                                //if (!string.IsNullOrEmpty(inspection.InspAperCambUbicFarm.DatosRegente.Firma))
+                                //{
+                                //    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                //    //var contents = new StreamContent(new MemoryStream(bytes));
+                                //    byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicFarm.DatosRegente.Firma.Split("image/png;base64,")[1]);
+                                //    MemoryStream memoryStream = new MemoryStream(data);
+                                //    table.Cell().AlignLeft().Image(memoryStream);
+                                //}
+                                //else
+                                //{
+                                //    table.Cell().Text("");
+                                //}
                             });
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
@@ -918,40 +906,60 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspAperCambUbicFarm.DatosAtendidosPor?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicFarm.DatosAtendidosPor.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitArea);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
+
+
                                 if (!string.IsNullOrEmpty(inspection.InspAperCambUbicFarm.DatosRegente?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicFarm.DatosRegente.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  Cargo:{2}", inspection.InspAperCambUbicFarm.DatosAtendidosPor?.Nombre, inspection.InspAperCambUbicFarm.DatosAtendidosPor?.Cedula, inspection.InspAperCambUbicFarm.DatosAtendidosPor?.Cargo));
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  Cargo:{2}  |  No. Registro:{3}", inspection.InspAperCambUbicFarm.DatosRegente.Nombre, inspection.InspAperCambUbicFarm.DatosRegente.Cedula, inspection.InspAperCambUbicFarm.DatosRegente.Cargo, inspection.InspAperCambUbicFarm.DatosRegente.NumRegistro));
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
-                                if (inspection.InspAperCambUbicFarm.DatosConclusiones.LParticipantes != null)
-                                {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspAperCambUbicFarm.DatosAtendidosPor?.Nombre, inspection.InspAperCambUbicFarm.DatosAtendidosPor?.Cedula, inspection.InspAperCambUbicFarm.DatosAtendidosPor?.Cargo));
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspAperCambUbicFarm.DatosRegente.Nombre, inspection.InspAperCambUbicFarm.DatosRegente.Cedula, inspection.InspAperCambUbicFarm.DatosRegente.Cargo, inspection.InspAperCambUbicFarm.DatosRegente.NumRegistro));
+
+                                table.Cell().AlignLeft().Text("");
+
+                            });
+
+                            column.Item().PaddingVertical(5).Text(" ").Bold();
+
+                            if (inspection.InspAperCambUbicFarm.DatosConclusiones.LParticipantes != null)
+                            {
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
 
                                     foreach (var participant in inspection.InspAperCambUbicFarm.DatosConclusiones.LParticipantes)
                                     {
@@ -965,15 +973,13 @@ namespace Aig.Auditoria.Services
                                             {
                                                 byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                 MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                                tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
-
-                                        });
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                        });                                        
                                     }
-                                }
-
-                            });
+                                });
+                            }
 
                             column.Item().PaddingVertical(5).Text(string.Format("Hora de finalización de inspección: {0}", inspection.InspAperCambUbicFarm.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt")??""));
 
@@ -986,16 +992,49 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
 
                     });
@@ -2044,47 +2083,62 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).Text("COMO PARTE DE LOS REQUISITOS PARA LA EMISIÓN DE LA LICENCIA DE OPERACIÓN, LAS DESVIACIONES OBSERVADAS EN LA INSPECCIÓN, DEBERÁN SER SUBSANADAS EN UN TERMINO NO MAYOR A 20 DÍAS, DENTRO DE LOS CUALES DEBEN NOTIFICAR A LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS. PARA REALIZAR LA INSPECCIÓN DEFINITIVA").Bold();
 
-                            column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes"));
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspAperCambUbicAgen.DatosAtendidosPor?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicAgen.DatosAtendidosPor.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitArea);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
-                                }
+                                }                                
+
                                 if (!string.IsNullOrEmpty(inspection.InspAperCambUbicAgen.DatosRegente?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicAgen.DatosRegente.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  Cargo:{2}", inspection.InspAperCambUbicAgen.DatosAtendidosPor?.Nombre, inspection.InspAperCambUbicAgen.DatosAtendidosPor?.Cedula, inspection.InspAperCambUbicAgen.DatosAtendidosPor?.Cargo));
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  Cargo:{2}  |  No. Registro:{3}", inspection.InspAperCambUbicAgen.DatosRegente.Nombre, inspection.InspAperCambUbicAgen.DatosRegente.Cedula, inspection.InspAperCambUbicAgen.DatosRegente.Cargo, inspection.InspAperCambUbicAgen.DatosRegente.NumRegistro));
+                                table.Cell().AlignLeft().Text("");
+    
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspAperCambUbicAgen.DatosAtendidosPor?.Nombre, inspection.InspAperCambUbicAgen.DatosAtendidosPor?.Cedula, inspection.InspAperCambUbicAgen.DatosAtendidosPor?.Cargo));
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspAperCambUbicAgen.DatosRegente.Nombre, inspection.InspAperCambUbicAgen.DatosRegente.Cedula, inspection.InspAperCambUbicAgen.DatosRegente.Cargo, inspection.InspAperCambUbicAgen.DatosRegente.NumRegistro));
+                                
+                                table.Cell().AlignLeft().Text("");
+                            });
+                            column.Item().PaddingVertical(5).Text(" ").Bold();
+                            if (inspection.InspAperCambUbicAgen.DatosConclusiones.LParticipantes != null)
+                            {
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
-                                if (inspection.InspAperCambUbicAgen.DatosConclusiones.LParticipantes != null)
-                                {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
 
                                     foreach (var participant in inspection.InspAperCambUbicAgen.DatosConclusiones.LParticipantes)
                                     {
@@ -2098,15 +2152,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                 MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                                tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
-
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
                                         });
                                     }
-                                }
+                                });
+                            }
 
-                            });
 
                             column.Item().PaddingVertical(5).Text(string.Format("Hora de finalización de inspección: {0}", inspection.InspAperCambUbicAgen.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
@@ -2119,17 +2172,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -2275,41 +2362,33 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspInvestigacion.DatosAtendidosPor?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspInvestigacion.DatosAtendidosPor.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
-                                //if (!string.IsNullOrEmpty(inspection.InspInvestigacion.DatosRepresentLegal?.Firma))
-                                //{
-                                //    //var bytes = Convert.FromBase64String(base64encodedstring);
-                                //    //var contents = new StreamContent(new MemoryStream(bytes));
-                                //    byte[] data = Convert.FromBase64String(inspection.InspInvestigacion.DatosRepresentLegal.Firma.Split("image/png;base64,")[1]);
-                                //    MemoryStream memoryStream = new MemoryStream(data);
-                                //    table.Cell().AlignLeft().Image(memoryStream);
-                                //}
-                                //else
-                                //{
-                                //    table.Cell().AlignLeft().Text("");
-                                //}
-                                
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspInvestigacion.DatosAtendidosPor?.Nombre, inspection.InspInvestigacion.DatosAtendidosPor?.Cedula));
-                                //table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspInvestigacion.DatosRepresentLegal?.Nombre, inspection.InspInvestigacion.DatosRepresentLegal?.Cedula));
+                                table.Cell().AlignLeft().Text("");
+                                table.Cell().AlignLeft().Text("");
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspInvestigacion.DatosAtendidosPor?.Nombre, inspection.InspInvestigacion.DatosAtendidosPor?.Cedula));
+                                table.Cell().AlignLeft().Text("");
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspInvestigacion.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspInvestigacion.DatosConclusiones.LParticipantes)
                                     {
@@ -2325,12 +2404,11 @@ namespace Aig.Auditoria.Services
                                                 MemoryStream memoryStream = new MemoryStream(data);
                                                 tbl.Cell().AlignLeft().Image(memoryStream);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
                                 }
-
                             });
 
                             column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspInvestigacion.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
@@ -2341,16 +2419,49 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
 
                     });
@@ -3165,16 +3276,17 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspAperFabricante.DatosRegente?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperFabricante.DatosRegente.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
@@ -3186,20 +3298,23 @@ namespace Aig.Auditoria.Services
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperFabricante.DatosRepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
+                                table.Cell().AlignLeft().Text("");
 
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspAperFabricante.DatosRegente?.Nombre, inspection.InspAperFabricante.DatosRegente?.Cedula));
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspAperFabricante.DatosRepresentLegal?.Nombre, inspection.InspAperFabricante.DatosRepresentLegal?.Cedula));
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspAperFabricante.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspAperFabricante.DatosConclusiones.LParticipantes)
                                     {
@@ -3213,9 +3328,9 @@ namespace Aig.Auditoria.Services
                                             {
                                                 byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                 MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                                tbl.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -3231,17 +3346,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -4664,16 +4813,17 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
                                 }
                                 else
                                 {
@@ -4685,20 +4835,24 @@ namespace Aig.Auditoria.Services
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
-
+                                
+                                table.Cell().AlignLeft().Text("");
+                                
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Nombre, inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Cedula));
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal?.Nombre, inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal?.Cedula));
-
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                
+                                table.Cell().AlignLeft().Text("");
+                                
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
                                     {
@@ -4712,9 +4866,9 @@ namespace Aig.Auditoria.Services
                                             {
                                                 byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                 MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                                tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -4730,17 +4884,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -4942,9 +5130,10 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignMiddle().AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignMiddle().AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspAperturaCosmetArtesanal.Propietario?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
@@ -4958,12 +5147,17 @@ namespace Aig.Auditoria.Services
                                     table.Cell().AlignMiddle().AlignLeft().Text("");
                                 }
                                 table.Cell().AlignMiddle().AlignLeft().Text("");
+                                table.Cell().AlignMiddle().AlignLeft().Text("");
+                                
                                 table.Cell().AlignLeft().AlignMiddle().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspAperturaCosmetArtesanal.Propietario?.Nombre, inspection.InspAperturaCosmetArtesanal.Propietario?.Cedula));
                                 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignMiddle().AlignLeft().Text("");
+                                table.Cell().AlignMiddle().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspAperturaCosmetArtesanal.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspAperturaCosmetArtesanal.DatosConclusiones.LParticipantes)
                                     {
@@ -4979,7 +5173,7 @@ namespace Aig.Auditoria.Services
                                                 MemoryStream memoryStream = new MemoryStream(data);
                                                 tbl.Cell().AlignMiddle().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignMiddle().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignMiddle().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -4995,17 +5189,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -6827,16 +7055,17 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabNatMedicina.RegenteFarmaceutico?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabNatMedicina.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
                                 }
                                 else
                                 {
@@ -6848,20 +7077,24 @@ namespace Aig.Auditoria.Services
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabNatMedicina.RepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
 
+                                table.Cell().AlignLeft().Text("");
+
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabNatMedicina.RegenteFarmaceutico?.Nombre, inspection.InspGuiBPMFabNatMedicina.RegenteFarmaceutico?.Cedula));
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabNatMedicina.RepresentLegal?.Nombre, inspection.InspGuiBPMFabNatMedicina.RepresentLegal?.Cedula));
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspGuiBPMFabNatMedicina.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspGuiBPMFabNatMedicina.DatosConclusiones.LParticipantes)
                                     {
@@ -6875,9 +7108,9 @@ namespace Aig.Auditoria.Services
                                             {
                                                 byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                 MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                                tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -6893,17 +7126,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -7382,9 +7649,10 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspRutinaVigAgencia.DatosRegente?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
@@ -7410,13 +7678,17 @@ namespace Aig.Auditoria.Services
                                     table.Cell().AlignLeft().Text("");
                                 }
 
+                                table.Cell().AlignLeft().Text("");
+
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspRutinaVigAgencia.DatosRegente.Nombre, inspection.InspRutinaVigAgencia.DatosRegente.Cedula));
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspRutinaVigAgencia.DatosRepresentLegal.Nombre, inspection.InspRutinaVigAgencia.DatosRepresentLegal.Cedula ));
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspRutinaVigAgencia.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspRutinaVigAgencia.DatosConclusiones.LParticipantes)
                                     {
@@ -7432,7 +7704,7 @@ namespace Aig.Auditoria.Services
                                                 MemoryStream memoryStream = new MemoryStream(data);
                                                 tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -7448,17 +7720,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -7577,9 +7883,10 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspCierreOperacion.DatosResponsable?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
@@ -7593,12 +7900,17 @@ namespace Aig.Auditoria.Services
                                     table.Cell().AlignLeft().Text("");
                                 }
                                 table.Cell().AlignLeft().Text("");
+                                table.Cell().AlignLeft().Text("");
+
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspCierreOperacion.DatosResponsable.Nombre, inspection.InspCierreOperacion.DatosResponsable.Cedula));
-                                
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+
+                                table.Cell().AlignLeft().Text("");
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspCierreOperacion.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspCierreOperacion.DatosConclusiones.LParticipantes)
                                     {
@@ -7614,12 +7926,11 @@ namespace Aig.Auditoria.Services
                                                 MemoryStream memoryStream = new MemoryStream(data);
                                                 tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
                                 }
-
                             });
 
                             column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspCierreOperacion.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
@@ -7630,17 +7941,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -7782,9 +8127,10 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspDisposicionFinal.DatosResponsable?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
@@ -7798,12 +8144,17 @@ namespace Aig.Auditoria.Services
                                     table.Cell().AlignLeft().Text("");
                                 }
                                 table.Cell().AlignLeft().Text("");
+                                table.Cell().AlignLeft().Text("");
+
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspDisposicionFinal.DatosResponsable.Nombre, inspection.InspDisposicionFinal.DatosResponsable.Cedula));
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignLeft().Text("");
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspDisposicionFinal.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspDisposicionFinal.DatosConclusiones.LParticipantes)
                                     {
@@ -7819,7 +8170,7 @@ namespace Aig.Auditoria.Services
                                                 MemoryStream memoryStream = new MemoryStream(data);
                                                 tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -7834,17 +8185,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -9268,16 +9653,17 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
@@ -9289,20 +9675,23 @@ namespace Aig.Auditoria.Services
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiaBPMFabricanteMed.RepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
+                                table.Cell().AlignLeft().Text("");
 
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico?.Nombre, inspection.InspGuiaBPMFabricanteMed.RegenteFarmaceutico?.Cedula));
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiaBPMFabricanteMed.RepresentLegal?.Nombre, inspection.InspGuiaBPMFabricanteMed.RepresentLegal?.Cedula));
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspGuiaBPMFabricanteMed.DatosConclusiones.LParticipantes)
                                     {
@@ -9316,9 +9705,9 @@ namespace Aig.Auditoria.Services
                                             {
                                                 byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                 MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                                tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -9334,17 +9723,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -10297,16 +10720,17 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspGuiaBPMLabAcondicionador.RegenteFarmaceutico?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiaBPMLabAcondicionador.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
@@ -10318,20 +10742,24 @@ namespace Aig.Auditoria.Services
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiaBPMLabAcondicionador.RepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
 
+                                table.Cell().AlignLeft().Text("");
+
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiaBPMLabAcondicionador.RegenteFarmaceutico?.Nombre, inspection.InspGuiaBPMLabAcondicionador.RegenteFarmaceutico?.Cedula));
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiaBPMLabAcondicionador.RepresentLegal?.Nombre, inspection.InspGuiaBPMLabAcondicionador.RepresentLegal?.Cedula));
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspGuiaBPMLabAcondicionador.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspGuiaBPMLabAcondicionador.DatosConclusiones.LParticipantes)
                                     {
@@ -10345,9 +10773,9 @@ namespace Aig.Auditoria.Services
                                             {
                                                 byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                 MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                                tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -10363,17 +10791,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })
@@ -10802,16 +11264,17 @@ namespace Aig.Auditoria.Services
                                 {
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignLeft().Text("Por el establecimiento:").Bold();
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
                                 if (!string.IsNullOrEmpty(inspection.InspGuiaBPM_Bpa.RegenteFarmaceutico?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiaBPM_Bpa.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
                                 }
                                 else
                                 {
@@ -10823,20 +11286,24 @@ namespace Aig.Auditoria.Services
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspGuiaBPM_Bpa.RepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
 
+                                table.Cell().AlignLeft().Text("");
+
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiaBPM_Bpa.RegenteFarmaceutico?.Nombre, inspection.InspGuiaBPM_Bpa.RegenteFarmaceutico?.Cedula));
                                 table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiaBPM_Bpa.RepresentLegal?.Nombre, inspection.InspGuiaBPM_Bpa.RepresentLegal?.Cedula));
 
-                                table.Cell().ColumnSpan(2).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
                                 if (inspection.InspGuiaBPM_Bpa.DatosConclusiones.LParticipantes != null)
                                 {
-                                    table.Cell().ColumnSpan(2).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
                                     foreach (var participant in inspection.InspGuiaBPM_Bpa.DatosConclusiones.LParticipantes)
                                     {
@@ -10850,9 +11317,9 @@ namespace Aig.Auditoria.Services
                                             {
                                                 byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
                                                 MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignLeft().Image(memoryStream);
+                                                tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}  |  No. Registro:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -10868,17 +11335,51 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(6);
+                                columns.RelativeColumn(4);
                             });
 
-                            table.Header(header =>
-                            {
-                                header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                                header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //table.Header(header =>
+                            //{
+                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //});
+
+                            table.Cell().Table(tbl => {
+                                tbl.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                    cols.RelativeColumn();
+                                });
+                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                tbl.Cell().AlignLeft().Text("512-9168/62");
+                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                tbl.Cell().AlignLeft().Text("935-0316/18");
+                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                tbl.Cell().AlignLeft().Text("774-7410");
+                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Colón");
+                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                tbl.Cell().AlignLeft().Text("504-2565");
+                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
+
 
                     });
                 })

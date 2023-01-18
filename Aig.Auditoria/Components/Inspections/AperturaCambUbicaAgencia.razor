@@ -1099,13 +1099,13 @@
                                     <label for="password">@languageContainerService.Keys["Select"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.EspacioFisicoAdecuadoDesc" class="form-control">
+                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.EspacioFisicoAdecuado" class="form-control">
                                                 @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.EspacioFisicoAdecuadoDesc) />
+                                                                <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosCondicionesLocal.AreaAlmacenamiento.EspacioFisicoAdecuado) />
                                         </div>
                                     </div>
                                 </div>

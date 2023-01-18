@@ -26,7 +26,7 @@ namespace DataModel
         //Numero de Licencia -- debe ser campo unico -- LICENCIA_N
         private string numLicencia;
 		[StringLength(250)]
-		[Required(ErrorMessage = "requerido")]
+		//[Required(ErrorMessage = "requerido")]
 		public string NumLicencia { get => numLicencia; set => SetProperty(ref numLicencia, value); }
 
         //Aviso Operaciones
