@@ -4866,6 +4866,8 @@ namespace DataModel
 
         private List<ContenidoTablas> lContenido;
         public List<ContenidoTablas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
+
+        public decimal TotalPtos { get { return LContenido?.Sum(x=>x.PuntosObtenido)??0; } set { } }
     }
 
     public class ContenidoTablas : SystemId
@@ -4902,7 +4904,7 @@ namespace DataModel
 
         // Evaluacion
         private enumAUD_TipoSeleccion evaluacion;
-        public enumAUD_TipoSeleccion Evaluacion { get => evaluacion; set => SetProperty(ref evaluacion, value); }
+        public enumAUD_TipoSeleccion Evaluacion { get { return evaluacion; } set { SetProperty(ref evaluacion, value); PuntosObtenido = evaluacion == enumAUD_TipoSeleccion.Si ? PuntosMax : 0;  } }
 
         // Evaluacion
         private enumAUD_TipoSeleccion evaluacion2;

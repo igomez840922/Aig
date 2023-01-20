@@ -4,6 +4,7 @@ using BlazorComponentBus;
 using DataModel;
 using DataModel.Helper;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
@@ -51,14 +52,34 @@ namespace Aig.Auditoria.Components.Inspections
         bool showExpColaborador { get; set; } = false;
         ExpedienteColaborador expedienteColaborador { get; set; } = null;
         bool showSearchEstablishment { get; set; } = false;
+        bool exit { get; set; } = false;
+        bool isOpen { get; set; } = true;
+
+        private EditContext? editContext;
+        private System.Timers.Timer timer = new(60 * 1000);
 
         protected async override Task OnInitializedAsync()
         {
+            editContext = new(Inspeccion);
+            timer.Elapsed += (sender, eventArgs) => {
+                _ = InvokeAsync(() =>
+                {
+                    SaveData();
+                });
+            };
+            timer.Start();
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
             base.OnInitialized();
         }
+
+        public void Dispose()
+        {
+            timer?.Dispose();
+        }
+
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -129,29 +150,43 @@ namespace Aig.Auditoria.Components.Inspections
         //Save Data and Close
         protected async Task SaveData()
         {
-            if (Inspeccion.InspRutinaVigFarmacia?.DatosConclusiones?.LParticipantes?.Count <= 0)
+            try
             {
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
-                return;
-            }
+                if (!editContext?.Validate() ?? false)
+                    return;
 
-            if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
+                if (Inspeccion.InspRutinaVigFarmacia?.DatosConclusiones?.LParticipantes?.Count <= 0)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
+                    return;
+                }
+
+                if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
+                {
+                    Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
+                }
+
+                var result = await inspeccionService.Save(Inspeccion);
+                if (result != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                    Inspeccion = result;
+
+                    if (exit)
+                        await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                }
+                else
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            }
+            catch { }
+            finally
             {
-                Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
+                exit = false;
+                await this.InvokeAsync(StateHasChanged);
             }
-
-            var result = await inspeccionService.Save(Inspeccion);
-            if (result != null)
-            {
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                Inspeccion = result;
-
-                await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
-            }
-            else
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
         }
 
+        
         //Cancel and Close
         protected async Task Cancel()
         {

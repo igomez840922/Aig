@@ -2316,6 +2316,7 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("A continuación, se describen los detalles de la inspección:\r\n{0}", inspection.InspInvestigacion.DetalleInspeccion));
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Se adjunta acta de retención y retiro de productos: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.AdjuntaActaRetencion)));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("No se puede movilizar los productos hasta culminar la investigación: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.MovilizarProductos)));
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
@@ -2342,17 +2343,23 @@ namespace Aig.Auditoria.Services
 
                                 table.Header(header =>
                                 {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("SEGÚN CRITERIO TÉCNICO SE CONCLUYE QUE").Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("se finaliza la inspección por".ToUpper()).Bold();
                                 });
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspInvestigacion.DetalleVerificacion).Bold();
 
-                                if (inspection.InspInvestigacion.DatosConclusiones.CumpleRequisitosMinOperacion)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
-                                }
-                                else
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
-                                }
+                                //table.Header(header =>
+                                //{
+                                //    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("SEGÚN CRITERIO TÉCNICO SE CONCLUYE QUE").Bold();
+                                //});
+
+                                //if (inspection.InspInvestigacion.DatosConclusiones.CumpleRequisitosMinOperacion)
+                                //{
+                                //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                //}
+                                //else
+                                //{
+                                //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                //}
                             });
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes"));
@@ -5793,7 +5800,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evalución".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
                                 });
-                                foreach (var dat in inspection.InspGuiBPMFabNatMedicina.DispensadoMatPrima.LContenido)
+                                foreach (var dat in inspection.InspGuiBPMFabNatMedicina.AreaDispensadoMatPrima.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {

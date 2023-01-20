@@ -23,6 +23,10 @@ namespace Aig.Auditoria.Pages.Inspections
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
         [Inject]
         IEmailService emailService { get; set; }
+        [Inject]
+        IProvicesService provicesService { get; set; }
+        List<ProvinciaTB> LProvincias { get; set; }
+
 
         GenericModel<AUD_InspeccionTB> dataModel { get; set; } = new GenericModel<AUD_InspeccionTB>()
         { Data = new AUD_InspeccionTB() };
@@ -56,6 +60,8 @@ namespace Aig.Auditoria.Pages.Inspections
 
         protected async Task FetchData()
         {
+            LProvincias = LProvincias?.Count > 0 ? LProvincias : await provicesService.GetAll();
+
             OpenAddEdit = false;
             dataModel.Data = null;
             var data = await inspeccionService.FindAll(dataModel);

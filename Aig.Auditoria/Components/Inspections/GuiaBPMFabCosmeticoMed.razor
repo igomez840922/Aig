@@ -1,5 +1,5 @@
 ﻿@using DataModel.Helper;
-
+@implements IDisposable
 
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="kt-portlet__body">
-                                    <EditForm Model="@Inspeccion" OnValidSubmit="SaveData">
+                                    <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
                     <DataAnnotationsValidator />
                     <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
                         <li class="nav-item">
@@ -591,12 +591,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["A- Generalidades - Estructura Organizativa"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -669,12 +669,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["A - Condiciones Externas de los Almacenes"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -741,12 +741,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th  width="40%">@languageContainerService.Keys["B - Condiciones Internas de los Almacenes"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -813,12 +813,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th  width="40%">@languageContainerService.Keys["C- Área de Recepción de Materia Prima"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -885,12 +885,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["CH - Almacén de Materia Prima"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -957,12 +957,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["D - Área de almacenamiento de Materiales de Acondicionamiento, Empaque y Envase"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1029,12 +1029,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["E - Recepción de Producto Terminado (De producción al almacén)"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1121,12 +1121,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["E.1 - Almacén de Producto Terminado"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1193,12 +1193,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["F - Área de productos Devueltos y/o Rechazados"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1265,12 +1265,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["G - Distribución de Productos Terminados"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1337,12 +1337,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["H - Manejo de quejas y reclamos de productos comercializados"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1409,12 +1409,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["I - Retiro de Productos del Mercado"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1488,12 +1488,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["3.1 Sistemas e Instalaciones de Agua"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1560,12 +1560,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["3.1.1 OSMOSIS INVERSA"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1632,12 +1632,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["3.1.2 SISTEMA DE DEIONIZACION"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1704,12 +1704,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["3.2 Calibraciones y Verificaciones de equipo"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1776,12 +1776,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["3.3 Validaciones"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1848,12 +1848,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>                                               
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["3.4 Mantenimiento de áreas y equipos"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1925,12 +1925,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["4.1.A Condiciones Externas"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -1998,12 +1998,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["4.1.B Condiciones Internas"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2071,12 +2071,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["4.2 Organización y Documentación"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2164,12 +2164,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["4.3 Área de Dispensación de Ordenes de Fabricación"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2248,12 +2248,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["4.4.1 Fabricación de Productos Desinfectantes"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2321,12 +2321,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["4.5.1 Fabricación de Plaguicidas"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2394,12 +2394,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["4.6.1 Fabricación de Cosméticos"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2472,12 +2472,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["5.1 Área de Envasado"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2545,12 +2545,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["5.2. Área de Etiquetado y Empaque"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2624,12 +2624,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["6.1 Laboratorio de Control de Calidad"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2697,12 +2697,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["6.2 Análisis por Contrato"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -2774,12 +2774,12 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Pto. Máximo"]</th>
-                                                    <th>@languageContainerService.Keys["Pto. Obtenido"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Máximo"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Pto. Obtenido"]</th>
                                                     <th width="40%">@languageContainerService.Keys["Inspecciones y Auditoría"]</th>
-                                                    <th>@languageContainerService.Keys["Art."]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                    <th>@languageContainerService.Keys["Criterio"]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Art."]</th>
+                                                    <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -3034,7 +3034,7 @@
 
                                         <div class="kt-portlet__foot" style="text-align:right;">
                                                 <div class="kt-form__actions">
-                                                    <button type="submit"
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
                                                             class="btn btn-info waves-effect">
                                                         @languageContainerService.Keys["Save"]
                                                     </button>

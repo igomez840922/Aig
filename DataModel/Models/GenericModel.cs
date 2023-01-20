@@ -65,6 +65,7 @@ namespace DataModel.Models
 
         public long? NParentId { get; set; }
         public int? Priority { get; set; } = null;
+        public long? ProvinceId { get; set; } = null;
 
     }
 

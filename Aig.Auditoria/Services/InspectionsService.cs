@@ -29,6 +29,7 @@ namespace Aig.Auditoria.Services
                                (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None? data.StatusInspecciones == model.StatusInspecciones : true) &&
+                               (model.ProvinceId != null ? data.Establecimiento.ProvinciaId == model.ProvinceId : true) &&
                                (model.FromDate !=null? data.FechaInicio >= model.FromDate:true) &&
                                (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
                                orderby data.FechaInicio
@@ -39,6 +40,7 @@ namespace Aig.Auditoria.Services
                                 (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
+                               (model.ProvinceId != null ? data.Establecimiento.ProvinciaId == model.ProvinceId : true) &&
                                (model.FromDate != null ? data.FechaInicio >= model.FromDate : true) &&
                                (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
                                select data).Count();

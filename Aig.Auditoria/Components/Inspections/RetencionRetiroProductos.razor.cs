@@ -18,6 +18,7 @@ using Org.BouncyCastle.Utilities;
 using DocumentFormat.OpenXml.ExtendedProperties;
 using Aig.Auditoria.Data;
 using Aig.Auditoria.Pages.Settings.Corregimiento;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace Aig.Auditoria.Components.Inspections
 {
@@ -58,14 +59,35 @@ namespace Aig.Auditoria.Components.Inspections
 
         bool showSearchEstablishment { get; set; } = false;
 
+        bool exit { get; set; } = false;
+        bool isOpen { get; set; } = true;
+
+        private EditContext? editContext;
+        private System.Timers.Timer timer = new(60 * 1000);
+
         protected async override Task OnInitializedAsync()
         {
+            editContext = new(Inspeccion);
+            timer.Elapsed += (sender, eventArgs) => {
+                _ = InvokeAsync(() =>
+                {
+                    SaveData();
+                });
+            };
+            timer.Start();
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            
+
             base.OnInitialized();
         }
-                
+
+        public void Dispose()
+        {
+            timer?.Dispose();
+        }
+
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -127,32 +149,46 @@ namespace Aig.Auditoria.Components.Inspections
             
             await this.InvokeAsync(StateHasChanged);
         }
-            
+
         //Save Data and Close
         protected async Task SaveData()
         {
-            if (Inspeccion.InspRetiroRetencion?.DatosConclusiones?.LParticipantes?.Count <= 0)
+            try
             {
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
-                return;
-            }
+                if (!editContext?.Validate() ?? false)
+                    return;
 
-            if (Inspeccion.EstablecimientoId!=null && Inspeccion.EstablecimientoId > 0) {
-                Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
-            }
+                if (Inspeccion.InspRetiroRetencion?.DatosConclusiones?.LParticipantes?.Count <= 0)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
+                    return;
+                }
 
-            var result = await inspeccionService.Save(Inspeccion);
-            if (result != null)
-            {                            
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                Inspeccion = result;
+                if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
+                {
+                    Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
+                }
 
-                await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                var result = await inspeccionService.Save(Inspeccion);
+                if (result != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                    Inspeccion = result;
+
+                    if (exit)
+                        await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                }
+                else
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
             }
-            else
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            catch { }
+            finally
+            {
+                exit = false;
+                await this.InvokeAsync(StateHasChanged);
+            }
         }
-
+                
         //Cancel and Close
         protected async Task Cancel()
         {
