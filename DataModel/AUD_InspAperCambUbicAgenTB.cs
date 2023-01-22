@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataModel
@@ -23,6 +24,7 @@ namespace DataModel
         }
 
         private AUD_InspeccionTB inspeccion;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
         //codigo

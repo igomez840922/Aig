@@ -390,7 +390,9 @@ namespace Aig.Auditoria.Components.Inspections
                 Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Telefono = message.Data?.Telefono1 ?? "";
                 Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Nombre = message.Data?.Nombre ?? "";
                 Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Direccion = message.Data?.Ubicacion ?? "";
-                Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Ciudad = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Provincia = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Distrito = message.Data?.Distrito?.Nombre ?? "";
+                Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Corregimiento = message.Data?.Corregimiento?.Nombre ?? "";
             }
 
             this.InvokeAsync(StateHasChanged);

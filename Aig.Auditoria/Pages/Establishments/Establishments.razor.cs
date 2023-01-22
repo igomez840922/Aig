@@ -20,6 +20,7 @@ namespace Aig.Auditoria.Pages.Establishments
         GenericModel<AUD_EstablecimientoTB> dataModel { get; set; } = new GenericModel<AUD_EstablecimientoTB>()
         { Data = new AUD_EstablecimientoTB() };
                 
+
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event

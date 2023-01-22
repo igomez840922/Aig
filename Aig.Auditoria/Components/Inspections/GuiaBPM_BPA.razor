@@ -313,6 +313,33 @@
                                                     </div>
                                                     </div>*@
                                                     <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["Provincia"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Provincia" />
+                                                                <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Provincia) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["Distrito"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Distrito" />
+                                                                <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Distrito) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["Corregimiento"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Corregimiento" />
+                                                                <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Corregimiento) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*<div class="col-sm-4">
                                                         <label>@languageContainerService.Keys["Ciudad"]</label>
                                                         <div class="form-group">
                                                             <div class="form-line">
@@ -320,7 +347,7 @@
                                                                 <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Ciudad) />
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>*@
                                                     <div class="col-sm-8">
                                                         <label>@languageContainerService.Keys["Location"]</label>
                                                         <div class="form-group">
@@ -419,12 +446,13 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
+                                                                        <th width="5%">@languageContainerService.Keys["No"]</th>
                                                                         <th width="40%">@languageContainerService.Keys["Título"]</th>
-                                                                        <th>@languageContainerService.Keys["Criterio"]</th>
-                                                                        <th>@languageContainerService.Keys["Cap."]</th>
-                                                                        <th>@languageContainerService.Keys["Art."]</th>
-                                                                        <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                                        <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["D.E."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Otros."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th>@languageContainerService.Keys["Evidencias / Observaciones"]</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -435,6 +463,7 @@
                                                                             @if (dt.IsHeader)
                                                                             {
                                                                                 <tr>
+                                                                                    <th></th>
                                                                                     <th>@dt.Titulo</th>
                                                                                     <th>@dt.Criterio</th>
                                                                                     <th>@dt.Capitulo</th>
@@ -446,6 +475,7 @@
                                                                             else
                                                                             {
                                                                                 <tr>
+                                                                                    <td>@dt.Numero</td>
                                                                                     <td>@dt.Titulo</td>
                                                                                     <td>@dt.Criterio</td>
                                                                                     <td>@dt.Capitulo</td>
@@ -482,12 +512,13 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
+                                                                        <th width="5%">@languageContainerService.Keys["No"]</th>
                                                                         <th width="40%">@languageContainerService.Keys["Título"]</th>
-                                                                        <th>@languageContainerService.Keys["Criterio"]</th>
-                                                                        <th>@languageContainerService.Keys["Cap."]</th>
-                                                                        <th>@languageContainerService.Keys["Art."]</th>
-                                                                        <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                                        <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["D.E."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Otros."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th>@languageContainerService.Keys["Evidencias / Observaciones"]</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -498,6 +529,7 @@
                                                                             @if (dt.IsHeader)
                                                                             {
                                                                                 <tr>
+                                                                                    <th></th>
                                                                                     <th>@dt.Titulo</th>
                                                                                     <th>@dt.Criterio</th>
                                                                                     <th>@dt.Capitulo</th>
@@ -509,6 +541,7 @@
                                                                             else
                                                                             {
                                                                                 <tr>
+                                                                                    <td>@dt.Numero</td>
                                                                                     <td>@dt.Titulo</td>
                                                                                     <td>@dt.Criterio</td>
                                                                                     <td>@dt.Capitulo</td>
@@ -545,12 +578,13 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
+                                                                        <th width="5%">@languageContainerService.Keys["No"]</th>
                                                                         <th width="40%">@languageContainerService.Keys["Título"]</th>
-                                                                        <th>@languageContainerService.Keys["Criterio"]</th>
-                                                                        <th>@languageContainerService.Keys["Cap."]</th>
-                                                                        <th>@languageContainerService.Keys["Art."]</th>
-                                                                        <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                                        <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["D.E."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Otros."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th>@languageContainerService.Keys["Evidencias / Observaciones"]</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -561,6 +595,7 @@
                                                                             @if (dt.IsHeader)
                                                                             {
                                                                                 <tr>
+                                                                                    <th></th>
                                                                                     <th>@dt.Titulo</th>
                                                                                     <th>@dt.Criterio</th>
                                                                                     <th>@dt.Capitulo</th>
@@ -572,6 +607,7 @@
                                                                             else
                                                                             {
                                                                                 <tr>
+                                                                                    <td>@dt.Numero</td>
                                                                                     <td>@dt.Titulo</td>
                                                                                     <td>@dt.Criterio</td>
                                                                                     <td>@dt.Capitulo</td>
@@ -608,12 +644,13 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
+                                                                        <th width="5%">@languageContainerService.Keys["No"]</th>
                                                                         <th width="40%">@languageContainerService.Keys["Título"]</th>
-                                                                        <th>@languageContainerService.Keys["Criterio"]</th>
-                                                                        <th>@languageContainerService.Keys["Cap."]</th>
-                                                                        <th>@languageContainerService.Keys["Art."]</th>
-                                                                        <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                                        <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["D.E."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Otros."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th>@languageContainerService.Keys["Evidencias / Observaciones"]</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -624,6 +661,7 @@
                                                                             @if (dt.IsHeader)
                                                                             {
                                                                                 <tr>
+                                                                                    <th></th>
                                                                                     <th>@dt.Titulo</th>
                                                                                     <th>@dt.Criterio</th>
                                                                                     <th>@dt.Capitulo</th>
@@ -635,6 +673,7 @@
                                                                             else
                                                                             {
                                                                                 <tr>
+                                                                                    <td>@dt.Numero</td>
                                                                                     <td>@dt.Titulo</td>
                                                                                     <td>@dt.Criterio</td>
                                                                                     <td>@dt.Capitulo</td>
@@ -671,12 +710,13 @@
                                                             <table class="table rounded table-striped">
                                                                 <thead class=thead-light>
                                                                     <tr>
+                                                                        <th width="5%">@languageContainerService.Keys["No"]</th>
                                                                         <th width="40%">@languageContainerService.Keys["Título"]</th>
-                                                                        <th>@languageContainerService.Keys["Criterio"]</th>
-                                                                        <th>@languageContainerService.Keys["Cap."]</th>
-                                                                        <th>@languageContainerService.Keys["Art."]</th>
-                                                                        <th>@languageContainerService.Keys["Evaluación"]</th>
-                                                                        <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Criterio"]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["D.E."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Otros."]</th>
+                                                                        <th width="5%">@languageContainerService.Keys["Evaluación"]</th>
+                                                                        <th>@languageContainerService.Keys["Evidencias / Observaciones"]</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -687,6 +727,7 @@
                                                                             @if (dt.IsHeader)
                                                                             {
                                                                                 <tr>
+                                                                                    <th></th>
                                                                                     <th>@dt.Titulo</th>
                                                                                     <th>@dt.Criterio</th>
                                                                                     <th>@dt.Capitulo</th>
@@ -698,6 +739,7 @@
                                                                             else
                                                                             {
                                                                                 <tr>
+                                                                                    <td>@dt.Numero</td>
                                                                                     <td>@dt.Titulo</td>
                                                                                     <td>@dt.Criterio</td>
                                                                                     <td>@dt.Capitulo</td>

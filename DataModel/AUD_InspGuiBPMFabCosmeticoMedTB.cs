@@ -69,6 +69,7 @@ namespace DataModel
 
 
         private AUD_InspeccionTB inspeccion;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
 
@@ -4858,6 +4859,10 @@ namespace DataModel
             LContenido = new List<ContenidoTablas>();
         }
 
+        private int numero;
+        public int Numero { get => numero; set => SetProperty(ref numero, value); }
+
+
         private string temperatura;
         public string Temperatura { get => temperatura; set => SetProperty(ref temperatura, value); }
 
@@ -4877,6 +4882,10 @@ namespace DataModel
             IsHeader = false;
             LSubContenido = new List<SubContenidoTablas>();
         }
+
+        private int numero;
+        public int Numero { get => numero; set => SetProperty(ref numero, value); }
+
 
         private bool isHeader;
         public bool IsHeader { get => isHeader; set => SetProperty(ref isHeader, value); }

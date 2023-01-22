@@ -25,6 +25,7 @@ namespace DataModel
 		private long? distritoId;
 		public long? DistritoId { get => distritoId; set => SetProperty(ref distritoId, value); }
 		private DistritoTB? distrito;
-		public virtual DistritoTB? Distrito { get => distrito; set => SetProperty(ref distrito, value); }
+        [System.Text.Json.Serialization.JsonIgnore]
+        public virtual DistritoTB? Distrito { get => distrito; set => SetProperty(ref distrito, value); }
 	}
 }

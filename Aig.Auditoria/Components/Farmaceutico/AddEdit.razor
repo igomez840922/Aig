@@ -1,0 +1,170 @@
+﻿@using DataModel.Helper;
+
+
+<!-- Modal Creat/Edit -->
+@if (Farmaceutico != null && OpenDialog)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog  modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@languageContainerService.Keys["Farmaceutico"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Farmaceutico" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+
+                        <div class="row clearfix">
+                            <div class="col-sm-9">
+                                <label>@languageContainerService.Keys["FullName"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.NombreCompleto" />
+                                        <ValidationMessage For=@(() => Farmaceutico.NombreCompleto) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Cedula"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Cedula" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Cedula) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.NumReg" />
+                                        <ValidationMessage For=@(() => Farmaceutico.NumReg) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Folio"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Folio" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Folio) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Sector"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Sector" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Sector) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Provincia"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Provincia" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Provincia) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Distrito"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Distrito" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Distrito) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Corregimiento"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Corregimiento" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Corregimiento) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label for="password">@languageContainerService.Keys["Dirección"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Direccion" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Direccion) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Telefono"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Telefono" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Telefono) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="password">@languageContainerService.Keys["Telefono del Trabajo"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.TelefonoTrabajo" />
+                                        <ValidationMessage For=@(() => Farmaceutico.TelefonoTrabajo) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="password">@languageContainerService.Keys["Dirección del Trabajo"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.TelefonoTrabajo" />
+                                        <ValidationMessage For=@(() => Farmaceutico.TelefonoTrabajo) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="password">@languageContainerService.Keys["Horario Laboral"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.Horario" />
+                                        <ValidationMessage For=@(() => Farmaceutico.Horario) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br><br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+}
+

@@ -10930,6 +10930,9 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Establecimiento Farmacéutico:")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}, {1}, {2}, {3}", inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Provincia, inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Distrito, inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Corregimiento, inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Direccion));
+                            column.Item().AlignLeft().Text(string.Format("Provincia: {0}", inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Provincia));
+                            column.Item().AlignLeft().Text(string.Format("Distrito: {0}", inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Distrito));
+                            column.Item().AlignLeft().Text(string.Format("Corregimiento: {0}", inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Corregimiento));
                             column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Telefono));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.Email));
                             column.Item().AlignLeft().Text(string.Format("Licencia de Operación Nº:  {0}", inspection.InspGuiaBPM_Bpa.GeneralesEmpresa.NumLicOperacion));
@@ -11022,27 +11025,30 @@ namespace Aig.Auditoria.Services
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
+                                    columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)4);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
-                                    columns.RelativeColumn((float)3);
+                                    columns.RelativeColumn((float)3.5);
                                 });
                                 table.Header(header =>
                                 {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("No.".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("REQUISITOS".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("CRITERIO".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evidencias / Observaciones".ToUpper());
                                 });
 
                                 foreach (var dat in inspection.InspGuiaBPM_Bpa.DispGenerlestablecimiento.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11052,6 +11058,7 @@ namespace Aig.Auditoria.Services
                                     }
                                     else
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Numero);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11068,27 +11075,30 @@ namespace Aig.Auditoria.Services
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
+                                    columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)4);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
-                                    columns.RelativeColumn((float)3);
+                                    columns.RelativeColumn((float)3.5);
                                 });
                                 table.Header(header =>
                                 {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("No.".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("REQUISITOS".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("CRITERIO".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evidencias / Observaciones".ToUpper());
                                 });
 
                                 foreach (var dat in inspection.InspGuiaBPM_Bpa.AreasEstablecimiento.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11098,6 +11108,7 @@ namespace Aig.Auditoria.Services
                                     }
                                     else
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Numero);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11114,27 +11125,30 @@ namespace Aig.Auditoria.Services
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
+                                    columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)4);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
-                                    columns.RelativeColumn((float)3);
+                                    columns.RelativeColumn((float)3.5);
                                 });
                                 table.Header(header =>
                                 {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("No.".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("REQUISITOS".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("CRITERIO".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evidencias / Observaciones".ToUpper());
                                 });
 
                                 foreach (var dat in inspection.InspGuiaBPM_Bpa.Distribucion.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(""); 
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11144,6 +11158,7 @@ namespace Aig.Auditoria.Services
                                     }
                                     else
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Numero);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11160,27 +11175,30 @@ namespace Aig.Auditoria.Services
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
+                                    columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)4);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
-                                    columns.RelativeColumn((float)3);
+                                    columns.RelativeColumn((float)3.5);
                                 });
                                 table.Header(header =>
                                 {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("No.".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("REQUISITOS".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("CRITERIO".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evidencias / Observaciones".ToUpper());
                                 });
 
                                 foreach (var dat in inspection.InspGuiaBPM_Bpa.TransProdFarmaceuticos.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11190,6 +11208,7 @@ namespace Aig.Auditoria.Services
                                     }
                                     else
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Numero);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11206,27 +11225,30 @@ namespace Aig.Auditoria.Services
                             {
                                 table.ColumnsDefinition(columns =>
                                 {
+                                    columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)4);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
                                     columns.RelativeColumn((float)0.5);
-                                    columns.RelativeColumn((float)3);
+                                    columns.RelativeColumn((float)3.5);
                                 });
                                 table.Header(header =>
                                 {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("No.".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("REQUISITOS".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("CRITERIO".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cap".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evidencias / Observaciones".ToUpper());
                                 });
 
                                 foreach (var dat in inspection.InspGuiaBPM_Bpa.AutoInspec.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
@@ -11236,6 +11258,7 @@ namespace Aig.Auditoria.Services
                                     }
                                     else
                                     {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Numero);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);

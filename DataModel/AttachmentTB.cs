@@ -54,7 +54,7 @@ namespace DataModel
         private long? inspeccionId;
         public long? InspeccionId { get => inspeccionId; set => SetProperty(ref inspeccionId, value); }
         private AUD_InspeccionTB? inspeccion;
-        [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB? Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
     }
 }

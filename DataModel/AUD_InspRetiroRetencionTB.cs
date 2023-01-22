@@ -36,6 +36,7 @@ namespace DataModel
         public virtual List<AUD_ProdRetiroRetencionTB> LProductos { get => lProductos; set => SetProperty(ref lProductos, value); }
 
         private AUD_InspeccionTB inspeccion;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
         //Datos Conclusión de Inspección

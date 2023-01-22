@@ -1,6 +1,7 @@
 ﻿using Aig.Auditoria.Data;
 using Aig.Auditoria.Events.Establishments;
 using Aig.Auditoria.Events.Language;
+using Aig.Auditoria.Pages.Inspections;
 using Aig.Auditoria.Services;
 using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
@@ -35,6 +36,10 @@ namespace Aig.Auditoria.Components.Establishments
 
         bool OpenDialog { get; set; }
         DataModel.AUD_EstablecimientoTB Establecimiento { get; set; } = null;
+
+        bool showFarmaceutico { get; set; } = false;
+        AUD_Farmaceutico farmaceutico { get; set; } = null;
+
 
         protected async override Task OnInitializedAsync()
         {
@@ -177,5 +182,49 @@ namespace Aig.Auditoria.Components.Establishments
             Establecimiento.DistritoId = IdDistrito > 0 ? IdDistrito : null;
             Establecimiento.CorregimientoId = IdCorregimiento > 0 ? IdCorregimiento : null;
         }
+
+
+        //ADD FARMACEUTICO
+        protected async Task OpenFarmaceutico(AUD_Farmaceutico _farmaceutico = null)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Farmaceutico.AddEditEvent>(FarmaceuticoAddEditEventHandler);
+
+            farmaceutico = _farmaceutico != null ? _farmaceutico : new AUD_Farmaceutico();
+            showFarmaceutico = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveFarmaceutico(AUD_Farmaceutico _farmaceutico)
+        {
+            if (_farmaceutico != null)
+            {
+                try
+                {
+                    Establecimiento.FarmaceuticoTablas.LFarmaceuticos.Remove(_farmaceutico);
+                }
+                catch { }
+
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void FarmaceuticoAddEditEventHandler(MessageArgs args)
+        {
+            showFarmaceutico = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Farmaceutico.AddEditEvent>(FarmaceuticoAddEditEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Farmaceutico.AddEditEvent>();
+
+            if (message.Data != null)
+            {
+                if (!Establecimiento.FarmaceuticoTablas.LFarmaceuticos.Contains(message.Data))
+                    Establecimiento.FarmaceuticoTablas.LFarmaceuticos.Add(message.Data);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
     }
 }

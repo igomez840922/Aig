@@ -140,6 +140,11 @@ namespace DataAccess
                 .HasForeignKey(e => e.EstablecimientoId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<AUD_EstablecimientoTB>()
+.Property(e => e.FarmaceuticoTablas)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_FarmaceuticoTablas>(x));
+
+
             modelBuilder.Entity<AUD_InspeccionTB>()
                 .HasMany(e => e.LAttachments)
                 .WithOne(e => e.Inspeccion)
@@ -1205,6 +1210,7 @@ namespace DataAccess
             modelBuilder.Entity<AUD_InspGuiaBPM_BpaTB>()
 .Property(e => e.DatosConclusiones)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+
 
 
             /////////////////////////////////////////////////

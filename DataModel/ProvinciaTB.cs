@@ -24,25 +24,32 @@ namespace DataModel
 		private long? paisId;
 		public long? PaisId { get => paisId; set => SetProperty(ref paisId, value); }
 		private PaisTB? pais;
-		public virtual PaisTB? Pais { get => pais; set => SetProperty(ref pais, value); }
+        [System.Text.Json.Serialization.JsonIgnore]
+        public virtual PaisTB? Pais { get => pais; set => SetProperty(ref pais, value); }
 
         private List<DistritoTB> lDistritos;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<DistritoTB> LDistritos { get => lDistritos; set => SetProperty(ref lDistritos, value); }
 
 
         private List<InstitucionDestinoTB> lInstitucion;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<InstitucionDestinoTB> LInstitucion { get => lInstitucion; set => SetProperty(ref lInstitucion, value); }
 
         private List<FMV_EsaviTB> lEsavi;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<FMV_EsaviTB> LEsavi { get => lEsavi; set => SetProperty(ref lEsavi, value); }
 
         private List<FMV_FfTB> lFf;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<FMV_FfTB> LFf { get => lFf; set => SetProperty(ref lFf, value); }
 
         private List<FMV_RamTB> lRam;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<FMV_RamTB> LRam { get => lRam; set => SetProperty(ref lRam, value); }
 
         private List<FMV_Esavi2TB> lEsavi2;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<FMV_Esavi2TB> LEsavi2 { get => lEsavi2; set => SetProperty(ref lEsavi2, value); }
     }
 }
