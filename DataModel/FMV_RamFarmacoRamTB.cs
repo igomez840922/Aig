@@ -213,15 +213,12 @@ namespace DataModel
                                        sino: Si [xplc]>=6 y [xplc]<8 entonces [probabilidad]="Probable"
                                              sino: Si [xplc]>=8 entonces [probabilidad]="Definida"
                                                    sino entonces [probabilidad]="ERROR"
-        */
-        //private string probabilidad;
-        //public string Probabilidad { get => probabilidad; set => SetProperty(ref probabilidad, value); }
-
+        */        
         public string Probabilidad
         {
             get
             {
-                return Puntuacion switch
+                MainProbabilidad = Puntuacion switch
                 {
                     <= 0 => "Improbable",
                     > 0 and < 4 => "Condicional",
@@ -230,8 +227,12 @@ namespace DataModel
                     >= 8 => "Definida",
                 };
 
+                return MainProbabilidad;
             }
         }
+
+        private string mainProbabilidad;
+        public string MainProbabilidad { get => mainProbabilidad; set => SetProperty(ref mainProbabilidad, value); }
 
 
         // Intensidad de la RAM. Total=9. Ocasiona la muerte, Pueda poner en peligro la vida, Requiere o prolonga una hospitalización, Produce una anomalía congénita o defecto al nacer

@@ -1,4 +1,4 @@
-﻿@page "/ram/reporte/calsifATC"
+﻿@page "/ram/reporte/calidadinfo"
 @layout BackendLayout
 @attribute [Authorize]
 
@@ -10,7 +10,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    @languageContainerService.Keys["RAM: Reporte por Clasificación ATC"]
+                                    @languageContainerService.Keys["RAM: Reporte por Calidad de la Información"]
                                 </h3>
                             </div>
                             <div class="kt-portlet__head-toolbar">
@@ -60,8 +60,7 @@
                                                     <table class="table rounded">
                                                         <thead class=thead-light>
                                                             <tr>
-                                                                <th>@languageContainerService.Keys["ATC"]</th>
-                                                                <th>@languageContainerService.Keys["Subgrupo Terapéutico"]</th>
+                                                                <th>@languageContainerService.Keys["Grado"]</th>
                                                                 <th>@languageContainerService.Keys["Cantidad"]</th>
                                                             </tr>
                                                         </thead>
@@ -69,8 +68,7 @@
                                                             @foreach (var dt in dataModel.Ldata)
                                                             {
                                                                 <tr>
-                                                                    <td scope="row">@(dt.Name?.Length > 2 ? dt.Name.Substring(0, 3) : "")</td>
-                                                                    <td>@(dt.Name2)</td>
+                                                                    <td scope="row">@(dt.Name)</td>
                                                                     <td>@(dt.Count)</td>
                                                                 </tr>                                                                                                                       
                                                             }

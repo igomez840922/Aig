@@ -19,6 +19,11 @@ namespace DataModel.Models
         public enumFMV_RAMNotificationType RAMNotificationType { get; set; }
         public enumFMV_RAMStatus RAMStatus { get; set; }
         public enumSexo Sexo { get; set; }
+        public enumFMV_RAMIntensidad RAMIntensidad { get; set; }
+
+        public enumFMV_RAMDesenlace RAMDesenlace { get; set; }
+
+        public enumFMV_EsaviProbabilidadAsociacion EsaviProbabilidadAsociacion { get; set; }
     }
 
 }

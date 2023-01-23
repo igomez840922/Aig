@@ -34,6 +34,18 @@ namespace Aig.FarmacoVigilancia.Services
         Task<ReportModel<ReportModelResponse>> Report7(ReportModel<ReportModelResponse> model);
         //Sexo
         Task<ReportModel<ReportModelResponse>> Report8(ReportModel<ReportModelResponse> model);
+        //Calidad de la información (grado)
+        Task<ReportModel<ReportModelResponse>> Report9(ReportModel<ReportModelResponse> model);
+        //RAM
+        Task<ReportModel<ReportModelResponse>> Report10(ReportModel<ReportModelResponse> model);
+        //Clasificación según SOC (Sistema órgano/clase)
+        Task<ReportModel<ReportModelResponse>> Report11(ReportModel<ReportModelResponse> model);
+        //Resultado del Algoritmo (Probabilidad)
+        Task<ReportModel<ReportModelResponse>> Report12(ReportModel<ReportModelResponse> model);
+        //Gravedad
+        Task<ReportModel<ReportModelResponse>> Report13(ReportModel<ReportModelResponse> model);
+        //Según año (fecha de recepción).
+        Task<ReportModel<ReportModelResponse>> Report14(ReportModel<ReportModelResponse> model);
     }
 
    
