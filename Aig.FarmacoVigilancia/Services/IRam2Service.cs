@@ -15,6 +15,25 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_Ram2TB> Save(FMV_Ram2TB data);
         Task<FMV_Ram2TB> Delete(long id);
         Task<int> Count();
+
+        //Reports
+
+        //Farmacos Sospechosos
+        Task<ReportModel<ReportModelResponse>> Report1(ReportModel<ReportModelResponse> model);
+        //Clasificación ATC
+        Task<ReportModel<ReportModelResponse>> Report2(ReportModel<ReportModelResponse> model);
+        //Origen de la Notificación 
+        Task<ReportModel<ReportModelResponse>> Report3(ReportModel<ReportModelResponse> model);
+        //Tipo de Notificador
+        Task<ReportModel<ReportModelResponse>> Report4(ReportModel<ReportModelResponse> model);
+        //Organizacion
+        Task<ReportModel<ReportModelResponse>> Report5(ReportModel<ReportModelResponse> model);
+        //Estatus
+        Task<ReportModel<ReportModelResponse>> Report6(ReportModel<ReportModelResponse> model);
+        //Edad
+        Task<ReportModel<ReportModelResponse>> Report7(ReportModel<ReportModelResponse> model);
+        //Sexo
+        Task<ReportModel<ReportModelResponse>> Report8(ReportModel<ReportModelResponse> model);
     }
 
    

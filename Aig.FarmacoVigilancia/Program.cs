@@ -64,9 +64,9 @@ builder.Services.AddSignalR(hubOptions =>
 {
     hubOptions.MaximumReceiveMessageSize = 102400000; // 100MB
     hubOptions.StreamBufferCapacity = 20; // 100MB
-    hubOptions.ClientTimeoutInterval = new TimeSpan(0,2,0);
-    hubOptions.HandshakeTimeout = new TimeSpan(0, 1, 0);
-    hubOptions.KeepAliveInterval = new TimeSpan(0, 1, 0);
+    //hubOptions.ClientTimeoutInterval = new TimeSpan(0,2,0);
+    //hubOptions.HandshakeTimeout = new TimeSpan(0, 1, 0);
+    //hubOptions.KeepAliveInterval = new TimeSpan(0, 1, 0);
     hubOptions.EnableDetailedErrors = true;
 });
 
