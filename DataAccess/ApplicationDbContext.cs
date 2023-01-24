@@ -1486,6 +1486,12 @@ namespace DataAccess
 
             ///////////////////////////////
             ///
+
+            modelBuilder.Entity<FMV_FtTB>()
+               .HasOne(e => e.DatosPaciente)
+               .WithOne()
+               .HasForeignKey<FMV_FtTB>(e => e.DatosPacienteId);
+
             //JSON Serialization
             modelBuilder.Entity<FMV_FfTB>()
               .Property(e => e.FallaReportada)
@@ -1502,9 +1508,9 @@ namespace DataAccess
               .Property(e => e.OtrasEspecificaciones)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FfOtrasEspecificaciones>(x));
 
-            modelBuilder.Entity<FMV_FtTB>()
-              .Property(e => e.DatosPaciente)
-              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtDatosPaciente>(x));
+            //modelBuilder.Entity<FMV_FtTB>()
+            //  .Property(e => e.DatosPaciente)
+            //  .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtDatosPaciente>(x));
 
             modelBuilder.Entity<FMV_FtTB>()
               .Property(e => e.EvaluacionCausalidad)
@@ -1740,8 +1746,8 @@ namespace DataAccess
         public virtual DbSet<FMV_Esavi2TB> FMV_Esavi2 { get; set; }
         public virtual DbSet<FMV_EsaviVacunaTB> FMV_EsaviVacuna { get; set; }
         public virtual DbSet<FMV_EsaviVacunaEsaviTB> FMV_EsaviVacunaEsavi { get; set; }
-
-
+        public virtual DbSet<FMV_FtDatosPaciente> FMV_FtDatosPaciente { get; set; }
+        
 
     }
 }

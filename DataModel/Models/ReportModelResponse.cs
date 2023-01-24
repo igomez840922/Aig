@@ -14,6 +14,7 @@ namespace DataModel.Models
         public int Count { get; set; }
         public string Name { get; set; }
         public string Name2 { get; set; }
+        public string Lote { get; set; }
 
         public enumFMV_RAMOrigenType RAMOrigenType { get; set; }
         public enumFMV_RAMNotificationType RAMNotificationType { get; set; }
@@ -24,6 +25,9 @@ namespace DataModel.Models
         public enumFMV_RAMDesenlace RAMDesenlace { get; set; }
 
         public enumFMV_EsaviProbabilidadAsociacion EsaviProbabilidadAsociacion { get; set; }
+
+        public enumFMV_FfTipoIncidenciaCaso FfTipoIncidenciaCaso { get; set; }
+
     }
 
 }

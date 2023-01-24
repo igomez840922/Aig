@@ -1,0 +1,111 @@
+﻿@page "/ff/reporte/calidadinfo"
+@layout BackendLayout
+@attribute [Authorize]
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @languageContainerService.Keys["FF: Reporte por Calidad de la Información"]
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                @*<div class="dropdown dropdown-inline">
+                                    <button type="button" class="btn btn-hover-brand btn-elevate-hover btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="flaticon-more"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ExportToExcel()"><i class="fa fa-file-excel"></i>@languageContainerService.Keys["Export"]</a>
+                                        <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
+                                        <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm Model="@dataModel" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
+                                            <DataAnnotationsValidator />                                            
+                                            <div class="form-group row">
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Fecha de Recibo Inicial"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                        <ValidationMessage For=@(() => dataModel.FromDate) />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Fecha de Recibo Final"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker Max="DateTime.Today" Min="dataModel.FromDate" TValue="DateTime?" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                        <ValidationMessage For=@(() => dataModel.ToDate) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </EditForm>
+                                    </div>
+
+                                    @if (dataModel != null && dataModel.Ldata != null && dataModel.Ldata.Count > 0)
+                                    {
+                                        <div class="kt-portlet__body">
+                                            <!--begin::Section-->
+                                            <div class="kt-section">
+                                                <div class="table-responsive">
+                                                    <table class="table rounded">
+                                                        <thead class=thead-light>
+                                                            <tr>
+                                                                <th>@languageContainerService.Keys["Grado"]</th>
+                                                                <th>@languageContainerService.Keys["Cantidad"]</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var dt in dataModel.Ldata)
+                                                            {
+                                                                <tr>
+                                                                    <td scope="row">@(dt.Name)</td>
+                                                                    <td>@(dt.Count)</td>
+                                                                </tr>                                                                                                                       
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--end::Section-->
+                                        </div>
+                                        <div class="kt-portlet__foot">
+                                            <BlazorPager CurrentPage="@(dataModel.PagIdx + 1)"
+                                                         PageCount="@dataModel.PagesCount"
+                                                         VisiblePages="@(dataModel.PagesCount>3?4:dataModel.PagesCount)"
+                                                         ShowFirstLast="true"
+                                                         ShowPageNumbers="true"
+                                                         FirstText="<<"
+                                                         LastText=">>"
+                                                         NextText=">"
+                                                         PreviousText="<"
+                                                         OnPageChanged="(async e => {
+						                     if (dataModel.PagesCount < e)
+							                    return;
+						                    dataModel.PagIdx = e - 1;
+						                    await FetchData();})">
+                                            </BlazorPager>
+                                        </div>
+
+                                    }
+                                    <!--end::Form-->
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</div>

@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230124164529_M084")]
+    partial class M084
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3160,79 +3162,6 @@ namespace DataAccess.Migrations
                     b.ToTable("FMV_Ff");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_FtDatosPaciente", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<string>("Concomitantes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Edad")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime?>("FechaFT")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FechaTratFinal")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FechaTratInicial")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<long?>("FtId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("HistClinica")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Indicacion")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("InicialesPaciente")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("NombrePaciente")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<int>("Sexo")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ViaAdministracion")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FtId");
-
-                    b.ToTable("FMV_FtDatosPaciente");
-                });
-
             modelBuilder.Entity("DataModel.FMV_FtTB", b =>
                 {
                     b.Property<long>("Id")
@@ -3271,8 +3200,8 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("DatosPacienteId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("DatosPaciente")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
@@ -3320,9 +3249,6 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("IncidenciaCaso")
                         .HasColumnType("int");
-
-                    b.Property<long?>("InspRutinaVigAgenciaId")
-                        .HasColumnType("bigint");
 
                     b.Property<long?>("InstitucionDestinoId")
                         .HasColumnType("bigint");
@@ -3387,20 +3313,11 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DatosPacienteId")
-                        .IsUnique()
-                        .HasFilter("[DatosPacienteId] IS NOT NULL");
 
                     b.HasIndex("EvaluadorId");
 
                     b.HasIndex("FabricanteId");
-
-                    b.HasIndex("InspRutinaVigAgenciaId");
 
                     b.HasIndex("InstitucionDestinoId");
 
@@ -5615,21 +5532,8 @@ namespace DataAccess.Migrations
                     b.Navigation("TipoInstitucion");
                 });
 
-            modelBuilder.Entity("DataModel.FMV_FtDatosPaciente", b =>
-                {
-                    b.HasOne("DataModel.FMV_FtTB", "Ft")
-                        .WithMany()
-                        .HasForeignKey("FtId");
-
-                    b.Navigation("Ft");
-                });
-
             modelBuilder.Entity("DataModel.FMV_FtTB", b =>
                 {
-                    b.HasOne("DataModel.FMV_FtDatosPaciente", "DatosPaciente")
-                        .WithOne()
-                        .HasForeignKey("DataModel.FMV_FtTB", "DatosPacienteId");
-
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
                         .WithMany("LFt")
                         .HasForeignKey("EvaluadorId")
@@ -5639,10 +5543,6 @@ namespace DataAccess.Migrations
                         .WithMany("LFt")
                         .HasForeignKey("FabricanteId")
                         .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("DataModel.AUD_InspRutinaVigAgenciaTB", "InspRutinaVigAgencia")
-                        .WithMany()
-                        .HasForeignKey("InspRutinaVigAgenciaId");
 
                     b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
                         .WithMany()
@@ -5656,13 +5556,9 @@ namespace DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("TipoInstitucionId");
 
-                    b.Navigation("DatosPaciente");
-
                     b.Navigation("Evaluador");
 
                     b.Navigation("Fabricant");
-
-                    b.Navigation("InspRutinaVigAgencia");
 
                     b.Navigation("InstitucionDestino");
 

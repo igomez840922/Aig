@@ -10,12 +10,20 @@ namespace DataModel
 {
     public class FMV_FtDatosPaciente : SystemId
     {
+        private FMV_FtTB ft;
+        [System.Text.Json.Serialization.JsonIgnore]
+        public virtual FMV_FtTB Ft { get => ft; set => SetProperty(ref ft, value); }
+
+
         // Nombre del Paciente
         private string nombrePaciente;
+        [Required(ErrorMessage = "requerido")]
+        [StringLength(300)]
         public string NombrePaciente { get => nombrePaciente; set => SetProperty(ref nombrePaciente, value); }
 
         // Iniciales del Paciente
         private string inicialesPaciente;
+        [StringLength(250)]
         public string InicialesPaciente { get => inicialesPaciente; set => SetProperty(ref inicialesPaciente, value); }
 
         // Sexo: Total=3. M, F, ND
@@ -23,11 +31,13 @@ namespace DataModel
         public enumSexo Sexo { get => sexo; set => SetProperty(ref sexo, value); }
 
         // Edad: int y string(No reportado)
-        private int edad;
-        public int Edad { get => edad; set => SetProperty(ref edad, value); }
+        private string edad;
+        [StringLength(250)]
+        public string Edad { get => edad; set => SetProperty(ref edad, value); }
 
         // Historia Clínica
         private string histClinica;
+        [StringLength(500)]
         public string HistClinica { get => histClinica; set => SetProperty(ref histClinica, value); }
 
         // Fecha de tratamiento inicial
@@ -47,10 +57,12 @@ namespace DataModel
 
         // Indicación
         private string indicacion;
+        [StringLength(500)]
         public string Indicacion { get => indicacion; set => SetProperty(ref indicacion, value); }
 
         // Dosis, Frecuencia, Vía de Administración
         private string viaAdministracion;
+        [StringLength(300)]
         public string ViaAdministracion { get => viaAdministracion; set => SetProperty(ref viaAdministracion, value); }
 
         // Concomitantes

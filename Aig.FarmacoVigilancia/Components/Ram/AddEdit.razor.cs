@@ -86,7 +86,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram
         public void OnAtcChanged()
         {
             Data.SubGrupoTerapeutico = "";
-            Data.Atc = Data.Atc.Replace(" ","");
+            Data.Atc = Data.Atc?.Replace(" ","");
             if (!string.IsNullOrEmpty(Data.Atc) && Data.Atc.Length >= 3)
                 Data.SubGrupoTerapeutico = Helper.Helper.GetATC2doNivel(Data.Atc);
         }
