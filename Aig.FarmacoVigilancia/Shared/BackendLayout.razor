@@ -82,30 +82,7 @@
                             </NavLink>
                         </li>
                        
-                      @*  <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
-                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
-                                <span class="kt-menu__link-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24" />
-                                            <path d="M15.4508979,17.4029496 L14.1784978,15.8599014 C15.324501,14.9149052 16,13.5137472 16,12 C16,10.4912085 15.3289582,9.09418404 14.1893841,8.14910121 L15.466112,6.60963188 C17.0590936,7.93073905 18,9.88958759 18,12 C18,14.1173586 17.0528606,16.0819686 15.4508979,17.4029496 Z M18.0211112,20.4681628 L16.7438102,18.929169 C18.7927036,17.2286725 20,14.7140097 20,12 C20,9.28974232 18.7960666,6.77820732 16.7520315,5.07766256 L18.031149,3.54017812 C20.5271817,5.61676443 22,8.68922234 22,12 C22,15.3153667 20.523074,18.3916375 18.0211112,20.4681628 Z M8.54910207,17.4029496 C6.94713944,16.0819686 6,14.1173586 6,12 C6,9.88958759 6.94090645,7.93073905 8.53388797,6.60963188 L9.81061588,8.14910121 C8.67104182,9.09418404 8,10.4912085 8,12 C8,13.5137472 8.67549895,14.9149052 9.82150222,15.8599014 L8.54910207,17.4029496 Z M5.9788888,20.4681628 C3.47692603,18.3916375 2,15.3153667 2,12 C2,8.68922234 3.47281829,5.61676443 5.96885102,3.54017812 L7.24796852,5.07766256 C5.20393339,6.77820732 4,9.28974232 4,12 C4,14.7140097 5.20729644,17.2286725 7.25618985,18.929169 L5.9788888,20.4681628 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                            <circle fill="#000000" cx="12" cy="12" r="2" />
-                                        </g>
-                                    </svg>
-                                </span>
-                                <span class="kt-menu__link-text">@languageContainerService.Keys["AlertsSecurityNotes"]</span>
-                                <i class="kt-menu__ver-arrow la la-angle-right"></i>
-                            </a>
-                            <div class="kt-menu__submenu ">
-                                <span class="kt-menu__arrow"></span>
-                                <ul class="kt-menu__subnav">
-                                    <li class="kt-menu__item " aria-haspopup="true"><a href="alertas" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Alerts"]</span></a></li>
-                                    <li class="kt-menu__item " aria-haspopup="true"><a href="notas" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Notes"]</span></a></li>
-                                </ul>
-                            </div>
-                        </li>
-*@
-
+                    
                         <li class="kt-menu__item" aria-haspopup="true">
                             <NavLink href="/alertas" class="kt-menu__link" Match="NavLinkMatch.All">
                                 <span class="kt-menu__link-icon">
@@ -179,7 +156,7 @@
                             </NavLink>
                         </li>
 
-                        <li class="kt-menu__item" aria-haspopup="true">
+                       @* <li class="kt-menu__item" aria-haspopup="true">
                             <NavLink href="/ram" class="kt-menu__link" Match="NavLinkMatch.All">
                                 <span class="kt-menu__link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -191,10 +168,54 @@
                                     </svg>
                                 </span><span class="kt-menu__link-text">@languageContainerService.Keys["Ram"]</span>
                             </NavLink>
+                        </li>*@
+
+                        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                                <span class="kt-menu__link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M12.9863016,8.83409843 C12.9953113,8.88805868 13,8.94348179 13,9 L13,11 L17,11 C18.1045695,11 19,11.8954305 19,13 L19,16 L5,16 L5,13 C5,11.8954305 5.8954305,11 7,11 L11,11 L11,9 C11,8.94348179 11.0046887,8.88805868 11.0136984,8.83409843 C9.84135601,8.42615464 9,7.31133193 9,6 C9,4.34314575 10.3431458,3 12,3 C13.6568542,3 15,4.34314575 15,6 C15,7.31133193 14.158644,8.42615464 12.9863016,8.83409843 Z" fill="#000000" />
+                                            <rect fill="#000000" opacity="0.3" x="5" y="18" width="14" height="2" rx="1" />
+                                        </g>
+                                    </svg>
+                                </span>
+                                <span class="kt-menu__link-text">@languageContainerService.Keys["Ram"]</span>
+                                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                            <div class="kt-menu__submenu ">
+                                <span class="kt-menu__arrow"></span>
+                                <ul class="kt-menu__subnav">
+                                    <li class="kt-menu__item " aria-haspopup="true"><a href="/ram" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Historial"]</span></a></li>
+                                    <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Reportes"]</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div class="kt-menu__submenu " kt-hidden-height="80" style="display: none; overflow: hidden;">
+                                            <span class="kt-menu__arrow"></span>
+                                            <ul class="kt-menu__subnav">
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/farmacosospechoso" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Fármacos Sospechosos"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/calsifATC" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Clasificación ATC"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/origennotificacion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Origen de la Notificación"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/tiponotificador" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Tipo de Notificador"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/organizacion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Organización"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/estatus" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Estatus"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/edad" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Edad"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/sexo" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Sexo"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/calidadinfo" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Calidad de la Información"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/ram" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["RAM "]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/probabilidad" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Probabilidad"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/gravedad" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Gravedad"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ram/reporte/anual" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Año de Recepción"]</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
 
-                        <li class="kt-menu__item" aria-haspopup="true">
-                            <NavLink href="/fallasfarmaceuticas" class="kt-menu__link" Match="NavLinkMatch.All">
+                                               
+                        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
                                 <span class="kt-menu__link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -203,11 +224,57 @@
                                             <rect fill="#000000" opacity="0.3" x="5" y="18" width="14" height="2" rx="1" />
                                         </g>
                                     </svg>
-                                </span><span class="kt-menu__link-text">@languageContainerService.Keys["FF"]</span>
-                            </NavLink>
+                                </span>
+                                <span class="kt-menu__link-text">@languageContainerService.Keys["FF"]</span>
+                                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                            <div class="kt-menu__submenu ">
+                                <span class="kt-menu__arrow"></span>
+                                <ul class="kt-menu__subnav">
+                                    <li class="kt-menu__item " aria-haspopup="true"><a href="/fallasfarmaceuticas" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Historial"]</span></a></li>
+                                    <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Reportes"]</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div class="kt-menu__submenu " kt-hidden-height="80" style="display: none; overflow: hidden;">
+                                            <span class="kt-menu__arrow"></span>
+                                            <ul class="kt-menu__subnav">
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/farmacosospechoso" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Fármacos Sospechosos"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/calsifATC" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Clasificación ATC"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/tiponotificador" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Tipo de Notificador"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/organizacion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Organización"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/provincia" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Provincias"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/fabricante" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Fabricante"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/anual" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Año de Recepción"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/calidadinfo" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Calidad de la Información"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/nombrecomercial" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Nombre Comercial"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/presentacion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Presentación"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/lote" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Lote"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/regsanitario" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Registro Sanitario"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ff/reporte/incidencia" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Incidencias del Caso"]</span></a></li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-                        <li class="kt-menu__item" aria-haspopup="true">
-                            <NavLink href="/fallasterapeuticas" class="kt-menu__link" Match="NavLinkMatch.All">
+
+
+
+                       
+                        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
                                 <span class="kt-menu__link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -216,11 +283,55 @@
                                             <rect fill="#000000" opacity="0.3" x="5" y="18" width="14" height="2" rx="1" />
                                         </g>
                                     </svg>
-                                </span><span class="kt-menu__link-text">@languageContainerService.Keys["FT"]</span>
-                            </NavLink>
+                                </span>
+                                <span class="kt-menu__link-text">@languageContainerService.Keys["FT"]</span>
+                                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                            <div class="kt-menu__submenu ">
+                                <span class="kt-menu__arrow"></span>
+                                <ul class="kt-menu__subnav">
+                                    <li class="kt-menu__item " aria-haspopup="true"><a href="/fallasterapeuticas" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Historial"]</span></a></li>
+                                    <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Reportes"]</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div class="kt-menu__submenu " kt-hidden-height="80" style="display: none; overflow: hidden;">
+                                            <span class="kt-menu__arrow"></span>
+                                            <ul class="kt-menu__subnav">
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/farmacosospechoso" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Fármacos Sospechosos"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/calsifATC" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Clasificación ATC"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/tiponotificador" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Tipo de Notificador"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/organizacion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Organización"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/provincia" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Provincias"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/fabricante" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Fabricante"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/anual" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Año de Recepción"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/calidadinfo" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Calidad de la Información"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/nombrecomercial" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Nombre Comercial"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/presentacion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Presentación"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/lote" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Lote"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/regsanitario" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Registro Sanitario"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ft/reporte/incidencia" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Incidencias del Caso"]</span></a></li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-                        <li class="kt-menu__item" aria-haspopup="true">
-                            <NavLink href="/esavi" class="kt-menu__link" Match="NavLinkMatch.All">
+
+                        
+                        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
                                 <span class="kt-menu__link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -229,9 +340,40 @@
                                             <rect fill="#000000" opacity="0.3" x="5" y="18" width="14" height="2" rx="1" />
                                         </g>
                                     </svg>
-                                </span><span class="kt-menu__link-text">@languageContainerService.Keys["ESAVI"]</span>
-                            </NavLink>
+                                </span>
+                                <span class="kt-menu__link-text">@languageContainerService.Keys["ESAVI"]</span>
+                                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                            <div class="kt-menu__submenu ">
+                                <span class="kt-menu__arrow"></span>
+                                <ul class="kt-menu__subnav">
+                                    <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Historial"]</span></a></li>
+                                    <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Reportes"]</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div class="kt-menu__submenu " kt-hidden-height="80" style="display: none; overflow: hidden;">
+                                            <span class="kt-menu__arrow"></span>
+                                            <ul class="kt-menu__subnav">
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/vacuna" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Según Vacuna"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/esavi" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["ESAVI "]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/origennotificacion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Origen de la Notificación"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/gravedad" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Gravedad"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/desenlace" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Desenlace"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/soc" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["SOC"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/causalidad" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Causalidad"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/sexo" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Sexo"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/edad" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Edad"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/tiponotificador" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Tipo de Notificador"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/tipoorganizacion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Organización"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/provincia" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Provincias"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/esavi/reporte/anual" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Año de Recepción"]</span></a></li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
+
 
                          <li class="kt-menu__section">
 							<h4 class="kt-menu__section-text">@languageContainerService.Keys["Settings"]</h4>

@@ -48,6 +48,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Provincia"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@dataModel.ProvinceId
+                                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                        Data=@LProvincias TextProperty="Nombre" ValueProperty="Id"
+                                                                        Change=@(args => {OnFilter();}) />
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-3">

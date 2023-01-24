@@ -26,9 +26,11 @@ namespace DataModel
 		private long? provinciaId;
 		public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
 		private ProvinciaTB? provincia;
-		public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+        [System.Text.Json.Serialization.JsonIgnore]
+        public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
 
         private List<CorregimientoTB> lCorregimientos;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<CorregimientoTB> LCorregimientos { get => lCorregimientos; set => SetProperty(ref lCorregimientos, value); }
     }
 }

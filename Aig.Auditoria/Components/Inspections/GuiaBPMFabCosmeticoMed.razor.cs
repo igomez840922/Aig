@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 using Aig.Auditoria.Events.Language;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace Aig.Auditoria.Components.Inspections
 {
@@ -49,12 +50,32 @@ namespace Aig.Auditoria.Components.Inspections
 
         bool showSearchEstablishment { get; set; } = false;
 
+        bool exit { get; set; } = false;
+        bool isOpen { get; set; } = true;
+
+        private EditContext? editContext;
+        private System.Timers.Timer timer = new(60*1000);
+
         protected async override Task OnInitializedAsync()
         {
+            editContext = new(Inspeccion);
+            timer.Elapsed += (sender, eventArgs) => {
+                _ = InvokeAsync(() =>
+                {
+                    SaveData();
+                });
+            };
+            timer.Start();
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
             base.OnInitialized();
+        }
+
+        public void Dispose()
+        {
+            timer?.Dispose();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -95,15 +116,7 @@ namespace Aig.Auditoria.Components.Inspections
             }
 
             if (Inspeccion != null)
-            {
-                //if (Inspeccion.EstablecimientoId == null)
-                //{
-                //    Inspeccion.EstablecimientoId = lEstablecimientos?.FirstOrDefault()?.Id ?? null;
-                //    if (Inspeccion.EstablecimientoId != null)
-                //    {
-                //        Inspeccion.UbicacionEstablecimiento = lEstablecimientos.Where(x => x.Id == Inspeccion.EstablecimientoId.Value).FirstOrDefault()?.Ubicacion ?? "";
-                //    }
-                //}
+            {                
 
                 if (signaturePad5 != null)
                     signaturePad5.Image = Inspeccion.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma;
@@ -126,21 +139,38 @@ namespace Aig.Auditoria.Components.Inspections
         //Save Data and Close
         protected async Task SaveData()
         {
-            if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
+            try 
             {
-                Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
-            }
+                if (!editContext?.Validate() ?? false)
+                    return;
 
-            var result = await inspeccionService.Save(Inspeccion);
-            if (result != null)
-            {
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                Inspeccion = result;
+                if (Inspeccion.InspGuiBPMFabCosmeticoMed?.DatosConclusiones?.LParticipantes?.Count <= 0)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
+                    return;
+                }
 
-                await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
+                {
+                    Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
+                }
+
+                var result = await inspeccionService.Save(Inspeccion);
+                if (result != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                    Inspeccion = result;
+
+                    if (exit)
+                        await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                }
+                else
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
             }
-            else
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            catch { }
+            finally { exit = false;
+                await this.InvokeAsync(StateHasChanged);
+            }
         }
 
         //Cancel and Close
@@ -150,19 +180,7 @@ namespace Aig.Auditoria.Components.Inspections
             await this.InvokeAsync(StateHasChanged);
         }
 
-
-        //protected async Task OnEstablishmentChange(long? Id)
-        //{
-        //    Inspeccion.EstablecimientoId = Id;
-        //    var establecimiento = lEstablecimientos.Where(x => x.Id == Id).FirstOrDefault();
-        //    Inspeccion.UbicacionEstablecimiento = establecimiento?.Ubicacion ?? "";
-        //    Inspeccion.TelefonoEstablecimiento = establecimiento?.Telefono1 ?? "";
-        //    Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Email = establecimiento?.Email ?? "";
-        //    Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Telefono = establecimiento?.Telefono1 ?? "";
-        //    Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Nombre = establecimiento?.Nombre ?? "";
-        //    Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Direccion = establecimiento?.Ubicacion ?? "";
-        //    Inspeccion.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Ciudad = establecimiento?.Provincia?.Nombre ?? "";
-        //}
+        
 
 
         protected async Task OnShowSignasure()

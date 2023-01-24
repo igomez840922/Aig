@@ -224,10 +224,30 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("Establecimiento")
+                    b.Property<string>("Empresa")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("EstablecimientoAsignado")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("EstablecimientoCorregimiento")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("EstablecimientoNombre")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("EstablecimientoNumLic")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("EstablecimientoUbicacion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("FechaIngreso")
                         .HasColumnType("datetime2");
@@ -361,6 +381,9 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<string>("FarmaceuticoTablas")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("FechaCierre")
                         .HasColumnType("datetime2");
 
@@ -409,7 +432,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("NumLicencia")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -1756,6 +1778,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
+                    b.Property<int>("MovilizarProductos")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -2451,6 +2476,9 @@ namespace DataAccess.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EvaluadorId");
@@ -3047,6 +3075,10 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Grado")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<int>("IncidenciaCaso")
                         .HasColumnType("int");
 
@@ -3110,6 +3142,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EvaluadorId");
@@ -3123,6 +3158,79 @@ namespace DataAccess.Migrations
                     b.HasIndex("TipoInstitucionId");
 
                     b.ToTable("FMV_Ff");
+                });
+
+            modelBuilder.Entity("DataModel.FMV_FtDatosPaciente", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Concomitantes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Edad")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime?>("FechaFT")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaTratFinal")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaTratInicial")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("FtId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("HistClinica")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Indicacion")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("InicialesPaciente")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("NombrePaciente")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<int>("Sexo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ViaAdministracion")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FtId");
+
+                    b.ToTable("FMV_FtDatosPaciente");
                 });
 
             modelBuilder.Entity("DataModel.FMV_FtTB", b =>
@@ -3163,8 +3271,8 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DatosPaciente")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("DatosPacienteId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
@@ -3206,8 +3314,15 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Grado")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<int>("IncidenciaCaso")
                         .HasColumnType("int");
+
+                    b.Property<long?>("InspRutinaVigAgenciaId")
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("InstitucionDestinoId")
                         .HasColumnType("bigint");
@@ -3272,11 +3387,20 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DatosPacienteId")
+                        .IsUnique()
+                        .HasFilter("[DatosPacienteId] IS NOT NULL");
 
                     b.HasIndex("EvaluadorId");
 
                     b.HasIndex("FabricanteId");
+
+                    b.HasIndex("InspRutinaVigAgenciaId");
 
                     b.HasIndex("InstitucionDestinoId");
 
@@ -3788,6 +3912,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CodExterno")
@@ -3889,6 +4016,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("IntRam")
                         .HasColumnType("int");
+
+                    b.Property<string>("MainProbabilidad")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ram")
                         .IsRequired()
@@ -5485,8 +5615,21 @@ namespace DataAccess.Migrations
                     b.Navigation("TipoInstitucion");
                 });
 
+            modelBuilder.Entity("DataModel.FMV_FtDatosPaciente", b =>
+                {
+                    b.HasOne("DataModel.FMV_FtTB", "Ft")
+                        .WithMany()
+                        .HasForeignKey("FtId");
+
+                    b.Navigation("Ft");
+                });
+
             modelBuilder.Entity("DataModel.FMV_FtTB", b =>
                 {
+                    b.HasOne("DataModel.FMV_FtDatosPaciente", "DatosPaciente")
+                        .WithOne()
+                        .HasForeignKey("DataModel.FMV_FtTB", "DatosPacienteId");
+
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
                         .WithMany("LFt")
                         .HasForeignKey("EvaluadorId")
@@ -5496,6 +5639,10 @@ namespace DataAccess.Migrations
                         .WithMany("LFt")
                         .HasForeignKey("FabricanteId")
                         .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("DataModel.AUD_InspRutinaVigAgenciaTB", "InspRutinaVigAgencia")
+                        .WithMany()
+                        .HasForeignKey("InspRutinaVigAgenciaId");
 
                     b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
                         .WithMany()
@@ -5509,9 +5656,13 @@ namespace DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("TipoInstitucionId");
 
+                    b.Navigation("DatosPaciente");
+
                     b.Navigation("Evaluador");
 
                     b.Navigation("Fabricant");
+
+                    b.Navigation("InspRutinaVigAgencia");
 
                     b.Navigation("InstitucionDestino");
 

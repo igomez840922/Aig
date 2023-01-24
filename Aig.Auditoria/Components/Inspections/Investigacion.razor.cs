@@ -5,6 +5,7 @@ using DataModel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
@@ -48,13 +49,34 @@ namespace Aig.Auditoria.Components.Inspections
         enum_StatusInspecciones StatusInspecciones { get; set; } = enum_StatusInspecciones.Pending;
         bool showSearchEstablishment { get; set; } = false;
 
+        bool exit { get; set; } = false;
+        bool isOpen { get; set; } = true;
+
+        private EditContext? editContext;
+        private System.Timers.Timer timer = new(60 * 1000);
+
         protected async override Task OnInitializedAsync()
         {
+            editContext = new(Inspeccion);
+            timer.Elapsed += (sender, eventArgs) => {
+                _ = InvokeAsync(() =>
+                {
+                    SaveData();
+                });
+            };
+            timer.Start();
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
             base.OnInitialized();
         }
+
+        public void Dispose()
+        {
+            timer?.Dispose();
+        }
+
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -125,6 +147,12 @@ namespace Aig.Auditoria.Components.Inspections
         //Save Data and Close
         protected async Task SaveData()
         {
+            if (Inspeccion.InspInvestigacion?.DatosConclusiones?.LParticipantes?.Count <= 0)
+            {
+                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
+                return;
+            }
+
             if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
             {
                 Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);

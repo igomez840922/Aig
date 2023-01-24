@@ -214,7 +214,7 @@ namespace Aig.FarmacoVigilancia.Components.FT
         public void OnAtcChanged()
         {
             Data.SubGrupoTerapeutico = "";
-            Data.ATC = Data.ATC.Replace(" ", "");
+            Data.ATC = Data.ATC?.Replace(" ", "");
             if (!string.IsNullOrEmpty(Data.ATC) && Data.ATC.Length >= 3)
                 Data.SubGrupoTerapeutico = Helper.Helper.GetATC2doNivel(Data.ATC);
         }
@@ -224,7 +224,7 @@ namespace Aig.FarmacoVigilancia.Components.FT
         ///
         private void UpdateGrado()
         {
-            Data.OtrasEspecificaciones.Grado = "";
+            Data.Grado = "";
 
             string nombreFarmaco = Data.NombreComercial;
             string nombreDci = Data.NombreDci;
@@ -253,18 +253,18 @@ namespace Aig.FarmacoVigilancia.Components.FT
             if (string.IsNullOrEmpty(nombreFarmaco) && string.IsNullOrEmpty(concent) && string.IsNullOrEmpty(formaFarm)
                 && string.IsNullOrEmpty(fabricante) && string.IsNullOrEmpty(lotes) && string.IsNullOrEmpty(fechaExp) )
             {
-                Data.OtrasEspecificaciones.Grado = "Grado 0";
+                Data.Grado = "Grado 0";
             }
             if (!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp)
                 && !string.IsNullOrEmpty(concent) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(notificador))
             {
-                Data.OtrasEspecificaciones.Grado = "Grado 1";
+                Data.Grado = "Grado 1";
                 if (!string.IsNullOrEmpty(fabricante) && !string.IsNullOrEmpty(regSanitario) && !string.IsNullOrEmpty(instSalud))
                 {
-                    Data.OtrasEspecificaciones.Grado = "Grado 2";
+                    Data.Grado = "Grado 2";
                     if (!string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(presentacion))
                     {
-                        Data.OtrasEspecificaciones.Grado = "Grado 3";
+                        Data.Grado = "Grado 3";
                     }
                 }
             }
@@ -273,7 +273,7 @@ namespace Aig.FarmacoVigilancia.Components.FT
                && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp) 
                && !string.IsNullOrEmpty(notificador) && !string.IsNullOrEmpty(instSalud) && !string.IsNullOrEmpty(presentacion))
             {
-                Data.OtrasEspecificaciones.Grado = "Grado 4";
+                Data.Grado = "Grado 4";
             }
 
             //Data.Grado = !string.IsNullOrEmpty(grado0) ? grado0 : (!string.IsNullOrEmpty(grado1) ? grado1 : (!string.IsNullOrEmpty(grado2) ? grado2 : (!string.IsNullOrEmpty(grado3) ? grado3 : (!string.IsNullOrEmpty(grado4) ? grado4 : "No Aplica"))));

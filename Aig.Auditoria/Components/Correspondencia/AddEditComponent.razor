@@ -56,8 +56,8 @@
                                                     <label for="password">@languageContainerService.Keys["Desde (Empresa o Institución, Dpto, otros)"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText disabled="@disabledDatosIngresos" class="form-control" @bind-Value="Correspondencia.Establecimiento" />
-                                                            <ValidationMessage For=@(() => Correspondencia.Establecimiento) />
+                                                            <InputText disabled="@disabledDatosIngresos" class="form-control" @bind-Value="Correspondencia.Empresa" />
+                                                            <ValidationMessage For=@(() => Correspondencia.Empresa) />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -211,6 +211,86 @@
                                                 *@
                                             </div>
 
+                                            <h5>@languageContainerService.Keys["Datos del Establecimiento"]</h5>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Número de Licencia"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText disabled="@(disabledDatosEstablecimientos)" class="form-control" @bind-Value="Correspondencia.EstablecimientoNumLic" />
+                                                            <ValidationMessage For=@(() => Correspondencia.EstablecimientoNumLic) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-8">
+                                                    <label>@languageContainerService.Keys["Nombre"]</label>
+                                                    <div class="input-group">
+                                                        <InputText disbled class="form-control" @bind-Value="Correspondencia.EstablecimientoNombre" />
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchEstablishment();}"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <ValidationMessage For=@(() => Correspondencia.EstablecimientoNombre) />
+                                                </div>
+
+                                                @*<div class="col-sm-8">
+                                                    <label for="password">@languageContainerService.Keys["Nombre"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText disabled="@(disabledDatosEstablecimientos)" class="form-control" @bind-Value="Correspondencia.EstablecimientoNombre" />
+                                                            <ValidationMessage For=@(() => Correspondencia.EstablecimientoNombre) />
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+
+                                                <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Corregimiento"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText disabled="@(disabledDatosEstablecimientos)" class="form-control" @bind-Value="Correspondencia.EstablecimientoCorregimiento" />
+                                                            <ValidationMessage For=@(() => Correspondencia.EstablecimientoCorregimiento) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-sm-8">
+                                                    <label>@languageContainerService.Keys["Ubicación"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText disabled="@(disabledDatosEstablecimientos)" class="form-control" @bind-Value="Correspondencia.EstablecimientoUbicacion" />
+                                                            <ValidationMessage For=@(() => Correspondencia.EstablecimientoUbicacion) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="password">@languageContainerService.Keys["Asignado"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText disabled="@(disabledDatosEstablecimientos)" class="form-control" @bind-Value="Correspondencia.EstablecimientoAsignado" />
+                                                            <ValidationMessage For=@(() => Correspondencia.EstablecimientoAsignado) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @*<div class="col-sm-12">
+                                            <label>@languageContainerService.Keys["Firma de quien Recibe"]</label>
+                                            <div class="form-group">
+                                            <div class="form-line">
+                                            <SignaturePad @ref="signaturePad5" OnSignatureChange="OnSignatureChange5"
+                                            MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                            <SignaturePadFooter>
+                                            <SignaturePadClear>
+                                            <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
+                                            </SignaturePadClear>
+                                            </SignaturePadFooter>
+                                            </SignaturePad>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            *@
+                                            </div>
+
+
                                             <h5>@languageContainerService.Keys["Datos de Seguimiento"]</h5>
                                             <div class="row clearfix">
                                                 <div class="col-sm-4">
@@ -242,9 +322,7 @@
                                                 </div>
                                             </div>
 
-                                            <br><br>
-                                           
-
+                                            <br><br> 
                                             <div class="kt-portlet__foot" style="text-align:right;">
                                                 <div class="kt-form__actions">
                                                     <button type="submit"
@@ -270,6 +348,12 @@
         </div>
 
     </div>
+
+    
+@if (showSearchEstablishment)
+{
+    <Aig.Auditoria.Components.Establishments.SearchComponent></Aig.Auditoria.Components.Establishments.SearchComponent>
+}
 
 }
 

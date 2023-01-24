@@ -69,6 +69,7 @@ namespace DataModel
 
 
         private AUD_InspeccionTB inspeccion;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
 
@@ -4858,6 +4859,10 @@ namespace DataModel
             LContenido = new List<ContenidoTablas>();
         }
 
+        private int numero;
+        public int Numero { get => numero; set => SetProperty(ref numero, value); }
+
+
         private string temperatura;
         public string Temperatura { get => temperatura; set => SetProperty(ref temperatura, value); }
 
@@ -4866,6 +4871,8 @@ namespace DataModel
 
         private List<ContenidoTablas> lContenido;
         public List<ContenidoTablas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
+
+        public decimal TotalPtos { get { return LContenido?.Sum(x=>x.PuntosObtenido)??0; } set { } }
     }
 
     public class ContenidoTablas : SystemId
@@ -4875,6 +4882,10 @@ namespace DataModel
             IsHeader = false;
             LSubContenido = new List<SubContenidoTablas>();
         }
+
+        private int numero;
+        public int Numero { get => numero; set => SetProperty(ref numero, value); }
+
 
         private bool isHeader;
         public bool IsHeader { get => isHeader; set => SetProperty(ref isHeader, value); }
@@ -4902,7 +4913,7 @@ namespace DataModel
 
         // Evaluacion
         private enumAUD_TipoSeleccion evaluacion;
-        public enumAUD_TipoSeleccion Evaluacion { get => evaluacion; set => SetProperty(ref evaluacion, value); }
+        public enumAUD_TipoSeleccion Evaluacion { get { return evaluacion; } set { SetProperty(ref evaluacion, value); PuntosObtenido = evaluacion == enumAUD_TipoSeleccion.Si ? PuntosMax : 0;  } }
 
         // Evaluacion
         private enumAUD_TipoSeleccion evaluacion2;

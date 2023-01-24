@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 using Aig.Auditoria.Events.Language;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace Aig.Auditoria.Components.Inspections
 {
@@ -51,13 +52,34 @@ namespace Aig.Auditoria.Components.Inspections
 
         bool showSearchEstablishment { get; set; } = false;
 
+        bool exit { get; set; } = false;
+        bool isOpen { get; set; } = true;
+
+        private EditContext? editContext;
+        private System.Timers.Timer timer = new(60 * 1000);
+
         protected async override Task OnInitializedAsync()
         {
+            editContext = new(Inspeccion);
+            timer.Elapsed += (sender, eventArgs) => {
+                _ = InvokeAsync(() =>
+                {
+                    SaveData();
+                });
+            };
+            timer.Start();
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
             base.OnInitialized();
         }
+
+        public void Dispose()
+        {
+            timer?.Dispose();
+        }
+
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -134,23 +156,42 @@ namespace Aig.Auditoria.Components.Inspections
         //Save Data and Close
         protected async Task SaveData()
         {
-            if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
+            try
             {
-                Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
-            }
+                if (!editContext?.Validate() ?? false)
+                    return;
 
-            var result = await inspeccionService.Save(Inspeccion);
-            if (result != null)
+                if (Inspeccion.InspGuiaBPM_Bpa?.DatosConclusiones?.LParticipantes?.Count <= 0)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
+                    return;
+                }
+
+                if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
+                {
+                    Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
+                }
+
+                var result = await inspeccionService.Save(Inspeccion);
+                if (result != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                    Inspeccion = result;
+
+                    if (exit)
+                        await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                }
+                else
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            }
+            catch { }
+            finally
             {
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                Inspeccion = result;
-
-                await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                exit = false;
+                await this.InvokeAsync(StateHasChanged);
             }
-            else
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
         }
-
+                
         //Cancel and Close
         protected async Task Cancel()
         {
@@ -349,7 +390,9 @@ namespace Aig.Auditoria.Components.Inspections
                 Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Telefono = message.Data?.Telefono1 ?? "";
                 Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Nombre = message.Data?.Nombre ?? "";
                 Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Direccion = message.Data?.Ubicacion ?? "";
-                Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Ciudad = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Provincia = message.Data?.Provincia?.Nombre ?? "";
+                Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Distrito = message.Data?.Distrito?.Nombre ?? "";
+                Inspeccion.InspGuiaBPM_Bpa.GeneralesEmpresa.Corregimiento = message.Data?.Corregimiento?.Nombre ?? "";
             }
 
             this.InvokeAsync(StateHasChanged);

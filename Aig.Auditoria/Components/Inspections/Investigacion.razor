@@ -1,5 +1,5 @@
 ﻿@using DataModel.Helper;
-
+@implements IDisposable
 
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="kt-portlet__body">
-                                    <EditForm Model="@Inspeccion" OnValidSubmit="SaveData">
+                                    <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
                                         <DataAnnotationsValidator />
                                         <ul class="nav nav-tabs  nav-tabs-line nav-tabs-line-2x nav-tabs-line-primary nav-tabs-bold" role="tablist">
                                             <li class="nav-item">
@@ -302,6 +302,20 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="password">@languageContainerService.Keys["No se puede movilizar los productos hasta culminar la investigación"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputSelect @bind-Value="Inspeccion.InspInvestigacion.MovilizarProductos" class="form-control">
+                                                                    @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
+                                                                    {
+                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                    }
+                                                                </InputSelect>
+                                                                <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.MovilizarProductos) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane" id="inspectorsApprovals" role="tabpanel">
@@ -405,10 +419,9 @@
 
                                         <br><br>
 
-
                                         <div class="kt-portlet__foot" style="text-align:right;">
                                             <div class="kt-form__actions">
-                                                <button type="submit"
+                                                <button type="submit" @onclick="(e)=>{exit=true;}"
                                                         class="btn btn-info waves-effect">
                                                     @languageContainerService.Keys["Save"]
                                                 </button>
@@ -418,7 +431,6 @@
                                                 </button>
                                             </div>
                                         </div>
-
 
 
                                     </EditForm>

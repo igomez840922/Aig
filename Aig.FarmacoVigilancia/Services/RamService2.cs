@@ -6,6 +6,8 @@ using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using System.Linq.Expressions;
+using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -419,6 +421,456 @@ namespace Aig.FarmacoVigilancia.Services
             try { return DalService.Count<FMV_Ram2TB>(); }
             catch { }return 0;
         }
+
+        ///Reports
+        //Fármaco sospechoso (DCI)
+        public async Task<ReportModel<ReportModelResponse>> Report1(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ram.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.FarmacoSospechosoDci into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().FarmacoSospechosoDci,
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ram.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.FarmacoSospechosoDci into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Clasificación ATC
+        public async Task<ReportModel<ReportModelResponse>> Report2(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ram.FechaRecibidoCNFV <= model.ToDate))&&
+                               (data.Atc!=null && data.Atc.Length > 2)
+                               group data by data.SubGrupoTerapeutico into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name2 = g.FirstOrDefault().SubGrupoTerapeutico,
+                                   Name = g.FirstOrDefault().Atc,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.Atc != null && data.Atc.Length > 2)
+                               group data by data.SubGrupoTerapeutico into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Origen de Notificacion
+        public async Task<ReportModel<ReportModelResponse>> Report3(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.RamOrigenType into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   RAMOrigenType = g.FirstOrDefault().RamOrigenType,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.RamOrigenType into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Tipo de Notificador
+        public async Task<ReportModel<ReportModelResponse>> Report4(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.TipoNotificacion into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   RAMNotificationType = g.FirstOrDefault().TipoNotificacion,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.TipoNotificacion into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Organización
+        public async Task<ReportModel<ReportModelResponse>> Report5(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.TipoInstitucionId into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().TipoInstitucion.Nombre,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.TipoInstitucionId into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Status
+        public async Task<ReportModel<ReportModelResponse>> Report6(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.Estatus into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   RAMStatus = g.FirstOrDefault().Estatus,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.Estatus into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Edad
+        public async Task<ReportModel<ReportModelResponse>> Report7(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.Edad into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().Edad,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.Edad into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Sexo
+        public async Task<ReportModel<ReportModelResponse>> Report8(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.Sexo into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Sexo = g.FirstOrDefault().Sexo,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.Sexo into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Grado
+        public async Task<ReportModel<ReportModelResponse>> Report9(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.Grado into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().Grado,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               group data by data.Grado into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //RAM
+        public async Task<ReportModel<ReportModelResponse>> Report10(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.Ram != null && data.Ram.Length > 0)
+                               group data by data.Ram into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.Ram != null && data.Ram.Length > 0)
+                               group data by data.Ram into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //SOC
+        public async Task<ReportModel<ReportModelResponse>> Report11(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.SocId != null && data.SocId > 0)
+                               group data by data.SocId into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.SocId != null && data.SocId > 0)
+                               group data by data.SocId into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Probabilidades
+        public async Task<ReportModel<ReportModelResponse>> Report12(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.MainProbabilidad != null && data.MainProbabilidad.Length > 0)
+                               group data by data.MainProbabilidad into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().MainProbabilidad,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.MainProbabilidad != null && data.MainProbabilidad.Length > 0)
+                               group data by data.MainProbabilidad into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Gravedad
+        public async Task<ReportModel<ReportModelResponse>> Report13(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.Gravedad != null && data.Gravedad.Length > 0)
+                               group data by data.Gravedad into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.Gravedad != null && data.Gravedad.Length > 0)
+                               group data by data.Gravedad into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Año de Recepción
+        public async Task<ReportModel<ReportModelResponse>> Report14(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
+                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
+                               (data.Year > 0)
+                               group data by data.Year into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = string.Format("RAM Totales Año {0}", g.FirstOrDefault().Year),//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
+                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
+                               (data.Year > 0)
+                               group data by data.Year into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
     }
 
 }

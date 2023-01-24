@@ -29,6 +29,7 @@ namespace DataModel
 
 
         private AUD_InspeccionTB inspeccion;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
         // Razon Social

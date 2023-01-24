@@ -18,6 +18,7 @@ namespace DataModel
         }
 
         private AUD_InspeccionTB inspeccion;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
 
@@ -31,6 +32,9 @@ namespace DataModel
 
         private enumOpcionSiNo adjuntaActaRetencion;
         public enumOpcionSiNo AdjuntaActaRetencion { get => adjuntaActaRetencion; set => SetProperty(ref adjuntaActaRetencion, value); }
+
+        private enumOpcionSiNo movilizarProductos;
+        public enumOpcionSiNo MovilizarProductos { get => movilizarProductos; set => SetProperty(ref movilizarProductos, value); }
 
 
         //Datos del Establecimiento

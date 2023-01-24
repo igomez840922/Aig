@@ -30,10 +30,14 @@ namespace DataModel
         [StringLength(250)]
         public string CodExt { get => codExt; set => SetProperty(ref codExt, value); }
 
+        // Año
+        private int year;
+        public int Year { get => year; set => SetProperty(ref year, value); }
+
         // Fecha de recibido (CNFV)
         private DateTime? fechaRecibidoCNFV;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaRecibidoCNFV { get => fechaRecibidoCNFV; set => SetProperty(ref fechaRecibidoCNFV, value); }
+        public DateTime? FechaRecibidoCNFV { get => fechaRecibidoCNFV; set { SetProperty(ref fechaRecibidoCNFV, value); Year = value.HasValue ? value.Value.Year : 0; } }
 
         // Fecha de entrega al evaluador
         private DateTime? fechaEntregaEva;
@@ -152,16 +156,30 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public FMV_FfOtrasEspecificaciones OtrasEspecificaciones { get => otrasEspecificaciones; set => SetProperty(ref otrasEspecificaciones, value); }
 
+
+        //Rutina o Vigilancia de Agencia
+        private long? inspRutinaVigAgenciaId;
+        public long? InspRutinaVigAgenciaId { get => inspRutinaVigAgenciaId; set => SetProperty(ref inspRutinaVigAgenciaId, value); }
+        private AUD_InspRutinaVigAgenciaTB? inspRutinaVigAgencia;
+        public virtual AUD_InspRutinaVigAgenciaTB? InspRutinaVigAgencia { get => inspRutinaVigAgencia; set => SetProperty(ref inspRutinaVigAgencia, value); }
+
+
         //TAB DATOS DEL PACIENTE
+        private long? datosPacienteId;
+        public long? DatosPacienteId { get => datosPacienteId; set => SetProperty(ref datosPacienteId, value); }
         private FMV_FtDatosPaciente datosPaciente;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public FMV_FtDatosPaciente DatosPaciente { get => datosPaciente; set => SetProperty(ref datosPaciente, value); }
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual FMV_FtDatosPaciente DatosPaciente { get => datosPaciente; set => SetProperty(ref datosPaciente, value); }
                
         //TAB EVALUACION DE CAUSALIDAD
         private FMV_FtEvaluacionCausalidad evaluacionCausalidad;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public FMV_FtEvaluacionCausalidad EvaluacionCausalidad { get => evaluacionCausalidad; set => SetProperty(ref evaluacionCausalidad, value); }
 
+        // Grado
+        private string grado;
+        [StringLength(250)]
+        public string Grado { get => grado; set => SetProperty(ref grado, value); }
 
         //TAB CONCLUSIONES
         // Fecha de trámite

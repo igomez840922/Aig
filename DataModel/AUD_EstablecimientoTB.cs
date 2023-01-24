@@ -17,6 +17,12 @@ namespace DataModel
 	/// </summary>
 	public class AUD_EstablecimientoTB: SystemId
 	{
+		public AUD_EstablecimientoTB()
+		{
+            FarmaceuticoTablas = new AUD_FarmaceuticoTablas();
+
+        }
+
         //nombre de establecimiento -- NOMB_ESTA
         private string nombre; 
 		[StringLength(250)]
@@ -26,7 +32,7 @@ namespace DataModel
         //Numero de Licencia -- debe ser campo unico -- LICENCIA_N
         private string numLicencia;
 		[StringLength(250)]
-		[Required(ErrorMessage = "requerido")]
+		//[Required(ErrorMessage = "requerido")]
 		public string NumLicencia { get => numLicencia; set => SetProperty(ref numLicencia, value); }
 
         //Aviso Operaciones
@@ -232,6 +238,7 @@ namespace DataModel
 		public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
 
         private List<AUD_InspeccionTB> lInspections;
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<AUD_InspeccionTB> LInspections { get => lInspections; set => SetProperty(ref lInspections, value); }
 
 
@@ -241,6 +248,12 @@ namespace DataModel
 			get { return string.Format("{0} - {1}", NumLicencia, Nombre); } 
 			set => SetProperty(ref nameAndRegNum, value); 
 		}
+
+        //1. Farmaceuticos
+        private AUD_FarmaceuticoTablas farmaceuticoTablas;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_FarmaceuticoTablas FarmaceuticoTablas { get => farmaceuticoTablas; set => SetProperty(ref farmaceuticoTablas, value); }
+
 
     }
 }

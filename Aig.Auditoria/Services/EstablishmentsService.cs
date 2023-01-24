@@ -52,6 +52,12 @@ namespace Aig.Auditoria.Services
         public async Task<AUD_EstablecimientoTB> Save(AUD_EstablecimientoTB data)
         {
             var result = DalService.Save(data);
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.FarmaceuticoTablas).IsModified = true;
+
+                DalService.DBContext.SaveChanges();
+            }
             return result;           
         }
 

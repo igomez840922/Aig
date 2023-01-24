@@ -42,10 +42,14 @@ namespace DataModel
         [StringLength(250)]
         public string CodCNFV { get => codCNFV; set => SetProperty(ref codCNFV, value); }
 
+        // Año
+        private int year;
+        public int Year { get => year; set => SetProperty(ref year, value); }
+
         // Fecha de recibido (CNFV)
         private DateTime? fechaRecibidoCNFV;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaRecibidoCNFV { get => fechaRecibidoCNFV; set => SetProperty(ref fechaRecibidoCNFV, value); }
+        public DateTime? FechaRecibidoCNFV { get => fechaRecibidoCNFV; set { SetProperty(ref fechaRecibidoCNFV, value); Year = value.HasValue ? value.Value.Year : 0; } }
 
         // Fecha de entrega al evaluador
         private DateTime? fechaEntregaEva;
