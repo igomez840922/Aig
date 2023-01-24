@@ -16,8 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="Files\datasheet\" />
+<<<<<<< HEAD
+=======
     <Folder Include="Files\prospectus\" />
+>>>>>>> development
     <Folder Include="Files\users\" />
   </ItemGroup>
 
