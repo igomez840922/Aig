@@ -1,9 +1,10 @@
 ﻿@page "/users"
-@using Aig.Farmacoterapia.Admin.Wasm.Components.User
-@using Aig.Farmacoterapia.Domain.Common
-@using Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers.User
-@using Aig.Farmacoterapia.Domain.Models
 @attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Aig.Farmacoterapia.Domain.Models
+@using Aig.Farmacoterapia.Admin.Wasm.Components.User
+@using Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers.User
 @inject IUserManager _manager;
 
 <PageTitle>Users</PageTitle>
@@ -35,7 +36,7 @@
                     </MudText>
                     <MudSpacer />
                     <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
-                       <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => InvokeModal())"/>
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.PersonAdd" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => Add())" />
                     </MudTooltip>
                 </MudToolBar>
             </MudItem>
@@ -45,8 +46,8 @@
 
 </MudCard>
 
-<EditForm Model="this" OnValidSubmit="OnSearch" style="margin-top:10px !important;" >
-   <MudCard Elevation="25">
+<EditForm Model="this" OnValidSubmit="OnSearch" style="margin-top:10px !important;">
+    <MudCard Elevation="25">
         <MudCardContent>
 
             <MudGrid>
@@ -83,7 +84,7 @@
 
 @if (_paginatedResult != null && _paginatedResult.Data.Count > 0)
 {
-    <MudGrid Style="margin-top:5px !important;" Spacing="5" >
+    <MudGrid Style="margin-top:5px !important;" Spacing="5">
         @foreach (var dt in _paginatedResult.Data)
         {
             <MudItem>
@@ -104,6 +105,10 @@
                         </CardHeaderAvatar>
                         <CardHeaderContent>
                             <MudText Typo="Typo.body1">@dt.FullName</MudText>
+                             <MudText Typo="Typo.body2">
+                                <MudIcon Icon="@Icons.Material.Filled.Group" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                                @dt.UserRoleDescription
+                            </MudText>
                             <MudText Typo="Typo.body2">
                                 <MudIcon Icon="@Icons.Material.Filled.Email" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
                                 @dt.Email
@@ -115,15 +120,15 @@
                         </CardHeaderContent>
                         <CardHeaderActions>
                             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
-                                <MudMenuItem Icon="@Icons.Material.Filled.Edit">Editar</MudMenuItem>
-                                <MudMenuItem Icon="@Icons.Material.Filled.Key">Contraseña</MudMenuItem>
-                                <MudMenuItem Icon="@Icons.Material.Filled.Delete">Eliminar</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.CoPresent" @onclick="@(() => Edit(@dt.UserName))">Perfil</MudMenuItem>
+                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Key"  @onclick="@(() => Password(@dt.UserName))">Contraseña</MudMenuItem>
+                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;"Icon="@Icons.Material.Filled.Group" @onclick="@(() => Role(@dt.UserName))">Rol</MudMenuItem>
+                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" @onclick="@(() => Delete(@dt.Id))">Eliminar</MudMenuItem>
                             </MudMenu>
                         </CardHeaderActions>
                     </MudCardHeader>
                 </MudCard>
             </MudItem>
-
         }
     </MudGrid>
 
@@ -151,19 +156,21 @@
     }
     protected async override Task OnInitializedAsync()
     {
-        try
-        {
-            _searchString = string.Empty;
-            _paginatedResult = new PaginatedResult<UserModelOutput>();
-            await DoFetchData();
-        }
-        catch (Exception ex)
-        {
-            // _systemLogger.Error(ex.Message);
-        }
+        _searchString = string.Empty;
+        //_bus.Subscribe<IResult>(UserAddedHandler);
+        _paginatedResult = new PaginatedResult<UserModelOutput>();
+        await DoFetchData();
 
         base.OnInitialized();
     }
+
+    //private  void UserAddedHandler(MessageArgs args)
+    //{
+    //    var result = args.GetMessage<IResult>();
+    //    if (result.Succeeded){
+    //       Task.Run(async () => await DoFetchData());
+    //    }
+    //}
 
     private async Task DoFetchData()
     {
@@ -181,7 +188,7 @@
                 FilteringOptions = filters
             };
         _paginatedResult = await _manager.SearchAsync(args);
-        _paginatedResult.Data = _paginatedResult.Data.Select(w => { w.ProfilePicture = string.IsNullOrEmpty(w.ProfilePicture) ? string.Empty : $"{_appConfiguration.ApiUrl}{AppConstants.AccountEndpoints.Avatar(w.ProfilePicture!)}"; return w; }).ToList();
+        _paginatedResult.Data = _paginatedResult.Data.Select(w => { w.ProfilePicture = string.IsNullOrEmpty(w.ProfilePicture) ? string.Empty : $"{_appConfiguration.ApiUrl}{AppConstants.UsersEndpoints.Avatar(w.ProfilePicture!)}"; return w; }).ToList();
         await RefresView(false);
     }
 
@@ -202,31 +209,62 @@
         await DoFetchData();
     }
 
-      private async Task InvokeModal(string id = "")
+    private async Task Add()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Add>("Nuevo", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+            await DoFetchData();
+    }
+    private async Task Edit(string username)
+    {
+        var parameters = new DialogParameters { ["username"]=username };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Edit>("Editar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+            await DoFetchData();
+    }
+
+    private async Task Password(string username)
+    {
+        var parameters = new DialogParameters { ["username"]=username };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Password>("Password", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+            await DoFetchData();
+    }
+
+     private async Task Role(string username)
+    {
+        var parameters = new DialogParameters { ["username"]=username };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Roles>("Roles", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+            await DoFetchData();
+    }
+
+    private async Task Delete(string id)
+    {
+        var parameters = new DialogParameters{
+             { nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro de querer eliminar el registro?", id) }
+         };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>("Eliminar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
         {
-            var parameters = new DialogParameters();
-            //if (id != 0)
-            //{
-            //    var product = _pagedData.FirstOrDefault(c => c.Id == id);
-            //    if (product != null)
-            //    {
-            //        parameters.Add(nameof(AddEditProductModal.AddEditProductModel), new AddEditProductCommand
-            //        {
-            //            Id = product.Id,
-            //            Name = product.Name,
-            //            Description = product.Description,
-            //            Rate = product.Rate,
-            //            BrandId = product.BrandId,
-            //            Barcode = product.Barcode
-            //        });
-            //    }
-            //}
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Add>(string.IsNullOrEmpty(id) ? "Create" : "Edit", parameters, options);
-            var result = await dialog.Result;
-            //if (!result.Cancelled)
-            //{
-            //    OnSearch("");
-            //}
+            var response = await _manager.DeleteUserAsync(id);
+            if (response.Succeeded)
+                await DoFetchData();
+            foreach (var message in response.Messages)
+            {
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
         }
+    }
 }

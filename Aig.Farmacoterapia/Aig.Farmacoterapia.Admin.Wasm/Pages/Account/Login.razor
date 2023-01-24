@@ -10,7 +10,7 @@
 @inject NavigationManager NavigationManager
 
 <EditForm Model="@model" OnValidSubmit="SubmitAsync">
-    <FluentValidationValidator  @ref="_fluentValidationValidator" />
+    <FluentValidationValidator  @ref="_fluentValidation" />
 
 
     <MudGrid>
@@ -40,7 +40,7 @@
                 }
                 else
                 {
-                    <MudText>Entrar 1</MudText>
+                    <MudText>Entrar</MudText>
                 }
             </MudButton>
         </MudItem>
@@ -52,8 +52,8 @@
 
 @code {
   
-    private FluentValidationValidator _fluentValidationValidator;
-    private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+    private FluentValidationValidator _fluentValidation;
+    private bool Validated => _fluentValidation.Validate(options => { options.IncludeAllRuleSets(); });
     private bool loading { get; set; } = false;
     private TokenRequest model = new TokenRequest();
     protected override async Task OnInitializedAsync()

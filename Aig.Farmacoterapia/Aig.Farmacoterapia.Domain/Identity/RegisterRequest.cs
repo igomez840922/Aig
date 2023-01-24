@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aig.Farmacoterapia.Domain.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,8 +16,10 @@ namespace Aig.Farmacoterapia.Domain.Identity
         public string UserName { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = "";
         public bool ActivateUser { get; set; } = true;
         public bool AutoConfirmEmail { get; set; } = true;
+        public string ProfilePicture { get; set; } = "";
+        public RoleType Role { get; set; }
     }
 }

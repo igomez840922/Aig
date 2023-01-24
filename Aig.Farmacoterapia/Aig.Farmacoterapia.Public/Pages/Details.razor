@@ -9,11 +9,13 @@
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Aig.Farmacoterapia.Infrastructure.Configuration
+@using Aig.Farmacoterapia.Public.Extensions
 @using BlazorComponentBus
 @using Microsoft.Extensions.Options
 @inject ISystemLogger _systemLogger;
 @inject IUnitOfWork _unitOfWork;
 @inject IOptions<AppConfiguration> _config;
+@inject HttpClient _client;
 @inject NavigationManager _navigation;
 <style>
     .product-details-wrapper {
@@ -86,7 +88,11 @@ else
                                                 @if (!string.IsNullOrEmpty(item?.DataSheetURL))
                                                     {
 
-                                                        <a style="padding: 10px;font-size: 16px;" target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}files/datasheet/{item.DataSheetURL}")">
+                                                      @*  <a style="padding: 10px;font-size: 16px;" target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}files/datasheet/{item.DataSheetURL}")">
+                                                            <i style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-pdf"></i>
+                                                            Monografía
+                                                        </a>*@
+                                                      <a style="padding: 10px;font-size: 16px;" target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}api/medicament/datasheet/{item.DataSheetURL}")">
                                                             <i style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-pdf"></i>
                                                             Monografía
                                                         </a>
@@ -94,11 +100,15 @@ else
                                                     }
                                                     @if (!string.IsNullOrEmpty(item?.ProspectusURL))
                                                     {
-                                                        <a style="padding: 10px;font-size: 16px;" target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}files/prospectus/{item.ProspectusURL}")">
+                                                       @* <a style="padding: 10px;font-size: 16px;" target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}files/prospectus/{item.ProspectusURL}")">
+                                                           <i  style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-powerpoint"></i>
+                                                            Prospecto
+                                                        </a>*@
+                                                 
+                                                         <a style="padding: 10px;font-size: 16px;" target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}api/medicament/prospectus/{item.ProspectusURL}")">
                                                            <i  style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-powerpoint"></i>
                                                             Prospecto
                                                         </a>
-                                                 
                                                     }
    
                                             </div>
@@ -367,6 +377,9 @@ else
     protected bool loading { get; set; } = true;
     private MudPagination _mudPagination;
     private AigMedicamento item;
+    private string DataSheetURL=string.Empty;
+    private string ProspectusURL=string.Empty;
+
     protected async override Task OnInitializedAsync()
     {
         item = await DoFetchData();
@@ -376,13 +389,14 @@ else
         }
         base.OnInitialized();
     }
-    
+
     private async Task<AigMedicamento> DoFetchData()
     {
         loading = true;
-        var result = await _unitOfWork.Repository<AigMedicamento>().GetByIdAsync(product);
+        //var result = await _unitOfWork.Repository<AigMedicamento>().GetByIdAsync(product);
+        var result = await _client.GetDetailsAsync(product,_config.Value);
         loading = false;
-        return result;
+        return result.Data;
     }
 
     private string GetSaleCondition(string value)

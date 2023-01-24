@@ -11,6 +11,7 @@ using AutoMapper;
 using Aig.Farmacoterapia.Infrastructure.Identity;
 using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Aig.Farmacoterapia.Domain.Models;
+using Aig.Farmacoterapia.Domain.Identity;
 
 namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
 {
@@ -33,8 +34,16 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
 
     }
 
+    public class GetUserQuery : IRequest<Result<UpdateProfileRequest>>
+    {
+        public string UserName { get; set; }
+        public GetUserQuery(string userName) => UserName = userName;
+
+    }
+
     internal class GetAllUserQueryHandler : 
         IRequestHandler<GetAllUserQuery, PaginatedResult<UserModelOutput>>,
+        IRequestHandler<GetUserQuery, Result<UpdateProfileRequest>>,
         IRequestHandler<GetUsernameQuery, Result<bool>>,
         IRequestHandler<GetPhoneQuery, Result<bool>>
     {
@@ -61,6 +70,21 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
             {
                 _logger.Error("Requested operation failed", exc);
                 return PaginatedResult<UserModelOutput>.Failure(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
+        public async Task<Result<UpdateProfileRequest>> Handle(GetUserQuery request, CancellationToken cancellationToken)
+        {
+            var answer = new Result<UpdateProfileRequest>();
+            try
+            {
+                answer = Result<UpdateProfileRequest>.Success(_mapper.Map<UpdateProfileRequest>(
+                                 await _userService.GetUserByNameAsync(request.UserName)));
+            }
+            catch (Exception exc)
+            {
+                _logger.Error("Requested operation failed", exc);
+                return Result<UpdateProfileRequest>.Fail(new List<string>() { exc.Message });
             }
             return answer;
         }

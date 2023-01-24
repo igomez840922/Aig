@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 
 namespace Aig.Farmacoterapia.Infrastructure.Extensions
 {
+
     public static class QueryableExtensions
     {
         public static async Task<PaginatedResult<T>> PaginatedByAsync<T>(this IQueryable<T> source, int pageNumber, int pageSize) where T : class

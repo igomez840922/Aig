@@ -2,9 +2,9 @@
 
 namespace Aig.Farmacoterapia.Admin.Wasm.Validation
 {
-    public class TokenValidator : GenericValidations<TokenRequest>
+    public class IdentityValidator : GenericValidations<TokenRequest>
     {
-        public TokenValidator()
+        public IdentityValidator()
         {
             IsNotEmpty(c => c.Email, "Debes ingresar tu correo");
             IsValidEmail(c => c.Email);

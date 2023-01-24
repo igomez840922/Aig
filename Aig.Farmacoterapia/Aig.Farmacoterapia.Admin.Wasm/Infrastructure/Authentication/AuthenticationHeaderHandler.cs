@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Authentication
+namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Authentication
 {
     public class AuthenticationHeaderHandler : DelegatingHandler
     {
@@ -21,7 +21,6 @@ namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Authentication
             if (request.Headers.Authorization?.Scheme != "Bearer")
             {
                 var savedToken = await this.localStorage.GetItemAsync<string>(AppConstants.Local.AuthToken);
-
                 if (!string.IsNullOrWhiteSpace(savedToken))
                 {
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", savedToken);

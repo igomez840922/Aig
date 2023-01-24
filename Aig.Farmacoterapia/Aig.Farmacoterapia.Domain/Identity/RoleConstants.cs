@@ -9,6 +9,5 @@ namespace Aig.Farmacoterapia.Domain.Identity
     public static class RoleConstants
     {
         public const string Administrator = "Admin";
-        public const string Basic = "Basic";
     }
 }

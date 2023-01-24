@@ -306,7 +306,7 @@
     {        
         if (isOk)
         {
-            var result = await _userService.DeleteDeleteAsync(modelData.Id);
+            var result = await _userService.DeleteAsync(modelData.Id);
             if (!result.Succeeded)
                 await JsRuntime.InvokeVoidAsync("ShowError", result.Messages.First());
             else {

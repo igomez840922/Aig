@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Identity;
@@ -10,11 +11,11 @@ using Aig.Farmacoterapia.Infrastructure.Mail;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
 using System.Linq.Expressions;
 using System.Text.Encodings.Web;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Domain.Identity;
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services
 {
@@ -24,6 +25,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMailService _mailService;
+        private readonly IUploadService _uploadService;
         private readonly ICurrentUserService _currentUserService;
         private readonly ISystemLogger _logger;
 
@@ -32,12 +34,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
             IMailService mailService,
+            IUploadService uploadService,
             ICurrentUserService currentUserService,
             ISystemLogger logger)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _mailService = mailService;
+            _uploadService = uploadService;
             _currentUserService = currentUserService;
             _signInManager = signInManager;
             _logger = logger;
@@ -58,7 +62,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     {
                         switch (sortingOption.Field)
                         {
-                          
                             case "name":
                                 orderByList.Add(new(sortingOption, c => c.UserName));
                                 break;
@@ -102,7 +105,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             var users = await _userManager.Users.ToListAsync();
             return await Result<List<ApplicationUser>>.SuccessAsync(users);
         }
-
         public async Task<IResult> SaveAsync(ApplicationUser data)
         {
            
@@ -143,13 +145,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             }
             return await Result.FailAsync("Error durante la operación");
         }
-      
-        public async Task<IResult> RegisterAsync(RegisterRequest request, string origin)
+        public async Task<IResult> RegisterAsync(RegisterRequest request, string origin="")
         {
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
             {
-                return await Result.FailAsync(string.Format("Username {0} is already taken.", request.UserName));
+                return await Result.FailAsync(string.Format("El nombre de usuario {0} ya está en uso.", request.UserName));
             }
 
             var user = new ApplicationUser
@@ -159,7 +160,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 LastName = request.LastName,
                 UserName = request.UserName,
                 PhoneNumber = request.PhoneNumber,
-                EmailConfirmed = request.AutoConfirmEmail
+                EmailConfirmed = request.AutoConfirmEmail,
+                ProfilePicture = request.ProfilePicture,
+                Role = request.Role
             };
 
             if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
@@ -167,17 +170,16 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 var userWithSamePhoneNumber = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == request.PhoneNumber);
                 if (userWithSamePhoneNumber != null)
                 {
-                    return await Result.FailAsync(string.Format("Phone number {0} is already registered.", request.PhoneNumber));
+                    return await Result.FailAsync(string.Format("El número de teléfono {0} ya está registrado.", request.PhoneNumber));
                 }
             }
-
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
             if (userWithSameEmail == null)
             {
                 var result = await _userManager.CreateAsync(user, request.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, RoleConstants.Administrator);
+                    await _userManager.AddToRoleAsync(user, request.Role.ToString());
                     if (!request.AutoConfirmEmail)
                     {
                         var verificationUri = await SendVerificationEmail(user, origin);
@@ -191,7 +193,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                         //await _mailService.SendAsync(mailRequest);
                         return await Result<string>.SuccessAsync(user.Id, string.Format("User {0} Registered. Please check your Mailbox to verify!", user.UserName));
                     }
-                    return await Result<string>.SuccessAsync(user.Id, string.Format("User {0} Registered.", user.UserName));
+                    return await Result<string>.SuccessAsync(user.Id, string.Format("Usuario {0} registrado correctamente !.", user.UserName));
                 }
                 else
                 {
@@ -203,7 +205,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 return await Result.FailAsync(string.Format("Email {0} is already registered.", request.Email));
             }
         }
-
         public async Task<IResult> ChangePasswordAsync(ChangePasswordRequest model)
         {
             var user = await _userManager.FindByIdAsync(model.UserId);
@@ -217,46 +218,36 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     return await Result.FailAsync(result.Errors.Select(a => a.Description.ToString()).ToList());
             }
             return await Result.FailAsync("Error durante la operación");
-
-            //var user = await this._userManager.FindByIdAsync(model.UserId);
-            //if (user == null)
-            //{
-            //    return await Result.FailAsync("User Not Found.");
-            //}
-
-            //var identityResult = await this._userManager.ChangePasswordAsync(
-            //    user,
-            //    model.Password,
-            //    model.NewPassword);
-            //var errors = identityResult.Errors.Select(e => e.Description.ToString()).ToList();
-            //return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
         }
-
         public async Task<IResult> UpdateProfileAsync(UpdateProfileRequest request)
         {
-        
-            //    if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
-            //    {
-            //        var userWithSamePhoneNumber = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == request.PhoneNumber);
-            //        if (userWithSamePhoneNumber != null)
-            //        {
-            //            return await Result.FailAsync(string.Format("Phone number {0} is already used.", request.PhoneNumber));
-            //        }
-            //    }
 
-            var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
-            if (userWithSameEmail == null || userWithSameEmail.Id == request.UserId)
+            if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
             {
-                var user = await _userManager.FindByIdAsync(request.UserId);
+                var userWithSamePhoneNumber = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == request.PhoneNumber && x.Id != request.Id);
+                if (userWithSamePhoneNumber != null)
+                {
+                    return await Result.FailAsync(string.Format("El número de teléfono {0} ya está en uso.", request.PhoneNumber));
+                }
+            }
+          
+            var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
+            if (userWithSameEmail == null || userWithSameEmail.Id == request.Id)
+            {
+                var user = await _userManager.FindByIdAsync(request.Id);
                 if (user == null)
                 {
-                    return await Result.FailAsync("User Not Found.");
+                    return await Result.FailAsync("Usuario no encontrado.");
                 }
-                if (!string.IsNullOrEmpty(request.ProfilePicture))
-                   user.ProfilePicture = request.ProfilePicture;
+                if (!string.IsNullOrEmpty(request.ProfilePicture) && !string.IsNullOrEmpty(user.ProfilePicture)) {
+                    if (request.ProfilePicture!=user.ProfilePicture)
+                        await _uploadService.DeleteAsync(UploadType.Users, user.ProfilePicture!);
+                }
+                user.ProfilePicture = request.ProfilePicture;
                 user.FirstName = request.FirstName;
                 user.LastName = request.LastName;
                 user.PhoneNumber = request.PhoneNumber;
+                user.UserName =user.Email = request.Email;
                 var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
                 if (request.PhoneNumber != phoneNumber)
                 {
@@ -269,10 +260,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             }
             else
             {
-                return await Result.FailAsync(string.Format("Email {0} is already used.", request.Email));
+                return await Result.FailAsync(string.Format("El correo electrónico {0} ya está en uso.", request.Email));
             }
         }
-
         private async Task<string> SendVerificationEmail(ApplicationUser user, string origin)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -283,7 +273,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             verificationUri = QueryHelpers.AddQueryString(verificationUri, "code", code);
             return verificationUri;
         }
-
         public async Task<ApplicationUser> GetAsync(string userId)
         {
             var user = await _userManager.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
@@ -304,21 +293,23 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             var user =  _userManager.Users.Where(u => u.PhoneNumber == phone).FirstOrDefault();
             return user;
         }
-        public async Task<IResult> DeleteDeleteAsync(string id)
+        public async Task<IResult> DeleteAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user!=null) {
                 var result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(user.ProfilePicture))
+                        await _uploadService.DeleteAsync(UploadType.Users,user.ProfilePicture);
                     return await Result<string>.SuccessAsync(user.UserName, string.Format("Usuario {0} eliminado correctamente !.", user.UserName));
+                }  
                 else
                     return await Result.FailAsync(result.Errors.Select(a => a.Description.ToString()).ToList());
             }
             else
               return await Result.FailAsync("Error durante la operación");
         }
-
-
         public async Task<IResult> ToggleUserStatusAsync(string userId,bool activate)
         {
             var user = await _userManager.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
@@ -335,7 +326,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             }
             return await Result.SuccessAsync();
         }
-
         public async Task<IResult<UserRolesResponse>> GetRolesAsync(string userId)
         {
             var viewModel = new List<UserRoleModel>();
@@ -361,30 +351,18 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             var result = new UserRolesResponse { UserRoles = viewModel };
             return await Result<UserRolesResponse>.SuccessAsync(result);
         }
-
         public async Task<IResult> UpdateRolesAsync(UpdateUserRolesRequest request)
         {
             var user = await _userManager.FindByIdAsync(request.UserId);
-            var roles = await _userManager.GetRolesAsync(user);
-            var selectedRoles = request.UserRoles.ToList();
-
             var currentUser = await _userManager.FindByIdAsync(_currentUserService.UserId);
-            if (!await _userManager.IsInRoleAsync(currentUser, RoleConstants.Administrator))
-            {
-                var tryToAddAdministratorRole = selectedRoles
-                    .Any(x => x.Name == RoleConstants.Administrator);
-                var userHasAdministratorRole = roles.Any(x => x == RoleConstants.Administrator);
-                if (tryToAddAdministratorRole && !userHasAdministratorRole || !tryToAddAdministratorRole && userHasAdministratorRole)
-                {
-                    return await Result.FailAsync("Not Allowed to add or delete Administrator Role if you have not this role.");
-                }
-            }
-
-            var result = await _userManager.RemoveFromRolesAsync(user, roles);
-            result = await _userManager.AddToRolesAsync(user, selectedRoles.Select(y => y.Name));
-            return await Result.SuccessAsync("Roles Updated");
+            if (!await _userManager.IsInRoleAsync(currentUser, RoleType.Admin.ToString()))
+                return await Result.FailAsync("Usted no tienen permisos para actualizar roles de usuarios.");
+            var result = await _userManager.RemoveFromRoleAsync(user, user.Role.ToString());
+            result = await _userManager.AddToRoleAsync(user, request.Role.ToString());
+            user.Role = request.Role;
+            result = await _userManager.UpdateAsync(user);
+            return await Result.SuccessAsync("Rol de usuario actulizado correctamente.");
         }
-
         public async Task<IResult<string>> ConfirmEmailAsync(string userId, string code)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -399,7 +377,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 throw new Exception(string.Format("An error occurred while confirming {0}", user.Email));
             }
         }
-
         public async Task<IResult> ForgotPasswordAsync(ForgotPasswordRequest request, string origin)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
@@ -424,7 +401,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             await _mailService.SendAsync(mailRequest);
             return await Result.SuccessAsync("Password Reset Mail has been sent to your authorized Email.");
         }
-
         public async Task<IResult> ResetPasswordAsync(ResetPasswordRequest request)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
@@ -444,12 +420,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 return await Result.FailAsync("An Error has occured!");
             }
         }
-
         public async Task<int> GetCountAsync()
         {
             var count = await _userManager.Users.CountAsync();
             return count;
         }
-
     }
 }

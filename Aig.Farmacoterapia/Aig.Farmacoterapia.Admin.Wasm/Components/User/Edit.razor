@@ -1,0 +1,307 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Admin.Wasm.Extensions
+@using Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers.User
+@using Aig.Farmacoterapia.Admin.Wasm.Validation
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@inject IUserManager _manager;
+<style>
+    .container-image {
+        border: 1px solid #adb5bd;
+        width: 100px;
+        height: 100px;
+        border-radius: 0.42rem;
+    }
+
+    .outer {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 150px !important;
+        max-height: 150px !important;
+        background-color: transparent;
+        position: relative;
+        background-size: cover;
+        border-radius: 0.42rem;
+    }
+
+    .inner-edit {
+        background-color: #594ae2ff;
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+    }
+
+        .inner-edit:hover {
+            background-color: #5555ff;
+        }
+
+        .inner-edit label {
+            background-color: transparent;
+            cursor: pointer !important;
+            width: 100%;
+            height: 100%;
+        }
+
+            .inner-edit label svg {
+                margin: 3px;
+            }
+
+    .inner-delete {
+        background-color: #E91E63;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        position: absolute;
+        bottom: -10px;
+        right: -10px;
+    }
+
+        .inner-delete label {
+            background-color: transparent;
+            cursor: pointer !important;
+            width: 100%;
+            height: 100%;
+        }
+
+            .inner-delete label svg {
+                margin: 3px;
+            }
+
+    .inputfile {
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        margin-top: 3px;
+    }
+     
+ 
+</style>
+
+<EditForm Model="@_userModel"  OnValidSubmit=@(async () => await SubmitAsync()) >
+    <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
+    <MudDialog DefaultFocus="DefaultFocus.FirstChild">
+      <TitleContent>
+          
+            <MudText Typo="Typo.h6">
+                <MudIcon Icon="@Icons.Material.Filled.CoPresent" Class="mr-3 mb-n1" />
+                Editar Perfil
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+
+            @if (_loading)
+            {
+                 <div style="margin-left:45% !important;">
+                    <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+                </div>
+            }
+            else
+            {
+                <MudGrid>
+                    <MudItem md="2">
+
+                        <MudGrid>
+
+                            <MudItem md="12">
+                                <MudItem>
+
+                                    <div class="container-image">
+
+                                        @if (string.IsNullOrEmpty(_profilePicture))
+                                        {
+                                            <div class="outer" style="background-image: url(/media/user.png);">
+                                                <div class="inner-edit">
+                                                    <label>
+                                                        <InputFile Class="inputfile" id="fileInput" OnChange="UploadFiles" />
+                                                        <MudIcon Icon="@Icons.Material.Filled.AttachFile" Style="color:#fff;" />
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="outer" style="background-image: url(@_profilePicture);">
+                                                <div class="inner-edit">
+                                                    <label>
+                                                        <InputFile Class="inputfile" id="fileInput" OnChange="UploadFiles" />
+                                                        <MudIcon Icon="@Icons.Material.Filled.AttachFile" Style="color:#fff;" />
+                                                    </label>
+                                                </div>
+                                                <div class="inner-delete">
+                                                    <label>
+                                                        <MudIcon @onclick="DeleteAsync" Icon="@Icons.Material.Filled.DeleteOutline" Style="color:#fff;" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                </MudItem>
+
+                            </MudItem>
+
+                        </MudGrid>
+
+                    </MudItem>
+
+                    <MudItem md="10">
+                        <MudItem>
+                            <MudGrid>
+
+                                <MudItem xs="12" md="6">
+
+                                    <MudItem md="12" Style="padding:3px !important">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.FirstName)" @bind-Value="_userModel.FirstName" Label="Nombre" />
+                                    </MudItem>
+
+                                    <MudItem md="12" Style="padding:3px !important">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.Email)" @bind-Value="_userModel.Email" Label="Usuario (Correo)" />
+                                    </MudItem>
+
+                                </MudItem>
+
+                                <MudItem xs="12" md="6">
+                                    <h6></h6>
+
+                                    <MudItem md="12" Style="padding:3px !important">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.LastName)" @bind-Value="_userModel.LastName" Label="Apellido" />
+                                    </MudItem>
+
+                                    <MudItem md="12" Style="padding:3px !important">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _userModel.PhoneNumber)" @bind-Value="_userModel.PhoneNumber" Label="Teléfono" />
+                                    </MudItem>
+                                </MudItem>
+
+                            </MudGrid>
+
+                        </MudItem>
+
+                    </MudItem>
+
+                </MudGrid>
+            }
+
+        </DialogContent>
+        <DialogActions >
+             <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
+             <MudButton Disabled="@(!Validate())" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Actualizar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+
+
+@code {
+
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string username { get; set; } = string.Empty;
+    private FluentValidationValidator _fluentValidation;
+    private UpdateProfileRequest _userModel = new UpdateProfileRequest();
+    private bool _validated=>Validate();
+    string _profilePicture { get; set; } = string.Empty;
+    private bool _showPictureAlert = false;
+    bool _loading = false;
+    private IBrowserFile _file;
+
+    protected override async Task OnInitializedAsync()
+    { 
+        await LoadDataAsync();
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender){}
+        Validate();
+    }
+    private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+    private bool Validate()=>_fluentValidation.Validate();
+
+    private async Task UploadFiles(InputFileChangeEventArgs e)
+    {
+        _file = e.File;
+        if (_file != null)
+        {
+            _showPictureAlert = false;
+            long maxFileSize = 1048576 * 1;//1 MB
+            if (_file.Size <= maxFileSize)
+            {
+                var contentType = _file.ContentType;
+                var extension = Path.GetExtension(_file.Name);
+                var imageFile = await _file.RequestImageFileAsync(contentType, 400, 400);
+                var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
+                var request = new UploadObject{
+                    FileName = $"{Guid.NewGuid()}{extension}",
+                    Data = stream,
+                    Size = imageFile.Size,
+                    UploadType = UploadType.Users,
+                    ContentType = contentType,
+                    Extension = extension,
+                 };
+                if((await _manager.UploadProfilePictureAsync(request)).Succeeded) { 
+                    _userModel.ProfilePicture= request.FileName;
+                    var buffer = new byte[imageFile.Size];
+                    await imageFile.OpenReadStream().ReadAsync(buffer);
+                    _profilePicture = $"data:{contentType};base64,{Convert.ToBase64String(buffer)}";
+                }
+            }
+            else { _showPictureAlert = true; }
+        }
+    }
+
+    private async Task DeleteAsync()
+    {
+        if (!string.IsNullOrEmpty(_userModel.ProfilePicture) && 
+           ((await _manager.DeleteProfilePictureAsync(UploadType.Users, _userModel.ProfilePicture)).Succeeded))
+            _profilePicture= null;
+    }
+    protected async Task SubmitAsync()
+    {
+        if (Validate()){
+            var response = await _manager.UpdateProfileAsync(_userModel);
+            if (response.Succeeded)
+                MudDialog.Close();
+            foreach (var message in response.Messages){
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
+        }
+    }
+
+    public void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        await RefresView(true);
+        var response = await _manager.GetAsync(username);
+        if (response.Succeeded) {
+             _userModel.Id = response.Data.Id;
+            _userModel.Email = response.Data.Email;
+            _userModel.FirstName =  response.Data.FirstName;
+            _userModel.LastName = response.Data.LastName;
+            _userModel.PhoneNumber = response.Data.PhoneNumber;
+            _userModel.ProfilePicture = response.Data.ProfilePicture;
+            _userModel.Role = response.Data.Role;
+            _profilePicture = string.IsNullOrEmpty(response.Data.ProfilePicture) ? string.Empty :
+            $"{_appConfiguration.ApiUrl}{AppConstants.UsersEndpoints.Avatar(response.Data.ProfilePicture)}";
+        }
+        await RefresView(false);
+    }
+}

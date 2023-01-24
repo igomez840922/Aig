@@ -2,17 +2,14 @@
 using Aig.Farmacoterapia.Domain.Identity;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Admin.Wasm.Extensions;
-using Aig.Farmacoterapia.Admin.Wasm.Infrastructure;
 using Blazored.LocalStorage;
-using BlazorHero.CleanArchitecture.Client.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Security.Claims;
-using System.Threading.Tasks;
-
+using Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Authentication;
 
 namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Identity.Authentication
 {
@@ -41,14 +38,14 @@ namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Identity.Authentication
 
         public async Task<IResult> Login(TokenRequest model)
         {
-            var uri = AppConstants.AccountEndpoints.Login;
-            var response = await _httpClient.PostAsJsonAsync(AppConstants.AccountEndpoints.Login, model);
+            var uri = AppConstants.IdentityEndpoints.Login;
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.IdentityEndpoints.Login, model);
             var result = await response.ToResult<TokenResponse>();
             if (result.Succeeded)
             {
                 var token = result.Data.Token;
                 var refreshToken = result.Data.RefreshToken;
-                var userImageURL = AppConstants.AccountEndpoints.Avatar(result.Data.Avatar);
+                var userImageURL = AppConstants.UsersEndpoints.Avatar(result.Data.Avatar);
                 await _localStorage.SetItemAsync(AppConstants.Local.AuthToken, token);
                 await _localStorage.SetItemAsync(AppConstants.Local.RefreshToken, refreshToken);
                 await _localStorage.SetItemAsync(AppConstants.Local.UserImageURL, string.IsNullOrEmpty(result.Data.Avatar)?string.Empty: userImageURL);
@@ -79,7 +76,7 @@ namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Identity.Authentication
             var token = await _localStorage.GetItemAsync<string>(AppConstants.Local.AuthToken);
             var refreshToken = await _localStorage.GetItemAsync<string>(AppConstants.Local.RefreshToken);
 
-            var response = await _httpClient.PostAsJsonAsync(AppConstants.AccountEndpoints.Refresh, new RefreshTokenRequest { Token = token, RefreshToken = refreshToken });
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.IdentityEndpoints.Refresh, new RefreshTokenRequest { Token = token, RefreshToken = refreshToken });
 
             var result = await response.ToResult<TokenResponse>();
 

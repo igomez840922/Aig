@@ -21,5 +21,7 @@ namespace Aig.Farmacoterapia.Admin.Wasm.Extensions
            => claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier);
         internal static string GetAvatar(this ClaimsPrincipal claimsPrincipal)
            => claimsPrincipal.FindFirstValue(ClaimTypes.UserData);
+        internal static string GetRole(this ClaimsPrincipal claimsPrincipal)
+          => claimsPrincipal.FindFirstValue(ClaimTypes.Role);
     }
 }

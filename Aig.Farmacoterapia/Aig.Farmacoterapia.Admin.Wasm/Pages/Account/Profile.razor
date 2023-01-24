@@ -1,10 +1,12 @@
 ﻿@page "/profile"
 @attribute [Authorize]
 @using Aig.Farmacoterapia.Admin.Wasm.Extensions
+@using Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers.User
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities.Enums
 @using Aig.Farmacoterapia.Domain.Identity
 @using Blazored.FluentValidation
+@inject IUserManager _manager;
 
 <style>
    .container-image {
@@ -74,7 +76,7 @@
     }
 </style>
 <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
-    <MudTabPanel Icon="@Icons.Material.Filled.Api" Text="Datos Generales">
+    <MudTabPanel Icon="@Icons.Material.Filled.CoPresent" Text="Datos Generales">
 
         <MudGrid>
             <MudItem md="2"/>
@@ -157,7 +159,7 @@
         </MudGrid>
 
     </MudTabPanel>
-    <MudTabPanel Text="Cambiar Contraseña">
+    <MudTabPanel  Icon="@Icons.Material.Filled.Key" Text="Cambiar Contraseña">
      
         <MudGrid>
             <MudItem md="2"/>
@@ -171,12 +173,15 @@
                             <MudGrid>
 
                                 <MudItem sm="12" md="8">
-                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _changePasswordRequestModel.NewPassword)" @bind-Value="_changePasswordRequestModel.NewPassword" Label="Contraseña" />
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _changePasswordRequestModel.NewPassword)" @bind-Value="_changePasswordRequestModel.NewPassword"
+                                                  Label="Contraseña" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
                                 </MudItem>
-                                <MudItem sm="12" md="8">
-                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _changePasswordRequestModel.ConfirmNewPassword)" @bind-Value="_changePasswordRequestModel.ConfirmNewPassword" Label="Confirmar Contraseña" />
+
+                                 <MudItem sm="12" md="8">
+                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _changePasswordRequestModel.ConfirmNewPassword)" @bind-Value="_changePasswordRequestModel.ConfirmNewPassword"
+                                                  Label="Contraseña" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
                                 </MudItem>
-                               
+                              
                             </MudGrid>
 
                         </MudCardContent>
@@ -198,16 +203,44 @@
 
 @code {
 
-    private FluentValidationValidator? _profileFluentValidationValidator;
-    private FluentValidationValidator? _passwordFluentValidationValidator;
+    private FluentValidationValidator _profileFluentValidationValidator;
+    private FluentValidationValidator _passwordFluentValidationValidator;
     private bool _profileValidated => _profileFluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-    private bool _passwordValidated => _passwordFluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+    private bool _passwordValidated =>_passwordFluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
     public UpdateProfileRequest _profileUserModel { get; set; } = new UpdateProfileRequest();
     public ChangePasswordRequest _changePasswordRequestModel { get; set; } = new ChangePasswordRequest();
     string _profilePicture { get; set; } = string.Empty;
     private bool _showPictureAlert = false;
     private IBrowserFile _file;
+
+    private bool _passwordVisibility;
+    private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+    private InputType _passwordInput = InputType.Password;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+
+    }
+
+    void TogglePasswordVisibility()
+    {
+        if (_passwordVisibility)
+        {
+            _passwordVisibility = false;
+            _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+            _passwordInput = InputType.Password;
+        }
+        else
+        {
+            _passwordVisibility = true;
+            _passwordInputIcon = Icons.Material.Filled.Visibility;
+            _passwordInput = InputType.Text;
+        }
+    }
+
 
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
@@ -230,7 +263,7 @@
                     ContentType = contentType,
                     Extension = extension,
                  };
-                if((await _accountManager.UploadProfilePictureAsync(request)).Succeeded) { 
+                if((await _manager.UploadProfilePictureAsync(request)).Succeeded) { 
                     _profileUserModel.ProfilePicture= request.FileName;
                     var buffer = new byte[imageFile.Size];
                     await imageFile.OpenReadStream().ReadAsync(buffer);
@@ -244,13 +277,16 @@
     private async Task DeleteAsync()
     {
         if (!string.IsNullOrEmpty(_profileUserModel.ProfilePicture) && 
-           ((await _accountManager.DeleteProfilePictureAsync(UploadType.Users, _profileUserModel.ProfilePicture)).Succeeded))
-              _profilePicture= null;
+           ((await _manager.DeleteProfilePictureAsync(UploadType.Users, _profileUserModel.ProfilePicture)).Succeeded)){
+           _profilePicture= null; 
+           _profileUserModel.ProfilePicture = string.Empty; 
+        }
+        
     }
 
     protected async Task ProfileSubmitAsync()
     {   
-        var response = await _accountManager.UpdateProfileAsync(_profileUserModel);
+        var response = await _manager.UpdateProfileAsync(_profileUserModel);
         if (response.Succeeded)
         {
             await _authenticationManager.Logout();
@@ -268,7 +304,7 @@
 
     protected async Task ChangePasswordAsyncSubmitAsync()
     {   
-        var response = await _accountManager.ChangePasswordAsync(_changePasswordRequestModel);
+        var response = await _manager.ChangePasswordAsync(_changePasswordRequestModel);
         if (response.Succeeded)
         {
             await _authenticationManager.Logout();
@@ -284,17 +320,11 @@
         }
     }
 
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadDataAsync();
-
-    }
-
     private async Task LoadDataAsync()
     {
         var state = await _stateProvider.GetAuthenticationStateAsync();
         var user = state.User;
-        _profileUserModel.UserId = user.GetUserId();
+        _profileUserModel.Id = user.GetUserId();
         _profileUserModel.Email = user.GetEmail();
         _profileUserModel.FirstName = user.GetFirstName();
         _profileUserModel.LastName = user.GetLastName();
@@ -302,7 +332,7 @@
          _profileUserModel.ProfilePicture = user.GetAvatar();
          var picture=await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL);
          _profilePicture =string.IsNullOrEmpty(picture)?string.Empty: $"{_appConfiguration.ApiUrl}{picture}";
-        _changePasswordRequestModel.UserId = _profileUserModel.UserId;
+        _changePasswordRequestModel.UserId = _profileUserModel.Id;
     }
 
 }

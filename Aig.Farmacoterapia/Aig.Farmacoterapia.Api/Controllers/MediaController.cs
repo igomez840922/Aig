@@ -17,6 +17,6 @@ namespace Aig.Farmacoterapia.Api.Controllers
         public async Task<IActionResult> UploadFile(IFormCollection formData) => Ok(await _mediator.Send(new UploadMediaCommand(formData)));
 
         [HttpDelete("{type}/{image}")]
-        public async Task<IActionResult> UploadFile(string type, string image) => Ok(await _mediator.Send(new DeleteMediaCommand(type, image)));
+        public async Task<IActionResult> DeleteFile(string type, string image) => Ok(await _mediator.Send(new DeleteMediaCommand(type, image)));
     }
 }

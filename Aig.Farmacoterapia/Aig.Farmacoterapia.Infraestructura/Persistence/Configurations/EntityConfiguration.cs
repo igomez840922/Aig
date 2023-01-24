@@ -23,6 +23,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(k => new { k.Id });
             builder.Ignore(c => c.ShowDetails);
+            //builder.Ignore(c => c.DataSheelFile);
 
             builder.HasOne(t => t.Fabricante)
                  .WithMany(t => t.Medicamentos)

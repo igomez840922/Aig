@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aig.Farmacoterapia.Domain.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Aig.Farmacoterapia.Domain.Models
     public class UserModelOutput
     {
         public string Id { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         
@@ -17,5 +19,7 @@ namespace Aig.Farmacoterapia.Domain.Models
         public string? ProfilePicture { get; set; }
         public string FullName { get; set; }
         public bool IsActive { get; set; } = true;
+        public string UserRoleDescription { get; set; }
+
     }
 }

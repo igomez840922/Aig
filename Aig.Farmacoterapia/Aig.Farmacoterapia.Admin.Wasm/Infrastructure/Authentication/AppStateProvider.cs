@@ -1,4 +1,4 @@
-﻿using Aig.Farmacoterapia.Admin.Wasm.Infrastructure;
+﻿
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
@@ -8,9 +8,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace BlazorHero.CleanArchitecture.Client.Infrastructure.Authentication
+
+namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Authentication
 {
     public class AppStateProvider : AuthenticationStateProvider
     {

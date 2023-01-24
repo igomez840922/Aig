@@ -17,16 +17,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Extensions
         {
             var converter = new ValueConverter<T, string>(
                 v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
-#pragma warning disable CS8603 // Possible null reference return.
                 v => JsonConvert.DeserializeObject<T>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
-#pragma warning restore CS8603 // Possible null reference return.
 
             var comparer = new ValueComparer<T>(
                 (o1, o2) => JsonConvert.SerializeObject(o1) == JsonConvert.SerializeObject(o2),
                 v => v == null ? 0 : JsonConvert.SerializeObject(v).GetHashCode(),
-#pragma warning disable CS8603 // Possible null reference return.
                 v => JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(v)));
-#pragma warning restore CS8603 // Possible null reference return.
 
             propertyBuilder.HasConversion(converter, comparer);
             propertyBuilder.HasColumnType("nvarchar(max)");

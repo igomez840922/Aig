@@ -532,7 +532,18 @@
     {
         await this.InvokeAsync(StateHasChanged);
     }
-    
+    public async Task<byte[]> GetArray(Stream stream,long size)
+    {
+        //using (MemoryStream ms = new MemoryStream())
+        //{
+        //    input.CopyTo(ms);
+        //    return ms.ToArray();
+        //}
+        var memoryStream = new MemoryStream((int)size);
+        await stream.CopyToAsync(memoryStream);
+        memoryStream.Position = 0;
+       return memoryStream.ToArray();
+    }
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
         _file = e.File;
@@ -548,7 +559,7 @@
                     var uploadType = UploadType.DataSheet;
                     var contentType = _file.ContentType;
                     var extension = Path.GetExtension(_file.Name);
-                    var stream = _file.OpenReadStream(maxAllowedSize: maxFileSize);
+                    var stream = _file.OpenReadStream(maxAllowedSize: (int)_file.Size);
                     var request = new UploadObject{
                             FileName = $"{Guid.NewGuid()}{extension}",
                             Data = stream,
@@ -636,7 +647,7 @@
                 showPictureFileInputAlert = false;
                 await RefresView();
                 long maxFileSize = 1048576 * 10;//10 MB
-                var contentType = _prospectusFile.ContentType;
+                var contentType = _imageFile.ContentType;
                 if (_imageFile.Size <= maxFileSize){
                     var imageFile = await _imageFile.RequestImageFileAsync(contentType, 600, 400);
                     var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);

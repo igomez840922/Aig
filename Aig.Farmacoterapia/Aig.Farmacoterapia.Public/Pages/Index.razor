@@ -19,6 +19,7 @@
 @inject IOptions<AppConfiguration> _config;
 @inject NavigationManager _navigation;
 @inject AppState _appState;
+@inject HttpClient _client;
 @implements IDisposable;
 
 <MudOverlay Visible="loading" LightBackground="true" Absolute="true">
@@ -164,7 +165,8 @@
                 FilteringOptions = filters,
                 LogicalOperator = LogicalOperator.And
             };
-        paginatedResult = await _repository.ListAsync(args);
+        //paginatedResult = await _repository.ListAsync(args);
+        paginatedResult = await _client.SearchAsync(args,_config.Value);
         loading = false;
         await RefresView();
     }
