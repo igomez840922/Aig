@@ -120,10 +120,10 @@
                         </CardHeaderContent>
                         <CardHeaderActions>
                             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
-                                <MudMenuItem Icon="@Icons.Material.Filled.CoPresent" @onclick="@(() => Edit(@dt.UserName))">Perfil</MudMenuItem>
-                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Key"  @onclick="@(() => Password(@dt.UserName))">Contraseña</MudMenuItem>
-                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;"Icon="@Icons.Material.Filled.Group" @onclick="@(() => Role(@dt.UserName))">Rol</MudMenuItem>
-                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" @onclick="@(() => Delete(@dt.Id))">Eliminar</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.CoPresent" OnClick="@(() => Edit(@dt.UserName))" OnTouch="@(() => Edit(@dt.UserName))">Perfil</MudMenuItem>
+                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Key" OnClick="@(() => Password(@dt.UserName))" OnTouch="@(() => Password(@dt.UserName))">Contraseña</MudMenuItem>
+                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;"Icon="@Icons.Material.Filled.Group" OnClick="@(() => Role(@dt.UserName))" OnTouch="@(() => Role(@dt.UserName))">Rol</MudMenuItem>
+                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@dt.Id))" OnTouch="@(() => Delete(@dt.Id))">Eliminar</MudMenuItem>
                             </MudMenu>
                         </CardHeaderActions>
                     </MudCardHeader>

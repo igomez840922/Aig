@@ -46,8 +46,8 @@ else
     app.UseHsts();
 }
 
-app.UseSwagger();
-app.UseSwaggerUI();
+//app.UseSwagger();
+//app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
@@ -65,6 +65,8 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.ConfigureSwagger();
 
 app.MapRazorPages();
 app.MapControllers();

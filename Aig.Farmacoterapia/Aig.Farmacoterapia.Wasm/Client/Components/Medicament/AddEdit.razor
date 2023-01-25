@@ -12,10 +12,9 @@
 @using System.Globalization
 @inject IMedicamentManager _manager;
 
-
-<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
+<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync()) style="max-height:800px !important;overflow-y: auto; min-height:300px !important" >
     <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
-    <MudDialog DisableSidePadding="false">
+    <MudDialog DisableSidePadding="false"  >
         <TitleContent>
             <MudText Typo="Typo.h6">
                              
@@ -47,8 +46,8 @@
             }
             else
             {
-              
 
+             
                     <MudGrid Style="margin-top:10px !important">
                         <MudItem xs="12">
                             <MudGrid>
@@ -240,7 +239,6 @@
                         </MudItem>
                     </MudGrid>
 
-
                     <MudGrid Spacing="6">
                         <MudItem xs="12">
                             <MudGrid>
@@ -428,7 +426,9 @@
                             </MudGrid>
                         </MudItem>
                     </MudGrid>
-                
+                  
+              
+               
             }
         </DialogContent>
         <DialogActions>

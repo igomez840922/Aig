@@ -67,9 +67,9 @@ var app = builder.Build();
 //        options.DisplayRequestDuration();
 //    });
 //}
+
 app.UseSwagger();
 app.UseSwaggerUI();
-
 
 app.UseHttpsRedirection();
 

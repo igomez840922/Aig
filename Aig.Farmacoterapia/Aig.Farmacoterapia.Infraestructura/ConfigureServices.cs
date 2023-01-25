@@ -162,6 +162,7 @@ namespace Aig.Farmacoterapia.Infrastructure
 
         public static void RegisterSwagger(this IServiceCollection services)
         {
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new() { Title = "Aig Farmacoterapia  API", Version = "v1" });
@@ -193,7 +194,7 @@ namespace Aig.Farmacoterapia.Infrastructure
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Aig Farmacoterapia API V1");
-                options.RoutePrefix = "swagger";
+                options.RoutePrefix = "api";
                 options.DisplayRequestDuration();
             });
         }
