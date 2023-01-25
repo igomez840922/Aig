@@ -19,7 +19,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.1" />
     <PackageReference Include="MudBlazor" Version="6.1.4" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.2.0" />
-	<PackageReference Include="BlazorComponentBus" Version="2.2.0" />
+	  <PackageReference Include="BlazorComponentBus" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

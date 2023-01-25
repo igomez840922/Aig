@@ -17,14 +17,6 @@ builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.RegisterSwagger();
 builder.Services.AddApplicationLayer();
 
-builder.Services.AddCors(policy =>
-{
-    policy.AddPolicy("CorsPolicy", opt => opt
-    .AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .WithExposedHeaders("X-Pagination"));
-});
 
 //builder.Services.AddControllers();
 builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
@@ -33,13 +25,33 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //For api Controllers
-builder.Services.AddCors(policy =>
+//builder.Services.AddCors(policy =>
+//{
+//    policy.AddDefaultPolicy(
+//        policy =>
+//        {            policy.AllowAnyOrigin()
+//            .AllowAnyHeader()
+//            .AllowAnyMethod()
+//            .SetIsOriginAllowed((host) => true)
+//            .WithExposedHeaders("X-Pagination")); ;  //set the allowed origin  
+//        });
+//    policy.AddPolicy("CorsPolicy", opt => opt
+//    .AllowAnyOrigin()
+//    .AllowAnyHeader()
+//    .AllowAnyMethod()
+//    .SetIsOriginAllowed((host) => true) //localhost
+//    .WithExposedHeaders("X-Pagination"));
+//});
+builder.Services.AddCors(options =>
 {
-    policy.AddPolicy("CorsPolicy", opt => opt
-    .AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .WithExposedHeaders("X-Pagination"));
+    options.AddPolicy(name: "CorsPolicy",
+                          policy =>
+                          {
+                              policy.AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .SetIsOriginAllowed((host) => true);
+                              });
 });
 
 var app = builder.Build();

@@ -5,5 +5,7 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args).AddRootComponents();
 builder.AddClientServices(builder.Configuration);
 await builder.Build().RunAsync();
 
+var app = builder.Build();
+await app.RunAsync();
 
 

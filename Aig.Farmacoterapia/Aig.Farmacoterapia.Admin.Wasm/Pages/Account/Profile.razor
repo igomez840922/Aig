@@ -291,7 +291,7 @@
         {
             await _authenticationManager.Logout();
             _snackBar.Add("Tu perfil ha sido actualizado correctamente. Por favor inicie sesión para continuar.", Severity.Success);
-            _navigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("login");
         }
         else
         {
@@ -309,7 +309,7 @@
         {
             await _authenticationManager.Logout();
             _snackBar.Add("Tu contraseña ha sido actualizada correctamente. Por favor inicie sesión para continuar.", Severity.Success);
-            _navigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("login");
         }
         else
         {
