@@ -31,10 +31,13 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             {
                 return $"api/user/phone/{phone}";
             }
-            public static string Delete(string id)
-            {
-                return $"api/user/{id}";
-            }
+            //public static string Delete(string id)
+            //{
+            //    return $"api/user/{id}";
+            //}
+            public static string Delete=$"api/user/delete";
+            
+           
             public static string Get(string userName)
             {
                 return $"api/user/{userName}";
@@ -47,7 +50,8 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             {
                 return $"api/media/upload";
             }
-            public static string DeleteFile(UploadType uploadType, string image) => $"api/media/{uploadType.ToString()}/{image}";
+            //public static string DeleteFile(UploadType uploadType, string image) => $"api/media/{uploadType.ToString()}/{image}";
+            public static string DeleteFile = $"api/media/delete";
 
         }
         public static class MedicamentEndpoints
@@ -58,7 +62,8 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             public static string Pharmaceutica= $"api/medicament/pharmaceutica";
             public static string MedicationRoutel = $"api/medicament/medicationroute";
             public static string Marker = $"api/medicament/marker";
-            public static string Delete(long id)=> $"api/medicament/{id}";
+            //public static string Delete(long id)=> $"api/medicament/{id}";
+            public static string Delete = $"api/medicament/delete";
             public static string Get(long id)
             {
                 return $"api/medicament/{id}";
