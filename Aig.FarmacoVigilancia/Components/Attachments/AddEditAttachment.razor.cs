@@ -6,8 +6,10 @@ using AKSoftware.Localization.MultiLanguages;
 using BlazorComponentBus;
 using DataModel;
 using DataModel.Models;
+using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop;
 using System;
 using System.Net.Mail;
@@ -87,47 +89,46 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
                 if (selectedFile != null)
                 {
                     _options = _options != null ? _options : new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-
                     if (selectedFile.Size > maxFileSize)
                     {
                         await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["YouExceedMaximumSizeOf"] + " 50MB");
                         return;
                     }
 
-                    ////await using FileStream fs = new(path, FileMode.Create);
-                    ////await selectedFile.OpenReadStream().CopyToAsync(fs);
-                    //Stream stream = selectedFile.OpenReadStream(maxFileSize);
-                    var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString(), selectedFile.Name.Split(".").LastOrDefault());
-                    var path = System.IO.Path.Combine(env.WebRootPath, "files", fileName);
-                    ////$"{env.WebRootPath}\\{selectedFile.Name}";
-                    //FileStream fs = File.Create(path);
-                    //await stream.CopyToAsync(fs);
-                    //stream.Close();
-                    //fs.Close();
-                                        
-                    await using FileStream writeStream = new(path, FileMode.Create);
-                    using var readStream = selectedFile.OpenReadStream(maxFileSize);
-                    var bytesRead = 0;
-                    var totalRead = 0;
-                    var buffer = new byte[1024 * 10];
-
-                    while ((bytesRead = await readStream.ReadAsync(buffer)) != 0)
-                    {
-                        totalRead += bytesRead;
-
-                        await writeStream.WriteAsync(buffer, 0, bytesRead);
-                        //progressPercent = Decimal.Divide(totalRead, file.Size);
-                        //StateHasChanged();
-                    }
-
-                    attachment.AbsolutePath = path;
-                    attachment.Url = string.Format("/files/{0}", fileName);
-                    attachment.FileName = fileName;
-
-                    await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = attachment });
+                    var flag = await jsRuntime.InvokeAsync<bool>("UploadFiles", DotNetObjectReference.Create(this));
                     return;
+
+                    ////////////////////////////////////
+                    ///// Implementation 2
+                    ////////////////////////////////////
+                    //var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString(), selectedFile.Name.Split(".").LastOrDefault());
+                    //var path = System.IO.Path.Combine(env.WebRootPath, "files", fileName);
+
+                    //await using FileStream writeStream = new(path, FileMode.Create);
+                    //using var readStream = selectedFile.OpenReadStream(maxFileSize);
+                    //var bytesRead = 0;
+                    //var totalRead = 0;
+                    //var buffer = new byte[1024 * 10];
+
+                    //while ((bytesRead = await readStream.ReadAsync(buffer)) != 0)
+                    //{
+                    //    totalRead += bytesRead;
+
+                    //    await writeStream.WriteAsync(buffer, 0, bytesRead);
+                    //    //progressPercent = Decimal.Divide(totalRead, file.Size);
+                    //    //StateHasChanged();
+                    //}
+
+                    //attachment.AbsolutePath = path;
+                    //attachment.Url = string.Format("/files/{0}", fileName);
+                    //attachment.FileName = fileName;
+
+                    //await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = attachment });
+                    //return;
+
                     //////////////////////////////////
-                    ///
+                    /// Implementation 1
+                    //////////////////////////////////
 
                     //try
                     //{
@@ -167,7 +168,13 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
             await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
         }
 
-       
+        [JSInvokable]
+        public void UploadFileResponse(IActionResult result)
+        {
+            //Message = msg;
+            //StateHasChanged();
+            //return true;
+        }
 
         //Cancel and Close
         protected async Task Cancel()

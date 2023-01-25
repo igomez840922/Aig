@@ -54,9 +54,9 @@ namespace Aig.FarmacoVigilancia.Controllers
                 }
             }
             catch (Exception ex)
-            { return BadRequest(new RegistrationResponseDto { Errors = new List<string>() { ex.Message} }); }
+            { return BadRequest(ex.Message); }
 
-            return BadRequest(new RegistrationResponseDto { Errors = new List<string>() { "Error al cargar el Fichero" } });
+            return BadRequest("Error al cargar el Fichero");
         }
 
 

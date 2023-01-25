@@ -33,7 +33,7 @@
                             <label>@languageContainerService.Keys["UploadFile"]</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <InputFile OnChange="@OnFileSelection" accept=".doc, .docx, .xls, .xlsx, .pdf" name="profile_avatar"></InputFile>
+                                    <InputFile id="files" OnChange="@OnFileSelection" accept=".doc, .docx, .xls, .xlsx, .pdf" name="profile_avatar"></InputFile>
                                     <ValidationMessage For=@(() => attachment.Description) />
                                 </div>
                             </div>
