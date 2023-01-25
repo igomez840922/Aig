@@ -1,10 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Files\users\2f0f6dc1-4465-4b99-b949-bc38bc0057a0.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Files\users\2f0f6dc1-4465-4b99-b949-bc38bc0057a0.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
@@ -18,8 +29,6 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="Files\datasheet\" />
-    <Folder Include="Files\prospectus\" />
-    <Folder Include="Files\users\" />
   </ItemGroup>
 
 </Project>
