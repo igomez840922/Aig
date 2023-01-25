@@ -220,15 +220,16 @@
                                     <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
                                         Vigente:
                                     </span>
+
                                     @if (@context.Vigente)
                                     {
-                                        <span class="fa fa-check-circle" aria-hidden="true" style="font-size: 15px;color:#1BC5BD">
-                                        </span>
+                                        <MudIcon style="font-size: 20px;color:#1BC5BD" Icon="@Icons.Material.Filled.CheckBox" />
+
                                     }
                                     else
                                     {
-                                        <span class="fa fa-times-circle" aria-hidden="true" style="font-size: 15px;color:#EE2D41">
-                                        </span>
+                                         <MudIcon style="font-size: 20px;color:#EE2D41" Icon="@Icons.Material.Filled.DisabledByDefault" />
+
                                     }
 
                                 </div>

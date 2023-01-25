@@ -15,7 +15,6 @@
     <ProjectReference Include="..\..\Aig.Farmacoterapia.Application\Aig.Farmacoterapia.Application.csproj" />
     <ProjectReference Include="..\..\Aig.Farmacoterapia.Infraestructura\Aig.Farmacoterapia.Infrastructure.csproj" />
     <ProjectReference Include="..\Client\Aig.Farmacoterapia.Wasm.Client.csproj" />
-    <ProjectReference Include="..\Shared\Aig.Farmacoterapia.Wasm.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

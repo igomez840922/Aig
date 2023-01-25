@@ -32,7 +32,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Aig.Farmacoterapia.Domain\Aig.Farmacoterapia.Domain.csproj" />
-    <ProjectReference Include="..\Shared\Aig.Farmacoterapia.Wasm.Shared.csproj" />
   </ItemGroup>
 
 </Project>
