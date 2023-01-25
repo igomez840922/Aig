@@ -23,6 +23,16 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddSwaggerGen();
 
+//For API CONTROLLERS
+builder.Services.AddCors(policy =>
+{
+    policy.AddPolicy("CorsPolicy", opt => opt
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithExposedHeaders("X-Pagination"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,6 +61,8 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
