@@ -13,17 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Public", "Aig.Farmacoterapia.Public\Aig.Farmacoterapia.Public.csproj", "{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Api", "Aig.Farmacoterapia.Api\Aig.Farmacoterapia.Api.csproj", "{D500B40A-C924-4E6E-82BA-682F7C0E6257}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wasm", "Wasm", "{4F98853E-9D56-4C3E-BAE7-142A4E3044D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Admin.Wasm", "Aig.Farmacoterapia.Admin.Wasm\Aig.Farmacoterapia.Admin.Wasm.csproj", "{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Wasm.Server", "Aig.Farmacoterapia.Wasm\Server\Aig.Farmacoterapia.Wasm.Server.csproj", "{5ECFC14C-E091-4031-8BE2-B13FCC6A95BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aig.Farmacoterapia.Wasm.Server", "Aig.Farmacoterapia.Wasm\Server\Aig.Farmacoterapia.Wasm.Server.csproj", "{5ECFC14C-E091-4031-8BE2-B13FCC6A95BB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aig.Farmacoterapia.Wasm.Client", "Aig.Farmacoterapia.Wasm\Client\Aig.Farmacoterapia.Wasm.Client.csproj", "{93BB2EC7-57A9-4183-9166-A449741C629C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aig.Farmacoterapia.Wasm.Shared", "Aig.Farmacoterapia.Wasm\Shared\Aig.Farmacoterapia.Wasm.Shared.csproj", "{E09EAB7E-2B42-4A88-B532-22AFA2018A53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Farmacoterapia.Wasm.Client", "Aig.Farmacoterapia.Wasm\Client\Aig.Farmacoterapia.Wasm.Client.csproj", "{93BB2EC7-57A9-4183-9166-A449741C629C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,14 +45,6 @@ Global
 		{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4319D49-5CB5-4424-8FC7-FBC36A9EB13B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D500B40A-C924-4E6E-82BA-682F7C0E6257}.Release|Any CPU.Build.0 = Release|Any CPU
-		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5ECFC14C-E091-4031-8BE2-B13FCC6A95BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5ECFC14C-E091-4031-8BE2-B13FCC6A95BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ECFC14C-E091-4031-8BE2-B13FCC6A95BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -67,20 +53,13 @@ Global
 		{93BB2EC7-57A9-4183-9166-A449741C629C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93BB2EC7-57A9-4183-9166-A449741C629C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93BB2EC7-57A9-4183-9166-A449741C629C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E09EAB7E-2B42-4A88-B532-22AFA2018A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E09EAB7E-2B42-4A88-B532-22AFA2018A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E09EAB7E-2B42-4A88-B532-22AFA2018A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E09EAB7E-2B42-4A88-B532-22AFA2018A53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D500B40A-C924-4E6E-82BA-682F7C0E6257} = {4F98853E-9D56-4C3E-BAE7-142A4E3044D9}
-		{87A5FA4E-4113-487D-B3C0-BC3CCFD7B730} = {4F98853E-9D56-4C3E-BAE7-142A4E3044D9}
 		{5ECFC14C-E091-4031-8BE2-B13FCC6A95BB} = {4F98853E-9D56-4C3E-BAE7-142A4E3044D9}
 		{93BB2EC7-57A9-4183-9166-A449741C629C} = {4F98853E-9D56-4C3E-BAE7-142A4E3044D9}
-		{E09EAB7E-2B42-4A88-B532-22AFA2018A53} = {4F98853E-9D56-4C3E-BAE7-142A4E3044D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FF36EE9-0CDF-4DF7-94A7-781076A6399D}

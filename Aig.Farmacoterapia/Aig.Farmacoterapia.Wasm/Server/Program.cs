@@ -1,6 +1,5 @@
 using Aig.Farmacoterapia.Application.Features.Extensions;
 using Aig.Farmacoterapia.Infrastructure;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
