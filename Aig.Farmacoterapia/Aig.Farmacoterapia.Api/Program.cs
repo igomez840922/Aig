@@ -45,16 +45,19 @@ builder.Services.AddCors(policy =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Aig Farmacoterapia API V1");
-        options.RoutePrefix = "swagger";
-        options.DisplayRequestDuration();
-    });
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI(options =>
+//    {
+//        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Aig Farmacoterapia API V1");
+//        options.RoutePrefix = "swagger";
+//        options.DisplayRequestDuration();
+//    });
+//}
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 
