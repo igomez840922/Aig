@@ -45,23 +45,34 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Medicament
             var response = await _httpClient.PostAsync(AppConstants.MediaEndpoints.Upload(), content);
             return await response.ToResult();
         }
+        //public async Task<IResult> DeleteFileAsync(UploadType uploadType, string file)
+        //{
+        //    var response = await _httpClient.DeleteAsync(AppConstants.MediaEndpoints.DeleteFile(uploadType, file));
+        //    return await response.ToResult();
+        //}
+
         public async Task<IResult> DeleteFileAsync(UploadType uploadType, string file)
         {
-            var response = await _httpClient.DeleteAsync(AppConstants.MediaEndpoints.DeleteFile(uploadType, file));
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.MediaEndpoints.DeleteFile, new { type = uploadType.ToString(), image= file });
             return await response.ToResult();
         }
-
-      
-        public async Task<IResult<bool>> UpdateAsync(AigMedicamento request)
+     
+       public async Task<IResult<bool>> UpdateAsync(AigMedicamento request)
         {
            
             var response = await _httpClient.PostAsJsonAsync(AppConstants.MedicamentEndpoints.Update, request);
             return await response.ToResult<bool>();
            
         }
+        //public async Task<IResult> DeleteAsync(long id)
+        //{
+        //    var response = await _httpClient.DeleteAsync(AppConstants.MedicamentEndpoints.Delete(id));
+        //    return await response.ToResult();
+        //}
+
         public async Task<IResult> DeleteAsync(long id)
         {
-            var response = await _httpClient.DeleteAsync(AppConstants.MedicamentEndpoints.Delete(id));
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.MedicamentEndpoints.Delete, new { id = id });
             return await response.ToResult();
         }
 

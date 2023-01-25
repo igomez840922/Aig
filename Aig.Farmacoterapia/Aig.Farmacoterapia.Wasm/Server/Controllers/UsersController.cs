@@ -41,9 +41,11 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest model) => Ok(await _mediator.Send(new ChangePasswordCommand(model)));
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) => Ok(await _mediator.Send(new DeleteUserCommand() { Id= id }));
-       
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> Delete(string id) => Ok(await _mediator.Send(new DeleteUserCommand() { Id= id }));
+        [HttpPost("delete")]
+        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand model) => Ok(await _mediator.Send(model));
+
         [HttpGet("avatar/{image}")]
         [AllowAnonymous]
         public async Task<FileStreamResult> GetAvatar(string image) => await _mediator.Send(new GetAvatarQuery(image));

@@ -58,7 +58,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.User
         }
         public async Task<IResult> DeleteUserAsync(string id)
         {
-            var response = await _httpClient.DeleteAsync(AppConstants.UsersEndpoints.Delete(id));
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.UsersEndpoints.Delete,new {id= id});
             return await response.ToResult();
         }
 
@@ -73,11 +73,15 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.User
             var response = await _httpClient.PostAsync(AppConstants.MediaEndpoints.Upload(), content);
             return await response.ToResult();
         }
-        public async Task<IResult> DeleteProfilePictureAsync(UploadType uploadType, string image)
+        //public async Task<IResult> DeleteProfilePictureAsync(UploadType uploadType, string image)
+        //{
+        //    var response = await _httpClient.DeleteAsync(AppConstants.MediaEndpoints.DeleteFile(uploadType, image));
+        //    return await response.ToResult();
+        //}
+        public async Task<IResult> DeleteProfilePictureAsync(UploadType uploadType, string file)
         {
-            var response = await _httpClient.DeleteAsync(AppConstants.MediaEndpoints.DeleteFile(uploadType, image));
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.MediaEndpoints.DeleteFile, new { type = uploadType.ToString(), image = file });
             return await response.ToResult();
         }
-
     }
 }
