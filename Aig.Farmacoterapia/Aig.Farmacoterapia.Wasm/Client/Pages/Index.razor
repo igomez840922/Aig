@@ -1,0 +1,214 @@
+﻿@page "/"
+@attribute [Authorize]
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Medicament
+@using Aig.Farmacoterapia.Domain.Response
+@inject IMedicamentManager _manager;
+
+<PageTitle>Dashboard</PageTitle>
+
+@if (_loading)
+{
+    <div style="position:absolute; top: 45vh;left: 0px; width: 100%; text-align: center">
+        <div align="center" class="cssload-fond">
+            <div class="cssload-container-general">
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_1"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_2"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_3"> </div></div>
+                <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_4"> </div></div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+  <MudGrid Spacing="2" Justify="Justify.Center">
+
+    <MudItem xs="12" md="3">
+        <MudCard>
+
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Style="color:#f383af  !important">Total</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                   <MudText  Style="color:#f383af; font-size: 15px;" Typo="Typo.body2"></MudText>
+                </CardHeaderActions>
+            </MudCardHeader>
+
+            <MudCardContent Style="border-top:1px solid #E4E6EF !important;" >
+                <MudText  Style="color:#f383af !important;font-size: 25px;" Typo="Typo.body2">@_modelData.MedicamentCount</MudText>
+            </MudCardContent>
+          
+        </MudCard>
+    </MudItem>
+
+
+      <MudItem xs="12" md="3">
+        <MudCard>
+
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Style="color:#7365f3  !important">De Referencia</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                   <MudText  Style="color:#7365f3; font-size: 15px;" Typo="Typo.body2">@_modelData.ReferencePercent</MudText>
+                </CardHeaderActions>
+            </MudCardHeader>
+
+            <MudCardContent Style="border-top:1px solid #E4E6EF !important;" >
+                <MudText  Style="color:#7365f3 !important;font-size: 25px;" Typo="Typo.body2">@_modelData.ReferenceCount</MudText>
+            </MudCardContent>
+          
+        </MudCard>
+    </MudItem>
+
+    
+      <MudItem xs="12" md="3">
+        <MudCard>
+
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Style="color:#7365f3  !important">Intercambiables</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                   <MudText  Style="color:#7365f3; font-size: 15px;" Typo="Typo.body2">@_modelData.InterchangeablePercent</MudText>
+                </CardHeaderActions>
+            </MudCardHeader>
+
+            <MudCardContent Style="border-top:1px solid #E4E6EF !important;" >
+                <MudText  Style="color:#7365f3 !important;font-size: 25px;" Typo="Typo.body2">@_modelData.InterchangeableCount</MudText>
+            </MudCardContent>
+          
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" md="3">
+        <MudCard>
+
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Style="color:#7365f3  !important">Genéricos</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                   <MudText  Style="color:#7365f3; font-size: 15px;" Typo="Typo.body2">@_modelData.GenericPercent</MudText>
+                </CardHeaderActions>
+            </MudCardHeader>
+
+            <MudCardContent Style="border-top:1px solid #E4E6EF !important;" >
+                <MudText  Style="color:#7365f3 !important;font-size: 25px;" Typo="Typo.body2">@_modelData.GenericCount</MudText>
+            </MudCardContent>
+          
+        </MudCard>
+    </MudItem>
+
+</MudGrid>
+
+
+<MudGrid Spacing="2" Justify="Justify.Center">
+
+     <MudItem xs="12" md="3">
+        <MudCard>
+
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Style="color:#7365f3  !important">Con Prescripción</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                   <MudText  Style="color:#7365f3; font-size: 15px;" Typo="Typo.body2">@_modelData.PrescriptionPercent</MudText>
+                </CardHeaderActions>
+            </MudCardHeader>
+
+            <MudCardContent Style="border-top:1px solid #E4E6EF !important;" >
+                <MudText  Style="color:#7365f3 !important;font-size: 25px;" Typo="Typo.body2">@_modelData.PrescriptionCount</MudText>
+            </MudCardContent>
+          
+        </MudCard>
+    </MudItem>
+
+      <MudItem xs="12" md="3">
+        <MudCard>
+
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Style="color:#7365f3  !important">Sin Prescripción</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                   <MudText  Style="color:#7365f3; font-size: 15px;" Typo="Typo.body2">@_modelData.NotPrescriptionPercent</MudText>
+                </CardHeaderActions>
+            </MudCardHeader>
+
+            <MudCardContent Style="border-top:1px solid #E4E6EF !important;" >
+                <MudText  Style="color:#7365f3 !important;font-size: 25px;" Typo="Typo.body2">@_modelData.NotPrescriptionCount</MudText>
+            </MudCardContent>
+          
+        </MudCard>
+    </MudItem>
+
+    
+      <MudItem xs="12" md="3">
+        <MudCard>
+
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Style="color:#7365f3  !important">Uso Hospitalario</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                   <MudText  Style="color:#7365f3; font-size: 15px;" Typo="Typo.body2">@_modelData.HospitalUsePercent</MudText>
+                </CardHeaderActions>
+            </MudCardHeader>
+
+            <MudCardContent Style="border-top:1px solid #E4E6EF !important;" >
+                <MudText  Style="color:#7365f3 !important;font-size: 25px;" Typo="Typo.body2">@_modelData.HospitalUseCount</MudText>
+            </MudCardContent>
+          
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" md="3">
+        <MudCard>
+
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Style="color:#7365f3  !important">Venta Popular</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                   <MudText  Style="color:#7365f3; font-size: 15px;" Typo="Typo.body2">@_modelData.PopularSalePercent</MudText>
+                </CardHeaderActions>
+            </MudCardHeader>
+
+            <MudCardContent Style="border-top:1px solid #E4E6EF !important;" >
+                <MudText  Style="color:#7365f3 !important;font-size: 25px;" Typo="Typo.body2">@_modelData.PopularSaleCount</MudText>
+            </MudCardContent>
+          
+        </MudCard>
+    </MudItem>
+
+</MudGrid>
+
+  
+}
+
+@code {
+
+    private DashboardMedicamentResponse _modelData = new DashboardMedicamentResponse();
+    bool _loading = false;
+    protected async override Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+        base.OnInitialized();
+    }
+    private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+    private async Task LoadDataAsync()
+    {
+        await RefresView(true);
+        var response = await _manager.GetDashBoardInfoAsync();
+        if (response.Succeeded) {
+            _modelData = response.Data;
+        }
+        await RefresView(false);
+    }
+ }
