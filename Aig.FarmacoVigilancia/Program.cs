@@ -174,9 +174,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<BlazorCookieLoginMiddleware<ApplicationUser>>();
 app.MapControllers();
-
 app.MapBlazorHub(); 
-
 
 app.MapFallbackToPage("/_Host");
 

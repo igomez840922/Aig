@@ -19,13 +19,13 @@ namespace Aig.FarmacoVigilancia.Controllers
 
         [HttpPost("UploadFile")]
         //[DisableRequestSizeLimit]
-        public async Task<ActionResult> UploadFile()//([FromForm] IEnumerable<IFormFile> files)
+        public async Task<ActionResult> UploadFile(IFormFile file)//([FromForm] IEnumerable<IFormFile> files)
         {
             try
             {
-                if (HttpContext.Request.Form.Files.Count > 0)
+                if (file!=null)
                 {
-                    foreach (var file in HttpContext.Request.Form.Files)
+                    //foreach (var file in Request.Form.Files)
                     {
                         var dir = Path.Combine(env.WebRootPath, "files");//Path.GetRandomFileName()
                         if (!Directory.Exists(dir))

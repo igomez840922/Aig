@@ -35,10 +35,16 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
 
         IBrowserFile selectedFile { get; set; }
 
+        bool loading { get; set; } = false;
+
         int maxFileSize { get; set; } = 1024 * 1024 * 50;
+
+        private DotNetObjectReference<AddEditAttachment>? objRef;
 
         protected async override Task OnInitializedAsync()
         {
+            objRef = DotNetObjectReference.Create(this);
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
@@ -71,6 +77,7 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
         //Fill Data
         protected async Task FetchData()
         {
+            loading = false;
             attachment = attachment!=null? attachment : new DataModel.AttachmentTB();
                         
             await this.InvokeAsync(StateHasChanged);
@@ -82,7 +89,7 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
 
         //Save Data and Close
         protected async Task SaveData()
-        {
+        {            
             try
             {
 
@@ -95,7 +102,8 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
                         return;
                     }
 
-                    var flag = await jsRuntime.InvokeAsync<bool>("UploadFiles", DotNetObjectReference.Create(this));
+                    loading = true;
+                    var flag = await jsRuntime.InvokeAsync<bool>("UploadFiles", objRef);
                     return;
 
                     ////////////////////////////////////
@@ -164,16 +172,28 @@ namespace Aig.FarmacoVigilancia.Components.Attachments
                     //}
                 }
             }
-            catch { }
+            catch { loading = false; }
             await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
         }
 
         [JSInvokable]
-        public void UploadFileResponse(IActionResult result)
+        public async Task UploadFileResponse(FileUploadResult result)
         {
-            //Message = msg;
-            //StateHasChanged();
-            //return true;
+            loading = false;
+            if (!string.IsNullOrEmpty(result.FileName))
+            {
+                attachment.AbsolutePath = result.AbsolutePath;
+                attachment.Url = result.Url;
+                attachment.FileName = result.FileName;
+
+                await bus.Publish(new AttachmentsAddEdit_CloseEvent() { Attachment = attachment });
+                return;
+            }
+            else
+            {
+                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            }
+            await this.InvokeAsync(StateHasChanged);
         }
 
         //Cancel and Close

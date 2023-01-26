@@ -522,6 +522,48 @@ else
             function InitTimeControl(){
                 $('.timepicker').timepicker();
             }
+
+            function UploadFiles(instance) {
+
+            @* var fileUpload = $("#files")[0];
+                var files = fileUpload.files;
+                console.log(files);
+
+                var data = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                data.append(files[i].name, files[i]);
+                }*@
+
+                var file = $('#files').get(0).files[0];
+                var data = new FormData();
+                data.append('file', file);
+                console.log(data);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/FileUpload/UploadFile",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        instance.invokeMethodAsync("UploadFileResponse",
+                            result)
+                            .then((result) => {
+                                console.log(result);
+                            });
+                    },
+                    error: function (result) {
+                        instance.invokeMethodAsync("UploadFileResponse",
+                            result)
+                            .then((result) => {
+                                console.log(result);
+                            });
+                    }
+                });
+                return true;
+            }
+
         </script>
 
         <!--end::Global Theme Bundle -->

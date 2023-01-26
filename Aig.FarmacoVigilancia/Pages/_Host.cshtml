@@ -402,34 +402,36 @@ else
 
             function UploadFiles(instance) {
 
-                var fileUpload = $("#files")[0];                
+            @* var fileUpload = $("#files")[0];
                 var files = fileUpload.files;
                 console.log(files);
 
-                   @* var data = new FormData();
+                   var data = new FormData();
                     for (var i = 0; i < files.length; i++) {
                         data.append(files[i].name, files[i]);
                     }*@
 
+                                            var file = $('#files').get(0).files[0];
                 var data = new FormData();
-                data.append(files[0].name, files[0].name);
-                console.log(data);
+                data.append('file', file);
+                console.log(data);     
 
                 $.ajax({
                         type: "POST",
                     url: "/api/FileUpload/UploadFile",
-                        contentType: false,
-                        processData: false,
-                        data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: data,
                         success: function (result) {
-                        parameter.instance.invokeMethodAsync("UploadFileResponse",
+                        instance.invokeMethodAsync("UploadFileResponse",
                             result)
                                 .then((result) => {
                                     console.log(result);
                                 });
                         },
                     error: function (result) {
-                        parameter.instance.invokeMethodAsync("UploadFileResponse",
+                        instance.invokeMethodAsync("UploadFileResponse",
                             result)
                                 .then((result) => {
                                     console.log(result);

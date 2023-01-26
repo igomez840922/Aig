@@ -485,145 +485,149 @@ namespace Aig.Auditoria.Helper
                         }
                         catch { }
                     }
-                    try {
+                    
+                }
 
-                        List<HorariosFarmaceutico> lHorarios = new List<HorariosFarmaceutico>();
-                        using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Horariosfarmaceuticos.xlsx"))
+                try
+                {
+
+                    List<HorariosFarmaceutico> lHorarios = new List<HorariosFarmaceutico>();
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Horariosfarmaceuticos.xlsx"))
+                    {
+                        try
                         {
-                            try
+                            using var wbook = new XLWorkbook(stream);
+                            var ws1 = wbook.Worksheet(1);
+                            var count = ws1.RowCount();
+                            for (int row = 2; row < count; row++)
                             {
-                                using var wbook = new XLWorkbook(stream);
-                                var ws1 = wbook.Worksheet(1);
-                                var count = ws1.RowCount();
-                                for (int row = 2; row < count; row++)
+                                var data = ws1.Row(row);
+
+                                var horario = new HorariosFarmaceutico();
+
+                                horario.NumLic = data.Cell(1).GetValue<string>();
+
+                                if (!string.IsNullOrEmpty(horario.NumLic))
                                 {
-                                    var data = ws1.Row(row);
-                                                                        
-                                    var horario = new HorariosFarmaceutico();
+                                    horario.HorarioRe1 = data.Cell(2).GetValue<string>();
+                                    horario.HorarioRe2 = data.Cell(3).GetValue<string>();
+                                    horario.NumRe1 = data.Cell(4).GetValue<string>();
+                                    horario.NumRe2 = data.Cell(5).GetValue<string>();
+                                    horario.HorarioRe3 = data.Cell(6).GetValue<string>();
+                                    horario.HorarioRe4 = data.Cell(7).GetValue<string>();
+                                    horario.NumRe3 = data.Cell(8).GetValue<string>();
+                                    horario.NumRe4 = data.Cell(9).GetValue<string>();
+                                    horario.HorarioRe5 = data.Cell(10).GetValue<string>();
+                                    horario.HorarioRe6 = data.Cell(11).GetValue<string>();
+                                    horario.NumRe5 = data.Cell(12).GetValue<string>();
+                                    horario.NumRe6 = data.Cell(13).GetValue<string>();
+                                    horario.NumRe7 = data.Cell(14).GetValue<string>();
+                                    horario.NumRe8 = data.Cell(15).GetValue<string>();
+                                    horario.NumRe9 = data.Cell(16).GetValue<string>();
+                                    horario.NumRe10 = data.Cell(17).GetValue<string>();
+                                    horario.HorarioRe7 = data.Cell(18).GetValue<string>();
+                                    horario.NumRe11 = data.Cell(19).GetValue<string>();
+                                    horario.NumRe12 = data.Cell(20).GetValue<string>();
+                                    horario.HorarioRe8 = data.Cell(21).GetValue<string>();
+                                    horario.HorarioRe9 = data.Cell(22).GetValue<string>();
+                                    horario.HorarioRe10 = data.Cell(23).GetValue<string>();
+                                    horario.HorarioRe11 = data.Cell(24).GetValue<string>();
+                                    horario.NumRe13 = data.Cell(40).GetValue<string>();
+                                    horario.NumRe14 = data.Cell(41).GetValue<string>();
+                                    horario.NumRe15 = data.Cell(42).GetValue<string>();
+                                    horario.HorarioRe12 = data.Cell(43).GetValue<string>();
+                                    horario.HorarioRe13 = data.Cell(44).GetValue<string>();
+                                    horario.HorarioRe14 = data.Cell(45).GetValue<string>();
+                                    horario.HorarioRe15 = data.Cell(46).GetValue<string>();
 
-                                    horario.NumLic = data.Cell(1).GetValue<string>();
-
-                                    if (!string.IsNullOrEmpty(horario.NumLic))
-                                    {
-                                        horario.HorarioRe1 = data.Cell(2).GetValue<string>();
-                                        horario.HorarioRe2 = data.Cell(3).GetValue<string>();
-                                        horario.NumRe1 = data.Cell(4).GetValue<string>();
-                                        horario.NumRe2 = data.Cell(5).GetValue<string>();
-                                        horario.HorarioRe3 = data.Cell(6).GetValue<string>();
-                                        horario.HorarioRe4 = data.Cell(7).GetValue<string>();
-                                        horario.NumRe3 = data.Cell(8).GetValue<string>();
-                                        horario.NumRe4 = data.Cell(9).GetValue<string>();
-                                        horario.HorarioRe5 = data.Cell(10).GetValue<string>();
-                                        horario.HorarioRe6 = data.Cell(11).GetValue<string>();
-                                        horario.NumRe5 = data.Cell(12).GetValue<string>();
-                                        horario.NumRe6 = data.Cell(13).GetValue<string>();
-                                        horario.NumRe7 = data.Cell(14).GetValue<string>();
-                                        horario.NumRe8 = data.Cell(15).GetValue<string>();
-                                        horario.NumRe9 = data.Cell(16).GetValue<string>();
-                                        horario.NumRe10 = data.Cell(17).GetValue<string>();
-                                        horario.HorarioRe7 = data.Cell(18).GetValue<string>();
-                                        horario.NumRe11 = data.Cell(19).GetValue<string>();
-                                        horario.NumRe12 = data.Cell(20).GetValue<string>();
-                                        horario.HorarioRe8 = data.Cell(21).GetValue<string>();
-                                        horario.HorarioRe9 = data.Cell(22).GetValue<string>();
-                                        horario.HorarioRe10 = data.Cell(23).GetValue<string>();
-                                        horario.HorarioRe11 = data.Cell(24).GetValue<string>();
-                                        horario.NumRe13 = data.Cell(40).GetValue<string>();
-                                        horario.NumRe14 = data.Cell(41).GetValue<string>();
-                                        horario.NumRe15 = data.Cell(42).GetValue<string>();
-                                        horario.HorarioRe12 = data.Cell(43).GetValue<string>();
-                                        horario.HorarioRe13 = data.Cell(44).GetValue<string>();
-                                        horario.HorarioRe14 = data.Cell(45).GetValue<string>();
-                                        horario.HorarioRe15 = data.Cell(46).GetValue<string>();
-
-                                        lHorarios.Add(horario);
-                                    }                                    
+                                    lHorarios.Add(horario);
                                 }
                             }
-                            catch { }
                         }
-                        
-                        List<Farmaceutico> lFarmaceuticos = new List<Farmaceutico>();
-                        using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Farmaceuticos.xlsx"))
+                        catch { }
+                    }
+
+                    List<Farmaceutico> lFarmaceuticos = new List<Farmaceutico>();
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Farmaceuticos.xlsx"))
+                    {
+                        try
                         {
-                            try
+                            using var wbook = new XLWorkbook(stream);
+                            var ws1 = wbook.Worksheet(1);
+                            var count = ws1.RowCount();
+                            for (int row = 2; row < count; row++)
                             {
-                                using var wbook = new XLWorkbook(stream);
-                                var ws1 = wbook.Worksheet(1);
-                                var count = ws1.RowCount();
-                                for (int row = 2; row < count; row++)
+                                var data = ws1.Row(row);
+
+                                var farmaceutico = new Farmaceutico();
+
+                                farmaceutico.Direccion = data.Cell(1).GetValue<string>();
+                                farmaceutico.NumReg = data.Cell(3).GetValue<string>();
+
+                                if (!string.IsNullOrEmpty(farmaceutico.NumReg))
                                 {
-                                    var data = ws1.Row(row);
+                                    farmaceutico.NombreCompleto = data.Cell(4).GetValue<string>();
+                                    farmaceutico.Telefono = data.Cell(5).GetValue<string>();
+                                    farmaceutico.Folio = data.Cell(6).GetValue<string>();
+                                    farmaceutico.Cedula = data.Cell(12).GetValue<string>();
+                                    farmaceutico.Sector = data.Cell(13).GetValue<string>();
+                                    farmaceutico.TelefonoTrabajo = data.Cell(14).GetValue<string>();
+                                    farmaceutico.DireccionTrabajo = data.Cell(15).GetValue<string>();
+                                    farmaceutico.Distrito = data.Cell(16).GetValue<string>();
+                                    farmaceutico.Provincia = data.Cell(17).GetValue<string>();
+                                    farmaceutico.Corregimiento = data.Cell(18).GetValue<string>();
 
-                                    var farmaceutico = new Farmaceutico();
+                                    lFarmaceuticos.Add(farmaceutico);
 
-                                    farmaceutico.Direccion = data.Cell(1).GetValue<string>();
-                                    farmaceutico.NumReg = data.Cell(3).GetValue<string>();
-
-                                    if (!string.IsNullOrEmpty(farmaceutico.NumReg))
-                                    {
-                                        farmaceutico.NombreCompleto = data.Cell(4).GetValue<string>();
-                                        farmaceutico.Telefono = data.Cell(5).GetValue<string>();
-                                        farmaceutico.Folio = data.Cell(6).GetValue<string>();
-                                        farmaceutico.Cedula = data.Cell(12).GetValue<string>();
-                                        farmaceutico.Sector = data.Cell(13).GetValue<string>();
-                                        farmaceutico.TelefonoTrabajo = data.Cell(14).GetValue<string>();
-                                        farmaceutico.DireccionTrabajo = data.Cell(15).GetValue<string>();
-                                        farmaceutico.Distrito = data.Cell(16).GetValue<string>();
-                                        farmaceutico.Provincia = data.Cell(17).GetValue<string>();
-                                        farmaceutico.Corregimiento = data.Cell(18).GetValue<string>();
-
-                                        lFarmaceuticos.Add(farmaceutico);
-
-                                    }                                                                          
                                 }
                             }
-                            catch { }
                         }
+                        catch { }
+                    }
 
-                        var lEstablecimientos = dalService.GetAll<AUD_EstablecimientoTB>();
-                        if(lEstablecimientos?.Count > 0)
+                    var lEstablecimientos = dalService.GetAll<AUD_EstablecimientoTB>();
+                    if (lEstablecimientos?.Count > 0)
+                    {
+                        foreach (var est in lEstablecimientos)
                         {
-                            foreach(var est in lEstablecimientos)
+                            est.FarmaceuticoTablas = est.FarmaceuticoTablas != null ? est.FarmaceuticoTablas : new AUD_FarmaceuticoTablas();
+                            foreach (var horaio in lHorarios?.Where(x => x.NumLic?.Replace(" ", "") == est.NumLicencia?.Replace(" ", "")))
                             {
-                                est.FarmaceuticoTablas = est.FarmaceuticoTablas != null ? est.FarmaceuticoTablas : new AUD_FarmaceuticoTablas();
-                                foreach (var horaio in lHorarios?.Where(x=>x.NumLic?.Replace(" ","") == est.NumLicencia?.Replace(" ", "")))
+                                if (!string.IsNullOrEmpty(horaio.NumRe1))
                                 {
-                                    if (!string.IsNullOrEmpty(horaio.NumRe1))
+                                    var farm = lFarmaceuticos.Where(x => x.NumReg?.Replace(" ", "") == horaio.NumRe1.Replace(" ", "")).FirstOrDefault();
+                                    if (farm != null)
                                     {
-                                        var farm = lFarmaceuticos.Where(x=>x.NumReg?.Replace(" ","") == horaio.NumRe1.Replace(" ", "")).FirstOrDefault();
-                                        if(farm != null)
+                                        if (est.FarmaceuticoTablas.LFarmaceuticos.Find(x => x.NumReg?.Replace(" ", "") == farm.NumReg?.Replace(" ", "")) == null)
                                         {
-                                            if(est.FarmaceuticoTablas.LFarmaceuticos.Find(x=>x.NumReg?.Replace(" ", "") == farm.NumReg?.Replace(" ", "")) == null)
-                                            {
-                                                est.FarmaceuticoTablas.LFarmaceuticos.Add(
-                                                    new AUD_Farmaceutico()
-                                                    {
-                                                        Direccion = farm.Direccion,
-                                                        NumReg = farm.NumReg,
-                                                        NombreCompleto = farm.NombreCompleto,
-                                                        Telefono = farm.Telefono,
-                                                        Folio = farm.Folio,
-                                                        Cedula = farm.Cedula,
-                                                        Sector = farm.Sector,
-                                                        TelefonoTrabajo = farm.TelefonoTrabajo,
-                                                        DireccionTrabajo = farm.DireccionTrabajo,
-                                                        Distrito = farm.Distrito,
-                                                        Provincia = farm.Provincia,
-                                                        Corregimiento = farm.Corregimiento,
-                                                    }
-                                                    );
-                                            }
+                                            est.FarmaceuticoTablas.LFarmaceuticos.Add(
+                                                new AUD_Farmaceutico()
+                                                {
+                                                    Direccion = farm.Direccion,
+                                                    NumReg = farm.NumReg,
+                                                    NombreCompleto = farm.NombreCompleto,
+                                                    Telefono = farm.Telefono,
+                                                    Folio = farm.Folio,
+                                                    Cedula = farm.Cedula,
+                                                    Sector = farm.Sector,
+                                                    TelefonoTrabajo = farm.TelefonoTrabajo,
+                                                    DireccionTrabajo = farm.DireccionTrabajo,
+                                                    Distrito = farm.Distrito,
+                                                    Provincia = farm.Provincia,
+                                                    Corregimiento = farm.Corregimiento,
+                                                }
+                                                );
                                         }
                                     }
                                 }
-
-                                dalService.Save(est);
                             }
+
+                            dalService.Save(est);
                         }
                     }
-                    catch { }
                 }
+                catch { }
+
                 //else //esto es para actualizar
                 //{
                 //    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Establecimientos.xlsx"))
