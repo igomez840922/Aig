@@ -5,7 +5,7 @@
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <BlazorCacheBootResources>false</BlazorCacheBootResources>
+	  <BlazorCacheBootResources>true</BlazorCacheBootResources>
 	  <BlazorEnableCompression>false</BlazorEnableCompression>
 </PropertyGroup>
 
