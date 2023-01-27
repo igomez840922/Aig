@@ -103,13 +103,16 @@
                                                 <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchMedicine();}"><i class="fa fa-search"></i></button>
                                             </div>
                                         </div>
-                                        <ValidationMessage For=@(() => Ips.NomComercial) />
-                                        @*<div class="form-group">
+                                        <ValidationMessage For=@(() => Ips.NomComercial) />                                       
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["DCI"]</label>
+                                        <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Ips.NomComercial" />
-                                                <ValidationMessage For=@(() => Ips.NomComercial) />
+                                                <InputText class="form-control" @bind-Value="Ips.NomDCI" />
+                                                <ValidationMessage For=@(() => Ips.NomDCI) />
                                             </div>
-                                        </div>*@
+                                        </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <label>@languageContainerService.Keys["ActivePrinciple"]</label>
@@ -235,31 +238,31 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["Innovator"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.IpsData.Innovador" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
+                                            <InputSelect @bind-Value="Ips.Innovador" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Ips.IpsData.Innovador) />
+                                            <ValidationMessage For=@(() => Ips.Innovador) />
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["Biologic"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.IpsData.Biologico" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
+                                            <InputSelect @bind-Value="Ips.Biologico" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Ips.IpsData.Biologico) />
+                                            <ValidationMessage For=@(() => Ips.Biologico) />
                                         </div>
                                     </div>
                                      <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["InterchangeRequired"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.IpsData.ReqIntercam" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
+                                            <InputSelect @bind-Value="Ips.ReqIntercam" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
-                                            <ValidationMessage For=@(() => Ips.IpsData.ReqIntercam) />
+                                            <ValidationMessage For=@(() => Ips.ReqIntercam) />
                                         </div>
                                     </div>
                                     <div class="col-sm-3">

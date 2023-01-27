@@ -16,10 +16,14 @@ namespace DataModel
 			Adjunto = new AttachmentData();
 		}
 
-		//Fecha de Recepcion en CNFV
-		private DateTime? fechaRecepcion;
+        // Año
+        private int year;
+        public int Year { get => year; set => SetProperty(ref year, value); }
+
+        // Fecha de recibido (CNFV)
+        private DateTime? fechaRecepcion;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaRecepcion { get => fechaRecepcion; set => SetProperty(ref fechaRecepcion, value); }
+        public DateTime? FechaRecepcion { get => fechaRecepcion; set { SetProperty(ref fechaRecepcion, value); Year = value.HasValue ? value.Value.Year : 0; } }
 
         //Fecha de entrega al registrador
         private DateTime? fechaRegistrador;
@@ -36,6 +40,10 @@ namespace DataModel
         [StringLength(500)]
         [Required(ErrorMessage = "requerido")]
         public string NomComercial { get => nomComercial; set => SetProperty(ref nomComercial, value); }
+
+        private string nomDCI;
+        [StringLength(500)]
+        public string NomDCI { get => nomDCI; set => SetProperty(ref nomDCI, value); }
 
         //Principio Activo
         private string princActivo;
@@ -126,8 +134,21 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public FMV_IpsData IpsData { get => ipsData; set => SetProperty(ref ipsData, value); }
 
-		//Ficheros Adjuntos
-		private AttachmentData adjunto;
+        // Innovador: si, no
+        private bool innovador;
+        public bool Innovador { get => innovador; set => SetProperty(ref innovador, value); }
+
+        //Biologico: si, no
+        private bool biologico;
+        public bool Biologico { get => biologico; set => SetProperty(ref biologico, value); }
+
+        // Requiere intercambiabilidad: si, no
+        private bool reqIntercam;
+        public bool ReqIntercam { get => reqIntercam; set => SetProperty(ref reqIntercam, value); }
+
+
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
 		[System.ComponentModel.DataAnnotations.Schema.NotMapped]
 		public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
@@ -138,7 +159,7 @@ namespace DataModel
 
             if (IpsData != null)
             {
-                if (IpsData.Innovador || IpsData.Biologico || IpsData.ReqIntercam)
+                if (Innovador || Biologico || ReqIntercam)
                 {
                     if (IpsData.FechaAutPan.HasValue && ((DateTime.Now - IpsData.FechaAutPan.Value).TotalDays / 365) < 5)
                     {

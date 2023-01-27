@@ -198,7 +198,7 @@ namespace Aig.FarmacoVigilancia.Services
             return model;
         }
 
-        //Fármaco sospechoso Nombre Comercial
+        //Fármaco sospechoso DCI
         public async Task<ReportModel<ReportModelResponse>> Report2(ReportModel<ReportModelResponse> model)
         {
             try

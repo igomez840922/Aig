@@ -148,6 +148,7 @@
                                                             <th>@languageContainerService.Keys["ReceptionDateCNFV"]</th>
                                                             <th>@languageContainerService.Keys["Register"]</th>
                                                             <th>@languageContainerService.Keys["CommercialName"]</th>
+                                                            <th>@languageContainerService.Keys["DCI"]</th>
                                                             <th>@languageContainerService.Keys["ActivePrinciple"]</th>
                                             <th>@languageContainerService.Keys["Laboratory"]</th>
                                                             <th>@languageContainerService.Keys["NumberOfHealthRegister"]</th>
@@ -168,6 +169,7 @@
                                                         <td scope="row">@(dt.FechaRecepcion?.ToString("dd/MM/yyyy") ?? "")</td>
                                                         <td>@(dt.Registrador?.NombreCompleto ?? "")</td>
                                                         <td>@(dt.NomComercial)</td>
+                                                        <td>@(dt.NomDCI)</td>
                                                         <td>@(dt.PrincActivo)</td>
                                                         <td>@(dt.Laboratorio?.Nombre ?? "")</td>
                                                         <td>@(dt.RegSanitario)</td>
