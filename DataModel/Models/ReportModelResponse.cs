@@ -28,6 +28,7 @@ namespace DataModel.Models
 
         public enumFMV_FfTipoIncidenciaCaso FfTipoIncidenciaCaso { get; set; }
 
+        public enumFMV_AlertType AlertType { get; set; }
     }
 
 }

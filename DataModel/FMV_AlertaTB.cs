@@ -15,10 +15,14 @@ namespace DataModel
             Adjunto = new AttachmentData();
         }
 
-        //Fecha de Recepcion en CNFV
+        // Año
+        private int year;
+        public int Year { get => year; set => SetProperty(ref year, value); }
+
+        // Fecha de recibido (CNFV)
         private DateTime? fechaRecepcion;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaRecepcion { get => fechaRecepcion; set => SetProperty(ref fechaRecepcion, value); }
+        public DateTime? FechaRecepcion { get => fechaRecepcion; set { SetProperty(ref fechaRecepcion, value); Year = value.HasValue ? value.Value.Year : 0; } }
 
         // Fecha de entrega al evaluador
         private DateTime? fechaEntregaEvaluador;

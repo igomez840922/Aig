@@ -160,6 +160,144 @@ namespace Aig.FarmacoVigilancia.Services
             try { return DalService.Count<FMV_AlertaTB>(); }
             catch { }return 0;
         }
+
+
+        ////// REPORTES ///////////////
+        ///
+        //Año de Recepción
+        public async Task<ReportModel<ReportModelResponse>> Report1(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
+                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
+                               (data.Year > 0)
+                               group data by data.Year into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = string.Format("ALARMAS Totales Año {0}", g.FirstOrDefault().Year),//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
+                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
+                               (data.Year > 0)
+                               group data by data.Year into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
+        //Fármaco sospechoso Nombre Comercial
+        public async Task<ReportModel<ReportModelResponse>> Report2(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (data.DCI != null && data.DCI.Length > 0)
+                               group data by data.DCI into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().DCI,
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (data.DCI != null && data.DCI.Length > 0)
+                               group data by data.DCI into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
+        //Origen
+        public async Task<ReportModel<ReportModelResponse>> Report3(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (data.OrigenAlertaId!=null && data.OrigenAlertaId>0)
+                               group data by data.OrigenAlertaId into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   Name = g.FirstOrDefault().OrigenAlerta.Nombre,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (data.OrigenAlertaId != null && data.OrigenAlertaId > 0)
+                               group data by data.OrigenAlertaId into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
+        //Tipo de Alerta
+        public async Task<ReportModel<ReportModelResponse>> Report4(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                               group data by data.TipoAlerta into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   AlertType = g.FirstOrDefault().TipoAlerta,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                               group data by data.TipoAlerta into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
     }
 
 }
