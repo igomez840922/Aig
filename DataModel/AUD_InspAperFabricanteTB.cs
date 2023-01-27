@@ -143,4 +143,5 @@ namespace DataModel
         public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
 
     }
+
 }

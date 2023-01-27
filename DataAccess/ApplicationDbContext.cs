@@ -131,6 +131,11 @@ namespace DataAccess
   .WithOne(e => e.Inspeccion)
   .HasForeignKey<AUD_InspeccionTB>(e => e.InspGuiaBPM_BpaId);
 
+            modelBuilder.Entity<AUD_InspeccionTB>()
+    .HasOne(e => e.InspAperFabricanteCosmetMed)
+    .WithOne(e => e.Inspeccion)
+    .HasForeignKey<AUD_InspeccionTB>(e => e.InspAperFabricanteCosmetMedId);
+
             ///////////////////////////////////////////
             ///
 
@@ -1063,6 +1068,66 @@ namespace DataAccess
             ///////////////////////////////////////////
             ///
 
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.DatosEstablecimiento)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.DatosRegente)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.DatosRepresentLegal)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.OrganizacionPersonal)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.Programas)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.ProdAnalisisContrato)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.ReclamosProdRetirados)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.Locales)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.AreaProduccion)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.Equipo)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.LaboratorioControlCalidad)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.AreaAlmacenamiento)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.AreaAuxiliar)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.DatosConclusiones)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+
+
+            ///////////////////////////////////////////
+            ///
+
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.AuditoriaSanitaria)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_AuditoriaSanitaria>(x));
@@ -1711,7 +1776,9 @@ namespace DataAccess
         public virtual DbSet<SmtpCorreoTB> SmtpCorreo { get; set; }
         public virtual DbSet<UserProfileTB> UserProfile { get; set; }
         public virtual DbSet<AUD_CorrespondenciaTB> AUD_Correspondencia { get; set; }
-
+        public virtual DbSet<AUD_InspGuiaBPMFabricanteMedTB> AUD_InspGuiaBPMFabricanteMed { get; set; }
+        public virtual DbSet<AUD_InspAperFabricanteCosmetMedTB> AUD_InspAperFabricanteCosmetMed { get; set; }
+        
 
         /////////////////////////////////////////////////
         ///

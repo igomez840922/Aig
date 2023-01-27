@@ -128,6 +128,26 @@ namespace Aig.Auditoria.Services
             var result = DalService.Save(data);
             if(result != null)
             {
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosEstablecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRegente).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.OrganizacionPersonal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Programas).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.ProdAnalisisContrato).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.ReclamosProdRetirados).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Locales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreaProduccion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Equipo).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.LaboratorioControlCalidad).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreaAlmacenamiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreaAuxiliar).IsModified = true;
+
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosConclusiones).IsModified = true;
+
+                    DalService.DBContext.SaveChanges();
+                }
                 if (result.InspGuiaBPM_Bpa != null)
                 {
                     DalService.DBContext.Entry(result.InspGuiaBPM_Bpa).Property(b => b.GeneralesEmpresa).IsModified = true;

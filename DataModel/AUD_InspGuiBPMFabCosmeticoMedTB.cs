@@ -4858,10 +4858,12 @@ namespace DataModel
         {
             LContenido = new List<ContenidoTablas>();
         }
-
+       
         private int numero;
         public int Numero { get => numero; set => SetProperty(ref numero, value); }
-
+        
+        private string titulo;
+        public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
 
         private string temperatura;
         public string Temperatura { get => temperatura; set => SetProperty(ref temperatura, value); }

@@ -90,9 +90,13 @@ namespace Aig.Auditoria.Components.Inspections
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.AFM:
-                    case DataModel.Helper.enumAUD_TipoActa.AFC:
                         {
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperFabricante = new AUD_InspAperFabricanteTB() };
+                            break;
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.AFC:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperFabricanteCosmetMed = new AUD_InspAperFabricanteCosmetMedTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.VF:
