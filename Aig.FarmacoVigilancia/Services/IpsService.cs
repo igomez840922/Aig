@@ -527,7 +527,7 @@ namespace Aig.FarmacoVigilancia.Services
             return model;
         }
 
-        //Estatus de Revisión
+        //Estatus del  Registro
         public async Task<ReportModel<ReportModelResponse>> Report10(ReportModel<ReportModelResponse> model)
         {
             try
@@ -538,11 +538,11 @@ namespace Aig.FarmacoVigilancia.Services
                                where data.Deleted == false &&
                                (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.ReqIntercam into g
+                               group data by data.EstatusRegistro into g
                                orderby g.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = g.FirstOrDefault().ReqIntercam ? "SI" : "NO",
+                                   IpsStatusRegistro = g.FirstOrDefault().EstatusRegistro,
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
@@ -550,7 +550,67 @@ namespace Aig.FarmacoVigilancia.Services
                                where data.Deleted == false &&
                                (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.ReqIntercam into g
+                               group data by data.EstatusRegistro into g
+                               select g.Count()).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
+        //Recibidos
+        public async Task<ReportModel<ReportModelResponse>> Report11(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                               select new ReportModelResponse
+                               {
+                                   Name = data.NomComercial,
+                               }).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                               where data.Deleted == false &&
+                              (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                               select data).Count();
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
+        //Estatus de Revision
+        public async Task<ReportModel<ReportModelResponse>> Report12(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                               group data by data.StatusRevision into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   IpsStatusRevision = g.FirstOrDefault().StatusRevision,
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                               group data by data.StatusRevision into g
                                select g.Count()).Count();
             }
             catch (Exception ex)

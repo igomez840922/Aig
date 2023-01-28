@@ -29,6 +29,11 @@ namespace DataModel.Models
         public enumFMV_FfTipoIncidenciaCaso FfTipoIncidenciaCaso { get; set; }
 
         public enumFMV_AlertType AlertType { get; set; }
+
+        public enumFMV_IpsStatusRegistro IpsStatusRegistro { get; set; }
+
+        public enumFMV_IpsStatusRevision IpsStatusRevision { get; set; }
+
     }
 
 }

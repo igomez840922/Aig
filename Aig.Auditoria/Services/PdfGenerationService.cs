@@ -11692,23 +11692,6 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                });
-
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONES GENERALES").Bold();
-                                });
-
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperFabricanteCosmetMed.DatosConclusiones.ObservacionesFinales);
-
-                            });
-
-
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
                             column.Item().AlignLeft().Text(string.Format("PROCEDIMIENTOS OPERATIVOS ESTÁNDARES".ToUpper())).Bold();
                             column.Item().Text("El establecimiento se compromete a que los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos, estén completos y acorde con la Normativa vigente y según las actividades a las que se dedicará el establecimiento.  De igual forma el establecimiento deberá tener a disposición de la Autoridad Reguladora los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos cuando esta lo solicite y al momento de Auditoría de Buenas prácticas de Fabricación");
@@ -11717,6 +11700,9 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("CRITERIO TÉCNICO".ToUpper())).Bold();
                             column.Item().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo N° 95 del 14 de mayo de 2019, por el cual se reglamentan las Buenas Prácticas de Fabricación de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} Cumple con los requisitos mínimos para operar como Laboratorio Farmacéutico  dedicado a {3}.\r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.InspAperFabricanteCosmetMed.DatosEstablecimiento.Nombre, inspection.UbicacionEstablecimiento, inspection.InspAperFabricanteCosmetMed.DatosConclusiones.CumpleRequisitosMinOperacion?"SI":"NO", inspection.InspAperFabricanteCosmetMed.TipoProductos, inspection.InspAperFabricanteCosmetMed.DatosConclusiones.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.InspAperFabricanteCosmetMed.DatosConclusiones.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.InspAperFabricanteCosmetMed.DatosConclusiones.FechaFinalizacion?.Year.ToString() ?? ""));
 
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("Inconformidades o desviaciones detectadas".ToUpper())).Bold();
+                            column.Item().Text(inspection.InspAperFabricanteCosmetMed.DatosConclusiones.ObservacionesFinales);
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes"));
                             column.Item().Table(table =>
