@@ -150,8 +150,9 @@
                             </NavLink>
                         </li>
 
-                        <li class="kt-menu__item" aria-haspopup="true">
-                            <NavLink href="/ips" class="kt-menu__link" Match="NavLinkMatch.All">
+                        
+                        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
                                 <span class="kt-menu__link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -162,9 +163,42 @@
                                             <rect fill="#000000" opacity="0.3" x="7" y="14" width="9" height="2" rx="1" />
                                         </g>
                                     </svg>
-                                </span><span class="kt-menu__link-text">@languageContainerService.Keys["IPS"]</span>
-                            </NavLink>
+                                </span>
+                                <span class="kt-menu__link-text">@languageContainerService.Keys["IPS"]</span>
+                                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                            <div class="kt-menu__submenu ">
+                                <span class="kt-menu__arrow"></span>
+                                <ul class="kt-menu__subnav">
+                                    <li class="kt-menu__item " aria-haspopup="true"><a href="/ips" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Historial"]</span></a></li>
+                                    <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Reportes"]</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div class="kt-menu__submenu " kt-hidden-height="80" style="display: none; overflow: hidden;">
+                                            <span class="kt-menu__arrow"></span>
+                                            <ul class="kt-menu__subnav">
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/nombrecomercial" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Nombre Comercial"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/nombredci" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["DCI"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/titular" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Titular"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/regsanitario" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Registro Sanitario"]</span></a></li>
+
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/prioridad" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Prioridad"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/anorecepcion" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Año de Recepción"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/innovador" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Innovador"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/biologicos" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Biológicos"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/intercambiabilidad" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Intercambiabilidad"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/estatusregistro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Estatus del Registro"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/recibidos" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Recibidos"]</span></a></li>
+                                                <li class="kt-menu__item " aria-haspopup="true"><a href="/ips/reporte/revisionstatus" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@languageContainerService.Keys["Estatus de Revisión"]</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
+
                                                 
 
                         <li class="kt-menu__item" aria-haspopup="true">
