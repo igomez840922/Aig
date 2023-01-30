@@ -11676,7 +11676,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
                                 });
 
-                                foreach (var dat in inspection.InspAperFabricanteCosmetMed.AreaAlmacenamiento.LContenido)
+                                foreach (var dat in inspection.InspAperFabricanteCosmetMed.AreaAuxiliar.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {
