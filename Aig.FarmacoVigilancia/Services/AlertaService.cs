@@ -190,7 +190,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
                                (data.Year > 0)
                                group data by data.Year into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -224,7 +224,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
                                (data.DCI != null && data.DCI.Length > 0)
                                group data by data.DCI into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -258,7 +258,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
                                (data.OrigenAlertaId != null && data.OrigenAlertaId > 0)
                                group data by data.OrigenAlertaId into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -290,7 +290,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
                                group data by data.TipoAlerta into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
