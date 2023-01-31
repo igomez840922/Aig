@@ -20,11 +20,11 @@ namespace Aig.Farmacoterapia.Api.Controllers
         public async Task<IActionResult> GetDashboard() => Ok(await _mediator.Send(new GetDashboardMedicamentQuery()));
 
         [HttpPost("adminsearch")]
-        public async Task<IActionResult> AdminGetAll([FromBody] PageSearchArgs Args) => Ok(await _mediator.Send(new AdminGetAllMedicamentQuery(Args)));
+        public async Task<IActionResult> AdminSearch([FromBody] PageSearchArgs Args) => Ok(await _mediator.Send(new AdminGetAllMedicamentQuery(Args)));
         
         [AllowAnonymous]
         [HttpPost("search")]
-        public async Task<IActionResult> GetAll([FromBody] PageSearchArgs Args) => Ok(await _mediator.Send(new GetAllMedicamentQuery(Args)));
+        public async Task<IActionResult> Search([FromBody] PageSearchArgs Args) => Ok(await _mediator.Send(new GetAllMedicamentQuery(Args)));
 
         [AllowAnonymous]
         [HttpGet("{id}")]

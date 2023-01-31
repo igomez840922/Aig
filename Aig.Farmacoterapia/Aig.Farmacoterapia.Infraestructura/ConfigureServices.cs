@@ -1,5 +1,6 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Domain.Interfaces.Studies;
 using Aig.Farmacoterapia.Infrastructure.Application;
 using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Files;
@@ -8,6 +9,7 @@ using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Logging;
 using Aig.Farmacoterapia.Infrastructure.Persistence;
 using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories;
+using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies;
 using Aig.Farmacoterapia.Infrastructure.Services;
 using log4net.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -243,7 +245,9 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddScoped<IPharmaceuticalRepository, PharmaceuticalRepository>()
                 .AddScoped<IMedicationRouteRepository, MedicationRouteRepository>()
                 .AddScoped<IMakerRepository, MakerRepository>()
-                .AddScoped<IStudiesRepository, StudiesRepository>()
+                 //.AddScoped<IStudiesRepository, StudiesRepository>()
+                .AddScoped<IAigEstudioDNFDRepository,AigEstudioDNFDRepository>()
+                .AddScoped<IAigEstudioRepository, AigEstudioRepository>()
                 .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddScoped<IUploadService, UploadService>();
         }

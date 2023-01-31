@@ -8,7 +8,6 @@ using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using AutoMapper;
-using Aig.Farmacoterapia.Infrastructure.Identity;
 using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Aig.Farmacoterapia.Domain.Models;
 using Aig.Farmacoterapia.Domain.Identity;
@@ -19,7 +18,6 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
     {
         public PageSearchArgs Args { get; set; }
         public GetAllUserQuery(PageSearchArgs args) => Args = args;
-       
     }
     public class GetUsernameQuery : IRequest<Result<bool>>
     {
@@ -31,17 +29,14 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
     {
         public string Phone { get; set; }
         public GetPhoneQuery(string phone) => Phone = phone;
-
     }
 
     public class GetUserQuery : IRequest<Result<UpdateProfileRequest>>
     {
         public string UserName { get; set; }
         public GetUserQuery(string userName) => UserName = userName;
-
     }
-
-    internal class GetAllUserQueryHandler : 
+    internal class UserQueryHandler : 
         IRequestHandler<GetAllUserQuery, PaginatedResult<UserModelOutput>>,
         IRequestHandler<GetUserQuery, Result<UpdateProfileRequest>>,
         IRequestHandler<GetUsernameQuery, Result<bool>>,
@@ -51,7 +46,7 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
         private readonly IMapper _mapper;
         private readonly ISystemLogger _logger;
 
-        public GetAllUserQueryHandler(IUserService userService, IMapper mapper,ISystemLogger logger)
+        public UserQueryHandler(IUserService userService, IMapper mapper,ISystemLogger logger)
         {
             _userService = userService;
             _mapper = mapper;

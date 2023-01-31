@@ -1,0 +1,267 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Medicament
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Validation
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@using System.Globalization
+@inject IStudyDNFDManager _manager;
+<style>
+    .mud-dialog {
+        max-height: calc(108vh - var(--mud-appbar-height));
+        overflow-y: auto;
+    }
+</style>
+<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
+    <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+
+                @{
+                    if (_modelData.Id == 0)
+                    {
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                            Nueva evaluación
+                        </MudText>
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
+                            Editar evaluación
+                        </MudText>
+                    }
+                }
+
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            @if (_loading)
+            {
+                <div style="margin-left:45% !important;">
+                    <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+                </div>
+            }
+            else
+            {
+
+                <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+                    <MudTabPanel Icon="@Icons.Material.Filled.Wysiwyg" Text="Datos Generales">
+
+                        <MudGrid Style="margin-top:10px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                    <MudItem xs="12" md="12" Style="padding:3px !important">
+                                        <MudTextField T="string" Label="Título del protocolo de investigación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Titulo" Lines="4" />
+                                    </MudItem>
+
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+                          <MudGrid Style="margin-top:10px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                    <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
+                                    </MudItem>
+
+                                      <MudItem xs="12" md="4" Style="padding:3px !important">
+                                        <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de ingreso" @bind-Date="_modelData.FechaIngreso" />
+                                        <ValidationMessage For="@(() => _modelData.FechaIngreso)" />
+                                    </MudItem>
+
+                                      <MudItem xs="12" md="4" Style="padding:3px !important">
+                                        <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de asignación" @bind-Date="_modelData.FechaAsignacion" />
+                                        <ValidationMessage For="@(() => _modelData.FechaAsignacion)" />
+                                    </MudItem>
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+                        <MudGrid Style="margin-top:10px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+
+                                    <MudItem xs="12" md="6" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.InvestigadorPrincipal)" @bind-Value="_modelData.InvestigadorPrincipal" Label="Investigador principal" />
+                                    </MudItem>
+
+                                     <MudItem xs="12" md="6" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Patrocinador)" @bind-Value="_modelData.Patrocinador" Label="Patrocinador del estudio" />
+                                    </MudItem>
+
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+
+
+                        <MudGrid Style="margin-top:12px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                  <MudItem xs="12" md="2" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Participantes)" @bind-Value="_modelData.Participantes" Label="No.Participantes" />
+                                    </MudItem>
+
+                                    <MudItem xs="12" md="5" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Duracion)" @bind-Value="_modelData.Duracion" Label="Duración del estudio" />
+                                    </MudItem>
+
+                                    
+                                    <MudItem xs="12" md="5" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Poblacion)" @bind-Value="_modelData.Poblacion" Label="Población a estudiar" />
+                                    </MudItem>
+
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+                        <MudGrid Style="margin-top:10px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                    <MudItem xs="12" md="3" Style="padding:3px !important">
+                                        <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de evaluación" @bind-Date="_modelData.FechaEvaluacion" />
+                                        <ValidationMessage For="@(() => _modelData.FechaEvaluacion)" />
+                                    </MudItem>
+
+                                    <MudItem xs="12" md="6" Style="padding:3px !important; margin-top:18px !important">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.NotaEvaluacion)" @bind-Value="_modelData.NotaEvaluacion" Label="Nota de evaluación" />
+                                    </MudItem>
+
+                                    <MudItem xs="12" md="3" Style="padding:3px !important;margin-top:18px !important">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.RegistroProtocoloDIGESA)" @bind-Value="_modelData.RegistroProtocoloDIGESA" Label="Registro en DIGESA" />
+                                    </MudItem>
+
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+                        <MudGrid Style="margin-top:12px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                    <MudItem xs="12" md="12" Style="padding:3px !important">
+                                        <MudTextField T="string" Label="Observaciones del Evaluador" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ObservacionesEvaluador" Lines="4" />
+                                    </MudItem>
+
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+
+
+                        <MudGrid Style="margin-top:10px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                    <MudItem xs="12" md="6" Style="padding:3px !important">
+                                        <MudTextField T="string" Label="Centro de investigación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.CentroInvestigacion" Lines="4" />
+                                    </MudItem>
+                                    <MudItem xs="12" md="6" Style="padding:3px !important">
+                                        <MudTextField T="string" Label="Comité de Bioetica" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ComiteBioetica" Lines="4" />
+                                    </MudItem>
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+
+                    </MudTabPanel>
+                   
+                    <MudTabPanel Icon="@Icons.Material.Filled.MedicationLiquid" Text="Productos">
+
+                        <MudGrid>
+
+                            <MudItem md="12">
+                             <Products _parent="@_modelData" ></Products>
+                            </MudItem>
+
+
+                        </MudGrid>
+
+
+                    </MudTabPanel>
+                </MudTabs>
+            }
+        </DialogContent>
+        <DialogActions>
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
+            <MudButton Disabled="@(!Validate())" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Guardar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+@code {
+
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    private FluentValidationValidator _fluentValidation;
+    private AigEstudioDNFD _modelData = new AigEstudioDNFD();
+    [Parameter] public long _id { get; set; } = 0;
+    private bool _validated => Validate();
+    bool _loading = false;
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            Validate();
+    }
+    private bool Validate() => _fluentValidation.Validate();
+
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    protected async Task SubmitAsync()
+    {
+        if (Validate())
+        {
+            var response = await _manager.UpdateAsync(_modelData);
+            if (response.Succeeded)
+                MudDialog.Close();
+            foreach (var message in response.Messages){
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
+        }
+    }
+
+
+    public void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        if (_id != 0)
+        {
+            _loading = true;
+            await this.InvokeAsync(StateHasChanged);
+            var response = await _manager.GetAsync(_id);
+            if (response.Succeeded){
+                _modelData = response.Data;
+             }
+            _loading = false;
+            await this.InvokeAsync(StateHasChanged);
+        }
+    }
+
+}

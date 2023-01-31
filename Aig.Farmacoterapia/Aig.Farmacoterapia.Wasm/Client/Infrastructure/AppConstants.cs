@@ -72,5 +72,14 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             public static string ProspectusURL(string file) => $"api/medicament/prospectus/{file}";
         }
 
+        public static class EstudioDNFDEndpoints
+        {
+            public static string Search = "api/studiesdnfd/search";
+            public static string Update = "api/studiesdnfd/update";
+            public static string Delete = $"api/studiesdnfd/delete";
+            public static string Get(long id) => $"api/studiesdnfd/study/{id}";
+            
+        }
+
     }
 }

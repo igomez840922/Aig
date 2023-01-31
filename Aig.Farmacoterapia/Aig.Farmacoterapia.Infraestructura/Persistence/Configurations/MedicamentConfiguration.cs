@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
 {
-    public class EntityConfiguration : 
+    public class MedicamentConfiguration : 
         IEntityTypeConfiguration<AigMedicamento>,
         IEntityTypeConfiguration<AigFabricante>,
         IEntityTypeConfiguration<AigPais>,
         IEntityTypeConfiguration<AigFormaFarmaceutica>,
         IEntityTypeConfiguration<AigViaAdministracion>,
-        IEntityTypeConfiguration<ApplicationUser>,
-        IEntityTypeConfiguration<AigEstudios>
+        IEntityTypeConfiguration<ApplicationUser>
+        //IEntityTypeConfiguration<AigEstudios>
     {
 
         public void Configure(EntityTypeBuilder<AigMedicamento> builder)
@@ -74,12 +74,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             builder.Ignore(c => c.FullName);
         }
 
-        public void Configure(EntityTypeBuilder<AigEstudios> builder)
-        {
-            builder.HasKey(k => new { k.Id });
-            builder.Ignore(c => c.ShowDetails);
-            builder.Property(e => e.Medicamentos).HasJsonConversion();
-        }
+        //public void Configure(EntityTypeBuilder<AigEstudios> builder)
+        //{
+        //    builder.HasKey(k => new { k.Id });
+        //    builder.Ignore(c => c.ShowDetails);
+        //    builder.Property(e => e.Medicamentos).HasJsonConversion();
+        //}
 
     }
 }

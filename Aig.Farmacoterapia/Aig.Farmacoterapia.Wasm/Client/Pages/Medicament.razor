@@ -54,7 +54,7 @@
     <MudCardContent>
 
         <MudGrid>
-            <MudItem md="12">
+            <MudItem xs="12" md="12" >
                 <MudToolBar Style="height:25px !important;">
                     <MudText Color="Color.Primary">
                         <MudIcon Icon="@Icons.Material.Filled.MedicationLiquid" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
@@ -121,8 +121,7 @@
     </MudCard>
 </EditForm>
 
-
-    <MudTable  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigMedicamento>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
+<MudTable Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigMedicamento>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
 
         <HeaderContent>
             <MudTh style="width:5px;"></MudTh>
@@ -334,7 +333,7 @@
             <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" Class="primary" InfoFormat="{first_item}-{last_item} de {all_items}"  PageSizeOptions="new int[] {8,10, 25, 50, 100, 250 }" RowsPerPageString="Filas" />
         </PagerContent>
 
-    </MudTable>
+</MudTable>
  
 
 @code {
@@ -344,7 +343,6 @@
     private MudTable<AigMedicamento> _table;
     private DateRange dateRange;
     private DateRange expirationRange;
-    //private static IEnumerable<AigMedicamento> List { get; set; }
     protected MedicamentFilter _modelFilter;
     protected bool _loading = false;
 
@@ -436,7 +434,7 @@
       private async Task AddEdit(long id = 0)
         {
             var parameters = new DialogParameters { ["_id"]=id };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddEdit>(id == 0 ? "Nuevo" :"Editar", parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)

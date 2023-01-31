@@ -20,13 +20,11 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
     {
         public PageSearchArgs Args { get; set; }
         public AdminGetAllMedicamentQuery(PageSearchArgs args) => Args = args;
-       
     }
     public class GetAllMedicamentQuery : IRequest<PaginatedResult<AigMedicamento>>
     {
         public PageSearchArgs Args { get; set; }
         public GetAllMedicamentQuery(PageSearchArgs args) => Args = args;
-
     }
     public class GetPharmaceuticalQuery : IRequest<Result<List<AigFormaFarmaceutica>>>
     {
@@ -44,8 +42,7 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
     {
         public string Type { get; set; }
         public string File { get; set; }
-        public GetFileQuery(string type, string file)
-        {
+        public GetFileQuery(string type, string file) {
             Type = type;
             File = file;
         }
@@ -54,15 +51,12 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
     {
         public long Id { get; set; }
         public GetMedicamentQuery(long id) => Id = id;
-
     }
     public class GetDashboardMedicamentQuery : IRequest<Result<DashboardMedicamentResponse>>
     {
         public GetDashboardMedicamentQuery() { }
-
     }
-
-    internal class GetAllMedicamentHandler : 
+    internal class MedicamentQueryHandler : 
         IRequestHandler<AdminGetAllMedicamentQuery, PaginatedResult<AigMedicamento>>,
         IRequestHandler<GetAllMedicamentQuery, PaginatedResult<AigMedicamento>>,
         IRequestHandler<GetMedicamentQuery, Result<AigMedicamento>>,
@@ -77,7 +71,7 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
         private readonly IUploadService _uploadService;
         private readonly ISystemLogger _logger;
 
-        public GetAllMedicamentHandler(IMedicamentRepository repository, IUnitOfWork unitOfWork, IUploadService uploadService, ISystemLogger logger)
+        public MedicamentQueryHandler(IMedicamentRepository repository, IUnitOfWork unitOfWork, IUploadService uploadService, ISystemLogger logger)
         {
             _uploadService = uploadService;
             _repository = repository;

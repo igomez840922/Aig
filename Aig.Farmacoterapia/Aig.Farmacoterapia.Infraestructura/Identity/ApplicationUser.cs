@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Entities.Enums;
+using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Domain.Extensions;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -46,5 +47,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Identity
             set { }
         }
 
+        private ICollection<AigEstudioEvaluador> _estudioEvaluador;
+        public virtual ICollection<AigEstudioEvaluador> EstudioEvaluador => _estudioEvaluador ??= new HashSet<AigEstudioEvaluador>();
     }
 }

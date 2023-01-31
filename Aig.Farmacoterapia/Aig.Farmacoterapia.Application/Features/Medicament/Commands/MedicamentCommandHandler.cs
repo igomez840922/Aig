@@ -16,7 +16,7 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Commands
     {
         public long Id { get; set; }
     }
-    internal class AddEditMedicamentCommandHandler : 
+    internal class MedicamentCommandHandler : 
         IRequestHandler<AddEditMedicamentCommand, IResult>,
         IRequestHandler<DeleteMedicamentCommand, IResult>
     {
@@ -25,7 +25,7 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Commands
         private readonly IUploadService _uploadService;
         private readonly ISystemLogger _logger;
 
-        public AddEditMedicamentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IUploadService uploadService, ISystemLogger logger)
+        public MedicamentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IUploadService uploadService, ISystemLogger logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

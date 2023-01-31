@@ -79,9 +79,8 @@
     <MudTabPanel Icon="@Icons.Material.Filled.CoPresent" Text="Datos Generales">
 
         <MudGrid>
-            <MudItem md="2"/>
-          
-            <MudItem md="8">
+           
+            <MudItem md="5">
                 <EditForm Model="@_profileUserModel" OnValidSubmit="ProfileSubmitAsync">
                     <MudCard>
                         <MudCardContent>
@@ -90,7 +89,7 @@
                             <MudGrid>
 
 
-                                <MudItem xs="12" md="8">
+                                <MudItem xs="12" sm="12" md="12">
                                     <MudItem>
 
                                         <div class="container-image">
@@ -131,16 +130,16 @@
                                 </MudItem>
 
 
-                                <MudItem sm="12" md="8">
+                                <MudItem  xs="12" sm="12" md="12">
                                     <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _profileUserModel.Email)" @bind-Value="_profileUserModel.Email" Label="Correo" />
                                 </MudItem>
-                                <MudItem sm="12" md="8">
+                                <MudItem   xs="12" sm="12" md="12">
                                     <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _profileUserModel.FirstName)" @bind-Value="_profileUserModel.FirstName" Label="Nombre" />
                                 </MudItem>
-                                <MudItem sm="12" md="8">
+                                <MudItem   xs="12" sm="12" md="12">
                                     <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _profileUserModel.LastName)" @bind-Value="_profileUserModel.LastName" Label="Apellido" />
                                 </MudItem>
-                                <MudItem sm="12" md="8">
+                                <MudItem   xs="12" sm="12" md="12">
                                     <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" T="string" Label="Teléfono" @bind-Value="_profileUserModel.PhoneNumber" For="@(() => _profileUserModel.PhoneNumber)" />
                                 </MudItem>
                              
@@ -154,7 +153,7 @@
                 </EditForm>
             </MudItem>
 
-            <MudItem md="2"/>
+            <MudItem md="7"/>
 
         </MudGrid>
 
@@ -162,9 +161,9 @@
     <MudTabPanel  Icon="@Icons.Material.Filled.Key" Text="Cambiar Contraseña">
      
         <MudGrid>
-            <MudItem md="2"/>
+           
           
-            <MudItem md="8">
+            <MudItem md="5">
                 <EditForm Model="@_changePasswordRequestModel" OnValidSubmit="ChangePasswordAsyncSubmitAsync">
                     <MudCard>
                         <MudCardContent>
@@ -172,12 +171,12 @@
                             <FluentValidationValidator  @ref="_passwordFluentValidationValidator" />
                             <MudGrid>
 
-                                <MudItem sm="12" md="8">
+                                <MudItem  xs="12" sm="12" md="12">
                                     <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _changePasswordRequestModel.NewPassword)" @bind-Value="_changePasswordRequestModel.NewPassword"
                                                   Label="Contraseña" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
                                 </MudItem>
 
-                                 <MudItem sm="12" md="8">
+                                 <MudItem  xs="12" sm="12" md="12">
                                     <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _changePasswordRequestModel.ConfirmNewPassword)" @bind-Value="_changePasswordRequestModel.ConfirmNewPassword"
                                                   Label="Contraseña" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
                                 </MudItem>
@@ -192,7 +191,7 @@
                 </EditForm>
             </MudItem>
 
-            <MudItem md="2"/>
+            <MudItem md="7"/>
 
         </MudGrid>
 

@@ -38,6 +38,7 @@
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="MudBlazor.Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
         <AuthorizeView>
+
             <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
                 <ActivatorContent>
                     @if (string.IsNullOrEmpty(_avatar))
@@ -58,14 +59,14 @@
 
                 <ChildContent>
                     <MudMenuItem Icon="@Icons.Material.Outlined.CoPresent" Href="/profile">Perfil</MudMenuItem>
-                    <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Outlined.Login" OnClick="Logout">Salir</MudMenuItem>
+                    <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Outlined.Login" OnClick="@(async () => await Logout())" OnTouch="@(async () => await Logout())">Salir</MudMenuItem>
                 </ChildContent>
 
                
             </MudMenu>
         </AuthorizeView>
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="8">
+    <MudDrawer MiniWidth="100" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="8">
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
@@ -124,18 +125,37 @@
             //}
         }
     }
-    private void Logout()
+
+     private async Task Logout()
     {
-        var parameters = new DialogParameters
+       var parameters = new DialogParameters
             {
                 {nameof(Dialogs.Logout.ContentText), "Está seguro que desea cerrar la sesión?"},
                 {nameof(Dialogs.Logout.ButtonText), "Confirmar"},
                 {nameof(Dialogs.Logout.Color), Color.Error},
             };
-
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
-        _dialogService.Show<Dialogs.Logout>("Cerrar la sesión", parameters, options);
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Dialogs.Logout>("Cerrar la sesión", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled){
+            await _authenticationManager.Logout();
+            _navigationManager.NavigateTo("/login");
+        }
     }
+
+
+    //private void Logout()
+    //{
+    //    var parameters = new DialogParameters
+    //        {
+    //            {nameof(Dialogs.Logout.ContentText), "Está seguro que desea cerrar la sesión?"},
+    //            {nameof(Dialogs.Logout.ButtonText), "Confirmar"},
+    //            {nameof(Dialogs.Logout.Color), Color.Error},
+    //        };
+
+    //    var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+    //    _dialogService.Show<Dialogs.Logout>("Cerrar la sesión", parameters, options);
+    //}
 
     void DrawerToggle()
     {
