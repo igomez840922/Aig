@@ -6,8 +6,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <BlazorCacheBootResources>false</BlazorCacheBootResources>
+    <!--
     <BlazorBinariesExtension>.bin</BlazorBinariesExtension>
     <BlazorEnableCompression>false</BlazorEnableCompression>
+    -->    
   </PropertyGroup>
 
   <ItemGroup>
