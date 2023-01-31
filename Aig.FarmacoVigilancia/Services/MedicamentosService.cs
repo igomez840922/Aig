@@ -39,7 +39,7 @@ namespace Aig.FarmacoVigilancia.Services
                     //                { "pageSize","40"}
                     //            };
                     StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                    var result = await apiConnectionService.Client.PostAsync("medicaments", content);
+                    var result = await apiConnectionService.Client.PostAsync("medicament/search", content);
                     var resultContent = await result.Content.ReadAsStringAsync();
                     var data = System.Text.Json.JsonSerializer.Deserialize<ProdServiceDataResponse>(resultContent, _options);
                     if (result.IsSuccessStatusCode)

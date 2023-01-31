@@ -147,11 +147,7 @@
                                         <tr>
                                                             <th>@languageContainerService.Keys["ReceptionDateCNFV"]</th>
                                                             <th>@languageContainerService.Keys["Register"]</th>
-                                                            <th>@languageContainerService.Keys["CommercialName"]</th>
-                                                            <th>@languageContainerService.Keys["DCI"]</th>
                                                             <th>@languageContainerService.Keys["ActivePrinciple"]</th>
-                                            <th>@languageContainerService.Keys["Laboratory"]</th>
-                                                            <th>@languageContainerService.Keys["NumberOfHealthRegister"]</th>
                                                             <th>@languageContainerService.Keys["Período"]</th>
                                                             <th>@languageContainerService.Keys["Prioridad"]</th>
                                                             <th>@languageContainerService.Keys["Asignación a Evaluador"]</th>
@@ -168,11 +164,7 @@
                                                     <tr>
                                                         <td scope="row">@(dt.FechaRecepcion?.ToString("dd/MM/yyyy") ?? "")</td>
                                                         <td>@(dt.Registrador?.NombreCompleto ?? "")</td>
-                                                        <td>@(dt.NomComercial)</td>
-                                                        <td>@(dt.NomDCI)</td>
                                                         <td>@(dt.PrincActivo)</td>
-                                                        <td>@(dt.Laboratorio?.Nombre ?? "")</td>
-                                                        <td>@(dt.RegSanitario)</td>
                                                                 <td>@(dt.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy"))<br/>@(dt.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy"))</td>
                                                                 <td>@(dt.Prioridad ? "Si" : "No")</td>
                                                                 <td>@(dt.FechaAsigEva?.ToString("dd/MM/yyyy") ?? "")</td>

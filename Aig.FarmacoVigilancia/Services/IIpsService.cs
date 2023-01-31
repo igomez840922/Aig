@@ -1,12 +1,14 @@
 ﻿using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
+using System.Linq.Expressions;
 
 namespace Aig.FarmacoVigilancia.Services
 {
     public interface IIpsService
     {
         Task<Stream> ExportToExcel(GenericModel<FMV_IpsTB> model);
+        Task<List<FMV_IpsTB>> FindAll(Expression<Func<FMV_IpsTB, bool>> match);
 
         Task<GenericModel<FMV_IpsTB>> FindAll(GenericModel<FMV_IpsTB> model);
         Task<List<FMV_IpsTB>> GetAll();

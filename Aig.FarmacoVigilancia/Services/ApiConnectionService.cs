@@ -14,13 +14,10 @@ namespace Aig.FarmacoVigilancia.Services
             this.configuration = configuration;
             Url = configuration["ApiUrl"];
 
-            Client = new HttpClient(
-                        //new HttpClientHandler
-                        //{
-                        //    UseCookies = true,
-                        //    CookieContainer = new CookieContainer()
-                        //}
-                        );
+            var httpClienthandler = new HttpClientHandler();
+            httpClienthandler.ServerCertificateCustomValidationCallback +=
+                (sender, certificate, chain, errors) =>{return true;};            
+            Client = new HttpClient(httpClienthandler) { Timeout = TimeSpan.FromSeconds(30) };
             Client.BaseAddress = new Uri(Url);
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Clear();

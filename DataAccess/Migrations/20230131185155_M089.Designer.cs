@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230131185155_M089")]
+    partial class M089
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3604,12 +3606,21 @@ namespace DataAccess.Migrations
                     b.Property<string>("IpsData")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("LaboratorioTBId")
+                    b.Property<long?>("LaboratorioId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("NoInforme")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("NomComercial")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("NomDCI")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("PrincActivo")
                         .IsRequired()
@@ -3618,6 +3629,11 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("Prioridad")
                         .HasColumnType("bit");
+
+                    b.Property<string>("RegSanitario")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<long?>("RegistradorId")
                         .HasColumnType("bigint");
@@ -3647,13 +3663,13 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("EvaluadorId");
 
-                    b.HasIndex("LaboratorioTBId");
+                    b.HasIndex("LaboratorioId");
 
                     b.HasIndex("RegistradorId");
 
                     b.HasIndex("TramitadorId");
 
-                    b.ToTable("FMV_Ips");
+                    b.ToTable("MV_Ips");
                 });
 
             modelBuilder.Entity("DataModel.FMV_NotaDestinoTB", b =>
@@ -5837,9 +5853,10 @@ namespace DataAccess.Migrations
                         .HasForeignKey("EvaluadorId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("DataModel.LaboratorioTB", null)
+                    b.HasOne("DataModel.LaboratorioTB", "Laboratorio")
                         .WithMany("LIps")
-                        .HasForeignKey("LaboratorioTBId");
+                        .HasForeignKey("LaboratorioId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Registrador")
                         .WithMany("LIpsRegistrador")
@@ -5852,6 +5869,8 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Evaluador");
+
+                    b.Navigation("Laboratorio");
 
                     b.Navigation("Registrador");
 

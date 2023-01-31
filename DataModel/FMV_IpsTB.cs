@@ -12,7 +12,8 @@ namespace DataModel
     {
 		public FMV_IpsTB()
 		{
-			IpsData = new FMV_IpsData();
+            LMedicamentos = new List<FMV_IpsMedicamentoTB>();
+            IpsData = new FMV_IpsData();
 			Adjunto = new AttachmentData();
 		}
 
@@ -36,14 +37,14 @@ namespace DataModel
         private PersonalTrabajadorTB? registrador;
         public virtual PersonalTrabajadorTB? Registrador { get => registrador; set => SetProperty(ref registrador, value); }
 
-        private string nomComercial;
-        [StringLength(500)]
-        [Required(ErrorMessage = "requerido")]
-        public string NomComercial { get => nomComercial; set => SetProperty(ref nomComercial, value); }
+        //private string nomComercial;
+        //[StringLength(500)]
+        //[Required(ErrorMessage = "requerido")]
+        //public string NomComercial { get => nomComercial; set => SetProperty(ref nomComercial, value); }
 
-        private string nomDCI;
-        [StringLength(500)]
-        public string NomDCI { get => nomDCI; set => SetProperty(ref nomDCI, value); }
+        //private string nomDCI;
+        //[StringLength(500)]
+        //public string NomDCI { get => nomDCI; set => SetProperty(ref nomDCI, value); }
 
         //Principio Activo
         private string princActivo;
@@ -51,12 +52,12 @@ namespace DataModel
         [Required(ErrorMessage = "requerido")]
         public string PrincActivo { get => princActivo; set => SetProperty(ref princActivo, value); }
 
-        //Titular
-        //Laboratorio
-        private long? laboratorioId;
-        public long? LaboratorioId { get => laboratorioId; set => SetProperty(ref laboratorioId, value); }
-        private LaboratorioTB? laboratorio;
-        public virtual LaboratorioTB? Laboratorio { get => laboratorio; set => SetProperty(ref laboratorio, value); }
+        ////Titular
+        ////Laboratorio
+        //private long? laboratorioId;
+        //public long? LaboratorioId { get => laboratorioId; set => SetProperty(ref laboratorioId, value); }
+        //private LaboratorioTB? laboratorio;
+        //public virtual LaboratorioTB? Laboratorio { get => laboratorio; set => SetProperty(ref laboratorio, value); }
 
 
         ////FMV_IspProductTB
@@ -64,10 +65,10 @@ namespace DataModel
         //[StringLength(250)]
         //public List<FMV_IpsProductTB> LProducts { get => lProducts; set => SetProperty(ref lProducts, value); }
 
-        private string regSanitario;
-        [StringLength(250)]
-        [Required(ErrorMessage = "requerido")]
-        public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
+        //private string regSanitario;
+        //[StringLength(250)]
+        //[Required(ErrorMessage = "requerido")]
+        //public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
 
         // Estatus Recepcion: Aceptado, Rechazado
         private enumFMV_IpsStatusRecepcion estatusRecepcion;
@@ -153,6 +154,12 @@ namespace DataModel
 		public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
 
+        ///Medicamentos
+
+        private List<FMV_IpsMedicamentoTB> lMedicamentos;
+        public virtual List<FMV_IpsMedicamentoTB> LMedicamentos { get => lMedicamentos; set => SetProperty(ref lMedicamentos, value); }
+
+
         public void UpdateRule()
         {
             Prioridad = false;
@@ -168,5 +175,8 @@ namespace DataModel
                 }
             }
         }
+    
+    
+    
     }
 }

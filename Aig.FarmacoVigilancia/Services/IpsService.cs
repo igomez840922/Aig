@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using Aig.FarmacoVigilancia.Pages.Settings.Laboratory;
+using System.Linq.Expressions;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -15,7 +17,17 @@ namespace Aig.FarmacoVigilancia.Services
         {
             DalService = dalService;
         }
+        public async Task<List<FMV_IpsTB>> FindAll(Expression<Func<FMV_IpsTB, bool>> match)
+        {
+            try
+            {
+                return DalService.FindAll(match);
+            }
+            catch (Exception ex)
+            { }
 
+            return null;
+        }
         public async Task<GenericModel<FMV_IpsTB>> FindAll(GenericModel<FMV_IpsTB> model)
         {
             try
@@ -23,8 +35,8 @@ namespace Aig.FarmacoVigilancia.Services
                 model.Ldata = null; model.Total = 0;
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_IpsTB>()
-                              where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NoInforme.Contains(model.Filter) || data.RegSanitario.Contains(model.Filter) || data.NomComercial.Contains(model.Filter) || data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                where data.Deleted == false &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NoInforme.Contains(model.Filter) || data.LMedicamentos.Where(x=>x.RegSanitario.Contains(model.Filter) || x.NomComercial.Contains(model.Filter) || x.Laboratorio.Nombre.Contains(model.Filter)).Count()>0 || data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) ))&&
                               (model.Priority == null ? true : (data.Prioridad == (model.Priority>0?true:false))) &&
                               (model.FromDate==null?true:(data.FechaRecepcion >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
@@ -36,13 +48,13 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NoInforme.Contains(model.Filter) || data.RegSanitario.Contains(model.Filter) || data.NomComercial.Contains(model.Filter) || data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NoInforme.Contains(model.Filter) || data.LMedicamentos.Where(x => x.RegSanitario.Contains(model.Filter) || x.NomComercial.Contains(model.Filter) || x.Laboratorio.Nombre.Contains(model.Filter)).Count() > 0 || data.PrincActivo.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
                               (model.Priority == null ? true : (data.Prioridad == (model.Priority > 0 ? true : false))) &&
                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
-                               (model.RegisterId == null ? true : (data.RegistradorId == model.RegisterId)) &&
-                               (model.IpsStatusRevision == null ? true : (data.StatusRevision == model.IpsStatusRevision))
+                              (model.RegisterId == null ? true : (data.RegistradorId == model.RegisterId)) &&
+                              (model.IpsStatusRevision == null ? true : (data.StatusRevision == model.IpsStatusRevision))
                                select data).Count();  
             }
             catch (Exception ex)
@@ -118,58 +130,119 @@ namespace Aig.FarmacoVigilancia.Services
                     ws.Cell(1, 48).Value = "No. de Informe";
                     ws.Cell(1, 49).Value = "OBSERVACIONES";
 
-                    for (int row = 1; row <= model.Ldata.Count; row++)
-                    {
-                        var prod = model.Ldata[row - 1];
-                        ws.Cell(row + 1, 1).Value = prod.FechaRecepcion?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 2).Value = prod.FechaRegistrador?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 3).Value = prod.Registrador?.NombreCompleto ?? "";
-                        ws.Cell(row + 1, 4).Value = prod.NomComercial;
-                        ws.Cell(row + 1, 5).Value = prod.PrincActivo;
-                        ws.Cell(row + 1, 6).Value = prod.Laboratorio?.Nombre??"";
-                        ws.Cell(row + 1, 7).Value = prod.RegSanitario;
-                        ws.Cell(row + 1, 8).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData.PresentaCd);
-                        ws.Cell(row + 1, 9).Value = prod.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy") ?? "" + " " + prod.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 10).Value = prod.IpsData?.FechaRegistro?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 11).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRecepcion);
-                        ws.Cell(row + 1, 12).Value = prod.IpsData?.FechaAsigPreEva?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 13).Value = prod.Tramitador?.NombreCompleto ?? "";
-                        ws.Cell(row + 1, 14).Value = prod.IpsData !=null && prod.Innovador?"Si":"No";
-                        ws.Cell(row + 1, 15).Value = prod.IpsData != null && prod.Biologico ? "Si" : "No";
-                        ws.Cell(row + 1, 16).Value = prod.IpsData != null && prod.ReqIntercam ? "Si" : "No";
-                        ws.Cell(row + 1, 17).Value = prod.IpsData?.FechaAutPan?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 18).Value = prod.IpsData?.FechaPreEva?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 19).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRegistro);
-                        ws.Cell(row + 1, 20).Value = prod.Prioridad ? "Si" : "No";
-                        ws.Cell(row + 1, 21).Value = prod.FechaAsigEva?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 22).Value = prod.Evaluador?.NombreCompleto ?? "";
-                        ws.Cell(row + 1, 23).Value = DataModel.Helper.Helper.GetDescription(prod.ResumenEjec);
-                        ws.Cell(row + 1, 24).Value = DataModel.Helper.Helper.GetDescription(prod.ResumenEjecTrad);
-                        ws.Cell(row + 1, 25).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.TablaContenido?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 26).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.Introduccion ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 27).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SitMunAutCom ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 28).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.MedAdoptada ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 29).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.CamInfoSeg ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 30).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.Monografia ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 31).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ExpEstimada ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 32).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PresCasos ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 33).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ResHallazgo ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 34).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.OtraInfRel ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 35).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.FaltaEficacia ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 36).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.RevisionSenales ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 37).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionSenales ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 38).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionBeneficio ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 39).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.AnaBenRiesgo ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 40).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ConcluAcciones ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 41).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.AnexoApendice ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 42).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.CambioBalance ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 43).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PropPlanAccion ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 44).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SolInfoFabricante ?? enumFMV_IpsTipoPresentaiones.No);
-                        ws.Cell(row + 1, 45).Value = prod.FechaRev?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 46).Value = DataModel.Helper.Helper.GetDescription(prod.StatusRevision);
-                        ws.Cell(row + 1, 47).Value = prod.ConfecConNormativa ? "Si" : "No";
-                        ws.Cell(row + 1, 48).Value = prod.NoInforme;
-                        ws.Cell(row + 1, 49).Value = prod.IpsData?.Observaciones?? "";
+                    int row = 1;
+                    for (int idx = 0; idx < model.Ldata.Count; idx++)
+                    {                        
+                        var prod = model.Ldata[idx];
+                        if (prod.LMedicamentos?.Count> 0)
+                        {                            
+                            foreach (var med in prod.LMedicamentos)
+                            {
+                                row++;
+                                ws.Cell(row, 1).Value = prod.FechaRecepcion?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 2).Value = prod.FechaRegistrador?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 3).Value = prod.Registrador?.NombreCompleto ?? "";
+                                ws.Cell(row, 4).Value = med?.NomComercial; 
+                                ws.Cell(row, 5).Value = prod.PrincActivo;
+                                ws.Cell(row, 6).Value = med?.Laboratorio?.Nombre ?? "";
+                                ws.Cell(row, 7).Value = med?.RegSanitario;
+                                ws.Cell(row, 8).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData.PresentaCd);
+                                ws.Cell(row, 9).Value = prod.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy") ?? "" + " " + prod.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 10).Value = prod.IpsData?.FechaRegistro?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 11).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRecepcion);
+                                ws.Cell(row, 12).Value = prod.IpsData?.FechaAsigPreEva?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 13).Value = prod.Tramitador?.NombreCompleto ?? "";
+                                ws.Cell(row, 14).Value = prod.IpsData != null && prod.Innovador ? "Si" : "No";
+                                ws.Cell(row, 15).Value = prod.IpsData != null && prod.Biologico ? "Si" : "No";
+                                ws.Cell(row, 16).Value = prod.IpsData != null && prod.ReqIntercam ? "Si" : "No";
+                                ws.Cell(row, 17).Value = prod.IpsData?.FechaAutPan?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 18).Value = prod.IpsData?.FechaPreEva?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 19).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRegistro);
+                                ws.Cell(row, 20).Value = prod.Prioridad ? "Si" : "No";
+                                ws.Cell(row, 21).Value = prod.FechaAsigEva?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 22).Value = prod.Evaluador?.NombreCompleto ?? "";
+                                ws.Cell(row, 23).Value = DataModel.Helper.Helper.GetDescription(prod.ResumenEjec);
+                                ws.Cell(row, 24).Value = DataModel.Helper.Helper.GetDescription(prod.ResumenEjecTrad);
+                                ws.Cell(row, 25).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.TablaContenido ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 26).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.Introduccion ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 27).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SitMunAutCom ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 28).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.MedAdoptada ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 29).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.CamInfoSeg ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 30).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.Monografia ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 31).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ExpEstimada ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 32).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PresCasos ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 33).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ResHallazgo ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 34).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.OtraInfRel ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 35).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.FaltaEficacia ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 36).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.RevisionSenales ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 37).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionSenales ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 38).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionBeneficio ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 39).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.AnaBenRiesgo ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 40).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ConcluAcciones ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 41).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.AnexoApendice ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 42).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.CambioBalance ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 43).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PropPlanAccion ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 44).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SolInfoFabricante ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 45).Value = prod.FechaRev?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 46).Value = DataModel.Helper.Helper.GetDescription(prod.StatusRevision);
+                                ws.Cell(row, 47).Value = prod.ConfecConNormativa ? "Si" : "No";
+                                ws.Cell(row, 48).Value = prod.NoInforme;
+                                ws.Cell(row, 49).Value = prod.IpsData?.Observaciones ?? "";
+                            }
+                        }
+                        else
+                        {
+                            row++;
+                            ws.Cell(row, 1).Value = prod.FechaRecepcion?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 2).Value = prod.FechaRegistrador?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 3).Value = prod.Registrador?.NombreCompleto ?? "";
+                            ws.Cell(row, 4).Value = "";
+                            ws.Cell(row, 5).Value = prod.PrincActivo;
+                            ws.Cell(row, 6).Value = "";
+                            ws.Cell(row, 7).Value = "";
+                            ws.Cell(row, 8).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData.PresentaCd);
+                            ws.Cell(row, 9).Value = prod.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy") ?? "" + " " + prod.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 10).Value = prod.IpsData?.FechaRegistro?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 11).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRecepcion);
+                            ws.Cell(row, 12).Value = prod.IpsData?.FechaAsigPreEva?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 13).Value = prod.Tramitador?.NombreCompleto ?? "";
+                            ws.Cell(row, 14).Value = prod.IpsData != null && prod.Innovador ? "Si" : "No";
+                            ws.Cell(row, 15).Value = prod.IpsData != null && prod.Biologico ? "Si" : "No";
+                            ws.Cell(row, 16).Value = prod.IpsData != null && prod.ReqIntercam ? "Si" : "No";
+                            ws.Cell(row, 17).Value = prod.IpsData?.FechaAutPan?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 18).Value = prod.IpsData?.FechaPreEva?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 19).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRegistro);
+                            ws.Cell(row, 20).Value = prod.Prioridad ? "Si" : "No";
+                            ws.Cell(row, 21).Value = prod.FechaAsigEva?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 22).Value = prod.Evaluador?.NombreCompleto ?? "";
+                            ws.Cell(row, 23).Value = DataModel.Helper.Helper.GetDescription(prod.ResumenEjec);
+                            ws.Cell(row, 24).Value = DataModel.Helper.Helper.GetDescription(prod.ResumenEjecTrad);
+                            ws.Cell(row, 25).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.TablaContenido ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 26).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.Introduccion ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 27).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SitMunAutCom ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 28).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.MedAdoptada ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 29).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.CamInfoSeg ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 30).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.Monografia ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 31).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ExpEstimada ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 32).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PresCasos ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 33).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ResHallazgo ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 34).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.OtraInfRel ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 35).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.FaltaEficacia ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 36).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.RevisionSenales ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 37).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionSenales ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 38).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionBeneficio ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 39).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.AnaBenRiesgo ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 40).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ConcluAcciones ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 41).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.AnexoApendice ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 42).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.CambioBalance ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 43).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PropPlanAccion ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 44).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SolInfoFabricante ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 45).Value = prod.FechaRev?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 46).Value = DataModel.Helper.Helper.GetDescription(prod.StatusRevision);
+                            ws.Cell(row, 47).Value = prod.ConfecConNormativa ? "Si" : "No";
+                            ws.Cell(row, 48).Value = prod.NoInforme;
+                            ws.Cell(row, 49).Value = prod.IpsData?.Observaciones ?? "";
+                        }    
                     }
 
                     MemoryStream XLSStream = new();
@@ -236,10 +309,10 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
                                (data.NomComercial != null && data.NomComercial.Length > 0)
                                group data by data.NomComercial into g
                                orderby g.Count() descending
@@ -249,10 +322,10 @@ namespace Aig.FarmacoVigilancia.Services
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
                                (data.NomComercial != null && data.NomComercial.Length > 0)
                                group data by data.NomComercial into g
                                select g.Count()).Sum(x => x);
@@ -270,10 +343,10 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
                                (data.NomDCI != null && data.NomDCI.Length > 0)
                                group data by data.NomDCI into g
                                orderby g.Count() descending
@@ -283,10 +356,10 @@ namespace Aig.FarmacoVigilancia.Services
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
                                (data.NomDCI != null && data.NomDCI.Length > 0)
                                group data by data.NomComercial into g
                                select g.Count()).Sum(x => x);
@@ -304,10 +377,10 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
                                (data.LaboratorioId > 0)
                                group data by data.LaboratorioId into g
                                orderby g.Count() descending
@@ -317,12 +390,12 @@ namespace Aig.FarmacoVigilancia.Services
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
                                (data.LaboratorioId > 0)
-                               group data by data.Laboratorio into g
+                               group data by data.LaboratorioId into g
                                select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
@@ -338,10 +411,10 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
                                (data.RegSanitario != null && data.RegSanitario.Length > 0)
                                group data by data.RegSanitario into g
                                orderby g.Count() descending
@@ -351,10 +424,10 @@ namespace Aig.FarmacoVigilancia.Services
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
                                (data.RegSanitario != null && data.RegSanitario.Length > 0)
                                group data by data.RegSanitario into g
                                select g.Count()).Sum(x => x);
@@ -570,16 +643,20 @@ namespace Aig.FarmacoVigilancia.Services
                                where data.Deleted == false &&
                                (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                               group data by data.NoInforme into g
+                               orderby g.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = data.NomComercial,
-                               }).ToList();
+                                   Name = g.FirstOrDefault().NoInforme,
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
                                where data.Deleted == false &&
                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               select data).Count();
+                               group data by data.NoInforme into g
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }

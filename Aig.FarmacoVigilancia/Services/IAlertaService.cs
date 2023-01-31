@@ -1,12 +1,14 @@
 ﻿using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
+using System.Linq.Expressions;
 
 namespace Aig.FarmacoVigilancia.Services
 {
     public interface IAlertaService
     {
         Task<Stream> ExportToExcel(GenericModel<FMV_AlertaTB> model);
+        Task<List<FMV_AlertaTB>> FindAll(Expression<Func<FMV_AlertaTB, bool>> match);
         Task<GenericModel<FMV_AlertaTB>> FindAll(GenericModel<FMV_AlertaTB> model);
         Task<List<FMV_AlertaTB>> GetAll();
         Task<FMV_AlertaTB> Get(long id);

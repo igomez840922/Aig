@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using System.Linq.Expressions;
+using Aig.FarmacoVigilancia.Pages.Settings.OrigenAlerta;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -15,7 +17,17 @@ namespace Aig.FarmacoVigilancia.Services
         {
             DalService = dalService;
         }
+        public async Task<List<FMV_AlertaTB>> FindAll(Expression<Func<FMV_AlertaTB, bool>> match)
+        {
+            try
+            {
+                return DalService.FindAll(match);
+            }
+            catch (Exception ex)
+            { }
 
+            return null;
+        }
         public async Task<GenericModel<FMV_AlertaTB>> FindAll(GenericModel<FMV_AlertaTB> model)
         {
             try
@@ -24,7 +36,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_AlertaTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter) || data.OrigenAlerta.Nombre.Contains(model.Filter)))&&
                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
@@ -35,7 +47,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_AlertaTB>()
                                where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter))) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.NumNota.Contains(model.Filter) || data.Producto.Contains(model.Filter) || data.DCI.Contains(model.Filter) || data.OrigenAlerta.Nombre.Contains(model.Filter))) &&
                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&

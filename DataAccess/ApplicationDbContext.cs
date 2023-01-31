@@ -1351,11 +1351,11 @@ namespace DataAccess
               .HasForeignKey(e => e.LaboratorioId)
               .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<LaboratorioTB>()
-              .HasMany(e => e.LIps)
-              .WithOne(e => e.Laboratorio)
-              .HasForeignKey(e => e.LaboratorioId)
-              .OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<LaboratorioTB>()
+            //  .HasMany(e => e.LIps)
+            //  .WithOne(e => e.Laboratorio)
+            //  .HasForeignKey(e => e.LaboratorioId)
+            //  .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<LaboratorioTB>()
              .HasMany(e => e.LRfv)
@@ -1374,6 +1374,12 @@ namespace DataAccess
              .WithOne(e => e.Fabricant)
              .HasForeignKey(e => e.FabricanteId)
              .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<LaboratorioTB>()
+            .HasMany(e => e.LIpsMedicamento)
+            .WithOne(e => e.Laboratorio)
+            .HasForeignKey(e => e.LaboratorioId)
+            .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<FMV_OrigenAlertaTB>()
              .HasMany(e => e.LAlertas)
@@ -1423,11 +1429,11 @@ namespace DataAccess
         .HasForeignKey(e => e.EvaluadorId)
         .OnDelete(DeleteBehavior.NoAction);
 
-           // modelBuilder.Entity<InstitucionDestinoTB>()
-           //.HasMany(e => e.LNotas)
-           //.WithOne(e => e.InstitucionDestino)
-           //.HasForeignKey(e => e.InstitucionDestinoId)
-           //.OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<FMV_IpsTB>()
+           .HasMany(e => e.LMedicamentos)
+           .WithOne(e => e.Ips)
+           .HasForeignKey(e => e.IpsId)
+           .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<FMV_IpsTB>()
             .Property(e => e.IpsData)
@@ -1791,7 +1797,7 @@ namespace DataAccess
         public virtual DbSet<FMV_RamTB> FMV_Ram { get; set; }
         public virtual DbSet<FMV_FtTB> FMV_Ft { get; set; }
         public virtual DbSet<FMV_FfTB> FMV_Ff { get; set; }
-        public virtual DbSet<FMV_IpsTB> MV_Ips { get; set; }
+        public virtual DbSet<FMV_IpsTB> FMV_Ips { get; set; }        
         public virtual DbSet<FMV_RfvTB> FMV_Rfv { get; set; }
         public virtual DbSet<FMV_OrigenAlertaTB> FMV_OrigenAlerta { get; set; }
         public virtual DbSet<FMV_AlertaTB> FMV_Alerta { get; set; }
@@ -1814,7 +1820,7 @@ namespace DataAccess
         public virtual DbSet<FMV_EsaviVacunaTB> FMV_EsaviVacuna { get; set; }
         public virtual DbSet<FMV_EsaviVacunaEsaviTB> FMV_EsaviVacunaEsavi { get; set; }
         public virtual DbSet<FMV_FtDatosPaciente> FMV_FtDatosPaciente { get; set; }
-        
+        public virtual DbSet<FMV_IpsMedicamentoTB> FMV_IpsMedicamento { get; set; }        
 
     }
 }
