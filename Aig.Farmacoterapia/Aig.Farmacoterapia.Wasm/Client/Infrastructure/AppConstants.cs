@@ -36,12 +36,14 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             //    return $"api/user/{id}";
             //}
             public static string Delete=$"api/user/delete";
+
+            //public static string Get(string userName)
+            //{
+            //    return $"api/user/{userName}";
+            //}
+
+            public static string Get = $"api/user";
             
-           
-            public static string Get(string userName)
-            {
-                return $"api/user/{userName}";
-            }
         }
 
         public static class MediaEndpoints

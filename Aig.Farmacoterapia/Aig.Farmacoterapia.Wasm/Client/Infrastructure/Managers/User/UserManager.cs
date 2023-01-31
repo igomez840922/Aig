@@ -30,11 +30,17 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.User
             return await response.ToResult<bool>();
         }
 
+        //public async Task<IResult<UpdateProfileRequest>> GetAsync(string userName)
+        //{
+        //    var response = await _httpClient.GetAsync(AppConstants.UsersEndpoints.Get(userName));
+        //    return await response.ToResult<UpdateProfileRequest>();
+        //}
         public async Task<IResult<UpdateProfileRequest>> GetAsync(string userName)
         {
-            var response = await _httpClient.GetAsync(AppConstants.UsersEndpoints.Get(userName));
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.UsersEndpoints.Get, new { username = userName});
             return await response.ToResult<UpdateProfileRequest>();
         }
+       
         public async Task<IResult> UpdateProfileAsync(UpdateProfileRequest model)
         {
             var response = await _httpClient.PostAsJsonAsync(AppConstants.UsersEndpoints.UpdateProfile, model);
