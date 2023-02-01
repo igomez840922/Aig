@@ -162,7 +162,7 @@ namespace DataModel
 
         public void UpdateRule()
         {
-            Prioridad = false;
+            //Prioridad = false;
 
             if (IpsData != null)
             {

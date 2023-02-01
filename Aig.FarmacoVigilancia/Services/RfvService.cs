@@ -20,21 +20,24 @@ namespace Aig.FarmacoVigilancia.Services
         {
             try
             {
+                
                 model.Ldata = null; model.Total = 0;
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_RfvTB>()
                               where data.Deleted == false &&
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter) || data.DireccionFisica.Contains(model.Filter) || data.Telefonos.Contains(model.Filter) || data.Correos.Contains(model.Filter)))&&
                               (model.LabId == null ? true : (data.LaboratorioId == model.LabId )) &&
-                              (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType))
-                              orderby data.CreatedDate
+                              (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType)) &&
+                              (model.TipoCargo == null ? true : (data.TipoCargo == model.TipoCargo))
+                               orderby data.CreatedDate
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_RfvTB>()
                                where data.Deleted == false &&
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NombreCompleto.Contains(model.Filter) || data.DireccionFisica.Contains(model.Filter) || data.Telefonos.Contains(model.Filter) || data.Correos.Contains(model.Filter))) &&
                               (model.LabId == null ? true : (data.LaboratorioId == model.LabId)) &&
-                              (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType))
+                              (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType)) &&
+                              (model.TipoCargo == null ? true : (data.TipoCargo == model.TipoCargo))
                                orderby data.CreatedDate
                                select data).Count();  
             }

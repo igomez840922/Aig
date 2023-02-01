@@ -1820,7 +1820,8 @@ namespace DataAccess
         public virtual DbSet<FMV_EsaviVacunaTB> FMV_EsaviVacuna { get; set; }
         public virtual DbSet<FMV_EsaviVacunaEsaviTB> FMV_EsaviVacunaEsavi { get; set; }
         public virtual DbSet<FMV_FtDatosPaciente> FMV_FtDatosPaciente { get; set; }
-        public virtual DbSet<FMV_IpsMedicamentoTB> FMV_IpsMedicamento { get; set; }        
+        public virtual DbSet<FMV_IpsMedicamentoTB> FMV_IpsMedicamento { get; set; }
+        public virtual DbSet<FarmacoTB> Farmaco { get; set; }
 
     }
 }

@@ -95,7 +95,8 @@
                                 </label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaVacunacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                        @*<RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaVacunacion" ShowTime="false" DateFormat="dd/MM/yyyy" />*@
+                                        <InputText class="form-control" @bind-Value="Data.FechaVacunacion" />
                                         <ValidationMessage For=@(() => Data.FechaVacunacion) />
                                     </div>
                                 </div>

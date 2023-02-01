@@ -150,6 +150,7 @@ builder.Services.AddScoped<IApiConnectionService, ApiConnectionService>();
 builder.Services.AddScoped<ITokenMedService, TokenMedService>();
 builder.Services.AddScoped<IMedicamentosService, MedicamentosService>();
 builder.Services.AddScoped<IApiConnectionFileUploadService, ApiConnectionFileUploadService>();
+builder.Services.AddScoped<IFarmacoService, FarmacoService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 

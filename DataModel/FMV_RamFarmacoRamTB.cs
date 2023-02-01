@@ -44,10 +44,17 @@ namespace DataModel
         private string concomitantes;
         public string Concomitantes { get => concomitantes; set => SetProperty(ref concomitantes, value); }
 
-        // Fecha de RAM, null
-        private DateTime? fechaRam;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaRam { get => fechaRam; set => SetProperty(ref fechaRam, value); }
+        // Fecha de RAM, Inicio
+        private string fechaRam;
+        [StringLength(250)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string FechaRam { get => fechaRam; set => SetProperty(ref fechaRam, value); }
+
+        // Fecha de RAM, Fin
+        private string fechaRamFin;
+        [StringLength(250)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string FechaRamFin { get => fechaRamFin; set => SetProperty(ref fechaRamFin, value); }
 
         // Desenlace. Total=7. Recuperado con secuelas, Recuperado sin secuelas, En recuperación, No recuperado, Desconocido, Muerte, null
         private enumFMV_RAMDesenlace desenlace;

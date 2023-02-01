@@ -112,12 +112,12 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                 foreach (var farm in Data.LFarmacos)
                 {
                     E5 += farm.FarmacoSospechosoDci;
-                    W5 += farm.FechaTratamiento?.ToString("dd/MM/yyyy")??"";
+                    W5 += farm.FechaTratamiento;//farm.FechaTratamiento?.ToString("dd/MM/yyyy")??"";
                     if (farm.LRams != null)
                     {
                         foreach (var ram in farm.LRams)
                         {
-                            X5+=ram.FechaRam?.ToString("dd/MM/yyyy") ?? "";
+                            X5+=ram.FechaRam;
                             Y5 += ram.Desenlace != enumFMV_RAMDesenlace.NA ? DataModel.Helper.Helper.GetDescription(ram.Desenlace) : "";
                             AC5 += ram.EvoDosis != enumFMV_RAMEvolucionDosis.NA ? DataModel.Helper.Helper.GetDescription(ram.EvoDosis) : "";
                             AD5 += ram.EvoTerapia != enumFMV_RAMEvolucionTerapia.NA ? DataModel.Helper.Helper.GetDescription(ram.EvoTerapia) : "";                            
@@ -450,6 +450,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                     }
                 }
 
+                Data.CodigoNotiFacedra = Data.RamOrigenType == enumFMV_RAMOrigenType.ServicioWeb ? Data.CodigoNotiFacedra : "";
                 //verificar Codigo NotiFacedra
                 if (!string.IsNullOrEmpty(Data.CodigoNotiFacedra))
                 {
@@ -463,6 +464,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
 
                 Data.FarmacosDesc = "";
                 Data.RamDesc = "";
+                Data.GravedadDesc = "";                
                 if (Data.LFarmacos?.Count() > 0)
                 {
                     foreach (var dt in Data.LFarmacos)
@@ -473,6 +475,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                         foreach (var ram in dt.LRams)
                         {
                             Data.RamDesc += string.Format("** {0} **", ram.Ram);
+                            Data.GravedadDesc += string.Format("** {0} **", ram.Gravedad);
                         }
                     }
                 }

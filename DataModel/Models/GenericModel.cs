@@ -1,4 +1,5 @@
 ﻿using DataModel.Helper;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -63,6 +64,7 @@ namespace DataModel.Models
         public enumFMV_NoteType? NotaType { get; set; } = null;
         public enum_LaboratoryType? LaboratoryType { get; set; } = null;
         public enumFMV_StatusPMR? StatusPMR { get; set; } = null;
+        public enum_Cargos? TipoCargo { get; set; } = null;
 
         public long? NParentId { get; set; }
         public int? Priority { get; set; } = null;

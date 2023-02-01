@@ -31,9 +31,10 @@ namespace DataModel
 
 
         // Fecha de Esavi
-        private DateTime? fechaEsavi;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaEsavi { get => fechaEsavi; set => SetProperty(ref fechaEsavi, value); }
+        private string fechaEsavi;
+        [StringLength(250)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string FechaEsavi { get => fechaEsavi; set => SetProperty(ref fechaEsavi, value); }
 
 
         // Desenlace

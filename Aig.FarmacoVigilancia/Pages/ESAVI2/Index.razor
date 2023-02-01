@@ -174,7 +174,7 @@
                                                                                                         </tr>
                                                                                                         <tr>
                                                                                                             <th>@languageContainerService.Keys["Fecha de Vacunación"]</th>
-                                                                                                            <td>@(vacun.FechaVacunacion?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                            <td>@(vacun.FechaVacunacion)</td>
                                                                                                         </tr>
                                                                                                         </tbody>
                                                                                                     </table>
@@ -201,7 +201,7 @@
                                                                                                                     <tr>
                                                                                                                         <td scope="row">@(DataModel.Helper.Helper.GetDescription(esavi.HayEsavi))</td>
                                                                                                                         <td>@(esavi.EsaviDescripcion)</td>
-                                                                                                                        <td>@(esavi.FechaEsavi?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                                        <td>@(esavi.FechaEsavi)</td>
                                                                                                                         <td>@(DataModel.Helper.Helper.GetDescription(esavi.Desenlace))</td>
                                                                                                                         <td>@(esavi.Soc)</td>
                                                                                                                         <td>@(esavi.TerWhoArt)</td>

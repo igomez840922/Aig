@@ -136,16 +136,22 @@
                                                                 <ValidationMessage For=@(() => Data.RamOrigenType) />
                                                             </div>
                                                         </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label>@languageContainerService.Keys["Código Noti-Facedra"]</label>
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.CodigoNotiFacedra" />
-                                                                    <ValidationMessage For=@(() => Data.CodigoNotiFacedra) />
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        @switch (Data.RamOrigenType)
+                                                        {
+                                                            case enumFMV_RAMOrigenType.ServicioWeb:{
+                                                                    <div class="col-sm-3">
+                                                                        <label>@languageContainerService.Keys["Código Noti-Facedra"]</label>
+                                                                        <div class="form-group">
+                                                                            <div class="form-line">
+                                                                                <InputText class="form-control" @bind-Value="Data.CodigoNotiFacedra" />
+                                                                                <ValidationMessage For=@(() => Data.CodigoNotiFacedra) />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    break;
+                                                                }
+                                                        }
+                                                        
 
                                                         <div class="col-sm-3">
                                                             <label>@languageContainerService.Keys["ID Facedra"]</label>
@@ -430,7 +436,7 @@
                                                                             <tr>
                                                                                 <td scope="row">@dt.Nombre</td>
                                                                                 <td>@dt.ViaAdministracion</td>                                                                                
-                                                                                <td>@(dt.FechaTratamiento?.ToString("dd/MM/yyyy")??"")</td>
+                                                                                <td>@(dt.FechaTratamiento)</td>
                                                                                 <td>@dt.Indicacion</td>
                                                                                 <td style="text-align:right">
                                                                                     <div class="btn-group">
@@ -471,7 +477,8 @@
                                                                         <th>@languageContainerService.Keys["RAM"]</th>
                                                                         <th>@languageContainerService.Keys["SOC"]</th>
                                                                         <th>@languageContainerService.Keys["Término MedDRA"]</th>
-                                                                        <th>@languageContainerService.Keys["Fecha RAM"]</th>
+                                                                        <th>@languageContainerService.Keys["Fecha Inicial de RAM"]</th>
+                                                                        <th>@languageContainerService.Keys["Fecha Final de RAM"]</th>
                                                                         <th>@languageContainerService.Keys["Descenlace"]</th>
                                                                         <th>@languageContainerService.Keys["Evo. sobre Dosis"]</th>
                                                                         <th>@languageContainerService.Keys["Evo. sobre Terapia"]</th>
@@ -494,7 +501,8 @@
                                                                                         <td>@ram.Ram</td>
                                                                                         <td>@ram.Soc</td>
                                                                                         <td>@ram.TerWhoArt</td>
-                                                                                        <td>@(ram.FechaRam?.ToString("dd/MM/yyyy")??"")</td>
+                                                                                        <td>@(ram.FechaRam)</td>
+                                                                                        <td>@(ram.FechaRamFin)</td>
                                                                                         <td>@(DataModel.Helper.Helper.GetDescription(ram.Desenlace))</td>
                                                                                         <td>@(DataModel.Helper.Helper.GetDescription(ram.EvoDosis))</td>
                                                                                         <td>@(DataModel.Helper.Helper.GetDescription(ram.EvoTerapia))</td>

@@ -49,7 +49,8 @@
                                 <label>@languageContainerService.Keys["Fecha de Tratamiento"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                        @*<RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Data.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />*@
+                                        <InputText class="form-control" @bind-Value="Data.FechaTratamiento" />
                                         <ValidationMessage For=@(() => Data.FechaTratamiento) />
                                     </div>
                                 </div>

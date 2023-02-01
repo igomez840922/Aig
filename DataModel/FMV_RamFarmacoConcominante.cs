@@ -26,9 +26,10 @@ namespace DataModel
         public string ViaAdministracion { get => viaAdministracion; set => SetProperty(ref viaAdministracion, value); }
 
         // Fecha de Tratamiento. null
-        private DateTime? fechaTratamiento;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaTratamiento { get => fechaTratamiento; set => SetProperty(ref fechaTratamiento, value); }
+        private string fechaTratamiento;
+        [StringLength(250)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string FechaTratamiento { get => fechaTratamiento; set => SetProperty(ref fechaTratamiento, value); }
 
         // Indicación. null
         private string indicacion;

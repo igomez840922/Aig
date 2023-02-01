@@ -153,7 +153,7 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 18).Value = prod.InstitucionDestino?.Nombre;
                         ws.Cell(row + 1, 19).Value = prod.Notificador;
                         ws.Cell(row + 1, 20).Value = DataModel.Helper.Helper.GetDescription(prod.IncidenciaCaso);
-                        ws.Cell(row + 1, 21).Value = prod.OtrasEspecificaciones?.NumIngresoVigiflow ?? "";
+                        ws.Cell(row + 1, 21).Value = prod.OtrasEspecificaciones?.CodigoNotiFacedra ?? "";
                         ws.Cell(row + 1, 22).Value = DataModel.Helper.Helper.GetDescription(prod.OtrasEspecificaciones?.RevisionRs?? enumFMV_FfAcciones.NA);
                         ws.Cell(row + 1, 23).Value = DataModel.Helper.Helper.GetDescription(prod.OtrasEspecificaciones?.Monitoreo ?? enumFMV_FfAcciones.NA);
                         ws.Cell(row + 1, 24).Value = prod.OtrasEspecificaciones.NotificacionRFV;
@@ -167,9 +167,9 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 32).Value = DataModel.Helper.Helper.GetDescription(prod.DatosPaciente.Sexo);
                         ws.Cell(row + 1, 33).Value = prod.DatosPaciente.Edad;
                         ws.Cell(row + 1, 34).Value = prod.DatosPaciente.HistClinica;
-                        ws.Cell(row + 1, 35).Value = prod.DatosPaciente.FechaTratInicial?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 36).Value = prod.DatosPaciente.FechaTratFinal?.ToString("dd/MM/yyyy") ?? "";
-                        ws.Cell(row + 1, 37).Value = prod.DatosPaciente.FechaFT?.ToString("dd/MM/yyyy") ?? "";
+                        ws.Cell(row + 1, 35).Value = prod.DatosPaciente.FechaTratInicial;
+                        ws.Cell(row + 1, 36).Value = prod.DatosPaciente.FechaTratFinal;
+                        ws.Cell(row + 1, 37).Value = prod.DatosPaciente.FechaFT;
                         ws.Cell(row + 1, 38).Value = prod.DatosPaciente.Indicacion;
                         ws.Cell(row + 1, 39).Value = prod.DatosPaciente.ViaAdministracion;
                         ws.Cell(row + 1, 40).Value = prod.DatosPaciente.Concomitantes;

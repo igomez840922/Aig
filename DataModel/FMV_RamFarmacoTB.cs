@@ -24,7 +24,7 @@ namespace DataModel
 
 
         private string farmacoSospechosoComercial;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string FarmacoSospechosoComercial { get => farmacoSospechosoComercial; set => SetProperty(ref farmacoSospechosoComercial, value); }
 
@@ -55,10 +55,18 @@ namespace DataModel
         [StringLength(300)]
         public string Indicacion { get => indicacion; set => SetProperty(ref indicacion, value); }
 
-        // Fecha de Tratamiento. null
-        private DateTime? fechaTratamiento;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaTratamiento { get => fechaTratamiento; set => SetProperty(ref fechaTratamiento, value); }
+        // Fecha de Tratamiento. Inicial
+        private string fechaTratamiento;
+        [StringLength(250)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string FechaTratamiento { get => fechaTratamiento; set => SetProperty(ref fechaTratamiento, value); }
+
+        // Fecha de Tratamiento. Final
+        private string fechaTratamientoFin;
+        [StringLength(250)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string FechaTratamientoFin { get => fechaTratamientoFin; set => SetProperty(ref fechaTratamientoFin, value); }
+
 
         // Conducta sobre Dosis. Total=3. Disminuyó la dosis, No disminuyó la dosis, null
         private enumFMV_RAMConductaDosis conductaDosis;

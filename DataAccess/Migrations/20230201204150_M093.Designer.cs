@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230201204150_M093")]
+    partial class M093
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2995,9 +2997,8 @@ namespace DataAccess.Migrations
                     b.Property<long?>("EsaviVacunaId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("FechaEsavi")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaEsavi")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
@@ -3075,9 +3076,8 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("FechaExp")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FechaVacunacion")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaVacunacion")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
@@ -3303,17 +3303,14 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("FechaFT")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaFT")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("FechaTratFinal")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaTratFinal")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("FechaTratInicial")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaTratInicial")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
@@ -4185,13 +4182,11 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("bigint");
 
-                    b.Property<string>("FechaRam")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaRam")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("FechaRamFin")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaRamFin")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
@@ -4293,13 +4288,11 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("FechaTratamiento")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaTratamiento")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("FechaTratamientoFin")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaTratamientoFin")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");

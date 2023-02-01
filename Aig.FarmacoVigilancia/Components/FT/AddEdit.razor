@@ -281,11 +281,11 @@
                                 <h5>@languageContainerService.Keys["Acciones y Resultados"]</h5>
                                 <div class="row clearfix">
                                     <div class="col-sm-4">
-                                        <label>@languageContainerService.Keys["Número de Ingreso a Vigiflow"]</label>
+                                        <label>@languageContainerService.Keys["Código Noti-Facedra"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Data.OtrasEspecificaciones.NumIngresoVigiflow" />
-                                                <ValidationMessage For=@(() => Data.OtrasEspecificaciones.NumIngresoVigiflow) />
+                                                <InputText class="form-control" @bind-Value="Data.OtrasEspecificaciones.CodigoNotiFacedra" />
+                                                <ValidationMessage For=@(() => Data.OtrasEspecificaciones.CodigoNotiFacedra) />
                                             </div>
                                         </div>
                                     </div>
@@ -472,7 +472,8 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" Min="Data.FechaEntregaEva" TValue="DateTime?" @bind-Value="Data.DatosPaciente.FechaTratInicial" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                @*<RadzenDatePicker Max="DateTime.Today" Min="Data.FechaEntregaEva" TValue="DateTime?" @bind-Value="Data.DatosPaciente.FechaTratInicial" ShowTime="false" DateFormat="dd/MM/yyyy" />*@
+                                                <InputText class="form-control" @bind-Value="Data.DatosPaciente.FechaTratInicial" />
                                                 <ValidationMessage For=@(() => Data.DatosPaciente.FechaTratInicial) />
                                             </div>
                                         </div>
@@ -483,7 +484,8 @@
                                         </label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" Min="Data.DatosPaciente.FechaTratInicial" TValue="DateTime?" @bind-Value="Data.DatosPaciente.FechaTratFinal" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                @*<RadzenDatePicker Max="DateTime.Today" Min="Data.DatosPaciente.FechaTratInicial" TValue="DateTime?" @bind-Value="Data.DatosPaciente.FechaTratFinal" ShowTime="false" DateFormat="dd/MM/yyyy" />*@
+                                                <InputText class="form-control" @bind-Value="Data.DatosPaciente.FechaTratFinal" />
                                                 <ValidationMessage For=@(() => Data.DatosPaciente.FechaTratFinal) />
                                             </div>
                                         </div>
@@ -492,7 +494,8 @@
                                         <label>@languageContainerService.Keys["Fecha FT"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" Min="Data.DatosPaciente.FechaTratInicial" TValue="DateTime?" @bind-Value="Data.DatosPaciente.FechaFT" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                @*<RadzenDatePicker Max="DateTime.Today" Min="Data.DatosPaciente.FechaFT" TValue="DateTime?" @bind-Value="Data.DatosPaciente.FechaFT" ShowTime="false" DateFormat="dd/MM/yyyy" />*@
+                                                <InputText class="form-control" @bind-Value="Data.DatosPaciente.FechaFT" />
                                                 <ValidationMessage For=@(() => Data.DatosPaciente.FechaFT) />
                                             </div>
                                         </div>
@@ -557,7 +560,7 @@
                                                                 <tr>
                                                                     <td scope="row">@dt.Nombre</td>
                                                                     <td>@dt.ViaAdministracion</td>
-                                                                    <td>@(dt.FechaTratamiento?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                    <td>@(dt.FechaTratamiento)</td>
                                                                     <td>@dt.Indicacion</td>
                                                                     <td style="text-align:right">
                                                                         <div class="btn-group">
@@ -899,7 +902,9 @@
     {
         <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
     }
-
-    <div class="modal-backdrop fade show"></div>
+    @if (openAttachment)
+    {
+        <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
+    }
 }
 

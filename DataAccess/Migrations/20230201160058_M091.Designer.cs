@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230201160058_M091")]
+    partial class M091
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2269,43 +2271,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Distrito");
                 });
 
-            modelBuilder.Entity("DataModel.FarmacoTB", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NombreComercial")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("NombreDCI")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Farmaco");
-                });
-
             modelBuilder.Entity("DataModel.FMV_AlertaTB", b =>
                 {
                     b.Property<long>("Id")
@@ -2492,6 +2457,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("CodigoNotiFacedra")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -2541,6 +2507,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("IdFacedra")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -2995,9 +2962,8 @@ namespace DataAccess.Migrations
                     b.Property<long?>("EsaviVacunaId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("FechaEsavi")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaEsavi")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
@@ -3075,9 +3041,8 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("FechaExp")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FechaVacunacion")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaVacunacion")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
@@ -3303,17 +3268,14 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("FechaFT")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaFT")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("FechaTratFinal")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaTratFinal")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("FechaTratInicial")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaTratInicial")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
@@ -3984,6 +3946,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("CodigoNotiFacedra")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -4104,8 +4067,7 @@ namespace DataAccess.Migrations
                         .IsUnique();
 
                     b.HasIndex("CodigoNotiFacedra")
-                        .IsUnique()
-                        .HasFilter("[CodigoNotiFacedra] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("EvaluadorId");
 
@@ -4185,13 +4147,8 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("bigint");
 
-                    b.Property<string>("FechaRam")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("FechaRamFin")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaRam")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
@@ -4285,6 +4242,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FarmacoSospechosoComercial")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -4293,13 +4251,8 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("FechaTratamiento")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("FechaTratamientoFin")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime?>("FechaTratamiento")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");

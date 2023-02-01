@@ -159,7 +159,7 @@ namespace Aig.FarmacoVigilancia.Services
                                 ws.Cell(row + 1, 25).Value = DataModel.Helper.Helper.GetDescription(notifica.Estatus);
                                 ws.Cell(row + 1, 26).Value = notifica.Observaciones;
                                 ws.Cell(row + 1, 27).Value = DataModel.Helper.Helper.GetDescription(data.HayEsavi);
-                                ws.Cell(row + 1, 28).Value = data.FechaEsavi?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row + 1, 28).Value = data.FechaEsavi;
                                 ws.Cell(row + 1, 29).Value = DataModel.Helper.Helper.GetDescription(data.Desenlace);
                                 ws.Cell(row + 1, 30).Value = data.EsaviDescripcion;
                                 ws.Cell(row + 1, 31).Value = data.TerWhoArt;
@@ -177,7 +177,7 @@ namespace Aig.FarmacoVigilancia.Services
                                 ws.Cell(row + 1, 43).Value = vac.Lote;
                                 ws.Cell(row + 1, 44).Value = vac.FechaExp?.ToString("dd/MM/yyyy") ?? "";
                                 ws.Cell(row + 1, 45).Value = vac.RegSanitario;
-                                ws.Cell(row + 1, 46).Value = vac.FechaVacunacion?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row + 1, 46).Value = vac.FechaVacunacion;
                                 ws.Cell(row + 1, 47).Value = vac.Indicaciones;
                                 ws.Cell(row + 1, 48).Value = vac.DosisViaAdmin;
                                 ws.Cell(row + 1, 49).Value = DataModel.Helper.Helper.GetDescription(vac.DosisPresenta);
