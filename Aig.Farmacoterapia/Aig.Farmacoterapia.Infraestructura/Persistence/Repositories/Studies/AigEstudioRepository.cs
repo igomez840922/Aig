@@ -15,10 +15,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
     public class AigEstudioRepository : IAigEstudioRepository
     {
         private readonly IRepositoryAsync<AigEstudio> _repository;
+        private readonly IRepositoryAsync<AigEstudioEvaluador> _evaluatorRepository;
         private readonly ISystemLogger _logger;
-        public AigEstudioRepository(IRepositoryAsync<AigEstudio> repository, ISystemLogger logger)
+        public AigEstudioRepository(IRepositoryAsync<AigEstudio> repository, IRepositoryAsync<AigEstudioEvaluador> evaluatorRepository, ISystemLogger logger)
         {
             _repository = repository;
+            _evaluatorRepository = evaluatorRepository;
             _logger = logger;
         }
         public async Task<PaginatedResult<AigEstudio>> ListAsync(PageSearchArgs args)
@@ -124,5 +126,39 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
             }
             return result;
         }
+
+        public List<string> ListEvaluatorAsync(long studyId)
+        {
+            var result = new List<string>();
+            try
+            {
+                var filterSpec = new StudyEvaluadorSpecification(studyId);
+                result = _evaluatorRepository.Entities
+                    .WhereBy(filterSpec)
+                    .Select(p => p.UserId)
+                    .ToList();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc.Message, exc);
+            }
+            return result;
+        }
+        public bool SetEvaluatorsAsync(long id, string[] evaluators)
+        {
+            var result =false;
+            try
+            {
+               
+
+
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc.Message, exc);
+            }
+            return result;
+        }
+      
     }
 }

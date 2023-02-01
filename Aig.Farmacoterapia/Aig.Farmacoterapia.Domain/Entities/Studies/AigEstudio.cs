@@ -11,13 +11,13 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
 {
     public class AigEstudio : AigEstudioBase
     {
-        public string? AgenciaDistribuidora { get; set; } //Match
-        public AigTramitanteEstudio Tramitante { get; set; } //Match
+        public string? AgenciaDistribuidora { get; set; }
+        public AigTramitanteEstudio Tramitante { get; set; } = new AigTramitanteEstudio();
         public string? ObservacionTramitante { get; set; } //Match
-        public EstadoEstudio Estado { get; set; }
+        public EstadoEstudio Estado { get; set; } = EstadoEstudio.NotAuthorized;
         public bool Placebo { get; set; } = false;
         public string? FrecuenciaImportacion { get; set; }
-        public AigNotaEstudio Nota { get; set; }
+        public AigNotaEstudio Nota { get; set; } = new AigNotaEstudio();
 
         private ICollection<AigEstudioEvaluador> _estudioEvaluador;
         public virtual ICollection<AigEstudioEvaluador> EstudioEvaluador => _estudioEvaluador ??= new HashSet<AigEstudioEvaluador>();

@@ -33,12 +33,8 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] AigMedicamento model) => Ok(await _mediator.Send(new AddEditMedicamentCommand(model)));
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete(long id) => Ok(await _mediator.Send(new DeleteMedicamentCommand() { Id = id }));
-
         [HttpPost("delete")]
         public async Task<IActionResult> Delete([FromBody] DeleteMedicamentCommand model) => Ok(await _mediator.Send(model));
-
 
         [HttpPost("pharmaceutica")]
         public async Task<IActionResult> GetPharmaceutical(GetPharmaceuticalQuery model) => Ok(await _mediator.Send(model));

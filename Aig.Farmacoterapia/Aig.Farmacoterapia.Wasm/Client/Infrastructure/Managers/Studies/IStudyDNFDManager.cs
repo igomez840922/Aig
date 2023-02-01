@@ -13,6 +13,6 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
         Task<IResult<AigEstudioDNFD>> GetAsync(long id);
         Task<IResult> DeleteAsync(long id);
         Task<IResult<bool>> UpdateAsync(AigEstudioDNFD request);
-      
+        Task<IResult<bool>> EvaluateAsync(long id);
     }
 }

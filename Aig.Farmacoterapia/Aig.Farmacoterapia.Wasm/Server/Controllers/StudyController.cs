@@ -27,5 +27,13 @@ namespace Aig.Farmacoterapia.Api.Controllers
 
         [HttpPost("delete")]
         public async Task<IActionResult> Delete([FromBody] DeleteStudyCommand model) => Ok(await _mediator.Send(model));
+
+        [HttpGet("evaluators/{studyId}")]
+        public async Task<IActionResult> GetEvaluatorQuery(long studyId) => Ok(await _mediator.Send(new GetEvaluatorQuery(studyId)));
+
+        [HttpPost]
+        [Route("evaluators")]
+        public async Task<IActionResult> SetEvaluators([FromBody] SetEvaluatorCommand model) => Ok(await _mediator.Send(model));
+       
     }
 }

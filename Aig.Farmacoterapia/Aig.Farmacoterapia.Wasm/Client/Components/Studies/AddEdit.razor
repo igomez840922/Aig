@@ -1,5 +1,6 @@
 ﻿@attribute [Authorize]
 @using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
 @using Aig.Farmacoterapia.Wasm.Client.Extensions
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Medicament
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
@@ -12,7 +13,7 @@
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Blazored.FluentValidation
 @using System.Globalization
-@inject IStudyDNFDManager _manager;
+@inject IStudyManager _manager;
 <style>
     .mud-dialog {
         max-height: calc(108vh - var(--mud-appbar-height));
@@ -30,7 +31,7 @@
                     {
                         <MudText Typo="Typo.h6">
                             <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
-                            Nueva evaluación
+                            Nueva solicitud
                         </MudText>
                     }
                     else
@@ -73,7 +74,7 @@
                             <MudItem xs="12">
                                 <MudGrid>
 
-                                    <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
+                                    <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
                                         <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
                                     </MudItem>
 
@@ -86,6 +87,11 @@
                                         <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de asignación" @bind-Date="_modelData.FechaAsignacion" />
                                         <ValidationMessage For="@(() => _modelData.FechaAsignacion)" />
                                     </MudItem>
+                                        
+                                    <MudItem xs="12" md="2" Style="padding:3px !important;margin-top:18px !important">
+                                    <MudCheckBox @bind-Checked="_modelData.Placebo" Label="Incluye Placebo" Color="Color.Primary"></MudCheckBox>
+                                </MudItem>
+
                                 </MudGrid>
                             </MudItem>
                         </MudGrid>
@@ -108,7 +114,6 @@
                         </MudGrid>
 
 
-
                         <MudGrid Style="margin-top:12px !important">
                             <MudItem xs="12">
                                 <MudGrid>
@@ -117,53 +122,23 @@
                                         <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Participantes)" @bind-Value="_modelData.Participantes" Label="No.Participantes" />
                                     </MudItem>
 
-                                    <MudItem xs="12" md="5" Style="padding:3px !important;">
+                                    <MudItem xs="12" md="3" Style="padding:3px !important;">
                                         <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Duracion)" @bind-Value="_modelData.Duracion" Label="Duración del estudio" />
                                     </MudItem>
 
                                     
-                                    <MudItem xs="12" md="5" Style="padding:3px !important;">
+                                  <MudItem xs="12" md="3" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.FrecuenciaImportacion)" @bind-Value="_modelData.FrecuenciaImportacion" Label="Frecuencia de Importación" />
+                                    </MudItem>
+                                    
+                                    <MudItem xs="12" md="4" Style="padding:3px !important;">
                                         <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Poblacion)" @bind-Value="_modelData.Poblacion" Label="Población a estudiar" />
                                     </MudItem>
 
-                                </MudGrid>
-                            </MudItem>
-                        </MudGrid>
-
-                        <MudGrid Style="margin-top:10px !important">
-                            <MudItem xs="12">
-                                <MudGrid>
-
-                                    <MudItem xs="12" md="3" Style="padding:3px !important">
-                                        <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de evaluación" @bind-Date="_modelData.FechaEvaluacion" />
-                                        <ValidationMessage For="@(() => _modelData.FechaEvaluacion)" />
-                                    </MudItem>
-
-                                    <MudItem xs="12" md="6" Style="padding:3px !important; margin-top:18px !important">
-                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.NotaEvaluacion)" @bind-Value="_modelData.NotaEvaluacion" Label="Nota de evaluación" />
-                                    </MudItem>
-
-                                    <MudItem xs="12" md="3" Style="padding:3px !important;margin-top:18px !important">
-                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.RegistroProtocoloDIGESA)" @bind-Value="_modelData.RegistroProtocoloDIGESA" Label="Registro en DIGESA" />
-                                    </MudItem>
 
                                 </MudGrid>
                             </MudItem>
                         </MudGrid>
-
-                        <MudGrid Style="margin-top:12px !important">
-                            <MudItem xs="12">
-                                <MudGrid>
-
-                                    <MudItem xs="12" md="12" Style="padding:3px !important">
-                                        <MudTextField T="string" Label="Observaciones del Evaluador" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ObservacionesEvaluador" Lines="4" />
-                                    </MudItem>
-
-                                </MudGrid>
-                            </MudItem>
-                        </MudGrid>
-
-
 
                         <MudGrid Style="margin-top:10px !important">
                             <MudItem xs="12">
@@ -172,22 +147,48 @@
                                     <MudItem xs="12" md="6" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Centro de investigación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.CentroInvestigacion" Lines="4" />
                                     </MudItem>
-                                    <MudItem xs="12" md="6" Style="padding:3px !important">
-                                        <MudTextField T="string" Label="Comité de Bioetica" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ComiteBioetica" Lines="4" />
+                                   <MudItem xs="12" md="6" Style="padding:3px !important">
+                                        <MudTextField T="string" Label="Agencia distribuidora" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.AgenciaDistribuidora" Lines="4" />
                                     </MudItem>
                                 </MudGrid>
                             </MudItem>
                         </MudGrid>
 
+                         <MudGrid Style="margin-top:12px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                  <MudItem xs="12" md="3" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Tramitante.Nombre)" @bind-Value="_modelData.Tramitante.Nombre" Label="Tramitante" />
+                                    </MudItem>
+
+                                    <MudItem xs="12" md="3" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Tramitante.Idoneidad)" @bind-Value="_modelData.Tramitante.Idoneidad" Label="Idoneidad" />
+                                    </MudItem>
+
+                                    
+                                    <MudItem xs="12" md="3" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Tramitante.Correo)" @bind-Value="_modelData.Tramitante.Correo" Label="Correo" />
+                                    </MudItem>
+
+                                   <MudItem xs="12" md="3" Style="padding:3px !important;">
+                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Tramitante.Telefono)" @bind-Value="_modelData.Tramitante.Telefono" Label="Teléfono" />
+                                    </MudItem>
+
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
 
                     </MudTabPanel>
                    
+                    
+
                     <MudTabPanel Icon="@Icons.Material.Filled.MedicationLiquid" Text="Productos">
 
                         <MudGrid>
 
                             <MudItem md="12">
-                             <ProductsDNFD _parent="@_modelData" ></ProductsDNFD>
+                             <Products _parent="@_modelData" ></Products>
                             </MudItem>
 
 
@@ -195,6 +196,52 @@
 
 
                     </MudTabPanel>
+
+                     <MudTabPanel Icon="@Icons.Material.Filled.NoteAdd" Text="Nota de Evaluación">
+                           
+                          <MudGrid Style="margin-top:10px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                      <MudItem xs="12" md="4" Style="padding:3px !important">
+                                        <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de evaluación" @bind-Date="_modelData.Nota.FechaEvaluacion" />
+                                        <ValidationMessage For="@(() => _modelData.Nota.FechaEvaluacion)" />
+                                    </MudItem>
+
+                                      <MudItem xs="12" md="4" Style="padding:3px !important;margin-top:18px !important">
+                                           <MudSelect T="EstadoEstudio" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.Estado">
+                                            <MudSelectItem Value="@(EstadoEstudio.All)">Todos</MudSelectItem>
+                                            @foreach (EstadoEstudio dt in Enum.GetValues(typeof(EstadoEstudio)))
+                                            {
+                                                if (dt != EstadoEstudio.None)
+                                                {
+                                                    <MudSelectItem Value="@(dt)">@(dt.ToDescriptionString())</MudSelectItem>
+                                                }
+                                            }
+                                        </MudSelect>
+                                    </MudItem>
+
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+                        <MudGrid Style="margin-top:15px !important">
+                            <MudItem xs="12">
+                                <MudGrid>
+
+                                    <MudItem xs="12" md="12" Style="padding:3px !important">
+                                        <MudTextField T="string" Label="Observaciones del Evaluador" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Nota.Observaciones" Lines="18" />
+                                    </MudItem>
+
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+
+                         
+
+
+                    </MudTabPanel>
+
                 </MudTabs>
             }
         </DialogContent>
@@ -209,7 +256,7 @@
 
     [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
     private FluentValidationValidator _fluentValidation;
-    private AigEstudioDNFD _modelData = new AigEstudioDNFD();
+    private AigEstudio _modelData = new AigEstudio();
     [Parameter] public long _id { get; set; } = 0;
     private bool _validated => Validate();
     bool _loading = false;

@@ -2,7 +2,6 @@
 using MediatR;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
-using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
 
 namespace Aig.Farmacoterapia.Application.Features.Study.Commands
@@ -17,9 +16,17 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
     {
         public long Id { get; set; }
     }
+
+    public partial class SetEvaluatorCommand : IRequest<IResult>
+    {
+        public long StudyId { get; set; } = 0;
+        public string[] Evaluators { get; set; } = Array.Empty<string>();
+
+    }
     internal class StudyCommandHandler : 
         IRequestHandler<AddEditStudyCommand, IResult>,
-        IRequestHandler<DeleteStudyCommand, IResult>
+        IRequestHandler<DeleteStudyCommand, IResult>,
+        IRequestHandler<SetEvaluatorCommand, IResult>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -38,10 +45,13 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
             try
             {
                 if (request.Model.Id > 0)
+                {
                     await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
+                }
+                   
                 else
                     await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
-                answer = Result<bool>.Success(_unitOfWork.Commit());
+                answer = Result<bool>.Success(_unitOfWork.Commit(),"Evaluadores actualizados correctamente !");
             }
             catch (Exception exc)
             {
@@ -70,5 +80,33 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
             }
             return answer;
         }
+        public async Task<IResult> Handle(SetEvaluatorCommand request, CancellationToken cancellationToken)
+        {
+            IResult answer = new Result();
+            try
+            {
+                var evaluators = _unitOfWork.Repository<AigEstudioEvaluador>().Entities
+                    .Where(p => p.EstudioId == request.StudyId)
+                    .ToList();
+                foreach (var item in evaluators)
+                    await _unitOfWork.Repository<AigEstudioEvaluador>().DeleteAsync(item);
+                foreach (var item in request.Evaluators){
+                    await _unitOfWork.Repository<AigEstudioEvaluador>().AddAsync(
+                        new AigEstudioEvaluador(){
+                            EstudioId = request.StudyId,
+                            UserId = item
+                        });
+                }
+                answer = Result<bool>.Success(_unitOfWork.Commit());
+
+            }
+            catch (Exception exc)
+            {
+                _logger.Error("Requested operation failed", exc);
+                return Result.Fail(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
+        
     }
 }

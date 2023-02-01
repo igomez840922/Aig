@@ -105,6 +105,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             var users = await _userManager.Users.ToListAsync();
             return await Result<List<ApplicationUser>>.SuccessAsync(users);
         }
+        public async Task<Result<List<ApplicationUser>>> GetAllEvaluatorAsync()
+        {
+            var users = await _userManager.Users.Where(p=>p.Role== RoleType.Evaluator).ToListAsync();
+            return await Result<List<ApplicationUser>>.SuccessAsync(users);
+        }
         public async Task<IResult> SaveAsync(ApplicationUser data)
         {
            
@@ -355,7 +360,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             var user = await _userManager.FindByIdAsync(request.UserId);
             var currentUser = await _userManager.FindByIdAsync(_currentUserService.UserId);
-            if (!await _userManager.IsInRoleAsync(currentUser, RoleType.Admin.ToString()))
+            if (currentUser!=null && !await _userManager.IsInRoleAsync(currentUser, RoleType.Admin.ToString()))
                 return await Result.FailAsync("Usted no tienen permisos para actualizar roles de usuarios.");
             var result = await _userManager.RemoveFromRoleAsync(user, user.Role.ToString());
             result = await _userManager.AddToRoleAsync(user, request.Role.ToString());
@@ -363,6 +368,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             result = await _userManager.UpdateAsync(user);
             return await Result.SuccessAsync("Rol de usuario actulizado correctamente.");
         }
+     
         public async Task<IResult<string>> ConfirmEmailAsync(string userId, string code)
         {
             var user = await _userManager.FindByIdAsync(userId);

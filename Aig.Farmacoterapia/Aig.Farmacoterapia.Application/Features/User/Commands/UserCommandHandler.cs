@@ -3,8 +3,9 @@ using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Identity;
 using Aig.Farmacoterapia.Infrastructure.Interfaces;
+using Aig.Farmacoterapia.Domain.Entities.Studies;
 
-namespace Aig.Farmacoterapia.Application.Features.Medicament.Commands
+namespace Aig.Farmacoterapia.Application.Features.User.Commands
 {
     public partial class DeleteUserCommand : IRequest<IResult>
     {
@@ -41,11 +42,13 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Commands
         IRequestHandler<ChangePasswordCommand, IResult>
     {
         private readonly IUserService _userService;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ISystemLogger _logger;
 
-        public UserCommandHandler(IUserService userService, ISystemLogger logger)
+        public UserCommandHandler(IUserService userService, IUnitOfWork unitOfWork, ISystemLogger logger)
         {
             _userService = userService;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
         public async Task<IResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -111,11 +114,19 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Commands
 
         public async Task<IResult> Handle(UpdateUserRolesCommand request, CancellationToken cancellationToken)
         {
-
             IResult answer = new Result();
             try
             {
                 answer = await _userService.UpdateRolesAsync(request.Model);
+                if (answer.Succeeded && request.Model.Role!=Domain.Entities.Enums.RoleType.Evaluator) {
+                    var evaluators = _unitOfWork.Repository<AigEstudioEvaluador>().Entities
+                       .Where(p => p.UserId == request.Model.UserId).ToList();
+                    foreach (var item in evaluators)
+                        await _unitOfWork.Repository<AigEstudioEvaluador>().DeleteAsync(item);
+                    if (evaluators.Count > 0) 
+                        _unitOfWork.Commit();
+                }
+
             }
             catch (Exception exc)
             {
@@ -125,6 +136,5 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Commands
             return answer;
         }
 
-       
     }
 }

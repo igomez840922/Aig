@@ -14,6 +14,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Interfaces
     {
         Task<PaginatedResult<ApplicationUser>> ListAsync(PageSearchArgs args);
         Task<Result<List<ApplicationUser>>> GetAllAsync();
+        Task<Result<List<ApplicationUser>>> GetAllEvaluatorAsync();
         Task<int> GetCountAsync();
         Task<ApplicationUser> GetUserByNameAsync(string userName);
         ApplicationUser GetUserByName(string userName);

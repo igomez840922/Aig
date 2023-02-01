@@ -44,4 +44,21 @@ namespace Aig.Farmacoterapia.Wasm.Client.Model
         public EstadoEstudioDNFD Status { get; set; }
 
     }
+
+    public class StudiesFilter : BaseFilter
+    {
+        public StudiesFilter() : base()
+        {
+            StartDate = null;
+            EndDate = null;
+            StartExpirationDate = null;
+            EndExpirationDate = null;
+        }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public DateTime? StartExpirationDate { get; set; }
+        public DateTime? EndExpirationDate { get; set; }
+        public EstadoEstudio Status { get; set; }
+
+    }
 }

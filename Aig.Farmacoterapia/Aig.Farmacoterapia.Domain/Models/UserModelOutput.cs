@@ -20,6 +20,6 @@ namespace Aig.Farmacoterapia.Domain.Models
         public string FullName { get; set; }
         public bool IsActive { get; set; } = true;
         public string UserRoleDescription { get; set; }
-
+        public EvaluatorStatus EvaluatorStatus { get; set; } = EvaluatorStatus.None;
     }
 }

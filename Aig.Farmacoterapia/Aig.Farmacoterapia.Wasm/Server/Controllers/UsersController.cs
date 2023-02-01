@@ -1,6 +1,6 @@
 ﻿using Aig.Farmacoterapia.Application.Features.Account.Queries;
-using Aig.Farmacoterapia.Application.Features.Medicament.Commands;
-using Aig.Farmacoterapia.Application.Features.Medicament.Queries;
+using Aig.Farmacoterapia.Application.Features.User.Commands;
+using Aig.Farmacoterapia.Application.Features.User.Queries;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Identity;
 using MediatR;
@@ -20,12 +20,6 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpPost("search")]
         public async Task<IActionResult> GetAll([FromBody] PageSearchArgs Args) => Ok(await _mediator.Send(new GetAllUserQuery(Args)));
         
-        //[HttpGet("username/{userName}")]
-        //public async Task<IActionResult> ExistUsername(string userName) => Ok(await _mediator.Send(new GetUsernameQuery(userName)));
-
-        //[HttpGet("{userName}")]
-        //public async Task<IActionResult> GetUser(string userName) => Ok(await _mediator.Send(new GetUserQuery(userName)));
-
         [HttpPost()]
         public async Task<IActionResult> GetUser([FromBody] GetUserQuery model) => Ok(await _mediator.Send(model));
 
@@ -44,13 +38,12 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest model) => Ok(await _mediator.Send(new ChangePasswordCommand(model)));
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete(string id) => Ok(await _mediator.Send(new DeleteUserCommand() { Id= id }));
         [HttpPost("delete")]
         public async Task<IActionResult> Delete([FromBody] DeleteUserCommand model) => Ok(await _mediator.Send(model));
 
         [HttpGet("avatar/{image}")]
         [AllowAnonymous]
         public async Task<FileStreamResult> GetAvatar(string image) => await _mediator.Send(new GetAvatarQuery(image));
+
     }
 }

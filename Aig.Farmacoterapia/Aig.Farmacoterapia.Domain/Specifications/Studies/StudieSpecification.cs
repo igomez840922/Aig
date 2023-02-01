@@ -15,4 +15,8 @@ namespace Aig.Farmacoterapia.Domain.Specifications.Studies
                 And(filter);
         }
     }
+    public class StudyEvaluadorSpecification : BaseSpecification<AigEstudioEvaluador>
+    {
+        public StudyEvaluadorSpecification(long id) => Criteria = p => p.EstudioId == id;
+    }
 }

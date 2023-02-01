@@ -5,7 +5,7 @@ using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Microsoft.AspNetCore.Http;
 using IResponse = Aig.Farmacoterapia.Domain.Interfaces.IResult;
 
-namespace Aig.Farmacoterapia.Application.Features.Medicament.Commands
+namespace Aig.Farmacoterapia.Application.Features.Media.Commands
 {
     public partial class UploadMediaCommand : IRequest<Result<string>>
     {

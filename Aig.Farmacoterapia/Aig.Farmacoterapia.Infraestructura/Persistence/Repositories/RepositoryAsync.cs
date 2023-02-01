@@ -58,10 +58,16 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
 
+        //public async Task<T> UpdateAsync(T entity)
+        //{
+        //    var exist = _dbContext.Set<T>().Find(entity.Id);
+        //    _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+        //    return entity;
+        //}
+
         public async Task<T> UpdateAsync(T entity)
         {
-            var exist = _dbContext.Set<T>().Find(entity.Id);
-            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+            var result = _dbContext.Set<T>().Update(entity);
             return entity;
         }
     }

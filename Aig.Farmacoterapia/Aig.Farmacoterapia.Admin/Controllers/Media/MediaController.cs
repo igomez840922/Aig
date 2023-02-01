@@ -5,6 +5,7 @@ using Aig.Farmacoterapia.Application.Features.Medicament.Commands;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Application.Features.Media.Commands;
 
 namespace Aig.Farmacoterapia.Admin.Controllers.Media
 {

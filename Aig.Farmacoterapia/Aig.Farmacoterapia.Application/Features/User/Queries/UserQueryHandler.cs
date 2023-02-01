@@ -5,14 +5,13 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Common;
-using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using AutoMapper;
 using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Aig.Farmacoterapia.Domain.Models;
 using Aig.Farmacoterapia.Domain.Identity;
 
-namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
+namespace Aig.Farmacoterapia.Application.Features.User.Queries
 {
     public class GetAllUserQuery : IRequest<PaginatedResult<UserModelOutput>>
     {
@@ -36,6 +35,7 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
         public string UserName { get; set; }
         public GetUserQuery(string userName) => UserName = userName;
     }
+
     internal class UserQueryHandler : 
         IRequestHandler<GetAllUserQuery, PaginatedResult<UserModelOutput>>,
         IRequestHandler<GetUserQuery, Result<UpdateProfileRequest>>,
@@ -111,6 +111,5 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
             }
             return answer;
         }
-
     }
 }

@@ -34,6 +34,13 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
             return await response.ToResult<bool>();
 
         }
+        public async Task<IResult<bool>> EvaluateAsync(long id)
+        {
+
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.EstudioDNFDEndpoints.Evaluate, new { id = id });
+            return await response.ToResult<bool>();
+
+        }
         public async Task<IResult> DeleteAsync(long id)
         {
             var response = await _httpClient.PostAsJsonAsync(AppConstants.EstudioDNFDEndpoints.Delete, new { id = id });

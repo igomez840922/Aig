@@ -1,15 +1,15 @@
-﻿@page "/studiesdnfd"
+﻿@page "/studies"
 @attribute [Authorize]
 @using Aig.Farmacoterapia.Domain.Entities.Studies
 @using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
 @using Aig.Farmacoterapia.Domain.Extensions
-@using Aig.Farmacoterapia.Wasm.Client.Components.StudiesDNFD
+@using Aig.Farmacoterapia.Wasm.Client.Components.Studies
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
 @using Aig.Farmacoterapia.Wasm.Client.Model
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
 @using System.Globalization
-@inject IStudyDNFDManager _manager;
+@inject IStudyManager _manager;
 
 <PageTitle>Medicaments</PageTitle>
 
@@ -67,8 +67,8 @@
             <MudItem md="12">
                 <MudToolBar Style="height:25px !important;">
                     <MudText Color="Color.Primary">
-                        <MudIcon Icon="@Icons.Material.Filled.Folder" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
-                        Evaluaciones de estudios DNFD
+                        <MudIcon Icon="@Icons.Material.Outlined.Assignment" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                        Evaluaciones de solicitudes de importación
                     </MudText>
                     <MudSpacer />
                     <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
@@ -105,11 +105,11 @@
 
                 <MudItem md="2" Style="margin-top:12px !important">
 
-                    <MudSelect T="EstadoEstudioDNFD" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
-                        <MudSelectItem Value="@(EstadoEstudioDNFD.All)">Todos</MudSelectItem>
-                        @foreach (EstadoEstudioDNFD dt in Enum.GetValues(typeof(EstadoEstudioDNFD)))
+                    <MudSelect T="EstadoEstudio" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
+                        <MudSelectItem Value="@(EstadoEstudio.All)">Todos</MudSelectItem>
+                        @foreach (EstadoEstudio dt in Enum.GetValues(typeof(EstadoEstudio)))
                         {
-                            if (dt != EstadoEstudioDNFD.None)
+                            if (dt != EstadoEstudio.None)
                             {
                                 <MudSelectItem Value="@(dt)">@(dt.ToDescriptionString())</MudSelectItem>
                             }
@@ -141,50 +141,47 @@
     </MudCard>
 </EditForm>
 
-    <MudTable HorizontalScrollbar="false" FixedHeader="true" FixedFooter="true"  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigEstudioDNFD>>>(DoFetchData))">
+    <MudTable HorizontalScrollbar="false" FixedHeader="true" FixedFooter="true"  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigEstudio>>>(DoFetchData))">
      
         <HeaderContent>
-            <MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>
-            <MudTh> <MudTableSortLabel Style="width:100px !important" SortLabel="status" T="AigEstudioDNFD">Estado</MudTableSortLabel></MudTh> 
-            <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudioDNFD">Fecha de Ingreso</MudTableSortLabel></MudTh> 
+            @*<MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>*@
+            <MudTh> <MudTableSortLabel Style="width:100px !important" SortLabel="status" T="AigEstudio">Estado</MudTableSortLabel></MudTh> 
+            <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudio">Fecha de Ingreso</MudTableSortLabel></MudTh> 
             <MudTh><MudInputLabel Style="width:50px !important">Código</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:500px !important">Título</MudInputLabel></MudTh>
             <MudTh> <MudInputLabel Style="width:300px !important">Nota de Evaluación</MudInputLabel> </MudTh>
-            <MudTh><MudTableSortLabel Style="width:200px" SortLabel="evaluationDate" T="AigEstudioDNFD">Fecha de Evaluación</MudTableSortLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:400px">Observaciones</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Protocolo en DIGESA</MudInputLabel></MudTh>
+            <MudTh><MudTableSortLabel Style="width:200px" SortLabel="evaluationDate" T="AigEstudio">Fecha de Evaluación</MudTableSortLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:400px">Observaciones del Evaluador</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Investigador</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Duración</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Participantes</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Centro</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Comité de Bioetica</MudInputLabel></MudTh>
-            <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Ascending" SortLabel="created" T="AigEstudioDNFD">Creado</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Ascending" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
 
-            <MudTd>
+           @* <MudTd>
                 <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
-            </MudTd>
+            </MudTd>*@
             <MudTd DataLabel="Estado">@context.Estado.ToDescriptionString()</MudTd>
             <MudTd DataLabel="Fecha de ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
             <MudTd DataLabel="Código">@context.Codigo</MudTd>
             <MudTd DataLabel="Título">@context.Titulo</MudTd>
-            <MudTd DataLabel="Nota de Evaluación">@context.NotaEvaluacion</MudTd>
-            <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", context.FechaEvaluacion!))</MudTd>
-            <MudTd DataLabel="Observaciones">@context.ObservacionesEvaluador</MudTd>
-            <MudTd DataLabel="Protocolo en DIGESA">@context.RegistroProtocoloDIGESA</MudTd>
+            <MudTd DataLabel="Nota de Evaluación">@context.Nota?.GetNoteCode(@context.Id)</MudTd>
+            <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))</MudTd>
+            <MudTd DataLabel="Observaciones del evluador">@context.Nota?.Observaciones</MudTd>
             <MudTd DataLabel="Investigador">@context.InvestigadorPrincipal</MudTd>
             <MudTd DataLabel="Duración">@context.Duracion</MudTd>
             <MudTd DataLabel="Participantes">@context.Participantes</MudTd>
              <MudTd DataLabel="Participantes">@context.CentroInvestigacion</MudTd>
-            <MudTd DataLabel="Comité de Bioetica">@context.ComiteBioetica</MudTd>
             <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
             <MudTd>
 
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                 <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
-                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.SupervisorAccount" OnClick="@(() => Evaluators(@context.Id))" OnTouch="@(() => Evaluators(@context.Id))">Evaluadores</MudMenuItem>
+                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
             </MudMenu>
 
             </MudTd>
@@ -212,18 +209,18 @@
 
 @code {
 
-    private PaginatedResult<AigEstudioDNFD> _paginatedResult;
-    private static IEnumerable<AigEstudioDNFD> List { get; set; }
-    private MudTable<AigEstudioDNFD> _table;
+    private PaginatedResult<AigEstudio> _paginatedResult;
+    private static IEnumerable<AigEstudio> List { get; set; }
+    private MudTable<AigEstudio> _table;
     private DateRange dateRange;
     private DateRange expirationRange;
-    protected StudiesDNFDFilter _modelFilter;
+    protected StudiesFilter _modelFilter;
     protected bool _loading = false;
 
     protected async override Task OnInitializedAsync()
     {
 
-        _modelFilter = new StudiesDNFDFilter();
+        _modelFilter = new StudiesFilter();
         dateRange = new DateRange();
         expirationRange = new DateRange();
         base.OnInitialized();
@@ -240,9 +237,9 @@
     }
 
 
-    private async Task<TableData<AigEstudioDNFD>> DoFetchData(TableState state)
+    private async Task<TableData<AigEstudio>> DoFetchData(TableState state)
     {
-        var result = new TableData<AigEstudioDNFD>();
+        var result = new TableData<AigEstudio>();
 
         await RefresView(true);
         var sorting = new List<SortingOption>();
@@ -277,7 +274,7 @@
             };
         var paginatedResult = await _manager.SearchAsync(args);
         List = paginatedResult.Data;
-        result = new TableData<AigEstudioDNFD>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
+        result = new TableData<AigEstudio>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
 
         await RefresView(false);
         return result;
@@ -299,7 +296,7 @@
     }
     private async Task OnReset()
     {
-        _modelFilter = new StudiesDNFDFilter();
+        _modelFilter = new StudiesFilter();
         dateRange = new DateRange();
         expirationRange = new DateRange();
         await _table.ReloadServerData();
@@ -314,8 +311,17 @@
             if (!result.Cancelled)
                 await _table.ReloadServerData();
       }
+        private async Task Evaluators(long id)
+        {
+            var parameters = new DialogParameters { ["_id"]=id };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditEvaluators>("Asignación de Evaluadores", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+                await _table.ReloadServerData();
+      }
 
-  private async Task Delete(long id)
+    private async Task Delete(long id)
     {
         var parameters = new DialogParameters{
              { nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro de querer eliminar el registro?", id) }

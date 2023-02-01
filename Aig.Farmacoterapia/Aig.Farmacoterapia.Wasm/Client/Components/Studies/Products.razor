@@ -2,13 +2,13 @@
 @using Aig.Farmacoterapia.Domain.Entities.Studies
 @using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
 @using Aig.Farmacoterapia.Domain.Extensions
-@using Aig.Farmacoterapia.Wasm.Client.Components.StudiesDNFD
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Components.Studies
 @using Aig.Farmacoterapia.Wasm.Client.Model
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
 @using System.Globalization
-@inject IStudyDNFDManager _manager;
+@inject IStudyManager _manager;
 
 <PageTitle>Medicaments</PageTitle>
 
@@ -60,7 +60,7 @@
         <MudTd>
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                 <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
-                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
             </MudMenu>
 
         </MudTd>
@@ -71,7 +71,7 @@
     </MudTable>
 
 @code {
-    [Parameter] public AigEstudioDNFD _parent { get; set; }
+    [Parameter] public AigEstudio _parent { get; set; }
     protected bool _loading = false;
     protected async override Task OnInitializedAsync()
     {

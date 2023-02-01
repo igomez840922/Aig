@@ -11,5 +11,6 @@ namespace Aig.Farmacoterapia.Domain.Interfaces.Studies
     public interface IAigEstudioRepository
     {
         Task<PaginatedResult<AigEstudio>> ListAsync(PageSearchArgs args);
+        List<string> ListEvaluatorAsync(long studyId);
     }
 }

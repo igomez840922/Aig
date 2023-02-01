@@ -9,9 +9,13 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies.Enums
 {
     public enum EstadoEstudio
     {
+        [Description("Ninguno")]
+        None = 0,
         [Description("No Procede")]
-        NotAuthorized = 0,
+        NotAuthorized = 1,
         [Description("Procede")]
-        Authorized = 1,
+        Authorized = 2,
+        [Description("Todos")]
+        All = NotAuthorized & Authorized,
     }
 }

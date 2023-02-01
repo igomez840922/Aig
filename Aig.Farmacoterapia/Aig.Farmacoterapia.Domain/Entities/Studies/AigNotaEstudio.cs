@@ -13,7 +13,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
     { 
         public DateTime? FechaEvaluacion { get; set; } = DateTime.Today;
         public string? Observaciones { get; set; }
-        public static string GetNoteCode(long noteNo)
+        public string GetNoteCode(long noteNo)
         {
             if (noteNo == default) return string.Empty;
             var noteCode = noteNo.ToString();
