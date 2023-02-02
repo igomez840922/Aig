@@ -20,12 +20,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(k => new { k.Id });
             builder.Property(e => e.Medicamentos).HasJsonConversion();
+            builder.Property(p => p.ProductsMetadata).HasColumnType("nvarchar(max)");
             builder.Ignore(c => c.ShowDetails);
+
         }
         public void Configure(EntityTypeBuilder<AigEstudio> builder)
         {
             builder.HasKey(k => new { k.Id });
-            //builder.Property(p => p.NoteNo).UseIdentityColumn().HasComputedColumnSql();
+            builder.Property(p => p.ProductsMetadata).HasColumnType("nvarchar(max)");
             builder.OwnsOne(o => o.Nota);
             builder.OwnsOne(o => o.Tramitante);
 
@@ -36,7 +38,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
 
             builder.Property(e => e.Medicamentos).HasJsonConversion();
             builder.Ignore(c => c.ShowDetails);
-
+            builder.Ignore(c => c.ElapsedDays);
+            
         }
         public void Configure(EntityTypeBuilder<AigEstudioEvaluador> builder)
         {

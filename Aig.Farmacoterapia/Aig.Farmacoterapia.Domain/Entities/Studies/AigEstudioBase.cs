@@ -31,7 +31,11 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
                 _Medicamentos = value;
             }
         }
+
+        [JsonIgnore]
         public bool ShowDetails { get; set; } = false;
+        [JsonIgnore]
+        public string ProductsMetadata { get; set; } = string.Empty;
     }
 
 }

@@ -62,15 +62,19 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                                     Expression<Func<AigEstudioDNFD, bool>> expression = f => f.Codigo.Contains((string)filteringOption.Value) ||
                                     f.Titulo.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
                                     f.CentroInvestigacion.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
-                                    f.InvestigadorPrincipal.ToLower().Contains(((string)filteringOption.Value).ToLower());
+                                    f.CentroInvestigacion.ToLower().Contains(((string)filteringOption.Value).ToLower());
                                     filterList.Add(expression);
                                  }
                                 break;
-                            case "state":
+                            case "status":
                                 {
+                                  
                                     var state = (EstadoEstudioDNFD)Enum.Parse(typeof(EstadoEstudioDNFD),filteringOption.Value, true);
-                                    Expression<Func<AigEstudioDNFD, bool>> expression = f => f.Estado == state;
-                                    filterList.Add(expression);
+                                    if (state != EstadoEstudioDNFD.All)
+                                    {
+                                        Expression<Func<AigEstudioDNFD, bool>> expression = f => f.Estado == state;
+                                        filterList.Add(expression);
+                                    }
                                 }
                                 break;
                             case "startEvaluationDate":

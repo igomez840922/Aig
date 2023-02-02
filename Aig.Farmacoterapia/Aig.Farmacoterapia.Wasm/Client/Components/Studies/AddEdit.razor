@@ -31,14 +31,14 @@
                     {
                         <MudText Typo="Typo.h6">
                             <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
-                            Nueva solicitud
+                            Nueva Solicitud
                         </MudText>
                     }
                     else
                     {
                         <MudText Typo="Typo.h6">
                             <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
-                            Editar evaluación
+                            Editar Solicitud
                         </MudText>
                     }
                 }
@@ -64,7 +64,8 @@
 
                                     <MudItem xs="12" md="12" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Título del protocolo de investigación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Titulo" Lines="4" />
-                                    </MudItem>
+                                     <ValidationMessage For="@(() => _modelData.Titulo)" />
+                                        </MudItem>
 
                                 </MudGrid>
                             </MudItem>
@@ -75,8 +76,9 @@
                                 <MudGrid>
 
                                     <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
-                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
-                                    </MudItem>
+                                        <MudTextField Disabled="true" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
+                                  
+                                        </MudItem>
 
                                       <MudItem xs="12" md="4" Style="padding:3px !important">
                                         <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de ingreso" @bind-Date="_modelData.FechaIngreso" />
@@ -146,10 +148,12 @@
 
                                     <MudItem xs="12" md="6" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Centro de investigación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.CentroInvestigacion" Lines="4" />
-                                    </MudItem>
+                                      <ValidationMessage For="@(() => _modelData.CentroInvestigacion)" />
+                                        </MudItem>
                                    <MudItem xs="12" md="6" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Agencia distribuidora" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.AgenciaDistribuidora" Lines="4" />
-                                    </MudItem>
+                                      <ValidationMessage For="@(() => _modelData.AgenciaDistribuidora)" />
+                                        </MudItem>
                                 </MudGrid>
                             </MudItem>
                         </MudGrid>
@@ -209,11 +213,10 @@
                                     </MudItem>
 
                                       <MudItem xs="12" md="4" Style="padding:3px !important;margin-top:18px !important">
-                                           <MudSelect T="EstadoEstudio" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.Estado">
-                                            <MudSelectItem Value="@(EstadoEstudio.All)">Todos</MudSelectItem>
+                                            <MudSelect T="EstadoEstudio" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.Estado">
                                             @foreach (EstadoEstudio dt in Enum.GetValues(typeof(EstadoEstudio)))
                                             {
-                                                if (dt != EstadoEstudio.None)
+                                                if (dt != EstadoEstudio.All)
                                                 {
                                                     <MudSelectItem Value="@(dt)">@(dt.ToDescriptionString())</MudSelectItem>
                                                 }

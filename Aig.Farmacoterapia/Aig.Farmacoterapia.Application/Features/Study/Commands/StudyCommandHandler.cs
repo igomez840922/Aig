@@ -44,18 +44,23 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
             IResult answer;
             try
             {
+                //if(_unitOfWork.Repository<AigEstudio>().Entities.FirstOrDefault(p => p.Codigo == request.Model.Codigo && p.Id!= request.Model.Id) != null)
+                //    return Result.Fail(new List<string>() { "Error en la operación solicitada. Ya existe un registro con ese código" });
+
+                //request.Model.ProductsMetadata = JsonConvert.SerializeObject(request.Model.Medicamentos, 
+                //    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore 
+                //   });
+
+                request.Model.ProductsMetadata = string.Join("//", request.Model.Medicamentos.Select(p => p.Nombre));
                 if (request.Model.Id > 0)
-                {
                     await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
-                }
-                   
                 else
                     await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
-                answer = Result<bool>.Success(_unitOfWork.Commit(),"Evaluadores actualizados correctamente !");
+                answer = Result<bool>.Success(_unitOfWork.Commit(), "Operación realizada satisfactoriamente !");
             }
             catch (Exception exc)
             {
-                _logger.Error("Requested operation failed", exc);
+                _logger.Error("Error en la operación solicitada", exc);
                 return Result.Fail(new List<string>() { exc.Message });
             }
             return answer;
@@ -97,7 +102,7 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                             UserId = item
                         });
                 }
-                answer = Result<bool>.Success(_unitOfWork.Commit());
+                answer = Result<bool>.Success(_unitOfWork.Commit(),"Evaluadores actualizados correctamente !");
 
             }
             catch (Exception exc)

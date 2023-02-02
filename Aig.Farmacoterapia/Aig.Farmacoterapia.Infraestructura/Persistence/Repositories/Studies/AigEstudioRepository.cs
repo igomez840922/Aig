@@ -9,6 +9,7 @@ using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Studies;
 using Aig.Farmacoterapia.Domain.Specifications.Studies;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
+using LinqKit;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
 {
@@ -44,6 +45,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                             case "title":
                                 orderByList.Add(new(sortingOption, c => c.Titulo));
                                 break;
+                           case "assignmentDate":
+                                orderByList.Add(new(sortingOption, c => c.FechaAsignacion!));
+                                break;
                             case "evaluationDate":
                                 orderByList.Add(new(sortingOption, c => c.Nota.FechaEvaluacion!));
                                 break;
@@ -58,20 +62,34 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                         switch (filteringOption.Field){
                             case "term":
                                 {
-                                    Expression<Func<AigEstudio, bool>> expression = f => f.Codigo.Contains((string)filteringOption.Value) ||
-                                    f.Titulo.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
-                                    f.CentroInvestigacion.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
-                                    f.InvestigadorPrincipal.ToLower().Contains(((string)filteringOption.Value).ToLower());
-                                    filterList.Add(expression);
-                                 }
-                                break;
-                            case "state":
-                                {
-                                    var state = (EstadoEstudio)Enum.Parse(typeof(EstadoEstudio),filteringOption.Value, true);
-                                    Expression<Func<AigEstudio, bool>> expression = f => f.Estado == state;
+                                    string value = ((string)filteringOption.Value).ToLower();
+                                    Expression<Func<AigEstudio, bool>> expression = f => f.Codigo.Contains(value) ||
+                                    f.Titulo.ToLower().Contains(value) ||
+                                    f.CentroInvestigacion.ToLower().Contains(value) ||
+                                    f.ProductsMetadata.ToLower().Contains(value) ||
+                                    f.InvestigadorPrincipal.ToLower().Contains(value);
                                     filterList.Add(expression);
                                 }
                                 break;
+                            case "product":
+                                {
+                                    string value = ((string)filteringOption.Value).ToLower();
+                                    Expression<Func<AigEstudio, bool>> expression = f => f.ProductsMetadata.ToLower().Contains(value);
+                                    filterList.Add(expression);
+                                }
+                                break;
+                            case "status":
+                                {
+
+                                    var state = (EstadoEstudio)Enum.Parse(typeof(EstadoEstudio), filteringOption.Value, true);
+                                    if (state != EstadoEstudio.All)
+                                    {
+                                        Expression<Func<AigEstudio, bool>> expression = f => f.Estado == state;
+                                        filterList.Add(expression);
+                                    }
+                                }
+                                break;
+                          
                             case "startEvaluationDate":
                                 {
                                     var value = filteringOption.Value;
@@ -106,7 +124,33 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                                     filterList.Add(expression);
                                 }
                                 break;
-                         
+                            case "startAssignmentDate":
+                                {
+                                    var value = filteringOption.Value;
+                                    var date = DateTime.ParseExact(value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    Expression<Func<AigEstudio, bool>> expression = f => f.FechaAsignacion >= date;
+                                    filterList.Add(expression);
+
+                                }
+                                break;
+                            case "endAssignmentDate":
+                                {
+                                    var value = filteringOption.Value;
+                                    var date = DateTime.ParseExact(value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    Expression<Func<AigEstudio, bool>> expression = f => f.FechaAsignacion <= date;
+                                    filterList.Add(expression);
+                                }
+                                break;
+                            case "evaluator":
+                                {
+                                    var value = filteringOption.Value;
+                                    string[] users = new string[] { value };
+                                    Expression<Func<AigEstudioEvaluador, bool>> lExp = p => users.Contains(p.UserId);
+                                    var lQuery = _evaluatorRepository.Entities.AsExpandable().Where(lExp).Select(g => g.EstudioId).Distinct();
+                                    Expression<Func<AigEstudio, bool>> expression = f => lQuery.Contains(f.Id);
+                                    filterList.Add(expression);
+                                }
+                                break;
                         }
                     }
                 }
@@ -118,7 +162,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
                                           .PaginatedByAsync(args.PageIndex, args.PageSize);
-
             }
             catch (Exception exc)
             {
@@ -144,21 +187,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
             }
             return result;
         }
-        public bool SetEvaluatorsAsync(long id, string[] evaluators)
-        {
-            var result =false;
-            try
-            {
-               
-
-
-            }
-            catch (Exception exc)
-            {
-                _logger.Error(exc.Message, exc);
-            }
-            return result;
-        }
+       
       
     }
 }

@@ -30,14 +30,14 @@
                     {
                         <MudText Typo="Typo.h6">
                             <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
-                            Nueva evaluación
+                            Nuevo Estudio
                         </MudText>
                     }
                     else
                     {
                         <MudText Typo="Typo.h6">
                             <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
-                            Editar evaluación
+                            Editar Estudio
                         </MudText>
                     }
                 }
@@ -63,7 +63,8 @@
 
                                     <MudItem xs="12" md="12" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Título del protocolo de investigación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Titulo" Lines="4" />
-                                    </MudItem>
+                                         <ValidationMessage For="@(() => _modelData.Titulo)" />
+                                     </MudItem>
 
                                 </MudGrid>
                             </MudItem>
@@ -73,9 +74,18 @@
                             <MudItem xs="12">
                                 <MudGrid>
 
-                                    <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
-                                        <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
-                                    </MudItem>
+                                    @if (_modelData.Id == 0)
+                                    {
+                                        <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
+                                            <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
+                                        </MudItem>
+                                    }
+                                    else
+                                    {
+                                        <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
+                                            <MudTextField Disabled="true" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
+                                        </MudItem>
+                                    }
 
                                       <MudItem xs="12" md="4" Style="padding:3px !important">
                                         <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de ingreso" @bind-Date="_modelData.FechaIngreso" />
@@ -171,10 +181,12 @@
 
                                     <MudItem xs="12" md="6" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Centro de investigación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.CentroInvestigacion" Lines="4" />
-                                    </MudItem>
+                                      <ValidationMessage For="@(() => _modelData.CentroInvestigacion)" />
+                                        </MudItem>
                                     <MudItem xs="12" md="6" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Comité de Bioetica" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ComiteBioetica" Lines="4" />
-                                    </MudItem>
+                                   <ValidationMessage For="@(() => _modelData.ComiteBioetica)" />
+                                        </MudItem>
                                 </MudGrid>
                             </MudItem>
                         </MudGrid>

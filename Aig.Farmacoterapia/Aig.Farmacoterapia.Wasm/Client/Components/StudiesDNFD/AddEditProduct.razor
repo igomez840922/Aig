@@ -69,8 +69,10 @@
                 <MudGrid Style="margin-top:5px !important">
                     <MudItem xs="12">
                         <MudGrid>
+
+                     
                          <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
-                                <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Factura)" @bind-Value="_modelData.Factura" Label="No.Factura" />
+                                <MudTextField  Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Factura)" @bind-Value="_modelData.Factura" Label="No.Factura" />
                             </MudItem>
 
                           <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
@@ -113,7 +115,8 @@
 
                                     <MudItem xs="12" md="12" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Principio activo y concentración" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.PrincipioActivo" Lines="3" />
-                                    </MudItem>
+                                    <ValidationMessage For="@(() => _modelData.PrincipioActivo)" />
+                                        </MudItem>
 
                                 </MudGrid>
                             </MudItem>
@@ -125,7 +128,8 @@
 
                                     <MudItem xs="12" md="12" Style="padding:3px !important">
                                         <MudTextField T="string" Label="Presentación del producto" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Presentacion" Lines="3" />
-                                    </MudItem>
+                                   <ValidationMessage For="@(() => _modelData.Presentacion)" />
+                                        </MudItem>
 
                                 </MudGrid>
                             </MudItem>

@@ -3,6 +3,7 @@
 @using Aig.Farmacoterapia.Domain.Entities.Studies
 @using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
 @using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Models
 @using Aig.Farmacoterapia.Wasm.Client.Components.Studies
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
 @using Aig.Farmacoterapia.Wasm.Client.Model
@@ -71,9 +72,9 @@
                         Evaluaciones de solicitudes de importación
                     </MudText>
                     <MudSpacer />
-                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                    @*<MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
                         <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(0))" />
-                    </MudTooltip>
+                    </MudTooltip>*@
                 </MudToolBar>
             </MudItem>
         </MudGrid>
@@ -89,32 +90,21 @@
             <MudGrid>
 
                 <MudItem md="3" Style="margin-top:12px !important">
-                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
+                   <MudTextField HelperText="Código / Título / Investigador / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
                 </MudItem>
 
-                 <MudItem md="5">
+                 <MudItem md="7">
                     <MudGrid>
-                        <MudItem md="6">
+                        <MudItem md="4">
                             <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Ingreso:"  @bind-DateRange="dateRange" />
                         </MudItem>
-                        <MudItem md="6">
+                         <MudItem md="4">
+                             <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Asignación:"  @bind-DateRange="assignmentRange" />
+                        </MudItem>
+                        <MudItem md="4">
                              <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Evaluación:" @bind-DateRange="expirationRange" />
                         </MudItem>
                     </MudGrid>
-                </MudItem>
-
-                <MudItem md="2" Style="margin-top:12px !important">
-
-                    <MudSelect T="EstadoEstudio" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
-                        <MudSelectItem Value="@(EstadoEstudio.All)">Todos</MudSelectItem>
-                        @foreach (EstadoEstudio dt in Enum.GetValues(typeof(EstadoEstudio)))
-                        {
-                            if (dt != EstadoEstudio.None)
-                            {
-                                <MudSelectItem Value="@(dt)">@(dt.ToDescriptionString())</MudSelectItem>
-                            }
-                        }
-                    </MudSelect>
                 </MudItem>
 
                 <MudItem md="2" Style="margin-top:12px !important">
@@ -128,11 +118,43 @@
                             </MudTooltip>
                         </MudItem>
                         <MudItem md="6">
+                              <MudText Color="Color.Primary" Typo="Typo.h6">Total:@(_paginatedResult?.TotalCount)</MudText>
                         </MudItem>
                     </MudGrid>
 
                 </MudItem>
              
+
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem md="3" Style="margin-top:8px !important">
+                    <MudTextField HelperText="Nombre de medicamento" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Product" Label="Producto" />
+                </MudItem>
+
+                <MudItem md="3" Style="margin-top:10px !important">
+
+                    <MudSelect T="string" Label="Evaluador" Clearable="true" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Evaluator">
+                        @foreach (UserModelOutput dt in Evaluators)
+                        {
+                            <MudSelectItem Value="@(dt.Id)">@(dt.FullName)</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem md="3" Style="margin-top:10px !important">
+
+                    <MudSelect T="EstadoEstudio"  Clearable="true" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
+                      
+                        @foreach (EstadoEstudio dt in Enum.GetValues(typeof(EstadoEstudio)))
+                        {
+                          
+                            <MudSelectItem Value="@(dt)">@(dt.ToDescriptionString())</MudSelectItem>
+                            
+                        }
+                    </MudSelect>
+                </MudItem>
+
 
             </MudGrid>
 
@@ -145,12 +167,15 @@
      
         <HeaderContent>
             @*<MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>*@
-            <MudTh> <MudTableSortLabel Style="width:100px !important" SortLabel="status" T="AigEstudio">Estado</MudTableSortLabel></MudTh> 
+            <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="status" T="AigEstudio">Estado</MudTableSortLabel></MudTh> 
             <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudio">Fecha de Ingreso</MudTableSortLabel></MudTh> 
             <MudTh><MudInputLabel Style="width:50px !important">Código</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:500px !important">Título</MudInputLabel></MudTh>
-            <MudTh> <MudInputLabel Style="width:300px !important">Nota de Evaluación</MudInputLabel> </MudTh>
+           
+            <MudTh><MudTableSortLabel Style="width:200px" SortLabel="assignmentDate" T="AigEstudio">Fecha de Asignación</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel Style="width:200px" SortLabel="evaluationDate" T="AigEstudio">Fecha de Evaluación</MudTableSortLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Días transcurridos</MudInputLabel></MudTh>
+             <MudTh> <MudInputLabel Style="width:300px !important">Nota de Evaluación</MudInputLabel> </MudTh>
             <MudTh><MudInputLabel Style="width:400px">Observaciones del Evaluador</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Investigador</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Duración</MudInputLabel></MudTh>
@@ -161,16 +186,57 @@
         </HeaderContent>
         <RowTemplate>
 
-           @* <MudTd>
-                <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
-            </MudTd>*@
-            <MudTd DataLabel="Estado">@context.Estado.ToDescriptionString()</MudTd>
+         
+            <MudTd DataLabel="Estado">
+               
+            @if (context.Estado == EstadoEstudio.Authorized)
+            {
+                <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                    <MudButton Color="Color.Tertiary" Variant="Variant.Filled" DisableElevation="true">
+                        @context.Estado.ToDescriptionString()
+                    </MudButton>
+                </MudBadge>
+
+            }
+            else
+            {
+                <MudBadge Icon="@Icons.Material.Filled.Close" Color="Color.Error" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                    <MudButton Color="Color.Error" Variant="Variant.Filled" DisableElevation="true">
+                        @context.Estado.ToDescriptionString()
+                    </MudButton>
+                </MudBadge>
+            }
+
+             </MudTd>
             <MudTd DataLabel="Fecha de ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
             <MudTd DataLabel="Código">@context.Codigo</MudTd>
             <MudTd DataLabel="Título">@context.Titulo</MudTd>
-            <MudTd DataLabel="Nota de Evaluación">@context.Nota?.GetNoteCode(@context.Id)</MudTd>
+            <MudTd DataLabel="Fecha de Asignación">@(string.Format("{0:dd/MM/yyyy}",@context.FechaAsignacion))</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))</MudTd>
-            <MudTd DataLabel="Observaciones del evluador">@context.Nota?.Observaciones</MudTd>
+            <MudTd DataLabel="Días transcurridos">
+            @if (context.ElapsedDays >= 0)
+            {
+                @* <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                    <MudButton Color="Color.Tertiary" Variant="Variant.Filled" DisableElevation="true">
+                    @(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")
+                    </MudButton>
+                    </MudBadge>
+                *@
+
+                <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
+                    <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.GppGood" Color="Color.Tertiary" />
+                </MudBadge>
+
+            }
+            else
+            {
+                <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
+                    <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.GppMaybe" Color="Color.Warning" />
+                </MudBadge>
+            }
+            </MudTd>
+             <MudTd DataLabel="Nota de Evaluación">@context.Nota?.GetNoteCode(@context.Id)</MudTd>
+            <MudTd DataLabel="Observaciones del evaluador">@context.Nota?.Observaciones</MudTd>
             <MudTd DataLabel="Investigador">@context.InvestigadorPrincipal</MudTd>
             <MudTd DataLabel="Duración">@context.Duracion</MudTd>
             <MudTd DataLabel="Participantes">@context.Participantes</MudTd>
@@ -180,7 +246,7 @@
 
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                 <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
-                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.SupervisorAccount" OnClick="@(() => Evaluators(@context.Id))" OnTouch="@(() => Evaluators(@context.Id))">Evaluadores</MudMenuItem>
+                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.SupervisorAccount" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
                 <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
             </MudMenu>
 
@@ -211,9 +277,11 @@
 
     private PaginatedResult<AigEstudio> _paginatedResult;
     private static IEnumerable<AigEstudio> List { get; set; }
+    private static List<UserModelOutput> Evaluators { get; set; } = new List<UserModelOutput>(); 
     private MudTable<AigEstudio> _table;
     private DateRange dateRange;
     private DateRange expirationRange;
+    private DateRange assignmentRange;
     protected StudiesFilter _modelFilter;
     protected bool _loading = false;
 
@@ -223,12 +291,18 @@
         _modelFilter = new StudiesFilter();
         dateRange = new DateRange();
         expirationRange = new DateRange();
+        assignmentRange = new DateRange();
         base.OnInitialized();
     }
-     protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
-             _table.SetRowsPerPage(8);
+        {
+            _table.SetRowsPerPage(8);
+            var result= await _manager.GetEvaluators(0);
+            Evaluators=result.Data;
+        }
+
     }
     private async Task RefresView(bool state)
     {
@@ -236,7 +310,22 @@
         await this.InvokeAsync(StateHasChanged);
     }
 
-
+    public double GetElapsedDays(AigEstudio item)
+    {
+        var result =0;
+        try
+        {
+            if (item == null || item.FechaAsignacion == null || item.Nota?.FechaEvaluacion == null) return result;
+            TimeSpan? timeSpan = (item.Nota?.FechaEvaluacion.Value - item.FechaAsignacion.Value);
+            return timeSpan!.Value.TotalDays;
+            //return days > 1 ? $"{days} Días" : $"{days} Día";
+        }
+        catch (Exception exc)
+        {
+            ;
+        }
+        return result;
+    }
     private async Task<TableData<AigEstudio>> DoFetchData(TableState state)
     {
         var result = new TableData<AigEstudio>();
@@ -251,20 +340,29 @@
         }
         if (!string.IsNullOrEmpty(_modelFilter.Term))
             filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = _modelFilter.Term.Trim() });
-        //if (_modelFilter.StartDate != null && _modelFilter.EndDate != null)
-        //{
-        //    filters.Add(new FilteringOption { Field = "startDateOfIssue", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartDate.Value.ToString("dd/MM/yyyy") });
-        //    filters.Add(new FilteringOption { Field = "endDateOfIssue", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndDate.Value.ToString("dd/MM/yyyy") });
-        //}
-        //if (_modelFilter.StartExpirationDate != null && _modelFilter.EndExpirationDate != null)
-        //{
-        //    filters.Add(new FilteringOption { Field = "startExpirationDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
-        //    filters.Add(new FilteringOption { Field = "endDateExpirationDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
-        //}
-        //if (_modelFilter.Fabricante != null)
-        //{
-        //    filters.Add(new FilteringOption { Field = "maker", Operator = FilteringOperator.Equal, Value = _modelFilter.Fabricante });
-        //}
+
+        if (_modelFilter.StartDate != null && _modelFilter.EndDate != null)
+        {
+            filters.Add(new FilteringOption { Field = "startEvaluationDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endEvaluationDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndDate.Value.ToString("dd/MM/yyyy") });
+        }
+        if (_modelFilter.StartExpirationDate != null && _modelFilter.EndExpirationDate != null)
+        {
+            filters.Add(new FilteringOption { Field = "startAdmissionDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endAdmissionDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
+        }
+        if (_modelFilter.StartAssignmentDate != null && _modelFilter.EndAssignmentDate != null)
+        {
+            filters.Add(new FilteringOption { Field = "startAssignmentDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartAssignmentDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endAssignmentDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndAssignmentDate.Value.ToString("dd/MM/yyyy") });
+        }
+        filters.Add(new FilteringOption { Field = "status", Operator = FilteringOperator.Equal, Value = _modelFilter.Status.ToString() });
+        if (!string.IsNullOrEmpty(_modelFilter.Product))
+            filters.Add(new FilteringOption { Field = "product", Operator = FilteringOperator.Contains, Value = _modelFilter.Product.Trim() });
+
+        if (!string.IsNullOrEmpty(_modelFilter.Evaluator))
+            filters.Add(new FilteringOption { Field = "evaluator", Operator = FilteringOperator.Equal, Value = _modelFilter.Evaluator });
+
         var args = new PageSearchArgs()
             {
                 PageIndex = state.Page + 1,
@@ -272,9 +370,9 @@
                 SortingOptions = sorting,
                 FilteringOptions = filters
             };
-        var paginatedResult = await _manager.SearchAsync(args);
-        List = paginatedResult.Data;
-        result = new TableData<AigEstudio>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
+        _paginatedResult = await _manager.SearchAsync(args);
+        List = _paginatedResult.Data.Select(w => { w.ElapsedDays = GetElapsedDays(w); return w; }).ToList();
+        result = new TableData<AigEstudio>() { TotalItems = _paginatedResult.TotalCount, Items = _paginatedResult.Data };
 
         await RefresView(false);
         return result;
@@ -292,6 +390,8 @@
         _modelFilter.EndDate = dateRange.End;
         _modelFilter.StartExpirationDate = expirationRange.Start;
         _modelFilter.EndExpirationDate = expirationRange.End;
+        _modelFilter.StartAssignmentDate = assignmentRange.Start;
+        _modelFilter.EndAssignmentDate = assignmentRange.End;
         await _table.ReloadServerData();
     }
     private async Task OnReset()
@@ -299,6 +399,7 @@
         _modelFilter = new StudiesFilter();
         dateRange = new DateRange();
         expirationRange = new DateRange();
+        assignmentRange = new DateRange();
         await _table.ReloadServerData();
     }
 
@@ -311,7 +412,7 @@
             if (!result.Cancelled)
                 await _table.ReloadServerData();
       }
-        private async Task Evaluators(long id)
+        private async Task SetEvaluators(long id)
         {
             var parameters = new DialogParameters { ["_id"]=id };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };

@@ -46,6 +46,7 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Commands
             IResult answer;
             try
             {
+                request.Model.ProductsMetadata = string.Join("//", request.Model.Medicamentos.Select(p => p.Nombre));
                 if (request.Model.Id > 0)
                     await _unitOfWork.Repository<AigEstudioDNFD>().UpdateAsync(request.Model);
                 else
@@ -98,6 +99,7 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Commands
                     newitem.Duracion = item.Duracion;
                     newitem.Poblacion = item.Poblacion;
                     newitem.Medicamentos = item.Medicamentos;
+                    newitem.ProductsMetadata = item.ProductsMetadata;
 
                     item.Estado = EstadoEstudioDNFD.Processed;
                      await _unitOfWork.ExecuteInTransactionAsync(async (cc) => {
