@@ -998,26 +998,64 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Ram != null && data.Ram.Length > 0)
-                               group data by data.Ram into g
-                               orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
-                                   Count = g.Count()
-                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+                model.Ldata = (from dataFinal in 
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                         where data.Deleted == false &&
+                                         (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                         (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                         (data.Ram != null && data.Ram.Length > 0)
+                                         group data by new { data.Farmaco.RamId, data.Ram } into g
+                                         orderby g.Count() descending
+                                         select new ReportModelResponse
+                                         {
+                                             Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
+                                             Count = 1,//g.Count()
+                                         })
+                                    group dataFinal by new { dataFinal.Name } into gFinal
+                                    orderby gFinal.Count() descending
+                                    select new ReportModelResponse
+                                    {
+                                        Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                        Count = gFinal.Count()
+                                    }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Ram != null && data.Ram.Length > 0)
-                               group data by data.Ram into g
-                               select g.Count()).Sum(x => x);
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                // (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //where data.Deleted == false &&
+                //(model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //(model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //(data.Ram != null && data.Ram.Length > 0)
+                //group data by new { data.Farmaco.RamId, data.Ram } into g
+                //orderby g.Count() descending
+                //select new ReportModelResponse
+                //{
+                //    Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
+                //    Count = 1,//g.Count()
+                //}).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.Ram != null && data.Ram.Length > 0)
+                //               group data by new { data.Farmaco.RamId, data.Ram } into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -1031,26 +1069,66 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.SocId != null && data.SocId > 0)
-                               group data by data.SocId into g
-                               orderby g.Count() descending
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.SocId } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
-                                   Count = g.Count()
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.SocId != null && data.SocId > 0)
-                               group data by data.SocId into g
-                               select g.Count()).Sum(x => x);
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.SocId } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = null; model.Total = 0;
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -1097,26 +1175,66 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Gravedad != null && data.Gravedad.Length > 0)
-                               group data by data.Gravedad into g
-                               orderby g.Count() descending
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.Gravedad } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
-                                   Count = g.Count()
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Gravedad != null && data.Gravedad.Length > 0)
-                               group data by data.Gravedad into g
-                               select g.Count()).Sum(x => x);
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.Gravedad } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = null; model.Total = 0;
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.Gravedad != null && data.Gravedad.Length > 0)
+                //               group data by data.Gravedad into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.Gravedad != null && data.Gravedad.Length > 0)
+                //               group data by data.Gravedad into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -1150,6 +1268,79 @@ namespace Aig.FarmacoVigilancia.Services
                                (data.Year > 0)
                                group data by data.Year into g
                                select g.Count()).Sum(x => x);
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Desenlace
+        public async Task<ReportModel<ReportModelResponse>> Report15(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.Desenlace } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      RAMDesenlace = g.FirstOrDefault().Desenlace,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.RAMDesenlace } into gFinal
+                               orderby gFinal.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   RAMDesenlace = gFinal.FirstOrDefault().RAMDesenlace,//.Substring(0, 3),
+                                   Count = gFinal.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.Desenlace } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      RAMDesenlace = g.FirstOrDefault().Desenlace,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.RAMDesenlace } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = null; model.Total = 0;
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
