@@ -118,7 +118,9 @@
                             </MudTooltip>
                         </MudItem>
                         <MudItem md="6">
-                              <MudText Color="Color.Primary" Typo="Typo.h6">Total:@(_paginatedResult?.TotalCount)</MudText>
+                            @if (!_loading){
+                                <MudText Style="margin-top: 10px !important;" Color="Color.Primary" Typo="Typo.h6">Total:@(_paginatedResult?.TotalCount)</MudText>
+                            }
                         </MudItem>
                     </MudGrid>
 
