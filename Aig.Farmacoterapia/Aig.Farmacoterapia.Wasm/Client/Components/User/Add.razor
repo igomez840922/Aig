@@ -83,6 +83,12 @@
         height: 100%;
         margin-top: 3px;
     }
+
+.mud-dialog {
+    max-height: calc(108vh - var(--mud-appbar-height));
+    overflow-y: auto;
+}
+
 </style>
 
 <EditForm Model="@_userModel" OnValidSubmit=@(async () => await SubmitAsync())>

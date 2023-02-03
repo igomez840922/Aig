@@ -1,7 +1,6 @@
 ﻿using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.User;
 using Aig.Farmacoterapia.Domain.Identity;
 using FluentValidation;
-using FluentValidation.Validators;
 
 namespace Aig.Farmacoterapia.Wasm.Client.Validation
 {
@@ -11,6 +10,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Validation
         {
             IsNotEmpty(c => c.Email, "Debes ingresar tu correo");
             IsNotEmpty(c => c.FirstName, "Debes ingresar tu nombre");
+            IsNotEmpty(c => c.LastName, "El apellido es obligatorio");
             IsNotEmpty(c => c.PhoneNumber, "El teléfono es obligatorio");
         }
     }
