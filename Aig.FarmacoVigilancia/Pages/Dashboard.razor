@@ -1,7 +1,7 @@
 ﻿@page "/dashboard"
 @layout BackendLayout
 @attribute [Authorize]
-
+@implements IDisposable
 
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
     @*<div class="kt-subheader  kt-grid__item" id="kt_subheader">
@@ -35,9 +35,242 @@
                         </div>
                     </div>
 
+                    <div class="kt-portlet__body kt-portlet__body--fit">
+                        <div class="row">
+                            <div class="col-12">
+
+
+                                <div class="container-fluid p-0" style="position: relative">
+                                    @*<RadzenCard Visible=@fetchingData style="z-index: 3; text-align: center; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, .5)">
+                                        <RadzenCard Visible=@(error == null) style="margin: 32px auto; width: 80%">
+                                            <h3 style="margin: 32px 0">Fetching data from GitHub: page @currentPage of @totalPages.</h3>
+                                            <RadzenProgressBar Value=@currentPage Max=@totalPages ShowValue="false" Style="display: inline-block; width: 180px; margin-top: 16px" />
+                                        </RadzenCard>
+                                        <RadzenCard Visible=@(error != null) style="margin: 32px auto; width: 80%">
+                                            <h3 style="margin: 32px 0">An error has occurred: @error. Try reloading your browser.</h3>
+                                        </RadzenCard>
+                                    </RadzenCard>*@
+                                    <div class="col-xl-12 col-lg-12 p-2">
+                                        <RadzenText TextStyle="TextStyle.H6">Histórico de Ultimos 12 Meses</RadzenText>
+                                    </div>
+                                    <div class="row no-gutters mx-n2">
+                                        
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">Alertas</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-primary" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelAlerta?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelAlerta.Ldata ValueProperty="Count" CategoryProperty="Name" Title="RAM" Fill="var(--rz-primary)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">Notas</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-warning" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelNota?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelNota.Ldata ValueProperty="Count" CategoryProperty="Name" Title="Nota" Fill="var(--rz-warning)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">PMR</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-series-2" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelPmr?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelPmr.Ldata ValueProperty="Count" CategoryProperty="Name" Title="Nota" Fill="var(--rz-series-2)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">IPS</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-series-7" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelIps?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelIps.Ldata ValueProperty="Count" CategoryProperty="Name" Title="Nota" Fill="var(--rz-series-7)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">RFV</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-series-1" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelRfv?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelRfv.Ldata ValueProperty="Count" CategoryProperty="Name" Title="Nota" Fill="var(--rz-series-1)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">RAM</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-primary" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelRam?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelRam.Ldata ValueProperty="Count" CategoryProperty="Name" Title="RAM" Fill="var(--rz-danger)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">FF</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-series-8" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelFF?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelFF.Ldata ValueProperty="Count" CategoryProperty="Name" Title="FF" Fill="var(--rz-series-8)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">FT</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-black" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelFT?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelFT.Ldata ValueProperty="Count" CategoryProperty="Name" Title="FT" Fill="var(--rz-color-black)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">ESAVI</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Class="rz-color-success" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelEsavi?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenColumnSeries Data=@dataModelEsavi.Ldata ValueProperty="Count" CategoryProperty="Name" Title="ESAVI" Fill="var(--rz-success)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenColumnOptions Margin="10" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+
+                                        @*<div class="col-xl-12 col-lg-12 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">Resumen de Datos Ultimo Año</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelAlerta?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenLineSeries Data=@dataModelAlerta.Ldata ValueProperty="Count" CategoryProperty="Name" Title="Alerta" Smooth="true" Stroke="var(--rz-primary)" />
+                                                    <RadzenLineSeries Data=@dataModelNota.Ldata ValueProperty="Count" CategoryProperty="Name" Title="Nota" Smooth="true" Stroke="var(--rz-warning)" />
+                                                    <RadzenLineSeries Data=@dataModelPmr.Ldata ValueProperty="Count" CategoryProperty="Name" Title="PMR" Smooth="true" Stroke="var(--rz-series-2)" />
+                                                    <RadzenLineSeries Data=@dataModelIps.Ldata ValueProperty="Count" CategoryProperty="Name" Title="IPS" Smooth="true" Stroke="var(--rz-series-7)" />
+                                                    <RadzenLineSeries Data=@dataModelRfv.Ldata ValueProperty="Count" CategoryProperty="Name" Title="RFV" Smooth="true" Stroke="var(--rz-series-1)" />
+                                                    <RadzenLineSeries Data=@dataModelFF.Ldata ValueProperty="Count" CategoryProperty="Name" Title="RFV" Smooth="true" Stroke="var(--rz-series-8)" />
+                                                    <RadzenLineSeries Data=@dataModelFT.Ldata ValueProperty="Count" CategoryProperty="Name" Title="RFV" Smooth="true" Stroke="var(--rz-color-black)" />
+                                                    <RadzenLineSeries Data=@dataModelRam.Ldata ValueProperty="Count" CategoryProperty="Name" Title="RFV" Smooth="true" Stroke="var(--rz-danger)" />
+                                                    <RadzenLineSeries Data=@dataModelEsavi.Ldata ValueProperty="Count" CategoryProperty="Name" Title="ESAVI" Smooth="true" Stroke="var(--rz-success)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard style="position: relative;">
+                                                <RadzenText TextStyle="TextStyle.H6">All Issues</RadzenText>
+                                                <RadzenText TextStyle="TextStyle.H2" Style="position: absolute; right: 1.5rem; top: 1rem;">@dataModelAlerta?.Total</RadzenText>
+                                                <RadzenChart style="width: 100%; height: 120px; margin-bottom: -30px;">
+                                                    <RadzenLineSeries Data=@dataModelAlerta.Ldata ValueProperty="Count" CategoryProperty="Name" Title="Open Issues" Smooth="true" Stroke="var(--rz-success)" />
+                                                    <RadzenLineSeries Data=@dataModelAlerta.Ldata ValueProperty="Count" CategoryProperty="Name" Title="Closed Issues" Smooth="true" Stroke="var(--rz-danger)" />
+                                                    <RadzenValueAxis Visible="false" />
+                                                    <RadzenCategoryAxis Visible="false" />
+                                                    <RadzenLegend Visible="false" />
+                                                </RadzenChart>
+                                            </RadzenCard>
+                                        </div>*@
+                                        @*<div class="col-xl-3 col-lg-6 p-2">
+                                            <RadzenCard>
+                                                <RadzenText TextStyle="TextStyle.H6">Progress</RadzenText>
+                                                <RadzenArcGauge style="width: 100%; height: 120px; margin-top: -30px;">
+                                                    <RadzenArcGaugeScale Max="1" Y="0.8" Radius="2">
+                                                        <RadzenArcGaugeScaleValue Value=@closeRatio FormatString="{0:P0}" />
+                                                    </RadzenArcGaugeScale>
+                                                </RadzenArcGauge>
+                                            </RadzenCard>
+                                        </div>*@
+                                    </div>
+                                    @*<div class="row no-gutters mx-n2">
+                                        <div class="col-lg-9">
+                                            <div class="row no-gutters">
+                                                <div class="col-lg-6 p-2">
+                                                    <RadzenCard style="height: 280px">
+                                                        <RadzenText TextStyle="TextStyle.H6">Top Issue Labels</RadzenText>
+                                                        <RadzenChart style="width: 100%; height: 200px">
+                                                            <RadzenDonutSeries Data=@labelGroups CategoryProperty="Label" ValueProperty="Count" Title="Issues" Fills=@labelColors />
+                                                        </RadzenChart>
+                                                    </RadzenCard>
+                                                </div>
+                                                <div class="col-lg-6 p-2">
+                                                    <RadzenCard style="height: 280px">
+                                                        <RadzenText TextStyle="TextStyle.H6">Top Contributors</RadzenText>
+                                                        <RadzenChart style="width: 100%; height: 200px">
+                                                            <RadzenPieSeries Data=@openByGroups CategoryProperty="Name" ValueProperty="Count" Title="Issues" />
+                                                        </RadzenChart>
+                                                    </RadzenCard>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 p-2">
+                                            <RadzenCard style="height: 280px">
+                                                <RadzenText TextStyle="TextStyle.H6">Most Active Member</RadzenText>
+                                                <div class="text-center">
+                                                    <img style="width: 120px; border-radius: 50%; margin: 20px 0;" src=@mostActiveMember?.AvatarUrl />
+                                                    <h4>
+                                                        @mostActiveMember?.Login
+                                                    </h4>
+                                                </div>
+                                            </RadzenCard>
+                                        </div>
+                                    </div>                                    
+                                *@
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
 </div>
+
+@code {
+  }
