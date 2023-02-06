@@ -1,15 +1,18 @@
 ﻿@page "/studies"
 @attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Enums
 @using Aig.Farmacoterapia.Domain.Entities.Studies
 @using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
 @using Aig.Farmacoterapia.Domain.Extensions
 @using Aig.Farmacoterapia.Domain.Models
 @using Aig.Farmacoterapia.Wasm.Client.Components.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
 @using Aig.Farmacoterapia.Wasm.Client.Model
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
 @using System.Globalization
+@using System.Security.Claims
 @inject IStudyManager _manager;
 
 <PageTitle>Medicaments</PageTitle>
@@ -247,9 +250,16 @@
             <MudTd>
 
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
-                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
-                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.SupervisorAccount" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
-                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Disabled="!IsSetEvaluators()" Style="border-bottom:1px solid #E4E6EF !important;"  Icon="@Icons.Material.Filled.SupervisorAccount" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
+                
+                @if (!string.IsNullOrEmpty(context.Nota?.Observaciones)) {
+                    <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" Target="_blank" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
+                         Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
+                        Exportar Nota
+                    </MudMenuItem>
+                }
+                <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
             </MudMenu>
 
             </MudTd>
@@ -286,10 +296,9 @@
     private DateRange assignmentRange;
     protected StudiesFilter _modelFilter;
     protected bool _loading = false;
-
+    private ClaimsPrincipal _user;
     protected async override Task OnInitializedAsync()
     {
-
         _modelFilter = new StudiesFilter();
         dateRange = new DateRange();
         expirationRange = new DateRange();
@@ -299,13 +308,42 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
-        {
+        {   _user = await _authenticationManager.CurrentUser();
             _table.SetRowsPerPage(8);
             var result= await _manager.GetEvaluators(0);
             Evaluators=result.Data;
         }
 
     }
+
+     protected bool IsDelete()
+    {
+        var disabled=true;
+        if (_user == null) return disabled;
+        var role= _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return (userRole== RoleType.Admin);
+    }
+   
+     protected bool IsSetEvaluators()
+    {
+        var disabled=true;
+        if (_user == null) return disabled;
+        var role= _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return (userRole== RoleType.Admin || userRole== RoleType.Boss);
+    }
+    
+    protected bool IsEdit(List<string> evaluators)
+    {
+        var disabled=true;
+        if (_user == null) return disabled;
+        var userId= _user.GetUserId();
+        var role= _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return (evaluators.Any(p => p == userId)) || (userRole== RoleType.Admin || userRole== RoleType.Boss);
+    }
+
     private async Task RefresView(bool state)
     {
         _loading = state;
@@ -423,7 +461,7 @@
             if (!result.Cancelled)
                 await _table.ReloadServerData();
       }
-
+    
     private async Task Delete(long id)
     {
         var parameters = new DialogParameters{

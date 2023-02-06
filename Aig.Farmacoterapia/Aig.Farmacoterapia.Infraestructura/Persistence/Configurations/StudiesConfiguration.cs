@@ -39,6 +39,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             builder.Property(e => e.Medicamentos).HasJsonConversion();
             builder.Ignore(c => c.ShowDetails);
             builder.Ignore(c => c.ElapsedDays);
+            builder.Ignore(c => c.Evaluators);
             
         }
         public void Configure(EntityTypeBuilder<AigEstudioEvaluador> builder)

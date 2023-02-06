@@ -167,6 +167,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
             {
                  _logger.Error(exc.Message, exc);
             }
+            result.Data = result.Data.Select(w => { w.Evaluators = w.EstudioEvaluador.Select(s => s.UserId).ToList(); return w; }).ToList();
             return result;
         }
 

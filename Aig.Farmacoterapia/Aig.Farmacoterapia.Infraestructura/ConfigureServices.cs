@@ -249,7 +249,8 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddScoped<IAigEstudioDNFDRepository,AigEstudioDNFDRepository>()
                 .AddScoped<IAigEstudioRepository, AigEstudioRepository>()
                 .AddScoped<IUnitOfWork, UnitOfWork>()
-                .AddScoped<IUploadService, UploadService>();
+                .AddScoped<IUploadService, UploadService>()
+                .AddScoped<IReportService, ReportService>();
         }
         public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
