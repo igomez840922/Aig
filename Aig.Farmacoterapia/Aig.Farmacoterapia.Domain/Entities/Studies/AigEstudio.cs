@@ -23,6 +23,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
         public double ElapsedDays = 0;
 
         private ICollection<AigEstudioEvaluador> _estudioEvaluador;
+        [JsonIgnore]
         public virtual ICollection<AigEstudioEvaluador> EstudioEvaluador => _estudioEvaluador ??= new HashSet<AigEstudioEvaluador>();
         public List<string> Evaluators { get; set; }
     }
