@@ -31,6 +31,12 @@ namespace DataModel
         [StringLength(500)]
         public string Asunto { get => asunto; set => SetProperty(ref asunto, value); }
 
+        //pais
+        private long? asuntoId;
+        public long? AsuntoId { get => asuntoId; set => SetProperty(ref asuntoId, value); }
+        private AUD_CorrespondenciaAsuntoTB? correspondenciaAsunto;
+        public virtual AUD_CorrespondenciaAsuntoTB? CorrespondenciaAsunto { get => correspondenciaAsunto; set => SetProperty(ref correspondenciaAsunto, value); }
+
         //Detalles
         private string detalles;
         public string Detalles { get => detalles; set => SetProperty(ref detalles, value); }
