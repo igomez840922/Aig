@@ -72,7 +72,7 @@
                 <MudToolBar Style="height:25px !important;">
                     <MudText Color="Color.Primary">
                         <MudIcon Icon="@Icons.Material.Outlined.Assignment" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
-                        Evaluaciones de solicitudes de importación
+                        Evaluación de solicitud de autorización de permiso de importación con fines de investigación
                     </MudText>
                     <MudSpacer />
                     @*<MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
@@ -93,19 +93,19 @@
             <MudGrid>
 
                 <MudItem md="3" Style="margin-top:12px !important">
-                   <MudTextField HelperText="Código / Título / Investigador / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
+                   <MudTextField Clearable="true" HelperText="Código / Título / Investigador / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
                 </MudItem>
 
                  <MudItem md="7">
                     <MudGrid>
                         <MudItem md="4">
-                            <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Ingreso:"  @bind-DateRange="dateRange" />
+                            <MudDateRangePicker Clearable="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Ingreso:"  @bind-DateRange="dateRange" />
                         </MudItem>
                          <MudItem md="4">
-                             <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Asignación:"  @bind-DateRange="assignmentRange" />
+                             <MudDateRangePicker Clearable="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Asignación:"  @bind-DateRange="assignmentRange" />
                         </MudItem>
                         <MudItem md="4">
-                             <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Evaluación:" @bind-DateRange="expirationRange" />
+                             <MudDateRangePicker Clearable="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Evaluación:" @bind-DateRange="expirationRange" />
                         </MudItem>
                     </MudGrid>
                 </MudItem>
@@ -134,7 +134,7 @@
 
             <MudGrid>
                 <MudItem md="3" Style="margin-top:8px !important">
-                    <MudTextField HelperText="Nombre de medicamento" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Product" Label="Producto" />
+                    <MudTextField Clearable="true" HelperText="Nombre de medicamento" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Product" Label="Producto" />
                 </MudItem>
 
                 <MudItem md="3" Style="margin-top:10px !important">
@@ -174,18 +174,19 @@
             @*<MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>*@
             <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="status" T="AigEstudio">Estado</MudTableSortLabel></MudTh> 
             <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudio">Fecha de Ingreso</MudTableSortLabel></MudTh> 
-            <MudTh><MudInputLabel Style="width:50px !important">Código</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:500px !important">Título</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:500px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
            
             <MudTh><MudTableSortLabel Style="width:200px" SortLabel="assignmentDate" T="AigEstudio">Fecha de Asignación</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel Style="width:200px" SortLabel="evaluationDate" T="AigEstudio">Fecha de Evaluación</MudTableSortLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Días transcurridos</MudInputLabel></MudTh>
              <MudTh> <MudInputLabel Style="width:300px !important">Nota de Evaluación</MudInputLabel> </MudTh>
-            <MudTh><MudInputLabel Style="width:400px">Observaciones del Evaluador</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Investigador</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Duración</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Participantes</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Centro</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:400px">Observaciones por el evaluador</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Investigador principal</MudInputLabel></MudTh>
+             <MudTh><MudInputLabel Style="width:200px">Patrocinador del estudio</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Duración del estudio</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Número de participantes en panamá</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
             <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Ascending" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
@@ -214,20 +215,14 @@
 
              </MudTd>
             <MudTd DataLabel="Fecha de ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
-            <MudTd DataLabel="Código">@context.Codigo</MudTd>
-            <MudTd DataLabel="Título">@context.Titulo</MudTd>
+            <MudTd DataLabel="Código del protocolo de investigació">@context.Codigo</MudTd>
+            <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
             <MudTd DataLabel="Fecha de Asignación">@(string.Format("{0:dd/MM/yyyy}",@context.FechaAsignacion))</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))</MudTd>
             <MudTd DataLabel="Días transcurridos">
             @if (context.ElapsedDays >= 0)
             {
-                @* <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
-                    <MudButton Color="Color.Tertiary" Variant="Variant.Filled" DisableElevation="true">
-                    @(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")
-                    </MudButton>
-                    </MudBadge>
-                *@
-
+               
                 <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
                     <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.GppGood" Color="Color.Tertiary" />
                 </MudBadge>
@@ -241,11 +236,13 @@
             }
             </MudTd>
              <MudTd DataLabel="Nota de Evaluación">@context.Nota?.GetNoteCode(@context.Id)</MudTd>
-            <MudTd DataLabel="Observaciones del evaluador">@context.Nota?.Observaciones</MudTd>
-            <MudTd DataLabel="Investigador">@context.InvestigadorPrincipal</MudTd>
-            <MudTd DataLabel="Duración">@context.Duracion</MudTd>
-            <MudTd DataLabel="Participantes">@context.Participantes</MudTd>
-             <MudTd DataLabel="Participantes">@context.CentroInvestigacion</MudTd>
+            <MudTd DataLabel="Observaciones por el evaluador">@context.Nota?.Observaciones</MudTd>
+            <MudTd DataLabel="Investigador principal">@context.InvestigadorPrincipal</MudTd>
+            <MudTd DataLabel="Patrocinador del estudio">@context.Patrocinador</MudTd>
+            <MudTd DataLabel="Duración del estudio">@context.Duracion</MudTd>
+            <MudTd DataLabel="Número de participantes en panamá">@context.Participantes</MudTd>
+          
+             <MudTd DataLabel="Centro de investigación">@context.CentroInvestigacion</MudTd>
             <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
             <MudTd>
 
@@ -383,13 +380,13 @@
 
         if (_modelFilter.StartDate != null && _modelFilter.EndDate != null)
         {
-            filters.Add(new FilteringOption { Field = "startEvaluationDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartDate.Value.ToString("dd/MM/yyyy") });
-            filters.Add(new FilteringOption { Field = "endEvaluationDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "startAdmissionDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endAdmissionDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndDate.Value.ToString("dd/MM/yyyy") });
         }
         if (_modelFilter.StartExpirationDate != null && _modelFilter.EndExpirationDate != null)
         {
-            filters.Add(new FilteringOption { Field = "startAdmissionDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
-            filters.Add(new FilteringOption { Field = "endAdmissionDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "startEvaluationDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endEvaluationDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
         }
         if (_modelFilter.StartAssignmentDate != null && _modelFilter.EndAssignmentDate != null)
         {

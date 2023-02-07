@@ -14,7 +14,8 @@
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Blazored.FluentValidation
 @using System.Globalization
-@inject IStudyManager _manager;
+@inject IJSRuntime _jsRuntime
+@inject IStudyManager _manager
 
 <style>
     .mud-dialog {
@@ -31,6 +32,7 @@
         </MudText>
     </TitleContent>
     <DialogContent>
+
         <MudDropContainer T="UserModelOutput" Items="_modelData"  ItemsSelector="@((item,dropzone) => item.EvaluatorStatus.ToString() == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
             <ChildContent>
               
@@ -128,22 +130,23 @@
 
     private void ItemUpdated(MudItemDropInfo<UserModelOutput> dropItem)
     {   
+        UserModelOutput item;
+        if (dropItem == null || dropItem.Item== null) return;
         var status = (EvaluatorStatus)Enum.Parse(typeof(EvaluatorStatus), dropItem.DropzoneIdentifier, true);
-        dropItem.Item.EvaluatorStatus = status;
+        if((item=_modelData.FirstOrDefault(p => p.Id == dropItem?.Item?.Id))!=null)
+            item.EvaluatorStatus = status;
     }
 
     protected async Task SubmitAsync()
     {
-        if (Validate()){
-            var evaluators = _modelData.Where(p => p.EvaluatorStatus == EvaluatorStatus.Assigned).Select(s => s.Id).ToArray();
-            var response = await _manager.SetEvaluatorsAsync(_id,evaluators);
-            if (response.Succeeded)
-                MudDialog.Close();
-            foreach (var message in response.Messages)
-            {
-                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
-            }
+        var evaluators = _modelData.Where(p => p.EvaluatorStatus == EvaluatorStatus.Assigned).Select(s => s.Id).ToArray();
+        var response = await _manager.SetEvaluatorsAsync(_id,evaluators);
+        if (response.Succeeded)
+            MudDialog.Close();
+        foreach (var message in response.Messages){
+            _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
         }
 
+       await _jsRuntime.InvokeVoidAsync("console.debug",$"Id: {_id} / evaluatos: {string.Join(" *** ",evaluators)}");
     }
 }

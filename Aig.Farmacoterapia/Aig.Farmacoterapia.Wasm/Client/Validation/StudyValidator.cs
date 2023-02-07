@@ -58,7 +58,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Validation
             IsNotNull(c => c.Expiracion!, "La fecha de vencimiento es obligatoria");
             IsNotEmpty(c => c.PrincipioActivo, "El principio activo es obligatorio");
             IsNotEmpty(c => c.FormaFarmaceutica, "La forma farmacéutica es obligatoria");
-            IsNotEmpty(c => c.ViaAdministracion, "La forma vía de administración es obligatoria");
+            IsNotEmpty(c => c.ViaAdministracion, "La vía de administración es obligatoria");
             IsNotEmpty(c => c.Presentacion, "La presentación del producto es obligatoria");
             RuleFor(x => x.Cantidad).NotNull()
                 .WithMessage("La cantidad aprobada es obligatoria")

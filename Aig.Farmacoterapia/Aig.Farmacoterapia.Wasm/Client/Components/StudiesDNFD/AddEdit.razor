@@ -79,13 +79,13 @@
                                     @if (_modelData.Id == 0)
                                     {
                                         <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
-                                            <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
+                                            <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código del protocolo de investigación" />
                                         </MudItem>
                                     }
                                     else
                                     {
                                         <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
-                                            <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código" />
+                                            <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código del protocolo de investigación" />
                                         </MudItem>
                                     }
 
@@ -125,16 +125,16 @@
                             <MudItem xs="12">
                                 <MudGrid>
 
-                                  <MudItem xs="12" md="2" Style="padding:3px !important;">
-                                        <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Participantes)" @bind-Value="_modelData.Participantes" Label="No.Participantes" />
+                                  <MudItem xs="12" md="3" Style="padding:3px !important;">
+                                        <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Participantes)" @bind-Value="_modelData.Participantes" Label="Número de participantes en panamá" />
                                     </MudItem>
 
-                                    <MudItem xs="12"  md="5" Style="padding:3px !important;">
+                                    <MudItem xs="12"  md="4" Style="padding:3px !important;">
                                         <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Duracion)" @bind-Value="_modelData.Duracion" Label="Duración del estudio" />
                                     </MudItem>
 
                                     <MudItem xs="12" md="5" Style="padding:3px !important;">
-                                        <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.RegistroProtocoloDIGESA)" @bind-Value="_modelData.RegistroProtocoloDIGESA" Label="Registro en DIGESA" />
+                                        <MudTextField Disabled="IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.RegistroProtocoloDIGESA)" @bind-Value="_modelData.RegistroProtocoloDIGESA" Label="Constancia de registro del protocolo en DIGESA" />
                                     </MudItem>
 
                                 </MudGrid>
@@ -163,7 +163,7 @@
                                 <MudGrid>
 
                                     <MudItem xs="12" md="12" Style="padding:3px !important">
-                                        <MudTextField T="string" Label="Observaciones del Evaluador" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ObservacionesEvaluador" Lines="4" />
+                                        <MudTextField T="string" Label="Observaciones por el evaluador" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ObservacionesEvaluador" Lines="4" />
                                     </MudItem>
 
                                 </MudGrid>
@@ -192,7 +192,7 @@
                                       <ValidationMessage For="@(() => _modelData.CentroInvestigacion)" />
                                         </MudItem>
                                     <MudItem xs="12" md="6" Style="padding:3px !important">
-                                        <MudTextField Disabled="IsEditData()" T="string" Label="Comité de Bioetica" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ComiteBioetica" Lines="4" />
+                                        <MudTextField Disabled="IsEditData()" T="string" Label="Comité de bioetica que aprobó el estudio" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.ComiteBioetica" Lines="4" />
                                    <ValidationMessage For="@(() => _modelData.ComiteBioetica)" />
                                         </MudItem>
                                 </MudGrid>

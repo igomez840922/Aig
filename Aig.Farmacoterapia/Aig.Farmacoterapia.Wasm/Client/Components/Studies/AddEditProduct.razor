@@ -69,20 +69,20 @@
                 <MudGrid Style="margin-top:5px !important">
                     <MudItem xs="12">
                         <MudGrid>
-                         <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
-                                <MudTextField  Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Factura)" @bind-Value="_modelData.Factura" Label="No.Factura" />
+                         <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
+                                <MudTextField  Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Factura)" @bind-Value="_modelData.Factura" Label="Número de factura de importación" />
                             </MudItem>
 
-                          <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
-                                <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Cantidad)" @bind-Value="_modelData.Cantidad" Label="Cantidad" />
+                          <MudItem xs="12" md="3" Style="padding:3px !important; margin-top:18px !important">
+                                <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Cantidad)" @bind-Value="_modelData.Cantidad" Label="Cantidad a importar" />
                             </MudItem>
 
-                            <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
+                            <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
                                 <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Lote)" @bind-Value="_modelData.Lote" Label="Lote" />
                             </MudItem>
 
 
-                            <MudItem xs="12" md="4" Style="padding:3px !important">
+                            <MudItem xs="12" md="3" Style="padding:3px !important">
                                 <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de expiración" @bind-Date="_modelData.Expiracion" />
                                 <ValidationMessage For="@(() => _modelData.Expiracion)" />
                             </MudItem>

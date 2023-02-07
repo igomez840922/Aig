@@ -72,7 +72,7 @@
                 <MudToolBar Style="height:25px !important;">
                     <MudText Color="Color.Primary">
                         <MudIcon Icon="@Icons.Material.Outlined.Archive" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
-                        Evaluaciones de estudios DNFD
+                        Evaluación del estudio clínico por DNFD
                     </MudText>
                     <MudSpacer />
                     <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
@@ -152,17 +152,18 @@
             @*<MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>*@
             <MudTh> <MudTableSortLabel Style="width:150px !important" SortLabel="status" T="AigEstudioDNFD">Estado</MudTableSortLabel></MudTh> 
             <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudioDNFD">Fecha de Ingreso</MudTableSortLabel></MudTh> 
-            <MudTh><MudInputLabel Style="width:50px !important">Código</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:500px !important">Título</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:500px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
             <MudTh> <MudInputLabel Style="width:300px !important">Nota de Evaluación</MudInputLabel> </MudTh>
             <MudTh><MudTableSortLabel Style="width:200px" SortLabel="evaluationDate" T="AigEstudioDNFD">Fecha de Evaluación</MudTableSortLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:400px">Observaciones del Evaluador</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Protocolo en DIGESA</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Investigador</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Duración</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Participantes</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Centro</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Comité de Bioetica</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:400px">Observaciones por el evaluador</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Constancia de registro del protocolo en DIGESA</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Investigador principal</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Patrocinador del estudio</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Duración del estudio</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Número de participantes en panamá</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:200px">Comité de bioetica que aprobó el estudio</MudInputLabel></MudTh>
             <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Ascending" SortLabel="created" T="AigEstudioDNFD">Creado</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
@@ -190,18 +191,19 @@
                 </MudBadge>
             }
                 </MudTd>
-            <MudTd DataLabel="Fecha de ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
-            <MudTd DataLabel="Código">@context.Codigo</MudTd>
-            <MudTd DataLabel="Título">@context.Titulo</MudTd>
+            <MudTd DataLabel="Fecha de Ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
+            <MudTd DataLabel="Código del protocolo de investigación">@context.Codigo</MudTd>
+            <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
             <MudTd DataLabel="Nota de Evaluación">@context.NotaEvaluacion</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", context.FechaEvaluacion!))</MudTd>
-            <MudTd DataLabel="Observaciones del Evaluador">@context.ObservacionesEvaluador</MudTd>
-            <MudTd DataLabel="Protocolo en DIGESA">@context.RegistroProtocoloDIGESA</MudTd>
-            <MudTd DataLabel="Investigador">@context.InvestigadorPrincipal</MudTd>
-            <MudTd DataLabel="Duración">@context.Duracion</MudTd>
-            <MudTd DataLabel="Participantes">@context.Participantes</MudTd>
-             <MudTd DataLabel="Participantes">@context.CentroInvestigacion</MudTd>
-            <MudTd DataLabel="Comité de Bioetica">@context.ComiteBioetica</MudTd>
+            <MudTd DataLabel="Observaciones por el evaluador">@context.ObservacionesEvaluador</MudTd>
+            <MudTd DataLabel="Constancia de registro del protocolo en DIGESA">@context.RegistroProtocoloDIGESA</MudTd>
+            <MudTd DataLabel="Investigador principal">@context.InvestigadorPrincipal</MudTd>
+            <MudTd DataLabel="Patrocinador del estudio">@context.Patrocinador</MudTd>
+            <MudTd DataLabel="Duración del estudio">@context.Duracion</MudTd>
+            <MudTd DataLabel="Número de participantes en panamá">@context.Participantes</MudTd>
+             <MudTd DataLabel="Centro de investigación">@context.CentroInvestigacion</MudTd>
+            <MudTd DataLabel="Comité de bioetica que aprobó el estudio">@context.ComiteBioetica</MudTd>
             <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
             <MudTd>
 
@@ -310,13 +312,13 @@
             filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = _modelFilter.Term.Trim() });
         if (_modelFilter.StartDate != null && _modelFilter.EndDate != null)
         {
-            filters.Add(new FilteringOption { Field = "startEvaluationDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartDate.Value.ToString("dd/MM/yyyy") });
-            filters.Add(new FilteringOption { Field = "endEvaluationDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "startAdmissionDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endAdmissionDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndDate.Value.ToString("dd/MM/yyyy") });
         }
         if (_modelFilter.StartExpirationDate != null && _modelFilter.EndExpirationDate != null)
         {
-            filters.Add(new FilteringOption { Field = "startAdmissionDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
-            filters.Add(new FilteringOption { Field = "endAdmissionDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "startEvaluationDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endEvaluationDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
         }
        
         filters.Add(new FilteringOption { Field = "status", Operator = FilteringOperator.Equal, Value = _modelFilter.Status.ToString() });

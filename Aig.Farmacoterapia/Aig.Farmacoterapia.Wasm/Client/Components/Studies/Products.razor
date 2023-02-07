@@ -24,7 +24,7 @@
                 <MudToolBar Style="height:25px !important;">
                     <MudSpacer />
                     @*<MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
-                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(string.Empty))" />
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || _parent?.Medicamentos.Count==4)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(string.Empty))" />
                     </MudTooltip>*@
                 </MudToolBar>
             </MudItem>
@@ -36,24 +36,24 @@
  
 <MudTable Items="@_parent?.Medicamentos"  Dense="true" Hover="true" Height="500px">
         <HeaderContent>
-              <MudTh>No. Factura</MudTh>
+              <MudTh>Número de factura de importación</MudTh>
              <MudTh><MudInputLabel Style="width:250px">Producto</MudInputLabel></MudTh>
-             <MudTh>Cantidad</MudTh>
-             <MudTh>Lote</MudTh>
-             <MudTh><MudInputLabel Style="width:150px">Fecha de vencimiento</MudInputLabel></MudTh>
+             <MudTh>Cantidad a importar</MudTh>
+             <MudTh>Lote (s)</MudTh>
+             <MudTh><MudInputLabel Style="width:150px">Expiración (s)</MudInputLabel></MudTh>
             <MudTh>Fabricante</MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
-             <MudTd DataLabel="Producto">
+             <MudTd DataLabel="Número de factura de importación">
                  @context.Factura
             </MudTd>
             <MudTd DataLabel="Producto">
                  @context.Nombre
             </MudTd>
-            <MudTd DataLabel="Cantidad">@context.Cantidad</MudTd>
-            <MudTd DataLabel="Lote">@context.Lote</MudTd>
-            <MudTd DataLabel="Fecha de vencimiento">@(string.Format("{0:dd/MM/yyyy}", context.Expiracion))</MudTd>
+            <MudTd DataLabel="Cantidad a importar">@context.Cantidad</MudTd>
+            <MudTd DataLabel="Lote (s)">@context.Lote</MudTd>
+            <MudTd DataLabel="Expiración (s)">@(string.Format("{0:dd/MM/yyyy}", context.Expiracion))</MudTd>
             <MudTd DataLabel="Fabricante">
                 @context.Fabricante?.Nombre
             </MudTd>
