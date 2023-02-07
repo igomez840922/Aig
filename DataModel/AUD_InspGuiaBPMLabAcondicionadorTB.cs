@@ -171,13 +171,13 @@ namespace DataModel
         private AUD_ContenidoTablas valGenerales;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoTablas ValGenerales { get => valGenerales; set => SetProperty(ref valGenerales, value); }
-                
+
         //17. QUEJAS, RECLAMOS Y RETIRO DE PRODUCTOS - GENERALIDADES - QUEJAS O RECLAMOS - RETIROS - 
         private AUD_ContenidoTablas quejasReclamos;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoTablas QuejasReclamos { get => quejasReclamos; set => SetProperty(ref quejasReclamos, value); }
 
-        //18. AUTOINSPECCIÓN Y AUDITORIAS DE CALIDAD - AUTOINSPECCIONES - AUDITORÍAS - 
+        //18. AUTOINSPECCIÓN Y auditorías DE CALIDAD - AUTOINSPECCIONES - AUDITORÍAS - 
         private AUD_ContenidoTablas autoInspecAuditCal;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoTablas AutoInspecAuditCal { get => autoInspecAuditCal; set => SetProperty(ref autoInspecAuditCal, value); }
@@ -6507,7 +6507,7 @@ namespace DataModel
                     },
                     new ContenidoTablas()
                     {
-                        Titulo = "¿Realiza el laboratorio fabricante autoinspecciones y auditorias periódicas?",
+                        Titulo = "¿Realiza el laboratorio fabricante autoinspecciones y auditorías periódicas?",
                         Criterio = "CRÍTICO",
                         Capitulo="",
                         Articulo="18.1.1",
@@ -6645,7 +6645,7 @@ namespace DataModel
                     },
                     new ContenidoTablas()
                     {
-                        Titulo = "¿Se realizan auditorias de calidad internas?",
+                        Titulo = "¿Se realizan auditorías de calidad internas?",
                         Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="18.2.1",
@@ -6677,7 +6677,7 @@ namespace DataModel
                     },
                     new ContenidoTablas()
                     {
-                        Titulo = "¿Las auditorias de calidad son realizadas por personal de la misma compañía?",
+                        Titulo = "¿Las auditorías de calidad son realizadas por personal de la misma compañía?",
                         Criterio = "INFORMATIVO",
                         Capitulo="",
                         Articulo="18.2.2",
@@ -6726,7 +6726,7 @@ namespace DataModel
                     },
                     new ContenidoTablas()
                     {
-                        Titulo = "¿Se da seguimiento a las acciones correctivas y preventivas de las auditorias de calidad?",
+                        Titulo = "¿Se da seguimiento a las acciones correctivas y preventivas de las auditorías de calidad?",
                         Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="",
@@ -6751,7 +6751,7 @@ namespace DataModel
                 }
             };
             /////////////
-            
+
         }
     }
 }

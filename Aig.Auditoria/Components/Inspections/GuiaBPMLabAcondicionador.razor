@@ -491,6 +491,7 @@
                                             <thead class=thead-light>
                                                 <tr>
                                                                         <th width="40%">@languageContainerService.Keys["Objetivos"]</th>
+                                                    <th>@languageContainerService.Keys["Criterios"]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
@@ -506,12 +507,14 @@
                                                                 <th>@dt.Titulo</th>
                                                                 <th></th>
                                                                 <th></th>
+                                                                <th></th>
                                                             </tr>
                                                         }
                                                         else                                                        
                                                         {
                                                             <tr>
                                                                 <td scope="row">@dt.Titulo</td>
+                                                                <td scope="row">@dt.Criterio</td>
                                                                 <td>
                                                                     <InputSelect style="padding:0px!important;"@bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -542,6 +545,7 @@
                                             <thead class=thead-light>
                                                 <tr>
                                                                         <th width="40%">@languageContainerService.Keys["Objetivos"]</th>
+                                                    <th>@languageContainerService.Keys["Criterios"]</th>
                                                     <th>@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
@@ -557,12 +561,14 @@
                                                                 <th>@dt.Titulo</th>
                                                                 <th></th>
                                                                 <th></th>
+                                                                <th></th>
                                                             </tr>
                                                         }
                                                         else
                                                         {
                                                             <tr>
                                                                 <td scope="row">@dt.Titulo</td>
+                                                                <td scope="row">@dt.Criterio</td>
                                                                 <td>
                                                                     <InputSelect style="padding:0px!important;"@bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
@@ -732,9 +738,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMLabAcondicionador.EdifInstalaciones.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMLabAcondicionador.Almacenes.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiaBPMLabAcondicionador.EdifInstalaciones.LContenido)
+                                                                        @foreach (var dt in Inspeccion.InspGuiaBPMLabAcondicionador.Almacenes.LContenido)
                                                     {
                                                         @if (dt.IsHeader)
                                                         {
@@ -825,7 +831,7 @@
                                 </div>
                             </div>
 
-                            <h5>@languageContainerService.Keys["Area de Acondicionamiento para Empaque Secundario"]</h5>                            
+                            <h5>@languageContainerService.Keys["Area de Acondicionamiento"]</h5>                            
                             <div class="row clearfix">
                                 <!--begin::Section-->
                                 <div class="col-sm-12">

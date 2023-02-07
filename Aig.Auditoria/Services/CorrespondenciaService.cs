@@ -26,15 +26,28 @@ namespace Aig.Auditoria.Services
                               where data.Deleted == false &&
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Empresa.Contains(model.Filter) || data.NumDocRecibido.Contains(model.Filter) || data.NombreRecibido.Contains(model.Filter) || data.NumDocRespuesta.Contains(model.Filter) || data.Asunto.Contains(model.Filter))) &&
                               (model.FromDate != null ? data.FechaIngreso >= model.FromDate : true) &&
-                               (model.ToDate != null ? data.FechaIngreso <= model.ToDate : true)
+                               (model.ToDate != null ? data.FechaIngreso <= model.ToDate : true) &&
+                              (model.RevDateIni != null ? data.FechaRevision >= model.RevDateIni : true) &&
+                               (model.RevDateEnd != null ? data.FechaRevision <= model.RevDateEnd : true) &&
+                               (model.RecDateIni != null ? data.FechaRecibo >= model.RecDateIni : true) &&
+                               (model.RecDateEnd != null ? data.FechaRecibo <= model.RecDateEnd : true) &&
+                               (model.ResDateIni != null ? data.FechaRespuesta >= model.ResDateIni : true) &&
+                               (model.ResDateEnd != null ? data.FechaRespuesta <= model.ResDateEnd : true)
                                 orderby data.CreatedDate descending
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_CorrespondenciaTB>()
                              where data.Deleted == false &&
                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Empresa.Contains(model.Filter) || data.NumDocRecibido.Contains(model.Filter) || data.NombreRecibido.Contains(model.Filter) || data.NumDocRespuesta.Contains(model.Filter) || data.Asunto.Contains(model.Filter))) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Empresa.Contains(model.Filter) || data.NumDocRecibido.Contains(model.Filter) || data.NombreRecibido.Contains(model.Filter) || data.NumDocRespuesta.Contains(model.Filter) || data.Asunto.Contains(model.Filter))) &&
                               (model.FromDate != null ? data.FechaIngreso >= model.FromDate : true) &&
-                               (model.ToDate != null ? data.FechaIngreso <= model.ToDate : true)
+                               (model.ToDate != null ? data.FechaIngreso <= model.ToDate : true) &&
+                              (model.RevDateIni != null ? data.FechaRevision >= model.RevDateIni : true) &&
+                               (model.RevDateEnd != null ? data.FechaRevision <= model.RevDateEnd : true) &&
+                               (model.RecDateIni != null ? data.FechaRecibo >= model.RecDateIni : true) &&
+                               (model.RecDateEnd != null ? data.FechaRecibo <= model.RecDateEnd : true) &&
+                               (model.ResDateIni != null ? data.FechaRespuesta >= model.ResDateIni : true) &&
+                               (model.ResDateEnd != null ? data.FechaRespuesta <= model.ResDateEnd : true)
                                select data).Count();  
             }
             catch (Exception ex)

@@ -5011,7 +5011,7 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Propietario Artesano:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspAperturaCosmetArtesanal.Propietario.Nombre));
-                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspAperturaCosmetArtesanal.Propietario.Cedula));
+                            column.Item().AlignLeft().Text(string.Format("Cédula: {0}", inspection.InspAperturaCosmetArtesanal.Propietario.Cedula));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Documentación:".ToUpper())).Bold();
                             column.Item().Table(table =>
@@ -5084,7 +5084,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
 
 
-                                foreach (var dat in inspection.InspAperturaCosmetArtesanal.Locales.LContenido)
+                                foreach (var dat in inspection.InspAperturaCosmetArtesanal.AreaAlmacenamiento.LContenido)
                                 {
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
@@ -8124,6 +8124,9 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Observaciones:".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(inspection.InspDisposicionFinal.DatosConclusiones.ObservacionesFinales);
+
                             column.Item().PaddingVertical(5).AlignCenter().Text(string.Format("Conclusiones".ToUpper())).Bold();
 
                             column.Item().AlignLeft().Text(string.Format("Luego de realizar {0} de los desechos farmacéuticos, se encontró que la existencia física {1} coincide con el registro en la lista que adjuntó el establecimiento a la solicitud.", DataModel.Helper.Helper.GetDescription(inspection.InspDisposicionFinal.TipoInspeccion), inspection.InspDisposicionFinal.Coincide?"Si":"No"));
@@ -8764,7 +8767,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
                                 });
 
-                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.AreaDispMatPrima.LContenido)
+                                foreach (var dat in inspection.InspGuiaBPMFabricanteMed.AreaProduccion.LContenido)
                                 {
                                     if (dat.IsHeader)
                                     {
@@ -10983,7 +10986,7 @@ namespace Aig.Auditoria.Services
                                 {
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Nombre".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cargo".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Area Evakuada".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Area Evaluada".ToUpper());
                                 });
                                 foreach (var dat in inspection.InspGuiaBPM_Bpa.DatosConclusiones.LParticipantes)
                                 {
@@ -11006,7 +11009,7 @@ namespace Aig.Auditoria.Services
                                 {
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Nombre".ToUpper());
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cargo".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Area Evakuada".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Area Evaluada".ToUpper());
                                 });
                                 foreach (var dat in inspection.InspGuiaBPM_Bpa.OtrosFuncionarios.LPersona)
                                 {

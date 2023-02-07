@@ -741,9 +741,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.EdifInstalaciones.LContenido != null)
+                                                @if (Inspeccion != null && Inspeccion.InspGuiaBPMFabricanteMed.Almacenes.LContenido != null)
                                                 {
-                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.EdifInstalaciones.LContenido)
+                                                                        @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.Almacenes.LContenido)
                                                     {
                                                         @if (dt.IsHeader)
                                                         {

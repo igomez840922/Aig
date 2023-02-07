@@ -1075,7 +1075,7 @@ namespace Aig.FarmacoVigilancia.Services
                                   (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
                                   (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
                                   (data.Ram != null && data.Ram.Length > 0)
-                                  group data by new { data.Farmaco.RamId, data.SocId } into g
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.SocId } into g
                                   orderby g.Count() descending
                                   select new ReportModelResponse
                                   {
@@ -1096,7 +1096,7 @@ namespace Aig.FarmacoVigilancia.Services
                                   (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
                                   (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
                                   (data.Ram != null && data.Ram.Length > 0)
-                                  group data by new { data.Farmaco.RamId, data.SocId } into g
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.SocId } into g
                                   orderby g.Count() descending
                                   select new ReportModelResponse
                                   {

@@ -350,6 +350,16 @@
                                                             <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.Coincide) />
                                                         </div>
                                                     </div>
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["Adjuntó lista de productos"]</label>
+                                                        <div class="form-group">
+                                                            <InputSelect @bind-Value="Inspeccion.InspDisposicionFinal.Adjunta" class="form-control">
+                                                                <option value="false">No</option>
+                                                                <option value="true">Si</option>
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.Adjunta) />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 

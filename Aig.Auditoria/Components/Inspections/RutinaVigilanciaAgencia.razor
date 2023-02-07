@@ -77,7 +77,7 @@
                                     <label for="password">@languageContainerService.Keys["Status"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
+                                            <InputSelect style="padding:0px!important;" @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
                                                 @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
                                                 {
                                                     if (dt != enum_StatusInspecciones.None)
@@ -291,7 +291,7 @@
                                     <label>@languageContainerService.Keys["Se Encontraba el Regente Farmacéutico en el Local"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigAgencia.DatosRegente.PresenteEnLocal" class="form-control">
+                                            <InputSelect style="padding:0px!important;" @bind-Value="Inspeccion.InspRutinaVigAgencia.DatosRegente.PresenteEnLocal" class="form-control">
                                                 @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                 {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -361,8 +361,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Generalidades del Establecimiento"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Generalidades del Establecimiento"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -384,7 +384,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -410,8 +410,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Área de Recepción de Productos"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Área de Recepción de Productos"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -433,7 +433,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -459,8 +459,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Área de Almacenamiento"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Área de Almacenamiento"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -482,7 +482,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -508,8 +508,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Área para productos devueltos"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Área para productos devueltos"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -531,7 +531,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -557,8 +557,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Área de despacho de productos"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Área de despacho de productos"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -580,7 +580,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -606,8 +606,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Área de almacenamiento de productos que requieren cadena de frío"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Área de almacenamiento de productos que requieren cadena de frío"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -629,7 +629,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -655,8 +655,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Área de almacén de desperdicios"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Área de almacén de desperdicios"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -678,7 +678,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -709,8 +709,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Productos Sujetos a Control"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Productos Sujetos a Control"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -732,7 +732,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -763,8 +763,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Procedimientos Operativos"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Procedimientos Operativos"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -786,7 +786,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -817,8 +817,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Transporte"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Transporte"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -840,7 +840,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -871,8 +871,8 @@
                                         <table class="table rounded table-striped">
                                             <thead class=thead-light>
                                                 <tr>
-                                                    <th>@languageContainerService.Keys["Actividades de Distribución"]</th>
-                                                    <th>@languageContainerService.Keys["Evaluación"]</th>
+                                                    <th width="50%">@languageContainerService.Keys["Actividades de Distribución"]</th>
+                                                    <th width="10%">@languageContainerService.Keys["Evaluación"]</th>
                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                 </tr>
                                             </thead>
@@ -894,7 +894,7 @@
                                                             <tr>
                                                                 <td>@dt.Titulo</td>
                                                                 <td>
-                                                                    <InputSelect @bind-Value="dt.Evaluacion" class="form-control">
+                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
                                                                         @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                         {
                                                                             <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
@@ -988,7 +988,7 @@
                                     <label for="password">@languageContainerService.Keys["El local cumple  o no cumple con los requisitos mínimos para operar"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigAgencia.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
+                                            <InputSelect style="padding:0px!important;" @bind-Value="Inspeccion.InspRutinaVigAgencia.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
@@ -1000,7 +1000,7 @@
                                     <label for="password">@languageContainerService.Keys["Se re-programará otra inspección para verificar observaciones"]</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigAgencia.DatosConclusiones.ReprogramaInspeccion" class="form-control">
+                                            <InputSelect style="padding:0px!important;" @bind-Value="Inspeccion.InspRutinaVigAgencia.DatosConclusiones.ReprogramaInspeccion" class="form-control">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
