@@ -162,6 +162,36 @@ namespace DataAccess
                 .HasForeignKey(e => e.FrmRetiroRetencionId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            ///////////////////////////////////////////
+            ///
+
+            modelBuilder.Entity<AUD_CorrespondenciaContactoTB>()
+               .HasMany(e => e.LCorrespondencia)
+               .WithOne(e => e.CorrespondenciaContacto)
+               .HasForeignKey(e => e.CorrespondenciaContactoId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<AUD_CorrespondenciaAsuntoTB>()
+              .HasMany(e => e.LCorrespondencia)
+              .WithOne(e => e.CorrespondenciaAsunto)
+              .HasForeignKey(e => e.CorrespondenciaAsuntoId)
+              .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<AUD_CorrespondenciaRespRevisionTB>()
+             .HasMany(e => e.LCorrespondencia)
+             .WithOne(e => e.CorrespondenciaResponsable)
+             .HasForeignKey(e => e.CorrespondenciaResponsableId)
+             .OnDelete(DeleteBehavior.NoAction);
+
+            //JSON Serialization
+            modelBuilder.Entity<AUD_CorrespondenciaTB>()
+              .Property(e => e.AdjuntoIngreso)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+           
+            modelBuilder.Entity<AUD_CorrespondenciaTB>()
+              .Property(e => e.AdjuntoSeguimiento)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
 
             ///////////////////////////////////////////
             ///
@@ -1784,7 +1814,10 @@ namespace DataAccess
         public virtual DbSet<AUD_CorrespondenciaTB> AUD_Correspondencia { get; set; }
         public virtual DbSet<AUD_InspGuiaBPMFabricanteMedTB> AUD_InspGuiaBPMFabricanteMed { get; set; }
         public virtual DbSet<AUD_InspAperFabricanteCosmetMedTB> AUD_InspAperFabricanteCosmetMed { get; set; }
-        
+
+        public virtual DbSet<AUD_CorrespondenciaAsuntoTB> AUD_CorrespondenciaAsunto { get; set; }
+        public virtual DbSet<AUD_CorrespondenciaContactoTB> AUD_CorrespondenciaContacto { get; set; }
+        public virtual DbSet<AUD_CorrespondenciaRespRevisionTB> AUD_CorrespondenciaRespRevision { get; set; }
 
         /////////////////////////////////////////////////
         ///

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataModel.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,15 @@ namespace DataModel
 {
     public class AUD_CorrespondenciaTB:SystemId
     {
+        //Empresa establecimiento
+        private string secNumberStr;
+        [StringLength(250)]
+        public string SecNumberStr { get => secNumberStr; set => SetProperty(ref secNumberStr, value); }
+
+        //Empresa establecimiento
+        private int secNumber;
+        public int SecNumber { get => secNumber; set => SetProperty(ref secNumber, value); }
+
         //Fecha de Ingreso
         private DateTime? fechaIngreso;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -31,11 +41,37 @@ namespace DataModel
         [StringLength(500)]
         public string Asunto { get => asunto; set => SetProperty(ref asunto, value); }
 
-        //pais
-        private long? asuntoId;
-        public long? AsuntoId { get => asuntoId; set => SetProperty(ref asuntoId, value); }
+
+        //Asunto
+        private long? correspondenciaAsuntoId;
+        public long? CorrespondenciaAsuntoId { get => correspondenciaAsuntoId; set => SetProperty(ref correspondenciaAsuntoId, value); }
         private AUD_CorrespondenciaAsuntoTB? correspondenciaAsunto;
         public virtual AUD_CorrespondenciaAsuntoTB? CorrespondenciaAsunto { get => correspondenciaAsunto; set => SetProperty(ref correspondenciaAsunto, value); }
+              
+        //Status
+        private enumAUD_StatusCorrespondencia status;
+        public enumAUD_StatusCorrespondencia Status { get => status; set => SetProperty(ref status, value); }
+
+        //Contacto
+        private long? correspondenciaContactoId;
+        public long? CorrespondenciaContactoId { get => correspondenciaContactoId; set => SetProperty(ref correspondenciaContactoId, value); }
+        private AUD_CorrespondenciaContactoTB? correspondenciaContacto;
+        public virtual AUD_CorrespondenciaContactoTB? CorrespondenciaContacto { get => correspondenciaContacto; set => SetProperty(ref correspondenciaContacto, value); }
+
+        //Tipo Correspondencia
+        private enumAUD_TipoCorrespondencia tipoCorrespondencia;
+        public enumAUD_TipoCorrespondencia TipoCorrespondencia { get => tipoCorrespondencia; set => SetProperty(ref tipoCorrespondencia, value); }
+        
+        private string descTipoCorrespondencia;
+        [StringLength(300)]
+        public string DescTipoCorrespondencia { get => descTipoCorrespondencia; set => SetProperty(ref descTipoCorrespondencia, value); }
+
+        //Reponsable
+        private long? correspondenciaResponsableId;
+        public long? CorrespondenciaResponsableId { get => correspondenciaResponsableId; set => SetProperty(ref correspondenciaResponsableId, value); }
+        private AUD_CorrespondenciaRespRevisionTB? correspondenciaResponsable;
+        public virtual AUD_CorrespondenciaRespRevisionTB? CorrespondenciaResponsable { get => correspondenciaResponsable; set => SetProperty(ref correspondenciaResponsable, value); }
+
 
         //Detalles
         private string detalles;
@@ -68,14 +104,12 @@ namespace DataModel
         //Nombre a quien va dirigido
         private string nombreDirigido;
         [StringLength(300)]
-        [Required(ErrorMessage = "requerido")]
         public string NombreDirigido { get => nombreDirigido; set => SetProperty(ref nombreDirigido, value); }
 
         //Correo a quien va dirigido
         private string emailDirigido;
         [StringLength(250)]
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
-        [Required(ErrorMessage = "requerido")]
         public string EmailDirigido { get => emailDirigido; set => SetProperty(ref emailDirigido, value); }
 
         //Nombre quien Recibe
@@ -133,5 +167,15 @@ namespace DataModel
         [StringLength(300)]
         public string EstablecimientoAsignado { get => establecimientoAsignado; set => SetProperty(ref establecimientoAsignado, value); }
 
+
+        //Ficheros Adjuntos
+        private AttachmentData adjuntoIngreso;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData AdjuntoIngreso { get => adjuntoIngreso; set => SetProperty(ref adjuntoIngreso, value); }
+
+        //Ficheros Adjuntos
+        private AttachmentData adjuntoSeguimiento;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AttachmentData AdjuntoSeguimiento { get => adjuntoSeguimiento; set => SetProperty(ref adjuntoSeguimiento, value); }
     }
 }

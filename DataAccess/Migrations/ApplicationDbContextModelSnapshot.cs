@@ -17,7 +17,7 @@ namespace DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -188,6 +188,115 @@ namespace DataAccess.Migrations
                     b.ToTable("Attachment");
                 });
 
+            modelBuilder.Entity("DataModel.AUD_CorrespondenciaAsuntoTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AUD_CorrespondenciaAsunto");
+                });
+
+            modelBuilder.Entity("DataModel.AUD_CorrespondenciaContactoTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AUD_CorrespondenciaContacto");
+                });
+
+            modelBuilder.Entity("DataModel.AUD_CorrespondenciaRespRevisionTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AUD_CorrespondenciaRespRevision");
+                });
+
             modelBuilder.Entity("DataModel.AUD_CorrespondenciaTB", b =>
                 {
                     b.Property<long>("Id")
@@ -196,15 +305,34 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<string>("AdjuntoIngreso")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdjuntoSeguimiento")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Asunto")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<long?>("CorrespondenciaAsuntoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CorrespondenciaContactoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CorrespondenciaResponsableId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("DescTipoCorrespondencia")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Detalles")
                         .HasColumnType("nvarchar(max)");
@@ -220,7 +348,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("EmailDirigido")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -268,7 +395,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("NombreDirigido")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -295,10 +421,29 @@ namespace DataAccess.Migrations
                     b.Property<string>("RespuestaCaso")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SecNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecNumberStr")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoCorrespondencia")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CorrespondenciaAsuntoId");
+
+                    b.HasIndex("CorrespondenciaContactoId");
+
+                    b.HasIndex("CorrespondenciaResponsableId");
 
                     b.ToTable("AUD_Correspondencia");
                 });
@@ -5460,6 +5605,30 @@ namespace DataAccess.Migrations
                     b.Navigation("Inspeccion");
                 });
 
+            modelBuilder.Entity("DataModel.AUD_CorrespondenciaTB", b =>
+                {
+                    b.HasOne("DataModel.AUD_CorrespondenciaAsuntoTB", "CorrespondenciaAsunto")
+                        .WithMany("LCorrespondencia")
+                        .HasForeignKey("CorrespondenciaAsuntoId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("DataModel.AUD_CorrespondenciaContactoTB", "CorrespondenciaContacto")
+                        .WithMany("LCorrespondencia")
+                        .HasForeignKey("CorrespondenciaContactoId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("DataModel.AUD_CorrespondenciaRespRevisionTB", "CorrespondenciaResponsable")
+                        .WithMany("LCorrespondencia")
+                        .HasForeignKey("CorrespondenciaResponsableId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("CorrespondenciaAsunto");
+
+                    b.Navigation("CorrespondenciaContacto");
+
+                    b.Navigation("CorrespondenciaResponsable");
+                });
+
             modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>
                 {
                     b.HasOne("DataModel.CorregimientoTB", "Corregimiento")
@@ -6137,6 +6306,21 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DataModel.AUD_CorrespondenciaAsuntoTB", b =>
+                {
+                    b.Navigation("LCorrespondencia");
+                });
+
+            modelBuilder.Entity("DataModel.AUD_CorrespondenciaContactoTB", b =>
+                {
+                    b.Navigation("LCorrespondencia");
+                });
+
+            modelBuilder.Entity("DataModel.AUD_CorrespondenciaRespRevisionTB", b =>
+                {
+                    b.Navigation("LCorrespondencia");
                 });
 
             modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>

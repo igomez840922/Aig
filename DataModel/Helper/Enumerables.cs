@@ -892,4 +892,24 @@ namespace DataModel.Helper
         AmpModArea = 6,
     }
 
+    public enum enumAUD_StatusCorrespondencia
+    {
+        [Description("Pendiente")]
+        Pendiente = 0,
+        [Description("Recibido")]
+        Recibido = 1,
+        [Description("Finalizado por DAC")]
+        FinalizadoDAC = 2,
+    }
+
+    public enum enumAUD_TipoCorrespondencia
+    {
+        [Description("Informe Técnico")]
+        InfTecnico = 0,
+        [Description("Hoja de Trámite")]
+        HojaTramite = 1,
+        [Description("Otros")]
+        Otros = 2,
+    }
+
 }

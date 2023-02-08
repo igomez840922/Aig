@@ -114,6 +114,7 @@
                                                     <table class="table rounded table-striped">
                                                         <thead class=thead-light>
                                                             <tr>
+                                                                <th>@languageContainerService.Keys["No. Correspondencia"]</th>
                                                                 <th>@languageContainerService.Keys["Fecha Ingreso"]</th>
                                                                 <th>@languageContainerService.Keys["No. Recibido"]</th>
                                                                 <th>@languageContainerService.Keys["Area"]</th>
@@ -128,6 +129,7 @@
                                                             @foreach (var dt in dataModel.Ldata)
                                                             {
                                                                 <tr>
+                                                                    <td>@(dt.SecNumberStr)</td>
                                                                     <td scope="row">@(dt.FechaIngreso?.ToString("dd/MM/yyyy"))</td>
                                                                     <td>@(dt.NumDocRecibido)</td>
                                                                     <td>@(dt.Empresa)</td>

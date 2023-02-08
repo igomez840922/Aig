@@ -1,4 +1,5 @@
 ﻿@using DataModel.Helper;
+@using DataModel;
 
 
 <!-- Modal Creat/Edit -->
@@ -15,7 +16,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    @(Correspondencia != null && Correspondencia.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["Correspondencia"]
+                                    @(Correspondencia != null && Correspondencia.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["Correspondencia"] @Correspondencia.SecNumberStr
                                 </h3>
                             </div>
                             <div class="kt-portlet__head-toolbar">
@@ -61,15 +62,30 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-6">
                                                     <label for="password">@languageContainerService.Keys["Asunto"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputTextArea disabled="@disabledDatosIngresos" rows="4" class="form-control" @bind-Value="Correspondencia.Asunto" />
-                                                            <ValidationMessage For=@(() => Correspondencia.Asunto) />
+                                                            <RadzenDropDown Disabled=@disabledDatosIngresos AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Correspondencia.CorrespondenciaAsuntoId
+                                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                        Data=@LAsuntos TextProperty="Nombre" ValueProperty="Id" />
+                                                            <ValidationMessage For=@(() => Correspondencia.CorrespondenciaAsuntoId) />
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @if (Correspondencia.CorrespondenciaAsuntoId == null)
+                                                {
+                                                    <div class="col-sm-6">
+                                                        <label for="password">@languageContainerService.Keys["Introduzca Asunto Manualmente"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText disabled="@disabledDatosIngresos" class="form-control" @bind-Value="Correspondencia.Asunto" />
+                                                                <ValidationMessage For=@(() => Correspondencia.Asunto) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                
                                                 <div class="col-sm-12">
                                                     <label for="password">@languageContainerService.Keys["Detalles: Resoluciones (nombre empresa y licencia, o producto) / Destrucciones (controlados o no) / Materia Prima (reingreso)"]</label>
                                                     <div class="form-group">
@@ -81,8 +97,53 @@
                                                 </div>
 
                                             </div>
+                                            <div class="row clearfix">
+                                                <div class="col-9" style="text-align:left;">
+                                                    <h5>@languageContainerService.Keys["Adjuntos de Ingresos"]</h5>
+                                                </div>
+                                                <div class="col-3" style="text-align:right;">
+                                                    <button disabled="@disabledDatosIngresos" type="button" @onclick="(e)=>{OpenAttachment();}"
+                                                            class="btn btn-sm btn-outline-primary waves-effect">
+                                                        @languageContainerService.Keys["Add"]
+                                                    </button>
+                                                </div>
+                                                <div class="col-12" style="text-align:left;">
+                                                    <div class="kt-section">
+                                                        <div class="table-responsive">
+                                                            <table class="table rounded table-striped">
+                                                                <thead class=thead-light>
+                                                                    <tr>
+                                                                        <th>@languageContainerService.Keys["Description"]</th>
+                                                                        <th>@languageContainerService.Keys["File"]</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if (Correspondencia?.AdjuntoIngreso?.LAttachments?.Count > 0)
+                                                                    {
+                                                                        @foreach (var dt in Correspondencia.AdjuntoIngreso.LAttachments)
+                                                                        {
+                                                                            <tr>
+                                                                                <td scope="row">@dt.Description</td>
+                                                                                <td>
+                                                                                    <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                                                </td>
+                                                                                <td style="text-align:right">
+                                                                                    <button disabled="@disabledDatosIngresos" type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
 
-                                            <h5>@languageContainerService.Keys["Datos de Revisión"]</h5>
+                                                </div>
+                                                <!--begin::Section-->
+                                            </div>
+                                            
+                                            <h5>@languageContainerService.Keys["Datos de Revisión"]</h5>                                            
                                             <div class="row clearfix">
                                                 <div class="col-sm-4">
                                                     <label>@languageContainerService.Keys["Fecha de Revision"]</label>
@@ -93,20 +154,39 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-8">
+                                                <div class="col-sm-4">
                                                     <label for="password">@languageContainerService.Keys["Responsable de Revisión"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText disabled="@(disabledDatosRevision)" class="form-control" @bind-Value="Correspondencia.NombreRevision" />
-                                                            <ValidationMessage For=@(() => Correspondencia.NombreRevision) />
+                                                            <RadzenDropDown Context="ResponsableContext" Disabled=@disabledDatosRevision AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Correspondencia.CorrespondenciaResponsableId
+                                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                        Data=@LResponsables ValueProperty="Id">
+                                                                        <Template>
+                                                                    @(string.Format("{0}-{1}", (ResponsableContext as AUD_CorrespondenciaRespRevisionTB).Nombre, (ResponsableContext as AUD_CorrespondenciaRespRevisionTB).Cargo))
+                                                                        </Template>
+                                                                    </RadzenDropDown>
+                                                            <ValidationMessage For=@(() => Correspondencia.CorrespondenciaResponsableId) />
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @if (Correspondencia.CorrespondenciaResponsableId == null)
+                                                {
+                                                    <div class="col-sm-4">
+                                                        <label for="password">@languageContainerService.Keys["Especifique Responsable"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText disabled="@disabledDatosRevision" class="form-control" @bind-Value="Correspondencia.NombreRevision" />
+                                                                <ValidationMessage For=@(() => Correspondencia.NombreRevision) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                
                                                 <div class="col-sm-12">
                                                     <label for="password">@languageContainerService.Keys["Observaciones"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputTextArea disabled="@(disabledDatosRevision)" rows="8" class="form-control" @bind-Value="Correspondencia.Observaciones" />
+                                                            <InputTextArea disabled="@(disabledDatosRevision)" rows="10" class="form-control" @bind-Value="Correspondencia.Observaciones" />
                                                             <ValidationMessage For=@(() => Correspondencia.Observaciones) />
                                                         </div>
                                                     </div>
@@ -144,8 +224,8 @@
                                                 {
                                                         case DataModel.enumUserRoleType.None:
                                                         {
-                                                            <div class="col-sm-4">
-                                                                <label for="password">@languageContainerService.Keys["Departamento o Sección Dirigido"]</label>
+                                                            <div class="col-sm-8">
+                                                                <label for="password">@languageContainerService.Keys["Especifique Departamento"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
                                                                         <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.DptoSeccion" />
@@ -157,24 +237,44 @@
                                                         }
                                                 }
                                                 
-                                                <div class="col-sm-8">
+                                                <div class="col-sm-4">
                                                     <label for="password">@languageContainerService.Keys["Nombre a quien va Dirigido"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.NombreDirigido" />
-                                                            <ValidationMessage For=@(() => Correspondencia.NombreDirigido) />
+                                                            <RadzenDropDown Context="ContactoContext" Disabled=@disabledDatosIngresos AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Correspondencia.CorrespondenciaContactoId
+                                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                        Data=@LContacto ValueProperty="Id">
+                                                                        <Template>
+                                                                    @(string.Format("{0}-{1}",(ContactoContext as AUD_CorrespondenciaContactoTB).Nombre,(ContactoContext as AUD_CorrespondenciaContactoTB).Email) )
+                                                                        </Template>
+                                                                    </RadzenDropDown>
+                                                            <ValidationMessage For=@(() => Correspondencia.CorrespondenciaContactoId) />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <label for="password">@languageContainerService.Keys["Correo a quien va Dirigido"]</label>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.EmailDirigido" />
-                                                            <ValidationMessage For=@(() => Correspondencia.EmailDirigido) />
+                                                @if (Correspondencia.CorrespondenciaContactoId == null)
+                                                {
+                                                    <div class="col-sm-4">
+                                                        <label for="password">@languageContainerService.Keys["Especifique Nombre"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.NombreDirigido" />
+                                                                <ValidationMessage For=@(() => Correspondencia.NombreDirigido) />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <div class="col-sm-4">
+                                                        <label for="password">@languageContainerService.Keys["Especifique Correo"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputText disabled="@(disabledDatosRecepcion)" class="form-control" @bind-Value="Correspondencia.EmailDirigido" />
+                                                                <ValidationMessage For=@(() => Correspondencia.EmailDirigido) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                                
                                                 <div class="col-sm-4">
                                                     <label>@languageContainerService.Keys["Fecha de Recepción"]</label>
                                                     <div class="form-group">
@@ -302,7 +402,51 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-8">
+                                                <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Tipo de Documento"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputSelect @bind-Value="Correspondencia.TipoCorrespondencia" class="form-control">
+                                                                @foreach (DataModel.Helper.enumAUD_TipoCorrespondencia dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoCorrespondencia)))
+                                                                {
+                                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                }
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Correspondencia.TipoCorrespondencia) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @switch (Correspondencia.TipoCorrespondencia)
+                                                {
+                                                    case DataModel.Helper.enumAUD_TipoCorrespondencia.Otros:
+                                                        {
+                                                            <div class="col-sm-4">
+                                                                <label for="password">@languageContainerService.Keys["Especifique Tipo de Documento"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Correspondencia.DescTipoCorrespondencia" />
+                                                                        <ValidationMessage For=@(() => Correspondencia.DescTipoCorrespondencia) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            break;
+                                                        }
+                                                }
+                                                <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Estatus de Documento"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputSelect @bind-Value="Correspondencia.Status" class="form-control">
+                                                                @foreach (DataModel.Helper.enumAUD_StatusCorrespondencia dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_StatusCorrespondencia)))
+                                                                {
+                                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                }
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Correspondencia.Status) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
                                                     <label for="password">@languageContainerService.Keys["No. Documento que da Respuesta a Solicitud"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
@@ -321,6 +465,51 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row clearfix">
+                                                <div class="col-9" style="text-align:left;">
+                                                    <h5>@languageContainerService.Keys["Adjuntos de Seguimiento"]</h5>
+                                                </div>
+                                                <div class="col-3" style="text-align:right;">
+                                                    <button type="button" @onclick="(e)=>{OpenAttachment2();}"
+                                                            class="btn btn-sm btn-outline-primary waves-effect">
+                                                        @languageContainerService.Keys["Add"]
+                                                    </button>
+                                                </div>
+                                                <div class="col-12" style="text-align:left;">
+                                                    <div class="kt-section">
+                                                        <div class="table-responsive">
+                                                            <table class="table rounded table-striped">
+                                                                <thead class=thead-light>
+                                                                    <tr>
+                                                                        <th>@languageContainerService.Keys["Description"]</th>
+                                                                        <th>@languageContainerService.Keys["File"]</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if (Correspondencia?.AdjuntoSeguimiento?.LAttachments?.Count > 0)
+                                                                    {
+                                                                        @foreach (var dt in Correspondencia.AdjuntoSeguimiento.LAttachments)
+                                                                        {
+                                                                            <tr>
+                                                                                <td scope="row">@dt.Description</td>
+                                                                                <td>
+                                                                                    <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                                                </td>
+                                                                                <td style="text-align:right">
+                                                                                    <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment2(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!--begin::Section-->
+                                           </div>
 
                                             <br><br> 
                                             <div class="kt-portlet__foot" style="text-align:right;">
@@ -354,6 +543,11 @@
 {
     <Aig.Auditoria.Components.Establishments.SearchComponent></Aig.Auditoria.Components.Establishments.SearchComponent>
 }
+    @if (openAttachment)
+    {
+        <Aig.Auditoria.Components.Attachments.AddEditAttachment></Aig.Auditoria.Components.Attachments.AddEditAttachment>
+
+    }
 
 }
 

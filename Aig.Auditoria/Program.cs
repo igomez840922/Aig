@@ -109,6 +109,9 @@ builder.Services.AddScoped<IProductoEstablecimientoService, ProductoEstablecimie
 builder.Services.AddScoped<IActividadEstablecimientoService, ActividadEstablecimientoService>();
 builder.Services.AddScoped<ICorrespondenciaService, CorrespondenciaService>();
 builder.Services.AddScoped<IApiConnectionFileUploadService, ApiConnectionFileUploadService>();
+builder.Services.AddScoped<ICorrespondenciaAsuntoService, CorrespondenciaAsuntoService>();
+builder.Services.AddScoped<ICorrespondenciaContactoService, CorrespondenciaContactoService>();
+builder.Services.AddScoped<ICorrespondenciaRespRevisionService, CorrespondenciaRespRevisionService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 ////Connection Configurations
