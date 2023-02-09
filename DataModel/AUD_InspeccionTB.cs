@@ -26,11 +26,6 @@ namespace DataModel
         private int intNumActa;
         public int IntNumActa { get => intNumActa; set => SetProperty(ref intNumActa, value); }
 
-        //status del acta
-        private enum_StatusInspecciones statusInspecciones;
-        public enum_StatusInspecciones StatusInspecciones { get => statusInspecciones; set => SetProperty(ref statusInspecciones, value); }
-
-
         //tipo de acta ... va a determinar el formulario a mostrar
         private enumAUD_TipoActa tipoActa;
         public enumAUD_TipoActa TipoActa { get => tipoActa; set => SetProperty(ref tipoActa, value); }
@@ -39,8 +34,30 @@ namespace DataModel
         private DateTime fechaInicio;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)] 
         public DateTime FechaInicio { get => fechaInicio; set => SetProperty(ref fechaInicio, value); }
-                
-       
+
+        //status del acta
+        private enum_StatusInspecciones statusInspecciones;
+        public enum_StatusInspecciones StatusInspecciones { get => statusInspecciones; set => SetProperty(ref statusInspecciones, value); }
+
+
+        //Datos del Representante Legal
+        private long? datosEstablecimientoId;
+        public long? DatosEstablecimientoId { get => datosEstablecimientoId; set => SetProperty(ref datosEstablecimientoId, value); }
+        private AUD_DatosEstablecimientoTB? datosEstablecimiento;
+        public virtual AUD_DatosEstablecimientoTB? DatosEstablecimiento { get => datosEstablecimiento; set => SetProperty(ref datosEstablecimiento, value); }
+
+
+        private AUD_ParticipantesDNFD participantesDNFD;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AUD_ParticipantesDNFD ParticipantesDNFD { get => participantesDNFD; set => SetProperty(ref participantesDNFD, value); }
+
+
+
+
+        /// <summary>
+        /// //////////////////////
+        /// </summary>
+
         ////////////////
         ///
         //---- Estos los tenemos en la relación de establecimiento ---
@@ -51,8 +68,8 @@ namespace DataModel
         private long? establecimientoId;
         [Required(ErrorMessage = "requerido")]
         public long? EstablecimientoId { get => establecimientoId; set => SetProperty(ref establecimientoId, value); }
-        private AUD_EstablecimientoTB? establecimiento;
-        public virtual AUD_EstablecimientoTB? Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
+        private AUD_EstablecimientoTB establecimiento;
+        public virtual AUD_EstablecimientoTB Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
 
         //Datos del Representante Legal
         private string nombreEstablecimiento;
@@ -118,7 +135,8 @@ namespace DataModel
 
         ///////////////////////
         /// LOS FORMULARIOS
-                
+        /// </summary>     
+        
         //1 - Formulario de Apertura y Cambio de Ubicación de Farmacias
         private long? inspAperCambUbicFarmId;
         public long? InspAperCambUbicFarmId { get => inspAperCambUbicFarmId; set => SetProperty(ref inspAperCambUbicFarmId, value); }

@@ -105,7 +105,7 @@ namespace Aig.Auditoria.Pages.RetiredProduct
             var result = await inspectionsService.Get(id);
             if (result == null)
             {
-                result = new AUD_InspeccionTB() { TipoActa = DataModel.Helper.enumAUD_TipoActa.RR, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
+                result = new AUD_InspeccionTB() { TipoActa = DataModel.Helper.enumAUD_TipoActa.RR, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspRetiroRetencion = new AUD_InspRetiroRetencionTB() { LProductos = new List<AUD_ProdRetiroRetencionTB>() } };
             }
             OpenAddEditScreen(result);
         }

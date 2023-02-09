@@ -136,6 +136,33 @@ namespace DataAccess
     .WithOne(e => e.Inspeccion)
     .HasForeignKey<AUD_InspeccionTB>(e => e.InspAperFabricanteCosmetMedId);
 
+            modelBuilder.Entity<AUD_InspeccionTB>()
+   .HasOne(e => e.DatosEstablecimiento)
+   .WithOne(e => e.Inspeccion)
+   .HasForeignKey<AUD_InspeccionTB>(e => e.DatosEstablecimientoId);
+
+            //JSON
+            modelBuilder.Entity<AUD_InspeccionTB>()
+.Property(e => e.ParticipantesDNFD)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ParticipantesDNFD>(x));
+
+            //JSON
+            modelBuilder.Entity<AUD_DatosEstablecimientoTB>()
+.Property(e => e.Establecimiento)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<AUD_EstablecimientoTB>(x));
+            //JSON
+            modelBuilder.Entity<AUD_DatosEstablecimientoTB>()
+.Property(e => e.Provincia)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings(){ReferenceLoopHandling = ReferenceLoopHandling.Ignore}), x => x == null ? null : JsonConvert.DeserializeObject<ProvinciaTB>(x));
+            //JSON
+            modelBuilder.Entity<AUD_DatosEstablecimientoTB>()
+.Property(e => e.Distrito)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<DistritoTB>(x));
+            //JSON
+            modelBuilder.Entity<AUD_DatosEstablecimientoTB>()
+.Property(e => e.Corregimiento)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<CorregimientoTB>(x));
+
             ///////////////////////////////////////////
             ///
 
@@ -1818,6 +1845,7 @@ namespace DataAccess
         public virtual DbSet<AUD_CorrespondenciaAsuntoTB> AUD_CorrespondenciaAsunto { get; set; }
         public virtual DbSet<AUD_CorrespondenciaContactoTB> AUD_CorrespondenciaContacto { get; set; }
         public virtual DbSet<AUD_CorrespondenciaRespRevisionTB> AUD_CorrespondenciaRespRevision { get; set; }
+        public virtual DbSet<AUD_DatosEstablecimientoTB> _DatosEstablecimiento { get; set; }
 
         /////////////////////////////////////////////////
         ///

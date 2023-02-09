@@ -122,12 +122,20 @@ namespace Aig.Auditoria.Services
             if(string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"),DateTime.Now.ToString("yyyy"),data.TipoActa.ToString(),data.Establecimiento?.TipoEstablecimiento.ToString()??"NA",data.Establecimiento?.Provincia?.Codigo??"0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"),DateTime.Now.ToString("yyyy"),data.TipoActa.ToString(),data.Establecimiento?.TipoEstablecimiento.ToString()??"NA",data.DatosEstablecimiento?.Provincia?.Codigo??"0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
             if(result != null)
             {
+                
+                if (result.DatosEstablecimiento != null)
+                {
+                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Establecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Provincia).IsModified = true;
+                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Distrito).IsModified = true;
+                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Corregimiento).IsModified = true;
+                }
                 if (result.InspAperFabricanteCosmetMed != null)
                 {
                     DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosEstablecimiento).IsModified = true;
@@ -146,7 +154,6 @@ namespace Aig.Auditoria.Services
 
                     DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosConclusiones).IsModified = true;
 
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspGuiaBPM_Bpa != null)
                 {
@@ -162,7 +169,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspGuiaBPM_Bpa).Property(b => b.AutoInspec).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPM_Bpa).Property(b => b.DatosConclusiones).IsModified = true;
 
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspGuiaBPMLabAcondicionador != null)
                 {
@@ -191,7 +197,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.QuejasReclamos).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.AutoInspecAuditCal).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspGuiaBPMFabricanteMed != null)
                 {
@@ -230,7 +235,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspGuiaBPMFabricanteMed).Property(b => b.ProdCitostatico).IsModified = true;
 
                     DalService.DBContext.Entry(result.InspGuiaBPMFabricanteMed).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspDisposicionFinal != null)
                 {
@@ -238,14 +242,12 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.DatosResponsable).IsModified = true;
                     DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.InventarioMedicamento).IsModified = true;
                     DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspDisposicionFinal != null)
                 {
                     DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.GeneralesEmpresa).IsModified = true;
                     DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.DatosResponsable).IsModified = true;
                     DalService.DBContext.Entry(result.InspDisposicionFinal).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspRutinaVigAgencia != null)
                 {
@@ -265,7 +267,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.ActividadDistribucion).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.InventarioMedicamento).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspAperturaCosmetArtesanal != null)
                 {
@@ -275,7 +276,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.Locales).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.AreaAlmacenamiento).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperturaCosmetArtesanal).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspGuiBPMFabCosmeticoMed != null)
                 {
@@ -321,7 +321,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspGuiBPMFabCosmeticoMed).Property(b => b.AnalisisContrato).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiBPMFabCosmeticoMed).Property(b => b.InspeccionAudito).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiBPMFabCosmeticoMed).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspInvestigacion != null)
                 {
@@ -329,7 +328,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosAtendidosPor).IsModified = true;
                     DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosRepresentLegal).IsModified = true;
                     DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspRetiroRetencion != null)
                 {
@@ -338,7 +336,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspRetiroRetencion).Property(b => b.DatosAtendidosPor).IsModified = true;
 
                     DalService.DBContext.Entry(result.InspRetiroRetencion).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspAperCambUbicFarm != null)
                 {
@@ -355,7 +352,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosAreaAlmacenamiento).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosConclusiones).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosAtendidosPor).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspAperCambUbicAgen != null)
                 {
@@ -368,7 +364,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosConclusiones).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosAtendidosPor).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosActProd).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspAperFabricante != null)
                 {
@@ -392,7 +387,6 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosAreaDispensado).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosAreaLabCtrCalidad).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperFabricante).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
                 }
                 if (result.InspRutinaVigFarmacia != null)
                 {
@@ -410,8 +404,10 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosAlmacenProductosFarmacia).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosProcedimientoFarmacia).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosConclusiones).IsModified = true;
-                    DalService.DBContext.SaveChanges();
-                }
+                 }
+
+                DalService.DBContext.SaveChanges();
+
             }
             return result;           
         }

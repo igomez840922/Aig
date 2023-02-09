@@ -74,84 +74,84 @@ namespace Aig.Auditoria.Components.Inspections
                 {
                     case enumAUD_TipoActa.RR:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRetiroRetencion = new AUD_InspRetiroRetencionTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspRetiroRetencion = new AUD_InspRetiroRetencionTB() };
                             break;
                         }
                     case enumAUD_TipoActa.AF:
                     case enumAUD_TipoActa.CUF:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspAperCambUbicFarm = new AUD_InspAperCambUbicFarmTB() };
                             break;
                         }
                     case enumAUD_TipoActa.AA:
                     case enumAUD_TipoActa.CUA:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperCambUbicAgen = new AUD_InspAperCambUbicAgenTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspAperCambUbicAgen = new AUD_InspAperCambUbicAgenTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.AFM:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperFabricante = new AUD_InspAperFabricanteTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspAperFabricante = new AUD_InspAperFabricanteTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.AFC:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperFabricanteCosmetMed = new AUD_InspAperFabricanteCosmetMedTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspAperFabricanteCosmetMed = new AUD_InspAperFabricanteCosmetMedTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.VF:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRutinaVigFarmacia = new AUD_InspRutinaVigFarmaciaTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspRutinaVigFarmacia = new AUD_InspRutinaVigFarmaciaTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.VA:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspRutinaVigAgencia = new AUD_InspRutinaVigAgenciaTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspRutinaVigAgencia = new AUD_InspRutinaVigAgenciaTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.INV:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspInvestigacion = new AUD_InspInvestigacionTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspInvestigacion = new AUD_InspInvestigacionTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.BPMCD:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabCosmeticoMed = new AUD_InspGuiBPMFabCosmeticoMedTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspGuiBPMFabCosmeticoMed = new AUD_InspGuiBPMFabCosmeticoMedTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.AECA:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspAperturaCosmetArtesanal = new AUD_InspAperturaCosmetArtesanalTB () };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspAperturaCosmetArtesanal = new AUD_InspAperturaCosmetArtesanalTB () };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.BPMMN:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiBPMFabNatMedicina = new AUD_InspGuiBPMFabNatMedicinaTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspGuiBPMFabNatMedicina = new AUD_InspGuiBPMFabNatMedicinaTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.COP:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspCierreOperacion = new AUD_InspCierreOperacionTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspCierreOperacion = new AUD_InspCierreOperacionTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.DFP:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspDisposicionFinal = new AUD_InspDisposicionFinalTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspDisposicionFinal = new AUD_InspDisposicionFinalTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.BPMFM:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiaBPMFabricanteMed = new AUD_InspGuiaBPMFabricanteMedTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspGuiaBPMFabricanteMed = new AUD_InspGuiaBPMFabricanteMedTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.BPMAM:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiaBPMLabAcondicionador = new AUD_InspGuiaBPMLabAcondicionadorTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspGuiaBPMLabAcondicionador = new AUD_InspGuiaBPMLabAcondicionadorTB() };
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.BPA:
                         {
-                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, InspGuiaBPM_Bpa = new AUD_InspGuiaBPM_BpaTB() };
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspGuiaBPM_Bpa = new AUD_InspGuiaBPM_BpaTB() };
                             break;
                         }                        
                     default:

@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230209060209_M098")]
+    partial class M098
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -481,9 +483,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Distrito")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Establecimiento")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<long?>("EstablecimientoId")
                         .IsRequired()
                         .HasColumnType("bigint");
@@ -512,6 +511,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EstablecimientoId");
 
                     b.ToTable("_DatosEstablecimiento");
                 });
@@ -5709,6 +5710,17 @@ namespace DataAccess.Migrations
                     b.Navigation("CorrespondenciaContacto");
 
                     b.Navigation("CorrespondenciaResponsable");
+                });
+
+            modelBuilder.Entity("DataModel.AUD_DatosEstablecimientoTB", b =>
+                {
+                    b.HasOne("DataModel.AUD_EstablecimientoTB", "Establecimiento")
+                        .WithMany()
+                        .HasForeignKey("EstablecimientoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Establecimiento");
                 });
 
             modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>

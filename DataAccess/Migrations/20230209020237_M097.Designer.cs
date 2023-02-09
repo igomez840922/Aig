@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230209020237_M097")]
+    partial class M097
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -448,74 +450,6 @@ namespace DataAccess.Migrations
                     b.ToTable("AUD_Correspondencia");
                 });
 
-            modelBuilder.Entity("DataModel.AUD_DatosEstablecimientoTB", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<string>("AvisoOperaciones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Corregimiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Correo")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Distrito")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Establecimiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("EstablecimientoId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("FromSystem")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NumLicencia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Provincia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReciboPago")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("_DatosEstablecimiento");
-                });
-
             modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>
                 {
                     b.Property<long>("Id")
@@ -656,10 +590,6 @@ namespace DataAccess.Migrations
 
                     b.Property<long?>("ProvinciaId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("ReciboPago")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("RepLegalCedula")
                         .HasMaxLength(250)
@@ -1183,8 +1113,8 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("DatosEstablecimientoId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("DatoEstablecimiento")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
@@ -1276,9 +1206,6 @@ namespace DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("ParticipantesDNFD")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RepreLegal")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -1305,10 +1232,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DatosEstablecimientoId")
-                        .IsUnique()
-                        .HasFilter("[DatosEstablecimientoId] IS NOT NULL");
 
                     b.HasIndex("EstablecimientoId");
 
@@ -5734,10 +5657,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataModel.AUD_InspeccionTB", b =>
                 {
-                    b.HasOne("DataModel.AUD_DatosEstablecimientoTB", "DatosEstablecimiento")
-                        .WithOne("Inspeccion")
-                        .HasForeignKey("DataModel.AUD_InspeccionTB", "DatosEstablecimientoId");
-
                     b.HasOne("DataModel.AUD_EstablecimientoTB", "Establecimiento")
                         .WithMany("LInspections")
                         .HasForeignKey("EstablecimientoId")
@@ -5807,8 +5726,6 @@ namespace DataAccess.Migrations
                     b.HasOne("DataModel.AUD_InspRutinaVigFarmaciaTB", "InspRutinaVigFarmacia")
                         .WithOne("Inspeccion")
                         .HasForeignKey("DataModel.AUD_InspeccionTB", "InspRutinaVigFarmaciaId");
-
-                    b.Navigation("DatosEstablecimiento");
 
                     b.Navigation("Establecimiento");
 
@@ -6409,11 +6326,6 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.AUD_CorrespondenciaRespRevisionTB", b =>
                 {
                     b.Navigation("LCorrespondencia");
-                });
-
-            modelBuilder.Entity("DataModel.AUD_DatosEstablecimientoTB", b =>
-                {
-                    b.Navigation("Inspeccion");
                 });
 
             modelBuilder.Entity("DataModel.AUD_EstablecimientoTB", b =>

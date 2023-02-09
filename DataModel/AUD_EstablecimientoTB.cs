@@ -86,9 +86,13 @@ namespace DataModel
 		private DateTime? fechaVigenciaFin;
 		public DateTime? FechaVigenciaFin { get => fechaVigenciaFin; set => SetProperty(ref fechaVigenciaFin, value); }
 
+        //Numero o ID de Maquina
+        private string reciboPago;
+        [StringLength(250)]
+        public string ReciboPago { get => reciboPago; set => SetProperty(ref reciboPago, value); }
 
-		//Numero o ID de Maquina
-		private string noMaquina;
+        //Numero o ID de Maquina
+        private string noMaquina;
 		[StringLength(250)]
 		public string NoMaquina { get => noMaquina; set => SetProperty(ref noMaquina, value); }
 
