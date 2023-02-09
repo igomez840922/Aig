@@ -13,5 +13,9 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save(AUD_InspeccionTB data);
         Task<AUD_InspeccionTB> Delete(long id);
         Task<int> Count();
+        Task<AUD_InspeccionTB> Save_GeneralData(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperCamUbicFarmacia_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperCamUbicFarmacia_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperCamUbicFarmacia_Cap4(AUD_InspeccionTB inspeccion);
     }
 }

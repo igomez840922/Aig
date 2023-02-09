@@ -912,4 +912,38 @@ namespace DataModel.Helper
         Otros = 2,
     }
 
+    public enum enumSelectedChapter
+    {
+        [Description("None")]
+        None = 0,
+        [Description("Cap01")]
+        Cap01 = 1,
+        [Description("Cap02")]
+        Cap02 = 2,
+        [Description("Cap03")]
+        Cap03 = 3,
+        [Description("Cap04")]
+        Cap04 = 4,
+        [Description("Cap05")]
+        Cap05 = 5,
+        [Description("Cap06")]
+        Cap06 = 6,
+        [Description("Cap07")]
+        Cap07 = 7,
+        [Description("Cap08")]
+        Cap08 = 8,
+        [Description("Cap09")]
+        Cap09 = 9,
+        [Description("Cap10")]
+        Cap10 = 10,
+        [Description("Cap11")]
+        Cap11 = 11,
+        [Description("Cap12")]
+        Cap12 = 12,
+        [Description("Cap13")]
+        Cap13 = 13,
+        [Description("Cap14")]
+        Cap14 = 14,
+    }
+
 }

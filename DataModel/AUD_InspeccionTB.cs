@@ -51,13 +51,22 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual AUD_ParticipantesDNFD ParticipantesDNFD { get => participantesDNFD; set => SetProperty(ref participantesDNFD, value); }
 
+        ///////////////////////
+        /// LOS FORMULARIOS
+        /// </summary>     
 
+        //1 - Formulario de Apertura y Cambio de Ubicación de Farmacias
+        private long? inspAperCambUbicFarmId;
+        public long? InspAperCambUbicFarmId { get => inspAperCambUbicFarmId; set => SetProperty(ref inspAperCambUbicFarmId, value); }
+        private AUD_InspAperCambUbicFarmTB? inspAperCambUbicFarm;
+        public virtual AUD_InspAperCambUbicFarmTB? InspAperCambUbicFarm { get => inspAperCambUbicFarm; set => SetProperty(ref inspAperCambUbicFarm, value); }
 
 
         /// <summary>
         /// //////////////////////
         /// </summary>
-
+        ////////////////
+        ////////////////
         ////////////////
         ///
         //---- Estos los tenemos en la relación de establecimiento ---
@@ -133,15 +142,9 @@ namespace DataModel
         public string ParticEstablecimientoCIP { get => particEstablecimientoCIP; set => SetProperty(ref particEstablecimientoCIP, value); }
 
 
-        ///////////////////////
-        /// LOS FORMULARIOS
-        /// </summary>     
         
-        //1 - Formulario de Apertura y Cambio de Ubicación de Farmacias
-        private long? inspAperCambUbicFarmId;
-        public long? InspAperCambUbicFarmId { get => inspAperCambUbicFarmId; set => SetProperty(ref inspAperCambUbicFarmId, value); }
-        private AUD_InspAperCambUbicFarmTB? inspAperCambUbicFarm;
-        public virtual AUD_InspAperCambUbicFarmTB? InspAperCambUbicFarm { get => inspAperCambUbicFarm; set => SetProperty(ref inspAperCambUbicFarm, value); }
+
+
 
         //2 - Formulario de Apertura y Cambio de Ubicación de Agencia
         private long? inspAperCambUbicAgenId;

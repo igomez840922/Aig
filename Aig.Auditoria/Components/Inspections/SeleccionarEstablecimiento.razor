@@ -81,7 +81,7 @@
                                         <RadzenDropDown AllowClear="true" TValue="DataModel.DistritoTB" Class="form-control" @bind-Value=@Data.Distrito
                                                     AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
                                                     Data=@(LDistritos.Where(x=>x.ProvinciaId == Data.Provincia?.Id)) TextProperty="Nombre"></RadzenDropDown>
-                                        <ValidationMessage For=@(() => Data.Provincia) />
+                                        <ValidationMessage For=@(() => Data.Distrito) />
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                         <RadzenDropDown AllowClear="true" TValue="DataModel.CorregimientoTB" Class="form-control" @bind-Value=@Data.Corregimiento
                                                     AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
                                                     Data=@(LCorregimiento.Where(x=>x.DistritoId == Data.Distrito?.Id)) TextProperty="Nombre"></RadzenDropDown>
-                                        <ValidationMessage For=@(() => Data.Provincia) />
+                                        <ValidationMessage For=@(() => Data.Corregimiento) />
                                     </div>
                                 </div>
                             </div>

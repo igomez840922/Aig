@@ -35,6 +35,28 @@ namespace DataModel
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
 
+        //Datos del Solicitante
+        private AUD_DatosSolicitante datosSolicitante;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosSolicitante DatosSolicitante { get => datosSolicitante; set => SetProperty(ref datosSolicitante, value); }
+
+        //Datos del Regente
+        private AUD_DatosRegente datosRegente;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
+
+        //Datos Estructura Organizacional
+        private AUD_DatosEstructuraOrganizacional datosEstructuraOrganizacional;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosEstructuraOrganizacional DatosEstructuraOrganizacional { get => datosEstructuraOrganizacional; set => SetProperty(ref datosEstructuraOrganizacional, value); }
+
+        /// <summary>
+        /// //////////////////////////
+        /// </summary>
+        /// <summary>
+        /// //////////////////////////
+        /// </summary>
+
         //codigo
         private string reciboPago;
         [StringLength(250)]
@@ -45,27 +67,15 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosEstablecimiento DatosEstablecimiento { get => datosEstablecimiento; set => SetProperty(ref datosEstablecimiento, value); }
 
-		//Datos del Solicitante
-		private AUD_DatosSolicitante datosSolicitante;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosSolicitante DatosSolicitante { get => datosSolicitante; set => SetProperty(ref datosSolicitante, value); }
-
-        //Datos del Regente
-        private AUD_DatosRegente datosRegente;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
-
+		
+        
         //Datos del Regente
         private AUD_DatosRepresentLegal datosRepresentLegal;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosRepresentLegal DatosRepresentLegal { get => datosRepresentLegal; set => SetProperty(ref datosRepresentLegal, value); }
 
 
-        //Datos Estructura Organizacional
-        private AUD_DatosEstructuraOrganizacional datosEstructuraOrganizacional;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosEstructuraOrganizacional DatosEstructuraOrganizacional { get => datosEstructuraOrganizacional; set => SetProperty(ref datosEstructuraOrganizacional, value); }
-
+        
         //Datos Infraestructura
         private AUD_DatosInfraEstructura datosInfraEstructura;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]

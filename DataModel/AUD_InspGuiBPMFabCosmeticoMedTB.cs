@@ -4990,4 +4990,45 @@ namespace DataModel
         public string Descripcion { get => descripcion; set => SetProperty(ref descripcion, value); }
 
     }
+
+    ///////////////////////////////
+    ///
+
+    public class AUD_ContenidoPreguntas : SystemId
+    {
+        public AUD_ContenidoPreguntas()
+        {
+            LContenido = new List<ContenidoPreguntas>();
+        }
+        private string titulo;
+        public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
+
+        private List<ContenidoPreguntas> lContenido;
+        public List<ContenidoPreguntas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
+        
+    }
+    public class ContenidoPreguntas : SystemId
+    {
+        public ContenidoPreguntas()
+        {
+            IsHeader = false;
+        }        
+
+        private bool isHeader;
+        public bool IsHeader { get => isHeader; set => SetProperty(ref isHeader, value); }
+
+        // Titulo
+        private string titulo;
+        public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
+
+        // Evaluacion
+        private enumAUD_TipoSeleccion evaluacion;
+        public enumAUD_TipoSeleccion Evaluacion { get { return evaluacion; } set { SetProperty(ref evaluacion, value);} }
+            
+        // Observaciones
+        private string observaciones;
+        public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
+
+    }
+
 }

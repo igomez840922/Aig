@@ -25,6 +25,8 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
 
         bool showSelectEstablecimiento { get; set; } = false;
 
+        enumSelectedChapter selectedChapter { get; set; } = enumSelectedChapter.None;
+
         protected async override Task OnInitializedAsync()
         {            
             //Subscribe Component to Language Change Event
@@ -127,7 +129,37 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
 
         }
 
+        ////////////////////
+        ///
 
+        //Abrimos un capitulo Determinado
+        protected async Task SelectChapter(enumSelectedChapter selectedChapter)
+        {
+            try
+            {
+                this.selectedChapter = selectedChapter;
+
+                if(this.selectedChapter!= enumSelectedChapter.None)
+                {
+                    bus.Subscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
+                }
+            }
+            catch { }
+            finally
+            {
+                await this.InvokeAsync(StateHasChanged);
+            }
+        }
+
+        //Cerramos todos los capitulos
+        private void ChapterChange_EventHandler(MessageArgs args)
+        {
+            bus.UnSubscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
+
+            this.selectedChapter = enumSelectedChapter.None;
+
+            this.InvokeAsync(StateHasChanged);
+        }
 
     }
 

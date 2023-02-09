@@ -438,6 +438,121 @@ namespace Aig.Auditoria.Services
             catch { }
             return 0;
         }
+
+
+        ///// Cambios para el trabajo por Capitulos///
+        ///
+        public async Task<AUD_InspeccionTB> Save_GeneralData(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.DatosEstablecimiento = inspeccion.DatosEstablecimiento;
+            data.ParticipantesDNFD = inspeccion.ParticipantesDNFD;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.DatosEstablecimiento != null)
+                {
+                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Establecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Provincia).IsModified = true;
+                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Distrito).IsModified = true;
+                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Corregimiento).IsModified = true;
+                }
+                
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+
+        public async Task<AUD_InspeccionTB> Save_AperCamUbicFarmacia_Cap2(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperCambUbicFarm.DatosSolicitante = inspeccion.InspAperCambUbicFarm.DatosSolicitante;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.DatosEstablecimiento != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosSolicitante).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperCamUbicFarmacia_Cap3(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperCambUbicFarm.DatosRegente = inspeccion.InspAperCambUbicFarm.DatosRegente;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.DatosEstablecimiento != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosRegente).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperCamUbicFarmacia_Cap4(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperCambUbicFarm.DatosEstructuraOrganizacional = inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperCambUbicFarm != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosEstructuraOrganizacional).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+
+
     }
 
 }
