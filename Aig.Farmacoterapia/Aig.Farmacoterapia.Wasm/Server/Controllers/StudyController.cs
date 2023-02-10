@@ -2,6 +2,7 @@
 using Aig.Farmacoterapia.Application.Features.Study.Queries;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
+using Aig.Farmacoterapia.Infrastructure.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ namespace Aig.Farmacoterapia.Api.Controllers
     [ApiController]
     [Route("api/studies")]
     [Authorize(AuthenticationSchemes = "JwtClient")]
+    [SwaggerOrder(2)]
     public class StudyController : Controller
     {
         private readonly IMediator _mediator;

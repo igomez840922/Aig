@@ -2,11 +2,13 @@
 using Aig.Farmacoterapia.Domain.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Aig.Farmacoterapia.Infrastructure.Helpers;
 
 namespace Aig.Farmacoterapia.Api.Controllers
 {
     [ApiController]
     [Route("api/identity")]
+    [SwaggerOrder(1)]
     public class IdentityController : Controller
     {
         private readonly IMediator _mediator;

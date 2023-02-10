@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Aig.Farmacoterapia.Application.Features.Media.Commands;
+using Aig.Farmacoterapia.Infrastructure.Helpers;
 
 namespace Aig.Farmacoterapia.Api.Controllers
 {
     [ApiController]
     [Route("api/media")]
     [Authorize(AuthenticationSchemes = "JwtClient")]
+    [SwaggerOrder(4)]
     public class MediaController : Controller
     {
         private readonly IMediator _mediator;

@@ -2,6 +2,7 @@
 using Aig.Farmacoterapia.Application.Features.Medicament.Queries;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
+using Aig.Farmacoterapia.Infrastructure.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ namespace Aig.Farmacoterapia.Api.Controllers
     [ApiController]
     [Route("api/medicament")]
     [Authorize(AuthenticationSchemes = "JwtClient")]
+    [SwaggerOrder(6)]
     public class MedicamentController : Controller
     {
         private readonly IMediator _mediator;

@@ -11,6 +11,7 @@ using Aig.Farmacoterapia.Infrastructure.Persistence;
 using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories;
 using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies;
 using Aig.Farmacoterapia.Infrastructure.Services;
+using Aig.Farmacoterapia.Infrastructure.Helpers;
 using log4net.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -187,6 +188,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                 {
                     { securityScheme, Array.Empty<string>() }
                 });
+                c.DocumentFilter<SwaggerOrderingFilter>();
 
             });
         }
