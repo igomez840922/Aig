@@ -13,6 +13,46 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosAreaFisicas : SystemId
     {
+
+        private List<ContenidoPreguntas> lContenido;
+        public List<ContenidoPreguntas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
+
+        public void Inicializa()
+        {
+            LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Iluminación", 
+                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Mobiliario de medicamentos",
+                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Muebles separados de las paredes, pisos, y techos",
+                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Tipo de Mobiliario",
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Estado del Mobiliario",
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Las cajas donde se dispondrán los medicamentos próximos a la ubicación en el recetario no deben obstruir el libre tránsito del personal por el área",
+                        IsHeader = true,
+                    },
+             };
+        }
+
+
+        /// <summary>
+        /// /////////////////////////////
+        /// </summary>
+        /// /// <summary>
+        /// /////////////////////////////
+        /// </summary>
+
         //Debe seleccionar Si o No, dependiendo de su debido cumplimiento y describir estado del mismo.
         private bool presentaIluminacion;
         public bool PresentaIluminacion { get => presentaIluminacion; set => SetProperty(ref presentaIluminacion, value); }

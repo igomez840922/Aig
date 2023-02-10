@@ -50,6 +50,22 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosEstructuraOrganizacional DatosEstructuraOrganizacional { get => datosEstructuraOrganizacional; set => SetProperty(ref datosEstructuraOrganizacional, value); }
 
+        //Datos Infraestructura
+        private AUD_DatosInfraEstructura datosInfraEstructura;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosInfraEstructura DatosInfraEstructura { get => datosInfraEstructura; set => SetProperty(ref datosInfraEstructura, value); }
+
+
+        //Datos Area Física
+        private AUD_DatosAreaFisicas datosAreaFisica;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosAreaFisicas DatosAreaFisica { get => datosAreaFisica; set => SetProperty(ref datosAreaFisica, value); }
+
+        //Datos Preguntas Genericas
+        private AUD_DatosPreguntasGenericas datosPreguntasGenericas;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosPreguntasGenericas DatosPreguntasGenericas { get => datosPreguntasGenericas; set => SetProperty(ref datosPreguntasGenericas, value); }
+
         /// <summary>
         /// //////////////////////////
         /// </summary>
@@ -76,21 +92,8 @@ namespace DataModel
 
 
         
-        //Datos Infraestructura
-        private AUD_DatosInfraEstructura datosInfraEstructura;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosInfraEstructura DatosInfraEstructura { get => datosInfraEstructura; set => SetProperty(ref datosInfraEstructura, value); }
-
-        //Datos Area Física
-        private AUD_DatosAreaFisicas datosAreaFisica;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosAreaFisicas DatosAreaFisica { get => datosAreaFisica; set => SetProperty(ref datosAreaFisica, value); }
-
-        //Datos Preguntas Genericas
-        private AUD_DatosPreguntasGenericas datosPreguntasGenericas;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosPreguntasGenericas DatosPreguntasGenericas { get => datosPreguntasGenericas; set => SetProperty(ref datosPreguntasGenericas, value); }
-
+        
+       
         //Datos Señalizacion y Avisos
         private AUD_DatosSenalizacionAvisos datosSenalizacionAvisos;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
