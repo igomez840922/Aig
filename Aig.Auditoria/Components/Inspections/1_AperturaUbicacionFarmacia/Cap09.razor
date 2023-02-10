@@ -1,7 +1,7 @@
 ﻿@using DataModel.Helper;
 @implements IDisposable
 
-@if (Inspeccion?.InspAperCambUbicFarm?.DatosInfraEstructura != null)
+@if (Inspeccion?.InspAperCambUbicFarm?.DatosAreaAlmacenamiento != null)
 {
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -33,7 +33,7 @@
                                             <DataAnnotationsValidator />
                                             <div class="row clearfix">
                                                 <div class="col-12">
-                                                    <h5>@languageContainerService.Keys["Área Física de Farmacia"]</h5>
+                                                    <h5>@languageContainerService.Keys["Área de Almacen de Medicamentos y otros productos para la salud humana"]</h5>
                                                 </div>
                                             </div>
                                             <div class="row clearfix">
@@ -49,14 +49,14 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @if (Inspeccion?.InspAperCambUbicFarm?.DatosAreaFisica?.LContenido != null)
+                                                                @if (Inspeccion?.InspAperCambUbicFarm?.DatosAreaAlmacenamiento?.LContenido != null)
                                                                 {
-                                                                    @foreach (var dt in Inspeccion.InspAperCambUbicFarm.DatosAreaFisica.LContenido)
+                                                                    @foreach (var dt in Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LContenido)
                                                                     {
                                                                         @if (dt.IsHeader)
                                                                         {
                                                                             <tr>
-                                                                                <td colspan="3">@dt.Titulo</td>
+                                                                                <td colspan="3" style="white-space: pre-line;text-align:justify;">@dt.Titulo</td>
                                                                             </tr>
                                                                         }
                                                                         else

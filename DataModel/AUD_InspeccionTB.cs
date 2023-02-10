@@ -51,6 +51,11 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual AUD_ParticipantesDNFD ParticipantesDNFD { get => participantesDNFD; set => SetProperty(ref participantesDNFD, value); }
 
+        //Datos Conclusión de Inspección
+        private AUD_DatosConclusiones datosConclusiones;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
+
         ///////////////////////
         /// LOS FORMULARIOS
         /// </summary>     
@@ -60,6 +65,13 @@ namespace DataModel
         public long? InspAperCambUbicFarmId { get => inspAperCambUbicFarmId; set => SetProperty(ref inspAperCambUbicFarmId, value); }
         private AUD_InspAperCambUbicFarmTB? inspAperCambUbicFarm;
         public virtual AUD_InspAperCambUbicFarmTB? InspAperCambUbicFarm { get => inspAperCambUbicFarm; set => SetProperty(ref inspAperCambUbicFarm, value); }
+
+        //2 - Formulario de Apertura y Cambio de Ubicación de Agencia
+        private long? inspAperCambUbicAgenId;
+        public long? InspAperCambUbicAgenId { get => inspAperCambUbicAgenId; set => SetProperty(ref inspAperCambUbicAgenId, value); }
+        private AUD_InspAperCambUbicAgenTB? inspAperCambUbicAgen;
+        public virtual AUD_InspAperCambUbicAgenTB? InspAperCambUbicAgen { get => inspAperCambUbicAgen; set => SetProperty(ref inspAperCambUbicAgen, value); }
+
 
 
         /// <summary>
@@ -146,12 +158,7 @@ namespace DataModel
 
 
 
-        //2 - Formulario de Apertura y Cambio de Ubicación de Agencia
-        private long? inspAperCambUbicAgenId;
-        public long? InspAperCambUbicAgenId { get => inspAperCambUbicAgenId; set => SetProperty(ref inspAperCambUbicAgenId, value); }
-        private AUD_InspAperCambUbicAgenTB? inspAperCambUbicAgen;
-        public virtual AUD_InspAperCambUbicAgenTB? InspAperCambUbicAgen { get => inspAperCambUbicAgen; set => SetProperty(ref inspAperCambUbicAgen, value); }
-
+        
         //3- Rutina o Vigilancia de Farmacia
         private long? inspRutinaVigFarmaciaId;
         public long? InspRutinaVigFarmaciaId { get => inspRutinaVigFarmaciaId; set => SetProperty(ref inspRutinaVigFarmaciaId, value); }

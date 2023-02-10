@@ -94,6 +94,9 @@ namespace DataModel
         public string LaboraOtraEmpresaHora { get => laboraOtraEmpresaHora; set => SetProperty(ref laboraOtraEmpresaHora, value); }
 
 
+        private enumAUD_TipoSeleccion presenteEnLocal;
+        public enumAUD_TipoSeleccion PresenteEnLocal { get => presenteEnLocal; set => SetProperty(ref presenteEnLocal, value); }
+
         //El regente está presente al momento de la inspección
         private enumAUD_TipoSeleccion presenteEnInspeccion;
         public enumAUD_TipoSeleccion PresenteEnInspeccion { get => presenteEnInspeccion; set => SetProperty(ref presenteEnInspeccion, value); }
@@ -104,13 +107,14 @@ namespace DataModel
         //Pais Residencia
         private string paisResidencia;
         public string PaisResidencia { get => paisResidencia; set => SetProperty(ref paisResidencia, value); }
+                
+
+        private enumAUD_TipoSeleccion realizaOtraFuncion;
+        public enumAUD_TipoSeleccion RealizaOtraFuncion { get => realizaOtraFuncion; set => SetProperty(ref realizaOtraFuncion, value); }
 
         //Otras Funciones
         private string otrasFunciones;
         public string OtrasFunciones { get => otrasFunciones; set => SetProperty(ref otrasFunciones, value); }
-
-        private enumAUD_TipoSeleccion presenteEnLocal;
-        public enumAUD_TipoSeleccion PresenteEnLocal { get => presenteEnLocal; set => SetProperty(ref presenteEnLocal, value); }
 
     }
 

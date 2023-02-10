@@ -24,7 +24,6 @@ namespace DataModel
         private DateTime? fechaFinalizacion;
         public DateTime? FechaFinalizacion { get => fechaFinalizacion; set => SetProperty(ref fechaFinalizacion, value); }
 
-
         //Observaciones
         private string observacionesFinales;
         public string ObservacionesFinales { get => observacionesFinales; set => SetProperty(ref observacionesFinales, value); }
@@ -37,15 +36,24 @@ namespace DataModel
         private string inconformidades;
         public string Inconformidades { get => inconformidades; set => SetProperty(ref inconformidades, value); }
 
+        //Según criterio técnico se concluye que el local cumple  o no cumple con los requisitos mínimos para operar
+        private bool cumpleRequisitosMinOperacion;
+        public bool CumpleRequisitosMinOperacion { get => cumpleRequisitosMinOperacion; set => SetProperty(ref cumpleRequisitosMinOperacion, value); }
+
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
         private List<AttachmentTB> lAttachments;
         public List<AttachmentTB> LAttachments { get => lAttachments; set => SetProperty(ref lAttachments, value); }
 
 
-        //Según criterio técnico se concluye que el local cumple  o no cumple con los requisitos mínimos para operar
-        private bool cumpleRequisitosMinOperacion;
-        public bool CumpleRequisitosMinOperacion { get => cumpleRequisitosMinOperacion; set => SetProperty(ref cumpleRequisitosMinOperacion, value); }
+        /// <summary>
+        /// //////////////////
+        /// </summary>
+        /// <summary>
+        /// //////////////////
+        /// </summary>
+
+
 
 
         //Lista de Participantes

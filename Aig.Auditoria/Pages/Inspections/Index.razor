@@ -139,9 +139,9 @@
                                                                     <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoActa))</td>
                                                                     <td>@(DataModel.Helper.Helper.GetDescription(dt.StatusInspecciones))</td>
                                                                     <td>@dt.FechaInicio.ToString("dd/MM/yyyy hh:mm tt")</td>
-                                                                    <td scope="row">@dt.LicenseNumber</td>
-                                                                    <td scope="row">@dt.AvisoOperacion</td>
-                                                                    <td>@(dt.Establecimiento?.Nombre ?? "")</td>
+                                                                    <td>@(dt.DatosEstablecimiento?.NumLicencia)</td>
+                                                                    <td>@(dt.DatosEstablecimiento?.AvisoOperaciones)</td>
+                                                                    <td>@(dt.DatosEstablecimiento?.Nombre)</td>
                                                                     <td style="text-align:right">
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -214,7 +214,9 @@ else
         case DataModel.Helper.enumAUD_TipoActa.AA:
         case DataModel.Helper.enumAUD_TipoActa.CUA:
             {
-                <Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia>
+                @*<Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia>*@
+                <Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Index>
+
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.AFM:

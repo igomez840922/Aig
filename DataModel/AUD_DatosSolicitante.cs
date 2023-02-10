@@ -50,6 +50,11 @@ namespace DataModel
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
         public string Email { get => email; set => SetProperty(ref email, value); }
 
+        //Cargo
+        private string cargo;
+        [StringLength(250)]
+        public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
+
         //Solicitante Profesion
         private string profesion;
         [StringLength(250)]
@@ -79,6 +84,9 @@ namespace DataModel
         private enumAUD_TipoSolicitante tipo;
         public enumAUD_TipoSolicitante Tipo { get => tipo; set => SetProperty(ref tipo, value); }
 
+        //El establecimiento se compromete al fiel cumplimiento del Artículo 386 del Decreto Ejecutivo 115 De 16 de agosto de 2022? Firma de Regente Farmacéutico
+        private string firma;
+        public string Firma { get => firma; set => SetProperty(ref firma, value); }
 
     }
 }

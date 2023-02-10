@@ -10,22 +10,28 @@ namespace DataModel
 {
     public class AUD_InspAperCambUbicAgenTB : SystemId
     {
-        public AUD_InspAperCambUbicAgenTB()
-        {
-            DatosEstablecimiento = new AUD_DatosEstablecimiento();
-            DatosSolicitante = new AUD_DatosSolicitante();
-            DatosRegente = new AUD_DatosRegente();
-            DatosRepresentLegal = new AUD_DatosRepresentLegal();
-            DatosCondicionesLocal = new AUD_DatosCondicionesLocal();
-            DatosAtendidosPor = new AUD_DatosAtendidosPor();
-            DatosActProd = new AUD_DatosActProd();
-
-            DatosConclusiones = new AUD_DatosConclusiones();
-        }
-
         private AUD_InspeccionTB inspeccion;
+
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
+
+        //Datos del Solicitante
+        private AUD_DatosSolicitante datosSolicitante;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosSolicitante DatosSolicitante { get => datosSolicitante; set => SetProperty(ref datosSolicitante, value); }
+
+        //Datos del Regente
+        private AUD_DatosRegente datosRegente;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
+
+
+
+
+
+
+
+
 
         //codigo
         private string reciboPago;
@@ -37,15 +43,15 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosEstablecimiento DatosEstablecimiento { get => datosEstablecimiento; set => SetProperty(ref datosEstablecimiento, value); }
 
-        //Datos del Solicitante
-        private AUD_DatosSolicitante datosSolicitante;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosSolicitante DatosSolicitante { get => datosSolicitante; set => SetProperty(ref datosSolicitante, value); }
+        ////Datos del Solicitante
+        //private AUD_DatosSolicitante datosSolicitante;
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //public AUD_DatosSolicitante DatosSolicitante { get => datosSolicitante; set => SetProperty(ref datosSolicitante, value); }
 
-        //Datos del Regente
-        private AUD_DatosRegente datosRegente;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
+        ////Datos del Regente
+        //private AUD_DatosRegente datosRegente;
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
 
         //Datos del Regente
         private AUD_DatosRepresentLegal datosRepresentLegal;

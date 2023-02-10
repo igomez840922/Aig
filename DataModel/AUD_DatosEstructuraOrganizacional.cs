@@ -13,11 +13,6 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosEstructuraOrganizacional : SystemId
     {
-        public AUD_DatosEstructuraOrganizacional()
-        {
-            
-        }
-
         
         private List<ContenidoPreguntas> lContenido;
         public List<ContenidoPreguntas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
