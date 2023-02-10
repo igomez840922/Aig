@@ -11,9 +11,11 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies.Enums
     {
         [Description("Todos")]
         All = 0,
+        [Description("Pendiente")]
+        Pendiente = 1,
         [Description("No Procede")]
-        NotAuthorized = 1,
+        NotAuthorized = 2,
         [Description("Procede")]
-        Authorized = 2
+        Authorized = 3
     }
 }

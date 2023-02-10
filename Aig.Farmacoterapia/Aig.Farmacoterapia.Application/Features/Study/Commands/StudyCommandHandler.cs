@@ -38,7 +38,7 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
             _mapper = mapper;
             _logger = logger;
         }
-
+      
         public async Task<IResult> Handle(AddEditStudyCommand request, CancellationToken cancellationToken)
         {
             IResult answer;
@@ -55,7 +55,33 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                 if (request.Model.Id > 0)
                     await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
                 else
-                    await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
+                {
+
+                    var newitem = new AigEstudioDNFD();
+                    newitem.Codigo = request.Model.Codigo;
+                    newitem.Titulo = request.Model.Titulo;
+                    newitem.CentroInvestigacion = request.Model.CentroInvestigacion;
+                    newitem.InvestigadorPrincipal = request.Model.InvestigadorPrincipal;
+                    newitem.Participantes = request.Model.Participantes;
+                    newitem.Patrocinador = request.Model.Patrocinador;
+                    newitem.Duracion = request.Model.Duracion;
+                    newitem.Poblacion = request.Model.Poblacion;
+                    newitem.Medicamentos = request.Model.Medicamentos;
+                    newitem.ProductsMetadata = request.Model.ProductsMetadata;
+
+                    newitem.RegistroProtocoloDIGESA = string.Empty;
+                    newitem.ComiteBioetica = string.Empty;
+
+                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) =>
+                    {
+                        await _unitOfWork.BeginTransactionAsync(cc);
+                        await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
+                        await _unitOfWork.Repository<AigEstudioDNFD>().AddAsync(newitem);
+                        answer = Result<bool>.Success(_unitOfWork.Commit());
+                    }, cancellationToken);
+
+                }
+                   
                 answer = Result<bool>.Success(_unitOfWork.Commit(), "Operación realizada satisfactoriamente !");
             }
             catch (Exception exc)

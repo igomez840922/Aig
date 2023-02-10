@@ -72,12 +72,12 @@
                 <MudToolBar Style="height:25px !important;">
                     <MudText Color="Color.Primary">
                         <MudIcon Icon="@Icons.Material.Outlined.Assignment" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
-                        Evaluación de solicitud de autorización de permiso de importación con fines de investigación
+                        Solicitudes de autorización de permisos de importación con fines de investigación
                     </MudText>
                     <MudSpacer />
-                    @*<MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
-                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(0))" />
-                    </MudTooltip>*@
+                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || !IsAddAndEvaluators())" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(0))" />
+                    </MudTooltip>
                 </MudToolBar>
             </MudItem>
         </MudGrid>
@@ -93,7 +93,7 @@
             <MudGrid>
 
                 <MudItem md="3" Style="margin-top:12px !important">
-                   <MudTextField Clearable="true" HelperText="Código / Título / Investigador / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
+                   <MudTextField Clearable="true" HelperText="Código / Título / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
                 </MudItem>
 
                  <MudItem md="7">
@@ -135,6 +135,10 @@
             <MudGrid>
                 <MudItem md="3" Style="margin-top:8px !important">
                     <MudTextField Clearable="true" HelperText="Nombre de medicamento" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Product" Label="Producto" />
+                </MudItem>
+
+                  <MudItem md="3" Style="margin-top:8px !important">
+                    <MudTextField Clearable="true" HelperText="Investigador principal" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Researcher" Label="Investigador" />
                 </MudItem>
 
                 <MudItem md="3" Style="margin-top:10px !important">
@@ -187,7 +191,7 @@
             <MudTh><MudInputLabel Style="width:200px">Duración del estudio</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Número de participantes en panamá</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
-            <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Ascending" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Descending" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -195,6 +199,41 @@
          
             <MudTd DataLabel="Estado">
                
+            @switch (context.Estado)
+            {
+                case EstadoEstudio.Authorized:
+                    {
+                        <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                            <MudButton Color="Color.Tertiary" Variant="Variant.Filled" DisableElevation="true">
+                                @context.Estado.ToDescriptionString()
+                            </MudButton>
+                        </MudBadge>
+                    }
+                    break;
+                case EstadoEstudio.NotAuthorized:
+                    {
+
+                        <MudBadge Icon="@Icons.Material.Filled.Close" Color="Color.Error" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                            <MudButton Color="Color.Error" Variant="Variant.Filled" DisableElevation="true">
+                                @context.Estado.ToDescriptionString()
+                            </MudButton>
+                        </MudBadge>
+                    }
+                    break;
+                default:
+                    {
+                        <MudBadge Icon="@Icons.Material.Filled.Warning" Color="Color.Warning" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                            <MudButton Color="Color.Warning" Variant="Variant.Filled" DisableElevation="true">
+                                @context.Estado.ToDescriptionString()
+                            </MudButton>
+                        </MudBadge>
+
+                    }
+                    break;
+            }
+
+
+@*
             @if (context.Estado == EstadoEstudio.Authorized)
             {
                 <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
@@ -211,7 +250,7 @@
                         @context.Estado.ToDescriptionString()
                     </MudButton>
                 </MudBadge>
-            }
+            }*@
 
              </MudTd>
             <MudTd DataLabel="Fecha de ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
@@ -220,7 +259,37 @@
             <MudTd DataLabel="Fecha de Asignación">@(string.Format("{0:dd/MM/yyyy}",@context.FechaAsignacion))</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))</MudTd>
             <MudTd DataLabel="Días transcurridos">
-            @if (context.ElapsedDays >= 0)
+            
+            @switch (context.ElapsedDays)
+            {
+                case 0:
+                    {
+                     
+                        <MudBadge Color="Color.Default" Content="@("-")" Overlap="true" Class="mx-6 my-4">
+                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Event" Color="Color.Info" />
+                        </MudBadge>
+                    }
+                    break;
+                case > 0:
+                    {
+
+                        <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
+                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventAvailable" Color="Color.Tertiary" />
+                        </MudBadge>
+                    }
+                    break;
+                default:
+                    {
+                        <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
+                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventBusy" Color="Color.Warning" />
+                        </MudBadge>
+
+                    }
+                    break;
+            }
+
+
+           @*  @if (context.ElapsedDays >= 0)
             {
                
                 <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
@@ -233,7 +302,7 @@
                 <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
                     <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.GppMaybe" Color="Color.Warning" />
                 </MudBadge>
-            }
+            }*@
             </MudTd>
              <MudTd DataLabel="Nota de Evaluación">@context.Nota?.GetNoteCode(@context.Id)</MudTd>
             <MudTd DataLabel="Observaciones por el evaluador">@context.Nota?.Observaciones</MudTd>
@@ -248,7 +317,7 @@
 
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                 <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
-                <MudMenuItem Disabled="!IsSetEvaluators()" Style="border-bottom:1px solid #E4E6EF !important;"  Icon="@Icons.Material.Filled.SupervisorAccount" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
+                <MudMenuItem Disabled="!IsAddAndEvaluators()" Style="border-bottom:1px solid #E4E6EF !important;"  Icon="@Icons.Material.Filled.HowToReg" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
                 
                 @if (!string.IsNullOrEmpty(context.Nota?.Observaciones)) {
                     <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" Target="_blank" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
@@ -321,8 +390,8 @@
         var userRole = role.ParseEnum<RoleType>();
         return (userRole== RoleType.Admin);
     }
-   
-     protected bool IsSetEvaluators()
+
+     protected bool IsAddAndEvaluators()
     {
         var disabled=true;
         if (_user == null) return disabled;
@@ -347,14 +416,14 @@
         await this.InvokeAsync(StateHasChanged);
     }
 
-    public double GetElapsedDays(AigEstudio item)
+    public int GetElapsedDays(AigEstudio item)
     {
         var result =0;
         try
         {
             if (item == null || item.FechaAsignacion == null || item.Nota?.FechaEvaluacion == null) return result;
             TimeSpan? timeSpan = (item.Nota?.FechaEvaluacion.Value - item.FechaAsignacion.Value);
-            return timeSpan!.Value.TotalDays;
+            return   Convert.ToInt32(timeSpan!.Value.TotalDays);
             //return days > 1 ? $"{days} Días" : $"{days} Día";
         }
         catch (Exception exc)
@@ -396,6 +465,9 @@
         filters.Add(new FilteringOption { Field = "status", Operator = FilteringOperator.Equal, Value = _modelFilter.Status.ToString() });
         if (!string.IsNullOrEmpty(_modelFilter.Product))
             filters.Add(new FilteringOption { Field = "product", Operator = FilteringOperator.Contains, Value = _modelFilter.Product.Trim() });
+
+        if (!string.IsNullOrEmpty(_modelFilter.Researcher))
+            filters.Add(new FilteringOption { Field = "researcher", Operator = FilteringOperator.Contains, Value = _modelFilter.Researcher.Trim() });
 
         if (!string.IsNullOrEmpty(_modelFilter.Evaluator))
             filters.Add(new FilteringOption { Field = "evaluator", Operator = FilteringOperator.Equal, Value = _modelFilter.Evaluator });

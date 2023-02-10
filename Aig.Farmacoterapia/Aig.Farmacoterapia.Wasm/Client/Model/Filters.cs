@@ -63,6 +63,8 @@ namespace Aig.Farmacoterapia.Wasm.Client.Model
         public DateTime? EndAssignmentDate { get; set; }
         public EstadoEstudio Status { get; set; }
         public string Product { get; set; }
+        public string Researcher { get; set; }
+
         public string Evaluator { get; set; }
 
     }

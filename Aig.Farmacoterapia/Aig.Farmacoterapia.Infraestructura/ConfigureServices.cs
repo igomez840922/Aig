@@ -189,7 +189,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                     { securityScheme, Array.Empty<string>() }
                 });
                 c.DocumentFilter<SwaggerOrderingFilter>();
-
+                c.SchemaFilter<SwaggerIgnoreFilter>();
             });
         }
         public static void ConfigureSwagger(this IApplicationBuilder app)

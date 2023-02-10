@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +9,8 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
 {
     public class AigProductoEstudio
     {
-        public string Id { get; set; }
+        [IgnoreDataMember]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Factura { get; set; }
         public string Nombre { get; set; }
         public string PrincipioActivo { get; set; }

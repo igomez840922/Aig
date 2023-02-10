@@ -23,9 +23,9 @@
             <MudItem md="12">
                 <MudToolBar Style="height:25px !important;">
                     <MudSpacer />
-                    @*<MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
-                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || _parent?.Medicamentos.Count==4)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(string.Empty))" />
-                    </MudTooltip>*@
+                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || _parent?.Medicamentos.Count==4 || !_edit )" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(string.Empty))" />
+                    </MudTooltip>
                 </MudToolBar>
             </MudItem>
         </MudGrid>
@@ -59,8 +59,8 @@
             </MudTd>
         <MudTd>
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
-                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
-                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                <MudMenuItem Disabled="!_edit"  Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Disabled="!_edit"  Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
             </MudMenu>
 
         </MudTd>
@@ -72,6 +72,8 @@
 
 @code {
     [Parameter] public AigEstudio _parent { get; set; }
+    [Parameter] public bool _edit { get; set; } = true;
+
     protected bool _loading = false;
     protected async override Task OnInitializedAsync()
     {
@@ -95,24 +97,13 @@
         if (!result.Cancelled)
         {
             var item = result.Data as AigProductoEstudio;
-            if (item != null)
-            {
-                if (string.IsNullOrEmpty(item.Id))
-                {
-                    item.Id = Guid.NewGuid().ToString();
-                    _parent.Medicamentos!.Add(item);
+            if (item != null) {
+                var index= _parent.Medicamentos!.FindIndex(p => p.Id == item.Id);
+                if (index != -1){
+                    _parent.Medicamentos!.RemoveAt(index);
+                    _parent.Medicamentos!.Insert(index,item);
                 }
-
-                else
-                {
-                    var index= _parent.Medicamentos!.FindIndex(p => p.Id == item.Id);
-                    if (index != -1)
-                    {
-                         _parent.Medicamentos!.RemoveAt(index);
-                         _parent.Medicamentos!.Insert(index,item);
-                    }
-                }
-               
+                else _parent.Medicamentos!.Add(item);
                 await RefresView(false);
             }
         }

@@ -65,9 +65,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                                     string value = ((string)filteringOption.Value).ToLower();
                                     Expression<Func<AigEstudio, bool>> expression = f => f.Codigo.Contains(value) ||
                                     f.Titulo.ToLower().Contains(value) ||
-                                    f.CentroInvestigacion.ToLower().Contains(value) ||
-                                    f.ProductsMetadata.ToLower().Contains(value) ||
-                                    f.InvestigadorPrincipal.ToLower().Contains(value);
+                                    f.CentroInvestigacion.ToLower().Contains(value);
                                     filterList.Add(expression);
                                 }
                                 break;
@@ -78,6 +76,15 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                                     filterList.Add(expression);
                                 }
                                 break;
+
+                            case "researcher":
+                                {
+                                    string value = ((string)filteringOption.Value).ToLower();
+                                    Expression<Func<AigEstudio, bool>> expression = f => f.InvestigadorPrincipal.ToLower().Contains(value);
+                                    filterList.Add(expression);
+                                }
+                                break;
+
                             case "status":
                                 {
 

@@ -72,12 +72,12 @@
                 <MudToolBar Style="height:25px !important;">
                     <MudText Color="Color.Primary">
                         <MudIcon Icon="@Icons.Material.Outlined.Archive" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
-                        Evaluación del estudio clínico por DNFD
+                        Estudio clínicos por DNFD
                     </MudText>
                     <MudSpacer />
-                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                   @* <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
                         <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(0))" />
-                    </MudTooltip>
+                    </MudTooltip>*@
                 </MudToolBar>
             </MudItem>
         </MudGrid>
@@ -150,7 +150,7 @@
      
         <HeaderContent>
             @*<MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>*@
-            <MudTh> <MudTableSortLabel Style="width:150px !important" SortLabel="status" T="AigEstudioDNFD">Estado</MudTableSortLabel></MudTh> 
+            @*<MudTh> <MudTableSortLabel Style="width:150px !important" SortLabel="status" T="AigEstudioDNFD">Estado</MudTableSortLabel></MudTh> *@
             <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudioDNFD">Fecha de Ingreso</MudTableSortLabel></MudTh> 
             <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:500px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
@@ -164,7 +164,7 @@
             <MudTh><MudInputLabel Style="width:200px">Número de participantes en panamá</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Comité de bioetica que aprobó el estudio</MudInputLabel></MudTh>
-            <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Ascending" SortLabel="created" T="AigEstudioDNFD">Creado</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Descending" SortLabel="created" T="AigEstudioDNFD">Creado</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -172,7 +172,8 @@
            @* <MudTd>
                 <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
             </MudTd>*@
-            <MudTd DataLabel="Estado">
+
+            @*<MudTd DataLabel="Estado">
                  @if (context.Estado== EstadoEstudioDNFD.Processed)
             {
                 <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
@@ -190,7 +191,7 @@
                     </MudButton>
                 </MudBadge>
             }
-                </MudTd>
+                </MudTd>*@
             <MudTd DataLabel="Fecha de Ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
             <MudTd DataLabel="Código del protocolo de investigación">@context.Codigo</MudTd>
             <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
@@ -209,7 +210,7 @@
 
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                 <MudMenuItem Disabled=IsEdit() Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
-                 <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Disabled="@(context.Estado!=EstadoEstudioDNFD.Pending || IsEvaluate())" IconColor="Color.Primary" Icon="@Icons.Material.Outlined.PostAdd" OnClick="@(() => Evaluate(@context.Id))" OnTouch="@(() => Evaluate(@context.Id))">Generar Solicitud</MudMenuItem>
+                 @*<MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Disabled="@(context.Estado!=EstadoEstudioDNFD.Pending || IsEvaluate())" IconColor="Color.Primary" Icon="@Icons.Material.Outlined.PostAdd" OnClick="@(() => Evaluate(@context.Id))" OnTouch="@(() => Evaluate(@context.Id))">Generar Solicitud</MudMenuItem>*@
                 <MudMenuItem Disabled=IsDelete() Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
             </MudMenu>
 
