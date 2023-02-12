@@ -11,12 +11,14 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
 {
     public class AigEstudioDNFD : AigEstudioBase
     {
-        public EstadoEstudioDNFD Estado { get; set; }
         public string RegistroProtocoloDIGESA { get; set; }
         public string ComiteBioetica { get; set; }
         public string? NotaEvaluacion { get; set; }
         public DateTime? FechaEvaluacion { get; set; } = DateTime.Today;
         public string? ObservacionesEvaluador { get; set; }
+       
+        public virtual AigEstudio AigEstudio { get; set; }
+        public long AigEstudioId { get; set; }
     }
 
 }

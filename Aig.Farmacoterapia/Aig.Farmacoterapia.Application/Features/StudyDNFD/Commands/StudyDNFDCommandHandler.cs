@@ -25,8 +25,7 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Commands
    
     internal class StudyDNFDCommandHandler : 
         IRequestHandler<AddEditStudyDNFDCommand, IResult>,
-        IRequestHandler<DeleteStudyDNFDCommand, IResult>,
-        IRequestHandler<EvaluateRequestCommand, IResult>
+        IRequestHandler<DeleteStudyDNFDCommand, IResult>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -81,43 +80,5 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Commands
             return answer;
         }
 
-        public async Task<IResult> Handle(EvaluateRequestCommand request, CancellationToken cancellationToken)
-        {
-            IResult answer= Result<bool>.Fail();
-            try
-            {
-                var item = await _unitOfWork.Repository<AigEstudioDNFD>().GetByIdAsync(request.Id);
-                if (item != null)
-                {
-                    var newitem = new AigEstudio();
-                    newitem.Codigo = item.Codigo;
-                    newitem.Titulo = item.Titulo;
-                    newitem.CentroInvestigacion = item.CentroInvestigacion;
-                    newitem.InvestigadorPrincipal = item.InvestigadorPrincipal;
-                    newitem.Participantes = item.Participantes;
-                    newitem.Patrocinador = item.Patrocinador;
-                    newitem.Duracion = item.Duracion;
-                    newitem.Poblacion = item.Poblacion;
-                    newitem.Medicamentos = item.Medicamentos;
-                    newitem.ProductsMetadata = item.ProductsMetadata;
-
-                    item.Estado = EstadoEstudioDNFD.Processed;
-                     await _unitOfWork.ExecuteInTransactionAsync(async (cc) => {
-                        await _unitOfWork.BeginTransactionAsync(cc);
-                        await _unitOfWork.Repository<AigEstudio>().AddAsync(newitem);
-                        await _unitOfWork.Repository<AigEstudioDNFD>().UpdateAsync(item);
-                        answer = Result<bool>.Success(_unitOfWork.Commit());
-                    }, cancellationToken);
-
-                }
-
-            }
-            catch (Exception exc)
-            {
-                _logger.Error("Requested operation failed", exc);
-                return Result.Fail(new List<string>() { exc.Message });
-            }
-            return answer;
-        }
     }
 }

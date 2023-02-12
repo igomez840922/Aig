@@ -54,9 +54,7 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                 request.Model.ProductsMetadata = string.Join("//", request.Model.Medicamentos.Select(p => p.Nombre));
                 if (request.Model.Id > 0)
                     await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
-                else
-                {
-
+                else {
                     var newitem = new AigEstudioDNFD();
                     newitem.Codigo = request.Model.Codigo;
                     newitem.Titulo = request.Model.Titulo;
@@ -72,16 +70,13 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                     newitem.RegistroProtocoloDIGESA = string.Empty;
                     newitem.ComiteBioetica = string.Empty;
 
-                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) =>
-                    {
+                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) => {
                         await _unitOfWork.BeginTransactionAsync(cc);
-                        await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
+                        newitem.AigEstudio= await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
                         await _unitOfWork.Repository<AigEstudioDNFD>().AddAsync(newitem);
                         answer = Result<bool>.Success(_unitOfWork.Commit());
                     }, cancellationToken);
-
-                }
-                   
+                }  
                 answer = Result<bool>.Success(_unitOfWork.Commit(), "Operación realizada satisfactoriamente !");
             }
             catch (Exception exc)

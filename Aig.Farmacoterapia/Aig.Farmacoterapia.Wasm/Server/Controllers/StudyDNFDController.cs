@@ -27,9 +27,6 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] AigEstudioDNFD model) => Ok(await _mediator.Send(new AddEditStudyDNFDCommand(model)));
 
-        [HttpPost("evaluate")]
-        public async Task<IActionResult> Evaluate([FromBody] EvaluateRequestCommand model) => Ok(await _mediator.Send(model));
-
         [HttpPost("delete")]
         public async Task<IActionResult> Delete([FromBody] DeleteStudyDNFDCommand model) => Ok(await _mediator.Send(model));
     }

@@ -71,7 +71,7 @@
             <MudItem xs="12" md="12" >
                 <MudToolBar Style="height:25px !important;">
                     <MudText Color="Color.Primary">
-                        <MudIcon Icon="@Icons.Material.Outlined.Archive" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                        <MudIcon Icon="@Icons.Material.Outlined.Assignment" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
                         Estudio clínicos por DNFD
                     </MudText>
                     <MudSpacer />
@@ -107,17 +107,15 @@
                     </MudGrid>
                 </MudItem>
 
-                <MudItem md="2" Style="margin-top:12px !important">
-
-                    <MudSelect T="EstadoEstudioDNFD"  Clearable="true" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
-                        @foreach (EstadoEstudioDNFD dt in Enum.GetValues(typeof(EstadoEstudioDNFD)))
-                        {
-                            
+                @*
+                    <MudItem md="2" Style="margin-top:12px !important">
+                     <MudSelect T="EstadoEstudioDNFD"  Clearable="true" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
+                        @foreach (EstadoEstudioDNFD dt in Enum.GetValues(typeof(EstadoEstudioDNFD))){
                             <MudSelectItem Value="@(dt)">@(dt.ToDescriptionString())</MudSelectItem>
-                            
                         }
-                    </MudSelect>
-                </MudItem>
+                     </MudSelect>
+                   </MudItem>
+                *@
 
                 <MudItem md="2" Style="margin-top:12px !important">
                     <MudGrid>
@@ -138,7 +136,6 @@
 
                 </MudItem>
              
-
             </MudGrid>
 
         </MudCardContent>
@@ -191,7 +188,7 @@
                     </MudButton>
                 </MudBadge>
             }
-                </MudTd>*@
+            </MudTd>*@
             <MudTd DataLabel="Fecha de Ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
             <MudTd DataLabel="Código del protocolo de investigación">@context.Codigo</MudTd>
             <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
@@ -211,7 +208,7 @@
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                 <MudMenuItem Disabled=IsEdit() Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
                  @*<MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Disabled="@(context.Estado!=EstadoEstudioDNFD.Pending || IsEvaluate())" IconColor="Color.Primary" Icon="@Icons.Material.Outlined.PostAdd" OnClick="@(() => Evaluate(@context.Id))" OnTouch="@(() => Evaluate(@context.Id))">Generar Solicitud</MudMenuItem>*@
-                <MudMenuItem Disabled=IsDelete() Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                @* <MudMenuItem Disabled=IsDelete() Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
             </MudMenu>
 
             </MudTd>

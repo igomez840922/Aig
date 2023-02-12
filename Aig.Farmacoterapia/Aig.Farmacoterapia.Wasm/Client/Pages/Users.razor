@@ -1,10 +1,14 @@
 ﻿@page "/users"
 @attribute [Authorize]
 @using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Aig.Farmacoterapia.Domain.Models
 @using Aig.Farmacoterapia.Wasm.Client.Components.User
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.User
+@using System.Security.Claims
 @inject IUserManager _manager;
 
 <PageTitle>Users</PageTitle>
@@ -120,10 +124,10 @@
                         </CardHeaderContent>
                         <CardHeaderActions>
                             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
-                                <MudMenuItem Icon="@Icons.Material.Filled.CoPresent" OnClick="@(() => Edit(@dt.UserName))" OnTouch="@(() => Edit(@dt.UserName))">Perfil</MudMenuItem>
-                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Key" OnClick="@(() => Password(@dt.UserName))" OnTouch="@(() => Password(@dt.UserName))">Contraseña</MudMenuItem>
-                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;"Icon="@Icons.Material.Filled.Group" OnClick="@(() => Role(@dt.UserName))" OnTouch="@(() => Role(@dt.UserName))">Rol</MudMenuItem>
-                                <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@dt.Id))" OnTouch="@(() => Delete(@dt.Id))">Eliminar</MudMenuItem>
+                                <MudMenuItem Disabled="!IsEdit()" Icon="@Icons.Material.Filled.CoPresent" OnClick="@(() => Edit(@dt.UserName))" OnTouch="@(() => Edit(@dt.UserName))">Perfil</MudMenuItem>
+                                <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Key" OnClick="@(() => Password(@dt.UserName))" OnTouch="@(() => Password(@dt.UserName))">Contraseña</MudMenuItem>
+                                <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;"Icon="@Icons.Material.Filled.Group" OnClick="@(() => Role(@dt.UserName))" OnTouch="@(() => Role(@dt.UserName))">Rol</MudMenuItem>
+                                <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@dt.Id))" OnTouch="@(() => Delete(@dt.Id))">Eliminar</MudMenuItem>
                             </MudMenu>
                         </CardHeaderActions>
                     </MudCardHeader>
@@ -137,15 +141,13 @@
             <MudPagination Selected="@_paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@_paginatedResult.TotalPages" Class="pa-4" />
         </MudItem>
     </MudGrid>
-
 }
-
-
 
 @code {
 
     private PaginatedResult<UserModelOutput> _paginatedResult;
     private MudTable<UserModelOutput> _table;
+    private ClaimsPrincipal _user;
     bool _loading = false;
     private string _searchString;
 
@@ -154,14 +156,26 @@
         _loading = state;
         await this.InvokeAsync(StateHasChanged);
     }
-    protected async override Task OnInitializedAsync()
+   
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _searchString = string.Empty;
-        //_bus.Subscribe<IResult>(UserAddedHandler);
-        _paginatedResult = new PaginatedResult<UserModelOutput>();
-        await DoFetchData();
-
+        if (firstRender){   
+            _user = await _authenticationManager.CurrentUser();
+            _searchString = string.Empty;
+            //_bus.Subscribe<IResult>(UserAddedHandler);
+            _paginatedResult = new PaginatedResult<UserModelOutput>();
+            await DoFetchData();
+        }
         base.OnInitialized();
+    }
+
+     protected bool IsEdit()
+    {
+        var disabled=true;
+        if (_user == null) return disabled;
+        var role= _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return (userRole== RoleType.Admin);
     }
 
     //private  void UserAddedHandler(MessageArgs args)

@@ -66,17 +66,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                                     filterList.Add(expression);
                                  }
                                 break;
-                            case "status":
-                                {
-                                  
-                                    var state = (EstadoEstudioDNFD)Enum.Parse(typeof(EstadoEstudioDNFD),filteringOption.Value, true);
-                                    if (state != EstadoEstudioDNFD.All)
-                                    {
-                                        Expression<Func<AigEstudioDNFD, bool>> expression = f => f.Estado == state;
-                                        filterList.Add(expression);
-                                    }
-                                }
-                                break;
                             case "startEvaluationDate":
                                 {
                                     var value = filteringOption.Value;

@@ -210,14 +210,12 @@ namespace Aig.Farmacoterapia.Infrastructure
                 options.UseSqlServer(conn, sqlServerOptionsAction:
                     sqlOptions =>
                     {
-                        options.EnableDetailedErrors();
-                        sqlOptions.EnableRetryOnFailure();
-                        sqlOptions.CommandTimeout(180);
-                        //sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                        //options.EnableDetailedErrors();
+                        sqlOptions.CommandTimeout(120);
+                        sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromMilliseconds(500), null);
                     });
             });
 
-          
             //services.AddDbContext<ApplicationDbContext>(options =>
             //{
             //    options.UseMySql(conn, ServerVersion.AutoDetect(conn), mySqlOptionsAction:

@@ -71,7 +71,7 @@
             <MudItem xs="12" md="12" >
                 <MudToolBar Style="height:25px !important;">
                     <MudText Color="Color.Primary">
-                        <MudIcon Icon="@Icons.Material.Outlined.Assignment" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                        <MudIcon Icon="@Icons.Material.Outlined.Archive" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
                         Solicitudes de autorización de permisos de importación con fines de investigación
                     </MudText>
                     <MudSpacer />
@@ -196,14 +196,13 @@
         </HeaderContent>
         <RowTemplate>
 
-         
             <MudTd DataLabel="Estado">
                
             @switch (context.Estado)
             {
                 case EstadoEstudio.Authorized:
                     {
-                        <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                        <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true">
                             <MudButton Color="Color.Tertiary" Variant="Variant.Filled" DisableElevation="true">
                                 @context.Estado.ToDescriptionString()
                             </MudButton>
@@ -213,7 +212,7 @@
                 case EstadoEstudio.NotAuthorized:
                     {
 
-                        <MudBadge Icon="@Icons.Material.Filled.Close" Color="Color.Error" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                        <MudBadge Icon="@Icons.Material.Filled.Close" Color="Color.Error" Overlap="true" Bordered="true">
                             <MudButton Color="Color.Error" Variant="Variant.Filled" DisableElevation="true">
                                 @context.Estado.ToDescriptionString()
                             </MudButton>
@@ -222,7 +221,7 @@
                     break;
                 default:
                     {
-                        <MudBadge Icon="@Icons.Material.Filled.Warning" Color="Color.Warning" Overlap="true" Bordered="true" Class="mx-6 my-4">
+                        <MudBadge Icon="@Icons.Material.Filled.Warning" Color="Color.Warning" Overlap="true" Bordered="true">
                             <MudButton Color="Color.Warning" Variant="Variant.Filled" DisableElevation="true">
                                 @context.Estado.ToDescriptionString()
                             </MudButton>
@@ -320,7 +319,8 @@
                 <MudMenuItem Disabled="!IsAddAndEvaluators()" Style="border-bottom:1px solid #E4E6EF !important;"  Icon="@Icons.Material.Filled.HowToReg" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
                 
                 @if (!string.IsNullOrEmpty(context.Nota?.Observaciones)) {
-                    <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" Target="_blank" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
+                  
+                    <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
                          Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
                         Exportar Nota
                     </MudMenuItem>
@@ -350,7 +350,6 @@
 
     </MudTable>
  
-
 @code {
 
     private PaginatedResult<AigEstudio> _paginatedResult;
@@ -379,10 +378,9 @@
             var result= await _manager.GetEvaluators(0);
             Evaluators=result.Data;
         }
-
     }
 
-     protected bool IsDelete()
+    protected bool IsDelete()
     {
         var disabled=true;
         if (_user == null) return disabled;
@@ -391,7 +389,7 @@
         return (userRole== RoleType.Admin);
     }
 
-     protected bool IsAddAndEvaluators()
+    protected bool IsAddAndEvaluators()
     {
         var disabled=true;
         if (_user == null) return disabled;
@@ -399,7 +397,7 @@
         var userRole = role.ParseEnum<RoleType>();
         return (userRole== RoleType.Admin || userRole== RoleType.Boss);
     }
-    
+
     protected bool IsEdit(List<string> evaluators)
     {
         var disabled=true;
@@ -416,20 +414,30 @@
         await this.InvokeAsync(StateHasChanged);
     }
 
+    public int GetWorkingDays(DateTime from, DateTime to,List<DateTime> holidays)
+    {
+        var totalDays = 0;
+        for (var date = from.AddDays(1); date <= to; date = date.AddDays(1))
+        {
+            if (date.DayOfWeek != DayOfWeek.Saturday
+                && date.DayOfWeek != DayOfWeek.Sunday
+                && !holidays.Contains(date))
+                totalDays++;
+        }
+
+        return totalDays;
+    }
+
     public int GetElapsedDays(AigEstudio item)
     {
         var result =0;
-        try
-        {
+        try {
             if (item == null || item.FechaAsignacion == null || item.Nota?.FechaEvaluacion == null) return result;
-            TimeSpan? timeSpan = (item.Nota?.FechaEvaluacion.Value - item.FechaAsignacion.Value);
-            return   Convert.ToInt32(timeSpan!.Value.TotalDays);
-            //return days > 1 ? $"{days} Días" : $"{days} Día";
+            //TimeSpan? timeSpan = (item.Nota?.FechaEvaluacion.Value - item.FechaAsignacion.Value);
+            //return   Convert.ToInt32(timeSpan!.Value.TotalDays);
+            return GetWorkingDays(item.FechaAsignacion.Value,item.Nota.FechaEvaluacion.Value,new List<DateTime>());
         }
-        catch (Exception exc)
-        {
-            ;
-        }
+        catch (Exception exc){;}
         return result;
     }
     private async Task<TableData<AigEstudio>> DoFetchData(TableState state)

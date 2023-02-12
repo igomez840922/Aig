@@ -40,7 +40,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             builder.Ignore(c => c.ShowDetails);
             builder.Ignore(c => c.ElapsedDays);
             builder.Ignore(c => c.Evaluators);
-            
+
+            builder.HasOne(a => a.AigEstudioDNFD)
+                   .WithOne(b => b.AigEstudio)
+                   .HasForeignKey<AigEstudioDNFD>(b => b.AigEstudioId)
+                   .IsRequired();
         }
         public void Configure(EntityTypeBuilder<AigEstudioEvaluador> builder)
         {
