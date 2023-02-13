@@ -318,7 +318,7 @@
                 <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
                 <MudMenuItem Disabled="!IsAddAndEvaluators()" Style="border-bottom:1px solid #E4E6EF !important;"  Icon="@Icons.Material.Filled.HowToReg" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
                 
-                @if (!string.IsNullOrEmpty(context.Nota?.Observaciones)) {
+                @if (context.Estado!=EstadoEstudio.Pendiente && !string.IsNullOrEmpty(context.Nota?.Observaciones)) {
                   
                     <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
                          Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
