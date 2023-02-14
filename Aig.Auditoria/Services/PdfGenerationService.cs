@@ -84,6 +84,7 @@ namespace Aig.Auditoria.Services
                         }
                     case DataModel.Helper.enumAUD_TipoActa.VF:
                         {
+                            return await GenerateRutinaVigilanciaFarmacias(inspection);
                             break;
                         }
                     case DataModel.Helper.enumAUD_TipoActa.VA:
@@ -117,221 +118,6 @@ namespace Aig.Auditoria.Services
                             break;
                         }
                 }
-            }
-            catch { }
-            return null;
-        }
-
-        //generamos el pdf del Acta de Retiro y Retencion de Productos
-        private async Task<Stream> GenerateRetentionReceptionPDF(AUD_InspeccionTB inspection)
-        {
-            try
-            {
-                //var inspection = DalService.Get<AUD_InspeccionTB>(InspectionId);
-
-                // code in your main method
-                var byteArray = QuestPDF.Fluent.Document.Create(container =>
-                  {
-                      container.Page(page =>
-                      {
-                          page.Size(PageSizes.A4);
-                          page.Margin(5, Unit.Millimetre);
-                          page.PageColor(Colors.White);
-                          page.DefaultTextStyle(x => x.FontSize(8));
-                          //page.DefaultTextStyle(x => x.Color("Black"));
-
-                          var path = System.IO.Path.Combine(env.WebRootPath, "img", "pdf", "Header.png");
-                          
-                          page.Header().Table(table =>
-                          {
-                              table.ColumnsDefinition(columns =>
-                              {
-                                  columns.RelativeColumn();
-                                  columns.RelativeColumn();
-                                  columns.RelativeColumn();
-                              });
-
-                              table.Header(header =>
-                              {
-                                  header.Cell().Image(path);
-                                  header.Cell().AlignCenter().Text("");
-                                  header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa,DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
-                              });
-                              
-                              table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
-                              table.Cell().ColumnSpan(3).AlignLeft().Text("Departamento de Auditorías de Calidad a Establecimientos Farmacéuticos y No Farmacéuticos");
-                              table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA DE RETENCIÓN Y/O RETIRO DE PRODUCTOS FARMACÉUTICOS").Bold();
-                          });
-                                                   
-                          page.Content().PaddingVertical(8).Column(column =>
-                              {
-                                  string participantes = "";
-                                  if (inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes!=null)
-                                  {
-                                      foreach(var partic in inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes)
-                                      {
-                                          participantes += partic.NombreCompleto + ", ";
-                                      }
-                                  }
-
-                                  column.Item().Text(string.Format("Siendo las {0} del día {1} de {2} de {3}, actuando en representación de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, procedimos a efectuar la {4}, de los productos a continuación descritos y que fueron localizados en el establecimiento denominado: {5}, ubicado en: {6}, con Aviso de Operación No. {7} y Licencia de operación {8}/DNFD. Y cuyo Representante Legal es {9} con documento de identidad personal N° {10}. Por la Dirección Nacional de Farmacia y Drogas, participamos: {11}. Y fuimos atendidos por: {12}, con cargo {13} cip: {14}\r\n",
-                                      inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.ToString("dd"), Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.ToString("yyyy"), DataModel.Helper.Helper.GetDescription(inspection.InspRetiroRetencion.RetiroRetencionType), inspection.Establecimiento?.Nombre??"", inspection.UbicacionEstablecimiento,inspection.AvisoOperacion, inspection.LicenseNumber, inspection.InspRetiroRetencion.DatosRepresentLegal.Nombre, inspection.InspRetiroRetencion.DatosRepresentLegal.Cedula, participantes, inspection.InspRetiroRetencion.DatosAtendidosPor.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor.Cargo, inspection.InspRetiroRetencion.DatosAtendidosPor.Cedula));
-
-                                  column.Item().Table(table =>
-                                  {
-                                      table.ColumnsDefinition(columns =>
-                                      {
-                                          columns.RelativeColumn();
-                                          columns.RelativeColumn();
-                                          columns.RelativeColumn();
-                                          columns.RelativeColumn();
-                                          columns.RelativeColumn();
-                                          columns.RelativeColumn();
-                                          columns.RelativeColumn();
-                                          columns.RelativeColumn();
-                                          columns.RelativeColumn();
-                                      });
-
-                                      table.Header(header =>
-                                      {
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Nombre del Producto").Bold();
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Presentación Comercial").Bold();
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Fabricante").Bold();
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("País de Fabricación").Bold();
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Lote").Bold();
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Fecha de Exp.").Bold();
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cant. Retenida").Bold();
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cant. Retirada").Bold();
-                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Motivo de la Retención y/o Retiro").Bold();
-
-                                      });
-
-                                      //table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
-                                      if(inspection.InspRetiroRetencion!=null && inspection.InspRetiroRetencion.LProductos != null)
-                                      {
-                                          foreach(var prod in inspection.InspRetiroRetencion.LProductos)
-                                          {
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Nombre);
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.PresentacionComercial);
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Fabricante);
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Pais);
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Lote);
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.FechaExp?.ToString("dd/MM/yyyy")??"");
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.CantidadRetenida);
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.CantidadRetirada);
-                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Motivo);
-
-                                              static IContainer CellStyle(IContainer container) => container.BorderBottom(1).BorderColor(Colors.Grey.Lighten2).PaddingVertical(5);
-                                          }
-                                      }  
-                                  
-                                  });
-
-                                  column.Item().PaddingVertical(5).Text(string.Format("Los productos retenidos y retirados del establecimiento se mantendrán bajo custodia en las instalaciones de la Dirección Nacional de Farmacia y Drogas, hasta culminar las investigaciones.\r\nLos productos farmacéuticos que se mantengan retenidos en el local no podrán ser movidos del lugar donde se fijó su ubicación al momento de levantar este documento.\r\n"));
-
-                                  ////////////////////////////
-                                  ///
-
-                                  column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
-                                  column.Item().Table(table =>
-                                  {
-                                      table.ColumnsDefinition(columns =>
-                                      {
-                                          columns.RelativeColumn(1);
-                                          columns.RelativeColumn(1);
-                                          columns.RelativeColumn(1);
-                                      });
-                                      
-                                      table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
-                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosAtendidosPor.Firma))
-                                      {
-                                          //var bytes = Convert.FromBase64String(base64encodedstring);
-                                          //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosAtendidosPor.Firma.Split("image/png;base64,")[1]);
-                                          MemoryStream memoryStream = new MemoryStream(data);
-                                          table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
-                                      }
-                                      else
-                                      {
-                                          table.Cell().AlignLeft().Text("");
-                                      }
-                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosRegente.Firma))
-                                      {
-                                          //var bytes = Convert.FromBase64String(base64encodedstring);
-                                          //var contents = new StreamContent(new MemoryStream(bytes));
-                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosRegente.Firma.Split("image/png;base64,")[1]);
-                                          MemoryStream memoryStream = new MemoryStream(data);
-                                          table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
-                                      }
-                                      else
-                                      {
-                                          table.Cell().AlignLeft().Text("");
-                                      }
-
-                                      table.Cell().AlignLeft().Text("");
-
-                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspRetiroRetencion.DatosAtendidosPor.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor.Cedula, inspection.InspRetiroRetencion.DatosAtendidosPor.Cargo));
-                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspRetiroRetencion.DatosRegente.Nombre, inspection.InspRetiroRetencion.DatosRegente.Cedula, inspection.InspRetiroRetencion.DatosRegente.Cargo, inspection.InspRetiroRetencion.DatosRegente.NumRegistro));
-
-                                      table.Cell().AlignLeft().Text("");
-
-                                      table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
-                                      if (inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes !=null)
-                                      {
-                                          table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
-
-                                          foreach (var participant in inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes)
-                                          {
-                                              table.Cell().Table(tbl =>
-                                              {
-                                                  tbl.ColumnsDefinition(columns =>
-                                                  {
-                                                      columns.RelativeColumn(1);
-                                                  });
-                                                  if (!string.IsNullOrEmpty(participant.Firma))
-                                                  {
-                                                      byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
-                                                      MemoryStream memoryStream = new MemoryStream(data);
-                                                      tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
-                                                  }
-                                                  tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
-
-                                              });
-                                          }                                          
-                                      }
-
-                                  });
-
-                                  column.Item().PaddingVertical(5).Text(" ");
-                                  column.Item().AlignBottom().Table(table =>
-                                  {
-                                      table.ColumnsDefinition(columns =>
-                                      {
-                                          columns.RelativeColumn(1);
-                                          columns.RelativeColumn((float)1.5);
-                                      });
-
-                                      table.Cell().AlignLeft().Text(" ");
-
-                                      table.Cell().Border(1).BorderColor(Colors.Black).Padding(10).AlignBottom().AlignLeft().Column(col =>
-                                      {
-                                          col.Item().AlignLeft().Text("Para uso de la Administración de la DNFD:").Bold();
-                                          col.Item().PaddingTop(5).Text("Productos recibidos por (nombre): _____________________________________________________________");
-                                          col.Item().PaddingTop(15).Text("(firma): ___________________________________________________________________________________________");
-                                          col.Item().PaddingTop(15).Text("Fecha (dd/MM/yyyy): __________________________     Hora: __________________________");
-                                      });
-
-                                  });
-
-                              });
-
-                      });
-                  })
-                  .GeneratePdf();
-
-                Stream stream = new MemoryStream(byteArray);
-
-                return stream;
             }
             catch { }
             return null;
@@ -383,9 +169,9 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
                             column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
-                            
-                            column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}",DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento??DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
@@ -404,7 +190,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("NOMBRE DEL ESTABLECIMIENTO");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento?.Nombre);
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Provincia");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento?.Provincia?.Nombre??"");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Distrito");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Corregimiento");
@@ -415,7 +201,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("NOMBRE DE SOLICITANTE");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Nombre);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tipo"); 
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Tipo");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicFarm.DatosSolicitante.Tipo));
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Nacionalidad");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Nacionalidad);
@@ -478,7 +264,7 @@ namespace Aig.Auditoria.Services
                                 //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspAperCambUbicFarm.DatosRegente?.Ubicacion);
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Teléfono / Celular");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicFarm.DatosRegente?.TelefonoOfic, inspection.InspAperCambUbicFarm.DatosRegente?.TelefonoMovil));
-                                                                
+
                             });
 
 
@@ -691,7 +477,7 @@ namespace Aig.Auditoria.Services
 
                                 }
                             });
-                                                        
+
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -708,7 +494,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            if (inspection.DatosConclusiones!=null)
+                            if (inspection.DatosConclusiones != null)
                             {
                                 column.Item().PaddingVertical(5).AlignTop().Table(table =>
                                 {
@@ -732,7 +518,7 @@ namespace Aig.Auditoria.Services
                                     }
 
                                 });
-                            }                                
+                            }
 
                             column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
                             column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
@@ -757,7 +543,7 @@ namespace Aig.Auditoria.Services
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicFarm.DatosSolicitante.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitArea);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitArea);
                                 }
                                 else
                                 {
@@ -790,7 +576,7 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).Text(" ").Bold();
 
-                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count>0)
+                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
                             {
                                 column.Item().Table(table => {
                                     table.ColumnsDefinition(columns =>
@@ -817,14 +603,14 @@ namespace Aig.Auditoria.Services
                                                 tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
                                             tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
-                                        });                                        
+                                        });
                                     }
                                 });
                             }
 
-                            column.Item().PaddingVertical(5).Text(string.Format("Hora de finalización de inspección: {0}", inspection.DatosConclusiones?.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt")??""));
+                            column.Item().PaddingVertical(5).Text(string.Format("Hora de finalización de inspección: {0}", inspection.DatosConclusiones?.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
-                           
+
                             column.Item().PaddingVertical(10).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -892,7 +678,7 @@ namespace Aig.Auditoria.Services
 
                         });
 
-                        
+
                     });
                 })
                   .GeneratePdf();
@@ -1019,7 +805,7 @@ namespace Aig.Auditoria.Services
 
                             }
 
-                            if (inspection.InspAperCambUbicAgen.DatosRegente!= null)
+                            if (inspection.InspAperCambUbicAgen.DatosRegente != null)
                             {
                                 column.Item().PaddingVertical(5).AlignTop().Table(table =>
                                 {
@@ -1689,13 +1475,13 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
-                            
+
                             column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
                             column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
 
                             column.Item().PaddingVertical(5).Text("COMO PARTE DE LOS REQUISITOS PARA LA EMISIÓN DE LA LICENCIA DE OPERACIÓN, LAS DESVIACIONES OBSERVADAS EN LA INSPECCIÓN, DEBERÁNM SER SUBSANADAS EN UN TERMINO NO MAYOR A 20 DÍAS, DENTRO DE LOS CUALES DEBEN NOTIFICAR A LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS. PARA REALIZAR LA INSPECCIÓN DEFINITIVA").Bold();
 
-                            if (inspection.DatosConclusiones!=null)
+                            if (inspection.DatosConclusiones != null)
                             {
                                 column.Item().PaddingVertical(5).AlignTop().Table(table =>
                                 {
@@ -1718,7 +1504,7 @@ namespace Aig.Auditoria.Services
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
                                 });
-                            }    
+                            }
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
@@ -1803,7 +1589,7 @@ namespace Aig.Auditoria.Services
                             }
 
                             column.Item().PaddingVertical(5).Text(string.Format("Hora de finalización de inspección: {0}", inspection.DatosConclusiones?.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
-                                                        
+
                             column.Item().PaddingVertical(10).Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -1871,54 +1657,7 @@ namespace Aig.Auditoria.Services
 
                         });
 
-                        //page.Footer().Table(table =>
-                        //{
-                        //    table.ColumnsDefinition(columns =>
-                        //    {
-                        //        columns.RelativeColumn(6);
-                        //        columns.RelativeColumn(4);
-                        //    });
-
-                        //    //table.Header(header =>
-                        //    //{
-                        //    //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                        //    //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
-                        //    //});
-
-                        //    table.Cell().Table(tbl => {
-                        //        tbl.ColumnsDefinition(cols =>
-                        //        {
-                        //            cols.RelativeColumn();
-                        //            cols.RelativeColumn();
-                        //            cols.RelativeColumn();
-                        //        });
-                        //        tbl.Cell().AlignLeft().Text("S. Inspecciones");
-                        //        tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
-                        //        tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
-
-                        //        tbl.Cell().AlignLeft().Text("S. Auditorías");
-                        //        tbl.Cell().AlignLeft().Text("512-9168/62");
-                        //        tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
-
-                        //        tbl.Cell().AlignLeft().Text("OR Veraguas");
-                        //        tbl.Cell().AlignLeft().Text("935-0316/18");
-                        //        tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
-
-                        //        tbl.Cell().AlignLeft().Text("OR Chiriquí");
-                        //        tbl.Cell().AlignLeft().Text("774-7410");
-                        //        tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
-
-                        //        tbl.Cell().AlignLeft().Text("OR Colón");
-                        //        tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
-                        //        tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
-
-                        //        tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
-                        //        tbl.Cell().AlignLeft().Text("504-2565");
-                        //        tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
-                        //    });
-
-                        //    table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
-                        //});
+                        
 
 
                     });
@@ -1932,6 +1671,957 @@ namespace Aig.Auditoria.Services
             catch { }
             return null;
         }
+        //RUTINA VIGILANCIA AGENCIA
+        private async Task<Stream> GenerateRutinaVigilanciaFarmacias(AUD_InspeccionTB inspection)
+        {
+            try
+            {
+                //var inspection = DalService.Get<AUD_InspeccionTB>(InspectionId);
+
+                // code in your main method
+                var byteArray = QuestPDF.Fluent.Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(5, Unit.Millimetre);
+                        page.PageColor(Colors.White);
+                        page.DefaultTextStyle(x => x.FontSize(8));
+                        //page.DefaultTextStyle(x => x.Color("Black"));
+
+                        var path = System.IO.Path.Combine(env.WebRootPath, "img", "pdf", "Header.png");
+
+                        page.Header().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().Image(path);
+                                header.Cell().AlignCenter().Text("");
+                                header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
+                            });
+
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
+                            table.Cell().ColumnSpan(3).AlignLeft().Text("Departamento de Auditorías de Calidad a Establecimientos Farmacéuticos y No Farmacéuticos");
+                            table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA DE RUTINA O VIGILANCIA OPERATIVA A FARMACIA".ToUpper()).Bold();
+                        });
+
+                        page.Content().PaddingVertical(8).Column(column =>
+                        {
+
+                            column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
+                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
+                            column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
+
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE INSPECCIÓN: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
+                            column.Item().AlignLeft().Text(string.Format("TIPO DE ESTABLECIMIENTO: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+
+                            if (inspection.DatosEstablecimiento != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.3);
+                                        columns.RelativeColumn((float)0.7);
+                                    });
+
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("GENERALIDADES DE LA FARMACIA Y REPRESENTANTE LEGAL O PROPIETARIO").Bold();
+                                    });
+
+                                    //Establecimiento
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("NOMBRE DEL ESTABLECIMIENTO");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Provincia");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Distrito");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Corregimiento");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ubicación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosEstablecimiento.Direccion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Número de Licencia de Operación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0}", inspection.DatosEstablecimiento.NumLicencia));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Vigente Desde");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteDesde?.ToString("dd/MM/yyyy") ?? ""));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Vigente Hasta");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
+
+                                    if (inspection.InspRutinaVigFarmacia.DatosRepresentLegal != null)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Nombre del Representante Legal o Propietario");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Nombre);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cédula de Identidad Personal");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Cedula);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Correo electrónico");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Email);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Residencia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.PaisResidencia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Provincia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Provincia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Distrito");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Distrito);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Corregimiento");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Corregimiento);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ubicación");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Direccion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Teléfono / Celular");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0} / {1}", inspection.InspRutinaVigFarmacia.DatosRepresentLegal.TelefonoResid, inspection.InspRutinaVigFarmacia.DatosRepresentLegal.TelefonoMovil));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Profesión");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Profesion);
+                                    }
+
+                                    table.Footer(footer =>
+                                    {
+                                        footer.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ley 66 de 10 de noviembre de 1947. Código Sanitario de la República de Panamá. (G.O. 10467 de 6 de diciembre de 1947). Artículo 200. Prohíbese ejercer conjuntamente las profesiones de médico-cirujano y farmacéutico. A partir de la aprobación de este código, ningún médico que ejerza la profesión podrá ser dueño por sí mismo o por interpuesta persona, accionista o tener participación comercial cualquiera en establecimientos en que se fabriquen, preparen o vendan medicinas y artículos de cualquier clase que se usen para la prevención o curación de enfermedades, corrección de defectos o para el diagnóstico.");
+                                    });
+                                });
+
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.DatosRegente != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.3);
+                                        columns.RelativeColumn((float)0.7);
+                                    });
+
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("DATOS SOBRE EL REGENTE FARMACÉUTICO DE LA EMPRESA, FARMACÉUTICO DE TURNO Y TECNICO EN FARMACIA").Bold();
+                                    });
+
+                                    //Establecimiento
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Nombre");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Registro de Idoneidad");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente.NumRegistro);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cédula de Identidad Personal");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente.Cedula);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Correo electrónico");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente.Email);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Se encontraba presente al momento de la inspección");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosRegente.PresenteEnInspeccion));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Horario declarado en la Licencia de Operación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente.HorarioRegencia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Residencia");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.PaisResidencia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Provincia");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Provincia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Distrito");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Distrito);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Corregimiento");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Corregimiento);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Ubicación");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Ubicacion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(string.Format("{0} / {1}", inspection.InspRutinaVigFarmacia.DatosRegente.TelefonoOfic, inspection.InspRutinaVigFarmacia.DatosRegente?.TelefonoMovil));
+
+                                    if (inspection.InspRutinaVigFarmacia.DatosFarmaceutico != null)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuenta con Farmacéutico de Turno");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.CuentaConFarmaceutico));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Horario declarado en la Licencia de Operación");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.Horario);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Cuenta con Personal (Técnico en Farmacia):");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.CuentaConPersonalTecnico));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Nombre de Técnico en Farmacia");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.Nombre);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("Registro");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.NumRegistro);
+                                    }
+                                });
+
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.ExpPersonalFarmacia != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("EXPEDIENTES DEL PERSONAL DE LA FARMACIA".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)5);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.ExpPersonalFarmacia?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.ExpPersonalFarmacia.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.EstructOrganizFarmacia != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ESTRUCTURA ORGANIZACIONAL DE LA FARMACIA".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)5);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.EstructOrganizFarmacia?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.EstructOrganizFarmacia.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.EstructFarmacia != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("INFRAESTRUCTURA DE LA FARMACIA".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)5);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.EstructFarmacia?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.EstructFarmacia.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.AreaFisicaFarmacia != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREA FÍSICA DE LA FARMACIA".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)5);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.AreaFisicaFarmacia?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.AreaFisicaFarmacia.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.AreaProdControlados != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("AREA DE PRODUCTOS CONTROLADOS (CUANDO APLIQUE).".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)5);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.AreaProdControlados?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.AreaProdControlados.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.RegMovimientoExistencia != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("REGISTRO DE MOVIMIENTO DE EXISTENCIA".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)5);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.RegMovimientoExistencia?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.RegMovimientoExistencia.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.AreaAlmacenMedicamentos != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREA DE ALMACEN DE MEDICAMENTOS Y OTROS PRODUCTOS PARA LA SALUD HUMANA. (CUANDO APLIQUE)".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)5);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.AreaAlmacenMedicamentos?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.AreaAlmacenMedicamentos.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.Procedimientos != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("PROCEDIMIENTOS".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)5);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.Procedimientos?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.Procedimientos.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.InventarioMedicamento != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Nombre del Producto".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Laboratorio Fabricante".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Nº de Lote".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Vencimiento".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Existencia Física".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Registro en Libro o sistema".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.InventarioMedicamento?.LProductos?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.InventarioMedicamento.LProductos)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Nombre);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Fabricante);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Lote);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Existencia);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.RegistroSistema);
+                                        }
+
+                                    }
+                                });
+
+                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario al azar de {1} (cantidad) productos, además de estos existen otros a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.InventarioMedicamento.InventarioAlAzar), inspection.InspRutinaVigFarmacia.InventarioMedicamento.CantidadAlAzar));
+                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario de todos los productos a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.InventarioMedicamento.InventarioProductosVenta)));
+
+                            }
+
+                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONES GENERALES").Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosConclusiones?.ObservacionesFinales);
+
+                            });
+
+                            column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
+                            column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
+
+                            if (inspection.DatosConclusiones != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn();
+                                    });
+
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("SEGÚN CRITERIO TÉCNICO SE CONCLUYE QUE").Bold();
+                                    });
+
+                                    if (inspection.DatosConclusiones.CumpleRequisitosMinOperacion)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                    }
+                                    else
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                    }
+
+                                    if (inspection.DatosConclusiones.ReprogramaInspeccion)
+                                    {
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO").Bold();
+                                    }
+                                });
+                            }
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
+                                });
+
+                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
+                                if (!string.IsNullOrEmpty(inspection.InspRutinaVigFarmacia.DatosRepresentLegal?.Firma))
+                                {
+                                    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                    //var contents = new StreamContent(new MemoryStream(bytes));
+                                    byte[] data = Convert.FromBase64String(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitArea);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignLeft().Text("");
+                                }
+
+
+                                if (!string.IsNullOrEmpty(inspection.InspRutinaVigFarmacia.DatosRegente?.Firma))
+                                {
+                                    //var bytes = Convert.FromBase64String(base64encodedstring);
+                                    //var contents = new StreamContent(new MemoryStream(bytes));
+                                    byte[] data = Convert.FromBase64String(inspection.InspRutinaVigFarmacia.DatosRegente.Firma.Split("image/png;base64,")[1]);
+                                    MemoryStream memoryStream = new MemoryStream(data);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
+                                }
+                                else
+                                {
+                                    table.Cell().AlignLeft().Text("");
+                                }
+
+
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspRutinaVigFarmacia.DatosRepresentLegal?.Nombre, inspection.InspRutinaVigFarmacia.DatosRepresentLegal?.Cedula, inspection.InspRutinaVigFarmacia.DatosRepresentLegal?.Cargo));
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspRutinaVigFarmacia.DatosRegente?.Nombre, inspection.InspRutinaVigFarmacia.DatosRegente?.Cedula, inspection.InspRutinaVigFarmacia.DatosRegente?.Cargo, inspection.InspRutinaVigFarmacia.DatosRegente?.NumRegistro));
+
+                                table.Cell().AlignLeft().Text("");
+
+                            });
+
+                            column.Item().PaddingVertical(5).Text(" ").Bold();
+
+                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
+                            {
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+
+                                    foreach (var participant in inspection.ParticipantesDNFD.LParticipantes)
+                                    {
+                                        table.Cell().Table(tbl =>
+                                        {
+                                            tbl.ColumnsDefinition(columns =>
+                                            {
+                                                columns.RelativeColumn(1);
+                                            });
+                                            if (!string.IsNullOrEmpty(participant.Firma))
+                                            {
+                                                byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
+                                                MemoryStream memoryStream = new MemoryStream(data);
+                                                tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
+                                            }
+                                            tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                        });
+                                    }
+                                });
+                            }
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Hora de finalización de inspección: {0}", inspection.DatosConclusiones?.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+
+                            column.Item().PaddingVertical(10).Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn(4);
+                                    columns.RelativeColumn(6);
+                                });
+
+                                table.Cell().Table(tbl => {
+                                    tbl.ColumnsDefinition(cols =>
+                                    {
+                                        cols.RelativeColumn();
+                                    });
+                                    tbl.Header(header =>
+                                    {
+                                        header.Cell().AlignLeft().Text("Fundamento Legal:").Bold();
+                                    });
+                                    tbl.Cell().AlignLeft().Text("Ley 66 de 10 de noviembre de 1947");
+                                    tbl.Cell().AlignLeft().Text("Ley 1 de 10 de enero de 2001");
+                                    tbl.Cell().AlignLeft().Text("Ley 17 de 12 de septiembre de 2014");
+                                    tbl.Cell().AlignLeft().Text("Ley 24 de 29 de enero de 1963");
+                                    tbl.Cell().AlignLeft().Text("Decreto Ejecutivo 115 de 16 de agosto de 2022");
+                                });
+
+                                table.Cell().Table(tbl => {
+                                    tbl.ColumnsDefinition(cols =>
+                                    {
+                                        cols.RelativeColumn();
+                                        cols.RelativeColumn();
+                                        cols.RelativeColumn();
+                                    });
+
+                                    tbl.Header(header =>
+                                    {
+                                        header.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold();
+                                    });
+
+                                    tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                    tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                    tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                    tbl.Cell().AlignLeft().Text("512-9168/62");
+                                    tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                    tbl.Cell().AlignLeft().Text("935-0316/18");
+                                    tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("OR Colón");
+                                    tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                    tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                    tbl.Cell().AlignLeft().Text("504-2565");
+                                    tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
+                                });
+
+                                table.Cell().ColumnSpan(2).AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            });
+
+                        });
+                    });
+                }).GeneratePdf();
+
+                Stream stream = new MemoryStream(byteArray);
+
+                return stream;
+            }
+            catch { }
+            return null;
+        }
+
+
+
+        //generamos el pdf del Acta de Retiro y Retencion de Productos
+        private async Task<Stream> GenerateRetentionReceptionPDF(AUD_InspeccionTB inspection)
+        {
+            try
+            {
+                //var inspection = DalService.Get<AUD_InspeccionTB>(InspectionId);
+
+                // code in your main method
+                var byteArray = QuestPDF.Fluent.Document.Create(container =>
+                  {
+                      container.Page(page =>
+                      {
+                          page.Size(PageSizes.A4);
+                          page.Margin(5, Unit.Millimetre);
+                          page.PageColor(Colors.White);
+                          page.DefaultTextStyle(x => x.FontSize(8));
+                          //page.DefaultTextStyle(x => x.Color("Black"));
+
+                          var path = System.IO.Path.Combine(env.WebRootPath, "img", "pdf", "Header.png");
+                          
+                          page.Header().Table(table =>
+                          {
+                              table.ColumnsDefinition(columns =>
+                              {
+                                  columns.RelativeColumn();
+                                  columns.RelativeColumn();
+                                  columns.RelativeColumn();
+                              });
+
+                              table.Header(header =>
+                              {
+                                  header.Cell().Image(path);
+                                  header.Cell().AlignCenter().Text("");
+                                  header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa,DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
+                              });
+                              
+                              table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
+                              table.Cell().ColumnSpan(3).AlignLeft().Text("Departamento de Auditorías de Calidad a Establecimientos Farmacéuticos y No Farmacéuticos");
+                              table.Cell().ColumnSpan(3).AlignCenter().Text("ACTA DE RETENCIÓN Y/O RETIRO DE PRODUCTOS FARMACÉUTICOS").Bold();
+                          });
+                                                   
+                          page.Content().PaddingVertical(8).Column(column =>
+                              {
+                                  string participantes = "";
+                                  if (inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes!=null)
+                                  {
+                                      foreach(var partic in inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes)
+                                      {
+                                          participantes += partic.NombreCompleto + ", ";
+                                      }
+                                  }
+
+                                  column.Item().Text(string.Format("Siendo las {0} del día {1} de {2} de {3}, actuando en representación de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, procedimos a efectuar la {4}, de los productos a continuación descritos y que fueron localizados en el establecimiento denominado: {5}, ubicado en: {6}, con Aviso de Operación No. {7} y Licencia de operación {8}/DNFD. Y cuyo Representante Legal es {9} con documento de identidad personal N° {10}. Por la Dirección Nacional de Farmacia y Drogas, participamos: {11}. Y fuimos atendidos por: {12}, con cargo {13} cip: {14}\r\n",
+                                      inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.ToString("dd"), Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.ToString("yyyy"), DataModel.Helper.Helper.GetDescription(inspection.InspRetiroRetencion.RetiroRetencionType), inspection.Establecimiento?.Nombre??"", inspection.UbicacionEstablecimiento,inspection.AvisoOperacion, inspection.LicenseNumber, inspection.InspRetiroRetencion.DatosRepresentLegal.Nombre, inspection.InspRetiroRetencion.DatosRepresentLegal.Cedula, participantes, inspection.InspRetiroRetencion.DatosAtendidosPor.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor.Cargo, inspection.InspRetiroRetencion.DatosAtendidosPor.Cedula));
+
+                                  column.Item().Table(table =>
+                                  {
+                                      table.ColumnsDefinition(columns =>
+                                      {
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                          columns.RelativeColumn();
+                                      });
+
+                                      table.Header(header =>
+                                      {
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Nombre del Producto").Bold();
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Presentación Comercial").Bold();
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Fabricante").Bold();
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("País de Fabricación").Bold();
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Lote").Bold();
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Fecha de Exp.").Bold();
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cant. Retenida").Bold();
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cant. Retirada").Bold();
+                                          header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Motivo de la Retención y/o Retiro").Bold();
+
+                                      });
+
+                                      //table.Cell().ColumnSpan(3).AlignLeft().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
+                                      if(inspection.InspRetiroRetencion!=null && inspection.InspRetiroRetencion.LProductos != null)
+                                      {
+                                          foreach(var prod in inspection.InspRetiroRetencion.LProductos)
+                                          {
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Nombre);
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.PresentacionComercial);
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Fabricante);
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Pais);
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Lote);
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.FechaExp?.ToString("dd/MM/yyyy")??"");
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.CantidadRetenida);
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.CantidadRetirada);
+                                              table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(prod.Motivo);
+
+                                              static IContainer CellStyle(IContainer container) => container.BorderBottom(1).BorderColor(Colors.Grey.Lighten2).PaddingVertical(5);
+                                          }
+                                      }  
+                                  
+                                  });
+
+                                  column.Item().PaddingVertical(5).Text(string.Format("Los productos retenidos y retirados del establecimiento se mantendrán bajo custodia en las instalaciones de la Dirección Nacional de Farmacia y Drogas, hasta culminar las investigaciones.\r\nLos productos farmacéuticos que se mantengan retenidos en el local no podrán ser movidos del lugar donde se fijó su ubicación al momento de levantar este documento.\r\n"));
+
+                                  ////////////////////////////
+                                  ///
+
+                                  column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
+                                  column.Item().Table(table =>
+                                  {
+                                      table.ColumnsDefinition(columns =>
+                                      {
+                                          columns.RelativeColumn(1);
+                                          columns.RelativeColumn(1);
+                                          columns.RelativeColumn(1);
+                                      });
+                                      
+                                      table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosAtendidosPor.Firma))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosAtendidosPor.Firma.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+                                      if (!string.IsNullOrEmpty(inspection.InspRetiroRetencion.DatosRegente.Firma))
+                                      {
+                                          //var bytes = Convert.FromBase64String(base64encodedstring);
+                                          //var contents = new StreamContent(new MemoryStream(bytes));
+                                          byte[] data = Convert.FromBase64String(inspection.InspRetiroRetencion.DatosRegente.Firma.Split("image/png;base64,")[1]);
+                                          MemoryStream memoryStream = new MemoryStream(data);
+                                          table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
+                                      }
+                                      else
+                                      {
+                                          table.Cell().AlignLeft().Text("");
+                                      }
+
+                                      table.Cell().AlignLeft().Text("");
+
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspRetiroRetencion.DatosAtendidosPor.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor.Cedula, inspection.InspRetiroRetencion.DatosAtendidosPor.Cargo));
+                                      table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspRetiroRetencion.DatosRegente.Nombre, inspection.InspRetiroRetencion.DatosRegente.Cedula, inspection.InspRetiroRetencion.DatosRegente.Cargo, inspection.InspRetiroRetencion.DatosRegente.NumRegistro));
+
+                                      table.Cell().AlignLeft().Text("");
+
+                                      table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
+                                      if (inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes !=null)
+                                      {
+                                          table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+
+                                          foreach (var participant in inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes)
+                                          {
+                                              table.Cell().Table(tbl =>
+                                              {
+                                                  tbl.ColumnsDefinition(columns =>
+                                                  {
+                                                      columns.RelativeColumn(1);
+                                                  });
+                                                  if (!string.IsNullOrEmpty(participant.Firma))
+                                                  {
+                                                      byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
+                                                      MemoryStream memoryStream = new MemoryStream(data);
+                                                      tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
+                                                  }
+                                                  tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+
+                                              });
+                                          }                                          
+                                      }
+
+                                  });
+
+                                  column.Item().PaddingVertical(5).Text(" ");
+                                  column.Item().AlignBottom().Table(table =>
+                                  {
+                                      table.ColumnsDefinition(columns =>
+                                      {
+                                          columns.RelativeColumn(1);
+                                          columns.RelativeColumn((float)1.5);
+                                      });
+
+                                      table.Cell().AlignLeft().Text(" ");
+
+                                      table.Cell().Border(1).BorderColor(Colors.Black).Padding(10).AlignBottom().AlignLeft().Column(col =>
+                                      {
+                                          col.Item().AlignLeft().Text("Para uso de la Administración de la DNFD:").Bold();
+                                          col.Item().PaddingTop(5).Text("Productos recibidos por (nombre): _____________________________________________________________");
+                                          col.Item().PaddingTop(15).Text("(firma): ___________________________________________________________________________________________");
+                                          col.Item().PaddingTop(15).Text("Fecha (dd/MM/yyyy): __________________________     Hora: __________________________");
+                                      });
+
+                                  });
+
+                              });
+
+                      });
+                  })
+                  .GeneratePdf();
+
+                Stream stream = new MemoryStream(byteArray);
+
+                return stream;
+            }
+            catch { }
+            return null;
+        }
+
         //generamos el pdf del Acta de Apertura o Cambio de Ubicacion de Agencia
         private async Task<Stream> GenerateInvestigaciones(AUD_InspeccionTB inspection)
         {
