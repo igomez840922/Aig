@@ -147,27 +147,35 @@ namespace Aig.Auditoria.Components.Inspections
         //Save Data and Close
         protected async Task SaveData()
         {
-            if (Inspeccion.InspInvestigacion?.DatosConclusiones?.LParticipantes?.Count <= 0)
-            {
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
-                return;
-            }
+            try {
+                if (Inspeccion.InspInvestigacion?.DatosConclusiones?.LParticipantes?.Count <= 0)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
+                    return;
+                }
 
-            if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
-            {
-                Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
-            }
+                if (Inspeccion.EstablecimientoId != null && Inspeccion.EstablecimientoId > 0)
+                {
+                    Inspeccion.Establecimiento = await establecimientoService.Get(Inspeccion.EstablecimientoId.Value);
+                }
 
-            var result = await inspeccionService.Save(Inspeccion);
-            if (result != null)
-            {
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                Inspeccion = result;
+                var result = await inspeccionService.Save(Inspeccion);
+                if (result != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                    Inspeccion = result;
 
-                await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                    if (exit)
+                        await bus.Publish(new Aig.Auditoria.Events.Inspections.AddEditCloseEvent { Inspeccion = null });
+                }
+                else
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
             }
-            else
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            catch { }
+            finally { 
+                exit = false;
+                await this.InvokeAsync(StateHasChanged);
+            }
         }
 
         //Cancel and Close

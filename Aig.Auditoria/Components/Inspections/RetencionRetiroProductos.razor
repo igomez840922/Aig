@@ -637,8 +637,6 @@
 </div>
 
 
-
-
 @if (showParticipant)
 {
     <Aig.Auditoria.Components.Participants.AddEditParticipantComponent Participante="@participante"></Aig.Auditoria.Components.Participants.AddEditParticipantComponent>
@@ -651,5 +649,8 @@
 
 <Aig.Auditoria.Components.RetiredProduct.AddEditProductComponent></Aig.Auditoria.Components.RetiredProduct.AddEditProductComponent>
 
-<Aig.Auditoria.Components.Attachments.AddEditAttachment></Aig.Auditoria.Components.Attachments.AddEditAttachment>
+@if (openAttachment)
+{
+    <Aig.Auditoria.Components.Attachments.AddEditAttachment></Aig.Auditoria.Components.Attachments.AddEditAttachment>
 
+}

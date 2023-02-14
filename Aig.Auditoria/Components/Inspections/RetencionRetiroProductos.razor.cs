@@ -65,6 +65,9 @@ namespace Aig.Auditoria.Components.Inspections
         private EditContext? editContext;
         private System.Timers.Timer timer = new(60 * 1000);
 
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
+
         protected async override Task OnInitializedAsync()
         {
             editContext = new(Inspeccion);
@@ -233,47 +236,7 @@ namespace Aig.Auditoria.Components.Inspections
             this.InvokeAsync(StateHasChanged);
         }
           
-        //Add New Attachment
-        protected async Task OpenAttachment(AttachmentTB attachment = null)
-        {
-            bus.Subscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
-
-            attachment = new AttachmentTB();
-
-            await bus.Publish(new Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_OpenEvent { Attachment = attachment });
-            await this.InvokeAsync(StateHasChanged);
-        }
-        //RemoveAttachment
-        protected async Task RemoveAttachment(AttachmentTB attachment)
-        {
-            if (attachment != null)
-            {
-                try {
-                    File.Delete(attachment.AbsolutePath);
-                }
-                catch { }
-
-                Inspeccion.LAttachments.Remove(attachment);
-                this.InvokeAsync(StateHasChanged);
-            }
-        }
-        //ON CLOSE ATTACHMENT
-        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
-        {
-            bus.UnSubscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
-
-            var message = args.GetMessage<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
-
-            if (message.Attachment != null)
-            {
-                message.Attachment.InspeccionId = Inspeccion.Id;
-                Inspeccion.LAttachments = Inspeccion.LAttachments != null ? Inspeccion.LAttachments : new List<AttachmentTB>();
-
-                Inspeccion.LAttachments.Add(message.Attachment);
-            }
-            this.InvokeAsync(StateHasChanged);
-        }
-
+        
         //ADD PARTICIPANTE
         protected async Task OpenParticipant(Participante _participante=null)
         {
@@ -416,6 +379,49 @@ namespace Aig.Auditoria.Components.Inspections
             this.InvokeAsync(StateHasChanged);
         }
 
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+                Inspeccion.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Inspeccion.LAttachments = Inspeccion.LAttachments != null ? Inspeccion.LAttachments : new List<AttachmentTB>();
+
+                Inspeccion.LAttachments.Add(message.Attachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
 
     }
 }
