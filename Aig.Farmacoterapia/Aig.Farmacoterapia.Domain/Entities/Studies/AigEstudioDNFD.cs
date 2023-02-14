@@ -16,9 +16,13 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
         public string? NotaEvaluacion { get; set; }
         public DateTime? FechaEvaluacion { get; set; } = DateTime.Today;
         public string? ObservacionesEvaluador { get; set; }
-       
-        public virtual AigEstudio AigEstudio { get; set; }
-        public long AigEstudioId { get; set; }
+
+        public long AigCodigoEstudioId { get; set; }
+        public virtual AigCodigoEstudio AigCodigo { get; set; }
+
+        private ICollection<AigEstudio> _aigEstudios;
+        public virtual ICollection<AigEstudio> AigEstudios => _aigEstudios ??= new HashSet<AigEstudio>();
+
     }
 
 }

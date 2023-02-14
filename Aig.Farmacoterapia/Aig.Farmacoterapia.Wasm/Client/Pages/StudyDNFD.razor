@@ -75,9 +75,9 @@
                         Estudio clínicos por DNFD
                     </MudText>
                     <MudSpacer />
-                   @* <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
                         <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(0))" />
-                    </MudTooltip>*@
+                    </MudTooltip>
                 </MudToolBar>
             </MudItem>
         </MudGrid>
@@ -190,7 +190,7 @@
             }
             </MudTd>*@
             <MudTd DataLabel="Fecha de Ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
-            <MudTd DataLabel="Código del protocolo de investigación">@context.Codigo</MudTd>
+            <MudTd DataLabel="Código del protocolo de investigación">@context.AigCodigo.Codigo</MudTd>
             <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
             <MudTd DataLabel="Nota de Evaluación">@context.NotaEvaluacion</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", context.FechaEvaluacion!))</MudTd>

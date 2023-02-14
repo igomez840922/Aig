@@ -2,7 +2,6 @@
 @using Aig.Farmacoterapia.Domain.Entities.Studies
 @using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
 @using Aig.Farmacoterapia.Wasm.Client.Extensions
-@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Medicament
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
 @using Aig.Farmacoterapia.Wasm.Client.Validation
 @using Aig.Farmacoterapia.Domain.Common
@@ -15,6 +14,7 @@
 @using System.Globalization
 @using System.Security.Claims
 @inject IStudyManager _manager;
+
 <style>
     .mud-dialog {
         max-height: calc(107vh - var(--mud-appbar-height));
@@ -80,7 +80,9 @@
                                 <MudGrid>
 
                                     <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
-                                        <MudTextField Disabled="!IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código del protocolo de investigación" />
+                                   
+                                      <MudTextField Disabled="!IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código del protocolo de investigación" />
+
 
                                     </MudItem>
 
@@ -354,7 +356,6 @@
             }
         }
     }
-
 
     public void Cancel()
     {

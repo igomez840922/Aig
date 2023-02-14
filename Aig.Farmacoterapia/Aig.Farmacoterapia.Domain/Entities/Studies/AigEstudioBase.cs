@@ -12,12 +12,11 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
     {
         public DateTime? FechaIngreso { get; set; } = DateTime.Today;  //Match 
         public DateTime? FechaAsignacion { get; set; } = DateTime.Today;
-        public string Codigo { get; set; } //Match 
         public string Titulo { get; set; } //Match 
         public string CentroInvestigacion { get; set; } //Match 
         public string InvestigadorPrincipal { get; set; }//Match 
         public string Patrocinador { get; set; }//Match 
-        public int Participantes { get; set; } = 0;//Match
+        public int Participantes { get; set; } = 1;//Match
         public string Duracion { get; set; }//Match
         public string Poblacion { get; set; }//Match
 

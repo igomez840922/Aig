@@ -19,7 +19,6 @@ namespace Aig.Farmacoterapia.Api.Controllers
         public StudyController(IMediator mediator) => _mediator = mediator;
        
         [HttpPost("search")]
-        [AllowAnonymous]
         public async Task<IActionResult> Search([FromBody] PageSearchArgs Args) => Ok(await _mediator.Send(new GetAllStudyQuery(Args)));
 
         [HttpGet("study/{id}")]

@@ -21,7 +21,12 @@ namespace Aig.Farmacoterapia.Wasm.Client.Validation
 
             IsNotEmpty(c => c.AgenciaDistribuidora, "La agencia distribuidora es obligatoria");
             IsNotEmpty(c => c.FrecuenciaImportacion, "La frecuencia de importación es obligatoria");
-            
+
+
+            IsNotEmpty(c => c.Tramitante.Nombre, "El nombre es obligatorio");
+            IsNotEmpty(c => c.Tramitante.Idoneidad, "La idoneidad es obligatoria");
+            IsNotEmpty(c => c.Tramitante.Telefono, "El teléfono es obligatorio");
+            IsNotEmpty(c => c.Tramitante.Correo, "El correo es obligatorio");
         }
 
     }
@@ -29,7 +34,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Validation
     {
         public StudyDNFDValidator()
         {
-            IsNotEmpty(c => c.Codigo, "El código es obligatorio");
+            IsNotNull(c => c.AigCodigo,"El código es obligatorio");
             IsNotEmpty(c => c.Titulo, "El título del estudio es obligatorio");
             IsNotEmpty(c => c.CentroInvestigacion, "El Centro de Investigación es obligatorio");
             IsNotEmpty(c => c.Patrocinador, "El Patrocinador es obligatorio");
@@ -66,5 +71,13 @@ namespace Aig.Farmacoterapia.Wasm.Client.Validation
                 .WithMessage("La cantidad aprobada no es válida");
         }
 
+    }
+
+    public class AigCodigoEstudioValidator : GenericValidations<AigCodigoEstudio>
+    {
+        public AigCodigoEstudioValidator()
+        {
+            IsNotEmpty(c => c.Codigo, "El código es obligatorio");
+        }
     }
 }

@@ -14,14 +14,19 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
         IEntityTypeConfiguration<AigEstudioDNFD>,
         IEntityTypeConfiguration<AigEstudio>,
         IEntityTypeConfiguration<AigEstudioEvaluador>,
-        IEntityTypeConfiguration<ApplicationUser>
-    {
+        IEntityTypeConfiguration<ApplicationUser>,
+        IEntityTypeConfiguration<AigCodigoEstudio> {
         public void Configure(EntityTypeBuilder<AigEstudioDNFD> builder)
         {
             builder.HasKey(k => new { k.Id });
             builder.Property(e => e.Medicamentos).HasJsonConversion();
             builder.Property(p => p.ProductsMetadata).HasColumnType("nvarchar(max)");
             builder.Ignore(c => c.ShowDetails);
+
+            // 1-1 relationships
+            builder.HasOne(c => c.AigCodigo)
+                   .WithOne().HasForeignKey<AigEstudioDNFD>(b => b.AigCodigoEstudioId)
+                   .IsRequired();
 
         }
         public void Configure(EntityTypeBuilder<AigEstudio> builder)
@@ -34,17 +39,24 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             // m-m relationships
             builder.HasMany(c => c.EstudioEvaluador)
                    .WithOne().HasForeignKey(pls => pls.EstudioId)
-                    .IsRequired();
+                   .IsRequired();
 
             builder.Property(e => e.Medicamentos).HasJsonConversion();
             builder.Ignore(c => c.ShowDetails);
             builder.Ignore(c => c.ElapsedDays);
             builder.Ignore(c => c.Evaluators);
 
-            builder.HasOne(a => a.AigEstudioDNFD)
-                   .WithOne(b => b.AigEstudio)
-                   .HasForeignKey<AigEstudioDNFD>(b => b.AigEstudioId)
-                   .IsRequired();
+            //builder.HasOne(a => a.AigEstudioDNFD)
+            //       .WithOne(b => b.AigEstudio)
+            //       .HasForeignKey<AigEstudioDNFD>(b => b.AigEstudioId)
+            //       .IsRequired();
+
+            //n - 1 relationships
+            builder.HasOne(s => s.AigEstudioDNFD)
+                   .WithMany(c => c.AigEstudios)
+                   .HasForeignKey(s => s.AigEstudioDNFDId)
+                   .IsRequired(false);
+
         }
         public void Configure(EntityTypeBuilder<AigEstudioEvaluador> builder)
         {
@@ -61,13 +73,21 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             builder.Property(p => p.Created).HasColumnType("datetime").IsRequired();
             builder.Property(p => p.LastModified).HasColumnType("datetime");
         }
-
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             // m-m relationships
             builder.HasMany(c => c.EstudioEvaluador)
-               .WithOne().HasForeignKey(pls => pls.UserId)
-              .IsRequired();
+                   .WithOne().HasForeignKey(pls => pls.UserId)
+                   .IsRequired();
+        }
+        public void Configure(EntityTypeBuilder<AigCodigoEstudio> builder)
+        {
+            builder.HasKey(k => new { k.Id });
+            builder.Property(p => p.Codigo)
+                   .IsRequired()
+                   .HasColumnType("nvarchar(250)");
+
+            builder.ToTable("AigCodigos");
         }
     }
 }

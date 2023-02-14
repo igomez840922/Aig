@@ -45,6 +45,18 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Commands
             IResult answer;
             try
             {
+               
+                if (request.Model != null) {
+                    var item = _unitOfWork.Repository<AigEstudioDNFD>().GetAll().FirstOrDefault(p => p.Id != request.Model.Id && p.AigCodigoEstudioId == request.Model.AigCodigo.Id);
+                    if(item!=null)
+                        return Result<bool>.Fail($"En código: {request.Model.AigCodigo.Codigo}, ya fue utilizado en el estudio:  {item.Titulo}");
+
+                    if (request.Model.AigCodigo != null){
+                        request.Model.AigCodigoEstudioId = request.Model.AigCodigo.Id;
+                        request.Model.AigCodigo = null;
+                    }
+                }
+
                 request.Model.ProductsMetadata = string.Join("//", request.Model.Medicamentos.Select(p => p.Nombre));
                 if (request.Model.Id > 0)
                     await _unitOfWork.Repository<AigEstudioDNFD>().UpdateAsync(request.Model);

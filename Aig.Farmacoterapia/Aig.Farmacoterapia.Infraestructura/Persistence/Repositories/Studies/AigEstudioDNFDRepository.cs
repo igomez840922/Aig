@@ -59,7 +59,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                         switch (filteringOption.Field){
                             case "term":
                                 {
-                                    Expression<Func<AigEstudioDNFD, bool>> expression = f => f.Codigo.Contains((string)filteringOption.Value) ||
+                                    Expression<Func<AigEstudioDNFD, bool>> expression = f => f.AigCodigo.Codigo.Contains((string)filteringOption.Value) ||
                                     f.Titulo.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
                                     f.CentroInvestigacion.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
                                     f.CentroInvestigacion.ToLower().Contains(((string)filteringOption.Value).ToLower());

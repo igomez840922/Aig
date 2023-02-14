@@ -1,0 +1,157 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Codes
+@using Aig.Farmacoterapia.Wasm.Client.Validation
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@using System.Globalization
+@using System.Security.Claims
+@inject ICodesManager _manager;
+<style>
+    .mud-dialog {
+        max-height: calc(107vh - var(--mud-appbar-height));
+        overflow-y: auto;
+    }
+</style>
+<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
+    <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+
+                @{
+                    if (_modelData.Id == 0)
+                    {
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                            Nuevo Código
+                        </MudText>
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
+                            Editar Código
+                        </MudText>
+                    }
+                }
+
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            @if (_loading)
+            {
+                <div style="margin-left:45% !important;">
+                    <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+                </div>
+            }
+            else
+            {
+                 
+                <MudGrid Style="margin-top:10px !important">
+                    <MudItem xs="12">
+                        <MudGrid>
+
+
+                            <MudItem xs="12" md="6" Style="padding:3px !important;">
+                                <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Codigo)" @bind-Value="_modelData.Codigo" Label="Código de estudio" />
+                            </MudItem>
+
+                        </MudGrid>
+                    </MudItem>
+                </MudGrid>
+
+                <MudGrid Style="margin-top:10px !important">
+                    <MudItem xs="12">
+                        <MudGrid>
+
+                            <MudItem xs="12" md="12" Style="padding:3px !important">
+                                <MudTextField T="string" Label="Descripción" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Descripcion" Lines="3" />
+                                <ValidationMessage For="@(() => _modelData.Descripcion)" />
+                            </MudItem>
+
+                        </MudGrid>
+                    </MudItem>
+                </MudGrid>
+            }
+
+        </DialogContent>
+        <DialogActions>
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
+            <MudButton Disabled="@(!Validate())" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Guardar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+@code {
+
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    private FluentValidationValidator _fluentValidation;
+    private AigCodigoEstudio _modelData = new AigCodigoEstudio();
+    [Parameter] public long _id { get; set; } = 0;
+    private bool _validated => Validate();
+    bool _loading = false;
+    private ClaimsPrincipal _user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {    _user = await _authenticationManager.CurrentUser();
+            Validate();
+        }
+    }
+    private bool Validate() => _fluentValidation.Validate();
+
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    protected async Task SubmitAsync()
+    {
+        if (Validate())
+        {
+            var response = await _manager.UpdateAsync(_modelData);
+            if (response.Succeeded)
+                MudDialog.Close();
+            foreach (var message in response.Messages){
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
+        }
+    }
+
+    public void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        if (_id != 0)
+        {
+            _loading = true;
+            await this.InvokeAsync(StateHasChanged);
+            var response = await _manager.GetAsync(_id);
+            if (response.Succeeded)
+            {
+                _modelData = response.Data;
+            }
+            _loading = false;
+            await this.InvokeAsync(StateHasChanged);
+        }
+
+    }
+
+}

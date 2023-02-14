@@ -196,8 +196,8 @@
         </HeaderContent>
         <RowTemplate>
 
-            <MudTd DataLabel="Estado">
-               
+        <MudTd DataLabel="Estado">
+
             @switch (context.Estado)
             {
                 case EstadoEstudio.Authorized:
@@ -231,29 +231,26 @@
                     break;
             }
 
+        </MudTd>
 
-@*
-            @if (context.Estado == EstadoEstudio.Authorized)
-            {
-                <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
-                    <MudButton Color="Color.Tertiary" Variant="Variant.Filled" DisableElevation="true">
-                        @context.Estado.ToDescriptionString()
-                    </MudButton>
-                </MudBadge>
-
-            }
-            else
-            {
-                <MudBadge Icon="@Icons.Material.Filled.Close" Color="Color.Error" Overlap="true" Bordered="true" Class="mx-6 my-4">
-                    <MudButton Color="Color.Error" Variant="Variant.Filled" DisableElevation="true">
-                        @context.Estado.ToDescriptionString()
-                    </MudButton>
-                </MudBadge>
-            }*@
-
-             </MudTd>
+       
             <MudTd DataLabel="Fecha de ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
-            <MudTd DataLabel="Código del protocolo de investigació">@context.Codigo</MudTd>
+            <MudTd DataLabel="Código del protocolo de investigació">
+              
+                @if (context.AigEstudioDNFDId != null)
+                {
+                    <MudBadge Content="context.Codigo" Color="Color.Default" Overlap="true">
+                        <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" />
+                    </MudBadge>
+
+                }
+                else
+                {
+                   <MudBadge Content="context.Codigo" Color="Color.Default" Overlap="true">
+                        <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
+                    </MudBadge>
+                }
+           </MudTd>
             <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
             <MudTd DataLabel="Fecha de Asignación">@(string.Format("{0:dd/MM/yyyy}",@context.FechaAsignacion))</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))</MudTd>
@@ -287,21 +284,6 @@
                     break;
             }
 
-
-           @*  @if (context.ElapsedDays >= 0)
-            {
-               
-                <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
-                    <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.GppGood" Color="Color.Tertiary" />
-                </MudBadge>
-
-            }
-            else
-            {
-                <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
-                    <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.GppMaybe" Color="Color.Warning" />
-                </MudBadge>
-            }*@
             </MudTd>
              <MudTd DataLabel="Nota de Evaluación">@context.Nota?.GetNoteCode(@context.Id)</MudTd>
             <MudTd DataLabel="Observaciones por el evaluador">@context.Nota?.Observaciones</MudTd>
@@ -325,7 +307,7 @@
                         Exportar Nota
                     </MudMenuItem>
                 }
-                <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+               @* <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
             </MudMenu>
 
             </MudTd>

@@ -52,32 +52,14 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                 //   });
 
                 request.Model.ProductsMetadata = string.Join("//", request.Model.Medicamentos.Select(p => p.Nombre));
+                var item = _unitOfWork.Repository<AigEstudioDNFD>().GetAll().FirstOrDefault(p => p.AigCodigo.Codigo == request.Model.Codigo);
+                request.Model.AigEstudioDNFDId = item != null ? item.Id : null;
                 if (request.Model.Id > 0)
                     await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
-                else {
-                    var newitem = new AigEstudioDNFD();
-                    newitem.Codigo = request.Model.Codigo;
-                    newitem.Titulo = request.Model.Titulo;
-                    newitem.CentroInvestigacion = request.Model.CentroInvestigacion;
-                    newitem.InvestigadorPrincipal = request.Model.InvestigadorPrincipal;
-                    newitem.Participantes = request.Model.Participantes;
-                    newitem.Patrocinador = request.Model.Patrocinador;
-                    newitem.Duracion = request.Model.Duracion;
-                    newitem.Poblacion = request.Model.Poblacion;
-                    newitem.Medicamentos = request.Model.Medicamentos;
-                    newitem.ProductsMetadata = request.Model.ProductsMetadata;
+                else
+                    await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
+                answer = Result<bool>.Success(_unitOfWork.Commit());
 
-                    newitem.RegistroProtocoloDIGESA = string.Empty;
-                    newitem.ComiteBioetica = string.Empty;
-
-                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) => {
-                        await _unitOfWork.BeginTransactionAsync(cc);
-                        newitem.AigEstudio= await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
-                        await _unitOfWork.Repository<AigEstudioDNFD>().AddAsync(newitem);
-                        answer = Result<bool>.Success(_unitOfWork.Commit());
-                    }, cancellationToken);
-                }  
-                answer = Result<bool>.Success(_unitOfWork.Commit(), "Operación realizada satisfactoriamente !");
             }
             catch (Exception exc)
             {

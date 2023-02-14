@@ -13,6 +13,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
 {
     public class AigEstudio : AigEstudioBase
     {
+        public string Codigo { get; set; } 
         public string AgenciaDistribuidora { get; set; } = string.Empty;
         public AigTramitanteEstudio Tramitante { get; set; } = new AigTramitanteEstudio();
         public string? ObservacionTramitante { get; set; }
@@ -34,8 +35,10 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
         [IgnoreDataMember]
         public List<string> Evaluators { get; set; }
 
+        public long? AigEstudioDNFDId { get; set; }
         [JsonIgnore]
-        public virtual AigEstudioDNFD AigEstudioDNFD { get; set; }
+        public virtual AigEstudioDNFD? AigEstudioDNFD { get; set; }
+
     }
 
 }

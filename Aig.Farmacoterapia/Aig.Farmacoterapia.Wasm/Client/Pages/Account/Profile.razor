@@ -275,8 +275,8 @@
 
     private async Task DeleteAsync()
     {
-        if (!string.IsNullOrEmpty(_profileUserModel.ProfilePicture) && 
-           ((await _manager.DeleteProfilePictureAsync(UploadType.Users, _profileUserModel.ProfilePicture)).Succeeded)){
+        if (!string.IsNullOrEmpty(_profileUserModel.ProfilePicture)){
+            await _manager.DeleteProfilePictureAsync(UploadType.Users, _profileUserModel.ProfilePicture);
            _profilePicture= null; 
            _profileUserModel.ProfilePicture = string.Empty; 
         }
