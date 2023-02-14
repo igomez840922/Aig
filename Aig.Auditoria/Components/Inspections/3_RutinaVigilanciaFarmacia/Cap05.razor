@@ -1,0 +1,124 @@
+﻿@using DataModel.Helper;
+@implements IDisposable
+
+@if (Inspeccion?.InspRutinaVigFarmacia?.EstructOrganizFarmacia != null)
+{
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
+                                            <DataAnnotationsValidator />
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <h5>@languageContainerService.Keys["Estructura Organizacional de la Farmacia"]</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <!--begin::Section-->
+                                                <div class="col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table rounded table-striped">
+                                                            <thead class=thead-light>
+                                                                <tr>
+                                                                    <th width="40%">@languageContainerService.Keys["Título"]</th>
+                                                                    <th width="5%">@languageContainerService.Keys["Seleccione"]</th>
+                                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @if (Inspeccion?.InspRutinaVigFarmacia?.EstructOrganizFarmacia?.LContenido != null)
+                                                                {
+                                                                    @foreach (var dt in Inspeccion.InspRutinaVigFarmacia.EstructOrganizFarmacia.LContenido)
+                                                                    {
+                                                                        @if (dt.IsHeader)
+                                                                        {
+                                                                            <tr>
+                                                                                <th colspan="3">@dt.Titulo</th>
+                                                                            </tr>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <tr>
+                                                                                <td>@dt.Titulo</td>
+                                                                                <td>
+                                                                                    <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
+                                                                                        @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                                        {
+                                                                                            <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                                        }
+                                                                                    </InputSelect>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <InputTextArea rows="6" class="form-control" @bind-Value="dt.Observaciones" />
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <br><br>
+
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                            class="btn btn-success waves-effect">
+                                                        @languageContainerService.Keys["SaveExit"]
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cerrar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

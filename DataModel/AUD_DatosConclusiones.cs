@@ -16,8 +16,6 @@ namespace DataModel
     {
         public AUD_DatosConclusiones() {
             LAttachments=new List<AttachmentTB>();
-            LParticipantes = new List<Participante>();
-            LPartEstablecimiento = new List<Participante>();
         }
 
         //fecha y Hora de finalizacion
@@ -45,6 +43,9 @@ namespace DataModel
         private List<AttachmentTB> lAttachments;
         public List<AttachmentTB> LAttachments { get => lAttachments; set => SetProperty(ref lAttachments, value); }
 
+        //SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO
+        private bool reprogramaInspeccion;
+        public bool ReprogramaInspeccion { get => reprogramaInspeccion; set => SetProperty(ref reprogramaInspeccion, value); }
 
         /// <summary>
         /// //////////////////
@@ -120,9 +121,6 @@ namespace DataModel
         public string FirmaRegente { get => firmaRegente; set => SetProperty(ref firmaRegente, value); }
 
 
-        //Se re-programará otra inspección para verificar observaciones. 
-        private bool reprogramaInspeccion;
-        public bool ReprogramaInspeccion { get => reprogramaInspeccion; set => SetProperty(ref reprogramaInspeccion, value); }
 
     }
 }

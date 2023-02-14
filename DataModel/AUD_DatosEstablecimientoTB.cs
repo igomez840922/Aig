@@ -33,6 +33,12 @@ namespace DataModel
         private string numLicencia;
         public string NumLicencia { get => numLicencia; set => SetProperty(ref numLicencia, value); }
 
+        private DateTime? vigenteDesde;
+        public DateTime? VigenteDesde { get => vigenteDesde; set => SetProperty(ref vigenteDesde, value); }
+
+        private DateTime? vigenteHasta;
+        public DateTime? VigenteHasta { get => vigenteHasta; set => SetProperty(ref vigenteHasta, value); }
+
         //Aviso Operaciones
         private string avisoOperaciones;
         public string AvisoOperaciones { get => avisoOperaciones; set => SetProperty(ref avisoOperaciones, value); }

@@ -1051,7 +1051,17 @@ namespace DataModel
 
         private List<AUD_InvProducto> lProductos;
         public List<AUD_InvProducto> LProductos { get => lProductos; set => SetProperty(ref lProductos, value); }
-                
+
+        private enumAUD_TipoSeleccion inventarioAlAzar;
+        public enumAUD_TipoSeleccion InventarioAlAzar { get => inventarioAlAzar; set => SetProperty(ref inventarioAlAzar, value); }
+
+        private string cantidadAlAzar;
+        public string CantidadAlAzar { get => cantidadAlAzar; set => SetProperty(ref cantidadAlAzar, value); }
+
+
+        private enumAUD_TipoSeleccion inventarioProductosVenta;
+        public enumAUD_TipoSeleccion InventarioProductosVenta { get => inventarioProductosVenta; set => SetProperty(ref inventarioProductosVenta, value); }
+
     }
 
     public class AUD_InvProducto : SystemId
@@ -1077,10 +1087,13 @@ namespace DataModel
         private string existencia;
         public string Existencia { get => existencia; set => SetProperty(ref existencia, value); }
 
+        private string registrados;
+        public string Registrados { get => registrados; set => SetProperty(ref registrados, value); }
+
         // Registro en Libro o sistema
 
-        private enumAUD_TipoSeleccion registroSistema;
-        public enumAUD_TipoSeleccion RegistroSistema { get => registroSistema; set => SetProperty(ref registroSistema, value); }
+        private string registroSistema;
+        public string RegistroSistema { get => registroSistema; set => SetProperty(ref registroSistema, value); }
 
         private int cantidad;
         public int Cantidad { get => cantidad; set => SetProperty(ref cantidad, value); }

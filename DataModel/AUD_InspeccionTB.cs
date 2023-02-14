@@ -73,6 +73,12 @@ namespace DataModel
         public virtual AUD_InspAperCambUbicAgenTB? InspAperCambUbicAgen { get => inspAperCambUbicAgen; set => SetProperty(ref inspAperCambUbicAgen, value); }
 
 
+        //3- Rutina o Vigilancia de Farmacia
+        private long? inspRutinaVigFarmaciaId;
+        public long? InspRutinaVigFarmaciaId { get => inspRutinaVigFarmaciaId; set => SetProperty(ref inspRutinaVigFarmaciaId, value); }
+        private AUD_InspRutinaVigFarmaciaTB? inspRutinaVigFarmacia;
+        public virtual AUD_InspRutinaVigFarmaciaTB? InspRutinaVigFarmacia { get => inspRutinaVigFarmacia; set => SetProperty(ref inspRutinaVigFarmacia, value); }
+
 
         /// <summary>
         /// //////////////////////
@@ -159,12 +165,7 @@ namespace DataModel
 
 
         
-        //3- Rutina o Vigilancia de Farmacia
-        private long? inspRutinaVigFarmaciaId;
-        public long? InspRutinaVigFarmaciaId { get => inspRutinaVigFarmaciaId; set => SetProperty(ref inspRutinaVigFarmaciaId, value); }
-        private AUD_InspRutinaVigFarmaciaTB? inspRutinaVigFarmacia;
-        public virtual AUD_InspRutinaVigFarmaciaTB? InspRutinaVigFarmacia { get => inspRutinaVigFarmacia; set => SetProperty(ref inspRutinaVigFarmacia, value); }
-
+        
         //4 - Rutina o Vigilancia de Agencia
         private long? inspRutinaVigAgenciaId;
         public long? InspRutinaVigAgenciaId { get => inspRutinaVigAgenciaId; set => SetProperty(ref inspRutinaVigAgenciaId, value); }

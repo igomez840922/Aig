@@ -83,7 +83,13 @@ namespace DataModel
         private string laboraOtraEmpresaHora;
         public string LaboraOtraEmpresaHora { get => laboraOtraEmpresaHora; set => SetProperty(ref laboraOtraEmpresaHora, value); }
 
+        //Cuenta Con Farmaceutico
+        private enumAUD_TipoSeleccion cuentaConFarmaceutico;
+        public enumAUD_TipoSeleccion CuentaConFarmaceutico { get => cuentaConFarmaceutico; set => SetProperty(ref cuentaConFarmaceutico, value); }
 
+        //Cuenta Con Personal Tecnico
+        private enumAUD_TipoSeleccion cuentaConPersonalTecnico;
+        public enumAUD_TipoSeleccion CuentaConPersonalTecnico { get => cuentaConPersonalTecnico; set => SetProperty(ref cuentaConPersonalTecnico, value); }
 
     }
 
