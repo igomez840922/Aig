@@ -104,9 +104,9 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                    @if (Inspeccion != null && Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.HorariosAtencion != null)
+                                                                    @if (Inspeccion != null && Inspeccion.InspAperCambUbicFarm.HorariosAtencion.HorariosAtencion != null)
                                                                     {
-                                                                        @foreach (var dt in Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.HorariosAtencion)
+                                                                        @foreach (var dt in Inspeccion.InspAperCambUbicFarm.HorariosAtencion.HorariosAtencion)
                                                                         {
                                                                                             <tr>
                                                                                                 <td scope="row">@dt.Dias</td>

@@ -100,7 +100,7 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
         {
             try
             {
-                var result = await inspeccionService.Save_AperCamUbicFarmacia_Cap3(Inspeccion);
+                var result = await inspeccionService.Save_AperCamUbicAgencia_Cap3(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);

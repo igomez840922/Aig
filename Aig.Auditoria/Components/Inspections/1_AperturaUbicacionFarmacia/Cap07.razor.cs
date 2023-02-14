@@ -82,11 +82,11 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
-                Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas = Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas != null ? Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas : new AUD_DatosPreguntasGenericas();
-                if (!(Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.LContenido?.Count > 0))
+                if (Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas == null)
                 {
-                    Inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas.Inicializa();
+                    Inspeccion.InspAperCambUbicFarm.Inicializa_DatosPreguntasGenericas();
                 }
+
 
             }
             else { Cancel(); }

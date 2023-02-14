@@ -944,6 +944,22 @@ namespace DataModel.Helper
         Cap13 = 13,
         [Description("Cap14")]
         Cap14 = 14,
+        [Description("Cap15")]
+        Cap15 = 15,
+        [Description("Cap16")]
+        Cap16 = 16,
+        [Description("Cap17")]
+        Cap17 = 17,
+        [Description("Cap18")]
+        Cap18 = 18,
+        [Description("Cap19")]
+        Cap19 = 19,
+        [Description("Cap20")]
+        Cap20 = 20,
+        [Description("Cap21")]
+        Cap21 = 21,
+        [Description("Cap22")]
+        Cap22 = 22,
     }
 
 }

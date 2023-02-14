@@ -13,15 +13,12 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosEstructuraOrganizacional : SystemId
     {
+
         
         private List<ContenidoPreguntas> lContenido;
         public List<ContenidoPreguntas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
 
-
-        //Horario de atención
-        private List<AUD_DatosHorario> horariosAtencion;
-        public List<AUD_DatosHorario> HorariosAtencion { get => horariosAtencion; set => SetProperty(ref horariosAtencion, value); }
-
+        
         public void Inicializa()
         {
             LContenido = new List<ContenidoPreguntas>() {

@@ -82,10 +82,9 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
-                Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento = Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento != null ? Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento : new AUD_DatosAreaAlmacenamiento();
-                if (!(Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.LContenido?.Count > 0))
+                if (Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento == null)
                 {
-                    Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.Inicializa();
+                    Inspeccion.InspAperCambUbicFarm.Inicializa_DatosAreaAlmacenamiento();
                 }
 
             }

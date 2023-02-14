@@ -723,28 +723,52 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<string>("Actividades")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAdministrativa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAlmacenMateriaPrima")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAlmacenPlaguicidas")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAlmacenProdReqCadenaFrio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAlmacenProdSujetosControl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAlmacenProdVolatiles")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAlmacenamiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaDespachoProductos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaDesperdicio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaProductosDevueltosVencidos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaProductosRetiradosMercado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaRecepcionProducto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CondCaractEstablecimiento")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DatosActProd")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAtendidosPor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosConclusiones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosCondicionesLocal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosEstablecimiento")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("DatosRegente")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosRepresentLegal")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DatosSolicitante")
@@ -759,9 +783,11 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ReciboPago")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<string>("Productos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Requisitos")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -814,6 +840,9 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
+
+                    b.Property<string>("HorariosAtencion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");

@@ -91,16 +91,14 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
-                Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional = Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional != null ? Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional : new AUD_DatosEstructuraOrganizacional();
-                if (!(Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.HorariosAtencion?.Count > 0))
+                if(Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional == null)
                 {
-                    Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.HorariosAtencion = new List<AUD_DatosHorario>();
+                    Inspeccion.InspAperCambUbicFarm.Inicializa_DatosEstructuraOrganizacional();
                 }
-                if (!(Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.LContenido?.Count > 0))
+                if (Inspeccion.InspAperCambUbicFarm.HorariosAtencion == null)
                 {
-                    Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional.Inicializa();
+                    Inspeccion.InspAperCambUbicFarm.HorariosAtencion = new AUD_Horarios() { HorariosAtencion = new List<AUD_DatosHorario>() };
                 }
-
             }
             else { Cancel(); }
 
@@ -156,7 +154,7 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
             var message = args.GetMessage<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_CloseEvent>();
             if (message.Data != null)
             {
-                Inspeccion.InspAperCambUbicFarm?.DatosEstructuraOrganizacional?.HorariosAtencion?.Add(message.Data);
+                Inspeccion.InspAperCambUbicFarm?.HorariosAtencion?.HorariosAtencion?.Add(message.Data);
             }
             this.InvokeAsync(StateHasChanged);
         }
@@ -164,7 +162,7 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
         {
             OpenHourModal = false;
             DatosHorario = null;
-            Inspeccion.InspAperCambUbicFarm?.DatosEstructuraOrganizacional?.HorariosAtencion?.Remove(horario);
+            Inspeccion.InspAperCambUbicFarm?.HorariosAtencion?.HorariosAtencion?.Remove(horario);
             await this.InvokeAsync(StateHasChanged);
         }
 

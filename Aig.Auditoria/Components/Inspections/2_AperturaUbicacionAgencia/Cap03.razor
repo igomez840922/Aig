@@ -131,15 +131,34 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    @*<div class="col-sm-4">
-                                                        <label>@languageContainerService.Keys["OfficePhone"]</label>
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["Se encontraba presente al momento de la inspección?"]</label>
                                                         <div class="form-group">
                                                             <div class="form-line">
-                                                                <InputText class="form-control" @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.TelefonoOfic" />
-                                                                <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.TelefonoOfic) />
+                                                            <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.PresenteEnInspeccion" class="form-control">
+                                                                    @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                    {
+                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                    }
+                                                                </InputSelect>
+                                                            <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.PresenteEnInspeccion) />
                                                             </div>
                                                         </div>
-                                                    </div>*@
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>@languageContainerService.Keys["El Regente Farmacéutico realiza otras funciones del dentro de la empresa?"]</label>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <InputSelect @bind-Value="Inspeccion.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion" class="form-control">
+                                                                    @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                    {
+                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                    }
+                                                                </InputSelect>
+                                                                <ValidationMessage For=@(() => Inspeccion.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion) />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             <br><br>
