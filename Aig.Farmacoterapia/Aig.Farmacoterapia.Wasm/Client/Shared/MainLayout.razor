@@ -38,7 +38,14 @@
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="MudBlazor.Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
         <AuthorizeView>
+            @if (_notification > 0)
+            {  
+                <MudBadge Style="margin-top:30px !important" Content="@(_notification.ToString())" Overlap="true" Class="mx-6 my-6">
+                    <MudIconButton Href="studies" Style="border:none !important;" Size="Size.Large" Color="Color.Warning" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Notifications" DisableElevation="true">
+                    </MudIconButton>
+                </MudBadge>
 
+            }
             <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
                 <ActivatorContent>
                     @if (string.IsNullOrEmpty(_avatar))
@@ -61,7 +68,6 @@
                     <MudMenuItem Icon="@Icons.Material.Outlined.CoPresent" Href="/profile">Perfil</MudMenuItem>
                     <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Outlined.Login" OnClick="@(async () => await Logout())" OnTouch="@(async () => await Logout())">Salir</MudMenuItem>
                 </ChildContent>
-
                
             </MudMenu>
         </AuthorizeView>
@@ -87,6 +93,7 @@
     bool _drawerOpen = true;
     private string _avatar { get; set; }
     private string _name { get; set; }
+    private long _notification { get; set; } = 0;
     protected async override Task OnInitializedAsync()
     {
         _interceptor.RegisterEvent();
@@ -112,17 +119,11 @@
             _avatar = string.IsNullOrEmpty(picture) ? string.Empty : $"{_appConfiguration.ApiUrl}{picture}";
             _snackBar.Add(string.Format($"Hola {user.GetFirstName()}"), Severity.Success);
 
-            //var role= user.GetRole();
-            //var requiredRole = RoleType.Admin;
-            //if (!string.IsNullOrEmpty(role))
-            //{
-            //    var userRole= role.ParseEnum<RoleType>();
-            //    if (((int)requiredRole & (int)userRole) > 0) //si es 0 no tienen el rol requerido, si es >0 si
-            //    {
-            //        ;
-            //    }
+            var result=await _authenticationManager.GetNotificationAsync();
+            if(result.Succeeded)
+                _notification = result.Data;
 
-            //}
+            await this.InvokeAsync(StateHasChanged);
         }
     }
 

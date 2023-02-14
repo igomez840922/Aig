@@ -91,7 +91,9 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             public static string Evaluators = $"api/studies/evaluators";
             public static string Get(long id) => $"api/studies/study/{id}";
             public static string GetEvaluators(long id) => $"api/studies/evaluators/{id}";
-            
+
+            public static string Notification = $"api/studies/notification";
+
         }
 
         public static class CodesEndpoints

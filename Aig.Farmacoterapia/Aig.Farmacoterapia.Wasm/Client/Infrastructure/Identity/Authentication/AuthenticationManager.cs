@@ -115,5 +115,12 @@ namespace Aig.Farmacoterapia.Wasm.ClientInfrastructure.Identity.Authentication
         {
             return await RefreshToken();
         }
+
+        public async Task<IResult<long>> GetNotificationAsync()
+        {
+            var response = await _httpClient.GetAsync(AppConstants.EstudioEndpoints.Notification);
+            return await response.ToResult<long>();
+        }
+     
     }
 }

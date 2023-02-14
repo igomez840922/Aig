@@ -18,5 +18,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Identity.Authentication
         Task<string> TryForceRefreshToken();
 
         Task<ClaimsPrincipal> CurrentUser();
+
+        Task<IResult<long>> GetNotificationAsync();
     }
 }

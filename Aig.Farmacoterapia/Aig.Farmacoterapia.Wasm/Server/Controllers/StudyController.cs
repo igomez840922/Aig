@@ -24,6 +24,9 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpGet("study/{id}")]
         public async Task<IActionResult> GetStudy(long id) => Ok(await _mediator.Send(new GetStudyQuery(id)));
 
+        [HttpGet("notification")]
+        public async Task<IActionResult> GetNotification() => Ok(await _mediator.Send(new GetStudyNotifyQuery()));
+
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] AigEstudio model) => Ok(await _mediator.Send(new AddEditStudyCommand(model)));
 

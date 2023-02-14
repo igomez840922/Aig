@@ -30,10 +30,17 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Queries
         public long StudyId { get; set; }
         public GetEvaluatorQuery(long studyId) => StudyId = studyId;
     }
+
+    public class GetStudyNotifyQuery : IRequest<Result<long>>
+    {
+        public GetStudyNotifyQuery() {;}
+    }
     internal class StudyQueryHandler : 
         IRequestHandler<GetAllStudyQuery, PaginatedResult<AigEstudio>>,
         IRequestHandler<GetStudyQuery, Result<AigEstudio>>,
-        IRequestHandler<GetEvaluatorQuery, Result<List<UserModelOutput>>>
+        IRequestHandler<GetEvaluatorQuery, Result<List<UserModelOutput>>>,
+        IRequestHandler<GetStudyNotifyQuery, Result<long>>
+        
     {
         private readonly IAigEstudioRepository _repository;
         private readonly IUserService _userService;
@@ -97,6 +104,21 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Queries
             {
                 _logger.Error("Requested operation failed", exc);
                 return Result<List<UserModelOutput>>.Fail(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
+
+        public async Task<Result<long>> Handle(GetStudyNotifyQuery request, CancellationToken cancellationToken)
+        {
+            Result<long> answer = new();
+            try
+            {
+                answer = Result<long>.Success(_unitOfWork.Repository<AigEstudio>().GetAll().Count(p => p.AigEstudioDNFDId == null));
+            }
+            catch (Exception exc)
+            {
+                _logger.Error("Requested operation failed", exc);
+                return Result<long>.Fail(new List<string>() { exc.Message });
             }
             return answer;
         }
