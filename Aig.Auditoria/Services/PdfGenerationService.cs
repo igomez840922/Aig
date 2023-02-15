@@ -7588,6 +7588,7 @@ namespace Aig.Auditoria.Services
         {
             try
             {
+                /*
                 //var inspection = DalService.Get<AUD_InspeccionTB>(InspectionId);
 
                 // code in your main method
@@ -8173,6 +8174,7 @@ namespace Aig.Auditoria.Services
                 Stream stream = new MemoryStream(byteArray);
 
                 return stream;
+                */
             }
             catch { }
             return null;

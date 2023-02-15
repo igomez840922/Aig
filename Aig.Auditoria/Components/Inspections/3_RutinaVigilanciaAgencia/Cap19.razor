@@ -1,7 +1,7 @@
 ﻿@using DataModel.Helper;
 @implements IDisposable
 
-@if (Inspeccion?.InspAperCambUbicAgen?.Requisitos != null)
+@if (Inspeccion?.InspRutinaVigAgencia?.Productos != null)
 {
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -33,7 +33,7 @@
                                             <DataAnnotationsValidator />
                                             <div class="row clearfix">
                                                 <div class="col-12">
-                                                    <h5>@languageContainerService.Keys["Procedimientos"]</h5>
+                                                    <h5>@languageContainerService.Keys["Productos"]</h5>
                                                 </div>
                                             </div>
                                             <div class="row clearfix">
@@ -49,9 +49,9 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @if (Inspeccion?.InspAperCambUbicAgen?.Requisitos?.LContenido != null)
+                                                                @if (Inspeccion?.InspRutinaVigAgencia?.Productos?.LContenido != null)
                                                                 {
-                                                                    @foreach (var dt in Inspeccion.InspAperCambUbicAgen.Requisitos.LContenido)
+                                                                    @foreach (var dt in Inspeccion.InspRutinaVigAgencia.Productos.LContenido)
                                                                     {
                                                                         @if (dt.IsHeader)
                                                                         {

@@ -251,22 +251,26 @@ namespace Aig.Auditoria.Services
                 }
                 if (result.InspRutinaVigAgencia != null)
                 {
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.GeneralesEmpresa).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRegente).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRepresentLegal).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.GenEstablecimiento).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaRecepProductos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRegente).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.CondCaractEstablecimiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAdministrativa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaRecepcionProducto).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenamiento).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaProdDevueltos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaProductosDevueltosVencidos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaProductosRetiradosMercado).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaDespachoProductos).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmCadenaFrio).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaDesperdicio).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaSustanciasControladas).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenProdReqCadenaFrio).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenProdVolatiles).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenPlaguicidas).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenMateriaPrima).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenProdSujetosControl).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Procedimientos).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Transporte).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.ActividadDistribucion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Actividades).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Productos).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.InventarioMedicamento).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosConclusiones).IsModified = true;
+
                 }
                 if (result.InspAperturaCosmetArtesanal != null)
                 {
@@ -401,20 +405,19 @@ namespace Aig.Auditoria.Services
                 if (result.InspRutinaVigFarmacia != null)
                 {
                     //ctx.Entry(designHubProject).Property(b => b.SectionStatuses).IsModified = true;                    
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosGeneralesFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRepresentLegal).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRegente).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosFarmaceutico).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRepresentLegal).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosPersonalTecnico).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosExpedienteColaborador).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosEstructuraFarmacia).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosEquipoRegistroFarmacia).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosAnuncioFarmacia).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRegMovimientoExistenciaFarmacia).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosAlmacenProductosFarmacia).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosProcedimientoFarmacia).IsModified = true;
-                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosConclusiones).IsModified = true;
-                 }
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.ExpPersonalFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.EstructOrganizFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.EstructFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.AreaFisicaFarmacia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.AreaProdControlados).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.RegMovimientoExistencia).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.AreaAlmacenMedicamentos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.Procedimientos).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.InventarioMedicamento).IsModified = true;
+                }
 
                 DalService.DBContext.SaveChanges();
 
@@ -525,7 +528,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.DatosEstablecimiento != null)
+                if (result.InspAperCambUbicFarm != null)
                 {
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosSolicitante).IsModified = true;
                 }
@@ -551,7 +554,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.DatosEstablecimiento != null)
+                if (result.InspAperCambUbicFarm != null)
                 {
                     DalService.DBContext.Entry(result.InspAperCambUbicFarm).Property(b => b.DatosRegente).IsModified = true;
                 }
@@ -768,7 +771,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.DatosEstablecimiento != null)
+                if (result.InspAperCambUbicAgen != null)
                 {
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosSolicitante).IsModified = true;
                 }
@@ -777,7 +780,7 @@ namespace Aig.Auditoria.Services
             }
             return result;
         }
-        public async Task<AUD_InspeccionTB> Save_AperCamUbicAgencia_Cap3(AUD_InspeccionTB inspeccion)
+        public async Task<AUD_InspeccionTB> Save_AperCamUbicAgencia_Cap3(AUD_InspeccionTB inspeccion)   
         {
             var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
 
@@ -794,7 +797,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.DatosEstablecimiento != null)
+                if (result.InspAperCambUbicAgen != null)
                 {
                     DalService.DBContext.Entry(result.InspAperCambUbicAgen).Property(b => b.DatosRegente).IsModified = true;
                 }
@@ -1269,7 +1272,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.DatosEstablecimiento != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRepresentLegal).IsModified = true;
                 }
@@ -1296,7 +1299,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.DatosEstablecimiento != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosRegente).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.DatosFarmaceutico).IsModified = true;
@@ -1323,7 +1326,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.ExpPersonalFarmacia).IsModified = true;
                 }
@@ -1349,7 +1352,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.EstructOrganizFarmacia).IsModified = true;
                 }
@@ -1375,7 +1378,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.EstructFarmacia).IsModified = true;
                 }
@@ -1401,7 +1404,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.AreaFisicaFarmacia).IsModified = true;
                 }
@@ -1427,7 +1430,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.AreaProdControlados).IsModified = true;
                 }
@@ -1453,7 +1456,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.RegMovimientoExistencia).IsModified = true;
                 }
@@ -1479,7 +1482,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.AreaAlmacenMedicamentos).IsModified = true;
                 }
@@ -1505,7 +1508,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.Procedimientos).IsModified = true;
                 }
@@ -1531,7 +1534,7 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
 
-                if (result.InspAperCambUbicAgen != null)
+                if (result.InspRutinaVigFarmacia != null)
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigFarmacia).Property(b => b.InventarioMedicamento).IsModified = true;
                 }
@@ -1570,6 +1573,536 @@ namespace Aig.Auditoria.Services
             }
             return result;
         }
+
+        /////////////////////////////
+        ///
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap2(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.DatosRepresentLegal = inspeccion.InspRutinaVigAgencia.DatosRepresentLegal;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRepresentLegal).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap3(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.DatosRegente = inspeccion.InspRutinaVigAgencia.DatosRegente;
+            //data.InspRutinaVigAgencia.DatosFarmaceutico = inspeccion.InspRutinaVigAgencia.DatosFarmaceutico;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRegente).IsModified = true;
+                    //DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosFarmaceutico).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap4(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.CondCaractEstablecimiento = inspeccion.InspRutinaVigAgencia.CondCaractEstablecimiento;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.CondCaractEstablecimiento).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap5(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaAdministrativa = inspeccion.InspRutinaVigAgencia.AreaAdministrativa;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAdministrativa).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap6(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaRecepcionProducto = inspeccion.InspRutinaVigAgencia.AreaRecepcionProducto;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaRecepcionProducto).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap7(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaAlmacenamiento = inspeccion.InspRutinaVigAgencia.AreaAlmacenamiento;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenamiento).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap8(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaProductosDevueltosVencidos = inspeccion.InspRutinaVigAgencia.AreaProductosDevueltosVencidos;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaProductosDevueltosVencidos).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap9(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaProductosRetiradosMercado = inspeccion.InspRutinaVigAgencia.AreaProductosRetiradosMercado;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaProductosRetiradosMercado).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap10(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaDespachoProductos = inspeccion.InspRutinaVigAgencia.AreaDespachoProductos;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaDespachoProductos).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap11(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaAlmacenProdReqCadenaFrio = inspeccion.InspRutinaVigAgencia.AreaAlmacenProdReqCadenaFrio;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenProdReqCadenaFrio).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap12(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaAlmacenProdVolatiles = inspeccion.InspRutinaVigAgencia.AreaAlmacenProdVolatiles;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenProdVolatiles).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap13(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaAlmacenPlaguicidas = inspeccion.InspRutinaVigAgencia.AreaAlmacenPlaguicidas;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenPlaguicidas).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap14(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaAlmacenMateriaPrima = inspeccion.InspRutinaVigAgencia.AreaAlmacenMateriaPrima;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenMateriaPrima).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap15(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.AreaAlmacenProdSujetosControl = inspeccion.InspRutinaVigAgencia.AreaAlmacenProdSujetosControl;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.AreaAlmacenProdSujetosControl).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap16(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.Procedimientos = inspeccion.InspRutinaVigAgencia.Procedimientos;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Procedimientos).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap17(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.Transporte = inspeccion.InspRutinaVigAgencia.Transporte;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Transporte).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap18(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.Actividades = inspeccion.InspRutinaVigAgencia.Actividades;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Actividades).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap19(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.Productos = inspeccion.InspRutinaVigAgencia.Productos;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.Productos).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap20(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.InventarioMedicamento = inspeccion.InspRutinaVigAgencia.InventarioMedicamento;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.InventarioMedicamento).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Frima(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspRutinaVigAgencia.DatosRepresentLegal = inspeccion.InspRutinaVigAgencia.DatosRepresentLegal;
+            data.InspRutinaVigAgencia.DatosRegente = inspeccion.InspRutinaVigAgencia.DatosRegente;
+            data.ParticipantesDNFD = inspeccion.ParticipantesDNFD;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.ParticipantesDNFD).IsModified = true;
+
+                if (result.InspRutinaVigAgencia != null)
+                {
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRegente).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+
 
     }
 

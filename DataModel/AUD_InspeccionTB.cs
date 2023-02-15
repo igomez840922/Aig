@@ -79,6 +79,12 @@ namespace DataModel
         private AUD_InspRutinaVigFarmaciaTB? inspRutinaVigFarmacia;
         public virtual AUD_InspRutinaVigFarmaciaTB? InspRutinaVigFarmacia { get => inspRutinaVigFarmacia; set => SetProperty(ref inspRutinaVigFarmacia, value); }
 
+        //4 - Rutina o Vigilancia de Agencia
+        private long? inspRutinaVigAgenciaId;
+        public long? InspRutinaVigAgenciaId { get => inspRutinaVigAgenciaId; set => SetProperty(ref inspRutinaVigAgenciaId, value); }
+        private AUD_InspRutinaVigAgenciaTB? inspRutinaVigAgencia;
+        public virtual AUD_InspRutinaVigAgenciaTB? InspRutinaVigAgencia { get => inspRutinaVigAgencia; set => SetProperty(ref inspRutinaVigAgencia, value); }
+
 
         /// <summary>
         /// //////////////////////
@@ -166,12 +172,7 @@ namespace DataModel
 
         
         
-        //4 - Rutina o Vigilancia de Agencia
-        private long? inspRutinaVigAgenciaId;
-        public long? InspRutinaVigAgenciaId { get => inspRutinaVigAgenciaId; set => SetProperty(ref inspRutinaVigAgenciaId, value); }
-        private AUD_InspRutinaVigAgenciaTB? inspRutinaVigAgencia;
-        public virtual AUD_InspRutinaVigAgenciaTB? InspRutinaVigAgencia { get => inspRutinaVigAgencia; set => SetProperty(ref inspRutinaVigAgencia, value); }
-
+        
         //5 - Formulario de Investigaciones
         private long? inspInvestigacionId;
         public long? InspInvestigacionId { get => inspInvestigacionId; set => SetProperty(ref inspInvestigacionId, value); }

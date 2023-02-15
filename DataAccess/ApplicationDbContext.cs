@@ -933,68 +933,80 @@ namespace DataAccess
             ///
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.GeneralesEmpresa)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
+    .Property(e => e.DatosRepresentLegal)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.DatosRegente)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
+    .Property(e => e.DatosRegente)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
+                                   
+            modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
+    .Property(e => e.CondCaractEstablecimiento)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.DatosRepresentLegal)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
+    .Property(e => e.AreaAdministrativa)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.GenEstablecimiento)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaRecepcionProducto)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.AreaRecepProductos)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaAlmacenamiento)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.AreaAlmacenamiento)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaProductosDevueltosVencidos)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.AreaProdDevueltos)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaProductosRetiradosMercado)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.AreaDespachoProductos)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaDespachoProductos)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.AreaAlmCadenaFrio)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaAlmacenProdReqCadenaFrio)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.AreaDesperdicio)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaAlmacenProdVolatiles)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.AreaSustanciasControladas)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaAlmacenPlaguicidas)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.Procedimientos)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaAlmacenMateriaPrima)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.Transporte)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.AreaAlmacenProdSujetosControl)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.ActividadDistribucion)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+    .Property(e => e.Procedimientos)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.InventarioMedicamento)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_InventarioMedicamento>(x));
+    .Property(e => e.Transporte)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
-.Property(e => e.DatosConclusiones)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+    .Property(e => e.Actividades)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
+
+            modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
+    .Property(e => e.Productos)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
+
+            modelBuilder.Entity<AUD_InspRutinaVigAgenciaTB>()
+    .Property(e => e.InventarioMedicamento)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_InventarioMedicamento>(x));
 
             ///////////////////////////////////////////
             ///

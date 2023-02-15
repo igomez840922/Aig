@@ -11,1033 +11,813 @@ namespace DataModel
 {
     public class AUD_InspRutinaVigAgenciaTB : SystemId
     {
-        public AUD_InspRutinaVigAgenciaTB()
-        {
-            GeneralesEmpresa = new AUD_GeneralesEmpresa();
-            DatosRegente = new AUD_DatosRegente();
-            DatosRepresentLegal = new AUD_DatosRepresentLegal();
-
-            InventarioMedicamento = new AUD_InventarioMedicamento();
-
-            DatosConclusiones = new AUD_DatosConclusiones();
-
-            InicializaData();
-        }
 
         private AUD_InspeccionTB inspeccion;
+
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
-
-
-        //Generales Empresa
-        private AUD_GeneralesEmpresa generalesEmpresa;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_GeneralesEmpresa GeneralesEmpresa { get => generalesEmpresa; set => SetProperty(ref generalesEmpresa, value); }
-
-        //DATOS GENERALES DEL REGENTE FARMACÉUTICO
-        private AUD_DatosRegente datosRegente;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
 
         //Datos del Representante Legal
         private AUD_DatosRepresentLegal datosRepresentLegal;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosRepresentLegal DatosRepresentLegal { get => datosRepresentLegal; set => SetProperty(ref datosRepresentLegal, value); }
 
-
-        //GENERALIDADES DEL ESTABLECIMIENTO
-        private AUD_ContenidoTablas genEstablecimiento;
+        //Datos del Regente
+        private AUD_DatosRegente datosRegente;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas GenEstablecimiento { get => genEstablecimiento; set => SetProperty(ref genEstablecimiento, value); }
+        public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
 
-        //AREA RECEPCION PRODUCTOS
-        private AUD_ContenidoTablas areaRecepProductos;
+        //CONDICIONES Y CARACTERÍSTICAS DEL ESTABLECIMIENTO
+        private AUD_ContenidoGenerico condCaractEstablecimiento;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas AreaRecepProductos { get => areaRecepProductos; set => SetProperty(ref areaRecepProductos, value); }
+        public AUD_ContenidoGenerico CondCaractEstablecimiento { get => condCaractEstablecimiento; set => SetProperty(ref condCaractEstablecimiento, value); }
 
-        //AREA ALMACENAMIENTO
-        private AUD_ContenidoTablas areaAlmacenamiento;
+        //ÁREA ADMINSITRATIVA
+        private AUD_ContenidoGenerico areaAdministrativa;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas AreaAlmacenamiento { get => areaAlmacenamiento; set => SetProperty(ref areaAlmacenamiento, value); }
+        public AUD_ContenidoGenerico AreaAdministrativa { get => areaAdministrativa; set => SetProperty(ref areaAdministrativa, value); }
 
-        //AREA PRODUCTOS DEVUELTOS
-        private AUD_ContenidoTablas areaProdDevueltos;
+        //ÁREA DE RECEPCIÓN DE PRODUCTOS
+        private AUD_ContenidoGenerico areaRecepcionProducto;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas AreaProdDevueltos { get => areaProdDevueltos; set => SetProperty(ref areaProdDevueltos, value); }
+        public AUD_ContenidoGenerico AreaRecepcionProducto { get => areaRecepcionProducto; set => SetProperty(ref areaRecepcionProducto, value); }
 
-        //AREA DESPACHO PRODUCTOS
-        private AUD_ContenidoTablas areaDespachoProductos;
+        //ÁREA DE ALMACEN
+        private AUD_ContenidoGenerico areaAlmacenamiento;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas AreaDespachoProductos { get => areaDespachoProductos; set => SetProperty(ref areaDespachoProductos, value); }
+        public AUD_ContenidoGenerico AreaAlmacenamiento { get => areaAlmacenamiento; set => SetProperty(ref areaAlmacenamiento, value); }
 
-        //Existe área de almacenamiento de productos que requieren cadena de frío?
-        private AUD_ContenidoTablas areaAlmCadenaFrio;
+        //ÁREA PARA PRODUCTOS DEVUELTOS Y VENCIDOS
+        private AUD_ContenidoGenerico areaProductosDevueltosVencidos;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas AreaAlmCadenaFrio { get => areaAlmCadenaFrio; set => SetProperty(ref areaAlmCadenaFrio, value); }
+        public AUD_ContenidoGenerico AreaProductosDevueltosVencidos { get => areaProductosDevueltosVencidos; set => SetProperty(ref areaProductosDevueltosVencidos, value); }
 
-        //Existe un área de almacén de desperdicios que se generan y no pueden ser colocados en el área de 
-        private AUD_ContenidoTablas areaDesperdicio;
+        //ÁREA PARA PRODUCTOS RETIRADOS DEL MERCADO
+        private AUD_ContenidoGenerico areaProductosRetiradosMercado;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas AreaDesperdicio { get => areaDesperdicio; set => SetProperty(ref areaDesperdicio, value); }
+        public AUD_ContenidoGenerico AreaProductosRetiradosMercado { get => areaProductosRetiradosMercado; set => SetProperty(ref areaProductosRetiradosMercado, value); }
 
-        //SUSTANCIAS CONTROLADAS (CUANDO APLIQUE).
-        private AUD_ContenidoTablas areaSustanciasControladas;
+        //	ÁREA DE DESPACHO DE PRODUCTOS
+        private AUD_ContenidoGenerico areaDespachoProductos;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas AreaSustanciasControladas { get => areaSustanciasControladas; set => SetProperty(ref areaSustanciasControladas, value); }
+        public AUD_ContenidoGenerico AreaDespachoProductos { get => areaDespachoProductos; set => SetProperty(ref areaDespachoProductos, value); }
 
-        //PROCEDIMIENTOS.
-        private AUD_ContenidoTablas procedimientos;
+        //ÁREA DE ALMACENAMIENTO DE PRODUCTOS QUE REQUIEREN CADENA DE FRÍO 
+        private AUD_ContenidoGenerico areaAlmacenProdReqCadenaFrio;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas Procedimientos { get => procedimientos; set => SetProperty(ref procedimientos, value); }
+        public AUD_ContenidoGenerico AreaAlmacenProdReqCadenaFrio { get => areaAlmacenProdReqCadenaFrio; set => SetProperty(ref areaAlmacenProdReqCadenaFrio, value); }
+
+        //	ÁREA DE ALMACENAMIENTO DE PRODUCTOS VOLATILES  
+        private AUD_ContenidoGenerico areaAlmacenProdVolatiles;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico AreaAlmacenProdVolatiles { get => areaAlmacenProdVolatiles; set => SetProperty(ref areaAlmacenProdVolatiles, value); }
+
+        //ÁREA DE ALMACENAMIENTO DE PLAGUICIDAS DE USO DOMÉSTICO Y DE SALUD PÚBLICA (CUANDO APLIQUE).
+        private AUD_ContenidoGenerico areaAlmacenPlaguicidas;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico AreaAlmacenPlaguicidas { get => areaAlmacenPlaguicidas; set => SetProperty(ref areaAlmacenPlaguicidas, value); }
+
+        //ÁREA DE ALMACENAMIENTO DE MATERIA PRIMA PARA LA INDUSTRIA FARMACÉUTICA (CUANDO APLIQUE).
+        private AUD_ContenidoGenerico areaAlmacenMateriaPrima;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico AreaAlmacenMateriaPrima { get => areaAlmacenMateriaPrima; set => SetProperty(ref areaAlmacenMateriaPrima, value); }
+
+        //ÁREA DE ALMACENAMIENTO DE PRODUCTOS SUJETOS A CONTROL (CUANDO APLIQUE)
+        private AUD_ContenidoGenerico areaAlmacenProdSujetosControl;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico AreaAlmacenProdSujetosControl { get => areaAlmacenProdSujetosControl; set => SetProperty(ref areaAlmacenProdSujetosControl, value); }
+
+        //PROCEDIMIENTOS
+        private AUD_ContenidoGenerico procedimientos;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico Procedimientos { get => procedimientos; set => SetProperty(ref procedimientos, value); }
 
         //TRANSPORTE
-        private AUD_ContenidoTablas transporte;
+        private AUD_ContenidoGenerico transporte;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas Transporte { get => transporte; set => SetProperty(ref transporte, value); }
+        public AUD_ContenidoGenerico Transporte { get => transporte; set => SetProperty(ref transporte, value); }
 
-        //EL ESTABLECIMIENTO SE DEDICA A LA ACTIVIDAD DE DISTRIBUCION DE
-        private AUD_ContenidoTablas actividadDistribucion;
+        //Actividades
+        private AUD_ContenidoGenerico actividades;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_ContenidoTablas ActividadDistribucion { get => actividadDistribucion; set => SetProperty(ref actividadDistribucion, value); }
+        public AUD_ContenidoGenerico Actividades { get => actividades; set => SetProperty(ref actividades, value); }
 
+        //Productos
+        private AUD_ContenidoGenerico productos;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico Productos { get => productos; set => SetProperty(ref productos, value); }
 
         //REPORTE DE INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO
         private AUD_InventarioMedicamento inventarioMedicamento;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual AUD_InventarioMedicamento InventarioMedicamento { get => inventarioMedicamento; set => SetProperty(ref inventarioMedicamento, value); }
 
-        //Datos Conclusión de Inspección
-        private AUD_DatosConclusiones datosConclusiones;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
 
-
-        // Se realizó inventario al azar 
-        private enumAUD_TipoSeleccion inventarioAlAzar;
-        public enumAUD_TipoSeleccion InventarioAlAzar { get => inventarioAlAzar; set => SetProperty(ref inventarioAlAzar, value); }
-
-
-        private enumAUD_TipoSeleccion inventarioCompleto;
-        public enumAUD_TipoSeleccion InventarioCompleto { get => inventarioCompleto; set => SetProperty(ref inventarioCompleto, value); }
-
-
-        private void InicializaData()
+        public void Inicializa_CondCaractEstablecimiento()
         {
-            //////////////////////
-            GenEstablecimiento = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El local está ubicado en área residencial (está prohibido operar en unifamiliares habitadas o en áreas no clasificadas para la actividad comercial o áreas residenciales)",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe letrero visible que identifique la empresa",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El ambiente donde se sitúa el local presenta riesgo mínimo de contaminación a los productos (ver área externa del local)",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Dispone de área administrativa",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Dispone de servicios sanitarios y lavamanos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Distribuye sus productos a establecimientos que están debidamente autorizados por la Dirección Nacional de Farmacia y Drogas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Mantiene registros de las importaciones oficiales aprobadas por la Dirección Nacional de Farmacia y Drogas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Hay evidencias de que el establecimiento verifica que los productos cumplan con las especificaciones consignadas en el certificado de registro sanitario",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            //////////////////////
-            AreaRecepProductos = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "¿Existe área de Recepción de productos?",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Ordenada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Aseada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Delimitada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Está esta área protegida de las inclemencias del tiempo",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe rampa para carga y descarga (cuando sea necesario)",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Los productos dispuestos para la recepción están colocados sobre tarimas u otro mobiliario",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ///////
-            AreaAlmacenamiento = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Dispone de área de Almacenamiento?",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Ordenada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Aseada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Delimitada ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Tamaño aproximado del Depósito",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "De acuerdo al criterio técnico del Farmacéutico inspector, la capacidad del área es suficiente para almacenar productos, manejo adecuado de productos y circulación del personal",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "De ser negativa la respuesta, indicar motivo",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Son adecuadas las condiciones:",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
-                        IsHeader=true,
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Piso",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Techos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Paredes",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Iluminación",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Ventilación",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Suministros eléctricos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Disponen de suficiente equipo para el control de incendios",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
-                        IsHeader=true,
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Extintores",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Alarma ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Detectores de humo ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Duchas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Mangueras",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Otros",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe señalización de rutas de evacuación en caso de siniestros",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe salida de emergencia identificada del local",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Dispone de estructuras donde almacenan los productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
-                        IsHeader=true,
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Racks",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Tarimas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Anaqueles",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Estantes",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Tablillas ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Otros ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Son adecuadas y suficientes estas estructuras",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Los muebles son colocados manteniendo un pie de distancia de las paredes y del techo",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe un sistema para monitorear la temperatura y humedad relativa de acuerdo a las especificaciones de almacenamiento del fabricante",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se mantiene monitoreo de la temperatura y humedad de esta área ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Valor de T° actual",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Valor de Humedad actual",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se mantiene registro",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Es adecuada la temperatura de almacenamiento de los productos allí almacenados (verifique)",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe un sistema para el control de fauna nociva",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existen señalizaciones de no comer, no fumar, no guardar plantas y comida",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe flujo lógico de operaciones",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Los productos cumplen con las normas de etiquetado",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe un sistema de codificación que permite la rápida ubicación del producto",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El establecimiento utiliza el sistema FIFO/FEFO para el almacenamiento",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Dispone de un área destinada exclusivamente para almacenar materiales y productos de limpieza",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Esta área es exclusiva para almacenar medicamentos y otros productos para la salud humana y no están mezclados o juntos con otros productos (alimentos, hidrocarburos, plaguicidas, otros) que pudieran afectar adversamente a los mismos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ////////
-            AreaProdDevueltos = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Dispone de área para productos devueltos o retirados del mercado",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Está identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Está asegurada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se lleva un registro de los productos a destruir y de los productos ya destruidos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Cuenta con un área de cuarentena",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Señale las condiciones del área que pueden afectar los productos ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ////////
-            AreaDespachoProductos = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe área de despacho de productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Está identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Está asegurada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se lleva un registro de los productos a destruir y de los productos ya destruidos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Cuenta con un área de cuarentena",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Señale las condiciones del área que pueden afectar los productos ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ////////
-            AreaAlmCadenaFrio = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe área de almacenamiento de productos que requieren cadena de frío?",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "delimitada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se mantiene monitoreo de la temperatura en esta área",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se mantiene registro de monitoreo",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Valor de T° actual",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ////////
-            AreaDesperdicio = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe un área de almacén de desperdicios que se generan y no pueden ser colocados en el área de almacenamiento",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Ordenada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Aseada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Delimitada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ////////
-            AreaSustanciasControladas = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Manejan productos sujetos a control?",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Medidas aproximadas del área:",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
+            CondCaractEstablecimiento = new AUD_ContenidoGenerico();
+            CondCaractEstablecimiento.LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "El local está ubicado en área residencial?",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Está prohibido operar en unifamiliares habitadas o en áreas no clasificadas para la actividad comercial o áreas residenciales",
                         IsHeader = true,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Largo ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe letrero visible que identifique al establecimiento?",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Ancho ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuenta con área separada para la conservación y consumo de alimentos?",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Altura  ",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+             };
+        }
+        public void Inicializa_AreaAdministrativa()
+        {
+            AreaAdministrativa = new AUD_ContenidoGenerico();
+            AreaAdministrativa.LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Dispone de área administrativa?",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El área se encuentra:",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
-                        IsHeader=true,
+                        new ContenidoPreguntas(){
+                        Titulo = "Dirección del área administrativa",
+                        IsHeader = true,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Mantiene almacenados productos o áreas de almacenamiento en el área descrita como área administrativa?",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Asegurada (llave y/o candado)",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+             };
+        }
+        public void Inicializa_AreaRecepcionProducto()
+        {
+            AreaRecepcionProducto = new AUD_ContenidoGenerico();
+            AreaRecepcionProducto.LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe el área de recepción de productos",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Aseada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Independiente de otras áreas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
+                        new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Posee un área identificada de vencidos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Iluminación y Ventilación",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Separada (cuando sea posible)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Responsables del Área",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Ordenada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Describa el lugar donde se almacenan y las medidas de seguridad",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Dispone de estructuras en esta área (Tarimas, mesa de trabajo).",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se mantiene un registro para el manejo de las sustancias controladas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Está esta área protegida de las inclemencias del tiempo",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se lleva un registro de las sustancias a distribuir",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe rampa para carga y descarga (cuando sea necesario)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Todas las sustancias controladas almacenadas poseen su registro sanitario o en situaciones excepcionales han sido autorizada por la Dirección Nacional de Farmacia y Drogas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+             };
+        }
+        public void Inicializa_AreaAlmacenamiento()
+        {
+            AreaAlmacenamiento = new AUD_ContenidoGenerico();
+            AreaAlmacenamiento.LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Aseada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Todos los vales están con copia de la factura, pre declaración y archivados en orden cronológico.",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Los permisos de importación, exportación o reexportación están archivados por secuencia numérica y con toda la documentación de la transacción.",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El inventario físico de las sustancias controladas coinciden con los registros en el libro o sistema automatizado.",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Ordenada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El establecimiento cumple con la prohibición del manejo de muestras médicas.",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Seca",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                }
-            };
-            ////////
-            Procedimientos = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe Manual de Procedimientos Operativos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Tamaño aproximado del Depósito",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Estos procedimientos se encuentran en un formato para procedimientos operativos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "La capacidad del área es suficiente para almacenar productos, manejo adecuado de productos y circulación del personal (de ser negativa la respuesta, indicar motivo)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Estos procedimientos están firmados por la persona que los elaboró, revisó y aprobó",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Este manual de Procedimientos Operativos posee una vigencia establecida",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existen Procedimientos Operativos?",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Recepción de los productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Almacenamiento de los productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Despacho de los productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Retiro y reemplazo de productos del mercado",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Limpieza de las áreas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se evidencia el cumplimiento de limpieza de áreas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Manejo de los productos de cadena de frío (si aplica)",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se evidencia el manejo de los productos de cadena de frio una vez entregado al cliente de que el producto cumple con la cadena de frio",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Manejo de quejas y reclamos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Incluye la coordinación del retiro del producto del mercado",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Incluye las recomendaciones de las medidas a tomar",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se les comunica a las autoridades correspondientes",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Distribución de los productos. El registro de distribución cuenta con:",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                        new ContenidoPreguntas(){
+                        Titulo = "SON ADECUADAS LAS CONDICIONES",
                         IsHeader=true,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Nombre, presentación y forma farmacéutica",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Piso",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Número de lote",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Techo",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Nombre y dirección del consignatario",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Paredes",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Fecha y cantidad despachada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Iluminación",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Número de factura o documentación de embarque según sea el caso",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Luces de emergencia",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Nombre del laboratorio fabricante",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Ventilación",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se mantienen actualizados los registros de distribución en carpeta o archivos electrónicos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Suministro eléctrico",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Transporte de los productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Control de Fauna Nociva",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Registros respectivos del control de fauna nociva",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Los productos utilizados cuentan con las autorizaciones correspondientes",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Manejo de la disposición final de desechos farmacéuticos de los productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Autoinspección",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El establecimiento registra con qué frecuencia se va a realizar la autoinspección",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Presenta evidencias de reportes realizados de la autoinspección",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Realizan un reporte de los resultados y de as acciones correctivas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Cuentan con un programa de Capacitación del personal",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se evidencia que desarrolla programas de capacitación del personal",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Cuentan con un programa de Mantenimiento Preventivo",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Cuentan con un programa de Salud Ocupacional",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Cuentan con un expediente para el archivo cronológico de las inspecciones y Auditorías realizadas por la Dirección Nacional de Farmacia y Drogas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ////////
-            Transporte = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe transporte adecuado, según sea el caso para el traslado de los productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El transporte cuenta con controles de T° y Humedad relativa",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El transporte mantiene los productos protegidos de la luz",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Los productos que requieren cadena de frío, se trasladan en vehículos o envases que permiten mantener la temperatura requerida",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "En los camiones se colocan los productos sobre tarimas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ////////
-            ActividadDistribucion = new AUD_ContenidoTablas()
-            {
-                LContenido = new List<ContenidoTablas>()
-                {
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Productos Inflamables",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                        new ContenidoPreguntas(){
+                        Titulo = "DISPONEN DE SUFICIENTE EQUIPO PARA EL CONTROL DE INCENDIOS",
                         IsHeader=true,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe un área separada e identificada para el almacenamiento de estos productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Alarma",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Cuenta con los equipos y implementos para la prevención de incendios",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Detectores de humo",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Plaguicidas",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
+                        new ContenidoPreguntas(){
+                        Titulo = "Extintores Vigentes",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Otros",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe señalización de rutas de evacuación en caso de siniestros",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe salida de emergencia identificada del local",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "DISPONE DE ESTRUCTURAS DONDE ALMACENAN LOS PRODUCTOS",
                         IsHeader=true,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Se almacenan en área segregada, delimitada e identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Anaqueles",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
+                        new ContenidoPreguntas(){
+                        Titulo = "Estantes",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Tablillas",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Tarimas",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Otros",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Son adecuadas, suficientes e identificadas estas estructuras",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Los muebles son colocados manteniendo un pie de distancia de las paredes y del techo",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuenta con área de desperdicios",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "CONDICIONES GENERALES",
+                        IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El área de almacenamiento está libre de polvo",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe un sistema para monitorear la temperatura y humedad relativa de acuerdo con las especificaciones de almacenamiento del fabricante",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene registro",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Los registros se registran por lo menos tres veces al día",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Es adecuada la temperatura de almacenamiento de los productos allí almacenados (verifique)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe letrero visible que identifique los rangos de temperatura y humedad",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe un sistema para el control de fauna nociva (cebadera y certificado de fumigación)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe flujo lógico de operaciones",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Disponen de un sistema interno de codificación que permita la localización de los productos en el mercado",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuenta con un sistema para el almacenamiento de productos. Sistema FIFO/FEFO (Primera fecha de entrada, primera salida/ Primera fecha de expiración, primera salida",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Valor informativo:\r\nPrecauciones en el área de Almacenamiento. No se permite fumar, comer, guardar comidas o cualquier otro objeto que pudiera afectar la calidad de los productos. Art. 418. Decreto Ejecutivo 115 de 16 de agosto de 2022",
+                        IsHeader=true,
+                    },
+             };
+        }
+        public void Inicializa_AreaProductosDevueltosVencidos()
+        {
+            AreaProductosDevueltosVencidos = new AUD_ContenidoGenerico();
+            AreaProductosDevueltosVencidos.LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Las condiciones del área pueden afectar los productos devueltos",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    }
+             };
+        }
+        public void Inicializa_AreaProductosRetiradosMercado()
+        {
+            AreaProductosRetiradosMercado = new AUD_ContenidoGenerico();
+            AreaProductosRetiradosMercado.LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Separados en un área segura e identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "En el área existen condiciones que pueden afectar los productos",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Valor Informativo: \r\nLos productos retirados del mercado deben ser identificados y almacenados separadamente en un área segura e identificada, en espera de la orden de reexportación hacia el laboratorio fabricante o su destrucción en el país. Art. 435. Decreto Ejecutivo 115 de 16 de agosto de 2022.",
+                        IsHeader = true,
+                    }
+             };
+        }
+        public void Inicializa_AreaDespachoProductos()
+        {
+            AreaDespachoProductos = new AUD_ContenidoGenerico();
+            AreaDespachoProductos.LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Aseada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Separada (cuando sea posible).",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Dispone de estructuras en esta área (Tarimas, mesa de trabajo)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Está esta área protegida de las inclemencias del tiempo",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe rampa para carga y descarga (cuando sea necesario)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    }
+             };
+        }
+        public void Inicializa_AreaAlmacenProdReqCadenaFrio()
+        {
+            AreaAlmacenProdReqCadenaFrio = new AUD_ContenidoGenerico();
+            AreaAlmacenProdReqCadenaFrio.LContenido = new List<ContenidoPreguntas>() {
+                        
+                    new ContenidoPreguntas(){
+                        Titulo = "Aseada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuentan con el equipo necesario para la conservación de la temperatura de este tipo de productos",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene registro",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El área de almacenamiento con temperatura controlada posee sistema de alarma",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El espacio es suficiente",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Codificación de ubicación de almacén",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+             };
+        }
+        public void Inicializa_AreaAlmacenProdVolatiles()
+        {
+            AreaAlmacenProdVolatiles = new AUD_ContenidoGenerico();
+            AreaAlmacenProdVolatiles.LContenido = new List<ContenidoPreguntas>() {
+                    new ContenidoPreguntas(){
+                        Titulo = "Aseada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Separada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Ordenada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuenta con kit de derrame",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuenta con control de incendio",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuenta con adecuada ventilación, que impida la concentración de olores",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    }
+             };
+        }
+        public void Inicializa_AreaAlmacenPlaguicidas()
+        {
+            AreaAlmacenPlaguicidas = new AUD_ContenidoGenerico();
+            AreaAlmacenPlaguicidas.LContenido = new List<ContenidoPreguntas>() {
+                    new ContenidoPreguntas(){
+                        Titulo = "Aseada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Separada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Ordenada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Codificación interna de ubicación en el almacén",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "Se cumple la prohibición de almacenar en conjunto con medicamentos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
+             };
+        }
+        public void Inicializa_AreaAlmacenMateriaPrima()
+        {
+            AreaAlmacenMateriaPrima = new AUD_ContenidoGenerico();
+            AreaAlmacenMateriaPrima.LContenido = new List<ContenidoPreguntas>() {
+                    new ContenidoPreguntas(){
+                        Titulo = "Aseada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Separada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Ordenada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Codificación interna de ubicación en el almacén",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+             };
+        }
+        public void Inicializa_AreaAlmacenProdSujetosControl()
+        {
+            AreaAlmacenProdSujetosControl = new AUD_ContenidoGenerico();
+            AreaAlmacenProdSujetosControl.LContenido = new List<ContenidoPreguntas>() {
+                    new ContenidoPreguntas(){
+                        Titulo = "Aseada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Asegurada (llave y/o candado)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Independiente de otras áreas",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Iluminación y Ventilación",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Posee un área identificada de vencidos",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene registro",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Responsable del Área",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Describa el lugar donde se almacenan y las medidas de seguridad",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Codificación interna de ubicación en el almacén",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se mantiene un registro para el manejo de las sustancias controladas",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se lleva un registro de las sustancias a distribuir",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Los vales están con copia de la factura, pre declaración y archivados en orden cronológico",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Los permisos de importación, exportación o reexportación están archivados por secuencia numérica y con toda la documentación de la transacción",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El inventario físico de las sustancias controladas coinciden con los registros en el libro o sistema automatizado",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El establecimiento cumple con la prohibición del manejo de muestras médicas",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+             };
+        }
+        public void Inicializa_Procedimientos()
+        {
+            Procedimientos = new AUD_ContenidoGenerico();
+            Procedimientos.LContenido = new List<ContenidoPreguntas>() {
+                     new ContenidoPreguntas(){
+                        Titulo = "La documentación integral que maneja el establecimiento farmacéutico forma parte del sistema de calidad y debe mantenerse en archivos físicos o digitales dentro del establecimiento y permanecer en custodia. Art. 403. Decreto Ejecutivo 115 de 16 de agosto de 2022",
+                        IsHeader = true,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Cargos y Funciones",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Organigrama",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de recepción de producto",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de manejo de productos de cadena de frio (cuando aplique)",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de transporte",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de mantenimiento preventivo del local",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de retiro de producto",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de devolución de producto",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de disposición final de productos o materia prima del mercado",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de control de fauna nociva",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+             };
+        }
+        public void Inicializa_Transporte()
+        {
+            Transporte = new AUD_ContenidoGenerico();
+            Transporte.LContenido = new List<ContenidoPreguntas>() {
+                     new ContenidoPreguntas(){
+                        Titulo = "Existe transporte para el traslado de los productos",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "El transporte cuenta con controles y registro de Temperatura y Humedad relativa",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Se mantienen registros",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "El transporte mantiene los productos protegidos de la luz",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Los productos que requieren cadena de frío se trasladan en vehículos o envases que permiten mantener la temperatura requerida",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "En los camiones se colocan los productos sobre tarimas",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "Presenta formato de verificación de mantenimiento y condiciones del vehículo",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "En caso de tercerización del transporte presenta contrato con la empresa que brindará el servicio",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },new ContenidoPreguntas(){
+                        Titulo = "El transporte está identificado con el nombre de la empresa con licencia de operación vigente ante la Dirección Nacional de Farmacia y Drogas.  Si es tercerizado se permite coloque un letrero removible o en acrílico (colocar en la parte de enfrente del vidrio) o similar",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+             };
+        }
+        public void Inicializa_Actividades()
+        {
+            Actividades = new AUD_ContenidoGenerico();
+            Actividades.LContenido = new List<ContenidoPreguntas>() {
+                    new ContenidoPreguntas(){
+                        Titulo = "Importación",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Exportación",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Reexportación",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Almacenamiento",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Distribución",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Transporte",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Comercialización al por mayor de materia prima para la industria farmacéutica",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Otros",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    }
+             };
+        }
+        public void Inicializa_Productos()
+        {
+            Productos = new AUD_ContenidoGenerico();
+            Productos.LContenido = new List<ContenidoPreguntas>() {
+                    new ContenidoPreguntas(){
+                        Titulo = "Materia prima para la industria farmacéutica",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Medicamentos",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Suplementos vitamínicos con propiedad terapéutica",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "Cosméticos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
-                        IsHeader=true,
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Cumplen con los requisitos de etiqueta",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Plaguicidas de uso doméstico",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "La etiqueta tiene información en español.",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
+                        new ContenidoPreguntas(){
+                        Titulo = "Desinfectantes de uso doméstico y hospitalario",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Declaran propiedades comprobantes y autorizadas en el registro sanitario",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Materia Prima",
-                        Evaluacion = enumAUD_TipoSeleccion.NA,
-                        IsHeader=true,
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Todas as materias primas que manejan cuentan con su certificado de inscripción vigente",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "Existe área delimitada e identificada",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                    new ContenidoTablas()
-                    {
-                        Titulo = "El área reúne las condiciones adecuadas para almacenar estos productos",
-                        Evaluacion = enumAUD_TipoSeleccion.NA
-                    },
-                }
-            };
-            ////////
+                        new ContenidoPreguntas(){
+                        Titulo = "Otros",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    }
+             };
         }
 
     }

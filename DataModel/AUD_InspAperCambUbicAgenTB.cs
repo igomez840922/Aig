@@ -253,38 +253,6 @@ namespace DataModel
                         Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "SON ADECUADAS LAS CONDICIONES",
-                        IsHeader=true,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Piso",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Techo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Paredes",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Iluminación",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Luces de emergencia",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Ventilación",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Suministro eléctrico",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    },
-                        new ContenidoPreguntas(){
                         Titulo = "DISPONEN DE SUFICIENTE EQUIPO PARA EL CONTROL DE INCENDIOS",
                         IsHeader=true,
                     },
@@ -326,6 +294,10 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Tablillas",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Tarimas",
                         Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
                         new ContenidoPreguntas(){
@@ -389,7 +361,7 @@ namespace DataModel
                         Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Precauciones en el área de Almacenamiento. No se permite fumar, comer, guardar comidas o cualquier otro objeto que pudiera afectar la calidad de los productos. Art. 418. Decreto Ejecutivo 115 de 16 de agosto de 2022",
+                        Titulo = "Valor informativo:\r\nPrecauciones en el área de Almacenamiento. No se permite fumar, comer, guardar comidas o cualquier otro objeto que pudiera afectar la calidad de los productos. Art. 418. Decreto Ejecutivo 115 de 16 de agosto de 2022",
                         IsHeader=true,
                     },
              };
@@ -454,6 +426,10 @@ namespace DataModel
                         Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
                         new ContenidoPreguntas(){
+                        Titulo = "Identificada",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "Separada (cuando sea posible).",
                         Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
@@ -507,6 +483,10 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El área de almacenamiento con temperatura controlada posee sistema de alarma",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El espacio es suficiente",
                         Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
                     },
                         new ContenidoPreguntas(){
@@ -568,7 +548,15 @@ namespace DataModel
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
                         Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    }
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Codificación interna de ubicación en el almacén",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Se cumple la prohibición de almacenar en conjunto con medicamentos",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
              };
         }
 
@@ -590,7 +578,11 @@ namespace DataModel
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
                         Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
-                    }
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Codificación interna de ubicación en el almacén",
+                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                    },
              };
         }
 
