@@ -53,7 +53,7 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
 
                 request.Model.ProductsMetadata = string.Join("//", request.Model.Medicamentos.Select(p => p.Nombre));
                 var item = _unitOfWork.Repository<AigEstudioDNFD>().GetAll().FirstOrDefault(p => p.AigCodigo.Codigo == request.Model.Codigo);
-                request.Model.AigEstudioDNFDId = item != null ? item.Id : null;
+                if(item!=null) request.Model.AigEstudioDNFDId = item.Id;
                 if (request.Model.Id > 0)
                     await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
                 else
