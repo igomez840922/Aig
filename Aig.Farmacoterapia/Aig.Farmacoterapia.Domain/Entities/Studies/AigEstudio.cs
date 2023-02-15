@@ -39,6 +39,11 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
         [JsonIgnore]
         public virtual AigEstudioDNFD? AigEstudioDNFD { get; set; }
 
+        [IgnoreDataMember]
+        public bool Match { get; set; } = true;
+        [IgnoreDataMember]
+        public string MatchInfo { get; set; } = string.Empty;
+
     }
 
 }

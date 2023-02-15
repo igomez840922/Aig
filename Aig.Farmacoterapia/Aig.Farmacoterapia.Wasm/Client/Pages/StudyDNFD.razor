@@ -365,8 +365,10 @@
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddEdit>(id == 0 ? "Nuevo" :"Editar ", parameters, options);
             var result = await dialog.Result;
-            if (!result.Cancelled)
-                await _table.ReloadServerData();
+            if (!result.Cancelled){   
+              await _table.ReloadServerData();
+              await _bus.Publish(true);
+           }
       }
 
   private async Task Evaluate(long id)

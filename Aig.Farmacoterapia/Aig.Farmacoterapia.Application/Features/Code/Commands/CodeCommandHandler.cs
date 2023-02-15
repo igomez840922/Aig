@@ -37,6 +37,10 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
             IResult answer;
             try
             {
+                var item = _unitOfWork.Repository<AigCodigoEstudio>().GetAll().FirstOrDefault(p => p.Id != request.Model.Id && p.Codigo == request.Model.Codigo);
+                if (item != null)
+                    return Result<bool>.Fail($"El código: {request.Model.Codigo}, ya fue registrado");
+
                 if (request.Model.Id > 0)
                     await _unitOfWork.Repository<AigCodigoEstudio>().UpdateAsync(request.Model);
                 else

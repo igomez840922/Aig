@@ -174,8 +174,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
             {
                  _logger.Error(exc.Message, exc);
             }
-            result.Data = result.Data.Select(w => { w.Evaluators = w.EstudioEvaluador.Select(s => s.UserId).ToList(); return w; }).ToList();
+            result.Data = result.Data.Select(w => {
+                w.Match = w.AigEstudioDNFDId != null && w.AigEstudioDNFD!.AigCodigo.Codigo == w.Codigo;
+                w.MatchInfo = !w.Match ? (w.AigEstudioDNFDId != null ? $"{w.Codigo} / {w.AigEstudioDNFD!.AigCodigo.Codigo}" : w.Codigo) :string.Empty;
+                w.Evaluators = w.EstudioEvaluador.Select(s => s.UserId).ToList(); return w; 
+            }).ToList();
             return result;
+
         }
 
         public List<string> ListEvaluatorAsync(long studyId)

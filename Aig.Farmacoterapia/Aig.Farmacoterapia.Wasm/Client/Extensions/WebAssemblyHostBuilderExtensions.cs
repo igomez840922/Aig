@@ -61,8 +61,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Extensions
                 })
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
             builder.Services.AddHttpClientInterceptor();
-            //For Components Comunucations Pul-Sub
-            //builder.Services.AddScoped<ComponentBus>();
+            builder.Services.AddScoped<ComponentBus>();//Pub-Sub Comunucations 
             return builder;
         }
 

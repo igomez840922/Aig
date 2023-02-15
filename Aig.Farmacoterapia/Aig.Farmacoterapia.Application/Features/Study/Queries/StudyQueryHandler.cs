@@ -113,7 +113,8 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Queries
             Result<long> answer = new();
             try
             {
-                answer = Result<long>.Success(_unitOfWork.Repository<AigEstudio>().GetAll().Count(p => p.AigEstudioDNFDId == null));
+                answer = Result<long>.Success(_unitOfWork.Repository<AigEstudio>().GetAll().Count(p => p.AigEstudioDNFDId == null || p.AigEstudioDNFD!.AigCodigo.Codigo!=p.Codigo));
+
             }
             catch (Exception exc)
             {

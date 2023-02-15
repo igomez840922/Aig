@@ -1,4 +1,5 @@
-﻿@using Aig.Farmacoterapia.Wasm.Client.Extensions
+﻿@using Aig.Farmacoterapia.Domain.Interfaces
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
 @using Aig.Farmacoterapia.Domain.Entities.Enums
 @using Aig.Farmacoterapia.Domain.Extensions
 @using Microsoft.AspNetCore.Components.Authorization
@@ -40,9 +41,12 @@
         <AuthorizeView>
             @if (_notification > 0)
             {  
+               
                 <MudBadge Style="margin-top:30px !important" Content="@(_notification.ToString())" Overlap="true" Class="mx-6 my-6">
-                    <MudIconButton Href="studies" Style="border:none !important;" Size="Size.Large" Color="Color.Warning" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Notifications" DisableElevation="true">
-                    </MudIconButton>
+                    <MudTooltip Text="Solicitudes de importación sin estudio clínico" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton Href="studies" Style="border:none !important;color: #ff95b9 !important;" Size="Size.Large" Color="Color.Warning" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Notifications" DisableElevation="true">
+                        </MudIconButton>
+                    </MudTooltip>
                 </MudBadge>
 
             }
@@ -103,9 +107,26 @@
     {
         if (firstRender)
         {
+            _bus.Subscribe<bool>(NotificationsHandler);
             await LoadDataAsync();
         }
         await base.OnInitializedAsync();
+    }
+    private  void NotificationsHandler(MessageArgs args)
+    {
+        var result = args.GetMessage<bool>();
+        if (result){
+            Task.Run(async () => await LoadNotificationsAsync());
+        }
+    }
+
+    private async Task LoadNotificationsAsync()
+    {
+        var result=await _authenticationManager.GetNotificationAsync();
+        if (result.Succeeded){
+            _notification = result.Data;
+            await this.InvokeAsync(StateHasChanged);
+        }     
     }
 
     private async Task LoadDataAsync()
@@ -118,12 +139,7 @@
             var picture = await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL);
             _avatar = string.IsNullOrEmpty(picture) ? string.Empty : $"{_appConfiguration.ApiUrl}{picture}";
             _snackBar.Add(string.Format($"Hola {user.GetFirstName()}"), Severity.Success);
-
-            var result=await _authenticationManager.GetNotificationAsync();
-            if(result.Succeeded)
-                _notification = result.Data;
-
-            await this.InvokeAsync(StateHasChanged);
+             await _bus.Publish(true);
         }
     }
 

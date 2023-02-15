@@ -93,13 +93,13 @@
             <MudGrid>
 
                 <MudItem md="3" Style="margin-top:12px !important">
-                   <MudTextField Clearable="true" HelperText="Código / Título / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
+                   <MudTextField  OnClearButtonClick="OnSearch" Clearable="true" HelperText="Código / Título / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
                 </MudItem>
 
                  <MudItem md="7">
                     <MudGrid>
                         <MudItem md="4">
-                            <MudDateRangePicker Clearable="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Ingreso:"  @bind-DateRange="dateRange" />
+                            <MudDateRangePicker  Clearable="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Ingreso:"  @bind-DateRange="dateRange" />
                         </MudItem>
                          <MudItem md="4">
                              <MudDateRangePicker Clearable="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Asignación:"  @bind-DateRange="assignmentRange" />
@@ -134,16 +134,16 @@
 
             <MudGrid>
                 <MudItem md="3" Style="margin-top:8px !important">
-                    <MudTextField Clearable="true" HelperText="Nombre de medicamento" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Product" Label="Producto" />
+                    <MudTextField  OnClearButtonClick="OnSearch" Clearable="true" HelperText="Nombre de medicamento" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Product" Label="Producto" />
                 </MudItem>
 
                   <MudItem md="3" Style="margin-top:8px !important">
-                    <MudTextField Clearable="true" HelperText="Investigador principal" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Researcher" Label="Investigador" />
+                    <MudTextField  OnClearButtonClick="OnSearch" Clearable="true" HelperText="Investigador principal" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Researcher" Label="Investigador" />
                 </MudItem>
 
                 <MudItem md="3" Style="margin-top:10px !important">
 
-                    <MudSelect T="string" Label="Evaluador" Clearable="true" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Evaluator">
+                    <MudSelect OnClearButtonClick="OnSearch" T="string" Label="Evaluador" Clearable="true" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Evaluator">
                         @foreach (UserModelOutput dt in Evaluators)
                         {
                             <MudSelectItem Value="@(dt.Id)">@(dt.FullName)</MudSelectItem>
@@ -153,7 +153,7 @@
 
                 <MudItem md="3" Style="margin-top:10px !important">
 
-                    <MudSelect T="EstadoEstudio"  Clearable="true" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
+                    <MudSelect T="EstadoEstudio"  OnClearButtonClick="OnSearch" Clearable="true" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
                       
                         @foreach (EstadoEstudio dt in Enum.GetValues(typeof(EstadoEstudio)))
                         {
@@ -237,25 +237,30 @@
             <MudTd DataLabel="Fecha de ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
             <MudTd DataLabel="Código del protocolo de investigació">
               
-                @if (context.AigEstudioDNFDId != null)
+                @if (context.Match)
                 {
-                    <MudBadge Content="context.Codigo" Color="Color.Default" Overlap="true">
-                        <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" />
-                    </MudBadge>
+                    <MudTooltip Text="El código del estudio de la solicitud coincide con un estudio clínico" Arrow="true" Placement="Placement.Top" Color="Color.Tertiary">
+                        <MudBadge Content="context.Codigo" Color="Color.Default" Overlap="true">
+                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Tertiary" />
+                        </MudBadge>
+                    </MudTooltip>
 
                 }
                 else
                 {
-                   <MudBadge Content="context.Codigo" Color="Color.Default" Overlap="true">
-                        <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
-                    </MudBadge>
+                    <MudTooltip Text="No se encontró un estudio clínico con ese código" Arrow="true" Placement="Placement.Top" Color="Color.Error">
+                        <MudBadge Content="context.MatchInfo" Color="Color.Default" Overlap="true">
+                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
+                        </MudBadge>
+                    </MudTooltip>
+
                 }
            </MudTd>
             <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
             <MudTd DataLabel="Fecha de Asignación">@(string.Format("{0:dd/MM/yyyy}",@context.FechaAsignacion))</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))</MudTd>
             <MudTd DataLabel="Días transcurridos">
-            
+           
             @switch (context.ElapsedDays)
             {
                 case 0:
@@ -277,7 +282,7 @@
                 default:
                     {
                         <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
-                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventBusy" Color="Color.Warning" />
+                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventBusy" Color="Color.Error" />
                         </MudBadge>
 
                     }
@@ -398,15 +403,14 @@
 
     public int GetWorkingDays(DateTime from, DateTime to,List<DateTime> holidays)
     {
+        if((to - from).TotalDays<0) return -1;
         var totalDays = 0;
-        for (var date = from.AddDays(1); date <= to; date = date.AddDays(1))
-        {
+        for (var date = from.AddDays(1); date <= to; date = date.AddDays(1)) {
             if (date.DayOfWeek != DayOfWeek.Saturday
                 && date.DayOfWeek != DayOfWeek.Sunday
                 && !holidays.Contains(date))
                 totalDays++;
         }
-
         return totalDays;
     }
 
@@ -479,8 +483,8 @@
 
     private void ShowBtnPress(long nr)
     {
-         var item=List.First(f => f.Id == nr);
-         item.ShowDetails = !item.ShowDetails;
+        var item=List.First(f => f.Id == nr);
+        item.ShowDetails = !item.ShowDetails;
     }
 
     private async void OnSearch()
@@ -502,16 +506,20 @@
         await _table.ReloadServerData();
     }
 
-      private async Task AddEdit(long id = 0)
-        {
-            var parameters = new DialogParameters { ["_id"]=id };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEdit>(id == 0 ? "Nuevo" :"Editar ", parameters, options);
-            var result = await dialog.Result;
-            if (!result.Cancelled)
-                await _table.ReloadServerData();
+    private async Task AddEdit(long id = 0)
+    {
+        var parameters = new DialogParameters { ["_id"]=id };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<AddEdit>(id == 0 ? "Nuevo" :"Editar ", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled){   
+            await _table.ReloadServerData();
+            await _bus.Publish(true);
+        }
+               
       }
-        private async Task SetEvaluators(long id)
+
+      private async Task SetEvaluators(long id)
         {
             var parameters = new DialogParameters { ["_id"]=id };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
