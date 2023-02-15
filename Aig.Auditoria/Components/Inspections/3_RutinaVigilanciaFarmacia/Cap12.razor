@@ -36,13 +36,7 @@
                                                     <h5>@languageContainerService.Keys["Inventario de Medicamentos de Uso Controlado"]</h5>
                                                 </div>
                                             </div>
-                                            <div class="row clearfix">
-                                               <div class="col-12" style="text-align:right;">
-                                                    <button type="button" @onclick="(e)=>{OpenProduct();}"
-                                                            class="btn btn-sm btn-outline-primary waves-effect">
-                                                        @languageContainerService.Keys["Add"]
-                                                    </button>
-                                                </div>
+                                            <div class="row clearfix">                                              
                                                 <div class="col-12">
                                                     <!--begin::Section-->
                                                     <div class="kt-section">
@@ -56,7 +50,12 @@
                                                                         <th>@languageContainerService.Keys["ExpDate"]</th>
                                                                         <th>@languageContainerService.Keys["Existencia Física"]</th>
                                                                         <th>@languageContainerService.Keys["Registro en Libro o Sistema"]</th>
-                                                                        <th></th>
+                                                                        <th style="text-align:right;">
+                                                                            <button type="button" @onclick="(e)=>{OpenProduct();}"
+                                                                                    class="btn btn-sm btn-outline-primary waves-effect">
+                                                                                @languageContainerService.Keys["Add"]
+                                                                            </button>
+                                                                        </th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -120,13 +119,13 @@
                                                     <label for="password">@languageContainerService.Keys["Se realizó inventario de todos los productos a la venta"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.InventarioAlAzar" class="form-control">
+                                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.InventarioProductosVenta" class="form-control">
                                                                 @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                 {
                                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                                 }
                                                             </InputSelect>
-                                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.InventarioAlAzar) />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.InventarioProductosVenta) />
                                                         </div>
                                                     </div>
                                                 </div>

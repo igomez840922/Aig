@@ -100,13 +100,13 @@
                                                     <label>@languageContainerService.Keys["El Regente Farmacéutico realiza otras funciones del dentro de la empresa?"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigAgencia.DatosRegente.PresenteEnInspeccion" class="form-control">
+                                                            <InputSelect @bind-Value="Inspeccion.InspRutinaVigAgencia.DatosRegente.RealizaOtraFuncion" class="form-control">
                                                                 @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                 {
                                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                                 }
                                                             </InputSelect>
-                                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigAgencia.DatosRegente.PresenteEnInspeccion) />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspRutinaVigAgencia.DatosRegente.RealizaOtraFuncion) />
                                                         </div>
                                                     </div>
                                                 </div>
