@@ -1,5 +1,6 @@
 ﻿using Aig.Farmacoterapia.Application.Features.Medicament.Commands;
 using Aig.Farmacoterapia.Application.Features.Medicament.Queries;
+using Aig.Farmacoterapia.Application.Medicament.Model;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Infrastructure.Helpers;
@@ -50,5 +51,10 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpGet("{type}/{file}")]
         [AllowAnonymous]
         public async Task<FileStreamResult> GetFile(string type, string file) => await _mediator.Send(new GetFileQuery(type, file));
+
+        [HttpPost]
+        [HttpPost("list")]
+        public async Task<IActionResult> List([FromBody] MedicamentPageSearch model) => Ok(await _mediator.Send(new ListMedicamentQuery(model)));
+
     }
 }

@@ -13,6 +13,7 @@ using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Domain.Specifications.Medicament;
 using Aig.Farmacoterapia.Domain.Specifications.Maker;
 using Aig.Farmacoterapia.Domain.Response;
+using Aig.Farmacoterapia.Application.Medicament.Model;
 
 namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
 {
@@ -56,6 +57,12 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
     {
         public GetDashboardMedicamentQuery() { }
     }
+
+    public class ListMedicamentQuery : IRequest<PaginatedResult<AigMedicamento>>
+    {
+        public MedicamentPageSearch Args { get; set; }
+        public ListMedicamentQuery(MedicamentPageSearch args) => Args = args;
+    }
     internal class MedicamentQueryHandler : 
         IRequestHandler<AdminGetAllMedicamentQuery, PaginatedResult<AigMedicamento>>,
         IRequestHandler<GetAllMedicamentQuery, PaginatedResult<AigMedicamento>>,
@@ -64,7 +71,8 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
         IRequestHandler<GetPharmaceuticalQuery, Result<List<AigFormaFarmaceutica>>>,
         IRequestHandler<GetMedicationRoutelQuery, Result<List<AigViaAdministracion>>>,
         IRequestHandler<GetMarkerQuery, Result<List<AigFabricante>>>,
-        IRequestHandler<GetDashboardMedicamentQuery, Result<DashboardMedicamentResponse>>
+        IRequestHandler<GetDashboardMedicamentQuery, Result<DashboardMedicamentResponse>>,
+        IRequestHandler<ListMedicamentQuery, PaginatedResult<AigMedicamento>>
     {
         private readonly IMedicamentRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -275,6 +283,29 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
             {
                 _logger.Error("Requested operation failed", exc);
                 return Result<DashboardMedicamentResponse>.Fail(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
+
+        public async Task<PaginatedResult<AigMedicamento>> Handle(ListMedicamentQuery request, CancellationToken cancellationToken)
+        {
+            PaginatedResult<AigMedicamento> answer;
+            try
+            {
+                var searchArgs = new PageSearchArgs() {
+                    PageIndex = request.Args.PageIndex,
+                    PageSize = request.Args.PageSize,
+                    FilteringOptions = !string.IsNullOrEmpty(request.Args.Term) ? new List<FilteringOption>() {
+                        new FilteringOption {
+                            Field = "term", Operator = FilteringOperator.Contains, Value =  request.Args.Term
+                        }
+                    } : new List<FilteringOption>()
+                };
+                answer= await _repository.AdminListAsync(searchArgs);
+            }
+            catch (Exception exc) {
+                _logger.Error("Requested operation failed", exc);
+                return PaginatedResult<AigMedicamento>.Failure(new List<string>() { exc.Message });
             }
             return answer;
         }

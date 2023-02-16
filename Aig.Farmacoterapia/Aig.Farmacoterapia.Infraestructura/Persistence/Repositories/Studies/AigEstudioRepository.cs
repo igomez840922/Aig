@@ -36,6 +36,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                 if (args.SortingOptions != null){
                     foreach (var sortingOption in args.SortingOptions){
                         switch (sortingOption.Field){
+                            case "status":
+                                orderByList.Add(new(sortingOption, c => c.Estado));
+                                break;
                             case "created":
                                   orderByList.Add(new(sortingOption, c => c.Created));
                                   break;
