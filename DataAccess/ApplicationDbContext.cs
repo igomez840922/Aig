@@ -514,20 +514,12 @@ namespace DataAccess
             ///
 
             modelBuilder.Entity<AUD_InspInvestigacionTB>()
-.Property(e => e.DatosEstablecimiento)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEstablecimiento>(x));
-
-            modelBuilder.Entity<AUD_InspInvestigacionTB>()
 .Property(e => e.DatosAtendidosPor)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
 
             modelBuilder.Entity<AUD_InspInvestigacionTB>()
-.Property(e => e.DatosRepresentLegal)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
-
-            modelBuilder.Entity<AUD_InspInvestigacionTB>()
-.Property(e => e.DatosConclusiones)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+.Property(e => e.DetallesInvestigacion)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DetallesInvestigacion>(x));
 
             ///////////////////////////////////////////
             ///

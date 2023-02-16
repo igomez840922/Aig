@@ -328,10 +328,8 @@ namespace Aig.Auditoria.Services
                 }
                 if (result.InspInvestigacion != null)
                 {
-                    DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosEstablecimiento).IsModified = true;
                     DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosAtendidosPor).IsModified = true;
-                    DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosRepresentLegal).IsModified = true;
-                    DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosConclusiones).IsModified = true;
+                    DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DetallesInvestigacion).IsModified = true;
                 }
                 if (result.InspRetiroRetencion != null)
                 {
@@ -2096,6 +2094,91 @@ namespace Aig.Auditoria.Services
                 {
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRepresentLegal).IsModified = true;
                     DalService.DBContext.Entry(result.InspRutinaVigAgencia).Property(b => b.DatosRegente).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+
+        /////////////////////////////
+        ///
+        public async Task<AUD_InspeccionTB> Save_Investigaciones_Cap2(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspInvestigacion.DatosAtendidosPor = inspeccion.InspInvestigacion.DatosAtendidosPor;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspInvestigacion != null)
+                {
+                    DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosAtendidosPor).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_Investigaciones_Cap3(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspInvestigacion.DetallesInvestigacion = inspeccion.InspInvestigacion.DetallesInvestigacion;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspInvestigacion != null)
+                {
+                    DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DetallesInvestigacion).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_Investigaciones_Frima(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspInvestigacion.DatosAtendidosPor = inspeccion.InspInvestigacion.DatosAtendidosPor;
+            //data.InspInvestigacion.DatosRegente = inspeccion.InspInvestigacion.DatosRegente;
+            data.ParticipantesDNFD = inspeccion.ParticipantesDNFD;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.ParticipantesDNFD).IsModified = true;
+
+                if (result.InspInvestigacion != null)
+                {
+                    DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosAtendidosPor).IsModified = true;
+                    //DalService.DBContext.Entry(result.InspInvestigacion).Property(b => b.DatosRegente).IsModified = true;
                 }
 
                 DalService.DBContext.SaveChanges();

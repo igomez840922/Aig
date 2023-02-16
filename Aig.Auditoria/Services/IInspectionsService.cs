@@ -79,5 +79,9 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Cap20(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_RutinaVigilanciaAgencia_Frima(AUD_InspeccionTB inspeccion);
 
+        Task<AUD_InspeccionTB> Save_Investigaciones_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_Investigaciones_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_Investigaciones_Frima(AUD_InspeccionTB inspeccion);
+
     }
 }

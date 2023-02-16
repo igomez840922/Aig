@@ -85,6 +85,13 @@ namespace DataModel
         private AUD_InspRutinaVigAgenciaTB? inspRutinaVigAgencia;
         public virtual AUD_InspRutinaVigAgenciaTB? InspRutinaVigAgencia { get => inspRutinaVigAgencia; set => SetProperty(ref inspRutinaVigAgencia, value); }
 
+        //5 - Formulario de Investigaciones
+        private long? inspInvestigacionId;
+        public long? InspInvestigacionId { get => inspInvestigacionId; set => SetProperty(ref inspInvestigacionId, value); }
+        private AUD_InspInvestigacionTB? inspInvestigacion;
+        public virtual AUD_InspInvestigacionTB? InspInvestigacion { get => inspInvestigacion; set => SetProperty(ref inspInvestigacion, value); }
+
+
 
         /// <summary>
         /// //////////////////////
@@ -173,12 +180,7 @@ namespace DataModel
         
         
         
-        //5 - Formulario de Investigaciones
-        private long? inspInvestigacionId;
-        public long? InspInvestigacionId { get => inspInvestigacionId; set => SetProperty(ref inspInvestigacionId, value); }
-        private AUD_InspInvestigacionTB? inspInvestigacion;
-        public virtual AUD_InspInvestigacionTB? InspInvestigacion { get => inspInvestigacion; set => SetProperty(ref inspInvestigacion, value); }
-
+        
         //6 - Formulario de Retiro y Retencion de Productos
         private long? inspRetiroRetencionId;
         public long? InspRetiroRetencionId { get => inspRetiroRetencionId; set => SetProperty(ref inspRetiroRetencionId, value); }
