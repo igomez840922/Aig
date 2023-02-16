@@ -1671,6 +1671,11 @@ namespace DataAccess
                .WithOne()
                .HasForeignKey<FMV_FtTB>(e => e.DatosPacienteId);
 
+            modelBuilder.Entity<FMV_FtTB>()
+               .HasOne(e => e.EvaluacionCausalidad)
+               .WithOne()
+               .HasForeignKey<FMV_FtTB>(e => e.EvaluacionCausalidadId);
+
             //JSON Serialization
             modelBuilder.Entity<FMV_FfTB>()
               .Property(e => e.FallaReportada)
@@ -1691,9 +1696,9 @@ namespace DataAccess
             //  .Property(e => e.DatosPaciente)
             //  .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtDatosPaciente>(x));
 
-            modelBuilder.Entity<FMV_FtTB>()
-              .Property(e => e.EvaluacionCausalidad)
-              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtEvaluacionCausalidad>(x));
+            //modelBuilder.Entity<FMV_FtTB>()
+            //  .Property(e => e.EvaluacionCausalidad)
+            //  .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FtEvaluacionCausalidad>(x));
 
             modelBuilder.Entity<FMV_FtTB>()
              .Property(e => e.Concominantes)
@@ -1934,6 +1939,7 @@ namespace DataAccess
         public virtual DbSet<FMV_FtDatosPaciente> FMV_FtDatosPaciente { get; set; }
         public virtual DbSet<FMV_IpsMedicamentoTB> FMV_IpsMedicamento { get; set; }
         public virtual DbSet<FarmacoTB> Farmaco { get; set; }
-
+        public virtual DbSet<FMV_FtEvaluacionCausalidad> FtEvaluacionCausalidad { get; set; }
+        
     }
 }

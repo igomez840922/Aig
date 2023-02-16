@@ -275,6 +275,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">
+                                            @languageContainerService.Keys["Reporta Falla Terapéutica"]
+                                        </label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Data.ReportaFallaTerapeutica" class="form-control">
+                                                @foreach (enumOpcionSiNoOnly dt in Enum.GetValues(typeof(enumOpcionSiNoOnly)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() => Data.ReportaFallaTerapeutica) />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="otherSpecificationInfo" role="tabpanel">
@@ -705,6 +719,18 @@
                                                 }
                                             </InputSelect>
                                             <ValidationMessage For=@(() =>Data.EvaluacionCausalidad.FactAsociados) />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["Evaluación de causalidad"]</label>
+                                        <div class="form-group">
+                                            <InputSelect @bind-Value="Data.EvaluacionCausalidad.EvolucionCausalidad" class="form-control">
+                                                @foreach (enumEvoCausalidad dt in Enum.GetValues(typeof(enumEvoCausalidad)))
+                                                {
+                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                }
+                                            </InputSelect>
+                                            <ValidationMessage For=@(() =>Data.EvaluacionCausalidad.EvolucionCausalidad) />
                                         </div>
                                     </div>
                                 </div>

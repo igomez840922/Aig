@@ -673,6 +673,14 @@ namespace DataModel.Helper
         NoSabe = 3,
     }
 
+    public enum enumOpcionSiNoOnly
+    {
+        [Description("No")]
+        No = 0,
+        [Description("Si")]
+        Si = 1,
+    }
+
     public enum enumFMV_IpsPresentaCD
     {
         [Description("No Adjunta")]
@@ -690,6 +698,22 @@ namespace DataModel.Helper
         Accepted = 1,
         [Description("Rechazado")]
         Rejected = 2,
+    }
+
+    public enum enumEvoCausalidad
+    {
+        [Description("No Clasificable")]
+        NoClasificable = 0,
+        [Description("Posiblemente asociado al uso inadecuado del medicamento")]
+        UsoInadecuado = 1,
+        [Description("Notificación posiblemente inducida")]
+        Inducida = 2,
+        [Description("Posiblemente asociado a un problema biofarmacéutico")]
+        ProblemaBioFarmaceutico = 3,
+        [Description("Posiblemente asociado a respuesta idiosincrática u otras razones no establecidas")]
+        RespuestaIdiosincratica = 4,
+        [Description("No se cuenta con suficiente información")]
+        NoSuficienteInfo = 5,
     }
 
     //////////////////////////////

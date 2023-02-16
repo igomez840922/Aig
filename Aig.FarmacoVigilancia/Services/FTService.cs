@@ -224,7 +224,7 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 DalService.DBContext.Entry(result).Property(b => b.OtrasEspecificaciones).IsModified = true;
                 //DalService.DBContext.Entry(result).Property(b => b.DatosPaciente).IsModified = true;
-                DalService.DBContext.Entry(result).Property(b => b.EvaluacionCausalidad).IsModified = true;
+                //DalService.DBContext.Entry(result).Property(b => b.EvaluacionCausalidad).IsModified = true;
                 DalService.DBContext.Entry(result).Property(b => b.Concominantes).IsModified = true;
                 DalService.DBContext.SaveChanges();
             }
@@ -750,6 +750,41 @@ namespace Aig.FarmacoVigilancia.Services
 
             return model;
         }
+
+        //Evolucion de la Causalidad
+        public async Task<ReportModel<ReportModelResponse>> Report16(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_FtTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.EvaluacionCausalidadId != null)
+                               group data by data.EvaluacionCausalidad.EvolucionCausalidad into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   EvoCausalidad = g.FirstOrDefault().EvaluacionCausalidad.EvolucionCausalidad,//.Substring(0, 3),
+                                   Count = g.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<FMV_FtTB>()
+                               where data.Deleted == false &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
+                               (data.EvaluacionCausalidadId != null)
+                               group data by data.EvaluacionCausalidad.EvolucionCausalidad into g
+                               select g.Count()).Sum(x => x);
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
 
         ////SOC
         //public async Task<ReportModel<ReportModelResponse>> Report16(ReportModel<ReportModelResponse> model)

@@ -17,7 +17,7 @@ namespace DataModel
 
         // Nombre del Paciente
         private string nombrePaciente;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         [StringLength(300)]
         public string NombrePaciente { get => nombrePaciente; set => SetProperty(ref nombrePaciente, value); }
 

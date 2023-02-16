@@ -34,6 +34,7 @@ namespace DataModel.Models
         public enumFMV_IpsStatusRegistro IpsStatusRegistro { get; set; }
 
         public enumFMV_IpsStatusRevision IpsStatusRevision { get; set; }
+        public enumEvoCausalidad EvoCausalidad { get; set; }
 
     }
 

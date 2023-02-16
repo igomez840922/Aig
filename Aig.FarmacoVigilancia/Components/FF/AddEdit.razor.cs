@@ -223,8 +223,7 @@ namespace Aig.FarmacoVigilancia.Components.FF
         /////////////
         ///
         private void UpdateGrado()
-        {
-            Data.Grado = "";
+        {            
 
             string nombreFarmaco = Data.NombreComercial;
             string nombreDci = Data.NombreDci;
@@ -247,38 +246,38 @@ namespace Aig.FarmacoVigilancia.Components.FF
                 (Data.FallaReportada?.Otros == enumOpcionSiNo.Si ? "Si" :
                 Data.FallaReportada?.DetFallaReport??"")))))))));
             string notificador = Data.Notificador;
+            string tipoNotificador = Data.TipoNotificador!= enumFMV_RAMNotificationType.NOREP?DataModel.Helper.Helper.GetDescription(Data.TipoNotificador):null;
             string instSalud = Data.InstitucionDestino?.Nombre ?? "";
             string presentacion = Data.Presentacion;
 
-            if (string.IsNullOrEmpty(nombreFarmaco) && string.IsNullOrEmpty(concent) && string.IsNullOrEmpty(formaFarm) 
-                && string.IsNullOrEmpty(fabricante) && string.IsNullOrEmpty(lotes) && string.IsNullOrEmpty(fechaExp) && string.IsNullOrEmpty(fallaFarmaceutica))
-            {
-                Data.Grado = "Grado 0";
-            }
-            if(!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp)
-                && !string.IsNullOrEmpty(concent) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(fallaFarmaceutica) && !string.IsNullOrEmpty(notificador))
+            //if (string.IsNullOrEmpty(nombreFarmaco) && string.IsNullOrEmpty(concent) && string.IsNullOrEmpty(formaFarm) 
+            //    && string.IsNullOrEmpty(fabricante) && string.IsNullOrEmpty(lotes) && string.IsNullOrEmpty(fechaExp) && string.IsNullOrEmpty(fallaFarmaceutica))
+            //{
+            //    Data.Grado = "Grado 0";
+            //}
+            if(!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(concent) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp)
+                  && !string.IsNullOrEmpty(fallaFarmaceutica) && !string.IsNullOrEmpty(notificador))
             {
                 Data.Grado = "Grado 1";
                 if (!string.IsNullOrEmpty(fabricante) && !string.IsNullOrEmpty(regSanitario) && !string.IsNullOrEmpty(instSalud))
                 {
                     Data.Grado = "Grado 2";
-                    if (!string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(presentacion))
+                    if (!string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(tipoNotificador))
                     {
                         Data.Grado = "Grado 3";
                     }
                 }
             }
-            if (!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(concent)
-               && !string.IsNullOrEmpty(regSanitario) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(fabricante)
-               && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp) && !string.IsNullOrEmpty(fallaFarmaceutica)
-               && !string.IsNullOrEmpty(notificador) && !string.IsNullOrEmpty(instSalud) && !string.IsNullOrEmpty(presentacion))
-            {
-                Data.Grado = "Grado 4";
-            }
+            //if (!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(concent)
+            //   && !string.IsNullOrEmpty(regSanitario) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(fabricante)
+            //   && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp) && !string.IsNullOrEmpty(fallaFarmaceutica)
+            //   && !string.IsNullOrEmpty(notificador) && !string.IsNullOrEmpty(instSalud) && !string.IsNullOrEmpty(presentacion))
+            //{
+            //    Data.Grado = "Grado 4";
+            //}
 
-                //Data.Grado = !string.IsNullOrEmpty(grado0) ? grado0 : (!string.IsNullOrEmpty(grado1) ? grado1 : (!string.IsNullOrEmpty(grado2) ? grado2 : (!string.IsNullOrEmpty(grado3) ? grado3 : (!string.IsNullOrEmpty(grado4) ? grado4 : "No Aplica"))));
-
-            }
+            Data.Grado = !string.IsNullOrEmpty(Data.Grado) ? Data.Grado : "Grado 0";
+        }
 
         /////////
         ///        
