@@ -20,15 +20,16 @@ namespace Aig.Auditoria.Components.RetiredProduct
         [Inject]
         ICountriesService countriesService { get; set; }
         bool OpenDialog { get; set; }
-        DataModel.AUD_ProdRetiroRetencionTB Product { get; set; } = null;
+
+        [Parameter]
+        public DataModel.AUD_ProdRetiroRetencionTB Product { get; set; } = null;
         List<PaisTB> lPaises { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<AddEditOpenEvent>(AddEditOpenEventHandler);
-
+            
             base.OnInitialized();
         }
                 
@@ -63,22 +64,13 @@ namespace Aig.Auditoria.Components.RetiredProduct
                 lPaises = await countriesService.GetAll();
             }
 
+            Product = Product!=null? Product:new AUD_ProdRetiroRetencionTB();
+            OpenDialog = true;
+
             await this.InvokeAsync(StateHasChanged);
         }
 
-        //OPEN MODAL TO ADD/Edit 
-        private void AddEditOpenEventHandler(MessageArgs args)
-        {
-            var message = args.GetMessage<AddEditOpenEvent>();
-
-            Product = message.Product != null? message.Product : new DataModel.AUD_ProdRetiroRetencionTB();
-
-            OpenDialog = true;
-            
-            this.InvokeAsync(StateHasChanged);
-        }
-        
-        
+               
         /// <summary>
         /// Saving Data
         /// </summary>
@@ -96,6 +88,12 @@ namespace Aig.Auditoria.Components.RetiredProduct
             await bus.Publish(new AddEditCloseEvent { Product = null });
             await this.InvokeAsync(StateHasChanged);
         }
-        
+
+        public void Dispose()
+        {
+            //timer?.Dispose();
+
+            bus.UnSubscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+        }
     }
 }

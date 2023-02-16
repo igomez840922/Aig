@@ -91,6 +91,18 @@ namespace DataModel
         private AUD_InspInvestigacionTB? inspInvestigacion;
         public virtual AUD_InspInvestigacionTB? InspInvestigacion { get => inspInvestigacion; set => SetProperty(ref inspInvestigacion, value); }
 
+        //6 - Formulario de Retiro y Retencion de Productos
+        private long? inspRetiroRetencionId;
+        public long? InspRetiroRetencionId { get => inspRetiroRetencionId; set => SetProperty(ref inspRetiroRetencionId, value); }
+        private AUD_InspRetiroRetencionTB? inspRetiroRetencion;
+        public virtual AUD_InspRetiroRetencionTB? InspRetiroRetencion { get => inspRetiroRetencion; set => SetProperty(ref inspRetiroRetencion, value); }
+
+        //7 - Cierre de Operaciones
+        private long? inspCierreOperacionId;
+        public long? InspCierreOperacionId { get => inspCierreOperacionId; set => SetProperty(ref inspCierreOperacionId, value); }
+        private AUD_InspCierreOperacionTB? inspCierreOperacion;
+        public virtual AUD_InspCierreOperacionTB? InspCierreOperacion { get => inspCierreOperacion; set => SetProperty(ref inspCierreOperacion, value); }
+
 
 
         /// <summary>
@@ -181,18 +193,8 @@ namespace DataModel
         
         
         
-        //6 - Formulario de Retiro y Retencion de Productos
-        private long? inspRetiroRetencionId;
-        public long? InspRetiroRetencionId { get => inspRetiroRetencionId; set => SetProperty(ref inspRetiroRetencionId, value); }
-        private AUD_InspRetiroRetencionTB? inspRetiroRetencion;
-        public virtual AUD_InspRetiroRetencionTB? InspRetiroRetencion { get => inspRetiroRetencion; set => SetProperty(ref inspRetiroRetencion, value); }
-
-        //7 - Cierre de Operaciones
-        private long? inspCierreOperacionId;
-        public long? InspCierreOperacionId { get => inspCierreOperacionId; set => SetProperty(ref inspCierreOperacionId, value); }
-        private AUD_InspCierreOperacionTB? inspCierreOperacion;
-        public virtual AUD_InspCierreOperacionTB? InspCierreOperacion { get => inspCierreOperacion; set => SetProperty(ref inspCierreOperacion, value); }
-
+        
+       
         //8 - Disposicion Final de Productos
         private long? inspDisposicionFinalId;
         public long? InspDisposicionFinalId { get => inspDisposicionFinalId; set => SetProperty(ref inspDisposicionFinalId, value); }

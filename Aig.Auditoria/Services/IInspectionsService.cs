@@ -83,5 +83,15 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_Investigaciones_Cap3(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_Investigaciones_Frima(AUD_InspeccionTB inspeccion);
 
+        Task<AUD_InspeccionTB> Save_RetiroRetencion_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_RetiroRetencion_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_RetiroRetencion_Cap4(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_RetiroRetencion_Frima(AUD_InspeccionTB inspeccion);
+
+        Task<AUD_InspeccionTB> Save_CierreOperacion_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_CierreOperacion_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_CierreOperacion_Frima(AUD_InspeccionTB inspeccion);
+
+
     }
 }

@@ -100,7 +100,6 @@
                                                     <thead class=thead-light>
                                                         <tr>
                                                             <th>@languageContainerService.Keys["Status"]</th>
-                                                            <th>@languageContainerService.Keys["Sección"]</th>
                                                             <th>@languageContainerService.Keys["InspectionDate"]</th>
                                                             <th>@languageContainerService.Keys["Establishments"]</th>
                                                             <th>@languageContainerService.Keys["LicNumber"]</th>
@@ -124,10 +123,9 @@
                                                             {
                                                                 <tr>
                                                                     <td>@(DataModel.Helper.Helper.GetDescription(dt.FrmRetiroRetencion?.Inspeccion?.StatusInspecciones ?? enum_StatusInspecciones.None))</td>
-                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.SeccionOficinaRegional ?? "")</td>
                                                                     <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.FechaInicio.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.Establecimiento?.Nombre ?? "")</td>
-                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.LicenseNumber ?? "")</td>
+                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.DatosEstablecimiento?.Nombre ?? "")</td>
+                                                                    <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.DatosEstablecimiento?.NumLicencia ?? "")</td>
                                                                     <td scope="row">@(dt.FrmRetiroRetencion?.Inspeccion?.NumActa ?? "")</td>
                                                                     <td scope="row">@dt.Nombre</td>
                                                                     <td scope="row">@(dt.RegSanitario)</td>

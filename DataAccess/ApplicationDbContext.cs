@@ -274,25 +274,17 @@ namespace DataAccess
         .Property(e => e.DatosAreaAlmacenamiento)
         .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
-    //        modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
-    //   .Property(e => e.DatosConclusiones)
-    //   .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+            //        modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+            //   .Property(e => e.DatosConclusiones)
+            //   .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
-    //        modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
-    //.Property(e => e.DatosAtendidosPor)
-    //.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
+            //        modelBuilder.Entity<AUD_InspAperCambUbicFarmTB>()
+            //.Property(e => e.DatosAtendidosPor)
+            //.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
 
 
             ///////////////////////////////////////////
             ///
-
-            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
-      .Property(e => e.DatosConclusiones)
-      .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
-
-            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
-     .Property(e => e.DatosRegente)
-     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
 
             modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
      .Property(e => e.DatosRepresentLegal)
@@ -1004,16 +996,13 @@ namespace DataAccess
             ///
 
             modelBuilder.Entity<AUD_InspCierreOperacionTB>()
-.Property(e => e.GeneralesEmpresa)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
+.Property(e => e.DatosRepresentLegal)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
 
             modelBuilder.Entity<AUD_InspCierreOperacionTB>()
-.Property(e => e.DatosResponsable)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
+.Property(e => e.DatosInspeccion)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosInspeccion>(x));
 
-            modelBuilder.Entity<AUD_InspCierreOperacionTB>()
-.Property(e => e.DatosConclusiones)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
             ///////////////////////////////////////////
             ///

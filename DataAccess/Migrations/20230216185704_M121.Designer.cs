@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230216185704_M121")]
+    partial class M121
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1080,20 +1082,32 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DatosInspeccion")
+                    b.Property<string>("DatosConclusiones")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DatosRepresentLegal")
+                    b.Property<string>("DatosResponsable")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("DestinoProductos")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
+
+                    b.Property<string>("GeneralesEmpresa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ObservacionUbicacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SolicitudCierre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -2102,6 +2116,12 @@ namespace DataAccess.Migrations
                     b.Property<string>("DatosAtendidosPor")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("DatosConclusiones")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DatosRegente")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DatosRepresentLegal")
                         .HasColumnType("nvarchar(max)");
 
@@ -2116,6 +2136,10 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("RetiroRetencionType")
                         .HasColumnType("int");
+
+                    b.Property<string>("SeccionOficinaRegional")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");

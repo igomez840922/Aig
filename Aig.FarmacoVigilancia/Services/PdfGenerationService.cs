@@ -70,9 +70,9 @@ namespace Aig.FarmacoVigilancia.Services
                           page.Content().PaddingVertical(15).Column(column =>
                               {
                                   string participantes = "";
-                                  if (inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes != null)
+                                  if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
                                   {
-                                      foreach (var partic in inspection.InspRetiroRetencion.DatosConclusiones.LParticipantes)
+                                      foreach (var partic in inspection.ParticipantesDNFD.LParticipantes)
                                       {
                                           participantes += partic.NombreCompleto + ", ";
                                       }
