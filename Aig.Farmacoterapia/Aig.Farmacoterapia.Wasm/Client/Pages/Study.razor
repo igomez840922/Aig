@@ -378,10 +378,12 @@
                 
                 @if (context.Estado!=EstadoEstudio.Pendiente && !string.IsNullOrEmpty(context.Nota?.Observaciones)) {
                   
-                   <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
+                   
+                        <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
                                  Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
                             Exportar Evaluación
                         </MudMenuItem>
+                   
 
                 }
                @* <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
