@@ -80,7 +80,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                         .AlignLeft()
                         .Text($"Dirección Nacional de Farmacia y Drogas")
                         .FontColor("#383838")
-                        .FontSize(15)
+                        .FontSize(14)
                         .Style(TextStyle.Default.Bold());
                 });
                 grid.Item(12).Row(row =>
@@ -163,57 +163,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
 
                     });
-
-                    //if (Model.Tramitante != null)
-                    //{
-                    //    row.RelativeItem().Column(column =>
-                    //    {
-                    //        column.Spacing(2);
-
-                    //        if (!string.IsNullOrEmpty(Model.Tramitante.Nombre))
-                    //        {
-                    //            column.Item().Text(text =>
-                    //            {
-                    //                //text.Span("Tramitante: ").SemiBold();
-                    //                text.Span(Model.Tramitante.Nombre).SemiBold().FontColor("#383838");
-                    //            });
-                    //        }
-
-                    //        if (!string.IsNullOrEmpty(Model.Tramitante.Idoneidad))
-                    //        {
-                    //            column.Item().Text(text =>
-                    //            {
-                    //                //text.Span("Idoneidad: ").SemiBold();
-                    //                text.Span(Model.Tramitante.Idoneidad).SemiBold().FontColor("#383838");
-                    //            });
-                    //        }
-                    //        if (!string.IsNullOrEmpty(Model.AgenciaDistribuidora))
-                    //        {
-                    //            column.Item().Text(text =>
-                    //            {
-                    //               //text.Span("Agencia distribuidora: ").SemiBold();
-                    //                text.Span(Model.AgenciaDistribuidora).SemiBold().FontColor("#383838");
-                    //            });
-                    //        }
-                    //        if (!string.IsNullOrEmpty(Model.Tramitante.Telefono))
-                    //        {
-                    //            column.Item().Text(text =>
-                    //            {
-                    //                //text.Span("Teléfono: ").SemiBold();
-                    //                text.Span(Model.Tramitante.Telefono).SemiBold().FontColor("#383838");
-                    //            });
-                    //        }
-                    //        if (!string.IsNullOrEmpty(Model.Tramitante.Correo))
-                    //        {
-                    //            column.Item().Text(text =>
-                    //            {
-                    //                //text.Span("Correo: ").SemiBold();
-                    //                text.Span(Model.Tramitante.Correo).SemiBold().FontColor("#383838");
-                    //            });
-                    //        }
-                    //    });
-                     
-                    //}
 
                 });
              
@@ -335,23 +284,58 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     {
                         hdl.ShowEntire().Column(column =>
                         {
+                            if (!string.IsNullOrEmpty(item.Fabricante?.Nombre))
+                            {
+                                column.Item().Text(text =>
+                                {
+                                    text.Span(item.Fabricante?.Nombre);
+                                });
+                            }
+                            if (!string.IsNullOrEmpty(item.Fabricante?.Direccion))
+                            {
+                                if (!string.IsNullOrEmpty(item.Fabricante?.Pais))
+                                {
+                                    column.Item().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
+                                    {
+                                        text.Span($"{item.Fabricante?.Direccion} / {item.Fabricante?.Pais}");
+                                    });
+                                }
+                                else
+                                {
+                                    column.Item().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
+                                    {
+                                        text.Span($"{item.Fabricante?.Direccion}");
+                                    });
+                                }
+                                 
+                            }
 
-                            column.Item().Text(text =>
+                            if (!string.IsNullOrEmpty(item.Acondicionador?.Nombre))
                             {
-                                text.Span(item.Fabricante?.Nombre);
-                            });
-                            column.Item().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
+                                column.Item().Text(text =>
+                                {
+                                    text.Span(item.Acondicionador?.Nombre);
+                                });
+                            }
+                            if (!string.IsNullOrEmpty(item.Acondicionador?.Direccion))
                             {
-                                text.Span($"{item.Fabricante?.Direccion}/{item.Fabricante?.Pais}");
-                            });
-                            column.Item().Text(text =>
-                            {
-                                text.Span(item.Acondicionador?.Nombre);
-                            });
-                            column.Item().Text(text =>
-                            {
-                                text.Span($"{item.Acondicionador?.Direccion}/{item.Acondicionador?.Pais}");
-                            });
+
+                                if (!string.IsNullOrEmpty(item.Acondicionador?.Pais))
+                                {
+                                    column.Item().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
+                                    {
+                                        text.Span($"{item.Acondicionador?.Direccion} / {item.Acondicionador?.Pais}");
+                                    });
+                                }
+                                else
+                                {
+                                    column.Item().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
+                                    {
+                                        text.Span($"{item.Acondicionador?.Direccion}");
+                                    });
+                                }
+                              
+                            }
 
                         });
                     });
@@ -439,10 +423,15 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                         row.RelativeItem().Element(RowBody3);
                     });
                 }
-                grid.Item(12).PaddingTop(100).Row(row =>
-                {
-                    row.RelativeItem().Element(RowBody4);
-                });
+                //grid.Item(12).PaddingTop(100).Row(row =>
+                //{
+                //    row.RelativeItem().Element(RowBody4);
+                //});
+                grid.Item(12)
+                    .ExtendVertical()
+                    .AlignBottom()
+                    .ExtendHorizontal()
+                    .Height(100).Row(row =>{row.RelativeItem().Element(RowBody4);});
 
             });
 

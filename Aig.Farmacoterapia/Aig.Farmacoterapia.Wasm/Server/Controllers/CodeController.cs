@@ -1,6 +1,5 @@
 ﻿using Aig.Farmacoterapia.Application.Features.Code.Queries;
 using Aig.Farmacoterapia.Application.Features.Study.Commands;
-using Aig.Farmacoterapia.Application.Features.Study.Queries;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Infrastructure.Helpers;
@@ -13,7 +12,7 @@ namespace Aig.Farmacoterapia.Api.Controllers
     [ApiController]
     [Route("api/codes")]
     [Authorize(AuthenticationSchemes = "JwtClient")]
-    [SwaggerOrder(2)]
+    [SwaggerOrder(8)]
     public class CodeController : Controller
     {
         private readonly IMediator _mediator;
