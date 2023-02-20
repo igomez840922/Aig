@@ -181,12 +181,11 @@
             <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:500px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
            
-            <MudTh><MudInputLabel Style="width:100px !important">Evaluadores</MudInputLabel></MudTh>
-
             <MudTh><MudTableSortLabel Style="width:100px" SortLabel="assignmentDate" T="AigEstudio">Fecha de Asignación</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel Style="width:100px" SortLabel="evaluationDate" T="AigEstudio">Fecha de Evaluación</MudTableSortLabel></MudTh>
             <MudTh><MudInputLabel Style="width:100px">Días transcurridos</MudInputLabel></MudTh>
-             <MudTh> <MudInputLabel Style="width:150px !important">Nota de Evaluación</MudInputLabel> </MudTh>
+            <MudTh><MudInputLabel Style="width:100px !important">Evaluadores</MudInputLabel></MudTh>
+            <MudTh> <MudInputLabel Style="width:150px !important">Nota de Evaluación</MudInputLabel> </MudTh>
             <MudTh><MudInputLabel Style="width:400px">Observaciones por el evaluador</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Investigador principal</MudInputLabel></MudTh>
              <MudTh><MudInputLabel Style="width:200px">Patrocinador del estudio</MudInputLabel></MudTh>
@@ -260,71 +259,110 @@
            </MudTd>
             <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
 
-            <MudTd DataLabel="Evaluadores">
+           
+             <MudTd DataLabel="Fecha de Asignación">
+                
+               <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", @context.FechaAsignacion))" Color="Color.Info" Overlap="true"  Class="mx-2 my-2">
+               </MudBadge>
+              
+            </MudTd>
+
+             <MudTd DataLabel="Fecha de Evaluación">
+                @if (context.Estado!= EstadoEstudio.Pendiente)
+                {  
+                    <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))" Color="Color.Tertiary" Overlap="true"  Class="mx-2 my-2">
+                    </MudBadge>
+                }
+                else
+                {
+                    <MudBadge Content="@("-")" Color="Color.Default" Overlap="true"  Class="mx-2 my-2">
+                    </MudBadge>
+                }
+            </MudTd>
+
+            <MudTd DataLabel="Días transcurridos">
+           
+            @if (context.Estado != EstadoEstudio.Pendiente)
+            {
+
+                @switch (context.ElapsedDays)
+                {
+                    case 0:
+                        {
+
+                            <MudBadge Color="Color.Default" Content="@("-")" Overlap="true">
+                                <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Event" Color="Color.Info" />
+                            </MudBadge>
+                        }
+                        break;
+                    case > 0:
+                        {
+
+                            <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true">
+                                <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventAvailable" Color="Color.Tertiary" />
+                            </MudBadge>
+                        }
+                        break;
+                    default:
+                        {
+                            <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true">
+                                <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventBusy" Color="Color.Error" />
+                            </MudBadge>
+
+                        }
+                        break;
+                }
+
+            }
+            else
+            {
+                <MudBadge Content="@("-")" Color="Color.Default" Overlap="true" Class="mx-2 my-2">
+                </MudBadge>
+            }
+
+            </MudTd>
+           
+             <MudTd DataLabel="Evaluadores">
                 @if (!string.IsNullOrEmpty(context.EvaluatorToShow))
                 {
                      <MudTooltip Text="@context.EvaluatorToShow" Arrow="true" Placement="Placement.Top" Color="Color.Default">
-                          <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.HowToReg" Color="Color.Tertiary" />
+                          <MudIconButton Disabled="!IsAddAndEvaluators()" OnClick="@(() => SetEvaluators(@context.Id))" Size="Size.Large" Icon="@Icons.Material.Filled.HowToReg" Color="Color.Tertiary" />
                     </MudTooltip>
 
                 }
                 else
                 {
-                    <MudBadge Content="@("Ninguno")" Color="Color.Default" Overlap="true">
-                       <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
+                    <MudBadge Content="@("Ninguno")" Color="Color.Default" Overlap="true" Style="top:8px !important;">
+                       <MudIconButton Disabled="!IsAddAndEvaluators()" OnClick="@(() => SetEvaluators(@context.Id))" Style="padding:3px !important;" Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
                     </MudBadge>
                 }
             </MudTd>
 
-            <MudTd DataLabel="Fecha de Asignación">@(string.Format("{0:dd/MM/yyyy}",@context.FechaAsignacion))</MudTd>
-            <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))</MudTd>
-            <MudTd DataLabel="Días transcurridos">
-           
-            @switch (context.ElapsedDays)
-            {
-                case 0:
-                    {
-                     
-                        <MudBadge Color="Color.Default" Content="@("-")" Overlap="true">
-                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Event" Color="Color.Info" />
-                        </MudBadge>
-                    }
-                    break;
-                case > 0:
-                    {
-
-                        <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true">
-                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventAvailable" Color="Color.Tertiary" />
-                        </MudBadge>
-                    }
-                    break;
-                default:
-                    {
-                        <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true">
-                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventBusy" Color="Color.Error" />
-                        </MudBadge>
-
-                    }
-                    break;
-            }
-
-            </MudTd>
-           
               <MudTd DataLabel="Nota de Evaluación">
-                @if (!string.IsNullOrEmpty(@context.Nota?.Observaciones))
+                @if (context.Estado!= EstadoEstudio.Pendiente && !string.IsNullOrEmpty(@context.Nota?.Observaciones))
                 {  
                     <MudBadge Content="@context.Nota?.GetNoteCode(@context.Id)" Color="Color.Tertiary" Overlap="true"  Class="mx-2 my-2">
                     </MudBadge>
                 }
                 else
                 {
-                    <MudBadge Content="@("Ninguna")" Color="Color.Default" Overlap="true"  Class="mx-2 my-2">
+                    <MudBadge Content="@("-")" Color="Color.Default" Overlap="true"  Class="mx-2 my-2">
                     </MudBadge>
                 }
             </MudTd>
 
+              <MudTd DataLabel="Observaciones por el evaluador">
+                @if (context.Estado!= EstadoEstudio.Pendiente && !string.IsNullOrEmpty(@context.Nota?.Observaciones))
+                {  
+                    @context.Nota?.Observaciones
+                }
+                else
+                {
+                    <MudBadge Content="@("-")" Color="Color.Default" Overlap="true"  Class="mx-2 my-2">
+                    </MudBadge>
+                }
+            </MudTd>
 
-            <MudTd DataLabel="Observaciones por el evaluador">@context.Nota?.Observaciones</MudTd>
             <MudTd DataLabel="Investigador principal">@context.InvestigadorPrincipal</MudTd>
             <MudTd DataLabel="Patrocinador del estudio">@context.Patrocinador</MudTd>
             <MudTd DataLabel="Duración del estudio">@context.Duracion</MudTd>

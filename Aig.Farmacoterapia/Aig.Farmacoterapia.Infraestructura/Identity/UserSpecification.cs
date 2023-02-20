@@ -12,7 +12,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Identity
     {
         public UserSpecification(List<Expression<Func<ApplicationUser, bool>>> filters)
         {
-            Criteria = p => true;
+            Criteria = p => p.UserName!= "sys@sys.com";
             foreach (var filter in filters)
                 And(filter);
         }
