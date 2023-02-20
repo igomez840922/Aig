@@ -939,64 +939,31 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<string>("AreaAcondSecundario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAlmacenamiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaAuxiliares")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaDispMateriaPrima")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaProduccion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ControlCalidad")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DatosAreaAlmacenamiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaAuxiliares")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaDispensado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaExterna")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaInterna")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaLabCtrCalidad")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAreaProduccion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosAutoInspeccion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosConclusiones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosDocumentacion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosEquipos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosEstablecimiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosLocal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosProcedimientoPrograma")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosProdAnalisisContrato")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosReclamoProductoRetirado")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DatosRegente")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DatosRepresentLegal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosSolicitante")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
@@ -1005,12 +972,23 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Equipos")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
-                    b.Property<string>("TipoProductos")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<string>("Instalaciones")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaterialesProductos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Personal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProdFabrican")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -1111,19 +1089,13 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<bool>("Adjunta")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Coincide")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DatosConclusiones")
+                    b.Property<string>("DatosAtendidosPor")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DatosResponsable")
+                    b.Property<string>("DatosInspeccion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
@@ -1135,37 +1107,8 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
-                    b.Property<string>("GeneralesEmpresa")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("InventarioMedicamento")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NumNotaSDGSA")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("NumReciboPago")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<decimal>("PesoDestruir")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("SolicitudCierre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TipoInspeccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoProduct")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoVerificacion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");

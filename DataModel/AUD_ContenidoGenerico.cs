@@ -10,5 +10,6 @@ namespace DataModel
     {
         private List<ContenidoPreguntas> lContenido;
         public List<ContenidoPreguntas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
-    }
+    }        
+
 }

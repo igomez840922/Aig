@@ -143,7 +143,7 @@ namespace Aig.Auditoria.Components.Inspections
                 if (!editContext?.Validate() ?? false)
                     return;
 
-                if (Inspeccion.InspAperFabricante?.DatosConclusiones?.LParticipantes?.Count <= 0)
+                if (Inspeccion.InspAperFabricanteCosmetMed?.DatosConclusiones?.LParticipantes?.Count <= 0)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["Seleccione los participantes antes de continuar"]);
                     return;

@@ -373,81 +373,56 @@ namespace DataAccess
             ///
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-     .Property(e => e.DatosEstablecimiento)
-     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEstablecimiento>(x));
+     .Property(e => e.DatosRepresentLegal)
+     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-     .Property(e => e.DatosSolicitante)
-     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosSolicitante>(x));
+    .Property(e => e.DatosRegente)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-     .Property(e => e.DatosRegente)
-     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
+    .Property(e => e.ProdFabrican)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_InspAperFabricanteProdFabrican>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosRepresentLegal)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
+    .Property(e => e.Personal)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosProcedimientoPrograma)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosProcedimientoPrograma>(x));
+    .Property(e => e.Instalaciones)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosAutoInspeccion)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAutoInspeccion>(x));
+    .Property(e => e.AreaAlmacenamiento)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosProdAnalisisContrato)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosProdAnalisisContrato>(x));
+    .Property(e => e.AreaDispMateriaPrima)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosReclamoProductoRetirado)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosReclamoProductoRetirado>(x));
+    .Property(e => e.AreaProduccion)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosLocal)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosLocal>(x));
+    .Property(e => e.AreaAcondSecundario)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosDocumentacion)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosDocumentacion>(x));
+    .Property(e => e.ControlCalidad)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosAreaInterna)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaInterna>(x));
+    .Property(e => e.AreaAuxiliares)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosAreaExterna)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaExterna>(x));
+    .Property(e => e.Equipos)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosAreaAlmacenamiento)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaAlmacenamiento>(x));
-
-            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosAreaProduccion)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaProduccion>(x));
-
-            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosAreaAuxiliares)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaAuxiliares>(x));
-
-            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosEquipos)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosEquipos>(x));
-
-            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosAreaDispensado)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaDispensado>(x));
-
-            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosAreaLabCtrCalidad)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAreaLabCtrCalidad>(x));
-
-
-            modelBuilder.Entity<AUD_InspAperFabricanteTB>()
-    .Property(e => e.DatosConclusiones)
-    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+    .Property(e => e.MaterialesProductos)
+    .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
 
             ///////////////////////////////////////////
@@ -1007,20 +982,16 @@ namespace DataAccess
             ///////////////////////////////////////////
             ///
             modelBuilder.Entity<AUD_InspDisposicionFinalTB>()
-.Property(e => e.GeneralesEmpresa)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
+.Property(e => e.DatosAtendidosPor)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
 
             modelBuilder.Entity<AUD_InspDisposicionFinalTB>()
-.Property(e => e.DatosResponsable)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
+.Property(e => e.DatosInspeccion)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosInspeccionDisposicion>(x));
 
             modelBuilder.Entity<AUD_InspDisposicionFinalTB>()
 .Property(e => e.InventarioMedicamento)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_InventarioMedicamento>(x));
-
-            modelBuilder.Entity<AUD_InspDisposicionFinalTB>()
-.Property(e => e.DatosConclusiones)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
             ///////////////////////////////////////////
             ///

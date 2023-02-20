@@ -4993,20 +4993,7 @@ namespace DataModel
 
     ///////////////////////////////
     ///
-
-    public class AUD_ContenidoPreguntas : SystemId
-    {
-        public AUD_ContenidoPreguntas()
-        {
-            LContenido = new List<ContenidoPreguntas>();
-        }
-        private string titulo;
-        public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
-
-        private List<ContenidoPreguntas> lContenido;
-        public List<ContenidoPreguntas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
         
-    }
     public class ContenidoPreguntas : SystemId
     {
         public ContenidoPreguntas()
@@ -5022,8 +5009,12 @@ namespace DataModel
         public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
 
         // Evaluacion
-        private enumAUD_TipoSeleccion? evaluacion = null;
+        enumAUD_TipoSeleccion? evaluacion = null;
         public enumAUD_TipoSeleccion? Evaluacion { get { return evaluacion; } set { SetProperty(ref evaluacion, value); } }
+
+        // Evaluacion
+        List<OpcionEvaluacion> lEvaluacion = null;
+        public List<OpcionEvaluacion> LEvaluacion { get { return lEvaluacion; } set { SetProperty(ref lEvaluacion, value); } }
 
 
         // Observaciones
@@ -5032,4 +5023,9 @@ namespace DataModel
 
     }
 
+    public class OpcionEvaluacion : SystemId
+    {
+        enumAUD_TipoSeleccion evaluacion;
+        public enumAUD_TipoSeleccion Evaluacion { get { return evaluacion; } set { SetProperty(ref evaluacion, value); } }
+    }
 }

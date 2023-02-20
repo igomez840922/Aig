@@ -716,6 +716,15 @@ namespace DataModel.Helper
         NoSuficienteInfo = 5,
     }
 
+    public enum enumTipoProductosImportacion
+    {
+        [Description("Otros")]
+        Otros = 0,
+        [Description("Importación de materia prima para la fabricación de productos farmacéuticos, que serán utilizados para los lotes de prueba")]
+        Importa = 1,
+    }
+
+
     //////////////////////////////
     /// <summary>
     /// 

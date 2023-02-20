@@ -72,7 +72,6 @@ namespace DataModel
         private AUD_InspAperCambUbicAgenTB? inspAperCambUbicAgen;
         public virtual AUD_InspAperCambUbicAgenTB? InspAperCambUbicAgen { get => inspAperCambUbicAgen; set => SetProperty(ref inspAperCambUbicAgen, value); }
 
-
         //3- Rutina o Vigilancia de Farmacia
         private long? inspRutinaVigFarmaciaId;
         public long? InspRutinaVigFarmaciaId { get => inspRutinaVigFarmaciaId; set => SetProperty(ref inspRutinaVigFarmaciaId, value); }
@@ -102,6 +101,18 @@ namespace DataModel
         public long? InspCierreOperacionId { get => inspCierreOperacionId; set => SetProperty(ref inspCierreOperacionId, value); }
         private AUD_InspCierreOperacionTB? inspCierreOperacion;
         public virtual AUD_InspCierreOperacionTB? InspCierreOperacion { get => inspCierreOperacion; set => SetProperty(ref inspCierreOperacion, value); }
+
+        //8 - Disposicion Final de Productos
+        private long? inspDisposicionFinalId;
+        public long? InspDisposicionFinalId { get => inspDisposicionFinalId; set => SetProperty(ref inspDisposicionFinalId, value); }
+        private AUD_InspDisposicionFinalTB? inspDisposicionFinal;
+        public virtual AUD_InspDisposicionFinalTB? InspDisposicionFinal { get => inspDisposicionFinal; set => SetProperty(ref inspDisposicionFinal, value); }
+
+        //9- Apertura Fabricante - Medicamentos
+        private long? inspAperFabricanteId;
+        public long? InspAperFabricanteId { get => inspAperFabricanteId; set => SetProperty(ref inspAperFabricanteId, value); }
+        private AUD_InspAperFabricanteTB? inspAperFabricante;
+        public virtual AUD_InspAperFabricanteTB? InspAperFabricante { get => inspAperFabricante; set => SetProperty(ref inspAperFabricante, value); }
 
 
 
@@ -184,29 +195,11 @@ namespace DataModel
         [StringLength(250)]
         public string ParticEstablecimientoCIP { get => particEstablecimientoCIP; set => SetProperty(ref particEstablecimientoCIP, value); }
 
-
-        
-
-
-
-        
-        
-        
         
         
        
-        //8 - Disposicion Final de Productos
-        private long? inspDisposicionFinalId;
-        public long? InspDisposicionFinalId { get => inspDisposicionFinalId; set => SetProperty(ref inspDisposicionFinalId, value); }
-        private AUD_InspDisposicionFinalTB? inspDisposicionFinal;
-        public virtual AUD_InspDisposicionFinalTB? InspDisposicionFinal { get => inspDisposicionFinal; set => SetProperty(ref inspDisposicionFinal, value); }
-                
-        //9- Apertura Fabricante - Medicamentos
-        private long? inspAperFabricanteId;
-        public long? InspAperFabricanteId { get => inspAperFabricanteId; set => SetProperty(ref inspAperFabricanteId, value); }
-        private AUD_InspAperFabricanteTB? inspAperFabricante;
-        public virtual AUD_InspAperFabricanteTB? InspAperFabricante { get => inspAperFabricante; set => SetProperty(ref inspAperFabricante, value); }
-
+        
+        
         //10 - Apertura Fabricante - Cosmeticos y Medicamentos
         private long? inspAperFabricanteCosmetMedId;
         public long? InspAperFabricanteCosmetMedId { get => inspAperFabricanteCosmetMedId; set => SetProperty(ref inspAperFabricanteCosmetMedId, value); }
