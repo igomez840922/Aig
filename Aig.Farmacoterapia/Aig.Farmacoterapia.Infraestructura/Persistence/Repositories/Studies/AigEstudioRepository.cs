@@ -9,7 +9,9 @@ using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Studies;
 using Aig.Farmacoterapia.Domain.Specifications.Studies;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
+using Aig.Farmacoterapia.Infrastructure.Identity;
 using LinqKit;
+using Microsoft.AspNetCore.Identity;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
 {
@@ -17,11 +19,16 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
     {
         private readonly IRepositoryAsync<AigEstudio> _repository;
         private readonly IRepositoryAsync<AigEstudioEvaluador> _evaluatorRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ISystemLogger _logger;
-        public AigEstudioRepository(IRepositoryAsync<AigEstudio> repository, IRepositoryAsync<AigEstudioEvaluador> evaluatorRepository, ISystemLogger logger)
+        public AigEstudioRepository(IRepositoryAsync<AigEstudio> repository,
+            IRepositoryAsync<AigEstudioEvaluador> evaluatorRepository,
+            UserManager<ApplicationUser> userManager,
+            ISystemLogger logger)
         {
             _repository = repository;
             _evaluatorRepository = evaluatorRepository;
+            _userManager = userManager;
             _logger = logger;
         }
         public async Task<PaginatedResult<AigEstudio>> ListAsync(PageSearchArgs args)
@@ -180,12 +187,29 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
             result.Data = result.Data.Select(w => {
                 w.Match = w.AigEstudioDNFDId != null && w.AigEstudioDNFD!.AigCodigo.Codigo == w.Codigo;
                 w.MatchInfo = !w.Match ? (w.AigEstudioDNFDId != null ? $"{w.Codigo} / {w.AigEstudioDNFD!.AigCodigo.Codigo}" : w.Codigo) :string.Empty;
-                w.Evaluators = w.EstudioEvaluador.Select(s => s.UserId).ToList(); return w; 
+                w.Evaluators = w.EstudioEvaluador.Select(s => s.UserId).ToList();
+                w.EvaluatorToShow = EvaluatorToShow(w.Evaluators);
+                return w; 
             }).ToList();
             return result;
-
         }
 
+        public string EvaluatorToShow(List<string> evaluators )
+        {
+            string result = string.Empty;
+            try
+            {
+                var list = _userManager.Users.Where(p => evaluators.Contains(p.Id))
+                                                   .Select(s=>s.FullName)
+                                                   .ToList();
+                result = string.Join(" / ", list);
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc.Message, exc);
+            }
+            return result;
+        }
         public List<string> ListEvaluatorAsync(long studyId)
         {
             var result = new List<string>();

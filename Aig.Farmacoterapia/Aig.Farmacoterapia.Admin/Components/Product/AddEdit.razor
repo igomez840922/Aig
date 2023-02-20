@@ -146,7 +146,7 @@
 
                                         <div class="col-lg-4">
                                             <div>
-                                                <label>Clasificación</label>
+                                                <label>Tipo</label>
                                                 <MudSelect T="string" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.TipoEquivalencia">
                                                     <MudSelectItem Value="@(TipoEquivalencia.Referencia)">Medicamento de Referencia</MudSelectItem>
                                                     <MudSelectItem Value="@(TipoEquivalencia.Intercambiable)">Medicamento Intercambiable</MudSelectItem>
@@ -161,7 +161,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div>
-                                                <label>Tipo</label>
+                                                <label> Clasificación </label>
                                                 <MudSelect T="string" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.TipoMedicamento">
                                                     <MudSelectItem Value="@(TipoMedicamento.SI)">Síntesis Química </MudSelectItem>
                                                     <MudSelectItem Value="@(TipoMedicamento.RA)">Radiofármacos</MudSelectItem>

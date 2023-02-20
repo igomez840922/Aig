@@ -17,7 +17,7 @@
         
         <MudItem xs="12">
             <div class="d-flex justify-center">
-                <MudText Typo="Typo.h6">Entrar en su cuenta</MudText>
+                <MudText Typo="Typo.h6">Entre con su cuenta</MudText>
             </div>
         </MudItem>
 
@@ -32,11 +32,11 @@
         </MudItem>
       
         <MudItem xs="12">
-            <MudButton Style="float: left;" Disabled="@(!Validated)" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">
+            <MudButton Style="float: left;"  ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">
                 @if (loading)
                 {
                     <MudProgressCircular Size="Size.Small" Indeterminate="true" Style="color:white !important" />
-                    <MudText Class="ms-8">Procesando...</MudText>
+                    <MudText Class="ms-3" Style="font-size:16px !important">Cargando...</MudText>
                 }
                 else
                 {
@@ -51,34 +51,42 @@
 </EditForm>
 
 @code {
-  
+
     private FluentValidationValidator _fluentValidation;
-    private bool Validated => _fluentValidation.Validate(options => { options.IncludeAllRuleSets(); });
     private bool loading { get; set; } = false;
     private TokenRequest model = new TokenRequest();
     protected override async Task OnInitializedAsync()
     {
         var user = await _authenticationManager.CurrentUser();
         var isAuthenticated=user.Identity?.IsAuthenticated;
-        if(isAuthenticated ?? false)
-        {
+        if(isAuthenticated ?? false){
             _navigationManager.NavigateTo("/");
         }
         loading = false;
-        //await base.OnInitializedAsync();
+        await base.OnInitializedAsync();
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) {Validate(); }
+    }
+    private bool Validate() => _fluentValidation.Validate();
+
     private async Task SubmitAsync()
     {
-      
+       
+        if (string.IsNullOrEmpty(model.Email) || 
+            string.IsNullOrEmpty(model.Password)) return;
+
         loading = true;
         var result = await _authenticationManager.Login(model);
         if (!result.Succeeded){
             foreach (var message in result.Messages)
                 _snackBar.Add(message, Severity.Error);
-          loading = false;
+            loading = false;
         }
-        else  _navigationManager.NavigateTo($"./login", true);
-
+        else _navigationManager.NavigateTo($"./login", true);
+        
 
     }
 

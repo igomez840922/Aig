@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
@@ -48,6 +49,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Identity
         }
 
         private ICollection<AigEstudioEvaluador> _estudioEvaluador;
+        [JsonIgnore]
         public virtual ICollection<AigEstudioEvaluador> EstudioEvaluador => _estudioEvaluador ??= new HashSet<AigEstudioEvaluador>();
     }
 }

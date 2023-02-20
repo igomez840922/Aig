@@ -45,6 +45,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             builder.Ignore(c => c.ShowDetails);
             builder.Ignore(c => c.ElapsedDays);
             builder.Ignore(c => c.Evaluators);
+            builder.Ignore(c => c.EvaluatorToShow);
             builder.Ignore(c => c.Match);
             builder.Ignore(c => c.MatchInfo);
             

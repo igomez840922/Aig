@@ -233,8 +233,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 break;
                             case "Classification":
                                 {
-                                    var value = filteringOption.Value.ToString();
-                                    Expression<Func<AigMedicamento, bool>> expression = f => f.TipoEquivalencia == value;
+                                    var value = filteringOption.Value.ToString().Trim().ToLower(); ;
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.TipoMedicamento.ToLower() == value;
                                     filterList.Add(expression);
                                 }
                                 break;

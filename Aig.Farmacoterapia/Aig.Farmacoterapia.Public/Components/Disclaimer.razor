@@ -1,7 +1,12 @@
-﻿
+﻿<style>
+    .mud-dialog {
+        max-height: calc(107vh - var(--mud-appbar-height));
+        overflow-y: auto;
+    }
+</style>
 <MudDialog DisableSidePadding="true">
     <DialogContent>
-        <MudContainer Style="max-height:650px; overflow-y: scroll">
+        <MudContainer>
               <div class="row">
                 <div class="col-xl-12 col-lg-12">
                     <p align="justify">

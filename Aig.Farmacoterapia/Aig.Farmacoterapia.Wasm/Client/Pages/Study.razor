@@ -177,19 +177,21 @@
         <HeaderContent>
             @*<MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>*@
             <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="status" T="AigEstudio">Estado</MudTableSortLabel></MudTh> 
-            <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudio">Fecha de Ingreso</MudTableSortLabel></MudTh> 
+            <MudTh> <MudTableSortLabel Style="width:100px !important" SortLabel="admissionDate" T="AigEstudio">Fecha de Ingreso</MudTableSortLabel></MudTh> 
             <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:500px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
            
-            <MudTh><MudTableSortLabel Style="width:200px" SortLabel="assignmentDate" T="AigEstudio">Fecha de Asignación</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel Style="width:200px" SortLabel="evaluationDate" T="AigEstudio">Fecha de Evaluación</MudTableSortLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Días transcurridos</MudInputLabel></MudTh>
-             <MudTh> <MudInputLabel Style="width:300px !important">Nota de Evaluación</MudInputLabel> </MudTh>
+            <MudTh><MudInputLabel Style="width:100px !important">Evaluadores</MudInputLabel></MudTh>
+
+            <MudTh><MudTableSortLabel Style="width:100px" SortLabel="assignmentDate" T="AigEstudio">Fecha de Asignación</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel Style="width:100px" SortLabel="evaluationDate" T="AigEstudio">Fecha de Evaluación</MudTableSortLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:100px">Días transcurridos</MudInputLabel></MudTh>
+             <MudTh> <MudInputLabel Style="width:150px !important">Nota de Evaluación</MudInputLabel> </MudTh>
             <MudTh><MudInputLabel Style="width:400px">Observaciones por el evaluador</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Investigador principal</MudInputLabel></MudTh>
              <MudTh><MudInputLabel Style="width:200px">Patrocinador del estudio</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Duración del estudio</MudInputLabel></MudTh>
-            <MudTh><MudInputLabel Style="width:200px">Número de participantes en panamá</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:100px">Número de participantes en panamá</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
             <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Descending" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
@@ -235,11 +237,11 @@
 
        
             <MudTd DataLabel="Fecha de ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
-            <MudTd DataLabel="Código del protocolo de investigació">
+            <MudTd DataLabel="Código del protocolo de investigación">
               
                 @if (context.Match)
                 {
-                    <MudTooltip Text="El código del estudio de la solicitud coincide con un estudio clínico" Arrow="true" Placement="Placement.Top" Color="Color.Tertiary">
+                    <MudTooltip Text="El código del estudio de la solicitud coincide con un estudio clínico" Arrow="true" Placement="Placement.Top" Color="Color.Default">
                         <MudBadge Content="context.Codigo" Color="Color.Default" Overlap="true">
                             <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Tertiary" />
                         </MudBadge>
@@ -248,7 +250,7 @@
                 }
                 else
                 {
-                    <MudTooltip Text="No se encontró un estudio clínico con ese código" Arrow="true" Placement="Placement.Top" Color="Color.Error">
+                    <MudTooltip Text="No se encontró un estudio clínico con ese código" Arrow="true" Placement="Placement.Top" Color="Color.Default">
                         <MudBadge Content="context.MatchInfo" Color="Color.Default" Overlap="true">
                             <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
                         </MudBadge>
@@ -257,6 +259,23 @@
                 }
            </MudTd>
             <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
+
+            <MudTd DataLabel="Evaluadores">
+                @if (!string.IsNullOrEmpty(context.EvaluatorToShow))
+                {
+                     <MudTooltip Text="@context.EvaluatorToShow" Arrow="true" Placement="Placement.Top" Color="Color.Default">
+                          <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.HowToReg" Color="Color.Tertiary" />
+                    </MudTooltip>
+
+                }
+                else
+                {
+                    <MudBadge Content="@("Ninguno")" Color="Color.Default" Overlap="true">
+                       <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
+                    </MudBadge>
+                }
+            </MudTd>
+
             <MudTd DataLabel="Fecha de Asignación">@(string.Format("{0:dd/MM/yyyy}",@context.FechaAsignacion))</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))</MudTd>
             <MudTd DataLabel="Días transcurridos">
@@ -266,7 +285,7 @@
                 case 0:
                     {
                      
-                        <MudBadge Color="Color.Default" Content="@("-")" Overlap="true" Class="mx-6 my-4">
+                        <MudBadge Color="Color.Default" Content="@("-")" Overlap="true">
                             <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Event" Color="Color.Info" />
                         </MudBadge>
                     }
@@ -274,14 +293,14 @@
                 case > 0:
                     {
 
-                        <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
+                        <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true">
                             <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventAvailable" Color="Color.Tertiary" />
                         </MudBadge>
                     }
                     break;
                 default:
                     {
-                        <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true" Class="mx-6 my-4">
+                        <MudBadge Color="Color.Default" Content="@(context.ElapsedDays > 1 ? $"{context.ElapsedDays} Días" : $"{context.ElapsedDays} Día")" Overlap="true">
                             <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.EventBusy" Color="Color.Error" />
                         </MudBadge>
 
@@ -290,7 +309,21 @@
             }
 
             </MudTd>
-             <MudTd DataLabel="Nota de Evaluación">@context.Nota?.GetNoteCode(@context.Id)</MudTd>
+           
+              <MudTd DataLabel="Nota de Evaluación">
+                @if (!string.IsNullOrEmpty(@context.Nota?.Observaciones))
+                {  
+                    <MudBadge Content="@context.Nota?.GetNoteCode(@context.Id)" Color="Color.Tertiary" Overlap="true"  Class="mx-2 my-2">
+                    </MudBadge>
+                }
+                else
+                {
+                    <MudBadge Content="@("Ninguna")" Color="Color.Default" Overlap="true"  Class="mx-2 my-2">
+                    </MudBadge>
+                }
+            </MudTd>
+
+
             <MudTd DataLabel="Observaciones por el evaluador">@context.Nota?.Observaciones</MudTd>
             <MudTd DataLabel="Investigador principal">@context.InvestigadorPrincipal</MudTd>
             <MudTd DataLabel="Patrocinador del estudio">@context.Patrocinador</MudTd>

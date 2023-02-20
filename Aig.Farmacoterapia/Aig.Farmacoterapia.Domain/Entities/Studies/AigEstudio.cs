@@ -32,9 +32,13 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
         private ICollection<AigEstudioEvaluador> _estudioEvaluador;
         [JsonIgnore]
         public virtual ICollection<AigEstudioEvaluador> EstudioEvaluador => _estudioEvaluador ??= new HashSet<AigEstudioEvaluador>();
+       
         [IgnoreDataMember]
         public List<string> Evaluators { get; set; }
 
+        [IgnoreDataMember]
+        public string EvaluatorToShow { get; set; }
+        
         public long? AigEstudioDNFDId { get; set; }
         [JsonIgnore]
         public virtual AigEstudioDNFD? AigEstudioDNFD { get; set; }

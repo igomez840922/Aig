@@ -35,6 +35,11 @@
       font-size: 20px !important;
     }
 
+    .mud-dialog {
+        max-height: calc(107vh - var(--mud-appbar-height));
+        overflow-y: auto;
+    }
+
 </style>
 
 @if (loading)
@@ -88,10 +93,6 @@ else
                                                 @if (!string.IsNullOrEmpty(item?.DataSheetURL))
                                                     {
 
-                                                      @*  <a style="padding: 10px;font-size: 16px;" target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}files/datasheet/{item.DataSheetURL}")">
-                                                            <i style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-pdf"></i>
-                                                            Monografía
-                                                        </a>*@
                                                       <a style="padding: 10px;font-size: 16px;" target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}api/medicament/datasheet/{item.DataSheetURL}")">
                                                             <i style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-pdf"></i>
                                                             Monografía
@@ -100,11 +101,6 @@ else
                                                     }
                                                     @if (!string.IsNullOrEmpty(item?.ProspectusURL))
                                                     {
-                                                       @* <a style="padding: 10px;font-size: 16px;" target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}files/prospectus/{item.ProspectusURL}")">
-                                                           <i  style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-powerpoint"></i>
-                                                            Prospecto
-                                                        </a>*@
-                                                 
                                                          <a style="padding: 10px;font-size: 16px;" target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}api/medicament/prospectus/{item.ProspectusURL}")">
                                                            <i  style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-powerpoint"></i>
                                                             Prospecto
@@ -175,20 +171,7 @@ else
                                     }
 
                                 </div>
-                               @* <div class="row">
-
-                                    @if (@item?.Excipientes != null)
-                                    {
-                                        <div class="col-12">
-                                            <div class="pro-02-list-info f-left">
-                                                <span>Exipientes</span>
-                                                <p>
-                                                    @item?.Excipientes
-                                                </p>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>*@
+                              
                             </div>
 
                             <hr style="margin: 0 0 1rem 0 !important;" />
@@ -197,18 +180,7 @@ else
 
                                 <div class="container">
                                     <div class="row">
-                                       @* @if (@item?.FormaFarmaceutica != null)
-                                        {
-                                            <div class="col-6">
-                                                <div class="pro-02-list-info f-left">
-                                                    <span>Forma farmacéutica </span>
-                                                    <p>
-                                                        @item.FormaFarmaceutica.Nombre
-                                                    </p>
-
-                                                </div>
-                                            </div>
-                                        }*@
+                                      
                                         @if (@item?.ViaAdministracion != null)
                                         {
                                             <div class="col-6">
@@ -238,32 +210,26 @@ else
                                             </div>
                                         </div>
 
-                                        <div class="col-4">
+                                        @if (!string.IsNullOrEmpty(item?.TipoMedicamento))
+                                        {
+                                           <div class="col-4">
                                             <div class="pro-02-list-info f-left">
-                                                <span>Clasificación</span>
-                                                <p>
-                                                    @GetEquivalence(item?.TipoEquivalencia)
-                                                </p>
-                                            </div>
-                                        </div>
-                                      @*
-                                        <div class="col-4">
-                                            <div class="pro-02-list-info f-left">
-                                                <span>Tipo</span>
+                                                <span>Clasificación Med.</span>
                                                 <p>
                                                     @GetMedicationType(item?.TipoMedicamento)
                                                 </p>
                                             </div>
-                                        </div>*@
+                                           </div>
+                                        }
 
                                     </div>
                                 </div>
 
                               
-                                 @if (@item?.Fabricante != null)
-                                        {
-                                             <hr style="margin: 0 0 1rem 0 !important;" />
-                                        }
+                                @if (@item?.Fabricante != null)
+                                {
+                                    <hr style="margin: 0 0 1rem 0 !important;" />
+                                }
 
                                 <div class="container">
                                     <div class="row">
@@ -289,17 +255,7 @@ else
                                                 </div>
                                             </div>
                                         }
-                                      @*  @if (!string.IsNullOrEmpty(item.Fabricante?.Direccion))
-                                        {
-                                            <div class="col-5">
-                                                <div class="pro-02-list-info f-left">
-                                                    <span>Dirección</span>
-                                                    <p>
-                                                        @item.Fabricante?.Direccion
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        }*@
+                                     
 
                                     </div>
                                 </div>
