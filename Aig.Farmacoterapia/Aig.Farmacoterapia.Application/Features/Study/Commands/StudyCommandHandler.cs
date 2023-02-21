@@ -5,6 +5,9 @@ using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Mail;
+using Aig.Farmacoterapia.Infrastructure.Configuration;
+using Microsoft.Extensions.Options;
+using System.Text.Encodings.Web;
 
 namespace Aig.Farmacoterapia.Application.Features.Study.Commands
 {
@@ -34,14 +37,21 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
         private readonly IMailService _mailService;
+        private readonly IOptions<AppConfiguration> _config;
         private readonly ISystemLogger _logger;
 
-        public StudyCommandHandler(IUnitOfWork unitOfWork, IUserService userService, IMailService mailService, IMapper mapper, ISystemLogger logger)
+        public StudyCommandHandler(IUnitOfWork unitOfWork, 
+            IUserService userService, 
+            IMailService mailService,
+            IMapper mapper,
+            IOptions<AppConfiguration> confi,
+            ISystemLogger logger)
         {
             _unitOfWork = unitOfWork;
             _userService = userService;
             _mailService = mailService;
             _mapper = mapper;
+            _config = confi;
             _logger = logger;
         }
       
@@ -122,10 +132,11 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                          Result<bool>.Success("Evaluadores actualizados correctamente !"):
                          Result.Fail(new List<string>() { "Error durante la operación. No fue posible asignar los evaluadores"});
                 if (answer.Succeeded) {
+                    var endpointUri = new Uri(string.Concat($"{_config.Value.BaseUrl}", "studies"));
                     foreach (var email in notifications) {
                         var mailRequest = new MailRequest {
                             To = Convert.ToString(email.email),
-                            Body =$"Se le ha asignado una solicitudes de autorización de permisos de importación con fines de investigación: {Convert.ToString(email.message)}",
+                            Body =$"Se le ha asignado una solicitudes de autorización de permisos de importación con fines de investigación: {Convert.ToString(email.message)} <a href='{HtmlEncoder.Default.Encode(endpointUri.ToString())}'> (click aqui) </a>",
                             Subject = "Farmacoterapia (Nueva asignación de estudio de importación)",
                         };
                         await _mailService.SendAsync(mailRequest);
