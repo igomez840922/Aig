@@ -57,7 +57,7 @@
             <MudGrid>
 
                 <MudItem md="4">
-                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_searchString" Label="Buscar" />
+                    <MudTextField OnClearButtonClick="OnSearch" Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_searchString" Label="Buscar" />
                 </MudItem>
                 <MudItem md="4">
                     <MudGrid>
@@ -88,59 +88,66 @@
 
 @if (_paginatedResult != null && _paginatedResult.Data.Count > 0)
 {
-    <MudGrid Style="margin-top:5px !important;" Spacing="5">
-        @foreach (var dt in _paginatedResult.Data)
-        {
-            <MudItem>
-                <MudCard Elevation="25" Class="d-flex">
-                    <MudCardHeader>
-                        <CardHeaderAvatar>
-
-                            @if (string.IsNullOrEmpty(dt.ProfilePicture))
-                            {
-
-                                <MudAvatar Size="Size.Large" Color="Color.Secondary"> @dt.FullName?[..1]?.ToUpper() </MudAvatar>
-                            }
-                            else
-                            {
-                                <MudAvatar Size="Size.Large" Image="@dt.ProfilePicture"></MudAvatar>
-                            }
-
-                        </CardHeaderAvatar>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.body1">@dt.FullName</MudText>
-                             <MudText Typo="Typo.body2">
-                                <MudIcon Icon="@Icons.Material.Filled.Group" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
-                                @dt.UserRoleDescription
-                            </MudText>
-                            <MudText Typo="Typo.body2">
-                                <MudIcon Icon="@Icons.Material.Filled.Email" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
-                                @dt.Email
-                            </MudText>
-                            <MudText Typo="Typo.body2">
-                                <MudIcon Icon="@Icons.Material.Filled.Phone" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
-                                @dt.PhoneNumber
-                            </MudText>
-                        </CardHeaderContent>
-                        <CardHeaderActions>
-                            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
-                                <MudMenuItem Disabled="!IsEdit()" Icon="@Icons.Material.Filled.CoPresent" OnClick="@(() => Edit(@dt.UserName))" OnTouch="@(() => Edit(@dt.UserName))">Perfil</MudMenuItem>
-                                <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Key" OnClick="@(() => Password(@dt.UserName))" OnTouch="@(() => Password(@dt.UserName))">Contraseña</MudMenuItem>
-                                <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;"Icon="@Icons.Material.Filled.Group" OnClick="@(() => Role(@dt.UserName))" OnTouch="@(() => Role(@dt.UserName))">Rol</MudMenuItem>
-                                <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@dt.Id))" OnTouch="@(() => Delete(@dt.Id))">Eliminar</MudMenuItem>
-                            </MudMenu>
-                        </CardHeaderActions>
-                    </MudCardHeader>
-                </MudCard>
-            </MudItem>
-        }
-    </MudGrid>
-
-    <MudGrid>
+    <MudGrid Style="margin-top:5px !important;">
         <MudItem>
-            <MudPagination Selected="@_paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@_paginatedResult.TotalPages" Class="pa-4" />
+
+            <MudGrid Spacing="5">
+                @foreach (var dt in _paginatedResult.Data)
+                {
+                    <MudItem>
+                        <MudCard Elevation="25" Class="d-flex">
+                            <MudCardHeader>
+                                <CardHeaderAvatar>
+
+                                    @if (string.IsNullOrEmpty(dt.ProfilePicture))
+                                    {
+
+                                        <MudAvatar Size="Size.Large" Color="Color.Secondary"> @dt.FullName?[..1]?.ToUpper() </MudAvatar>
+                                    }
+                                    else
+                                    {
+                                        <MudAvatar Size="Size.Large" Image="@dt.ProfilePicture"></MudAvatar>
+                                    }
+
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.body1">@dt.FullName</MudText>
+                                    <MudText Typo="Typo.body2">
+                                        <MudIcon Icon="@Icons.Material.Filled.Group" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                                        @dt.UserRoleDescription
+                                    </MudText>
+                                    <MudText Typo="Typo.body2">
+                                        <MudIcon Icon="@Icons.Material.Filled.Email" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                                        @dt.Email
+                                    </MudText>
+                                    <MudText Typo="Typo.body2">
+                                        <MudIcon Icon="@Icons.Material.Filled.Phone" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                                        @dt.PhoneNumber
+                                    </MudText>
+                                </CardHeaderContent>
+                                <CardHeaderActions>
+                                    <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                                        <MudMenuItem Disabled="!IsEdit()" Icon="@Icons.Material.Filled.CoPresent" OnClick="@(() => Edit(@dt.UserName))" OnTouch="@(() => Edit(@dt.UserName))">Perfil</MudMenuItem>
+                                        <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Key" OnClick="@(() => Password(@dt.UserName))" OnTouch="@(() => Password(@dt.UserName))">Contraseña</MudMenuItem>
+                                        <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Group" OnClick="@(() => Role(@dt.UserName))" OnTouch="@(() => Role(@dt.UserName))">Rol</MudMenuItem>
+                                        <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@dt.Id))" OnTouch="@(() => Delete(@dt.Id))">Eliminar</MudMenuItem>
+                                    </MudMenu>
+                                </CardHeaderActions>
+                            </MudCardHeader>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+
+            <MudGrid  Style="margin-bottom:100px !important;">
+                <MudItem>
+                    <MudPagination Selected="@_paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@_paginatedResult.TotalPages" Class="pa-4" />
+                </MudItem>
+            </MudGrid>
+
         </MudItem>
     </MudGrid>
+
 }
 
 @code {
@@ -163,7 +170,7 @@
             _user = await _authenticationManager.CurrentUser();
             _searchString = string.Empty;
             //_bus.Subscribe<IResult>(UserAddedHandler);
-            _paginatedResult = new PaginatedResult<UserModelOutput>();
+            _paginatedResult = new PaginatedResult<UserModelOutput>(){PageSize=12};
             await DoFetchData();
         }
         base.OnInitialized();

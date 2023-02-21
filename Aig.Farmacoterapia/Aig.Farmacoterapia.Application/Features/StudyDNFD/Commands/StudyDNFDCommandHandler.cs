@@ -42,27 +42,37 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Commands
 
         public async Task<IResult> Handle(AddEditStudyDNFDCommand request, CancellationToken cancellationToken)
         {
-            IResult answer;
+            IResult answer = Result.Fail(new List<string>() { "Requested operation failed" });
             try
             {
-               
+                var unassigned = new List<AigEstudio>();
                 if (request.Model != null) {
+                    unassigned = _unitOfWork.Repository<AigEstudio>().GetAll().Where(p => p.AigEstudioDNFDId == null && p.Codigo == request.Model.AigCodigo.Codigo).ToList();
                     var item = _unitOfWork.Repository<AigEstudioDNFD>().GetAll().FirstOrDefault(p => p.Id != request.Model.Id && p.AigCodigoEstudioId == request.Model.AigCodigo.Id);
                     if(item!=null)
                         return Result<bool>.Fail($"En código: {request.Model.AigCodigo.Codigo}, ya fue utilizado en el estudio:  {item.Titulo}");
-
                     if (request.Model.AigCodigo != null){
                         request.Model.AigCodigoEstudioId = request.Model.AigCodigo.Id;
-                        request.Model.AigCodigo = null;
-                    }
+                        request.Model.AigCodigo = null; }
                 }
-
                 request.Model.ProductsMetadata = string.Join("//", request.Model.Medicamentos.Select(p => p.Nombre));
-                if (request.Model.Id > 0)
-                    await _unitOfWork.Repository<AigEstudioDNFD>().UpdateAsync(request.Model);
-                else
-                    await _unitOfWork.Repository<AigEstudioDNFD>().AddAsync(request.Model);
-                answer = Result<bool>.Success(_unitOfWork.Commit());
+                await _unitOfWork.ExecuteInTransactionAsync(async (cc) => {
+                    await _unitOfWork.BeginTransactionAsync(cc);
+                    var result=await _unitOfWork.Repository<AigEstudioDNFD>().UpdateAsync(request.Model);
+                    foreach (var item in unassigned) {
+                        item.AigEstudioDNFD = result;
+                        await _unitOfWork.Repository<AigEstudio>().UpdateAsync(item);
+                    }
+                    if (await _unitOfWork.CommitAsync(cancellationToken))
+                        answer = Result<bool>.Success(_unitOfWork.Commit());
+
+                }, cancellationToken);
+
+                //if (request.Model.Id > 0)
+                //    await _unitOfWork.Repository<AigEstudioDNFD>().UpdateAsync(request.Model);
+                //else
+                //    await _unitOfWork.Repository<AigEstudioDNFD>().AddAsync(request.Model);
+                //answer = Result<bool>.Success(_unitOfWork.Commit());
             }
             catch (Exception exc)
             {
