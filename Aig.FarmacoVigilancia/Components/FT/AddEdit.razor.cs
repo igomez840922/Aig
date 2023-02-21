@@ -234,50 +234,45 @@ namespace Aig.FarmacoVigilancia.Components.FT
             string fabricante = Data.Fabricant?.Nombre ?? "";
             string lotes = Data.Lote;
             string fechaExp = Data.FechaExpira?.ToString("dd/MM/yyyy");
-            //string fallaFarmaceutica =
-            //    Data.FallaReportada?.Olor == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.Color == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.Sabor == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.SepFases == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.ParExtrana == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.Contaminacion == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.ProDisolucion == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.ProDesintegracion == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.Precipitacion == enumOpcionSiNo.Si ? "Si" :
-            //    (Data.FallaReportada?.Otros == enumOpcionSiNo.Si ? "Si" :
-            //    Data.FallaReportada?.DetFallaReport ?? "")))))))));
+            string fechaTratamInicial = Data.DatosPaciente?.FechaTratInicial??"";
+            string fechaTratamFinal = Data.DatosPaciente?.FechaTratFinal ?? "";
+            string fechaFT = Data.DatosPaciente?.FechaFT ?? "";
+            string indicacion = Data.DatosPaciente?.Indicacion ?? "";
+            string dosis = Data.DatosPaciente?.ViaAdministracion ?? "";
+            string edad = Data.DatosPaciente?.Edad ?? "";
+            string sexo = Data.DatosPaciente?.Sexo != enumSexo.NA ? DataModel.Helper.Helper.GetDescription(Data.DatosPaciente.Sexo):"";
+            string otrosMedicamentos = Data.Concominantes?.LProductos?.Count > 0 ? "Medicamentos" : "";
+            string fallaTerapeutica = Data.ReportaFallaTerapeutica== enumOpcionSiNoOnly.Si? DataModel.Helper.Helper.GetDescription(Data.ReportaFallaTerapeutica) : "";
+            
             string notificador = Data.Notificador;
             string instSalud = Data.InstitucionDestino?.Nombre ?? "";
             string presentacion = Data.Presentacion;
+            string tipoNotificador = Data.TipoNotificador != enumFMV_RAMNotificationType.NOREP ? DataModel.Helper.Helper.GetDescription(Data.TipoNotificador) : null;
 
-            if (string.IsNullOrEmpty(nombreFarmaco) && string.IsNullOrEmpty(concent) && string.IsNullOrEmpty(formaFarm)
-                && string.IsNullOrEmpty(fabricante) && string.IsNullOrEmpty(lotes) && string.IsNullOrEmpty(fechaExp) )
-            {
-                Data.Grado = "Grado 0";
-            }
-            if (!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp)
-                && !string.IsNullOrEmpty(concent) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(notificador))
+            if (!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(concent) && !string.IsNullOrEmpty(formaFarm)
+                && !string.IsNullOrEmpty(fechaExp) && !string.IsNullOrEmpty(lotes) 
+                  && !string.IsNullOrEmpty(notificador) && !string.IsNullOrEmpty(fechaTratamInicial) 
+                  && !string.IsNullOrEmpty(fechaTratamFinal) && !string.IsNullOrEmpty(fechaFT))
             {
                 Data.Grado = "Grado 1";
-                if (!string.IsNullOrEmpty(fabricante) && !string.IsNullOrEmpty(regSanitario) && !string.IsNullOrEmpty(instSalud))
+                if (!string.IsNullOrEmpty(fabricante) && !string.IsNullOrEmpty(regSanitario)
+                    && !string.IsNullOrEmpty(fallaTerapeutica) && !string.IsNullOrEmpty(instSalud))
                 {
                     Data.Grado = "Grado 2";
-                    if (!string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(presentacion))
+                    if (!string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(tipoNotificador))
                     {
                         Data.Grado = "Grado 3";
+                        if (!string.IsNullOrEmpty(indicacion) && !string.IsNullOrEmpty(dosis) 
+                            && !string.IsNullOrEmpty(edad) && !string.IsNullOrEmpty(sexo) && !string.IsNullOrEmpty(otrosMedicamentos))
+                        {
+                            Data.Grado = "Grado 4";
+                        }
                     }
                 }
             }
-            if (!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(concent)
-               && !string.IsNullOrEmpty(regSanitario) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(fabricante)
-               && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp) 
-               && !string.IsNullOrEmpty(notificador) && !string.IsNullOrEmpty(instSalud) && !string.IsNullOrEmpty(presentacion))
-            {
-                Data.Grado = "Grado 4";
-            }
-
+            
             //Data.Grado = !string.IsNullOrEmpty(grado0) ? grado0 : (!string.IsNullOrEmpty(grado1) ? grado1 : (!string.IsNullOrEmpty(grado2) ? grado2 : (!string.IsNullOrEmpty(grado3) ? grado3 : (!string.IsNullOrEmpty(grado4) ? grado4 : "No Aplica"))));
-
+            Data.Grado = !string.IsNullOrEmpty(Data.Grado) ? Data.Grado : "Grado 0";
         }
 
         /////////////////////

@@ -67,5 +67,8 @@ namespace DataModel
         private List<FMV_FtTB> lFt;
         public virtual List<FMV_FtTB> LFt { get => lFt; set => SetProperty(ref lFt, value); }
 
+        private List<FMV_IpsMedicamentoTB> lIpsMedicamento;
+        public virtual List<FMV_IpsMedicamentoTB> LIpsMedicamento { get => lIpsMedicamento; set => SetProperty(ref lIpsMedicamento, value); }
+
     }
 }

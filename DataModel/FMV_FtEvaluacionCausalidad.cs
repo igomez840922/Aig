@@ -10,6 +10,10 @@ namespace DataModel
 {
     public class FMV_FtEvaluacionCausalidad:SystemId
     {
+        private FMV_FtTB ft;
+        [System.Text.Json.Serialization.JsonIgnore]
+        public virtual FMV_FtTB Ft { get => ft; set => SetProperty(ref ft, value); }
+
 
         // ¿Fármaco con cinética compleja?. Total=3. Si, No, No sabe
         private enumOpcionSiNo farmCinCompleja;
@@ -50,6 +54,11 @@ namespace DataModel
         // ¿Existen otros factores asociados que pudiera explicar el FT?. Total=3. Si, No, No sabe
         private enumOpcionSiNo factAsociados;
         public enumOpcionSiNo FactAsociados { get => factAsociados; set => SetProperty(ref factAsociados, value); }
+
+        // ¿Existen otros factores asociados que pudiera explicar el FT?. Total=3. Si, No, No sabe
+        private enumEvoCausalidad evolucionCausalidad;
+        public enumEvoCausalidad EvolucionCausalidad { get => evolucionCausalidad; set => SetProperty(ref evolucionCausalidad, value); }
+
 
         /*
          / COLUMNAS AZ - BD

@@ -1,0 +1,92 @@
+﻿<!-- Modal Creat/Edit -->
+@if (Data != null && OpenDialog)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog  modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@(Data != null && Data.Id > 0 ? @languageContainerService.Keys["Edit"] : @languageContainerService.Keys["New"]) @languageContainerService.Keys["Medicamento"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Data" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+
+                        <div class="row clearfix">
+                           <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["CommercialName"]</label>
+                                        <div class="input-group">
+                                            <InputText class="form-control" @bind-Value="Data.NomComercial" />
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchMedicine();}"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <ValidationMessage For=@(() => Data.NomComercial) />                                       
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["DCI"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Data.NomDCI" />
+                                                <ValidationMessage For=@(() => Data.NomDCI) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["Laboratory"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">                                               
+                                                <RadzenDropDown AllowClear="true" TValue="long?" Class="form-control" @bind-Value=@Data.LaboratorioId
+                                                                AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                Data=@Labs TextProperty="Nombre" ValueProperty="Id" />
+                                                <ValidationMessage For=@(() => Data.LaboratorioId) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>@languageContainerService.Keys["NumberOfHealthRegister"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Data.RegSanitario" />
+                                                <ValidationMessage For=@(() => Data.RegSanitario) />
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+
+                        <br><br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                            @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+     @if (showSearchMedicine)
+    {
+        <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
+    }
+
+}
+
+   

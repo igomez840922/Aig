@@ -13,6 +13,43 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosInfraEstructura : SystemId
     {
+
+        private List<ContenidoPreguntas> lContenido;
+        public List<ContenidoPreguntas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
+
+        public void Inicializa()
+        {
+            LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Tipo de Paredes",
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Estado de las Paredes",
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Tipo de Cielo Raso",
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Estado del Cielo Raso",
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Tipo de Pisos",
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Estado del Piso",
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El ambiente externo del establecimiento presenta un riesgo mínimo de cualquier contaminación? De ser sí explique.",
+                        Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                    },
+             };
+        }
+
+
+
+
+
+
         //Escribir el tipo de paredes y el estado en el que está
         private string tipoParedes;
         [StringLength(500)]

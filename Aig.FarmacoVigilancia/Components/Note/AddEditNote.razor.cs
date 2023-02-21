@@ -89,25 +89,26 @@ namespace Aig.FarmacoVigilancia.Components.Note
         //Save Data and Close
         protected async Task SaveData()
         {
-            if (Nota.EvaluadorId != null && Nota.EvaluadorId > 0)
-            {
-                Nota.Evaluador = LPerson?.Where(x => x.Id == Nota.EvaluadorId.Value).FirstOrDefault();
-            }
-            //if (Nota.InstitucionDestinoId != null && Nota.InstitucionDestinoId > 0)
-            //{
-            //    Nota.InstitucionDestino = LInstitucionDestino?.Where(x => x.Id == Nota.InstitucionDestinoId.Value).FirstOrDefault();
-            //}
-
             //verificar el numero de nota unico
             if (!string.IsNullOrEmpty(Nota.NumNota))
             {
-                var tmpData = (await noteService.FindAll(x => x.NumNota.Contains(Nota.NumNota) && x.Id!=Nota.Id)).FirstOrDefault();
-                if(tmpData != null)
+                var tmpData = (await noteService.FindAll(x => x.NumNota.Contains(Nota.NumNota) && x.Id != Nota.Id)).FirstOrDefault();
+                if (tmpData != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El Número de Nota ya Existe"]);
                     return;
                 }
             }
+
+            if (Nota.EvaluadorId != null && Nota.EvaluadorId > 0)
+            {
+                Nota.Evaluador = LPerson?.Where(x => x.Id == Nota.EvaluadorId.Value).FirstOrDefault();
+            }
+
+            //if (Nota.InstitucionDestinoId != null && Nota.InstitucionDestinoId > 0)
+            //{
+            //    Nota.InstitucionDestino = LInstitucionDestino?.Where(x => x.Id == Nota.InstitucionDestinoId.Value).FirstOrDefault();
+            //}                        
 
             var result = await noteService.Save(Nota);
             if (result != null)

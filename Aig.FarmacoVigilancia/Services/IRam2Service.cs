@@ -46,6 +46,7 @@ namespace Aig.FarmacoVigilancia.Services
         Task<ReportModel<ReportModelResponse>> Report13(ReportModel<ReportModelResponse> model);
         //Según año (fecha de recepción).
         Task<ReportModel<ReportModelResponse>> Report14(ReportModel<ReportModelResponse> model);
+        Task<ReportModel<ReportModelResponse>> Report15(ReportModel<ReportModelResponse> model);
     }
 
    

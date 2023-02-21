@@ -1,0 +1,162 @@
+﻿@implements IDisposable
+
+@using DataModel.Helper;
+
+
+<!-- Modal Creat/Edit -->
+@if (Data != null && OpenDialog)
+{
+    <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
+        <div class="modal-dialog  modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">@languageContainerService.Keys["Seleccione el Establecimiento"]</h5>
+                    <button type="button" class="close" @onclick="(e)=>{Cancel();}"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="@Data" OnValidSubmit="SaveData">
+                        <DataAnnotationsValidator />
+                        <h5>@languageContainerService.Keys["GeneralInfo"]</h5>
+                        <div class="row clearfix">
+                            <div class="col-sm-8">
+
+                                <label>@languageContainerService.Keys["Name"]</label>
+                                <div class="input-group">
+                                    <InputText disbled class="form-control" @bind-Value="Data.Nombre" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchEstablishment();}"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <ValidationMessage For=@(() => Data.Nombre) />
+
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["LicNumber"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.NumLicencia" />
+                                        <ValidationMessage For=@(() => Data.NumLicencia) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["Aviso de Operaciones"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.AvisoOperaciones" />
+                                        <ValidationMessage For=@(() => Data.AvisoOperaciones) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["Recibo de Pago"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.ReciboPago" />
+                                        <ValidationMessage For=@(() => Data.ReciboPago) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Province"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="DataModel.ProvinciaTB" Class="form-control" @bind-Value=@Data.Provincia
+                                                    AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@LProvincias TextProperty="Nombre"></RadzenDropDown>
+                                        <ValidationMessage For=@(() => Data.Provincia) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["District"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="DataModel.DistritoTB" Class="form-control" @bind-Value=@Data.Distrito
+                                                    AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@(LDistritos.Where(x=>x.ProvinciaId == Data.Provincia?.Id)) TextProperty="Nombre"></RadzenDropDown>
+                                        <ValidationMessage For=@(() => Data.Distrito) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Corregimiento"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <RadzenDropDown AllowClear="true" TValue="DataModel.CorregimientoTB" Class="form-control" @bind-Value=@Data.Corregimiento
+                                                    AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                    Data=@(LCorregimiento.Where(x=>x.DistritoId == Data.Distrito?.Id)) TextProperty="Nombre"></RadzenDropDown>
+                                        <ValidationMessage For=@(() => Data.Corregimiento) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="password">@languageContainerService.Keys["Ubication"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.Direccion" />
+                                        <ValidationMessage For=@(() => Data.Direccion) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["PhoneNumber"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.Telefono" />
+                                        <ValidationMessage For=@(() => Data.Telefono) />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="password">@languageContainerService.Keys["Email"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Data.Correo" />
+                                        <ValidationMessage For=@(() => Data.Correo) />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                class="btn btn-info waves-effect">
+                                @languageContainerService.Keys["Save"]
+                            </button>
+                            <button type="button" class="btn btn-danger waves-effect"
+                                @onclick="(e)=>{Cancel();}">
+                                @languageContainerService.Keys["Cancel"]
+                            </button>
+                        </div>
+
+
+                    </EditForm>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    @if (showSearchEstablishment)
+    {
+        <Aig.Auditoria.Components.Establishments.SearchComponent></Aig.Auditoria.Components.Establishments.SearchComponent>
+    }
+}
+

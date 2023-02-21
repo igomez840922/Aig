@@ -4858,10 +4858,12 @@ namespace DataModel
         {
             LContenido = new List<ContenidoTablas>();
         }
-
+       
         private int numero;
         public int Numero { get => numero; set => SetProperty(ref numero, value); }
-
+        
+        private string titulo;
+        public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
 
         private string temperatura;
         public string Temperatura { get => temperatura; set => SetProperty(ref temperatura, value); }
@@ -4987,5 +4989,43 @@ namespace DataModel
         private string descripcion;
         public string Descripcion { get => descripcion; set => SetProperty(ref descripcion, value); }
 
+    }
+
+    ///////////////////////////////
+    ///
+        
+    public class ContenidoPreguntas : SystemId
+    {
+        public ContenidoPreguntas()
+        {
+            IsHeader = false;
+        }        
+
+        private bool isHeader;
+        public bool IsHeader { get => isHeader; set => SetProperty(ref isHeader, value); }
+               
+        // Titulo
+        private string titulo;
+        public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
+
+        // Evaluacion
+        enumAUD_TipoSeleccion? evaluacion = null;
+        public enumAUD_TipoSeleccion? Evaluacion { get { return evaluacion; } set { SetProperty(ref evaluacion, value); } }
+
+        // Evaluacion
+        List<OpcionEvaluacion> lEvaluacion = null;
+        public List<OpcionEvaluacion> LEvaluacion { get { return lEvaluacion; } set { SetProperty(ref lEvaluacion, value); } }
+
+
+        // Observaciones
+        private string observaciones;
+        public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
+
+    }
+
+    public class OpcionEvaluacion : SystemId
+    {
+        enumAUD_TipoSeleccion evaluacion;
+        public enumAUD_TipoSeleccion Evaluacion { get { return evaluacion; } set { SetProperty(ref evaluacion, value); } }
     }
 }

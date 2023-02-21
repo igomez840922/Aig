@@ -1,4 +1,5 @@
 ﻿using DataModel.Helper;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -62,10 +63,25 @@ namespace DataModel.Models
         public enumFMV_AlertType? AlertaNotaType { get; set; } = null;
         public enumFMV_NoteType? NotaType { get; set; } = null;
         public enum_LaboratoryType? LaboratoryType { get; set; } = null;
+        public enumFMV_StatusPMR? StatusPMR { get; set; } = null;
+        public enum_Cargos? TipoCargo { get; set; } = null;
 
         public long? NParentId { get; set; }
         public int? Priority { get; set; } = null;
         public long? ProvinceId { get; set; } = null;
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? RevDateIni { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? RevDateEnd { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? RecDateIni { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? RecDateEnd { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? ResDateIni { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? ResDateEnd { get; set; }
 
     }
 

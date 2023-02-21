@@ -75,6 +75,12 @@
                                 </label>
                                 <div class="form-group">
                                     <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Product.RegistroSistema" />
+                                        <ValidationMessage For=@(() => Product.RegistroSistema) />
+                                    </div>
+                                </div>
+                               @* <div class="form-group">
+                                    <div class="form-line">
                                         <InputSelect @bind-Value="Product.RegistroSistema" class="form-control">
                                             @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                             {
@@ -83,7 +89,7 @@
                                         </InputSelect>
                                         <ValidationMessage For=@(() => Product.RegistroSistema) />
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
 

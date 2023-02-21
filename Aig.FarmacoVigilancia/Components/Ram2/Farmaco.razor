@@ -85,21 +85,35 @@
                                 </div>
                             </div>
 
+                           
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Fecha de Tratamiento Inicial"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        @*<RadzenDatePicker Max="DateTime.Today" Change="@(args => OnFechaTratamientoChange(args, "Calendar", "MM/dd/yyyy"))" TValue="DateTime?" @bind-Value="Data.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />*@
+                                        <InputText class="form-control" @bind-Value="Data.FechaTratamiento" />
+                                        <ValidationMessage For=@(() => Data.FechaTratamiento) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>@languageContainerService.Keys["Fecha de Tratamiento Final"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        @*<RadzenDatePicker Max="DateTime.Today" Min="Data.FechaTratamiento" Change="@(args => OnFechaTratamientoChange(args, "Calendar", "MM/dd/yyyy"))" TValue="DateTime?" @bind-Value="Data.FechaTratamientoFin" ShowTime="false" DateFormat="dd/MM/yyyy" />*@
+                                        <InputText class="form-control" @bind-Value="Data.FechaTratamientoFin" />
+                                            <ValidationMessage For=@(() => Data.FechaTratamientoFin) />
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-sm-3">
                                 <label>@languageContainerService.Keys["Indicación"]</label>
                                 <div class="form-group">
                                     <InputText class="form-control" @bind-Value="Data.Indicacion" />
                                     <ValidationMessage For=@(() => Data.Indicacion) />
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label>@languageContainerService.Keys["Fecha de Tratamiento"]</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <RadzenDatePicker Max="DateTime.Today" Change="@(args => OnFechaTratamientoChange(args, "Calendar", "MM/dd/yyyy"))" TValue="DateTime?" @bind-Value="Data.FechaTratamiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
-                                        <ValidationMessage For=@(() => Data.FechaTratamiento) />
-                                    </div>
                                 </div>
                             </div>
 

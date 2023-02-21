@@ -139,9 +139,9 @@
                                                                     <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoActa))</td>
                                                                     <td>@(DataModel.Helper.Helper.GetDescription(dt.StatusInspecciones))</td>
                                                                     <td>@dt.FechaInicio.ToString("dd/MM/yyyy hh:mm tt")</td>
-                                                                    <td scope="row">@dt.LicenseNumber</td>
-                                                                    <td scope="row">@dt.AvisoOperacion</td>
-                                                                    <td>@(dt.Establecimiento?.Nombre ?? "")</td>
+                                                                    <td>@(dt.DatosEstablecimiento?.NumLicencia)</td>
+                                                                    <td>@(dt.DatosEstablecimiento?.AvisoOperaciones)</td>
+                                                                    <td>@(dt.DatosEstablecimiento?.Nombre)</td>
                                                                     <td style="text-align:right">
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -201,40 +201,53 @@ else
     {
         case DataModel.Helper.enumAUD_TipoActa.RR:
             {
-                <Aig.Auditoria.Components.Inspections.RetencionRetiroProductos Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RetencionRetiroProductos>
+                @*<Aig.Auditoria.Components.Inspections.RetencionRetiroProductos Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RetencionRetiroProductos>*@
+                <Aig.Auditoria.Components.Inspections._6_RetencionRetiro.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._6_RetencionRetiro.Index>
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.AF:
         case DataModel.Helper.enumAUD_TipoActa.CUF:
             {
-                <Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia>
+                @*<Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaFarmacia>*@
+                <Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.Index>
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.AA:
         case DataModel.Helper.enumAUD_TipoActa.CUA:
             {
-                <Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia>
+                @*<Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaCambUbicaAgencia>*@
+                <Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Index>
+
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.AFM:
+         {
+                @*<Aig.Auditoria.Components.Inspections.AperturaFabricante Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaFabricante>*@
+                <Aig.Auditoria.Components.Inspections._9_AperturaFabMedicamento.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._9_AperturaFabMedicamento.Index>
+
+                break;
+            }
         case DataModel.Helper.enumAUD_TipoActa.AFC:
             {
-                <Aig.Auditoria.Components.Inspections.AperturaFabricante Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaFabricante>
+                <Aig.Auditoria.Components.Inspections.AperturaFabricanteCosmetDesinf Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.AperturaFabricanteCosmetDesinf>
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.VF:
             {
-                <Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia>
+                @*<Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaFarmacia>*@
+                <Aig.Auditoria.Components.Inspections._3_RutinaVigilanciaFarmacia.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._3_RutinaVigilanciaFarmacia.Index>
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.VA:
             {
-                <Aig.Auditoria.Components.Inspections.RutinaVigilanciaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaAgencia>
+                @*<Aig.Auditoria.Components.Inspections.RutinaVigilanciaAgencia Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.RutinaVigilanciaAgencia>*@
+                <Aig.Auditoria.Components.Inspections._4_RutinaVigilanciaAgencia.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._4_RutinaVigilanciaAgencia.Index>
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.INV:
             {
-                <Aig.Auditoria.Components.Inspections.Investigacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.Investigacion>
+               @* <Aig.Auditoria.Components.Inspections.Investigacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.Investigacion>*@
+                <Aig.Auditoria.Components.Inspections._5_Investigaciones.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._5_Investigaciones.Index>
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.BPMCD:
@@ -254,12 +267,15 @@ else
             }
         case DataModel.Helper.enumAUD_TipoActa.COP:
             {
-                <Aig.Auditoria.Components.Inspections.CierreOperacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.CierreOperacion>
+                @*<Aig.Auditoria.Components.Inspections.CierreOperacion Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.CierreOperacion>*@
+                <Aig.Auditoria.Components.Inspections._7_CierreOperaciones.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._7_CierreOperaciones.Index>
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.DFP:
             {
-                <Aig.Auditoria.Components.Inspections.DisposicionFinal Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.DisposicionFinal>
+                @*<Aig.Auditoria.Components.Inspections.DisposicionFinal Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections.DisposicionFinal>*@
+                <Aig.Auditoria.Components.Inspections._8_DisposicionFinal.Index Inspeccion="@dataModel.Data"></Aig.Auditoria.Components.Inspections._8_DisposicionFinal.Index>
+
                 break;
             }
         case DataModel.Helper.enumAUD_TipoActa.BPMFM:

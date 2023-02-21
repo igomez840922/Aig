@@ -17,7 +17,7 @@ namespace DataModel
 
         // Nombre del Paciente
         private string nombrePaciente;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         [StringLength(300)]
         public string NombrePaciente { get => nombrePaciente; set => SetProperty(ref nombrePaciente, value); }
 
@@ -41,19 +41,22 @@ namespace DataModel
         public string HistClinica { get => histClinica; set => SetProperty(ref histClinica, value); }
 
         // Fecha de tratamiento inicial
-        private DateTime? fechaTratInicial;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaTratInicial { get => fechaTratInicial; set => SetProperty(ref fechaTratInicial, value); }
+        private string fechaTratInicial;
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [StringLength(250)]
+        public string FechaTratInicial { get => fechaTratInicial; set => SetProperty(ref fechaTratInicial, value); }
 
         // Fecha de tratamiento final
-        private DateTime? fechaTratFinal;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaTratFinal { get => fechaTratFinal; set => SetProperty(ref fechaTratFinal, value); }
+        private string fechaTratFinal;
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [StringLength(250)]
+        public string FechaTratFinal { get => fechaTratFinal; set => SetProperty(ref fechaTratFinal, value); }
 
         // Fecha de FT
-        private DateTime? fechaFT;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaFT { get => fechaFT; set => SetProperty(ref fechaFT, value); }
+        private string fechaFT;
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [StringLength(250)]
+        public string FechaFT { get => fechaFT; set => SetProperty(ref fechaFT, value); }
 
         // Indicación
         private string indicacion;

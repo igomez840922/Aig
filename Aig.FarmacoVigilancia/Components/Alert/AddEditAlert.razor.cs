@@ -79,6 +79,17 @@ namespace Aig.FarmacoVigilancia.Components.Alert
         //Save Data and Close
         protected async Task SaveData()
         {
+            //verificar num de la nota
+            if (!string.IsNullOrEmpty(Alerta.NumNota))
+            {
+                var tmpData = (await alertaService.FindAll(x => x.NumNota.Contains(Alerta.NumNota) && x.Id != Alerta.Id)).FirstOrDefault();
+                if (tmpData != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El Número de Nota ya Existe"]);
+                    return;
+                }
+            }
+
             if (Alerta.OrigenAlertaId != null && Alerta.OrigenAlertaId > 0)
             {
                 Alerta.OrigenAlerta = LOriginAlert?.Where(x => x.Id == Alerta.OrigenAlertaId.Value).FirstOrDefault();

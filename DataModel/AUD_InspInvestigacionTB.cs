@@ -9,19 +9,26 @@ namespace DataModel
 {
     public class AUD_InspInvestigacionTB: SystemId
     {
-        public AUD_InspInvestigacionTB()
-        {
-            DatosEstablecimiento = new AUD_DatosEstablecimiento();
-            DatosAtendidosPor = new AUD_DatosAtendidosPor();
-            DatosRepresentLegal = new AUD_DatosRepresentLegal();
-            DatosConclusiones = new AUD_DatosConclusiones();    
-        }
-
         private AUD_InspeccionTB inspeccion;
+
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
+        //Datos Atendidos Por
+        private AUD_DatosAtendidosPor datosAtendidosPor;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DatosAtendidosPor DatosAtendidosPor { get => datosAtendidosPor; set => SetProperty(ref datosAtendidosPor, value); }
 
+        //Datos Atendidos Por
+        private AUD_DetallesInvestigacion detallesInvestigacion;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_DetallesInvestigacion DetallesInvestigacion { get => detallesInvestigacion; set => SetProperty(ref detallesInvestigacion, value); }
+
+        
+    }
+
+    public class AUD_DetallesInvestigacion : SystemId
+    {
         private string detalleVerificacion;
         public string DetalleVerificacion { get => detalleVerificacion; set => SetProperty(ref detalleVerificacion, value); }
 
@@ -35,30 +42,6 @@ namespace DataModel
 
         private enumOpcionSiNo movilizarProductos;
         public enumOpcionSiNo MovilizarProductos { get => movilizarProductos; set => SetProperty(ref movilizarProductos, value); }
-
-
-        //Datos del Establecimiento
-        private AUD_DatosEstablecimiento datosEstablecimiento;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosEstablecimiento DatosEstablecimiento { get => datosEstablecimiento; set => SetProperty(ref datosEstablecimiento, value); }
-
-        //Datos Atendidos Por
-        private AUD_DatosAtendidosPor datosAtendidosPor;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosAtendidosPor DatosAtendidosPor { get => datosAtendidosPor; set => SetProperty(ref datosAtendidosPor, value); }
-
-        //Datos del Regente
-        private AUD_DatosRepresentLegal datosRepresentLegal;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosRepresentLegal DatosRepresentLegal { get => datosRepresentLegal; set => SetProperty(ref datosRepresentLegal, value); }
-               
-
-        //Datos Conclusión de Inspección
-        private AUD_DatosConclusiones datosConclusiones;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
-
-        
 
     }
 }

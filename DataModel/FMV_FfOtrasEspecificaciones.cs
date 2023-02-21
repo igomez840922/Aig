@@ -11,8 +11,8 @@ namespace DataModel
     public class FMV_FfOtrasEspecificaciones:SystemId
     {
         // Número de Ingreso a Vigiflow
-        private string numIngresoVigiflow;
-        public string NumIngresoVigiflow { get => numIngresoVigiflow; set => SetProperty(ref numIngresoVigiflow, value); }
+        private string codigoNotiFacedra;
+        public string CodigoNotiFacedra { get => codigoNotiFacedra; set => SetProperty(ref codigoNotiFacedra, value); }
 
         // Revisión de RS (Especificaciones, inserto, otro): Total=3. Realizado, Pendiente, No Requerido
         private enumFMV_FfAcciones revisionRs;

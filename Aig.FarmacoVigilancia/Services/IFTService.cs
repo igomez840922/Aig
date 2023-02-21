@@ -45,6 +45,12 @@ namespace Aig.FarmacoVigilancia.Services
         Task<ReportModel<ReportModelResponse>> Report12(ReportModel<ReportModelResponse> model);
         //13.	Incidencia del caso (inicial y seguimiento)
         Task<ReportModel<ReportModelResponse>> Report13(ReportModel<ReportModelResponse> model);
+        //14. Por Edad
+        Task<ReportModel<ReportModelResponse>> Report14(ReportModel<ReportModelResponse> model);
+        //15. Por Sexo
+        Task<ReportModel<ReportModelResponse>> Report15(ReportModel<ReportModelResponse> model);
+        //16. evolucion de la Causalidad
+        Task<ReportModel<ReportModelResponse>> Report16(ReportModel<ReportModelResponse> model);
 
     }
 

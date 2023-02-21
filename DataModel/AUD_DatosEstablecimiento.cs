@@ -37,5 +37,11 @@ namespace DataModel
         private string telefono;
         [StringLength(250)]
         public string Telefono { get => telefono; set => SetProperty(ref telefono, value); }
+
+        //correo
+        private string correo;
+        [StringLength(250)]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
+        public string Correo { get => correo; set => SetProperty(ref correo, value); }
     }
 }

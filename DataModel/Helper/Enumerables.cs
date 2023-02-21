@@ -673,6 +673,14 @@ namespace DataModel.Helper
         NoSabe = 3,
     }
 
+    public enum enumOpcionSiNoOnly
+    {
+        [Description("No")]
+        No = 0,
+        [Description("Si")]
+        Si = 1,
+    }
+
     public enum enumFMV_IpsPresentaCD
     {
         [Description("No Adjunta")]
@@ -691,6 +699,31 @@ namespace DataModel.Helper
         [Description("Rechazado")]
         Rejected = 2,
     }
+
+    public enum enumEvoCausalidad
+    {
+        [Description("No Clasificable")]
+        NoClasificable = 0,
+        [Description("Posiblemente asociado al uso inadecuado del medicamento")]
+        UsoInadecuado = 1,
+        [Description("Notificación posiblemente inducida")]
+        Inducida = 2,
+        [Description("Posiblemente asociado a un problema biofarmacéutico")]
+        ProblemaBioFarmaceutico = 3,
+        [Description("Posiblemente asociado a respuesta idiosincrática u otras razones no establecidas")]
+        RespuestaIdiosincratica = 4,
+        [Description("No se cuenta con suficiente información")]
+        NoSuficienteInfo = 5,
+    }
+
+    public enum enumTipoProductosImportacion
+    {
+        [Description("Otros")]
+        Otros = 0,
+        [Description("Importación de materia prima para la fabricación de productos farmacéuticos, que serán utilizados para los lotes de prueba")]
+        Importa = 1,
+    }
+
 
     //////////////////////////////
     /// <summary>
@@ -890,6 +923,76 @@ namespace DataModel.Helper
         ModActividad = 5,
         [Description("Ampliación o modificación de área")]
         AmpModArea = 6,
+    }
+
+    public enum enumAUD_StatusCorrespondencia
+    {
+        [Description("Pendiente")]
+        Pendiente = 0,
+        [Description("Recibido")]
+        Recibido = 1,
+        [Description("Finalizado por DAC")]
+        FinalizadoDAC = 2,
+    }
+
+    public enum enumAUD_TipoCorrespondencia
+    {
+        [Description("Informe Técnico")]
+        InfTecnico = 0,
+        [Description("Hoja de Trámite")]
+        HojaTramite = 1,
+        [Description("Otros")]
+        Otros = 2,
+    }
+
+    public enum enumSelectedChapter
+    {
+        [Description("None")]
+        None = 0,
+        [Description("Cap01")]
+        Cap01 = 1,
+        [Description("Cap02")]
+        Cap02 = 2,
+        [Description("Cap03")]
+        Cap03 = 3,
+        [Description("Cap04")]
+        Cap04 = 4,
+        [Description("Cap05")]
+        Cap05 = 5,
+        [Description("Cap06")]
+        Cap06 = 6,
+        [Description("Cap07")]
+        Cap07 = 7,
+        [Description("Cap08")]
+        Cap08 = 8,
+        [Description("Cap09")]
+        Cap09 = 9,
+        [Description("Cap10")]
+        Cap10 = 10,
+        [Description("Cap11")]
+        Cap11 = 11,
+        [Description("Cap12")]
+        Cap12 = 12,
+        [Description("Cap13")]
+        Cap13 = 13,
+        [Description("Cap14")]
+        Cap14 = 14,
+        [Description("Cap15")]
+        Cap15 = 15,
+        [Description("Cap16")]
+        Cap16 = 16,
+        [Description("Cap17")]
+        Cap17 = 17,
+        [Description("Cap18")]
+        Cap18 = 18,
+        [Description("Cap19")]
+        Cap19 = 19,
+        [Description("Cap20")]
+        Cap20 = 20,
+        [Description("Cap21")]
+        Cap21 = 21,
+        [Description("Cap22")]
+        Cap22 = 22,
     }
 
 }

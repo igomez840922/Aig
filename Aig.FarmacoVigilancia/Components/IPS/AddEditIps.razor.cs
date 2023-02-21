@@ -1,4 +1,5 @@
-﻿using Aig.FarmacoVigilancia.Events.IPS;
+﻿using Aig.FarmacoVigilancia.Components.ESAVI2;
+using Aig.FarmacoVigilancia.Events.IPS;
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.PMR;
 using Aig.FarmacoVigilancia.Pages.Alert;
@@ -30,7 +31,12 @@ namespace Aig.FarmacoVigilancia.Components.IPS
         bool openAttachment { get; set; } = false;
         AttachmentTB attachment { get; set; } = null;
 
-        bool showSearchMedicine { get; set; } = false;
+        //bool showSearchMedicine { get; set; } = false;
+
+        FMV_IpsMedicamentoTB Medicamento { get; set; } = null;
+        bool OpenAddEditMedicamento { get; set; } = false;
+
+        bool Exit { get; set; } = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -96,34 +102,56 @@ namespace Aig.FarmacoVigilancia.Components.IPS
         //Save Data and Close
         protected async Task SaveData()
         {
-            if (Ips.EvaluadorId != null && Ips.EvaluadorId > 0)
+            try
             {
-                Ips.Evaluador = lPersons?.Where(x=>x.Id == Ips.EvaluadorId.Value).FirstOrDefault();
-            }
-            if (Ips.TramitadorId != null && Ips.TramitadorId > 0)
-            {
-                Ips.Tramitador = lPersons?.Where(x => x.Id == Ips.TramitadorId.Value).FirstOrDefault();
-            }
-            if (Ips.RegistradorId != null && Ips.RegistradorId > 0)
-            {
-                Ips.Registrador = lPersons?.Where(x => x.Id == Ips.RegistradorId.Value).FirstOrDefault();
-            }
+                //verificar num de la nota
+                if (!string.IsNullOrEmpty(Ips.NoInforme))
+                {
+                    var tmpData = (await ipsService.FindAll(x => x.NoInforme.Contains(Ips.NoInforme) && x.Id != Ips.Id))?.FirstOrDefault();
+                    if (tmpData != null)
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["El Número de Informe ya Existe"]);
+                        return;
+                    }
+                }
 
-            if(Ips.EstatusRecepcion == DataModel.Helper.enumFMV_IpsStatusRecepcion.Rejected)
-            {
-                Ips.StatusRevision = DataModel.Helper.enumFMV_IpsStatusRevision.Rejected;
-            }
+                if (Ips.EvaluadorId != null && Ips.EvaluadorId > 0)
+                {
+                    Ips.Evaluador = lPersons?.Where(x => x.Id == Ips.EvaluadorId.Value).FirstOrDefault();
+                }
+                if (Ips.TramitadorId != null && Ips.TramitadorId > 0)
+                {
+                    Ips.Tramitador = lPersons?.Where(x => x.Id == Ips.TramitadorId.Value).FirstOrDefault();
+                }
+                if (Ips.RegistradorId != null && Ips.RegistradorId > 0)
+                {
+                    Ips.Registrador = lPersons?.Where(x => x.Id == Ips.RegistradorId.Value).FirstOrDefault();
+                }
 
-            var result = await ipsService.Save(Ips);
-            if (result != null)
-            {
-                await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                Ips = result;
+                if (Ips.EstatusRecepcion == DataModel.Helper.enumFMV_IpsStatusRecepcion.Rejected)
+                {
+                    Ips.StatusRevision = DataModel.Helper.enumFMV_IpsStatusRevision.Rejected;
+                }
 
-                await bus.Publish(new IpsAddEdit_CloseEvent { Data = null });
+                var result = await ipsService.Save(Ips);
+                if (result != null)
+                {
+                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+                    Ips = result;
+
+                    if (Exit)
+                        await bus.Publish(new IpsAddEdit_CloseEvent { Data = null });
+                }
+                else
+                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+
             }
-            else
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            catch (Exception ex)
+            {
+            }
+            finally { Exit = false; }
+            //verificar CodigoCNFV
+
         }
 
         //Cancel and Close
@@ -180,31 +208,73 @@ namespace Aig.FarmacoVigilancia.Components.IPS
 
         /////////
         ///        
-        protected async Task OpenSearchMedicine()
-        {
-            bus.Subscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+        //protected async Task OpenSearchMedicine()
+        //{
+        //    bus.Subscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
 
-            showSearchMedicine = true;
+        //    showSearchMedicine = true;
+
+        //    await this.InvokeAsync(StateHasChanged);
+        //}
+        //private void MedicineSearchEventHandler(MessageArgs args)
+        //{
+        //    showSearchMedicine = false;
+
+        //    bus.UnSubscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+
+        //    var message = args.GetMessage<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>();
+
+        //    if (message.Data != null)
+        //    {
+        //        Ips.RegSanitario = message.Data.numReg;
+        //        Ips.NomComercial = message.Data.nombre;
+        //        Ips.PrincActivo = string.IsNullOrEmpty(message.Data.principio) ? Ips.PrincActivo : message.Data.principio;
+        //    }
+
+        //    this.InvokeAsync(StateHasChanged);
+        //}
+
+
+        //Add New Farmaco
+        protected async Task OpenMedicamento(FMV_IpsMedicamentoTB medicamento = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.IPSMedicamento.AddEditEvent>(Medicamento_AddEditEventHandler);
+
+            Medicamento = medicamento != null ? medicamento : new FMV_IpsMedicamentoTB();
+            OpenAddEditMedicamento = true;
 
             await this.InvokeAsync(StateHasChanged);
         }
-        private void MedicineSearchEventHandler(MessageArgs args)
+        //Remove Farmaco
+        protected async Task RemoveMedicamento(FMV_IpsMedicamentoTB medicamento)
         {
-            showSearchMedicine = false;
+            if (medicamento != null)
+            {
+                Ips.LMedicamentos.Remove(medicamento);
 
-            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>(MedicineSearchEventHandler);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //on close Farmaco MODAL 
+        private void Medicamento_AddEditEventHandler(MessageArgs args)
+        {
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.IPSMedicamento.AddEditEvent>(Medicamento_AddEditEventHandler);
 
-            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.SearchMedicines.SearchMedicinesEvent>();
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.IPSMedicamento.AddEditEvent>();
 
+            Medicamento = null;
+            OpenAddEditMedicamento = false;
             if (message.Data != null)
             {
-                Ips.RegSanitario = message.Data.numReg;
-                Ips.NomComercial = message.Data.nombre;
-                Ips.PrincActivo = string.IsNullOrEmpty(message.Data.principio) ? Ips.PrincActivo : message.Data.principio;
+                Ips.LMedicamentos = Ips.LMedicamentos != null ? Ips.LMedicamentos : new List<FMV_IpsMedicamentoTB>();
+
+                if (!Ips.LMedicamentos.Contains(message.Data))
+                    Ips.LMedicamentos.Add(message.Data);
             }
 
             this.InvokeAsync(StateHasChanged);
         }
+
     }
 
 }

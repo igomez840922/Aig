@@ -187,11 +187,11 @@ namespace Aig.Auditoria.Pages.Correspondencia
                 var data = await correspondenciaService.Get(Id);
                 if (data != null && !string.IsNullOrEmpty(data.EmailDirigido))
                 {
-                    var subject = string.Format("Correspondencia para {0}",data.DptoSeccion);
+                    var subject = string.Format("Correspondencia {0}", data.SecNumberStr);
 
                     var builder = new BodyBuilder();
 
-                    builder.TextBody = string.Format("Para: {0} \r\nFecha: {1} \r\n\r\nAsunto: {2} \r\n\r\nDe: Ana Belén Gonzáles\r\nJefa del Dpto. Auditorías de Calidad a \r\nEstablecimientos Farmacéuticos y NF", data.DptoSeccion, DateTime.Now.ToString("dd/MM/yyyy"), data.Asunto); 
+                    builder.TextBody = string.Format("Para: {0} \r\nFecha: {1} \r\nNum.: {2} \r\n\r\nAsunto: {3}\r\n\r\nObservaciones: {4} \r\n\r\nDe: Ana Belén Gonzáles\r\nJefa del Dpto. Auditorías de Calidad a \r\nEstablecimientos Farmacéuticos y NF", data.DptoSeccion, DateTime.Now.ToString("dd/MM/yyyy"), data.SecNumberStr, data.Asunto, data.Observaciones); 
 
                     var stream = await pdfGenerationService.GenerateCorrespondencia(data.Id);
                     if (stream != null)

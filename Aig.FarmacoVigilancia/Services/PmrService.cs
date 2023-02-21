@@ -25,16 +25,18 @@ namespace Aig.FarmacoVigilancia.Services
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.PmrProducto.NomComercial.Contains(model.Filter) || data.PmrProducto.RegSanitario.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) || data.PmrProducto.Laboratorio.Nombre.Contains(model.Filter)))&&
                               (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
-                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
-                              orderby data.CreatedDate
+                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
+                              (model.StatusPMR == null ? true : (data.Status == model.StatusPMR))
+                                orderby data.CreatedDate
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_PmrTB>()
                                where data.Deleted == false &&
                                (string.IsNullOrEmpty(model.Filter) ? true : (data.PrincActivo.Contains(model.Filter) || data.PmrProducto.NomComercial.Contains(model.Filter) || data.PmrProducto.RegSanitario.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) || data.PmrProducto.Laboratorio.Nombre.Contains(model.Filter))) &&
-                                (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
-                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
+                              (model.FromDate == null ? true : (data.FechaEntrada >= model.FromDate)) &&
+                              (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
+                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
+                              (model.StatusPMR == null ? true : (data.Status == model.StatusPMR))
                                select data).Count();  
             }
             catch (Exception ex)

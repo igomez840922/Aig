@@ -47,7 +47,7 @@ namespace DataModel
         public enumFMV_RAMOrigenType RamOrigenType { get => ramOrigenType; set => SetProperty(ref ramOrigenType, value); }
 
         private string codigoNotiFacedra;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string CodigoNotiFacedra { get => codigoNotiFacedra; set => SetProperty(ref codigoNotiFacedra, value); }
 
@@ -80,6 +80,10 @@ namespace DataModel
         private string ramDesc;
         [StringLength(500)]
         public string RamDesc { get => ramDesc; set => SetProperty(ref ramDesc, value); }
+
+        private string gravedadDesc;
+        [StringLength(500)]
+        public string GravedadDesc { get => gravedadDesc; set => SetProperty(ref gravedadDesc, value); }
 
         /////////////////////////////
         ///PROCEDENCIA DE LA NOTIFICACION

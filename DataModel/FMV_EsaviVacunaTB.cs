@@ -58,9 +58,10 @@ namespace DataModel
         public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
 
         // Fecha de Vacunación
-        private DateTime? fechaVacunacion;
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaVacunacion { get => fechaVacunacion; set => SetProperty(ref fechaVacunacion, value); }
+        private string fechaVacunacion;
+        [StringLength(250)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string FechaVacunacion { get => fechaVacunacion; set => SetProperty(ref fechaVacunacion, value); }
 
 
         //Indicaciones

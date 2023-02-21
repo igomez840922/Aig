@@ -150,6 +150,8 @@ builder.Services.AddScoped<IApiConnectionService, ApiConnectionService>();
 builder.Services.AddScoped<ITokenMedService, TokenMedService>();
 builder.Services.AddScoped<IMedicamentosService, MedicamentosService>();
 builder.Services.AddScoped<IApiConnectionFileUploadService, ApiConnectionFileUploadService>();
+builder.Services.AddScoped<IFarmacoService, FarmacoService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 
@@ -174,9 +176,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<BlazorCookieLoginMiddleware<ApplicationUser>>();
 app.MapControllers();
-
 app.MapBlazorHub(); 
-
 
 app.MapFallbackToPage("/_Host");
 

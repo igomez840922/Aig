@@ -170,11 +170,14 @@ namespace DataModel
         private FMV_FtDatosPaciente datosPaciente;
         //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual FMV_FtDatosPaciente DatosPaciente { get => datosPaciente; set => SetProperty(ref datosPaciente, value); }
-               
+
+        private long? evaluacionCausalidadId;
+        public long? EvaluacionCausalidadId { get => evaluacionCausalidadId; set => SetProperty(ref evaluacionCausalidadId, value); }
         //TAB EVALUACION DE CAUSALIDAD
         private FMV_FtEvaluacionCausalidad evaluacionCausalidad;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public FMV_FtEvaluacionCausalidad EvaluacionCausalidad { get => evaluacionCausalidad; set => SetProperty(ref evaluacionCausalidad, value); }
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual FMV_FtEvaluacionCausalidad EvaluacionCausalidad { get => evaluacionCausalidad; set => SetProperty(ref evaluacionCausalidad, value); }
+               
 
         // Grado
         private string grado;
@@ -218,5 +221,8 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
+        //Falla Terapeutica
+        private enumOpcionSiNoOnly reportaFallaTerapeutica;
+        public enumOpcionSiNoOnly ReportaFallaTerapeutica { get => reportaFallaTerapeutica; set => SetProperty(ref reportaFallaTerapeutica, value); }
     }
 }

@@ -32,6 +32,8 @@ namespace DataModel
         JefSecLic = 8,
         [Description("Evaluador - Inscripción de Materia Prima")]
         EvaInsMP = 9,
+        [Description("Consultor de Correspondencias")]
+        ConsultCo = 9,
     }
 
     public class ApplicationUser : IdentityUser

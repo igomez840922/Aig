@@ -91,6 +91,15 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Recibo de Pago"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.ReciboPago" />
+                                                <ValidationMessage For=@(() => Establecimiento.ReciboPago) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Sector"]</label>
                                         <div class="form-group">
                                             <div class="form-line">

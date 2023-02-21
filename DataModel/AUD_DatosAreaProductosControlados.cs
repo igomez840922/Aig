@@ -14,6 +14,59 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosAreaProductosControlados : SystemId
     {
+        private List<ContenidoPreguntas> lContenido;
+        public List<ContenidoPreguntas> LContenido { get => lContenido; set => SetProperty(ref lContenido, value); }
+
+        public void Inicializa()
+        {
+            LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                            Titulo = "Identificada",
+                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Delimitada",
+                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Asegurado bajo llave u otro sistema de seguridad comprobada",
+                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Posee un área identificada de vencidos",
+                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Independiente de otras áreas",
+                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Medidas aproximadas",
+                            IsHeader=true,
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Largo",
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Ancho",
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Altura",
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Descripción del lugar donde se almacenan y las medidas de seguridad",
+                        },
+             };
+        }
+
+
+
+        /// <summary>
+        /// ////////////////////
+        /// </summary>
+
+
+
         //El área se encuentra identificada
         private enumAUD_TipoSeleccion areaIdentificada;
         public enumAUD_TipoSeleccion AreaIdentificada { get => areaIdentificada; set => SetProperty(ref areaIdentificada, value); }

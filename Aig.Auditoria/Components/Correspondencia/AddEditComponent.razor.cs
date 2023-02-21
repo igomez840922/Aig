@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
+using System.Net.Mail;
 
 namespace Aig.Auditoria.Components.Correspondencia
 {   
@@ -20,6 +21,16 @@ namespace Aig.Auditoria.Components.Correspondencia
         ICorrespondenciaService correspondenciaService { get; set; }
         [Inject]
         AuthenticationStateProvider authenticationStateAsync { get; set; }
+        [Inject]
+        ICorrespondenciaAsuntoService correspondenciaAsuntoService { get; set; }
+        List<AUD_CorrespondenciaAsuntoTB> LAsuntos { get; set; } = new List<AUD_CorrespondenciaAsuntoTB>();
+        [Inject]
+        ICorrespondenciaContactoService correspondenciaContactoService { get; set; }
+        List<AUD_CorrespondenciaContactoTB> LContacto { get; set; } = new List<AUD_CorrespondenciaContactoTB>();
+        [Inject]
+        ICorrespondenciaRespRevisionService correspondenciaRespRevisionService { get; set; }
+        List<AUD_CorrespondenciaRespRevisionTB> LResponsables { get; set; } = new List<AUD_CorrespondenciaRespRevisionTB>();
+
 
         bool OpenDialog { get; set; }
         [Parameter]
@@ -37,6 +48,9 @@ namespace Aig.Auditoria.Components.Correspondencia
         bool disabledDatosEstablecimientos { get; set; } = false;
 
         bool showSearchEstablishment { get; set; } = false;
+
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -70,6 +84,10 @@ namespace Aig.Auditoria.Components.Correspondencia
         //Fill Data
         protected async Task FetchData()
         {
+            LContacto = LContacto?.Count > 0 ? LContacto : await correspondenciaContactoService.GetAll();
+            LAsuntos = LAsuntos?.Count > 0 ? LAsuntos : await correspondenciaAsuntoService.GetAll();
+            LResponsables = LResponsables?.Count > 0 ? LResponsables : await correspondenciaRespRevisionService.GetAll();
+
             OpenDialog = true;
             Correspondencia = Correspondencia != null ? Correspondencia : new DataModel.AUD_CorrespondenciaTB();
 
@@ -115,6 +133,27 @@ namespace Aig.Auditoria.Components.Correspondencia
                         Correspondencia.DptoSeccion = DataModel.Helper.Helper.GetDescription(Correspondencia.DptoSeccionType);
                         break;
                     }
+            }
+
+            if(Correspondencia.TipoCorrespondencia!= DataModel.Helper.enumAUD_TipoCorrespondencia.Otros)
+            {
+                Correspondencia.DescTipoCorrespondencia = DataModel.Helper.Helper.GetDescription(Correspondencia.TipoCorrespondencia);
+            }
+            if (Correspondencia.CorrespondenciaAsuntoId != null)
+            {
+                Correspondencia.CorrespondenciaAsunto = LAsuntos.Where(x => x.Id == Correspondencia.CorrespondenciaAsuntoId)?.FirstOrDefault();
+                Correspondencia.Asunto = Correspondencia.CorrespondenciaAsunto?.Nombre;               
+            }
+            if(Correspondencia.CorrespondenciaContactoId != null)
+            {
+                Correspondencia.CorrespondenciaContacto = LContacto.Where(x => x.Id == Correspondencia.CorrespondenciaContactoId)?.FirstOrDefault();
+                Correspondencia.NombreDirigido = Correspondencia.CorrespondenciaContacto?.Nombre;
+                Correspondencia.EmailDirigido = Correspondencia.CorrespondenciaContacto?.Email;
+            }
+            if (Correspondencia.CorrespondenciaResponsableId != null)
+            {
+                Correspondencia.CorrespondenciaResponsable = LResponsables.Where(x => x.Id == Correspondencia.CorrespondenciaResponsableId)?.FirstOrDefault();
+                Correspondencia.NombreRevision = string.Format("{0} - {1}", Correspondencia.CorrespondenciaResponsable?.Nombre, Correspondencia.CorrespondenciaResponsable?.Cargo);
             }
 
             var result = await correspondenciaService.Save(Correspondencia);
@@ -193,6 +232,98 @@ namespace Aig.Auditoria.Components.Correspondencia
             this.InvokeAsync(StateHasChanged);
         }
 
+
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+
+                Correspondencia.AdjuntoIngreso.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Correspondencia.AdjuntoIngreso = Correspondencia.AdjuntoIngreso != null ? Correspondencia.AdjuntoIngreso : new AttachmentData();
+                Correspondencia.AdjuntoIngreso.LAttachments = Correspondencia.AdjuntoIngreso.LAttachments != null ? Correspondencia.AdjuntoIngreso.LAttachments : new List<AttachmentTB>();
+
+                Correspondencia.AdjuntoIngreso.LAttachments.Add(message.Attachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
+        //Add New Attachment2
+        protected async Task OpenAttachment2(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler2);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment2(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+
+                Correspondencia.AdjuntoSeguimiento.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler2(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Correspondencia.AdjuntoSeguimiento = Correspondencia.AdjuntoSeguimiento != null ? Correspondencia.AdjuntoSeguimiento : new AttachmentData();
+                Correspondencia.AdjuntoSeguimiento.LAttachments = Correspondencia.AdjuntoSeguimiento.LAttachments != null ? Correspondencia.AdjuntoSeguimiento.LAttachments : new List<AttachmentTB>();
+
+                Correspondencia.AdjuntoSeguimiento.LAttachments.Add(message.Attachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
 
     }
 

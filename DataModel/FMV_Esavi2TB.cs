@@ -23,12 +23,12 @@ namespace DataModel
 
         private string codigoNotiFacedra;
         [StringLength(250)]
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         public string CodigoNotiFacedra { get => codigoNotiFacedra; set => SetProperty(ref codigoNotiFacedra, value); }
 
         private string idFacedra;
         [StringLength(250)]
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         public string IdFacedra { get => idFacedra; set => SetProperty(ref idFacedra, value); }
 
         // Código externo

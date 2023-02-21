@@ -121,6 +121,8 @@ iframe {
 
 .table th, .table td {
     vertical-align: middle !important;
+    white-space: pre-line;
+    text-align: justify;
 }
 
 .kt-header--fixed.kt-subheader--fixed.kt-subheader--enabled .kt-wrapper{

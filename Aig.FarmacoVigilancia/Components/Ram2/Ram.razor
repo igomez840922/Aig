@@ -82,11 +82,23 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <label>@languageContainerService.Keys["Fecha de RAM"]</label>
+                                <label>@languageContainerService.Keys["Fecha Inicio de RAM"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <RadzenDatePicker Max=" DateTime.Today"  Change="@(args => OnRAMDateChange(args, "Calendar", "MM/dd/yyyy"))"  TValue="   DateTime?" @bind-Value=" Data.FechaRam" ShowTime="    false" DateFormat="dd/MM/yyyy" />
+                                        @*<RadzenDatePicker Max=" DateTime.Today"  Change="@(args => OnRAMDateChange(args, "Calendar", "MM/dd/yyyy"))"  TValue="   DateTime?" @bind-Value=" Data.FechaRam" ShowTime="    false" DateFormat="dd/MM/yyyy" />*@
+                                        <InputText class="form-control" @bind-Value="Data.FechaRam" />
                                         <ValidationMessage For=@(() => Data.FechaRam) />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label>@languageContainerService.Keys["Fecha Fin de RAM"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        @*<RadzenDatePicker Max=" DateTime.Today" Min="Data.FechaRam" Change="@(args => OnRAMDateChange(args, "Calendar", "MM/dd/yyyy"))" TValue="   DateTime?" @bind-Value=" Data.FechaRamFin" ShowTime="    false" DateFormat="dd/MM/yyyy" />*@
+                                        <InputText class="form-control" @bind-Value="Data.FechaRamFin" />
+                                        <ValidationMessage For=@(() => Data.FechaRamFin) />
                                     </div>
                                 </div>
                             </div>

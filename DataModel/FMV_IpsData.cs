@@ -35,17 +35,17 @@ namespace DataModel
         public DateTime? FechaAsigPreEva { get => fechaAsigPreEva; set => SetProperty(ref fechaAsigPreEva, value); }
 
 
-        // Innovador: si, no
-        private bool innovador;
-        public bool Innovador { get => innovador; set => SetProperty(ref innovador, value); }
+        //// Innovador: si, no
+        //private bool innovador;
+        //public bool Innovador { get => innovador; set => SetProperty(ref innovador, value); }
 
-        //Biologico: si, no
-        private bool biologico;
-        public bool Biologico { get => biologico; set => SetProperty(ref biologico, value); }
+        ////Biologico: si, no
+        //private bool biologico;
+        //public bool Biologico { get => biologico; set => SetProperty(ref biologico, value); }
 
-        // Requiere intercambiabilidad: si, no
-        private bool reqIntercam;
-        public bool ReqIntercam { get => reqIntercam; set => SetProperty(ref reqIntercam, value); }
+        //// Requiere intercambiabilidad: si, no
+        //private bool reqIntercam;
+        //public bool ReqIntercam { get => reqIntercam; set => SetProperty(ref reqIntercam, value); }
 
         // Fecha de autorizacion en Panamá
         private DateTime? fechaAutPan;

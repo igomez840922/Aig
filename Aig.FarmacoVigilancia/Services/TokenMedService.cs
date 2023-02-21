@@ -30,7 +30,7 @@ namespace Aig.FarmacoVigilancia.Services
                                     { "password","123"}
                                 };
                 StringContent content = new StringContent(JsonConvert.SerializeObject(myDict), Encoding.UTF8, "application/json");
-                var result = await apiConnectionService.Client.PostAsync("identity/token", content);
+                var result = await apiConnectionService.Client.PostAsync("identity/login", content);
                 var resultContent = await result.Content.ReadAsStringAsync();
                 var data = System.Text.Json.JsonSerializer.Deserialize<ProdServiceTokenResponse>(resultContent, _options);
                 if (result.IsSuccessStatusCode)

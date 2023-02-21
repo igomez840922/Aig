@@ -400,35 +400,47 @@ else
                 swal.fire(Header, Msg, Type);
                 }
 
-                //////////////////// QR SCANNER ////////////////
-                var dotNetObjRef=null;
-                var html5QrcodeScanner = null;
-                function StartQRCodeScanner(_dotNetObjRef){
+            function UploadFiles(instance) {
 
-                dotNetObjRef = _dotNetObjRef;
+            @* var fileUpload = $("#files")[0];
+                var files = fileUpload.files;
+                console.log(files);
 
-                html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
-                html5QrcodeScanner.render(onScanSuccess);
-                }
+                   var data = new FormData();
+                    for (var i = 0; i < files.length; i++) {
+                        data.append(files[i].name, files[i]);
+                    }*@
 
-                function StopQRCodeScanner(){
-                if(html5QrcodeScanner!==null){
-                html5QrcodeScanner.clear();
-                }
-                }
+                                            var file = $('#files').get(0).files[0];
+                var data = new FormData();
+                data.append('file', file);
+                console.log(data);     
 
-                function onScanSuccess(decodedText, decodedResult) {
-                // Handle on success condition with the decoded text or result.
-                //console.log(`Scan result: ${decodedText}`, decodedResult);
-                dotNetObjRef.invokeMethodAsync('QRCodeResultJS', decodedText);  
-                //.then(data => {  
-                //    //alert(decodedResult)  
-                //})      
+                $.ajax({
+                        type: "POST",
+                    url: "/api/FileUpload/UploadFile",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                        success: function (result) {
+                        instance.invokeMethodAsync("UploadFileResponse",
+                            result)
+                                .then((result) => {
+                                    console.log(result);
+                                });
+                        },
+                    error: function (result) {
+                        instance.invokeMethodAsync("UploadFileResponse",
+                            result)
+                                .then((result) => {
+                                    console.log(result);
+                                });
+                        }
+                    });
+                    return true;
                 }
-
-                function onScanError(errorMessage) {
-                // handle on error condition, with error message
-                }
+                
             </script>
 
             <!--end::Global Theme Bundle -->

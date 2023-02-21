@@ -485,7 +485,8 @@ namespace Aig.Auditoria.Helper
                         }
                         catch { }
                     }
-                    try {
+                    try
+                    {
 
                         List<HorariosFarmaceutico> lHorarios = new List<HorariosFarmaceutico>();
                         using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Horariosfarmaceuticos.xlsx"))
@@ -498,7 +499,7 @@ namespace Aig.Auditoria.Helper
                                 for (int row = 2; row < count; row++)
                                 {
                                     var data = ws1.Row(row);
-                                                                        
+
                                     var horario = new HorariosFarmaceutico();
 
                                     horario.NumLic = data.Cell(1).GetValue<string>();
@@ -537,12 +538,12 @@ namespace Aig.Auditoria.Helper
                                         horario.HorarioRe15 = data.Cell(46).GetValue<string>();
 
                                         lHorarios.Add(horario);
-                                    }                                    
+                                    }
                                 }
                             }
                             catch { }
                         }
-                        
+
                         List<Farmaceutico> lFarmaceuticos = new List<Farmaceutico>();
                         using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Farmaceuticos.xlsx"))
                         {
@@ -575,26 +576,26 @@ namespace Aig.Auditoria.Helper
 
                                         lFarmaceuticos.Add(farmaceutico);
 
-                                    }                                                                          
+                                    }
                                 }
                             }
                             catch { }
                         }
 
                         var lEstablecimientos = dalService.GetAll<AUD_EstablecimientoTB>();
-                        if(lEstablecimientos?.Count > 0)
+                        if (lEstablecimientos?.Count > 0)
                         {
-                            foreach(var est in lEstablecimientos)
+                            foreach (var est in lEstablecimientos)
                             {
                                 est.FarmaceuticoTablas = est.FarmaceuticoTablas != null ? est.FarmaceuticoTablas : new AUD_FarmaceuticoTablas();
-                                foreach (var horaio in lHorarios?.Where(x=>x.NumLic?.Replace(" ","") == est.NumLicencia?.Replace(" ", "")))
+                                foreach (var horaio in lHorarios?.Where(x => x.NumLic?.Replace(" ", "") == est.NumLicencia?.Replace(" ", "")))
                                 {
                                     if (!string.IsNullOrEmpty(horaio.NumRe1))
                                     {
-                                        var farm = lFarmaceuticos.Where(x=>x.NumReg?.Replace(" ","") == horaio.NumRe1.Replace(" ", "")).FirstOrDefault();
-                                        if(farm != null)
+                                        var farm = lFarmaceuticos.Where(x => x.NumReg?.Replace(" ", "") == horaio.NumRe1.Replace(" ", "")).FirstOrDefault();
+                                        if (farm != null)
                                         {
-                                            if(est.FarmaceuticoTablas.LFarmaceuticos.Find(x=>x.NumReg?.Replace(" ", "") == farm.NumReg?.Replace(" ", "")) == null)
+                                            if (est.FarmaceuticoTablas.LFarmaceuticos.Find(x => x.NumReg?.Replace(" ", "") == farm.NumReg?.Replace(" ", "")) == null)
                                             {
                                                 est.FarmaceuticoTablas.LFarmaceuticos.Add(
                                                     new AUD_Farmaceutico()
@@ -623,7 +624,10 @@ namespace Aig.Auditoria.Helper
                         }
                     }
                     catch { }
+
                 }
+
+
                 //else //esto es para actualizar
                 //{
                 //    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Establecimientos.xlsx"))

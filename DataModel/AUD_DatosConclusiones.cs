@@ -16,14 +16,11 @@ namespace DataModel
     {
         public AUD_DatosConclusiones() {
             LAttachments=new List<AttachmentTB>();
-            LParticipantes = new List<Participante>();
-            LPartEstablecimiento = new List<Participante>();
         }
 
         //fecha y Hora de finalizacion
         private DateTime? fechaFinalizacion;
         public DateTime? FechaFinalizacion { get => fechaFinalizacion; set => SetProperty(ref fechaFinalizacion, value); }
-
 
         //Observaciones
         private string observacionesFinales;
@@ -37,15 +34,27 @@ namespace DataModel
         private string inconformidades;
         public string Inconformidades { get => inconformidades; set => SetProperty(ref inconformidades, value); }
 
+        //Según criterio técnico se concluye que el local cumple  o no cumple con los requisitos mínimos para operar
+        private bool cumpleRequisitosMinOperacion;
+        public bool CumpleRequisitosMinOperacion { get => cumpleRequisitosMinOperacion; set => SetProperty(ref cumpleRequisitosMinOperacion, value); }
+
 
         //También debe permitir la opción de adjuntar evidencia como fotos o algún documento escaneado.
         private List<AttachmentTB> lAttachments;
         public List<AttachmentTB> LAttachments { get => lAttachments; set => SetProperty(ref lAttachments, value); }
 
+        //SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO
+        private bool reprogramaInspeccion;
+        public bool ReprogramaInspeccion { get => reprogramaInspeccion; set => SetProperty(ref reprogramaInspeccion, value); }
 
-        //Según criterio técnico se concluye que el local cumple  o no cumple con los requisitos mínimos para operar
-        private bool cumpleRequisitosMinOperacion;
-        public bool CumpleRequisitosMinOperacion { get => cumpleRequisitosMinOperacion; set => SetProperty(ref cumpleRequisitosMinOperacion, value); }
+        /// <summary>
+        /// //////////////////
+        /// </summary>
+        /// <summary>
+        /// //////////////////
+        /// </summary>
+
+
 
 
         //Lista de Participantes
@@ -112,9 +121,6 @@ namespace DataModel
         public string FirmaRegente { get => firmaRegente; set => SetProperty(ref firmaRegente, value); }
 
 
-        //Se re-programará otra inspección para verificar observaciones. 
-        private bool reprogramaInspeccion;
-        public bool ReprogramaInspeccion { get => reprogramaInspeccion; set => SetProperty(ref reprogramaInspeccion, value); }
 
     }
 }

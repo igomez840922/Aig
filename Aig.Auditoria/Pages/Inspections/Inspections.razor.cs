@@ -106,7 +106,7 @@ namespace Aig.Auditoria.Pages.Inspections
             var result = await inspeccionService.Get(id);
             if (result == null)
             {
-                result = new AUD_InspeccionTB();
+                result = new AUD_InspeccionTB() { DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), };
             }
             OpenAddEditScreen(result);
         }

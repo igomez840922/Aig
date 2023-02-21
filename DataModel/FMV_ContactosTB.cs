@@ -18,7 +18,7 @@ namespace DataModel
         //Cargo
         private string cargo;
         [StringLength(300)]
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
 
         //profesion

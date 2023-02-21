@@ -1,0 +1,177 @@
+﻿@using DataModel.Helper;
+@implements IDisposable
+
+@if (Inspeccion?.InspDisposicionFinal?.DatosInspeccion != null)
+{
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
+                                            <DataAnnotationsValidator />
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <h5>@languageContainerService.Keys["Datos de la Inspección"]</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Tipo de Inspección"]</label>
+                                                    <div class="form-group">
+                                                        <InputSelect @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoInspeccion" class="form-control">
+                                                            @foreach (enum_TipoInspeccionDispFinal dt in Enum.GetValues(typeof(enum_TipoInspeccionDispFinal)))
+                                                            {
+                                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                            }
+                                                        </InputSelect>
+                                                        <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoInspeccion) />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Tipo de Producto"]</label>
+                                                    <div class="form-group">
+                                                        <InputSelect @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoProduct" class="form-control">
+                                                            @foreach (enum_TipoProductDispFinal dt in Enum.GetValues(typeof(enum_TipoProductDispFinal)))
+                                                            {
+                                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                            }
+                                                        </InputSelect>
+                                                        <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoProduct) />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Tipo de Verificación"]</label>
+                                                    <div class="form-group">
+                                                        <InputSelect @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoVerificacion" class="form-control">
+                                                            @foreach (enum_TipoVerificacionDispFinal dt in Enum.GetValues(typeof(enum_TipoVerificacionDispFinal)))
+                                                            {
+                                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                            }
+                                                        </InputSelect>
+                                                        <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoVerificacion) />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Disposición final solicitado por"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.SolicitudCierre" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.SolicitudCierre) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["N° de nota de SDGSA"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.NumNotaSDGSA" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.NumNotaSDGSA) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["N° de Recibo de Pago"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.NumReciboPago" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.NumReciboPago) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["El peso de los productos a destruir (Kg)"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.PesoDestruir" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.PesoDestruir) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Total de cajas/tarimas/bultos"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.Total" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.Total) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Adjuntó lista de productos"]</label>
+                                                    <div class="form-group">
+                                                        <InputSelect @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.Adjunta" class="form-control">
+                                                            <option value="false">No</option>
+                                                            <option value="true">Si</option>
+                                                        </InputSelect>
+                                                        <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.Adjunta) />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>@languageContainerService.Keys["La existencia física coincide con el registro en la lista que adjuntó el establecimiento a la solicitud"]</label>
+                                                    <div class="form-group">
+                                                        <InputSelect @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.Coincide" class="form-control">
+                                                            <option value="false">No</option>
+                                                            <option value="true">Si</option>
+                                                        </InputSelect>
+                                                        <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.Coincide) />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                            class="btn btn-success waves-effect">
+                                                        @languageContainerService.Keys["SaveExit"]
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cerrar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

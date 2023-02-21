@@ -227,7 +227,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.NombreDci != null && data.NombreDci.Length > 0)
                                group data by data.NombreDci into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -262,7 +262,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.ATC != null && data.ATC.Length > 2)
                                group data by data.SubGrupoTerapeutico into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x=>x);
             }
             catch (Exception ex)
             { }
@@ -294,7 +294,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.TipoNotificacion into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -326,7 +326,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.TipoInstitucionId into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -360,7 +360,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.ProvinciaId > 0)
                                group data by data.ProvinciaId into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -394,7 +394,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.FabricanteId > 0)
                                group data by data.FabricanteId into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -428,7 +428,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
                                (data.Year > 0)
                                group data by data.Year into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -462,7 +462,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.Grado != null && data.Grado.Length > 0)
                                group data by data.Grado into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -496,7 +496,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.NombreComercial != null && data.NombreComercial.Length > 0)
                                group data by data.NombreComercial into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -530,7 +530,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.Presentacion != null && data.Presentacion.Length > 0)
                                group data by data.Presentacion into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -564,7 +564,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by new { data.NombreComercial, data.FabricanteId, data.Lote } into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -598,7 +598,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.RegSanitario != null && data.RegSanitario.Length > 0)
                                group data by data.RegSanitario into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -630,7 +630,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.IncidenciaCaso into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }

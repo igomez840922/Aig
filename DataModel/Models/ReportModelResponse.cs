@@ -15,6 +15,7 @@ namespace DataModel.Models
         public string Name { get; set; }
         public string Name2 { get; set; }
         public string Lote { get; set; }
+        public DateTime DateResult { get; set; }
 
         public enumFMV_RAMOrigenType RAMOrigenType { get; set; }
         public enumFMV_RAMNotificationType RAMNotificationType { get; set; }
@@ -27,6 +28,13 @@ namespace DataModel.Models
         public enumFMV_EsaviProbabilidadAsociacion EsaviProbabilidadAsociacion { get; set; }
 
         public enumFMV_FfTipoIncidenciaCaso FfTipoIncidenciaCaso { get; set; }
+
+        public enumFMV_AlertType AlertType { get; set; }
+
+        public enumFMV_IpsStatusRegistro IpsStatusRegistro { get; set; }
+
+        public enumFMV_IpsStatusRevision IpsStatusRevision { get; set; }
+        public enumEvoCausalidad EvoCausalidad { get; set; }
 
     }
 

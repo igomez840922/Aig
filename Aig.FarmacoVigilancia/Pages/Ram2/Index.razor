@@ -178,8 +178,12 @@
                                                                                                             <td>@(farm.Indicacion)</td>
                                                                                                         </tr>
                                                                                                         <tr>
-                                                                                                            <th>@languageContainerService.Keys["Fecha de Tratamineto"]</th>
-                                                                                                            <td>@(farm.FechaTratamiento?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                                            <th>@languageContainerService.Keys["Fecha de Tratamineto Inicial"]</th>
+                                                                                                            <td>@(farm.FechaTratamiento)</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>@languageContainerService.Keys["Fecha de Tratamineto Final"]</th>
+                                                                                                            <td>@(farm.FechaTratamientoFin)</td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>
@@ -193,8 +197,9 @@
                                                                                                                 <th>@languageContainerService.Keys["RAM"]</th>
                                                                                                                 <th>@languageContainerService.Keys["SOC"]</th>
                                                                                                                 <th>@languageContainerService.Keys["Término MedDRA"]</th>
-                                                                                                                <th>@languageContainerService.Keys["Fecha de RAM"]</th>
-                                                                                                                <th>@languageContainerService.Keys["Desenlace"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Fecha Inicial de RAM"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Fecha Final de RAM"]</th>
+                                                                                                                <th>@languageContainerService.Keys["Gravedad"]</th>
                                                                                                             </tr>
                                                                                                         </thead>
                                                                                                         <tbody>
@@ -204,8 +209,9 @@
                                                                                                                     <td scope="row">@(ram.Ram)</td>
                                                                                                                     <td>@(ram.Soc)</td>
                                                                                                                     <td>@(ram.TerWhoArt)</td>
-                                                                                                                    <td>@(ram.FechaRam?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                                                                                    <td>@(DataModel.Helper.Helper.GetDescription(ram.Desenlace))</td>
+                                                                                                                    <td>@(ram.FechaRam)</td>
+                                                                                                                    <td>@(ram.FechaRamFin)</td>
+                                                                                                                    <td>@(ram.Gravedad)</td>
                                                                                                                 </tr>
                                                                                                             }
                                                                                                         </tbody>

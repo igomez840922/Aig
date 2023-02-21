@@ -46,19 +46,60 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                             </div>
+                                            <div class="form-group row">
                                                 <div class="col-sm-3">
-                                                    <label>@languageContainerService.Keys["FromDate"]</label>
+                                                    <label>@languageContainerService.Keys["Fecha Ingreso Inicial"]</label>
                                                     <div class="form-line">
                                                         <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" @bind-Value="dataModel.FromDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                     </div>
 
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <label>@languageContainerService.Keys["ToDate"]</label>
+                                                    <label>@languageContainerService.Keys["Fecha Ingreso Final"]</label>
                                                     <div class="form-line">
                                                         <RadzenDatePicker TValue="DateTime?" Min="dataModel.FromDate" @bind-Value="dataModel.ToDate" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
                                                     </div>
 
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Fecha Revisión Inicial"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" @bind-Value="dataModel.RevDateIni" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Fecha Revisión Final"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Min="dataModel.FromDate" @bind-Value="dataModel.RevDateEnd" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Fecha Recibo Inicial"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" @bind-Value="dataModel.RecDateIni" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Fecha Recibo Final"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Min="dataModel.FromDate" @bind-Value="dataModel.RecDateEnd" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Fecha Respuesta Inicial"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Max="DateTime.Now" @bind-Value="dataModel.ResDateIni" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Fecha Respuesta Final"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDatePicker TValue="DateTime?" Min="dataModel.FromDate" @bind-Value="dataModel.ResDateEnd" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {OnFilter();}) />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </EditForm>
@@ -73,6 +114,7 @@
                                                     <table class="table rounded table-striped">
                                                         <thead class=thead-light>
                                                             <tr>
+                                                                <th>@languageContainerService.Keys["No. Correspondencia"]</th>
                                                                 <th>@languageContainerService.Keys["Fecha Ingreso"]</th>
                                                                 <th>@languageContainerService.Keys["No. Recibido"]</th>
                                                                 <th>@languageContainerService.Keys["Area"]</th>
@@ -87,6 +129,7 @@
                                                             @foreach (var dt in dataModel.Ldata)
                                                             {
                                                                 <tr>
+                                                                    <td>@(dt.SecNumberStr)</td>
                                                                     <td scope="row">@(dt.FechaIngreso?.ToString("dd/MM/yyyy"))</td>
                                                                     <td>@(dt.NumDocRecibido)</td>
                                                                     <td>@(dt.Empresa)</td>

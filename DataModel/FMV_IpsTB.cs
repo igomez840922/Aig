@@ -12,14 +12,19 @@ namespace DataModel
     {
 		public FMV_IpsTB()
 		{
-			IpsData = new FMV_IpsData();
+            LMedicamentos = new List<FMV_IpsMedicamentoTB>();
+            IpsData = new FMV_IpsData();
 			Adjunto = new AttachmentData();
 		}
 
-		//Fecha de Recepcion en CNFV
-		private DateTime? fechaRecepcion;
+        // Año
+        private int year;
+        public int Year { get => year; set => SetProperty(ref year, value); }
+
+        // Fecha de recibido (CNFV)
+        private DateTime? fechaRecepcion;
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaRecepcion { get => fechaRecepcion; set => SetProperty(ref fechaRecepcion, value); }
+        public DateTime? FechaRecepcion { get => fechaRecepcion; set { SetProperty(ref fechaRecepcion, value); Year = value.HasValue ? value.Value.Year : 0; } }
 
         //Fecha de entrega al registrador
         private DateTime? fechaRegistrador;
@@ -32,10 +37,14 @@ namespace DataModel
         private PersonalTrabajadorTB? registrador;
         public virtual PersonalTrabajadorTB? Registrador { get => registrador; set => SetProperty(ref registrador, value); }
 
-        private string nomComercial;
-        [StringLength(500)]
-        [Required(ErrorMessage = "requerido")]
-        public string NomComercial { get => nomComercial; set => SetProperty(ref nomComercial, value); }
+        //private string nomComercial;
+        //[StringLength(500)]
+        //[Required(ErrorMessage = "requerido")]
+        //public string NomComercial { get => nomComercial; set => SetProperty(ref nomComercial, value); }
+
+        //private string nomDCI;
+        //[StringLength(500)]
+        //public string NomDCI { get => nomDCI; set => SetProperty(ref nomDCI, value); }
 
         //Principio Activo
         private string princActivo;
@@ -43,12 +52,12 @@ namespace DataModel
         [Required(ErrorMessage = "requerido")]
         public string PrincActivo { get => princActivo; set => SetProperty(ref princActivo, value); }
 
-        //Titular
-        //Laboratorio
-        private long? laboratorioId;
-        public long? LaboratorioId { get => laboratorioId; set => SetProperty(ref laboratorioId, value); }
-        private LaboratorioTB? laboratorio;
-        public virtual LaboratorioTB? Laboratorio { get => laboratorio; set => SetProperty(ref laboratorio, value); }
+        ////Titular
+        ////Laboratorio
+        //private long? laboratorioId;
+        //public long? LaboratorioId { get => laboratorioId; set => SetProperty(ref laboratorioId, value); }
+        //private LaboratorioTB? laboratorio;
+        //public virtual LaboratorioTB? Laboratorio { get => laboratorio; set => SetProperty(ref laboratorio, value); }
 
 
         ////FMV_IspProductTB
@@ -56,10 +65,10 @@ namespace DataModel
         //[StringLength(250)]
         //public List<FMV_IpsProductTB> LProducts { get => lProducts; set => SetProperty(ref lProducts, value); }
 
-        private string regSanitario;
-        [StringLength(250)]
-        [Required(ErrorMessage = "requerido")]
-        public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
+        //private string regSanitario;
+        //[StringLength(250)]
+        //[Required(ErrorMessage = "requerido")]
+        //public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
 
         // Estatus Recepcion: Aceptado, Rechazado
         private enumFMV_IpsStatusRecepcion estatusRecepcion;
@@ -126,19 +135,38 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public FMV_IpsData IpsData { get => ipsData; set => SetProperty(ref ipsData, value); }
 
-		//Ficheros Adjuntos
-		private AttachmentData adjunto;
+        // Innovador: si, no
+        private bool innovador;
+        public bool Innovador { get => innovador; set => SetProperty(ref innovador, value); }
+
+        //Biologico: si, no
+        private bool biologico;
+        public bool Biologico { get => biologico; set => SetProperty(ref biologico, value); }
+
+        // Requiere intercambiabilidad: si, no
+        private bool reqIntercam;
+        public bool ReqIntercam { get => reqIntercam; set => SetProperty(ref reqIntercam, value); }
+
+
+        //Ficheros Adjuntos
+        private AttachmentData adjunto;
 		[System.ComponentModel.DataAnnotations.Schema.NotMapped]
 		public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
 
+        ///Medicamentos
+
+        private List<FMV_IpsMedicamentoTB> lMedicamentos;
+        public virtual List<FMV_IpsMedicamentoTB> LMedicamentos { get => lMedicamentos; set => SetProperty(ref lMedicamentos, value); }
+
+
         public void UpdateRule()
         {
-            Prioridad = false;
+            //Prioridad = false;
 
             if (IpsData != null)
             {
-                if (IpsData.Innovador || IpsData.Biologico || IpsData.ReqIntercam)
+                if (Innovador || Biologico || ReqIntercam)
                 {
                     if (IpsData.FechaAutPan.HasValue && ((DateTime.Now - IpsData.FechaAutPan.Value).TotalDays / 365) < 5)
                     {
@@ -147,5 +175,8 @@ namespace DataModel
                 }
             }
         }
+    
+    
+    
     }
 }

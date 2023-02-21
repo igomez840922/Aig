@@ -77,15 +77,23 @@
                                                                 <ValidationMessage For=@(() => Data.OrigenNotificacion) />
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-4">
-                                                            <label>@languageContainerService.Keys["Código de Notifacedra"]</label>
-                                                            <div class="form-group">
+                                                        @switch(Data.OrigenNotificacion)
+                                                        {
+                                                            case enumFMV_RAMOrigenType.ServicioWeb:
+                                                            {
+                                                                <div class="col-sm-4">
+                                                                <label>@languageContainerService.Keys["Código de Noti-Facedra"]</label>
+                                                                <div class="form-group">
                                                                 <div class="form-line">
-                                                                    <InputText class="form-control" @bind-Value="Data.CodigoNotiFacedra" />
-                                                                    <ValidationMessage For=@(() => Data.CodigoNotiFacedra) />
+                                                                <InputText class="form-control" @bind-Value="Data.CodigoNotiFacedra" />
+                                                                <ValidationMessage For =@(() => Data.CodigoNotiFacedra) />
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                                </div>
+                                                                </div>
+                                                                break;
+                                                            }
+                                                        }
+                                                        
                                                         <div class="col-sm-4">
                                                             <label>@languageContainerService.Keys["ID de Facedra"]</label>
                                                             <div class="form-group">
@@ -340,7 +348,7 @@
                                                                                 <td>@dt.Lote</td>
                                                                                 <td>@(dt.FechaExp?.ToString("dd/MM/yyyy"))</td>
                                                                                 <td>@dt.RegSanitario</td>
-                                                                                <td>@(dt.FechaVacunacion?.ToString("dd/MM/yyyy"))</td>
+                                                                                <td>@(dt.FechaVacunacion)</td>
                                                                                 <td style="text-align:right">
                                                                                     <div class="btn-group">
                                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -392,7 +400,7 @@
                                                                             <tr>
                                                                                 <td scope="row">@dt.Nombre</td>
                                                                                 <td>@dt.ViaAdministracion</td>                                                                                
-                                                                                <td>@(dt.FechaTratamiento?.ToString("dd/MM/yyyy")??"")</td>
+                                                                                <td>@(dt.FechaTratamiento)</td>
                                                                                 <td>@dt.Indicacion</td>
                                                                                 <td style="text-align:right">
                                                                                     <div class="btn-group">
@@ -457,7 +465,7 @@
                                                                                         </td>
                                                                                         <td>@ram.EsaviDescripcion</td>
                                                                                         <td>@(DataModel.Helper.Helper.GetDescription(ram.HayEsavi))</td>
-                                                                                        <td>@(ram.FechaEsavi?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                                        <td>@(ram.FechaEsavi)</td>
                                                                                         <td>@(DataModel.Helper.Helper.GetDescription(ram.Desenlace))</td>
                                                                                         <td>@ram.Soc</td>
                                                                                         <td>@ram.TerWhoArt</td>

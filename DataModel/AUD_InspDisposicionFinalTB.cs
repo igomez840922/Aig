@@ -11,37 +11,29 @@ namespace DataModel
 {
     public class AUD_InspDisposicionFinalTB : SystemId
     {
-        public AUD_InspDisposicionFinalTB()
-        {
-            GeneralesEmpresa = new AUD_GeneralesEmpresa();
-            DatosResponsable = new DatosPersona();
-
-            InventarioMedicamento = new AUD_InventarioMedicamento();
-
-            DatosConclusiones = new AUD_DatosConclusiones();
-
-        }
-
         private AUD_InspeccionTB inspeccion;
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
-
-        //Generales Empresa
-        private AUD_GeneralesEmpresa generalesEmpresa;
+        //Datos Atendidos Por
+        private AUD_DatosAtendidosPor datosAtendidosPor;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_GeneralesEmpresa GeneralesEmpresa { get => generalesEmpresa; set => SetProperty(ref generalesEmpresa, value); }
+        public AUD_DatosAtendidosPor DatosAtendidosPor { get => datosAtendidosPor; set => SetProperty(ref datosAtendidosPor, value); }
 
-        //DATOS RESPONSABLE DEL ESTABLECIMIENTO
-        private DatosPersona datosResponsable;
+        //Datos de la Inspeccion
+        private AUD_DatosInspeccionDisposicion datosInspeccion;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public DatosPersona DatosResponsable { get => datosResponsable; set => SetProperty(ref datosResponsable, value); }
+        public AUD_DatosInspeccionDisposicion DatosInspeccion { get => datosInspeccion; set => SetProperty(ref datosInspeccion, value); }
 
-        //SOLICITUD DE CIERRE
-        private string solicitudCierre;
-        public string SolicitudCierre { get => solicitudCierre; set => SetProperty(ref solicitudCierre, value); }
+        //REPORTE DE INVENTARIO DE MEDICAMENTOS
+        private AUD_InventarioMedicamento inventarioMedicamento;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual AUD_InventarioMedicamento InventarioMedicamento { get => inventarioMedicamento; set => SetProperty(ref inventarioMedicamento, value); }
 
+    }
 
+    public class AUD_DatosInspeccionDisposicion : SystemId
+    {       
         //Tipo de inspección
         private enum_TipoInspeccionDispFinal tipoInspeccion;
         public enum_TipoInspeccionDispFinal TipoInspeccion { get => tipoInspeccion; set => SetProperty(ref tipoInspeccion, value); }
@@ -54,14 +46,17 @@ namespace DataModel
         private enum_TipoVerificacionDispFinal tipoVerificacion;
         public enum_TipoVerificacionDispFinal TipoVerificacion { get => tipoVerificacion; set => SetProperty(ref tipoVerificacion, value); }
 
+        //SOLICITUD DE CIERRE
+        private string solicitudCierre;
+        public string SolicitudCierre { get => solicitudCierre; set => SetProperty(ref solicitudCierre, value); }
+
+
         //N° de nota de SDGSA
         private string numNotaSDGSA;
-        [StringLength(250)]
         public string NumNotaSDGSA { get => numNotaSDGSA; set => SetProperty(ref numNotaSDGSA, value); }
 
         //recibo de pago N°: 
         private string numReciboPago;
-        [StringLength(250)]
         public string NumReciboPago { get => numReciboPago; set => SetProperty(ref numReciboPago, value); }
 
         //recibo de pago N°: 
@@ -80,19 +75,7 @@ namespace DataModel
         private bool adjunta;
         public bool Adjunta { get => adjunta; set => SetProperty(ref adjunta, value); }
 
-
-        //REPORTE DE INVENTARIO DE MEDICAMENTOS
-        private AUD_InventarioMedicamento inventarioMedicamento;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_InventarioMedicamento InventarioMedicamento { get => inventarioMedicamento; set => SetProperty(ref inventarioMedicamento, value); }
-
-
-        //Datos Conclusión de Inspección
-        private AUD_DatosConclusiones datosConclusiones;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
-
-
     }
+
 
 }

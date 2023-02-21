@@ -8,6 +8,7 @@ using DocumentFormat.OpenXml.Drawing.Charts;
 using System.Linq.Expressions;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Aig.FarmacoVigilancia.Components.Ram2;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -38,7 +39,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_Ram2TB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.FarmacosDesc.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.FarmacosDesc.Contains(model.Filter) || data.GravedadDesc.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
                               (model.FromDate==null?true:(data.FechaRecibidoCNFV >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId ))
@@ -47,7 +48,7 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
                                where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.FarmacosDesc.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.FarmacosDesc.Contains(model.Filter) || data.GravedadDesc.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
@@ -114,7 +115,9 @@ namespace Aig.FarmacoVigilancia.Services
                     idx++;
                     ws.Cell(1, idx).Value = "Estatus";
                     idx++;
-                    ws.Cell(1, idx).Value = "Fecha de Tratamiento";
+                    ws.Cell(1, idx).Value = "Fecha de Tratamiento Inicial";
+                    idx++;
+                    ws.Cell(1, idx).Value = "Fecha de Tratamiento Final";
                     idx++;
                     ws.Cell(1, idx).Value = "Fecha de RAM";
                     idx++;
@@ -207,7 +210,7 @@ namespace Aig.FarmacoVigilancia.Services
                     ws.Cell(1, idx).Value = "Incongruencia Reexposicion Conducta_Mantuvo la terapia/ REEX";
                     idx++;
                     ws.Cell(1, idx).Value = "Incongruencia Reexposición/Consecuencia de REEX";
-                    
+
                     //ws.Cell(1, 68).Value = "Recomendaciones a Profesionales y Pacientes";
                     //ws.Cell(1, 69).Value = "Actualización de monografía e inserto";
                     //ws.Cell(1, 70).Value = "Suspensión y retiro de lote(s)";
@@ -215,155 +218,438 @@ namespace Aig.FarmacoVigilancia.Services
                     //ws.Cell(1, 72).Value = "Otras";
                     //ws.Cell(1, 73).Value = "Observaciones";
 
-                    var row = 1;
+                    int row = 1;
                     foreach (var ram in model.Ldata)
-                    {
-                        foreach (var farmaco in ram.LFarmacos)
+                    {                       
+                        if (ram?.LFarmacos?.Count > 0)
                         {
-                            foreach (var data in farmaco.LRams)
+                            foreach (var farmaco in ram.LFarmacos)
                             {
-                                idx=1;
-                                ws.Cell(row + 1, idx).Value = ram.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "";
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "";
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.Evaluador?.NombreCompleto ?? "";
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = farmaco.FarmacoSospechosoComercial;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = farmaco.FarmacoSospechosoDci;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = farmaco.Atc;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = farmaco.SubGrupoTerapeutico;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(ram.RamType);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(ram.RamOrigenType);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.CodigoNotiFacedra;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.IdFacedra;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.CodigoCNFV;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.CodExterno;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(ram.TipoNotificacion);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.TipoInstitucion?.Nombre ?? ""; //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
-                                idx++;
-                                //ws.Cell(row + 1, idx).Value = ram.NumIngresoVigiflow;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.FechaEvaluacion?.ToString("dd/MM/yyyy") ?? "";
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(ram.Estatus);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = farmaco.FechaTratamiento?.ToString("dd/MM/yyyy") ?? "";
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.FechaRam?.ToString("dd/MM/yyyy") ?? "";
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.Desenlace);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = farmaco.Indicacion;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.ConductaDosis);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.ConductaTerapia);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.EvoDosis);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.EvoTerapia);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.OtrosDiagnosticos;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(ram.Sexo);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.Edad;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.HistClinica;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.DatosLab;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.Reexposicion);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.ConReexposicion);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.RamUnaDosis);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.Grado;
-                                //ws.Cell(row + 1, idx).Value = data.Iniciales;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = farmaco.ViaAdministracion;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Ram;//data.EvaluacionCausalidad.Ram;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.TerWhoArt;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Soc;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Concomitantes;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.SecTemporal);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Stemp;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.ConPrevio);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Cprev;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.EfecRetirada);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Reti;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.EfecReexposicion);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Reex;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.CausasAlter);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Alter;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.FactContribuyentes);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Facon;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.ExpComplementarias);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Xplc;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Puntuacion;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Probabilidad;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = DataModel.Helper.Helper.GetDescription(data.IntRam);
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Gravedad;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = data.Referencia;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondDosisEvo;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex;
-                                idx++;
-                                ws.Cell(row + 1, idx).Value = ram.ObservacionInfoNotifica.IncongruenciaConReex;
-                                //ws.Cell(row + 1, 68).Value = DataModel.Helper.Helper.GetDescription(ram.RecomendacionProPac);
-                                //ws.Cell(row + 1, 69).Value = DataModel.Helper.Helper.GetDescription(data.ActMonografia);
-                                //ws.Cell(row + 1, 70).Value = DataModel.Helper.Helper.GetDescription(data.SuspRetiroLote);
-                                //ws.Cell(row + 1, 71).Value = DataModel.Helper.Helper.GetDescription(data.RegSanSuspencionCancelacion);
-                                //ws.Cell(row + 1, 72).Value = ram.Otras;
-                                //ws.Cell(row + 1, 73).Value = ram.Observaciones;
+                                if (farmaco?.LRams?.Count > 0)
+                                {
+                                    foreach (var data in farmaco.LRams)
+                                    {
+                                        idx = 1; row++;
+                                        ws.Cell(row , idx).Value = ram.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "";
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "";
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.Evaluador?.NombreCompleto ?? "";
+                                        idx++;
+                                        ws.Cell(row , idx).Value = farmaco.FarmacoSospechosoComercial;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = farmaco.FarmacoSospechosoDci;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = farmaco.Atc;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = farmaco.SubGrupoTerapeutico;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.RamType);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.RamOrigenType);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.CodigoNotiFacedra;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.IdFacedra;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.CodigoCNFV;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.CodExterno;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.TipoNotificacion);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.TipoInstitucion?.Nombre ?? ""; //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
+                                        idx++;
+                                        //ws.Cell(row , idx).Value = ram.NumIngresoVigiflow;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.FechaEvaluacion?.ToString("dd/MM/yyyy") ?? "";
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Estatus);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = farmaco.FechaTratamiento;
+                                        idx++;
+                                        ws.Cell(row, idx).Value = farmaco.FechaTratamientoFin;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.FechaRam;
+                                        idx++;
+                                        ws.Cell(row, idx).Value = data.FechaRamFin;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.Desenlace);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = farmaco.Indicacion;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.ConductaDosis);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.ConductaTerapia);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.EvoDosis);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.EvoTerapia);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.OtrosDiagnosticos;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Sexo);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.Edad;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.HistClinica;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.DatosLab;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.Reexposicion);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.ConReexposicion);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.RamUnaDosis);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.Grado;
+                                        //ws.Cell(row , idx).Value = data.Iniciales;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = farmaco.ViaAdministracion;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Ram;//data.EvaluacionCausalidad.Ram;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.TerWhoArt;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Soc;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Concomitantes;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.SecTemporal);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Stemp;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.ConPrevio);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Cprev;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.EfecRetirada);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Reti;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.EfecReexposicion);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Reex;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.CausasAlter);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Alter;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.FactContribuyentes);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Facon;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.ExpComplementarias);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Xplc;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Puntuacion;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Probabilidad;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.IntRam);
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Gravedad;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = data.Referencia;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondDosisEvo;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaConReex;
+                                    }
+                                }
+                                else
+                                {
+                                    idx = 1; row++;
+                                    ws.Cell(row , idx).Value = ram.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.Evaluador?.NombreCompleto ?? "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = farmaco.FarmacoSospechosoComercial;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = farmaco.FarmacoSospechosoDci;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = farmaco.Atc;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = farmaco.SubGrupoTerapeutico;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.RamType);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.RamOrigenType);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.CodigoNotiFacedra;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.IdFacedra;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.CodigoCNFV;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.CodExterno;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.TipoNotificacion);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.TipoInstitucion?.Nombre ?? ""; //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
+                                    idx++;
+                                    //ws.Cell(row , idx).Value = ram.NumIngresoVigiflow;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.FechaEvaluacion?.ToString("dd/MM/yyyy") ?? "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Estatus);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = farmaco.FechaTratamiento;
+                                    idx++;
+                                    ws.Cell(row, idx).Value = farmaco.FechaTratamientoFin;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row, idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = farmaco.Indicacion;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.ConductaDosis);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.ConductaTerapia);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.OtrosDiagnosticos;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Sexo);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.Edad;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.HistClinica;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.DatosLab;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(farmaco.Reexposicion);
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.Grado;
+                                    //ws.Cell(row , idx).Value = data.Iniciales;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = farmaco.ViaAdministracion;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = "";
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondDosisEvo;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaConReex;
+                                }
                             }
                         }
-                        row++;
+                        else
+                        {
+                            idx = 1; row++;
+                            ws.Cell(row , idx).Value = ram.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "";
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "";
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.Evaluador?.NombreCompleto ?? "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.RamType);
+                            idx++;
+                            ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.RamOrigenType);
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.CodigoNotiFacedra;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.IdFacedra;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.CodigoCNFV;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.CodExterno;
+                            idx++;
+                            ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.TipoNotificacion);
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.TipoInstitucion?.Nombre ?? ""; //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
+                            idx++;
+                            //ws.Cell(row , idx).Value = ram.NumIngresoVigiflow;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.FechaEvaluacion?.ToString("dd/MM/yyyy") ?? "";
+                            idx++;
+                            ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Estatus);
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row, idx).Value = "";
+                            idx++;
+                            ws.Cell(row, idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.OtrosDiagnosticos;
+                            idx++;
+                            ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Sexo);
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.Edad;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.HistClinica;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.DatosLab;
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.Grado;
+                            //ws.Cell(row , idx).Value = data.Iniciales;
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = "";
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondDosisEvo;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondTerapiaEvo;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondSuspTerapiaReex;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaCondMantTerapiaReex;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.ObservacionInfoNotifica.IncongruenciaConReex;
+                        }
                     }
 
                     MemoryStream XLSStream = new();
@@ -447,7 +733,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.Ram.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.FarmacoSospechosoDci into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -481,7 +767,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.Atc != null && data.Atc.Length > 2)
                                group data by data.SubGrupoTerapeutico into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -512,7 +798,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.RamOrigenType into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -543,7 +829,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.TipoNotificacion into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -574,7 +860,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.TipoInstitucionId into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -605,7 +891,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Estatus into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -636,7 +922,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Edad into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -667,7 +953,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Sexo into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -698,7 +984,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Grado into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -712,26 +998,64 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Ram != null && data.Ram.Length > 0)
-                               group data by data.Ram into g
-                               orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
-                                   Count = g.Count()
-                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+                model.Ldata = (from dataFinal in 
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                         where data.Deleted == false &&
+                                         (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                         (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                         (data.Ram != null && data.Ram.Length > 0)
+                                         group data by new { data.Farmaco.RamId, data.Ram } into g
+                                         orderby g.Count() descending
+                                         select new ReportModelResponse
+                                         {
+                                             Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
+                                             Count = 1,//g.Count()
+                                         })
+                                    group dataFinal by new { dataFinal.Name } into gFinal
+                                    orderby gFinal.Count() descending
+                                    select new ReportModelResponse
+                                    {
+                                        Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                        Count = gFinal.Count()
+                                    }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Ram != null && data.Ram.Length > 0)
-                               group data by data.Ram into g
-                               select g.Count()).Count();
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                // (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //where data.Deleted == false &&
+                //(model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //(model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //(data.Ram != null && data.Ram.Length > 0)
+                //group data by new { data.Farmaco.RamId, data.Ram } into g
+                //orderby g.Count() descending
+                //select new ReportModelResponse
+                //{
+                //    Name = g.FirstOrDefault().Ram,//.Substring(0, 3),
+                //    Count = 1,//g.Count()
+                //}).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.Ram != null && data.Ram.Length > 0)
+                //               group data by new { data.Farmaco.RamId, data.Ram } into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -745,26 +1069,66 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.SocId != null && data.SocId > 0)
-                               group data by data.SocId into g
-                               orderby g.Count() descending
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.SocId } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
-                                   Count = g.Count()
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.SocId != null && data.SocId > 0)
-                               group data by data.SocId into g
-                               select g.Count()).Count();
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.SocId } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = null; model.Total = 0;
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -797,7 +1161,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.MainProbabilidad != null && data.MainProbabilidad.Length > 0)
                                group data by data.MainProbabilidad into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -811,26 +1175,66 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Gravedad != null && data.Gravedad.Length > 0)
-                               group data by data.Gravedad into g
-                               orderby g.Count() descending
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.Gravedad } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
-                                   Count = g.Count()
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Gravedad != null && data.Gravedad.Length > 0)
-                               group data by data.Gravedad into g
-                               select g.Count()).Count();
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.Gravedad } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = null; model.Total = 0;
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.Gravedad != null && data.Gravedad.Length > 0)
+                //               group data by data.Gravedad into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.Gravedad != null && data.Gravedad.Length > 0)
+                //               group data by data.Gravedad into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -863,7 +1267,80 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
                                (data.Year > 0)
                                group data by data.Year into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+        //Desenlace
+        public async Task<ReportModel<ReportModelResponse>> Report15(ReportModel<ReportModelResponse> model)
+        {
+            try
+            {
+                model.Ldata = null; model.Total = 0;
+
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.Desenlace } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      RAMDesenlace = g.FirstOrDefault().Desenlace,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.RAMDesenlace } into gFinal
+                               orderby gFinal.Count() descending
+                               select new ReportModelResponse
+                               {
+                                   RAMDesenlace = gFinal.FirstOrDefault().RAMDesenlace,//.Substring(0, 3),
+                                   Count = gFinal.Count()
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.Ram != null && data.Ram.Length > 0)
+                                  group data by new { data.Farmaco.RamId, data.Ram, data.Desenlace } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      RAMDesenlace = g.FirstOrDefault().Desenlace,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.RAMDesenlace } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = null; model.Total = 0;
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_RamFarmacoRamTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Farmaco.Ram.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }

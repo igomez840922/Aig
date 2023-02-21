@@ -159,7 +159,7 @@ namespace Aig.FarmacoVigilancia.Services
                                 ws.Cell(row + 1, 25).Value = DataModel.Helper.Helper.GetDescription(notifica.Estatus);
                                 ws.Cell(row + 1, 26).Value = notifica.Observaciones;
                                 ws.Cell(row + 1, 27).Value = DataModel.Helper.Helper.GetDescription(data.HayEsavi);
-                                ws.Cell(row + 1, 28).Value = data.FechaEsavi?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row + 1, 28).Value = data.FechaEsavi;
                                 ws.Cell(row + 1, 29).Value = DataModel.Helper.Helper.GetDescription(data.Desenlace);
                                 ws.Cell(row + 1, 30).Value = data.EsaviDescripcion;
                                 ws.Cell(row + 1, 31).Value = data.TerWhoArt;
@@ -177,7 +177,7 @@ namespace Aig.FarmacoVigilancia.Services
                                 ws.Cell(row + 1, 43).Value = vac.Lote;
                                 ws.Cell(row + 1, 44).Value = vac.FechaExp?.ToString("dd/MM/yyyy") ?? "";
                                 ws.Cell(row + 1, 45).Value = vac.RegSanitario;
-                                ws.Cell(row + 1, 46).Value = vac.FechaVacunacion?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row + 1, 46).Value = vac.FechaVacunacion;
                                 ws.Cell(row + 1, 47).Value = vac.Indicaciones;
                                 ws.Cell(row + 1, 48).Value = vac.DosisViaAdmin;
                                 ws.Cell(row + 1, 49).Value = DataModel.Helper.Helper.GetDescription(vac.DosisPresenta);
@@ -275,7 +275,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.TipoVacunaId > 0)
                                group data by data.TipoVacunaId into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -289,26 +289,65 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
-                               group data by data.EsaviDescripcion into g
-                               orderby g.Count() descending
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                                  group data by new { data.EsaviVacuna.EsaviId, data.EsaviDescripcion } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().EsaviDescripcion,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = g.FirstOrDefault().EsaviDescripcion,//.Substring(0, 3),
-                                   Count = g.Count()
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
-                               group data by data.EsaviDescripcion into g
-                               select g.Count()).Count();
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                                  group data by new { data.EsaviVacuna.EsaviId, data.EsaviDescripcion } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().EsaviDescripcion,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                //               group data by data.EsaviDescripcion into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().EsaviDescripcion,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                //               group data by data.EsaviDescripcion into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -339,7 +378,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.OrigenNotificacion into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -353,26 +392,64 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Gravedad != null && data.Gravedad.Length > 0)
-                               group data by data.Gravedad into g
-                               orderby g.Count() descending
+                model.Ldata = (from dataFinal in
+                                (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                                 where data.Deleted == false &&
+                                 (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                                 (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                                 (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                                 group data by new { data.EsaviVacuna.EsaviId, data.EsaviDescripcion, data.Gravedad } into g
+                                 orderby g.Count() descending
+                                 select new ReportModelResponse
+                                 {
+                                     Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                                     Count = 1,//g.Count()
+                                 })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
-                                   Count = g.Count()
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.Gravedad != null && data.Gravedad.Length > 0)
-                               group data by data.Gravedad into g
-                               select g.Count()).Count();
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                                 (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                                 (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                                  group data by new { data.EsaviVacuna.EsaviId, data.EsaviDescripcion, data.Gravedad } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.Gravedad != null && data.Gravedad.Length > 0)
+                //               group data by data.Gravedad into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Gravedad,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.Gravedad != null && data.Gravedad.Length > 0)
+                //               group data by data.Gravedad into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -386,24 +463,62 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate))
-                               group data by data.Desenlace into g
-                               orderby g.Count() descending
+                model.Ldata = (from dataFinal in
+                                (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                                 where data.Deleted == false &&
+                                 (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                                 (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                                 (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                                 group data by new { data.EsaviVacuna.EsaviId, data.EsaviDescripcion, data.Desenlace } into g
+                                 orderby g.Count() descending
+                                 select new ReportModelResponse
+                                 {
+                                     RAMDesenlace = g.FirstOrDefault().Desenlace,//.Substring(0, 3),
+                                     Count = 1,//g.Count()
+                                 })
+                               group dataFinal by new { dataFinal.RAMDesenlace } into gFinal
+                               orderby gFinal.Count() descending
                                select new ReportModelResponse
                                {
-                                   RAMDesenlace = g.FirstOrDefault().Desenlace,//.Substring(0, 3),
-                                   Count = g.Count()
+                                   RAMDesenlace = gFinal.FirstOrDefault().RAMDesenlace,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate))
-                               group data by data.Desenlace into g
-                               select g.Count()).Count();
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                                 (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                                 (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                                  group data by new { data.EsaviVacuna.EsaviId, data.EsaviDescripcion, data.Desenlace } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      RAMDesenlace = g.FirstOrDefault().Desenlace,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.RAMDesenlace } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate))
+                //               group data by data.Desenlace into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   RAMDesenlace = g.FirstOrDefault().Desenlace,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate))
+                //               group data by data.Desenlace into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -417,26 +532,64 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.SocId != null && data.SocId > 0)
-                               group data by data.SocId into g
-                               orderby g.Count() descending
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                                  group data by new { data.EsaviVacuna.EsaviId, data.EsaviDescripcion, data.SocId } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
                                select new ReportModelResponse
                                {
-                                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
-                                   Count = g.Count()
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
-                               (data.SocId != null && data.SocId > 0)
-                               group data by data.SocId into g
-                               select g.Count()).Count();
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                                  where data.Deleted == false &&
+                                  (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                                  (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                                  (data.EsaviDescripcion != null && data.EsaviDescripcion.Length > 0)
+                                  group data by new { data.EsaviVacuna.EsaviId, data.EsaviDescripcion, data.SocId } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse
+                                  {
+                                      Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                                      Count = g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Soc,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_EsaviVacunaEsaviTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate)) &&
+                //               (data.SocId != null && data.SocId > 0)
+                //               group data by data.SocId into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -467,7 +620,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.EsaviVacuna.Esavi.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.ProbabilidadAsociacion into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -498,7 +651,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Sexo into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -529,7 +682,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Edad into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -560,7 +713,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.TipoNotificacion into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -591,7 +744,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.TipoInstitucionId into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -624,7 +777,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.ProvinciaId > 0)
                                group data by data.ProvinciaId into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -657,7 +810,7 @@ namespace Aig.FarmacoVigilancia.Services
                                (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
                                (data.Year > 0)
                                group data by data.Year into g
-                               select g.Count()).Count();
+                               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
