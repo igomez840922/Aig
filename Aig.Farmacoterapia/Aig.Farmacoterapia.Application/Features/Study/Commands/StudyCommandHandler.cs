@@ -136,8 +136,8 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                     foreach (var email in notifications) {
                         var mailRequest = new MailRequest {
                             To = Convert.ToString(email.email),
-                            Body =$"Se le ha asignado una solicitudes de autorización de permisos de importación con fines de investigación: {Convert.ToString(email.message)} <a href='{HtmlEncoder.Default.Encode(endpointUri.ToString())}'> (click aqui) </a>",
-                            Subject = "Farmacoterapia (Nueva asignación de estudio de importación)",
+                            Body =$"Se le ha asignado una solicitud de autorización de permiso de importación con fines de investigación: {Convert.ToString(email.message)} <a href='{HtmlEncoder.Default.Encode(endpointUri.ToString())}'> (click aqui) </a>",
+                            Subject = "Farmacoterapia (Nueva solicitud de importación)",
                         };
                         await _mailService.SendAsync(mailRequest);
                     }
