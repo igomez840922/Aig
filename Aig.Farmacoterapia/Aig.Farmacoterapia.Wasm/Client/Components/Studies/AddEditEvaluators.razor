@@ -32,20 +32,22 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-
-        <MudDropContainer T="UserModelOutput" Items="_modelData"  ItemsSelector="@((item,dropzone) => item.EvaluatorStatus.ToString() == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
+          
+        
+        
+      
+        <MudDropContainer T="UserModelOutput" Items="_modelData" ItemsSelector="@((item,dropzone) => item.EvaluatorStatus.ToString() == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
             <ChildContent>
-              
-                   
-                        <MudDropZone T="UserModelOutput" Identifier="UnAssigned" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                             <MudText Typo="Typo.h6" Class="mb-4">Disponibles</MudText>
-                        </MudDropZone>
-                   
 
-                        <MudDropZone T="UserModelOutput" Identifier="Assigned" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                            <MudText Typo="Typo.h6" Class="mb-4">Asignados</MudText>
-                        </MudDropZone>
-                   
+                <MudDropZone T="UserModelOutput" Identifier="UnAssigned" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">Disponibles</MudText>
+                </MudDropZone>
+
+
+                <MudDropZone T="UserModelOutput" Identifier="Assigned" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">Asignados</MudText>
+                </MudDropZone>
+
             </ChildContent>
             <ItemRenderer>
                 <MudListItem>
@@ -69,14 +71,21 @@
 
                         </MudCardHeader>
                     </MudCard>
-       
+
                 </MudListItem>
             </ItemRenderer>
         </MudDropContainer>
+        
+
     </DialogContent>
     <DialogActions>
+
+       @if (_loading)
+        {
+          <MudProgressCircular Style="margin-right:10px !important;" Size="Size.Small" Color="Color.Primary" Indeterminate="true" />
+        }
         <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
-        <MudButton Disabled="@(!Validate())" ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" OnClick="()=>SubmitAsync()">Guardar</MudButton>
+        <MudButton Disabled="@(!Validate() || _loading)" ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" OnClick="()=>SubmitAsync()">Guardar</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -89,7 +98,7 @@
     private List<UserModelOutput> _modelData = new();
     private bool _validated => Validate();
     private bool _addSectionOpen;
-    bool _loading = false;
+    bool _loading = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -103,8 +112,9 @@
     }
     private bool Validate() => true;
 
-    private async Task RefresView()
+     private async Task RefresView(bool state)
     {
+        _loading = state;
         await this.InvokeAsync(StateHasChanged);
     }
 
@@ -112,14 +122,12 @@
     {
         if (_id != 0)
         {
-            _loading = true;
-            await this.InvokeAsync(StateHasChanged);
+            await RefresView(true);
             var response = await _manager.GetEvaluators(_id);
             if (response.Succeeded){
                 _modelData = response.Data.Select(w => { w.ProfilePicture = string.IsNullOrEmpty(w.ProfilePicture) ? string.Empty : $"{_appConfiguration.ApiUrl}{AppConstants.UsersEndpoints.Avatar(w.ProfilePicture!)}"; return w; }).ToList();;
             }
-            _loading = false;
-            await this.InvokeAsync(StateHasChanged);
+            await RefresView(false);
         }
     }
 
@@ -138,7 +146,8 @@
     }
 
     protected async Task SubmitAsync()
-    {
+    { 
+        await RefresView(true);
         var evaluators = _modelData.Where(p => p.EvaluatorStatus == EvaluatorStatus.Assigned).Select(s => s.Id).ToArray();
         var response = await _manager.SetEvaluatorsAsync(_id,evaluators);
         if (response.Succeeded)
@@ -146,7 +155,7 @@
         foreach (var message in response.Messages){
             _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
         }
-
-       await _jsRuntime.InvokeVoidAsync("console.debug",$"Id: {_id} / evaluatos: {string.Join(" *** ",evaluators)}");
+        await RefresView(false);
+        //await _jsRuntime.InvokeVoidAsync("console.debug",$"Id: {_id} / evaluatos: {string.Join(" *** ",evaluators)}");
     }
 }

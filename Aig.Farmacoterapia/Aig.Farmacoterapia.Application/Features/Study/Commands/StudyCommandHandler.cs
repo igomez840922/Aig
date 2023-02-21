@@ -3,6 +3,8 @@ using MediatR;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
+using Aig.Farmacoterapia.Infrastructure.Interfaces;
+using Aig.Farmacoterapia.Infrastructure.Mail;
 
 namespace Aig.Farmacoterapia.Application.Features.Study.Commands
 {
@@ -30,11 +32,15 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
+        private readonly IMailService _mailService;
         private readonly ISystemLogger _logger;
 
-        public StudyCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ISystemLogger logger)
+        public StudyCommandHandler(IUnitOfWork unitOfWork, IUserService userService, IMailService mailService, IMapper mapper, ISystemLogger logger)
         {
             _unitOfWork = unitOfWork;
+            _userService = userService;
+            _mailService = mailService;
             _mapper = mapper;
             _logger = logger;
         }
@@ -93,6 +99,7 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
             IResult answer = new Result();
             try
             {
+                var notifications = new List<dynamic>();
                 var evaluators = _unitOfWork.Repository<AigEstudioEvaluador>().Entities
                     .Where(p => p.EstudioId == request.StudyId)
                     .ToList();
@@ -104,9 +111,26 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                             EstudioId = request.StudyId,
                             UserId = item
                         });
+                    var user = await _userService.GetAsync(item);
+                    var stydy = _unitOfWork.Repository<AigEstudio>().Entities.FirstOrDefault(p => p.Id == request.StudyId);
+                    notifications.Add(new {
+                        email = user?.Email,
+                        message = $"{stydy?.Titulo} ({stydy?.Codigo})"
+                    });
                 }
-                answer = Result<bool>.Success(_unitOfWork.Commit(),"Evaluadores actualizados correctamente !");
-
+                answer = _unitOfWork.Commit()?
+                         Result<bool>.Success("Evaluadores actualizados correctamente !"):
+                         Result.Fail(new List<string>() { "Error durante la operación. No fue posible asignar los evaluadores"});
+                if (answer.Succeeded) {
+                    foreach (var email in notifications) {
+                        var mailRequest = new MailRequest {
+                            To = Convert.ToString(email.email),
+                            Body =$"Se le ha asignado una solicitudes de autorización de permisos de importación con fines de investigación: {Convert.ToString(email.message)}",
+                            Subject = "Farmacoterapia (Nueva asignación de estudio de importación)",
+                        };
+                        await _mailService.SendAsync(mailRequest);
+                    }
+                }
             }
             catch (Exception exc)
             {
