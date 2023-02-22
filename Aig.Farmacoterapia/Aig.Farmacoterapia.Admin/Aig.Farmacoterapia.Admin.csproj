@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Files\users\**" />
+    <Content Remove="Files\users\**" />
+    <EmbeddedResource Remove="Files\users\**" />
+    <None Remove="Files\users\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\Products\Index - Copy.razor" />
     <Content Remove="Pages\_Host - Copy.cshtml" />
   </ItemGroup>
@@ -90,6 +97,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Files\" />
+    <Folder Include="Files\datasheet\" />
+    <Folder Include="Files\prospectus\" />
     <Folder Include="Models\" />
   </ItemGroup>
 
@@ -99,12 +109,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Files\users\fcbc2787-f9eb-4821-a732-3ac8580132f4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

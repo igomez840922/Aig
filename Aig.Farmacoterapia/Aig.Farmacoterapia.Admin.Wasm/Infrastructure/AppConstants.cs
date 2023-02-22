@@ -1,4 +1,6 @@
-﻿namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure
+﻿using Aig.Farmacoterapia.Domain.Entities.Enums;
+
+namespace Aig.Farmacoterapia.Admin.Wasm.Infrastructure
 {
     public static class AppConstants
     {
@@ -8,46 +10,61 @@
             public static string RefreshToken = "refreshToken";
             public static string UserImageURL = "userImageURL";
         }
-
-        public static class UserEndpoints
+        public static class IdentityEndpoints
         {
-            public static string Login = "api/account/login";
-            public static string Avatar(string image)
-            {
-                return $"api/account/avatar/{image}";
-            }
-            public static string Refresh = "api/account/token/refresh";
-            public static string Register = "api/account/register";
-            public static string ChangePassword = "api/account/changepassword";
-            public static string UpdateProfile = "api/account/updateprofile";
+            public static string Login = "api/identity/login";
+            public static string Refresh = "api/identity/token/refresh";
         }
-
-        public static class AccountEndpoints
+        public static class UsersEndpoints
         {
-            public static string Register = "api/identity/account/register";
-            public static string ChangePassword = "api/identity/account/changepassword";
-            public static string UpdateProfile = "api/identity/account/updateprofile";
-
-            public static string GetProfilePicture(string userId)
+            public static string Search = "api/user/search";
+            public static string Register = "api/user/register";
+            public static string UpdateProfile = "api/user/updateprofile";
+            public static string UpdateRoles = "api/user/updateroles";
+            public static string ChangePassword = "api/user/changepassword";
+            public static string Avatar(string image) => $"api/user/avatar/{image}";
+            public static string UsernameExists(string userName)
             {
-                return $"api/identity/account/profile-picture/{userId}";
+                return $"api/user/username/{userName}";
             }
-
-            public static string UpdateProfilePicture(string userId)
+            public static string PhoneExists(string phone)
             {
-                return $"api/identity/account/profile-picture/{userId}";
+                return $"api/user/phone/{phone}";
             }
-        }
-
-        public static class AigMedicamentoEndpoints
-        {
-            public static string Search = "api/medicament/search";
-            public static string Save = "api/medicament/save";
             public static string Delete(string id)
             {
-                return $"api/medicaments/{id}";
+                return $"api/user/{id}";
             }
+            public static string Get(string userName)
+            {
+                return $"api/user/{userName}";
+            }
+        }
 
+        public static class MediaEndpoints
+        {
+            public static string Upload()
+            {
+                return $"api/media/upload";
+            }
+            public static string DeleteFile(UploadType uploadType, string image) => $"api/media/{uploadType.ToString()}/{image}";
+
+        }
+        public static class MedicamentEndpoints
+        {
+            public static string Dashboard = "api/medicament/dashboard";
+            public static string AdminSearch = "api/medicament/adminsearch";
+            public static string Update = "api/medicament/update";
+            public static string Pharmaceutica= $"api/medicament/pharmaceutica";
+            public static string MedicationRoutel = $"api/medicament/medicationroute";
+            public static string Marker = $"api/medicament/marker";
+            public static string Delete(long id)=> $"api/medicament/{id}";
+            public static string Get(long id)
+            {
+                return $"api/medicament/{id}";
+            }
+            public static string DataSheetURL(string file) => $"api/medicament/datasheet/{file}";
+            public static string ProspectusURL(string file) => $"api/medicament/prospectus/{file}";
         }
 
     }

@@ -1,4 +1,6 @@
 ﻿@using Aig.Farmacoterapia.Admin.Wasm.Extensions
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
 @using Microsoft.AspNetCore.Components.Authorization
 @inherits LayoutComponentBase
 @implements IDisposable;
@@ -6,27 +8,41 @@
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
+
 <style>
     .footer_copyright {
         position: fixed;
-        bottom: 0;
+        bottom: 8px;
         left: 48%;
         right: 0;
         height: 30px;
     }
+
+
+    .mud-dialog-title {
+        border-bottom: 1px solid #e9e7e7 !important;
+    }
+
+    .mud-dialog-actions {
+        border-top: 1px solid #e9e7e7 !important;
+    }
+
+    .mud-dialog-content {
+        padding: 25px !important;
+    }
+
 </style>
 <MudLayout>
-    <MudAppBar Elevation="8">
+    <MudAppBar Style="background-color: #7365f3 !important;" Elevation="8">
         <MudImage Src="media/logo2.png" Style="margin-right:30px" />
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="MudBlazor.Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
-
         <AuthorizeView>
             <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
                 <ActivatorContent>
                     @if (string.IsNullOrEmpty(_avatar))
                     {
-                        <MudAvatar Color="Color.Tertiary">
+                        <MudAvatar Color="Color.Secondary">
                             @_name?[..1]?.ToUpper()
                         </MudAvatar>
                         <MudText Style="margin: 7px 10px 7px 10px;">@_name</MudText>
@@ -41,19 +57,13 @@
 
 
                 <ChildContent>
-                    <MudMenuItem Icon="@Icons.Material.Outlined.Person" Href="/profile">Profile</MudMenuItem>
-                     <MudDivider Class="mb-2" />
-                    <MudMenuItem Icon="@Icons.Material.Outlined.Login" OnClick="Logout">Salir</MudMenuItem>
+                    <MudMenuItem Icon="@Icons.Material.Outlined.CoPresent" Href="/profile">Perfil</MudMenuItem>
+                    <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Outlined.Login" OnClick="Logout">Salir</MudMenuItem>
                 </ChildContent>
 
-               @* <ChildContent>
-                    <MudDivider Class="mb-2" />
-                    <MudListItem Text="Perfil" Icon="@Icons.Material.Outlined.Person" Href="/profile" />
-                    <MudListItem Text="Salir" Icon="@Icons.Material.Outlined.Login" OnClick="Logout" />
-                </ChildContent>*@
+               
             </MudMenu>
         </AuthorizeView>
-
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="8">
         <NavMenu />
@@ -62,10 +72,12 @@
         <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
             @Body
         </MudContainer>
-        <MudPaper Elevation="0" Class="footer_copyright">
-            @DateTime.Now.Year &nbsp;&copy;&nbsp;
-            <MudLink Target="_blank" Href="https://soaint.com" Typo="Typo.body2">SOAINT</MudLink>
-        </MudPaper>
+        <MudAppBar Style="top: auto; bottom: 0;background-color: #7365f3 !important;" Elevation="8">
+            <div class="footer_copyright">
+                @DateTime.Now.Year &nbsp;&copy;&nbsp;
+                <MudLink Target="_blank" Style="color: #fff !important;" Href="https://soaint.com" Typo="Typo.body2">SOAINT</MudLink>
+            </div>
+        </MudAppBar>
     </MudMainContent>
 </MudLayout>
 
@@ -90,34 +102,48 @@
 
     private async Task LoadDataAsync()
     {
-        var user =await _authenticationManager.CurrentUser();
+        var user = await _authenticationManager.CurrentUser();
         if (user == null) return;
-        if (user.Identity?.IsAuthenticated == true){
-            _name = $"{user.GetFirstName()} {user.GetLastName()}";
-            _avatar = $"{_appConfiguration.ApiUrl}{await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL)}";
-            _snackBar.Add(string.Format($"Hola {user.GetFirstName()}"), Severity.Success);
-        }
-     }
-       private void Logout()
+        if (user.Identity?.IsAuthenticated == true)
         {
-            var parameters = new DialogParameters
+            _name = $"{user.GetFirstName()} {user.GetLastName()}";
+            var picture = await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL);
+            _avatar = string.IsNullOrEmpty(picture) ? string.Empty : $"{_appConfiguration.ApiUrl}{picture}";
+            _snackBar.Add(string.Format($"Hola {user.GetFirstName()}"), Severity.Success);
+
+            //var role= user.GetRole();
+            //var requiredRole = RoleType.Admin;
+            //if (!string.IsNullOrEmpty(role))
+            //{
+            //    var userRole= role.ParseEnum<RoleType>();
+            //    if (((int)requiredRole & (int)userRole) > 0) //si es 0 no tienen el rol requerido, si es >0 si
+            //    {
+            //        ;
+            //    }
+
+            //}
+        }
+    }
+    private void Logout()
+    {
+        var parameters = new DialogParameters
             {
                 {nameof(Dialogs.Logout.ContentText), "Está seguro que desea cerrar la sesión?"},
-                {nameof(Dialogs.Logout.ButtonText), "Aceptar"},
+                {nameof(Dialogs.Logout.ButtonText), "Confirmar"},
                 {nameof(Dialogs.Logout.Color), Color.Error},
             };
 
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-            _dialogService.Show<Dialogs.Logout>("Cerrar la sesión", parameters, options);
-        }
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        _dialogService.Show<Dialogs.Logout>("Cerrar la sesión", parameters, options);
+    }
 
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
 
-     public void Dispose()
+    public void Dispose()
     {
-       _interceptor.DisposeEvent();
+        _interceptor.DisposeEvent();
     }
 }

@@ -1,18 +1,30 @@
-﻿@using Aig.Farmacoterapia.Domain.Common
+﻿@using Aig.Farmacoterapia.Admin.Extensions
+@using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
 @using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using System.Globalization
 @using Aig.Farmacoterapia.Domain.Specifications.Maker
 @using Aig.Farmacoterapia.Domain.Specifications.Medicament
+@using Aig.Farmacoterapia.Infrastructure.Configuration
 @using Aig.Farmacoterapia.Infrastructure.Extensions
 @using System.Linq.Expressions
+@using Aig.Farmacoterapia.Infrastructure.Interfaces
 @using Blazored.FluentValidation
+@using System.Text.Json;
+@using System.Net.Http.Headers
+@using System.Text.Json.Serialization
+@using Microsoft.Extensions.Options
 @inject IUnitOfWork _unitOfWork;
 @inject IUploadService _uploadService;
 @inject IWebHostEnvironment env;
 @inject IJSRuntime JsRuntime
 @inject ISystemLogger _systemLogger;
+@inject HttpClient _client;
+@inject IMedicamentRepository _repository;
+@inject IOptions<AppConfiguration> _config;
 
 <style>
 
@@ -134,7 +146,7 @@
 
                                         <div class="col-lg-4">
                                             <div>
-                                                <label>Clasificación</label>
+                                                <label>Tipo</label>
                                                 <MudSelect T="string" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.TipoEquivalencia">
                                                     <MudSelectItem Value="@(TipoEquivalencia.Referencia)">Medicamento de Referencia</MudSelectItem>
                                                     <MudSelectItem Value="@(TipoEquivalencia.Intercambiable)">Medicamento Intercambiable</MudSelectItem>
@@ -149,7 +161,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div>
-                                                <label>Tipo</label>
+                                                <label> Clasificación </label>
                                                 <MudSelect T="string" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="ModelData.TipoMedicamento">
                                                     <MudSelectItem Value="@(TipoMedicamento.SI)">Síntesis Química </MudSelectItem>
                                                     <MudSelectItem Value="@(TipoMedicamento.RA)">Radiofármacos</MudSelectItem>
@@ -246,7 +258,7 @@
                                                                                        Color="Color.Info"
                                                                                        StartIcon="@Icons.Filled.RemoveRedEye"
                                                                                        Size="Size.Small"
-                                                                                       Link="@(ModelData.DataSheetURL)" Target="_blank">
+                                                                                       Link="@($"files/datasheet/{ModelData.DataSheetURL}")" Target="_blank">
                                                                                 Ver
                                                                             </MudButton>
                                                                             <MudButton Variant="Variant.Text"
@@ -299,7 +311,7 @@
                                                                                        Color="Color.Info"
                                                                                        StartIcon="@Icons.Filled.RemoveRedEye"
                                                                                        Size="Size.Small"
-                                                                                       Link="@(ModelData.ProspectusURL)" Target="_blank">
+                                                                                       Link="@($"files/prospectus/{ModelData.ProspectusURL}")" Target="_blank">
                                                                                 Ver
                                                                             </MudButton>
                                                                             <MudButton Variant="Variant.Text"
@@ -520,7 +532,18 @@
     {
         await this.InvokeAsync(StateHasChanged);
     }
-
+    public async Task<byte[]> GetArray(Stream stream,long size)
+    {
+        //using (MemoryStream ms = new MemoryStream())
+        //{
+        //    input.CopyTo(ms);
+        //    return ms.ToArray();
+        //}
+        var memoryStream = new MemoryStream((int)size);
+        await stream.CopyToAsync(memoryStream);
+        memoryStream.Position = 0;
+       return memoryStream.ToArray();
+    }
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
         _file = e.File;
@@ -531,35 +554,39 @@
                 fileLoading = true;
                 showFileInputAlert = false;
                 await RefresView();
-                long maxFileSize = 1048576 * 50;//20MB
-                var extension = Path.GetExtension(_file.Name);
-                if (_file.Size <= maxFileSize)
-                {
-                    var stream = _file.OpenReadStream(maxAllowedSize: maxFileSize);
-                    var request = new UploadObject
-                        {
+                long maxFileSize = 1048576 * 50;//50MB
+                if (_file.Size <= maxFileSize) {
+                    var uploadType = UploadType.DataSheet;
+                    var contentType = _file.ContentType;
+                    var extension = Path.GetExtension(_file.Name);
+                    var stream = _file.OpenReadStream(maxAllowedSize: (int)_file.Size);
+                    var request = new UploadObject{
                             FileName = $"{Guid.NewGuid()}{extension}",
                             Data = stream,
                             Size = _file.Size,
-                            UploadType = UploadType.DataSheet,
-                            Extension = extension
+                            UploadType = uploadType,
+                            ContentType = contentType,
+                            Extension = extension,
                         };
-                    ModelData.DataSheetURL = await _uploadService.UploadAsync(request);
+                    var result = await _client.PostFileAsync(request,_config.Value);
+                    if (result.Succeeded)
+                         ModelData.DataSheetURL =result.Data;
                 }
                 else { showFileInputAlert = true; }
 
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 _systemLogger.Error(ex);
             }
             finally { fileLoading = false;  await RefresView();}
+
         }
+     
     }
 
     private async Task DeleteDataSheetAsync()
     {
-        await _uploadService.DeleteAsync(ModelData.DataSheetURL);
+        await _uploadService.DeleteAsync($"files/datasheet/{ModelData.DataSheetURL}");
         _file = null;
         ModelData.DataSheetURL = null;
     }
@@ -575,25 +602,26 @@
                 showProspectusFileInputAlert = false;
                 await RefresView();
                 long maxFileSize = 1048576 * 50;//50MB
-                var extension = Path.GetExtension(_prospectusFile.Name);
-                if (_prospectusFile.Size <= maxFileSize)
-                {
+                if (_prospectusFile.Size <= maxFileSize) {
+                    var uploadType = UploadType.Prospectus;
+                    var contentType = _prospectusFile.ContentType;
+                    var extension = Path.GetExtension(_prospectusFile.Name);
                     var stream = _prospectusFile.OpenReadStream(maxAllowedSize: maxFileSize);
-                    var request = new UploadObject
-                        {
+                    var request = new UploadObject{
                             FileName = $"{Guid.NewGuid()}{extension}",
                             Data = stream,
                             Size = _prospectusFile.Size,
-                            UploadType = UploadType.Prospectus,
-                            Extension = extension
+                            UploadType =uploadType,
+                            ContentType = contentType,
+                            Extension = extension,
                         };
-                    ModelData.ProspectusURL = await _uploadService.UploadAsync(request);
+                    var result = await _client.PostFileAsync(request,_config.Value);
+                    if (result.Succeeded)
+                         ModelData.ProspectusURL =result.Data;
                 }
                 else { showProspectusFileInputAlert = true; }
-
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 _systemLogger.Error(ex);
             }
             finally { prospectusLoading = false;  await RefresView();}
@@ -603,10 +631,9 @@
 
     private async Task DeleteProspectusAsync()
     {
-        await _uploadService.DeleteAsync(ModelData.ProspectusURL);
+        await _uploadService.DeleteAsync($"files/prospectus/{ModelData.ProspectusURL}");
         _prospectusFile = null;
          ModelData.ProspectusURL = null;
-        
     }
 
     private async Task UploadPictureFiles(InputFileChangeEventArgs e)
@@ -620,14 +647,12 @@
                 showPictureFileInputAlert = false;
                 await RefresView();
                 long maxFileSize = 1048576 * 10;//10 MB
-                var extension = Path.GetExtension(_imageFile.Name);
-                var format = "image/png";
-                if (_imageFile.Size <= maxFileSize)
-                {
-                    var imageFile = await _imageFile.RequestImageFileAsync(format, 600, 400);
+                var contentType = _imageFile.ContentType;
+                if (_imageFile.Size <= maxFileSize){
+                    var imageFile = await _imageFile.RequestImageFileAsync(contentType, 600, 400);
                     var stream = imageFile.OpenReadStream(maxAllowedSize: maxFileSize);
                     var data = Convert.ToBase64String(await GetDataAsync(stream));
-                    ModelData.PictureData = $"data:{format};base64,{data}";
+                    ModelData.PictureData = $"data:{contentType};base64,{data}";
                 }
                 else { showPictureFileInputAlert = true; }
 

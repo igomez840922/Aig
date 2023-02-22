@@ -10,7 +10,7 @@
 @inject NavigationManager NavigationManager
 
 <EditForm Model="@model" OnValidSubmit="SubmitAsync">
-    <FluentValidationValidator  @ref="_fluentValidationValidator" />
+    <FluentValidationValidator  @ref="_fluentValidation" />
 
 
     <MudGrid>
@@ -52,8 +52,8 @@
 
 @code {
   
-    private FluentValidationValidator _fluentValidationValidator;
-    private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+    private FluentValidationValidator _fluentValidation;
+    private bool Validated => _fluentValidation.Validate(options => { options.IncludeAllRuleSets(); });
     private bool loading { get; set; } = false;
     private TokenRequest model = new TokenRequest();
     protected override async Task OnInitializedAsync()
@@ -62,7 +62,7 @@
         var isAuthenticated=user.Identity?.IsAuthenticated;
         if(isAuthenticated ?? false)
         {
-            _navigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("login");
         }
         loading = false;
         //await base.OnInitializedAsync();
@@ -77,7 +77,7 @@
                 _snackBar.Add(message, Severity.Error);
           loading = false;
         }
-        else  _navigationManager.NavigateTo($"./login", true);
+        else  _navigationManager.NavigateTo("login", true);
 
 
     }

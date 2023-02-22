@@ -10,6 +10,10 @@ using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 using Aig.Farmacoterapia.Domain.Identity;
+using Aig.Farmacoterapia.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using Aig.Farmacoterapia.Domain.Extensions;
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services
 {
@@ -66,47 +70,61 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IOptions<AppConfiguration> _appConfig;
+        private readonly ApplicationDbContext _dbContext;
         public IdentityService(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext dbContext,
             IOptions<AppConfiguration> appConfig)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _appConfig = appConfig;
             _appConfig = appConfig;
+            _dbContext = dbContext;
         }
 
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            //var user = await _userManager.FindByEmailAsync(model.Email);
+            var dbset = _dbContext.Set<ApplicationUser>();
+            var user = dbset.Where(p => p.Email == model.Email).FirstOrDefault();
+
             if (user == null)
             {
-                return await Result<TokenResponse>.FailAsync("User Not Found.");
+                return await Result<TokenResponse>.FailAsync("Usuario no encontrado.");
             }
             if (!user.IsActive)
             {
-                return await Result<TokenResponse>.FailAsync("User Not Active. Please contact the administrator.");
+                return await Result<TokenResponse>.FailAsync("Usuario no activo. Póngase en contacto con el administrador.");
             }
             if (!user.EmailConfirmed)
             {
-                return await Result<TokenResponse>.FailAsync("E-Mail not confirmed.");
+                return await Result<TokenResponse>.FailAsync("Correo electrónico no confirmado.");
             }
             var passwordValid = await _userManager.CheckPasswordAsync(user, model.Password);
             if (!passwordValid)
             {
-                return await Result<TokenResponse>.FailAsync("Invalid Credentials.");
+                return await Result<TokenResponse>.FailAsync("Credenciales no válidas.");
             }
 
             user.RefreshToken = GenerateRefreshToken();
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
-            await _userManager.UpdateAsync(user);
+           
+            //await _userManager.UpdateAsync(user);
+            Update(user);
 
             var token = await GenerateJwtAsync(user);
             var response = new TokenResponse { Token = token, RefreshToken = user.RefreshToken, TokenExpiryTime = user.RefreshTokenExpiryTime, Avatar = user.ProfilePicture! };
+
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
+        public void Update(ApplicationUser item) 
+        {
+            _dbContext.Entry(item).CurrentValues.SetValues(item);
+            _dbContext.SaveChanges();
+        }
         public async Task<Result<TokenResponse>> GetRefreshTokenAsync(RefreshTokenRequest model)
         {
             if (model is null)
@@ -142,7 +160,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             var permissionClaims = new List<Claim>();
             foreach (var role in roles)
             {
-                roleClaims.Add(new Claim(ClaimTypes.Role, role));
+                roleClaims.Add(new Claim(ClaimTypes.Role, role.ParseEnum<RoleType>().ToString()));
                 var thisRole = await _roleManager.FindByNameAsync(role);
                 var allPermissionsForThisRoles = await _roleManager.GetClaimsAsync(thisRole);
                 permissionClaims.AddRange(allPermissionsForThisRoles);
@@ -153,7 +171,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 new(ClaimTypes.Email, user.Email),
                 new(ClaimTypes.Name, user.FirstName),
                 new(ClaimTypes.Surname, user.LastName),
-                new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
+                new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty),
+                new(ClaimTypes.UserData, user.ProfilePicture ?? string.Empty)
             }
             .Union(userClaims)
             .Union(roleClaims)
@@ -174,7 +193,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             var token = new JwtSecurityToken(
                claims: claims,
-               expires: DateTime.UtcNow.AddDays(1),
+               expires: DateTime.UtcNow.AddDays(7),
                signingCredentials: signingCredentials);
             var tokenHandler = new JwtSecurityTokenHandler();
             var encryptedToken = tokenHandler.WriteToken(token);

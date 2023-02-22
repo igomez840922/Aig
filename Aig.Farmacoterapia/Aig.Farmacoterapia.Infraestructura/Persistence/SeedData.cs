@@ -1,4 +1,5 @@
-﻿using Aig.Farmacoterapia.Infrastructure.Identity;
+﻿using Aig.Farmacoterapia.Domain.Entities.Enums;
+using Aig.Farmacoterapia.Infrastructure.Identity;
 using Aig.Farmacoterapia.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,7 @@ namespace Aig.Farmacoterapia.Infrastructure.SeedData
                 if (userManager.FindByNameAsync("admin").Result == null)
                 {
                     ApplicationUser user = new ApplicationUser();
+                    user.Role = RoleType.Admin;
                     user.FirstName = "admin";
                     user.LastName = "admin";
                     user.UserName = "admin@admin.com";

@@ -13,7 +13,7 @@ namespace Aig.Farmacoterapia.Admin.Wasm.Pages.Account
         protected NavigationManager NavigationManager { get; set; }
         protected override void OnInitialized()
         {
-            NavigationManager.NavigateTo("/login");
+            NavigationManager.NavigateTo("login");
         }
 
     }

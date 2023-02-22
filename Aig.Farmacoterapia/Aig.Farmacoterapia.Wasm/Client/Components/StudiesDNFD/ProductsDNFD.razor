@@ -1,0 +1,136 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Components.StudiesDNFD
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Model
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using System.Globalization
+@inject IStudyDNFDManager _manager;
+
+<PageTitle>Medicaments</PageTitle>
+
+<style>
+
+</style>
+
+<MudCard Elevation="25">
+    <MudCardContent>
+
+        <MudGrid>
+            <MudItem md="12">
+                <MudToolBar Style="height:25px !important;">
+                    <MudSpacer />
+                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || _parent?.Medicamentos.Count==4)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(string.Empty))" />
+                    </MudTooltip>
+                </MudToolBar>
+            </MudItem>
+        </MudGrid>
+
+    </MudCardContent>
+
+</MudCard>
+ 
+<MudTable Items="@_parent?.Medicamentos"  Dense="true" Hover="true" Height="500px">
+        <HeaderContent>
+              <MudTh>Número de factura de importación</MudTh>
+             <MudTh><MudInputLabel Style="width:250px">Producto</MudInputLabel></MudTh>
+             <MudTh>Cantidad a importar</MudTh>
+             <MudTh>Lote (s)</MudTh>
+             <MudTh><MudInputLabel Style="width:150px">Expiración (s)</MudInputLabel></MudTh>
+            <MudTh>Fabricante</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+             <MudTd DataLabel="Número de factura de importación">
+                 @context.Factura
+            </MudTd>
+            <MudTd DataLabel="Producto">
+                 @context.Nombre
+            </MudTd>
+            <MudTd DataLabel="Cantidad a importar">@context.Cantidad</MudTd>
+            <MudTd DataLabel="Lote (s)">@context.Lote</MudTd>
+            <MudTd DataLabel="Expiración (s)">@(string.Format("{0:dd/MM/yyyy}", context.Expiracion))</MudTd>
+            <MudTd DataLabel="Fabricante">
+                @context.Fabricante?.Nombre
+            </MudTd>
+        <MudTd>
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+            </MudMenu>
+
+        </MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>No se encontraron elementos</MudText>
+        </NoRecordsContent>
+    </MudTable>
+
+@code {
+    [Parameter] public AigEstudioDNFD _parent { get; set; }
+    protected bool _loading = false;
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
+
+    private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    private async Task AddEdit(string id)
+    { 
+        var data = _parent.Medicamentos.Where(p => p.Id == id).FirstOrDefault();
+        var parameters = data != null ? new DialogParameters { ["_modelData"] = data } :
+              new DialogParameters { ["_modelData"] = new AigProductoEstudio() };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<AddEditProduct>(string.IsNullOrEmpty(id) ? "Nuevo" : "Editar ", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            var item = result.Data as AigProductoEstudio;
+            if (item != null)
+            {
+                if (string.IsNullOrEmpty(item.Id))
+                {
+                    item.Id = Guid.NewGuid().ToString();
+                    _parent.Medicamentos!.Add(item);
+                }
+
+                else
+                {
+                    var index= _parent.Medicamentos!.FindIndex(p => p.Id == item.Id);
+                    if (index != -1)
+                    {
+                         _parent.Medicamentos!.RemoveAt(index);
+                         _parent.Medicamentos!.Insert(index,item);
+                    }
+                }
+               
+                await RefresView(false);
+            }
+        }
+            
+    }
+
+  private async Task Delete(string id)
+    {
+        var parameters = new DialogParameters{
+             { nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro de querer eliminar el registro?", id) }
+         };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>("Eliminar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+             _parent.Medicamentos!.RemoveAll(p => p.Id == id);
+             await RefresView(false);
+        }
+    }
+}

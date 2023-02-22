@@ -1,7 +1,8 @@
 ﻿using Aig.Farmacoterapia.Admin.Wasm;
 using Aig.Farmacoterapia.Admin.Wasm.Infrastructure;
+using Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Authentication;
+using BlazorComponentBus;
 using Blazored.LocalStorage;
-using BlazorHero.CleanArchitecture.Client.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -60,6 +61,8 @@ namespace BlazorHero.CleanArchitecture.Client.Extensions
                 })
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
             builder.Services.AddHttpClientInterceptor();
+            //For Components Comunucations Pul-Sub
+            //builder.Services.AddScoped<ComponentBus>();
             return builder;
         }
 

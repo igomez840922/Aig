@@ -134,7 +134,7 @@
                                                 <div class="kt-avatar__holder" style="background-image: url(assets/media/users/default.jpg)"></div>
                                             }
                                             else{
-                                                <img class="kt-avatar__holder" src="@dt.ProfilePicture"/>
+                                               <img class="kt-avatar__holder" src="@($"files/users/{dt.ProfilePicture}")"/>
                                             }
                                         </div>
                                        
@@ -306,7 +306,7 @@
     {        
         if (isOk)
         {
-            var result = await _userService.DeleteDeleteAsync(modelData.Id);
+            var result = await _userService.DeleteAsync(modelData.Id);
             if (!result.Succeeded)
                 await JsRuntime.InvokeVoidAsync("ShowError", result.Messages.First());
             else {

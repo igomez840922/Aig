@@ -2,6 +2,7 @@
 using Aig.Farmacoterapia.Application.Features.Extensions;
 using Aig.Farmacoterapia.Infrastructure;
 using Microsoft.Extensions.FileProviders;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,33 +17,59 @@ builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.RegisterSwagger();
 builder.Services.AddApplicationLayer();
 
-builder.Services.AddCors(policy =>
-{
-    policy.AddPolicy("CorsPolicy", opt => opt
-    .AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .WithExposedHeaders("X-Pagination"));
-});
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+//builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//For api Controllers
+//builder.Services.AddCors(policy =>
+//{
+//    policy.AddDefaultPolicy(
+//        policy =>
+//        {            policy.AllowAnyOrigin()
+//            .AllowAnyHeader()
+//            .AllowAnyMethod()
+//            .SetIsOriginAllowed((host) => true)
+//            .WithExposedHeaders("X-Pagination")); ;  //set the allowed origin  
+//        });
+//    policy.AddPolicy("CorsPolicy", opt => opt
+//    .AllowAnyOrigin()
+//    .AllowAnyHeader()
+//    .AllowAnyMethod()
+//    .SetIsOriginAllowed((host) => true) //localhost
+//    .WithExposedHeaders("X-Pagination"));
+//});
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CorsPolicy",
+                          policy =>
+                          {
+                              policy.AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .SetIsOriginAllowed((host) => true);
+                              });
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Aig Farmacoterapia API V1");
-        options.RoutePrefix = "swagger";
-        options.DisplayRequestDuration();
-    });
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI(options =>
+//    {
+//        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Aig Farmacoterapia API V1");
+//        options.RoutePrefix = "swagger";
+//        options.DisplayRequestDuration();
+//    });
+//}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

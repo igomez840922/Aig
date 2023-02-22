@@ -1,5 +1,4 @@
 ﻿@using Aig.Farmacoterapia.Application.Dashboard.Event
-@using Aig.Farmacoterapia.Application.Medicament.Model
 @using Aig.Farmacoterapia.Infrastructure.Application
 @using Blazored.FluentValidation
 @inherits LayoutComponentBase
@@ -221,22 +220,22 @@
         base.OnInitialized();
     }
    
-    private void OnSearch()
-    {
-        var path= _navigation.ToBaseRelativePath(_navigation.Uri);
-        if (path.Contains("details")||path.Contains("disclaimer")) {  
-            _appState.SetSerachWithoutEvent(_searchText);
-             _navigation.NavigateTo("./");
-        }
-        else
-           _appState.SetSerachText(_searchText);
-    }
+    //private void OnSearch()
+    //{
+    //    var path= _navigation.ToBaseRelativePath(_navigation.Uri);
+    //    if (path.Contains("details")||path.Contains("disclaimer")) {  
+    //        _appState.SetSearchWithoutEvent(_searchText);
+    //         _navigation.NavigateTo("./");
+    //    }
+    //    else
+    //       _appState.SetSearchText(_searchText);
+    //}
 
-    private void OnSearchChanged()
-    {  
-        if (string.IsNullOrEmpty(_searchText)) {
-            _appState.SetSerachText(_searchText);
-        }
-    }
+    //private void OnSearchChanged()
+    //{  
+    //    if (string.IsNullOrEmpty(_searchText)) {
+    //        _appState.SetSearchText(_searchText);
+    //    }
+    //}
        
 }

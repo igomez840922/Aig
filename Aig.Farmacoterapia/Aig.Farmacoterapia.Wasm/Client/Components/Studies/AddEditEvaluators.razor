@@ -1,0 +1,161 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
+@using Aig.Farmacoterapia.Domain.Models
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Medicament
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Validation
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@using System.Globalization
+@inject IJSRuntime _jsRuntime
+@inject IStudyManager _manager
+
+<style>
+    .mud-dialog {
+        max-height: calc(108vh - var(--mud-appbar-height));
+        overflow-y: auto;
+    }
+</style>
+
+<MudDialog >
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.SupervisorAccount" Class="mr-3 mb-n1" />
+            Asignar Evaluadores
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+          
+        
+        
+      
+        <MudDropContainer T="UserModelOutput" Items="_modelData" ItemsSelector="@((item,dropzone) => item.EvaluatorStatus.ToString() == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
+            <ChildContent>
+
+                <MudDropZone T="UserModelOutput" Identifier="UnAssigned" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">Disponibles</MudText>
+                </MudDropZone>
+
+
+                <MudDropZone T="UserModelOutput" Identifier="Assigned" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">Asignados</MudText>
+                </MudDropZone>
+
+            </ChildContent>
+            <ItemRenderer>
+                <MudListItem>
+
+                    <MudCard Elevation="25" Class="d-flex">
+                        <MudCardHeader>
+                            <CardHeaderAvatar>
+                                @if (string.IsNullOrEmpty(context.ProfilePicture))
+                                {
+
+                                    <MudAvatar Size="Size.Medium" Color="Color.Secondary"> @context.FullName?[..1]?.ToUpper() </MudAvatar>
+                                }
+                                else
+                                {
+                                    <MudAvatar Size="Size.Medium" Image="@context.ProfilePicture"></MudAvatar>
+                                }
+                            </CardHeaderAvatar>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.body1">@context.FullName</MudText>
+                            </CardHeaderContent>
+
+                        </MudCardHeader>
+                    </MudCard>
+
+                </MudListItem>
+            </ItemRenderer>
+        </MudDropContainer>
+        
+
+    </DialogContent>
+    <DialogActions>
+
+       @if (_loading)
+        {
+          <MudProgressCircular Style="margin-right:10px !important;" Size="Size.Small" Color="Color.Primary" Indeterminate="true" />
+        }
+        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
+        <MudButton Disabled="@(!Validate() || _loading)" ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" OnClick="()=>SubmitAsync()">Guardar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+
+@code {
+
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    [Parameter] public long _id { get; set; } = 0;
+    private List<UserModelOutput> _modelData = new();
+    private bool _validated => Validate();
+    private bool _addSectionOpen;
+    bool _loading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            Validate();
+    }
+    private bool Validate() => true;
+
+     private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    private async Task LoadDataAsync()
+    {
+        if (_id != 0)
+        {
+            await RefresView(true);
+            var response = await _manager.GetEvaluators(_id);
+            if (response.Succeeded){
+                _modelData = response.Data.Select(w => { w.ProfilePicture = string.IsNullOrEmpty(w.ProfilePicture) ? string.Empty : $"{_appConfiguration.ApiUrl}{AppConstants.UsersEndpoints.Avatar(w.ProfilePicture!)}"; return w; }).ToList();;
+            }
+            await RefresView(false);
+        }
+    }
+
+    public void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private void ItemUpdated(MudItemDropInfo<UserModelOutput> dropItem)
+    {   
+        UserModelOutput item;
+        if (dropItem == null || dropItem.Item== null) return;
+        var status = (EvaluatorStatus)Enum.Parse(typeof(EvaluatorStatus), dropItem.DropzoneIdentifier, true);
+        if((item=_modelData.FirstOrDefault(p => p.Id == dropItem?.Item?.Id))!=null)
+            item.EvaluatorStatus = status;
+    }
+
+    protected async Task SubmitAsync()
+    { 
+        await RefresView(true);
+        var evaluators = _modelData.Where(p => p.EvaluatorStatus == EvaluatorStatus.Assigned).Select(s => s.Id).ToArray();
+        var response = await _manager.SetEvaluatorsAsync(_id,evaluators);
+        if (response.Succeeded)
+            MudDialog.Close();
+        foreach (var message in response.Messages){
+            _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+        }
+        await RefresView(false);
+        //await _jsRuntime.InvokeVoidAsync("console.debug",$"Id: {_id} / evaluatos: {string.Join(" *** ",evaluators)}");
+    }
+}

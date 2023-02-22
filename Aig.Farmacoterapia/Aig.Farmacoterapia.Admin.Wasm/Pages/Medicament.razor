@@ -1,0 +1,464 @@
+﻿@page "/medicaments"
+@attribute [Authorize]
+@using Aig.Farmacoterapia.Admin.Wasm.Components.Medicament
+@using Aig.Farmacoterapia.Admin.Wasm.Model
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Admin.Wasm.Infrastructure.Managers.Medicament
+@using System.Globalization
+@inject IMedicamentManager _manager;
+
+<PageTitle>Medicaments</PageTitle>
+
+<style>
+    .table th, .table td {
+        vertical-align: middle !important;
+    }
+
+    .table-sm th {
+        padding: 0.8rem 0.3rem 0.8rem 1rem !important;
+    }
+
+    .table-sm td {
+        padding: 0.3rem 0.3rem 0.3rem 1rem !important;
+    }
+
+    .dropdown-item {
+        display: flow-root !important;
+    }
+
+    .mud-table-container {
+        min-height: 200px !important;
+    }
+
+    .mud-table-empty-row {
+        padding-top: 60px !important;
+    }
+
+    .mud-table-head {
+        background-color: #f0f0f0 !important;
+        border-color: #f0f0f0 !important;
+        color: #594ae2 !important;
+    }
+
+    .mud-table-root .mud-table-head .mud-table-cell {
+        color: #594ae2 !important;
+    }
+
+    .mud-table-sort-label:hover {
+        color: #594ae2 !important;
+    }
+</style>
+
+<MudCard Elevation="25">
+    <MudCardContent>
+
+        <MudGrid>
+            <MudItem md="12">
+                <MudToolBar Style="height:25px !important;">
+                    <MudText Color="Color.Primary">
+                        <MudIcon Icon="@Icons.Material.Filled.MedicationLiquid" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                        Medicamentos
+                    </MudText>
+                    <MudSpacer />
+                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(0))" />
+                    </MudTooltip>
+                </MudToolBar>
+            </MudItem>
+        </MudGrid>
+
+    </MudCardContent>
+
+</MudCard>
+
+<EditForm Elevation="25" Model="this" OnValidSubmit="OnSearch" style="margin-top:10px !important;">
+    <MudCard Elevation="25">
+        <MudCardContent>
+
+            <MudGrid>
+
+                <MudItem md="3" Style="margin-top:12px !important">
+                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
+                </MudItem>
+
+                 <MudItem md="5">
+                    <MudGrid>
+                        <MudItem md="6">
+                            <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Emisión:"  @bind-DateRange="dateRange" />
+                        </MudItem>
+                        <MudItem md="6">
+                             <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Expiración:" @bind-DateRange="expirationRange" />
+                        </MudItem>
+                    </MudGrid>
+                </MudItem>
+
+                 <MudItem md="2" Style="margin-top:12px !important">
+                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Fabricante" Label="Fabricante" />
+                </MudItem>
+
+                <MudItem md="2" Style="margin-top:12px !important">
+                    <MudGrid>
+                        <MudItem md="6" Style="margin-top: 10px !important;">
+                            <MudTooltip Text="Buscar" Arrow="true" Placement="Placement.Top" Color="Color.Default">
+                                <MudIconButton Disabled="@(_loading)" Style="margin-right: 8px;" ButtonType="ButtonType.Submit" Icon="@Icons.Material.Filled.Search" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
+                            </MudTooltip>
+                            <MudTooltip Text="Eliminar" Arrow="true" Placement="Placement.Top" Color="Color.Default" Style="margin-top: 10px !important;">
+                                <MudIconButton Disabled="@(_loading)" ButtonType="ButtonType.Button" Icon="@Icons.Material.Filled.Clear" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="()=>OnReset()" />
+                            </MudTooltip>
+                        </MudItem>
+                        <MudItem md="6">
+                        </MudItem>
+                    </MudGrid>
+
+                </MudItem>
+             
+
+            </MudGrid>
+
+        </MudCardContent>
+
+    </MudCard>
+</EditForm>
+
+
+    <MudTable  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigMedicamento>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
+
+        <HeaderContent>
+            <MudTh style="width:5px;"></MudTh>
+            <MudTh style="width:60px;"><MudTableSortLabel SortLabel="numReg" T="AigMedicamento">Registro</MudTableSortLabel></MudTh>
+            <MudTh style="width:100px;"><MudTableSortLabel SortLabel="dateOfIssue" T="AigMedicamento">Emisión</MudTableSortLabel></MudTh>
+            <MudTh style="width:100px;"><MudTableSortLabel SortLabel="expirationDate" T="AigMedicamento">Expiración</MudTableSortLabel></MudTh>
+            <MudTh style="width:350px;"><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigMedicamento">Medicamento</MudTableSortLabel></MudTh>
+            <MudTh style="width:350px;">Principio Activo</MudTh>
+            <MudTh>Fabricante</MudTh>
+            <MudTh style="width:20px;"><MudTableSortLabel T="AigMedicamento" SortLabel="created">Creado</MudTableSortLabel></MudTh>
+            <MudTh style="width:5px;"></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+              <MudTd>
+                <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
+            </MudTd>
+            <MudTd DataLabel="No. Registro">@context.NumReg</MudTd>
+            <MudTd DataLabel="Fech. Emisión">@(string.Format("{0:dd/MM/yyyy}", context.FechaEmision))</MudTd>
+            <MudTd DataLabel="Fech. Expiración">@(string.Format("{0:dd/MM/yyyy}", context.FechaExpiracion))</MudTd>
+            <MudTd DataLabel="Medicamento">@context.Nombre</MudTd>
+            <MudTd DataLabel="Principio Activo">@context.Principio</MudTd>
+            <MudTd DataLabel="Fabricante">@context.Fabricante?.Nombre</MudTd>
+            <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
+            <MudTd>
+
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Icon="@Icons.Material.Filled.Edit" @onclick="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" @onclick="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                @if (!string.IsNullOrEmpty(context.DataSheetURL))
+                {
+                    <MudMenuItem Target="_blank" Icon="@Icons.Filled.PictureAsPdf"
+                         Link="@($"{_appConfiguration.ApiUrl}{AppConstants.MedicamentEndpoints.DataSheetURL(context.DataSheetURL)}")">
+                        Monografía
+                    </MudMenuItem>
+                } 
+                @if (!string.IsNullOrEmpty(context.ProspectusURL))
+                {
+                    <MudMenuItem Target="_blank" Icon="@Icons.Filled.PictureAsPdf"
+                         Link="@($"{_appConfiguration.ApiUrl}{AppConstants.MedicamentEndpoints.ProspectusURL(context.ProspectusURL)}")">
+                        Prospecto
+                    </MudMenuItem>
+                }
+            </MudMenu>
+
+            </MudTd>
+        </RowTemplate>
+     <ChildRowContent>
+            @if (context.ShowDetails)
+            {
+                <MudTr>
+                    <td colspan="9">
+
+                        <div style="background-color: #f2eefc;" _ngcontent-lil-c210="" class="py-4 d-flex ng-star-inserted">
+
+
+                            <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+
+                                    @if (!string.IsNullOrEmpty(@context.PictureData))
+                                    {
+                                        <a target="_blank" href="@context.PictureData" download>
+                                            <img src="@context.PictureData" Width="150" Height="110" Elevation="25" Class="rounded-lg" />
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                     
+                                        <img src="/media/no-image.png" Width="150" Height="110" Elevation="25" Class="rounded-lg" />
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+                            <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Registro sanitario:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.NumReg) ? @context.NumReg : "<Ninguno>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Revisiones :
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.NumRen) ? @context.NumRen : "<Ninguna>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Vigente:
+                                    </span>
+                                    @if (@context.Vigente)
+                                    {
+                                        <span class="fa fa-check-circle" aria-hidden="true" style="font-size: 15px;color:#1BC5BD">
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fa fa-times-circle" aria-hidden="true" style="font-size: 15px;color:#EE2D41">
+                                        </span>
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div _ngcontent-lil-c210="" class="mx-4">
+
+
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Fabricante:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Fabricante?.Nombre) ? @context.Fabricante?.Nombre : "<Ninguno>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Dirección:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Fabricante?.Direccion) ? @context.Fabricante?.Direccion : "<Ninguno>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        País:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Fabricante?.Pais?.Nombre) ? @context.Fabricante?.Pais?.Nombre : "<Ninguno>")
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Concentración:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(context.Concentracion) ? context.Concentracion : "<Ninguna>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Vía de Administración:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(context.ViaAdministracion != null ? context.ViaAdministracion?.Nombre : "<Ninguna>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Excipientes:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Excipientes) ? @context.Excipientes : "<Ninguno>")
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div _ngcontent-lil-c210="" class="mx-4">
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Creado:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @context.Created
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Creado por:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.CreatedBy) ? @context.CreatedBy : "<Ninguno>")
+                                    </span>
+                                </div>
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                        Modificado:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(@context.LastModified != null ? @context.LastModified : "<Ninguna>")
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </td>
+                </MudTr>
+            }
+        </ChildRowContent>
+        <NoRecordsContent>
+            <MudText>No se encontraron elementos</MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>Cargando...</MudText>
+        </LoadingContent>
+        <PagerContent>
+            <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" Class="primary" InfoFormat="{first_item}-{last_item} de {all_items}"  PageSizeOptions="new int[] {8,10, 25, 50, 100, 250 }" RowsPerPageString="Filas" />
+        </PagerContent>
+
+    </MudTable>
+ 
+
+@code {
+
+    private PaginatedResult<AigMedicamento> _paginatedResult;
+    private static IEnumerable<AigMedicamento> List { get; set; }
+    private MudTable<AigMedicamento> _table;
+    private DateRange dateRange;
+    private DateRange expirationRange;
+    //private static IEnumerable<AigMedicamento> List { get; set; }
+    protected MedicamentFilter _modelFilter;
+    protected bool _loading = false;
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        _modelFilter = new MedicamentFilter();
+        dateRange = new DateRange();
+        expirationRange = new DateRange();
+        base.OnInitialized();
+    }
+     protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+             _table.SetRowsPerPage(8);
+    }
+    private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+
+    private async Task<TableData<AigMedicamento>> DoFetchData(TableState state)
+    {
+        var result = new TableData<AigMedicamento>();
+
+        await RefresView(true);
+        var sorting = new List<SortingOption>();
+        var filters = new List<FilteringOption>();
+        if (state.SortDirection != SortDirection.None)
+        {
+            var sortDirection = state.SortDirection == SortDirection.Descending ? SortingDirection.DESC : SortingDirection.ASC;
+            sorting = new() { new SortingOption { Field = state.SortLabel, Direction = sortDirection } };
+        }
+        if (!string.IsNullOrEmpty(_modelFilter.Term))
+            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = _modelFilter.Term.Trim() });
+        if (_modelFilter.StartDate != null && _modelFilter.EndDate != null)
+        {
+            filters.Add(new FilteringOption { Field = "startDateOfIssue", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endDateOfIssue", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndDate.Value.ToString("dd/MM/yyyy") });
+        }
+        if (_modelFilter.StartExpirationDate != null && _modelFilter.EndExpirationDate != null)
+        {
+            filters.Add(new FilteringOption { Field = "startExpirationDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
+            filters.Add(new FilteringOption { Field = "endDateExpirationDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
+        }
+        if (_modelFilter.Fabricante != null)
+        {
+            filters.Add(new FilteringOption { Field = "maker", Operator = FilteringOperator.Equal, Value = _modelFilter.Fabricante });
+        }
+        var args = new PageSearchArgs()
+            {
+                PageIndex = state.Page + 1,
+                PageSize =state.PageSize,
+                SortingOptions = sorting,
+                FilteringOptions = filters
+            };
+        var paginatedResult = await _manager.AdminSearchAsync(args);
+        List = paginatedResult.Data;
+        result = new TableData<AigMedicamento>() { TotalItems = paginatedResult.TotalCount, Items = paginatedResult.Data };
+
+        await RefresView(false);
+        return result;
+    }
+
+    private void ShowBtnPress(long nr)
+    {
+         var item=List.First(f => f.Id == nr);
+         item.ShowDetails = !item.ShowDetails;
+    }
+
+    private async void OnSearch()
+    {
+        _modelFilter.StartDate = dateRange.Start;
+        _modelFilter.EndDate = dateRange.End;
+        _modelFilter.StartExpirationDate = expirationRange.Start;
+        _modelFilter.EndExpirationDate = expirationRange.End;
+        await _table.ReloadServerData();
+    }
+    private async Task OnReset()
+    {
+        _modelFilter = new MedicamentFilter();
+        dateRange = new DateRange();
+        expirationRange = new DateRange();
+        await _table.ReloadServerData();
+    }
+
+      private async Task AddEdit(long id = 0)
+        {
+            var parameters = new DialogParameters { ["_id"]=id };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEdit>(id == 0 ? "Nuevo" :"Editar", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+                await _table.ReloadServerData();
+      }
+
+  private async Task Delete(long id)
+    {
+        var parameters = new DialogParameters{
+             { nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro de querer eliminar el registro?", id) }
+         };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>("Eliminar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            var response = await _manager.DeleteAsync(id);
+            if (response.Succeeded)
+                 await _table.ReloadServerData();
+            foreach (var message in response.Messages)
+            {
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
+        }
+    }
+}

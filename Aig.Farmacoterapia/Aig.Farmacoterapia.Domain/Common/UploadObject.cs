@@ -11,6 +11,7 @@ namespace Aig.Farmacoterapia.Domain.Common
     {
         public string FileName { get; set; }
         public string Extension { get; set; }
+        public string ContentType { get; set; }
         public long Size { get; set; }
         public UploadType UploadType { get; set; }
         public Stream Data { get; set; }

@@ -1,0 +1,112 @@
+﻿@page "/login"
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure
+@using Aig.Farmacoterapia.Domain.Identity
+@using Blazored.FluentValidation
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@layout AccountLayout
+@attribute [AllowAnonymous]
+@inject NavigationManager NavigationManager
+
+<EditForm Model="@model" OnValidSubmit="SubmitAsync">
+    <FluentValidationValidator  @ref="_fluentValidation" />
+
+
+    <MudGrid>
+        
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText Typo="Typo.h6">Entre con su cuenta</MudText>
+            </div>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField T="string" Label="E-mail" Variant="Variant.Outlined" Margin="Margin.Dense"
+                          @bind-Value="model.Email" For="@(() => model.Email)" />    
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Password" Variant="Variant.Outlined" Margin="Margin.Dense"
+                          @bind-Value="model.Password" For="@(() => model.Password)"
+                          InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+        </MudItem>
+      
+        <MudItem xs="12">
+            <MudButton Style="float: left;"  ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">
+                @if (loading)
+                {
+                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Style="color:white !important" />
+                    <MudText Class="ms-3" Style="font-size:16px !important">Cargando...</MudText>
+                }
+                else
+                {
+                    <MudText>Entrar</MudText>
+                }
+            </MudButton>
+        </MudItem>
+
+
+
+    </MudGrid>
+</EditForm>
+
+@code {
+
+    private FluentValidationValidator _fluentValidation;
+    private bool loading { get; set; } = false;
+    private TokenRequest model = new TokenRequest();
+    protected override async Task OnInitializedAsync()
+    {
+        var user = await _authenticationManager.CurrentUser();
+        var isAuthenticated=user.Identity?.IsAuthenticated;
+        if(isAuthenticated ?? false){
+            _navigationManager.NavigateTo("/");
+        }
+        loading = false;
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) {Validate(); }
+    }
+    private bool Validate() => _fluentValidation.Validate();
+
+    private async Task SubmitAsync()
+    {
+       
+        if (string.IsNullOrEmpty(model.Email) || 
+            string.IsNullOrEmpty(model.Password)) return;
+
+        loading = true;
+        var result = await _authenticationManager.Login(model);
+        if (!result.Succeeded){
+            foreach (var message in result.Messages)
+                _snackBar.Add(message, Severity.Error);
+            loading = false;
+        }
+        else _navigationManager.NavigateTo($"./login", true);
+        
+
+    }
+
+    private bool _passwordVisibility;
+    private InputType _passwordInput = InputType.Password;
+    private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    void TogglePasswordVisibility()
+    {
+        if (_passwordVisibility)
+        {
+            _passwordVisibility = false;
+            _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+            _passwordInput = InputType.Password;
+        }
+        else
+        {
+            _passwordVisibility = true;
+            _passwordInputIcon = Icons.Material.Filled.Visibility;
+            _passwordInput = InputType.Text;
+        }
+    }
+}

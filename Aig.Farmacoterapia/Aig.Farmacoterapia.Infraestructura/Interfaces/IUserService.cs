@@ -14,14 +14,15 @@ namespace Aig.Farmacoterapia.Infrastructure.Interfaces
     {
         Task<PaginatedResult<ApplicationUser>> ListAsync(PageSearchArgs args);
         Task<Result<List<ApplicationUser>>> GetAllAsync();
+        Task<Result<List<ApplicationUser>>> GetAllEvaluatorAsync();
         Task<int> GetCountAsync();
         Task<ApplicationUser> GetUserByNameAsync(string userName);
         ApplicationUser GetUserByName(string userName);
         ApplicationUser GetUserByPhone(string phone);
         Task<ApplicationUser> GetAsync(string userId);
         Task<IResult> SaveAsync(ApplicationUser data);
-        Task<IResult> DeleteDeleteAsync(string id);
-        Task<IResult> RegisterAsync(RegisterRequest request, string origin);
+        Task<IResult> DeleteAsync(string id);
+        Task<IResult> RegisterAsync(RegisterRequest request, string origin = "");
         Task<IResult> UpdateProfileAsync(UpdateProfileRequest model);
         Task<IResult> ChangePasswordAsync(ChangePasswordRequest model);
         Task<IResult> ToggleUserStatusAsync(string userId, bool activate);

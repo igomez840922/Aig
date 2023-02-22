@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\plugins\**" />
+    <Content Remove="wwwroot\assets\plugins\**" />
+    <EmbeddedResource Remove="wwwroot\assets\plugins\**" />
+    <None Remove="wwwroot\assets\plugins\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\assets\js\jquery-bootpag\jquery.bootpag.js" />
     <None Include="wwwroot\assets\js\jquery-bootpag\jquery.bootpag.min.js" />
     <None Include="wwwroot\assets\js\jquery-bootpag\README.md" />
@@ -63,8 +70,6 @@
     <None Include="wwwroot\assets\js\select2\select2_locale_vi.js" />
     <None Include="wwwroot\assets\js\select2\select2_locale_zh-CN.js" />
     <None Include="wwwroot\assets\js\select2\select2_locale_zh-TW.js" />
-    <None Include="wwwroot\assets\plugins\daterangepicker\clickAndPositionHandler.js" />
-    <None Include="wwwroot\assets\plugins\daterangepicker\daterangepicker.scss" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,7 +80,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1" />
-    <PackageReference Include="MudBlazor" Version="6.0.17" />
+    <PackageReference Include="MudBlazor" Version="6.1.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
   </ItemGroup>
 
@@ -88,10 +93,6 @@
     <Content Update="wwwroot\favicon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Components\" />
   </ItemGroup>
 
 </Project>

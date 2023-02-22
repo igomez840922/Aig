@@ -1,5 +1,6 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Domain.Interfaces.Studies;
 using Aig.Farmacoterapia.Infrastructure.Application;
 using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Files;
@@ -8,7 +9,9 @@ using Aig.Farmacoterapia.Infrastructure.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Logging;
 using Aig.Farmacoterapia.Infrastructure.Persistence;
 using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories;
+using Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies;
 using Aig.Farmacoterapia.Infrastructure.Services;
+using Aig.Farmacoterapia.Infrastructure.Helpers;
 using log4net.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -20,7 +23,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using System.Globalization;
 using System.Net;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 
@@ -160,6 +165,7 @@ namespace Aig.Farmacoterapia.Infrastructure
 
         public static void RegisterSwagger(this IServiceCollection services)
         {
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new() { Title = "Aig Farmacoterapia  API", Version = "v1" });
@@ -182,7 +188,8 @@ namespace Aig.Farmacoterapia.Infrastructure
                 {
                     { securityScheme, Array.Empty<string>() }
                 });
-
+                c.DocumentFilter<SwaggerOrderingFilter>();
+                c.SchemaFilter<SwaggerIgnoreFilter>();
             });
         }
         public static void ConfigureSwagger(this IApplicationBuilder app)
@@ -191,7 +198,7 @@ namespace Aig.Farmacoterapia.Infrastructure
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Aig Farmacoterapia API V1");
-                options.RoutePrefix = "swagger";
+                options.RoutePrefix = "api";
                 options.DisplayRequestDuration();
             });
         }
@@ -203,14 +210,12 @@ namespace Aig.Farmacoterapia.Infrastructure
                 options.UseSqlServer(conn, sqlServerOptionsAction:
                     sqlOptions =>
                     {
-                        options.EnableDetailedErrors();
-                        sqlOptions.EnableRetryOnFailure();
-                        sqlOptions.CommandTimeout(180);
-                        //sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                        //options.EnableDetailedErrors();
+                        sqlOptions.CommandTimeout(120);
+                        sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromMilliseconds(500), null);
                     });
             });
 
-          
             //services.AddDbContext<ApplicationDbContext>(options =>
             //{
             //    options.UseMySql(conn, ServerVersion.AutoDetect(conn), mySqlOptionsAction:
@@ -240,18 +245,37 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .AddScoped<IPharmaceuticalRepository, PharmaceuticalRepository>()
                 .AddScoped<IMedicationRouteRepository, MedicationRouteRepository>()
                 .AddScoped<IMakerRepository, MakerRepository>()
-                .AddScoped<IStudiesRepository, StudiesRepository>()
+                .AddScoped<IAigEstudioDNFDRepository,AigEstudioDNFDRepository>()
+                .AddScoped<IAigEstudioRepository, AigEstudioRepository>()
+                .AddScoped<IAigCodigoEstudioRepository, AigCodigoEstudioRepository>()
                 .AddScoped<IUnitOfWork, UnitOfWork>()
-                .AddScoped<IUploadService, UploadService>();
+                .AddScoped<IUploadService, UploadService>()
+                .AddScoped<IReportService, ReportService>();
+
         }
         public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
-        {   
+        {
             //Log4net
             XmlConfigurator.Configure(new FileInfo("log4net.config"));
             services.AddScoped<AppState>();
             services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
+            return services;
+        }
+        public static void AddInfrastructureMappings(this IServiceCollection services)
+        {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        }
+        public static IServiceCollection AddHttpClient(this IServiceCollection services, IConfiguration configuration)
+        {
+            var apiUrl = services.GetApplicationSettings(configuration).BaseUrl;
+            services.AddScoped<HttpClient>(s => {
+                var client = new HttpClient { BaseAddress = new Uri(apiUrl)};
+                client.DefaultRequestHeaders.AcceptLanguage.Clear();
+                client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
+                return client;
+            });
             return services;
         }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
@@ -264,6 +288,8 @@ namespace Aig.Farmacoterapia.Infrastructure
             AddRepositories(services);
             AddJwtAuthentication(services, configuration);
             RegisterSwagger(services);
+            AddInfrastructureMappings(services);
+            AddHttpClient(services, configuration);
 
             return services;
         }

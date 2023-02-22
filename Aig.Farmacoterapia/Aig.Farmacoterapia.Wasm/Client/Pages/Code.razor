@@ -1,0 +1,303 @@
+﻿@page "/codes"
+@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Models
+@using Aig.Farmacoterapia.Wasm.Client.Components.Codes
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Codes
+@using Aig.Farmacoterapia.Wasm.Client.Model
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using System.Globalization
+@using System.Security.Claims
+@inject ICodesManager _manager;
+
+<PageTitle>Medicaments</PageTitle>
+
+<style>
+    .table th, .table td {
+        vertical-align: middle !important;
+    }
+
+    .table-sm th {
+        padding: 0.8rem 0.3rem 0.8rem 1rem !important;
+    }
+
+    .table-sm td {
+        padding: 0.3rem 0.3rem 0.3rem 1rem !important;
+    }
+
+    .dropdown-item {
+        display: flow-root !important;
+    }
+
+    .mud-table-container {
+        min-height: 200px !important;
+        width:100% !important;
+    }
+
+    .mud-table-empty-row {
+        padding-top: 60px !important;
+    }
+
+    .mud-table-head {
+        background-color: #f0f0f0 !important;
+        border-color: #f0f0f0 !important;
+        color: #594ae2 !important;
+    }
+
+    .mud-table-root .mud-table-head .mud-table-cell {
+        color: #594ae2 !important;
+    }
+
+    .mud-table-sort-label:hover {
+        color: #594ae2 !important;
+    }
+    .row-width {
+       width:2000px !important;
+    }
+    td.table-row { 
+    color: red;
+}
+</style>
+
+<MudCard Elevation="25">
+    <MudCardContent>
+
+        <MudGrid>
+            <MudItem xs="12" md="12" >
+                <MudToolBar Style="height:25px !important;">
+                    <MudText Color="Color.Primary">
+                        <MudIcon Icon="@Icons.Material.Outlined.AppRegistration" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                       Códigos de estudios
+                    </MudText>
+                    <MudSpacer />
+                    <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || !IsEdit())" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(0))" />
+                    </MudTooltip>
+                </MudToolBar>
+            </MudItem>
+        </MudGrid>
+
+    </MudCardContent>
+
+</MudCard>
+
+<EditForm Elevation="25" Model="this" OnValidSubmit="OnSearch" style="margin-top:10px !important;">
+    <MudCard Elevation="25">
+        <MudCardContent>
+
+            <MudGrid>
+
+                <MudItem md="3" Style="margin-top:12px !important">
+                   <MudTextField Clearable="true" HelperText="Código" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_term" Label="Buscar" />
+                </MudItem>
+
+                
+                <MudItem md="2" Style="margin-top:12px !important">
+                    <MudGrid>
+                        <MudItem md="6" Style="margin-top: 10px !important;">
+                            <MudTooltip Text="Buscar" Arrow="true" Placement="Placement.Top" Color="Color.Default">
+                                <MudIconButton Disabled="@(_loading)" Style="margin-right: 8px;" ButtonType="ButtonType.Submit" Icon="@Icons.Material.Filled.Search" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
+                            </MudTooltip>
+                            <MudTooltip Text="Eliminar" Arrow="true" Placement="Placement.Top" Color="Color.Default" Style="margin-top: 10px !important;">
+                                <MudIconButton Disabled="@(_loading)" ButtonType="ButtonType.Button" Icon="@Icons.Material.Filled.Clear" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="()=>OnReset()" />
+                            </MudTooltip>
+                        </MudItem>
+                       
+                    </MudGrid>
+
+                </MudItem>
+
+            </MudGrid>
+
+           
+        </MudCardContent>
+
+    </MudCard>
+</EditForm>
+
+    <MudTable HorizontalScrollbar="false" FixedHeader="true" FixedFooter="true"  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigCodigoEstudio>>>(DoFetchData))">
+     
+        <HeaderContent>
+          
+            <MudTh><MudInputLabel Style="width:40px !important">Código</MudInputLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:40px !important">Descripción</MudInputLabel></MudTh>
+            <MudTh><MudTableSortLabel Style="width:40px" InitialDirection="SortDirection.Descending" SortLabel="created" T="AigCodigoEstudio">Creado</MudTableSortLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:80px !important">Creado por</MudInputLabel></MudTh>
+            <MudTh><MudTableSortLabel Style="width:40px" SortLabel="modified" T="AigCodigoEstudio">Modificado</MudTableSortLabel></MudTh>
+            <MudTh><MudInputLabel Style="width:100px !important">Modificado por</MudInputLabel></MudTh>
+          
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+
+            <MudTd DataLabel="Código">@context.Codigo</MudTd>
+            <MudTd DataLabel="Descripción">@context.Descripcion</MudTd>
+            <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
+            <MudTd DataLabel="Creado por">@context.CreatedBy</MudTd>
+            <MudTd DataLabel="Modificado">@(string.Format("{0:dd/MM/yyyy}", context.LastModified))</MudTd>
+            <MudTd DataLabel="Modificado por">@context.LastModifiedBy</MudTd>
+            <MudTd>
+
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Disabled=(!IsEdit()) Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+            </MudMenu>
+
+            </MudTd>
+        </RowTemplate>
+   
+        <NoRecordsContent>
+            <MudText>No se encontraron elementos</MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>Cargando...</MudText>
+        </LoadingContent>
+        <PagerContent>
+            <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" Class="primary" InfoFormat="{first_item}-{last_item} de {all_items}"  PageSizeOptions="new int[] {8,10, 25, 50, 100, 250 }" RowsPerPageString="Filas" />
+        </PagerContent>
+
+    </MudTable>
+ 
+@code {
+
+    private PaginatedResult<AigCodigoEstudio> _paginatedResult;
+    private static IEnumerable<AigCodigoEstudio> List { get; set; }
+    private MudTable<AigCodigoEstudio> _table;
+    private DateRange dateRange;
+    private DateRange expirationRange;
+    private DateRange assignmentRange;
+    protected string _term;
+    protected bool _loading = false;
+    private ClaimsPrincipal _user;
+    protected async override Task OnInitializedAsync()
+    {
+        _term = string.Empty;
+        dateRange = new DateRange();
+        expirationRange = new DateRange();
+        assignmentRange = new DateRange();
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {   _user = await _authenticationManager.CurrentUser();
+            _table.SetRowsPerPage(8);
+        }
+    }
+
+    protected bool IsDelete()
+    {
+        var disabled=true;
+        if (_user == null) return disabled;
+        var role= _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return (userRole== RoleType.Admin);
+    }
+
+    protected bool IsEdit()
+    {
+        var disabled=true;
+        if (_user == null) return disabled;
+        var userId= _user.GetUserId();
+        var role= _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return (userRole== RoleType.Admin || userRole== RoleType.Boss);
+    }
+
+    private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    public int GetWorkingDays(DateTime from, DateTime to,List<DateTime> holidays)
+    {
+        var totalDays = 0;
+        for (var date = from.AddDays(1); date <= to; date = date.AddDays(1))
+        {
+            if (date.DayOfWeek != DayOfWeek.Saturday
+                && date.DayOfWeek != DayOfWeek.Sunday
+                && !holidays.Contains(date))
+                totalDays++;
+        }
+
+        return totalDays;
+    }
+
+    private async Task<TableData<AigCodigoEstudio>> DoFetchData(TableState state)
+    {
+        var result = new TableData<AigCodigoEstudio>();
+
+        await RefresView(true);
+        var sorting = new List<SortingOption>();
+        var filters = new List<FilteringOption>();
+        if (state.SortDirection != SortDirection.None)
+        {
+            var sortDirection = state.SortDirection == SortDirection.Descending ? SortingDirection.DESC : SortingDirection.ASC;
+            sorting = new() { new SortingOption { Field = state.SortLabel, Direction = sortDirection } };
+        }
+        if (!string.IsNullOrEmpty(_term))
+            filters.Add(new FilteringOption { Field = "term", Operator = FilteringOperator.Contains, Value = _term.Trim() });
+
+        var args = new PageSearchArgs()
+            {
+                PageIndex = state.Page + 1,
+                PageSize =state.PageSize,
+                SortingOptions = sorting,
+                FilteringOptions = filters
+            };
+        _paginatedResult = await _manager.SearchAsync(args);
+        List = _paginatedResult.Data.ToList();
+        result = new TableData<AigCodigoEstudio>() { TotalItems = _paginatedResult.TotalCount, Items = _paginatedResult.Data };
+
+        await RefresView(false);
+        return result;
+    }
+
+    private async void OnSearch()
+    {
+        await _table.ReloadServerData();
+    }
+    private async Task OnReset()
+    {
+        _term = string.Empty;
+        await _table.ReloadServerData();
+    }
+
+      private async Task AddEdit(long id = 0)
+        {
+            var parameters = new DialogParameters { ["_id"]=id };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEdit>(id == 0 ? "Nuevo" :"Editar ", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled){   
+               await _table.ReloadServerData();
+               await _bus.Publish(true);
+           }
+     }
+      
+    private async Task Delete(long id)
+    {
+        var parameters = new DialogParameters{
+             { nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro de querer eliminar el registro?", id) }
+         };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>("Eliminar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            var response = await _manager.DeleteAsync(id);
+            if (response.Succeeded)
+                 await _table.ReloadServerData();
+            foreach (var message in response.Messages)
+            {
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
+        }
+    }
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aig.Farmacoterapia.Domain.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,32 +10,16 @@ namespace Aig.Farmacoterapia.Domain.Identity
 {
     public class RegisterRequest
     {
-        [Required]
         public string FirstName { get; set; }
-
-        [Required]
         public string LastName { get; set; }
-
-        [Required]
-        [EmailAddress]
-
         public string Email { get; set; }
-
-        [Required]
-        [MinLength(6)]
         public string UserName { get; set; }
-
-        [Required]
-        [MinLength(6)]
         public string Password { get; set; }
-
-        [Required]
-        [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        public bool ActivateUser { get; set; } = false;
-        public bool AutoConfirmEmail { get; set; } = false;
+        public string PhoneNumber { get; set; } = "";
+        public bool ActivateUser { get; set; } = true;
+        public bool AutoConfirmEmail { get; set; } = true;
+        public string ProfilePicture { get; set; } = "";
+        public RoleType Role { get; set; }
     }
 }

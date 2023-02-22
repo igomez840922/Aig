@@ -14,8 +14,10 @@ namespace Aig.Farmacoterapia.Admin.Wasm.Extensions
             var responseAsString = await response.Content.ReadAsStringAsync();
             var responseObject = JsonSerializer.Deserialize<Result<T>>(responseAsString, new JsonSerializerOptions
             {
+                //DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 PropertyNameCaseInsensitive = true,
-                ReferenceHandler = ReferenceHandler.Preserve
+                ReferenceHandler = ReferenceHandler.Preserve,
+
             });
             return responseObject;
         }
@@ -26,7 +28,7 @@ namespace Aig.Farmacoterapia.Admin.Wasm.Extensions
             var responseObject = JsonSerializer.Deserialize<Result>(responseAsString, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
-                ReferenceHandler = ReferenceHandler.Preserve
+                ReferenceHandler = ReferenceHandler.Preserve,
             });
             return responseObject;
         }

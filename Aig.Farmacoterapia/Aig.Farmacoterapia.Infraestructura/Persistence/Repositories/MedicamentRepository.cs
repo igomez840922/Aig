@@ -75,8 +75,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 break;
                             case "startDateOfIssue":
                                 {
-                                    var value = filteringOption.Value.ToString();
-                                    var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                    var value = filteringOption.Value;
+                                    var date = DateTime.ParseExact(value,"dd/MM/yyyy", CultureInfo.InvariantCulture);
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision >= date;
                                     filterList.Add(expression);
 
@@ -84,16 +84,16 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 break;
                             case "endDateOfIssue":
                                 {
-                                    var value = filteringOption.Value.ToString();
-                                    var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                    var value = filteringOption.Value;
+                                    var date = DateTime.ParseExact(value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.FechaEmision <= date;
                                     filterList.Add(expression);
                                 }
                                 break;
                             case "startExpirationDate":
                                 {
-                                    var value = filteringOption.Value.ToString();
-                                    var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                    var value = filteringOption.Value;
+                                    var date = DateTime.ParseExact(value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.FechaExpiracion >= date;
                                     filterList.Add(expression);
 
@@ -101,8 +101,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                 break;
                             case "endDateExpirationDate":
                                 {
-                                    var value = filteringOption.Value.ToString();
-                                    var date = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                    var value = filteringOption.Value;
+                                    var date = DateTime.ParseExact(value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.FechaExpiracion <= date;
                                     filterList.Add(expression);
                                 }
@@ -209,6 +209,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 }
                 if (args?.FilteringOptions != null)
                 {
+                  
                     foreach (var filteringOption in args.FilteringOptions)
                     {
                         switch (filteringOption.Field)
@@ -223,52 +224,28 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                     filterList.Add(expression);
                                 }
                                 break;
-                            case "MedicalPrescription":
+                            case "SaleCondition":
                                 {
                                     var value = filteringOption.Value.ToString();
                                     Expression<Func<AigMedicamento, bool>> expression = f => f.CondicionVenta == value;
                                     filterList.Add(expression);
                                 }
                                 break;
-                            case "HospitalUse":
-                            case "PopularSale":
+                            case "Classification":
                                 {
-                                    var value = filteringOption.Value.ToString();
-                                    Expression<Func<AigMedicamento, bool>> expression = filteringOption.Operator == FilteringOperator.Equal ?
-                                        f => f.CondicionVenta == value :
-                                        f => f.CondicionVenta != value;
+                                    var value = filteringOption.Value.ToString().Trim().ToLower(); ;
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.TipoMedicamento.ToLower() == value;
                                     filterList.Add(expression);
                                 }
                                 break;
-                            case "ChemicalSynthesis":
-                            case "Radiopharmaceuticals":
-                            case "Orphans":
-                            case "Homeopathic":
-                            case "Phytopharmaceuticals":
-                            case "Biotechnological":
-                            case "Biological":
+                            case "Valid":
                                 {
-                                    var value = filteringOption.Value.ToString();
-                                    Expression<Func<AigMedicamento, bool>> expression = filteringOption.Operator == FilteringOperator.Equal ?
-                                        f => f.TipoMedicamento == value :
-                                        f => f.TipoMedicamento != value;
+                                    var value =Convert.ToBoolean(filteringOption.Value);
+                                    Expression<Func<AigMedicamento, bool>> expression = f => f.Vigente == value;
                                     filterList.Add(expression);
                                 }
                                 break;
-                            case "Interchangeable":
-                            case "Referencia":
-                            case "Generic":
-                            case "Mark":
-                                {
-                                    var value = filteringOption.Value.ToString();
-                                    Expression<Func<AigMedicamento, bool>> expression = filteringOption.Operator == FilteringOperator.Equal ?
-                                        f => f.TipoEquivalencia == value :
-                                        f => f.TipoEquivalencia != value;
-                                    filterList.Add(expression);
-                                }
-                                break;
-
-
+                                
                         }
                     }
                 }

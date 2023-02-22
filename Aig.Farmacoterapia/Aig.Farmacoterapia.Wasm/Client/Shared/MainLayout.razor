@@ -1,0 +1,186 @@
+﻿@using Aig.Farmacoterapia.Domain.Interfaces
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Microsoft.AspNetCore.Components.Authorization
+@inherits LayoutComponentBase
+@implements IDisposable;
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<style>
+    .footer_copyright {
+        position: fixed;
+        bottom: 8px;
+        left: 48%;
+        right: 0;
+        height: 30px;
+    }
+
+
+    .mud-dialog-title {
+        border-bottom: 1px solid #e9e7e7 !important;
+    }
+
+    .mud-dialog-actions {
+        border-top: 1px solid #e9e7e7 !important;
+    }
+
+    .mud-dialog-content {
+        padding: 25px !important;
+    }
+
+</style>
+<MudLayout>
+    <MudAppBar Style="background-color: #7365f3 !important;" Elevation="8">
+        <MudImage Src="media/logo2.png" Style="margin-right:30px" />
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="MudBlazor.Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudSpacer />
+        <AuthorizeView>
+            @if (_notification > 0)
+            {  
+               
+                <MudBadge Style="margin-top:30px !important" Content="@(_notification.ToString())" Overlap="true" Class="mx-6 my-6">
+                    <MudTooltip Text="Solicitudes de importación sin estudio clínico" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton Href="studies" Style="border:none !important;color: #ff95b9 !important;" Size="Size.Large" Color="Color.Warning" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Notifications" DisableElevation="true">
+                        </MudIconButton>
+                    </MudTooltip>
+                </MudBadge>
+
+            }
+            <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+                <ActivatorContent>
+                    @if (string.IsNullOrEmpty(_avatar))
+                    {
+                        <MudAvatar Color="Color.Secondary">
+                            @_name?[..1]?.ToUpper()
+                        </MudAvatar>
+                        <MudText Style="margin: 7px 10px 7px 10px;">@_name</MudText>
+                    }
+                    else
+                    {
+                        <MudAvatar Image="@_avatar"></MudAvatar>
+                        <MudText Style="margin: 7px 10px 7px 10px;">@_name</MudText>
+                    }
+
+                </ActivatorContent>
+
+
+                <ChildContent>
+                    <MudMenuItem Icon="@Icons.Material.Outlined.CoPresent" Href="/profile">Perfil</MudMenuItem>
+                    <MudMenuItem Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Outlined.Login" OnClick="@(async () => await Logout())" OnTouch="@(async () => await Logout())">Salir</MudMenuItem>
+                </ChildContent>
+               
+            </MudMenu>
+        </AuthorizeView>
+    </MudAppBar>
+    <MudDrawer MiniWidth="200" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="8">
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+            @Body
+        </MudContainer>
+        <MudAppBar Style="top: auto; bottom: 0;background-color: #7365f3 !important;" Elevation="8">
+            <div class="footer_copyright">
+                @DateTime.Now.Year &nbsp;&copy;&nbsp;
+                <MudLink Target="_blank" Style="color: #fff !important;" Href="https://soaint.com" Typo="Typo.body2">SOAINT</MudLink>
+            </div>
+        </MudAppBar>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+
+    bool _drawerOpen = true;
+    private string _avatar { get; set; }
+    private string _name { get; set; }
+    private long _notification { get; set; } = 0;
+    protected async override Task OnInitializedAsync()
+    {
+        _interceptor.RegisterEvent();
+        await base.OnInitializedAsync();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _bus.Subscribe<bool>(NotificationsHandler);
+            await LoadDataAsync();
+        }
+        await base.OnInitializedAsync();
+    }
+    private  void NotificationsHandler(MessageArgs args)
+    {
+        var result = args.GetMessage<bool>();
+        if (result){
+            Task.Run(async () => await LoadNotificationsAsync());
+        }
+    }
+
+    private async Task LoadNotificationsAsync()
+    {
+        var result=await _authenticationManager.GetNotificationAsync();
+        if (result.Succeeded){
+            _notification = result.Data;
+            await this.InvokeAsync(StateHasChanged);
+        }     
+    }
+
+    private async Task LoadDataAsync()
+    {
+        var user = await _authenticationManager.CurrentUser();
+        if (user == null) return;
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            _name = $"{user.GetFirstName()} {user.GetLastName()}";
+            var picture = await _localStorage.GetItemAsync<string>(AppConstants.Local.UserImageURL);
+            _avatar = string.IsNullOrEmpty(picture) ? string.Empty : $"{_appConfiguration.ApiUrl}{picture}";
+            _snackBar.Add(string.Format($"Hola {user.GetFirstName()}"), Severity.Success);
+             await _bus.Publish(true);
+        }
+    }
+
+     private async Task Logout()
+    {
+       var parameters = new DialogParameters
+            {
+                {nameof(Dialogs.Logout.ContentText), "Está seguro que desea cerrar la sesión?"},
+                {nameof(Dialogs.Logout.ButtonText), "Confirmar"},
+                {nameof(Dialogs.Logout.Color), Color.Error},
+            };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Dialogs.Logout>("Cerrar la sesión", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled){
+            await _authenticationManager.Logout();
+            _navigationManager.NavigateTo("/login");
+        }
+    }
+
+
+    //private void Logout()
+    //{
+    //    var parameters = new DialogParameters
+    //        {
+    //            {nameof(Dialogs.Logout.ContentText), "Está seguro que desea cerrar la sesión?"},
+    //            {nameof(Dialogs.Logout.ButtonText), "Confirmar"},
+    //            {nameof(Dialogs.Logout.Color), Color.Error},
+    //        };
+
+    //    var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+    //    _dialogService.Show<Dialogs.Logout>("Cerrar la sesión", parameters, options);
+    //}
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
+    }
+}
