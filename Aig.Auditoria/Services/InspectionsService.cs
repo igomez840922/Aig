@@ -138,22 +138,18 @@ namespace Aig.Auditoria.Services
                 }
                 if (result.InspAperFabricanteCosmetMed != null)
                 {
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosEstablecimiento).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRegente).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRepresentLegal).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.OrganizacionPersonal).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Programas).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.ProdAnalisisContrato).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.ReclamosProdRetirados).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Locales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRegente).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.ProdFabrican).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.EstructuraOrganizativa).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Almacenes).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Documantacion).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreasAuxiliares).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.SistemaCriticoApoyo).IsModified = true;
                     DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreaProduccion).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Equipo).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.LaboratorioControlCalidad).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreaAlmacenamiento).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreaAuxiliar).IsModified = true;
-
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosConclusiones).IsModified = true;
-
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Acondicionamiento).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.ControlCalidad).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.InspeccionAuditoria).IsModified = true;
                 }
                 if (result.InspGuiaBPM_Bpa != null)
                 {
@@ -2841,6 +2837,352 @@ namespace Aig.Auditoria.Services
             }
             return result;
         }
+
+        /////////////////////////////
+        ///
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap2(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.DatosRepresentLegal = inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRepresentLegal).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap3(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.DatosRegente = inspeccion.InspAperFabricanteCosmetMed.DatosRegente;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRegente).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap4(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.ProdFabrican = inspeccion.InspAperFabricanteCosmetMed.ProdFabrican;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.ProdFabrican).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap5(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.EstructuraOrganizativa = inspeccion.InspAperFabricanteCosmetMed.EstructuraOrganizativa;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.EstructuraOrganizativa).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap6(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.Almacenes = inspeccion.InspAperFabricanteCosmetMed.Almacenes;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Almacenes).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap7(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.Documantacion = inspeccion.InspAperFabricanteCosmetMed.Documantacion;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Documantacion).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap8(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.AreasAuxiliares = inspeccion.InspAperFabricanteCosmetMed.AreasAuxiliares;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreasAuxiliares).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap9(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.SistemaCriticoApoyo = inspeccion.InspAperFabricanteCosmetMed.SistemaCriticoApoyo;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.SistemaCriticoApoyo).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap10(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.AreaProduccion = inspeccion.InspAperFabricanteCosmetMed.AreaProduccion;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.AreaProduccion).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap11(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.Acondicionamiento = inspeccion.InspAperFabricanteCosmetMed.Acondicionamiento;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Acondicionamiento).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap12(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.ControlCalidad = inspeccion.InspAperFabricanteCosmetMed.ControlCalidad;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.ControlCalidad).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap13(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.InspeccionAuditoria = inspeccion.InspAperFabricanteCosmetMed.InspeccionAuditoria;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.InspeccionAuditoria).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Firma(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspAperFabricanteCosmetMed.DatosRepresentLegal = inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal;
+            data.InspAperFabricanteCosmetMed.DatosRegente = inspeccion.InspAperFabricanteCosmetMed.DatosRegente;
+            data.ParticipantesDNFD = inspeccion.ParticipantesDNFD;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.ParticipantesDNFD).IsModified = true;
+
+                if (result.InspAperFabricanteCosmetMed != null)
+                {
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.DatosRegente).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+
 
     }
 

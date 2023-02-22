@@ -114,6 +114,17 @@ namespace DataModel
         private AUD_InspAperFabricanteTB? inspAperFabricante;
         public virtual AUD_InspAperFabricanteTB? InspAperFabricante { get => inspAperFabricante; set => SetProperty(ref inspAperFabricante, value); }
 
+        //10 - Apertura Fabricante - Cosmeticos y Medicamentos
+        private long? inspAperFabricanteCosmetMedId;
+        public long? InspAperFabricanteCosmetMedId { get => inspAperFabricanteCosmetMedId; set => SetProperty(ref inspAperFabricanteCosmetMedId, value); }
+        private AUD_InspAperFabricanteCosmetMedTB? inspAperFabricanteCosmetMed;
+        public virtual AUD_InspAperFabricanteCosmetMedTB? InspAperFabricanteCosmetMed { get => inspAperFabricanteCosmetMed; set => SetProperty(ref inspAperFabricanteCosmetMed, value); }
+
+        //11- Guia BPM Fabricante de Medicamentos
+        private long? inspGuiaBPMFabricanteMedId;
+        public long? InspGuiaBPMFabricanteMedId { get => inspGuiaBPMFabricanteMedId; set => SetProperty(ref inspGuiaBPMFabricanteMedId, value); }
+        private AUD_InspGuiaBPMFabricanteMedTB? inspGuiaBPMFabricanteMed;
+        public virtual AUD_InspGuiaBPMFabricanteMedTB? InspGuiaBPMFabricanteMed { get => inspGuiaBPMFabricanteMed; set => SetProperty(ref inspGuiaBPMFabricanteMed, value); }
 
 
         /// <summary>
@@ -200,18 +211,8 @@ namespace DataModel
        
         
         
-        //10 - Apertura Fabricante - Cosmeticos y Medicamentos
-        private long? inspAperFabricanteCosmetMedId;
-        public long? InspAperFabricanteCosmetMedId { get => inspAperFabricanteCosmetMedId; set => SetProperty(ref inspAperFabricanteCosmetMedId, value); }
-        private AUD_InspAperFabricanteCosmetMedTB? inspAperFabricanteCosmetMed;
-        public virtual AUD_InspAperFabricanteCosmetMedTB? InspAperFabricanteCosmetMed { get => inspAperFabricanteCosmetMed; set => SetProperty(ref inspAperFabricanteCosmetMed, value); }
-
-        //11- Guia BPM Fabricante de Medicamentos
-        private long? inspGuiaBPMFabricanteMedId;
-        public long? InspGuiaBPMFabricanteMedId { get => inspGuiaBPMFabricanteMedId; set => SetProperty(ref inspGuiaBPMFabricanteMedId, value); }
-        private AUD_InspGuiaBPMFabricanteMedTB? inspGuiaBPMFabricanteMed;
-        public virtual AUD_InspGuiaBPMFabricanteMedTB? InspGuiaBPMFabricanteMed { get => inspGuiaBPMFabricanteMed; set => SetProperty(ref inspGuiaBPMFabricanteMed, value); }
-
+        
+        
         //12 - Guia BPM Acondicionadores de Medicamentos
         private long? inspGuiaBPMLabAcondicionadorId;
         public long? InspGuiaBPMLabAcondicionadorId { get => inspGuiaBPMLabAcondicionadorId; set => SetProperty(ref inspGuiaBPMLabAcondicionadorId, value); }

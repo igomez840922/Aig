@@ -112,6 +112,20 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_AperFabricanteMedicamento_Cap14(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_AperFabricanteMedicamento_Firma(AUD_InspeccionTB inspeccion);
 
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap4(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap5(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap6(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap7(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap8(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap9(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap10(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap11(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap12(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap13(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Firma(AUD_InspeccionTB inspeccion);
+        
 
     }
 }
