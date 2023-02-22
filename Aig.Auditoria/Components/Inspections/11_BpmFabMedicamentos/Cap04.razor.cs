@@ -11,23 +11,24 @@ using Mobsites.Blazor;
 
 namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
 {
-    public partial class Cap02
+    public partial class Cap04
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
         [Inject]
         IProfileService profileService { get; set; }
-        
+
         [Parameter]
         public long Id { get; set; }
         DataModel.AUD_InspeccionTB Inspeccion { get; set; } = null;
 
-        
+
         private EditContext? editContext;
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-       
+        bool showPersona { get; set; } = false;
+        DataModel.DatosPersona datosPersona { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -77,14 +78,13 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
 
         //Fill Data
         protected async Task FetchData()
-        {
-            
+        {            
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
-                Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal = Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal != null ? Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal : new DataModel.DatosPersona();
+                Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios = Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios != null ? Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios : new AUD_OtrosFuncionarios();
             }
             else { Cancel(); }
 
@@ -96,7 +96,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap2(Inspeccion);
+                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap4(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -125,7 +125,50 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             await this.InvokeAsync(StateHasChanged);
         }
 
-        
+
+        //ADD PERSONA
+        protected async Task OpenPersona(DataModel.DatosPersona _datosPersona = null)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>(PersonaAddEdit_CloseEventHandler);
+
+            datosPersona = _datosPersona != null ? _datosPersona : new DataModel.DatosPersona();
+            showPersona = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemovePersona(DataModel.DatosPersona _datosPersona)
+        {
+            if (_datosPersona != null)
+            {
+                try
+                {
+                    Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona.Remove(_datosPersona);
+                }
+                catch { }
+
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void PersonaAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            showPersona = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>(PersonaAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>();
+
+            if (message.Data != null)
+            {
+                if (!Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona.Contains(message.Data))
+                    Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona.Add(message.Data);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
+
     }
 
 }

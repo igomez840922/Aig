@@ -4780,6 +4780,8 @@ namespace DataModel
         public AUD_OtrosFuncionarios()
         {
             LPersona = new List<DatosPersona>();
+            RespProduccion = new DatosPersona();
+            RespControlCalidad = new DatosPersona();
         }
 
         //RESPONSABLE DE PRODUCCIÓN

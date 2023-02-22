@@ -1691,7 +1691,7 @@ namespace DataModel
                     },
                     new ContenidoTablas()
                     {
-                        Titulo = "ÁREAS DE ACONDICIONAMIENTO PARA EMPAQUE\r\nSECUNDARIO",
+                        Titulo = "ÁREAS DE ACONDICIONAMIENTO PARA EMPAQUE SECUNDARIO",
                         Criterio = "",
                         Capitulo="8.5",
                         Articulo="",
@@ -1724,7 +1724,7 @@ namespace DataModel
                     },
                     new ContenidoTablas()
                     {
-                        Titulo = "El área de empaque:",
+                        Titulo = "ÁREAS DE EMPAQUE",
                         Criterio = "MAYOR",
                         Capitulo="",
                         Articulo="8.5.2",

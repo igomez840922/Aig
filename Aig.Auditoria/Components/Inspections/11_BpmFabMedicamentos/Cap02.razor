@@ -1,7 +1,7 @@
 ﻿@using DataModel.Helper;
 @implements IDisposable
 
-@if (Inspeccion?.InspAperFabricanteCosmetMed?.DatosRepresentLegal != null)
+@if (Inspeccion?.InspGuiaBPMFabricanteMed?.DatosRepresentLegal != null)
 {
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -42,8 +42,8 @@
                                                             <label>@languageContainerService.Keys["FullName"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Nombre" />
-                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Nombre) />
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Nombre" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Nombre) />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -51,8 +51,8 @@
                                                             <label>@languageContainerService.Keys["Cédula de Identidad Personal"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Cedula" />
-                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Cedula) />
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Cedula" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Cedula) />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -61,8 +61,8 @@
                                                             <label>@languageContainerService.Keys["Email"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Email" />
-                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Email) />
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Email" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Email) />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -70,8 +70,8 @@
                                                             <label>@languageContainerService.Keys["Profession"]</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Profesion" />
-                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Profesion) />
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Profesion" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Profesion) />
                                                                 </div>
                                                             </div>
                                                         </div>

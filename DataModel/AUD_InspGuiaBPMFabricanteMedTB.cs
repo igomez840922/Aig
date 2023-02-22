@@ -1607,7 +1607,14 @@ namespace DataModel
         {
             AreaAcondicionamiento = new AUD_ContenidoGenerico();
             AreaAcondicionamiento.LContenido = new List<ContenidoPreguntas>() {
-                        new ContenidoPreguntas()
+
+                    new ContenidoPreguntas()
+                    {
+                        Titulo = "ÁREA DE ACONDICIONAMIENTO PARA EMPAQUE SECUNDARIO",
+                        Capitulo="8.5",
+                        IsHeader= true,
+                    },
+                    new ContenidoPreguntas()
                     {
                         Titulo = "¿Está el área de empaque secundario separada e identificada?",
                         Criterio = "MAYOR",
@@ -7866,9 +7873,6 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "SE REALIZA Y DOCUMENTA LA CALIFICACION Y VALIDACION DE SISTEMA DE AGUA",
-
-
-                        Articulo="f",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },

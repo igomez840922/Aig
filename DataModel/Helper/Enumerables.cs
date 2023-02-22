@@ -993,6 +993,16 @@ namespace DataModel.Helper
         Cap21 = 21,
         [Description("Cap22")]
         Cap22 = 22,
+        [Description("Cap23")]
+        Cap23 = 23,
+        [Description("Cap24")]
+        Cap24 = 24,
+        [Description("Cap25")]
+        Cap25 = 25,
+        [Description("Cap26")]
+        Cap26 = 26,
+        [Description("Cap27")]
+        Cap27 = 27,
     }
 
 }

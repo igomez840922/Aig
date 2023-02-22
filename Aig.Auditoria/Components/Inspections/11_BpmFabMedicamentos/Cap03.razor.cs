@@ -82,8 +82,8 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
-                Inspeccion.InspAperFabricanteCosmetMed.DatosRegente = Inspeccion.InspAperFabricanteCosmetMed.DatosRegente != null ? Inspeccion.InspAperFabricanteCosmetMed.DatosRegente : new AUD_DatosRegente();
-                //Inspeccion.InspAperFabricanteCosmetMed.DatosFarmaceutico = Inspeccion.InspAperFabricanteCosmetMed.DatosFarmaceutico != null ? Inspeccion.InspAperFabricanteCosmetMed.DatosFarmaceutico : new AUD_DatosFarmaceutico();
+                Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente = Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente != null ? Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente : new DataModel.DatosPersona(); 
+                //Inspeccion.InspGuiaBPMFabricanteMed.DatosFarmaceutico = Inspeccion.InspGuiaBPMFabricanteMed.DatosFarmaceutico != null ? Inspeccion.InspGuiaBPMFabricanteMed.DatosFarmaceutico : new AUD_DatosFarmaceutico();
             }
             else { Cancel(); }
 
@@ -95,7 +95,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_AperFabricanteCosmeticosDesin_Cap3(Inspeccion);
+                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap3(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);

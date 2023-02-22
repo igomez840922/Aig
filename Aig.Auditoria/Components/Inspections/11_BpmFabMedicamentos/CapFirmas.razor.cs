@@ -105,7 +105,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_AperFabricanteCosmeticosDesin_Firma(Inspeccion);
+                var result = await inspeccionService.Save_BpmFabMededicamentos_Firma(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -139,9 +139,9 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             await Task.Delay(2000);
 
             if(signaturePad5!=null)
-                signaturePad5.Image = Inspeccion.InspAperFabricanteCosmetMed?.DatosRepresentLegal?.Firma??null;
+                signaturePad5.Image = Inspeccion.InspGuiaBPMFabricanteMed?.DatosRepresentLegal?.Firma??null;
             if (signaturePad6 != null)
-                signaturePad6.Image = Inspeccion.InspAperFabricanteCosmetMed?.DatosRegente?.Firma ?? null;
+                signaturePad6.Image = Inspeccion.InspGuiaBPMFabricanteMed?.DatosRegente?.Firma ?? null;
 
             if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
             {
@@ -165,11 +165,11 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
+            Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg5()
         {
-            Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Firma = null;
+            Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Firma = null;
             signaturePad5.Image = null;
         }
         protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
@@ -179,11 +179,11 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
+            Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg6()
         {
-            Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Firma = null;
+            Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.Firma = null;
             signaturePad6.Image = null;
         }
 

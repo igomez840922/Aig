@@ -11,24 +11,23 @@ using Mobsites.Blazor;
 
 namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
 {
-    public partial class Cap02
+    public partial class Cap05
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
         [Inject]
         IProfileService profileService { get; set; }
-        
+
         [Parameter]
         public long Id { get; set; }
         DataModel.AUD_InspeccionTB Inspeccion { get; set; } = null;
 
-        
+
         private EditContext? editContext;
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-       
-
+        
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
@@ -77,14 +76,19 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
 
         //Fill Data
         protected async Task FetchData()
-        {
-            
+        {            
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-
-                Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal = Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal != null ? Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal : new DataModel.DatosPersona();
+                if (Inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales == null)
+                {
+                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_RequisitosLegales();
+                }
+                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales == null)
+                {
+                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifActComerciales();
+                }
             }
             else { Cancel(); }
 
@@ -96,7 +100,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap2(Inspeccion);
+                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap5(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -125,7 +129,6 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             await this.InvokeAsync(StateHasChanged);
         }
 
-        
     }
 
 }
