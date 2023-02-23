@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
+namespace Aig.Auditoria.Components.Inspections._12_BpmAcondMedicamentos
 {
-    public partial class Cap05
+    public partial class Cap04
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -27,7 +27,9 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-        
+        bool showPersona { get; set; } = false;
+        DataModel.DatosPersona datosPersona { get; set; } = null;
+
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
@@ -81,18 +83,8 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-                if (Inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_RequisitosLegales();
-                }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifActComerciales();
-                }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifEstablecimiento == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifEstablecimiento();
-                }
+
+                Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios = Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios != null ? Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios : new AUD_OtrosFuncionarios();
             }
             else { Cancel(); }
 
@@ -104,7 +96,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap5(Inspeccion);
+                var result = await inspeccionService.Save_BpmAcondMedicamentos_Cap4(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -132,6 +124,50 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             await bus.Publish(new Aig.Auditoria.Events.Inspections.ChapterChangeEvent { Inspeccion = null });
             await this.InvokeAsync(StateHasChanged);
         }
+
+
+        //ADD PERSONA
+        protected async Task OpenPersona(DataModel.DatosPersona _datosPersona = null)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>(PersonaAddEdit_CloseEventHandler);
+
+            datosPersona = _datosPersona != null ? _datosPersona : new DataModel.DatosPersona();
+            showPersona = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemovePersona(DataModel.DatosPersona _datosPersona)
+        {
+            if (_datosPersona != null)
+            {
+                try
+                {
+                    Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.LPersona.Remove(_datosPersona);
+                }
+                catch { }
+
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void PersonaAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            showPersona = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>(PersonaAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>();
+
+            if (message.Data != null)
+            {
+                if (!Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.LPersona.Contains(message.Data))
+                    Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.LPersona.Add(message.Data);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
 
     }
 

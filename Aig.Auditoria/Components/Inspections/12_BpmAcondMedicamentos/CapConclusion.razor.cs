@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
+namespace Aig.Auditoria.Components.Inspections._12_BpmAcondMedicamentos
 {
-    public partial class Cap05
+    public partial class CapConclusion
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -27,7 +27,9 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-        
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
+
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
@@ -76,23 +78,14 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
 
         //Fill Data
         protected async Task FetchData()
-        {            
+        {
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-                if (Inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_RequisitosLegales();
-                }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifActComerciales();
-                }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifEstablecimiento == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifEstablecimiento();
-                }
+
+                Inspeccion.DatosConclusiones = Inspeccion.DatosConclusiones != null ? Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
+
             }
             else { Cancel(); }
 
@@ -104,7 +97,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap5(Inspeccion);
+                var result = await inspeccionService.Save_Conclusiones(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -131,6 +124,52 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             await bus.Publish(new Aig.Auditoria.Events.Inspections.ChapterChangeEvent { Inspeccion = null });
             await this.InvokeAsync(StateHasChanged);
+        }
+
+
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
+        {
+            if (attachment != null)
+            {
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
+
+                Inspeccion.DatosConclusiones.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Inspeccion.DatosConclusiones.LAttachments = Inspeccion.DatosConclusiones.LAttachments != null ? Inspeccion.DatosConclusiones.LAttachments : new List<AttachmentTB>();
+
+                Inspeccion.DatosConclusiones.LAttachments.Add(message.Attachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
         }
 
     }

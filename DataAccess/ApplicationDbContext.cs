@@ -1166,17 +1166,12 @@ namespace DataAccess
 
             ///////////////////////////////////////////
             ///
-
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
-.Property(e => e.AuditoriaSanitaria)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_AuditoriaSanitaria>(x));
-
-            modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
-.Property(e => e.RepresentLegal)
+.Property(e => e.DatosRepresentLegal)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
-.Property(e => e.RegenteFarmaceutico)
+.Property(e => e.DatosRegente)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
@@ -1184,89 +1179,72 @@ namespace DataAccess
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_OtrosFuncionarios>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
-.Property(e => e.GeneralesEmpresa)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
-
-            modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
-.Property(e => e.RespProduccion)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
-
-            modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
-.Property(e => e.RespControlCalidad)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
-
-            modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.RequisitosLegales)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.ClasifActComerciales)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.ClasifEstablecimiento)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.OrganizacionPersonal)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.EdifInstalaciones)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.Almacenes)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.AreaAcondicionamiento)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.EquiposGeneralidades)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.MatProducts)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.Documentacion)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.Acondicionamiento)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.GarantiaCalidad)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.ControlCalidad)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
-
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.ProdAnalisisContrato)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.ValGenerales)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.QuejasReclamos)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
 .Property(e => e.AutoInspecAuditCal)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));           
-
-            modelBuilder.Entity<AUD_InspGuiaBPMLabAcondicionadorTB>()
-.Property(e => e.DatosConclusiones)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             ///////////////////////////////////////////
             ///

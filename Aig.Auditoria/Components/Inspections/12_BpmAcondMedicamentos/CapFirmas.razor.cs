@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
+namespace Aig.Auditoria.Components.Inspections._12_BpmAcondMedicamentos
 {
-    public partial class Cap05
+    public partial class CapFirmas
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -27,7 +27,18 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-        
+        bool showSignasure { get; set; } = false;
+        List<SignaturePad> lSignaturePads { get; set; } = new List<SignaturePad>();
+        SignaturePad signaturePad
+        {
+            get { return null; }
+            set { lSignaturePads.Add(value); }
+        }
+        SignaturePad signaturePad5;
+        SignaturePad signaturePad6;
+        SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = SignaturePad.SupportedSaveAsTypes.png;
+
+
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
@@ -76,23 +87,13 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
 
         //Fill Data
         protected async Task FetchData()
-        {            
+        {
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-                if (Inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_RequisitosLegales();
-                }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifActComerciales();
-                }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifEstablecimiento == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifEstablecimiento();
-                }
+
+                DelayToShowSignasure();                      
             }
             else { Cancel(); }
 
@@ -104,7 +105,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap5(Inspeccion);
+                var result = await inspeccionService.Save_BpmAcondMedicamentos_Firma(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -131,6 +132,74 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             await bus.Publish(new Aig.Auditoria.Events.Inspections.ChapterChangeEvent { Inspeccion = null });
             await this.InvokeAsync(StateHasChanged);
+        }
+
+        async Task DelayToShowSignasure()
+        {
+            await Task.Delay(2000);
+
+            if(signaturePad5!=null)
+                signaturePad5.Image = Inspeccion.InspGuiaBPMLabAcondicionador?.DatosRepresentLegal?.Firma??null;
+            if (signaturePad6 != null)
+                signaturePad6.Image = Inspeccion.InspGuiaBPMLabAcondicionador?.DatosRegente?.Firma ?? null;
+
+            if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
+            {
+                foreach (var partic in Inspeccion.ParticipantesDNFD.LParticipantes)
+                {
+                    try
+                    {
+                        lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(partic)].Image = partic.Firma;
+                    }
+                    catch (Exception ex) { }
+                }
+            }
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+
+        protected async Task OnSignatureChange5(ChangeEventArgs eventArgs)
+        {
+            RemoveSignatureImg5();
+            if (eventArgs?.Value != null)
+            {
+                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+            }
+            Inspeccion.InspGuiaBPMLabAcondicionador.DatosRepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
+        }
+        protected async Task RemoveSignatureImg5()
+        {
+            Inspeccion.InspGuiaBPMLabAcondicionador.DatosRepresentLegal.Firma = null;
+            signaturePad5.Image = null;
+        }
+        protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
+        {
+            RemoveSignatureImg6();
+            if (eventArgs?.Value != null)
+            {
+                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+            }
+            Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
+        }
+        protected async Task RemoveSignatureImg6()
+        {
+            Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.Firma = null;
+            signaturePad6.Image = null;
+        }
+
+        ////////
+        ///
+        protected async Task OnSignatureChange(Participante _participante)
+        {
+            await RemoveSignatureImg(_participante);
+            var _signaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
+            _participante.Firma = await _signaturePad.ToDataURL(signatureType);
+        }
+        protected async Task RemoveSignatureImg(Participante _participante)
+        {
+            _participante.Firma = null;
+            var _signaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
+            _signaturePad.Image = null;
         }
 
     }

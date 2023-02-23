@@ -1,0 +1,193 @@
+﻿@using DataModel.Helper;
+@implements IDisposable
+
+@if (Inspeccion?.InspGuiaBPMLabAcondicionador?.OtrosFuncionarios != null)
+{
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
+                                            <DataAnnotationsValidator />
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <h5>@languageContainerService.Keys["Funcionarios de la Empresa"]</h5>
+                                                </div>
+                                            </div>
+
+
+                                            <h5>@languageContainerService.Keys["Responsable de Producción"]</h5>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-6">
+                                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespProduccion.Nombre" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespProduccion.Nombre) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["IdentificationCard"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespProduccion.Cedula" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespProduccion.Cedula) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Profesión"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespProduccion.Profesion" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespProduccion.Profesion) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <h5>@languageContainerService.Keys["Responsable de Control de Calidad"]</h5>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-6">
+                                                    <label>@languageContainerService.Keys["FullName"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespControlCalidad.Nombre" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespControlCalidad.Nombre) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["IdentificationCard"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespControlCalidad.Cedula" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespControlCalidad.Cedula) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["Profesión"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespControlCalidad.Profesion" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.RespControlCalidad.Profesion) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <h5>@languageContainerService.Keys["Otros funcionarios de la empresa"]</h5>
+                                            <div class="row clearfix">
+                                                <!--begin::Section-->
+                                                <div class="col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table rounded table-striped">
+                                                            <thead class=thead-light>
+                                                                <tr>
+                                                                    <th>@languageContainerService.Keys["FullName"]</th>
+                                                                    <th>@languageContainerService.Keys["IdentificationCard"]</th>
+                                                                    <th>@languageContainerService.Keys["RegisterNumber"]</th>
+                                                                    <th>@languageContainerService.Keys["Charge"]</th>
+                                                                    <th style="text-align:right;">
+                                                                        <button type="button" @onclick="(e)=>{OpenPersona();}"
+                                                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                                                            @languageContainerService.Keys["Add"]
+                                                                        </button>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @if (Inspeccion?.InspGuiaBPMLabAcondicionador?.OtrosFuncionarios?.LPersona?.Count > 0)
+                                                                {
+                                                                    @foreach (var dt in Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios.LPersona)
+                                                                    {
+                                                                        <tr>
+                                                                            <td scope="row">@dt.Nombre</td>
+                                                                            <td>@dt.Cedula</td>
+                                                                            <td>@dt.NumRegistro</td>
+                                                                            <td>@dt.Cargo</td>
+                                                                            <td style="text-align:right">
+                                                                                <div class="btn-group">
+                                                                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                                    <div class="dropdown-menu">
+                                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{OpenPersona(dt);}" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="(e)=>{RemovePersona(dt);}"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <br><br>
+
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+                                                    
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                        class="btn btn-success waves-effect">
+                                                        @languageContainerService.Keys["SaveExit"]
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                    @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cerrar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @if (showPersona)
+    {
+        <Aig.Auditoria.Components.DatosPersona.DatosPersonaComponent DatosPersona="@datosPersona"></Aig.Auditoria.Components.DatosPersona.DatosPersonaComponent>
+    }
+}

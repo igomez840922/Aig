@@ -9,25 +9,26 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
+namespace Aig.Auditoria.Components.Inspections._12_BpmAcondMedicamentos
 {
-    public partial class Cap05
+    public partial class Cap02
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
         [Inject]
         IProfileService profileService { get; set; }
-
+        
         [Parameter]
         public long Id { get; set; }
         DataModel.AUD_InspeccionTB Inspeccion { get; set; } = null;
 
-
+        
         private EditContext? editContext;
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-        
+       
+
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
@@ -76,23 +77,14 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
 
         //Fill Data
         protected async Task FetchData()
-        {            
+        {
+            
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-                if (Inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_RequisitosLegales();
-                }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifActComerciales();
-                }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifEstablecimiento == null)
-                {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifEstablecimiento();
-                }
+
+                Inspeccion.InspGuiaBPMLabAcondicionador.DatosRepresentLegal = Inspeccion.InspGuiaBPMLabAcondicionador.DatosRepresentLegal != null ? Inspeccion.InspGuiaBPMLabAcondicionador.DatosRepresentLegal : new DataModel.DatosPersona();
             }
             else { Cancel(); }
 
@@ -104,7 +96,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap5(Inspeccion);
+                var result = await inspeccionService.Save_BpmAcondMedicamentos_Cap2(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -133,6 +125,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             await this.InvokeAsync(StateHasChanged);
         }
 
+        
     }
 
 }

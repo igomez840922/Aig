@@ -168,13 +168,9 @@ namespace Aig.Auditoria.Services
                 }
                 if (result.InspGuiaBPMLabAcondicionador != null)
                 {
-                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.AuditoriaSanitaria).IsModified = true;
-                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RepresentLegal).IsModified = true;
-                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RegenteFarmaceutico).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosRegente).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.OtrosFuncionarios).IsModified = true;
-                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.GeneralesEmpresa).IsModified = true;
-                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RespProduccion).IsModified = true;
-                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RespControlCalidad).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.RequisitosLegales).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ClasifActComerciales).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ClasifEstablecimiento).IsModified = true;
@@ -192,7 +188,7 @@ namespace Aig.Auditoria.Services
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ValGenerales).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.QuejasReclamos).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.AutoInspecAuditCal).IsModified = true;
-                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosConclusiones).IsModified = true;
+
                 }
                 if (result.InspGuiaBPMFabricanteMed != null)
                 {
@@ -3263,6 +3259,7 @@ namespace Aig.Auditoria.Services
 
             data.InspGuiaBPMFabricanteMed.RequisitosLegales = inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales;
             data.InspGuiaBPMFabricanteMed.ClasifActComerciales = inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales;
+            data.InspGuiaBPMFabricanteMed.ClasifEstablecimiento = inspeccion.InspGuiaBPMFabricanteMed.ClasifEstablecimiento;
             data.InspGuiaBPMFabricanteMed.Observaciones = inspeccion.InspGuiaBPMFabricanteMed.Observaciones;
             data.InspGuiaBPMFabricanteMed.ProcesoVigilanciaSanit = inspeccion.InspGuiaBPMFabricanteMed.ProcesoVigilanciaSanit;
             data.InspGuiaBPMFabricanteMed.FechaUltimaVista = inspeccion.InspGuiaBPMFabricanteMed.FechaUltimaVista;
@@ -3281,6 +3278,7 @@ namespace Aig.Auditoria.Services
                 {
                     DalService.DBContext.Entry(result.InspGuiaBPMFabricanteMed).Property(b => b.OtrosFuncionarios).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMFabricanteMed).Property(b => b.ClasifActComerciales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMFabricanteMed).Property(b => b.ClasifEstablecimiento).IsModified = true;
                 }
 
                 DalService.DBContext.SaveChanges();
@@ -3817,6 +3815,500 @@ namespace Aig.Auditoria.Services
                 {
                     DalService.DBContext.Entry(result.InspGuiaBPMFabricanteMed).Property(b => b.DatosRepresentLegal).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPMFabricanteMed).Property(b => b.DatosRegente).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        
+        /////////////////////////////
+        ///
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap2(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.DatosRepresentLegal = inspeccion.InspGuiaBPMLabAcondicionador.DatosRepresentLegal;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosRepresentLegal).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap3(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.DatosRegente = inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosRegente).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap4(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.OtrosFuncionarios = inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.OtrosFuncionarios).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap5(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.RequisitosLegales = inspeccion.InspGuiaBPMLabAcondicionador.RequisitosLegales;
+            data.InspGuiaBPMLabAcondicionador.ClasifActComerciales = inspeccion.InspGuiaBPMLabAcondicionador.ClasifActComerciales;
+            data.InspGuiaBPMLabAcondicionador.ClasifEstablecimiento = inspeccion.InspGuiaBPMLabAcondicionador.ClasifEstablecimiento;
+            data.InspGuiaBPMLabAcondicionador.Observaciones = inspeccion.InspGuiaBPMLabAcondicionador.Observaciones;
+            data.InspGuiaBPMLabAcondicionador.ProcesoVigilanciaSanit = inspeccion.InspGuiaBPMLabAcondicionador.ProcesoVigilanciaSanit;
+            data.InspGuiaBPMLabAcondicionador.FechaUltimaVista = inspeccion.InspGuiaBPMLabAcondicionador.FechaUltimaVista;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.OtrosFuncionarios).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ClasifActComerciales).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ClasifEstablecimiento).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap6(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.OrganizacionPersonal = inspeccion.InspGuiaBPMLabAcondicionador.OrganizacionPersonal;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.OrganizacionPersonal).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap7(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.EdifInstalaciones = inspeccion.InspGuiaBPMLabAcondicionador.EdifInstalaciones;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.EdifInstalaciones).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap8(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.Almacenes = inspeccion.InspGuiaBPMLabAcondicionador.Almacenes;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.Almacenes).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap9(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.AreaAcondicionamiento = inspeccion.InspGuiaBPMLabAcondicionador.AreaAcondicionamiento;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.AreaAcondicionamiento).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap10(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.EquiposGeneralidades = inspeccion.InspGuiaBPMLabAcondicionador.EquiposGeneralidades;
+            
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.EquiposGeneralidades).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap11(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.MatProducts = inspeccion.InspGuiaBPMLabAcondicionador.MatProducts;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.MatProducts).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap12(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.Documentacion = inspeccion.InspGuiaBPMLabAcondicionador.Documentacion;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.Documentacion).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap13(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.Acondicionamiento = inspeccion.InspGuiaBPMLabAcondicionador.Acondicionamiento;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.Acondicionamiento).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap14(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.GarantiaCalidad = inspeccion.InspGuiaBPMLabAcondicionador.GarantiaCalidad;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.GarantiaCalidad).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap15(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.ControlCalidad = inspeccion.InspGuiaBPMLabAcondicionador.ControlCalidad;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ControlCalidad).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap16(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.ProdAnalisisContrato = inspeccion.InspGuiaBPMLabAcondicionador.ProdAnalisisContrato;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ProdAnalisisContrato).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap17(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.ValGenerales = inspeccion.InspGuiaBPMLabAcondicionador.ValGenerales;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.ValGenerales).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap18(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.QuejasReclamos = inspeccion.InspGuiaBPMLabAcondicionador.QuejasReclamos;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.QuejasReclamos).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap19(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.AutoInspecAuditCal = inspeccion.InspGuiaBPMLabAcondicionador.AutoInspecAuditCal;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.AutoInspecAuditCal).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+            return result;
+        }
+
+        public async Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Firma(AUD_InspeccionTB inspeccion)
+        {
+            var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+
+            data.InspGuiaBPMLabAcondicionador.DatosRepresentLegal = inspeccion.InspGuiaBPMLabAcondicionador.DatosRepresentLegal;
+            data.InspGuiaBPMLabAcondicionador.DatosRegente = inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente;
+            data.ParticipantesDNFD = inspeccion.ParticipantesDNFD;
+
+            //generar el numero de acta
+            if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
+            {
+                data.IntNumActa = GetMaxInspectionActNumber() + 1;
+                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+            }
+
+            var result = DalService.Save(data);
+            if (result != null)
+            {
+                DalService.DBContext.Entry(result).Property(b => b.ParticipantesDNFD).IsModified = true;
+
+                if (result.InspGuiaBPMLabAcondicionador != null)
+                {
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosRepresentLegal).IsModified = true;
+                    DalService.DBContext.Entry(result.InspGuiaBPMLabAcondicionador).Property(b => b.DatosRegente).IsModified = true;
                 }
 
                 DalService.DBContext.SaveChanges();

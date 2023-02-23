@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
+namespace Aig.Auditoria.Components.Inspections._12_BpmAcondMedicamentos
 {
     public partial class Cap05
     {
@@ -81,17 +81,17 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-                if (Inspeccion.InspGuiaBPMFabricanteMed.RequisitosLegales == null)
+                if (Inspeccion.InspGuiaBPMLabAcondicionador.RequisitosLegales == null)
                 {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_RequisitosLegales();
+                    Inspeccion.InspGuiaBPMLabAcondicionador.Inicializa_RequisitosLegales();
                 }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifActComerciales == null)
+                if (Inspeccion.InspGuiaBPMLabAcondicionador.ClasifActComerciales == null)
                 {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifActComerciales();
+                    Inspeccion.InspGuiaBPMLabAcondicionador.Inicializa_ClasifActComerciales();
                 }
-                if (Inspeccion.InspGuiaBPMFabricanteMed.ClasifEstablecimiento == null)
+                if (Inspeccion.InspGuiaBPMLabAcondicionador.ClasifEstablecimiento == null)
                 {
-                    Inspeccion.InspGuiaBPMFabricanteMed.Inicializa_ClasifEstablecimiento();
+                    Inspeccion.InspGuiaBPMLabAcondicionador.Inicializa_ClasifEstablecimiento();
                 }
             }
             else { Cancel(); }
@@ -104,7 +104,7 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabMededicamentos_Cap5(Inspeccion);
+                var result = await inspeccionService.Save_BpmAcondMedicamentos_Cap5(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
