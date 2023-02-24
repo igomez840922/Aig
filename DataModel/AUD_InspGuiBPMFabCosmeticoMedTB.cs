@@ -4780,7 +4780,19 @@ namespace DataModel
         public AUD_OtrosFuncionarios()
         {
             LPersona = new List<DatosPersona>();
+            RespProduccion = new DatosPersona();
+            RespControlCalidad = new DatosPersona();
         }
+
+        //RESPONSABLE DE PRODUCCIÓN
+        private DatosPersona respProduccion;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public DatosPersona RespProduccion { get => respProduccion; set => SetProperty(ref respProduccion, value); }
+
+        //RESPONSABLE DE CONTROL DE CALIDAD:
+        private DatosPersona respControlCalidad;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public DatosPersona RespControlCalidad { get => respControlCalidad; set => SetProperty(ref respControlCalidad, value); }
 
         private List<DatosPersona> lPersona;
         public List<DatosPersona> LPersona { get => lPersona; set => SetProperty(ref lPersona, value); }
@@ -5003,10 +5015,22 @@ namespace DataModel
 
         private bool isHeader;
         public bool IsHeader { get => isHeader; set => SetProperty(ref isHeader, value); }
-               
+
+        // Capitulo
+        private string capitulo;
+        public string Capitulo { get => capitulo; set => SetProperty(ref capitulo, value); }
+
+        // Articulo
+        private string articulo;
+        public string Articulo { get => articulo; set => SetProperty(ref articulo, value); }
+
         // Titulo
         private string titulo;
         public string Titulo { get => titulo; set => SetProperty(ref titulo, value); }
+
+        // Criterio
+        private string criterio;
+        public string Criterio { get => criterio; set => SetProperty(ref criterio, value); }
 
         // Evaluacion
         enumAUD_TipoSeleccion? evaluacion = null;
@@ -5015,7 +5039,6 @@ namespace DataModel
         // Evaluacion
         List<OpcionEvaluacion> lEvaluacion = null;
         public List<OpcionEvaluacion> LEvaluacion { get { return lEvaluacion; } set { SetProperty(ref lEvaluacion, value); } }
-
 
         // Observaciones
         private string observaciones;

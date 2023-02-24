@@ -1,0 +1,256 @@
+﻿@using DataModel.Helper;
+@implements IDisposable
+
+@if (Inspeccion != null)
+{
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
+                                            <DataAnnotationsValidator />
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <h5>@languageContainerService.Keys["Firmas"]</h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="row clearfix">
+
+                                                @if (Inspeccion?.InspGuiaBPMFabricanteMed?.DatosRepresentLegal != null)
+                                                {
+                                                    <div class="col-sm-6">
+                                                        <h5>@languageContainerService.Keys["Por el Establecimiento"]</h5>
+                                                        <div class="row clearfix">
+                                                            <div class="col-sm-12">
+                                                                <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Nombre" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Nombre) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Cargo" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Cargo) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Cedula" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Cedula) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <SignaturePad @ref="signaturePad5" OnSignatureChange="OnSignatureChange5"
+                                                                              MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                            <SignaturePadFooter>
+                                                                                <SignaturePadClear>
+                                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
+                                                                                </SignaturePadClear>
+                                                                            </SignaturePadFooter>
+                                                                        </SignaturePad>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                }
+
+                                                @if (Inspeccion?.InspGuiaBPMFabricanteMed?.DatosRegente != null)
+                                                {
+                                                    <div class="col-sm-6">
+                                                        <h5>@languageContainerService.Keys["Regente Farmaceutico"]</h5>
+                                                        <div class="row clearfix">
+                                                            <div class="col-sm-8">
+                                                                <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.Nombre" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.Nombre) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.NumRegistro" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.NumRegistro) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.Cargo" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.Cargo) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.Cedula" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente.Cedula) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-12">
+                                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <SignaturePad @ref="signaturePad6" OnSignatureChange="OnSignatureChange6"
+                                                                              MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                            <SignaturePadFooter>
+                                                                                <SignaturePadClear>
+                                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg6">@languageContainerService.Keys["Clear"]</button>
+                                                                                </SignaturePadClear>
+                                                                            </SignaturePadFooter>
+                                                                        </SignaturePad>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                                <div class="col-sm-12">
+                                                    <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
+                                                </div>
+                                                @if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
+                                                {
+                                                    @foreach (var dt in Inspeccion.ParticipantesDNFD.LParticipantes)
+                                                    {
+
+                                                        <div class="col-sm-6">
+                                                            <div class="row clearfix">
+                                                                <div class="col-sm-12">
+                                                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText disabled="disabled" class="form-control" @bind-Value="dt.NombreCompleto" />
+                                                                            <ValidationMessage For=@(() => dt.NombreCompleto) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText disabled="disabled" class="form-control" @bind-Value="dt.RegistroNumero" />
+                                                                            <ValidationMessage For=@(() => dt.RegistroNumero) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                 <div class="col-sm-6">
+                                                                    <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText disabled="disabled" class="form-control" @bind-Value="dt.CedulaIdentificacion" />
+                                                                            <ValidationMessage For=@(() => dt.CedulaIdentificacion) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-sm-12">
+                                                                    <label>@languageContainerService.Keys["Signature"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <SignaturePad @ref="signaturePad" OnSignatureChange="(e)=>{OnSignatureChange(dt);}"
+                                                                              MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
+                                                                                <SignaturePadFooter>
+                                                                                    <SignaturePadClear>
+                                                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="(e)=>{RemoveSignatureImg(dt);}">@languageContainerService.Keys["Clear"]</button>
+                                                                                    </SignaturePadClear>
+                                                                                </SignaturePadFooter>
+                                                                            </SignaturePad>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+
+
+                                            <br><br>
+
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                            class="btn btn-success waves-effect">
+                                                        @languageContainerService.Keys["SaveExit"]
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cerrar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

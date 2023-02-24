@@ -1795,4 +1795,10 @@
     <EmbeddedResource Include="Resources\Horariosfarmaceuticos.xlsx" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Components\Inspections\11_BpmFabMedicamentos\Cap04.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

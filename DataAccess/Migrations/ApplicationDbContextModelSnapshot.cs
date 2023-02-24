@@ -866,23 +866,23 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("AreaAlmacenamiento")
+                    b.Property<string>("Acondicionamiento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AreaAuxiliar")
+                    b.Property<string>("Almacenes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AreaProduccion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AreasAuxiliares")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ControlCalidad")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DatosConclusiones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DatosEstablecimiento")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DatosRegente")
                         .HasColumnType("nvarchar(max)");
@@ -896,31 +896,22 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Equipo")
+                    b.Property<string>("Documantacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EstructuraOrganizativa")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LaboratorioControlCalidad")
+                    b.Property<string>("InspeccionAuditoria")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Locales")
+                    b.Property<string>("ProdFabrican")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrganizacionPersonal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProdAnalisisContrato")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Programas")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReclamosProdRetirados")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TipoProductos")
+                    b.Property<string>("SistemaCriticoApoyo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -1422,9 +1413,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("AreaProduccion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AuditoriaSanitaria")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("AutoInspecAuditCal")
                         .HasColumnType("nvarchar(max)");
 
@@ -1440,7 +1428,10 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DatosConclusiones")
+                    b.Property<string>("DatosRegente")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DatosRepresentLegal")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
@@ -1482,9 +1473,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("GarantiaCalidad")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GeneralesEmpresa")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Lactamicos")
                         .HasColumnType("nvarchar(max)");
 
@@ -1515,19 +1503,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("QuejasReclamos")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RegenteFarmaceutico")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RepresentLegal")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RequisitosLegales")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RespControlCalidad")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RespProduccion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -1558,9 +1534,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("AreaAcondicionamiento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AuditoriaSanitaria")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("AutoInspecAuditCal")
                         .HasColumnType("nvarchar(max)");
 
@@ -1576,7 +1549,10 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DatosConclusiones")
+                    b.Property<string>("DatosRegente")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DatosRepresentLegal")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
@@ -1603,9 +1579,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("GarantiaCalidad")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GeneralesEmpresa")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MatProducts")
                         .HasColumnType("nvarchar(max)");
 
@@ -1627,19 +1600,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("QuejasReclamos")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RegenteFarmaceutico")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RepresentLegal")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RequisitosLegales")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RespControlCalidad")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RespProduccion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")

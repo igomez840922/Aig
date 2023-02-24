@@ -1,0 +1,134 @@
+﻿@using DataModel.Helper;
+@implements IDisposable
+
+@if (Inspeccion?.InspGuiaBPMFabricanteMed?.ValGenerales != null)
+{
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
+                                            <DataAnnotationsValidator />
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <h5>@languageContainerService.Keys["Validación"]</h5>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="row clearfix">
+                                                <!--begin::Section-->
+                                                <div class="col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table rounded table-striped">
+                                                            <thead class=thead-light>
+                                                                <tr>
+                                                                    <th width="5%">@languageContainerService.Keys["Capítulo"]</th>
+                                                                    <th width="5%">@languageContainerService.Keys["Artículo"]</th>
+                                                                    <th width="30%">@languageContainerService.Keys["Título"]</th>
+                                                                    <th width="5%">@languageContainerService.Keys["Criterio"]</th>
+                                                                    <th width="5%">@languageContainerService.Keys["Cumple"]</th>
+                                                                    <th>@languageContainerService.Keys["Observaciones"]</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @if (Inspeccion?.InspGuiaBPMFabricanteMed?.ValGenerales?.LContenido != null)
+                                                                {
+                                                                    @foreach (var dt in Inspeccion.InspGuiaBPMFabricanteMed.ValGenerales.LContenido)
+                                                                    {
+                                                                        @if (dt.IsHeader)
+                                                                        {
+                                                                            <tr>
+                                                                                <th>@dt.Capitulo</th>
+                                                                                <th>@dt.Articulo</th>
+                                                                                <th>@dt.Titulo</th>
+                                                                                <th colspan="3">@dt.Criterio</th>
+                                                                            </tr>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <tr>
+                                                                                <td>@dt.Capitulo</td>
+                                                                                <td>@dt.Articulo</td>
+                                                                                <td>@dt.Titulo</td>
+                                                                                <td>@dt.Criterio</td>
+                                                                                @foreach (var eva in dt.LEvaluacion)
+                                                                                {
+                                                                                    <td>
+                                                                                        <InputSelect style="padding:0px!important;" @bind-Value="eva.Evaluacion" class="form-control">
+                                                                                            @foreach (enumAUD_TipoSeleccion opt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                                            {
+                                                                                                <option value="@opt">@(DataModel.Helper.Helper.GetDescription(opt))</option>
+                                                                                            }
+                                                                                        </InputSelect>
+                                                                                    </td>
+                                                                                }
+                                                                                <td>
+                                                                                    <InputTextArea rows="6" class="form-control" @bind-Value="dt.Observaciones" />
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <br><br>
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+                                                    
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                        class="btn btn-success waves-effect">
+                                                        @languageContainerService.Keys["SaveExit"]
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                    @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cerrar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

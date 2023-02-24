@@ -112,6 +112,67 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_AperFabricanteMedicamento_Cap14(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_AperFabricanteMedicamento_Firma(AUD_InspeccionTB inspeccion);
 
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap4(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap5(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap6(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap7(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap8(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap9(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap10(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap11(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap12(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Cap13(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperFabricanteCosmeticosDesin_Firma(AUD_InspeccionTB inspeccion);
+
+
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap4(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap5(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap6(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap7(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap8(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap9(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap10(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap11(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap12(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap13(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap14(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap15(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap16(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap17(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap18(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap19(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap20(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap21(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap22(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap23(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap24(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Cap25(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabMededicamentos_Firma(AUD_InspeccionTB inspeccion);
+
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap4(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap5(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap6(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap7(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap8(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap9(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap10(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap11(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap12(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap13(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap14(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap15(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap16(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap17(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap18(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Cap19(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Firma(AUD_InspeccionTB inspeccion);
+
 
     }
 }

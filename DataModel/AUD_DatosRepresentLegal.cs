@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataModel.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -80,6 +81,43 @@ namespace DataModel
         //Profesion
         private string cargo;
         public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
+
+        
+        //Horario Regencia
+        private string horario;
+        public string Horario { get => horario; set => SetProperty(ref horario, value); }
+
+        //Labora en otra empresa:: 
+        private enumAUD_TipoSeleccion laboraOtraEmpresa;
+        public enumAUD_TipoSeleccion LaboraOtraEmpresa { get => laboraOtraEmpresa; set => SetProperty(ref laboraOtraEmpresa, value); }
+        private string laboraOtraEmpresaDesc;
+        public string LaboraOtraEmpresaDesc { get => laboraOtraEmpresaDesc; set => SetProperty(ref laboraOtraEmpresaDesc, value); }
+
+        private string laboraOtraEmpresaHora;
+        public string LaboraOtraEmpresaHora { get => laboraOtraEmpresaHora; set => SetProperty(ref laboraOtraEmpresaHora, value); }
+
+
+        private enumAUD_TipoSeleccion presenteEnLocal;
+        public enumAUD_TipoSeleccion PresenteEnLocal { get => presenteEnLocal; set => SetProperty(ref presenteEnLocal, value); }
+
+        //El regente está presente al momento de la inspección
+        private enumAUD_TipoSeleccion presenteEnInspeccion;
+        public enumAUD_TipoSeleccion PresenteEnInspeccion { get => presenteEnInspeccion; set => SetProperty(ref presenteEnInspeccion, value); }
+
+        private string observacion;
+        public string Observacion { get => observacion; set => SetProperty(ref observacion, value); }
+
+        //Pais Residencia
+        private string paisResidencia;
+        public string PaisResidencia { get => paisResidencia; set => SetProperty(ref paisResidencia, value); }
+
+
+        private enumAUD_TipoSeleccion realizaOtraFuncion;
+        public enumAUD_TipoSeleccion RealizaOtraFuncion { get => realizaOtraFuncion; set => SetProperty(ref realizaOtraFuncion, value); }
+
+        //Otras Funciones
+        private string otrasFunciones;
+        public string OtrasFunciones { get => otrasFunciones; set => SetProperty(ref otrasFunciones, value); }
     }
 
 }
