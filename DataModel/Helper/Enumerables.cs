@@ -1003,6 +1003,32 @@ namespace DataModel.Helper
         Cap26 = 26,
         [Description("Cap27")]
         Cap27 = 27,
+        [Description("Cap28")]
+        Cap28 = 28,
+        [Description("Cap29")]
+        Cap29 = 29,
+        [Description("Cap30")]
+        Cap30 = 30,
+        [Description("Cap31")]
+        Cap31 = 31,
+        [Description("Cap32")]
+        Cap32 = 32,
+        [Description("Cap33")]
+        Cap33 = 33,
+        [Description("Cap34")]
+        Cap34 = 34,
+        [Description("Cap35")]
+        Cap35 = 35,
+        [Description("Cap36")]
+        Cap36 = 36,
+        [Description("Cap37")]
+        Cap37 = 37,
+        [Description("Cap38")]
+        Cap38 = 38,
+        [Description("Cap39")]
+        Cap39 = 39,
+        [Description("Cap40")]
+        Cap40 = 40,
     }
 
 }

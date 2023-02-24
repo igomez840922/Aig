@@ -9036,13 +9036,6 @@ namespace Aig.Auditoria.Services
             catch { }
             return null;
         }
-
-
-
-
-
-        
-
         //generamos el pdf de BPM Guia Fabricante de Cosmeticos y Desinfectantes
         private async Task<Stream> GenerateGuiaFabricantesCosmeticosDesinfectantes(AUD_InspeccionTB inspection)
         {
@@ -9096,125 +9089,103 @@ namespace Aig.Auditoria.Services
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
-                            foreach (var participant in inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
+                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
                             {
-                                column.Item().AlignLeft().Text(string.Format("Lic. {0}", participant.NombreCompleto));
+                                foreach (var participant in inspection.ParticipantesDNFD.LParticipantes)
+                                {
+                                    column.Item().AlignLeft().Text(string.Format("Lic. {0}", participant.NombreCompleto));
+                                }
                             }
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Por la Empresa:"));
-                            column.Item().Table(table =>
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.DatosRepresentLegal != null)
                             {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                    columns.RelativeColumn();
-                                    columns.RelativeColumn();
-                                });
-
-                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Representante Legal: {0}", inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Nombre));
-                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("C.I.P : {0}", inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Cedula));
-                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma))
-                                {
-                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma.Split("image/png;base64,")[1]);
-                                    MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignMiddle().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
-                                }
-                                else
-                                {
-                                    table.Cell().AlignMiddle().AlignLeft().Text("");
-                                }
-                            });
-                            column.Item().AlignLeft().Text(string.Format("Regente farmacéutico /Director Técnico y número de Registro:"));
-                            column.Item().Table(table =>
+                                column.Item().AlignLeft().Text(string.Format("Representante Legal: {0}, Cedula: {1}", inspection.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal.Nombre, inspection.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal.Cedula));
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.DatosRegente != null)
                             {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                    columns.RelativeColumn();
-                                    columns.RelativeColumn();
-                                });
-
-                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Lic: {0}", inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Nombre));
-                                table.Cell().AlignMiddle().AlignLeft().Text(string.Format("Registro : {0}", inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.NumRegistro));
-                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma))
-                                {
-                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
-                                    MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignMiddle().AlignLeft().Image(memoryStream);
-                                }
-                                else
-                                {
-                                    table.Cell().AlignMiddle().AlignLeft().Text("");
-                                }
-                            });
-
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Otros funcionarios de la empresa:"));
-                            foreach (var persona in inspection.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona)
+                                column.Item().AlignLeft().Text(string.Format("Regente farmacéutico / Director técnico: {0}, Cedula: {1}", inspection.InspGuiBPMFabCosmeticoMed.DatosRegente.Nombre, inspection.InspGuiBPMFabCosmeticoMed.DatosRegente.Cedula));
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.OtrosFuncionarios?.LPersona?.Count > 0)
                             {
-                                column.Item().AlignLeft().Text(string.Format("Lic. {0}", persona.Nombre));
+                                column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Otros funcionarios de la empresa:"));
+                                foreach (var persona in inspection.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona)
+                                {
+                                    column.Item().AlignLeft().Text(string.Format("Lic. {0}", persona.Nombre));
+                                }
                             }
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Nombre));
-                            column.Item().AlignLeft().Text(string.Format("Dirección: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Direccion));
-                            column.Item().AlignLeft().Text(string.Format("Ciudad: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Ciudad));
-                            column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Telefono));
-                            column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiBPMFabCosmeticoMed.GeneralesEmpresa.Email));
+                            column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.DatosEstablecimiento?.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Provincia: {0}", inspection.DatosEstablecimiento?.Provincia?.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Distrito: {0}", inspection.DatosEstablecimiento?.Distrito?.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Corregimiento: {0}", inspection.DatosEstablecimiento?.Corregimiento?.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Dirección: {0}", inspection.DatosEstablecimiento?.Direccion));
+                            column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.DatosEstablecimiento?.Telefono));
+                            column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.DatosEstablecimiento?.Correo));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("RESPONSABLE DE PRODUCCIÓN:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespProduccion.Nombre));
-                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespProduccion.Profesion));
+                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabCosmeticoMed?.OtrosFuncionarios?.RespProduccion?.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabCosmeticoMed?.OtrosFuncionarios?.RespProduccion?.Profesion));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("RESPONSABLE DE CONTROL DE CALIDAD:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Nombre));
-                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabCosmeticoMed.RespControlCalidad.Profesion));
+                            column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiBPMFabCosmeticoMed?.OtrosFuncionarios?.RespControlCalidad?.Nombre));
+                            column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiBPMFabCosmeticoMed?.OtrosFuncionarios?.RespControlCalidad?.Profesion));
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("REQUISITOS LEGALES:".ToUpper())).Bold();
-                            column.Item().Table(table =>
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.RequisitosLegales?.LContenido?.Count > 0)
                             {
-                                table.ColumnsDefinition(columns =>
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("REQUISITOS LEGALES:".ToUpper())).Bold();
+                                column.Item().Table(table =>
                                 {
-                                    columns.RelativeColumn((float)0.1);
-                                    columns.RelativeColumn((float)0.1);
-                                    columns.RelativeColumn((float)0.6); 
-                                    columns.RelativeColumn((float)0.1);
-                                    columns.RelativeColumn((float)0.1);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("6.1".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("De la autorización de funcionamiento".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                });
-
-                                var i = 0;
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RequisitosLegales.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text("");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(i>0?"":"6.1.1");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                    table.ColumnsDefinition(columns =>
                                     {
-                                        tbl.ColumnsDefinition(columns =>
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capítulo".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículo".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cumple".ToUpper());
+                                        //header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIoNes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RequisitosLegales.LContenido)
+                                    {
+                                        if (dat.IsHeader)
                                         {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
                                         }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    i++;
-                                }
-                            });
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Observaciones:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(inspection.InspGuiBPMFabCosmeticoMed.Observaciones);
@@ -9222,1212 +9193,1946 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"));
                             column.Item().AlignLeft().Text(string.Format(DataModel.Helper.Helper.GetDescription(inspection.InspGuiBPMFabCosmeticoMed.ProcesoVigilanciaSanit)));
 
-                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiBPMFabCosmeticoMed.FechaUltimaVista?.ToString("dd/MM/yyyy")??""));
+                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiBPMFabCosmeticoMed.FechaUltimaVista?.ToString("dd/MM/yyyy") ?? ""));
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
-                            column.Item().Table(table =>
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.ClasifActComerciales?.LContenido?.Count > 0)
                             {
-                                table.ColumnsDefinition(columns =>
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
+                                column.Item().Table(table =>
                                 {
-                                    columns.RelativeColumn((float)0.9);
-                                    columns.RelativeColumn((float)0.1);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Adquisición de Materias primas y materiales".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                });
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifActComerciales.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                }
-                            });
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CLASIFICACIÓN DEL ESTABLECIMIENTO:".ToUpper())).Bold();
-                            column.Item().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn((float)0.5);
-                                    columns.RelativeColumn((float)0.2);
-                                    columns.RelativeColumn((float)0.3);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Objetivos".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
-                                });
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
-                                }
-                            });
-                            column.Item().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn((float)0.8);
-                                    columns.RelativeColumn((float)0.1);
-                                    columns.RelativeColumn((float)0.1);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Adquisición de Materias primas y materiales".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                });
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento2.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                }
-                            });
-
-                            column.Item().PaddingVertical(5).Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)40);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)10);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)30);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Auditoría".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capítulo I - ADMINISTRACIÓN E INFORMACIÓN GENERAL".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículos".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
-
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt.".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                });
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("A- Generalidades - Estructura Organizativa".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.GenEstructuraOrganizativa.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                    table.ColumnsDefinition(columns =>
                                     {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                     });
-
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                            });
-
-                            column.Item().PaddingVertical(5).Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)40);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)10);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)30);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Auditoría".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("CAPITULO II - ALMACENES".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículos".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
-
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto Obt.".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                });
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("A - Condiciones Externas de los Almacenes".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CondExtAlmacenas.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                    table.Header(header =>
                                     {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capítulo".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículo".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cumple".ToUpper());
+                                        //header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIoNes".ToUpper());
                                     });
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("B - Condiciones Internas de los Almacenes".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CondIntAlmacenas.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifActComerciales.LContenido)
                                     {
-                                        tbl.ColumnsDefinition(columns =>
+                                        if (dat.IsHeader)
                                         {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
                                         }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("C - Área de Recepción de Materia Prima ".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaRecepMateriaPrima.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
+                                        else
                                         {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                         }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("CH - Almacén de Materia Prima".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenMateriaPrima.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("D - Área de almacenamiento de Materiales de Acondicionamiento, Empaque y Envase".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenMatAcondicionamineto.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("E - Recepción de Producto Terminado (De producción al almacén)".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RecepProductoTerminado.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("E.1 - Almacén de Producto Terminado".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("F - Área de productos Devueltos y/o Rechazados".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ProductoDevueltoRechazado.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("G - Distribución de Productos Terminados".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.DistProductoTerminado.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("H - Manejo de quejas y reclamos de productos comercializados".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ManejoQuejaReclamos.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("I - Retiro de Productos del Mercado".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RetiroProcMercado.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                            });
-
-                            column.Item().PaddingVertical(5).Table(table =>
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.ClasifEstablecimiento?.LContenido?.Count > 0)
                             {
-                                table.ColumnsDefinition(columns =>
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("Clasificación del Establecimiento:".ToUpper())).Bold();
+                                column.Item().Table(table =>
                                 {
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)40);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)10);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)30);
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capítulo".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículo".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Cumple".ToUpper());
+                                        //header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIoNes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
                                 });
-                                table.Header(header =>
-                                {
-                                    header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Auditoría".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capitulo III - SISTEMAS CRITICOS DE APOYO".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículos".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
-
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto Obt.".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                });
-                                                                
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.1 Sistemas e Instalaciones de Agua".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.SistemaInstAgua.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.1.1 OSMOSIS INVERSA".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.OsmosisInversa.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.1.2 SISTEMA DE DEIONIZACION".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.SistemaDeIonizacion.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.2 Calibraciones y Verificaciones de equipo".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CalibraVerifEquipo.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.3 Validaciones".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.Validaciones.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("3.4 Mantenimiento de áreas y equipos".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.MantAreaEquipos.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                            });
-
-                            column.Item().PaddingVertical(5).Table(table =>
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AdminInfoGeneral?.LContenido?.Count > 0)
                             {
-                                table.ColumnsDefinition(columns =>
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("Administración e Información General:".ToUpper())).Bold();
+                                column.Item().Table(table =>
                                 {
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)40);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)10);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)30);
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AdminInfoGeneral.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
                                 });
-                                table.Header(header =>
-                                {
-                                    header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Auditoría".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capitulo IV - ÁREAS DE PRODUCCIÓN".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículos".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
-
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto Obt.".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                });
-                                                                
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.1.A Condiciones Externas".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaProdCondExternas.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.1.B Condiciones Internas".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaProdCondInternas.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.2 Organización y Documentación".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaOrganizaDocumentacion.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.3 Área de Dispensación de Ordenes de Fabricación".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.4.1 Fabricación de Productos Desinfectantes".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.5.1 Fabricación de Plaguicidas ".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabPlaguicida.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("4.6.1 Fabricación de Cosméticos".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabCosmeticos.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
-                                    {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-
-                            });
-
-                            column.Item().PaddingVertical(5).Table(table =>
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.CondExtAlmacenas?.LContenido?.Count > 0)
                             {
-                                table.ColumnsDefinition(columns =>
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Condiciones Externas".ToUpper())).Bold();
+                                column.Item().Table(table =>
                                 {
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)40);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)10);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)30);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Auditoría".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capítulo V - Acondicionamiento".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículos".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
-
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto Obt.".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                });
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("5.1 Área de Envasado".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaEnvasado.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                    table.ColumnsDefinition(columns =>
                                     {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("5.2. Área de Etiquetado y Empaque".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaEtiquetadoEmpaque.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
                                     {
-                                        tbl.ColumnsDefinition(columns =>
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CondExtAlmacenas.LContenido)
+                                    {
+                                        if (dat.IsHeader)
                                         {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
                                         }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-
-                            });
-
-                            column.Item().PaddingVertical(5).Table(table =>
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.CondIntAlmacenas?.LContenido?.Count > 0)
                             {
-                                table.ColumnsDefinition(columns =>
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Condiciones Internas".ToUpper())).Bold();
+                                column.Item().Table(table =>
                                 {
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)40);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)10);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)30);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Auditoría".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capítulo VI- Control de Calidad".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículos".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
-
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto Obt.".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                });
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("6.1 Laboratorio de Control de Calidad".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.LabControlCalidad.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                    table.ColumnsDefinition(columns =>
                                     {
-                                        tbl.ColumnsDefinition(columns =>
-                                        {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
-                                        }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("6.2 Análisis por Contrato".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AnalisisContrato.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
                                     {
-                                        tbl.ColumnsDefinition(columns =>
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CondIntAlmacenas.LContenido)
+                                    {
+                                        if (dat.IsHeader)
                                         {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
                                         }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-
-                            });
-
-                            column.Item().PaddingVertical(5).Table(table =>
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AreaRecepMateriaPrima?.LContenido?.Count > 0)
                             {
-                                table.ColumnsDefinition(columns =>
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Área de Recepción de Materia Prima".ToUpper())).Bold();
+                                column.Item().Table(table =>
                                 {
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)40);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)10);
-                                    columns.RelativeColumn((float)5);
-                                    columns.RelativeColumn((float)30);
-                                });
-                                table.Header(header =>
-                                {
-                                    header.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Auditoría".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Capítulo VII- Inspecciones y Auditoría".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Artículos".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Evaluación".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Criterio".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper());
-
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto Obt.".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                });
-
-                                table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text(" ".ToUpper());
-                                table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("".ToUpper());
-
-                                foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.InspeccionAudito.LContenido)
-                                {
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosMax);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.PuntosObtenido);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Titulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).Table(tbl =>
+                                    table.ColumnsDefinition(columns =>
                                     {
-                                        tbl.ColumnsDefinition(columns =>
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaRecepMateriaPrima.LContenido)
+                                    {
+                                        if (dat.IsHeader)
                                         {
-                                            columns.RelativeColumn(7);
-                                            columns.RelativeColumn(3);
-                                        });
-
-                                        tbl.Cell().ColumnSpan(2).AlignLeft().Text(dat.Titulo);
-                                        foreach (var subdt in dat.LSubContenido)
-                                        {
-                                            tbl.Cell().AlignLeft().Text(string.Format("{0}:", subdt.Titulo));
-                                            tbl.Cell().AlignLeft().Text(DataModel.Helper.Helper.GetDescription(subdt.Seleccion));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
                                         }
-                                    }); 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Articulo);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(DataModel.Helper.Helper.GetDescription(dat.Evaluacion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Criterio);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Text(dat.Observaciones);
-                                }
-
-
-                            });
-
-
-
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AlmacenMateriaPrima?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Almacén de Materia Prima".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenMateriaPrima.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AlmacenMatAcondicionamineto?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Área de almacenamiento de Materiales de Acondicionamiento, Empaque y Envase".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenMatAcondicionamineto.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.RecepProductoTerminado?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Recepción de Producto Terminado (de producción al almacén)".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RecepProductoTerminado.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AlmacenProductoTerminado?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Almacén de Producto Terminado".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.ProductoDevueltoRechazado?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Área de productos Devueltos y/o Rechazados".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ProductoDevueltoRechazado.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.DistProductoTerminado?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Distribución de Productos Terminados".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.DistProductoTerminado.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.ManejoQuejaReclamos?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Manejo de quejas y reclamos de productos comercializados".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.ManejoQuejaReclamos.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.RetiroProcMercado?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Retiro de Productos del Mercado".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.RetiroProcMercado.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.SistemaInstAgua?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Sistemas e Instalaciones de Agua".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.SistemaInstAgua.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.OsmosisInversa?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Osmosis Inversa".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.OsmosisInversa.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.SistemaDeIonizacion?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Sistema de Deionización".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.SistemaDeIonizacion.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.CalibraVerifEquipo?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Calibraciones y Verificaciones de equipo".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.CalibraVerifEquipo.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.Validaciones?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Validaciones".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.Validaciones.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.MantAreaEquipos?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Mantenimiento de áreas y equipos".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.MantAreaEquipos.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AreaProdCondExternas?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Condiciones Externas".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaProdCondExternas.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AreaProdCondInternas?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Condiciones Internas".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaProdCondInternas.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AreaOrganizaDocumentacion?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Organización y Documentación".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaOrganizaDocumentacion.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AreaDispensionOrdFab?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Área de Dispensación de Ordenes de Fabricación".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.FabProdDesinfectante?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Fabricación de Productos Desinfectantes".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.FabPlaguicida?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Fabricación de Plaguicidas".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabPlaguicida.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.FabCosmeticos?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Fabricación de Cosméticos".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.FabCosmeticos.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AreaEnvasado?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ACONDICIONAMIENTO - Área de Envasado".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaEnvasado.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AreaEtiquetadoEmpaque?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ACONDICIONAMIENTO - Área de Etiquetado y Empaque".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AreaEtiquetadoEmpaque.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.LabControlCalidad?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("CONTROL DE CALIDAD - Laboratorio de Control de Calidad".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.LabControlCalidad.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.AnalisisContrato?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("CONTROL DE CALIDAD - Análisis por Contrato".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.AnalisisContrato.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            if (inspection.InspGuiBPMFabCosmeticoMed?.InspeccionAudito?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("Inspecciones y Auditoría".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)3.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Max".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Pto. Obt".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Art.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Eval.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Crit.".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONes".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspGuiBPMFabCosmeticoMed.InspeccionAudito.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosMax);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Articulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
@@ -10438,15 +11143,14 @@ namespace Aig.Auditoria.Services
 
                                 table.Header(header =>
                                 {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONES GENERALES").Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Observaciones".ToUpper()).Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
-
-                            column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes"));
+                            column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -10457,23 +11161,25 @@ namespace Aig.Auditoria.Services
                                 });
 
                                 table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
-                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Firma))
+                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
-                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico.Firma.Split("image/png;base64,")[1]);
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignLeft().Image(memoryStream,ImageScaling.FitWidth);
+                                    table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitArea);
                                 }
                                 else
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
-                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal?.Firma))
+
+
+                                if (!string.IsNullOrEmpty(inspection.InspGuiBPMFabCosmeticoMed.DatosRegente?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
-                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal.Firma.Split("image/png;base64,")[1]);
+                                    byte[] data = Convert.FromBase64String(inspection.InspGuiBPMFabCosmeticoMed.DatosRegente.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
                                     table.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                 }
@@ -10481,20 +11187,32 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.Cell().AlignLeft().Text("");
                                 }
-                                
-                                table.Cell().AlignLeft().Text("");
-                                
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Nombre, inspection.InspGuiBPMFabCosmeticoMed.RegenteFarmaceutico?.Cedula));
-                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal?.Nombre, inspection.InspGuiBPMFabCosmeticoMed.RepresentLegal?.Cedula));
-                                
-                                table.Cell().AlignLeft().Text("");
-                                
-                                table.Cell().ColumnSpan(3).AlignLeft().PaddingVertical(5).Text(" ").Bold();
-                                if (inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes != null)
-                                {
-                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Dirección Nacional de Farmacia y Drogas:").Bold();
 
-                                    foreach (var participant in inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.LParticipantes)
+
+                                table.Cell().AlignLeft().Text("");
+
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal?.Nombre, inspection.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal?.Cedula, inspection.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal?.Cargo));
+                                table.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspGuiBPMFabCosmeticoMed.DatosRegente?.Nombre, inspection.InspGuiBPMFabCosmeticoMed.DatosRegente?.Cedula, inspection.InspGuiBPMFabCosmeticoMed.DatosRegente?.Cargo, inspection.InspGuiBPMFabCosmeticoMed.DatosRegente?.NumRegistro));
+
+                                table.Cell().AlignLeft().Text("");
+
+                            });
+
+                            column.Item().PaddingVertical(5).Text(" ").Bold();
+
+                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
+                            {
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+
+                                    foreach (var participant in inspection.ParticipantesDNFD.LParticipantes)
                                     {
                                         table.Cell().Table(tbl =>
                                         {
@@ -10509,14 +11227,76 @@ namespace Aig.Auditoria.Services
                                                 tbl.Cell().AlignLeft().Image(memoryStream, ImageScaling.FitWidth);
                                             }
                                             tbl.Cell().AlignLeft().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
-
                                         });
                                     }
-                                }
+                                });
+                            }
+
+                            column.Item().PaddingVertical(5).Text(string.Format("Hora de finalización de inspección: {0}", inspection.DatosConclusiones?.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
+
+                            column.Item().PaddingVertical(10).Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn(4);
+                                    columns.RelativeColumn(6);
+                                });
+
+                                table.Cell().Table(tbl => {
+                                    tbl.ColumnsDefinition(cols =>
+                                    {
+                                        cols.RelativeColumn();
+                                    });
+                                    tbl.Header(header =>
+                                    {
+                                        header.Cell().AlignLeft().Text("Fundamento Legal:").Bold();
+                                    });
+                                    tbl.Cell().AlignLeft().Text("Ley 66 de 10 de noviembre de 1947");
+                                    tbl.Cell().AlignLeft().Text("Ley 1 de 10 de enero de 2001");
+                                    tbl.Cell().AlignLeft().Text("Ley 17 de 12 de septiembre de 2014");
+                                    tbl.Cell().AlignLeft().Text("Ley 24 de 29 de enero de 1963");
+                                    tbl.Cell().AlignLeft().Text("Decreto Ejecutivo 115 de 16 de agosto de 2022");
+                                });
+
+                                table.Cell().Table(tbl => {
+                                    tbl.ColumnsDefinition(cols =>
+                                    {
+                                        cols.RelativeColumn();
+                                        cols.RelativeColumn();
+                                        cols.RelativeColumn();
+                                    });
+
+                                    tbl.Header(header =>
+                                    {
+                                        header.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold();
+                                    });
+
+                                    tbl.Cell().AlignLeft().Text("S. Inspecciones");
+                                    tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                    tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("S. Auditorías");
+                                    tbl.Cell().AlignLeft().Text("512-9168/62");
+                                    tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("OR Veraguas");
+                                    tbl.Cell().AlignLeft().Text("935-0316/18");
+                                    tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("OR Chiriquí");
+                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("OR Colón");
+                                    tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                    tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                    tbl.Cell().AlignLeft().Text("504-2565");
+                                    tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
+                                });
 
                             });
-
-                            column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.InspGuiBPMFabCosmeticoMed.DatosConclusiones.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                         });
 
@@ -10524,55 +11304,14 @@ namespace Aig.Auditoria.Services
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn(6);
-                                columns.RelativeColumn(4);
+                                columns.RelativeColumn();
                             });
 
-                            //table.Header(header =>
-                            //{
-                            //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
-                            //});
-
-                            table.Cell().Table(tbl => {
-                                tbl.ColumnsDefinition(cols =>
-                                {
-                                    cols.RelativeColumn();
-                                    cols.RelativeColumn();
-                                    cols.RelativeColumn();
-                                });
-                                tbl.Cell().AlignLeft().Text("S. Inspecciones");
-                                tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
-                                tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
-
-                                tbl.Cell().AlignLeft().Text("S. Auditorías");
-                                tbl.Cell().AlignLeft().Text("512-9168/62");
-                                tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
-
-                                tbl.Cell().AlignLeft().Text("OR Veraguas");
-                                tbl.Cell().AlignLeft().Text("935-0316/18");
-                                tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
-
-                                tbl.Cell().AlignLeft().Text("OR Chiriquí");
-                                tbl.Cell().AlignLeft().Text("774-7410");
-                                tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
-
-                                tbl.Cell().AlignLeft().Text("OR Colón");
-                                tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
-                                tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
-
-                                tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
-                                tbl.Cell().AlignLeft().Text("504-2565");
-                                tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
-                            });
 
                             table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
-
-
                     });
-                })
-                  .GeneratePdf();
+                }).GeneratePdf();
 
                 Stream stream = new MemoryStream(byteArray);
 
@@ -10581,6 +11320,13 @@ namespace Aig.Auditoria.Services
             catch { }
             return null;
         }
+
+
+
+
+
+
+
         //Apertura – Cosméticos Artesanales
         private async Task<Stream> GenerateAperturaCosmeticosArtesanales(AUD_InspeccionTB inspection)
         {

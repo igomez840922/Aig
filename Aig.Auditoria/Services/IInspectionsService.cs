@@ -174,5 +174,41 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_BpmAcondMedicamentos_Firma(AUD_InspeccionTB inspeccion);
 
 
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap4(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap5(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap6(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap7(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap8(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap9(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap10(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap11(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap12(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap13(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap14(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap15(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap16(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap17(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap18(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap19(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap20(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap21(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap22(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap23(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap24(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap25(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap26(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap27(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap28(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap29(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap30(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap31(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap32(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap33(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap34(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap35(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Firma(AUD_InspeccionTB inspeccion);
+
     }
 }

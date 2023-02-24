@@ -132,6 +132,13 @@ namespace DataModel
         private AUD_InspGuiaBPMLabAcondicionadorTB? inspGuiaBPMLabAcondicionador;
         public virtual AUD_InspGuiaBPMLabAcondicionadorTB? InspGuiaBPMLabAcondicionador { get => inspGuiaBPMLabAcondicionador; set => SetProperty(ref inspGuiaBPMLabAcondicionador, value); }
 
+        //13 - Gui BPM Fabribacante Cosmetico Medicamento
+        private long? inspGuiBPMFabCosmeticoMedId;
+        public long? InspGuiBPMFabCosmeticoMedId { get => inspGuiBPMFabCosmeticoMedId; set => SetProperty(ref inspGuiBPMFabCosmeticoMedId, value); }
+        private AUD_InspGuiBPMFabCosmeticoMedTB? inspGuiBPMFabCosmeticoMed;
+        public virtual AUD_InspGuiBPMFabCosmeticoMedTB? InspGuiBPMFabCosmeticoMed { get => inspGuiBPMFabCosmeticoMed; set => SetProperty(ref inspGuiBPMFabCosmeticoMed, value); }
+
+
 
         /// <summary>
         /// //////////////////////
@@ -215,12 +222,7 @@ namespace DataModel
         
         
         
-        //13 - Gui BPM Fabribacante Cosmetico Medicamento
-        private long? inspGuiBPMFabCosmeticoMedId;
-        public long? InspGuiBPMFabCosmeticoMedId { get => inspGuiBPMFabCosmeticoMedId; set => SetProperty(ref inspGuiBPMFabCosmeticoMedId, value); }
-        private AUD_InspGuiBPMFabCosmeticoMedTB? inspGuiBPMFabCosmeticoMed;
-        public virtual AUD_InspGuiBPMFabCosmeticoMedTB? InspGuiBPMFabCosmeticoMed { get => inspGuiBPMFabCosmeticoMed; set => SetProperty(ref inspGuiBPMFabCosmeticoMed, value); }
-
+        
         //14 - Fabricantes Naturales medicinales
         private long? inspGuiBPMFabNatMedicinaId;
         public long? InspGuiBPMFabNatMedicinaId { get => inspGuiBPMFabNatMedicinaId; set => SetProperty(ref inspGuiBPMFabNatMedicinaId, value); }

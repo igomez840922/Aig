@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Text;
 using DataModel.DTO;
 using System.Text.Json;
+using System.Security.Policy;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -13,10 +14,13 @@ namespace Aig.FarmacoVigilancia.Services
     {
         private readonly IApiConnectionService apiConnectionService;
         private readonly JsonSerializerOptions _options;
-        public TokenMedService(IApiConnectionService apiConnectionService)
+        private readonly IConfiguration configuration;
+
+        public TokenMedService(IApiConnectionService apiConnectionService, IConfiguration configuration)
         {
             this.apiConnectionService = apiConnectionService;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            this.configuration = configuration;
         }
 
         
@@ -24,10 +28,11 @@ namespace Aig.FarmacoVigilancia.Services
         {
             try
             {
+                
                 var myDict = new Dictionary<string, object>()
                                 {
-                                    { "email","admin@admin.com"},
-                                    { "password","123"}
+                                    { "email",configuration["ApiUsr"]},
+                                    { "password",configuration["ApiPsw"]}
                                 };
                 StringContent content = new StringContent(JsonConvert.SerializeObject(myDict), Encoding.UTF8, "application/json");
                 var result = await apiConnectionService.Client.PostAsync("identity/login", content);
