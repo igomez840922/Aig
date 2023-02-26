@@ -210,5 +210,22 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Cap35(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_BpmFabCosmeticosDesinf_Firma(AUD_InspeccionTB inspeccion);
 
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap4(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap5(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap6(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap7(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap8(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap9(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap10(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap11(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap12(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap13(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap14(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap15(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap16(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap17(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Firma(AUD_InspeccionTB inspeccion);
     }
 }

@@ -138,6 +138,11 @@ namespace DataModel
         private AUD_InspGuiBPMFabCosmeticoMedTB? inspGuiBPMFabCosmeticoMed;
         public virtual AUD_InspGuiBPMFabCosmeticoMedTB? InspGuiBPMFabCosmeticoMed { get => inspGuiBPMFabCosmeticoMed; set => SetProperty(ref inspGuiBPMFabCosmeticoMed, value); }
 
+        //14 - Fabricantes Naturales medicinales
+        private long? inspGuiBPMFabNatMedicinaId;
+        public long? InspGuiBPMFabNatMedicinaId { get => inspGuiBPMFabNatMedicinaId; set => SetProperty(ref inspGuiBPMFabNatMedicinaId, value); }
+        private AUD_InspGuiBPMFabNatMedicinaTB? inspGuiBPMFabNatMedicina;
+        public virtual AUD_InspGuiBPMFabNatMedicinaTB? InspGuiBPMFabNatMedicina { get => inspGuiBPMFabNatMedicina; set => SetProperty(ref inspGuiBPMFabNatMedicina, value); }
 
 
         /// <summary>
@@ -223,12 +228,7 @@ namespace DataModel
         
         
         
-        //14 - Fabricantes Naturales medicinales
-        private long? inspGuiBPMFabNatMedicinaId;
-        public long? InspGuiBPMFabNatMedicinaId { get => inspGuiBPMFabNatMedicinaId; set => SetProperty(ref inspGuiBPMFabNatMedicinaId, value); }
-        private AUD_InspGuiBPMFabNatMedicinaTB? inspGuiBPMFabNatMedicina;
-        public virtual AUD_InspGuiBPMFabNatMedicinaTB? InspGuiBPMFabNatMedicina { get => inspGuiBPMFabNatMedicina; set => SetProperty(ref inspGuiBPMFabNatMedicina, value); }
-
+        
         //15 - GUIA DE BUENAS PRACTICAS ALMACENAMIENTO
         private long? inspGuiaBPM_BpaId;
         public long? InspGuiaBPM_BpaId { get => inspGuiaBPM_BpaId; set => SetProperty(ref inspGuiaBPM_BpaId, value); }
