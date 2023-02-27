@@ -39,7 +39,7 @@
 
                                             <div class="row clearfix">
 
-                                                @if (Inspeccion?.InspGuiBPMFabNatMedicina?.DatosRepresentLegal != null)
+                                                @if (Inspeccion?.InspGuiaBPM_Bpa?.DatosRepresentLegal != null)
                                                 {
                                                     <div class="col-sm-6">
                                                         <h5>@languageContainerService.Keys["Por el Establecimiento"]</h5>
@@ -48,8 +48,8 @@
                                                                 <label for="password">@languageContainerService.Keys["FullName"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Nombre" />
-                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Nombre) />
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Nombre" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Nombre) />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -57,8 +57,8 @@
                                                                 <label for="password">@languageContainerService.Keys["Charge"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Cargo" />
-                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Cargo) />
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Cargo" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Cargo) />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -66,8 +66,8 @@
                                                                 <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Cedula" />
-                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Cedula) />
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Cedula" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Cedula) />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -93,7 +93,7 @@
 
                                                 }
 
-                                                @if (Inspeccion?.InspGuiBPMFabNatMedicina?.DatosRegente != null)
+                                                @if (Inspeccion?.InspGuiaBPM_Bpa?.DatosRegente != null)
                                                 {
                                                     <div class="col-sm-6">
                                                         <h5>@languageContainerService.Keys["Regente Farmaceutico"]</h5>
@@ -102,8 +102,8 @@
                                                                 <label for="password">@languageContainerService.Keys["FullName"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Nombre" />
-                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Nombre) />
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Nombre" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Nombre) />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -111,8 +111,8 @@
                                                                 <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.NumRegistro" />
-                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.NumRegistro) />
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRegente.NumRegistro" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRegente.NumRegistro) />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -120,8 +120,8 @@
                                                                 <label for="password">@languageContainerService.Keys["Charge"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Cargo" />
-                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Cargo) />
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Cargo" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Cargo) />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -129,8 +129,8 @@
                                                                 <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Cedula" />
-                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Cedula) />
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Cedula" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Cedula) />
                                                                     </div>
                                                                 </div>
                                                             </div>

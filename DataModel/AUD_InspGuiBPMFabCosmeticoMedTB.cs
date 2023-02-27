@@ -5447,7 +5447,9 @@ namespace DataModel
         // PuntosMax
         private decimal puntosObtenido;
         public decimal PuntosObtenido { get => puntosObtenido; set => SetProperty(ref puntosObtenido, value); }
-
+        
+        private int numero;
+        public int Numero { get => numero; set => SetProperty(ref numero, value); }
 
     }
 

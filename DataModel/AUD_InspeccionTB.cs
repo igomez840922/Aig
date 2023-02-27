@@ -144,6 +144,12 @@ namespace DataModel
         private AUD_InspGuiBPMFabNatMedicinaTB? inspGuiBPMFabNatMedicina;
         public virtual AUD_InspGuiBPMFabNatMedicinaTB? InspGuiBPMFabNatMedicina { get => inspGuiBPMFabNatMedicina; set => SetProperty(ref inspGuiBPMFabNatMedicina, value); }
 
+        //15 - GUIA DE BUENAS PRACTICAS ALMACENAMIENTO
+        private long? inspGuiaBPM_BpaId;
+        public long? InspGuiaBPM_BpaId { get => inspGuiaBPM_BpaId; set => SetProperty(ref inspGuiaBPM_BpaId, value); }
+        private AUD_InspGuiaBPM_BpaTB? inspGuiaBPM_Bpa;
+        public virtual AUD_InspGuiaBPM_BpaTB? InspGuiaBPM_Bpa { get => inspGuiaBPM_Bpa; set => SetProperty(ref inspGuiaBPM_Bpa, value); }
+
 
         /// <summary>
         /// //////////////////////
@@ -229,12 +235,7 @@ namespace DataModel
         
         
         
-        //15 - GUIA DE BUENAS PRACTICAS ALMACENAMIENTO
-        private long? inspGuiaBPM_BpaId;
-        public long? InspGuiaBPM_BpaId { get => inspGuiaBPM_BpaId; set => SetProperty(ref inspGuiaBPM_BpaId, value); }
-        private AUD_InspGuiaBPM_BpaTB? inspGuiaBPM_Bpa;
-        public virtual AUD_InspGuiaBPM_BpaTB? InspGuiaBPM_Bpa { get => inspGuiaBPM_Bpa; set => SetProperty(ref inspGuiaBPM_Bpa, value); }
-
+        
         //16 - Apertura Cosméticos Artesanales
         private long? inspAperturaCosmetArtesanalId;
         public long? InspAperturaCosmetArtesanalId { get => inspAperturaCosmetArtesanalId; set => SetProperty(ref inspAperturaCosmetArtesanalId, value); }

@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
+namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
 {
-    public partial class CapFirmas
+    public partial class CapConclusion
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -27,17 +27,8 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-        bool showSignasure { get; set; } = false;
-        List<SignaturePad> lSignaturePads { get; set; } = new List<SignaturePad>();
-        SignaturePad signaturePad
-        {
-            get { return null; }
-            set { lSignaturePads.Add(value); }
-        }
-        SignaturePad signaturePad5;
-        SignaturePad signaturePad6;
-        SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = SignaturePad.SupportedSaveAsTypes.png;
-
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -93,7 +84,8 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
-                DelayToShowSignasure();                      
+                Inspeccion.DatosConclusiones = Inspeccion.DatosConclusiones != null ? Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
+
             }
             else { Cancel(); }
 
@@ -105,7 +97,7 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabNaturalesMed_Firma(Inspeccion);
+                var result = await inspeccionService.Save_Conclusiones(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -134,72 +126,50 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
             await this.InvokeAsync(StateHasChanged);
         }
 
-        async Task DelayToShowSignasure()
+
+        //Add New Attachment
+        protected async Task OpenAttachment(AttachmentTB _attachment = null)
         {
-            await Task.Delay(2000);
+            bus.Subscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
 
-            if(signaturePad5!=null)
-                signaturePad5.Image = Inspeccion.InspGuiBPMFabNatMedicina?.DatosRepresentLegal?.Firma??null;
-            if (signaturePad6 != null)
-                signaturePad6.Image = Inspeccion.InspGuiBPMFabNatMedicina?.DatosRegente?.Firma ?? null;
-
-            if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
-            {
-                foreach (var partic in Inspeccion.ParticipantesDNFD.LParticipantes)
-                {
-                    try
-                    {
-                        lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(partic)].Image = partic.Firma;
-                    }
-                    catch (Exception ex) { }
-                }
-            }
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
 
             await this.InvokeAsync(StateHasChanged);
         }
-
-        protected async Task OnSignatureChange5(ChangeEventArgs eventArgs)
+        //RemoveAttachment
+        protected async Task RemoveAttachment(AttachmentTB attachment)
         {
-            RemoveSignatureImg5();
-            if (eventArgs?.Value != null)
+            if (attachment != null)
             {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
-            }
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg5()
-        {
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Firma = null;
-            signaturePad5.Image = null;
-        }
-        protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
-        {
-            RemoveSignatureImg6();
-            if (eventArgs?.Value != null)
-            {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
-            }
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg6()
-        {
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Firma = null;
-            signaturePad6.Image = null;
-        }
+                try
+                {
+                    File.Delete(attachment.AbsolutePath);
+                }
+                catch { }
 
-        ////////
-        ///
-        protected async Task OnSignatureChange(Participante _participante)
-        {
-            await RemoveSignatureImg(_participante);
-            var _signaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
-            _participante.Firma = await _signaturePad.ToDataURL(signatureType);
+                Inspeccion.DatosConclusiones.LAttachments.Remove(attachment);
+                this.InvokeAsync(StateHasChanged);
+            }
         }
-        protected async Task RemoveSignatureImg(Participante _participante)
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
         {
-            _participante.Firma = null;
-            var _signaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
-            _signaturePad.Image = null;
+            openAttachment = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+
+            if (message.Attachment != null)
+            {
+                //message.Attachment.InspeccionId = Inspeccion.Id;
+                Inspeccion.DatosConclusiones.LAttachments = Inspeccion.DatosConclusiones.LAttachments != null ? Inspeccion.DatosConclusiones.LAttachments : new List<AttachmentTB>();
+
+                Inspeccion.DatosConclusiones.LAttachments.Add(message.Attachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
         }
 
     }

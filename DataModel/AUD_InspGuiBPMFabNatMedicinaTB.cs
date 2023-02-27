@@ -271,18 +271,18 @@ namespace DataModel
                         Criterio = "INFORMATIVO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
-                    new ContenidoPreguntas()
-                    {
-                        Titulo = "Nombre de la empresa: ",
-                        Criterio = "INFORMATIVO",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                    },
-                    new ContenidoPreguntas()
-                    {
-                        Titulo = "Dirección del domicilio legal de la empresa: ",
-                        Criterio = "INFORMATIVO",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                    },
+                    //new ContenidoPreguntas()
+                    //{
+                    //    Titulo = "Nombre de la empresa: ",
+                    //    Criterio = "INFORMATIVO",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                    //},
+                    //new ContenidoPreguntas()
+                    //{
+                    //    Titulo = "Dirección del domicilio legal de la empresa: ",
+                    //    Criterio = "INFORMATIVO",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                    //},
                     new ContenidoPreguntas()
                     {
                         Titulo = "Dirección del laboratorio fabricante:  ",

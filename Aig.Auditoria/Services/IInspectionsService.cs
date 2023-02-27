@@ -227,5 +227,18 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap16(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Cap17(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_BpmFabNaturalesMed_Firma(AUD_InspeccionTB inspeccion);
+
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap4(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap5(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap6(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap7(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap8(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap9(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Cap10(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_BpmBPA_Firma(AUD_InspeccionTB inspeccion);
+
+
     }
 }

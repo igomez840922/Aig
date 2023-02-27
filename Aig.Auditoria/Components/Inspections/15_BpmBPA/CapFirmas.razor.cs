@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
+namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
 {
     public partial class CapFirmas
     {
@@ -105,7 +105,7 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabNaturalesMed_Firma(Inspeccion);
+                var result = await inspeccionService.Save_BpmBPA_Firma(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -139,9 +139,9 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
             await Task.Delay(2000);
 
             if(signaturePad5!=null)
-                signaturePad5.Image = Inspeccion.InspGuiBPMFabNatMedicina?.DatosRepresentLegal?.Firma??null;
+                signaturePad5.Image = Inspeccion.InspGuiaBPM_Bpa?.DatosRepresentLegal?.Firma??null;
             if (signaturePad6 != null)
-                signaturePad6.Image = Inspeccion.InspGuiBPMFabNatMedicina?.DatosRegente?.Firma ?? null;
+                signaturePad6.Image = Inspeccion.InspGuiaBPM_Bpa?.DatosRegente?.Firma ?? null;
 
             if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
             {
@@ -165,11 +165,11 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
+            Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg5()
         {
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Firma = null;
+            Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Firma = null;
             signaturePad5.Image = null;
         }
         protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
@@ -179,11 +179,11 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
             {
                 var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
+            Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg6()
         {
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Firma = null;
+            Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Firma = null;
             signaturePad6.Image = null;
         }
 

@@ -1,0 +1,145 @@
+﻿@using DataModel.Helper;
+@implements IDisposable
+@using DataModel.Helper;
+@using DataModel;
+
+@if (Inspeccion?.InspGuiaBPM_Bpa?.OtrosFuncionarios != null)
+{
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
+                                            <DataAnnotationsValidator />
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <h5>@languageContainerService.Keys["Generalidades"]</h5>
+                                                </div>
+                                            </div>
+
+                                            <h5>@languageContainerService.Keys["Propósito de la Inspección de Buenas Prácticas de Almacenamiento y Distribución"]</h5>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12">
+                                                    <label for="password">@languageContainerService.Keys["Seleccione los propósitos de dicha inspección"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+
+                                                            <RadzenDropDown AllowClear="true" Multiple="true" Chips="true" MaxSelectedLabels="20" Class="form-control" TValue="List<PropositoInspeccion>" @bind-Value=@Inspeccion.InspGuiaBPM_Bpa.PropositoInsp.LPropositos
+                                                                        AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                        Data=@(LPropositos) TextProperty="Nombre" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <h5>@languageContainerService.Keys["Observaciones"]</h5>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Fecha de la última Inspección por BPAD Oficial realizada"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.FechaUltimaInspeccion" ShowTime="false" HourFormat="12" DateFormat="dd/MM/yyyy" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.FechaUltimaInspeccion) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Actividad Comercial aprobada (Ley 1 Art. 172):"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputTextArea rows="10" class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.ActComercialAprobada" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.ActComercialAprobada) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <h5>@languageContainerService.Keys["Horarios verificados durante la inspección"]</h5>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Establecimiento Farmacéutico"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputTextArea rows="10" class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.HorarioEstFarmaceutico" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.HorarioEstFarmaceutico) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Regencia Farmacéutica"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputTextArea rows="10" class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.HorarioRegFarmaceutica" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.HorarioRegFarmaceutica) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+
+                                           
+                                            <br><br>
+
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+                                                    
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                        class="btn btn-success waves-effect">
+                                                        @languageContainerService.Keys["SaveExit"]
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                    @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cerrar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @if (showPersona)
+    {
+        <Aig.Auditoria.Components.DatosPersona.DatosPersonaComponent DatosPersona="@datosPersona"></Aig.Auditoria.Components.DatosPersona.DatosPersonaComponent>
+    }
+}

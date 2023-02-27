@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
+namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
 {
-    public partial class CapFirmas
+    public partial class Cap04
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -27,17 +27,8 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-        bool showSignasure { get; set; } = false;
-        List<SignaturePad> lSignaturePads { get; set; } = new List<SignaturePad>();
-        SignaturePad signaturePad
-        {
-            get { return null; }
-            set { lSignaturePads.Add(value); }
-        }
-        SignaturePad signaturePad5;
-        SignaturePad signaturePad6;
-        SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = SignaturePad.SupportedSaveAsTypes.png;
-
+        bool showPersona { get; set; } = false;
+        DataModel.DatosPersona datosPersona { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -87,13 +78,13 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
 
         //Fill Data
         protected async Task FetchData()
-        {
+        {            
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
-                DelayToShowSignasure();                      
+                Inspeccion.InspGuiaBPM_Bpa.OtrosFuncionarios = Inspeccion.InspGuiaBPM_Bpa.OtrosFuncionarios != null ? Inspeccion.InspGuiaBPM_Bpa.OtrosFuncionarios : new AUD_OtrosFuncionarios();
             }
             else { Cancel(); }
 
@@ -105,7 +96,7 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
         {
             try
             {
-                var result = await inspeccionService.Save_BpmFabNaturalesMed_Firma(Inspeccion);
+                var result = await inspeccionService.Save_BpmBPA_Cap4(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -134,73 +125,49 @@ namespace Aig.Auditoria.Components.Inspections._14_BpmFabNaturalesMed
             await this.InvokeAsync(StateHasChanged);
         }
 
-        async Task DelayToShowSignasure()
+
+        //ADD PERSONA
+        protected async Task OpenPersona(DataModel.DatosPersona _datosPersona = null)
         {
-            await Task.Delay(2000);
+            bus.Subscribe<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>(PersonaAddEdit_CloseEventHandler);
 
-            if(signaturePad5!=null)
-                signaturePad5.Image = Inspeccion.InspGuiBPMFabNatMedicina?.DatosRepresentLegal?.Firma??null;
-            if (signaturePad6 != null)
-                signaturePad6.Image = Inspeccion.InspGuiBPMFabNatMedicina?.DatosRegente?.Firma ?? null;
-
-            if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
-            {
-                foreach (var partic in Inspeccion.ParticipantesDNFD.LParticipantes)
-                {
-                    try
-                    {
-                        lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(partic)].Image = partic.Firma;
-                    }
-                    catch (Exception ex) { }
-                }
-            }
+            datosPersona = _datosPersona != null ? _datosPersona : new DataModel.DatosPersona();
+            showPersona = true;
 
             await this.InvokeAsync(StateHasChanged);
         }
-
-        protected async Task OnSignatureChange5(ChangeEventArgs eventArgs)
+        //RemoveAttachment
+        protected async Task RemovePersona(DataModel.DatosPersona _datosPersona)
         {
-            RemoveSignatureImg5();
-            if (eventArgs?.Value != null)
+            if (_datosPersona != null)
             {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+                try
+                {
+                    Inspeccion.InspGuiaBPM_Bpa.OtrosFuncionarios.LPersona.Remove(_datosPersona);
+                }
+                catch { }
+
+                this.InvokeAsync(StateHasChanged);
             }
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
         }
-        protected async Task RemoveSignatureImg5()
+        //ON CLOSE ATTACHMENT
+        private void PersonaAddEdit_CloseEventHandler(MessageArgs args)
         {
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal.Firma = null;
-            signaturePad5.Image = null;
-        }
-        protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
-        {
-            RemoveSignatureImg6();
-            if (eventArgs?.Value != null)
+            showPersona = false;
+
+            bus.UnSubscribe<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>(PersonaAddEdit_CloseEventHandler);
+
+            var message = args.GetMessage<Aig.Auditoria.Events.DatosPersona.AddEdit_CloseEvent>();
+
+            if (message.Data != null)
             {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+                if (!Inspeccion.InspGuiaBPM_Bpa.OtrosFuncionarios.LPersona.Contains(message.Data))
+                    Inspeccion.InspGuiaBPM_Bpa.OtrosFuncionarios.LPersona.Add(message.Data);
             }
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg6()
-        {
-            Inspeccion.InspGuiBPMFabNatMedicina.DatosRegente.Firma = null;
-            signaturePad6.Image = null;
+
+            this.InvokeAsync(StateHasChanged);
         }
 
-        ////////
-        ///
-        protected async Task OnSignatureChange(Participante _participante)
-        {
-            await RemoveSignatureImg(_participante);
-            var _signaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
-            _participante.Firma = await _signaturePad.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg(Participante _participante)
-        {
-            _participante.Firma = null;
-            var _signaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
-            _signaturePad.Image = null;
-        }
 
     }
 
