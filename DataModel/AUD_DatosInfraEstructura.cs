@@ -40,7 +40,7 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El ambiente externo del establecimiento presenta un riesgo mínimo de cualquier contaminación? De ser sí explique.",
-                        Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }

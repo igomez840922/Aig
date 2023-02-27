@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using ClosedXML.Excel;
 using DataModel.Helper;
+using Aig.Auditoria.Pages.Inspections;
+using Duende.IdentityServer.Models;
 
 namespace Aig.Auditoria.Services
 {    
@@ -26,10 +28,10 @@ namespace Aig.Auditoria.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None? data.StatusInspecciones == model.StatusInspecciones : true) &&
-                               (model.ProvinceId != null ? data.Establecimiento.ProvinciaId == model.ProvinceId : true) &&
+                               (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
                                (model.FromDate !=null? data.FechaInicio >= model.FromDate:true) &&
                                (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
                                orderby data.FechaInicio
@@ -37,10 +39,10 @@ namespace Aig.Auditoria.Services
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                                (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && data.Establecimiento.Nombre.Contains(model.Filter)))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
-                               (model.ProvinceId != null ? data.Establecimiento.ProvinciaId == model.ProvinceId : true) &&
+                               (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
                                (model.FromDate != null ? data.FechaInicio >= model.FromDate : true) &&
                                (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
                                select data).Count();
@@ -428,6 +430,10 @@ namespace Aig.Auditoria.Services
 
             data.DatosEstablecimiento = inspeccion.DatosEstablecimiento;
             data.ParticipantesDNFD = inspeccion.ParticipantesDNFD;
+            if (data.DatosEstablecimiento != null)
+            {
+                data.DatosEstablecimiento.ProvinciaId = inspeccion.DatosEstablecimiento?.Provincia?.Id;
+            }
 
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))

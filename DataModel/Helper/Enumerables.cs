@@ -159,6 +159,14 @@ namespace DataModel.Helper
 		No = 2,
 	}
 
+    public enum enumAUD_MovilizarProductos
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("No se puede movilizar los productos hasta culminar la investigación")]
+        NCI = 1,
+    }
+
     public enum enumAUD_TipoSolicitante
     {
         [Description("N/A")]

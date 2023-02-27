@@ -16,7 +16,7 @@ namespace DataModel
             LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "El local está ubicado en área residencial?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Está prohibido operar en unifamiliares habitadas o en áreas no clasificadas para la actividad comercial o áreas residenciales",
@@ -24,11 +24,11 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe letrero visible que identifique la empresa?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cuenta con área separada para la conservación y consumo de alimentos?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }

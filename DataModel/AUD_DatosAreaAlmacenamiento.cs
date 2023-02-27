@@ -23,11 +23,11 @@ namespace DataModel
             LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                             Titulo = "Esta identificada y delimitada",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "El espacio físico de almacenamiento es adecuado para el movimiento y operaciones del personal permitiendo un despacho oportuno a las estanterías del área de recetario",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "En el área de almacenamiento debe existir un sistema de inventario que permita determinar la vigencia de los medicamentos de tal forma que puedan abastecer o retirar los mismos en tiempo oportuno (de acuerdo con las políticas de devolución). Se almacenarán las existencias utilizando los sistemas FIFO (primero que entra que sale) o FEFO (primero que expira primero que sale).",
@@ -35,59 +35,59 @@ namespace DataModel
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Higrotermómetro y formato de registro de temperatura y humedad relativa. El registro y control de los parámetros debe ser como mínimo tres veces al día.",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Limpio y ordenado",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Iluminación",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Los productos farmacéuticos se almacenan sobre anaqueles, racks, tarimas u otros. Manteniendo suficiente distancia de paredes, piso y techo",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Las condiciones de paredes, piso y techo deben ser adecuadas para evitar posible contaminación de los medicamentos",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Cuenta con cortina de aire a la entrada del almacén para evitar posible contaminación de los medicamentos (aplíquese cuando el almacén este fuera de las instalaciones de la farmacia)",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Extintores contra incendios (vigentes y aprobados por el Cuerpo de Bomberos)",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Alarmas contra incendios o detector de humo",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Luces de emergencia",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Existe un sistema para el control de fauna nociva (Cebadera y certificado de fumigación)",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Área de productos devueltos y vencidos identificada, delimitada y asegurada",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Área de productos controlados, delimitada y asegurada bajo llave",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Área de almacenamiento de Alcohol o productos inflamables separada con ventilación adecuada que evite la exposición a los vapores",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Área de almacenamiento de un alto inventario o volumen de Alcohol o productos inflamables el cual cuenta con extintores, detectores de humo o alarma contra incendio, lámpara de emergencia en el área y kit de emergencia para el manejo de derrames de sustancias peligrosas o corrosivas",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "El establecimiento se compromete al fiel cumplimiento del Artículo 639 del Decreto Ejecutivo 115 De 16 de agosto de 2022",

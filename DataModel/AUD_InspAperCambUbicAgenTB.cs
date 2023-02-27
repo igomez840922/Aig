@@ -113,7 +113,7 @@ namespace DataModel
             CondCaractEstablecimiento.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "El local está ubicado en área residencial?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Está prohibido operar en unifamiliares habitadas o en áreas no clasificadas para la actividad comercial o áreas residenciales",
@@ -121,11 +121,11 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe letrero visible que identifique la empresa?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cuenta con área separada para la conservación y consumo de alimentos?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -136,7 +136,7 @@ namespace DataModel
             AreaAdministrativa.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Dispone de área administrativa?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Dirección del área administrativa",
@@ -144,7 +144,7 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Mantiene almacenados productos o áreas de almacenamiento en el área descrita como área administrativa?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -155,35 +155,35 @@ namespace DataModel
             AreaRecepcionProducto.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Separada. (cuando sea posible)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Dispone de estructuras en esta área (Tarimas, mesa de trabajo).",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Está esta área protegida de las inclemencias del tiempo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe rampa para carga y descarga (cuando sea necesario)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -194,31 +194,31 @@ namespace DataModel
             AreaAlmacenamiento.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Claramente  Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Seca",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Tamaño aproximado del Depósito",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "La  capacidad del área es suficiente para almacenar productos, manejo adecuado de productos y circulación del personal (de ser negativa la respuesta, indicar motivo)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "SON ADECUADAS LAS CONDICIONES",
@@ -226,31 +226,31 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Piso",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Techo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Paredes",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Iluminación",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Luces de emergencia",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Ventilación",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Suministro eléctrico",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "DISPONEN DE SUFICIENTE EQUIPO PARA EL CONTROL DE INCENDIOS",
@@ -258,27 +258,27 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Extintores Vigentes",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Alarma",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Detectores de humo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Otros",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe señalización de rutas de evacuación en caso de siniestros",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe salida de emergencia identificada del local",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "DISPONE DE ESTRUCTURAS DONDE ALMACENAN LOS PRODUCTOS",
@@ -286,35 +286,35 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Anaqueles",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Estantes",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Tablillas",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Tarimas",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Otros",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Son adecuadas, suficientes e identificadas estas estructuras",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Los muebles son colocados manteniendo un pie de distancia de las paredes y del techo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cuenta con área de desperdicios",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "CONDICIONES GENERALES",
@@ -322,43 +322,43 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El área de almacenamiento está libre de polvo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe un sistema para monitorear la temperatura y humedad relativa de acuerdo con las especificaciones de almacenamiento del fabricante",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene monitoreo de la Temperatura",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene monitoreo de la Humedad Relativa",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene registro",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Los registros se registran por lo menos tres veces al día",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Es adecuada la temperatura de almacenamiento de los productos allí almacenados (verifique)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe letrero visible que identifique los rangos de temperatura y humedad",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe un sistema para el control de fauna nociva (cebadera y certificado de fumigación)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe flujo lógico de operaciones",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Valor informativo:\r\nPrecauciones en el área de Almacenamiento. No se permite fumar, comer, guardar comidas o cualquier otro objeto que pudiera afectar la calidad de los productos. Art. 418. Decreto Ejecutivo 115 de 16 de agosto de 2022",
@@ -373,15 +373,15 @@ namespace DataModel
             AreaProductosDevueltosVencidos.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Las condiciones del área pueden afectar los productos devueltos",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     }
              };
         }
@@ -392,19 +392,19 @@ namespace DataModel
             AreaProductosRetiradosMercado.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Separados en un área segura e identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "En el área existen condiciones que pueden afectar los productos",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Valor Informativo: \r\nLos productos retirados del mercado deben ser identificados y almacenados separadamente en un área segura e identificada, en espera de la orden de reexportación hacia el laboratorio fabricante o su destrucción en el país. Art. 435. Decreto Ejecutivo 115 de 16 de agosto de 2022.",
@@ -419,31 +419,31 @@ namespace DataModel
             AreaDespachoProductos.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Separada (cuando sea posible).",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Dispone de estructuras en esta área (Tarimas, mesa de trabajo)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Está esta área protegida de las inclemencias del tiempo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe rampa para carga y descarga (cuando sea necesario)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     }
              };
         }
@@ -455,43 +455,43 @@ namespace DataModel
                         
                         new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene monitoreo de la Temperatura",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene monitoreo de la Humedad Relativa",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cuentan con el equipo necesario para la conservación de la temperatura de este tipo de productos",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene registro",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El área de almacenamiento con temperatura controlada posee sistema de alarma",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El espacio es suficiente",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Codificación de ubicación de almacén",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -502,30 +502,30 @@ namespace DataModel
             AreaAlmacenProdVolatiles.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Separada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cuenta con kit de derrame",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cuenta con control de incendio",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cuenta con adecuada ventilación, que impida la concentración de olores",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     }
              };
         }
@@ -536,26 +536,26 @@ namespace DataModel
             AreaAlmacenPlaguicidas.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Separada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Codificación interna de ubicación en el almacén",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se cumple la prohibición de almacenar en conjunto con medicamentos",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -566,22 +566,22 @@ namespace DataModel
             AreaAlmacenMateriaPrima.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Separada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Codificación interna de ubicación en el almacén",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -592,51 +592,51 @@ namespace DataModel
             AreaAlmacenProdSujetosControl.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Asegurada (llave y/o candado)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Independiente de otras áreas",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Iluminación y Ventilación",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Posee un área identificada de vencidos",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene monitoreo de la Temperatura",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene monitoreo de la Humedad Relativa",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene registro",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Responsable del Área",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Describa el lugar donde se almacenan y las medidas de seguridad",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -647,19 +647,19 @@ namespace DataModel
             AreaDesperdicio.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -677,39 +677,39 @@ namespace DataModel
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Existe transporte para el traslado de los productos",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El transporte cuenta con controles y registro de Temperatura y Humedad relativa",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se mantienen registros",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El transporte mantiene los productos protegidos de la luz",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Los productos que requieren cadena de frío se trasladan en vehículos o envases que permiten mantener la temperatura requerida",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "En los camiones se colocan los productos sobre tarimas",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Presenta formato de verificación de mantenimiento y condiciones del vehículo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "En caso de tercerización del transporte presenta contrato con la empresa que brindará el servicio",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El transporte está identificado con el nombre de la empresa con licencia de operación vigente ante la Dirección Nacional de Farmacia y Drogas.  Si es tercerizado se permite coloque un letrero removible o en acrílico (colocar en la parte de enfrente del vidrio) o similar.",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }
@@ -720,35 +720,35 @@ namespace DataModel
             Actividades.LContenido = new List<ContenidoPreguntas>() {                    
                     new ContenidoPreguntas(){
                         Titulo = "Importación",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Exportación",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Reexportación",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Almacenamiento",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Distribución",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Transporte",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Comercialización al por mayor de materia prima para la industria farmacéutica",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Otros",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     }
              };
         }
@@ -759,31 +759,31 @@ namespace DataModel
             Productos.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas(){
                         Titulo = "Materia prima para la industria farmacéutica",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Medicamentos",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Suplementos vitamínicos con propiedad terapéutica",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cosméticos",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Plaguicidas de uso doméstico",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Desinfectantes de uso doméstico y hospitalario",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Otros",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     }
              };
         }

@@ -24,15 +24,15 @@ namespace DataModel
             LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Dispone de su letrero de identificación visible al público",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El establecimiento utilizará plataformas tecnológicas para la comercialización de medicamentos de venta sin prescripción médica y otros productos para la salud humana",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El establecimiento se compromete al fiel cumplimiento del Artículo 386 del Decreto Ejecutivo 115 De 16 de agosto de 2022",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }

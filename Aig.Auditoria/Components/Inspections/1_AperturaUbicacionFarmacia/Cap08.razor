@@ -62,17 +62,17 @@
                                                                         else
                                                                         {
                                                                             <tr>
-                                                                                <td>
-                                                                                    @if (dt.Evaluacion != null)
-                                                                                    {
-                                                                                        <InputSelect style="padding:0px!important;" @bind-Value="dt.Evaluacion" class="form-control">
-                                                                                            @foreach (enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                                @foreach (var eva in dt.LEvaluacion)
+                                                                                {
+                                                                                    <td>
+                                                                                        <InputSelect style="padding:0px!important;" @bind-Value="eva.Evaluacion" class="form-control">
+                                                                                            @foreach (enumAUD_TipoSeleccion opt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
                                                                                             {
-                                                                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                                                <option value="@opt">@(DataModel.Helper.Helper.GetDescription(opt))</option>
                                                                                             }
                                                                                         </InputSelect>
-                                                                                    }
-                                                                                </td>
+                                                                                    </td>
+                                                                                }
                                                                                 <td>@dt.Titulo</td>
                                                                                 <td>
                                                                                     <InputTextArea rows="6" class="form-control" @bind-Value="dt.Observaciones" />

@@ -16,35 +16,35 @@ namespace DataModel
             LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Aseada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Delimitada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Identificada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Separada. (cuando sea posible)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Ordenada",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Dispone de estructuras en esta área (Tarimas, mesa de trabajo).",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Está esta área protegida de las inclemencias del tiempo",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe rampa para carga y descarga (cuando sea necesario)",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }

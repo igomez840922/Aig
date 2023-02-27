@@ -166,7 +166,7 @@ namespace Aig.Auditoria.Components.Inspections._3_RutinaVigilanciaFarmacia
                 Inspeccion.DatosEstablecimiento.Nombre = message.Data.Nombre;
                 Inspeccion.DatosEstablecimiento.NumLicencia = message.Data.NumLicencia;
                 Inspeccion.DatosEstablecimiento.AvisoOperaciones = message.Data.AvisoOperaciones;
-                Inspeccion.DatosEstablecimiento.Provincia = message.Data.Provincia;
+                Inspeccion.DatosEstablecimiento.Provincia = message.Data.Provincia; Inspeccion.DatosEstablecimiento.ProvinciaId = message.Data.Provincia?.Id;
                 Inspeccion.DatosEstablecimiento.Distrito = message.Data.Distrito;
                 Inspeccion.DatosEstablecimiento.Corregimiento = message.Data.Corregimiento;
                 Inspeccion.DatosEstablecimiento.ReciboPago = message.Data.ReciboPago;

@@ -47,6 +47,12 @@ namespace DataModel
         private bool reprogramaInspeccion;
         public bool ReprogramaInspeccion { get => reprogramaInspeccion; set => SetProperty(ref reprogramaInspeccion, value); }
 
+
+        //MOVILIZAR PRODUCTOS
+        private enumAUD_MovilizarProductos movilizarProductos;
+        public enumAUD_MovilizarProductos MovilizarProductos { get => movilizarProductos; set => SetProperty(ref movilizarProductos, value); }
+
+
         /// <summary>
         /// //////////////////
         /// </summary>

@@ -22,23 +22,23 @@ namespace DataModel
             LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                             Titulo = "Identificada",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Delimitada",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Asegurado bajo llave u otro sistema de seguridad comprobada",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Posee un área identificada de vencidos",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Independiente de otras áreas",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Medidas aproximadas",

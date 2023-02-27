@@ -293,7 +293,13 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                         }
@@ -328,7 +334,13 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                         }
@@ -363,7 +375,13 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                         }
@@ -398,7 +416,13 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                         }
@@ -433,7 +457,13 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                         }
@@ -468,7 +498,13 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                         }
@@ -672,7 +708,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                                //table.Cell().ColumnSpan(2).AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                             });
 
                         });
@@ -685,7 +721,7 @@ namespace Aig.Auditoria.Services
                             });
 
                             
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 })
@@ -888,7 +924,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -926,7 +968,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -964,7 +1012,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1002,7 +1056,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1040,7 +1100,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1078,7 +1144,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1116,7 +1188,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1154,7 +1232,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1192,7 +1276,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1230,7 +1320,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1268,7 +1364,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1306,7 +1408,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1344,7 +1452,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1382,7 +1496,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1420,7 +1540,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1458,7 +1584,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1660,7 +1792,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                                 });
 
-                                table.Cell().ColumnSpan(2).AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                                //table.Cell().ColumnSpan(2).AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                             });
 
                         });
@@ -1673,7 +1805,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
 
 
@@ -1893,7 +2025,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1931,7 +2069,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -1969,7 +2113,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2007,7 +2157,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2045,7 +2201,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2083,7 +2245,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2121,7 +2289,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2159,7 +2333,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2419,7 +2599,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -2625,7 +2805,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2663,7 +2849,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2701,7 +2893,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2739,7 +2937,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2777,7 +2981,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2815,7 +3025,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2853,7 +3069,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2891,7 +3113,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2929,7 +3157,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -2967,7 +3201,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -3005,7 +3245,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -3043,7 +3289,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -3081,7 +3333,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -3119,7 +3377,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -3202,7 +3466,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -3240,7 +3510,13 @@ namespace Aig.Auditoria.Services
                                             else
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Titulo);
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Evaluacion != null ? DataModel.Helper.Helper.GetDescription(dat.Evaluacion.Value) : "");
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(dat.Observaciones);
                                             }
                                         }
@@ -3457,7 +3733,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -3574,40 +3850,27 @@ namespace Aig.Auditoria.Services
 
                                 table.Header(header =>
                                 {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("OBSERVACIONES GENERALES").Bold();
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Se Finaliza la Inspección por").Bold();
                                 });
 
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection?.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
-                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                });
+                            //column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                            //{
+                            //    table.ColumnsDefinition(columns =>
+                            //    {
+                            //        columns.RelativeColumn();
+                            //    });
 
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("se finaliza la inspección por".ToUpper()).Bold();
-                                });
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection?.InspInvestigacion?.DetallesInvestigacion?.DetalleVerificacion).Bold();
+                            //    table.Header(header =>
+                            //    {
+                            //        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("Se Finaliza la Inspección por".ToUpper()).Bold();
+                            //    });
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text(inspection?.InspInvestigacion?.DetallesInvestigacion?.DetalleVerificacion).Bold();
 
-                                //table.Header(header =>
-                                //{
-                                //    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Grey.Lighten1).AlignCenter().Text("SEGÚN CRITERIO TÉCNICO SE CONCLUYE QUE").Bold();
-                                //});
-
-                                //if (inspection.InspInvestigacion.DatosConclusiones.CumpleRequisitosMinOperacion)
-                                //{
-                                //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
-                                //}
-                                //else
-                                //{
-                                //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
-                                //}
-                            });
+                            //});
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
@@ -3767,7 +4030,7 @@ namespace Aig.Auditoria.Services
                             });
 
                             
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
 
                     });
@@ -4060,7 +4323,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 })
@@ -4303,7 +4566,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 })
@@ -4577,7 +4840,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 })
@@ -5329,7 +5592,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -6008,7 +6271,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -7791,7 +8054,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -9024,7 +9287,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -11308,7 +11571,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -14049,7 +14312,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -14688,7 +14951,7 @@ namespace Aig.Auditoria.Services
                             });
 
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
                     });
                 }).GeneratePdf();
@@ -14963,7 +15226,7 @@ namespace Aig.Auditoria.Services
                             //table.Header(header =>
                             //{
                             //    header.Cell().AlignLeft().AlignBottom().Text("Teléfono de Oficina 512-9168\r\nCorreo Electrónico: inspeccionesfyd@minsa.gob.pa");
-                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            //    header.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                             //});
 
                             table.Cell().Table(tbl => {
@@ -14998,7 +15261,7 @@ namespace Aig.Auditoria.Services
                                 tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                             });
 
-                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: Sección de Inspecciones {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignRight().AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                         });
 
 

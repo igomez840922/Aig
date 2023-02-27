@@ -22,15 +22,15 @@ namespace DataModel
             LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Iluminación", 
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Mobiliario de medicamentos",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Muebles separados de las paredes, pisos, y techos",
-                            Evaluacion =  Helper.enumAUD_TipoSeleccion.NA,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Tipo de Mobiliario",

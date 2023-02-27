@@ -123,11 +123,13 @@
                                                             <tr>
                                                                 <th>@languageContainerService.Keys["ActNumber"]</th>
                                                                 <th>@languageContainerService.Keys["IspectionType"]</th>
-                                                                <th>@languageContainerService.Keys["Status"]</th>
+                                                                @*<th>@languageContainerService.Keys["Status"]</th>*@
                                                                 <th>@languageContainerService.Keys["DateOfRecord"]</th>
                                                                 <th>@languageContainerService.Keys["LicNumber"]</th>
+                                                                <th>@languageContainerService.Keys["Recibo de Pago"]</th>
                                                                 <th>@languageContainerService.Keys["NoticeOperation"]</th>
                                                                 <th>@languageContainerService.Keys["Establishments"]</th>
+                                                                <th>@languageContainerService.Keys["Provincia"]</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -137,11 +139,13 @@
                                                                 <tr>
                                                                     <td scope="row">@dt.NumActa</td>
                                                                     <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoActa))</td>
-                                                                    <td>@(DataModel.Helper.Helper.GetDescription(dt.StatusInspecciones))</td>
+                                                                    @*<td>@(DataModel.Helper.Helper.GetDescription(dt.StatusInspecciones))</td>*@
                                                                     <td>@dt.FechaInicio.ToString("dd/MM/yyyy hh:mm tt")</td>
                                                                     <td>@(dt.DatosEstablecimiento?.NumLicencia)</td>
+                                                                    <td>@(dt.DatosEstablecimiento?.ReciboPago)</td>
                                                                     <td>@(dt.DatosEstablecimiento?.AvisoOperaciones)</td>
                                                                     <td>@(dt.DatosEstablecimiento?.Nombre)</td>
+                                                                    <td>@(dt.DatosEstablecimiento?.Provincia?.Nombre??"")</td>
                                                                     <td style="text-align:right">
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>

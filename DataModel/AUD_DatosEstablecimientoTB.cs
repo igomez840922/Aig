@@ -47,6 +47,10 @@ namespace DataModel
         private string reciboPago;
         public string ReciboPago { get => reciboPago; set => SetProperty(ref reciboPago, value); }
 
+        //Provincia -- PROV
+        private long? provinciaId;
+        public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
+
         //provincia
         private ProvinciaTB? provincia;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]

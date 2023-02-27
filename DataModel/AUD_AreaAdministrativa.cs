@@ -16,7 +16,7 @@ namespace DataModel
             LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Dispone de área administrativa?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Dirección del área administrativa",
@@ -24,7 +24,7 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Mantiene almacenados productos o áreas de almacenamiento en el área descrita como área administrativa?",
-                        Evaluacion = Helper.enumAUD_TipoSeleccion.NA,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
         }

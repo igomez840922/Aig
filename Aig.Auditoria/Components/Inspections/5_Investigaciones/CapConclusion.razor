@@ -57,7 +57,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @*<div class="col-sm-4">
+                                                <div class="col-sm-4">
                                                     <label for="password">@languageContainerService.Keys["Se reprograma inspección al Establecimiento"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
@@ -68,9 +68,24 @@
                                                             <ValidationMessage For=@(() => Inspeccion.DatosConclusiones.ReprogramaInspeccion) />
                                                         </div>
                                                     </div>
-                                                </div>*@
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Movilizar Productos"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">                                                           
+                                                            <InputSelect style="padding:0px!important;" @bind-Value="Inspeccion.DatosConclusiones.MovilizarProductos" class="form-control">
+                                                                @foreach (enumAUD_MovilizarProductos dt in Enum.GetValues(typeof(enumAUD_MovilizarProductos)))
+                                                                {
+                                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                }
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Inspeccion.DatosConclusiones.MovilizarProductos) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
                                                 <div class="col-sm-12">
-                                                    <label>@languageContainerService.Keys["Observaciones"]</label>
+                                                    <label>@languageContainerService.Keys["Se Finaliza la Inspección por"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
                                                             <InputTextArea rows="10" class="form-control" @bind-Value="Inspeccion.DatosConclusiones.ObservacionesFinales" />
