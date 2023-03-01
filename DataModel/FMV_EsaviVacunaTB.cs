@@ -26,7 +26,7 @@ namespace DataModel
 
         //Vacuna Sospechosa (Comercial)
         private string vacunaComercial;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         [StringLength(250)]
         public string VacunaComercial { get => vacunaComercial; set => SetProperty(ref vacunaComercial, value); }
 

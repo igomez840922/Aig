@@ -10,336 +10,401 @@ namespace DataModel
 {
     public class AUD_InspAperturaCosmetArtesanalTB : SystemId
     {
-        public AUD_InspAperturaCosmetArtesanalTB()
-        {
-            GeneralesEmpresa = new AUD_GeneralesEmpresa();
-            
-            Propietario = new DatosPersona();
-
-            Documentacion = new AUD_ContenidoTablas();
-
-            Locales = new AUD_ContenidoTablas();
-
-            AreaAlmacenamiento = new AUD_ContenidoTablas();
-
-            DatosConclusiones = new AUD_DatosConclusiones();
-
-            InicializaData();
-        }
-
-
         private AUD_InspeccionTB inspeccion;
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
-        //Generales Empresa
-        private AUD_GeneralesEmpresa generalesEmpresa;
+        //Datos del Representante Legal
+        private DatosPersona datosRepresentLegal;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_GeneralesEmpresa GeneralesEmpresa { get => generalesEmpresa; set => SetProperty(ref generalesEmpresa, value); }
-
-        //PROPIETARIO ARTESANO:
-        private DatosPersona propietario;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public DatosPersona Propietario { get => propietario; set => SetProperty(ref propietario, value); }
+        public DatosPersona DatosRepresentLegal { get => datosRepresentLegal; set => SetProperty(ref datosRepresentLegal, value); }
 
         //DOCUMENTACION
-        private AUD_ContenidoTablas documentacion;
+        private AUD_ContenidoGenerico documentacion;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_ContenidoTablas Documentacion { get => documentacion; set => SetProperty(ref documentacion, value); }
+        public AUD_ContenidoGenerico Documentacion { get => documentacion; set => SetProperty(ref documentacion, value); }
 
         //LOCALES
-        private AUD_ContenidoTablas locales;
+        private AUD_ContenidoGenerico locales;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_ContenidoTablas Locales { get => locales; set => SetProperty(ref locales, value); }
+        public AUD_ContenidoGenerico Locales { get => locales; set => SetProperty(ref locales, value); }
 
         //AREA ALMACENAMIENTO
-        private AUD_ContenidoTablas areaAlmacenamiento;
+        private AUD_ContenidoGenerico areaAlmacenamiento;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_ContenidoTablas AreaAlmacenamiento { get => areaAlmacenamiento; set => SetProperty(ref areaAlmacenamiento, value); }
+        public AUD_ContenidoGenerico AreaAlmacenamiento { get => areaAlmacenamiento; set => SetProperty(ref areaAlmacenamiento, value); }
 
-        //Inconformidades o desviaciones detectadas
-        private string inconformidades;
-        public string Inconformidades { get => inconformidades; set => SetProperty(ref inconformidades, value); }
-
-        //Datos Conclusión de Inspección
-        private AUD_DatosConclusiones datosConclusiones;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_DatosConclusiones DatosConclusiones { get => datosConclusiones; set => SetProperty(ref datosConclusiones, value); }
-
-
-        private void InicializaData()
-        {
-            Documentacion.LContenido = new List<ContenidoTablas>() {
-            new ContenidoTablas()
+        public void Inicializa_Documentacion() {
+            Documentacion = new AUD_ContenidoGenerico();
+            Documentacion.LContenido = new List<ContenidoPreguntas>()
+            {
+            new ContenidoPreguntas()
                 {
+                    Numero = 1,
                     Titulo = "Listado de productos a elaborar.",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                {
+                    Numero = 2,
                    Titulo = "Listado de materias primas a utilizar",
-                   Evaluacion = enumAUD_TipoSeleccion.NA
+                   LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                {
+                    Numero = 3,
                    Titulo = "Programa de limpieza ",
-                   Evaluacion = enumAUD_TipoSeleccion.NA
+                   LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                {
+                    Numero = 4,
                    Titulo = "Programa para el control de la fauna nociva",
-                   Evaluacion = enumAUD_TipoSeleccion.NA
+                   LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                {
+                    Numero = 5,
                    Titulo = "Carpeta para el archivo de los formularios de Control de Elaboración de productos Cosméticos Artesanales",
-                   Evaluacion = enumAUD_TipoSeleccion.NA
+                   LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                }
             };
-            //////////////////////
-            ///
-            Locales.LContenido = new List<ContenidoTablas>()
+        }
+        public void Inicializa_Locales() {
+            Locales = new AUD_ContenidoGenerico();
+            Locales.LContenido = new List<ContenidoPreguntas>()
             {
-            new ContenidoTablas()
+            new ContenidoPreguntas()
             {
-                Titulo = "Áreas externas limpias, ordenadas y libres de materiales extraños",
-                Evaluacion = enumAUD_TipoSeleccion.NA
+                Titulo = "Área para la elaboración de cosméticos artesanales: ",
+                IsHeader = true
             },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
+            {
+                    Numero = 1,
+                Titulo = "Áreas externas limpias, ordenadas y libres de materiales extraños",
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            },
+            new ContenidoPreguntas()
+            {
+                Titulo = "El área está: ",
+                IsHeader = true
+            },
+            new ContenidoPreguntas()
                 {
+                    Numero = 2,
                     Titulo = "El área está separada",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 3,
                     Titulo = "El área está limpia",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 4,
                     Titulo = "El área está ordenada",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 5,
                     Titulo = "El área es utilizada exclusivamente para este fin",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 6,
                     Titulo = "Cuenta con instrucciones que no se debe permitir fumar, comer, beber, masticar o guardar plantas, comidas, bebidas, material de fumar y medicamentos personales",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
+            {
+                Titulo = "Condiciones adecuadas de: ",
+                IsHeader = true
+            },
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Condiciones adecuadas de suministros eléctricos",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 7,
+                    Titulo = "Suministros eléctricos",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Condiciones adecuadas de iluminación",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 8,
+                    Titulo = "Iluminación",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Condiciones adecuadas de ventilación",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 9,
+                    Titulo = "Ventilación",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 10,
                     Titulo = "Buen estado de conservación del edificio",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 11,
                     Titulo = "Señalización de las vías o rutas de evacuación",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Equipo para el control de incendios (detector de humo)",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                   Numero = 12,
+                     Titulo = "Equipo para el control de incendios (detector de humo)",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
+            {
+                Titulo = "Condiciones adecuadas (lisas, sin grietas ni fisuras, no desprende partículas, permite limpieza fácil) de: ",
+                IsHeader = true
+            },
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Condiciones adecuadas (lisas, sin grietas ni fisuras, no desprende partículas, permite limpieza fácil) de pisos",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 13,
+                    Titulo = "Pisos",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Condiciones adecuadas (lisas, sin grietas ni fisuras, no desprende partículas, permite limpieza fácil) de paredes",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 14,
+                    Titulo = "Paredes",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Condiciones adecuadas (lisas, sin grietas ni fisuras, no desprende partículas, permite limpieza fácil) de techos",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 15,
+                    Titulo = "Techos",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 16,
                     Titulo = "Existen lavabos o fregador",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
+            {
+                Titulo = "Cuentan con los siguientes implementos: ",
+                IsHeader = true
+            },
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuentan con mascarillas",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 17,
+                    Titulo = "Mascarillas",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuentan con cubre cabello",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 18,
+                    Titulo = "Cubre Cabello",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuentan con guantes",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 19,
+                    Titulo = "Guantes",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuentan con anteojos (cuando aplique)",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 20,
+                    Titulo = "Anteojos (cuando aplique)",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuentan con delantales",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 21,
+                    Titulo = "Delantales",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 22,
                     Titulo = "Están limpios y en buen estado",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 23,
                     Titulo = "Están identificadas las áreas de pesado",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
+            {
+                Titulo = "Están identificadas las áreas de: (según aplique)",
+                IsHeader = true
+            },
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Están identificadas las áreas de preparación o mezclado",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 24,
+                    Titulo = "Pesado",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Están identificadas las áreas de llenado",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 25,
+                    Titulo = "Preparación o mezclado",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Están identificadas las áreas de secado",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 26,
+                    Titulo = "Llenado",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Están identificadas las áreas de empaque",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 27,
+                    Titulo = "Secado",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Están identificadas las áreas de etiquetado",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 28,
+                    Titulo = "Empaque",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Están identificadas las áreas de producto terminado",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 29,
+                    Titulo = "Etiquetado",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Están identificadas las áreas de utensilios limpios",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 30,
+                    Titulo = "Producto terminado",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con mesa de acero inoxidable",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 31,
+                    Titulo = "Utensilios limpios",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
+            {
+                Titulo = "Cuenta con:",
+                IsHeader = true
+            },
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con balanza",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 32,
+                    Titulo = "Mesa de acero inoxidable",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con estufas",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 33,
+                    Titulo = "Balanza",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con hornillas",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 34,
+                    Titulo = "Estufas",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con mecheros",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 35,
+                    Titulo = "Hornillas",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con moldes",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 36,
+                    Titulo = "Mecheros",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con cristalería",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 37,
+                    Titulo = "Moldes",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con ollas",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 38,
+                    Titulo = "Cristalería",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con cucharones, cucharas",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 39,
+                    Titulo = "Ollas",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
-                    Titulo = "Cuenta con otros",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    Numero = 40,
+                    Titulo = "Cucharones, cucharas",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-            new ContenidoTablas()
+            new ContenidoPreguntas()
                 {
+                    Numero = 41,
+                    Titulo = "Otros",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                },
+            new ContenidoPreguntas()
+                {
+                    Numero = 42,
                     Titulo = "Son de uso exclusivo de esta actividad",
-                    Evaluacion = enumAUD_TipoSeleccion.NA
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 }
             };
-            //////////////////////
-            ///
-            AreaAlmacenamiento.LContenido = new List<ContenidoTablas>() {
-            new ContenidoTablas()
-            {
-                Titulo = "Anaqueles para almacenar los productos y materiales a utilizar",
-                Evaluacion = enumAUD_TipoSeleccion.NA
-            },
-            new ContenidoTablas()
-            {
-                Titulo = "Capacidad suficiente para permitir el almacenamiento ordenado de los productos y que facilite el manejo y circulación en el área",
-                Evaluacion = enumAUD_TipoSeleccion.NA
-            },
-            new ContenidoTablas()
-            {
-                Titulo = "Área protegida de las inclemencias   del tiempo",
-                Evaluacion = enumAUD_TipoSeleccion.NA
-            },
-            new ContenidoTablas()
-            {
-                Titulo = "Área para almacenar productos rechazados, retirados o devueltos",
-                Evaluacion = enumAUD_TipoSeleccion.NA
-            },
-            new ContenidoTablas()
-            {
-                Titulo = "Área de almacenamiento para Etiquetas, material impreso",
-                Evaluacion = enumAUD_TipoSeleccion.NA
-            },
-            };
-            ///////
-            
-
-
         }
+        public void Inicializa_AreaAlmacenamiento() {
+            AreaAlmacenamiento = new AUD_ContenidoGenerico();
+            AreaAlmacenamiento.LContenido = new List<ContenidoPreguntas>() {
+            new ContenidoPreguntas()
+            {
+                    Titulo = "Dispone de:",
+                IsHeader = true
+            },new ContenidoPreguntas()
+            {
+                Numero = 1,
+                    Titulo = "Anaqueles para almacenar los productos y materiales a utilizar",
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
+            },
+            new ContenidoPreguntas()
+            {
+               Numero = 2,
+                 Titulo = "Capacidad suficiente para permitir el almacenamiento ordenado de los productos y que facilite el manejo y circulación en el área",
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
+            },
+            new ContenidoPreguntas()
+            {
+                Numero = 3,
+                Titulo = "Área protegida de las inclemencias   del tiempo",
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
+            },
+            new ContenidoPreguntas()
+            {
+                Numero = 4,
+                Titulo = "Área para almacenar productos rechazados, retirados o devueltos",
+               LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
+            },
+            new ContenidoPreguntas()
+            {
+                Numero = 5,
+                Titulo = "Área de almacenamiento para Etiquetas, material impreso",
+               LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
+             },
+            };
+        }
+
+
+       
     
     }
 

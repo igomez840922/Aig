@@ -243,11 +243,13 @@ namespace Aig.FarmacoVigilancia.Components.FT
             string sexo = Data.DatosPaciente?.Sexo != enumSexo.NA ? DataModel.Helper.Helper.GetDescription(Data.DatosPaciente.Sexo):"";
             string otrosMedicamentos = Data.Concominantes?.LProductos?.Count > 0 ? "Medicamentos" : "";
             string fallaTerapeutica = Data.ReportaFallaTerapeutica== enumOpcionSiNoOnly.Si? DataModel.Helper.Helper.GetDescription(Data.ReportaFallaTerapeutica) : "";
-            
+            string organizacion = Data.TipoInstitucionId?.ToString() ?? null;
+
+
             string notificador = Data.Notificador;
-            string instSalud = Data.InstitucionDestino?.Nombre ?? "";
+            //string instSalud = Data.InstitucionDestino?.Nombre ?? "";
             string presentacion = Data.Presentacion;
-            string tipoNotificador = Data.TipoNotificador != enumFMV_RAMNotificationType.NOREP ? DataModel.Helper.Helper.GetDescription(Data.TipoNotificador) : null;
+            string tipoNotificador = Data.TipoNotificacion != enumFMV_RAMNotificationType.NOREP ? DataModel.Helper.Helper.GetDescription(Data.TipoNotificacion) : null;
 
             if (!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(concent) && !string.IsNullOrEmpty(formaFarm)
                 && !string.IsNullOrEmpty(fechaExp) && !string.IsNullOrEmpty(lotes) 
@@ -256,7 +258,7 @@ namespace Aig.FarmacoVigilancia.Components.FT
             {
                 Data.Grado = "Grado 1";
                 if (!string.IsNullOrEmpty(fabricante) && !string.IsNullOrEmpty(regSanitario)
-                    && !string.IsNullOrEmpty(fallaTerapeutica) && !string.IsNullOrEmpty(instSalud))
+                    && !string.IsNullOrEmpty(fallaTerapeutica)  && !string.IsNullOrEmpty(organizacion)) //&& !string.IsNullOrEmpty(instSalud)
                 {
                     Data.Grado = "Grado 2";
                     if (!string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(tipoNotificador))

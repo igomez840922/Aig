@@ -638,30 +638,22 @@ namespace DataAccess
 
             ///////////////////////////////////////////
             ///
-
+                       
             modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
-.Property(e => e.GeneralesEmpresa)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_GeneralesEmpresa>(x));
-
-            modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
-.Property(e => e.Propietario)
+.Property(e => e.DatosRepresentLegal)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
 
             modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
 .Property(e => e.Documentacion)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
 .Property(e => e.Locales)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
 .Property(e => e.AreaAlmacenamiento)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoTablas>(x));
-
-            modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
-.Property(e => e.DatosConclusiones)
-.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             ///////////////////////////////////////////
             ///
@@ -1649,21 +1641,21 @@ namespace DataAccess
             ///////////////////////////////
             ///
 
-            //Codigo CNFV
-            modelBuilder.Entity<FMV_Ram2TB>()
-        .HasIndex(e => e.CodigoCNFV).IsUnique();
+        //    //Codigo CNFV
+        //    modelBuilder.Entity<FMV_Ram2TB>()
+        //.HasIndex(e => e.CodigoCNFV).IsUnique();
 
-            //ID Facedra
-            modelBuilder.Entity<FMV_Ram2TB>()
-        .HasIndex(e => e.IdFacedra).IsUnique();
+        //    //ID Facedra
+        //    modelBuilder.Entity<FMV_Ram2TB>()
+        //.HasIndex(e => e.IdFacedra).IsUnique();
 
-            //Codigo Noti-Facedra
-            modelBuilder.Entity<FMV_Ram2TB>()
-        .HasIndex(e => e.CodigoNotiFacedra).IsUnique();
+        //    //Codigo Noti-Facedra
+        //    modelBuilder.Entity<FMV_Ram2TB>()
+        //.HasIndex(e => e.CodigoNotiFacedra).IsUnique();
 
-            //Codigo Externo
-            modelBuilder.Entity<FMV_Ram2TB>()
-        .HasIndex(e => e.CodExterno).IsUnique();
+        //    //Codigo Externo
+        //    modelBuilder.Entity<FMV_Ram2TB>()
+        //.HasIndex(e => e.CodExterno).IsUnique();
 
             modelBuilder.Entity<FMV_Ram2TB>()
        .HasMany(e => e.LFarmacos)

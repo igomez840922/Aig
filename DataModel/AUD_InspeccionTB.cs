@@ -151,6 +151,13 @@ namespace DataModel
         public virtual AUD_InspGuiaBPM_BpaTB? InspGuiaBPM_Bpa { get => inspGuiaBPM_Bpa; set => SetProperty(ref inspGuiaBPM_Bpa, value); }
 
 
+        //16 - Apertura Cosméticos Artesanales
+        private long? inspAperturaCosmetArtesanalId;
+        public long? InspAperturaCosmetArtesanalId { get => inspAperturaCosmetArtesanalId; set => SetProperty(ref inspAperturaCosmetArtesanalId, value); }
+        private AUD_InspAperturaCosmetArtesanalTB? inspAperturaCosmetArtesanal;
+        public virtual AUD_InspAperturaCosmetArtesanalTB? InspAperturaCosmetArtesanal { get => inspAperturaCosmetArtesanal; set => SetProperty(ref inspAperturaCosmetArtesanal, value); }
+
+
         /// <summary>
         /// //////////////////////
         /// </summary>
@@ -236,12 +243,7 @@ namespace DataModel
         
         
         
-        //16 - Apertura Cosméticos Artesanales
-        private long? inspAperturaCosmetArtesanalId;
-        public long? InspAperturaCosmetArtesanalId { get => inspAperturaCosmetArtesanalId; set => SetProperty(ref inspAperturaCosmetArtesanalId, value); }
-        private AUD_InspAperturaCosmetArtesanalTB? inspAperturaCosmetArtesanal;
-        public virtual AUD_InspAperturaCosmetArtesanalTB? InspAperturaCosmetArtesanal { get => inspAperturaCosmetArtesanal; set => SetProperty(ref inspAperturaCosmetArtesanal, value); }
-
+        
 
        
 

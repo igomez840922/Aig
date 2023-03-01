@@ -231,7 +231,7 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["Innovator"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.Innovador" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
+                                            <InputSelect @bind-Value="Ips.Innovador" class="form-control">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
@@ -241,7 +241,7 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["Biologic"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.Biologico" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
+                                            <InputSelect @bind-Value="Ips.Biologico" class="form-control">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
@@ -251,7 +251,7 @@
                                      <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["InterchangeRequired"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.ReqIntercam" class="form-control" @onclick="(e)=>{Ips.UpdateRule();}">
+                                            <InputSelect @bind-Value="Ips.ReqIntercam" class="form-control">
                                                 <option value="false">No</option>
                                                 <option value="true">Si</option>
                                             </InputSelect>
@@ -262,7 +262,7 @@
                                         <label for="password">@languageContainerService.Keys["AuthDatePanama"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaAutPan" ShowTime="false" DateFormat="dd/MM/yyyy" Change="@(args => Ips.UpdateRule())" />
+                                                <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="Ips.IpsData.FechaAutPan" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.IpsData.FechaAutPan) />
                                             </div>
                                         </div>
@@ -627,7 +627,13 @@
                                             <InputSelect @bind-Value="Ips.IpsData.SolInfoFabricante" class="form-control">
                                                 @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
                                                 {
-                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    switch (dt) {
+                                                        case enumFMV_IpsTipoPresentaiones.No:
+                                                        case enumFMV_IpsTipoPresentaiones.Yes: {
+                                                                 <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                            break;    
+                                                        }
+                                                    }                                                   
                                                 }
                                             </InputSelect>
                                             <ValidationMessage For=@(() => Ips.IpsData.SolInfoFabricante) />
@@ -698,10 +704,11 @@
                                     <div class="col-sm-3">
                                         <label for="password">@languageContainerService.Keys["IPSMadeAccordingRegulations"]</label>
                                         <div class="form-group">
-                                            <InputSelect @bind-Value="Ips.ConfecConNormativa" class="form-control">
-                                                <option value="false">No Cumple</option>
-                                                <option value="true">Cumple</option>
-                                            </InputSelect>
+                                             <InputSelect @bind-Value="Ips.ConfecConNormativa" class="form-control">
+                                                    @foreach (enumFMV_IpsNormativa dt in Enum.GetValues(typeof(enumFMV_IpsNormativa))) {
+                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                    }
+                                                    </InputSelect>
                                             <ValidationMessage For=@(() => Ips.ConfecConNormativa) />
                                         </div>
                                     </div>                                        

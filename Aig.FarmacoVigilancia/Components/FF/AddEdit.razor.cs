@@ -246,20 +246,21 @@ namespace Aig.FarmacoVigilancia.Components.FF
                 (Data.FallaReportada?.Otros == enumOpcionSiNo.Si ? "Si" :
                 Data.FallaReportada?.DetFallaReport??"")))))))));
             string notificador = Data.Notificador;
-            string tipoNotificador = Data.TipoNotificador!= enumFMV_RAMNotificationType.NOREP?DataModel.Helper.Helper.GetDescription(Data.TipoNotificador):null;
-            string instSalud = Data.InstitucionDestino?.Nombre ?? "";
+            string tipoNotificador = Data.TipoNotificacion != enumFMV_RAMNotificationType.NOREP?DataModel.Helper.Helper.GetDescription(Data.TipoNotificacion) :null;
+            string organizacion = Data.TipoInstitucionId?.ToString() ?? null;
             string presentacion = Data.Presentacion;
 
+            
             //if (string.IsNullOrEmpty(nombreFarmaco) && string.IsNullOrEmpty(concent) && string.IsNullOrEmpty(formaFarm) 
             //    && string.IsNullOrEmpty(fabricante) && string.IsNullOrEmpty(lotes) && string.IsNullOrEmpty(fechaExp) && string.IsNullOrEmpty(fallaFarmaceutica))
             //{
             //    Data.Grado = "Grado 0";
             //}
-            if(!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(concent) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp)
+            if (!string.IsNullOrEmpty(nombreFarmaco) && !string.IsNullOrEmpty(concent) && !string.IsNullOrEmpty(formaFarm) && !string.IsNullOrEmpty(lotes) && !string.IsNullOrEmpty(fechaExp)
                   && !string.IsNullOrEmpty(fallaFarmaceutica) && !string.IsNullOrEmpty(notificador))
             {
                 Data.Grado = "Grado 1";
-                if (!string.IsNullOrEmpty(fabricante) && !string.IsNullOrEmpty(regSanitario) && !string.IsNullOrEmpty(instSalud))
+                if (!string.IsNullOrEmpty(fabricante) && !string.IsNullOrEmpty(regSanitario) && !string.IsNullOrEmpty(organizacion))
                 {
                     Data.Grado = "Grado 2";
                     if (!string.IsNullOrEmpty(nombreDci) && !string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(tipoNotificador))

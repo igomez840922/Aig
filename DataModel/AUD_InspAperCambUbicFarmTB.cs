@@ -90,21 +90,27 @@ namespace DataModel
             DatosInfraEstructura.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Tipo de Paredes",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Estado de las Paredes",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Tipo de Cielo Raso",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Estado del Cielo Raso",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Tipo de Pisos",
+                   LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Estado del Piso",
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El ambiente externo del establecimiento presenta un riesgo mínimo de cualquier contaminación? De ser sí explique.",
@@ -131,9 +137,11 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Tipo de Mobiliario",
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Estado del Mobiliario",
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Las cajas donde se dispondrán los medicamentos próximos a la ubicación en el recetario no deben obstruir el libre tránsito del personal por el área",
@@ -267,15 +275,19 @@ namespace DataModel
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Largo",
+                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Ancho",
+                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Altura",
+                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
                         new ContenidoPreguntas(){
                             Titulo = "Descripción del lugar donde se almacenan y las medidas de seguridad",
+                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         },
              };
         }

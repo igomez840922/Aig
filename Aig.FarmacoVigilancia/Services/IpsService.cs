@@ -185,7 +185,7 @@ namespace Aig.FarmacoVigilancia.Services
                                 ws.Cell(row, 44).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SolInfoFabricante ?? enumFMV_IpsTipoPresentaiones.No);
                                 ws.Cell(row, 45).Value = prod.FechaRev?.ToString("dd/MM/yyyy") ?? "";
                                 ws.Cell(row, 46).Value = DataModel.Helper.Helper.GetDescription(prod.StatusRevision);
-                                ws.Cell(row, 47).Value = prod.ConfecConNormativa ? "Si" : "No";
+                                ws.Cell(row, 47).Value = DataModel.Helper.Helper.GetDescription(prod.ConfecConNormativa);
                                 ws.Cell(row, 48).Value = prod.NoInforme;
                                 ws.Cell(row, 49).Value = prod.IpsData?.Observaciones ?? "";
                             }
@@ -239,7 +239,7 @@ namespace Aig.FarmacoVigilancia.Services
                             ws.Cell(row, 44).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.SolInfoFabricante ?? enumFMV_IpsTipoPresentaiones.No);
                             ws.Cell(row, 45).Value = prod.FechaRev?.ToString("dd/MM/yyyy") ?? "";
                             ws.Cell(row, 46).Value = DataModel.Helper.Helper.GetDescription(prod.StatusRevision);
-                            ws.Cell(row, 47).Value = prod.ConfecConNormativa ? "Si" : "No";
+                            ws.Cell(row, 47).Value = DataModel.Helper.Helper.GetDescription(prod.ConfecConNormativa);
                             ws.Cell(row, 48).Value = prod.NoInforme;
                             ws.Cell(row, 49).Value = prod.IpsData?.Observaciones ?? "";
                         }    
@@ -343,26 +343,62 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
-                               (data.NomDCI != null && data.NomDCI.Length > 0)
-                               group data by data.NomDCI into g
-                               orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = g.FirstOrDefault().NomDCI,
-                                   Count = g.Count()
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                //               (data.NomDCI != null && data.NomDCI.Length > 0)
+                //               group data by data.NomDCI into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().NomDCI,
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                //               (data.NomDCI != null && data.NomDCI.Length > 0)
+                //               group data by data.NomComercial into g
+                //               select g.Count()).Sum(x => x);
+
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                                  where data.Deleted == false &&
+                                (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                                (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                                (data.NomDCI != null && data.NomDCI.Length > 0)
+                                  group data by new { data.NomDCI } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse {
+                                      Name = g.FirstOrDefault().NomDCI,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
+                               select new ReportModelResponse {
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
-                               (data.NomDCI != null && data.NomDCI.Length > 0)
-                               group data by data.NomComercial into g
-                               select g.Count()).Sum(x => x);
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                                  where data.Deleted == false &&
+                                (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                                (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                                (data.NomDCI != null && data.NomDCI.Length > 0)
+                                  group data by new { data.NomDCI } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse {
+                                      Name = g.FirstOrDefault().NomDCI,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
+
             }
             catch (Exception ex)
             { }
@@ -377,26 +413,61 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
-                               (data.LaboratorioId > 0)
-                               group data by data.LaboratorioId into g
-                               orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = g.FirstOrDefault().Laboratorio.Nombre,//.Substring(0, 3),
-                                   Count = g.Count()
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                //               (data.LaboratorioId > 0)
+                //               group data by data.LaboratorioId into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Laboratorio.Nombre,//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                //               (data.LaboratorioId > 0)
+                //               group data by data.LaboratorioId into g
+                //               select g.Count()).Sum(x => x);
+
+                model.Ldata = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                                  where data.Deleted == false &&
+                                (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                                (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                                (data.LaboratorioId != null && data.LaboratorioId > 0)
+                                  group data by new { data.LaboratorioId } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse {
+                                      Name = g.FirstOrDefault().Laboratorio.Nombre,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               orderby gFinal.Count() descending
+                               select new ReportModelResponse {
+                                   Name = gFinal.FirstOrDefault().Name,//.Substring(0, 3),
+                                   Count = gFinal.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
-                               (data.LaboratorioId > 0)
-                               group data by data.LaboratorioId into g
-                               select g.Count()).Sum(x => x);
+                model.Total = (from dataFinal in
+                                 (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                                  where data.Deleted == false &&
+                                (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                                (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                                (data.LaboratorioId != null && data.LaboratorioId > 0)
+                                  group data by new { data.LaboratorioId } into g
+                                  orderby g.Count() descending
+                                  select new ReportModelResponse {
+                                      Name = g.FirstOrDefault().Laboratorio.Nombre,//.Substring(0, 3),
+                                      Count = 1,//g.Count()
+                                  })
+                               group dataFinal by new { dataFinal.Name } into gFinal
+                               //orderby gFinal.Count() descending
+                               select gFinal.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }

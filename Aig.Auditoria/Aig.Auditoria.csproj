@@ -1799,6 +1799,9 @@
     <Content Update="Components\Inspections\11_BpmFabMedicamentos\Cap04.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Components\Inspections\16_AperturaFabCosmeticoArtesanal\Cap03.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
   </ItemGroup>
 
 </Project>

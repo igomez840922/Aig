@@ -117,9 +117,9 @@ namespace DataModel
         [StringLength(250)]
         public string RegSanitario { get => regSanitario; set => SetProperty(ref regSanitario, value); }
 
-        // Tipo de notificador: Médico, Farmacéutico, Enfermera, Otro profesional de salud, Paciente, Insdustria Farmacéutica
-        private enumFMV_RAMNotificationType tipoNotificador;
-        public enumFMV_RAMNotificationType TipoNotificador { get => tipoNotificador; set => SetProperty(ref tipoNotificador, value); }
+        //// Tipo de notificador: Médico, Farmacéutico, Enfermera, Otro profesional de salud, Paciente, Insdustria Farmacéutica
+        //private enumFMV_RAMNotificationType tipoNotificador;
+        //public enumFMV_RAMNotificationType TipoNotificador { get => tipoNotificador; set => SetProperty(ref tipoNotificador, value); }
 
         //Tipo de Notificacion
         private enumFMV_RAMNotificationType tipoNotificacion;
@@ -224,5 +224,11 @@ namespace DataModel
         //Falla Terapeutica
         private enumOpcionSiNoOnly reportaFallaTerapeutica;
         public enumOpcionSiNoOnly ReportaFallaTerapeutica { get => reportaFallaTerapeutica; set => SetProperty(ref reportaFallaTerapeutica, value); }
+
+
+        // detalla de falla
+        private string detalleFalla;
+        public string DetalleFalla { get => detalleFalla; set => SetProperty(ref detalleFalla, value); }
+
     }
 }

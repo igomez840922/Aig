@@ -17,7 +17,7 @@ namespace DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -1006,7 +1006,7 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DatosConclusiones")
+                    b.Property<string>("DatosRepresentLegal")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Deleted")
@@ -1021,16 +1021,7 @@ namespace DataAccess.Migrations
                     b.Property<bool>("FromSystem")
                         .HasColumnType("bit");
 
-                    b.Property<string>("GeneralesEmpresa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Inconformidades")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Locales")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Propietario")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -3187,7 +3178,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("VacunaComercial")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -3336,9 +3326,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<int>("TipoNotificacion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoNotificador")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -3550,6 +3537,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("DetalleFalla")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
@@ -3657,9 +3647,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("TipoNotificacion")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoNotificador")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -3757,8 +3744,8 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Biologico")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ConfecConNormativa")
-                        .HasColumnType("bit");
+                    b.Property<int>("ConfecConNormativa")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -4254,22 +4241,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CodExterno")
-                        .IsUnique()
-                        .HasFilter("[CodExterno] IS NOT NULL");
-
-                    b.HasIndex("CodigoCNFV")
-                        .IsUnique();
-
-                    b.HasIndex("CodigoNotiFacedra")
-                        .IsUnique()
-                        .HasFilter("[CodigoNotiFacedra] IS NOT NULL");
-
                     b.HasIndex("EvaluadorId");
-
-                    b.HasIndex("IdFacedra")
-                        .IsUnique()
-                        .HasFilter("[IdFacedra] IS NOT NULL");
 
                     b.HasIndex("InstitucionDestinoId");
 

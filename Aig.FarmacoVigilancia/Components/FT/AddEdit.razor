@@ -277,7 +277,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="password">
-                                            @languageContainerService.Keys["Reporta Falla Terapéutica"]
+                                            @languageContainerService.Keys["Reporta Sospecha de Falla Terapéutica"]
                                         </label>
                                         <div class="form-group">
                                             <InputSelect @bind-Value="Data.ReportaFallaTerapeutica" class="form-control">
@@ -290,6 +290,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <label>@languageContainerService.Keys["Detalle de la Falla"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="8" class="form-control" @bind-Value="Data.DetalleFalla" />
+                                                <ValidationMessage For=@(() => Data.DetalleFalla) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="tab-pane" id="otherSpecificationInfo" role="tabpanel">
                                 <h5>@languageContainerService.Keys["Acciones y Resultados"]</h5>

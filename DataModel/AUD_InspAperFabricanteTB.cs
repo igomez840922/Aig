@@ -832,6 +832,10 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
+                        Titulo = "Formato de registros ",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "PRODUCTOS DEVUELTOS",
                         IsHeader = true,
                     },

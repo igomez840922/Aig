@@ -109,8 +109,22 @@ namespace DataModel
         public enumFMV_IpsTipoPresentaiones ResumenEjecTrad { get => resumenEjecTrad; set => SetProperty(ref resumenEjecTrad, value); }
 
         // Prioridad
+        /*Realizar priorización automática tomando en consideración la siguiente condición: respuesta afirmativa en alguna de estas preguntas (innovador, biológico, requiere intercambiabilidad) y fecha de autorización en Panamá menor a 5 años, tomando como referencia la fecha en que se recibe el IPS.
+*/
         private bool prioridad;
-        public bool Prioridad { get => prioridad; set => SetProperty(ref prioridad, value); }
+        public bool Prioridad { 
+            get {
+                prioridad = false;
+                if (IpsData != null) {
+                    if (Innovador || Biologico || ReqIntercam) {
+                        if (IpsData.FechaAutPan.HasValue && ((DateTime.Now - IpsData.FechaAutPan.Value).TotalDays / 365) < 5) {
+                            Prioridad = true;
+                        }
+                    }
+                }
+                return prioridad;
+            }
+            set => SetProperty(ref prioridad, value); }
 
         // Fecha de revision
         private DateTime? fechaRev;
@@ -121,9 +135,10 @@ namespace DataModel
         private enumFMV_IpsStatusRevision statusRevision;
         public enumFMV_IpsStatusRevision StatusRevision { get => statusRevision; set => SetProperty(ref statusRevision, value); }
 
+
         // IPS confeccionado conforme a la normativa: Cumple, no cumple
-        private bool confecConNormativa;
-        public bool ConfecConNormativa { get => confecConNormativa; set => SetProperty(ref confecConNormativa, value); }
+        private enumFMV_IpsNormativa confecConNormativa;
+        public enumFMV_IpsNormativa ConfecConNormativa { get => confecConNormativa; set => SetProperty(ref confecConNormativa, value); }
 
         // No. de Informe 
         private string noInforme;
@@ -160,21 +175,20 @@ namespace DataModel
         public virtual List<FMV_IpsMedicamentoTB> LMedicamentos { get => lMedicamentos; set => SetProperty(ref lMedicamentos, value); }
 
 
-        public void UpdateRule()
-        {
-            //Prioridad = false;
-
-            if (IpsData != null)
-            {
-                if (Innovador || Biologico || ReqIntercam)
-                {
-                    if (IpsData.FechaAutPan.HasValue && ((DateTime.Now - IpsData.FechaAutPan.Value).TotalDays / 365) < 5)
-                    {
-                        Prioridad = true;
-                    }
-                }
-            }
-        }
+        //public void UpdateRule()
+        //{
+        //    Prioridad = false;
+        //    if (IpsData != null)
+        //    {
+        //        if (Innovador || Biologico || ReqIntercam)
+        //        {
+        //            if (IpsData.FechaAutPan.HasValue && ((DateTime.Now - IpsData.FechaAutPan.Value).TotalDays / 365) < 5)
+        //            {
+        //                Prioridad = true;
+        //            }
+        //        }
+        //    }
+        //}
     
     
     

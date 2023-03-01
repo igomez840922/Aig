@@ -749,14 +749,14 @@ namespace DataModel.Helper
 
     public enum enumFMV_IpsTipoPresentaiones
     {
-        //[Description("No Presentado")]
-        //NotPresent = 0,
-        //[Description("Presentado")]
-        //Presented = 1,
+        [Description("No Presentado")]
+        NotPresent = 0,
+        [Description("Presentado")]
+        Presented = 1,
         [Description("Si")]
-        Yes = 1,
+        Yes = 2,
         [Description("No")]
-        No = 0,
+        No = 3,
     }
 
     public enum enumFMV_IpsStatusRevision
@@ -770,6 +770,16 @@ namespace DataModel.Helper
         [Description("Tramitado")]
         Processed = 3,
     }
+
+    public enum enumFMV_IpsNormativa {
+        [Description("Pendiente")]
+        Pending = 0,
+        [Description("Cumple")]
+        Yes = 1,
+        [Description("No Cumple")]
+        No = 2,
+    }
+
 
     public enum enumFMV_AlertType
     {

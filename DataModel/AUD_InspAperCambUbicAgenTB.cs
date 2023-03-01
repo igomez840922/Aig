@@ -329,11 +329,15 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                        Titulo = "Se mantiene monitoreo de la Temperatura y Humedad de esta área",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Titulo = "Temperatura",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Humedad Relativa",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -466,11 +470,11 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                        Titulo = "Se mantiene monitoreo de la Temperatura y Humedad de esta área",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Titulo = "Temperatura",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -485,10 +489,10 @@ namespace DataModel
                         Titulo = "El área de almacenamiento con temperatura controlada posee sistema de alarma",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "El espacio es suficiente",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "El espacio es suficiente",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
                         new ContenidoPreguntas(){
                         Titulo = "Codificación de ubicación de almacén",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -549,14 +553,14 @@ namespace DataModel
                         Titulo = "Ordenada",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Codificación interna de ubicación en el almacén",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Se cumple la prohibición de almacenar en conjunto con medicamentos",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Codificación interna de ubicación en el almacén",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Se cumple la prohibición de almacenar en conjunto con medicamentos",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
              };
         }
 
@@ -579,10 +583,10 @@ namespace DataModel
                         Titulo = "Ordenada",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Codificación interna de ubicación en el almacén",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Codificación interna de ubicación en el almacén",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
              };
         }
 
@@ -619,11 +623,15 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                        Titulo = "Se mantiene monitoreo de la Temperatura y Humedad de esta área",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Titulo = "Temperatura",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Humedad Relativa",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
