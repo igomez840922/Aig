@@ -7,6 +7,7 @@ using ClosedXML.Excel;
 using DataModel.Helper;
 using Aig.Auditoria.Pages.Inspections;
 using Duende.IdentityServer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aig.Auditoria.Services
 {    
@@ -14,9 +15,11 @@ namespace Aig.Auditoria.Services
     {
         private readonly IDalService DalService;
         //private DalService DalService;
-        public InspectionsService(IDalService dalService)
+        public InspectionsService(IDalService dalService, IConfiguration config)
         {
+            //DalService = new DalService(new ApplicationDbContext(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")),)); 
             DalService = dalService;
+            //DalService.DBContext.de
         }
 
         public async Task<GenericModel<AUD_InspeccionTB>> FindAll(GenericModel<AUD_InspeccionTB> model)
@@ -114,8 +117,9 @@ namespace Aig.Auditoria.Services
         }
 
         public async Task<AUD_InspeccionTB> Get(long Id)
-        {
-            var result = DalService.Get<AUD_InspeccionTB>(Id);
+       {
+            var result = DalService.Get<AUD_InspeccionTB>(Id);                        
+
             return result;
         }
 
@@ -2937,6 +2941,7 @@ namespace Aig.Auditoria.Services
             var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
 
             data.InspAperFabricanteCosmetMed.Almacenes = inspeccion.InspAperFabricanteCosmetMed.Almacenes;
+            data.InspAperFabricanteCosmetMed.Almacenes2 = inspeccion.InspAperFabricanteCosmetMed.Almacenes2;
 
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
@@ -2952,6 +2957,7 @@ namespace Aig.Auditoria.Services
                 if (result.InspAperFabricanteCosmetMed != null)
                 {
                     DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Almacenes).IsModified = true;
+                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Almacenes2).IsModified = true;
                 }
 
                 DalService.DBContext.SaveChanges();

@@ -5,6 +5,7 @@ using DataModel;
 using DataModel.Helper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Microsoft.VisualBasic;
 
 namespace Aig.FarmacoVigilancia.Components.FT
 {
@@ -43,6 +44,9 @@ namespace Aig.FarmacoVigilancia.Components.FT
         AttachmentTB attachment { get; set; } = null;
         bool Exit { get; set; } = false;
         bool showSearchMedicine { get; set; } = false;
+
+        bool openLote { get; set; } = false;
+        FMV_LoteTB lote { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {
@@ -232,8 +236,10 @@ namespace Aig.FarmacoVigilancia.Components.FT
             string regSanitario = Data.RegSanitario;
             string formaFarm = Data.FormaFarmaceutica;
             string fabricante = Data.Fabricant?.Nombre ?? "";
-            string lotes = Data.Lote;
-            string fechaExp = Data.FechaExpira?.ToString("dd/MM/yyyy");
+            //string lotes = Data.Lote;
+            //string fechaExp = Data.FechaExpira?.ToString("dd/MM/yyyy");
+            string lotes = Data.LLotes?.Count > 0 ? "lotes" : null;
+            string fechaExp = Data.LLotes?.Where(x => x.FechaExpira != null)?.Count() > 0 ? "fecha expira" : null; //Data.FechaExpira?.ToString("dd/MM/yyyy");
             string fechaTratamInicial = Data.DatosPaciente?.FechaTratInicial??"";
             string fechaTratamFinal = Data.DatosPaciente?.FechaTratFinal ?? "";
             string fechaFT = Data.DatosPaciente?.FechaFT ?? "";
@@ -352,6 +358,45 @@ namespace Aig.FarmacoVigilancia.Components.FT
 
             this.InvokeAsync(StateHasChanged);
         }
+
+
+        //////////////
+        ////
+        //Add New Attachment
+        protected async Task OpenLote(FMV_LoteTB lote = null) {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Lotes.AddEditEvent>(LoteAddEditEvent_Handler);
+
+            this.lote = lote != null ? lote : new FMV_LoteTB();
+            openLote = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //RemoveAttachment
+        protected async Task RemoveLote(FMV_LoteTB lote) {
+            if (lote != null) {
+                Data.LLotes.Remove(lote);
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
+        //ON CLOSE ATTACHMENT
+        private void LoteAddEditEvent_Handler(MessageArgs args) {
+            openLote = false;
+
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Lotes.AddEditEvent>(LoteAddEditEvent_Handler);
+
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Lotes.AddEditEvent>();
+
+            if (message.Data != null) {
+                Data.LLotes = Data.LLotes != null ? Data.LLotes : new List<FMV_LoteTB>();
+                if (!Data.LLotes.Contains(message.Data)) {
+                    Data.LLotes.Add(message.Data);
+                }
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
+
     }
 
 }

@@ -176,7 +176,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    @*<div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Lotes"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -193,7 +193,8 @@
                                                 <ValidationMessage For=@(() => Data.FechaExpira) />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
+
                                     <div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Reg. Sanitario"]</label>
                                         <div class="form-group">
@@ -267,6 +268,61 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <label for="password">@languageContainerService.Keys["Lotes"]</label>
+                                        <div class="kt-section">
+                                            <div class="table-responsive">
+                                                <table class="table rounded table-striped">
+                                                    <thead class=thead-light>
+                                                        <tr>
+                                                            <th>@languageContainerService.Keys["Lote"]</th>
+                                                            <th>@languageContainerService.Keys["Fecha Expiración"]</th>
+                                                            <th style="text-align:right;">
+                                                                <button type="button" @onclick="(e)=>{OpenLote();}"
+                                                                        class="btn btn-sm btn-outline-primary waves-effect">
+                                                                    @languageContainerService.Keys["Add"]
+                                                                </button>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (Data != null && Data.LLotes?.Count > 0) {
+                                                            @foreach (var dt in Data.LLotes) {
+                                                                <tr>
+                                                                    <td scope="row">@dt.Nombre</td>
+                                                                    <td scope="row">@(dt.FechaExpira?.ToString("dd/MM/yyyy"))</td>
+                                                                    <td style="text-align:right">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                            <div class="dropdown-menu">
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OpenLote(dt)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => RemoveLote(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <label>@languageContainerService.Keys["Detalle de la Falla"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="8" class="form-control" @bind-Value="Data.DetalleFalla" />
+                                                <ValidationMessage For=@(() => Data.DetalleFalla) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="tab-pane" id="products" role="tabpanel">
                                 <h5>@languageContainerService.Keys["Fallas Reportadas"]</h5>
@@ -722,6 +778,11 @@
     @if (showSearchMedicine)
     {
         <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
+    }
+    
+    @if (openLote)
+    {
+        <Aig.FarmacoVigilancia.Components.Lotes.AddEdit Data="@lote"></Aig.FarmacoVigilancia.Components.Lotes.AddEdit>
     }
 }
 

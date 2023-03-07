@@ -250,10 +250,10 @@ namespace DataModel
                         Titulo = "Luces de emergencia",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Ventilación",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Ventilación",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
                         new ContenidoPreguntas(){
                         Titulo = "Suministro eléctrico",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -334,12 +334,16 @@ namespace DataModel
                         Titulo = "Existe un sistema para monitorear la temperatura y humedad relativa de acuerdo con las especificaciones de almacenamiento del fabricante",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                    new ContenidoPreguntas(){
+                        Titulo = "Se mantiene monitoreo de la Temperatura y Humedad de esta área",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Titulo = "Temperatura",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Humedad Relativa",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -411,7 +415,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Separados en un área segura e identificada",
+                        Titulo = "Separados en un área segura",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -419,7 +423,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Valor Informativo: \r\nLos productos retirados del mercado deben ser identificados y almacenados separadamente en un área segura e identificada, en espera de la orden de reexportación hacia el laboratorio fabricante o su destrucción en el país. Art. 435. Decreto Ejecutivo 115 de 16 de agosto de 2022.",
+                        Titulo = "Valor Informativo: \r\nLos productos retirados del mercado deben ser identificados y almacenados separadamente en un área segura e identificada, en espera de la orden de reexportación hacia el laboratorio fabricante o su destrucción en el país",
                         IsHeader = true,
                     }
              };
@@ -475,11 +479,11 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                        Titulo = "Se mantiene monitoreo de la Temperatura de esta área",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Titulo = "Temperatura",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -499,7 +503,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Codificación de ubicación de almacén",
+                        Titulo = "Codificación interna de ubicación de almacén",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
@@ -624,11 +628,15 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Temperatura",
+                        Titulo = "Se mantiene monitoreo de la Temperatura y Humedad de esta área",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Humedad Relativa",
+                        Titulo = "Temperatura",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Humedad Relativa",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -689,7 +697,12 @@ namespace DataModel
                     },new ContenidoPreguntas(){
                         Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de recepción de producto",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },new ContenidoPreguntas(){
+                    },
+                     new ContenidoPreguntas(){
+                        Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de despacho de producto",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
                         Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de manejo de productos de cadena de frio (cuando aplique)",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
@@ -709,6 +722,9 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
                         Titulo = "Cuenta con Manual de Procedimientos Operativos Estandarizados y correspondientes registros de control de fauna nociva",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },new ContenidoPreguntas(){
+                        Titulo = "Otros procedimientos y sus correspondientes registros",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };

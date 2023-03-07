@@ -52,6 +52,7 @@ namespace Aig.FarmacoVigilancia.Services
         //16. evolucion de la Causalidad
         Task<ReportModel<ReportModelResponse>> Report16(ReportModel<ReportModelResponse> model);
 
+        Task<Stream> ExportToExcelRpt(ReportModel<ReportModelResponse> model, int RptType);
     }
 
 

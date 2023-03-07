@@ -28,6 +28,7 @@ namespace Aig.FarmacoVigilancia.Services
         //Tipo de Alerta
         Task<ReportModel<ReportModelResponse>> Report4(ReportModel<ReportModelResponse> model);
 
+        Task<Stream> ExportToExcelRpt(ReportModel<ReportModelResponse> model, int RptType);
     }
 
    

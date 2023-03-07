@@ -47,6 +47,8 @@ namespace Aig.FarmacoVigilancia.Services
         //13.	Incidencia del caso (inicial y seguimiento)
         Task<ReportModel<ReportModelResponse>> Report13(ReportModel<ReportModelResponse> model);
 
+        Task<Stream> ExportToExcelRpt(ReportModel<ReportModelResponse> model, int RptType);
+
     }
 
 

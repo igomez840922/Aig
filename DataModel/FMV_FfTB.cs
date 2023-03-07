@@ -196,5 +196,14 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public virtual AttachmentData Adjunto { get => adjunto; set => SetProperty(ref adjunto, value); }
 
+
+        private List<FMV_LoteTB> lLotes;
+        public virtual List<FMV_LoteTB> LLotes { get => lLotes; set => SetProperty(ref lLotes, value); }
+
+
+        // detalla de falla
+        private string detalleFalla;
+        public string DetalleFalla { get => detalleFalla; set => SetProperty(ref detalleFalla, value); }
+
     }
 }

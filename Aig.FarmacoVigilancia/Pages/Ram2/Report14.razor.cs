@@ -17,7 +17,7 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
         IRamService2 ramService { get; set; }
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
-        ReportModel<ReportModelResponse> dataModel { get; set; } = new ReportModel<ReportModelResponse>() { FromDate = DateTime.Now.AddMonths(-1) };
+        ReportModel<ReportModelResponse> dataModel { get; set; } = new ReportModel<ReportModelResponse>() { FromDate = DateTime.Now.AddYears(-1) };
 
         protected async override Task OnInitializedAsync()
         {
@@ -89,13 +89,11 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
         /// </summary>
 
         ///Export to excel
-        protected async Task ExportToExcel()
-        {
-            //Stream stream = await ramService.ExportToExcel(dataModel);
-            //if (stream != null)
-            //{
-            //    await blazorDownloadFileService.DownloadFile("REACCIONES_ADVERSAS_MEDICAMENTOS.xlsx", stream, "application/actet-stream");
-            //}
+        protected async Task ExportToExcel() {
+            Stream stream = await ramService.ExportToExcelRpt(dataModel, 14);
+            if (stream != null) {
+                await blazorDownloadFileService.DownloadFile("Reportes.xlsx", stream, "application/actet-stream");
+            }
         }
 
     }

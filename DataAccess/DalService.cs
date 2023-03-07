@@ -1,4 +1,6 @@
 ﻿using DataModel;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +17,12 @@ namespace DataAccess
 
         public DalService(ApplicationDbContext dbContext)
         {
-            DBContext = dbContext;
+            DBContext = dbContext;            
         }
 
         public List<T> GetAll<T>() where T : class
         {
-            //lock (objLock)
+            Reload();
             try
             {
                 List<T> _Data = null;
@@ -33,7 +35,7 @@ namespace DataAccess
 
         public List<T> GetAll<T>(int PageIdx, int PageAmt) where T : class, Identity
         {
-            //lock (objLock)
+            Reload();
             try
             {
                 List<T> _Data = null;
@@ -46,15 +48,12 @@ namespace DataAccess
             return null;
         }
 
-        public T Get<T>(long Id) where T : class
-        {
-            //lock (objLock)
+        public T Get<T>(long Id) where T : class{
+            Reload();
             try
             {
-                T _Data = null;
-
+                T _Data = null;  
                 _Data = DBContext.Set<T>().Find(Id);
-
                 return _Data;
             }
             catch { }
@@ -63,7 +62,7 @@ namespace DataAccess
 
         public T Find<T>(Expression<Func<T, bool>> match) where T : class
         {
-            //lock (objLock)
+            Reload();
             try
             {
                 T _Data = null;
@@ -78,7 +77,7 @@ namespace DataAccess
 
         public List<T> FindAll<T>(Expression<Func<T, bool>> match) where T : class
         {
-            //lock (objLock)
+            Reload();
             try
             {
                 List<T> _Data = null;
@@ -93,7 +92,7 @@ namespace DataAccess
 
         public List<T> FindAll<T>(Expression<Func<T, bool>> match, int PageIdx, int PageAmt) where T : class, Identity
         {
-            //lock (objLock)
+            Reload();
             try
             {
                 List<T> _Data = null;
@@ -124,7 +123,7 @@ namespace DataAccess
 
                 DBContext.SaveChanges();
 
-                return _Data;
+                return Get<T>(_Data.Id);
             }
             catch (Exception ex)
             { }
@@ -165,8 +164,7 @@ namespace DataAccess
         }
 
         public int Count<T>(Expression<Func<T, bool>> match) where T : class
-        {
-            //lock (objLock)
+        {           
             try
             {
                 int _count = 0;
@@ -180,7 +178,7 @@ namespace DataAccess
 
         public T First<T>() where T : class
         {
-            //lock (objLock)
+            Reload();
             try
             {
                 T _Data = null;
@@ -191,6 +189,10 @@ namespace DataAccess
             return null;
         }
 
-        
+        public void Reload() {
+            try { DBContext.ChangeTracker.Clear(); }
+            catch { }            
+        }
+
     }
 }

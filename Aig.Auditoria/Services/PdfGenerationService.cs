@@ -1761,7 +1761,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -2341,51 +2341,7 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            if (inspection.InspRutinaVigFarmacia.InventarioMedicamento != null)
-                            {
-                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO".ToUpper())).Bold();
-                                column.Item().Table(table =>
-                                {
-                                    table.ColumnsDefinition(columns =>
-                                    {
-                                        columns.RelativeColumn((float)2);
-                                        columns.RelativeColumn((float)2);
-                                        columns.RelativeColumn((float)2);
-                                        columns.RelativeColumn((float)2);
-                                        columns.RelativeColumn((float)1);
-                                        columns.RelativeColumn((float)1);
-                                    });
-                                    table.Header(header =>
-                                    {
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Nombre del Producto".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Laboratorio Fabricante".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Nº de Lote".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Vencimiento".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Existencia Física".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Registro en Libro o sistema".ToUpper());
-                                    });
-                                    if (inspection.InspRutinaVigFarmacia?.InventarioMedicamento?.LProductos?.Count > 0)
-                                    {
-                                        foreach (var dat in inspection.InspRutinaVigFarmacia.InventarioMedicamento.LProductos)
-                                        {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Nombre);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Fabricante);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Lote);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Existencia);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.RegistroSistema);
-                                        }
-
-                                    }
-                                });
-
-                                column.Item().PaddingVertical(5).AlignLeft().Text("");
-                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario al azar de {1} (cantidad) productos, además de estos existen otros a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.InventarioMedicamento.InventarioAlAzar), inspection.InspRutinaVigFarmacia.InventarioMedicamento.CantidadAlAzar));
-                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario de todos los productos a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.InventarioMedicamento.InventarioProductosVenta)));
-
-                            }
-
+                            
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -2402,9 +2358,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
-                            column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
-
+                            
                             if (inspection.DatosConclusiones != null)
                             {
                                 column.Item().PaddingVertical(5).AlignTop().Table(table =>
@@ -2434,6 +2388,9 @@ namespace Aig.Auditoria.Services
                                     }
                                 });
                             }
+
+                            column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
+                            column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
@@ -2553,7 +2510,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -2581,6 +2538,71 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                                 });
                             });
+
+                            if (inspection.InspRutinaVigFarmacia.InventarioMedicamento != null) {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO".ToUpper())).Bold();
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns => {
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                    });
+                                    table.Header(header => {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Nombre del Producto".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Laboratorio Fabricante".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Nº de Lote".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Vencimiento".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Existencia Física".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Registro en Libro o sistema".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.InventarioMedicamento?.LProductos?.Count > 0) {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.InventarioMedicamento.LProductos) {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Nombre);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Fabricante);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Lote);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Existencia);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.RegistroSistema);
+                                        }
+
+                                    }
+                                });
+
+                                column.Item().PaddingVertical(5).AlignLeft().Text("");
+                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario al azar de {1} (cantidad) productos, además de estos existen otros a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.InventarioMedicamento.InventarioAlAzar), inspection.InspRutinaVigFarmacia.InventarioMedicamento.CantidadAlAzar));
+                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario de todos los productos a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.InventarioMedicamento.InventarioProductosVenta)));
+
+                                column.Item().PaddingVertical(5).Text(string.Format(" "));
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Firmas:");
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Autoridad de Salud Pública:");
+
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("\r\n \r\n");
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Empresa o Entidad:");
+
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+
+                                });
+
+                            }
 
                         });
 
@@ -3380,51 +3402,10 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            if (inspection.InspRutinaVigAgencia.InventarioMedicamento != null)
-                            {
-                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO".ToUpper())).Bold();
-                                column.Item().Table(table =>
-                                {
-                                    table.ColumnsDefinition(columns =>
-                                    {
-                                        columns.RelativeColumn((float)2);
-                                        columns.RelativeColumn((float)2);
-                                        columns.RelativeColumn((float)2);
-                                        columns.RelativeColumn((float)2);
-                                        columns.RelativeColumn((float)1);
-                                        columns.RelativeColumn((float)1);
-                                    });
-                                    table.Header(header =>
-                                    {
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Nombre del Producto".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Laboratorio Fabricante".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Nº de Lote".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Vencimiento".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Existencia Física".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Registro en Libro o sistema".ToUpper());
-                                    });
-                                    if (inspection.InspRutinaVigAgencia?.InventarioMedicamento?.LProductos?.Count > 0)
-                                    {
-                                        foreach (var dat in inspection.InspRutinaVigAgencia.InventarioMedicamento.LProductos)
-                                        {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Nombre);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Fabricante);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Lote);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Existencia);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.RegistroSistema);
-                                        }
+                            column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
+                            column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
 
-                                    }
-                                });
-
-                                column.Item().PaddingVertical(5).AlignLeft().Text("");
-                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario al azar de {1} (cantidad) productos, además de estos existen otros a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.InventarioMedicamento.InventarioAlAzar), inspection.InspRutinaVigAgencia.InventarioMedicamento.CantidadAlAzar));
-                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario de todos los productos a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.InventarioMedicamento.InventarioProductosVenta)));
-
-                            }
-
+                            
                             if (inspection.InspRutinaVigAgencia.Actividades != null)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
@@ -3530,9 +3511,7 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
-                            column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
-
+                            
                             if (inspection.DatosConclusiones != null)
                             {
                                 column.Item().PaddingVertical(5).AlignTop().Table(table =>
@@ -3681,7 +3660,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -3710,6 +3689,69 @@ namespace Aig.Auditoria.Services
                                 });
 
                            });
+
+                            if (inspection.InspRutinaVigAgencia.InventarioMedicamento != null) {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO".ToUpper())).Bold();
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns => {
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)2);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                    });
+                                    table.Header(header => {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Nombre del Producto".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Laboratorio Fabricante".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Nº de Lote".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Vencimiento".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Existencia Física".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Registro en Libro o sistema".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigAgencia?.InventarioMedicamento?.LProductos?.Count > 0) {
+                                        foreach (var dat in inspection.InspRutinaVigAgencia.InventarioMedicamento.LProductos) {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Nombre);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Fabricante);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Lote);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Existencia);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.RegistroSistema);
+                                        }
+
+                                    }
+                                });
+
+                                column.Item().PaddingVertical(5).AlignLeft().Text("");
+                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario al azar de {1} (cantidad) productos, además de estos existen otros a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.InventarioMedicamento.InventarioAlAzar), inspection.InspRutinaVigAgencia.InventarioMedicamento.CantidadAlAzar));
+                                column.Item().AlignLeft().Text(string.Format("{0} Se realizó inventario de todos los productos a la venta", DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.InventarioMedicamento.InventarioProductosVenta)));
+
+                                column.Item().PaddingVertical(5).Text(string.Format(" "));
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns => {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Firmas:");
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Autoridad de Salud Pública:");
+
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("\r\n \r\n");
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por la Empresa o Entidad:");
+
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+                                    table.Cell().AlignLeft().Text("Nombre: \r\nCargo:\r\nIdoneidad:\r\n");
+
+                                });
+
+                            }
 
                         });
 
@@ -3974,7 +4016,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -4262,7 +4304,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -4503,7 +4545,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -4773,7 +4815,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -5386,23 +5428,7 @@ namespace Aig.Auditoria.Services
                             
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("CRITERIO TÉCNICO")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos y con base en el REGLAMENTO TECNICO CENTROAMERICANO RTCA 11.03.42:07 REGLAMENTO TÉCNICO SOBRE BUENAS PRÁCTICAS DE MANUFACTURA PARA LA INDUSTRIA FARMACÉUTICA. PRODUCTOS FARMACÉUTICOS Y MEDICAMENTOS DE USO HUMANO, por el cual se reglamentan las Buenas Prácticas de Manufactura de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.DatosEstablecimiento?.Nombre, inspection.DatosEstablecimiento?.Direccion, (inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE"), DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.ProdFabrican?.TipoProductos?? enumTipoProductosImportacion.Otros) + (inspection.InspAperFabricante.ProdFabrican?.TipoProductos == enumTipoProductosImportacion.Otros? inspection.InspAperFabricante.ProdFabrican?.ProductosDesc??"":""),  inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones ? .FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
-                                                        
-                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                });
-
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
-                                });
-
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
-
-                            });
-
+                               
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
                             {
@@ -5521,7 +5547,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -5548,6 +5574,19 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("504-2565");
                                     tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                                 });
+
+                            });
+
+                            column.Item().PaddingVertical(5).AlignTop().Table(table => {
+                                table.ColumnsDefinition(columns => {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header => {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -6063,22 +6102,7 @@ namespace Aig.Auditoria.Services
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("CRITERIO TÉCNICO")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo 115 del 16 de agosto de 2022, por el cual se reglamentan las Buenas Prácticas de Fabricación de Productos Farmacéuticos. Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.DatosEstablecimiento?.Nombre, inspection.DatosEstablecimiento?.Direccion, (inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE"), DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricanteCosmetMed.ProdFabrican?.TipoProductos ?? enumTipoProductosImportacion.Otros) + (inspection.InspAperFabricanteCosmetMed.ProdFabrican?.TipoProductos == enumTipoProductosImportacion.Otros ? inspection.InspAperFabricanteCosmetMed.ProdFabrican?.ProductosDesc ?? "" : ""), inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones?.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
 
-                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                });
-
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
-                                });
-
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
-
-                            });
-
+                            
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
                             {
@@ -6120,8 +6144,8 @@ namespace Aig.Auditoria.Services
 
                                 table.Cell().AlignLeft().Padding(3).Text("");
 
-                                table.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspAperFabricanteCosmetMed.DatosRepresentLegal?.Nombre, inspection.InspAperFabricanteCosmetMed.DatosRepresentLegal?.Cedula, inspection.InspAperFabricanteCosmetMed.DatosRepresentLegal?.Cargo));
-                                table.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspAperFabricanteCosmetMed.DatosRegente?.Nombre, inspection.InspAperFabricanteCosmetMed.DatosRegente?.Cedula, inspection.InspAperFabricanteCosmetMed.DatosRegente?.Cargo, inspection.InspAperFabricanteCosmetMed.DatosRegente?.NumRegistro));
+                                table.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", inspection.InspAperFabricanteCosmetMed.DatosRepresentLegal?.Nombre, inspection.InspAperFabricanteCosmetMed.DatosRepresentLegal?.Cedula, inspection.InspAperFabricanteCosmetMed.DatosRepresentLegal?.NumRegistro));
+                                table.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", inspection.InspAperFabricanteCosmetMed.DatosRegente?.Nombre, inspection.InspAperFabricanteCosmetMed.DatosRegente?.Cedula, inspection.InspAperFabricanteCosmetMed.DatosRegente?.NumRegistro));
 
                                 table.Cell().AlignLeft().Padding(3).Text("");
 
@@ -6197,7 +6221,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -6224,6 +6248,19 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("504-2565");
                                     tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                                 });
+
+                            });
+
+                            column.Item().PaddingVertical(5).AlignTop().Table(table => {
+                                table.ColumnsDefinition(columns => {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header => {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -7977,7 +8014,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -9206,7 +9243,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -11487,7 +11524,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -14225,7 +14262,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -14861,7 +14898,7 @@ namespace Aig.Auditoria.Services
 
                                     tbl.Header(header =>
                                     {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold(); 
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold(); 
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -15096,21 +15133,6 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Dado en la ciudad de Panamá a los Dado en la ciudad de Panamá a los {0} días del mes de {1} de {2}.", inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones?.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
 
-
-                            column.Item().PaddingVertical(5).AlignTop().Table(table => {
-                                table.ColumnsDefinition(columns => {
-                                    columns.RelativeColumn();
-                                });
-
-                                table.Header(header => {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
-                                });
-
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.Inconformidades);
-
-                            });
-
-
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table => {
                                 table.ColumnsDefinition(columns => {
@@ -15215,7 +15237,7 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     tbl.Header(header => {
-                                        tbl.Cell().AlignLeft().Text("Contáctenos:").Bold();
+                                        tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold();
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
@@ -15242,6 +15264,19 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("504-2565");
                                     tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
                                 });
+
+                            });
+
+                            column.Item().PaddingVertical(5).AlignTop().Table(table => {
+                                table.ColumnsDefinition(columns => {
+                                    columns.RelativeColumn();
+                                });
+
+                                table.Header(header => {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.Inconformidades);
 
                             });
 

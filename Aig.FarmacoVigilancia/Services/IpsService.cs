@@ -767,6 +767,344 @@ namespace Aig.FarmacoVigilancia.Services
             return model;
         }
 
+
+        public async Task<Stream> ExportToExcelRpt(ReportModel<ReportModelResponse> model, int RptType) {
+            try {
+                model.PagIdx = 0; model.PagAmt = int.MaxValue;
+
+                switch (RptType) {
+                    case 1: {
+                            model = await Report1(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Nombre_Comercial";
+                                wb.Properties.Title = "Nombre_Comercial";
+                                wb.Properties.Subject = "Nombre_Comercial";
+
+                                var ws = wb.Worksheets.Add("Nombre_Comercial");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 2: {
+                            model = await Report2(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Nombre_DCI";
+                                wb.Properties.Title = "Nombre_DCI";
+                                wb.Properties.Subject = "Nombre_DCI";
+
+                                var ws = wb.Worksheets.Add("Nombre_DCI");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 3: {
+                            model = await Report3(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Titular";
+                                wb.Properties.Title = "Titular";
+                                wb.Properties.Subject = "Titular";
+
+                                var ws = wb.Worksheets.Add("Titular");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 4: {
+                            model = await Report4(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Reg_Sanitario";
+                                wb.Properties.Title = "Reg_Sanitario";
+                                wb.Properties.Subject = "Reg_Sanitario";
+
+                                var ws = wb.Worksheets.Add("Reg_Sanitario");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = DataModel.Helper.Helper.GetDescription(prod.AlertType);
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 5: {
+                            model = await Report5(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Prioridad";
+                                wb.Properties.Title = "Prioridad";
+                                wb.Properties.Subject = "Prioridad";
+
+                                var ws = wb.Worksheets.Add("Prioridad");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 6: {
+                            model = await Report6(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Ano_Recepción";
+                                wb.Properties.Title = "Ano_Recepción";
+                                wb.Properties.Subject = "Ano_Recepción";
+
+                                var ws = wb.Worksheets.Add("Ano_Recepción");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 7: {
+                            model = await Report7(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Innovador";
+                                wb.Properties.Title = "Innovador";
+                                wb.Properties.Subject = "Innovador";
+
+                                var ws = wb.Worksheets.Add("Innovador");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 8: {
+                            model = await Report8(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Biológico";
+                                wb.Properties.Title = "Biológico";
+                                wb.Properties.Subject = "Biológico";
+
+                                var ws = wb.Worksheets.Add("Biológico");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 9: {
+                            model = await Report9(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Requiere_intercambiabilidad";
+                                wb.Properties.Title = "Requiere_intercambiabilidad";
+                                wb.Properties.Subject = "Requiere_intercambiabilidad";
+
+                                var ws = wb.Worksheets.Add("Requiere_intercambiabilidad");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 10: {
+                            model = await Report10(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Estatus_Registro";
+                                wb.Properties.Title = "Estatus_Registro";
+                                wb.Properties.Subject = "Estatus_Registro";
+
+                                var ws = wb.Worksheets.Add("Estatus_Registro");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = DataModel.Helper.Helper.GetDescription(prod.IpsStatusRegistro);
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 11: {
+                            model = await Report11(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Recibidos";
+                                wb.Properties.Title = "Recibidos";
+                                wb.Properties.Subject = "Recibidos";
+
+                                var ws = wb.Worksheets.Add("Recibidos");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = prod.Name;
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                    case 12: {
+                            model = await Report12(model);
+                            if (model.Ldata != null && model.Ldata.Count > 0) {
+                                var wb = new XLWorkbook();
+                                wb.Properties.Author = "Estatus_Revision";
+                                wb.Properties.Title = "Estatus_Revision";
+                                wb.Properties.Subject = "Estatus_Revision";
+
+                                var ws = wb.Worksheets.Add("Estatus_Revision");
+
+                                ws.Cell(1, 1).Value = "Descripción";
+                                ws.Cell(1, 2).Value = string.Format("Total: {0}", model.Total);
+
+                                for (int row = 1; row <= model.Ldata.Count; row++) {//FechaRecepcion
+                                    var prod = model.Ldata[row - 1];
+                                    ws.Cell(row + 1, 1).Value = DataModel.Helper.Helper.GetDescription(prod.IpsStatusRevision);
+                                    ws.Cell(row + 1, 2).Value = prod.Count;
+                                }
+
+                                MemoryStream XLSStream = new();
+                                wb.SaveAs(XLSStream);
+
+                                return XLSStream;
+                            }
+
+                            break;
+                        }
+                }
+            }
+            catch (Exception ex) { }
+
+            return null;
+        }
+
+
     }
 
 }

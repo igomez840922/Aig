@@ -1093,6 +1093,10 @@ namespace DataAccess
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
             modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.Almacenes2)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
+
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
 .Property(e => e.Documantacion)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
@@ -1533,16 +1537,12 @@ namespace DataAccess
                .WithOne()
                .HasForeignKey<FMV_FtTB>(e => e.EvaluacionCausalidadId);
 
-            //JSON Serialization
-            modelBuilder.Entity<FMV_FfTB>()
-              .Property(e => e.FallaReportada)
-              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FfFallaReportada>(x));
-
-            modelBuilder.Entity<FMV_FfTB>()
-             .Property(e => e.OtrasEspecificaciones)
-             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FfOtrasEspecificaciones>(x));
-
-            ///////////////////////////////
+            modelBuilder.Entity<FMV_FtTB>()
+           .HasMany(e => e.LLotes)
+           .WithOne(e => e.Ft)
+           .HasForeignKey(e => e.FtId)
+           .OnDelete(DeleteBehavior.Cascade); 
+            
             ///
             //JSON Serialization
             modelBuilder.Entity<FMV_FtTB>()
@@ -1612,10 +1612,25 @@ namespace DataAccess
             ///////////////////////////////////////////
             ///
 
+            modelBuilder.Entity<FMV_FfTB>()
+           .HasMany(e => e.LLotes)
+           .WithOne(e => e.Ff)
+           .HasForeignKey(e => e.FfId)
+           .OnDelete(DeleteBehavior.Cascade);
+
             //JSON Serialization
             modelBuilder.Entity<FMV_FfTB>()
               .Property(e => e.Adjunto)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
+            //JSON Serialization
+            modelBuilder.Entity<FMV_FfTB>()
+              .Property(e => e.FallaReportada)
+              .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FfFallaReportada>(x));
+
+            modelBuilder.Entity<FMV_FfTB>()
+             .Property(e => e.OtrasEspecificaciones)
+             .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<FMV_FfOtrasEspecificaciones>(x));
 
             ///////////////////////////////////////////
             ///
@@ -1795,6 +1810,7 @@ namespace DataAccess
         public virtual DbSet<FMV_EsaviVacunaEsaviTB> FMV_EsaviVacunaEsavi { get; set; }
         public virtual DbSet<FMV_FtDatosPaciente> FMV_FtDatosPaciente { get; set; }
         public virtual DbSet<FMV_IpsMedicamentoTB> FMV_IpsMedicamento { get; set; }
+        public virtual DbSet<FMV_LoteTB> FMV_Lote { get; set; }
         public virtual DbSet<FarmacoTB> Farmaco { get; set; }
         public virtual DbSet<FMV_FtEvaluacionCausalidad> FtEvaluacionCausalidad { get; set; }
         

@@ -244,6 +244,12 @@ namespace DataModel
                 {
                     new ContenidoPreguntas()
             {
+                Titulo = "Adquisición de Materias Primas y Materiales",
+                Criterio = "Informativo",
+                IsHeader = true
+            },
+                    new ContenidoPreguntas()
+            {
                 Titulo = "¿Compra local?",
                 Criterio = "Informativo",
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -308,6 +314,11 @@ namespace DataModel
                 {
                     new ContenidoPreguntas()
             {
+                Titulo = "Laboratorio Fabricante de:",
+                Criterio = "Informativo",
+                IsHeader = true
+            },new ContenidoPreguntas()
+            {
                 Titulo = "Medicamentos Humanos?",
                 Criterio = "Informativo",
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -320,7 +331,7 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "Medicamentos Cosméticos?",
+                Titulo = "Cosméticos?",
                 Criterio = "Informativo",
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1674,7 +1685,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Existen indicaciones en las áreas para el personal que requiere evacuar el almacén en caso de emergencia? (Rutas de evacuación).?",
+                Titulo = "¿Existen indicaciones en las áreas para el personal que requiere evacuar el almacén en caso de emergencia? (Rutas de evacuación)",
                 Criterio = "N",
                 Articulo="358",
                 PuntosMax = (decimal)1.5,
@@ -1942,7 +1953,7 @@ namespace DataModel
                 Titulo = "¿Existen Informes de los retiros de productos del mercado y sus causas? (Verifique)",
                 Criterio = "INF",
                 Articulo="386",
-                PuntosMax = (decimal)2.5,
+                PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
                 new ContenidoPreguntas()
@@ -2112,7 +2123,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El agua potable se emplea como fuente de alimentación para los sistemas de producción de agua purificada? (No observándose puntos muertos en las tuberías) ?",
+                Titulo = "¿El agua potable se emplea como fuente de alimentación para los sistemas de producción de agua purificada? (No observándose puntos muertos en las tuberías)",
                 Criterio = "R",
                 Articulo="",
                 PuntosMax = (decimal)1.0,
@@ -2404,7 +2415,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Existen registros de este mantenimiento? (Verifique frecuencia)?",
+                Titulo = "¿Existen registros de este mantenimiento? (Verifique frecuencia)",
                 Criterio = "INF",
                 Articulo="437",
                 PuntosMax = (decimal)0.5,
@@ -2414,7 +2425,7 @@ namespace DataModel
                 {
                 Titulo = "¿Existe algún filtro en el Sistema? ¿Detalle cuál?",
                 Criterio = "INF",
-                Articulo="437",
+                Articulo="436",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -2984,6 +2995,22 @@ namespace DataModel
             {
                 new ContenidoPreguntas()
                 {
+                Titulo = "Temperatura",
+                Criterio = "",
+                Articulo="",
+                PuntosMax = 0,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                },
+                  new ContenidoPreguntas()
+                {
+                Titulo = "Humedad Relativa",
+                Criterio = "",
+                Articulo="",
+                PuntosMax = 0,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                },
+                    new ContenidoPreguntas()
+                {
                 Titulo = "¿Existe un área separada e identificada para la dispensación de órdenes de fabricación? ¿Existe esclusa?",
                 Criterio = "C",
                 Articulo="424",
@@ -3097,6 +3124,7 @@ namespace DataModel
                 new ContenidoPreguntas()
                 {
                 Titulo = "Ropa adecuada (uniformes limpios)",
+                PuntosMax = (decimal)0.25,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
                 new ContenidoPreguntas()
@@ -3489,7 +3517,7 @@ namespace DataModel
                 PuntosMax = (decimal)2.0,
                 IsSubHeader = true,
                 },
-                new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Nombre del Producto y Código del Producto", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Nombre del Producto y Código del Producto", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fecha de emisión de la fórmula", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Descripción de la forma farmacéutica, potencia del producto y tamañodel lote", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fórmula unitaria", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
@@ -3740,16 +3768,16 @@ namespace DataModel
                 IsSubHeader = true,
                 },
                 new ContenidoPreguntas(){ PuntosMax = (decimal)0.28, LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Iluminación"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Ventilación"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Paredes"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Pisos"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Ventilación"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Instalación de Control de aire, incluyendo Temperatura y Humedad"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Curvas Sanitarias"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.32,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Gradiente hacia el desagüe"},
 
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Existe un sistema de suministro de aire que permita una adecuada ventilación?",
+                Titulo = "¿Existe un sistema de suministro y renovación de aire en el area?",
                 Criterio = "N",
                 Articulo="417",
                 PuntosMax = (decimal)1.5,
@@ -3777,7 +3805,7 @@ namespace DataModel
 
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El sistema de tuberías de servicio (agua, electricidad, gases, etc.…) se observa limpio e identificado?",
+                Titulo = "¿El sistema de tuberías de servicio (agua, electricidad, gases) se encuentran limpias e identificadas según códigos oficiales?",
                 Criterio = "R",
                 Articulo="430",
                 PuntosMax = (decimal)1.0,
@@ -3889,7 +3917,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Existen recipientes de basura adecuados?",
+                Titulo = "¿Existen suficientes recipientes recolectores de basura?",
                 Criterio = "INF",
                 Articulo="457",
                 PuntosMax = (decimal)0.5,
@@ -3956,7 +3984,7 @@ namespace DataModel
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Instrucciones para cualquier control durante el proceso con sus límites"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cualquier precaución a seguir"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fecha de expiración del producto"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.32,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Lista de los materiales de acondicionamiento, cantidad y tipo de cadauno de ellos"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.32,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Lista de los materiales de acondicionamiento, cantidad y tipo de cada uno de ellos"},
 
                 new ContenidoPreguntas()
                 {
@@ -3991,9 +4019,9 @@ namespace DataModel
                 IsSubHeader = true,
                 },
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Nombre del producto" },
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Lote del producto" },
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Concentración del producto" },
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Volumen total del contenido del recipiente" },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Número de lote" },
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Fecha de vencimiento" },
 
                 new ContenidoPreguntas()
@@ -4100,7 +4128,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El Registro de Producción de Lote (Batch Record) contiene la siguienteinformación?",
+                Titulo = "¿El Registro de Producción de Lote (Batch Record) contiene la siguiente información?",
                 Criterio = "C",
                 Articulo="464",
                 PuntosMax = (decimal)2.0,
@@ -4115,7 +4143,7 @@ namespace DataModel
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Nombre de la persona que verifica cada una de las operaciones"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Número de lote y/o número de control analítico de las materias primas"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cantidades pesadas de cada materia prima"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Registro de controles en proceso con iniciales de personas que los realizaron yresultados obtenidos"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Registro de controles en proceso con iniciales de personas que los realizaron y resultados obtenidos"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cantidad de producto obtenido en la fabricación"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Comentarios o explicaciones de las desviaciones significativas con relación alrendimiento esperado"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Firma de autorización por cualquier desviación de la fórmula maestra"},
@@ -4135,6 +4163,22 @@ namespace DataModel
             {
                 new ContenidoPreguntas()
                 {
+                Titulo = "Temperatura",
+                Criterio = "",
+                Articulo="",
+                PuntosMax = 0,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                },
+                new ContenidoPreguntas()
+                {
+                Titulo = "Humedad Relativa",
+                Criterio = "",
+                Articulo="",
+                PuntosMax = 0,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                },
+                    new ContenidoPreguntas()
+                {
                 Titulo = "¿Esta área esta físicamente delimitada e identificada? ¿Cuenta con esclusa?",
                 Criterio = "C",
                 Articulo="413",
@@ -4150,9 +4194,9 @@ namespace DataModel
                 IsSubHeader = true,
                 },
                 new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Iluminación"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Ventilación"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Paredes"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Pisos"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Ventilación"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Instalación de Control de aire, incluyendo Temperatura y Humedad"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Curvas Sanitarias"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.32,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Gradiente hacia el desagüe"},
@@ -4188,7 +4232,7 @@ namespace DataModel
 
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El sistema de tuberías de servicio (agua, electricidad, gases, etc.…) se observa limpio e identificado?",
+                Titulo = "¿El sistema de tuberías de servicio (agua, electricidad, gases) se observa limpio e identificado?",
                 Criterio = "R",
                 Articulo="430",
                 PuntosMax = (decimal)1.0,
@@ -4267,7 +4311,7 @@ namespace DataModel
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.32,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Protección auditiva (Cuando aplique)" },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Se observa que estos uniformes se encuentran en buenas condiciones?",
+                Titulo = "¿Los uniformes se encuentran limpios y en buenas condiciones?",
                 Criterio = "N",
                 Articulo="403",
                 PuntosMax = (decimal)1.05,
@@ -4394,9 +4438,9 @@ namespace DataModel
                 IsSubHeader = true,
                 },
                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Nombre del producto" },
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Lote del Producto" },
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Concentración del producto" },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Volumen total del contenido del recipiente" },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Número de lote" },
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Volumen total del contenido en el recipiente" },
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Fecha de vencimiento" },
 
                 new ContenidoPreguntas()
@@ -4503,7 +4547,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El Registro de Producción de Lote (Batch Record) contiene la siguienteinformación?",
+                Titulo = "¿El Registro de Producción de Lote (Batch Record) contiene la siguiente información?",
                 Criterio = "C",
                 Articulo="464",
                 PuntosMax = (decimal)2.0,
@@ -4518,7 +4562,7 @@ namespace DataModel
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Nombre de la persona que verifica cada una de las operaciones"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Número de lote y/o número de control analítico de las materias primas"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cantidades pesadas de cada materia prima"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Registro de controles en proceso con iniciales de personas que los realizaron yresultados obtenidos"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Registro de controles en proceso con iniciales de personas que los realizaron y resultados obtenidos"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cantidad de producto obtenido en la fabricación"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Comentarios o explicaciones de las desviaciones significativas con relación alrendimiento esperado"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Firma de autorización por cualquier desviación de la fórmula maestra"},
@@ -4932,7 +4976,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El laboratorio de Control de Calidad es responsable de aprobar o rechazar:? ¿Hay registros de cumplimiento del programa?",
+                Titulo = "¿El laboratorio de Control de Calidad es responsable de aprobar o rechazar:",
                 Criterio = "C",
                 Articulo="444, 438",
                 PuntosMax = (decimal)2.0,
@@ -5542,9 +5586,10 @@ namespace DataModel
         private decimal puntosObtenido;
         public decimal PuntosObtenido { 
             get {
-                if(LEvaluacion?.All(x => x.Evaluacion == enumAUD_TipoSeleccion.Si)??false)
+                puntosObtenido = 0;
+                if (LEvaluacion?.All(x => x.Evaluacion == enumAUD_TipoSeleccion.Si)??false)
                 {
-                    return puntosMax;
+                    puntosObtenido = puntosMax;
                 }
                 return puntosObtenido;
             } 

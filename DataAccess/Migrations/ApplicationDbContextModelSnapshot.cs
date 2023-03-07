@@ -3230,6 +3230,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("DetalleFalla")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
@@ -3839,6 +3842,52 @@ namespace DataAccess.Migrations
                     b.HasIndex("TramitadorId");
 
                     b.ToTable("FMV_Ips");
+                });
+
+            modelBuilder.Entity("DataModel.FMV_LoteTB", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Disabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("FechaExpira")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("FfId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("FromSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("FtId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FfId");
+
+                    b.HasIndex("FtId");
+
+                    b.ToTable("FMV_Lote");
                 });
 
             modelBuilder.Entity("DataModel.FMV_NotaDestinoTB", b =>
@@ -6086,6 +6135,23 @@ namespace DataAccess.Migrations
                     b.Navigation("Tramitador");
                 });
 
+            modelBuilder.Entity("DataModel.FMV_LoteTB", b =>
+                {
+                    b.HasOne("DataModel.FMV_FfTB", "Ff")
+                        .WithMany("LLotes")
+                        .HasForeignKey("FfId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DataModel.FMV_FtTB", "Ft")
+                        .WithMany("LLotes")
+                        .HasForeignKey("FtId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Ff");
+
+                    b.Navigation("Ft");
+                });
+
             modelBuilder.Entity("DataModel.FMV_NotaTB", b =>
                 {
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
@@ -6439,6 +6505,16 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.FMV_EsaviVacunaTB", b =>
                 {
                     b.Navigation("LEsavis");
+                });
+
+            modelBuilder.Entity("DataModel.FMV_FfTB", b =>
+                {
+                    b.Navigation("LLotes");
+                });
+
+            modelBuilder.Entity("DataModel.FMV_FtTB", b =>
+                {
+                    b.Navigation("LLotes");
                 });
 
             modelBuilder.Entity("DataModel.FMV_IpsTB", b =>

@@ -42,6 +42,7 @@ namespace Aig.FarmacoVigilancia.Services
         //Estatus de Revision
         Task<ReportModel<ReportModelResponse>> Report12(ReportModel<ReportModelResponse> model);
 
+        Task<Stream> ExportToExcelRpt(ReportModel<ReportModelResponse> model, int RptType);
     }
 
    

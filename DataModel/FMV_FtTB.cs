@@ -230,5 +230,10 @@ namespace DataModel
         private string detalleFalla;
         public string DetalleFalla { get => detalleFalla; set => SetProperty(ref detalleFalla, value); }
 
+
+        private List<FMV_LoteTB> lLotes;
+        public virtual List<FMV_LoteTB> LLotes { get => lLotes; set => SetProperty(ref lLotes, value); }
+
+
     }
 }

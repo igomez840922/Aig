@@ -36,6 +36,34 @@
                     </div>
 
                     <div class="kt-portlet__body kt-portlet__body--fit">
+
+                        <div class="row">                           
+                            <div class="col-12">
+                                <div class="kt-portlet__body">
+                                    <EditForm Model="@dashBoardModel" OnValidSubmit="FetchData" class="kt-form kt-form--label-right">
+                                        <DataAnnotationsValidator />
+                                        <div class="form-group row">
+                                            <div class="col-sm-4">
+                                                <label>@languageContainerService.Keys["Fecha Inicial"]</label>
+                                                <div class="form-line">
+                                                    <RadzenDatePicker Max="DateTime.Today" TValue="DateTime?" @bind-Value="dashBoardModel.DateFrom" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {FetchData();}) />
+                                                    <ValidationMessage For=@(() => dashBoardModel.DateFrom) />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label>@languageContainerService.Keys["Fecha Final"]</label>
+                                                <div class="form-line">
+                                                    <RadzenDatePicker Max="DateTime.Today" Min="dashBoardModel.DateFrom" TValue="DateTime?" @bind-Value="dashBoardModel.DateTo" ShowTime="false" DateFormat="dd/MM/yyyy" Change=@(args => {FetchData();}) />
+                                                    <ValidationMessage For=@(() => dashBoardModel.DateTo) />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </EditForm>
+                                </div>
+                                <!--end::Form-->
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-12">
 
@@ -50,9 +78,7 @@
                                             <h3 style="margin: 32px 0">An error has occurred: @error. Try reloading your browser.</h3>
                                         </RadzenCard>
                                     </RadzenCard>*@
-                                    <div class="col-xl-12 col-lg-12 p-2">
-                                        <RadzenText TextStyle="TextStyle.H6">Histórico de Ultimos 12 Meses</RadzenText>
-                                    </div>
+                                   
                                     <div class="row no-gutters mx-n2">
                                         
                                         <div class="col-xl-3 col-lg-6 p-2">
