@@ -31,6 +31,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram
         List<FMV_SocTB> lSoc { get; set; } = new List<FMV_SocTB>();
 
         bool OpenAddEditNotification { get; set; } = false;
+        bool showSearchFarmaco { get; set; } = false;
         FMV_RamNotificacionTB Notificacion { get; set; } = null;
 
         [Inject]
@@ -556,7 +557,25 @@ namespace Aig.FarmacoVigilancia.Components.Ram
 
             //await FetchData();
         }
-        
+
+        ////////////
+        ///
+
+        protected async Task OpenSearchFarmaco() {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>(SearchFarmacoEventHandler);
+            showSearchFarmaco = true;
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void SearchFarmacoEventHandler(MessageArgs args) {
+            showSearchFarmaco = false;
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>(SearchFarmacoEventHandler);
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>();
+            if (message.Data != null) {
+                Data.FarmacoSospechosoDci = message.Data.NombreDCI;
+                Data.FarmacoSospechosoComercial = string.IsNullOrEmpty(message.Data.NombreComercial) ? Data.FarmacoSospechosoComercial : message.Data.NombreComercial;
+            }
+            this.InvokeAsync(StateHasChanged);
+        }
 
     }
 

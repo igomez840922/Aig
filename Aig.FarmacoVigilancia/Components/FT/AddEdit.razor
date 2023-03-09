@@ -112,11 +112,25 @@
                                             </div>
                                         </div>*@
                                     </div>
-                                    <div class="col-sm-4">
+                                    @*<div class="col-sm-4">
                                         <label>@languageContainerService.Keys["Fármaco Sospechoso (DCI)"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <InputText class="form-control" @bind-Value="Data.NombreDci" />
+                                                <ValidationMessage For=@(() => Data.NombreDci) />
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Fármaco Sospechoso (DCI)"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <div class="input-group">
+                                                    <InputText class="form-control" @bind-Value="Data.NombreDci" />
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchFarmaco();}"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
                                                 <ValidationMessage For=@(() => Data.NombreDci) />
                                             </div>
                                         </div>
@@ -991,6 +1005,10 @@
     @if (openLote)
     {
         <Aig.FarmacoVigilancia.Components.Lotes.AddEdit Data="@lote"></Aig.FarmacoVigilancia.Components.Lotes.AddEdit>
+    }
+
+    @if (showSearchFarmaco) {
+        <Aig.FarmacoVigilancia.Components.FarmacoComun.Search></Aig.FarmacoVigilancia.Components.FarmacoComun.Search>
     }
 }
 

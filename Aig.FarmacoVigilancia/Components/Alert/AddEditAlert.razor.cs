@@ -29,6 +29,7 @@ namespace Aig.FarmacoVigilancia.Components.Alert
         AttachmentTB attachment { get; set; } = null;
 
         bool showSearchMedicine { get; set; } = false;
+        bool showSearchFarmaco { get; set; } = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -195,6 +196,22 @@ namespace Aig.FarmacoVigilancia.Components.Alert
             this.InvokeAsync(StateHasChanged);
         }
 
+        protected async Task OpenSearchFarmaco() {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>(SearchFarmacoEventHandler);
+            showSearchFarmaco = true;
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void SearchFarmacoEventHandler(MessageArgs args) {
+            showSearchFarmaco = false;
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>(SearchFarmacoEventHandler);
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>();
+            if (message.Data != null) {
+                Alerta.DCI = message.Data.NombreDCI;
+                Alerta.Producto = string.IsNullOrEmpty(message.Data.NombreComercial)? Alerta.Producto: message.Data.NombreComercial;
+            }
+            this.InvokeAsync(StateHasChanged);
+        }
+        
 
     }
 

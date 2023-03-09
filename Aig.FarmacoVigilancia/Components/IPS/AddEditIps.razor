@@ -517,8 +517,7 @@
                                         <label for="password">@languageContainerService.Keys["LackEfficacyClinicalTrials"]</label>
                                         <div class="form-group">
                                             <InputSelect @bind-Value="Ips.IpsData.FaltaEficacia" class="form-control">
-                                                @foreach (enumFMV_IpsTipoPresentaiones dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones)))
-                                                {
+                                                @foreach (enumFMV_IpsTipoPresentaiones2 dt in Enum.GetValues(typeof(enumFMV_IpsTipoPresentaiones2))) {
                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                 }
                                             </InputSelect>

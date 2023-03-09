@@ -117,26 +117,27 @@
                                             </div>
                                         </div>
                                         <ValidationMessage For=@(() => Alerta.Producto) />
-                                        @*<div class="form-group">
-                                            <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Alerta.Producto" />
-                                                <ValidationMessage For=@(() => Alerta.Producto) />
-                                            </div>
-                                        </div>*@
                                     </div>
 
                                 </div>
                                 <div class="row clearfix">
-
+                                    
                                     <div class="col-sm-12">
                                         <label>@languageContainerService.Keys["DCI"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Alerta.DCI" />
+                                                <div class="input-group">
+                                                    <InputText class="form-control" @bind-Value="Alerta.DCI" />
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchFarmaco();}"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
                                                 <ValidationMessage For=@(() => Alerta.DCI) />
                                             </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
+                                </div>
+                                <div class="row clearfix">
 
                                     <div class="col-sm-12">
                                         <label>@languageContainerService.Keys["Título/Descripción"]</label>
@@ -358,7 +359,10 @@
     @if (showSearchMedicine)
 {
     <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
-}
+    }
+    @if (showSearchFarmaco) {
+        <Aig.FarmacoVigilancia.Components.FarmacoComun.Search></Aig.FarmacoVigilancia.Components.FarmacoComun.Search>
+    }
 }
 
 <div class="modal-backdrop fade show"></div>

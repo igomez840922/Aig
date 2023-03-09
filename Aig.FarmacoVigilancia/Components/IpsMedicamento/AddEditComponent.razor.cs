@@ -1,4 +1,5 @@
 ﻿using Aig.FarmacoVigilancia.Events.Language;
+using Aig.FarmacoVigilancia.Pages.Alert;
 using Aig.FarmacoVigilancia.Pages.IPS;
 using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
@@ -23,7 +24,7 @@ namespace Aig.FarmacoVigilancia.Components.IpsMedicamento
         List<LaboratorioTB> Labs { get; set; } = new List<LaboratorioTB>();
 
         bool showSearchMedicine { get; set; } = false;
-
+        bool showSearchFarmaco { get; set; } = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -116,6 +117,22 @@ namespace Aig.FarmacoVigilancia.Components.IpsMedicamento
             this.InvokeAsync(StateHasChanged);
         }
 
+
+        protected async Task OpenSearchFarmaco() {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>(SearchFarmacoEventHandler);
+            showSearchFarmaco = true;
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void SearchFarmacoEventHandler(MessageArgs args) {
+            showSearchFarmaco = false;
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>(SearchFarmacoEventHandler);
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>();
+            if (message.Data != null) {
+                Data.NomDCI = message.Data.NombreDCI;
+                Data.NomComercial = string.IsNullOrEmpty(message.Data.NombreComercial) ? Data.NomComercial : message.Data.NombreComercial;
+            }
+            this.InvokeAsync(StateHasChanged);
+        }
     }
 
 }

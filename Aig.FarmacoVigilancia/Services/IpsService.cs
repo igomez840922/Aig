@@ -173,7 +173,7 @@ namespace Aig.FarmacoVigilancia.Services
                                 ws.Cell(row, 32).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PresCasos ?? enumFMV_IpsTipoPresentaiones.No);
                                 ws.Cell(row, 33).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ResHallazgo ?? enumFMV_IpsTipoPresentaiones.No);
                                 ws.Cell(row, 34).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.OtraInfRel ?? enumFMV_IpsTipoPresentaiones.No);
-                                ws.Cell(row, 35).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.FaltaEficacia ?? enumFMV_IpsTipoPresentaiones.No);
+                                ws.Cell(row, 35).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.FaltaEficacia ?? enumFMV_IpsTipoPresentaiones2.No);
                                 ws.Cell(row, 36).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.RevisionSenales ?? enumFMV_IpsTipoPresentaiones.No);
                                 ws.Cell(row, 37).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionSenales ?? enumFMV_IpsTipoPresentaiones.No);
                                 ws.Cell(row, 38).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionBeneficio ?? enumFMV_IpsTipoPresentaiones.No);
@@ -227,7 +227,7 @@ namespace Aig.FarmacoVigilancia.Services
                             ws.Cell(row, 32).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.PresCasos ?? enumFMV_IpsTipoPresentaiones.No);
                             ws.Cell(row, 33).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.ResHallazgo ?? enumFMV_IpsTipoPresentaiones.No);
                             ws.Cell(row, 34).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.OtraInfRel ?? enumFMV_IpsTipoPresentaiones.No);
-                            ws.Cell(row, 35).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.FaltaEficacia ?? enumFMV_IpsTipoPresentaiones.No);
+                            ws.Cell(row, 35).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.FaltaEficacia ?? enumFMV_IpsTipoPresentaiones2.No);
                             ws.Cell(row, 36).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.RevisionSenales ?? enumFMV_IpsTipoPresentaiones.No);
                             ws.Cell(row, 37).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionSenales ?? enumFMV_IpsTipoPresentaiones.No);
                             ws.Cell(row, 38).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData?.EvaluacionBeneficio ?? enumFMV_IpsTipoPresentaiones.No);

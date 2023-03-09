@@ -35,7 +35,7 @@ namespace Aig.FarmacoVigilancia.Services
 
             return model;
         }
-
+        
         public async Task<List<FarmacoTB>> GetAll()
         {
             return (from data in DalService.DBContext.Set<FarmacoTB>()

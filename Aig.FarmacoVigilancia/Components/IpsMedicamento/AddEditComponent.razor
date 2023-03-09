@@ -27,6 +27,22 @@
                                         </div>
                                         <ValidationMessage For=@(() => Data.NomComercial) />                                       
                                     </div>
+
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["DCI"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <div class="input-group">
+                                            <InputText class="form-control" @bind-Value="Data.NomDCI" />
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-secondary" @onclick="(e)=>{OpenSearchFarmaco();}"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                        <ValidationMessage For=@(() => Data.NomDCI) />
+                                            </div>
+                                        </div>                                        
+                                    </div>
+@*
                                     <div class="col-sm-6">
                                         <label>@languageContainerService.Keys["DCI"]</label>
                                         <div class="form-group">
@@ -35,7 +51,7 @@
                                                 <ValidationMessage For=@(() => Data.NomDCI) />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
                                     
                                     <div class="col-sm-6">
                                         <label for="password">@languageContainerService.Keys["Laboratory"]</label>
@@ -87,6 +103,9 @@
         <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
     }
 
+    @if (showSearchFarmaco) {
+        <Aig.FarmacoVigilancia.Components.FarmacoComun.Search></Aig.FarmacoVigilancia.Components.FarmacoComun.Search>
+    }
 }
 
    

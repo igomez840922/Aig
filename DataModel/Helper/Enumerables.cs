@@ -759,6 +759,19 @@ namespace DataModel.Helper
         No = 3,
     }
 
+    public enum enumFMV_IpsTipoPresentaiones2 {
+        [Description("No Presentado")]
+        NotPresent = 0,
+        [Description("Presentado")]
+        Presented = 1,
+        [Description("Si")]
+        Yes = 2,
+        [Description("No")]
+        No = 3,
+        [Description("No hay estudios")]
+        NoEstud = 4,
+    }
+
     public enum enumFMV_IpsStatusRevision
     {
         [Description("Por Evaluar")]

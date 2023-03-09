@@ -106,8 +106,8 @@ namespace DataModel
         public enumFMV_IpsTipoPresentaiones OtroInfPer { get => otroInfPer; set => SetProperty(ref otroInfPer, value); }
 
         // Falta de eficacia en ensayos clínicos controlados: No hay estudios, no presentado, si, no
-        private enumFMV_IpsTipoPresentaiones faltaEficacia;
-        public enumFMV_IpsTipoPresentaiones FaltaEficacia { get => faltaEficacia; set => SetProperty(ref faltaEficacia, value); }
+        private enumFMV_IpsTipoPresentaiones2 faltaEficacia;
+        public enumFMV_IpsTipoPresentaiones2 FaltaEficacia { get => faltaEficacia; set => SetProperty(ref faltaEficacia, value); }
 
         // Revision de señales: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones revisionSenales;

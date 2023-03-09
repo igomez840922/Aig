@@ -42,6 +42,7 @@ namespace Aig.FarmacoVigilancia.Components.FF
         AttachmentTB attachment { get; set; } = null;
         bool Exit { get; set; } = false;
         bool showSearchMedicine { get; set; } = false;
+        bool showSearchFarmaco { get; set; } = false;
 
         bool openLote { get; set; } = false;
         FMV_LoteTB lote { get; set; } = null;
@@ -350,6 +351,26 @@ namespace Aig.FarmacoVigilancia.Components.FF
 
             this.InvokeAsync(StateHasChanged);
         }
+
+        ////////////
+        ///
+
+        protected async Task OpenSearchFarmaco() {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>(SearchFarmacoEventHandler);
+            showSearchFarmaco = true;
+            await this.InvokeAsync(StateHasChanged);
+        }
+        private void SearchFarmacoEventHandler(MessageArgs args) {
+            showSearchFarmaco = false;
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>(SearchFarmacoEventHandler);
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Farmaco.AddEditEvent>();
+            if (message.Data != null) {
+                Data.NombreDci = message.Data.NombreDCI;
+                Data.NombreComercial = string.IsNullOrEmpty(message.Data.NombreComercial) ? Data.NombreComercial : message.Data.NombreComercial;
+            }
+            this.InvokeAsync(StateHasChanged);
+        }
+
 
     }
 
