@@ -210,8 +210,10 @@
                             Exportar Evaluación
                         </MudMenuItem>
                    
-
                 }
+                <MudMenuItem Disabled=(!IsCopy()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">
+                  Clonar
+                </MudMenuItem>
                @* <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
             </MudMenu>
 
@@ -406,7 +408,11 @@
                    
 
                 }
-                 <MudMenuItem Disabled=(!IsEdit()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">Editar</MudMenuItem>
+
+                <MudMenuItem Disabled=(!IsCopy()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">
+                  Clonar
+                </MudMenuItem>
+
                @* <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
             </MudMenu>
 
@@ -489,7 +495,7 @@
         var userRole = role.ParseEnum<RoleType>();
         return (evaluators.Any(p => p == userId)) || (userRole== RoleType.Admin || userRole== RoleType.Boss);
     }
-     protected bool IsEdit()
+     protected bool IsCopy()
     {
         var disabled=true;
         if (_user == null) return disabled;

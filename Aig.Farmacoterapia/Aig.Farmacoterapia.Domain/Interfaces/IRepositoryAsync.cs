@@ -9,6 +9,7 @@ namespace Aig.Farmacoterapia.Domain.Interfaces
     public interface IRepositoryAsync<T> where T : class
     {
         IQueryable<T> Entities { get; }
+        IQueryable<T> EntitiesNoTracking { get; }
         Task<T?> GetByIdAsync(long id);
         IQueryable<T> GetAll();
         Task<int> CountAsync();

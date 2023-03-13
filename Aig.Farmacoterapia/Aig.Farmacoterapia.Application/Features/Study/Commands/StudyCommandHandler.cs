@@ -163,14 +163,17 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
             IResult answer = new Result();
             try
             {
-                var item = await _unitOfWork.Repository<AigEstudio>().GetByIdAsync(request.Id);
+                var item =  _unitOfWork.Repository<AigEstudio>().EntitiesNoTracking.FirstOrDefault(s => s.Id == request.Id);
                 if (item != null)
                 {
-                    item.Estado = EstadoEstudio.Pendiente;
-                    item.FechaAsignacion = null;
-                    item.Nota = new AigNotaEstudio();
-                    await _unitOfWork.Repository<AigEstudio>().AddAsync(item);
-                    answer = Result<bool>.Success(_unitOfWork.Commit());
+                     var clone = _mapper.Map<AigEstudio>(item);
+                     clone.Id = 0;
+                     clone.FechaAsignacion = null;
+                     clone.Estado = EstadoEstudio.Pendiente;
+                     clone.Nota = new AigNotaEstudio();
+
+                     await _unitOfWork.Repository<AigEstudio>().AddAsync(clone);
+                     answer = Result<bool>.Success(_unitOfWork.Commit());
                 }
                 else answer = Result<bool>.Fail();
             }
