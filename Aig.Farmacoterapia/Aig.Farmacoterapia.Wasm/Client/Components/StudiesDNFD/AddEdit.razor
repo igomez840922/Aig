@@ -23,6 +23,13 @@
         max-height: calc(107vh - var(--mud-appbar-height));
         overflow-y: auto;
     }
+  .mud-input.mud-disabled {
+    color: var(--mud-palette-text-primary) !important;
+    cursor: default;
+  }
+  .mud-input-control>.mud-input-control-input-container>.mud-input-label-inputcontrol.mud-disabled {
+    color: var(--mud-palette-text-primary) !important;
+  }
 </style>
 <EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
     <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />

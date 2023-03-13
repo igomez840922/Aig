@@ -48,6 +48,17 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
         [IgnoreDataMember]
         public string MatchInfo { get; set; } = string.Empty;
 
+        private List<AigEstudioFile>? _Documents; 
+        public List<AigEstudioFile>? Documents
+        {
+            get => _Documents ??= new List<AigEstudioFile>();
+            set
+            {
+
+                _Documents = value;
+            }
+        }
+
     }
 
 }

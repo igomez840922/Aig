@@ -69,15 +69,15 @@
                 <MudGrid Style="margin-top:5px !important">
                     <MudItem xs="12">
                         <MudGrid>
-                         <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
-                                <MudTextField  Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Factura)" @bind-Value="_modelData.Factura" Label="Número de factura de importación" />
+                         <MudItem xs="12" md="3" Style="padding:3px !important; margin-top:18px !important">
+                                <MudTextField  Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Factura)" @bind-Value="_modelData.Factura" Label="Número de factura" />
                             </MudItem>
 
-                          <MudItem xs="12" md="3" Style="padding:3px !important; margin-top:18px !important">
-                                <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Cantidad)" @bind-Value="_modelData.Cantidad" Label="Cantidad a importar" />
+                          <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
+                                <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Cantidad)" @bind-Value="_modelData.Cantidad" Label="Cantidad" />
                             </MudItem>
 
-                            <MudItem xs="12" md="2" Style="padding:3px !important; margin-top:18px !important">
+                            <MudItem xs="12" md="4" Style="padding:3px !important; margin-top:18px !important">
                                 <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Lote)" @bind-Value="_modelData.Lote" Label="Lote" />
                             </MudItem>
 

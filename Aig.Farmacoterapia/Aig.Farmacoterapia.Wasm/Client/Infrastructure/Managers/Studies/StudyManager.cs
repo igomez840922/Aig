@@ -1,8 +1,10 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Models;
 using Aig.Farmacoterapia.Wasm.Client.Extensions;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
@@ -50,6 +52,44 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
             var response = await _httpClient.PostAsJsonAsync(AppConstants.EstudioEndpoints.Evaluators, new { studyId = id, evaluators = evaluators });
             return await response.ToResult();
         }
-       
+        public async Task<IResult> CloneAsync(long id)
+        {
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.EstudioEndpoints.Clone, new { id = id });
+            return await response.ToResult();
+        }
+        //public async Task<IResult> UploadFileAsync(UploadObject model)
+        //{
+        //    var fileContent = new StreamContent(model.Data);
+        //    fileContent.Headers.ContentType = new MediaTypeHeaderValue(model.ContentType);
+        //    using var content = new MultipartFormDataContent {
+        //       { fileContent,"file", model.FileName },
+        //       { new StringContent(model.UploadType.ToString()),"type"},
+        //    };
+        //    var response = await _httpClient.PostAsync(AppConstants.MediaEndpoints.Upload(), content);
+        //    return await response.ToResult();
+        //}
+
+        //public async Task<IResult> DeleteFileAsync(UploadType uploadType, string file)
+        //{
+        //    var response = await _httpClient.PostAsJsonAsync(AppConstants.MediaEndpoints.DeleteFile, new { type = uploadType.ToString(), image = file });
+        //    return await response.ToResult();
+        //}
+
+        public async Task<IResult> UploadFileAsync(UploadObject model)
+        {
+            var fileContent = new StreamContent(model.Data);
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(model.ContentType);
+            using var content = new MultipartFormDataContent {
+               { fileContent,"file", model.FileName },
+               { new StringContent(model.UploadType.ToString()),"type"},
+            };
+            var response = await _httpClient.PostAsync(AppConstants.MediaEndpoints.Upload(), content);
+            return await response.ToResult();
+        }
+        public async Task<IResult> DeleteFileAsync(UploadType uploadType, string file)
+        {
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.MediaEndpoints.DeleteFile, new { type = uploadType.ToString(), image = file });
+            return await response.ToResult();
+        }
     }
 }

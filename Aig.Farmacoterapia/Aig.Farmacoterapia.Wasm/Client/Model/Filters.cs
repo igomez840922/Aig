@@ -43,7 +43,9 @@ namespace Aig.Farmacoterapia.Wasm.Client.Model
         public DateTime? StartExpirationDate { get; set; }
         public DateTime? EndExpirationDate { get; set; }
         public EstadoEstudioDNFD Status { get; set; }
-
+        public string Researcher { get; set; }
+        public string Sponsor { get; set; }
+        
     }
 
     public class StudiesFilter : BaseFilter

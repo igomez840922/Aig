@@ -59,12 +59,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                         switch (filteringOption.Field){
                             case "term":
                                 {
-                                    Expression<Func<AigEstudioDNFD, bool>> expression = f => f.AigCodigo.Codigo.Contains((string)filteringOption.Value) ||
-                                    f.Titulo.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
-                                    f.CentroInvestigacion.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
-                                    f.CentroInvestigacion.ToLower().Contains(((string)filteringOption.Value).ToLower());
+                                    string value = ((string)filteringOption.Value).ToLower();
+                                    Expression<Func<AigEstudioDNFD, bool>> expression = f => f.AigCodigo.Codigo.Contains(value) ||
+                                    f.Titulo.ToLower().Contains(value) ||
+                                    f.CentroInvestigacion.ToLower().Contains(value);
                                     filterList.Add(expression);
-                                 }
+                                }
                                 break;
                             case "startEvaluationDate":
                                 {
@@ -100,7 +100,22 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                                     filterList.Add(expression);
                                 }
                                 break;
-                         
+                            case "researcher":
+                                {
+                                    string value = ((string)filteringOption.Value).ToLower();
+                                    Expression<Func<AigEstudioDNFD, bool>> expression = f => f.InvestigadorPrincipal.ToLower().Contains(value);
+                                    filterList.Add(expression);
+                                }
+                                break;
+
+                            case "sponsor":
+                                {
+                                    string value = ((string)filteringOption.Value).ToLower();
+                                    Expression<Func<AigEstudioDNFD, bool>> expression = f => f.Patrocinador.ToLower().Contains(value);
+                                    filterList.Add(expression);
+                                }
+                                break;
+
                         }
                     }
                 }

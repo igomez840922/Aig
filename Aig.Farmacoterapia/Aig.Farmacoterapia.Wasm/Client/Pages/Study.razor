@@ -175,7 +175,7 @@
     <MudTable HorizontalScrollbar="false" FixedHeader="true" FixedFooter="true"  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigEstudio>>>(DoFetchData))">
      
         <HeaderContent>
-            @*<MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>*@
+           <MudTh></MudTh>
             <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="status" T="AigEstudio">Estado</MudTableSortLabel></MudTh> 
             <MudTh> <MudTableSortLabel Style="width:100px !important" SortLabel="admissionDate" T="AigEstudio">Fecha de Ingreso</MudTableSortLabel></MudTh> 
             <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
@@ -192,10 +192,30 @@
             <MudTh><MudInputLabel Style="width:200px">Duración del estudio</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:100px">Número de participantes en panamá</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
-            <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Descending" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel Style="width:200px" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
+            <MudTd>
+
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Disabled="!IsAddAndEvaluators()" Style="border-bottom:1px solid #E4E6EF !important;"  Icon="@Icons.Material.Filled.HowToReg" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
+                
+                @if (context.Estado!=EstadoEstudio.Pendiente && !string.IsNullOrEmpty(context.Nota?.Observaciones)) {
+                  
+                   
+                        <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
+                                 Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
+                            Exportar Evaluación
+                        </MudMenuItem>
+                   
+
+                }
+               @* <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
+            </MudMenu>
+
+            </MudTd>
 
         <MudTd DataLabel="Estado">
 
@@ -386,6 +406,7 @@
                    
 
                 }
+                 <MudMenuItem Disabled=(!IsEdit()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">Editar</MudMenuItem>
                @* <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
             </MudMenu>
 
@@ -468,7 +489,15 @@
         var userRole = role.ParseEnum<RoleType>();
         return (evaluators.Any(p => p == userId)) || (userRole== RoleType.Admin || userRole== RoleType.Boss);
     }
-
+     protected bool IsEdit()
+    {
+        var disabled=true;
+        if (_user == null) return disabled;
+        var userId= _user.GetUserId();
+        var role= _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return (userRole== RoleType.Admin || userRole== RoleType.Boss);
+    }
     private async Task RefresView(bool state)
     {
         _loading = state;
@@ -614,6 +643,26 @@
         if (!result.Cancelled)
         {
             var response = await _manager.DeleteAsync(id);
+            if (response.Succeeded)
+                 await _table.ReloadServerData();
+            foreach (var message in response.Messages)
+            {
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
+        }
+    }
+
+    private async Task Clone(long id)
+    {
+        var parameters = new DialogParameters{
+             { nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro de querer clonar esta solicitud ?", id) }
+         };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>("Eliminar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            var response = await _manager.CloneAsync(id);
             if (response.Succeeded)
                  await _table.ReloadServerData();
             foreach (var message in response.Messages)

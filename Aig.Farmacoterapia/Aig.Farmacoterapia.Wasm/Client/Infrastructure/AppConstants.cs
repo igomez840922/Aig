@@ -88,11 +88,14 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             public static string Search = "api/studies/search";
             public static string Update = "api/studies/update";
             public static string Delete = $"api/studies/delete";
+            public static string Clone = $"api/studies/clone";
             public static string Evaluators = $"api/studies/evaluators";
             public static string Get(long id) => $"api/studies/study/{id}";
             public static string GetEvaluators(long id) => $"api/studies/evaluators/{id}";
 
             public static string Notification = $"api/studies/notification";
+
+            public static string DocumentURL(string file) => $"api/studies/documents/{file}";
 
         }
 

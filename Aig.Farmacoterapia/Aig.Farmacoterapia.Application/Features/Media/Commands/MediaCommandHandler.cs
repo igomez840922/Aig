@@ -50,6 +50,7 @@ namespace Aig.Farmacoterapia.Application.Features.Media.Commands
                         FileName = file.FileName,
                         Data = ms,
                         Size = file.Length,
+                        ContentType = file.ContentType,
                         UploadType = (UploadType)Enum.Parse(typeof(UploadType), type.ToString(), true),
                     };
                     var result = string.Empty;

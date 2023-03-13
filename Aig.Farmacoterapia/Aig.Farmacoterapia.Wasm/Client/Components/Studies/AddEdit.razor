@@ -13,12 +13,24 @@
 @using Blazored.FluentValidation
 @using System.Globalization
 @using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
 @inject IStudyManager _manager;
 
 <style>
     .mud-dialog {
         max-height: calc(107vh - var(--mud-appbar-height));
         overflow-y: auto;
+    }
+  .mud-input.mud-disabled {
+    color: var(--mud-palette-text-primary) !important;
+    cursor: default;
+  }
+  .mud-input-control>.mud-input-control-input-container>.mud-input-label-inputcontrol.mud-disabled {
+    color: var(--mud-palette-text-primary) !important;
+  }
+
+   .mud-input-control>.mud-input-control-input-container>.mud-input-label-inputcontrol {
+        padding: 0 5px !important;
     }
 </style>
 <EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
@@ -91,10 +103,14 @@
                                         <ValidationMessage For="@(() => _modelData.FechaIngreso)" />
                                     </MudItem>
 
-                                    <MudItem xs="12" md="3" Style="padding:3px !important">
-                                        <MudDatePicker  Disabled="!IsEditData()" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de asignación" @bind-Date="_modelData.FechaAsignacion" />
-                                        <ValidationMessage For="@(() => _modelData.FechaAsignacion)" />
-                                    </MudItem>
+                                    @if (_user?.GetRole().ParseEnum<RoleType>()== RoleType.Boss)
+                                    {
+                                        <MudItem xs="12" md="3" Style="padding:3px !important">
+                                            <MudDatePicker Disabled="!IsEditData()" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de asignación" @bind-Date="_modelData.FechaAsignacion" />
+                                            <ValidationMessage For="@(() => _modelData.FechaAsignacion)" />
+                                        </MudItem>
+
+                                    }
 
                                     <MudItem xs="12" md="2" Style="padding:3px !important;margin-top:18px !important">
                                         <MudCheckBox Disabled="!IsEditData()" @bind-Checked="_modelData.Placebo" Label="Incluye Placebo" Color="Color.Primary"></MudCheckBox>
@@ -127,7 +143,7 @@
                                 <MudGrid>
 
                                     <MudItem xs="12" md="5" Style="padding:3px !important;">
-                                        <MudTextField Disabled="!IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Participantes)" @bind-Value="_modelData.Participantes" Label="Número de participantes en panamá" />
+                                        <MudTextField Disabled="!IsEditData()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Participantes)" @bind-Value="_modelData.Participantes" Label="Número de participantes en Panamá" />
                                     </MudItem>
 
                                     <MudItem xs="12" md="3" Style="padding:3px !important;">
@@ -232,6 +248,22 @@
                     </MudTabPanel>
 
                   
+                    <MudTabPanel Icon="@Icons.Material.Filled.AttachFile" Text="Documentos">
+
+                        <MudGrid>
+
+                            <MudItem md="12">
+                                <Documents  _parent="@_modelData" _edit="IsEditData()"></Documents>
+                            </MudItem>
+
+
+                        </MudGrid>
+
+
+                    </MudTabPanel>
+                    
+
+
                      <MudTabPanel Icon="@Icons.Material.Filled.NoteAdd" Text="Nota de Evaluación">
 
                             <MudGrid Style="margin-top:10px !important">

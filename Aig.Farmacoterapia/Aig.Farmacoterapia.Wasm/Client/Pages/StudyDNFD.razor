@@ -93,29 +93,19 @@
             <MudGrid>
 
                 <MudItem md="3" Style="margin-top:12px !important">
-                   <MudTextField HelperText="Código / Título / Investigador / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
+                   <MudTextField  OnClearButtonClick="OnSearch" Clearable="true" HelperText="Código / Título  / Centro" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
                 </MudItem>
 
                  <MudItem md="5">
                     <MudGrid>
                         <MudItem md="6">
-                            <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Ingreso:"  @bind-DateRange="dateRange" />
+                            <MudDateRangePicker Clearable="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Ingreso:"  @bind-DateRange="dateRange" />
                         </MudItem>
                         <MudItem md="6">
-                             <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Evaluación:" @bind-DateRange="expirationRange" />
+                             <MudDateRangePicker Clearable="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Evaluación:" @bind-DateRange="expirationRange" />
                         </MudItem>
                     </MudGrid>
                 </MudItem>
-
-                @*
-                    <MudItem md="2" Style="margin-top:12px !important">
-                     <MudSelect T="EstadoEstudioDNFD"  Clearable="true" Label="Estado" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.Status">
-                        @foreach (EstadoEstudioDNFD dt in Enum.GetValues(typeof(EstadoEstudioDNFD))){
-                            <MudSelectItem Value="@(dt)">@(dt.ToDescriptionString())</MudSelectItem>
-                        }
-                     </MudSelect>
-                   </MudItem>
-                *@
 
                 <MudItem md="2" Style="margin-top:12px !important">
                     <MudGrid>
@@ -138,6 +128,19 @@
              
             </MudGrid>
 
+            <MudGrid>
+                  
+                    <MudItem md="3" Style="margin-top:8px !important">
+                        <MudTextField OnClearButtonClick="OnSearch" Clearable="true" HelperText="Investigador principal" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Researcher" Label="Investigador" />
+                    </MudItem>
+
+                      <MudItem md="3" Style="margin-top:8px !important">
+                        <MudTextField OnClearButtonClick="OnSearch" Clearable="true" HelperText="Patrocinador del estudio" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Sponsor" Label="Patrocinador" />
+                    </MudItem>
+
+
+                </MudGrid>
+
         </MudCardContent>
 
     </MudCard>
@@ -146,8 +149,7 @@
     <MudTable HorizontalScrollbar="false" FixedHeader="true" FixedFooter="true"  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigEstudioDNFD>>>(DoFetchData))">
      
         <HeaderContent>
-            @*<MudTh> <MudInputLabel Style="width:5px !important"/> </MudTh>*@
-            @*<MudTh> <MudTableSortLabel Style="width:150px !important" SortLabel="status" T="AigEstudioDNFD">Estado</MudTableSortLabel></MudTh> *@
+             <MudTh></MudTh>
             <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudioDNFD">Fecha de Ingreso</MudTableSortLabel></MudTh> 
             <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
             <MudTh><MudInputLabel Style="width:500px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
@@ -166,31 +168,29 @@
         </HeaderContent>
         <RowTemplate>
 
-           @* <MudTd>
-                <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
-            </MudTd>*@
+           <MudTd>
 
-            @*<MudTd DataLabel="Estado">
-                 @if (context.Estado== EstadoEstudioDNFD.Processed)
-            {
-                <MudBadge Icon="@Icons.Material.Filled.Check" Color="Color.Tertiary" Overlap="true" Bordered="true" Class="mx-6 my-4">
-                    <MudButton Color="Color.Tertiary" Variant="Variant.Filled" DisableElevation="true">
-                        @context.Estado.ToDescriptionString()
-                    </MudButton>
-                </MudBadge>
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Disabled=IsEdit() Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                 @*<MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Disabled="@(context.Estado!=EstadoEstudioDNFD.Pending || IsEvaluate())" IconColor="Color.Primary" Icon="@Icons.Material.Outlined.PostAdd" OnClick="@(() => Evaluate(@context.Id))" OnTouch="@(() => Evaluate(@context.Id))">Generar Solicitud</MudMenuItem>*@
+                @* <MudMenuItem Disabled=IsDelete() Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
+            </MudMenu>
 
-            }
-            else
-            {
-                <MudBadge Icon="@Icons.Material.Filled.Warning" Color="Color.Error" Overlap="true" Bordered="true" Class="mx-6 my-4">
-                    <MudButton Color="Color.Error" Variant="Variant.Filled" DisableElevation="true">
-                        @context.Estado.ToDescriptionString()
-                    </MudButton>
-                </MudBadge>
-            }
-            </MudTd>*@
+            </MudTd>
+
             <MudTd DataLabel="Fecha de Ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
-            <MudTd DataLabel="Código del protocolo de investigación">@context.AigCodigo.Codigo</MudTd>
+            <MudTd DataLabel="Código del protocolo de investigación">
+                 @if (!string.IsNullOrEmpty(context.AigCodigo?.Codigo))
+                {  
+                     <MudBadge Content="context.AigCodigo?.Codigo" Color="Color.Tertiary" Overlap="true">
+                     </MudBadge>
+                }
+                else
+                {
+                    <MudBadge Content="@("-")" Color="Color.Default" Overlap="true"  Class="mx-2 my-2">
+                    </MudBadge>
+                }
+             </MudTd>
             <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
             <MudTd DataLabel="Nota de Evaluación">@context.NotaEvaluacion</MudTd>
             <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", context.FechaEvaluacion!))</MudTd>
@@ -203,7 +203,7 @@
              <MudTd DataLabel="Centro de investigación">@context.CentroInvestigacion</MudTd>
             <MudTd DataLabel="Comité de bioetica que aprobó el estudio">@context.ComiteBioetica</MudTd>
             <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
-            <MudTd>
+           <MudTd>
 
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                 <MudMenuItem Disabled=IsEdit() Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
@@ -321,6 +321,12 @@
        
         filters.Add(new FilteringOption { Field = "status", Operator = FilteringOperator.Equal, Value = _modelFilter.Status.ToString() });
         
+        if (!string.IsNullOrEmpty(_modelFilter.Researcher))
+            filters.Add(new FilteringOption { Field = "researcher", Operator = FilteringOperator.Contains, Value = _modelFilter.Researcher.Trim() });
+
+        if (!string.IsNullOrEmpty(_modelFilter.Sponsor))
+            filters.Add(new FilteringOption { Field = "sponsor", Operator = FilteringOperator.Contains, Value = _modelFilter.Sponsor.Trim() });
+
         var args = new PageSearchArgs()
             {
                 PageIndex = state.Page + 1,

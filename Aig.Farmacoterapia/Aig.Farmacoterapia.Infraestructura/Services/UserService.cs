@@ -107,7 +107,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         }
         public async Task<Result<List<ApplicationUser>>> GetAllEvaluatorAsync()
         {
-            var users = await _userManager.Users.Where(p=>p.Role== RoleType.Evaluator).ToListAsync();
+            var users = await _userManager.Users.Where(p=>p.Role== RoleType.Evaluator || p.Role == RoleType.Boss).ToListAsync();
             return await Result<List<ApplicationUser>>.SuccessAsync(users);
         }
         public async Task<IResult> SaveAsync(ApplicationUser data)

@@ -1,0 +1,205 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Medicament
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Validation
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@using System.Globalization
+@inject IStudyManager _manager;
+<style>
+    .mud-dialog {
+        max-height: calc(108vh - var(--mud-appbar-height));
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+</style>
+<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
+    <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+
+                <MudText Typo="Typo.h6">
+                    <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                    Nuevo documento
+                </MudText>
+
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            @if (_loading)
+            {
+                <div style="margin-left:45% !important;">
+                    <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+                </div>
+            }
+            else
+            { 
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudGrid>
+
+                            <MudItem xs="12" md="12" Style="padding:3px !important">
+                                <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Nombre)" @bind-Value="_modelData.Nombre" Label="Nombre del documento" />
+                            </MudItem>
+
+                        </MudGrid>
+                    </MudItem>
+
+                     <MudItem xs="12">
+                        <MudGrid>
+
+                            <MudItem xs="12" md="12" Style="padding:3px !important">
+
+                                <table class="divInputFile" cellspacing="0" cellpadding="0">
+
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <InputFile id="fileInput" hidden OnChange="UploadFile" SuppressOnChangeWhenInvalid="SuppressOnChangeWhenInvalid" />
+                                                <MudButton HtmlTag="label"
+                                                       Variant="Variant.Text"
+                                                       Color="Color.Primary"
+                                                       Size="Size.Small"
+                                                       StartIcon="@Icons.Filled.AttachFile"
+                                                       for="fileInput">
+                                                    Adjuntar
+                                                </MudButton>
+
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div>
+
+                                                @if (!_showFileInputAlert && !string.IsNullOrEmpty(_modelData.Document!.FileName))
+                                                {
+                                                    <MudButton Variant="Variant.Text"
+                                                       Color="Color.Info"
+                                                       StartIcon="@Icons.Filled.FileDownload"
+                                                       Size="Size.Small"
+                                                       Link="@($"{_appConfiguration.ApiUrl}{AppConstants.EstudioEndpoints.DocumentURL(_modelData.Document!.FileName)}")" Target="_blank">
+                                                        Descargar
+                                                    </MudButton>
+                                                    <MudButton Variant="Variant.Text"
+                                                       Color="Color.Error"
+                                                       StartIcon="@Icons.Filled.Delete"
+                                                       Size="Size.Small"
+                                                       OnClick="DeleteFile">
+                                                        Eliminar
+                                                    </MudButton>
+                                                }
+                                            </div>
+                                        </td>
+                                        @if (_fileLoading)
+                                        {
+                                            <td>
+                                                <div>
+                                                    <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
+                                                </div>
+                                            </td>
+                                        }
+                                    </tr>
+
+                                </table>
+                                 @*<ValidationMessage For="@(() => _modelData.Document.FileName)" />*@
+                            </MudItem>
+
+                        </MudGrid>
+                    </MudItem>
+
+                </MudGrid>
+
+            }
+        </DialogContent>
+        <DialogActions>
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
+            <MudButton Disabled="@(!Validate())" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Guardar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+@code {
+
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    private FluentValidationValidator _fluentValidation;
+    [Parameter] public AigEstudioFile _modelData { get; set; }
+    private bool _validated => Validate();
+    bool _loading = false;
+    protected override async Task OnInitializedAsync()
+    {      
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            Validate();
+    }
+    private bool Validate() => _fluentValidation.Validate();
+
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    protected async Task SubmitAsync()
+    {
+        if (Validate()){
+            MudDialog.Close(DialogResult.Ok(_modelData));
+        }
+    }
+    private bool _showFileInputAlert = false;
+    protected bool _fileLoading { get; set; } = false;
+    private async Task UploadFile(InputFileChangeEventArgs e)
+    {
+        IBrowserFile file = e.File;
+        if (file != null) {
+            _showFileInputAlert = false;
+            _fileLoading = true;
+            await RefresView();
+            long maxFileSize = 1048576 * 120;//120MB
+            if (file.Size <= maxFileSize) {
+                var uploadType = UploadType.Documents;
+                var contentType = file.ContentType;
+                var extension = Path.GetExtension(file.Name);
+                var stream = file.OpenReadStream(maxAllowedSize: (int)file.Size);
+                var request = new UploadObject{
+                            FileName = $"{Guid.NewGuid()}{extension}",
+                            Data = stream,
+                            Size = file.Size,
+                            UploadType = uploadType,
+                            ContentType = contentType,
+                            Extension = extension,
+                        };
+                if ((await _manager.UploadFileAsync(request)).Succeeded)
+                    _modelData.Document = request;
+            }
+            else { _showFileInputAlert = true; }
+            _fileLoading = false;
+            await RefresView();
+        }
+    }
+
+    private async Task DeleteFile()
+    {
+        if (!string.IsNullOrEmpty(_modelData.Document!.FileName)) {
+            await _manager.DeleteFileAsync(UploadType.Documents, _modelData.Document!.FileName);
+            _modelData= new AigEstudioFile() {  Document = new UploadObject() };
+            await RefresView();
+        }
+    }
+
+    public async Task  Cancel()
+    {
+        await DeleteFile();
+        MudDialog.Cancel();
+    }
+
+}

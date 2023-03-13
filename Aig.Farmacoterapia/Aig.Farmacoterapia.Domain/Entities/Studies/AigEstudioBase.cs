@@ -11,7 +11,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
     public class AigEstudioBase : BaseAuditableEntity
     {
         public DateTime? FechaIngreso { get; set; } = DateTime.Today;  //Match 
-        public DateTime? FechaAsignacion { get; set; } = DateTime.Today;
+        public DateTime? FechaAsignacion { get; set; }
         public string Titulo { get; set; } //Match 
         public string CentroInvestigacion { get; set; } //Match 
         public string InvestigadorPrincipal { get; set; }//Match 

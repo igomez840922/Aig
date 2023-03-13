@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Domain.Entities.Studies.Enums;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using Aig.Farmacoterapia.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -16,17 +18,36 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 {
     public class ReportService : IReportService
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISystemLogger _logger;
-        public ReportService(IUnitOfWork unitOfWork, ISystemLogger logger){
+        public ReportService(UserManager<ApplicationUser> userManager,IUnitOfWork unitOfWork, ISystemLogger logger){
+            _userManager = userManager;
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
         public async Task<byte[]> GetNotePdfAsync(long studyId) {
             var item = await _unitOfWork.Repository<AigEstudio>().GetByIdAsync(studyId);
+            item!.EvaluatorToShow = EvaluatorToShow(item.EstudioEvaluador.Select(s => s.UserId).ToList());
             if (item == null) return new byte[0];
             var document = new NoteReport(item);
             return document.GeneratePdf();
+        }
+       private string EvaluatorToShow(List<string> evaluators)
+        {
+            string result = string.Empty;
+            try
+            {
+                var list = _userManager.Users.Where(p => evaluators.Contains(p.Id)).ToList()
+                                              .Select(w => { w.FirstName = w.FirstName[..1].ToLower(); return w.FirstName; });
+
+                result = string.Join(" / ", list);
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc.Message, exc);
+            }
+            return result;
         }
     }
 
@@ -44,13 +65,45 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             container.Page(page =>
             {
+                page.DefaultTextStyle(x => x.FontFamily("Arial").FontSize(12));
                 page.MarginVertical(10);
                 page.MarginHorizontal(25);
                 page.Size(PageSizes.A4);
-
                 page.Header().Element(HeaderBody);
 
-                page.Content().Element(ContentBody);
+                page.Content().Element(ContentBody1);
+
+                page.Footer().PaddingTop(10).PaddingBottom(5).AlignCenter()
+                  .Text(x =>
+                  {
+                      x.Span("Página ");
+                      x.CurrentPageNumber();
+                  });
+            })
+            .Page(page =>
+             {
+                 page.Size(PageSizes.Letter.Landscape());
+                 page.MarginVertical(10);
+                 page.MarginHorizontal(25);
+                 page.Content().Element(RowTable);
+
+                 page.Footer().PaddingTop(10).PaddingBottom(5).AlignCenter()
+                  .Text(x =>
+                  {
+                      x.Span("Página ");
+                      x.CurrentPageNumber();
+                  });
+             })
+            .Page(page =>
+            {
+                page.DefaultTextStyle(x => x.FontFamily("Arial").FontSize(12));
+                page.MarginVertical(10);
+                page.MarginHorizontal(25);
+                page.Size(PageSizes.A4);
+                page.Header().Element(HeaderBody);
+
+                page.Content().Element(ContentBody2);
+
 
                 page.Footer().PaddingTop(10).PaddingBottom(5).AlignCenter()
                    .Text(x =>
@@ -109,8 +162,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                         
                        column.Item().PaddingBottom(10).Text(text =>
                        {
-                         //text.Span("Fecha de evaluación: ").SemiBold();
-                         text.Span($"{Model.Nota?.FechaEvaluacion:d}").SemiBold().FontColor("#383838");
+                           //text.Span("Fecha de evaluación: ").SemiBold();
+                           //text.Span($"{Model.Nota?.FechaEvaluacion:d}").SemiBold().FontColor("#383838");
+                           text.Span($"Panamá, {Model.Nota?.FechaEvaluacion!.Value.ToLongDateString()}").SemiBold().FontColor("#383838").FontSize(11);
+                          
                        });
 
                         if (Model.Tramitante != null)
@@ -126,14 +181,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                 });
                             }
 
-                            if (!string.IsNullOrEmpty(Model.Tramitante.Idoneidad))
-                            {
-                                column.Item().Text(text =>
-                                {
-                                    //text.Span("Idoneidad: ").SemiBold();
-                                    text.Span(Model.Tramitante.Idoneidad).SemiBold().FontColor("#383838");
-                                });
-                            }
+                            //if (!string.IsNullOrEmpty(Model.Tramitante.Idoneidad))
+                            //{
+                            //    column.Item().Text(text =>
+                            //    {
+                            //        //text.Span("Idoneidad: ").SemiBold();
+                            //        text.Span(Model.Tramitante.Idoneidad).SemiBold().FontColor("#383838");
+                            //    });
+                            //}
                             if (!string.IsNullOrEmpty(Model.AgenciaDistribuidora))
                             {
                                 column.Item().Text(text =>
@@ -142,22 +197,22 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                     text.Span(Model.AgenciaDistribuidora).SemiBold().FontColor("#383838");
                                 });
                             }
-                            if (!string.IsNullOrEmpty(Model.Tramitante.Telefono))
-                            {
-                                column.Item().Text(text =>
-                                {
-                                    //text.Span("Teléfono: ").SemiBold();
-                                    text.Span(Model.Tramitante.Telefono).SemiBold().FontColor("#383838");
-                                });
-                            }
-                            if (!string.IsNullOrEmpty(Model.Tramitante.Correo))
-                            {
-                                column.Item().Text(text =>
-                                {
-                                    //text.Span("Correo: ").SemiBold();
-                                    text.Span(Model.Tramitante.Correo).SemiBold().FontColor("#383838");
-                                });
-                            }
+                            //if (!string.IsNullOrEmpty(Model.Tramitante.Telefono))
+                            //{
+                            //    column.Item().Text(text =>
+                            //    {
+                            //        //text.Span("Teléfono: ").SemiBold();
+                            //        text.Span(Model.Tramitante.Telefono).SemiBold().FontColor("#383838");
+                            //    });
+                            //}
+                            //if (!string.IsNullOrEmpty(Model.Tramitante.Correo))
+                            //{
+                            //    column.Item().Text(text =>
+                            //    {
+                            //        //text.Span("Correo: ").SemiBold();
+                            //        text.Span(Model.Tramitante.Correo).SemiBold().FontColor("#383838");
+                            //    });
+                            //}
 
                         }
 
@@ -177,9 +232,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 row.Spacing(2);
                 row.RelativeItem(4).Text(text =>
                 {
-                    text.Span($"En referencia al Protocolo de Investigación del estudio clínico {Model.Codigo}  " +
-                              $"titulado \"{Model.Titulo}\" cuyo investigador principal es: {Model.InvestigadorPrincipal},  " +
-                              $"a realizarse en {Model.CentroInvestigacion},  le informamos que autorizamos la introducción al país " +
+                    text.Span($"En referencia al Protocolo de Investigación del estudio clínico {Model?.Codigo}  " +
+                              $"titulado \"{Model?.Titulo}\" cuyo investigador principal es: {Model?.InvestigadorPrincipal},  " +
+                              $"a realizarse en {Model?.CentroInvestigacion},  le informamos que autorizamos la introducción al país " +
                               $"de los siguientes productos, exclusivamente para el fin indicado.");
                 });
 
@@ -194,9 +249,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 row.Spacing(2);
                 row.RelativeItem(4).Text(text =>
                 {
-                    text.Span($"En referencia al Protocolo de Investigación del estudio clínico {Model.Codigo}  " +
-                              $"titulado \"{Model.Titulo}\" cuyo investigador principal es: {Model.InvestigadorPrincipal},  " +
-                              $"a realizarse en {Model.CentroInvestigacion}, correspondiente a la Factura: {facture},  " +
+                    text.Span($"En referencia al Protocolo de Investigación del estudio clínico {Model?.Codigo}  " +
+                              $"titulado \"{Model?.Titulo}\" cuyo investigador principal es: {Model?.InvestigadorPrincipal},  " +
+                              $"a realizarse en {Model?.CentroInvestigacion}, correspondiente a la Factura: {facture},  " +
                               $"le informamos los siguientes aspectos:");
                 });
 
@@ -221,19 +276,21 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             container.Table(table =>
             {
+              
                 table.ColumnsDefinition(columns =>
                 {
                     columns.RelativeColumn(12);
                     columns.RelativeColumn(12);
-                    columns.RelativeColumn(20);
-                    columns.RelativeColumn(20);
-                    columns.RelativeColumn(10);
                     columns.RelativeColumn(15);
-                    columns.RelativeColumn(10);
+                    columns.RelativeColumn(20);
+                    columns.RelativeColumn(20);
+                    columns.RelativeColumn(12);
+                    columns.RelativeColumn(8);
                 });
 
                 table.Header(header =>
                 {
+                   
                     header.Cell().Element(CellStyle).Text("Factura N°");
                     header.Cell().Element(CellStyle).Text("Cantidad");
                     header.Cell().Element(CellStyle).Text("Producto");
@@ -250,43 +307,43 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
                 foreach (var item in Model.Medicamentos)
                 {
-                    table.Cell().Element(CellStyle).Text(item.Factura);
-                    table.Cell().Element(CellStyle).Text(item.Cantidad);
-                    table.Cell().BorderBottom(0.5f).BorderColor("#A2A2A2").Element(hdl =>
+                    table.Cell().Element(CellStyle).ShowOnce().Text(item.Factura);
+                    table.Cell().Element(CellStyle).ShowOnce().Text(item.Cantidad);
+                    table.Cell().BorderBottom(0.5f).BorderColor("#A2A2A2").Padding(10).Element(hdl =>
                     {
                         hdl.ShowEntire().Column(column =>
                         {
 
-                            column.Item().Text(text =>
+                            column.Item().ShowOnce().Text(text =>
                             {
                                 text.Span(item.Nombre);
                             });
-                            column.Item().Text(text =>
+                            column.Item().ShowOnce().Text(text =>
                             {
                                 text.Span(item.PrincipioActivo);
                             });
-                            column.Item().Text(text =>
+                            column.Item().ShowOnce().Text(text =>
                             {
                                 text.Span(item.FormaFarmaceutica);
                             });
-                            column.Item().Text(text =>
+                            column.Item().ShowOnce().Text(text =>
                             {
                                 text.Span(item.ViaAdministracion);
                             });
-                            column.Item().Text(text =>
+                            column.Item().ShowOnce().Text(text =>
                             {
                                 text.Span(item.Presentacion);
                             });
 
                         });
                     });
-                    table.Cell().BorderBottom(0.5f).BorderColor("#A2A2A2").Element(hdl =>
+                    table.Cell().BorderBottom(0.5f).BorderColor("#A2A2A2").Padding(10).Element(hdl =>
                     {
                         hdl.ShowEntire().Column(column =>
                         {
                             if (!string.IsNullOrEmpty(item.Fabricante?.Nombre))
                             {
-                                column.Item().Text(text =>
+                                column.Item().ShowOnce().Text(text =>
                                 {
                                     text.Span(item.Fabricante?.Nombre);
                                 });
@@ -295,14 +352,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                             {
                                 if (!string.IsNullOrEmpty(item.Fabricante?.Pais))
                                 {
-                                    column.Item().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
+                                    column.Item().ShowOnce().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
                                     {
                                         text.Span($"{item.Fabricante?.Direccion} / {item.Fabricante?.Pais}");
                                     });
                                 }
                                 else
                                 {
-                                    column.Item().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
+                                    column.Item().ShowOnce().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
                                     {
                                         text.Span($"{item.Fabricante?.Direccion}");
                                     });
@@ -312,7 +369,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
                             if (!string.IsNullOrEmpty(item.Acondicionador?.Nombre))
                             {
-                                column.Item().Text(text =>
+                                column.Item().ShowOnce().Text(text =>
                                 {
                                     text.Span(item.Acondicionador?.Nombre);
                                 });
@@ -322,7 +379,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
                                 if (!string.IsNullOrEmpty(item.Acondicionador?.Pais))
                                 {
-                                    column.Item().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
+                                    column.Item().ShowOnce().BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingBottom(5).Text(text =>
                                     {
                                         text.Span($"{item.Acondicionador?.Direccion} / {item.Acondicionador?.Pais}");
                                     });
@@ -339,18 +396,18 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
                         });
                     });
-                    table.Cell().Element(CellStyle).Text(item.Lote);
-                    table.Cell().Element(CellStyle).Text($"{item.Expiracion:d}");
-                    table.Cell().Element(CellStyle).Text(item.Fabricante?.Pais);
+                    table.Cell().Element(CellStyle).ShowOnce().Text(item.Lote);
+                    table.Cell().Element(CellStyle).ShowOnce().Text($"{item.Expiracion:d}");
+                    table.Cell().Element(CellStyle).ShowOnce().Text(item.Fabricante?.Pais);
 
                     static IContainer CellStyle(IContainer container)
                     {
-                        return container.BorderBottom(0.5f).BorderColor("#A2A2A2").PaddingVertical(5);
+                        return container.BorderBottom(0.5f).BorderColor("#A2A2A2").Padding(10);
                     }
                 }
             });
         }
-
+      
         void RowBody4(IContainer container)
         {
             container.ShowEntire().Row(row =>
@@ -371,17 +428,26 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     {
                         text.Span("Director(a) Nacional de Farmacia y Drogas").SemiBold();
                     });
-                    column.Item().Text(text =>
+                    //column.Item().Text(text =>
+                    //{
+                    //    text.Span("Ciudad de Panamá");
+                    //});
+
+                    if (!string.IsNullOrEmpty(Model.EvaluatorToShow))
                     {
-                        text.Span("Ciudad de Panamá");
-                    });
+                        column.Item().Text(text =>
+                        {
+                            text.Span(Model.EvaluatorToShow).FontSize(10);
+                        });
+                    }
+                   
 
                 });
 
             });
 
         }
-        void ContentBody(IContainer container)
+        void ContentBody1(IContainer container)
         {
 
             container.Grid(grid =>
@@ -408,14 +474,37 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 }
 
 
-                if (Model.Estado==EstadoEstudio.Authorized)
-                {
-                    grid.Item(12).PaddingTop(20).Row(row =>
-                    {
-                        row.RelativeItem().Element(RowTable);
-                    });
-                }
+                //if (Model.Estado == EstadoEstudio.Authorized)
+                //{
+                //    grid.Item(12).PaddingTop(20).Row(row =>
+                //    {
+                //        row.RelativeItem().Element(RowTable);
+                //    });
+                //}
+
+                //if (!string.IsNullOrEmpty(Model.Nota?.Observaciones))
+                //{
+                //    grid.Item(12).PaddingTop(20).Row(row =>
+                //    {
+                //        row.RelativeItem().Element(RowBody3);
+                //    });
+                //}
                
+                //grid.Item(12)
+                //    .ExtendVertical()
+                //    .AlignBottom()
+                //    .ExtendHorizontal()
+                //    .Height(100).Row(row => { row.RelativeItem().Element(RowBody4); });
+
+            });
+
+        }
+
+        void ContentBody2(IContainer container)
+        {
+
+            container.Grid(grid =>
+            {
                 if (!string.IsNullOrEmpty(Model.Nota?.Observaciones))
                 {
                     grid.Item(12).PaddingTop(20).Row(row =>
@@ -423,15 +512,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                         row.RelativeItem().Element(RowBody3);
                     });
                 }
-                //grid.Item(12).PaddingTop(100).Row(row =>
-                //{
-                //    row.RelativeItem().Element(RowBody4);
-                //});
+
                 grid.Item(12)
                     .ExtendVertical()
                     .AlignBottom()
                     .ExtendHorizontal()
-                    .Height(100).Row(row =>{row.RelativeItem().Element(RowBody4);});
+                    .Height(100).Row(row => { row.RelativeItem().Element(RowBody4); });
 
             });
 

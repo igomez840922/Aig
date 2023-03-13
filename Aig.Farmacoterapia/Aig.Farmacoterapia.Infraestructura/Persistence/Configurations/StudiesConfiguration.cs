@@ -42,6 +42,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
                    .IsRequired();
 
             builder.Property(e => e.Medicamentos).HasJsonConversion();
+            builder.Property(e => e.Documents).HasJsonConversion();
             builder.Ignore(c => c.ShowDetails);
             builder.Ignore(c => c.ElapsedDays);
             builder.Ignore(c => c.Evaluators);

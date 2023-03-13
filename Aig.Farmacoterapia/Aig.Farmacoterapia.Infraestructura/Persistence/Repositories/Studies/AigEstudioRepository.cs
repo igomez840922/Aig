@@ -172,27 +172,47 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                     }
                 }
                 if (orderByList.Count == 0)
-                    orderByList.Add(new(new() { Direction = SortingDirection.ASC }, c => c.Created));
+                {
+                    orderByList.Add(new(new() { Direction = SortingDirection.ASC, Priority = 1 }, c => c.Estado));
+                    orderByList.Add(new(new() { Direction = SortingDirection.ASC, Priority = 2 }, c => c.Created));
+                }
 
                 var filterSpec = new StudieSpecification(filterList);
                 result = await _repository.Entities
                                           .OrderBy(orderByList)
                                           .WhereBy(filterSpec)
                                           .PaginatedByAsync(args.PageIndex, args.PageSize);
+
+                result.Data = result.Data.Select(w => {
+                    w.Match = w.AigEstudioDNFDId != null && w.AigEstudioDNFD!.AigCodigo.Codigo == w.Codigo;
+                    w.MatchInfo = !w.Match ? (w.AigEstudioDNFDId != null ? $"{w.Codigo} / {w.AigEstudioDNFD!.AigCodigo.Codigo}" : w.Codigo) : string.Empty;
+                    w.Evaluators = w.EstudioEvaluador.Select(s => s.UserId).ToList();
+                    w.EvaluatorToShow = EvaluatorToShow(w.Evaluators);
+                    return w;
+                }).ToList();
+                //if (orderByList.Count == 0) {
+                //    result.Data.Sort(delegate (AigEstudio x, AigEstudio y) {
+                //        if (string.IsNullOrEmpty(x.Nota?.Observaciones)) {
+                //            if (string.IsNullOrEmpty(y.Nota?.Observaciones)) return 0;
+                //            else return -1;
+                //        }
+                //        else{
+                //            if (string.IsNullOrEmpty(y.Nota?.Observaciones)) return 1;
+                //            else return x.Nota.Observaciones.CompareTo(y.Nota.Observaciones);
+                //        }
+                //    });
+                //}
             }
             catch (Exception exc)
             {
                  _logger.Error(exc.Message, exc);
             }
-            result.Data = result.Data.Select(w => {
-                w.Match = w.AigEstudioDNFDId != null && w.AigEstudioDNFD!.AigCodigo.Codigo == w.Codigo;
-                w.MatchInfo = !w.Match ? (w.AigEstudioDNFDId != null ? $"{w.Codigo} / {w.AigEstudioDNFD!.AigCodigo.Codigo}" : w.Codigo) :string.Empty;
-                w.Evaluators = w.EstudioEvaluador.Select(s => s.UserId).ToList();
-                w.EvaluatorToShow = EvaluatorToShow(w.Evaluators);
-                return w; 
-            }).ToList();
+          
             return result;
         }
+
+        private int CompareNote(AigNotaEstudio l, AigNotaEstudio r) => l == null ? -1 : 1;
+
 
         public string EvaluatorToShow(List<string> evaluators )
         {

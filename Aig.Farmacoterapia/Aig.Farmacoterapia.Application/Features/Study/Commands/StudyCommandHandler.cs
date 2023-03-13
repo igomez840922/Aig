@@ -8,6 +8,7 @@ using Aig.Farmacoterapia.Infrastructure.Mail;
 using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
 using System.Text.Encodings.Web;
+using Aig.Farmacoterapia.Domain.Entities.Studies.Enums;
 
 namespace Aig.Farmacoterapia.Application.Features.Study.Commands
 {
@@ -28,9 +29,15 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
         public string[] Evaluators { get; set; } = Array.Empty<string>();
 
     }
+    public partial class CloneStudyCommand : IRequest<IResult>
+    {
+        public long Id { get; set; }
+    }
+
     internal class StudyCommandHandler : 
         IRequestHandler<AddEditStudyCommand, IResult>,
         IRequestHandler<DeleteStudyCommand, IResult>,
+        IRequestHandler<CloneStudyCommand, IResult>,
         IRequestHandler<SetEvaluatorCommand, IResult>
     {
         private readonly IMapper _mapper;
@@ -150,6 +157,29 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
             }
             return answer;
         }
-        
+
+        public async Task<IResult> Handle(CloneStudyCommand request, CancellationToken cancellationToken)
+        {
+            IResult answer = new Result();
+            try
+            {
+                var item = await _unitOfWork.Repository<AigEstudio>().GetByIdAsync(request.Id);
+                if (item != null)
+                {
+                    item.Estado = EstadoEstudio.Pendiente;
+                    item.FechaAsignacion = null;
+                    item.Nota = new AigNotaEstudio();
+                    await _unitOfWork.Repository<AigEstudio>().AddAsync(item);
+                    answer = Result<bool>.Success(_unitOfWork.Commit());
+                }
+                else answer = Result<bool>.Fail();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error("Requested operation failed", exc);
+                return Result.Fail(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
     }
 }
