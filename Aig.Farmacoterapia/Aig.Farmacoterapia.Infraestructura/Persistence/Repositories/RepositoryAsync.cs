@@ -20,6 +20,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
         }
 
         public IQueryable<T> Entities => _dbContext.Set<T>();
+        public IQueryable<T> EntitiesNoTracking => _dbContext.Set<T>().AsNoTracking();
 
         public async Task<T> AddAsync(T entity)
         {
@@ -47,7 +48,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-
+      
         public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize)
         {
             return await _dbContext
@@ -64,7 +65,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
         //    _dbContext.Entry(exist).CurrentValues.SetValues(entity);
         //    return entity;
         //}
-
         public async Task<T> UpdateAsync(T entity)
         {
             var result = _dbContext.Set<T>().Update(entity);
