@@ -158,6 +158,17 @@ namespace Aig.Auditoria.Components.Inspections._8_DisposicionFinal
 
             this.selectedChapter = enumSelectedChapter.None;
 
+            updateInspection();
+
+            //this.InvokeAsync(StateHasChanged);
+        }
+
+        private async Task updateInspection() {
+            if (Inspeccion.Id > 0) {
+
+                this.Inspeccion = await inspeccionService.Get(Inspeccion.Id);
+            }
+
             this.InvokeAsync(StateHasChanged);
         }
 

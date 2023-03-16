@@ -23,8 +23,7 @@ namespace DataModel
         private AUD_DetallesInvestigacion detallesInvestigacion;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DetallesInvestigacion DetallesInvestigacion { get => detallesInvestigacion; set => SetProperty(ref detallesInvestigacion, value); }
-
-        
+                
     }
 
     public class AUD_DetallesInvestigacion : SystemId

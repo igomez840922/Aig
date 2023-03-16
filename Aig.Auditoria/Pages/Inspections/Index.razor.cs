@@ -26,10 +26,10 @@ namespace Aig.Auditoria.Pages.Inspections
         [Inject]
         IProvicesService provicesService { get; set; }
         List<ProvinciaTB> LProvincias { get; set; }
+        AUD_InspeccionTB SelectedData { get; set; }
 
-
-        GenericModel<AUD_InspeccionTB> dataModel { get; set; } = new GenericModel<AUD_InspeccionTB>()
-        { Data = new AUD_InspeccionTB() };
+        GenericModel<InspeccionDTO> dataModel { get; set; } = new GenericModel<InspeccionDTO>()
+        { Data = new InspeccionDTO() };
 
         bool OpenAddEdit { get; set; } = false;
         bool DeleteDialog { get; set; } = false;
@@ -64,7 +64,7 @@ namespace Aig.Auditoria.Pages.Inspections
 
             OpenAddEdit = false;
             dataModel.Data = null;
-            var data = await inspeccionService.FindAll(dataModel);
+            var data = await inspeccionService.BandejaEntrada(dataModel);
             if (data != null)
             {
                 dataModel = data;
@@ -138,7 +138,8 @@ namespace Aig.Auditoria.Pages.Inspections
         private async Task OpenAddEditScreen(AUD_InspeccionTB data)
         {
             bus.Subscribe<Aig.Auditoria.Events.Inspections.AddEditCloseEvent>(InspectionAddEdit_CloseEventHandler);
-            dataModel.Data = data;
+            //dataModel.Data = data;
+            SelectedData = data;
 
             OpenAddEdit = true;            
             
@@ -146,12 +147,11 @@ namespace Aig.Auditoria.Pages.Inspections
         }
 
         
-        private async Task OnDelete(AUD_InspeccionTB data)
+        private async Task OnDelete(long id)
         {
             bus.Subscribe<Aig.Auditoria.Events.DeleteConfirmationDlg.DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
-            dataModel.Data = data;
+            SelectedData = await inspeccionService.Get(id);            
             DeleteDialog = true;
-
             await this.InvokeAsync(StateHasChanged);
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)

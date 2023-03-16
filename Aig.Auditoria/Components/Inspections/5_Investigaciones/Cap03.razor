@@ -64,7 +64,13 @@
                                                             <InputSelect style="padding:0px!important;" @bind-Value="Inspeccion.InspInvestigacion.DetallesInvestigacion.AdjuntaActaRetencion" class="form-control">
                                                                 @foreach (enumOpcionSiNo dt in Enum.GetValues(typeof(enumOpcionSiNo)))
                                                                 {
-                                                                    <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                    switch (dt) {
+                                                                        case enumOpcionSiNo.NA:
+                                                                        case enumOpcionSiNo.Si: {
+                                                                                <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                                break;
+                                                                            }
+                                                                    }
                                                                 }
                                                             </InputSelect>
                                                             <ValidationMessage For=@(() => Inspeccion.InspInvestigacion.DetallesInvestigacion.AdjuntaActaRetencion) />

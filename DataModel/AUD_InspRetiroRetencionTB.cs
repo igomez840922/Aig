@@ -34,8 +34,6 @@ namespace DataModel
 
         private List<AUD_ProdRetiroRetencionTB> lProductos;
         public virtual List<AUD_ProdRetiroRetencionTB> LProductos { get => lProductos; set => SetProperty(ref lProductos, value); }
-
-                
-
+        
     }
 }

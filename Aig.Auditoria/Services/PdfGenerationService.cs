@@ -3813,9 +3813,9 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignCenter().Text("ACTA DE INVESTIGACIONES").Bold();
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
-                            column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
-                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
-                            column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
+                            //column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
+                            //column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
+                            //column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
@@ -3864,7 +3864,7 @@ namespace Aig.Auditoria.Services
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("A continuación, se describen los detalles de la inspección:\r\n{0}", inspection.InspInvestigacion.DetallesInvestigacion.DetalleInspeccion));
                                 column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Se adjunta acta de retención y retiro de productos: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.DetallesInvestigacion.AdjuntaActaRetencion)));
-                                column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("No se puede movilizar los productos hasta culminar la investigación: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.DetallesInvestigacion.MovilizarProductos)));
+                                //column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("No se puede movilizar los productos hasta culminar la investigación: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.DetallesInvestigacion.MovilizarProductos)));
                             }
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
@@ -3899,6 +3899,33 @@ namespace Aig.Auditoria.Services
                             //});
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
+
+                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0) {
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns => {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+
+                                    foreach (var participant in inspection.ParticipantesDNFD.LParticipantes) {
+                                        table.Cell().Table(tbl => {
+                                            tbl.ColumnsDefinition(columns => {
+                                                columns.RelativeColumn(1);
+                                            });
+                                            if (!string.IsNullOrEmpty(participant.Firma)) {
+                                                byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
+                                                MemoryStream memoryStream = new MemoryStream(data);
+                                                tbl.Cell().AlignCenter().Image(memoryStream, ImageScaling.FitWidth);
+                                            }
+                                            tbl.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                        });
+                                    }
+                                });
+                            }
+
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -3946,39 +3973,6 @@ namespace Aig.Auditoria.Services
                                 table.Cell().AlignLeft().Padding(3).Text("");
 
                             });
-
-                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
-                            {
-                                column.Item().Table(table => {
-                                    table.ColumnsDefinition(columns =>
-                                    {
-                                        columns.RelativeColumn(1);
-                                        columns.RelativeColumn(1);
-                                        columns.RelativeColumn(1);
-                                    });
-
-                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
-
-                                    foreach (var participant in inspection.ParticipantesDNFD.LParticipantes)
-                                    {
-                                        table.Cell().Table(tbl =>
-                                        {
-                                            tbl.ColumnsDefinition(columns =>
-                                            {
-                                                columns.RelativeColumn(1);
-                                            });
-                                            if (!string.IsNullOrEmpty(participant.Firma))
-                                            {
-                                                byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
-                                                MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignCenter().Image(memoryStream, ImageScaling.FitWidth);
-                                            }
-                                            tbl.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
-                                        });
-                                    }
-                                });
-                            }
-
 
                             column.Item().PaddingVertical(5).Text(string.Format("Fecha y Hora de finalizada la inspección: {0}", inspection.DatosConclusiones?.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
@@ -4239,7 +4233,7 @@ namespace Aig.Auditoria.Services
                                                 MemoryStream memoryStream = new MemoryStream(data);
                                                 tbl.Cell().AlignCenter().Image(memoryStream, ImageScaling.FitWidth);
                                             }
-                                            tbl.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                            tbl.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Reg. No.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
 
                                         });
                                     }
@@ -4661,7 +4655,7 @@ namespace Aig.Auditoria.Services
                                     foreach (var participant in inspection.ParticipantesDNFD.LParticipantes)
                                     {
                                         table.Cell().AlignLeft().Padding(3).Text(string.Format("Lic. {0}", participant.NombreCompleto));
-                                        table.Cell().AlignLeft().Padding(3).Text(string.Format("Idoneidad profesional N°. {0}", participant.RegistroNumero));
+                                        table.Cell().AlignLeft().Padding(3).Text(string.Format("Idoneidad N°. {0}", participant.RegistroNumero));
                                         table.Cell().AlignLeft().Padding(3).Text(" ");
                                         table.Cell().AlignLeft().Padding(3).Text(" ");
 
@@ -4713,8 +4707,8 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Observaciones:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                            //column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Observaciones:".ToUpper())).Bold();
+                            //column.Item().AlignLeft().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("Conclusiones".ToUpper())).Bold();
 
@@ -4748,7 +4742,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().AlignLeft().Padding(3).Text("");
                                 table.Cell().AlignLeft().Padding(3).Text("");
 
-                                table.Cell().AlignLeft().Padding(3).Text(string.Format("{0}\r\nCédula:{1}", inspection.InspDisposicionFinal.DatosAtendidosPor.Nombre, inspection.InspDisposicionFinal.DatosAtendidosPor.Cedula));
+                                table.Cell().AlignCenter().Padding(3).Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspDisposicionFinal.DatosAtendidosPor.Nombre, inspection.InspDisposicionFinal.DatosAtendidosPor.Cedula, inspection.InspDisposicionFinal.DatosAtendidosPor.Cargo));
 
                                 table.Cell().AlignLeft().Padding(3).Text("");
                                 table.Cell().AlignLeft().Padding(3).Text("");
@@ -8221,7 +8215,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"));
                             column.Item().AlignLeft().Text(string.Format(DataModel.Helper.Helper.GetDescription(inspection.InspGuiaBPMLabAcondicionador.ProcesoVigilanciaSanit)));
 
-                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiaBPMLabAcondicionador.FechaUltimaVista?.ToString("dd/MM/yyyy") ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0} (Anexar copia de la hoja de la última inspección)", inspection.InspGuiaBPMLabAcondicionador.FechaUltimaVista?.ToString("dd/MM/yyyy") ?? ""));
 
                             if (inspection.InspGuiaBPMLabAcondicionador?.ClasifActComerciales?.LContenido?.Count > 0)
                             {
@@ -11612,6 +11606,9 @@ namespace Aig.Auditoria.Services
                         });
 
                         page.Content().Column(column => {
+                            column.Item().AlignRight().Text("Anexo de la Resolución No. 423-2020(COMIECO-XC)").Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+
                             column.Item().AlignCenter().Text("GUÍA DE VERIFICACIÓN DEL REGLAMENTO TÉCNICO CENTROAMERICANO (RTCA) 11.03.69:13 PRODUCTOS FARMACÉUTICOS. PRODUCTOS NATURALES MEDICINALES PARA USO HUMANO. BUENAS PRÁCTICAS DE MANUFACTURA".ToUpper()).Bold();
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
@@ -14983,15 +14980,21 @@ namespace Aig.Auditoria.Services
                                 header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
                             });
 
+                            table.Cell().ColumnSpan(3).AlignLeft().Text(" ");
+
+                            table.Cell().AlignLeft().Text(string.Format("Fecha de Evaluación {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
+                            table.Cell().AlignLeft().AlignLeft().Text(" ");
+                            table.Cell().AlignRight().Text(string.Format("Hora de Inicio {0}", inspection.FechaInicio.ToString("hh:mm tt")));
+
+
                         });
 
                         page.Content().Column(column => {
                             column.Item().AlignCenter().Text("Evaluación Técnica por Apertura para la Elaboración de Cosméticos Artesanales".ToUpper()).Bold();
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
-
-                            column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
-                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
+                            //column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
+                            //column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
@@ -15131,9 +15134,37 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo N° 875 del 18 de noviembre de 2021, que reglamenta la elaboración de productos cosméticos arsenales en la República de Panamá.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1} {2} con los requisitos mínimos para la elaboración de productos cosméticos arsenales.", inspection.DatosEstablecimiento?.Nombre, inspection.DatosEstablecimiento?.Direccion, (inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE")));
                             //0- Nombere, 1- Ubicacion, 2-Cumple 
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Dado en la ciudad de Panamá a los Dado en la ciudad de Panamá a los {0} días del mes de {1} de {2}.", inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones?.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Dado en la ciudad de Panamá a los {0} días del mes de {1} de {2}.", inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones?.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
+                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0) {
+                                column.Item().Table(table => {
+                                    table.ColumnsDefinition(columns => {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
+
+                                    foreach (var participant in inspection.ParticipantesDNFD.LParticipantes) {
+                                        table.Cell().Table(tbl => {
+                                            tbl.ColumnsDefinition(columns => {
+                                                columns.RelativeColumn(1);
+                                            });
+                                            if (!string.IsNullOrEmpty(participant.Firma)) {
+                                                byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
+                                                MemoryStream memoryStream = new MemoryStream(data);
+                                                tbl.Cell().AlignCenter().Image(memoryStream, ImageScaling.FitWidth);
+                                            }
+                                            tbl.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
+                                        });
+                                    }
+                                });
+                            }
+
+                            column.Item().PaddingVertical(5).Text(" ").Bold();
+
                             column.Item().Table(table => {
                                 table.ColumnsDefinition(columns => {
                                     columns.RelativeColumn(1);
@@ -15179,33 +15210,6 @@ namespace Aig.Auditoria.Services
 
                             });
 
-                            column.Item().PaddingVertical(5).Text(" ").Bold();
-
-                            if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0) {
-                                column.Item().Table(table => {
-                                    table.ColumnsDefinition(columns => {
-                                        columns.RelativeColumn(1);
-                                        columns.RelativeColumn(1);
-                                        columns.RelativeColumn(1);
-                                    });
-
-                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Ministerio de Salud (DNFD):").Bold();
-
-                                    foreach (var participant in inspection.ParticipantesDNFD.LParticipantes) {
-                                        table.Cell().Table(tbl => {
-                                            tbl.ColumnsDefinition(columns => {
-                                                columns.RelativeColumn(1);
-                                            });
-                                            if (!string.IsNullOrEmpty(participant.Firma)) {
-                                                byte[] data = Convert.FromBase64String(participant.Firma.Split("image/png;base64,")[1]);
-                                                MemoryStream memoryStream = new MemoryStream(data);
-                                                tbl.Cell().AlignCenter().Image(memoryStream, ImageScaling.FitWidth);
-                                            }
-                                            tbl.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Reg.:{2}", participant.NombreCompleto, participant.CedulaIdentificacion, participant.RegistroNumero));
-                                        });
-                                    }
-                                });
-                            }
 
                             column.Item().PaddingVertical(5).Text(string.Format("Hora de finalización de inspección: {0}", inspection.DatosConclusiones?.FechaFinalizacion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
@@ -15276,7 +15280,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.Inconformidades);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 

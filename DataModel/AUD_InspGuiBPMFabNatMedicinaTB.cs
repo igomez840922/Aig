@@ -271,18 +271,18 @@ namespace DataModel
                         Criterio = "INFORMATIVO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
-                    //new ContenidoPreguntas()
-                    //{
-                    //    Titulo = "Nombre de la empresa: ",
-                    //    Criterio = "INFORMATIVO",
-                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                    //},
-                    //new ContenidoPreguntas()
-                    //{
-                    //    Titulo = "Dirección del domicilio legal de la empresa: ",
-                    //    Criterio = "INFORMATIVO",
-                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                    //},
+                    new ContenidoPreguntas()
+                    {
+                        Titulo = "Nombre de la empresa: ",
+                        Criterio = "INFORMATIVO",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                    },
+                    new ContenidoPreguntas()
+                    {
+                        Titulo = "Dirección del domicilio legal de la empresa: ",
+                        Criterio = "INFORMATIVO",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                    },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Dirección del laboratorio fabricante:  ",
@@ -727,7 +727,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Se mantienen registros? ",
-                        Criterio = "CRITICO",
+                        Criterio = "CALIFICABLE",
                         Articulo="6.4.2, 6.4.3, 6.4.4, 6.4.5. 10.3.5 f)",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -1270,13 +1270,13 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "c) ¿Están protegidas de la incidencia de la luz directa?  ",
+                        Titulo = "c) ¿Tiene suficiente capacidad para permitir el tratamiento de la materia prima natural?  ",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "d) ¿Cuentan con recolectores de polvo y sistema de inyección y extracción de aire, cuando aplique? ",
+                        Titulo = "d) ¿Cuentan con condiciones de temperatura y humedad de acuerdo a las especificaciones de la materia prima? ",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -2230,7 +2230,7 @@ namespace DataModel
                     {
                         Titulo = "¿Cuenta con un sistema de tratamiento de agua que le permita obtener agua purificada que cumpla con las especificaciones de  acuerdo a los libros oficiales para la producción de sus productos?",
                         Criterio = "CRITICO",
-                        Articulo="7.9.1",
+                        Articulo="8.4.2",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -2768,12 +2768,6 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "h. Fecha de expiración, cuando aplique",
-                        Criterio = "CALIFICABLE",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                    },
-                    new ContenidoPreguntas()
-                    {
-                        Titulo = "",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -3456,7 +3450,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Productos a grane",
+                        Titulo = "Productos a granel",
                         Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -3666,7 +3660,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "g) Nombre de la Persona responsable que la aprobó y su firm",
+                        Titulo = "g) Nombre de la Persona responsable que la aprobó y su firma",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -3945,7 +3939,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "j) Firma de la persona que despacha, recibe y verifica los insumos. ",
+                        Titulo = "m) Firma de las personas que intervienen y supervisan los procesos. ",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -4645,7 +4639,6 @@ namespace DataModel
                         Criterio = "CRITICO",
                         Articulo = "12.1",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -4934,7 +4927,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Existen programas y registros escritos del mantenimiento, verificación y calibración de cada equipo de control de calidad que lo  requiera?",
+                        Titulo = "¿Se conserva la documentación de control de calidad, relativa a un lote, hasta un mínimo de un año después de vencido el lote?",
                         Criterio = "CALIFICABLE",
                         Articulo = "13.1.10",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -4993,8 +4986,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) El método de muestreo",
-                        Criterio = "CRITICO",
-                        Articulo = "7.9.1",
+                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
@@ -5067,12 +5059,6 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Cantidad",
-                        Criterio = "CALIFICABLE",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas()
-                    {
-                        Titulo = "",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
@@ -5468,12 +5454,6 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "c) Número de lote del producto.",
-                        Criterio = "CALIFICABLE",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas()
-                    {
                         Titulo = "d) Fecha de producción y fecha de expiración",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -5530,7 +5510,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Quedan documentadas, en los registros de lote, las decisiones tomadas respecto de las quejas del producto? ",
+                        Titulo = "¿Se revisan los registros de reclamos periódicamente para detectar problemas específicos o repetitivos que requieran acción especial y el eventual retiro de productos comercializados? ",
                         Criterio = "CALIFICABLE",
                         Articulo = "14.1.6",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},

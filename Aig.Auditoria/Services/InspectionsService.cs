@@ -22,6 +22,51 @@ namespace Aig.Auditoria.Services
             //DalService.DBContext.de
         }
 
+        public async Task<GenericModel<InspeccionDTO>> BandejaEntrada(GenericModel<InspeccionDTO> model) {
+            try {
+                model.Ldata = null; model.Total = 0;
+                model.FromDate = model.FromDate != null ? new DateTime(model.FromDate.Value.Year, model.FromDate.Value.Month, model.FromDate.Value.Day, 0, 0, 0) : model.FromDate;
+                model.ToDate = model.ToDate != null ? new DateTime(model.ToDate.Value.Year, model.ToDate.Value.Month, model.ToDate.Value.Day, 23, 59, 59) : model.ToDate;
+
+                model.Ldata = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
+                               where data.Deleted == false &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
+                               (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
+                               (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
+                               (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
+                               (model.FromDate != null ? data.FechaInicio >= model.FromDate : true) &&
+                               (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
+                               orderby data.FechaInicio
+                               select new InspeccionDTO {
+                                   Id = data.Id,
+                                   NumActa = data.NumActa,
+                                   TipoActa = data.TipoActa,
+                                   FechaInicio = data.FechaInicio,
+                                   StatusInspecciones = data.StatusInspecciones,
+                                   NumLicencia = data.DatosEstablecimiento.NumLicencia,
+                                   ReciboPago = data.DatosEstablecimiento.ReciboPago,
+                                   AvisoOperaciones = data.DatosEstablecimiento.AvisoOperaciones,
+                                   Nombre = data.DatosEstablecimiento.Nombre ,
+                                   ProvinciaId = data.DatosEstablecimiento.ProvinciaId,
+                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                model.Total = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
+                               where data.Deleted == false &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
+                               (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
+                               (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
+                               (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
+                               (model.FromDate != null ? data.FechaInicio >= model.FromDate : true) &&
+                               (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
+                               select data).Count();
+
+            }
+            catch (Exception ex) { }
+
+            return model;
+        }
+
+
         public async Task<GenericModel<AUD_InspeccionTB>> FindAll(GenericModel<AUD_InspeccionTB> model)
         {
             try
@@ -58,16 +103,25 @@ namespace Aig.Auditoria.Services
             return model;
         }
 
-        public async Task<Stream> ExportToExcel(GenericModel<AUD_InspeccionTB> model)
+        public async Task<Stream> ExportToExcel(GenericModel<InspeccionDTO> model)
         {
             try
             {
                 model.PagIdx = 0; model.PagAmt = int.MaxValue;
 
-                model = await FindAll(model);
+                var Ldata = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
+                               where data.Deleted == false &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
+                               (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
+                               (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
+                               (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
+                               (model.FromDate != null ? data.FechaInicio >= model.FromDate : true) &&
+                               (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
+                               orderby data.FechaInicio
+                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
 
-                if (model.Ldata != null && model.Ldata.Count > 0)
+                if (Ldata?.Count > 0)
                 {
                     var wb = new XLWorkbook();
                     wb.Properties.Author = "Inspeccion";
@@ -84,9 +138,9 @@ namespace Aig.Auditoria.Services
                     ws.Cell(1, 6).Value = "Aviso de Operaciones";
                     ws.Cell(1, 7).Value = "Establecimientos";
 
-                    for (int row = 1; row <= model.Ldata.Count; row++)
+                    for (int row = 1; row <= Ldata.Count; row++)
                     {
-                        var prod = model.Ldata[row - 1];
+                        var prod = Ldata[row - 1];
 
                         ws.Cell(row + 1, 1).Value = prod.NumActa;
                         ws.Cell(row + 1, 2).Value = DataModel.Helper.Helper.GetDescription(prod.TipoActa);

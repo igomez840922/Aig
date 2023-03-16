@@ -92,31 +92,26 @@ namespace DataModel
             },
             new ContenidoPreguntas()
                 {
-                    Numero = 2,
-                    Titulo = "El área está separada",
+                    Titulo = "Separada",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 3,
-                    Titulo = "El área está limpia",
+                    Titulo = "Limpia",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 4,
-                    Titulo = "El área está ordenada",
+                    Titulo = "Ordenada",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 5,
-                    Titulo = "El área es utilizada exclusivamente para este fin",
+                    Titulo = "Es utilizada exclusivamente para este fin",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 6,
                     Titulo = "Cuenta con instrucciones que no se debe permitir fumar, comer, beber, masticar o guardar plantas, comidas, bebidas, material de fumar y medicamentos personales",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -127,37 +122,31 @@ namespace DataModel
             },
             new ContenidoPreguntas()
                 {
-                    Numero = 7,
                     Titulo = "Suministros eléctricos",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 8,
                     Titulo = "Iluminación",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 9,
                     Titulo = "Ventilación",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 10,
                     Titulo = "Buen estado de conservación del edificio",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 11,
                     Titulo = "Señalización de las vías o rutas de evacuación",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                   Numero = 12,
                      Titulo = "Equipo para el control de incendios (detector de humo)",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -168,25 +157,21 @@ namespace DataModel
             },
             new ContenidoPreguntas()
                 {
-                    Numero = 13,
                     Titulo = "Pisos",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 14,
                     Titulo = "Paredes",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 15,
                     Titulo = "Techos",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 16,
                     Titulo = "Existen lavabos o fregador",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -197,43 +182,36 @@ namespace DataModel
             },
             new ContenidoPreguntas()
                 {
-                    Numero = 17,
                     Titulo = "Mascarillas",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 18,
                     Titulo = "Cubre Cabello",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 19,
                     Titulo = "Guantes",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 20,
                     Titulo = "Anteojos (cuando aplique)",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 21,
                     Titulo = "Delantales",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 22,
                     Titulo = "Están limpios y en buen estado",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 23,
                     Titulo = "Están identificadas las áreas de pesado",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -244,49 +222,41 @@ namespace DataModel
             },
             new ContenidoPreguntas()
                 {
-                    Numero = 24,
                     Titulo = "Pesado",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 25,
                     Titulo = "Preparación o mezclado",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 26,
                     Titulo = "Llenado",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 27,
                     Titulo = "Secado",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 28,
                     Titulo = "Empaque",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 29,
                     Titulo = "Etiquetado",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 30,
                     Titulo = "Producto terminado",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 31,
                     Titulo = "Utensilios limpios",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -297,32 +267,29 @@ namespace DataModel
             },
             new ContenidoPreguntas()
                 {
-                    Numero = 32,
                     Titulo = "Mesa de acero inoxidable",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 33,
                     Titulo = "Balanza",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 34,
                     Titulo = "Estufas",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
                     Numero = 35,
-                    Titulo = "Hornillas",
+                    Titulo = "Hornilla",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
                     Numero = 36,
-                    Titulo = "Mecheros",
+                    Titulo = "Mechero",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
@@ -372,13 +339,11 @@ namespace DataModel
                 IsHeader = true
             },new ContenidoPreguntas()
             {
-                Numero = 1,
                     Titulo = "Anaqueles para almacenar los productos y materiales a utilizar",
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
             },
             new ContenidoPreguntas()
             {
-               Numero = 2,
                  Titulo = "Capacidad suficiente para permitir el almacenamiento ordenado de los productos y que facilite el manejo y circulación en el área",
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
             },

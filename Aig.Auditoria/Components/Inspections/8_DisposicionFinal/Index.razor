@@ -65,7 +65,7 @@
                                                                     <!-- /btn-group -->
                                                                 </td>
                                                             </tr>
-                                                            @*@if (Inspeccion?.InspDisposicionFinal?.DatosInspeccion?.TipoInspeccion != DataModel.Helper.enum_TipoInspeccionDispFinal.DispFinal)
+                                                            @if (Inspeccion?.InspDisposicionFinal?.DatosInspeccion?.TipoInspeccion != DataModel.Helper.enum_TipoInspeccionDispFinal.DispFinal)
                                                             {
                                                                 <tr>
                                                                     <td scope="row">@languageContainerService.Keys["Inventario de Productos"]</td>
@@ -73,7 +73,7 @@
                                                                         <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap04);}">@languageContainerService.Keys["Select"]</button>
                                                                    </td>
                                                                 </tr>
-                                                            }*@
+                                                            }
                                                             <tr>
                                                                 <td scope="row">@languageContainerService.Keys["Conclusiones"]</td>
                                                                 <td style="text-align:right">
