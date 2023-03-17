@@ -47,7 +47,23 @@ namespace Aig.Auditoria.Controllers
                 if (!string.IsNullOrEmpty(number)) {
                     var data = dalService.Find<AUD_InspeccionTB>(x => x.NumActa == number);
                     if (data != null) {
-                        return Ok(new InspeccionModel() { Nombre=DataModel.Helper.Helper.GetDescription(data.TipoActa), NumeroActa = data.NumActa });
+                        return Ok(new InspeccionModel() { Nombre=DataModel.Helper.Helper.GetDescription(data.TipoActa), NumeroActa = data.NumActa, 
+                            DatosEstablecimiento = new DatosEstablecimiento() { 
+                                AvisoOperaciones=data.DatosEstablecimiento?.AvisoOperaciones??"",
+                                 NumLicencia = data.DatosEstablecimiento?.NumLicencia ?? "",
+                                Nombre = data.DatosEstablecimiento?.Nombre ?? "",
+                                 ReciboPago = data.DatosEstablecimiento?.ReciboPago ?? "",
+                                 CorregimientoCodigo = data.DatosEstablecimiento?.Corregimiento?.Codigo ?? "",
+                                CorregimientoNombre = data.DatosEstablecimiento?.Corregimiento?.Nombre ?? "",
+                                DistritoCodigo = data.DatosEstablecimiento?.Distrito?.Codigo ?? "",
+                                DistritoNombre = data.DatosEstablecimiento?.Distrito?.Nombre ?? "",
+                                ProvinciaCodigo = data.DatosEstablecimiento?.Provincia?.Codigo ?? "",
+                                ProvinciaNombre = data.DatosEstablecimiento?.Provincia?.Nombre ?? "",
+                                Correo = data.DatosEstablecimiento?.Correo ?? "",
+                                Direccion = data.DatosEstablecimiento?.Direccion ?? "",
+                                Telefono = data.DatosEstablecimiento?.Telefono ?? "",
+                            } 
+                        });
                     }
                 }
             }
