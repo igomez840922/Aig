@@ -40,7 +40,7 @@
                     </MudText>
                     <MudSpacer />
                     <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
-                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.PersonAdd" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => Add())" />
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || !IsEdit())" Icon="@Icons.Material.Filled.PersonAdd" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => Add())" />
                     </MudTooltip>
                 </MudToolBar>
             </MudItem>
@@ -94,7 +94,7 @@
             <MudGrid Spacing="5">
                 @foreach (var dt in _paginatedResult.Data)
                 {
-                    <MudItem>
+                    <MudItem Style="display:flex;">
                         <MudCard Elevation="25" Class="d-flex">
                             <MudCardHeader>
                                 <CardHeaderAvatar>

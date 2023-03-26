@@ -135,14 +135,16 @@
     <div class="header-top-area pl-165 pr-165" style="background-color: #4e97fd !important;box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);">
         <div class="container-fluid" style="padding: 0 !important;;">
             <div class="row">
-                <div class="col-xl-5 col-lg-6 col-md-6">
+                <div class="col-xl-4 col-lg-4 col-md-4">
                   <div class="header-top-wrapper">  
                        <div class="header-link f-left" style="margin-left: 20px !important;">
-                            <span style="color:#fff !important;font-size: 12px !important; font-weight:bold !important;">SISTEMA DE MONOGRAFÍAS E INSERTOS DE LA DIRECCIÓN DE FRAMACIA Y DROGAS</span>
+                            <span style="color:#fff !important;font-size: 18px !important; font-weight:bold !important;">
+                               SISTEMA DE MONOGRAFÍAS Y PROSPECTOS DE LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS
+                              </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-7 col-lg-6 col-md-6">
+                <div class="col-xl-8 col-lg-8 col-md-8">
                     <div class="header-top-right text-md-right">
                         <div class="shop-menu">
                             <ul>
@@ -170,19 +172,23 @@
                                 </li>
                                 <li>
                                    
-                                   @*   <a target="__blank"
-                                       title="Notas de seguridad de medicamentos"
-                                       href="/disclaimer">
-                                        <i class="fa fa-info"></i>
-                                        Descargo de Responsabilidad
-                                    </a>
-                                   *@
                                      <a
                                        title="Notas de seguridad de medicamentos"
                                        href="javascript:void(0)"
                                        @onclick="() => InvokeModal()">
-                                        <i class="fa fa-info"></i>
+                                        <i class="fa fa-exclamation-triangle"></i>
                                         Descargo de Responsabilidad
+                                    </a>
+
+                                </li>
+                                <li>
+                                   
+                                     <a
+                                       title="Recomendaciones"
+                                       href="javascript:void(0)"
+                                       @onclick="() => InvokeModal2()">
+                                        <i class="fa fa-info"></i>
+                                       Recomendaciones
                                     </a>
 
                                 </li>
@@ -298,15 +304,15 @@
         }
         else
         {
-             _appState.SetSearchText(_filter);
+            _appState.SetSearchText(_filter);
         }
-       
+
     }
 
     private void OnSearchChanged()
     {  
         if (string.IsNullOrEmpty(_filter.Term)) {
-             _appState.SetSearchText(_filter,false);
+            _appState.SetSearchText(_filter,false);
         }
     }
 
@@ -315,6 +321,14 @@
         var parameters = new DialogParameters();
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
         var dialog = _dialogService.Show<Disclaimer>("DESCARGO DE RESPONSABILIDAD", parameters, options);
+        var result = await dialog.Result;
+    }
+
+    private async Task InvokeModal2()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Info>("RECOMENDACIONES", parameters, options);
         var result = await dialog.Result;
     }
 

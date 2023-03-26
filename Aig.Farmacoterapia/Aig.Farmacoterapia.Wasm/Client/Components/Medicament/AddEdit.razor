@@ -10,12 +10,23 @@
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Blazored.FluentValidation
 @using System.Globalization
+@using System.Security.Claims
 @inject IMedicamentManager _manager;
 <style>
 .mud-dialog {
     max-height: calc(108vh - var(--mud-appbar-height));
     overflow-y: auto;
 }
+ .mud-input.mud-disabled {
+    color: var(--mud-palette-text-primary) !important;
+    cursor: default;
+  }
+  .mud-input-control>.mud-input-control-input-container>.mud-input-label-inputcontrol.mud-disabled {
+    color: var(--mud-palette-text-primary) !important;
+  }
+   .mud-input-control>.mud-input-control-input-container>.mud-input-label-inputcontrol {
+        padding: 0 5px !important;
+    }
 </style>
 <EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync()) >
     <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
@@ -58,15 +69,15 @@
                             <MudGrid>
 
                                 <MudItem xs="12" md="7" Style="padding:3px !important">
-                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Nombre)" @bind-Value="_modelData.Nombre" Label="Medicamento" />
+                                    <MudTextField Disabled="!IsEdit()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Nombre)" @bind-Value="_modelData.Nombre" Label="Medicamento" />
                                 </MudItem>
 
                                 <MudItem xs="12" md="3" Style="padding:3px !important">
-                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.NumReg)" @bind-Value="_modelData.NumReg" Label="Registro" />
+                                    <MudTextField Disabled="!IsEdit()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.NumReg)" @bind-Value="_modelData.NumReg" Label="Registro" />
                                 </MudItem>
 
                                 <MudItem xs="12" md="2" Style="padding:3px !important">
-                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.NumRen)" @bind-Value="_modelData.NumRen" Label="Revisiones" />
+                                    <MudTextField Disabled="!IsEdit()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.NumRen)" @bind-Value="_modelData.NumRen" Label="Revisiones" />
                                 </MudItem>
 
                             </MudGrid>
@@ -77,17 +88,17 @@
                         <MudItem xs="12">
                             <MudGrid>
                                 <MudItem xs="12" md="5" Style="padding:3px !important">
-                                    <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de emisión" @bind-Date="_modelData.FechaEmision" />
+                                    <MudDatePicker Disabled="!IsEdit()" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de emisión" @bind-Date="_modelData.FechaEmision" />
                                     <ValidationMessage For="@(() => _modelData.FechaEmision)" />
                                 </MudItem>
 
                                 <MudItem xs="12" md="5" Style="padding:3px !important">
-                                    <MudDatePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de expiración" @bind-Date="_modelData.FechaExpiracion" />
+                                    <MudDatePicker Disabled="!IsEdit()" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de expiración" @bind-Date="_modelData.FechaExpiracion" />
                                     <ValidationMessage For="@(() => _modelData.FechaExpiracion)" />
                                 </MudItem>
 
                                 <MudItem xs="12" md="2" Style="margin-top: 10px !important">
-                                    <MudCheckBox @bind-Checked="_modelData.Vigente" Label="Vigente" Color="Color.Primary"></MudCheckBox>
+                                    <MudCheckBox Disabled="!IsEdit()" @bind-Checked="_modelData.Vigente" Label="Vigente" Color="Color.Primary"></MudCheckBox>
                                 </MudItem>
 
                             </MudGrid>
@@ -98,7 +109,7 @@
                         <MudItem xs="12">
                             <MudGrid>
                                 <MudItem xs="12" md="6" Style="padding:3px !important">
-                                    <MudAutocomplete @bind-Value="_modelData.FormaFarmaceutica" Label="Forma farmacéutica" MaxItems="null" T="AigFormaFarmaceutica" Dense="true" Margin="Margin.Dense" Variant="Variant.Outlined" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadPharmaceutical" ShowProgressIndicator="true">
+                                    <MudAutocomplete Disabled="!IsEdit()" @bind-Value="_modelData.FormaFarmaceutica" Label="Forma farmacéutica" MaxItems="null" T="AigFormaFarmaceutica" Dense="true" Margin="Margin.Dense" Variant="Variant.Outlined" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadPharmaceutical" ShowProgressIndicator="true">
                                         <ItemTemplate Context="e">
                                             <MudText>
                                                 @e.Nombre
@@ -115,7 +126,7 @@
                                 </MudItem>
 
                                 <MudItem xs="12" md="6" Style="padding:3px !important">
-                                    <MudAutocomplete @bind-Value="_modelData.ViaAdministracion" Label="Vía de administración" MaxItems="null" T="AigViaAdministracion" Dense="true" Margin="Margin.Dense" Variant="Variant.Outlined" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadMedicationRoute" ShowProgressIndicator="true">
+                                    <MudAutocomplete Disabled="!IsEdit()" @bind-Value="_modelData.ViaAdministracion" Label="Vía de administración" MaxItems="null" T="AigViaAdministracion" Dense="true" Margin="Margin.Dense" Variant="Variant.Outlined" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@LoadMedicationRoute" ShowProgressIndicator="true">
                                         <ItemTemplate Context="e">
                                             <MudText>
                                                 @e.Nombre
@@ -138,8 +149,8 @@
                     <MudGrid Spacing="6">
                         <MudItem xs="12">
                             <MudGrid>
-                                <MudItem xs="12" md="4" Style="padding:3px !important">
-                                    <MudSelect T="string" Label="Clasificación" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.TipoEquivalencia">
+                                <MudItem  xs="12" md="4" Style="padding:3px !important">
+                                    <MudSelect Disabled="!IsEdit()" T="string" Label="Clasificación" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.TipoEquivalencia">
                                         <MudSelectItem Value="@(TipoEquivalencia.Referencia)">Medicamento de Referencia</MudSelectItem>
                                         <MudSelectItem Value="@(TipoEquivalencia.Intercambiable)">Medicamento Intercambiable</MudSelectItem>
                                         <MudSelectItem Value="@(TipoEquivalencia.Generico)">Medicamento Genérico</MudSelectItem>
@@ -149,7 +160,7 @@
                                 </MudItem>
 
                                 <MudItem xs="12" md="4" Style="padding:3px !important">
-                                    <MudSelect T="string" Label="Tipo" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.TipoMedicamento">
+                                    <MudSelect Disabled="!IsEdit()" T="string" Label="Tipo" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.TipoMedicamento">
                                         <MudSelectItem Value="@(TipoMedicamento.SI)">Síntesis Química </MudSelectItem>
                                         <MudSelectItem Value="@(TipoMedicamento.RA)">Radiofármacos</MudSelectItem>
                                         <MudSelectItem Value="@(TipoMedicamento.HU)">Huérfanos</MudSelectItem>
@@ -162,7 +173,7 @@
                                 </MudItem>
 
                                 <MudItem xs="12" md="4" Style="padding:3px !important">
-                                    <MudSelect T="string" Label="Condición de venta" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.CondicionVenta">
+                                    <MudSelect Disabled="!IsEdit()" T="string" Label="Condición de venta" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelData.CondicionVenta">
                                         <MudSelectItem Value="@(TipoCondicionVenta.SinPrescripcion)">Sin Prescripción Médica</MudSelectItem>
                                         <MudSelectItem Value="@(TipoCondicionVenta.ConPrescripcion)">Con Prescripción Médica</MudSelectItem>
                                         <MudSelectItem Value="@(TipoCondicionVenta.UsoHospitalario)">Uso Hospitalario Exclusivo</MudSelectItem>
@@ -179,7 +190,7 @@
                         <MudItem xs="12">
                             <MudGrid>
                                 <MudItem xs="12" md="8" Style="padding:3px !important">
-                                    <MudAutocomplete @bind-Value="_modelData.Fabricante" Label="Fabricante" MaxItems="null" T="AigFabricante" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@(LoadMarker)" ShowProgressIndicator="true" ProgressIndicatorColor="Color.Primary">
+                                    <MudAutocomplete Disabled="!IsEdit()" @bind-Value="_modelData.Fabricante" Label="Fabricante" MaxItems="null" T="AigFabricante" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" ToStringFunc="@(e=> e==null?null : e.Nombre)" SearchFunc="@(LoadMarker)" ShowProgressIndicator="true" ProgressIndicatorColor="Color.Primary">
 
                                         <ItemTemplate Context="e">
                                             <MudText>
@@ -196,7 +207,7 @@
                                 </MudItem>
 
                                 <MudItem xs="12" md="4" Style="padding:3px !important">
-                                    <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Concentracion)" @bind-Value="_modelData.Concentracion" Label="Concentración" />
+                                    <MudTextField Disabled="!IsEdit()" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Concentracion)" @bind-Value="_modelData.Concentracion" Label="Concentración" />
                                 </MudItem>
 
                             </MudGrid>
@@ -207,7 +218,7 @@
                         <MudItem xs="12">
                             <MudGrid>
                                 <MudItem xs="12" md="12" Style="padding:3px !important">
-                                    <MudTextField T="string" Label="Principios Activos" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Principio" Lines="2" />
+                                    <MudTextField Disabled="!IsEdit()" T="string" Label="Principios Activos" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Principio" Lines="2" />
                                     <ValidationMessage For="@(() => _modelData.Principio)" />
                                 </MudItem>
                             </MudGrid>
@@ -218,7 +229,7 @@
                         <MudItem xs="12">
                             <MudGrid>
                                 <MudItem xs="12" md="12" Style="padding:3px !important">
-                                    <MudTextField T="string" Label="Excipientes" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Excipientes" Lines="2" />
+                                    <MudTextField Disabled="!IsEdit()" T="string" Label="Excipientes" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Excipientes" Lines="2" />
                                 </MudItem>
                             </MudGrid>
                         </MudItem>
@@ -228,7 +239,7 @@
                         <MudItem xs="12">
                             <MudGrid>
                                 <MudItem xs="12" md="12" Style="padding:3px !important">
-                                    <MudTextField T="string" Label="Presentación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Presentacion" Lines="2" />
+                                    <MudTextField Disabled="!IsEdit()" T="string" Label="Presentación" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Presentacion" Lines="2" />
                                 </MudItem>
                             </MudGrid>
                         </MudItem>
@@ -238,7 +249,7 @@
                         <MudItem xs="12">
                             <MudGrid>
                                 <MudItem xs="12" md="12" Style="padding:3px !important">
-                                    <MudTextField T="string" Label="Descripción del Envase" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Envase" Lines="2" />
+                                    <MudTextField Disabled="!IsEdit()" T="string" Label="Descripción del Envase" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Envase" Lines="2" />
                                 </MudItem>
                             </MudGrid>
                         </MudItem>
@@ -459,6 +470,7 @@
     protected bool _prospectusLoading { get; set; } = false;
     protected bool _pictureLoading { get; set; } = false;
     bool _loading = false;
+    private ClaimsPrincipal _user;
     protected override async Task OnInitializedAsync()
     {
         await LoadDataAsync();
@@ -467,9 +479,22 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
-            Validate();
+        {     _user = await _authenticationManager.CurrentUser();
+              Validate();
+        }
+      
     }
     private bool Validate() => _fluentValidation.Validate();
+
+     protected bool IsEdit()
+    {
+        var disabled=true;
+        if (_user == null) return disabled;
+        var userId= _user.GetUserId();
+        var role= _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return  userRole== RoleType.Admin || userRole== RoleType.Boss || userRole== RoleType.Evaluator ;
+    }
 
     private async Task RefresView()
     {

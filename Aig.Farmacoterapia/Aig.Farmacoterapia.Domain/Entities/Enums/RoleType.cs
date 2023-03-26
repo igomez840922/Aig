@@ -11,7 +11,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Enums
     [Flags]
     public enum RoleType
     {
-        [Description("Secretaria")] //Asistente
+        [Description("Asistente")]
         Secretary = 1,
         [Description("Jefe")]
         Boss = 2,

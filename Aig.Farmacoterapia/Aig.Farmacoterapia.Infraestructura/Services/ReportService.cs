@@ -39,7 +39,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             try
             {
                 var list = _userManager.Users.Where(p => evaluators.Contains(p.Id)).ToList()
-                                              .Select(w => { w.FirstName = w.FirstName[..1].ToLower(); return w.FirstName; });
+                                              .Select(w => { w.FirstName = w.FirstName[..1].ToLower(); w.LastName = w.LastName[..1].ToLower(); return $"{ w.FirstName}{ w.LastName}"; });
 
                 result = string.Join(" / ", list);
             }
@@ -65,6 +65,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             container.Page(page =>
             {
+               
                 page.DefaultTextStyle(x => x.FontFamily("Arial").FontSize(12));
                 page.MarginVertical(10);
                 page.MarginHorizontal(25);
@@ -79,39 +80,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                       x.Span("Página ");
                       x.CurrentPageNumber();
                   });
-            })
-            .Page(page =>
-             {
-                 page.Size(PageSizes.Letter.Landscape());
-                 page.MarginVertical(10);
-                 page.MarginHorizontal(25);
-                 page.Content().Element(RowTable);
-
-                 page.Footer().PaddingTop(10).PaddingBottom(5).AlignCenter()
-                  .Text(x =>
-                  {
-                      x.Span("Página ");
-                      x.CurrentPageNumber();
-                  });
-             })
-            .Page(page =>
-            {
-                page.DefaultTextStyle(x => x.FontFamily("Arial").FontSize(12));
-                page.MarginVertical(10);
-                page.MarginHorizontal(25);
-                page.Size(PageSizes.A4);
-                page.Header().Element(HeaderBody);
-
-                page.Content().Element(ContentBody2);
-
-
-                page.Footer().PaddingTop(10).PaddingBottom(5).AlignCenter()
-                   .Text(x =>
-                   {
-                       x.Span("Página ");
-                       x.CurrentPageNumber();
-                   });
             });
+           
         }
         void LogoBody(IContainer container)
         {
@@ -227,6 +197,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         }
         void AuthorizedIntroRowBody(IContainer container)
         {
+            //column.Item().Text(text).DirectionFromLeftToRight();
             container.ShowEntire().Row(row =>
             {
                 row.Spacing(2);
@@ -235,7 +206,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     text.Span($"En referencia al Protocolo de Investigación del estudio clínico {Model?.Codigo}  " +
                               $"titulado \"{Model?.Titulo}\" cuyo investigador principal es: {Model?.InvestigadorPrincipal},  " +
                               $"a realizarse en {Model?.CentroInvestigacion},  le informamos que autorizamos la introducción al país " +
-                              $"de los siguientes productos, exclusivamente para el fin indicado.");
+                              $"de los siguientes productos, exclusivamente para el fin indicado.")
+                             .DirectionFromLeftToRight();
                 });
 
             });
@@ -474,27 +446,27 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 }
 
 
-                //if (Model.Estado == EstadoEstudio.Authorized)
-                //{
-                //    grid.Item(12).PaddingTop(20).Row(row =>
-                //    {
-                //        row.RelativeItem().Element(RowTable);
-                //    });
-                //}
+                if (Model.Estado == EstadoEstudio.Authorized)
+                {
+                    grid.Item(12).PaddingTop(20).Row(row =>
+                    {
+                        row.RelativeItem().Element(RowTable);
+                    });
+                }
 
-                //if (!string.IsNullOrEmpty(Model.Nota?.Observaciones))
-                //{
-                //    grid.Item(12).PaddingTop(20).Row(row =>
-                //    {
-                //        row.RelativeItem().Element(RowBody3);
-                //    });
-                //}
-               
-                //grid.Item(12)
-                //    .ExtendVertical()
-                //    .AlignBottom()
-                //    .ExtendHorizontal()
-                //    .Height(100).Row(row => { row.RelativeItem().Element(RowBody4); });
+                if (!string.IsNullOrEmpty(Model.Nota?.Observaciones))
+                {
+                    grid.Item(12).PaddingTop(20).Row(row =>
+                    {
+                        row.RelativeItem().Element(RowBody3);
+                    });
+                }
+
+                grid.Item(12)
+                    .ExtendVertical()
+                    .AlignBottom()
+                    .ExtendHorizontal()
+                    .Height(100).Row(row => { row.RelativeItem().Element(RowBody4); });
 
             });
 

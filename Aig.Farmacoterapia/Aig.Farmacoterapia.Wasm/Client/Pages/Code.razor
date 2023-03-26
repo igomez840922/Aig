@@ -120,8 +120,11 @@
     </MudCard>
 </EditForm>
 
-    <MudTable HorizontalScrollbar="false" FixedHeader="true" FixedFooter="true"  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigCodigoEstudio>>>(DoFetchData))">
-     
+<MudTable  HorizontalScrollbar="false" FixedHeader="false" FixedFooter="false" Elevation="25" @ref="_table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigCodigoEstudio>>>(DoFetchData))">
+  
+
+   @* <MudTable HorizontalScrollbar="false" FixedHeader="true" FixedFooter="true"  Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name"  LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigCodigoEstudio>>>(DoFetchData))">
+     *@
         <HeaderContent>
           
             <MudTh><MudInputLabel Style="width:40px !important">Código</MudInputLabel></MudTh>

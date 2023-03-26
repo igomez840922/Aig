@@ -283,7 +283,7 @@
         if (_user == null) return disabled;
         var role= _user.GetRole();
         var userRole = role.ParseEnum<RoleType>();
-        disabled=!(userRole== RoleType.Admin || userRole== RoleType.Boss || userRole== RoleType.Secretary);
+        disabled=!(userRole== RoleType.Admin || userRole== RoleType.Boss || userRole== RoleType.Secretary || userRole== RoleType.Evaluator);
         return disabled;
     }
 
@@ -293,7 +293,7 @@
         if (_user == null) return disabled;
         var role= _user.GetRole();
         var userRole = role.ParseEnum<RoleType>();
-        disabled=!(userRole== RoleType.Admin || userRole== RoleType.Boss  || userRole== RoleType.Secretary);
+        disabled=!(userRole== RoleType.Admin || userRole== RoleType.Boss  || userRole== RoleType.Secretary || userRole== RoleType.Evaluator);
         return disabled;
     }
 
