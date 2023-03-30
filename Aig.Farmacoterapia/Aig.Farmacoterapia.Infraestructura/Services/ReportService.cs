@@ -212,6 +212,21 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
             });
         }
+        //void AuthorizedBottomRowBody(IContainer container)
+        //{
+        //    container.ShowEntire().Row(row =>
+        //    {
+        //        row.Spacing(2);
+        //        row.RelativeItem(4).Text(text =>
+        //        {
+        //            text.Span($"Le solicitamos presentar los documentos de importación en la Recepción de Farmacia y " +
+        //                      $"Drogas (Edificio 253), para el sellado de los mismos, antes de proceder al retiro de los " +
+        //                      $"medicamentos de los recintos de la Autoridad Nacional de Aduanas para evitar inconvenientes.")
+        //                     .DirectionFromLeftToRight();
+        //        });
+
+        //    });
+        //}
         void NotAuthorizedIntroRowBody(IContainer container)
         {
             var item = Model.Medicamentos.FirstOrDefault();
@@ -257,7 +272,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     columns.RelativeColumn(20);
                     columns.RelativeColumn(20);
                     columns.RelativeColumn(12);
-                    columns.RelativeColumn(8);
+                    columns.RelativeColumn(9);
                 });
 
                 table.Header(header =>
@@ -387,7 +402,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 row.RelativeItem().Column(column =>
                 {
                     column.Spacing(2);
-
+                   
                     column.Item().Text(text =>
                     {
                         text.Span("Atentamente,");
@@ -398,7 +413,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     });
                     column.Item().Text(text =>
                     {
-                        text.Span("Director(a) Nacional de Farmacia y Drogas").SemiBold();
+                        text.Span("Director(a) Nacional de Farmacia y Drogas ").SemiBold();
                     });
                     //column.Item().Text(text =>
                     //{
@@ -445,14 +460,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     });
                 }
 
-
-                if (Model.Estado == EstadoEstudio.Authorized)
+                grid.Item(12).ShowIf(Model.Estado == EstadoEstudio.Authorized).PaddingTop(20).Row(row =>
                 {
-                    grid.Item(12).PaddingTop(20).Row(row =>
-                    {
-                        row.RelativeItem().Element(RowTable);
-                    });
-                }
+                    row.RelativeItem().Element(RowTable);
+                });
+
 
                 if (!string.IsNullOrEmpty(Model.Nota?.Observaciones))
                 {

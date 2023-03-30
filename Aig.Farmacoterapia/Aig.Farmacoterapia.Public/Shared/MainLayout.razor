@@ -129,20 +129,25 @@
 .shop-menu ul li a:hover {
     color: #fff !important;
 }
+
+.pr-165 {
+    padding-left:  50px !important;
+    padding-right: 50px !important;
+}
 </style>
 
 <header>
     <div class="header-top-area pl-165 pr-165" style="background-color: #4e97fd !important;box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);">
-        <div class="container-fluid" style="padding: 0 !important;;">
+        <div class="container-fluid" style="padding: 0 !important;">
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4">
-                  <div class="header-top-wrapper">  
+                 @* <div class="header-top-wrapper">  
                        <div class="header-link f-left" style="margin-left: 20px !important;">
                             <span style="color:#fff !important;font-size: 18px !important; font-weight:bold !important;">
                                SISTEMA DE MONOGRAFÍAS Y PROSPECTOS DE LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS
                               </span>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="col-xl-8 col-lg-8 col-md-8">
                     <div class="header-top-right text-md-right">
@@ -202,32 +207,44 @@
     <div id="sticky-header" class="main-menu-area menu-01 pl-165 pr-165">
         <div class="container-fluid">
             <div class="row align-items-center">
+               
+                <div class="col-4" style="margin-top: 20px;">
+
+                    <span style="color:#454848 !important;font-size: 16px !important; font-weight:bold !important;">
+                       SISTEMA DE MONOGRAFÍAS Y PROSPECTOS DE LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS
+                    </span>
+
+                </div>
+
                 <div class="col-4">
+
+                    <div class="header-search header-02-search" style="margin-top: 15px;">
+
+                        <EditForm Model="this" class="header-search-form" OnValidSubmit="InvokenSearch">
+                            <FluentValidationValidator />
+                            <input type="text" @bind-value="@_filter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
+                            <button type="submit"><i class="far fa-search"></i></button>
+                        </EditForm>
+
+                    </div>
+
+                </div>
+
+                <div class="col-2">
+                    <div class="header-search header-02-search" style="margin-top: 15px;">
+                        <button class="custom-search" type="button" @onclick="() => InvokeFilterModal()">
+                            <i class="fal fa-filter"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="col-2">
                     <div class="logo" style="margin-top: 20px;">
                         <a href="/"><img src="assets/img/logo/logo.png" alt="" /></a>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="header-search header-02-search" style="margin-top: 15px;">
-                     
-                            <EditForm Model="this" class="header-search-form" OnValidSubmit="InvokenSearch">
-                                <FluentValidationValidator />
-                                <input type="text" @bind-value="@_filter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo / Fabricante" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
-                                <button type="submit"><i class="far fa-search"></i></button>
-                            </EditForm>
-                             
-                          
-                    </div>
-           
-                </div>
-                 <div class="col-2">
-                    <div class="header-search header-02-search" style="margin-top: 15px;">
-                          <button class="custom-search" type="button"  @onclick="() => InvokeFilterModal()">
-                              <i class="fal fa-filter"></i>
-                           </button>
-                    </div>
-           
-                </div>
+
             </div>
         </div>
     </div>
