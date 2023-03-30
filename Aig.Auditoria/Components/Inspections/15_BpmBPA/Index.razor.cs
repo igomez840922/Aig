@@ -113,7 +113,7 @@ namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
         private void SelectEstablecimiento_EventHandler(MessageArgs args)
         {
             showSelectEstablecimiento = false;
-            bus.UnSubscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(SelectEstablecimiento_EventHandler);
+            bus.UnSubscribe<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>(SelectEstablecimiento_EventHandler);
             var message = args.GetMessage<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>();
             if (message.Data != null && message.Data.EstablecimientoId !=null)
             {
