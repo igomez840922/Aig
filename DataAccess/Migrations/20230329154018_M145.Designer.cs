@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230329154018_M145")]
+    partial class M145
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -4256,6 +4258,9 @@ namespace DataAccess.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<long?>("PersonalTrabajadorTBId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("ProvinciaId")
                         .HasColumnType("bigint");
 
@@ -4297,6 +4302,8 @@ namespace DataAccess.Migrations
                     b.HasIndex("InstitucionId")
                         .IsUnique()
                         .HasFilter("[InstitucionId] IS NOT NULL");
+
+                    b.HasIndex("PersonalTrabajadorTBId");
 
                     b.HasIndex("ProvinciaId")
                         .IsUnique()
@@ -6210,6 +6217,10 @@ namespace DataAccess.Migrations
                         .WithOne()
                         .HasForeignKey("DataModel.FMV_Ram2TB", "InstitucionId");
 
+                    b.HasOne("DataModel.PersonalTrabajadorTB", null)
+                        .WithMany("LRams2")
+                        .HasForeignKey("PersonalTrabajadorTBId");
+
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
                         .WithOne()
                         .HasForeignKey("DataModel.FMV_Ram2TB", "ProvinciaId");
@@ -6617,6 +6628,8 @@ namespace DataAccess.Migrations
                     b.Navigation("LPmr");
 
                     b.Navigation("LRams");
+
+                    b.Navigation("LRams2");
                 });
 
             modelBuilder.Entity("DataModel.ProvinciaTB", b =>

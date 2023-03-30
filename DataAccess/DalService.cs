@@ -111,19 +111,27 @@ namespace DataAccess
             try
             {
                 _Data.UpdatedDate = DateTime.Now;
-                var _OldData = DBContext.Set<T>().Find(_Data.Id);
-                if (_OldData != null)
-                {                    
-                    DBContext.Entry(_OldData).CurrentValues.SetValues(_Data);                    
+                //var _OldData = DBContext.Set<T>().Find(_Data.Id);
+                //if (_OldData != null)
+                //{                    
+                //    DBContext.Entry(_OldData).CurrentValues.SetValues(_Data);                    
+                //}
+                //else
+                //{
+                //    DBContext.Set<T>().Add(_Data);
+                //}
+                //var _OldData = DBContext.Set<T>().Find(_Data.Id);
+                if (_Data.Id > 0) {
+                    DBContext.Set<T>().Update(_Data);
                 }
-                else
-                {
+                else {
+                    DBContext.Set<T>().Attach(_Data);
                     DBContext.Set<T>().Add(_Data);
                 }
 
                 DBContext.SaveChanges();
 
-                return Get<T>(_Data.Id);
+                return DBContext.Set<T>().Find(_Data.Id); ;
             }
             catch (Exception ex)
             { }

@@ -102,11 +102,11 @@ namespace DataModel
 
         // Resumen ejecutivo: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones resumenEjec;
-        public enumFMV_IpsTipoPresentaiones ResumenEjec { get => resumenEjec; set => SetProperty(ref resumenEjec, value); }
+        public enumFMV_IpsTipoPresentaiones ResumenEjec { get => resumenEjec; set { SetProperty(ref resumenEjec, value); IpsData?.UpdateRule(resumenEjec); } }
 
         // Resumen ejecutivo traducido: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones resumenEjecTrad;
-        public enumFMV_IpsTipoPresentaiones ResumenEjecTrad { get => resumenEjecTrad; set => SetProperty(ref resumenEjecTrad, value); }
+        public enumFMV_IpsTipoPresentaiones ResumenEjecTrad { get => resumenEjecTrad; set { SetProperty(ref resumenEjecTrad, value); IpsData?.UpdateRule(resumenEjecTrad); } }
 
         // Prioridad
         /*Realizar priorización automática tomando en consideración la siguiente condición: respuesta afirmativa en alguna de estas preguntas (innovador, biológico, requiere intercambiabilidad) y fecha de autorización en Panamá menor a 5 años, tomando como referencia la fecha en que se recibe el IPS.
@@ -174,23 +174,8 @@ namespace DataModel
         private List<FMV_IpsMedicamentoTB> lMedicamentos;
         public virtual List<FMV_IpsMedicamentoTB> LMedicamentos { get => lMedicamentos; set => SetProperty(ref lMedicamentos, value); }
 
+        
 
-        //public void UpdateRule()
-        //{
-        //    Prioridad = false;
-        //    if (IpsData != null)
-        //    {
-        //        if (Innovador || Biologico || ReqIntercam)
-        //        {
-        //            if (IpsData.FechaAutPan.HasValue && ((DateTime.Now - IpsData.FechaAutPan.Value).TotalDays / 365) < 5)
-        //            {
-        //                Prioridad = true;
-        //            }
-        //        }
-        //    }
-        //}
-    
-    
-    
+
     }
 }

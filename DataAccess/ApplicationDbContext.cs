@@ -1374,11 +1374,11 @@ namespace DataAccess
           .HasForeignKey(e => e.EvaluadorId)
           .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<PersonalTrabajadorTB>()
-          .HasMany(e => e.LRams2)
-          .WithOne(e => e.Evaluador)
-          .HasForeignKey(e => e.EvaluadorId)
-          .OnDelete(DeleteBehavior.NoAction);
+          //  modelBuilder.Entity<PersonalTrabajadorTB>()
+          //.HasMany(e => e.LRams2)
+          //.WithOne(e => e.Evaluador)
+          //.HasForeignKey(e => e.EvaluadorId)
+          //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<PersonalTrabajadorTB>()
          .HasMany(e => e.LFf)
@@ -1683,6 +1683,26 @@ namespace DataAccess
        .WithOne(e => e.Farmaco)
        .HasForeignKey(e => e.FarmacoId)
        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FMV_Ram2TB>()
+                .HasOne(e => e.Evaluador)
+                .WithOne()
+                .HasForeignKey<FMV_Ram2TB>(e => e.EvaluadorId);
+
+            modelBuilder.Entity<FMV_Ram2TB>()
+               .HasOne(e => e.Provincia)
+               .WithOne()
+               .HasForeignKey<FMV_Ram2TB>(e => e.ProvinciaId);
+
+            modelBuilder.Entity<FMV_Ram2TB>()
+               .HasOne(e => e.TipoInstitucion)
+               .WithOne()
+               .HasForeignKey<FMV_Ram2TB>(e => e.TipoInstitucionId);
+
+            modelBuilder.Entity<FMV_Ram2TB>()
+              .HasOne(e => e.InstitucionDestino)
+              .WithOne()
+              .HasForeignKey<FMV_Ram2TB>(e => e.InstitucionId);
 
             modelBuilder.Entity<FMV_Ram2TB>()
              .Property(e => e.ObservacionInfoNotifica)
