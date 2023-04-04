@@ -39,19 +39,21 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata  =(from data in DalService.DBContext.Set<FMV_Ram2TB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.FarmacosDesc.Contains(model.Filter) || data.GravedadDesc.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter)))&&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.FarmacosDesc.Contains(model.Filter) || data.RamDesc.Contains(model.Filter) || data.GravedadDesc.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) ))&&
                               (model.FromDate==null?true:(data.FechaRecibidoCNFV >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
-                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId ))
-                              orderby data.CreatedDate
+                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
+                              (model.RamType == null ? true : (data.RamType == model.RamType))
+                               orderby data.CreatedDate
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
                                where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.FarmacosDesc.Contains(model.Filter) || data.GravedadDesc.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter))) &&
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.CodigoCNFV.Contains(model.Filter) || data.IdFacedra.Contains(model.Filter) || data.CodigoNotiFacedra.Contains(model.Filter) || data.CodExterno.Contains(model.Filter) || data.FarmacosDesc.Contains(model.Filter) || data.RamDesc.Contains(model.Filter) || data.GravedadDesc.Contains(model.Filter) || data.Evaluador.NombreCompleto.Contains(model.Filter) ))&&
                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) &&
-                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId))
+                              (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
+                              (model.RamType == null ? true : (data.RamType == model.RamType))
                                select data).Count();  
             }
             catch (Exception ex)
@@ -62,10 +64,14 @@ namespace Aig.FarmacoVigilancia.Services
 
         public async Task<Stream> ExportToExcel(GenericModel<FMV_Ram2TB> model)
         {
-            try
-            {
+            try {
+                var lInstitucionDest = DalService.GetAll<InstitucionDestinoTB>();
+                var lTipoInstitucion = DalService.GetAll<TipoInstitucionTB>();
+                var lProvincias = DalService.GetAll<ProvinciaTB>();
+
                 model.PagIdx = 0; model.PagAmt = int.MaxValue;
                 model = await FindAll(model);
+
 
                 if (model.Ldata != null && model.Ldata.Count > 0)
                 {
@@ -258,14 +264,14 @@ namespace Aig.FarmacoVigilancia.Services
                                         idx++;
                                         ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.TipoNotificacion);
                                         idx++;
-                                        ws.Cell(row , idx).Value = ram.TipoInstitucion?.Nombre ?? ""; //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
+                                        ws.Cell(row , idx).Value = (ram.TipoInstitucionId.HasValue ? lTipoInstitucion.Where(x => x.Id == ram.TipoInstitucionId.Value)?.FirstOrDefault()?.Nombre ?? "" : ""); //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
                                         idx++;
-                                        ws.Cell(row , idx).Value = ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
+                                        ws.Cell(row, idx).Value = (ram.ProvinciaId.HasValue ? lProvincias.Where(x => x.Id == ram.ProvinciaId.Value)?.FirstOrDefault()?.Nombre ?? "" : "");//ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
                                         idx++;
-                                        ws.Cell(row , idx).Value = ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
+                                        ws.Cell(row, idx).Value = (ram.InstitucionId.HasValue ? lInstitucionDest.Where(x => x.Id == ram.InstitucionId.Value)?.FirstOrDefault()?.Nombre ?? "" : ""); // ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
                                         idx++;
                                         //ws.Cell(row , idx).Value = ram.NumIngresoVigiflow;
-                                        idx++;
+                                        //idx++;
                                         ws.Cell(row , idx).Value = ram.FechaEvaluacion?.ToString("dd/MM/yyyy") ?? "";
                                         idx++;
                                         ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Estatus);
@@ -276,8 +282,8 @@ namespace Aig.FarmacoVigilancia.Services
                                         idx++;
                                         ws.Cell(row , idx).Value = data.FechaRam;
                                         idx++;
-                                        ws.Cell(row, idx).Value = data.FechaRamFin;
-                                        idx++;
+                                        //ws.Cell(row, idx).Value = data.FechaRamFin;
+                                        //idx++;
                                         ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.Desenlace);
                                         idx++;
                                         ws.Cell(row , idx).Value = farmaco.Indicacion;
@@ -307,7 +313,8 @@ namespace Aig.FarmacoVigilancia.Services
                                         ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.RamUnaDosis);
                                         idx++;
                                         ws.Cell(row , idx).Value = ram.Grado;
-                                        //ws.Cell(row , idx).Value = data.Iniciales;
+                                        idx++;
+                                        ws.Cell(row , idx).Value = ram.InicialesPaciente;
                                         idx++;
                                         ws.Cell(row , idx).Value = farmaco.ViaAdministracion;
                                         idx++;
@@ -343,8 +350,8 @@ namespace Aig.FarmacoVigilancia.Services
                                         idx++;
                                         ws.Cell(row , idx).Value = data.Facon;
                                         idx++;
-                                        ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.ExpComplementarias);
-                                        idx++;
+                                        //ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(data.ExpComplementarias);
+                                        //idx++;
                                         ws.Cell(row , idx).Value = data.Xplc;
                                         idx++;
                                         ws.Cell(row , idx).Value = data.Puntuacion;
@@ -399,14 +406,14 @@ namespace Aig.FarmacoVigilancia.Services
                                     idx++;
                                     ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.TipoNotificacion);
                                     idx++;
-                                    ws.Cell(row , idx).Value = ram.TipoInstitucion?.Nombre ?? ""; //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
+                                    ws.Cell(row, idx).Value = (ram.TipoInstitucionId.HasValue ? lTipoInstitucion.Where(x => x.Id == ram.TipoInstitucionId.Value)?.FirstOrDefault()?.Nombre ?? "" : ""); //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
                                     idx++;
-                                    ws.Cell(row , idx).Value = ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
+                                    ws.Cell(row, idx).Value = (ram.ProvinciaId.HasValue ? lProvincias.Where(x => x.Id == ram.ProvinciaId.Value)?.FirstOrDefault()?.Nombre ?? "" : "");//ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
                                     idx++;
-                                    ws.Cell(row , idx).Value = ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
+                                    ws.Cell(row, idx).Value = (ram.InstitucionId.HasValue ? lInstitucionDest.Where(x => x.Id == ram.InstitucionId.Value)?.FirstOrDefault()?.Nombre ?? "" : ""); // ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
                                     idx++;
                                     //ws.Cell(row , idx).Value = ram.NumIngresoVigiflow;
-                                    idx++;
+                                    //idx++;
                                     ws.Cell(row , idx).Value = ram.FechaEvaluacion?.ToString("dd/MM/yyyy") ?? "";
                                     idx++;
                                     ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Estatus);
@@ -448,7 +455,8 @@ namespace Aig.FarmacoVigilancia.Services
                                     ws.Cell(row , idx).Value = "";
                                     idx++;
                                     ws.Cell(row , idx).Value = ram.Grado;
-                                    //ws.Cell(row , idx).Value = data.Iniciales;
+                                    idx++;
+                                    ws.Cell(row , idx).Value = ram.InicialesPaciente;
                                     idx++;
                                     ws.Cell(row , idx).Value = farmaco.ViaAdministracion;
                                     idx++;
@@ -541,14 +549,14 @@ namespace Aig.FarmacoVigilancia.Services
                             idx++;
                             ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.TipoNotificacion);
                             idx++;
-                            ws.Cell(row , idx).Value = ram.TipoInstitucion?.Nombre ?? ""; //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
+                            ws.Cell(row, idx).Value = (ram.TipoInstitucionId.HasValue ? lTipoInstitucion.Where(x => x.Id == ram.TipoInstitucionId.Value)?.FirstOrDefault()?.Nombre ?? "" : ""); //DataModel.Helper.Helper.GetDescription(data.TipoOrgInst);
                             idx++;
-                            ws.Cell(row , idx).Value = ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
+                            ws.Cell(row, idx).Value = (ram.ProvinciaId.HasValue ? lProvincias.Where(x => x.Id == ram.ProvinciaId.Value)?.FirstOrDefault()?.Nombre ?? "" : "");//ram.Provincia?.Nombre ?? ""; //data.ProvRegionOrigen;
                             idx++;
-                            ws.Cell(row , idx).Value = ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
+                            ws.Cell(row, idx).Value = (ram.InstitucionId.HasValue ? lInstitucionDest.Where(x => x.Id == ram.InstitucionId.Value)?.FirstOrDefault()?.Nombre ?? "" : ""); // ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
                             idx++;
                             //ws.Cell(row , idx).Value = ram.NumIngresoVigiflow;
-                            idx++;
+                            //idx++;
                             ws.Cell(row , idx).Value = ram.FechaEvaluacion?.ToString("dd/MM/yyyy") ?? "";
                             idx++;
                             ws.Cell(row , idx).Value = DataModel.Helper.Helper.GetDescription(ram.Estatus);
@@ -590,7 +598,8 @@ namespace Aig.FarmacoVigilancia.Services
                             ws.Cell(row , idx).Value = "";
                             idx++;
                             ws.Cell(row , idx).Value = ram.Grado;
-                            //ws.Cell(row , idx).Value = data.Iniciales;
+                            idx++;
+                            ws.Cell(row , idx).Value = ram.InicialesPaciente;
                             idx++;
                             ws.Cell(row , idx).Value = "";
                             idx++;
@@ -1250,9 +1259,11 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
-                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
-                               (data.Year > 0)
+                               //(model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
+                               //(model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate)) 
+                               //(data.Year > 0)
                                group data by data.Year into g
                                orderby g.Count() descending
                                select new ReportModelResponse
@@ -1263,9 +1274,11 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_Ram2TB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
-                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
-                               (data.Year > 0)
+                               //(model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
+                               //(model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
+                               //(data.Year > 0)
                                group data by data.Year into g
                                select g.Count()).Sum(x => x);
             }

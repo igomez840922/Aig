@@ -1,4 +1,5 @@
 ﻿@page "/ram"
+@using DataModel.Helper;
 @layout BackendLayout
 @attribute [Authorize]
 <style>
@@ -88,6 +89,18 @@
 
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-3">
+                                                    <label>@languageContainerService.Keys["RAM"]</label>
+                                                    <div class="form-line">
+                                                        <RadzenDropDown AllowClear="true" TValue="enumFMV_RAMType?" Class="form-control" @bind-Value=@dataModel.RamType
+                                                                    AllowFiltering="true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                                    Data=@(Enum.GetValues(typeof(enumFMV_RAMType))) Change=@(args => {OnFilter();})>
+                                                            <Template Context="tContext">
+                                                                @(DataModel.Helper.Helper.GetDescription(tContext))
+                                                            </Template>
+                                                        </RadzenDropDown>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </EditForm>
                                     </div>
@@ -116,7 +129,7 @@
                                                             @foreach (var dt in dataModel.Ldata)
                                                             {
                                                                 <tr>
-                                                                    <td scope="row">@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                                    <td scope="row">@(dt.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "")</td>
                                                                     <td>@(dt.FechaEntregaEva?.ToString("dd/MM/yyyy") ?? "")</td>
                                                                     <td>@(dt.CodigoCNFV)</td>
                                                                     <td>@(dt.CodExterno)</td>

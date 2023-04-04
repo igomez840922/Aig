@@ -155,9 +155,22 @@ namespace DataModel
 
         public void UpdateRule(enumFMV_IpsTipoPresentaiones tipoPresentaiones) {
             SolInfoFabricante = tipoPresentaiones == enumFMV_IpsTipoPresentaiones.NotPresent ? enumFMV_IpsTipoPresentaiones.Yes : SolInfoFabricante;
+            UpdateRule3();
         }
         public void UpdateRule2(enumFMV_IpsTipoPresentaiones2 tipoPresentaiones) {
             SolInfoFabricante = tipoPresentaiones == enumFMV_IpsTipoPresentaiones2.NotPresent ? enumFMV_IpsTipoPresentaiones.Yes : SolInfoFabricante;
+            UpdateRule3();
         }
+        public void UpdateRule3() {
+            SolInfoFabricante = MedAdoptada == enumFMV_IpsTipoPresentaiones.No ? MedAdoptada : SolInfoFabricante;
+            SolInfoFabricante = CamInfoSeg == enumFMV_IpsTipoPresentaiones.No ? CamInfoSeg : SolInfoFabricante;
+            SolInfoFabricante = ResHallazgo == enumFMV_IpsTipoPresentaiones.No ? ResHallazgo : SolInfoFabricante;
+            SolInfoFabricante = FaltaEficacia == enumFMV_IpsTipoPresentaiones2.No ? enumFMV_IpsTipoPresentaiones.No : SolInfoFabricante;
+            SolInfoFabricante = CambioBalance == enumFMV_IpsTipoPresentaiones.No ? CambioBalance : SolInfoFabricante;
+            SolInfoFabricante = PropPlanAccion == enumFMV_IpsTipoPresentaiones.No ? PropPlanAccion : SolInfoFabricante;
+            
+        }
+
+
     }
 }

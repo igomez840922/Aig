@@ -22,7 +22,7 @@ namespace DataAccess
 
         public List<T> GetAll<T>() where T : class
         {
-            Reload();
+            //Reload();
             try
             {
                 List<T> _Data = null;
@@ -35,7 +35,7 @@ namespace DataAccess
 
         public List<T> GetAll<T>(int PageIdx, int PageAmt) where T : class, Identity
         {
-            Reload();
+            //Reload();
             try
             {
                 List<T> _Data = null;
@@ -62,7 +62,7 @@ namespace DataAccess
 
         public T Find<T>(Expression<Func<T, bool>> match) where T : class
         {
-            Reload();
+            //Reload();
             try
             {
                 T _Data = null;
@@ -77,7 +77,7 @@ namespace DataAccess
 
         public List<T> FindAll<T>(Expression<Func<T, bool>> match) where T : class
         {
-            Reload();
+            //Reload();
             try
             {
                 List<T> _Data = null;
@@ -92,7 +92,7 @@ namespace DataAccess
 
         public List<T> FindAll<T>(Expression<Func<T, bool>> match, int PageIdx, int PageAmt) where T : class, Identity
         {
-            Reload();
+            //Reload();
             try
             {
                 List<T> _Data = null;
@@ -125,6 +125,7 @@ namespace DataAccess
                     DBContext.Set<T>().Update(_Data);
                 }
                 else {
+                    _Data.CreatedDate = DateTime.Now;
                     DBContext.Set<T>().Attach(_Data);
                     DBContext.Set<T>().Add(_Data);
                 }
@@ -186,7 +187,7 @@ namespace DataAccess
 
         public T First<T>() where T : class
         {
-            Reload();
+            //Reload();
             try
             {
                 T _Data = null;

@@ -150,6 +150,19 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public FMV_IpsData IpsData { get => ipsData; set => SetProperty(ref ipsData, value); }
 
+        // Periodo que cubre
+        //periodo inicial
+        private DateTime? periodoIni;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? PeriodoIni { get => periodoIni; set => SetProperty(ref periodoIni, value); }
+        //periodo final
+        private DateTime? periodoFin;
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? PeriodoFin { get => periodoFin; set => SetProperty(ref periodoFin, value); }
+
+
+
+
         // Innovador: si, no
         private bool innovador;
         public bool Innovador { get => innovador; set => SetProperty(ref innovador, value); }

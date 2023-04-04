@@ -85,6 +85,11 @@ namespace DataModel
         [StringLength(500)]
         public string GravedadDesc { get => gravedadDesc; set => SetProperty(ref gravedadDesc, value); }
 
+        private string medraDesc;
+        [StringLength(500)]
+        public string MedraDesc { get => medraDesc; set => SetProperty(ref medraDesc, value); }
+
+
         /////////////////////////////
         ///PROCEDENCIA DE LA NOTIFICACION
 

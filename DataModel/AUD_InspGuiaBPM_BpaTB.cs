@@ -917,15 +917,15 @@ namespace DataModel
                         {
                              Numero=87,
                             Titulo = "El establecimiento utiliza el sistema FIFO/FEFO para el almacenamiento",
-                            Criterio = "423",
-                            Capitulo="",
+                            Criterio = "Mayor",
+                            Capitulo="423",
                             Articulo="",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         },
                     new ContenidoPreguntas()
                         {
                              Numero=88,
-                            Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa",
+                            Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa. En caso afirmativo agregar dichos valores en las observaciones.",
                             Criterio = "Crítico",
                             Capitulo="423, 424",
                             Articulo="",
@@ -1087,7 +1087,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                         {
                            Numero=106,
-                            Titulo = "Las áreas de almacenamiento están dentro de los límites de temperatura y humedad relativa que estipula el laboratorio fabricante para los productos farmacéuticos\r\n\r\n",
+                            Titulo = "Las áreas de almacenamiento están dentro de los límites de temperatura y humedad relativa que estipula el laboratorio fabricante para los productos farmacéuticos. En caso afirmativo agregar dichos valores en las observaciones.",
                             Criterio = "Crítico",
                             Capitulo="423",
                             Articulo="",
@@ -1096,7 +1096,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                         {
                            Numero=107,
-                            Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa",
+                            Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa. En caso afirmativo agregar dichos valores en las observaciones.",
                             Criterio = "Mayor",
                             Capitulo="423",
                             Articulo="",

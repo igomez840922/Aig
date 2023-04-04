@@ -147,7 +147,7 @@ namespace Aig.FarmacoVigilancia.Services
                                 ws.Cell(row, 6).Value = med?.Laboratorio?.Nombre ?? "";
                                 ws.Cell(row, 7).Value = med?.RegSanitario;
                                 ws.Cell(row, 8).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData.PresentaCd);
-                                ws.Cell(row, 9).Value = prod.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy") ?? "" + " " + prod.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy") ?? "";
+                                ws.Cell(row, 9).Value = (prod.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy") ?? "") + " - " + (prod.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy") ?? "");
                                 ws.Cell(row, 10).Value = prod.IpsData?.FechaRegistro?.ToString("dd/MM/yyyy") ?? "";
                                 ws.Cell(row, 11).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRecepcion);
                                 ws.Cell(row, 12).Value = prod.IpsData?.FechaAsigPreEva?.ToString("dd/MM/yyyy") ?? "";
@@ -201,7 +201,7 @@ namespace Aig.FarmacoVigilancia.Services
                             ws.Cell(row, 6).Value = "";
                             ws.Cell(row, 7).Value = "";
                             ws.Cell(row, 8).Value = DataModel.Helper.Helper.GetDescription(prod.IpsData.PresentaCd);
-                            ws.Cell(row, 9).Value = prod.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy") ?? "" + " " + prod.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy") ?? "";
+                            ws.Cell(row, 9).Value = (prod.IpsData?.PeriodoIni?.ToString("dd/MM/yyyy") ?? "") + " - " + (prod.IpsData?.PeriodoFin?.ToString("dd/MM/yyyy") ?? "");
                             ws.Cell(row, 10).Value = prod.IpsData?.FechaRegistro?.ToString("dd/MM/yyyy") ?? "";
                             ws.Cell(row, 11).Value = DataModel.Helper.Helper.GetDescription(prod.EstatusRecepcion);
                             ws.Cell(row, 12).Value = prod.IpsData?.FechaAsigPreEva?.ToString("dd/MM/yyyy") ?? "";
@@ -273,6 +273,9 @@ namespace Aig.FarmacoVigilancia.Services
 
         public async Task<FMV_IpsTB> Save(FMV_IpsTB data)
         {
+            data.PeriodoIni = data.IpsData?.PeriodoIni;
+            data.PeriodoFin = data.IpsData?.PeriodoFin;
+
             var result = DalService.Save(data);
 
             if(result != null)
@@ -413,27 +416,6 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
-                //               where data.Deleted == false &&
-                //               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
-                //               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
-                //               (data.LaboratorioId > 0)
-                //               group data by data.LaboratorioId into g
-                //               orderby g.Count() descending
-                //               select new ReportModelResponse
-                //               {
-                //                   Name = g.FirstOrDefault().Laboratorio.Nombre,//.Substring(0, 3),
-                //                   Count = g.Count()
-                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
-
-                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
-                //               where data.Deleted == false &&
-                //               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
-                //               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
-                //               (data.LaboratorioId > 0)
-                //               group data by data.LaboratorioId into g
-                //               select g.Count()).Sum(x => x);
-
                 model.Ldata = (from dataFinal in
                                  (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                   where data.Deleted == false &&
@@ -482,32 +464,98 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                var ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
                                (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
                                (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
-                               (data.RegSanitario != null && data.RegSanitario.Length > 0)
-                               group data by data.RegSanitario into g
-                               orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = g.FirstOrDefault().RegSanitario,
-                                   Count = g.Count()
-                               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+                               (data.RegSanitario != null && data.RegSanitario.Length > 0 && data.IpsId > 0 && data.Ips.PeriodoIni != null && data.Ips.PeriodoFin != null)
+                               //group data by data.RegSanitario into g
+                               //orderby g.Count() descending
+                               select new {
+                                   Name = data.RegSanitario,
+                                   PeriodoIni = data.Ips.PeriodoIni,
+                                   PeriodoFin = data.Ips.PeriodoFin,
+                               }).ToList();
+                var ldateRanges = (from dateranges in ldata
+                                  where dateranges.PeriodoIni!=null
+                                  select new DateRangeModel { DateIni = dateranges.PeriodoIni.Value, DateEnd = dateranges.PeriodoFin.Value }).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
-                               where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
-                               (data.RegSanitario != null && data.RegSanitario.Length > 0)
-                               group data by data.RegSanitario into g
+                ldateRanges = GetNonOverlappingDateRanges(ldateRanges);
+
+                foreach(var daterange in ldateRanges) {
+
+                    var ltmpData = (from data in ldata
+                                    where data.PeriodoIni >= daterange.DateIni && data.PeriodoFin <= daterange.DateEnd
+                                   group data by data.Name into g
+                                   select new ReportModelResponse {
+                                       Name = g.FirstOrDefault().Name,
+                                       Count = 1 //g.Count()
+                                   }).ToList();
+                    model.Ldata = model.Ldata != null ? model.Ldata : new List<ReportModelResponse>();
+                    model.Ldata.AddRange(ltmpData);
+                }
+
+                model.Ldata = (from data in model.Ldata
+                               group data by data.Name into g
+                               orderby g.Count() descending
+                               select new ReportModelResponse {
+                                   Name = g.FirstOrDefault().Name,
+                                   Count = g.Count()
+                               }).OrderBy(x=>x.Name).ToList();
+
+                model.Total = (from data in model.Ldata
+                               group data by data.Name into g
+                               orderby g.Count() descending
                                select g.Count()).Sum(x => x);
+
+                model.PagAmt = model.Total;
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                //               (data.RegSanitario != null && data.RegSanitario.Length > 0)
+                //               group data by data.RegSanitario into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().RegSanitario,
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate)) &&
+                //               (data.RegSanitario != null && data.RegSanitario.Length > 0)
+                //               group data by data.RegSanitario into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
 
             return model;
         }
+
+        public List<DateRangeModel> GetNonOverlappingDateRanges(List<DateRangeModel> dateRanges) {
+            dateRanges.Sort((x, y) => x.DateIni.CompareTo(y.DateIni));
+            List<DateRangeModel> nonOverlappingRanges = new List<DateRangeModel>();
+            foreach (var dateRange in dateRanges) {
+                if (nonOverlappingRanges.Count == 0) {
+                    nonOverlappingRanges.Add(dateRange);
+                }
+                else if (dateRange.DateIni > nonOverlappingRanges.Last().DateEnd) {
+                    nonOverlappingRanges.Add(dateRange);
+                }
+                else {
+                    nonOverlappingRanges[nonOverlappingRanges.Count - 1] = new DateRangeModel { DateIni = nonOverlappingRanges.Last().DateIni,
+                        DateEnd = DateTime.Compare(nonOverlappingRanges.Last().DateEnd, dateRange.DateEnd) >= 0 ? nonOverlappingRanges.Last().DateEnd : dateRange.DateEnd};
+                }
+            }
+            return nonOverlappingRanges;
+        }
+
+
 
         //Prioridad
         public async Task<ReportModel<ReportModelResponse>> Report5(ReportModel<ReportModelResponse> model)
@@ -516,24 +564,43 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.Prioridad into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.Prioridad into g
                                orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = g.FirstOrDefault().Prioridad?"SI":"NO",
+                               select new ReportModelResponse {
+                                   Name = g.FirstOrDefault().Ips.Prioridad ? "SI" : "NO",
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.Prioridad into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.Prioridad into g
                                select g.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.Prioridad into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Prioridad?"SI":"NO",
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.Prioridad into g
+                //               select g.Count()).Sum(x => x);
+                //select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -548,26 +615,42 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
-                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
-                               (data.Year > 0)
-                               group data by data.Year into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.Year into g
                                orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = string.Format("FT Totales Año {0}", g.FirstOrDefault().Year),//.Substring(0, 3),
+                               select new ReportModelResponse {
+                                   Name = string.Format("FT Totales Año {0}", g.FirstOrDefault().Ips.Year),//.Substring(0, 3),
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
-                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
-                               (data.Year > 0)
-                               group data by data.Year into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.Year into g
                                select g.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.Year into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = string.Format("FT Totales Año {0}", g.FirstOrDefault().Year),//.Substring(0, 3),
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.Year into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -582,24 +665,42 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.Innovador into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.Innovador into g
                                orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = g.FirstOrDefault().Innovador ? "SI" : "NO",
+                               select new ReportModelResponse {
+                                   Name = g.FirstOrDefault().Ips.Innovador ? "SI" : "NO",
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.Innovador into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.Innovador into g
                                select g.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.Innovador into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Innovador ? "SI" : "NO",
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.Innovador into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -614,24 +715,42 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.Biologico into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.Biologico into g
                                orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   Name = g.FirstOrDefault().Biologico ? "SI" : "NO",
+                               select new ReportModelResponse {
+                                   Name = g.FirstOrDefault().Ips.Biologico ? "SI" : "NO",
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.Biologico into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.Biologico into g
                                select g.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.Biologico into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   Name = g.FirstOrDefault().Biologico ? "SI" : "NO",
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.Biologico into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -678,24 +797,42 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.EstatusRegistro into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.EstatusRegistro into g
                                orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   IpsStatusRegistro = g.FirstOrDefault().EstatusRegistro,
+                               select new ReportModelResponse {
+                                   IpsStatusRegistro = g.FirstOrDefault().Ips.EstatusRegistro,
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.EstatusRegistro into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.EstatusRegistro into g
                                select g.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.EstatusRegistro into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   IpsStatusRegistro = g.FirstOrDefault().EstatusRegistro,
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.EstatusRegistro into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }
@@ -742,24 +879,42 @@ namespace Aig.FarmacoVigilancia.Services
             {
                 model.Ldata = null; model.Total = 0;
 
-                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.StatusRevision into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.StatusRevision into g
                                orderby g.Count() descending
-                               select new ReportModelResponse
-                               {
-                                   IpsStatusRevision = g.FirstOrDefault().StatusRevision,
+                               select new ReportModelResponse {
+                                   IpsStatusRevision = g.FirstOrDefault().Ips.StatusRevision,
                                    Count = g.Count()
                                }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
-                model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                model.Total = (from data in DalService.DBContext.Set<FMV_IpsMedicamentoTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
-                               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
-                               group data by data.StatusRevision into g
+                               (model.FromDate == null ? true : (data.Ips.FechaRecepcion >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.Ips.FechaRecepcion <= model.ToDate))
+                               group data by data.Ips.StatusRevision into g
                                select g.Count()).Sum(x => x);
+
+                //model.Ldata = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.StatusRevision into g
+                //               orderby g.Count() descending
+                //               select new ReportModelResponse
+                //               {
+                //                   IpsStatusRevision = g.FirstOrDefault().StatusRevision,
+                //                   Count = g.Count()
+                //               }).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+
+                //model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()
+                //               where data.Deleted == false &&
+                //               (model.FromDate == null ? true : (data.FechaRecepcion >= model.FromDate)) &&
+                //               (model.ToDate == null ? true : (data.FechaRecepcion <= model.ToDate))
+                //               group data by data.StatusRevision into g
+                //               select g.Count()).Sum(x => x);
             }
             catch (Exception ex)
             { }

@@ -216,9 +216,16 @@ namespace DataModel
                 {
                     new ContenidoPreguntas()
                 {
+                    Titulo = "De la autorización de funcionamiento.",
+                    IsHeader=true,
+                    Capitulo = "6.1"
+                },
+                    new ContenidoPreguntas()
+                {
                     Titulo = "El laboratorio fabricante posee permiso sanitario de funcionamiento o licencia sanitaria, autorizada por la autoridad reguladora del país.",
                     Criterio = "CRITICO",
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    Articulo="6.1.1"
                 },
             new ContenidoPreguntas()
                {
@@ -380,10 +387,14 @@ namespace DataModel
             AdminInfoGeneral = new AUD_ContenidoGenerico()
             {
                 LContenido = new List<ContenidoPreguntas>()
-                {
+                {new ContenidoPreguntas()
+            {
+                Titulo = "Capitulo I - Administración e Información General",
+                IsHeader = true,
+            },
                     new ContenidoPreguntas()
             {
-                Titulo = "Generalidades - Estructura Organizativa",                
+                Titulo = "A - Generalidades - Estructura Organizativa",                
                 IsHeader = true,
             },
                     new ContenidoPreguntas()
@@ -579,6 +590,15 @@ namespace DataModel
             CondExtAlmacenas = new AUD_ContenidoGenerico()
             {
                 LContenido = new List<ContenidoPreguntas>() {
+                    new ContenidoPreguntas()
+            {
+                Titulo = "Capítulo II - Almacenes",
+                IsHeader=true,
+            },new ContenidoPreguntas()
+            {
+                Titulo = "A -- Condiciones Externas de los Almacenes",
+                IsHeader=true,
+            },
             new ContenidoPreguntas()
             {
                 Titulo = "¿Son adecuadas las condiciones externas del local? (Ausencia de rajaduras, pintura descascarillada, filtraciones, crecimiento de moho) ",
@@ -1572,6 +1592,27 @@ namespace DataModel
             {
                 LContenido = new List<ContenidoPreguntas>()
             {
+                new ContenidoPreguntas()
+                {
+                Titulo = "E.1 -- Almacén de Productos Terminados",
+                IsHeader= true,
+                },
+                new ContenidoPreguntas()
+                {
+                Titulo = "Temperatura",
+                Criterio = "",
+                Articulo="",
+                PuntosMax = 0,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                },
+                new ContenidoPreguntas()
+                {
+                Titulo = "Humedad",
+                Criterio = "",
+                Articulo="",
+                PuntosMax = 0,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                },
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿El almacén de producto terminado está debidamente identificado y delimitado?",
@@ -3223,6 +3264,14 @@ namespace DataModel
             {
                 LContenido = new List<ContenidoPreguntas>()
             {
+                    new ContenidoPreguntas()
+                {
+                Titulo = "Temperatura",
+                Criterio = "",
+                Articulo="",
+                PuntosMax = 0,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                },
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿El área esta físicamente delimitada e identificada? ¿Cuenta con esclusa?",
@@ -3532,12 +3581,12 @@ namespace DataModel
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fecha de expiración del producto", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Lista de los materiales de acondicionamiento, cantidad y tipo de cadauno de ellos", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
 
-                new ContenidoPreguntas()
-                {
-                    PuntosMax = (decimal)0.18,
-                Titulo = "Nombre del Producto y Código del Producto",
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //    PuntosMax = (decimal)0.18,
+                //Titulo = "Nombre del Producto y Código del Producto",
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Cada etapa de elaboración es ejecutada y firmada por el operario y aprobado por su superior inmediato?",
@@ -3733,7 +3782,7 @@ namespace DataModel
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Nombre de la persona que verifica cada una de las operaciones"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Número de lote y/o número de control analítico de las materias primas"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cantidades pesadas de cada materia prima"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Registro de controles en proceso con iniciales de personas que los realizaron yresultados obtenidos"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Registro de controles en proceso con iniciales de personas que los realizaron y resultados obtenidos"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cantidad de producto obtenido en la fabricación"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Comentarios o explicaciones de las desviaciones significativas con relación alrendimiento esperado"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Firma de autorización por cualquier desviación de la fórmula maestra"},
@@ -3971,20 +4020,20 @@ namespace DataModel
                 PuntosMax = (decimal)2.0,
                 IsSubHeader = true,
                 },
-                new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Nombre del Producto y Código del Producto"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28, LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fecha de emisión de la fórmula"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Descripción de la forma farmacéutica, potencia del producto y tamañodel lote"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fórmula unitaria"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fórmula industrial"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Lista de materia prima y cantidades utilizadas"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Rendimiento teórico y rendimiento final esperado con sus límites aceptados"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fecha de revisión de la fórmula maestra o su sustitución por otra"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Listado del Equipo de Producción"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Instrucciones detalladas para cada paso en el proceso de verificación delos materiales, pretratamientos, secuencia en la adición de las materias primas,tiempo de mezclado, temperatura y otros (hoja de ruta"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Instrucciones para cualquier control durante el proceso con sus límites"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cualquier precaución a seguir"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.28,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fecha de expiración del producto"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.32,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Lista de los materiales de acondicionamiento, cantidad y tipo de cada uno de ellos"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Nombre del Producto y Código del Producto"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14, LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fecha de emisión de la fórmula"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Descripción de la forma farmacéutica, potencia del producto y tamañodel lote"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fórmula unitaria"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fórmula industrial"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Lista de materia prima y cantidades utilizadas"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Rendimiento teórico y rendimiento final esperado con sus límites aceptados"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fecha de revisión de la fórmula maestra o su sustitución por otra"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Listado del Equipo de Producción"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Instrucciones detalladas para cada paso en el proceso de verificación delos materiales, pretratamientos, secuencia en la adición de las materias primas,tiempo de mezclado, temperatura y otros (hoja de ruta"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Instrucciones para cualquier control durante el proceso con sus límites"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Cualquier precaución a seguir"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Fecha de expiración del producto"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.14,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Lista de los materiales de acondicionamiento, cantidad y tipo de cada uno de ellos"},
 
                 new ContenidoPreguntas()
                 {
@@ -4026,7 +4075,7 @@ namespace DataModel
 
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Están en buen estado?",
+                Titulo = "¿Se observa que están en buen estado?",
                 Criterio = "N",
                 Articulo="435",
                 PuntosMax = (decimal)1.5,
@@ -4149,7 +4198,7 @@ namespace DataModel
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Firma de autorización por cualquier desviación de la fórmula maestra"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Registro de envasado"},
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Registro de etiquetado"},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.18,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Ejemplares de los materiales impresos con el número de lote, fecha de expiración y cualquier impresión adicional o foto de estos"},
+                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},Titulo="Ejemplares de los materiales impresos con el número de lote, fecha de expiración y cualquier impresión adicional o foto de estos"},
 
             }
         };
@@ -4232,7 +4281,7 @@ namespace DataModel
 
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El sistema de tuberías de servicio (agua, electricidad, gases) se observa limpio e identificado?",
+                Titulo = "¿El sistema de tuberías de servicio (agua, electricidad, gases) se encuentran limpias e identificadas según cádigos oficiales?",
                 Criterio = "R",
                 Articulo="430",
                 PuntosMax = (decimal)1.0,
@@ -4296,7 +4345,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Los operarios al momento de la Auditoría, se encuentran debidamente uniformados?:",
+                Titulo = "¿Al momento de la Auditoría los operarios se encuentran debidamente uniformados:",
                 Criterio = "C",
                 Articulo="403",
                 PuntosMax = (decimal)2.0,
@@ -4445,7 +4494,7 @@ namespace DataModel
 
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Están en buen estado?",
+                Titulo = "¿Se observa que están en buen estado?",
                 Criterio = "N",
                 Articulo="435",
                 PuntosMax = (decimal)1.5,

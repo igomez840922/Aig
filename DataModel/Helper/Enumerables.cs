@@ -663,9 +663,9 @@ namespace DataModel.Helper
     {
         [Description("N/A")]
         NA = 0,
-        [Description("Masculino")]
+        [Description("M")]
         MAS = 1,
-        [Description("Femenino")]
+        [Description("F")]
         FEM = 2,
     }
 

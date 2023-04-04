@@ -6,6 +6,7 @@ using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using System.Linq.Expressions;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -64,7 +65,7 @@ namespace Aig.FarmacoVigilancia.Services
                 model.PagIdx = 0; model.PagAmt = int.MaxValue;
                 model = await FindAll(model);
 
-                if (model.Ldata != null && model.Ldata.Count > 0)
+                if (model?.Ldata?.Count > 0)
                 {
                     var wb = new XLWorkbook();
                     wb.Properties.Author = "FT";
@@ -129,10 +130,22 @@ namespace Aig.FarmacoVigilancia.Services
                     ws.Cell(1, 54).Value = "Estatus";
                     ws.Cell(1, 55).Value = "Resoluciones emitidas";
                     ws.Cell(1, 56).Value = "Observaciones";
+                                        
 
                     for (int row = 1; row <= model.Ldata.Count; row++)
                     {
                         var prod = model.Ldata[row - 1];
+
+                        string lotes = "";
+                        if (prod.LLotes?.Count > 0) {
+                            var arrayStrLotes = (from lots in prod.LLotes
+                                                 select new { name = lots.Nombre, exp = lots.FechaExpira }).ToList();
+                            foreach(var lots in arrayStrLotes) {
+                                lotes += string.Format("N: {0} Exp: {1}\r\n", lots.name, lots.exp?.ToString("dd/MM/yyyy")??""); 
+                            }
+                        }
+                         
+
                         ws.Cell(row + 1, 1).Value = prod.CodCNFV;
                         ws.Cell(row + 1, 2).Value = prod.CodExt;
                         ws.Cell(row + 1, 3).Value = prod.FechaRecibidoCNFV?.ToString("dd/MM/yyyy") ?? "";
@@ -144,7 +157,7 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 9).Value = prod.ATC;
                         ws.Cell(row + 1, 10).Value = prod.SubGrupoTerapeutico;
                         ws.Cell(row + 1, 11).Value = prod.Fabricant?.Nombre ?? "";
-                        ws.Cell(row + 1, 12).Value = prod.Lote;
+                        ws.Cell(row + 1, 12).Value = lotes;//prod.Lote?.;
                         ws.Cell(row + 1, 13).Value = prod.FechaExpira?.ToString("dd/MM/yyyy") ?? ""; ;
                         ws.Cell(row + 1, 14).Value = prod.RegSanitario;
                         ws.Cell(row + 1, 15).Value = DataModel.Helper.Helper.GetDescription(prod.TipoNotificacion);
@@ -456,9 +469,8 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<FMV_FtTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
-                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
-                               (data.Year > 0)
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Year into g
                                orderby g.Count() descending
                                select new ReportModelResponse
@@ -469,9 +481,8 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_FtTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
-                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
-                               (data.Year > 0)
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Year into g
                                select g.Count()).Sum(x => x);
             }

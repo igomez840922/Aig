@@ -411,9 +411,8 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<FMV_FfTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
-                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
-                               (data.Year > 0)
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Year into g
                                orderby g.Count() descending
                                select new ReportModelResponse
@@ -424,9 +423,8 @@ namespace Aig.FarmacoVigilancia.Services
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_FfTB>()
                                where data.Deleted == false &&
-                               (model.FromDate == null ? true : (data.Year >= model.FromDate.Value.Year)) &&
-                               (model.ToDate == null ? true : (data.Year <= model.ToDate.Value.Year)) &&
-                               (data.Year > 0)
+                               (model.FromDate == null ? true : (data.FechaRecibidoCNFV >= model.FromDate)) &&
+                               (model.ToDate == null ? true : (data.FechaRecibidoCNFV <= model.ToDate))
                                group data by data.Year into g
                                select g.Count()).Sum(x => x);
             }

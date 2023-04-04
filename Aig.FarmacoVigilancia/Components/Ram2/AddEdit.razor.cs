@@ -464,7 +464,8 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
 
                 Data.FarmacosDesc = "";
                 Data.RamDesc = "";
-                Data.GravedadDesc = "";                
+                Data.GravedadDesc = "";
+                Data.MedraDesc = "";
                 if (Data.LFarmacos?.Count() > 0)
                 {
                     foreach (var dt in Data.LFarmacos)
@@ -476,6 +477,7 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                         {
                             Data.RamDesc += string.Format("** {0} **", ram.Ram);
                             Data.GravedadDesc += string.Format("** {0} **", ram.Gravedad);
+                            Data.MedraDesc += string.Format("** {0} **", ram.TerWhoArt);
                         }
                     }
                 }

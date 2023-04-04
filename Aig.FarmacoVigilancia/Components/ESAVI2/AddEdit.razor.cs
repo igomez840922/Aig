@@ -148,6 +148,7 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
 
                 Data.VacunasDesc = "";
                 Data.EsaviDesc = "";
+                Data.MedraDesc = "";
                 if (Data.LVacunas?.Count() > 0)
                 {
                     foreach(var dt in Data.LVacunas)
@@ -157,6 +158,7 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
                         foreach (var esav in dt.LEsavis)
                         {
                             Data.EsaviDesc += string.Format("** {0} **", esav.EsaviDescripcion);
+                            Data.MedraDesc += string.Format("** {0} **", esav.TerWhoArt);
                         }
                     }
                 }

@@ -65,7 +65,8 @@ namespace DataModel.Models
         public enum_LaboratoryType? LaboratoryType { get; set; } = null;
         public enumFMV_StatusPMR? StatusPMR { get; set; } = null;
         public enum_Cargos? TipoCargo { get; set; } = null;
-
+        public enumFMV_RAMType? RamType { get; set; } = null;
+         
         public long? NParentId { get; set; }
         public int? Priority { get; set; } = null;
         public long? ProvinceId { get; set; } = null;

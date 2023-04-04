@@ -70,6 +70,10 @@ namespace DataModel
         [StringLength(500)]
         public string EsaviDesc { get => esaviDesc; set => SetProperty(ref esaviDesc, value); }
 
+        private string medraDesc;
+        [StringLength(500)]
+        public string MedraDesc { get => medraDesc; set => SetProperty(ref medraDesc, value); }
+
         //PROCEDENCIA DE LA NOTIFICACION
 
         //Tipo de Notificacion

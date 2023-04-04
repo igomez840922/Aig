@@ -79,7 +79,7 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El establecimiento se compromete al fiel cumplimiento del Artículo 386 del Decreto Ejecutivo 115 De 16 de agosto de 2022",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        IsHeader = true,
                     },
              };
         }
@@ -113,7 +113,7 @@ namespace DataModel
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "El ambiente externo del establecimiento presenta un riesgo mínimo de cualquier contaminación? De ser sí explique.",
+                        Titulo = "El ambiente externo del establecimiento presenta un riesgo mínimo de cualquier contaminación? De ser sí Por qué?.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
@@ -132,16 +132,16 @@ namespace DataModel
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Muebles separados de las paredes, pisos, y techos",
-                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
                         Titulo = "Tipo de Mobiliario",
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Estado del Mobiliario",
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Muebles separados de las paredes, pisos, y techos",
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Las cajas donde se dispondrán los medicamentos próximos a la ubicación en el recetario no deben obstruir el libre tránsito del personal por el área",

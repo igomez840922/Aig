@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230403151535_M148")]
+    partial class M148
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2498,6 +2500,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Correo")
+                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -2629,10 +2632,6 @@ namespace DataAccess.Migrations
 
                     b.Property<long?>("InstitucionId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("MedraDesc")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("NombreCompletoPersona")
                         .HasMaxLength(300)
@@ -4258,10 +4257,6 @@ namespace DataAccess.Migrations
                     b.Property<long?>("InstitucionId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("MedraDesc")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<string>("ObservacionInfoNotifica")
                         .HasColumnType("nvarchar(max)");
 
@@ -4303,7 +4298,9 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EvaluadorId");
+                    b.HasIndex("EvaluadorId")
+                        .IsUnique()
+                        .HasFilter("[EvaluadorId] IS NOT NULL");
 
                     b.HasIndex("InstitucionId")
                         .IsUnique()
@@ -6214,9 +6211,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.FMV_Ram2TB", b =>
                 {
                     b.HasOne("DataModel.PersonalTrabajadorTB", "Evaluador")
-                        .WithMany("LRams2")
-                        .HasForeignKey("EvaluadorId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .WithOne()
+                        .HasForeignKey("DataModel.FMV_Ram2TB", "EvaluadorId");
 
                     b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
                         .WithOne()
@@ -6629,8 +6625,6 @@ namespace DataAccess.Migrations
                     b.Navigation("LPmr");
 
                     b.Navigation("LRams");
-
-                    b.Navigation("LRams2");
                 });
 
             modelBuilder.Entity("DataModel.ProvinciaTB", b =>

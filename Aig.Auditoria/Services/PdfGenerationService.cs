@@ -11384,21 +11384,21 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                });
+                            //column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                            //{
+                            //    table.ColumnsDefinition(columns =>
+                            //    {
+                            //        columns.RelativeColumn();
+                            //    });
 
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
-                                });
+                            //    table.Header(header =>
+                            //    {
+                            //        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
+                            //    });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
-                            });
+                            //});
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
@@ -14350,13 +14350,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignCenter().Text("Guía para las Buenas Prácticas de Almacenamiento, Distribución y Transporte de Medicamentos y Otros Productos para la Salud Humana".ToUpper()).Bold();
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
-
-                            column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
-                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
-
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
-
+                            column.Item().PaddingVertical(5).AlignLeft().Text("I. INTRODUCCIÓN.\r\nII. CLASIFICACIÓN DE LOS CRITERIOS DE EVALUACIÓN\r\nIII. CRITERIO DE APROBACIÓN\r\nIV. SOLICITUD PARA OBTENCIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE\r\n      ALMACENAMIENTO Y DISTRIBUCIÓN\r\nV. DATOS GENERALES DEL ESTABLECIMIENTO Y DE LA INSPECCIÓN\r\n\r\n1.\tDISPOSICIONES GENERALES DEL ESTABLECIMIENTO FARMACÉUTICO  \r\n1.1. Generalidades\r\n1.2. Documentación\r\n2.\tAREAS DEL ESTABLECIMIENTO\r\n2.1. Instalaciones\r\n2.2. Área de Recepción y Despacho\r\n2.3. Área de Almacén\r\n2.4. Almacenamiento de Productos\r\n       de Cadena de Frío\r\n2.5. Almacenamiento de\r\n       Estupefacientes o psicotrópicos\r\n2.6. Productos inflamables\r\n2.7. Plaguicidas\r\n2.8. Cosméticos\r\n2.9. Materia prima para la fabricación de productos regulados por la Dirección Nacional de Farmacia y Drogas  \r\n2.10. Productos retirados del mercado\r\n2.11. Productos devueltos del mercado\r\n2.12. Productos Falsificados o Ilícitos\r\n3.\tDISTRIBUCIÓN  \r\n3.1. Especificaciones para Productos a Distribuir\r\n3.2. Registros de Distribución\r\n4.\tDEL TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS\r\n5. AUTO-INSPECCIÓN\r\n6. CONCLUSIONES");
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("I. INTRODUCCIÓN".ToUpper())).Bold();
@@ -14378,6 +14372,12 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("IV. SOLICITUD PARA OBTENCIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE ALMACENAMIENTO Y DISTRIBUCIÓN".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("el interesado debe realizar la solicitud con el formulario destinado para tal fin"));
 
+                            column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
+                            column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
+
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
+
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("V. DATOS GENERALES DEL ESTABLECIMIENTO".ToUpper())).Bold();
 
@@ -14386,18 +14386,22 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Provincia: {0}", inspection.DatosEstablecimiento?.Provincia?.Nombre??""));
                             column.Item().AlignLeft().Text(string.Format("Distrito: {0}", inspection.DatosEstablecimiento?.Distrito?.Nombre ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Corregimiento: {0}", inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? ""));
-                            column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.DatosEstablecimiento?.Telefono ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Teléfono Fijo: {0}", inspection.DatosEstablecimiento?.Telefono ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Móvil: {0}",""));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.DatosEstablecimiento?.Correo ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Licencia de Operación Nº:  {0}", inspection.DatosEstablecimiento?.NumLicencia ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Fecha de Expiración:  {0}", inspection.DatosEstablecimiento?.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
-                            
+                            column.Item().AlignLeft().Text(string.Format("Licencia Especial de Sustancias Controladas Nº:  {0}", ""));
+                            column.Item().AlignLeft().Text(string.Format("Fecha de Expiración:  {0}",  ""));
+
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Actividad Comercial aprobada (Ley 1 Art. 172):")).Bold();
                             column.Item().AlignLeft().Text(string.Format("{0}", inspection.InspGuiaBPM_Bpa.ActComercialAprobada));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Regente Farmacéutico")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Lic: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.Nombre??""));
                             column.Item().AlignLeft().Text(string.Format("N° Idoneidad: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.NumRegistro ?? ""));
-                            column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.TelefonoMovil ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Móvil: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.TelefonoMovil ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.TelefonoResid ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.Email ?? ""));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Representante Legal")).Bold();
@@ -14405,9 +14409,10 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Cédula: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Cedula ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.TelefonoMovil ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Email ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Dirección completa del Domicilio: {0}", ""));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Fecha de la última Inspección por BPAD Oficial realizada: {0}", inspection.InspGuiaBPM_Bpa.FechaUltimaInspeccion?.ToString("dd/MM/yyyy") ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Fecha de la última Inspección por BPAD Oficial realizada: {0}", inspection.InspGuiaBPM_Bpa.FechaUltimaInspeccion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("DATOS GENERALES DE LA INSPECCIÓN".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Propósito de la Inspección de Buenas Prácticas de Almacenamiento y Distribución")).Bold();
@@ -14503,7 +14508,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("D.E".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Evaluación".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
                                     });
                                     foreach (var dat in inspection.InspGuiaBPM_Bpa.DispGenerlestablecimiento.LContenido)
                                     {
@@ -14559,7 +14564,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("D.E".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Evaluación".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
                                     });
                                     foreach (var dat in inspection.InspGuiaBPM_Bpa.AreasEstablecimiento.LContenido)
                                     {
@@ -14615,7 +14620,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("D.E".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Evaluación".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
                                     });
                                     foreach (var dat in inspection.InspGuiaBPM_Bpa.Distribucion.LContenido)
                                     {
@@ -14671,7 +14676,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("D.E".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Evaluación".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
                                     });
                                     foreach (var dat in inspection.InspGuiaBPM_Bpa.TransProdFarmaceuticos.LContenido)
                                     {
@@ -14727,7 +14732,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("D.E".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Evaluación".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
                                     });
                                     foreach (var dat in inspection.InspGuiaBPM_Bpa.AutoInspec.LContenido)
                                     {

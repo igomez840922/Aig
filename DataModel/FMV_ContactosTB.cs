@@ -40,7 +40,7 @@ namespace DataModel
         //correo principal
         private string correo;
         [StringLength(300)]
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
         public string Correo { get => correo; set => SetProperty(ref correo, value); }
 
