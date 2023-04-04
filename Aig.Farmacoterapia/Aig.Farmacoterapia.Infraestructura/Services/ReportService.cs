@@ -12,7 +12,7 @@ using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-
+using QuestPDF.Previewer;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services
 {
@@ -31,8 +31,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             item!.EvaluatorToShow = EvaluatorToShow(item.EstudioEvaluador.Select(s => s.UserId).ToList());
             if (item == null) return new byte[0];
             var document = new NoteReport(item);
+            document.ShowInPreviewer(5243);
             return document.GeneratePdf();
         }
+
        private string EvaluatorToShow(List<string> evaluators)
         {
             string result = string.Empty;
@@ -60,12 +62,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         }
 
         public DocumentMetadata GetMetadata() => new DocumentMetadata();
-
+      
         public void Compose(IDocumentContainer container)
         {
             container.Page(page =>
             {
-               
                 page.DefaultTextStyle(x => x.FontFamily("Arial").FontSize(12));
                 page.MarginVertical(10);
                 page.MarginHorizontal(25);
@@ -74,12 +75,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
                 page.Content().Element(ContentBody1);
 
-                page.Footer().PaddingTop(10).PaddingBottom(5).AlignCenter()
-                  .Text(x =>
+                page.Footer().PaddingTop(10).PaddingBottom(5).AlignCenter().Text(x =>
                   {
                       x.Span("Página ");
                       x.CurrentPageNumber();
                   });
+
             });
            
         }
@@ -95,28 +96,62 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
         void HeaderBody(IContainer container)
         {
-            container.Grid(grid => {
-                grid.Item(12).Row(row => row.RelativeItem().Element(LogoBody));
-                grid.Item(12).Row(row =>
+            container.ShowEntire().Column(column =>
+            {
+                column.Item().Row(row =>
                 {
-                    row.RelativeItem()
-                        .AlignLeft()
+                    row.RelativeItem().Element(LogoBody);
+                });
+                column.Item().Row(row =>
+                {
+                    row.RelativeItem().AlignLeft()
                         .Text($"Dirección Nacional de Farmacia y Drogas")
                         .FontColor("#383838")
                         .FontSize(14)
                         .Style(TextStyle.Default.Bold());
                 });
-                grid.Item(12).Row(row =>
+                column.Item().Row(row =>
                 {
                     row.RelativeItem().PaddingTop(10).PaddingLeft(1).PaddingRight(1).BorderBottom(0.5f).BorderColor("#A2A2A2");
                 });
-
             });
+
+            //container.Row(row =>
+            //{
+            //    row.RelativeItem().Element(LogoBody);
+            //    row.RelativeItem().AlignLeft()
+            //            .Text($"Dirección Nacional de Farmacia y Drogas")
+            //            .FontColor("#383838")
+            //            .FontSize(14)
+            //            .Style(TextStyle.Default.Bold());
+            //    row.RelativeItem().PaddingTop(10).PaddingLeft(1).PaddingRight(1).BorderBottom(0.5f).BorderColor("#A2A2A2");
+            //});
+
+            //container.Grid(grid =>
+            //{
+            //    grid.Item(12).Row(row => row.RelativeItem().Element(LogoBody));
+            //    grid.Item(12).Row(row =>
+            //    {
+            //        row.RelativeItem()
+            //            .AlignLeft()
+            //            .Text($"Dirección Nacional de Farmacia y Drogas")
+            //            .FontColor("#383838")
+            //            .FontSize(14)
+            //            .Style(TextStyle.Default.Bold());
+            //    });
+            //    grid.Item(12).Row(row =>
+            //    {
+            //        row.RelativeItem().PaddingTop(10).PaddingLeft(1).PaddingRight(1).BorderBottom(0.5f).BorderColor("#A2A2A2");
+            //    });
+
+            //});
 
         }
 
         void RowBody1(IContainer container)
         {
+
+
             container.ShowEntire().Column(column =>
             {
                 column.Item().Row(row =>
@@ -126,16 +161,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                         column.Spacing(2);
                         column.Item().Text(text =>
                        {
-                         //text.Span("Número de nota: ").SemiBold();
                          text.Span(Model.Nota?.GetNoteCode(Model.Id)).SemiBold().FontColor("#383838");
                        });
                         
                        column.Item().PaddingBottom(10).Text(text =>
                        {
-                           //text.Span("Fecha de evaluación: ").SemiBold();
-                           //text.Span($"{Model.Nota?.FechaEvaluacion:d}").SemiBold().FontColor("#383838");
                            text.Span($"Panamá, {Model.Nota?.FechaEvaluacion!.Value.ToLongDateString()}").SemiBold().FontColor("#383838").FontSize(11);
-                          
                        });
 
                         if (Model.Tramitante != null)
@@ -151,14 +182,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                 });
                             }
 
-                            //if (!string.IsNullOrEmpty(Model.Tramitante.Idoneidad))
-                            //{
-                            //    column.Item().Text(text =>
-                            //    {
-                            //        //text.Span("Idoneidad: ").SemiBold();
-                            //        text.Span(Model.Tramitante.Idoneidad).SemiBold().FontColor("#383838");
-                            //    });
-                            //}
                             if (!string.IsNullOrEmpty(Model.AgenciaDistribuidora))
                             {
                                 column.Item().Text(text =>
@@ -167,22 +190,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                     text.Span(Model.AgenciaDistribuidora).SemiBold().FontColor("#383838");
                                 });
                             }
-                            //if (!string.IsNullOrEmpty(Model.Tramitante.Telefono))
-                            //{
-                            //    column.Item().Text(text =>
-                            //    {
-                            //        //text.Span("Teléfono: ").SemiBold();
-                            //        text.Span(Model.Tramitante.Telefono).SemiBold().FontColor("#383838");
-                            //    });
-                            //}
-                            //if (!string.IsNullOrEmpty(Model.Tramitante.Correo))
-                            //{
-                            //    column.Item().Text(text =>
-                            //    {
-                            //        //text.Span("Correo: ").SemiBold();
-                            //        text.Span(Model.Tramitante.Correo).SemiBold().FontColor("#383838");
-                            //    });
-                            //}
+                          
 
                         }
 
@@ -190,8 +198,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                     });
 
                 });
-             
-
             });
 
         }
@@ -212,21 +218,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
             });
         }
-        //void AuthorizedBottomRowBody(IContainer container)
-        //{
-        //    container.ShowEntire().Row(row =>
-        //    {
-        //        row.Spacing(2);
-        //        row.RelativeItem(4).Text(text =>
-        //        {
-        //            text.Span($"Le solicitamos presentar los documentos de importación en la Recepción de Farmacia y " +
-        //                      $"Drogas (Edificio 253), para el sellado de los mismos, antes de proceder al retiro de los " +
-        //                      $"medicamentos de los recintos de la Autoridad Nacional de Aduanas para evitar inconvenientes.")
-        //                     .DirectionFromLeftToRight();
-        //        });
-
-        //    });
-        //}
+       
         void NotAuthorizedIntroRowBody(IContainer container)
         {
             var item = Model.Medicamentos.FirstOrDefault();
