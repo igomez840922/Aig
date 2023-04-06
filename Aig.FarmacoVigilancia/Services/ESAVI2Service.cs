@@ -7,6 +7,7 @@ using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using System.Linq.Expressions;
+using Aig.FarmacoVigilancia.Components.Ram2;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
@@ -63,6 +64,8 @@ namespace Aig.FarmacoVigilancia.Services
         {
             try
             {
+                var lInstitucionDest = DalService.GetAll<InstitucionDestinoTB>();
+
                 model.PagIdx = 0; model.PagAmt = int.MaxValue;
                 model = await FindAll(model);
 
@@ -144,7 +147,8 @@ namespace Aig.FarmacoVigilancia.Services
                                 ws.Cell(row + 1, 10).Value = DataModel.Helper.Helper.GetDescription(notifica.TipoNotificacion);
                                 ws.Cell(row + 1, 11).Value = notifica.TipoInstitucion?.Nombre ?? "";
                                 ws.Cell(row + 1, 12).Value = notifica.Provincia?.Nombre ?? "";
-                                ws.Cell(row + 1, 13).Value = notifica.InstitucionDestino?.Nombre ?? "";
+                                //ws.Cell(row + 1, 13).Value = notifica.InstitucionDestino?.Nombre ?? "";
+                                ws.Cell(row + 1, 13).Value = (notifica.InstitucionId.HasValue ? lInstitucionDest.Where(x => x.Id == notifica.InstitucionId.Value)?.FirstOrDefault()?.Nombre ?? "" : ""); // ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
                                 ws.Cell(row + 1, 14).Value = notifica.OtrosDiagnosticos;
                                 ws.Cell(row + 1, 15).Value = DataModel.Helper.Helper.GetDescription(notifica.Sexo);
                                 ws.Cell(row + 1, 16).Value = notifica.Edad;
