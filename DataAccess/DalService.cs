@@ -49,10 +49,21 @@ namespace DataAccess
         }
 
         public T Get<T>(long Id) where T : class{
-            Reload();
+            //Reload();
             try
             {
                 T _Data = null;  
+                _Data = DBContext.Set<T>().Find(Id);
+                return _Data;
+            }
+            catch { }
+            return null;
+        }
+
+        public T GetReloaded<T>(long Id) where T : class {
+            Reload();
+            try {
+                T _Data = null;
                 _Data = DBContext.Set<T>().Find(Id);
                 return _Data;
             }

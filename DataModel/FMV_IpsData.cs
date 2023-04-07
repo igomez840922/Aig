@@ -63,87 +63,87 @@ namespace DataModel
 
         // Tabla de contenido: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones tablaContenido;
-        public enumFMV_IpsTipoPresentaiones TablaContenido { get => tablaContenido; set { SetProperty(ref tablaContenido, value); UpdateRule(tablaContenido); } }
+        public enumFMV_IpsTipoPresentaiones TablaContenido { get => tablaContenido; set { SetProperty(ref tablaContenido, value); UpdateRule(); } }
 
         // Introducción: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones introduccion;
-        public enumFMV_IpsTipoPresentaiones Introduccion { get => introduccion; set { SetProperty(ref introduccion, value); UpdateRule(introduccion); } }
+        public enumFMV_IpsTipoPresentaiones Introduccion { get => introduccion; set { SetProperty(ref introduccion, value); UpdateRule(); } }
 
         // Situacion mundial de autorizacion de comercializacion: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones sitMunAutCom;
-        public enumFMV_IpsTipoPresentaiones SitMunAutCom { get => sitMunAutCom; set { SetProperty(ref sitMunAutCom, value); UpdateRule(sitMunAutCom); } }
+        public enumFMV_IpsTipoPresentaiones SitMunAutCom { get => sitMunAutCom; set { SetProperty(ref sitMunAutCom, value); UpdateRule(); } }
 
         // Medidas adoptadas por ARNs o TRS: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones medAdoptada;
-        public enumFMV_IpsTipoPresentaiones MedAdoptada { get => medAdoptada; set { SetProperty(ref medAdoptada, value); UpdateRule(medAdoptada); } }
+        public enumFMV_IpsTipoPresentaiones MedAdoptada { get => medAdoptada; set { SetProperty(ref medAdoptada, value); UpdateRule(); } }
 
         // Cambios a la informacion de seguridad: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones camInfoSeg;
-        public enumFMV_IpsTipoPresentaiones CamInfoSeg { get => camInfoSeg; set { SetProperty(ref camInfoSeg, value); UpdateRule(camInfoSeg); } }
+        public enumFMV_IpsTipoPresentaiones CamInfoSeg { get => camInfoSeg; set { SetProperty(ref camInfoSeg, value); UpdateRule(); } }
 
         // Monografía: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones monografia;
-        public enumFMV_IpsTipoPresentaiones Monografia { get => monografia; set { SetProperty(ref monografia, value); UpdateRule(monografia); } }
+        public enumFMV_IpsTipoPresentaiones Monografia { get => monografia; set { SetProperty(ref monografia, value); UpdateRule(); } }
 
         // Exposicion estimada y patrones de uso: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones expEstimada;
-        public enumFMV_IpsTipoPresentaiones ExpEstimada { get => expEstimada; set { SetProperty(ref expEstimada, value); UpdateRule(expEstimada); } }
+        public enumFMV_IpsTipoPresentaiones ExpEstimada { get => expEstimada; set { SetProperty(ref expEstimada, value); UpdateRule(); } }
 
         // Presentacion de casos (RAMs reportadas): Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones presCasos;
-        public enumFMV_IpsTipoPresentaiones PresCasos { get => presCasos; set { SetProperty(ref presCasos, value); UpdateRule(presCasos); } }
+        public enumFMV_IpsTipoPresentaiones PresCasos { get => presCasos; set { SetProperty(ref presCasos, value); UpdateRule(); } }
 
         // Resumen de hallazgos significantes de seguridad: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones resHallazgo;
-        public enumFMV_IpsTipoPresentaiones ResHallazgo { get => resHallazgo; set { SetProperty(ref resHallazgo, value); UpdateRule(resHallazgo); } }
+        public enumFMV_IpsTipoPresentaiones ResHallazgo { get => resHallazgo; set { SetProperty(ref resHallazgo, value); UpdateRule(); } }
 
         // Otra información relacionada: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones otraInfRel;
-        public enumFMV_IpsTipoPresentaiones OtraInfRel { get => otraInfRel; set { SetProperty(ref otraInfRel, value); UpdateRule(otraInfRel); } }
+        public enumFMV_IpsTipoPresentaiones OtraInfRel { get => otraInfRel; set { SetProperty(ref otraInfRel, value); UpdateRule(); } }
 
         // Datos no clínicos: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones datosNoCli;
-        public enumFMV_IpsTipoPresentaiones DatosNoCli { get => datosNoCli; set { SetProperty(ref datosNoCli, value); UpdateRule(datosNoCli); } }
+        public enumFMV_IpsTipoPresentaiones DatosNoCli { get => datosNoCli; set { SetProperty(ref datosNoCli, value); UpdateRule(); } }
 
         // Otros informes periodicos: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones otroInfPer;
-        public enumFMV_IpsTipoPresentaiones OtroInfPer { get => otroInfPer; set { SetProperty(ref otroInfPer, value); UpdateRule(otroInfPer); } }
+        public enumFMV_IpsTipoPresentaiones OtroInfPer { get => otroInfPer; set { SetProperty(ref otroInfPer, value); UpdateRule(); } }
 
         // Falta de eficacia en ensayos clínicos controlados: No hay estudios, no presentado, si, no
         private enumFMV_IpsTipoPresentaiones2 faltaEficacia;
-        public enumFMV_IpsTipoPresentaiones2 FaltaEficacia { get => faltaEficacia; set { SetProperty(ref faltaEficacia, value); UpdateRule2(faltaEficacia); } }
+        public enumFMV_IpsTipoPresentaiones2 FaltaEficacia { get => faltaEficacia; set { SetProperty(ref faltaEficacia, value); UpdateRule(); } }
 
         // Revision de señales: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones revisionSenales;
-        public enumFMV_IpsTipoPresentaiones RevisionSenales { get => revisionSenales; set { SetProperty(ref revisionSenales, value); UpdateRule(revisionSenales); } }
+        public enumFMV_IpsTipoPresentaiones RevisionSenales { get => revisionSenales; set { SetProperty(ref revisionSenales, value); UpdateRule(); } }
 
         // Evaluación de señales y riesgos: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones evaluacionSenales;
-        public enumFMV_IpsTipoPresentaiones EvaluacionSenales { get => evaluacionSenales; set { SetProperty(ref evaluacionSenales, value); UpdateRule(evaluacionSenales); } }
+        public enumFMV_IpsTipoPresentaiones EvaluacionSenales { get => evaluacionSenales; set { SetProperty(ref evaluacionSenales, value); UpdateRule(); } }
 
         // Evaluación del beneficio: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones evaluacionBeneficio;
-        public enumFMV_IpsTipoPresentaiones EvaluacionBeneficio { get => evaluacionBeneficio; set { SetProperty(ref evaluacionBeneficio, value); UpdateRule(evaluacionBeneficio); } }
+        public enumFMV_IpsTipoPresentaiones EvaluacionBeneficio { get => evaluacionBeneficio; set { SetProperty(ref evaluacionBeneficio, value); UpdateRule(); } }
 
         // Análisis de beneficio riesgo: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones anaBenRiesgo;
-        public enumFMV_IpsTipoPresentaiones AnaBenRiesgo { get => anaBenRiesgo; set { SetProperty(ref anaBenRiesgo, value); UpdateRule(anaBenRiesgo); } }
+        public enumFMV_IpsTipoPresentaiones AnaBenRiesgo { get => anaBenRiesgo; set { SetProperty(ref anaBenRiesgo, value); UpdateRule(); } }
 
         // Conclusiones y acciones: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones concluAcciones;
-        public enumFMV_IpsTipoPresentaiones ConcluAcciones { get => concluAcciones; set { SetProperty(ref concluAcciones, value); UpdateRule(concluAcciones); } }
+        public enumFMV_IpsTipoPresentaiones ConcluAcciones { get => concluAcciones; set { SetProperty(ref concluAcciones, value); UpdateRule(); } }
 
         // Anexos y apendices: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones anexoApendice;
-        public enumFMV_IpsTipoPresentaiones AnexoApendice { get => anexoApendice; set { SetProperty(ref anexoApendice, value); UpdateRule(anexoApendice); } }
+        public enumFMV_IpsTipoPresentaiones AnexoApendice { get => anexoApendice; set { SetProperty(ref anexoApendice, value); UpdateRule(); } }
 
         // Ha cambiado el balance B/R: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones cambioBalance;
-        public enumFMV_IpsTipoPresentaiones CambioBalance { get => cambioBalance; set { SetProperty(ref cambioBalance, value); UpdateRule(cambioBalance); } }
+        public enumFMV_IpsTipoPresentaiones CambioBalance { get => cambioBalance; set { SetProperty(ref cambioBalance, value); UpdateRule(); } }
 
         // Hay propuestas de un plan de accion: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones propPlanAccion;
-        public enumFMV_IpsTipoPresentaiones PropPlanAccion { get => propPlanAccion; set { SetProperty(ref propPlanAccion, value); UpdateRule(propPlanAccion); } }
+        public enumFMV_IpsTipoPresentaiones PropPlanAccion { get => propPlanAccion; set { SetProperty(ref propPlanAccion, value); UpdateRule(); } }
 
         // Solicitud de informacion al fabricante: Si, no
         private enumFMV_IpsTipoPresentaiones solInfoFabricante;
@@ -153,24 +153,45 @@ namespace DataModel
         private string observaciones;
         public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
 
-        public void UpdateRule(enumFMV_IpsTipoPresentaiones tipoPresentaiones) {
-            SolInfoFabricante = tipoPresentaiones == enumFMV_IpsTipoPresentaiones.NotPresent ? enumFMV_IpsTipoPresentaiones.Yes : SolInfoFabricante;
-            UpdateRule3();
-        }
-        public void UpdateRule2(enumFMV_IpsTipoPresentaiones2 tipoPresentaiones) {
-            SolInfoFabricante = tipoPresentaiones == enumFMV_IpsTipoPresentaiones2.NotPresent ? enumFMV_IpsTipoPresentaiones.Yes : SolInfoFabricante;
-            UpdateRule3();
-        }
-        public void UpdateRule3() {
-            SolInfoFabricante = MedAdoptada == enumFMV_IpsTipoPresentaiones.No ? MedAdoptada : SolInfoFabricante;
-            SolInfoFabricante = CamInfoSeg == enumFMV_IpsTipoPresentaiones.No ? CamInfoSeg : SolInfoFabricante;
-            SolInfoFabricante = ResHallazgo == enumFMV_IpsTipoPresentaiones.No ? ResHallazgo : SolInfoFabricante;
-            SolInfoFabricante = FaltaEficacia == enumFMV_IpsTipoPresentaiones2.No ? enumFMV_IpsTipoPresentaiones.No : SolInfoFabricante;
-            SolInfoFabricante = CambioBalance == enumFMV_IpsTipoPresentaiones.No ? CambioBalance : SolInfoFabricante;
-            SolInfoFabricante = PropPlanAccion == enumFMV_IpsTipoPresentaiones.No ? PropPlanAccion : SolInfoFabricante;
-            
-        }
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        List<enumFMV_IpsTipoPresentaiones> lTipoPresentaiones = new List<enumFMV_IpsTipoPresentaiones>();
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        List<enumFMV_IpsTipoPresentaiones> lTipoPresentaiones2 = new List<enumFMV_IpsTipoPresentaiones>();
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        List<enumFMV_IpsTipoPresentaiones> lTipoPresentaionesExternal = new List<enumFMV_IpsTipoPresentaiones>();
 
+        public void UpdateRule() {
+            
+            CheckList();
+            var pp = lTipoPresentaiones.All(x => x != enumFMV_IpsTipoPresentaiones.NotPresent);
+             pp = FaltaEficacia != enumFMV_IpsTipoPresentaiones2.NotPresent;
+             pp = (lTipoPresentaionesExternal?.All(x => x != enumFMV_IpsTipoPresentaiones.NotPresent) ?? true);
+            SolInfoFabricante = lTipoPresentaiones.All(x => x != enumFMV_IpsTipoPresentaiones.NotPresent) && FaltaEficacia != enumFMV_IpsTipoPresentaiones2.NotPresent && (lTipoPresentaionesExternal?.All(x => x != enumFMV_IpsTipoPresentaiones.NotPresent) ??true) ? enumFMV_IpsTipoPresentaiones.No : enumFMV_IpsTipoPresentaiones.Yes;
+            if(SolInfoFabricante == enumFMV_IpsTipoPresentaiones.Yes) {
+                return;
+            }
+
+            pp = lTipoPresentaiones2.All(x => x == enumFMV_IpsTipoPresentaiones.No);
+            pp = FaltaEficacia == enumFMV_IpsTipoPresentaiones2.No;
+            SolInfoFabricante = lTipoPresentaiones2.All(x => x == enumFMV_IpsTipoPresentaiones.No) && FaltaEficacia == enumFMV_IpsTipoPresentaiones2.No ? enumFMV_IpsTipoPresentaiones.No : enumFMV_IpsTipoPresentaiones.Yes;
+
+        }
+        
+        void CheckList() {
+            if(lTipoPresentaiones?.Count > 0 && lTipoPresentaiones2?.Count > 0) { lTipoPresentaiones.Clear(); }
+            lTipoPresentaiones = new List<enumFMV_IpsTipoPresentaiones>()
+              { TablaContenido, Introduccion, SitMunAutCom, MedAdoptada, CamInfoSeg,Monografia,ExpEstimada,PresCasos,ResHallazgo,
+            OtraInfRel,DatosNoCli,OtroInfPer,RevisionSenales,EvaluacionSenales,EvaluacionBeneficio,AnaBenRiesgo,ConcluAcciones,
+            AnexoApendice,CambioBalance,PropPlanAccion};
+            if (lTipoPresentaiones2?.Count > 0 && lTipoPresentaiones2?.Count > 0) { lTipoPresentaiones2.Clear(); }
+            lTipoPresentaiones2 = new List<enumFMV_IpsTipoPresentaiones>()
+            {MedAdoptada,CamInfoSeg,ResHallazgo,CambioBalance,PropPlanAccion};
+        }
+        public void ExternalUpdateRule(enumFMV_IpsTipoPresentaiones TipoPresentaiones1 = enumFMV_IpsTipoPresentaiones.NotPresent, enumFMV_IpsTipoPresentaiones TipoPresentaiones2 = enumFMV_IpsTipoPresentaiones.NotPresent) {
+            if (lTipoPresentaionesExternal?.Count > 0 && lTipoPresentaionesExternal?.Count > 0) { lTipoPresentaionesExternal.Clear(); }
+            lTipoPresentaionesExternal = new List<enumFMV_IpsTipoPresentaiones> { TipoPresentaiones1, TipoPresentaiones2 };
+            UpdateRule();
+        }
 
     }
 }

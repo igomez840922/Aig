@@ -14,6 +14,7 @@ namespace DataAccess
         List<T> GetAll<T>() where T : class;
         List<T> GetAll<T>(int PageIdx, int PageAmt) where T : class, Identity;
         T Get<T>(long Id) where T : class;
+        T GetReloaded<T>(long Id) where T : class;
         T Find<T>(Expression<Func<T, bool>> match) where T : class;
         List<T> FindAll<T>(Expression<Func<T, bool>> match) where T : class;
         List<T> FindAll<T>(Expression<Func<T, bool>> match, int PageIdx, int PageAmt) where T : class, Identity;

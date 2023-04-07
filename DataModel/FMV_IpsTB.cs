@@ -102,11 +102,11 @@ namespace DataModel
 
         // Resumen ejecutivo: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones resumenEjec;
-        public enumFMV_IpsTipoPresentaiones ResumenEjec { get => resumenEjec; set { SetProperty(ref resumenEjec, value); IpsData?.UpdateRule(resumenEjec); } }
+        public enumFMV_IpsTipoPresentaiones ResumenEjec { get => resumenEjec; set { SetProperty(ref resumenEjec, value); IpsData?.ExternalUpdateRule(resumenEjec, ResumenEjecTrad); } }
 
         // Resumen ejecutivo traducido: Presentado, No Presentado, Si, No
         private enumFMV_IpsTipoPresentaiones resumenEjecTrad;
-        public enumFMV_IpsTipoPresentaiones ResumenEjecTrad { get => resumenEjecTrad; set { SetProperty(ref resumenEjecTrad, value); IpsData?.UpdateRule(resumenEjecTrad); } }
+        public enumFMV_IpsTipoPresentaiones ResumenEjecTrad { get => resumenEjecTrad; set { SetProperty(ref resumenEjecTrad, value); IpsData?.ExternalUpdateRule(resumenEjecTrad, ResumenEjec); } }
 
         // Prioridad
         /*Realizar priorización automática tomando en consideración la siguiente condición: respuesta afirmativa en alguna de estas preguntas (innovador, biológico, requiere intercambiabilidad) y fecha de autorización en Panamá menor a 5 años, tomando como referencia la fecha en que se recibe el IPS.

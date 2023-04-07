@@ -62,6 +62,8 @@ namespace Aig.FarmacoVigilancia.Services
         {
             try
             {
+                var lInstitucionDest = DalService.GetAll<InstitucionDestinoTB>();
+                
                 model.PagIdx = 0; model.PagAmt = int.MaxValue;
                 model = await FindAll(model);
 
@@ -137,6 +139,7 @@ namespace Aig.FarmacoVigilancia.Services
                         var prod = model.Ldata[row - 1];
 
                         string lotes = "";
+                        string concominantes = "";
                         if (prod.LLotes?.Count > 0) {
                             var arrayStrLotes = (from lots in prod.LLotes
                                                  select new { name = lots.Nombre, exp = lots.FechaExpira }).ToList();
@@ -144,7 +147,13 @@ namespace Aig.FarmacoVigilancia.Services
                                 lotes += string.Format("N: {0} Exp: {1}\r\n", lots.name, lots.exp?.ToString("dd/MM/yyyy")??""); 
                             }
                         }
-                         
+                        if (prod.Concominantes?.LProductos?.Count > 0) {
+                            var arrayStrLotes = (from conco in prod.Concominantes.LProductos
+                                                 select new { name = conco.Nombre }).ToList();
+                            foreach (var conco in arrayStrLotes) {
+                                concominantes += string.Format("{0}\r\n", conco.name);
+                            }
+                        }
 
                         ws.Cell(row + 1, 1).Value = prod.CodCNFV;
                         ws.Cell(row + 1, 2).Value = prod.CodExt;
@@ -163,7 +172,8 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 15).Value = DataModel.Helper.Helper.GetDescription(prod.TipoNotificacion);
                         ws.Cell(row + 1, 16).Value = prod.TipoInstitucion?.Nombre;
                         ws.Cell(row + 1, 17).Value = prod.Provincia?.Nombre;
-                        ws.Cell(row + 1, 18).Value = prod.InstitucionDestino?.Nombre;
+                       // ws.Cell(row + 1, 18).Value = prod.InstitucionDestino?.Nombre;
+                        ws.Cell(row + 1, 18).Value = (prod.InstitucionId.HasValue ? lInstitucionDest.Where(x => x.Id == prod.InstitucionId.Value)?.FirstOrDefault()?.Nombre ?? "" : ""); // ram.InstitucionDestino?.Nombre ?? ""; //data.NombreOrgInst;
                         ws.Cell(row + 1, 19).Value = prod.Notificador;
                         ws.Cell(row + 1, 20).Value = DataModel.Helper.Helper.GetDescription(prod.IncidenciaCaso);
                         ws.Cell(row + 1, 21).Value = prod.OtrasEspecificaciones?.CodigoNotiFacedra ?? "";
@@ -185,7 +195,7 @@ namespace Aig.FarmacoVigilancia.Services
                         ws.Cell(row + 1, 37).Value = prod.DatosPaciente.FechaFT;
                         ws.Cell(row + 1, 38).Value = prod.DatosPaciente.Indicacion;
                         ws.Cell(row + 1, 39).Value = prod.DatosPaciente.ViaAdministracion;
-                        ws.Cell(row + 1, 40).Value = prod.DatosPaciente.Concomitantes;
+                        ws.Cell(row + 1, 40).Value = concominantes;
                         ws.Cell(row + 1, 41).Value = DataModel.Helper.Helper.GetDescription(prod.EvaluacionCausalidad.FarmCinCompleja);
                         ws.Cell(row + 1, 42).Value = DataModel.Helper.Helper.GetDescription(prod.EvaluacionCausalidad.CondClinicas);
                         ws.Cell(row + 1, 43).Value = DataModel.Helper.Helper.GetDescription(prod.EvaluacionCausalidad.Preescrito);

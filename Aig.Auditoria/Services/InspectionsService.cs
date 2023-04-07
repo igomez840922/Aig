@@ -8,6 +8,7 @@ using DataModel.Helper;
 using Aig.Auditoria.Pages.Inspections;
 using Duende.IdentityServer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
 
 namespace Aig.Auditoria.Services
 {    
@@ -30,7 +31,7 @@ namespace Aig.Auditoria.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || data.DatosEstablecimiento.NumLicencia.Contains(model.Filter) || data.DatosEstablecimiento.ReciboPago.Contains(model.Filter) || data.DatosEstablecimiento.AvisoOperaciones.Contains(model.Filter) || data.DatosEstablecimiento.Nombre.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
                                (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
@@ -52,7 +53,7 @@ namespace Aig.Auditoria.Services
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || data.DatosEstablecimiento.NumLicencia.Contains(model.Filter) || data.DatosEstablecimiento.ReciboPago.Contains(model.Filter) || data.DatosEstablecimiento.AvisoOperaciones.Contains(model.Filter) || data.DatosEstablecimiento.Nombre.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
                                (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
@@ -77,7 +78,7 @@ namespace Aig.Auditoria.Services
 
                 model.Ldata = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter)  || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || data.DatosEstablecimiento.NumLicencia.Contains(model.Filter) || data.DatosEstablecimiento.ReciboPago.Contains(model.Filter) || data.DatosEstablecimiento.AvisoOperaciones.Contains(model.Filter) || data.DatosEstablecimiento.Nombre.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None? data.StatusInspecciones == model.StatusInspecciones : true) &&
                                (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
@@ -88,7 +89,7 @@ namespace Aig.Auditoria.Services
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_InspeccionTB>()
                                where data.Deleted == false &&
-                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
+                               (string.IsNullOrEmpty(model.Filter) ? true : (data.NumActa.Contains(model.Filter) || data.LicenseNumber.Contains(model.Filter) || data.DatosEstablecimiento.NumLicencia.Contains(model.Filter) || data.DatosEstablecimiento.ReciboPago.Contains(model.Filter) || data.DatosEstablecimiento.AvisoOperaciones.Contains(model.Filter) || data.DatosEstablecimiento.Nombre.Contains(model.Filter) || (data.Establecimiento != null && (data.Establecimiento.Nombre.Contains(model.Filter) || data.Establecimiento.ReciboPago.Contains(model.Filter) || data.Establecimiento.NumLicencia.Contains(model.Filter) || data.Establecimiento.AvisoOperaciones.Contains(model.Filter))))) &&
                                (model.TipoActa != DataModel.Helper.enumAUD_TipoActa.None ? data.TipoActa == model.TipoActa : true) &&
                                (model.StatusInspecciones != DataModel.Helper.enum_StatusInspecciones.None ? data.StatusInspecciones == model.StatusInspecciones : true) &&
                                (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
@@ -172,7 +173,7 @@ namespace Aig.Auditoria.Services
 
         public async Task<AUD_InspeccionTB> Get(long Id)
        {
-            var result = DalService.Get<AUD_InspeccionTB>(Id);                        
+            var result = DalService.GetReloaded<AUD_InspeccionTB>(Id);                        
 
             return result;
         }

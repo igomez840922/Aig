@@ -81,8 +81,7 @@ namespace Aig.FarmacoVigilancia.Components.IPS
                 Labs = await labsService.GetAll();
             }
 
-            //if (Ips != null)
-            //    Ips.UpdateRule();
+            Ips?.IpsData?.UpdateRule();
 
             //if (Pmr != null)
             //{
