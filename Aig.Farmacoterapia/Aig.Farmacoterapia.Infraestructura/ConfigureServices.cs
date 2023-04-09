@@ -28,6 +28,8 @@ using System.Net;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 namespace Aig.Farmacoterapia.Infrastructure
 {
@@ -261,6 +263,8 @@ namespace Aig.Farmacoterapia.Infrastructure
             services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
             return services;
         }
         public static void AddInfrastructureMappings(this IServiceCollection services)

@@ -1,8 +1,12 @@
 using Aig.Farmacoterapia.Application.Features.Extensions;
 using Aig.Farmacoterapia.Infrastructure;
+using Aig.Farmacoterapia.Wasm.Server.Helpers;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var context = new CustomAssemblyLoadContext();
+context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "DinkToPdf.v0.12.4", "64bit", "libwkhtmltox.dll"));
 
 // Add services to the container.
 builder.Services.AddSharedInfrastructure(builder.Configuration);
@@ -21,6 +25,7 @@ builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequ
 builder.Services.AddRazorPages();
 
 builder.Services.AddSwaggerGen();
+
 
 //For API CONTROLLERS
 builder.Services.AddCors(policy =>
