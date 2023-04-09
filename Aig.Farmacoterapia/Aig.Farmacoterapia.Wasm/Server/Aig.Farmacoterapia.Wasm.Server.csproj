@@ -24,5 +24,17 @@
     <Folder Include="Files\datasheet\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="DinkToPdf.v0.12.4\64bit\libwkhtmltox.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DinkToPdf.v0.12.4\64bit\libwkhtmltox.dylib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DinkToPdf.v0.12.4\64bit\libwkhtmltox.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>
