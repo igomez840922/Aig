@@ -55,7 +55,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                           "  <div style=\"margin-top:20px !important;\">Atentamente</div>" +
                           "  <div style=\"font-weight: bold;margin-top:50px\">" +
                           "    <div>----------------------------------------------------------------------</div>" +
-                          $"   <div>{item.Nota?.DirectoraNacional.ToUpper()}</div>" +
+                          $"   <div>{item.Nota?.DirectoraNacional?.ToUpper()}</div>" +
                           "    <div> Director(a) Nacional de Farmacia y Drogas</div>" +
                           $"    <div style=\"font-size: 10px;\"> { item!.EvaluatorToShow} </div>" +
                           "  </div>" +
@@ -119,7 +119,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                       $"le informamos los siguientes aspectos:";
 
             sb.AppendLine("<div style=\"margin-top:20px !important\">");
-            sb.AppendLine("<p style=\"text-align: justify;font-size: 15px;\">");
+            sb.AppendLine("<p style=\"text-align: justify;font-size: 14px;\">");
             sb.AppendLine(title);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");
@@ -188,7 +188,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             StringBuilder sb = new StringBuilder();
             
             sb.AppendLine("<div style=\"margin-top:20px !important\">");
-            sb.AppendLine("<p style=\"text-align: justify;font-size: 15px;\">");
+            sb.AppendLine("<p style=\"text-align: justify;font-size: 14px;\">");
             sb.AppendLine(model.Nota?.Observaciones);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");
