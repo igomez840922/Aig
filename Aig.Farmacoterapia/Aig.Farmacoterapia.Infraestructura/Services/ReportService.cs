@@ -34,7 +34,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             var dateFormatInfo = CultureInfo.CreateSpecificCulture("es-PAN").DateTimeFormat;
             var item = await _unitOfWork.Repository<AigEstudio>().GetByIdAsync(studyId);
-            item!.EvaluatorToShow = EvaluatorToShow(item.EstudioEvaluador.Select(s => s.UserId).ToList());
+            item!.EvaluatorToShow = EvaluatorToShow(item.EstudioEvaluador.Select(s => s.UserId).ToList(), item.Nota?.Jefe);
             if (item == null) return new byte[0];
             var html = "<html>" +
                           "<body style=\"margin: 20px !important;font-family: Arial, Helvetica, sans-serif;font-size: 15px;\">" +
@@ -49,24 +49,47 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                           $" <div style=\"font-weight: bold !important;\">Panamá, {item.Nota?.FechaEvaluacion!.Value.ToString("dd 'de' MMMM 'de' yyyy", dateFormatInfo) ?? ""} </div>" +
                           $" <div style=\"margin-top:20px !important;font-weight: bold !important;\">{item.Tramitante.Nombre} </div> " +
                           $" <div style=\"font-weight: bold !important;\"> {item.AgenciaDistribuidora} </div>" +
-                          $"{BuilTitle(item)}" +
-                          $"{BuilTable(item)}" +
-                          $"{BuilNote(item)}" +
+                          $"{BuildTitle(item)}" +
+                          $"{BuildTable(item)}" +
+                          $"{BuildNote(item)}" +
                           "  <div style=\"margin-top:20px !important;\">Atentamente</div>" +
                           "  <div style=\"font-weight: bold;margin-top:50px\">" +
                           "    <div>----------------------------------------------------------------------</div>" +
-                          $"   <div>{""}</div>" + //Mgtra. Elvia C.Lau R.
+                          $"   <div>{item.Nota?.DirectoraNacional.ToUpper()}</div>" +
                           "    <div> Director(a) Nacional de Farmacia y Drogas</div>" +
                           $"    <div style=\"font-size: 10px;\"> { item!.EvaluatorToShow} </div>" +
                           "  </div>" +
                           "</body>" +
                         "</html>";
 
-            GlobalSettings globalSettings = new GlobalSettings();
-            globalSettings.ColorMode = ColorMode.Color;
-            globalSettings.Orientation = Orientation.Portrait;
-            globalSettings.PaperSize = PaperKind.A4;
-            globalSettings.Margins = new MarginSettings { Top = 10, Bottom = 10 };
+            var settings = new GlobalSettings();
+            settings.ColorMode = ColorMode.Color;
+            settings.Orientation = Orientation.Portrait;
+            settings.PaperSize = PaperKind.A4;
+            settings.Margins = new MarginSettings { Top = 10, Bottom = 10 };
+            var objectSettings = BuildSettings(html);
+            var doc = new HtmlToPdfDocument()  { GlobalSettings = settings, Objects = { objectSettings }};
+            return _converter.Convert(doc);
+        }
+        private string EvaluatorToShow(List<string> evaluators, string jefe)
+        {
+            string result = string.Empty;
+            try
+            {
+                var list = _userManager.Users.Where(p => evaluators.Contains(p.Id)).ToList()
+                                              .Select(w => { w.FirstName = w.FirstName[..1].ToLower(); w.LastName = w.LastName[..1].ToLower(); return $"{ w.FirstName}{ w.LastName}"; }).ToList();
+                if (list != null && !string.IsNullOrEmpty(jefe) && !list.Any(p => p == jefe.ToLower()))
+                    list.Insert(0,jefe.ToLower());
+               result = string.Join(" / ", list);
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc.Message, exc);
+            }
+            return result;
+        }
+        private static ObjectSettings BuildSettings(string html)
+        {
             ObjectSettings objectSettings = new ObjectSettings();
             objectSettings.PagesCount = true;
             objectSettings.HtmlContent = html;
@@ -79,26 +102,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             footerSettings.Line = false;
             objectSettings.FooterSettings = footerSettings;
             objectSettings.WebSettings = webSettings;
-
-            var doc = new HtmlToPdfDocument()  { GlobalSettings = globalSettings,Objects = { objectSettings }};
-            return _converter.Convert(doc);
+            return objectSettings;
         }
-        private string EvaluatorToShow(List<string> evaluators)
-        {
-            string result = string.Empty;
-            try
-            {
-                var list = _userManager.Users.Where(p => evaluators.Contains(p.Id)).ToList()
-                                              .Select(w => { w.FirstName = w.FirstName[..1].ToLower(); w.LastName = w.LastName[..1].ToLower(); return $"{ w.FirstName}{ w.LastName}"; });
-                result = string.Join(" / ", list);
-            }
-            catch (Exception exc)
-            {
-                _logger.Error(exc.Message, exc);
-            }
-            return result;
-        }
-        private string BuilTitle(AigEstudio model)
+        private static string BuildTitle(AigEstudio model)
         {
             var item = model.Medicamentos.FirstOrDefault();
             string facture = item != null ? item.Factura : "--";
@@ -113,13 +119,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                       $"le informamos los siguientes aspectos:";
 
             sb.AppendLine("<div style=\"margin-top:20px !important\">");
-                sb.AppendLine("<p align=\"justify;\" style=\"font-size: 15px;\">");
-                sb.AppendLine(title);
-                sb.AppendLine("</p>");
-                sb.AppendLine("<div/>");
+            sb.AppendLine("<p style=\"text-align: justify;font-size: 15px;\">");
+            sb.AppendLine(title);
+            sb.AppendLine("</p>");
+            sb.AppendLine("<div/>");
             return sb.ToString();
         }
-        private string BuilTable(AigEstudio model)
+        private static string BuildTable(AigEstudio model)
         {
             if (model.Estado== EstadoEstudio.NotAuthorized) return "";
             StringBuilder sb = new StringBuilder();
@@ -177,12 +183,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
             return sb.ToString();
         }
-        private string BuilNote(AigEstudio model)
+        private static string BuildNote(AigEstudio model)
         {
             StringBuilder sb = new StringBuilder();
             
             sb.AppendLine("<div style=\"margin-top:20px !important\">");
-            sb.AppendLine("<p align=\"justify;\" style=\"font-size: 15px;\">");
+            sb.AppendLine("<p style=\"text-align: justify;font-size: 15px;\">");
             sb.AppendLine(model.Nota?.Observaciones);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");

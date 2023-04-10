@@ -287,6 +287,14 @@
                                             </MudSelect>
                                         </MudItem>
 
+                                      <MudItem xs="12" md="6" Style="padding:3px !important">
+                                         <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Nota.DirectoraNacional)" @bind-Value="_modelData.Nota.DirectoraNacional" Label="Nombre de la Directora Nacional de farmacias y Drogas" />
+                                      </MudItem>
+
+                                       <MudItem xs="12" md="6" Style="padding:3px !important">
+                                         <MudTextField Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Nota.Jefe)" @bind-Value="_modelData.Nota.Jefe" Label="Iniciales del Jefe" />
+                                      </MudItem>
+
                                     </MudGrid>
                                 </MudItem>
                             </MudGrid>
