@@ -171,9 +171,11 @@ namespace DataModel
                 return;
             }
 
-            pp = lTipoPresentaiones2.All(x => x == enumFMV_IpsTipoPresentaiones.No);
-            pp = FaltaEficacia == enumFMV_IpsTipoPresentaiones2.No;
-            SolInfoFabricante = lTipoPresentaiones2.All(x => x == enumFMV_IpsTipoPresentaiones.No) && FaltaEficacia == enumFMV_IpsTipoPresentaiones2.No ? enumFMV_IpsTipoPresentaiones.No : enumFMV_IpsTipoPresentaiones.Yes;
+            SolInfoFabricante = CambioBalance == enumFMV_IpsTipoPresentaiones.Yes ? enumFMV_IpsTipoPresentaiones.Yes : enumFMV_IpsTipoPresentaiones.No;
+
+            //pp = lTipoPresentaiones2.All(x => x == enumFMV_IpsTipoPresentaiones.No);
+            //pp = FaltaEficacia == enumFMV_IpsTipoPresentaiones2.No;
+            //SolInfoFabricante = lTipoPresentaiones2.All(x => x == enumFMV_IpsTipoPresentaiones.No) && FaltaEficacia == enumFMV_IpsTipoPresentaiones2.No ? enumFMV_IpsTipoPresentaiones.No : enumFMV_IpsTipoPresentaiones.Yes;
 
         }
         
