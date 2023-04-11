@@ -234,7 +234,10 @@
                 <MudMenuItem Disabled=(!IsCopy()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">
                     Clonar
                 </MudMenuItem>
-                @* <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
+                @if (IsDelete())
+                {
+                  <MudMenuItem  Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                }
             </MudMenu>
 
         </MudTd>
@@ -434,7 +437,10 @@
                     Clonar
                 </MudMenuItem>
 
-                @* <MudMenuItem Disabled="!IsDelete()" Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>*@
+                @if (IsDelete())
+                {
+                  <MudMenuItem  Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                }
             </MudMenu>
 
         </MudTd>
@@ -495,9 +501,8 @@
     {
         var disabled=true;
         if (_user == null) return disabled;
-        var role= _user.GetRole();
-        var userRole = role.ParseEnum<RoleType>();
-        return (userRole== RoleType.Admin);
+        var username= _user.GetUserName();
+        return (username== "sys@sys.com");
     }
 
     protected bool IsAddAndEvaluators()
