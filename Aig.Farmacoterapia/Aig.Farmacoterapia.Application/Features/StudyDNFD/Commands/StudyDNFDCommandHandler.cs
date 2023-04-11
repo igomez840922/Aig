@@ -90,7 +90,8 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Commands
                 var item=await _unitOfWork.Repository<AigEstudioDNFD>().GetByIdAsync(request.Id);
                 if (item != null){
                     await _unitOfWork.Repository<AigEstudioDNFD>().DeleteAsync(item);
-                    answer = Result<bool>.Success(_unitOfWork.Commit(), "Solicitud de importación generada satisfactoriamente");
+                    answer = _unitOfWork.Commit() ? Result<bool>.Success("Elemento eliminado correctamente !") :
+                             Result<bool>.Fail("Error durante la operación");
                 }
                 else answer = Result<bool>.Fail();
             }

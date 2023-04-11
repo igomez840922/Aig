@@ -100,7 +100,8 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                 var item=await _unitOfWork.Repository<AigEstudio>().GetByIdAsync(request.Id);
                 if (item != null){
                     await _unitOfWork.Repository<AigEstudio>().DeleteAsync(item);
-                    answer = Result<bool>.Success(_unitOfWork.Commit());
+                    answer = _unitOfWork.Commit() ? Result<bool>.Success("Elemento eliminado correctamente !") :
+                             Result<bool>.Fail("Error durante la operación");
                 }
                 else answer = Result<bool>.Fail();
             }

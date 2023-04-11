@@ -23,5 +23,10 @@ namespace Aig.Farmacoterapia.Wasm.Client.Extensions
            => claimsPrincipal.FindFirstValue(ClaimTypes.UserData);
         internal static string GetRole(this ClaimsPrincipal claimsPrincipal)
           => claimsPrincipal.FindFirstValue(ClaimTypes.Role);
+        internal static string GetUserName(this ClaimsPrincipal claimsPrincipal)
+         => claimsPrincipal.FindFirstValue("username");
+
+        
+
     }
 }

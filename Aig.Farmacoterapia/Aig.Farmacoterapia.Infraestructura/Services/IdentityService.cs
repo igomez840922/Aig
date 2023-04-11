@@ -168,6 +168,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             var claims = new List<Claim>
             {
                 new(ClaimTypes.NameIdentifier, user.Id),
+                new("username", user.UserName),
                 new(ClaimTypes.Email, user.Email),
                 new(ClaimTypes.Name, user.FirstName),
                 new(ClaimTypes.Surname, user.LastName),
