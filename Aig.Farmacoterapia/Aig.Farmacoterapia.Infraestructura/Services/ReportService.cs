@@ -62,7 +62,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 var settings = new GlobalSettings();
                 settings.ColorMode = ColorMode.Color;
                 settings.Orientation = Orientation.Portrait;
-                settings.PaperSize = PaperKind.A4;
+                settings.PaperSize = PaperKind.Letter;
                 settings.Margins = new MarginSettings { Left=0, Right = 0, Top = 40, Bottom = 6.2 };
                 var objectSettings = BuildSettings(html);
                 var doc = new HtmlToPdfDocument() { GlobalSettings = settings, Objects = { objectSettings } };
