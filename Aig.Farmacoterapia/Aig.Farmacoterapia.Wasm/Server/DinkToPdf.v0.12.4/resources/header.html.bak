@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>my example</title>
+    <!-- pdfmake files: -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/vfs_fonts.min.js"></script>
+    <!-- html-to-pdfmake file: -->
+    <script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake/browser.js"></script>
+  </head>
+  <body>
+    <h1>
+      <a href="https://github.com/Aymkdn/html-to-pdfmake">
+        html-to-pdfmake
+      </a>
+      Examples
+    </h1>
+    <iframe id="pdf" height="600px" width="700px"> </iframe>
+    <hr />
+    <button type="button" onclick="download();">Download</button>
+    <script>
+      const html = `<div>
+        <h1>ALL HAIL KEVIN BACON!</h1>
+        <p>
+          This is a sentence with a <strong>bold word</strong>, <em>one in italic</em>,
+          and <u>one with underline</u>. And finally <a href="https://www.somewhere.com">a link</a>.
+        </p>
+        <table>
+          <tr>
+            <th style="width:150px">Header 1</th>
+          </tr>
+          <tr>
+            <td style="text-align:center" height="50">Cell A1</td>
+          </tr>
+        </table>
+        <span class="green">Text in green using the styles from PDFMake</small>
+      </div>`;
+
+      const val = htmlToPdfmake(html);
+      const dd = { content: val };
+
+      pdfMake.createPdf(dd).getDataUrl(function (outDoc1) {
+        document.getElementById("pdf").src = outDoc1;
+      });
+
+      const download = function () {
+        pdfMake.createPdf(dd).download();
+      };
+    </script>
+  </body>
+</html>
