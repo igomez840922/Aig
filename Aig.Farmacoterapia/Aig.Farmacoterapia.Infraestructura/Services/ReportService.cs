@@ -49,7 +49,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                               $"{BuildTitle(item)}" +
                               $"{BuildTable(item)}" +
                               $"{BuildNote(item)}" +
-                              " <div style=\"margin-top:12px !important;\">Atentamente</div>" +
+                              " <div style=\"page-break-inside: avoid;margin-top:40px !important;\">Atentamente</div>" +
                               "  <div style=\"font-family: Arial, Helvetica, sans-serif;font-size: 14px;font-weight: bold;margin-top:50px\">" +
                               "    <div>----------------------------------------------------------------------</div>" +
                               $"   <div>{item.Nota?.DirectoraNacional?.ToUpper()}</div>" +
@@ -131,7 +131,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                       $"le informamos los siguientes aspectos:";
 
             sb.AppendLine("<div style=\"margin-top:20px !important\">");
-            sb.AppendLine("<p style=\"text-align: justify;font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px\">");
+            sb.AppendLine("<p style=\"text-align: justify;font-family:'Arial';font-size: 18px;line-height: 24px\">");
             sb.AppendLine(title);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");
@@ -199,7 +199,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             StringBuilder sb = new StringBuilder();
             
-            sb.AppendLine("<div style=\"margin-top:20px !important\">");
+            sb.AppendLine("<div style=\"page-break-inside: avoid;margin-top:20px !important\">");
             sb.AppendLine("<p style=\"text-align: justify;font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px\">");
             sb.AppendLine(model.Nota?.Observaciones);
             sb.AppendLine("</p>");
