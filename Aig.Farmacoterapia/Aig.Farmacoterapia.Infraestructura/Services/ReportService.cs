@@ -41,7 +41,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 item!.EvaluatorToShow = EvaluatorToShow(item.EstudioEvaluador.Select(s => s.UserId).ToList(), item.Nota?.Jefe);
                 if (item == null) return new byte[0];
                 var html = "<html>" +
-                              "<body style=\"margin: 30px !important;font-family: Arial, Helvetica, sans-serif;font-size: 18px;\">" +
+                              "<body style=\"margin: 30px !important;font-family: Arial, sans-serif;font-size: 18px;\">" +
                               $" <div style=\"font-weight: bold !important;\">{item.Nota?.GetNoteCode(item.Id)}</div>" +
                               $" <div style=\"font-weight: bold !important;\">Panamá, {item.Nota?.FechaEvaluacion!.Value.ToString("dd 'de' MMMM 'de' yyyy", dateFormatInfo) ?? ""} </div>" +
                               $" <div style=\"margin-top:20px !important;font-weight: bold !important;\">{item.Tramitante.Nombre} </div> " +
@@ -50,7 +50,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                               $"{BuildTable(item)}" +
                               $"{BuildNote(item)}" +
                               " <div style=\"page-break-inside: avoid;margin-top:40px !important;\">Atentamente</div>" +
-                              "  <div style=\"font-family: Arial, Helvetica, sans-serif;font-size: 14px;font-weight: bold;margin-top:50px\">" +
+                              "  <div style=\"font-family:'Arial';font-size: 14px;font-weight: bold;margin-top:50px\">" +
                               "    <div>----------------------------------------------------------------------</div>" +
                               $"   <div>{item.Nota?.DirectoraNacional?.ToUpper()}</div>" +
                               "    <div> Director(a) Nacional de Farmacia y Drogas</div>" +
@@ -104,8 +104,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             headerSettings.HtmUrl = header;
 
             FooterSettings footerSettings = new FooterSettings();
-            footerSettings.FontSize = 13;
-            footerSettings.FontName = "Arial";
+            //footerSettings.FontSize = 13;
+            //footerSettings.FontName = "Arial";
             //footerSettings.Center = "[page]";
             footerSettings.HtmUrl = footer;
             footerSettings.Line = false;
@@ -121,17 +121,17 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             var item = model.Medicamentos.FirstOrDefault();
             string facture = item != null ? item.Factura : "--";
             StringBuilder sb = new StringBuilder();
-            var title = model.Estado == EstadoEstudio.Authorized ? $"En referencia al Protocolo de Investigación del estudio clínico {model?.Codigo}  " +
-                                      $"titulado \"{model?.Titulo}\" cuyo investigador principal es: {model?.InvestigadorPrincipal},  " +
-                                      $"a realizarse en {model?.CentroInvestigacion},  le informamos que autorizamos la introducción al país " +
-                                      $"de los siguientes productos, exclusivamente para el fin indicado." :
-                                      $"En referencia al Protocolo de Investigación del estudio clínico {model?.Codigo}  " +
-                                      $"titulado \"{model?.Titulo}\" cuyo investigador principal es: {model?.InvestigadorPrincipal},  " +
-                                      $"a realizarse en {model?.CentroInvestigacion}, correspondiente a la Factura: {facture},  " +
-                                      $"le informamos los siguientes aspectos:";
+            var title = model.Estado == EstadoEstudio.Authorized ? $"En referencia al Protocolo de Investigación del estudio clínico {model?.Codigo}" +
+                                      $" titulado \"{model?.Titulo}\" cuyo investigador principal es: {model?.InvestigadorPrincipal}," +
+                                      $" a realizarse en {model?.CentroInvestigacion}, le informamos que autorizamos la introducción al país" +
+                                      $" de los siguientes productos, exclusivamente para el fin indicado." :
+                                      $"En referencia al Protocolo de Investigación del estudio clínico {model?.Codigo}" +
+                                      $" titulado \"{model?.Titulo}\" cuyo investigador principal es: {model?.InvestigadorPrincipal}," +
+                                      $" a realizarse en {model?.CentroInvestigacion}, correspondiente a la Factura: {facture}," +
+                                      $" le informamos los siguientes aspectos:";
 
             sb.AppendLine("<div style=\"margin-top:20px !important\">");
-            sb.AppendLine("<p style=\"text-align: justify;font-family:'Arial';font-size: 18px;line-height: 24px\">");
+            sb.AppendLine("<p style=\"text-align: justify;font-family: Arial, sans-serif;font-size: 18px;line-height: 24px\">");
             sb.AppendLine(title);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");
@@ -144,7 +144,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             foreach (var item in model.Medicamentos)
             {
                 sb.AppendLine("<div style=\"margin-top: 20px;\">");
-                sb.AppendLine("<table style=\"page-break-inside: avoid;font-family: Arial, Helvetica, sans-serif;font-size: 18px; border: 1px solid #797575;padding: 10px; width: 100%;\">");
+                sb.AppendLine("<table style=\"page-break-inside: avoid;font-family:'Arial';font-size: 18px; border: 1px solid #797575;padding: 10px; width: 100%;\">");
 
                 sb.AppendLine("<tr>");
                 sb.AppendLine($"<td style=\"font-weight: bold;width: 100px;\">Factura N°</td>");
@@ -200,7 +200,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             StringBuilder sb = new StringBuilder();
             
             sb.AppendLine("<div style=\"page-break-inside: avoid;margin-top:20px !important\">");
-            sb.AppendLine("<p style=\"text-align: justify;font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px\">");
+            sb.AppendLine("<p style=\"text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
             sb.AppendLine(model.Nota?.Observaciones);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");
