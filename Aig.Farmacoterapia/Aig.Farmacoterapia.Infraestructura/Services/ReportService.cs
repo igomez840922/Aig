@@ -43,7 +43,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 item!.EvaluatorToShow = EvaluatorToShow(item.EstudioEvaluador.Select(s => s.UserId).ToList(), item.Nota?.Jefe);
                 if (item == null) return new byte[0];
                 var html = "<html>" +
-                              "<body style=\"margin: 40px !important;font-family: Arial, sans-serif;font-size: 18px;\">" +
+                              "<body style=\"margin: 40px !important;padding: 40px !important;text-align: justify;font-family: Arial;font-size: 18px;\">" +
                               $" <div style=\"font-weight: bold !important;\">{item.Nota?.GetNoteCode(item.Id)}</div>" +
                               $" <div style=\"font-weight: bold !important;\">Panamá, {item.Nota?.FechaEvaluacion!.Value.ToString("dd 'de' MMMM 'de' yyyy", dateFormatInfo) ?? ""} </div>" +
                               $" <div style=\"margin-top:20px !important;font-weight: bold !important;\">{item.Tramitante.Nombre} </div> " +
@@ -140,7 +140,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                       $" le informamos los siguientes aspectos:";
 
             sb.AppendLine("<div style=\"margin-top:20px !important\">");
-            sb.AppendLine("<p style=\"text-align: justify;font-family: Arial, sans-serif;font-size: 18px;line-height: 24px\">");
+            sb.AppendLine("<p  style=\"text-align: justify;font-family: Arial; font-size: 18px;line-height: 24px\">");
             sb.AppendLine(title);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");
