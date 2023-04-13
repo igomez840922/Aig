@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Web;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Domain.Entities.Studies.Enums;
 using Aig.Farmacoterapia.Domain.Interfaces;
@@ -41,7 +43,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 item!.EvaluatorToShow = EvaluatorToShow(item.EstudioEvaluador.Select(s => s.UserId).ToList(), item.Nota?.Jefe);
                 if (item == null) return new byte[0];
                 var html = "<html>" +
-                              "<body style=\"margin: 30px !important;font-family: Arial, sans-serif;font-size: 18px;\">" +
+                              "<body style=\"margin: 40px !important;font-family: Arial, sans-serif;font-size: 18px;\">" +
                               $" <div style=\"font-weight: bold !important;\">{item.Nota?.GetNoteCode(item.Id)}</div>" +
                               $" <div style=\"font-weight: bold !important;\">Panamá, {item.Nota?.FechaEvaluacion!.Value.ToString("dd 'de' MMMM 'de' yyyy", dateFormatInfo) ?? ""} </div>" +
                               $" <div style=\"margin-top:20px !important;font-weight: bold !important;\">{item.Tramitante.Nombre} </div> " +
@@ -58,12 +60,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                               "  </div>" +
                               "</body>" +
                             "</html>";
-
+              
                 var settings = new GlobalSettings();
                 settings.ColorMode = ColorMode.Color;
                 settings.Orientation = Orientation.Portrait;
                 settings.PaperSize = PaperKind.Letter;
-                settings.Margins = new MarginSettings { Left=0, Right = 0, Top = 40, Bottom = 6.2 };
+                //settings.Margins = new MarginSettings { Left=0, Right = 0, Top = 40, Bottom = 6.2 };
+                settings.Margins = new MarginSettings { Left = 0, Right = 0, Top = 50, Bottom = 15 };
                 var objectSettings = BuildSettings(html);
                 var doc = new HtmlToPdfDocument() { GlobalSettings = settings, Objects = { objectSettings } };
                 return _converter.Convert(doc);
@@ -77,7 +80,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             try
             {
                 var list = _userManager.Users.Where(p => evaluators.Contains(p.Id)).ToList()
-                                              .Select(w => { w.FirstName = w.FirstName[..1]; w.LastName = w.LastName[..1]; return $"{ w.FirstName}{ w.LastName}"; }).ToList();
+                                              .Select(w => { w.FirstName = w.FirstName[..1].ToLower(); w.LastName = w.LastName[..1].ToLower(); return $"{ w.FirstName}{ w.LastName}"; }).ToList();
                 if (list != null && !string.IsNullOrEmpty(jefe) && !list.Any(p => p == jefe.ToLower()))
                     list.Insert(0,jefe);
                result = string.Join(" / ", list);
@@ -102,13 +105,19 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
 
             HeaderSettings headerSettings = new HeaderSettings();
             headerSettings.HtmUrl = header;
+            //headerSettings.FontSize = 11;
+            //headerSettings.FontName = "Arial";
+            //headerSettings.Right = "Página [page] de [toPage]";
+
+
 
             FooterSettings footerSettings = new FooterSettings();
-            //footerSettings.FontSize = 13;
-            //footerSettings.FontName = "Arial";
-            //footerSettings.Center = "[page]";
             footerSettings.HtmUrl = footer;
-            footerSettings.Line = false;
+
+            footerSettings.FontSize = 10;
+            footerSettings.FontName = "Arial";
+            footerSettings.Right = "Página [page] de [toPage]        ";
+            footerSettings.Spacing = 2.5;
 
             objectSettings.HeaderSettings = headerSettings;
             objectSettings.FooterSettings = footerSettings;
