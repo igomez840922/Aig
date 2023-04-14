@@ -140,7 +140,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                                       $" le informamos los siguientes aspectos:";
 
             sb.AppendLine("<div style=\"margin-top:20px !important\">");
-            sb.AppendLine("<p  style=\"text-align: justify;font-family: Arial; font-size: 18px;line-height: 24px\">");
+            sb.AppendLine("<p  style=\"white-space: pre-line;text-align: justify;font-family: Arial; font-size: 18px;line-height: 24px\">");
             sb.AppendLine(title);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");
@@ -209,7 +209,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             StringBuilder sb = new StringBuilder();
             
             sb.AppendLine("<div style=\"page-break-inside: avoid;margin-top:20px !important\">");
-            sb.AppendLine("<p style=\"text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
+            sb.AppendLine("<p style=\"white-space: pre-line;text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
             sb.AppendLine(model.Nota?.Observaciones);
             sb.AppendLine("</p>");
             sb.AppendLine("<div/>");
