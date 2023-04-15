@@ -206,12 +206,21 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         }
         private static string BuildNote(AigEstudio model)
         {
+            model.Nota.Lines ??= new List<AigNota>();
             StringBuilder sb = new StringBuilder();
-            
-            sb.AppendLine("<div style=\"page-break-inside: avoid;margin-top:20px !important\">");
-            sb.AppendLine("<p style=\"white-space: pre-line;text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
-            sb.AppendLine(model.Nota?.Observaciones);
-            sb.AppendLine("</p>");
+            sb.AppendLine("<div style=\"page-break-inside: avoid;margin-top:10px !important;\">");
+            //sb.AppendLine("<p style=\"white-space: pre-line;text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
+            //sb.AppendLine(model.Nota?.Observaciones);
+            //sb.AppendLine("</p>");
+            foreach (var item in model.Nota.Lines){
+                if (item.WhiteSpace)
+                    sb.AppendLine("<p style=\"white-space: pre-line;text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
+                else
+                    sb.AppendLine("<p style=\"text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
+                sb.AppendLine(item.Observaciones);
+                sb.AppendLine("</p>");
+            }
+
             sb.AppendLine("<div/>");
             return sb.ToString();
         }

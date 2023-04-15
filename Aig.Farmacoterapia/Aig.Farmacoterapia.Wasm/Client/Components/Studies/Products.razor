@@ -16,7 +16,7 @@
 
 </style>
 
-<MudCard Elevation="25">
+@*<MudCard Elevation="0">
     <MudCardContent>
 
         <MudGrid>
@@ -32,7 +32,7 @@
 
     </MudCardContent>
 
-</MudCard>
+</MudCard>*@
  
 <MudTable Items="@_parent?.Medicamentos"  Dense="true" Hover="true" Height="500px">
         <HeaderContent>
@@ -42,7 +42,9 @@
              <MudTh>Lote (s)</MudTh>
              <MudTh><MudInputLabel Style="width:150px">Expiración (s)</MudInputLabel></MudTh>
             <MudTh>Fabricante</MudTh>
-            <MudTh></MudTh>
+            <MudTh>
+                  <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || _parent?.Medicamentos.Count==4 || !_edit )" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(string.Empty))" />
+            </MudTh>
         </HeaderContent>
         <RowTemplate>
              <MudTd DataLabel="Número de factura de importación">

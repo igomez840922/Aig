@@ -33,8 +33,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(k => new { k.Id });
             builder.Property(p => p.ProductsMetadata).HasColumnType("nvarchar(max)");
-            builder.OwnsOne(o => o.Nota);
             builder.OwnsOne(o => o.Tramitante);
+
+            //builder.OwnsOne(o => o.Nota);
+            builder.OwnsOne(o => o.Nota, p =>{
+                p.Property(s => s.Lines).HasJsonConversion();
+            });
 
             // m-m relationships
             builder.HasMany(c => c.EstudioEvaluador)

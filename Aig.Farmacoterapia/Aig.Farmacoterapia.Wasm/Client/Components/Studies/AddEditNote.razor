@@ -1,0 +1,114 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Medicament
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Validation
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@using System.Globalization
+@inject IStudyManager _manager;
+<style>
+    .mud-dialog {
+        max-height: calc(108vh - var(--mud-appbar-height));
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+</style>
+<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
+    <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+
+               @{
+                    if (string.IsNullOrEmpty(_modelData.Id ))
+                    {
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                            Nueva Observación
+                        </MudText>
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
+                            Editar Observación
+                        </MudText>
+                    }
+                }
+
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            @if (_loading)
+            {
+                <div style="margin-left:45% !important;">
+                    <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+                </div>
+            }
+            else
+            { 
+                <MudGrid>
+                        <MudItem xs="12">
+                            <MudGrid>
+
+                                <MudItem xs="12" md="12" Style="padding:3px !important">
+                                   <ValidationMessage For="@(() => _modelData.Observaciones)" />
+                                    <MudTextField T="string" Label="Observaciones del Evaluador" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Observaciones" Lines="12" />
+                                </MudItem>
+                                  <MudItem xs="12" md="12" Style="padding: 0px !important;">
+                                    <MudCheckBox @bind-Checked="_modelData.WhiteSpace" Label="Respetar saltos de línea" Color="Color.Primary"></MudCheckBox>
+                                </MudItem>
+                            </MudGrid>
+                        </MudItem>
+                    </MudGrid>
+            }
+        </DialogContent>
+        <DialogActions>
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Guardar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+@code {
+
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    private FluentValidationValidator _fluentValidation;
+    [Parameter] public AigNota _modelData { get; set; }
+    private bool _validated => Validate();
+    bool _loading = false;
+    protected override async Task OnInitializedAsync()
+    {      
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) { }
+    }
+    private bool Validate() => _fluentValidation.Validate();
+
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    protected async Task SubmitAsync()
+    {
+        if (Validate()){
+            MudDialog.Close(DialogResult.Ok(_modelData));
+        }
+    }
+ 
+    public async Task  Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+}

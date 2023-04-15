@@ -88,5 +88,11 @@ namespace Aig.Farmacoterapia.Wasm.Client.Validation
             IsNotEmpty(c => c.Document!.FileName, "El documento es obligatorio");
         }
     }
-    
+    public class AigNotaValidator : GenericValidations<AigNota>
+    {
+        public AigNotaValidator()
+        {
+            IsNotEmpty(c => c.Observaciones!, "Las observaciones son obligatorias");
+        }
+    }
 }

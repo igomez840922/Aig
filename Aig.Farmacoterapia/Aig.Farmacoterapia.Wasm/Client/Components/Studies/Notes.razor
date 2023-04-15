@@ -1,0 +1,93 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Components.Studies
+@using Aig.Farmacoterapia.Wasm.Client.Model
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using System.Globalization
+@inject IStudyManager _manager;
+
+<PageTitle>Medicaments</PageTitle>
+
+<style>
+
+</style>
+
+
+<MudTable Items="@_parent?.Nota.Lines"  Dense="true" Hover="true" Height="500px">
+        <HeaderContent>
+             <MudTh><MudInputLabel Style="width:600px">Observaciones</MudInputLabel></MudTh>
+             <MudTh>
+                <MudIconButton Style="margin-left:5px !important" ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(string.Empty))" />
+             </MudTh>
+        </HeaderContent>
+        <RowTemplate>
+             <MudTd DataLabel="Observaciones">
+                 @context.Observaciones
+            </MudTd>
+          <MudTd>
+             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+            </MudMenu>
+        </MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>No se encontraron elementos</MudText>
+        </NoRecordsContent>
+    </MudTable>
+
+@code {
+    [Parameter] public AigEstudio _parent { get; set; }
+    [Parameter] public bool _edit { get; set; } = true;
+
+    protected bool _loading = false;
+    protected async override Task OnInitializedAsync()
+    {  
+        _parent.Nota.Lines ??= new List<AigNota>();
+        base.OnInitialized();
+    }
+
+    private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    private async Task AddEdit(string id)
+    {
+        var data = _parent.Nota.Lines.Where(p => p.Id == id).FirstOrDefault();
+        var parameters = data != null ? new DialogParameters { ["_modelData"] = data } :
+              new DialogParameters { ["_modelData"] = new AigNota()};
+        var options = new DialogOptions {CloseOnEscapeKey=false, CloseButton = false, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<AddEditNote>(string.IsNullOrEmpty(id) ? "Nuevo" : "Editar ", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled) {
+            var item = result.Data as AigNota;
+            if (item != null) {
+                item.Observaciones=item.Observaciones!.Trim();
+                var index= _parent.Nota.Lines!.FindIndex(p => p.Id == item.Id);
+                if (index == -1){ _parent.Nota.Lines.Add(item);}
+                await RefresView(false);
+            }
+        }   
+    }
+
+    private async Task Delete(string id)
+    {
+        var parameters = new DialogParameters
+        {{ nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro de querer eliminar el documento?", id) }};
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>("Eliminar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled) {
+            _parent.Nota.Lines.RemoveAll(p => p.Id == id);
+            await _manager.UpdateAsync(_parent);
+            await RefresView(false);
+        }
+    }
+}

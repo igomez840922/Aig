@@ -197,7 +197,7 @@
         </DialogContent>
         <DialogActions>
             <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
-            <MudButton Disabled="@(!Validate())" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Guardar</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Guardar</MudButton>
         </DialogActions>
     </MudDialog>
 </EditForm>
@@ -215,8 +215,7 @@
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
-            Validate();
+       if (firstRender) { }
     }
     private bool Validate() => _fluentValidation.Validate();
 
