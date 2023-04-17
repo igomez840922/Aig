@@ -51,21 +51,19 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                               $"{BuildTitle(item)}" +
                               $"{BuildTable(item)}" +
                               $"{BuildNote(item)}" +
-                              "<div style=\"page-break-inside: avoid;margin-top:80px !important;\">" +
-                                  "<div> Atentamente <div>" +
-                                  "<div style=\"margin-top:50px\"> ----------------------------------------------------------------------</div>" +
-                                  $"<div style=\"font-family:'Arial';font-size: 14px;font-weight: bold;\"> {item.Nota?.DirectoraNacional?.ToUpper()} </div>" +
-                                  "<div style=\"font-family:'Arial';font-size: 14px;font-weight: bold;\"> Director(a) Nacional de Farmacia y Drogas </div>" +
-                                  $"<div style=\"font-size: 10px;\"> {item!.EvaluatorToShow} </div>" +
-                               "</div>" +
+                              "<table style=\"page-break-inside: avoid;margin-top:0px !important;font-family:'Arial';font-size: 14px; border: 0px;width: 100%;\">" +
+                                 "<tr><td style=\"font-size: 18px !important;padding-top:20px\">Atentamente </td></tr>" +
+                                 "<tr><td style=\"padding-top:50px\">----------------------------------------------------------------------</td></tr>" +
+                                 $"<tr><td style=\"font-weight: bold;\">{item.Nota?.DirectoraNacional?.ToUpper()}</td></tr>" +
+                                 "<tr><td style=\"font-weight: bold;\">Director(a) Nacional de Farmacia y Drogas </td></tr>" +
+                                 $"<tr><td style=\"font-size: 10px;font-weight: bold;\">{item!.EvaluatorToShow}</td></tr>" +
+                               "</table>" +
                               "</body>" +
                             "</html>";
-              
                 var settings = new GlobalSettings();
                 settings.ColorMode = ColorMode.Color;
                 settings.Orientation = Orientation.Portrait;
                 settings.PaperSize = PaperKind.Letter;
-                //settings.Margins = new MarginSettings { Left = 0, Right = 0, Top = 50, Bottom = 15 };
                 settings.Margins = new MarginSettings { Left = 0, Right = 0, Top = 45, Bottom = 15 };
                 var objectSettings = BuildSettings(html);
                 var doc = new HtmlToPdfDocument() { GlobalSettings = settings, Objects = { objectSettings } };
@@ -108,8 +106,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             //headerSettings.FontSize = 11;
             //headerSettings.FontName = "Arial";
             //headerSettings.Right = "Página [page] de [toPage]";
-
-
 
             FooterSettings footerSettings = new FooterSettings();
             footerSettings.HtmUrl = footer;
