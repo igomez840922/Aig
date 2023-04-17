@@ -415,7 +415,7 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿La empresa dispone de un organigrama general? (Anexar Copia) ?",
+                Titulo = "¿La empresa dispone de un organigrama general? (Anexar Copia)",
                 Criterio = "INF",
                 Articulo="397",
                 PuntosMax = (decimal)0.5,
@@ -423,30 +423,31 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿Existen organigramas específicos para las áreas de? (Anexar Copia)?",
+                Titulo = "¿Existen organigramas específicos para las áreas de? (Anexar Copia)\r\n __ Producción\r\n __ Control de Calidad\r\n __ Gestión o Aseguramiento de la Calidad",
                 Criterio = "INF",
                 Articulo="397",
                 PuntosMax = (decimal)0.5,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Producción",
-                PuntosMax = (decimal)0.16,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //IsSubHeader = true,
             },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Control de Calidad",
-                PuntosMax = (decimal)0.16,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Gestión o Aseguramiento de la Calidad",
-                PuntosMax = (decimal)0.18,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Producción",
+            //    //PuntosMax = (decimal)0.16,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Control de Calidad",
+            //    //PuntosMax = (decimal)0.16,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Gestión o Aseguramiento de la Calidad",
+            //    //PuntosMax = (decimal)0.18,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿Está vigente la Licencia de Operación?",
@@ -505,18 +506,18 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿Existe evidencia escrita de capacitación específica para el personal que trabaja en áreas de riesgo de contaminación?",
+                Titulo = "¿Existe evidencia escrita de capacitación específica para el personal que trabaja en áreas de riesgo de contaminación?\r\n __ Manejo de Materiales Tóxicos, Infecciosos o sensibilizantes",
                 Criterio = "INF",
                 Articulo="401",
                 PuntosMax = (decimal)0.5,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Manejo de Materiales Tóxicos, Infecciosos o sensibilizantes",
-                PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Manejo de Materiales Tóxicos, Infecciosos o sensibilizantes",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿Se encuentran las áreas técnicas (Producción, Control de Calidad y demás) separadas?",
@@ -594,7 +595,8 @@ namespace DataModel
             {
                 Titulo = "Capítulo II - Almacenes",
                 IsHeader=true,
-            },new ContenidoPreguntas()
+            },
+                    new ContenidoPreguntas()
             {
                 Titulo = "A -- Condiciones Externas de los Almacenes",
                 IsHeader=true,
@@ -632,6 +634,11 @@ namespace DataModel
             CondIntAlmacenas = new AUD_ContenidoGenerico()
             {
                 LContenido = new List<ContenidoPreguntas>() {
+                    new ContenidoPreguntas()
+            {
+                Titulo = "B -- Condiciones Internas de los Almacenes",
+                IsHeader=true,
+            },
             new ContenidoPreguntas()
             {
                 Titulo = "¿El piso cumple con la característica de ser liso?",
@@ -645,6 +652,7 @@ namespace DataModel
                 Titulo = "¿El piso presenta rajaduras, agujeros, roturas, depresiones o desprendimiento de partículas?",
                 Criterio = "R",
                 Articulo="415",
+                PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
             new ContenidoPreguntas()
@@ -673,7 +681,7 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿El techo es liso, está limpio y en buen estado? 415 R 1.0 ¿El drenaje es de tamaño adecuado, limpio y no permite contracorriente?",
+                Titulo = "¿El techo es liso, está limpio y en buen estado?",
                 Criterio = "R",
                 Articulo="415",
                 PuntosMax = (decimal)1.0,
@@ -704,7 +712,12 @@ namespace DataModel
             AreaRecepMateriaPrima = new AUD_ContenidoGenerico()
             {
                 LContenido = new List<ContenidoPreguntas>() {
-            new ContenidoPreguntas()
+                    new ContenidoPreguntas()
+            {
+                Titulo = "C -- Areas de Recepción de Materia Prima",
+                IsHeader=true,
+            },
+                    new ContenidoPreguntas()
             {
                 Titulo = "¿Se encuentra Identificada con letrero, diseñada y equipada de forma que permita la limpieza de los productos antes de su almacenamiento?",
                 Criterio = "R",
@@ -770,36 +783,36 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿La materia prima está etiquetada con la siguiente información?",
+                Titulo = "¿La materia prima está etiquetada con la siguiente información?\r\n __ Nombre\r\n __ Número de lote del proveedor\r\n __ Número de lote del proveedor\r\n __ Estatus de la materia prima\r\n __ Fecha de expiración o fecha de reanálisis",
                 Criterio = "N",
                 Articulo="442",
                 PuntosMax = (decimal)1.5,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Nombre",
-                PuntosMax = (decimal)0.38,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Número de lote del proveedor",
-                PuntosMax = (decimal)0.38,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Estatus de la materia prima",
-                PuntosMax = (decimal)0.38,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Fecha de expiración o fecha de reanálisis",
-                PuntosMax = (decimal)0.36,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Nombre",
+            //    PuntosMax = (decimal)0.38,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Número de lote del proveedor",
+            //    PuntosMax = (decimal)0.38,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Estatus de la materia prima",
+            //    PuntosMax = (decimal)0.38,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Fecha de expiración o fecha de reanálisis",
+            //    PuntosMax = (decimal)0.36,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿Existen criterios de aceptación o rechazo de la materia prima?",
@@ -883,6 +896,10 @@ namespace DataModel
                 LContenido = new List<ContenidoPreguntas>() {
             new ContenidoPreguntas()
             {
+                Titulo = "CH -- Almacén de Materia Prima",
+                IsHeader=true,
+            },new ContenidoPreguntas()
+            {
                 Titulo = "¿El almacén de Materia Prima se encuentra identificado y delimitado?",
                 Criterio = "N",
                 Articulo="366",
@@ -915,36 +932,36 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿Cuenta con un área destinada para el almacenamiento de Materias Primas Inflamables (Alcohol, Esencias) separada, debidamente delimitada, identificada, ventilada; con equipos necesarios para sofocar siniestros o accidentes tales como?",
+                Titulo = "¿Cuenta con un área destinada para el almacenamiento de Materias Primas Inflamables (Alcohol, Esencias) separada, debidamente delimitada, identificada, ventilada; con equipos necesarios para sofocar siniestros o accidentes tales como?\r\n __ Extintores vigentes\r\n __ Mangueras\r\n __ Detector de humo\r\n __ Tanque de arena con su pala o Kit de seguridad ( Cuando Aplique)",
                 Criterio = "C",
                 Articulo="420, 422",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Extintores vigentes",
-                PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Mangueras",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Detector de humo",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Tanque de arena con su pala o Kit de seguridad ( Cuando Aplique)",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Extintores vigentes",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Mangueras",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Detector de humo",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Tanque de arena con su pala o Kit de seguridad ( Cuando Aplique)",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿De tratarse de Alcohol, ¿Los tanques son colocados sobre estructuras separados del piso?",
@@ -994,72 +1011,76 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿En la Etiqueta de identificación de Materia Prima Aprobada, se detalla?",
+                Titulo = "¿En la Etiqueta de identificación de Materia Prima Aprobada, se detalla?" +
+                "\r\n __ Nombre del Producto\r\n __ Número de Lote del Proveedor\r\n __ Cantidad aprobada" +
+                "\r\n __ Nombre del proveedor y país de procedencia\r\n __ Nombre del proveedor y país de procedencia" +
+                "\r\n __ Fecha de expiración o vencimiento\r\n __ Número de Análisis\r\n __ Fecha de Análisis" +
+                "\r\n __ Fecha de Re-Análisis\r\n __ Número de entrada al almacén\r\n __ Total de recipientes aprobados",
                 Criterio = "C",
                 Articulo="442, 467",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Nombre del Producto",
-                PuntosMax = (decimal)0.2,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Número de Lote del Proveedor",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Cantidad aprobada",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Nombre del proveedor y país de procedencia",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Fecha de expiración o vencimiento",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Número de Análisis",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Fecha de Análisis",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Fecha de Re-Análisis",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Número de entrada al almacén",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Total de recipientes aprobados",
-                PuntosMax = (decimal)0.2,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Nombre del Producto",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Número de Lote del Proveedor",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Cantidad aprobada",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Nombre del proveedor y país de procedencia",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Fecha de expiración o vencimiento",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Número de Análisis",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Fecha de Análisis",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Fecha de Re-Análisis",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Número de entrada al almacén",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Total de recipientes aprobados",
+            //    PuntosMax = (decimal)0.2,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿Están identificados los ductos o tuberías expuestas",
@@ -1078,50 +1099,53 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿Existe un programa que garantice la integridad de los productos almacenados mediante: (Verifique) ?",
+                Titulo = "¿Existe un programa que garantice la integridad de los productos almacenados mediante: (Verifique) ?" +
+                "\r\n __ Control o repetición de análisis de Control de Calidad\r\n __ Verificación física de los envases",
                 Criterio = "R",
                 Articulo="491",
                 PuntosMax = (decimal)1.0,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Control o repetición de análisis de Control de Calidad",
-                PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Control o repetición de análisis de Control de Calidad",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Verificación física de los envases",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
-                Titulo = "Verificación física de los envases",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "¿Las Materias Primas Rechazadas?",
+                Titulo = "¿Las Materias Primas Rechazadas?" +
+                "\r\n __ Poseen etiquetas que indiquen su estatus\r\n __ Se encuentran almacenadas separadamente" +
+                "\r\n __ Identificadas y en un área restringida",
                 Criterio = "C",
                 Articulo="454",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Poseen etiquetas que indiquen su estatus",
-                PuntosMax = (decimal)0.66,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Se encuentran almacenadas separadamente",
-                PuntosMax = (decimal)0.66,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Identificadas y en un área restringida",
-                PuntosMax = (decimal)0.68,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Poseen etiquetas que indiquen su estatus",
+            //    PuntosMax = (decimal)0.66,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Se encuentran almacenadas separadamente",
+            //    PuntosMax = (decimal)0.66,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Identificadas y en un área restringida",
+            //    PuntosMax = (decimal)0.68,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿En el almacén de Materia Prima aprobada, existen otros materiales no relacionados con el área? (Materiales en Desuso o Equipos Dañados). Descríbalos?",
@@ -1285,30 +1309,31 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿El almacén de materiales de acondicionamiento, envase y empaque está construido con materiales adecuados (Que faciliten la Limpieza), en: ",
+                Titulo = "¿El almacén de materiales de acondicionamiento, envase y empaque está construido con materiales adecuados (Que faciliten la Limpieza), en: " +
+                "\r\n __ Paredes\r\n __ Piso\r\n __ Techo",
                 Criterio = "C",
                 Articulo="425",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Paredes",
-                PuntosMax = (decimal)0.66,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Piso",
-                PuntosMax = (decimal)0.66,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Techo",
-                PuntosMax = (decimal)0.68,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Paredes",
+            //    PuntosMax = (decimal)0.66,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Piso",
+            //    PuntosMax = (decimal)0.66,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Techo",
+            //    PuntosMax = (decimal)0.68,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿Se observan almacenados otros enseres diferentes a los materiales de acondicionamiento, empaque y envase (¿Materiales que no pertenecen al área o que se encuentran en desuso? Descríbalos",
@@ -1343,42 +1368,44 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿Los materiales de acondicionamiento, envase y empaque, detallan en su etiqueta de identificación lo siguiente?",
+                Titulo = "¿Los materiales de acondicionamiento, envase y empaque, detallan en su etiqueta de identificación lo siguiente?" +
+                "\r\n __ Código o número interno de entrada al almacén\r\n __ Número de Lote (Cuando Aplique)" +
+                "\r\n __ Fecha de aprobación por Control de Calidad\r\n __ Cantidad Aprobada\r\n __ Total de Bultos Aprobados",
                 Criterio = "C",
                 Articulo="442, 448",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Código o número interno de entrada al almacén",
-                PuntosMax = (decimal)0.4,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Número de Lote (Cuando Aplique)",
-                PuntosMax = (decimal)0.4,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Fecha de aprobación por Control de Calidad",
-                PuntosMax = (decimal)0.4,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Cantidad Aprobada",
-                PuntosMax = (decimal)0.4,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Total de Bultos Aprobados",
-                PuntosMax = (decimal)0.4,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Código o número interno de entrada al almacén",
+            //    PuntosMax = (decimal)0.4,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Número de Lote (Cuando Aplique)",
+            //    PuntosMax = (decimal)0.4,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Fecha de aprobación por Control de Calidad",
+            //    PuntosMax = (decimal)0.4,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Cantidad Aprobada",
+            //    PuntosMax = (decimal)0.4,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Total de Bultos Aprobados",
+            //    PuntosMax = (decimal)0.4,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿Existe procedimiento escrito para el almacenamiento de los Materiales de Acondicionamiento, envase y empaque? (Verifique cumplimiento)",
@@ -1494,37 +1521,37 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "¿Son adecuadas las condiciones de:",
+                Titulo = "¿Son adecuadas las condiciones de:\r\n __ Pisos:\r\n __ Techos\r\n __ Paredes" +
+                "\r\n __ Tarimas",
                 Criterio = "C",
                 Articulo="371, 415",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                IsSubHeader = true,
             },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Pisos",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Techos",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Paredes",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
-            new ContenidoPreguntas()
-            {
-                Titulo = "Tarimas",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Pisos",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Techos",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Paredes",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Tarimas",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "¿Existen procedimientos escritos para el recibo de productos terminados?",
@@ -1734,30 +1761,31 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Los implementos necesarios para atender una emergencia están?",
+                Titulo = "¿Los implementos necesarios para atender una emergencia están?" +
+                "\r\n __ Bien Ubicados\r\n __ Claramente Identificados\r\n __ Accesibles al Personal",
                 Criterio = "R",
                 Articulo="358",
                 PuntosMax = (decimal)1.0,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                    Titulo = "Bien Ubicados",
-                PuntosMax = (decimal)0.33,
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                    Titulo = "Claramente Identificados",
-                PuntosMax = (decimal)0.33,
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                    Titulo = "Accesibles al Personal",
-                PuntosMax = (decimal)0.34,
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //    Titulo = "Bien Ubicados",
+                //PuntosMax = (decimal)0.33,
+                //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //    Titulo = "Claramente Identificados",
+                //PuntosMax = (decimal)0.33,
+                //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //    Titulo = "Accesibles al Personal",
+                //PuntosMax = (decimal)0.34,
+                //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
             }
         };
 
@@ -1844,42 +1872,47 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Contiene el registro de distribución la información siguiente?",
+                Titulo = "¿Contiene el registro de distribución la información siguiente?" +
+                "\r\n __ Nombre, presentación y forma farmacéutica del producto" +
+                "\r\n __ Número de lote o número de control" +
+                "\r\n __ Nombre y dirección del consignatario" +
+                "\r\n __ Fecha y cantidad despachada" +
+                "\r\n __ Número de factura o documento de embarque según sea el caso",
                 Criterio = "N",
                 Articulo="469",
                 PuntosMax = (decimal)1.5,
-                IsSubHeader = true,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                    Titulo = "Nombre, presentación y forma farmacéutica del producto",
-                PuntosMax = (decimal)0.3,
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                    Titulo = "Número de lote o número de control",
-                PuntosMax = (decimal)0.3,
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                    Titulo = "Nombre y dirección del consignatario",
-                PuntosMax = (decimal)0.3,
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                    Titulo = "Fecha y cantidad despachada",
-                PuntosMax = (decimal)0.3,
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                    Titulo = "Número de factura o documento de embarque según sea el caso",
-                PuntosMax = (decimal)0.3,
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //    Titulo = "Nombre, presentación y forma farmacéutica del producto",
+                //PuntosMax = (decimal)0.3,
+                //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //    Titulo = "Número de lote o número de control",
+                //PuntosMax = (decimal)0.3,
+                //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //    Titulo = "Nombre y dirección del consignatario",
+                //PuntosMax = (decimal)0.3,
+                //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //    Titulo = "Fecha y cantidad despachada",
+                //PuntosMax = (decimal)0.3,
+                //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //    Titulo = "Número de factura o documento de embarque según sea el caso",
+                //PuntosMax = (decimal)0.3,
+                //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
             }
 
         };
@@ -2026,30 +2059,32 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El abastecimiento de agua a la planta proviene de:",
+                Titulo = "¿El abastecimiento de agua a la planta proviene de:" +
+                "\r\n __ Servicio Municipal\r\n __ Pozo Colectivo\r\n __ Pozo Propio" +
+                "\r\n __ Pozo Propio",
                 Criterio = "N",
                 Articulo="436",
                 PuntosMax = (decimal)1.5,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Servicio Municipal",
-                PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Pozo Colectivo",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Pozo Propio",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Servicio Municipal",
+                //PuntosMax = (decimal)0.5,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Pozo Colectivo",
+                //PuntosMax = (decimal)0.5,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Pozo Propio",
+                //PuntosMax = (decimal)0.5,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Sistemas de purificación del agua?",
@@ -2092,36 +2127,37 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Los controles que se le hacen al agua son:",
+                Titulo = "¿Los controles que se le hacen al agua son:" +
+                "\r\n __ Químicos\r\n __ Físicos\r\n __ Microbiológicos\r\n __ Conductividad Eléctrica",
                 Criterio = "C",
                 Articulo="437",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Químicos",
-                PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Físicos",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Microbiológicos",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Conductividad Eléctrica",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Químicos",
+                //PuntosMax = (decimal)0.5,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Físicos",
+                //PuntosMax = (decimal)0.5,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Microbiológicos",
+                //PuntosMax = (decimal)0.5,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Conductividad Eléctrica",
+                //PuntosMax = (decimal)0.5,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Se llevan los registros de estos resultados?",
@@ -2620,42 +2656,44 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Qué procesos son validados? ",
+                Titulo = "¿Qué procesos son validados?" +
+                "\r\n __ Sistemas Críticos de Apoyo\r\n __ Sistema digitalizado\r\n __ Equipos de Producción (Calificación)" +
+                "\r\n __ Procedimientos de Limpieza\r\n __ Métodos Analíticos",
                 Criterio = "N",
                 Articulo="479",
                 PuntosMax = (decimal)1.5,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Sistemas Críticos de Apoyo",
-                PuntosMax = (decimal)0.3,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Sistema digitalizado",
-                PuntosMax = (decimal)0.3,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Equipos de Producción (Calificación)",
-                PuntosMax = (decimal)0.3,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Procedimientos de Limpieza",
-                PuntosMax = (decimal)0.3,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Métodos Analíticos",
-                PuntosMax = (decimal)0.3,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Sistemas Críticos de Apoyo",
+                //PuntosMax = (decimal)0.3,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Sistema digitalizado",
+                //PuntosMax = (decimal)0.3,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Equipos de Producción (Calificación)",
+                //PuntosMax = (decimal)0.3,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Procedimientos de Limpieza",
+                //PuntosMax = (decimal)0.3,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Métodos Analíticos",
+                //PuntosMax = (decimal)0.3,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Existen registro actualizados de las Validaciones efectuadas? (Verifique) ",
@@ -3060,68 +3098,72 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿El área se encuentra equipada con?",
+                Titulo = "¿El área se encuentra equipada con?" +
+                "\r\n __ Sistema de inyección y extracción de Aire\r\n __ Balanzas calibradas" +
+                "\r\n __ Se identifican con etiquetas una vez han sido pesadas las materias primas" +
+                "\r\n __ Disponen de un sitio para colocar la materia prima pesada",
                 Criterio = "N",
                 Articulo="424",
                 PuntosMax = (decimal)1.5,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Sistema de inyección y extracción de Aire",
-                PuntosMax = (decimal)0.37,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Sistema de inyección y extracción de Aire",
+                //PuntosMax = (decimal)0.37,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Balanzas calibradas",
+                //PuntosMax = (decimal)0.37,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Se identifican con etiquetas una vez han sido pesadas las materias primas",
+                //PuntosMax = (decimal)0.37,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Disponen de un sitio para colocar la materia prima pesada",
+                //PuntosMax = (decimal)0.39,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
-                Titulo = "Balanzas calibradas",
-                PuntosMax = (decimal)0.37,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Se identifican con etiquetas una vez han sido pesadas las materias primas",
-                PuntosMax = (decimal)0.37,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Disponen de un sitio para colocar la materia prima pesada",
-                PuntosMax = (decimal)0.39,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "¿Son adecuadas las condiciones de:?",
+                Titulo = "¿Son adecuadas las condiciones de:?" +
+                "\r\n __ Paredes\r\n __ Pisos\r\n __ Techos\r\n __ Curva sanitaria",
                 Criterio = "N",
                 Articulo="424",
                 PuntosMax = (decimal)1.5,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Paredes",
-                PuntosMax = (decimal)0.37,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Pisos",
-                PuntosMax = (decimal)0.37,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Techos",
-                PuntosMax = (decimal)0.37,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Curva sanitaria",
-                PuntosMax = (decimal)0.39,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Paredes",
+                //PuntosMax = (decimal)0.37,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Pisos",
+                //PuntosMax = (decimal)0.37,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Techos",
+                //PuntosMax = (decimal)0.37,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Curva sanitaria",
+                //PuntosMax = (decimal)0.39,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Cuentan con procedimiento escrito para la dispensación de órdenes de fabricación? ",
@@ -3156,60 +3198,63 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Cuándo se efectúan las pesadas y/o medidas, el personal que dispensa cuenta con?",
+                Titulo = "¿Cuándo se efectúan las pesadas y/o medidas, el personal que dispensa cuenta con?" +
+                "\r\n __ Ropa adecuada (uniformes limpios)\r\n __ Cubre boca\r\n __ Anteojos de seguridad" +
+                "\r\n __ Máscaras de protección\r\n __ Cubre cabellos o cofias\r\n __ Cubre cabellos o cofias" +
+                "\r\n __ Guantes\r\n __ Protección auditiva (Cuando aplique)\r\n __ Zapatos especiales",
                 Criterio = "C",
                 Articulo="403",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Ropa adecuada (uniformes limpios)",
-                PuntosMax = (decimal)0.25,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Cubre boca",
-                PuntosMax = (decimal)0.25,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Anteojos de seguridad",
-                PuntosMax = (decimal)0.25,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Máscaras de protección",
-                PuntosMax = (decimal)0.25,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Cubre cabellos o cofias",
-                PuntosMax = (decimal)0.25,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Guantes",
-                PuntosMax = (decimal)0.25,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Protección auditiva (Cuando aplique)",
-                PuntosMax = (decimal)0.25,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Zapatos especiales",
-                PuntosMax = (decimal)0.25,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Ropa adecuada (uniformes limpios)",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Cubre boca",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Anteojos de seguridad",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Máscaras de protección",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Cubre cabellos o cofias",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Guantes",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Protección auditiva (Cuando aplique)",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Zapatos especiales",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Existen procedimientos escritos de limpieza del área de dispensación de órdenes de Fabricación? ",
@@ -3228,24 +3273,25 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Dónde está ubicada el área de dispensación? ",
+                Titulo = "¿Dónde está ubicada el área de dispensación? " +
+                "\r\n __ Área de Almacenamiento\r\n __ Área de Producción",
                 Criterio = "INF",
                 Articulo="424",
                 PuntosMax = (decimal)0.5,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Área de Almacenamiento",
-                PuntosMax = (decimal)0.25,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Área de Producción",
-                PuntosMax = (decimal)0.25,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Área de Almacenamiento",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Área de Producción",
+                //PuntosMax = (decimal)0.25,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Los materiales, una vez medidos o pesados, son identificados evitando así confusiones?",
@@ -3282,54 +3328,56 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Son adecuadas las condiciones de:?",
+                Titulo = "¿Son adecuadas las condiciones de:?\r\n __ Iluminación\r\n __ Ventilación\r\n __ Paredes" +
+                "\r\n __ Pisos\r\n __ Instalación de Control de aire, incluyendo Temperatura y Humedad" +
+                "\r\n __ Curvas Sanitarias\r\n __ Gradiente hacia el desagüe",
                 Criterio = "C",
                 Articulo="415, 416, 417",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Iluminación",
-                PuntosMax = (decimal)0.28,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Ventilación",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Paredes",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Pisos",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Instalación de Control de aire, incluyendo Temperatura y Humedad",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Curvas Sanitarias",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Gradiente hacia el desagüe",
-                PuntosMax = (decimal)0.32,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Iluminación",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Ventilación",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Paredes",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Pisos",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Instalación de Control de aire, incluyendo Temperatura y Humedad",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Curvas Sanitarias",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Gradiente hacia el desagüe",
+                //PuntosMax = (decimal)0.32,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Existe un sistema de suministro de aire que permita una adecuada ventilación?",
@@ -3348,30 +3396,31 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "El área cuenta con",
+                Titulo = "El área cuenta con\r\n __ Detector de humo\r\n __ Extintores contra incendios cargados y operando adecuadamente" +
+                "\r\n __ Los extintores se localizan en lugares y cantidades convenientes \r\n __ ",
                 Criterio = "C",
                 Articulo="422",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Detector de humo",
-                PuntosMax = (decimal)0.66,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Extintores contra incendios cargados y operando adecuadamente",
-                PuntosMax = (decimal)0.66,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Los extintores se localizan en lugares y cantidades convenientes",
-                PuntosMax = (decimal)0.68,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Detector de humo",
+                //PuntosMax = (decimal)0.66,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Extintores contra incendios cargados y operando adecuadamente",
+                //PuntosMax = (decimal)0.66,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Los extintores se localizan en lugares y cantidades convenientes",
+                //PuntosMax = (decimal)0.68,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿El sistema de tuberías de servicio (agua, electricidad, gases, etc.…) se observa limpio e identificado?",
@@ -3438,54 +3487,57 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Los operarios al momento de la Auditoría, se encuentran debidamente uniformados?:",
+                Titulo = "¿Los operarios al momento de la Auditoría, se encuentran debidamente uniformados?:" +
+                "\r\n __ Ropa adecuada (uniformes limpios)\r\n __ Cubre boca\r\n __ Anteojos de seguridad" +
+                "\r\n __ Máscaras de protección\r\n __ Cubre cabellos o cofias" +
+                "\r\n __ Guantes \r\n __ Protección auditiva (Cuando aplique)",
                 Criterio = "C",
                 Articulo="403",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "ropa adecuada (uniformes limpios)",
-                PuntosMax = (decimal)0.28,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                new ContenidoPreguntas()
-                {
-                Titulo = "cubre boca",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "anteojos de seguridad",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "máscaras de protección",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "cubre cabellos o cofias",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "guantes",
-                PuntosMax = (decimal)0.28,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-                new ContenidoPreguntas()
-                {
-                Titulo = "Protección auditiva (Cuando aplique)",
-                PuntosMax = (decimal)0.32,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Ropa adecuada (uniformes limpios)",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "cubre boca",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "anteojos de seguridad",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "máscaras de protección",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "cubre cabellos o cofias",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "guantes",
+                //PuntosMax = (decimal)0.28,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
+                //new ContenidoPreguntas()
+                //{
+                //Titulo = "Protección auditiva (Cuando aplique)",
+                //PuntosMax = (decimal)0.32,
+                //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                //},
                 new ContenidoPreguntas()
                 {
                 Titulo = "¿Los uniformes se encuentran en buenas condiciones?",
@@ -3560,26 +3612,40 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "La fórmula maestra contiene",
+                Titulo = "La fórmula maestra contiene" +
+                "\r\n __ Nombre del Producto y Código del Producto" +
+                "\r\n __ Fecha de emisión de la fórmula" +
+                "\r\n __ Descripción de la forma farmacéutica, potencia del producto y tamaño del lote" +
+                "\r\n __ Fórmula unitaria" +
+                "\r\n __ Fórmula industrial" +
+                "\r\n __ Lista de materia prima y cantidades utilizadas" +
+                "\r\n __ Rendimiento teórico y rendimiento final esperado con sus límites aceptados" +
+                "\r\n __ Fecha de revisión de la fórmula maestra o su sustitución por otra" +
+                "\r\n __ Listado del Equipo de Producción" +
+                "\r\n __ Instrucciones detalladas para cada paso en el proceso de verificación delos materiales, pretratamientos, secuencia en la adición de las materias primas,tiempo de mezclado, temperatura y otros (hoja de ruta)" +
+                "\r\n __ Instrucciones para cualquier control durante el proceso con sus límites" +
+                "\r\n __ Cualquier precaución a seguir" +
+                "\r\n __ Fecha de expiración del producto" +
+                "\r\n __ Lista de los materiales de acondicionamiento, cantidad y tipo de cadauno de ellos",
                 Criterio = "C",
                 Articulo="464",
                 PuntosMax = (decimal)2.0,
-                IsSubHeader = true,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Nombre del Producto y Código del Producto", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fecha de emisión de la fórmula", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Descripción de la forma farmacéutica, potencia del producto y tamañodel lote", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fórmula unitaria", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fórmula industrial", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Lista de materia prima y cantidades utilizadas", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Rendimiento teórico y rendimiento final esperado con sus límites aceptados", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fecha de revisión de la fórmula maestra o su sustitución por otra", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Listado del Equipo de Producción", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Instrucciones detalladas para cada paso en el proceso de verificación delos materiales, pretratamientos, secuencia en la adición de las materias primas,tiempo de mezclado, temperatura y otros (hoja de ruta)", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Instrucciones para cualquier control durante el proceso con sus límites", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Cualquier precaución a seguir", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fecha de expiración del producto", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Lista de los materiales de acondicionamiento, cantidad y tipo de cadauno de ellos", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Nombre del Producto y Código del Producto", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fecha de emisión de la fórmula", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Descripción de la forma farmacéutica, potencia del producto y tamañodel lote", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fórmula unitaria", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fórmula industrial", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Lista de materia prima y cantidades utilizadas", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Rendimiento teórico y rendimiento final esperado con sus límites aceptados", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fecha de revisión de la fórmula maestra o su sustitución por otra", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Listado del Equipo de Producción", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Instrucciones detalladas para cada paso en el proceso de verificación delos materiales, pretratamientos, secuencia en la adición de las materias primas,tiempo de mezclado, temperatura y otros (hoja de ruta)", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Instrucciones para cualquier control durante el proceso con sus límites", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Cualquier precaución a seguir", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Fecha de expiración del producto", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.13,Titulo="Lista de los materiales de acondicionamiento, cantidad y tipo de cadauno de ellos", LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}},
 
                 //new ContenidoPreguntas()
                 //{
@@ -3621,25 +3687,35 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Los recipientes conteniendo el producto envasado, están debidamente identificadoscon los siguientes datos?",
+                Titulo = "¿Los recipientes conteniendo el producto envasado, están debidamente identificadoscon los siguientes datos?" +
+                "\r\n __ Nombre del producto" +
+                "\r\n __ Concentración del producto" +
+                "\r\n __ Volumen total del contenido del recipiente" +
+                "\r\n __ Número de lote" +
+                "\r\n __ Fecha de vencimiento",
                 Criterio = "N",
                 Articulo="463",
                 PuntosMax = (decimal)1.5,
-                IsSubHeader = true,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Nombre del producto" },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Concentración del producto" },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Volumen total del contenido del recipiente" },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Número de lote" },
-                    new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Fecha de vencimiento" },
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Nombre del producto" },
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Concentración del producto" },
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Volumen total del contenido del recipiente" },
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Número de lote" },
+                    //new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="Fecha de vencimiento" },
 
                 new ContenidoPreguntas()
                 {
-                Titulo = "¿Están en buen estado?",
+                Titulo = "¿Están en buen estado?" +
+                "\r\n __ Reactores" +
+                "\r\n __ Filtros" +
+                "\r\n __ Agitadores" +
+                "\r\n __ Bombas" +
+                "\r\n __ Recipientes empleados en la fabricación",
                 Criterio = "N",
                 Articulo="435",
                 PuntosMax = (decimal)1.5,
-                IsSubHeader = true,
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="reactores" },
                     new ContenidoPreguntas(){PuntosMax = (decimal)0.3,LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}, Titulo="filtros" },
