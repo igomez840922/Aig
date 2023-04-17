@@ -51,13 +51,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                               $"{BuildTitle(item)}" +
                               $"{BuildTable(item)}" +
                               $"{BuildNote(item)}" +
-                              " <div style=\"page-break-inside: avoid;margin-top:40px !important;\">Atentamente</div>" +
-                              "  <div style=\"font-family:'Arial';font-size: 14px;font-weight: bold;margin-top:50px\">" +
-                              "    <div>----------------------------------------------------------------------</div>" +
-                              $"   <div>{item.Nota?.DirectoraNacional?.ToUpper()}</div>" +
-                              "    <div> Director(a) Nacional de Farmacia y Drogas</div>" +
-                              $"    <div style=\"font-size: 10px;\"> { item!.EvaluatorToShow} </div>" +
-                              "  </div>" +
+                              "<div style=\"page-break-inside: avoid;margin-top:80px !important;\">" +
+                                  "<div> Atentamente <div>" +
+                                  "<div style=\"margin-top:50px\"> ----------------------------------------------------------------------</div>" +
+                                  $"<div style=\"font-family:'Arial';font-size: 14px;font-weight: bold;\"> {item.Nota?.DirectoraNacional?.ToUpper()} </div>" +
+                                  "<div style=\"font-family:'Arial';font-size: 14px;font-weight: bold;\"> Director(a) Nacional de Farmacia y Drogas </div>" +
+                                  $"<div style=\"font-size: 10px;\"> {item!.EvaluatorToShow} </div>" +
+                               "</div>" +
                               "</body>" +
                             "</html>";
               
@@ -65,8 +65,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
                 settings.ColorMode = ColorMode.Color;
                 settings.Orientation = Orientation.Portrait;
                 settings.PaperSize = PaperKind.Letter;
-                //settings.Margins = new MarginSettings { Left=0, Right = 0, Top = 40, Bottom = 6.2 };
-                settings.Margins = new MarginSettings { Left = 0, Right = 0, Top = 50, Bottom = 15 };
+                //settings.Margins = new MarginSettings { Left = 0, Right = 0, Top = 50, Bottom = 15 };
+                settings.Margins = new MarginSettings { Left = 0, Right = 0, Top = 45, Bottom = 15 };
                 var objectSettings = BuildSettings(html);
                 var doc = new HtmlToPdfDocument() { GlobalSettings = settings, Objects = { objectSettings } };
                 return _converter.Convert(doc);
@@ -129,7 +129,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             var item = model.Medicamentos.FirstOrDefault();
             string facture = item != null ? item.Factura : "--";
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             var title = model.Estado == EstadoEstudio.Authorized ? $"En referencia al Protocolo de Investigación del estudio clínico {model?.Codigo}" +
                                       $" titulado \"{model?.Titulo}\" cuyo investigador principal es: {model?.InvestigadorPrincipal}," +
                                       $" a realizarse en {model?.CentroInvestigacion}, le informamos que autorizamos la introducción al país" +
@@ -149,7 +149,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         private static string BuildTable(AigEstudio model)
         {
             if (model.Estado== EstadoEstudio.NotAuthorized) return "";
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             foreach (var item in model.Medicamentos)
             {
                 sb.AppendLine("<div style=\"margin-top: 20px;\">");
@@ -207,16 +207,16 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         private static string BuildNote(AigEstudio model)
         {
             model.Nota.Lines ??= new List<AigNota>();
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<div style=\"page-break-inside: avoid;margin-top:10px !important;\">");
+            var sb = new StringBuilder();
+            sb.AppendLine("<div style=\"margin-top:10px !important;\">");
             //sb.AppendLine("<p style=\"white-space: pre-line;text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
             //sb.AppendLine(model.Nota?.Observaciones);
             //sb.AppendLine("</p>");
             foreach (var item in model.Nota.Lines){
                 if (item.WhiteSpace)
-                    sb.AppendLine("<p style=\"white-space: pre-line;text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
+                    sb.AppendLine("<p style=\"page-break-inside: avoid;white-space: pre-line;text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
                 else
-                    sb.AppendLine("<p style=\"text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
+                    sb.AppendLine("<p style=\"page-break-inside: avoid;text-align: justify;font-family: 'Arial';font-size: 18px;line-height: 24px\">");
                 sb.AppendLine(item.Observaciones);
                 sb.AppendLine("</p>");
             }
