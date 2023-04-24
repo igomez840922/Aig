@@ -246,5 +246,10 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_AperturaFabCosmeticoArtesanal_Cap5(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_AperturaFabCosmeticoArtesanal_Firma(AUD_InspeccionTB inspeccion);
 
+
+        Task<AUD_InspeccionTB> Save_AperCamUbicBotiquin_Cap2(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperCamUbicBotiquin_Cap3(AUD_InspeccionTB inspeccion);
+        Task<AUD_InspeccionTB> Save_AperCamUbicBotiquin_Frima(AUD_InspeccionTB inspeccion);
+
     }
 }

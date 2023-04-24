@@ -141,6 +141,7 @@ namespace Aig.Auditoria.Pages.Inspections
             //dataModel.Data = data;
             SelectedData = data;
 
+            OpenNew = false; 
             OpenAddEdit = true;            
             
             await this.InvokeAsync(StateHasChanged);

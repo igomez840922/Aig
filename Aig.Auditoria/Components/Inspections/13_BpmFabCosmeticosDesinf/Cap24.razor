@@ -66,9 +66,12 @@
                                                                         else if (dt.IsSubHeader)
                                                                         {
                                                                             <tr>
-                                                                                <td>@(dt.PuntosMax>0?dt.PuntosMax:"")</td>
+                                                                                <td>@(dt.PuntosMax > 0 ? dt.PuntosMax : "")</td>
                                                                                 <td>
-                                                                                   @* <InputNumber class="form-control" @bind-Value="dt.PuntosObtenido" />*@
+                                                                                    @if (dt.PuntosMax > 0)
+                                                                                    {
+                                                                                        <InputNumber class="form-control" @bind-Value="dt.PuntosObtenido" />
+                                                                                    }
                                                                                 </td>
                                                                                 <td>@dt.Titulo</td>
                                                                                 <td>@dt.Articulo </td>
@@ -80,9 +83,12 @@
                                                                         else
                                                                         {
                                                                             <tr>
-                                                                                <td>@(dt.PuntosMax>0?dt.PuntosMax:"")</td>
+                                                                                <td>@(dt.PuntosMax > 0 ? dt.PuntosMax : "")</td>
                                                                                 <td>
-                                                                                    <InputNumber class="form-control" @bind-Value="dt.PuntosObtenido" />
+                                                                                    @if (dt.PuntosMax > 0)
+                                                                                    {
+                                                                                        <InputNumber class="form-control" @bind-Value="dt.PuntosObtenido" />
+                                                                                    }
                                                                                 </td>
                                                                                 <td>@dt.Titulo</td>
                                                                                 <td>@dt.Articulo</td>
@@ -102,6 +108,28 @@
                                                                                     <InputTextArea rows="6" class="form-control" @bind-Value="dt.Observaciones" />
                                                                                 </td>
                                                                             </tr>
+                                                                            @if (dt.LSubPreguntas?.Count > 0)
+                                                                            {
+                                                                                foreach (var sub in dt.LSubPreguntas)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td>@sub.Nombre</td>
+                                                                                        <td></td>
+                                                                                        <td>
+                                                                                            <InputSelect style="padding:0px!important;" @bind-Value="sub.Evaluacion" class="form-control">
+                                                                                                @foreach (enumAUD_TipoSeleccion opt in Enum.GetValues(typeof(enumAUD_TipoSeleccion)))
+                                                                                                {
+                                                                                                    <option value="@opt">@(DataModel.Helper.Helper.GetDescription(opt))</option>
+                                                                                                }
+                                                                                            </InputSelect>
+                                                                                        </td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                    </tr>
+                                                                                }
+                                                                            }
                                                                         }
                                                                     }
                                                                 }

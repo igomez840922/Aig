@@ -1,0 +1,170 @@
+﻿@using DataModel.Helper;
+@implements IDisposable
+
+@if (Inspeccion?.DatosConclusiones != null)
+{
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
+                                            <DataAnnotationsValidator />
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <h5>@languageContainerService.Keys["Conclusiones"]</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-6">
+                                                    <label for="password">@languageContainerService.Keys["El local cumple estructuralmente con los requisitos mínimos para operar"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputSelect @bind-Value="Inspeccion.DatosConclusiones.CumpleRequisitosMinOperacion" class="form-control">
+                                                                <option value="false">No</option>
+                                                                <option value="true">Si</option>
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Inspeccion.DatosConclusiones.CumpleRequisitosMinOperacion) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Fecha de Finalización"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.DatosConclusiones.FechaFinalizacion" ShowTime="true" HourFormat="12" DateFormat="dd/MM/yyyy h:mm tt" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Se reprograma inspección al Establecimiento"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputSelect @bind-Value="Inspeccion.DatosConclusiones.ReprogramaInspeccion" class="form-control">
+                                                                <option value="false">No</option>
+                                                                <option value="true">Si</option>
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Inspeccion.DatosConclusiones.ReprogramaInspeccion) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Observaciones"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputTextArea rows="10" class="form-control" @bind-Value="Inspeccion.DatosConclusiones.ObservacionesFinales" />
+                                                            <ValidationMessage For=@(() => Inspeccion.DatosConclusiones.ObservacionesFinales) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-9" style="text-align:left;">
+                                                    <h5>@languageContainerService.Keys["Adjuntar Archivos"]</h5>
+                                                </div>
+                                                <div class="col-3" style="text-align:right;">
+                                                </div>
+                                                <div class="col-12" style="text-align:left;">
+                                                    <div class="kt-section">
+                                                        <div class="table-responsive">
+                                                            <table class="table rounded table-striped">
+                                                                <thead class=thead-light>
+                                                                    <tr>
+                                                                        <th>@languageContainerService.Keys["Description"]</th>
+                                                                        <th>@languageContainerService.Keys["File"]</th>
+                                                                        <th style="text-align:right;">
+                                                                            <button type="button" @onclick="(e)=>{OpenAttachment();}"
+                                                                                    class="btn btn-sm btn-outline-primary waves-effect">
+                                                                                @languageContainerService.Keys["Add"]
+                                                                            </button>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if (Inspeccion?.DatosConclusiones?.LAttachments?.Count > 0)
+                                                                    {
+                                                                        @foreach (var dt in Inspeccion.DatosConclusiones.LAttachments)
+                                                                        {
+                                                                            <tr>
+                                                                                <td scope="row">@dt.Description</td>
+                                                                                <td>
+                                                                                    <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
+                                                                                </td>
+                                                                                <td style="text-align:right">
+                                                                                    <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!--begin::Section-->
+                                            </div>
+
+                                            <br><br>
+
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                            class="btn btn-success waves-effect">
+                                                        @languageContainerService.Keys["SaveExit"]
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cerrar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (openAttachment)
+    {
+        <Aig.Auditoria.Components.Attachments.AddEditAttachment></Aig.Auditoria.Components.Attachments.AddEditAttachment>
+    }
+
+}

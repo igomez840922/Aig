@@ -28,16 +28,19 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
         enumSelectedChapter selectedChapter { get; set; } = enumSelectedChapter.None;
 
         protected async override Task OnInitializedAsync()
-        {            
+        {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-
+            bus.Subscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
+            bus.Subscribe<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>(SelectEstablecimiento_EventHandler);
             base.OnInitialized();
         }
 
         public void Dispose()
         {
             bus.UnSubscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+            bus.UnSubscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
+            bus.UnSubscribe<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>(SelectEstablecimiento_EventHandler);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -106,14 +109,14 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
         ///
         protected async Task OpenSelectEstablecimientos()
         {
-            bus.Subscribe<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>(SelectEstablecimiento_EventHandler);
+            //bus.Subscribe<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>(SelectEstablecimiento_EventHandler);
             showSelectEstablecimiento = true;
             await this.InvokeAsync(StateHasChanged);
         }
         private void SelectEstablecimiento_EventHandler(MessageArgs args)
         {
             showSelectEstablecimiento = false;
-            bus.UnSubscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(SelectEstablecimiento_EventHandler);
+            //bus.UnSubscribe<Aig.Auditoria.Events.Establishments.SearchEvent>(SelectEstablecimiento_EventHandler);
             var message = args.GetMessage<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>();
             if (message.Data != null && message.Data.EstablecimientoId !=null)
             {
@@ -141,7 +144,7 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
 
                 if(this.selectedChapter!= enumSelectedChapter.None)
                 {
-                    bus.Subscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
+                    //bus.Subscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
                 }
             }
             catch { }
@@ -154,7 +157,7 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
         //Cerramos todos los capitulos
         private void ChapterChange_EventHandler(MessageArgs args)
         {
-            bus.UnSubscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
+            //bus.UnSubscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
 
             this.selectedChapter = enumSelectedChapter.None;
 

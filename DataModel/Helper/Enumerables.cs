@@ -75,8 +75,10 @@ namespace DataModel.Helper
         BPA = 17,
         [Description("Apertura – Cosméticos Artesanales")]
         AECA = 18,
-        //[Description("Rutina o vigilancia de Establecimiento No Farmacéutico")]
-        //VENF = 19,
+        [Description("Apertura de Botiquín de Pueblo")]
+        ABP = 19,
+        [Description("Rutina o Vigilancia de Botiquín de Pueblo")]
+        CUBP = 20,
     }
 
     public enum enumAUD_ClasificacionTramite

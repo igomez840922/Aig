@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._5_Investigaciones
+namespace Aig.Auditoria.Components.Inspections._17_AperturaUbicacionBotiquin
 {
     public partial class Index
     {
@@ -42,6 +42,7 @@ namespace Aig.Auditoria.Components.Inspections._5_Investigaciones
             bus.UnSubscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
             bus.UnSubscribe<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>(SelectEstablecimiento_EventHandler);
         }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)

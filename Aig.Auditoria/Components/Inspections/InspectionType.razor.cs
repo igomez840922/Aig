@@ -153,7 +153,13 @@ namespace Aig.Auditoria.Components.Inspections
                         {
                             data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspGuiaBPM_Bpa = new AUD_InspGuiaBPM_BpaTB() };
                             break;
-                        }                        
+                        }
+                    case DataModel.Helper.enumAUD_TipoActa.ABP:
+                    case DataModel.Helper.enumAUD_TipoActa.CUBP:
+                        {
+                            data = new AUD_InspeccionTB() { TipoActa = tipoActa, DatosEstablecimiento = new AUD_DatosEstablecimientoTB(), InspAperCambUbicBotiquin = new AUD_InspAperCambUbicBotiquinTB() };
+                            break;
+                        }
                     default:
                         {
                             return;

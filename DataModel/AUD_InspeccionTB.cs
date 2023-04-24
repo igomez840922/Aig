@@ -157,6 +157,12 @@ namespace DataModel
         private AUD_InspAperturaCosmetArtesanalTB? inspAperturaCosmetArtesanal;
         public virtual AUD_InspAperturaCosmetArtesanalTB? InspAperturaCosmetArtesanal { get => inspAperturaCosmetArtesanal; set => SetProperty(ref inspAperturaCosmetArtesanal, value); }
 
+        //17 - Apertura, Cambio Ubicacion de Botiquin de Pueblo
+        private long? inspAperCambUbicBotiquinId;
+        public long? InspAperCambUbicBotiquinId { get => inspAperCambUbicBotiquinId; set => SetProperty(ref inspAperCambUbicBotiquinId, value); }
+        private AUD_InspAperCambUbicBotiquinTB? inspAperCambUbicBotiquin;
+        public virtual AUD_InspAperCambUbicBotiquinTB? InspAperCambUbicBotiquin { get => inspAperCambUbicBotiquin; set => SetProperty(ref inspAperCambUbicBotiquin, value); }
+
 
         /// <summary>
         /// //////////////////////

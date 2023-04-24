@@ -143,7 +143,7 @@ namespace DataAccess
 
                 DBContext.SaveChanges();
 
-                return DBContext.Set<T>().Find(_Data.Id); ;
+                return Get<T>(_Data.Id); ;
             }
             catch (Exception ex)
             { }

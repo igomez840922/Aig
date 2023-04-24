@@ -141,6 +141,11 @@ namespace DataAccess
    .WithOne(e => e.Inspeccion)
    .HasForeignKey<AUD_InspeccionTB>(e => e.DatosEstablecimientoId);
 
+            modelBuilder.Entity<AUD_InspeccionTB>()
+           .HasOne(e => e.InspAperCambUbicBotiquin)
+           .WithOne(e => e.Inspeccion)
+           .HasForeignKey<AUD_InspeccionTB>(e => e.InspAperCambUbicBotiquinId);
+
             //JSON
             modelBuilder.Entity<AUD_InspeccionTB>()
 .Property(e => e.ParticipantesDNFD)
@@ -224,6 +229,23 @@ namespace DataAccess
             modelBuilder.Entity<AUD_CorrespondenciaTB>()
               .Property(e => e.AdjuntoSeguimiento)
               .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AttachmentData>(x));
+
+
+            ///////////////////////////////////////////
+            ///
+
+            modelBuilder.Entity<AUD_InspAperCambUbicBotiquinTB>()
+            .Property(e => e.DatosRepresentLegal)
+            .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRepresentLegal>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicBotiquinTB>()
+            .Property(e => e.DatosRegente)
+            .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRegente>(x));
+
+            modelBuilder.Entity<AUD_InspAperCambUbicBotiquinTB>()
+            .Property(e => e.CondCaractEstablecimiento)
+            .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
+
 
 
             ///////////////////////////////////////////
@@ -635,10 +657,10 @@ namespace DataAccess
 .Property(e => e.InspeccionAudito)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
 
-
+            
             ///////////////////////////////////////////
             ///
-                       
+
             modelBuilder.Entity<AUD_InspAperturaCosmetArtesanalTB>()
 .Property(e => e.DatosRepresentLegal)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
