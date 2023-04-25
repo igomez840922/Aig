@@ -25,6 +25,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#cap2" role="tab">@languageContainerService.Keys["Farmaceuticos"]</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#cap3" role="tab">@languageContainerService.Keys["Representante Legal"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#cap4" role="tab">@languageContainerService.Keys["Regente Farmacéutico"]</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="cap1" role="tabpanel">
@@ -354,9 +360,156 @@
                                 </div>
 
                             </div>
-                        </div>
+                            <div class="tab-pane active" id="cap3" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Representante Legal"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Primer Nombre"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.RepresentanteLegal.PrimerNombre" />
+                                                <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.PrimerNombre) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Segundo Nombre"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.RepresentanteLegal.SegundoNombre" />
+                                                <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.SegundoNombre) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Primer Apellido"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.RepresentanteLegal.PrimerApellido" />
+                                                <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.PrimerApellido) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Segundo Apellido"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.RepresentanteLegal.SegundoApellido" />
+                                                <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.SegundoApellido) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["No. Identificación"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.RepresentanteLegal.Identificacion" />
+                                                <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.Identificacion) />
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["No. Idoneidad"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.RepresentanteLegal.NumIdoneidad" />
+                                                <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.NumIdoneidad) />
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Correo"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.RepresentanteLegal.Correo" />
+                                                <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.Correo) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Teléfono"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.RepresentanteLegal.Telefono" />
+                                                <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.Telefono) />
+                                            </div>
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="tab-pane active" id="cap4" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Regente Farmacéutico"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Primer Nombre"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.PrimerNombre" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.PrimerNombre) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Segundo Nombre"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.SegundoNombre" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.SegundoNombre) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Primer Apellido"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.PrimerApellido" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.PrimerApellido) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Segundo Apellido"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.SegundoApellido" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.SegundoApellido) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["No. Identificación"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.Identificacion" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Identificacion) />
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="col-sm-6">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Correo"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.Correo" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Correo) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Teléfono"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.Telefono" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Telefono) />
+                                            </div>
+                                        </div>
+                                    </div>
+                               </div>
+                                
+                            </div>
+                           </div>
 
-                        
                         <br>
                         <div class="modal-footer">
                             <button type="submit"

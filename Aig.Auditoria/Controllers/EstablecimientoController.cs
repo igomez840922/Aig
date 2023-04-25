@@ -2,11 +2,13 @@
 using Aig.Auditoria.Services;
 using DataAccess;
 using DataModel;
+using DataModel.DTO;
 using DataModel.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using static ClosedXML.Excel.XLPredefinedFormat;
 using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace Aig.Auditoria.Controllers
@@ -38,6 +40,27 @@ namespace Aig.Auditoria.Controllers
             }
             catch(Exception ex) { return BadRequest(new { message = ex.Message }); }
             return BadRequest(new { message = "data not found" });
+        }
+
+        [HttpPost("SaveUpdate")]
+        public async Task<IActionResult> SaveUpdate([FromBody] AUD_EstablecimientoTB establecimiento)
+        {
+            //if (userForRegistration == null || !ModelState.IsValid)
+            //    return BadRequest();
+            var data = dalService.Get<AUD_EstablecimientoTB>(establecimiento.Id);
+            if(data == null )
+            {
+                data = dalService.Find<AUD_EstablecimientoTB>(x => x.NumLicencia == establecimiento.NumLicencia);
+            }
+            establecimiento.Id = data?.Id ?? establecimiento.Id;
+
+            establecimiento = dalService.Save<AUD_EstablecimientoTB>(establecimiento);
+
+           if (establecimiento!=null)
+            {
+                return Ok(establecimiento);
+            }
+            return BadRequest(new { message = "establecimiento no pudo ser actualizado" });
         }
 
 
@@ -77,6 +100,6 @@ namespace Aig.Auditoria.Controllers
         //    return BadRequest(new { message = "data not found" });
         //}
 
-        
+
     }
 }

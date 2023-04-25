@@ -104,6 +104,8 @@ namespace Aig.Auditoria.Components.Establishments
             var message = args.GetMessage<EstablishmentsAddEdit_OpenEvent>();
 
             Establecimiento = message.Data != null ? message.Data : new DataModel.AUD_EstablecimientoTB();
+            Establecimiento.RepresentanteLegal = Establecimiento.RepresentanteLegal != null ? Establecimiento.RepresentanteLegal : new PersonaDatos();
+            Establecimiento.Regente = Establecimiento.Regente != null ? Establecimiento.Regente : new PersonaDatos();
 
             OpenDialog = true;
 

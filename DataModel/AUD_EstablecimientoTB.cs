@@ -258,6 +258,15 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_FarmaceuticoTablas FarmaceuticoTablas { get => farmaceuticoTablas; set => SetProperty(ref farmaceuticoTablas, value); }
 
+        //1. Representante Legal
+        private PersonaDatos representanteLegal;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public PersonaDatos RepresentanteLegal { get => representanteLegal; set => SetProperty(ref representanteLegal, value); }
+
+        //1. Regente Farmaceutico
+        private PersonaDatos regente;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public PersonaDatos Regente { get => regente; set => SetProperty(ref regente, value); }
 
     }
 }
