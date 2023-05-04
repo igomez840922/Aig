@@ -242,7 +242,8 @@ namespace DataModel
 		public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
 
         private List<AUD_InspeccionTB> lInspections;
-        [System.Text.Json.Serialization.JsonIgnore]
+        //[System.Text.Json.Serialization.JsonIgnore]
+		[JsonIgnore]
         public virtual List<AUD_InspeccionTB> LInspections { get => lInspections; set => SetProperty(ref lInspections, value); }
 
 

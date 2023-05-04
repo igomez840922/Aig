@@ -36,6 +36,11 @@ namespace Aig.Auditoria.Controllers
                     {
                         return Ok(data);
                     }
+                    data = dalService.Find<AUD_EstablecimientoTB>(x => x.ReciboPago == number);
+                    if (data != null)
+                    {
+                        return Ok(data);
+                    }
                 }
             }
             catch(Exception ex) { return BadRequest(new { message = ex.Message }); }
@@ -47,6 +52,23 @@ namespace Aig.Auditoria.Controllers
         {
             //if (userForRegistration == null || !ModelState.IsValid)
             //    return BadRequest();
+
+            if (establecimiento?.Provincia != null)
+            {
+                establecimiento.ProvinciaId = dalService.Find<ProvinciaTB>(x => x.Codigo == establecimiento.Provincia.Codigo)?.Id??0;
+                establecimiento.Provincia = null;
+            }
+            if (establecimiento?.Distrito != null)
+            {
+                establecimiento.DistritoId = dalService.Find<DistritoTB>(x => x.Codigo == establecimiento.Distrito.Codigo)?.Id ?? 0;
+                establecimiento.Distrito=null;
+            }
+            if (establecimiento?.Corregimiento != null)
+            {
+                establecimiento.CorregimientoId = dalService.Find<CorregimientoTB>(x => x.Codigo == establecimiento.Corregimiento.Codigo)?.Id ?? 0;
+                establecimiento.Corregimiento = null;
+            }
+
             var data = dalService.Get<AUD_EstablecimientoTB>(establecimiento.Id);
             if(data == null )
             {
@@ -54,7 +76,7 @@ namespace Aig.Auditoria.Controllers
             }
             establecimiento.Id = data?.Id ?? establecimiento.Id;
 
-            establecimiento = dalService.Save<AUD_EstablecimientoTB>(establecimiento);
+            establecimiento = dalService.UpdateValues<AUD_EstablecimientoTB>(establecimiento);
 
            if (establecimiento!=null)
             {

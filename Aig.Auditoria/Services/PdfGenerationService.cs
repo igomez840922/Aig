@@ -1,24 +1,12 @@
 ﻿using DataAccess;
-using DataModel.Models;
 using DataModel;
-using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Reflection.Metadata;
+using DataModel.Helper;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using MimeKit;
-using System;
-using Org.BouncyCastle.Utilities;
-using System.IO;
-using Microsoft.Net.Http.Headers;
-using Aig.Auditoria.Pages.Inspections;
-using DataModel.Helper;
 
 namespace Aig.Auditoria.Services
-{    
+{
     public class PdfGenerationService : IPdfGenerationService
     {
         private readonly IDalService DalService;
@@ -6287,7 +6275,7 @@ namespace Aig.Auditoria.Services
             { }
             return null;
         }
-        // Guis BPM Fabricante de Medicamentos
+        //11 - Guis BPM Fabricante de Medicamentos
         private async Task<Stream> GenerateGuiaFabricantesMedicamentos(AUD_InspeccionTB inspection)
         {
             try
@@ -6453,7 +6441,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6516,7 +6511,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6570,7 +6572,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6590,11 +6599,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -6625,7 +6634,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                   if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6645,11 +6661,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -6680,7 +6696,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6700,17 +6723,17 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                     });
                                     table.Header(header =>
                                     {
@@ -6746,7 +6769,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6766,11 +6796,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -6801,7 +6831,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6821,13 +6858,13 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -6860,7 +6897,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6880,11 +6924,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -6915,7 +6959,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6935,14 +6986,14 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)3);
                                     });
                                     table.Header(header =>
                                     {
@@ -6974,7 +7025,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -6994,11 +7052,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7029,7 +7087,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7049,11 +7114,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7084,7 +7149,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7104,11 +7176,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7139,7 +7211,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7159,14 +7238,14 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)4);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)3);
                                     });
                                     table.Header(header =>
                                     {
@@ -7198,7 +7277,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7218,11 +7304,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7253,7 +7339,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7273,11 +7366,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7308,7 +7401,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7328,11 +7428,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7363,7 +7463,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7383,11 +7490,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7418,7 +7525,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7438,11 +7552,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7473,7 +7587,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7493,11 +7614,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7528,7 +7649,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7548,13 +7676,13 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7587,7 +7715,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7607,11 +7742,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7642,7 +7777,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7662,13 +7804,13 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7701,7 +7843,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7721,11 +7870,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7756,7 +7905,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7776,11 +7932,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7811,7 +7967,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7831,11 +7994,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -7866,7 +8029,14 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    if (!eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    }
                                                 }
                                             }
                                             else
@@ -7880,21 +8050,21 @@ namespace Aig.Auditoria.Services
                             }
 
 
-                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                });
+                            //column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                            //{
+                            //    table.ColumnsDefinition(columns =>
+                            //    {
+                            //        columns.RelativeColumn();
+                            //    });
 
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
-                                });
+                            //    table.Header(header =>
+                            //    {
+                            //        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
+                            //    });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
-                            });
+                            //});
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
@@ -8067,7 +8237,7 @@ namespace Aig.Auditoria.Services
             return null;
         }
 
-        // Guis BPM Laboratorios Acondicionadores de Medicamentos
+        //12 - Guis BPM Laboratorios Acondicionadores de Medicamentos
         private async Task<Stream> GenerateGuiaLabAcondicionadores(AUD_InspeccionTB inspection)
         {
             try
@@ -9295,7 +9465,7 @@ namespace Aig.Auditoria.Services
             catch { }
             return null;
         }
-        //generamos el pdf de BPM Guia Fabricante de Cosmeticos y Desinfectantes
+        //13 - BPM Guia Fabricante de Cosmeticos y Desinfectantes
         private async Task<Stream> GenerateGuiaFabricantesCosmeticosDesinfectantes(AUD_InspeccionTB inspection)
         {
             try
@@ -9324,7 +9494,7 @@ namespace Aig.Auditoria.Services
 
                             table.Header(header => {
                                 header.Cell().AlignMiddle().Image(path);
-                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE INSPECCIONES\r\n");
+                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE AUDITORíAS\r\n".ToUpper());
                                 header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
                             });
 
@@ -9406,7 +9576,7 @@ namespace Aig.Auditoria.Services
                                     {
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Capítulo".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Artículo".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Título".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Título".ToUpper()).Bold();
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Criterio".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Cumple".ToUpper());
                                         //header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
@@ -9415,9 +9585,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -9438,6 +9608,17 @@ namespace Aig.Auditoria.Services
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
                                             //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9454,7 +9635,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.ClasifActComerciales?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL - Informativo".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9462,15 +9643,15 @@ namespace Aig.Auditoria.Services
                                         columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)1);
+                                        //columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)1);
                                     });
                                     table.Header(header =>
                                     {
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Capítulo".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Artículo".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Título".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Criterio".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Título".ToUpper()).Bold(); ;
+                                        //header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Criterio".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Cumple".ToUpper());
                                         //header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
                                     });
@@ -9478,17 +9659,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold(); ;
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold(); ;
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold(); ;
+                                            //table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                         }
                                         else
                                         {
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
@@ -9500,7 +9682,17 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9508,7 +9700,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.ClasifEstablecimiento?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Clasificación del Establecimiento:".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Clasificación del Establecimiento - Informativo".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9524,7 +9716,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Capítulo".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Artículo".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Título".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Criterio".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Criterio".ToUpper()).Bold();
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Cumple".ToUpper());
                                         //header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
                                     });
@@ -9532,10 +9724,10 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
                                         }
                                         else
                                         {
@@ -9554,7 +9746,17 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9567,12 +9769,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -9589,18 +9791,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold(); ;
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -9616,6 +9818,20 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9628,12 +9844,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -9650,18 +9866,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -9677,6 +9893,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9689,12 +9918,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -9711,18 +9940,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -9738,6 +9967,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9750,12 +9992,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -9772,18 +10014,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -9799,6 +10041,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9811,12 +10066,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -9833,18 +10088,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -9860,6 +10115,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9872,12 +10140,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -9894,18 +10162,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -9921,6 +10189,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9933,12 +10214,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -9955,18 +10236,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -9982,6 +10263,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -9994,12 +10288,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10016,18 +10310,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10043,6 +10337,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10055,12 +10362,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10077,18 +10384,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10104,6 +10411,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10116,12 +10436,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10138,18 +10458,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10165,6 +10485,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10177,12 +10510,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10199,18 +10532,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10226,6 +10559,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10238,12 +10584,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10260,18 +10606,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10287,6 +10633,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10299,12 +10658,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10321,18 +10680,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10348,6 +10707,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10360,12 +10732,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10382,18 +10754,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10409,6 +10781,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10421,12 +10806,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10443,18 +10828,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10470,6 +10855,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10482,12 +10880,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10504,18 +10902,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10531,6 +10929,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10543,12 +10954,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10565,18 +10976,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10592,6 +11003,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10604,12 +11028,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10626,18 +11050,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10653,6 +11077,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10665,12 +11102,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10687,18 +11124,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10714,6 +11151,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10726,12 +11176,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10748,18 +11198,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10775,6 +11225,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10787,12 +11250,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10809,18 +11272,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10836,6 +11299,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10848,12 +11324,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10870,18 +11346,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10897,6 +11373,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10909,12 +11398,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10931,18 +11420,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -10958,6 +11447,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -10970,12 +11472,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -10992,18 +11494,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -11019,6 +11521,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -11031,12 +11546,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11053,18 +11568,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -11080,6 +11595,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -11092,12 +11620,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11114,18 +11642,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -11141,6 +11669,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -11153,12 +11694,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11175,18 +11716,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -11202,6 +11743,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -11214,12 +11768,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11236,18 +11790,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -11263,6 +11817,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -11270,17 +11837,17 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AnalisisContrato?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("CONTROL DE CALIDAD - Análisis por Contrato".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CONTROL DE CALIDAD".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11297,18 +11864,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -11324,6 +11891,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -11336,12 +11916,12 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)3.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11358,18 +11938,18 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosObtenido);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
@@ -11385,6 +11965,19 @@ namespace Aig.Auditoria.Services
                                             }
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            if (dat.LSubPreguntas?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LSubPreguntas)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -11576,7 +12169,7 @@ namespace Aig.Auditoria.Services
             catch { }
             return null;
         }
-        //Guia BPM Fabricante Productos Naturales Medicinales
+        //14 - Guia BPM Fabricante Productos Naturales Medicinales
         private async Task<Stream> GenerateGuiaFabricantesProdNaturalesMedicinales(AUD_InspeccionTB inspection)
         {
             try
@@ -11605,7 +12198,7 @@ namespace Aig.Auditoria.Services
 
                             table.Header(header => {
                                 header.Cell().AlignMiddle().Image(path);
-                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE INSPECCIONES\r\n");
+                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE AUDITORíAS\r\n".ToUpper());
                                 header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
                             });
 
@@ -11707,11 +12300,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11727,9 +12320,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -11762,11 +12355,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11782,9 +12375,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -11817,11 +12410,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11837,9 +12430,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -11872,11 +12465,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11892,9 +12485,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -11927,11 +12520,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -11947,9 +12540,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -11982,11 +12575,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12002,9 +12595,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12037,11 +12630,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12057,9 +12650,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12093,11 +12686,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12113,9 +12706,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12148,11 +12741,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12168,9 +12761,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12203,11 +12796,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12223,9 +12816,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12258,11 +12851,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12278,9 +12871,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12313,11 +12906,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12333,9 +12926,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12368,11 +12961,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12388,9 +12981,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12423,11 +13016,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12443,9 +13036,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12478,11 +13071,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12498,9 +13091,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12533,11 +13126,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12553,9 +13146,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12589,11 +13182,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12609,9 +13202,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12644,11 +13237,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12664,9 +13257,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12699,11 +13292,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12719,9 +13312,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12754,11 +13347,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12774,9 +13367,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12810,11 +13403,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12830,9 +13423,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12865,11 +13458,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12885,9 +13478,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12920,11 +13513,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12940,9 +13533,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -12975,11 +13568,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -12995,9 +13588,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13030,11 +13623,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13050,9 +13643,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13085,11 +13678,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13105,9 +13698,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13140,11 +13733,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13160,9 +13753,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13196,11 +13789,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13216,9 +13809,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13251,11 +13844,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13271,9 +13864,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13306,11 +13899,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13326,9 +13919,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13362,11 +13955,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13382,9 +13975,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                           table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13418,11 +14011,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13438,9 +14031,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13473,11 +14066,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13493,9 +14086,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13529,11 +14122,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13549,9 +14142,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13584,11 +14177,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13604,9 +14197,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13639,11 +14232,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13659,9 +14252,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13694,11 +14287,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13714,9 +14307,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13749,11 +14342,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13769,9 +14362,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13805,11 +14398,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13825,9 +14418,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13860,11 +14453,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13880,9 +14473,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13916,11 +14509,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13936,9 +14529,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -13971,11 +14564,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -13991,9 +14584,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -14026,11 +14619,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -14046,9 +14639,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -14082,11 +14675,11 @@ namespace Aig.Auditoria.Services
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
-                                        columns.RelativeColumn((float)0.5);
-                                        columns.RelativeColumn((float)0.5);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)4);
                                     });
                                     table.Header(header =>
@@ -14102,9 +14695,9 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
@@ -14131,21 +14724,21 @@ namespace Aig.Auditoria.Services
                             }
 
 
-                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                });
+                            //column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                            //{
+                            //    table.ColumnsDefinition(columns =>
+                            //    {
+                            //        columns.RelativeColumn();
+                            //    });
 
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
-                                });
+                            //    table.Header(header =>
+                            //    {
+                            //        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
+                            //    });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
-                            });
+                            //});
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>

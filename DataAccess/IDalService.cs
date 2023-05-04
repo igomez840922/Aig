@@ -19,6 +19,7 @@ namespace DataAccess
         List<T> FindAll<T>(Expression<Func<T, bool>> match) where T : class;
         List<T> FindAll<T>(Expression<Func<T, bool>> match, int PageIdx, int PageAmt) where T : class, Identity;
         T Save<T>(T _Data) where T : class, Identity;
+        T UpdateValues<T>(T _Data) where T : class, Identity;
         T Delete<T>(long Id) where T : class;
         int Count<T>() where T : class;
         int Count<T>(Expression<Func<T, bool>> match) where T : class;

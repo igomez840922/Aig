@@ -150,6 +150,31 @@ namespace DataAccess
             return null;
         }
 
+        public T UpdateValues<T>(T _Data) where T : class, Identity
+        {
+            //lock (objLock)
+            try
+            {
+                _Data.UpdatedDate = DateTime.Now;
+                var _OldData = DBContext.Set<T>().Find(_Data.Id);
+                if (_OldData != null)
+                {
+                    DBContext.Entry(_OldData).CurrentValues.SetValues(_Data);
+                }
+                else
+                {
+                    DBContext.Set<T>().Add(_Data);
+                }
+                DBContext.SaveChanges();                
+
+                return Get<T>(_Data.Id); ;
+            }
+            catch (Exception ex)
+            { }
+            return null;
+        }
+
+
         public T Delete<T>(long Id) where T : class
         {
             //lock (objLock)
