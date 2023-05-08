@@ -257,24 +257,12 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Las áreas de almacenamiento se mantienen limpias y ordenadas?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
-                        new ContenidoPreguntas(){
                         Titulo = "Las instalaciones eléctricas están diseñadas y ubicadas de tal forma que facilitan la limpieza? ",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados? ¿Formatos de registros?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Para las materias primas y productos que requieren condiciones especiales de enfriamiento, existe cámara fría? ¿Formatos de registros?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Existe un sistema de alerta que indique los desvíos de la temperatura programada en la cámara fría?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                        Titulo = "Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Están protegidas de las condiciones ambientales las áreas de recepción y despacho? ",
@@ -282,7 +270,7 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe un área de despacho de producto terminado? ",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, },
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Las áreas donde se almacenan materiales y productos sometidos a cuarentena están claramente definidas y marcadas, el acceso a las mismas está limitado sólo al personal autorizado?",
@@ -290,36 +278,16 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El muestreo de materia prima se efectúa en área separada o en el área de pesaje o dispensado? ",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "El área de muestreo cumple con las siguientes características:",
-                        IsHeader = true,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "a) Las paredes, pisos y techos son lisos y con curvas sanitarias.",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "b) Existen controles de limpieza, temperatura y humedad relativa dentro del área.",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "c) La iluminación es suficiente para el desempeño del proceso.",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "d) El sistema de aire es independiente",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, },
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Se utilizan materias primas psicotrópicas o estupefacientes? ",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                   },
                         new ContenidoPreguntas(){
                         Titulo = "Existen áreas separadas, bajo llave, de acceso restringido e identificadas para almacenar materias primas y productos psicotrópicos y estupefacientes?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
+                       LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                     },
                         new ContenidoPreguntas(){
                         Titulo = "Cuenta el laboratorio con áreas de almacenamiento separadas para productos rechazados, retirados y devueltos?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
@@ -329,20 +297,16 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existen procedimientos escritos para identificar, separar, retirar y destruir los productos rechazados, retirados, vencidos y devueltos? ¿Formatos de registros?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
-                        new ContenidoPreguntas(){
                         Titulo = "Existe un área separada y de acceso restringido para almacenar material impreso (etiquetas, estuches, insertos y envases impresos)? ",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, },
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Está identificada?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
-                    },
+                       LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, },
+                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe un área para almacenamiento de productos inflamables y explosivos alejada de las otras instalaciones, es ventilada y cuenta con medidas de seguridad contra incendios o explosiones según la legislación nacional?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(), new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion() { HideEvaluacion = true }, },
                     },
              };
         }

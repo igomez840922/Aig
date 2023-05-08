@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aig.Auditoria2", "Aig.Audit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agi.API", "Agi.API\Agi.API.csproj", "{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignaturePad2", "SignaturePad\SignaturePad2.csproj", "{4477E9AA-B7E8-4305-AAEF-DDCCF0E25C98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4AFD586-2336-4849-8A76-D4CCE4F3E72B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4477E9AA-B7E8-4305-AAEF-DDCCF0E25C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4477E9AA-B7E8-4305-AAEF-DDCCF0E25C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4477E9AA-B7E8-4305-AAEF-DDCCF0E25C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4477E9AA-B7E8-4305-AAEF-DDCCF0E25C98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

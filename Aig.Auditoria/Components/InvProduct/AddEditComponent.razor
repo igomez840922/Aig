@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <label>@languageContainerService.Keys["ExpDate"]</label>
+                                <label>@languageContainerService.Keys["Vencimiento"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <RadzenDatePicker TValue="DateTime?" @bind-Value="Product.FechaVencimiento" ShowTime="false" DateFormat="dd/MM/yyyy" />
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <label>@languageContainerService.Keys["Existencia Física"]</label>
+                                <label>@languageContainerService.Keys["Inventario Realizado"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <InputText class="form-control" @bind-Value="Product.Existencia" />
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <label>
-                                    @languageContainerService.Keys["Registro en Libro o Sistema"]
+                                    @languageContainerService.Keys["Cant. Registrada en Libro o Sistema"]
                                 </label>
                                 <div class="form-group">
                                     <div class="form-line">

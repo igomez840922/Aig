@@ -58,6 +58,23 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Status"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputSelect @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
+                                                                @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
+                                                                {
+                                                                    if (dt != enum_StatusInspecciones.None)
+                                                                    {
+                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                    }
+                                                                }
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Inspeccion.StatusInspecciones) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               @* <div class="col-sm-4">
                                                     <label for="password">@languageContainerService.Keys["Se reprograma inspección al Establecimiento"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
@@ -68,7 +85,7 @@
                                                             <ValidationMessage For=@(() => Inspeccion.DatosConclusiones.ReprogramaInspeccion) />
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>*@
                                                 <div class="col-sm-12">
                                                     <label>@languageContainerService.Keys["Inconformidades o desviaciones detectadas"]</label>
                                                     <div class="form-group">

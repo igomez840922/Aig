@@ -81,9 +81,9 @@ namespace Aig.Auditoria.Components.Inspections._10_AperturaFabCosmetico
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-                if(Inspeccion.InspAperFabricanteCosmetMed.EstructuraOrganizativa == null)
+                if(Inspeccion.InspAperFabricanteCosmetMed.Documantacion == null)
                 {
-                    Inspeccion.InspAperFabricanteCosmetMed.Inicializa_EstructuraOrganizativa();
+                    Inspeccion.InspAperFabricanteCosmetMed.Inicializa_Documantacion();
                 }                
             }
             else { Cancel(); }

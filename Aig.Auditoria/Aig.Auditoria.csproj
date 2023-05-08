@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\js\Mobsites.Blazor.Mobsites.Blazor.SignaturePad\**" />
+    <Content Remove="wwwroot\assets\js\Mobsites.Blazor.Mobsites.Blazor.SignaturePad\**" />
+    <EmbeddedResource Remove="wwwroot\assets\js\Mobsites.Blazor.Mobsites.Blazor.SignaturePad\**" />
+    <None Remove="wwwroot\assets\js\Mobsites.Blazor.Mobsites.Blazor.SignaturePad\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Components\Inspections\AddEditProductComponent.razor" />
     <Content Remove="Resources\paises.json" />
     <Content Remove="Resources\provincias.json" />
@@ -221,7 +228,6 @@
     <None Include="wwwroot\assets\js\jquery-validation\js\localization\methods_pt.js" />
     <None Include="wwwroot\assets\js\jquery-validation\js\localization\methods_pt.min.js" />
     <None Include="wwwroot\assets\js\jquery-validation\README.md" />
-    <None Include="wwwroot\assets\js\Mobsites.Blazor.SignaturePad\bundle.js" />
     <None Include="wwwroot\assets\js\pages\builder.js" />
     <None Include="wwwroot\assets\js\pages\components\base\dropdown.js" />
     <None Include="wwwroot\assets\js\pages\components\calendar\background-events.js" />
@@ -1784,6 +1790,7 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\DataBindable\DataBindable.csproj" />
     <ProjectReference Include="..\DataModel\DataModel.csproj" />
+    <ProjectReference Include="..\SignaturePad\SignaturePad2.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -1801,6 +1808,14 @@
     </Content>
     <Content Update="Components\Inspections\16_AperturaFabCosmeticoArtesanal\Cap03.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="wwwroot\assets\js\Mobsites.Blazor.SignaturePad\bundle.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\assets\js\Mobsites.Blazor.SignaturePad\bundle.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
 

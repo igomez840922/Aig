@@ -1,0 +1,76 @@
+﻿
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    Firma
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                    <EditForm OnValidSubmit="SaveData" Model="@signatureModel">
+                                            <DataAnnotationsValidator />   
+                                            <div class="row clearfix">
+
+                                            <div class="col-sm-8">
+                                                <label for="password">@languageContainerService.Keys["Plasmar Firma"]</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <SignaturePad2 @bind-Value="signatureModel.signatureArray" />
+                                                        <ValidationMessage For=@(() => signatureModel.signatureArray) />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                           @* <SignaturePad2 @bind-Value="signatureModel.signatureArray" />*@
+
+                                          </div>
+
+
+                                            <br><br>
+
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+                                                    
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cancelar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

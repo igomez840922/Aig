@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Version></Version>
+		<Description>A simple to use blazor component to draw a signature.</Description>
+		<Copyright>2023</Copyright>
+		<RepositoryUrl>https://github.com/MarvinKlein1508/SignaturePad</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>unterschrift, signature</PackageTags>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>SignaturePad2</Title>
+		<PackageId>Blazor.$(AssemblyName)</PackageId>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
+	</ItemGroup>
+
+</Project>

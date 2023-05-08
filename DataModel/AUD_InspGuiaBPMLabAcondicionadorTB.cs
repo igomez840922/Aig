@@ -137,21 +137,20 @@ namespace DataModel
                         IsHeader = true,
                     },new ContenidoPreguntas()
                         {
-                            Titulo = "El laboratorio fabricante posee permiso sanitario de funcionamiento o licencia sanitaria, autorizada por la autoridad reguladora del país.",
+                            Titulo = "El laboratorio Acondicionador posee permiso sanitario de funcionamiento o licencia \r\nsanitaria, autorizada por la autoridad reguladora del país.",
                             Criterio = "CRÍTICO",
-                            Capitulo="6.1",
                             Articulo="6.1.1",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         },
                     new ContenidoPreguntas()
                         {
-                            Titulo = "El permiso sanitario de funcionamiento o licencia de operación se encuentra vigente",
+                            Titulo = "El permiso sanitario de funcionamiento o licencia de operación se encuentra vigente.",
                             Criterio = "CRÍTICO",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         },
                     new ContenidoPreguntas()
                         {
-                            Titulo = "El permiso sanitario de funcionamiento o licencia de operación se encuentra colocado en un lugar visible al público",
+                            Titulo = "El permiso sanitario de funcionamiento o licencia de operación se encuentra colocado en un lugar visible al público.",
                             Criterio = "MENOR",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         }
@@ -173,61 +172,51 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Compra local?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Es importador?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Exigen certificado de análisis de del fabricante?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Se encuentran disponibles los certificados de análisis?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Es importador de:",
-                        Criterio = "Informativo",
                         IsHeader = true,
                     },
                     new ContenidoPreguntas()
                         {
                             Titulo = "¿Producto terminado?",
-                            Criterio = "Informativo",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         },
                     new ContenidoPreguntas()
                         {
                             Titulo = "¿Producto semielaborado?",
-                            Criterio = "Informativo",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         },
                     new ContenidoPreguntas()
                         {
                             Titulo = "¿Producto a granel?",
-                            Criterio = "Informativo",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         },
                     new ContenidoPreguntas()
                         {
                             Titulo = "¿Exigen certificado de análisis del fabricante?",
-                            Criterio = "Informativo",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         },
                     new ContenidoPreguntas()
                         {
                             Titulo = "¿Se encuentran disponibles los certificados de análisis?",
-                            Criterio = "Informativo",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                         }
                 }
@@ -248,51 +237,36 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Medicamentos Humanos?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Medicamentos Veterinarios?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Medicamentos Cosméticos?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Productos Naturales?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Productos Homeopáticos?",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Otros indiquen",
-                        Criterio = "Informativo",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Acondicionan y analizan productos a terceros?",
-                        Criterio = "CRÍTICO",
-                        //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
-                    },
-                    new ContenidoPreguntas()
-                    {
-                        Titulo = "¿Cuáles y de qué empresa(s)?. Anexar Listado ",
-                        Criterio = "CRÍTICO",
-                        //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}                        
+                        Titulo = "¿Acondicionan y analizan productos a terceros?\r\n¿Cuáles y de qué empresa(s)?. Anexar Listado",
                         IsHeader = true,
                     },
                     new ContenidoPreguntas()
@@ -321,17 +295,13 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "ORGANIZACIÓN",
-
                         Capitulo="7.1",
-
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Tiene el laboratorio fabricante organigramas generales y específicos de cada uno de los departamentos, se encuentran actualizados y aprobados? ",
+                        Titulo = "¿Tiene el laboratorio acondicionador los organigramas generales y específicos de cada uno de los departamentos, se encuentran actualizados y aprobados? ",
                         Criterio = "MAYOR",
-
                         Articulo="7.1.1",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -339,15 +309,12 @@ namespace DataModel
                     {
                         Titulo = "¿Existe independencia de responsabilidades entre producción y control de la calidad?",
                         Criterio = "CRÍTICO",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Cuenta con descripciones escritas de las funciones y responsabilidades de cada puesto incluido en el organigrama?",
                         Criterio = "MAYOR",
-
                         Articulo="7.1.2",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -355,40 +322,31 @@ namespace DataModel
                     {
                         Titulo = "¿Dispone de un Director técnico / Regente Farmacéutico? ",
                         Criterio = "CRÍTICO",
-
                         Articulo="7.1.3",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿El director técnico del establecimiento cumple con el horario de funcionamiento del laboratorio fabricante?",
+                        Titulo = "¿El director técnico del establecimiento cumple con el horario de funcionamiento del laboratorio acondicionador?",
                         Criterio = "MENOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿En caso de jornadas continuas o extraordinarias el Director técnico / Regente garantiza los mecanismos de supervisión de acuerdo a la Legislación de cada Estado Parte?",
                         Criterio = "MAYOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Participa en las inspecciones realizadas?",
                         Criterio = "MENOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Existe registro?",
                         Criterio = "MENOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -399,7 +357,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Dispone el laboratorio fabricante de personal con la calificación y experiencia práctica según el puesto asignado?",
+                        Titulo = "¿Dispone el laboratorio acondicionador de personal con la calificación y experiencia práctica según el puesto asignado?",
                         Criterio = "MAYOR",
                         Articulo="7.2.1, 7.2.3",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -431,19 +389,19 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "a) Asegura que los productos se elaboren y almacenen en concordancia con la documentación aprobada",
+                        Titulo = "a) Asegura que los productos se acondicionan y almacenen en concordancia con la documentación aprobada",
                         Criterio = "MAYOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "b) Aprueba los documentos maestros relacionados con las operaciones de producción incluyendo los controles durante el proceso y asegurar su estricto cumplimiento",
+                        Titulo = "b) Aprueba los documentos maestros relacionados con las operaciones de acondicionamiento incluyendo los controles durante el proceso y asegurar su estricto cumplimiento",
                         Criterio = "MAYOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "c) Garantiza que la orden de producción esté completa y firmada por las personas designadas antes de que se pongan a disposición del Depto. de Control de Calidad",
+                        Titulo = "c) Garantiza que la orden de acondicionamiento esté completa y firmada por las personas designadas antes de que se pongan a disposición del Depto. de Control de Calidad",
                         Criterio = "MAYOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -461,13 +419,13 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "f) Autoriza los procedimientos del Departamento de producción, y verifica que se cumplan dejando constancia escrita",
+                        Titulo = "f) Autoriza los procedimientos del Departamento de producción (Acondicionamiento), y verifica que se cumplan dejando constancia escrita",
                         Criterio = "MAYOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "g) Asegura que se lleve a cabo la capacitación inicial y continua del personal de producción y que dicha capacitación se adapte a las necesidades del departamento",
+                        Titulo = "g) Asegura que se lleve a cabo la capacitación inicial y continua del personal de producción (Acondicionamiento) y que dicha capacitación se adapte a las necesidades del departamento",
                         Criterio = "MAYOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -485,7 +443,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "b) Verifica que toda la documentación de un lote de producto terminado esté completa",
+                        Titulo = "b) Verifica que toda la documentación del acondicionamiento de un producto terminado esté completa.",
                         Criterio = "MAYOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -611,7 +569,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Cuentan con un procedimiento escrito de inducción general de buenas prácticas de manufactura para el personal de nuevo ingreso y es específica de acuerdo a sus funciones y atribuciones asignadas?",
+                        Titulo = "¿Cuentan con procedimiento escrito de inducción general de buenas prácticas de manufactura (acondicionamiento) para el personal de nuevo ingreso y es específica de acuerdo con sus funciones y atribuciones asignadas?",
                         Criterio = "MAYOR",
                         Articulo="7.4.1",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -657,7 +615,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Existe un procedimiento escrito para el ingreso de personas ajenas a las áreas de producción y control de calidad?",
+                        Titulo = "¿Existe un procedimiento escrito para el ingreso de personas ajenas a las áreas de acondicionamiento y control de calidad?",
                         Criterio = "MAYOR",
                         Articulo="7.4.6",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -689,7 +647,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Existe un procedimiento escrito en donde el personal enfermo comunique de inmediato a su superior, cualquier estado de salud que influya negativamente en la producción?",
+                        Titulo = "¿Existe un procedimiento escrito en donde el personal enfermo comunique de inmediato a su superior, cualquier estado de salud que influya negativamente en la producción (Acondicionamiento)?",
                         Criterio = "MAYOR",
                         Articulo="7.5.3",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -702,7 +660,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Existen procedimientos relacionados con la higiene del personal incluyendo el uso de ropas protectoras, que incluyan a todas las personas que ingresan a las áreas de producción?",
+                        Titulo = "¿Existen procedimientos relacionados con la higiene del personal incluyendo el uso de ropas protectoras, que incluyan a todas las personas que ingresan a las áreas de acondicionamiento?",
                         Criterio = "MAYOR",
                         Articulo="7.5.4",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -722,22 +680,22 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Gorro que cubra la totalidad del cabello",
+                        Titulo = "- Gorro que cubra la totalidad del cabello",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Mascarilla",
+                        Titulo = "- Mascarilla",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Guantes desechables",
+                        Titulo = "- Guantes desechables",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Zapatos de superficie lisa, cerrados y suela antideslizante",
+                        Titulo = "- Zapatos de superficie lisa, cerrados y suela antideslizante",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -748,7 +706,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "En las áreas de producción, almacenamiento y control de calidad existe la prohibición de:",
+                        Titulo = "En las áreas de acondicionamiento, almacenamiento y control de calidad existe la prohibición de:",
                         Articulo="7.5.6",
                         IsHeader = true,
                     },
@@ -766,7 +724,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Llevar barba o bigote al descubierto durante la jornada de trabajo en los procesos acondicionamiento",
+                        Titulo = "Llevar barba o bigote al descubierto durante la jornada de trabajo en los procesos Acondicionamiento",
                         Criterio = "CRÍTICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -907,14 +865,14 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Los equipos y materiales están ubicados de forma que eviten el riesgo de confusión, contaminación cruzada y omisión entre los distintos productos y sus componentes en cualquiera de las operaciones de producción, control y almacenamiento?",
+                        Titulo = "¿Los equipos y materiales están ubicados de forma que eviten el riesgo de confusión, contaminación cruzada y omisión entre los distintos productos y sus componentes en cualquiera de las operaciones de producción (Acondicionamiento), control y almacenamiento?",
                         Criterio = "CRÍTICO",
                         Articulo="8.1.10",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Son las áreas de almacenamiento y producción (Acondicionamiento)exclusivas para el uso previsto y se mantienen libres de objetos y materiales extraños al proceso?",
+                        Titulo = "¿Son las áreas de almacenamiento y producción (Acondicionamiento) exclusivas para el uso previsto y se mantienen libres de objetos y materiales extraños al proceso?",
                         Criterio = "MAYOR",
                         Articulo="8.1.11",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -1187,7 +1145,6 @@ namespace DataModel
                     {
                         Titulo = "¿El laboratorio cuenta con áreas de tamaño, diseño y servicios (aire comprimido, agua, luz, ventilación, etc.) para efectuar los procesos de acondicionamiento que corresponden?",
                         Criterio = "INFORMATIVO",
-                        Capitulo="8.4",
                         Articulo="8.4.1",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -1450,15 +1407,12 @@ namespace DataModel
                     {
                         Titulo = "El laboratorio de control de calidad tiene las siguientes condiciones:",
                         Articulo="8.6.2",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader = true,
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Está diseñado de acuerdo a las operaciones que se realizan?",
                         Criterio = "MAYOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -1612,7 +1566,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Cuentan con un comedor separado de las demás áreas productivas e identificada, en buenas condiciones de orden y limpieza? ",
+                        Titulo = "¿Cuentan con un comedor separado de las demás áreas de acondicionamiento e identificada, en buenas condiciones de orden y limpieza? ",
                         Criterio = "MAYOR",
 
                         Articulo="8.7.2",
@@ -1808,8 +1762,6 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Se identifican todos los equipos limpios con una etiqueta que indique la siguiente información:",
-
-
                         Articulo="9.1.5",
                         IsHeader=true,
                     },
@@ -2124,15 +2076,11 @@ namespace DataModel
                     {
                         Titulo = "a) Nombre y código del material.",
 
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Número de ingreso.",
-
-
 
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -2140,22 +2088,17 @@ namespace DataModel
                     {
                         Titulo = "c) Situación del material.",
 
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Nombre del proveedor.",
 
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "MATERIALES DE ACONDICIONAMIENTO",
-
                         Capitulo="10.3",
                         IsHeader = true,
                     },
@@ -2505,7 +2448,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Están las especificaciones, fórmulas, métodos e instrucciones de fabricación y procedimientos en forma impresa, debidamente revisadas y aprobadas?",
+                        Titulo = "¿Están las especificaciones, fórmulas, métodos e instrucciones de acondicionamiento y procedimientos en forma impresa, debidamente revisadas y aprobadas?",
                         Criterio = "CRÍTICO",
 
                         Articulo="11.1.1",
@@ -3034,7 +2977,7 @@ namespace DataModel
                     //},
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿La orden de producción correspondiente a un lote, ¿es emitida por el departamento asignado para este fin? ",
+                        Titulo = "¿La orden de acondicionamiento correspondiente a un lote, ¿es emitida por el departamento asignado para este fin? ",
                         Criterio = "MAYOR",
 
                         Articulo="11.2.7",
@@ -3390,7 +3333,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Control de calidad o garantía de calidad revisan, aprueban y verifican todos los registros de producción y control de cada lote terminado, así comolos procedimientos escritos?",
+                        Titulo = "¿Control de calidad o garantía de calidad revisan, aprueban y verifican todos los registros de acondicionamiento y control de cada lote terminado, así comolos procedimientos escritos?",
                         Criterio = "MAYOR",
 
                         Articulo="11.3.3, 11.3.2",
@@ -3430,7 +3373,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Se recopila toda la documentación involucrada en la producción de un lote de producto terminado (orden de producción, orden de envasado y empaque, etiquetas, muestras del material de empaque codificado)?",
+                        Titulo = "¿Se recopila toda la documentación involucrada en el acondicionamiento de producto (orden de acondicionamiento, orden de envasado (si aplica) y empaque, etiquetas, muestras del material de empaque codificado)",
                         Criterio = "MAYOR",
 
 
@@ -3446,7 +3389,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Se lleva registro correlativo/ secuencial y rastreable de cada producción?",
+                        Titulo = "¿Se lleva registro correlativo/ secuencial y rastreable de cada acondicionamiento?",
                         Criterio = "CRÍTICO",
 
 
@@ -3760,7 +3703,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Las áreas y los equipos son destinados únicamente para la producción de medicamentos?",
+                        Titulo = "¿Las áreas y los equipos son destinados únicamente para el acondicionamiento de medicamentos?",
                         Criterio = "MAYOR",
 
                         Articulo="12.1.9",
@@ -3775,7 +3718,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Existen procedimientos escritos que indiquen medidas preventivas para evitar la contaminación cruzada en todas las fases de producción, los productos y materiales?",
+                        Titulo = "¿Existen procedimientos escritos que indiquen medidas preventivas para evitar la contaminación cruzada en todas las fases de acondicionamiento, los productos y materiales?",
                         Criterio = "MAYOR",
 
                         Articulo="12.2.1",
@@ -3881,7 +3824,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Antes de iniciar las operaciones de acondicionamiento, ¿se realiza el despeje del área, se verifica que los equipos estén limpios y libres de materiales, productos y documentos de una operación anterior y cualquier otro material extraño al proceso de producción?",
+                        Titulo = "Antes de iniciar las operaciones de acondicionamiento, ¿se realiza el despeje del área, se verifica que los equipos estén limpios y libres de materiales, productos y documentos de una operación anterior y cualquier otro material extraño al proceso de acondicionamiento?",
                         Criterio = "CRÍTICO",
 
                         Articulo="12.3.1",
@@ -4161,7 +4104,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Las muestras tomadas de la línea de envasado y empaque para análisis, se descartan después de ser analizadas? ",
+                        Titulo = "¿Las muestras tomadas de la línea de envasado y empaque para análisis, se descartan después de ser analizadas? En caso de acondicionamiento primario.",
                         Criterio = "MAYOR",
 
                         Articulo="12.3.8",
@@ -4332,42 +4275,26 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "a) ¿Los medicamentos se diseñan y desarrollan de forma que se tenga en cuenta lo requerido por las buenas prácticas de manufactura?",
-                        Criterio = "CRÍTICO",
-
-
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas()
-                    {
                         Titulo = "¿Se disponen de protocolos y registros de todos los productos de manera que se verifica, que cada lote (para empaque primario) de producto es acondicionado y controlado correctamente de acuerdo con los procedimientos definidos?",
                         Criterio = "MAYOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Si en la revisión de los registros de acondicionamiento se detectan desvíos de los procedimientos establecidos, ¿garantía de calidad es responsable de asegurar su completa investigación y que las conclusiones finales estén justificadas?",
+                        Titulo = "Si en la revisión de los registros de acondicionamiento se detectan desvíos de los procedimientos establecidos, ¿garantía de calidad es responsable de asegurar su completa investigación y que las conclusiones estén justificadas?",
                         Criterio = "MAYOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Se mantienen documentos originales de todos los procedimientos y registros de distribución de las copias autorizadas?",
                         Criterio = "MAYOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "b) ¿Estén claras las especificaciones de las operaciones de producción y control?",
+                        Titulo = "b) ¿Estén claras las especificaciones de las operaciones de acondicionamiento y control?",
                         Criterio = "MAYOR",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
@@ -4519,7 +4446,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿El laboratorio fabricante cuenta con una unidad de control de calidad?",
+                        Titulo = "¿El laboratorio acondicionador cuenta con una unidad de control de calidad?",
                         Criterio = "CRÍTICO",
 
                         Articulo="14.1.2",
@@ -4648,7 +4575,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Cada lote de producto terminado es aprobado por la persona responsable, previa evaluación de las especificaciones establecidas, incluyendo las condiciones de producción, análisis en proceso y la documentación para su aprobación final?",
+                        Titulo = "¿Cada lote (empaque primario) de producto acondicionado es aprobado por la persona responsable, previa evaluación de las especificaciones \r\nestablecidas, incluyendo las condiciones de acondicionamiento y la documentación para su aprobación final?n",
                         Criterio = "CRÍTICO",
 
                         Articulo="14.1.5",
@@ -4656,7 +4583,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Hay personal con responsabilidad asignada y destinado a inspeccionar los procesos de producción (propios y de terceros)?",
+                        Titulo = "¿Hay personal con responsabilidad asignada y destinado a inspeccionar los procesos de acondicionamiento (propios y de terceros)?",
                         Criterio = "MAYOR",
 
 
@@ -4688,7 +4615,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Tiene acceso el personal de control de calidad a las áreas de producción con fines de muestreo, inspección e investigación?",
+                        Titulo = "¿Tiene acceso el personal de control de calidad a las áreas de acondicionamiento con fines de muestreo, inspección e investigación?",
                         Criterio = "MAYOR",
 
                         Articulo="14.1.7",
@@ -4834,7 +4761,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "f) ¿Existen registro de los resultados de las condiciones ambientales de las áreas de producción? Cuando aplique",
+                        Titulo = "f) ¿Existen registro de los resultados de las condiciones ambientales de las áreas de acondicionamiento? Cuando aplique",
                         Criterio = "MAYOR",
 
 
@@ -4946,7 +4873,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Control de calidad conserva toda la documentación relativa a un lote según la legislación de cada país?",
+                        Titulo = "¿¿Control de calidad conserva toda la documentación relativa a los lotes acondicionados según la legislación de cada país?",
                         Criterio = "MAYOR",
 
                         Articulo="14.2.2",
@@ -5005,7 +4932,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "c) La cantidad de muestra que debe recolectarse",
+                        Titulo = "c)  La cantidad de muestra de producto acondicionado",
                         Criterio = "MAYOR",
 
 
@@ -5072,7 +4999,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿El laboratorio fabricante realiza actividades de producción o análisis a terceros?",
+                        Titulo = "¿El laboratorio fabricante realiza actividades de acondicionamiento a terceros?",
                         Criterio = "INFORMATIVO",
 
                         Articulo="15.1.1",
@@ -5096,7 +5023,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿El contrato a terceros para la producción o análisis está debidamente legalizado, definido y de mutuo consentimiento?",
+                        Titulo = "¿El contrato a terceros para el acondicionamiento está debidamente\r\nlegalizado, definido y de mutuo consentimiento?",
                         Criterio = "MAYOR",
 
                         Articulo="15.1.2",
@@ -5105,7 +5032,6 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "El contrato estipula las obligaciones de cada una de las partes con relación a: ",
-                        Criterio = "MAYOR",
 
                         Articulo="15.1.3",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -5304,16 +5230,13 @@ namespace DataModel
 
                         Capitulo="15.2",
 
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Ha verificado el contratante que el contratista (contratado):",
-                        Criterio = "MAYOR",
 
                         Articulo="15.2.1",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },
                     new ContenidoPreguntas()
@@ -5362,7 +5285,6 @@ namespace DataModel
 
                         Capitulo="15.3",
 
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },
                     new ContenidoPreguntas()
@@ -5371,7 +5293,6 @@ namespace DataModel
 
 
                         Articulo="15.3.1",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },
                     new ContenidoPreguntas()
@@ -5677,9 +5598,6 @@ namespace DataModel
                     {
                         Titulo = "Se realizan y documentan las calificaciones y validaciones de:",
 
-
-
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },
                     new ContenidoPreguntas()
@@ -5720,12 +5638,11 @@ namespace DataModel
 
                         Capitulo="16.6",
 
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Se valida toda modificación importante del proceso de fabricación, incluyendo cualquier cambio en equipos, áreas de acondicionamiento y materiales?",
+                        Titulo = "¿Se valida toda modificación importante del proceso de acondicionamientoa, incluyendo cualquier cambio en equipos, áreas de acondicionamiento y materiales?",
                         Criterio = "MAYOR",
 
                         Articulo="16.6",
@@ -5750,10 +5667,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "REVALIDACIÓN",
-
                         Capitulo="16.7",
-
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         IsHeader=true,
                     },
                     new ContenidoPreguntas()
@@ -5951,7 +5865,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Se evalúan otros lotes relacionados con el producto al cual se refiere la queja o reclamo, se indica en el procedimiento escrito?",
+                        Titulo = "¿Se evalúan otros lotes relacionados con el producto acondicionado al cual se refiere la queja o reclamo, se indica en el procedimiento escrito?",
                         Criterio = "MAYOR",
 
                         Articulo="17.2.3",
@@ -6007,7 +5921,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "RETIROS",
+                        Titulo = "RETIROS (en caso de que aplique para el laboratorio acondicionador)",
 
                         Capitulo="17.3",
 
@@ -6016,7 +5930,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Está definido en sus procedimientos que la orden de retiro de un producto del mercado es una decisión del mismo laboratorio o de la Autoridad Reguladora?",
+                        Titulo = "¿Está definido en sus procedimientos que la orden de retiro de un producto del mercado es una decisión del mismo laboratorio acondicionador o de la Autoridad Reguladora?",
                         Criterio = "MAYOR",
 
                         Articulo="17.3.1",
@@ -6121,7 +6035,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Realiza el laboratorio fabricante autoinspecciones y auditorías periódicas?",
+                        Titulo = "¿Realiza el laboratorio acondicionador autoinspecciones y auditorías periódicas?",
                         Criterio = "CRÍTICO",
 
                         Articulo="18.1.1",
@@ -6129,7 +6043,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Tiene el laboratorio fabricante un procedimiento y programa de autoinspecciones que contempla todos los aspectos de las buenas prácticas de manufactura (acondicionamiento)?",
+                        Titulo = "¿Tiene el laboratorio acondicionador un procedimiento y programa de autoinspecciones que contempla todos los aspectos de las buenas prácticas de manufactura (acondicionamiento)?",
                         Criterio = "CRÍTICO",
 
                         Articulo="18.1.2",
@@ -6305,7 +6219,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "¿Tiene el laboratorio un procedimiento escrito para realizar las auditorías de calidad? ",
+                        Titulo = "¿Tiene el laboratorio acondicionador un procedimiento escrito para realizar las auditorías de calidad? ",
                         Criterio = "MAYOR",
 
                         Articulo="18.2.3",

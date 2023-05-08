@@ -28,15 +28,15 @@ namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
         bool exit { get; set; } = false;
 
         bool showSignasure { get; set; } = false;
-        List<SignaturePad> lSignaturePads { get; set; } = new List<SignaturePad>();
-        SignaturePad signaturePad
+        List<Mobsites.Blazor.SignaturePad> lSignaturePads { get; set; } = new List<Mobsites.Blazor.SignaturePad>();
+        Mobsites.Blazor.SignaturePad SignaturePad
         {
             get { return null; }
             set { lSignaturePads.Add(value); }
         }
-        SignaturePad signaturePad5;
-        SignaturePad signaturePad6;
-        SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = SignaturePad.SupportedSaveAsTypes.png;
+        Mobsites.Blazor.SignaturePad SignaturePad5;
+        Mobsites.Blazor.SignaturePad SignaturePad6;
+        Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes.png;
 
 
         protected async override Task OnInitializedAsync()
@@ -138,10 +138,10 @@ namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
         {
             await Task.Delay(2000);
 
-            if(signaturePad5!=null)
-                signaturePad5.Image = Inspeccion.InspGuiaBPM_Bpa?.DatosRepresentLegal?.Firma??null;
-            if (signaturePad6 != null)
-                signaturePad6.Image = Inspeccion.InspGuiaBPM_Bpa?.DatosRegente?.Firma ?? null;
+            if(SignaturePad5!=null)
+                SignaturePad5.Image = Inspeccion.InspGuiaBPM_Bpa?.DatosRepresentLegal?.Firma??null;
+            if (SignaturePad6 != null)
+                SignaturePad6.Image = Inspeccion.InspGuiaBPM_Bpa?.DatosRegente?.Firma ?? null;
 
             if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
             {
@@ -163,28 +163,28 @@ namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
             RemoveSignatureImg5();
             if (eventArgs?.Value != null)
             {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+                var signatureType = (Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Firma = await signaturePad5.ToDataURL(signatureType);
+            Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Firma = await SignaturePad5.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg5()
         {
             Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Firma = null;
-            signaturePad5.Image = null;
+            SignaturePad5.Image = null;
         }
         protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
         {
             RemoveSignatureImg6();
             if (eventArgs?.Value != null)
             {
-                var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+                var signatureType = (Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
             }
-            Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Firma = await signaturePad6.ToDataURL(signatureType);
+            Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Firma = await SignaturePad6.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg6()
         {
             Inspeccion.InspGuiaBPM_Bpa.DatosRegente.Firma = null;
-            signaturePad6.Image = null;
+            SignaturePad6.Image = null;
         }
 
         ////////
@@ -192,14 +192,14 @@ namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
         protected async Task OnSignatureChange(Participante _participante)
         {
             await RemoveSignatureImg(_participante);
-            var _signaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
-            _participante.Firma = await _signaturePad.ToDataURL(signatureType);
+            var _SignaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
+            _participante.Firma = await _SignaturePad.ToDataURL(signatureType);
         }
         protected async Task RemoveSignatureImg(Participante _participante)
         {
             _participante.Firma = null;
-            var _signaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
-            _signaturePad.Image = null;
+            var _SignaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
+            _SignaturePad.Image = null;
         }
 
     }

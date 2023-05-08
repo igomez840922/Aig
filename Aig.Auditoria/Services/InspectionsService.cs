@@ -511,6 +511,7 @@ namespace Aig.Auditoria.Services
             var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
 
             data.DatosConclusiones = inspeccion.DatosConclusiones;
+            data.StatusInspecciones = inspeccion.StatusInspecciones;
 
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
@@ -2985,7 +2986,7 @@ namespace Aig.Auditoria.Services
             var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
 
             data.InspAperFabricanteCosmetMed.Almacenes = inspeccion.InspAperFabricanteCosmetMed.Almacenes;
-            data.InspAperFabricanteCosmetMed.Almacenes2 = inspeccion.InspAperFabricanteCosmetMed.Almacenes2;
+            //data.InspAperFabricanteCosmetMed.Almacenes2 = inspeccion.InspAperFabricanteCosmetMed.Almacenes2;
 
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
@@ -3001,7 +3002,7 @@ namespace Aig.Auditoria.Services
                 if (result.InspAperFabricanteCosmetMed != null)
                 {
                     DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Almacenes).IsModified = true;
-                    DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Almacenes2).IsModified = true;
+                    //DalService.DBContext.Entry(result.InspAperFabricanteCosmetMed).Property(b => b.Almacenes2).IsModified = true;
                 }
 
                 DalService.DBContext.SaveChanges();

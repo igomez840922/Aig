@@ -85,9 +85,6 @@ namespace Aig.Auditoria.Components.Inspections._10_AperturaFabCosmetico
                 {
                     Inspeccion.InspAperFabricanteCosmetMed.Inicializa_Almacenes();
                 }
-                if (Inspeccion.InspAperFabricanteCosmetMed.Almacenes2 == null) {
-                    Inspeccion.InspAperFabricanteCosmetMed.Inicializa_Almacenes2();
-                }
             }
             else { Cancel(); }
 

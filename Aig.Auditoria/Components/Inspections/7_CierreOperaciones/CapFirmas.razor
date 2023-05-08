@@ -39,7 +39,7 @@
 
                                             <div class="row clearfix">
 
-                                                @if (Inspeccion?.InspCierreOperacion?.DatosRepresentLegal != null)
+                                                @*@if (Inspeccion?.InspCierreOperacion?.DatosRepresentLegal != null)
                                                 {
                                                     <div class="col-sm-6">
                                                         <h5>@languageContainerService.Keys["Por el Establecimiento"]</h5>
@@ -75,14 +75,14 @@
                                                                 <label>@languageContainerService.Keys["Signature"]</label>
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <SignaturePad @ref="signaturePad5" OnSignatureChange="OnSignatureChange5"
+                                                                        <Mobsites.Blazor.SignaturePad @ref="SignaturePad5" OnSignatureChange="OnSignatureChange5"
                                                                               MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                                            <SignaturePadFooter>
-                                                                                <SignaturePadClear>
+                                                                            <Mobsites.Blazor.SignaturePadFooter>
+                                                                                <Mobsites.Blazor.SignaturePadClear>
                                                                                     <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
-                                                                                </SignaturePadClear>
-                                                                            </SignaturePadFooter>
-                                                                        </SignaturePad>
+                                                                                </Mobsites.Blazor.SignaturePadClear>
+                                                                            </Mobsites.Blazor.SignaturePadFooter>
+                                                                        </Mobsites.Blazor.SignaturePad>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -92,7 +92,7 @@
                                                     </div>
 
                                                 }
-
+*@
                                                 <div class="col-sm-12">
                                                     <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
                                                 </div>
@@ -137,14 +137,14 @@
                                                                     <label>@languageContainerService.Keys["Signature"]</label>
                                                                     <div class="form-group">
                                                                         <div class="form-line">
-                                                                            <SignaturePad @ref="signaturePad" OnSignatureChange="(e)=>{OnSignatureChange(dt);}"
+                                                                            <Mobsites.Blazor.SignaturePad @ref="SignaturePad" OnSignatureChange="(e)=>{OnSignatureChange(dt);}"
                                                                               MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                                                <SignaturePadFooter>
-                                                                                    <SignaturePadClear>
+                                                                                <Mobsites.Blazor.SignaturePadFooter>
+                                                                                    <Mobsites.Blazor.SignaturePadClear>
                                                                                         <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="(e)=>{RemoveSignatureImg(dt);}">@languageContainerService.Keys["Clear"]</button>
-                                                                                    </SignaturePadClear>
-                                                                                </SignaturePadFooter>
-                                                                            </SignaturePad>
+                                                                                    </Mobsites.Blazor.SignaturePadClear>
+                                                                                </Mobsites.Blazor.SignaturePadFooter>
+                                                                            </Mobsites.Blazor.SignaturePad>
                                                                         </div>
                                                                     </div>
                                                                 </div>

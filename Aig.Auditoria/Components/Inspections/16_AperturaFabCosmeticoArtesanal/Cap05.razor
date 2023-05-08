@@ -42,7 +42,6 @@
                                                         <table class="table rounded table-striped">
                                                             <thead class=thead-light>
                                                                 <tr>
-                                                                    <th width="5%">@languageContainerService.Keys["No."]</th>
                                                                     <th width="40%">@languageContainerService.Keys["Punto por evaluar"]</th>
                                                                     <th width="5%">@languageContainerService.Keys["Materia Prima"]</th>
                                                                     <th width="5%">@languageContainerService.Keys["Material de Acond."]</th>
@@ -56,13 +55,12 @@
                                                                         @if (dt.IsHeader)
                                                                         {
                                                                             <tr>
-                                                                                <th colspan="4">@dt.Titulo</th>
+                                                                                <th colspan="5">@dt.Titulo</th>
                                                                             </tr>
                                                                         }
                                                                         else
                                                                         {
                                                                             <tr>
-                                                                                <td>@dt.Numero</td>
                                                                                 <td>@dt.Titulo</td>
                                                                                 @foreach (var eva in dt.LEvaluacion)
                                                                                 {
@@ -88,8 +86,7 @@
                                                 </div>
                                             </div>
 
-
-                                            <br><br>
+                                            <br/>
 
                                             <div class="kt-portlet__foot" style="text-align:right;">
                                                 <div class="kt-form__actions">

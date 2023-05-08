@@ -33,7 +33,9 @@ namespace DataModel.Helper
         B = 10,
         [Description("Elaborador de Cosméticos Artesanales")]
         ECA = 11,
-	}
+        [Description("Estación de Medicamentos")]
+        EM = 12,
+    }
 
     public enum enumAUD_TipoActa //Tipo de Inspeccion
     {
@@ -137,6 +139,12 @@ namespace DataModel.Helper
         Vencido = 5, 
         [Description("Resolucion")]
         Resolucion = 6,
+        [Description("Apertura")]
+        Apertura = 7,
+        [Description("Cambio de Ubicación")]
+        CambioUbicacion = 8,
+        [Description("Aumento de Actividad")]
+        AumentoActividad = 9,
     }
 
     public enum enumAUD_ClasifEstablecimiento

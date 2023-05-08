@@ -69,7 +69,24 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @*<div class="col-sm-12">
+                                                <div class="col-sm-4">
+                                                    <label for="password">@languageContainerService.Keys["Status"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputSelect @bind-Value="Inspeccion.StatusInspecciones" class="form-control">
+                                                                @foreach (enum_StatusInspecciones dt in Enum.GetValues(typeof(enum_StatusInspecciones)))
+                                                                {
+                                                                    if (dt != enum_StatusInspecciones.None)
+                                                                    {
+                                                                        <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
+                                                                    }
+                                                                }
+                                                            </InputSelect>
+                                                            <ValidationMessage For=@(() => Inspeccion.StatusInspecciones) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
                                                     <label>@languageContainerService.Keys["Observaciones"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
@@ -77,7 +94,7 @@
                                                             <ValidationMessage For=@(() => Inspeccion.DatosConclusiones.ObservacionesFinales) />
                                                         </div>
                                                     </div>
-                                                </div>*@
+                                                </div>
                                             </div>
                                             <div class="row clearfix">
                                                 <div class="col-9" style="text-align:left;">

@@ -81,7 +81,6 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                    Numero = 1,
                 Titulo = "Áreas externas limpias, ordenadas y libres de materiales extraños",
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -282,49 +281,41 @@ namespace DataModel
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 35,
                     Titulo = "Hornilla",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 36,
                     Titulo = "Mechero",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 37,
                     Titulo = "Moldes",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 38,
                     Titulo = "Cristalería",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 39,
                     Titulo = "Ollas",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 40,
                     Titulo = "Cucharones, cucharas",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 41,
                     Titulo = "Otros",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
                 {
-                    Numero = 42,
                     Titulo = "Son de uso exclusivo de esta actividad",
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 }
@@ -349,19 +340,16 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Numero = 3,
                 Titulo = "Área protegida de las inclemencias   del tiempo",
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
             },
             new ContenidoPreguntas()
             {
-                Numero = 4,
                 Titulo = "Área para almacenar productos rechazados, retirados o devueltos",
                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
             },
             new ContenidoPreguntas()
             {
-                Numero = 5,
                 Titulo = "Área de almacenamiento para Etiquetas, material impreso",
                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
              },

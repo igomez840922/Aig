@@ -81,9 +81,9 @@ namespace Aig.Auditoria.Components.Inspections._10_AperturaFabCosmetico
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-                if(Inspeccion.InspAperFabricanteCosmetMed.Documantacion == null)
+                if(Inspeccion.InspAperFabricanteCosmetMed.AreasAuxiliares == null)
                 {
-                    Inspeccion.InspAperFabricanteCosmetMed.Inicializa_Documantacion();
+                    Inspeccion.InspAperFabricanteCosmetMed.Inicializa_AreasAuxiliares();
                 }                
             }
             else { Cancel(); }
@@ -96,7 +96,7 @@ namespace Aig.Auditoria.Components.Inspections._10_AperturaFabCosmetico
         {
             try
             {
-                var result = await inspeccionService.Save_AperFabricanteCosmeticosDesin_Cap7(Inspeccion);
+                var result = await inspeccionService.Save_AperFabricanteCosmeticosDesin_Cap8(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);

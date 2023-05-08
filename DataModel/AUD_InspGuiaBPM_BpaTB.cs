@@ -1086,21 +1086,23 @@ namespace DataModel
                         },
                     new ContenidoPreguntas()
                         {
-                           Numero=106,
-                            Titulo = "Las áreas de almacenamiento están dentro de los límites de temperatura y humedad relativa que estipula el laboratorio fabricante para los productos farmacéuticos. En caso afirmativo agregar dichos valores en las observaciones.",
+                            Numero=106,
+                            Titulo = "Las áreas de almacenamiento están dentro de los límites de temperatura y humedad relativa que estipula el laboratorio fabricante para los productos farmacéuticos.",
                             Criterio = "Crítico",
                             Capitulo="423",
                             Articulo="",
-                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                            Observaciones = string.Format("Temperatura:{0}\r\nHumedad Relativa:{1}\r\n","","")
                         },
                     new ContenidoPreguntas()
                         {
                            Numero=107,
-                            Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa. En caso afirmativo agregar dichos valores en las observaciones.",
+                            Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa.",
                             Criterio = "Mayor",
                             Capitulo="423",
                             Articulo="",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                            Observaciones = string.Format("Temperatura:{0}\r\nHumedad Relativa:{1}\r\n","","")
                         },
                     new ContenidoPreguntas()
                         {
@@ -1248,7 +1250,7 @@ namespace DataModel
                         },
                     new ContenidoPreguntas()
                         {
-                            Titulo = "2.5. Almacenamiento de Estupefacientes o psicotrópicos.  Cuando aplique. ",
+                            Titulo = "2.5. Almacenamiento de Estupefacientes o psicotrópicos. Cuando aplique. ",
                             Criterio = "",
                             Capitulo="",
                             Articulo="",

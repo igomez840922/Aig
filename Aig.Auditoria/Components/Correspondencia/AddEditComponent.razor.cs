@@ -36,8 +36,8 @@ namespace Aig.Auditoria.Components.Correspondencia
         [Parameter]
         public DataModel.AUD_CorrespondenciaTB Correspondencia { get; set; } = null;
 
-        SignaturePad signaturePad5;
-        SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = SignaturePad.SupportedSaveAsTypes.png;
+        Mobsites.Blazor.SignaturePad SignaturePad5;
+        Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes.png;
 
         System.Security.Claims.ClaimsPrincipal userClaims { get; set; } = null;
 
@@ -184,8 +184,8 @@ namespace Aig.Auditoria.Components.Correspondencia
         //protected async Task OnSignatureload()
         //{
         //    await Task.Delay(2000);
-        //    if (signaturePad5 != null)
-        //        signaturePad5.Image = Correspondencia.FirmaRecibido;
+        //    if (SignaturePad5 != null)
+        //        SignaturePad5.Image = Correspondencia.FirmaRecibido;
         //    await this.InvokeAsync(StateHasChanged);
         //}
         //protected async Task OnSignatureChange5(ChangeEventArgs eventArgs)
@@ -193,14 +193,14 @@ namespace Aig.Auditoria.Components.Correspondencia
         //    RemoveSignatureImg5();
         //    if (eventArgs?.Value != null)
         //    {
-        //        var signatureType = (SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+        //        var signatureType = (Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
         //    }
-        //    Correspondencia.FirmaRecibido = await signaturePad5.ToDataURL(signatureType);
+        //    Correspondencia.FirmaRecibido = await SignaturePad5.ToDataURL(signatureType);
         //}
         //protected async Task RemoveSignatureImg5()
         //{
         //    Correspondencia.FirmaRecibido = null;
-        //    signaturePad5.Image = null;
+        //    SignaturePad5.Image = null;
         //}
 
         /////////

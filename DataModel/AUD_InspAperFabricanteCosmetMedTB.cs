@@ -29,31 +29,37 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_InspAperFabricanteProdFabrican ProdFabrican { get => prodFabrican; set => SetProperty(ref prodFabrican, value); }
 
-        //Estructura Organizativa
-        private AUD_ContenidoGenerico estructuraOrganizativa;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_ContenidoGenerico EstructuraOrganizativa { get => estructuraOrganizativa; set => SetProperty(ref estructuraOrganizativa, value); }
-
-        //Estructura Organizativa
-        private AUD_ContenidoGenerico almacenes;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_ContenidoGenerico Almacenes { get => almacenes; set => SetProperty(ref almacenes, value); }
-
-        //Estructura Organizativa
-        private AUD_ContenidoGenerico almacenes2;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_ContenidoGenerico Almacenes2 { get => almacenes2; set => SetProperty(ref almacenes2, value); }
-
 
         //Estructura Organizativa
         private AUD_ContenidoGenerico documantacion;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoGenerico Documantacion { get => documantacion; set => SetProperty(ref documantacion, value); }
 
+        //Estructura Organizativa
+        private AUD_ContenidoGenerico almacenes;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico Almacenes { get => almacenes; set => SetProperty(ref almacenes, value); }
+        
         //Areas Auxiliares
         private AUD_ContenidoGenerico areasAuxiliares;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoGenerico AreasAuxiliares { get => areasAuxiliares; set => SetProperty(ref areasAuxiliares, value); }
+
+
+
+
+
+
+        //Estructura Organizativa
+        private AUD_ContenidoGenerico estructuraOrganizativa;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico EstructuraOrganizativa { get => estructuraOrganizativa; set => SetProperty(ref estructuraOrganizativa, value); }
+
+        
+        //Estructura Organizativa
+        private AUD_ContenidoGenerico almacenes2;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico Almacenes2 { get => almacenes2; set => SetProperty(ref almacenes2, value); }
 
         //SISTEMAS CRITICOS DE APOYO
         private AUD_ContenidoGenerico sistemaCriticoApoyo;
@@ -81,40 +87,29 @@ namespace DataModel
         public AUD_ContenidoGenerico InspeccionAuditoria { get => inspeccionAuditoria; set => SetProperty(ref inspeccionAuditoria, value); }
 
 
-        public void Inicializa_EstructuraOrganizativa()
+        public void Inicializa_Documantacion()
         {
-            EstructuraOrganizativa = new AUD_ContenidoGenerico();
-            EstructuraOrganizativa.LContenido = new List<ContenidoPreguntas>() {
+            Documantacion = new AUD_ContenidoGenerico();
+            Documantacion.LContenido =
+                new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
+                        Titulo = "Organización y Personal",
+                                 IsHeader=true,
+                    },
+                    new ContenidoPreguntas(){
                         Titulo = "El establecimiento se encuentra identificado exteriormente, mediante letrero?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Organigramas",
+                        Titulo = "Organigramas (General y específicos)",
                                  IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "- General",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "- Específicos",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "- Producción",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "- Control de Calidad",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "- Gestión o Aseguramiento de la Calidad",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
                         Titulo = "Descripción de puestos",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Responsable de investigación y desarrollo",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -130,87 +125,214 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Las áreas técnicas (Producción, Control de Calidad y demás) separadas",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-             };
-        }
-        public void Inicializa_Almacenes()
-        {
-            Almacenes = new AUD_ContenidoGenerico();
-            Almacenes.LContenido = new List<ContenidoPreguntas>() {
-                        new ContenidoPreguntas(){
-                        Titulo = "Condiciones Externas del Almacén",
-                                 IsHeader = true,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Condiciones externas del local (Ausencia de rajaduras, pintura descascarillada, filtraciones, crecimiento de moho)",
+                        Titulo = "Inducción del personal",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Áreas externas limpias, ordenadas y libres de materiales extraños, protección contra la entrada de insectos u otros animales",
+                        Titulo = "Programas",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Programa de limpieza e higiene",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Programa que contemple exámenes médicos",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Programa para el control de la fauna nociva",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuando la documentación se mantiene por procesamiento electrónico de datos, el acceso está restringido por claves de acceso",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Fórmula maestra",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Producción y Análisis por Contrato",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Contrato por escrito que establezca las funciones y responsabilidades de cada parte",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Análisis por contrato: el contrato establece que la aprobación final del producto lo hará el contratante a través del responsable de Control de Calidad.",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El contrato establece donde se tomarán las muestras para su análisis",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Fabricación por contrato: realizada por un fabricante con Licencia de Operación.",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Reclamos y Productos retirados del mercado",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Persona encargada",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Locales",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El local está limpio y ordenado",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Instrucciones que no se debe permitir fumar, comer, beber, masticar o guardar plantas, comidas, bebidas, material de fumar y medicamentos personales",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Áreas externas limpias, ordenadas y libres de materiales extraños",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Áreas externas limpias, ordenadas y libres de materiales extraños",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Condiciones adecuadas de:",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - suministros eléctricos",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - iluminación",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - temperatura",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - humedad",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - ventilación",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Estado de conservación del edificio",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
-                        Titulo = "Condiciones Internas del Almacén",
-                                 IsHeader = true,
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "El local está limpio y ordenado",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Instrucciones que no se debe permitir fumar, comer, beber, masticar o guardar plantas, comidas, bebidas, material de fumar y medicamentos personales",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Condiciones adecuadas de",
-                                 IsHeader = true,
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "- Suministros eléctricos",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "- Iluminación",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "- Temperatura",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "- Humedad",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "- Ventilación",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
+                        new ContenidoPreguntas(){
                         Titulo = "Señalización de las vías o rutas de evacuación",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
+                        new ContenidoPreguntas(){
                         Titulo = "Equipo para el control de incendios",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
-                        Titulo = "Área de recepción identificada y protegida de las inclemencias del tiempo",
+                        new ContenidoPreguntas(){
+                        Titulo = "Área de Producción",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Orden lógico de las operaciones",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
-                        Titulo = "Área de despacho identificada y protegida de las inclemencias del tiempo",
+                        new ContenidoPreguntas(){
+                        Titulo = "Condiciones adecuadas (lisas, sin grietas ni fisuras, no desprende partículas, permite limpieza fácil) de:",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - paredes",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
+                        new ContenidoPreguntas(){
+                        Titulo = " - pisos",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - techos",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Vestidores, lavados, servicios sanitarios",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Implementos (mascarillas, gorros, guantes)",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Los servicios sanitarios no comunican directamente con el área de producción",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Si almacenan piezas y herramientas en esta área, están colocadas en armarios reservados para este fin.",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Letreros indicando el acceso restringido a personal autorizado",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Equipo",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Adecuadamente localizado",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Las tuberías fijas conectados al equipo están rotulados claramente indicando su contenido",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Las tuberías de servicios (agua, gases, otros), están identificados",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Laboratorio de Control de Calidad",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Equipo e instrumentos de laboratorio de control son apropiados a los procedimientos de análisis que se realizarán",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Área para almacenar los patrones",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuentan con especificaciones para",
+                                 IsHeader=true,
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - Materia prima",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - Material de acondicionamiento",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - Productos semi-elaborados y a granel",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = " - Productos terminados",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    }
              };
-        }
 
-        public void Inicializa_Almacenes2() {
+        }
+        public void Inicializa_Almacenes()
+        {
             Almacenes = new AUD_ContenidoGenerico();
             Almacenes.LContenido = new List<ContenidoPreguntas> {
 
@@ -220,10 +342,6 @@ namespace DataModel
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Capacidad suficiente para permitir el almacenamiento ordenado de los productos y que facilite el manejo y circulación en el área",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Existen tarimas, u otros tipos de mobiliarios para el almacenmiento",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
@@ -283,6 +401,10 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
+                        Titulo = "Recepción y despacho protegida de las inclemencias   del tiempo",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
                         Titulo = "Áreas de cuarentena: identificadas y de acceso restringido",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
@@ -291,16 +413,12 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
-                        Titulo = "Área para almacenar sustancias inflamables (Alcohol, Esencias), separada, delimitada, identificada, ventilada y con los equipos necesario para accidentes. Posee estructura separadas del piso",
+                        Titulo = "Área para almacenar sustancias con riesgo a fuego o explosión",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
-                        Titulo = "Área especial, identificada para el muestreo ",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Área de almacenamiento para Etiquetas, material impreso, asegurada",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                        Titulo = "Área de almacenamiento para Etiquetas, material impreso",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true},new OpcionEvaluacion(),new OpcionEvaluacion(){ HideEvaluacion=true}},
                     },
                     new ContenidoPreguntas(){
                         Titulo = "Existen advertencias o prohibiciones de: no comer, no beber, no fumar, no guardar plantas comidas y bebidas",
@@ -318,83 +436,10 @@ namespace DataModel
                         Titulo = "Equipo para el control de incendios",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
-                        Titulo = "Recipientes para la recolección de la basura",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
-                    },
             };
+
         }
 
-        public void Inicializa_Documantacion()
-        {
-            Documantacion = new AUD_ContenidoGenerico();
-            Documantacion.LContenido = new List<ContenidoPreguntas>() {
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimientos que describan las normas de higiene y comportamiento del personal según cada área",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Programa de Calificación de Proveedores",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Programas de capacitación e inducción del personal",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimientos y formato de registro para la recepción de materia prima",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimiento para el muestreo de la materia prima",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimiento y formatos de registros de limpieza de las áreas",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimiento para el almacenamiento de la materia prima. (formatos, etiquetas, etc.)",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimiento para el almacenamiento, incluye el formato de identificación de los materiales aprobado, rechazado y cuarentena",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimientos y formato de registro para la recepción de los materiales de acondicionamiento, empaque y envase. Se incluye los criterios de aceptación o rechazo",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimientos y formato de registro para el almacenamiento de los materiales de acondicionamiento, empaque y envase",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimientos y formato de registro para el recibo de productos terminados. Se incluye los criterios de aceptación o rechazo",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Programa y procedimiento para el control o eliminación de la fauna nociva",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimiento y formatos de registro para el manejo de devoluciones y/o rechazo de productos",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimiento y formato de registro que regule la distribución primaria de los productos",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimiento y formato de registro para el manejo de quejas y reclamos de productos comercializados",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Procedimiento y formato de registro para el retiro de los productos del mercado",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    }
-             };
-        }
         public void Inicializa_AreasAuxiliares()
         {
             AreasAuxiliares = new AUD_ContenidoGenerico();
@@ -417,6 +462,119 @@ namespace DataModel
                     }
              };
         }
+
+
+
+
+
+        public void Inicializa_Almacenes2()
+        {
+            Almacenes = new AUD_ContenidoGenerico();
+            Almacenes.LContenido = new List<ContenidoPreguntas> {
+
+                    new ContenidoPreguntas(){
+                        Titulo = "Cuenta con un área para",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Capacidad suficiente para permitir el almacenamiento ordenado de los productos y que facilite el manejo y circulación en el área",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "El área se encuentra",
+                                 IsHeader = true,
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- limpia ",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- seca",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- dentro de límites aceptables de temperatura",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- delimitada",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- identificada",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- ordenada",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- adecuada iluminación",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- adecuadas condiciones de pisos",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- adecuadas condiciones de paredes",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "- adecuadas condiciones de techos",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Sistema para los controles ambientales de temperatura y humedad relativa.",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Formatos para Registro de temperatura y humedad relativa",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Letreros visibles de los rangos de temperatura y humedad de almacenamiento (según lo estipulado por el fabricante)",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Recepción y despacho protegida de las inclemencias   del tiempo",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Áreas de cuarentena: identificadas y de acceso restringido",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Área para almacenar productos rechazados, retirados o devueltos",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Área para almacenar sustancias con riesgo a fuego o explosión",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Área de almacenamiento para Etiquetas, material impreso",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true},new OpcionEvaluacion(),new OpcionEvaluacion(){ HideEvaluacion=true}},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Existen advertencias o prohibiciones de: no comer, no beber, no fumar, no guardar plantas comidas y bebidas",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Los servicios sanitarios no comunican directamente",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Señalización de las vías o rutas de evacuación en casos de siniestro o catástrofe",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Equipo para el control de incendios",
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                    },
+            };
+        }
+
         public void Inicializa_SistemaCriticoApoyo()
         {
             SistemaCriticoApoyo = new AUD_ContenidoGenerico();
