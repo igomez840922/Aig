@@ -120,7 +120,7 @@ namespace Aig.Auditoria.Pages.Correspondencia
                 result = new AUD_CorrespondenciaTB();
             }
             dataModel.Data = result;
-            //Aig.FarmacoVigilancia.Events.Ram.AddEdit_CloseEvent
+            //Aig.Auditoria.Events.Ram.AddEdit_CloseEvent
             bus.Subscribe<Aig.Auditoria.Events.Correspondencia.AddEditEvent>(AddEditEventHandler);
 
             await this.InvokeAsync(StateHasChanged);

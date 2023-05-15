@@ -80,14 +80,14 @@ namespace DataModel
         //[Required(ErrorMessage = "campo requerido")]
         //public string Email { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        [Required(ErrorMessage = "requerido")]
-        public string Password { get; set; }
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //[Required(ErrorMessage = "requerido")]
+        //public string Password { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        [Required(ErrorMessage = "requerido")]
-        [Compare(nameof(Password), ErrorMessage = "no coincide")]
-        public string PasswordConfirm { get; set; }
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //[Required(ErrorMessage = "requerido")]
+        //[Compare(nameof(Password), ErrorMessage = "no coincide")]
+        //public string PasswordConfirm { get; set; }
 
         public long? UserProfileId { get; set; }
         public virtual UserProfileTB? UserProfile { get; set; }

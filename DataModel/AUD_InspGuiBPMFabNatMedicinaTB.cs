@@ -1276,7 +1276,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "d) ¿Cuentan con condiciones de temperatura y humedad de acuerdo a las especificaciones de la materia prima? ",
+                        Titulo = "d) ¿Cuenta con condiciones de temperatura y humedad de acuerdo a las especificaciones de la materia prima? ",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },

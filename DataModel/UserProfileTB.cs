@@ -38,14 +38,14 @@ namespace DataModel
 
 
         [StringLength(250)]
-        [Required(ErrorMessage = "requerido")]
+        [Required(ErrorMessage = "campo requerido")]
         public string FirstName { get; set; }
 
         [StringLength(250)]
         public string SecondName { get; set; }
 
         [StringLength(250)]
-        [Required(ErrorMessage = "requerido")]
+        [Required(ErrorMessage = "campo requerido")]
         public string SureName { get; set; }
 
         [StringLength(250)]

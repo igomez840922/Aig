@@ -210,11 +210,6 @@ namespace DataModel
                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
             new ContenidoPreguntas()
-                {
-                    Titulo = "Están identificadas las áreas de pesado",
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                },
-            new ContenidoPreguntas()
             {
                 Titulo = "Están identificadas las áreas de: (según aplique)",
                 IsHeader = true
@@ -351,7 +346,7 @@ namespace DataModel
             new ContenidoPreguntas()
             {
                 Titulo = "Área de almacenamiento para Etiquetas, material impreso",
-               LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() }
+               LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true}, new OpcionEvaluacion() , new OpcionEvaluacion() { HideEvaluacion = true } }
              },
             };
         }

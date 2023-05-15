@@ -35,7 +35,7 @@ namespace DataModel
         // Fecha de la última Inspeccion
         private DateTime? fechaUltimaInspeccion;
         public DateTime? FechaUltimaInspeccion { get => fechaUltimaInspeccion; set => SetProperty(ref fechaUltimaInspeccion, value); }
-
+                
         //Propósito de la Inspección de Buenas Prácticas de Almacenamiento y Distribución
         private AUD_PropositosInspeccion propositoInsp;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
@@ -929,7 +929,8 @@ namespace DataModel
                             Criterio = "Crítico",
                             Capitulo="423, 424",
                             Articulo="",
-                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                            Observaciones = string.Format("Temperatura:{0}\r\nHumedad Relativa:{1}\r\n","","")
                         },
                     new ContenidoPreguntas()
                         {

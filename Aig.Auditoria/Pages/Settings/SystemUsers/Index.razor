@@ -1,0 +1,153 @@
+﻿@page "/configuracion/usuarios"
+@using DataModel.Helper;
+@layout BackendLayout
+@attribute [Authorize]
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    @*<div class="kt-subheader  kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <NavLink href='/dashboard' class="kt-subheader__breadcrumbs-link">
+						@languageContainerService.Keys["Dashboard"]
+                    </NavLink>
+                </h3>
+            </div>
+        </div>
+    </div>*@
+
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                @languageContainerService.Keys["Usuarios"]
+                            </h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="dropdown dropdown-inline">
+                                <button type="button" class="btn btn-hover-brand btn-elevate-hover btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="flaticon-more"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
+                                    <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit()"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body kt-portlet__body--fit">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="kt-portlet__body">
+                                    <EditForm Model="@model" OnValidSubmit="OnFilter" class="kt-form kt-form--label-right">
+                                        <DataAnnotationsValidator />
+                                        <div class="form-group row">
+                                            <div class="col-lg-4">
+                                                <label>@languageContainerService.Keys["Search"]</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" @bind="model.Filter" name="Filter" />
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                       
+                                    </EditForm>
+                                </div>
+
+                                @if (model?.Ldata?.Count > 0)
+                                {
+                                                 <div class="kt-portlet__body">
+                                            <!--begin::Section-->
+                                            <div class="kt-section">
+                                            <div class="table-responsive">
+                                            <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                        <tr>
+                                                            <th>@languageContainerService.Keys["Usuario"]</th>
+                                                            <th>@languageContainerService.Keys["Nombre Completo"]</th>
+                                                            <th>@languageContainerService.Keys["PhoneNumber"]</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                                <tbody>
+                                                        @foreach (var dt in model.Ldata)
+                                                        {
+                                                                    <tr>
+                                                                        <td>@(dt.UserName)</td>
+                                                                        <td>@(dt.UserProfile?.FullName??"")</td>
+                                                                        <td>@(dt.PhoneNumber)</td>
+                                                                        <td style="text-align:right">
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                        <div class="dropdown-menu">
+                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnChangePsw(dt)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="password"><i class="fa fa-key"></i>@languageContainerService.Keys["Contraseña"]</a>
+                                                                            <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnEdit(dt)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                        <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OnDelete(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                    </div>
+                                                                    </div>
+                                                                <!-- /btn-group -->
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                            </div>
+                                            <!--end::Section-->
+                                            </div>
+                                                <div class="kt-portlet__foot">
+                                                    <BlazorPager CurrentPage="@(model.PagIdx + 1)"
+                                                     PageCount="@model.PagesCount"
+                                                     VisiblePages="@(model.PagesCount>3?4:model.PagesCount)"
+                                                 ShowFirstLast="true"
+                                                 ShowPageNumbers="true"
+                                                 FirstText="<<"
+                                                 LastText=">>"
+                                                 NextText=">"
+                                                 PreviousText="<"
+                                                 OnPageChanged="(async e => {
+						                     if (model.PagesCount < e)
+							                    return;
+						                    model.PagIdx = e - 1;
+						                    await FetchData();})">
+                                                    </BlazorPager>
+                                                </div>
+
+                                }
+                                <!--end::Form-->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@if (OpenAddEditDialog)
+{
+    <Aig.Auditoria.Components.SystemUsers.Edit User="@model.Data"></Aig.Auditoria.Components.SystemUsers.Edit>
+}
+
+@if (OpenAddDialog)
+{
+    <Aig.Auditoria.Components.SystemUsers.AddNew User="@newUser"></Aig.Auditoria.Components.SystemUsers.AddNew>
+}
+@if (OpenChangePswDialog)
+{
+    <Aig.Auditoria.Components.SystemUsers.ChangePsw User="@chgPsw"></Aig.Auditoria.Components.SystemUsers.ChangePsw>
+}
+@if (OpenDeleteDialog)
+{
+    <Aig.Auditoria.Components.DeleteConfirmDialog></Aig.Auditoria.Components.DeleteConfirmDialog>
+}
+
