@@ -27,17 +27,7 @@ namespace Aig.Auditoria.Components.Inspections._16_AperturaFabCosmeticoArtesanal
         private System.Timers.Timer timer = new(60 * 1000);
         bool exit { get; set; } = false;
 
-        bool showSignasure { get; set; } = false;
-        List<Mobsites.Blazor.SignaturePad> lSignaturePads { get; set; } = new List<Mobsites.Blazor.SignaturePad>();
-        Mobsites.Blazor.SignaturePad SignaturePad
-        {
-            get { return null; }
-            set { lSignaturePads.Add(value); }
-        }
-        Mobsites.Blazor.SignaturePad SignaturePad5;
-        //Mobsites.Blazor.SignaturePad Mobsites.Blazor.SignaturePad6;
-        Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes signatureType { get; set; } = Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes.png;
-
+       
 
         protected async override Task OnInitializedAsync()
         {
@@ -92,8 +82,7 @@ namespace Aig.Auditoria.Components.Inspections._16_AperturaFabCosmeticoArtesanal
             if (Inspeccion != null)
             {
                 editContext = editContext != null ? editContext : new(Inspeccion);
-
-                DelayToShowSignasure();                      
+                 
             }
             else { Cancel(); }
 
@@ -134,73 +123,58 @@ namespace Aig.Auditoria.Components.Inspections._16_AperturaFabCosmeticoArtesanal
             await this.InvokeAsync(StateHasChanged);
         }
 
-        async Task DelayToShowSignasure()
+        protected async Task OnSignature(string signature)
         {
-            await Task.Delay(2000);
-
-            if(SignaturePad5!=null)
-                SignaturePad5.Image = Inspeccion.InspAperturaCosmetArtesanal?.DatosRepresentLegal?.Firma??null;
-            //if (Mobsites.Blazor.SignaturePad6 != null)
-            //    Mobsites.Blazor.SignaturePad6.Image = Inspeccion.InspAperturaCosmetArtesanal?.DatosRegente?.Firma ?? null;
-
-            if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
+            try
             {
-                foreach (var partic in Inspeccion.ParticipantesDNFD.LParticipantes)
+                switch (signatureTo)
                 {
-                    try
-                    {
-                        lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(partic)].Image = partic.Firma;
-                    }
-                    catch (Exception ex) { }
+                    case 1:
+                        {
+                            Inspeccion.InspAperturaCosmetArtesanal.DatosRepresentLegal.Firma = signature;
+                            break;
+                        }
+                    case 2:
+                        {
+                            //Inspeccion.InspAperturaCosmetArtesanal.DatosRegente.Firma = signature;
+                            break;
+                        }
+                    case 3:
+                        {
+                            selectedParticipante.Firma = signature;
+                            break;
+                        }
                 }
             }
-
-            await this.InvokeAsync(StateHasChanged);
+            catch { }
+            finally { showSignasure = false; signatureTo = 0; selectedParticipante = null; await this.InvokeAsync(StateHasChanged); }
         }
 
-        protected async Task OnSignatureChange5(ChangeEventArgs eventArgs)
+        int signatureTo = 0;
+        Participante selectedParticipante = null;
+        bool showSignasure = false;
+        protected async Task OpenSignature(int _signatureTo)
         {
-            RemoveSignatureImg5();
-            if (eventArgs?.Value != null)
+            try
             {
-                var signatureType = (Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
+                signatureTo = _signatureTo;
+                showSignasure = true;
             }
-            Inspeccion.InspAperturaCosmetArtesanal.DatosRepresentLegal.Firma = await SignaturePad5.ToDataURL(signatureType);
+            catch { }
+            finally { await this.InvokeAsync(StateHasChanged); }
         }
-        protected async Task RemoveSignatureImg5()
-        {
-            Inspeccion.InspAperturaCosmetArtesanal.DatosRepresentLegal.Firma = null;
-            SignaturePad5.Image = null;
-        }
-        //protected async Task OnSignatureChange6(ChangeEventArgs eventArgs)
-        //{
-        //    RemoveSignatureImg6();
-        //    if (eventArgs?.Value != null)
-        //    {
-        //        var signatureType = (Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes)Enum.Parse(typeof(Mobsites.Blazor.SignaturePad.SupportedSaveAsTypes), eventArgs.Value as string);
-        //    }
-        //    Inspeccion.InspAperturaCosmetArtesanal.DatosRegente.Firma = await Mobsites.Blazor.SignaturePad6.ToDataURL(signatureType);
-        //}
-        //protected async Task RemoveSignatureImg6()
-        //{
-        //    Inspeccion.InspAperturaCosmetArtesanal.DatosRegente.Firma = null;
-        //    Mobsites.Blazor.SignaturePad6.Image = null;
-        //}
 
-        ////////
+        protected async Task OpenSignature(Participante _participante)
+        {
+            try
+            {
+                selectedParticipante = _participante;
+                OpenSignature(3);
+            }
+            catch { }
+        }
+        ////////////////////////////////////
         ///
-        protected async Task OnSignatureChange(Participante _participante)
-        {
-            await RemoveSignatureImg(_participante);
-            var _SignaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
-            _participante.Firma = await _SignaturePad.ToDataURL(signatureType);
-        }
-        protected async Task RemoveSignatureImg(Participante _participante)
-        {
-            _participante.Firma = null;
-            var _SignaturePad = lSignaturePads[Inspeccion.ParticipantesDNFD.LParticipantes.IndexOf(_participante)];
-            _SignaturePad.Image = null;
-        }
 
     }
 

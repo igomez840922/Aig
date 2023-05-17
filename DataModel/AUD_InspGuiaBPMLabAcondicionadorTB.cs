@@ -137,7 +137,7 @@ namespace DataModel
                         IsHeader = true,
                     },new ContenidoPreguntas()
                         {
-                            Titulo = "El laboratorio Acondicionador posee permiso sanitario de funcionamiento o licencia \r\nsanitaria, autorizada por la autoridad reguladora del país.",
+                            Titulo = "El laboratorio Acondicionador posee permiso sanitario de funcionamiento o licencia sanitaria, autorizada por la autoridad reguladora del país.",
                             Criterio = "CRÍTICO",
                             Articulo="6.1.1",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}

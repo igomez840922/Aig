@@ -6180,7 +6180,6 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Nombre: {0}", inspection.InspGuiaBPMFabricanteMed?.OtrosFuncionarios?.RespControlCalidad?.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Profesión: {0}", inspection.InspGuiaBPMFabricanteMed?.OtrosFuncionarios?.RespControlCalidad?.Profesion));
 
-
                             if (inspection.InspGuiaBPMFabricanteMed?.RequisitosLegales?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
@@ -6325,6 +6324,7 @@ namespace Aig.Auditoria.Services
                                         columns.RelativeColumn((float)4);
                                         columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)1);
                                     });
                                     table.Header(header =>
                                     {
@@ -6333,7 +6333,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Criterio".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("Cumple".ToUpper());
-                                        //header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).Background(Colors.Blue.Medium).AlignCenter().Padding(3).Text("OBSERVACIoNes".ToUpper());
                                     });
                                     foreach (var dat in inspection.InspGuiaBPMFabricanteMed.ClasifEstablecimiento.LContenido)
                                     {
@@ -6342,7 +6342,7 @@ namespace Aig.Auditoria.Services
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
@@ -6368,7 +6368,7 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14731,7 +14731,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignCenter().Text("Guía para las Buenas Prácticas de Almacenamiento, Distribución y Transporte de Medicamentos y Otros Productos para la Salud Humana".ToUpper()).Bold();
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text("I. INTRODUCCIÓN.\r\nII. CLASIFICACIÓN DE LOS CRITERIOS DE EVALUACIÓN\r\nIII. CRITERIO DE APROBACIÓN\r\nIV. SOLICITUD PARA OBTENCIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE\r\n      ALMACENAMIENTO Y DISTRIBUCIÓN\r\nV. DATOS GENERALES DEL ESTABLECIMIENTO Y DE LA INSPECCIÓN\r\n\r\n1.\tDISPOSICIONES GENERALES DEL ESTABLECIMIENTO FARMACÉUTICO  \r\n1.1. Generalidades\r\n1.2. Documentación\r\n2.\tAREAS DEL ESTABLECIMIENTO\r\n2.1. Instalaciones\r\n2.2. Área de Recepción y Despacho\r\n2.3. Área de Almacén\r\n2.4. Almacenamiento de Productos\r\n       de Cadena de Frío\r\n2.5. Almacenamiento de\r\n       Estupefacientes o psicotrópicos\r\n2.6. Productos inflamables\r\n2.7. Plaguicidas\r\n2.8. Cosméticos\r\n2.9. Materia prima para la fabricación de productos regulados por la Dirección Nacional de Farmacia y Drogas  \r\n2.10. Productos retirados del mercado\r\n2.11. Productos devueltos del mercado\r\n2.12. Productos Falsificados o Ilícitos\r\n3.\tDISTRIBUCIÓN  \r\n3.1. Especificaciones para Productos a Distribuir\r\n3.2. Registros de Distribución\r\n4.\tDEL TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS\r\n5. AUTO-INSPECCIÓN\r\n6. CONCLUSIONES");
+                            column.Item().PaddingVertical(5).AlignLeft().Text("I. INTRODUCCIÓN.\r\nII. CLASIFICACIÓN DE LOS CRITERIOS DE EVALUACIÓN\r\nIII. CRITERIO DE APROBACIÓN\r\nIV. SOLICITUD PARA OBTENCIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE\r\n ALMACENAMIENTO Y DISTRIBUCIÓN\r\n. DATOS GENERALES DEL ESTABLECIMIENTO Y DE LA INSPECCIÓN\r\n\r\n1.DISPOSICIONES GENERALES DEL ESTABLECIMIENTO FARMACÉUTICO  \r\n1.1. Generalidades\r\n1.2. Documentación\r\n2.AREAS DEL ESTABLECIMIENTO\r\n2.1. Instalaciones\r\n2.2. Área de Recepción y Despacho\r\n2.3. Área de Almacén\r\n2.4. Almacenamiento de Productos\r\n       de Cadena de Frío\r\n2.5. Almacenamiento de\r\n       Estupefacientes o psicotrópicos\r\n2.6. Productos inflamables\r\n2.7. Plaguicidas\r\n2.8. Cosméticos\r\n2.9. Materia prima para la fabricación de productos regulados por la Dirección Nacional de Farmacia y Drogas  \r\n2.10. Productos retirados del mercado\r\n2.11. Productos devueltos del mercado\r\n2.12. Productos Falsificados o Ilícitos\r\n3.DISTRIBUCIÓN  \r\n3.1. Especificaciones para Productos a Distribuir\r\n3.2. Registros de Distribución\r\n4.DEL TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS\r\n5. AUTO-INSPECCIÓN\r\n6. CONCLUSIONES");
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("I. INTRODUCCIÓN".ToUpper())).Bold();

@@ -925,12 +925,12 @@ namespace DataModel
                     new ContenidoPreguntas()
                         {
                              Numero=88,
-                            Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa. En caso afirmativo agregar dichos valores en las observaciones.",
+                            Titulo = "Se identifican los rangos permitidos de Temperatura y Humedad Relativa.",
                             Criterio = "Crítico",
                             Capitulo="423, 424",
                             Articulo="",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                            Observaciones = string.Format("Temperatura:{0}\r\nHumedad Relativa:{1}\r\n","","")
+                            Observaciones = string.Format("T(°C):{0}\r\nHR(%):{1}\r\n","","")
                         },
                     new ContenidoPreguntas()
                         {
@@ -1093,7 +1093,7 @@ namespace DataModel
                             Capitulo="423",
                             Articulo="",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                            Observaciones = string.Format("Temperatura:{0}\r\nHumedad Relativa:{1}\r\n","","")
+                            Observaciones = string.Format("T(°C):{0}\r\nHR(%):{1}\r\n","","")
                         },
                     new ContenidoPreguntas()
                         {
@@ -1103,7 +1103,7 @@ namespace DataModel
                             Capitulo="423",
                             Articulo="",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                            Observaciones = string.Format("Temperatura:{0}\r\nHumedad Relativa:{1}\r\n","","")
+                            Observaciones = string.Format("T(°C):{0}\r\nHR(%):{1}\r\n","","")
                         },
                     new ContenidoPreguntas()
                         {

@@ -3,6 +3,12 @@
 
 @if (Inspeccion != null)
 {
+    if (showSignasure)
+    {
+        <Aig.Auditoria.Components.Signage.Index OnSignature="OnSignature"></Aig.Auditoria.Components.Signage.Index>
+    }
+    else
+    {
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
         <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
@@ -72,17 +78,14 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-12">
-                                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                                @*<label>@languageContainerService.Keys["Signature"]</label>*@
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <Mobsites.Blazor.SignaturePad @ref="SignaturePad5" OnSignatureChange="OnSignatureChange5"
-                                                                              MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                                            <Mobsites.Blazor.SignaturePadFooter>
-                                                                                <Mobsites.Blazor.SignaturePadClear>
-                                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg5">@languageContainerService.Keys["Clear"]</button>
-                                                                                </Mobsites.Blazor.SignaturePadClear>
-                                                                            </Mobsites.Blazor.SignaturePadFooter>
-                                                                        </Mobsites.Blazor.SignaturePad>
+                                                                        <img src="@Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Firma" style="width:100%!important;border:solid 1px;margin-bottom: 5px;">
+                                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect"
+                                                                        @onclick="(e)=>{OpenSignature(1);}">
+                                                                            @languageContainerService.Keys["Firmar"]
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -136,18 +139,16 @@
                                                             </div>
 
                                                             <div class="col-sm-12">
-                                                                <label>@languageContainerService.Keys["Signature"]</label>
+                                                                @*<label>@languageContainerService.Keys["Signature"]</label>*@
                                                                 <div class="form-group">
                                                                     <div class="form-line">
-                                                                        <Mobsites.Blazor.SignaturePad @ref="SignaturePad6" OnSignatureChange="OnSignatureChange6"
-                                                                              MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                                            <Mobsites.Blazor.SignaturePadFooter>
-                                                                                <Mobsites.Blazor.SignaturePadClear>
-                                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="RemoveSignatureImg6">@languageContainerService.Keys["Clear"]</button>
-                                                                                </Mobsites.Blazor.SignaturePadClear>
-                                                                            </Mobsites.Blazor.SignaturePadFooter>
-                                                                        </Mobsites.Blazor.SignaturePad>
+                                                                        <img src="@Inspeccion.InspAperCambUbicAgen.DatosRegente.Firma" style="width:100%!important;border:solid 1px;margin-bottom: 5px;">
+
                                                                     </div>
+                                                                    <button type="button" class="btn btn-sm btn-outline-primary waves-effect"
+                                                                    @onclick="(e)=>{OpenSignature(2);}">
+                                                                        @languageContainerService.Keys["Firmar"]
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -193,19 +194,16 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="col-sm-12">
-                                                                    <label>@languageContainerService.Keys["Signature"]</label>
+                                                                    @*<label>@languageContainerService.Keys["Signature"]</label>*@
                                                                     <div class="form-group">
                                                                         <div class="form-line">
-                                                                            <Mobsites.Blazor.SignaturePad @ref="SignaturePad" OnSignatureChange="(e)=>{OnSignatureChange(dt);}"
-                                                                              MinHeight="150" MaxHeight="190" BackgroundColor="#FFFFFF">
-                                                                                <Mobsites.Blazor.SignaturePadFooter>
-                                                                                    <Mobsites.Blazor.SignaturePadClear>
-                                                                                        <button type="button" class="btn btn-sm btn-outline-primary waves-effect" @onclick="(e)=>{RemoveSignatureImg(dt);}">@languageContainerService.Keys["Clear"]</button>
-                                                                                    </Mobsites.Blazor.SignaturePadClear>
-                                                                                </Mobsites.Blazor.SignaturePadFooter>
-                                                                            </Mobsites.Blazor.SignaturePad>
+                                                                            <img src="@dt.Firma" style="width:100%!important;border:solid 1px;margin-bottom: 5px;">
+                                                                            <button type="button" class="btn btn-sm btn-outline-primary waves-effect"
+                                                                            @onclick="(e)=>{OpenSignature(dt);}">
+                                                                                @languageContainerService.Keys["Firmar"]
+                                                                            </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -252,5 +250,6 @@
         </div>
     </div>
 
+    }
 }
 

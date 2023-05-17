@@ -151,11 +151,15 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Mobiliario de medicamentos. Tipo de mobiliario y Estado",
+                        Titulo = "Mobiliario de medicamentos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Muebles separados de las paredes, pisos y techos",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Tipo de mobiliario y Estado",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
