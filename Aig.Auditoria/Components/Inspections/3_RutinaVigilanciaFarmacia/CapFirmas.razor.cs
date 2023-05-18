@@ -129,12 +129,12 @@ namespace Aig.Auditoria.Components.Inspections._3_RutinaVigilanciaFarmacia
                 {
                     case 1:
                         {
-                            Inspeccion.InspAperCambUbicAgen.DatosSolicitante.Firma = signature;
+                            Inspeccion.InspRutinaVigFarmacia.DatosRepresentLegal.Firma = signature;
                             break;
                         }
                     case 2:
                         {
-                            Inspeccion.InspAperCambUbicAgen.DatosRegente.Firma = signature;
+                            Inspeccion.InspRutinaVigFarmacia.DatosRegente.Firma = signature;
                             break;
                         }
                     case 3:

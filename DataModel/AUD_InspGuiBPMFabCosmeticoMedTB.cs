@@ -927,7 +927,7 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "Cuenta con un área destinada para el almacenamiento de Materias Primas Inflamables (Alcohol, Esencias) separada, debidamente delimitada, identificada, ventilada; con equipos necesarios para sofocar siniestros o accidentes tales como: (Pantalla Almacen de materia prima)?" ,
+                Titulo = "Cuenta con un área destinada para el almacenamiento de Materias Primas Inflamables (Alcohol, Esencias) separada, debidamente delimitada, identificada, ventilada; con equipos necesarios para sofocar siniestros o accidentes tales como:",
                 Criterio = "C",
                 Articulo="420, 422",
                 PuntosMax = (decimal)2.0,
@@ -1084,7 +1084,7 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "Existe un programa que garantice la integridad de los productos almacenados mediante: (Verifique) (Pantalla almacen de materia prima)?",
+                Titulo = "Existe un programa que garantice la integridad de los productos almacenados mediante: (Verifique)?",
                 Criterio = "R",
                 Articulo="491",
                 PuntosMax = (decimal)1.0,
@@ -1218,7 +1218,7 @@ namespace DataModel
             },
             new ContenidoPreguntas()
             {
-                Titulo = "Son adecuados los documentos o formatos empleados para la recepción?",
+                Titulo = "Son adecuados los documentos o formatos empleados para la recepción? (Nombre, Número de Lote y Fecha de Expiración)",
                 Criterio = "R",
                 Articulo="470",
                 PuntosMax = (decimal)1.0,

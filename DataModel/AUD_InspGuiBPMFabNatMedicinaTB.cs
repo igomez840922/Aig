@@ -3933,7 +3933,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "l) Firma de la persona que despacha, recibe y verifica los insumos. ",
+                        Titulo = "j) Firma de la persona que despacha, recibe y verifica los insumos. ",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },

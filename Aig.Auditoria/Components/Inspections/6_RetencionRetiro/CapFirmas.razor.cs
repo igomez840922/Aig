@@ -135,7 +135,7 @@ namespace Aig.Auditoria.Components.Inspections._6_RetencionRetiro
                         }
                     case 2:
                         {
-                            //Inspeccion.InspInvestigacion.DatosRegente.Firma = signature;
+                            //Inspeccion.InspRetiroRetencion.DatosRegente.Firma = signature;
                             break;
                         }
                     case 3:

@@ -279,7 +279,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Medicamentos Cosméticos",
+                        Titulo = "Cosméticos",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
@@ -10235,7 +10235,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Se utiliza vestimenta acorde a las áreas y tareas que se realizan, según procedimiento?",
-                        Criterio = "MAYOR",
+                        Criterio = "",
 
                         Articulo="A.5.6",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
