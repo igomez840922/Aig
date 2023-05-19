@@ -266,7 +266,7 @@
                                     </div>
                                 </div>
                                 <div class="row clearfix">
-                                    <div class="col-sm-8">
+                                    @*<div class="col-sm-8">
                                         <label for="password">@languageContainerService.Keys["Representante Legal"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -283,7 +283,7 @@
                                                 <ValidationMessage For=@(() => Establecimiento.RepLegalCedula) />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="col-sm-8">
                                         <label for="password">@languageContainerService.Keys["Nombre de Sociedad"]</label>
                                         <div class="form-group">
@@ -360,7 +360,7 @@
                                 </div>
 
                             </div>
-                            <div class="tab-pane active" id="cap3" role="tabpanel">
+                            <div class="tab-pane" id="cap3" role="tabpanel">
                                 <h5>@languageContainerService.Keys["Representante Legal"]</h5>
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
@@ -408,7 +408,7 @@
                                             </div>
                                         </div>
                                     </div>    
-                                    <div class="col-sm-6">
+                                   @* <div class="col-sm-6">
                                         <label for="password">@languageContainerService.Keys["No. Idoneidad"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -416,7 +416,7 @@
                                                 <ValidationMessage For=@(() => Establecimiento.RepresentanteLegal.NumIdoneidad) />
                                             </div>
                                         </div>
-                                    </div>    
+                                    </div>  *@  
                                     <div class="col-sm-4">
                                         <label for="password">@languageContainerService.Keys["Correo"]</label>
                                         <div class="form-group">
@@ -437,7 +437,7 @@
                                     </div>
                                </div>
                             </div>
-                            <div class="tab-pane active" id="cap4" role="tabpanel">
+                            <div class="tab-pane" id="cap4" role="tabpanel">
                                 <h5>@languageContainerService.Keys["Regente Farmacéutico"]</h5>
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
@@ -486,6 +486,13 @@
                                         </div>
                                     </div>    
                                     <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["No. Idoneidad"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.NumIdoneidad" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.NumIdoneidad) />
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="password">@languageContainerService.Keys["Correo"]</label>

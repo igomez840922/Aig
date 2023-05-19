@@ -55,6 +55,26 @@
 
                                             <h5>@languageContainerService.Keys["Observaciones"]</h5>
                                             <div class="row clearfix">
+                                                <div class="col-sm-8">
+                                                    <label>@languageContainerService.Keys["Licencia Especial de Sustancias Controladas Nº"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.LicEspSustanciasCtr" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.LicEspSustanciasCtr) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Fecha de Expiración"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <RadzenDatePicker TValue="DateTime?" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.FechaExpLicEspecial" ShowTime="false" HourFormat="12" DateFormat="dd/MM/yyyy" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.FechaExpLicEspecial) />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
                                                 <div class="col-sm-4">
                                                     <label>@languageContainerService.Keys["Fecha de la última Inspección por BPAD Oficial realizada"]</label>
                                                     <div class="form-group">

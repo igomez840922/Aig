@@ -75,6 +75,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                <div class="col-sm-12">
+                                                    <label>@languageContainerService.Keys["Dirección completa del domicilio del Representante Legal"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Ubicacion" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.Ubicacion) />
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                     </div>                                            
                                             <br><br>
 

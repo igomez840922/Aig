@@ -49,6 +49,14 @@ namespace DataModel
         private string horarioRegFarmaceutica;
         public string HorarioRegFarmaceutica { get => horarioRegFarmaceutica; set => SetProperty(ref horarioRegFarmaceutica, value); }
 
+        // Licencia especial de sustancias controladoas
+        private string licEspSustanciasCtr;
+        public string LicEspSustanciasCtr { get => licEspSustanciasCtr; set => SetProperty(ref licEspSustanciasCtr, value); }
+        
+        // Fecha de la última Inspeccion
+        private DateTime? fechaExpLicEspecial;
+        public DateTime? FechaExpLicEspecial { get => fechaExpLicEspecial; set => SetProperty(ref fechaExpLicEspecial, value); }
+
 
 
         //1. DISPOSICIONES GENERALES DEL ESTABLECIMIENTO FARMACÉUTICO

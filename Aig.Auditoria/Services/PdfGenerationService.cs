@@ -4920,7 +4920,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento?? enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento?? enumAUD_TipoEstablecimiento.None)));
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
@@ -5447,7 +5447,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text("El establecimiento se compromete a que los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos, estén completos y acorde con la Normativa vigente y según las actividades a las que se dedicará el establecimiento.  De igual forma el establecimiento deberá tener a disposición de la Autoridad Reguladora los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos cuando esta lo solicite y al momento de Auditoría de Buenas prácticas de Fabricación.");
 
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("CRITERIO TÉCNICO")).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos y con base en el REGLAMENTO TECNICO CENTROAMERICANO RTCA 11.03.42:07 REGLAMENTO TÉCNICO SOBRE BUENAS PRÁCTICAS DE MANUFACTURA PARA LA INDUSTRIA FARMACÉUTICA. PRODUCTOS FARMACÉUTICOS Y MEDICAMENTOS DE USO HUMANO, por el cual se reglamentan las Buenas Prácticas de Manufactura de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.DatosEstablecimiento?.Nombre, inspection.DatosEstablecimiento?.Direccion, (inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE"), DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.ProdFabrican?.TipoProductos?? enumTipoProductosImportacion.Otros) + (inspection.InspAperFabricante.ProdFabrican?.TipoProductos == enumTipoProductosImportacion.Otros? inspection.InspAperFabricante.ProdFabrican?.ProductosDesc??"":""),  inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones ? .FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos y con base en el REGLAMENTO TECNICO CENTROAMERICANO RTCA 11.03.42:07 REGLAMENTO TÉCNICO SOBRE BUENAS PRÁCTICAS DE MANUFACTURA PARA LA INDUSTRIA FARMACÉUTICA. PRODUCTOS FARMACÉUTICOS Y MEDICAMENTOS DE USO HUMANO, por el cual se reglamentan las Buenas Prácticas de Manufactura de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.DatosEstablecimiento?.Nombre??"", inspection.DatosEstablecimiento?.Direccion??"", (inspection.DatosConclusiones!=null && inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE"), DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricante.ProdFabrican?.TipoProductos?? enumTipoProductosImportacion.Otros) + (inspection.InspAperFabricante.ProdFabrican?.TipoProductos == enumTipoProductosImportacion.Otros? inspection.InspAperFabricante.ProdFabrican?.ProductosDesc??"":""),  inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones ? .FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
                                
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
@@ -14768,12 +14768,12 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Distrito: {0}", inspection.DatosEstablecimiento?.Distrito?.Nombre ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Corregimiento: {0}", inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Teléfono Fijo: {0}", inspection.DatosEstablecimiento?.Telefono ?? ""));
-                            column.Item().AlignLeft().Text(string.Format("Móvil: {0}",""));
+                            //column.Item().AlignLeft().Text(string.Format("Móvil: {0}",""));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.DatosEstablecimiento?.Correo ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Licencia de Operación Nº:  {0}", inspection.DatosEstablecimiento?.NumLicencia ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Fecha de Expiración:  {0}", inspection.DatosEstablecimiento?.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
-                            column.Item().AlignLeft().Text(string.Format("Licencia Especial de Sustancias Controladas Nº:  {0}", ""));
-                            column.Item().AlignLeft().Text(string.Format("Fecha de Expiración:  {0}",  ""));
+                            column.Item().AlignLeft().Text(string.Format("Licencia Especial de Sustancias Controladas Nº:  {0}", inspection.InspGuiaBPM_Bpa.LicEspSustanciasCtr));
+                            column.Item().AlignLeft().Text(string.Format("Fecha de Expiración:  {0}", inspection.InspGuiaBPM_Bpa?.FechaExpLicEspecial?.ToString("dd/MM/yyyy") ?? ""));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Actividad Comercial aprobada (Ley 1 Art. 172):")).Bold();
                             column.Item().AlignLeft().Text(string.Format("{0}", inspection.InspGuiaBPM_Bpa.ActComercialAprobada));
@@ -14781,7 +14781,7 @@ namespace Aig.Auditoria.Services
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Regente Farmacéutico")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Lic: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.Nombre??""));
                             column.Item().AlignLeft().Text(string.Format("N° Idoneidad: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.NumRegistro ?? ""));
-                            column.Item().AlignLeft().Text(string.Format("Móvil: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.TelefonoMovil ?? ""));
+                            //column.Item().AlignLeft().Text(string.Format("Móvil: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.TelefonoMovil ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.TelefonoResid ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.Email ?? ""));
 
@@ -14790,7 +14790,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Cédula: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Cedula ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.TelefonoMovil ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Email ?? ""));
-                            column.Item().AlignLeft().Text(string.Format("Dirección completa del Domicilio: {0}", ""));
+                            column.Item().AlignLeft().Text(string.Format("Dirección completa del Domicilio: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Ubicacion ?? ""));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Fecha de la última Inspección por BPAD Oficial realizada: {0}", inspection.InspGuiaBPM_Bpa.FechaUltimaInspeccion?.ToString("dd/MM/yyyy hh:mm tt") ?? ""));
