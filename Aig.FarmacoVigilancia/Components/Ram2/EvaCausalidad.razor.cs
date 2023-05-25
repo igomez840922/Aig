@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
 using System.Text.Json;
+using IdentityModel.Client;
 
 namespace Aig.FarmacoVigilancia.Components.Ram2
 {
@@ -64,13 +65,20 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         //Fill Data
         protected async Task FetchData()
         {
-            
+
+            //if (Data!=null)
+            //{
+            //    Data.AlreadySaved = true;
+            //}
+
             await this.InvokeAsync(StateHasChanged);
         }
 
         //Save Data and Close
         protected async Task SaveData()
         {
+            Data.AlreadySaved = true;
+
             await bus.Publish(new Aig.FarmacoVigilancia.Events.RamFarmacoRam.AddEdit_Event { Data = Data });
         }
 

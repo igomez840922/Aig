@@ -34,14 +34,14 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link active" data-toggle="tab" href="#generalInfo" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
                                                 </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#patient" role="tab">@languageContainerService.Keys["Paciente"]</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#farmacos" role="tab">@languageContainerService.Keys["Fármacos Sospechosos"]</a>
+                                                </li>
                                                 @if (Data.RamType != enumFMV_RAMType.NoRam)
-                                                {
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#patient" role="tab">@languageContainerService.Keys["Paciente"]</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#farmacos" role="tab">@languageContainerService.Keys["Fármacos Sospechosos"]</a>
-                                                    </li>
+                                                {                                                   
                                                     <li class="nav-item">
                                                         <a class="nav-link" data-toggle="tab" href="#concominantes" role="tab">@languageContainerService.Keys["Fármacos Concomitantes"]</a>
                                                     </li>
@@ -51,20 +51,24 @@
                                                     <li class="nav-item">
                                                         <a class="nav-link" data-toggle="tab" href="#labs" role="tab">@languageContainerService.Keys["Datos de Laboratorio"]</a>
                                                     </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#evaluac" role="tab">@languageContainerService.Keys["Evaluación de la Causalidad"]</a>
-                                                    </li>
+                                                    if((!Data.Grado?.Contains("Grado 0")??false) && (!Data.Grado?.Contains("No Aplica")??false))
+                                                    {
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#evaluac" role="tab">@languageContainerService.Keys["Evaluación de la Causalidad"]</a>
+                                                </li>
+
+                                                    }
                                                     <li class="nav-item">
                                                         <a class="nav-link" data-toggle="tab" href="#obsInfoNotif" role="tab">@languageContainerService.Keys["Observación sobre Información de la Notificación"]</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" data-toggle="tab" href="#accionRegulat" role="tab">@languageContainerService.Keys["Acciones Regulatorias"]</a>
                                                     </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Estatus"]</a>
-                                                    </li>
                                                 }
 
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#procNotifica" role="tab">@languageContainerService.Keys["Estatus"]</a>
+                                                </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#attachments" role="tab">@languageContainerService.Keys["Attachments"]</a>
                                                 </li>

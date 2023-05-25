@@ -224,8 +224,8 @@ namespace DataModel
         public string Probabilidad
         {
             get
-            {
-                MainProbabilidad = Puntuacion switch
+            {                
+                MainProbabilidad = !AlreadySaved?"No Evaluado": Puntuacion switch
                 {
                     <= 0 => "Improbable",
                     > 0 and < 4 => "Condicional",
@@ -267,6 +267,8 @@ namespace DataModel
         private string referencia;
         public string Referencia { get => referencia; set => SetProperty(ref referencia, value); }
 
-
+        // AlreadyChange
+        private bool alreadySaved;
+        public bool AlreadySaved { get => alreadySaved; set => SetProperty(ref alreadySaved, value); }
     }
 }

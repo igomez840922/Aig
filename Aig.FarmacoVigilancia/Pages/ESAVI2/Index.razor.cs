@@ -6,6 +6,7 @@ using DataModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
+using System.Net.Mail;
 
 namespace Aig.FarmacoVigilancia.Pages.ESAVI2
 {
@@ -22,6 +23,12 @@ namespace Aig.FarmacoVigilancia.Pages.ESAVI2
 
         [Inject]
         IBlazorDownloadFileService blazorDownloadFileService { get; set; }
+        [Inject]
+        IImportFileService importFileService { get; set; }
+
+        bool openAttachment { get; set; } = false;
+        AttachmentTB attachment { get; set; } = null;
+
         List<PersonalTrabajadorTB> lPersons { get; set; }
         GenericModel<FMV_Esavi2TB> dataModel { get; set; } = new GenericModel<FMV_Esavi2TB>()
         { Data = new FMV_Esavi2TB() };
@@ -33,7 +40,15 @@ namespace Aig.FarmacoVigilancia.Pages.ESAVI2
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
             base.OnInitialized();
+        }
+        public void Dispose()
+        {
+            bus.UnSubscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
         }
 
         protected override async Task OnParametersSetAsync()
@@ -172,6 +187,44 @@ namespace Aig.FarmacoVigilancia.Pages.ESAVI2
             }
         }
 
+        //Add New Attachment
+        protected async Task ImportarToExcel(AttachmentTB _attachment = null)
+        {
+            //bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+            attachment = _attachment != null ? _attachment : new AttachmentTB();
+            openAttachment = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        //ON CLOSE ATTACHMENT
+        private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
+        {
+            jsRuntime.InvokeVoidAsync("ShowLoading");
+            try
+            {
+                openAttachment = false;
+
+                //bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
+                var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
+                if (message.Attachment != null)
+                {
+                    importFileService.ImportRAMEsavi(message.Attachment);
+                    //message.Attachment.InspeccionId = Inspeccion.Id;
+                    //Alerta.Adjunto = Alerta.Adjunto != null ? Alerta.Adjunto : new AttachmentData();
+                    //Alerta.Adjunto.LAttachments = Alerta.Adjunto.LAttachments != null ? Alerta.Adjunto.LAttachments : new List<AttachmentTB>();
+                    //Alerta.Adjunto.LAttachments.Add(message.Attachment);
+                    FetchData();
+                }
+            }
+            catch { }
+            finally
+            {
+                jsRuntime.InvokeVoidAsync("CloseLoading");
+                this.InvokeAsync(StateHasChanged);
+            }
+        }
     }
 
 }

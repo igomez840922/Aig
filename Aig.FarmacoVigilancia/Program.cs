@@ -152,6 +152,7 @@ builder.Services.AddScoped<IMedicamentosService, MedicamentosService>();
 builder.Services.AddScoped<IApiConnectionFileUploadService, ApiConnectionFileUploadService>();
 builder.Services.AddScoped<IFarmacoService, FarmacoService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<IImportFileService, ImportFileService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 

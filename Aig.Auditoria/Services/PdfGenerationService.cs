@@ -4396,7 +4396,7 @@ namespace Aig.Auditoria.Services
 
                             table.Header(header => {
                                 header.Cell().AlignMiddle().Image(path);
-                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE INSPECCIONES\r\n");
+                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\n");
                                 header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
                             });
 
@@ -4636,7 +4636,7 @@ namespace Aig.Auditoria.Services
 
                             table.Header(header => {
                                 header.Cell().AlignMiddle().Image(path);
-                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE INSPECCIONES\r\n");
+                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\n");
                                 header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
                             });
 
@@ -4906,7 +4906,7 @@ namespace Aig.Auditoria.Services
 
                             table.Header(header => {
                                 header.Cell().AlignMiddle().Image(path);
-                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE AUDITORíAS\r\n");
+                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\n");
                                 header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
                             });
 

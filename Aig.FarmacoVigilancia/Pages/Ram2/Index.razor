@@ -2,6 +2,7 @@
 @using DataModel.Helper;
 @layout BackendLayout
 @attribute [Authorize]
+@implements IDisposable
 <style>
     .modal-dialog.modal-custom {
         max-width: 1240px !important;
@@ -42,6 +43,7 @@
                                         <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ExportToExcel()"><i class="fa fa-file-excel"></i>@languageContainerService.Keys["Export"]</a>
                                         <a href="javascript:void(0)" class="dropdown-item" @onclick="() => FetchData()"><i class="fa fa-random"></i>@languageContainerService.Keys["Update"]</a>
                                         <a href="javascript:void(0)" class="dropdown-item" @onclick="() => OnEdit(0)"><i class="fa fa-plus"></i>@languageContainerService.Keys["New"]</a>
+                                        <a href="javascript:void(0)" class="dropdown-item" @onclick="() => ImportarToExcel()"><i class="fa fa-file-upload"></i>@languageContainerService.Keys["Importar"]</a>
                                     </div>
                                 </div>
                             </div>
@@ -289,4 +291,9 @@ else
 {
     <Aig.FarmacoVigilancia.Components.DeleteConfirmDialog2></Aig.FarmacoVigilancia.Components.DeleteConfirmDialog2>
 
+}
+
+@if (openAttachment)
+{
+    <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
 }
