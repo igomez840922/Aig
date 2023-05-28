@@ -7,6 +7,7 @@ namespace Aig.FarmacoVigilancia.Services
     public interface IImportFileService
     {
         Task ImportRAMEsavi(AttachmentTB attachment);
+        Task<string> TransferRAMEsavi(ImportFVRE data);
     }
 }
 

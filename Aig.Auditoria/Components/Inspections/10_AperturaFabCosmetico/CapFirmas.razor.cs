@@ -144,6 +144,11 @@ namespace Aig.Auditoria.Components.Inspections._10_AperturaFabCosmetico
                             selectedParticipante.Firma = signature;
                             break;
                         }
+                    case 4:
+                        {
+                            Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Firma = signature;
+                            break;
+                        }
                 }
             }
             catch { }

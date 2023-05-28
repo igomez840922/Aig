@@ -154,6 +154,64 @@
                                                     </div>
                                                 }
 
+                                                    @if (Inspeccion?.InspAperFabricanteCosmetMed?.DatosResponsable != null)
+                                                    {
+                                                        <div class="col-sm-6">
+                                                            <h5>@languageContainerService.Keys["Responsable"]</h5>
+                                                            <div class="row clearfix">
+                                                                <div class="col-sm-8">
+                                                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Nombre" />
+                                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Nombre) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.NumRegistro" />
+                                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.NumRegistro) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Cargo" />
+                                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Cargo) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Cedula" />
+                                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Cedula) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-12">
+                                                                    @*<label>@languageContainerService.Keys["Signature"]</label>*@
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <img src="@Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Firma" style="width:100%!important;border:solid 1px;margin-bottom: 5px;">
+                                                                            <button type="button" class="btn btn-sm btn-outline-primary waves-effect"
+                                                                            @onclick="(e)=>{OpenSignature(4);}">
+                                                                                @languageContainerService.Keys["Firmar"]
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
                                                 <div class="col-sm-12">
                                                     <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
                                                 </div>

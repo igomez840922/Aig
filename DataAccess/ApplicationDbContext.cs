@@ -1145,6 +1145,10 @@ namespace DataAccess
             modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
 .Property(e => e.InspeccionAuditoria)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ContenidoGenerico>(x));
+            
+            modelBuilder.Entity<AUD_InspAperFabricanteCosmetMedTB>()
+.Property(e => e.DatosResponsable)
+.HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<DatosPersona>(x));
 
 
             ///////////////////////////////////////////

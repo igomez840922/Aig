@@ -7,6 +7,7 @@ namespace Aig.FarmacoVigilancia.Services
     public interface IApiConnectionService
     {
         HttpClient Client { get; set; }
+        void UpdateUrlBase(string url);
         void Dispose();
     }
 

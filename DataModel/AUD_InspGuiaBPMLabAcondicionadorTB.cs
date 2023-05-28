@@ -2206,7 +2206,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Existen procedimientos escritos para el manejo de materiales, productos intermedios, a granel y productos terminados que han sido rechazados?",
+                        Titulo = "Existen procedimientos escritos para el manejo de materiales, productos intermedios, a granel (Si aplica) y productos terminados que han sido rechazados?",
                         Criterio = "MAYOR",
 
                         Articulo="10.6.1",
@@ -4903,9 +4903,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "producto acondicionado",
-                        Criterio = "MAYOR",
-
+                        Titulo = "producto acondicionado",                       
 
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
@@ -5877,7 +5875,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "El registro es claro e identifica el lote o lotes investigados?",
+                        Titulo = "El registro es claro e identifica los productos investigados?",
                         Criterio = "MAYOR",
 
 

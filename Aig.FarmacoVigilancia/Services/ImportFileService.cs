@@ -2,11 +2,16 @@
 using DataAccess;
 using DataAccess;
 using DataModel;
+using DataModel.Models;
 using MailKit;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MimeKit.Utils;
+using Newtonsoft.Json;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Net.Http.Headers;
 using System.Reflection;
+using System.Text;
 using static Duende.IdentityServer.Models.IdentityResources;
 
 namespace Aig.FarmacoVigilancia.Services
@@ -14,10 +19,14 @@ namespace Aig.FarmacoVigilancia.Services
     public class ImportFileService : IImportFileService
     {
         private readonly IDalService DalService;
+        private readonly IApiConnectionService apiConnectionService;
+        private readonly IConfiguration configuration;
 
-        public ImportFileService(IDalService dalService)
+        public ImportFileService(IDalService dalService, IApiConnectionService apiConnectionService, IConfiguration configuration)
         {
             DalService = dalService;
+            this.apiConnectionService = apiConnectionService;
+            this.configuration = configuration;
         }
 
 
@@ -100,6 +109,36 @@ namespace Aig.FarmacoVigilancia.Services
                 }
             }
             catch (Exception ex) { }
+        }
+
+        public async Task<string> TransferRAMEsavi(ImportFVRE data)
+        {
+            try
+            {
+                if(!configuration["ApiUrlFadi"].Contains(apiConnectionService.Client.BaseAddress.AbsoluteUri))
+                    apiConnectionService.UpdateUrlBase( configuration["ApiUrlFadi"]);
+                //apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.data.token);
+
+                //var myDict = new Dictionary<string, object>()
+                //            {
+                //                { "term",filter},
+                //                { "pageIndex","1"},
+                //                { "pageSize","40"}
+                //            };
+                StringContent content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+                var result = await apiConnectionService.Client.PostAsync("tramitegen/NuevoFVRE", content);
+                var resultContent = await result.Content.ReadAsStringAsync();
+                if (result.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+                else
+                {
+                    return resultContent.Replace("\"","");
+                }
+            }
+            catch (Exception ex) { return ex.Message; }
+            return "no se pudo crear el trámite";
         }
 
     }

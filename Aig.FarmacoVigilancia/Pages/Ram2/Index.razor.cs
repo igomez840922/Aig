@@ -10,6 +10,9 @@ using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
 using System.Net.Mail;
 using Aig.FarmacoVigilancia.Pages.Alert;
+using Newtonsoft.Json;
+using System.Text;
+using DataModel.Helper;
 
 namespace Aig.FarmacoVigilancia.Pages.Ram2
 {
@@ -226,6 +229,55 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
                 this.InvokeAsync(StateHasChanged);
             }
         }
+
+        private async Task TransferToFadi(long id)
+        {
+            jsRuntime.InvokeVoidAsync("ShowLoading");
+            try
+            {
+                var data = await ramService.Get(id);
+                if (data != null)
+                {
+                    /*
+                     FechaRecibidoCNFV = (DateTime)data.Cell(1).GetValue<DateTime>(),
+                                            CodigoNotiFacedra = (string)data.Cell(3).GetValue<string>(),
+                                            CodigoCNFV = (string)data.Cell(3).GetValue<string>(),
+                                            LFarmacos = new List<FMV_RamFarmacoTB>() {
+                                                new FMV_RamFarmacoTB()
+                                                {
+                                                    FarmacoSospechosoComercial= (string)data.Cell(7).GetValue<string>(),
+                                                    FarmacoSospechosoDci= (string)data.Cell(7).GetValue<string>(),
+                                                }
+                                            }
+                     */
+                    var dataImport = new ImportFVRE()
+                    {
+                        NumNotificacion = data.CodigoCNFV,
+                        FechaNotificacion = data.FechaRecibidoCNFV,
+                        FarmacoNotificado = data.LFarmacos?.FirstOrDefault()?.FarmacoSospechosoDci ?? "",
+                        TipoTramiteFVRE = TipoTramiteFVRE.RAM
+                    };
+                    var result = await importFileService.TransferRAMEsavi(dataImport);
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", result);
+                    }
+                    else
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowMessage", "Trámite exportado satisfactoriamente");
+                    }
+                }
+
+            }
+            catch { }
+            finally
+            {
+                jsRuntime.InvokeVoidAsync("CloseLoading");
+                this.InvokeAsync(StateHasChanged);
+            }
+
+        }
+
     }
 
 }

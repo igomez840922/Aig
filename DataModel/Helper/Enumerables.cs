@@ -1072,4 +1072,11 @@ namespace DataModel.Helper
         Cap40 = 40,
     }
 
+    public enum TipoTramiteFVRE : int
+    {
+        [Description("RAM")]
+        RAM = 0,
+        [Description("ESAVI")]
+        ESAVI = 1,
+    }
 }

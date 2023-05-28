@@ -19,6 +19,7 @@ namespace DataModel
 
         public string NumIdoneidad { get; set; }
 
+        public string Firma { get; set; }
 
         public string Correo { get; set; }
 

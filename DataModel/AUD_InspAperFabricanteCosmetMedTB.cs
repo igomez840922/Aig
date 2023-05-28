@@ -10,6 +10,11 @@ namespace DataModel
 {
     public class AUD_InspAperFabricanteCosmetMedTB : SystemId
     {
+        public AUD_InspAperFabricanteCosmetMedTB()
+        {
+            DatosResponsable = new DatosPersona();
+        }
+
         private AUD_InspeccionTB inspeccion;
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
@@ -23,6 +28,11 @@ namespace DataModel
         private AUD_DatosRegente datosRegente;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_DatosRegente DatosRegente { get => datosRegente; set => SetProperty(ref datosRegente, value); }
+
+        //Datos del Responsable
+        private DatosPersona datosResponsable;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public DatosPersona DatosResponsable { get => datosResponsable; set => SetProperty(ref datosResponsable, value); }
 
         //Productos que fabricarán 
         private AUD_InspAperFabricanteProdFabrican prodFabrican;
@@ -44,9 +54,6 @@ namespace DataModel
         private AUD_ContenidoGenerico areasAuxiliares;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoGenerico AreasAuxiliares { get => areasAuxiliares; set => SetProperty(ref areasAuxiliares, value); }
-
-
-
 
 
 

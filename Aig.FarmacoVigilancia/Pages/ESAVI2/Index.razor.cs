@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Aig.FarmacoVigilancia.Events.Language;
 using System.Net.Mail;
+using DataModel.Helper;
+using Duende.IdentityServer.Models;
 
 namespace Aig.FarmacoVigilancia.Pages.ESAVI2
 {
@@ -225,6 +227,55 @@ namespace Aig.FarmacoVigilancia.Pages.ESAVI2
                 this.InvokeAsync(StateHasChanged);
             }
         }
+
+        ///Transfer to FADI
+        private async Task TransferToFadi(long id)
+        {
+            jsRuntime.InvokeVoidAsync("ShowLoading");
+            try
+            {
+                var data = await esaviService.Get(id);
+                if (data != null)
+                {
+                    /*
+                     FechaRecibidoCNFV = (DateTime)data.Cell(1).GetValue<DateTime>(),
+                                                //IdFacedra = (string)data.Cell(3).GetValue<string>(),
+                                                CodCNFV = (string)data.Cell(3).GetValue<string>(),
+                                                Notificador = "Servicio Web",
+                                                LVacunas = new List<FMV_EsaviVacunaTB>() {
+                                                new FMV_EsaviVacunaTB()
+                                                {
+                                                    VacunaComercial= (string)data.Cell(7).GetValue<string>(),
+                                                }
+                     */
+                    var dataImport = new ImportFVRE()
+                    {
+                        NumNotificacion = data.CodCNFV,
+                        FechaNotificacion = data.FechaRecibidoCNFV,
+                        FarmacoNotificado = data.LVacunas?.FirstOrDefault()?.VacunaComercial ?? "",
+                        TipoTramiteFVRE = TipoTramiteFVRE.ESAVI
+                    };
+                    var result = await importFileService.TransferRAMEsavi(dataImport);
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowError", result);
+                    }
+                    else
+                    {
+                        await jsRuntime.InvokeVoidAsync("ShowMessage", "Trámite exportado satisfactoriamente");
+                    }
+                }
+
+            }
+            catch { }
+            finally
+            {
+                jsRuntime.InvokeVoidAsync("CloseLoading");
+                this.InvokeAsync(StateHasChanged);
+            }
+           
+        }
+
     }
 
 }

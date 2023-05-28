@@ -165,7 +165,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
@@ -774,7 +774,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             if (inspection.DatosEstablecimiento != null)
                             {
@@ -1857,7 +1857,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             if (inspection.DatosEstablecimiento != null)
                             {
@@ -2666,7 +2666,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             if (inspection.DatosEstablecimiento != null)
                             {
@@ -3799,7 +3799,7 @@ namespace Aig.Auditoria.Services
 
                             table.Header(header => {
                                 header.Cell().AlignMiddle().Image(path);
-                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE INSPECCIONES\r\n");
+                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\n");
                                 header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
                             });
 
@@ -3814,7 +3814,7 @@ namespace Aig.Auditoria.Services
                             //column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Nombre del establecimiento:{0}", inspection.DatosEstablecimiento?.Nombre));
@@ -4089,7 +4089,7 @@ namespace Aig.Auditoria.Services
 
                             table.Header(header => {
                                 header.Cell().AlignMiddle().Image(path);
-                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\nSECCIÓN DE INSPECCIONES\r\n");
+                                header.Cell().AlignLeft().AlignMiddle().Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS \r\nESTABLECIMIENTOS FARMACÉUTICOS Y NO FARMACÉUTICO \r\n");
                                 header.Cell().AlignRight().AlignMiddle().Text(string.Format("Acta N°: {0}\r\nEstatus: {1}", inspection.NumActa, DataModel.Helper.Helper.GetDescription(inspection.StatusInspecciones)));
                             });
 
@@ -5674,7 +5674,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
@@ -5869,6 +5869,39 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format(" ")).Bold();
                             column.Item().AlignLeft().Text("El establecimiento se compromete a que los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos, estén completos y acorde con la Normativa vigente y según las actividades a las que se dedicará el establecimiento.  De igual forma el establecimiento deberá tener a disposición de la Autoridad Reguladora los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos cuando esta lo solicite y al momento de Auditoría de Buenas prácticas de Fabricación.");
+
+                            if (!string.IsNullOrEmpty(inspection.InspAperFabricanteCosmetMed.DatosResponsable?.Firma))
+                            {
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                        columns.RelativeColumn(1);
+                                    });
+
+                                    table.Cell().ColumnSpan(3).AlignLeft().Text("Firma del responsable del establecimiento:").Bold();
+                                    if (!string.IsNullOrEmpty(inspection.InspAperFabricanteCosmetMed.DatosResponsable?.Firma))
+                                    {
+                                        //var bytes = Convert.FromBase64String(base64encodedstring);
+                                        //var contents = new StreamContent(new MemoryStream(bytes));
+                                        byte[] data = Convert.FromBase64String(inspection.InspAperFabricanteCosmetMed.DatosResponsable.Firma.Split("image/png;base64,")[1]);
+                                        MemoryStream memoryStream = new MemoryStream(data);
+                                        table.Cell().AlignCenter().Image(memoryStream, ImageScaling.FitArea);
+                                    }
+                                    else
+                                    {
+                                        table.Cell().AlignLeft().Padding(3).Text("");
+                                    }
+                                    table.Cell().ColumnSpan(2).AlignLeft().Padding(3).Text("");
+
+                                    table.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1}", inspection.InspAperFabricanteCosmetMed.DatosResponsable?.Nombre, inspection.InspAperFabricanteCosmetMed.DatosResponsable?.Cedula));
+
+                                    table.Cell().ColumnSpan(2).AlignLeft().Padding(3).Text("");
+                                });
+
+                            }
 
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("CRITERIO TÉCNICO")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo N° 95 del 14 de mayo de 2019, por el cual se reglamentan las Buenas Prácticas de Fabricación de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.DatosEstablecimiento?.Nombre, inspection.DatosEstablecimiento?.Direccion, (inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE"), DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricanteCosmetMed.ProdFabrican?.TipoProductos ?? enumTipoProductosImportacion.Otros) + (inspection.InspAperFabricanteCosmetMed.ProdFabrican?.TipoProductos == enumTipoProductosImportacion.Otros ? inspection.InspAperFabricanteCosmetMed.ProdFabrican?.ProductosDesc ?? "" : ""), inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones?.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
@@ -6102,7 +6135,7 @@ namespace Aig.Auditoria.Services
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
-
+                            
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("I. INTRODUCCIÓN".ToUpper())).Bold();
@@ -8063,7 +8096,7 @@ namespace Aig.Auditoria.Services
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
-
+                            
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
 
@@ -9292,8 +9325,7 @@ namespace Aig.Auditoria.Services
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
-
-
+                            
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
@@ -11998,7 +12030,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("CRITERIOS DE EVALUACIÓN:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Los diferentes ítems a evaluar de la Guía de Verificación de Buenas Prácticas de Manufactura (BPM) de Productos Naturales Medicinales para uso Humano, se clasificarán como críticos, calificables e informativos."));
@@ -14757,7 +14789,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("V. DATOS GENERALES DEL ESTABLECIMIENTO".ToUpper())).Bold();
@@ -14779,14 +14811,14 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("{0}", inspection.InspGuiaBPM_Bpa.ActComercialAprobada));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Regente Farmacéutico")).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Lic: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.Nombre??""));
+                            column.Item().AlignLeft().Text(string.Format("{0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.Nombre??""));
                             column.Item().AlignLeft().Text(string.Format("N° Idoneidad: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.NumRegistro ?? ""));
                             //column.Item().AlignLeft().Text(string.Format("Móvil: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.TelefonoMovil ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.TelefonoResid ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiaBPM_Bpa.DatosRegente?.Email ?? ""));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Representante Legal")).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Lic: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Nombre ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("{0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Nombre ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Cédula: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Cedula ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Teléfono: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.TelefonoMovil ?? ""));
                             column.Item().AlignLeft().Text(string.Format("Correo electrónico: {0}", inspection.InspGuiaBPM_Bpa.DatosRepresentLegal?.Email ?? ""));
@@ -15382,7 +15414,7 @@ namespace Aig.Auditoria.Services
                             //column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Datos Generales:".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.DatosEstablecimiento?.Nombre));
@@ -15728,7 +15760,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("No. Recibo: {0}", inspection.DatosEstablecimiento.ReciboPago));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento?.TipoEstablecimiento ?? enumAUD_TipoEstablecimiento.None)));
 
                             if (inspection.DatosEstablecimiento != null)
                             {

@@ -26,6 +26,11 @@ namespace Aig.FarmacoVigilancia.Services
             //Client.DefaultRequestHeaders.Add("Basic", "ZmRvdEQ2OjQ1NE1lV2JvakpN");
         }
 
+        public void UpdateUrlBase(string url)
+        {
+            Client.BaseAddress = new Uri(url);
+        }
+
         public void Dispose()
         {
             try { Client.Dispose(); Client = null; }
