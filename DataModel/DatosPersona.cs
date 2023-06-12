@@ -27,7 +27,7 @@ namespace DataModel
         private string cargo;
         public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
 
-
+        
         //provincia
         private string provincia;
         public string Provincia { get => provincia; set => SetProperty(ref provincia, value); }

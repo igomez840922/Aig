@@ -234,7 +234,7 @@ namespace DataAccess
             return null;
         }
 
-        public void Reload() {
+        private void Reload() {
             try { DBContext.ChangeTracker.Clear(); }
             catch { }            
         }

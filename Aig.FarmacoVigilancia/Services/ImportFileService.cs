@@ -1,6 +1,5 @@
 ﻿using ClosedXML.Excel;
 using DataAccess;
-using DataAccess;
 using DataModel;
 using DataModel.Models;
 using MailKit;

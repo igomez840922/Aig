@@ -2040,37 +2040,33 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Al equipo limpio se le coloca una etiqueta que indique lo siguiente? ",
-                        IsHeader = true,
+                        Criterio = "CRITICO",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         Articulo="8.1.7"
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre e identificación del equipo",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Fecha cuando fue realizada la limpieza",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Nombre e identificación de lote del último producto fabricado",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Nombre e identificación de lote del producto a fabricar, (cuando aplique) ",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Firma del operario que realizó la limpieza y de quien la verificó ",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -2097,31 +2093,28 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Existen registros de los mantenimientos realizados que incluyan",
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                         Articulo="8.1.8",
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre e identificación del equipo ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Fecha de realizado el mantenimiento ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Descripción breve de lo realizado",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Firma de las personas responsables de la ejecución, supervisión y recepción del mantenimiento realizado",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                 }
@@ -2661,7 +2654,7 @@ namespace DataModel
                         Titulo = "Cada lote de material de envase o empaque recibido es rotulado a su ingreso, con una etiqueta que incluye: ",
                         Articulo="9.1.7, 9.1.3",
                         Criterio = "CALIFICABLE",
-                        IsHeader=true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -2714,8 +2707,7 @@ namespace DataModel
                         Titulo = "Cada envase de materia prima está identificado con una etiqueta que incluya: ",
                         Articulo="9.1.8, 9.1.3",
                         Criterio = "CALIFICABLE",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -2946,55 +2938,46 @@ namespace DataModel
                         Titulo = "Cada recipiente conteniendo materia prima dispensada se identifica con una etiqueta con la siguiente información",
                         Criterio = "CRITICO",
                         Articulo="9.2.1, 9.2.2",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre de la materia prima.",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Código o número de lote o número de ingreso.",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Nombre del producto a fabricar.",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Código de lote del producto a fabricar. ",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Contenido neto (Sistema Internacional de Unidades SI)",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Fecha de dispensado",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Nombre y firma de la persona que dispensó",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Nombre y firma de la persona que verificó.",
-                        Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -3443,134 +3426,114 @@ namespace DataModel
                     {
                         Titulo = "Las especificaciones de la materia prima, material de envase, empaque, productos intermedios o granel y producto terminado,  incluyen:",
                         Articulo="10.2.2",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre del material o producto, (denominación común internacional, nombre científico cuando corresponda)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Código de referencia interna",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Referencia, si la hubiere, de los libros oficiales vigentes.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Fórmula química (cuando aplique)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Requisitos cuali y cuantitativos con límites de aceptación (cuando aplique)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Muestra del material impreso (cuando aplique).",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Condiciones de almacenamiento y precauciones (cuando aplique)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Proveedores aprobados y marcas comerciales (cuando aplique)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "i) Descripción de la forma farmacéutica y detalles de empaque (cuando aplique).",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "j) Estabilidad (cuando aplique).",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "k) Vida útil para material de acondicionamiento",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "l) Fecha de vencimiento para productos terminados.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Las especificaciones de las materias primas naturales incluyen:",
                         Articulo="10.2.3",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre científico de la materia prima vegetal o animal o nombre de la materia prima mineral.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Parte utilizada y su estado",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Detalles de la procedencia (país o región de origen)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Descripción de la materia prima, basado en la inspección organoléptica y macromorfológica.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Contenido de materias extrañas",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Contenido de humedad. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Características microbiológicas",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Contaminación por plaguicidas, metales pesados o aflatoxinas, cuando aplique",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -3598,97 +3561,82 @@ namespace DataModel
                     {
                         Titulo = "¿La fórmula maestra incluye lo siguiente? ",
                         Articulo="10.2.6",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre y código del producto correspondiente a su especificación",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Número de registro sanitario. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Descripción de la forma farmacéutica.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Fecha de emisión.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Nombre de la Persona responsable que la emitió y su firma",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Fecha de aprobación",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Nombre de la Persona responsable que la aprobó y su firma",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Fórmula cuali-cuantitativa por unidad de dosis expresada en sistema internacional",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "i) Código y nombre de la materia prima",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "j). Proceso de manufactura",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "k) Precauciones y medidas especiales durante el proceso de fabricación.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "l) Equipo a usar",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "m) Análisis intermedios (control en procesos).",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "n) Especificaciones.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "o) Cualquier otro documento que se considere necesario.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -3744,200 +3692,169 @@ namespace DataModel
                     {
                         Titulo = "La Orden de producción además de lo indicado en la formula maestra contiene los siguientes datos",
                         Articulo="10.2.9",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Tamaño del lote.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Fecha de emisión.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Número de lote",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Fecha de inicio y finalización de la producción",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Fecha de expiración del producto.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Firma de las personas que autorizan la orden de producción.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Número de lote de la materia prima.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Firma de la persona que despacha, recibe y verifica los insumos.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "i) Firma de las personas que intervienen y supervisan los procesos",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "j) Instrucciones para la toma de muestras en las etapas que sean necesarias.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "k) Resultados de los análisis del producto en proceso cuando aplique",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "l) Registro de controles durante el proceso y espacio para anotar observaciones.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "m) Declaración del rendimiento real y teórico con los límites de aceptación.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "n) Indicaciones de las precauciones necesarias para el almacenamiento del producto a granel si fuera necesario.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "o) Fórmula aplicada al tamaño de lote. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "¿Cuenta la orden de envasado y empaque con la siguiente información?",
                         Articulo="10.2.10",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre completo y código del producto",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Forma farmacéutica ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Número de registro sanitario.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d)Tamaño del lote",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Fecha de emisión",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Número de lote",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Cantidad del producto a envasar o empacar.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Fecha de inicio y finalización de las operaciones de acondicionamiento.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "i) Fecha de expiración del producto. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "j) Firma de las personas que autorizan la orden de envase y empaque",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "k) Cantidad y número de lote de cada material de envase y empaque a utilizar.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "j) Firma de la persona que despacha, recibe y verifica los insumos. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "m) Firma de las personas que intervienen y supervisan los procesos. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "n) Registro de controles durante el proceso y espacio para anotar observaciones",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "o) Muestras del material de acondicionamiento impreso que se haya utilizado, incluyendo muestras con el número de lote, fecha  de expiración y cualquier impresión suplementaria, en caso de que no se pueda adjuntar a la orden de producción las muestras  indicadas, se debe asegurar su trazabilidad a una muestra retenida",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "p) Cantidades de los materiales impresos de acondicionamiento que han sido devueltos al almacén o destruidos y las cantidades de producto obtenido.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                 }
@@ -4405,49 +4322,36 @@ namespace DataModel
                         Titulo = "¿Los productos a granel están identificados con una etiqueta que contenga la siguiente información?",
                         Criterio = "CRITICO",
                         Articulo = "11.10",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a. Nombre del producto a granel. ",
-                        Criterio = "CRITICO",
-                        Articulo = "11.10",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b. Número de lote",
-                        Criterio = "CRITICO",
-                        Articulo = "11.10",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c. Etapa del proceso.",
-                        Criterio = "CRITICO",
-                        Articulo = "11.10",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d. Tamaño de lote",
-                        Criterio = "CRITICO",
-                        Articulo = "11.10",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e. Fecha",
-                        Criterio = "CRITICO",
-                        Articulo = "11.10",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f. Firma de la persona responsable de ejecutar la última etapa. ",
-                        Criterio = "CRITICO",
-                        Articulo = "11.10",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -5020,55 +4924,47 @@ namespace DataModel
                     {
                         Titulo = "¿Se encuentra debidamente identificadas las muestras con una etiqueta que indique lo siguiente?",
                         Articulo = "13.2.4",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre del material o producto. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Descripción de la muestra",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Cantidad",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Código o número de lote",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Fecha de muestreo.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Recipientes de los que se han tomado las muestras. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Nombre y firma de la persona que realiza el muestreo.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Fecha de expiración o reanálisis, según aplique. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
@@ -5192,86 +5088,74 @@ namespace DataModel
                     {
                         Titulo = "Cada envase de reactivos químicos del laboratorio lleva una etiqueta de identificación con la siguiente información:",
                         Articulo = "13.3.4",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre del reactivo",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Concentración o pureza (cuando aplique)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Fecha de preparación (cuando aplique)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Fecha de vencimiento",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Nombre y firma de la persona que realizo la preparación (cuando aplique)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Condiciones de almacenamiento (condiciones específicas) ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) para soluciones volumétricas: fecha de valoración y concentración ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Cada medio microbiológico empleado por el laboratorio lleva una etiqueta de identificación con la siguiente información:",
                         Articulo = "13.3.5",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Fecha de preparación.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Fecha de vencimiento.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Nombre y firma de la persona que los preparó.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Condiciones de almacenamiento (condiciones especificas)",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                 }
@@ -5410,67 +5294,57 @@ namespace DataModel
                     {
                         Titulo = "¿El laboratorio cuenta con registros escritos para el manejo de productos, devueltos por quejas o reclamos que incluya la siguiente  información?",
                         Articulo = "14.1.3",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Nombre del producto natural medicinal. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Forma farmacéutica.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Número de lote del producto. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Fecha de producción y fecha de expiración",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Nombre y datos generales de la persona que realizó el reclamo",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Fecha de reclamo",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Motivo de reclamo",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Revisión de las condiciones del producto cuando se recibe",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "i) Investigación que se realiza.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "j) Determinación de las acciones correctivas y medidas adoptadas",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
@@ -5619,55 +5493,47 @@ namespace DataModel
                     {
                         Titulo = "El contrato a terceros contiene los siguientes aspectos:",
                         Articulo = "15.1.5",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader = true,
+                        Criterio = "CALIFICABLE",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Fue redactado por personas competentes y autorizadas.?",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "b) Aceptación de los términos del contrato por las partes. ",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "c) Aceptación del cumplimiento del Reglamento Centroamericano en Buenas Prácticas de Manufactura de productos naturales  medicinales para uso humano.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "d) Abarca la producción y el análisis o cualquier otra gestión técnica relacionada con estos.",
-                        Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "e) Describe el manejo de materias primas, material de acondicionamiento, graneles y producto terminado, en caso de que sean  rechazados. ",
-                        Criterio = "CALIFICABLES",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "f) Permite el ingreso del contratante a las instalaciones del contratista (contratado), para auditorias.",
-                        Criterio = "CALIFICABLES",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "g) Permite el ingreso del contratista (contratado) a las instalaciones del contratante.",
-                        Criterio = "CALIFICABLES",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "h) Lista de cada uno de los productos o servicios de análisis objeto del contrato",
-                        Criterio = "CALIFICABLES",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()

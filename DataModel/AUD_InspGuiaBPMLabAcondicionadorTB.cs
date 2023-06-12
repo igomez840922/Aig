@@ -192,7 +192,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Es importador de:",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                         {
@@ -267,8 +267,9 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Acondicionan y analizan productos a terceros?\r\nCuáles y de qué empresa(s)?. Anexar Listado",
-                        IsHeader = true,
+                        //IsHeader = true,
                         Criterio = "Crítico",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -677,7 +678,7 @@ namespace DataModel
                         Titulo = "Utiliza diariamente el personal dedicado a la producción (Acondicionamiento), que este en contacto directo con el producto terminado, uniforme completo:",
                         Criterio = "CRÍTICO",
                         Articulo="7.5.5",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -957,12 +958,12 @@ namespace DataModel
                         Criterio = "CRÍTICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() }
                     },
-                    new ContenidoPreguntas()
-                    {
-                        Titulo = "Para las materias primas y productos que requieren condiciones especiales de enfriamiento, existe cámara fría?",
-                        Criterio = "CRÍTICO",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() }
-                    },
+                    //new ContenidoPreguntas()
+                    //{
+                    //    Titulo = "Para las materias primas y productos que requieren condiciones especiales de enfriamiento, existe cámara fría?",
+                    //    Criterio = "CRÍTICO",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() }
+                    //},
                     new ContenidoPreguntas()
                     {
                         Titulo = "Se llevan registros?",
@@ -1160,7 +1161,7 @@ namespace DataModel
                         Titulo = "Las áreas de acondicionamiento (elaboración):",
                         Criterio = "CRÍTICO",
                         Articulo="8.4.2",
-                        IsHeader=true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -1227,7 +1228,7 @@ namespace DataModel
                         Titulo = "Las áreas de Empaque Primario:",
                         Criterio = "CRÍTICO",
                         Articulo="8.4.3",
-                        IsHeader=true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -1358,7 +1359,7 @@ namespace DataModel
                         Titulo = "EL ÁREA DE EMPAQUE",
                         Criterio = "MAYOR",
                         Articulo="8.5.2",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -2077,7 +2078,7 @@ namespace DataModel
                         Criterio = "MAYOR",
 
                         Articulo="10.1.10",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -2714,9 +2715,8 @@ namespace DataModel
                     {
                         Titulo = "Incluyen las especificaciones del material de acondicionamiento, productos intermedios o granel (si aplica) y producto terminado lo siguiente:",
                         Criterio = "MAYOR",
-
                         Articulo="11.2.2",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -3018,10 +3018,8 @@ namespace DataModel
                     {
                         Titulo = "Tiene la orden de acondicionamiento además de lo indicado en la fórmula maestra la información siguiente: ",
                         Criterio = "MAYOR",
-
                         Articulo="11.2.8",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -3175,7 +3173,6 @@ namespace DataModel
 
                         Articulo="11.2.9",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -3737,7 +3734,6 @@ namespace DataModel
 
                         Articulo="12.2.3",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -5073,7 +5069,6 @@ namespace DataModel
 
                         Articulo="15.1.5",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -6039,8 +6034,7 @@ namespace DataModel
                     {
                         Titulo = "El informe de estas autoinspecciones incluye:",
                         Criterio = "MAYOR",
-
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {

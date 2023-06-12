@@ -66,6 +66,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                <div class="col-sm-4">
+                                                    <label>@languageContainerService.Keys["Telefono"]</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.TelefonoMovil" />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal.TelefonoMovil) />
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                         <div class="col-sm-4">
                                                             <label>@languageContainerService.Keys["Profession"]</label>
                                                             <div class="form-group">

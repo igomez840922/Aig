@@ -265,11 +265,11 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?",
+                        Titulo = "Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados? Formatos de registros?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Para las materias primas y productos que requieren condiciones especiales de enfriamiento, existe cámara fría? ¿Formatos de registros?",
+                        Titulo = "Para las materias primas y productos que requieren condiciones especiales de enfriamiento, existe cámara fría? Formatos de registros?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
@@ -294,8 +294,8 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El área de muestreo cumple con las siguientes características",
-                        IsHeader = true,
-                    },
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                   },
                         new ContenidoPreguntas(){
                         Titulo = "a) Las paredes, pisos y techos son lisos y con curvas sanitarias",
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), },
@@ -327,6 +327,10 @@ namespace DataModel
                         new ContenidoPreguntas(){
                         Titulo = "Tienen estas áreas acceso restringido y bajo llave?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existen procedimientos escritos para identificar, separar, retirar y destruir los productos rechazados, retirados, vencidos y devueltos? Formatos de registros?",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , },
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe un área separada y de acceso restringido para almacenar material impreso (etiquetas, estuches, insertos y envases impresos)? ",
@@ -402,8 +406,8 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Las áreas de producción (acondicionamiento):",
-                        IsHeader = true,
-                    },
+                           LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
+                 },
                         new ContenidoPreguntas(){
                         Titulo = "Están identificadas y separadas las áreas para la producción de sólidos, líquidos y semisólidos?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
@@ -442,8 +446,8 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Las áreas de empaque primario:",
-                        IsHeader = true,
-                    },
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
+                   },
                         new ContenidoPreguntas(){
                         Titulo = "Están identificadas y separadas las áreas para el empaque primario de sólidos, líquidos y semisólidos? ",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
@@ -550,8 +554,8 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Según las operaciones que se realizan se dispone de las siguientes áreas:",
-                        IsHeader = true,
-                    },
+                                   LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                  },
                         new ContenidoPreguntas(){
                         Titulo = "- microbiología",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -570,7 +574,7 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe equipo de seguridad como: ",
-                        IsHeader = true,
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "- ducha",
@@ -728,6 +732,10 @@ namespace DataModel
                         Titulo = "Existe un sistema de tratamiento de aire que evite el riesgo de la contaminación de los productos y las personas?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
+                        new ContenidoPreguntas(){
+                        Titulo = "Existe un programa de mantenimiento preventivo para este sistema? Formatos de registro?",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
              };
         }
         public void Inicializa_MaterialesProductos()
@@ -737,7 +745,7 @@ namespace DataModel
                         
                         new ContenidoPreguntas(){
                         Titulo = "Existen procedimientos escritos que describan las operaciones de:",
-                        IsHeader = true,
+                       LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "- Recepción e identificación de materiales y productos",
@@ -901,8 +909,8 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "La unidad de control de calidad tiene a su disposición la documentación siguiente:",
-                        IsHeader = true,
-                    },
+                       LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                     },
                         new ContenidoPreguntas(){
                         Titulo = "a) Especificaciones escritas de los materiales y producto terminado.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -941,7 +949,7 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Especifique:",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Existe contrato?",

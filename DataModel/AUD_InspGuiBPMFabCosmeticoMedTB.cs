@@ -4650,7 +4650,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                    Titulo = "5.1 Area de embasado",
+                    Titulo = "5.1 Area de envasado",
                     IsHeader = true,
                 },new ContenidoPreguntas()
                 {
@@ -5178,7 +5178,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "Existen patrones y materiales de referencia? Se sigue este procedimiento? (Verifique)?",
+                Titulo = "Existen patrones y materiales de referencia?",
                 Criterio = "N",
                 Articulo="419",
                 PuntosMax = (decimal)1.5,

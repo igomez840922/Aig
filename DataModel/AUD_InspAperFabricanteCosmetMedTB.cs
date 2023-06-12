@@ -109,7 +109,8 @@ namespace DataModel
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Organigramas (General y específicos)",
-                                 IsHeader = true,
+                                 //IsHeader = true,
+                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "Descripción de puestos",

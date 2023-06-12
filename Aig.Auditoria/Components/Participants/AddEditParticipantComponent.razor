@@ -56,6 +56,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                <label>@languageContainerService.Keys["Area Evaluada"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Participante.AreaEvaluada" />
+                                        <ValidationMessage For=@(() => Participante.AreaEvaluada) />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <br><br>

@@ -27,6 +27,8 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         ISocService socService { get; set; }
 
         [Parameter]
+        public long Id { get; set; }
+
         public DataModel.FMV_Ram2TB Data { get; set; }
         List<PersonalTrabajadorTB> lEvaluators { get; set; } = new List<PersonalTrabajadorTB>();
         List<FMV_SocTB> lSoc { get; set; } = new List<FMV_SocTB>();
@@ -400,9 +402,18 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         //Fill Data
         protected async Task FetchData()
         {
+            if(Data == null)
+            {
+                Data = await ramService.Get(Id);
+                if (Data == null)
+                {
+                    Data = new FMV_Ram2TB();
+                }
+            }
+
             lSoc = lSoc != null && lSoc.Count > 0 ? lSoc : await socService.GetAll();
             lEvaluators = lEvaluators != null && lEvaluators.Count > 0 ? lEvaluators : await evaluatorService.GetAll();
-            lTipoInstitucion = lTipoInstitucion != null && lTipoInstitucion.Count > 0 ? lTipoInstitucion : await tipoInstitucionService.GetAll();
+            lTipoInstitucion =  lTipoInstitucion != null && lTipoInstitucion.Count > 0 ? lTipoInstitucion : await tipoInstitucionService.GetAll();
             lProvincias = lProvincias != null && lProvincias.Count > 0 ? lProvincias : await provicesService.GetAll();
 
             lInstitucionDestino = await destinyInstituteService.FindAll(x => (Data.TipoInstitucionId != null ? x.TipoInstitucionId == Data.TipoInstitucionId : true) && (Data.ProvinciaId != null ? x.ProvinciaId == Data.ProvinciaId : true));
@@ -720,10 +731,10 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         //ON CLOSE ATTACHMENT
         private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
         {
-            openAttachment = false;
-
             bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
 
+            openAttachment = false;
+            
             var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>();
 
             if (message.Attachment != null)

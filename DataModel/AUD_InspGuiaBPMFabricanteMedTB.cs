@@ -335,7 +335,7 @@ namespace DataModel
                     {
                         Titulo = "Tienen aprobadas por parte de la autoridad reguladora las condiciones para las siguientes áreas de producción:",
                         Criterio = "Informativo",
-                        IsHeader = true,
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(){ HideEvaluacion=true}},
                     },
                     new ContenidoPreguntas()
                     {
@@ -364,7 +364,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Lactámicos",
+                        Titulo = "β-Lactámicos",
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
@@ -1086,7 +1086,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?",
+                        Titulo = "Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?. Formatos de registros?",
                         Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
@@ -1258,7 +1258,8 @@ namespace DataModel
                     {
                         Titulo = "Existen áreas separadas, bajo llave, de acceso restringido e identificadas para almacenar materias primas y productos psicotrópicos y estupefacientes?",
                         Criterio = "CRITICO",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                        //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(), new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
@@ -1423,7 +1424,7 @@ namespace DataModel
                         Titulo = "Las áreas de producción (elaboración): ",
                         Criterio = "CRITICO",
                         Articulo="8.4.2",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() }
                     },
                     new ContenidoPreguntas()
                     {
@@ -1495,7 +1496,7 @@ namespace DataModel
                         Titulo = "Las áreas de empaque primario:",
                         Criterio = "CRITICO",
                         Articulo="8.4.3",
-                        IsHeader=true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() }
                     },
                     new ContenidoPreguntas()
                     {
@@ -1638,7 +1639,7 @@ namespace DataModel
                         Titulo = "El área de empaque:",
                         Criterio = "MAYOR",
                         Articulo="8.5.2",
-                        IsHeader = true,
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(){ HideEvaluacion=true}},
                     },
                     new ContenidoPreguntas()
                     {
@@ -1734,7 +1735,7 @@ namespace DataModel
                     {
                         Titulo = "Según las operaciones que se realizan se dispone de las siguientes áreas:",
                         Criterio = "CRITICO",
-                        IsHeader = true,
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(){ HideEvaluacion=true}},
                     },
                     new ContenidoPreguntas()
                     {
@@ -1760,7 +1761,7 @@ namespace DataModel
                     {
                         Titulo = "Existe equipo de seguridad como:",
                         Criterio = "CRITICO",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -1808,7 +1809,7 @@ namespace DataModel
                     {
                         Titulo = "El área de microbiología para productos estériles cuenta con:",
                         Criterio = "CRITICO",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -1964,14 +1965,14 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Existe un área separada a las áreas de producción destinada al mantenimiento de equipos y al almacenamiento de herramientas y repuestos?",
-                        Criterio = "MENOR",
+                        Criterio = "MAYOR",
                         Articulo="8.7.4",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Dispone de un área destinada al almacenamiento del equipo obsoleto o en mal estado que no interviene en los procesos de producción?",
-                        Criterio = "MAYOR",
+                        Criterio = "MENOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -3010,7 +3011,7 @@ namespace DataModel
                         Titulo = "La etiqueta de identificación de materiales contiene la siguiente información? ",
                         Criterio = "MAYOR",
                         Articulo="10.1.10",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -3072,7 +3073,7 @@ namespace DataModel
                         Titulo = "Cada lote de materia prima está identificado con una etiqueta que contenga lo siguiente: ",
                         Criterio = "MAYOR",
                         Articulo="10.2.2",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -3266,7 +3267,7 @@ namespace DataModel
                         Titulo = "En esa etiqueta, consta: ",
                         Criterio = "MAYOR",
                         Articulo="10.2.9",
-                        IsHeader =true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -3811,14 +3812,14 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Son retirados los documentos invalidados u obsoletos de todos los puntos de uso? ",
-                        Criterio = "MENOR",
+                        Criterio = "MAYOR",
                         Articulo="11.1.11",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Existe un archivo histórico identificado para almacenar los originales de los documentos obsoletos?",
-                        Criterio = "MAYOR",
+                        Criterio = "MENOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -3862,7 +3863,7 @@ namespace DataModel
                         Titulo = "Incluyen las especificaciones de la materia prima, material de acondicionamiento, productos intermedios o granel y producto terminado lo siguiente:",
                         Criterio = "MAYOR",
                         Articulo="11.2.2",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -3968,7 +3969,7 @@ namespace DataModel
                         Titulo = "Contiene la fórmula maestra los datos siguientes:",
                         Criterio = "MAYOR",
                         Articulo="11.2.5",
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -4082,7 +4083,7 @@ namespace DataModel
                         Titulo = "Tiene la orden de producción además de lo indicado en la fórmula maestra la información siguiente: ",
                         Criterio = "MAYOR",
                         Articulo="11.2.8",
-                        IsHeader=true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -4208,7 +4209,7 @@ namespace DataModel
                         Titulo = "Además de lo indicado en la fórmula maestra, incluye la orden de envasado y empaque lo siguiente:",
                         Criterio = "MAYOR",
                         Articulo="11.2.9",
-                        IsHeader=true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
                     {
@@ -4753,9 +4754,8 @@ namespace DataModel
                         Criterio = "CRITICO",
 
                         Articulo="12.2.3",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
-                        IsHeader=true,
-                    },
+                     LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                       },
                     new ContenidoPreguntas()
                     {
                         Titulo = "a) Esclusas (cuando aplique).",
@@ -6623,7 +6623,7 @@ namespace DataModel
                         Criterio = "INFORMATIVO",
 
                         Articulo="14.4.4",
-                        IsHeader=true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
@@ -6913,7 +6913,6 @@ namespace DataModel
 
                         Articulo="14.4.5",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -7030,10 +7029,7 @@ namespace DataModel
                     {
                         Titulo = "El protocolo incluye: ",
                         Criterio = "CRITICO",
-
-
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -7222,7 +7218,6 @@ namespace DataModel
 
                         Articulo="15.1.5",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -9226,16 +9221,12 @@ namespace DataModel
                       new ContenidoPreguntas()
                     {
                         Titulo = "GENERALIDADES",
-                        Criterio = "MAYOR",
                         Capitulo="17.1",
-
                         IsHeader = true,
                     },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Existen procedimientos escritos sobre el manejo de:",
-                        Criterio = "MAYOR",
-
                         Articulo="17.1.1",
                         IsHeader = true,
                     },
@@ -9568,8 +9559,7 @@ namespace DataModel
                     {
                         Titulo = "El informe de estas autoinspecciones incluye:",
                         Criterio = "MAYOR",
-
-                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
@@ -9836,8 +9826,8 @@ namespace DataModel
                         Criterio = "MAYOR",
                         Capitulo="A.1",
 
-                        IsHeader = true,
-                    },
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                   },
                     new ContenidoPreguntas()
                     {
                         Titulo = "La producción de productos farmacéuticos estériles se realiza en instalaciones especiales para minimizar el riesgo de contaminación?",
@@ -9934,7 +9924,6 @@ namespace DataModel
 
                         Articulo="A.1.7",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -10027,9 +10016,8 @@ namespace DataModel
                         Titulo = "PRODUCCIÓN ASÉPTICA",
                         Criterio = "MAYOR",
                         Capitulo="A.2",
-
-                        IsHeader = true,
-                    },
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                  },
                     new ContenidoPreguntas()
                     {
                         Titulo = "La producción aséptica se realiza con materiales estériles? ",
@@ -10227,7 +10215,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Existen registros?",
-                        Criterio = "MAYOR",
+                        //Criterio = "MAYOR",
 
                         Articulo="A.5.5",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -10383,7 +10371,6 @@ namespace DataModel
 
                         Articulo="A.6.9",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -10569,7 +10556,6 @@ namespace DataModel
 
                         Articulo="A.8.1",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -10763,7 +10749,6 @@ namespace DataModel
 
                         Articulo="A.9.1",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -10873,7 +10858,6 @@ namespace DataModel
 
 
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -11209,7 +11193,6 @@ namespace DataModel
 
                         Articulo="A.12.1",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {

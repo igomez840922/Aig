@@ -117,7 +117,7 @@ namespace DataModel
                 prioridad = false;
                 if (IpsData != null) {
                     if (Innovador || Biologico || ReqIntercam) {
-                        if (IpsData.FechaAutPan.HasValue && ((DateTime.Now - IpsData.FechaAutPan.Value).TotalDays / 365) < 5) {
+                        if (FechaRecepcion.HasValue && IpsData.FechaAutPan.HasValue && ((FechaRecepcion.Value - IpsData.FechaAutPan.Value).TotalDays / 365) < 5) {
                             Prioridad = true;
                         }
                     }

@@ -48,6 +48,10 @@ namespace DataModel
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<FMV_RamTB> LRam { get => lRam; set => SetProperty(ref lRam, value); }
 
+        private List<FMV_Ram2TB> lRam2;
+        [System.Text.Json.Serialization.JsonIgnore]
+        public virtual List<FMV_Ram2TB> LRam2 { get => lRam2; set => SetProperty(ref lRam2, value); }
+
         private List<FMV_Esavi2TB> lEsavi2;
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<FMV_Esavi2TB> LEsavi2 { get => lEsavi2; set => SetProperty(ref lEsavi2, value); }

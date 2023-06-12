@@ -17,7 +17,7 @@ namespace DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -4358,17 +4358,11 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("EvaluadorId");
 
-                    b.HasIndex("InstitucionId")
-                        .IsUnique()
-                        .HasFilter("[InstitucionId] IS NOT NULL");
+                    b.HasIndex("InstitucionId");
 
-                    b.HasIndex("ProvinciaId")
-                        .IsUnique()
-                        .HasFilter("[ProvinciaId] IS NOT NULL");
+                    b.HasIndex("ProvinciaId");
 
-                    b.HasIndex("TipoInstitucionId")
-                        .IsUnique()
-                        .HasFilter("[TipoInstitucionId] IS NOT NULL");
+                    b.HasIndex("TipoInstitucionId");
 
                     b.ToTable("FMV_Ram2");
                 });
@@ -6281,16 +6275,19 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.InstitucionDestinoTB", "InstitucionDestino")
-                        .WithOne()
-                        .HasForeignKey("DataModel.FMV_Ram2TB", "InstitucionId");
+                        .WithMany("LRam2")
+                        .HasForeignKey("InstitucionId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithOne()
-                        .HasForeignKey("DataModel.FMV_Ram2TB", "ProvinciaId");
+                        .WithMany("LRam2")
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.TipoInstitucionTB", "TipoInstitucion")
-                        .WithOne()
-                        .HasForeignKey("DataModel.FMV_Ram2TB", "TipoInstitucionId");
+                        .WithMany("LRam2")
+                        .HasForeignKey("TipoInstitucionId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Evaluador");
 
@@ -6644,6 +6641,8 @@ namespace DataAccess.Migrations
                     b.Navigation("LNotas");
 
                     b.Navigation("LRam");
+
+                    b.Navigation("LRam2");
                 });
 
             modelBuilder.Entity("DataModel.IntensidadEsaviTB", b =>
@@ -6713,6 +6712,8 @@ namespace DataAccess.Migrations
                     b.Navigation("LInstitucion");
 
                     b.Navigation("LRam");
+
+                    b.Navigation("LRam2");
                 });
 
             modelBuilder.Entity("DataModel.TipoInstitucionTB", b =>
@@ -6726,6 +6727,8 @@ namespace DataAccess.Migrations
                     b.Navigation("LInstituciones");
 
                     b.Navigation("LRam");
+
+                    b.Navigation("LRam2");
                 });
 
             modelBuilder.Entity("DataModel.TipoVacunaTB", b =>

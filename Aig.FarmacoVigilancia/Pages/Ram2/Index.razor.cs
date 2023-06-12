@@ -32,6 +32,8 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
         GenericModel<FMV_Ram2TB> dataModel { get; set; } = new GenericModel<FMV_Ram2TB>()
         { Data = new FMV_Ram2TB() };
 
+        long selectedId{ get; set; } = 0;
+
         bool OpenAddEditDialog { get; set; } = false;
         bool DeleteDialog { get; set; } = false;
 
@@ -42,7 +44,6 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
         {
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
-            bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
             
             base.OnInitialized();
         }
@@ -77,6 +78,7 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
             }
             dataModel.ErrorMsg = null;
             dataModel.Data = null;
+            selectedId = 0;
 
             var data = await ramService.FindAll(dataModel);
             if (data != null)
@@ -124,12 +126,8 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
         //Call Add/Edit 
         private async Task OnEdit(long id)
         {
-            var result = await ramService.Get(id);
-            if (result == null)
-            {
-                result = new FMV_Ram2TB();
-            }
-            dataModel.Data = result;
+            
+            selectedId = id;
             OpenAddEditDialog = true;
             
             bus.Subscribe<Aig.FarmacoVigilancia.Events.Ram2.AddEdit_Event>(AddEdit_CloseHandler);
@@ -140,6 +138,8 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
             bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Ram2.AddEdit_Event>(AddEdit_CloseHandler);
 
             OpenAddEditDialog = false;
+            selectedId = 0;
+
             var message = args.GetMessage<Aig.FarmacoVigilancia.Events.Ram2.AddEdit_Event>();
 
             FetchData();
@@ -194,7 +194,7 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
         protected async Task ImportarToExcel(AttachmentTB _attachment = null)
         {
           
-            //bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
 
             attachment = _attachment != null ? _attachment : new AttachmentTB();
             openAttachment = true;
@@ -204,6 +204,8 @@ namespace Aig.FarmacoVigilancia.Pages.Ram2
         //ON CLOSE ATTACHMENT
         private void AttachmentsAddEdit_CloseEventHandler(MessageArgs args)
         {
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.Attachments.AttachmentsAddEdit_CloseEvent>(AttachmentsAddEdit_CloseEventHandler);
+
             jsRuntime.InvokeVoidAsync("ShowLoading");
             try
             {

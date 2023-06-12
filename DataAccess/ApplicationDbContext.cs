@@ -1501,17 +1501,36 @@ namespace DataAccess
      .HasForeignKey(e => e.TipoInstitucionId)
      .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<TipoInstitucionTB>()
+     .HasMany(e => e.LRam2)
+     .WithOne(e => e.TipoInstitucion)
+     .HasForeignKey(e => e.TipoInstitucionId)
+     .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<ProvinciaTB>()
         .HasMany(e => e.LRam)
         .WithOne(e => e.Provincia)
         .HasForeignKey(e => e.ProvinciaId)
         .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<ProvinciaTB>()
+       .HasMany(e => e.LRam2)
+       .WithOne(e => e.Provincia)
+       .HasForeignKey(e => e.ProvinciaId)
+       .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<InstitucionDestinoTB>()
        .HasMany(e => e.LRam)
        .WithOne(e => e.InstitucionDestino)
        .HasForeignKey(e => e.InstitucionId)
        .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<InstitucionDestinoTB>()
+      .HasMany(e => e.LRam2)
+      .WithOne(e => e.InstitucionDestino)
+      .HasForeignKey(e => e.InstitucionId)
+      .OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<IntensidadEsaviTB>()
        .HasMany(e => e.LEsaviNotificacion)
@@ -1715,20 +1734,20 @@ namespace DataAccess
             //    .WithOne()
             //    .HasForeignKey<FMV_Ram2TB>(e => e.EvaluadorId);
 
-            modelBuilder.Entity<FMV_Ram2TB>()
-               .HasOne(e => e.Provincia)
-               .WithOne()
-               .HasForeignKey<FMV_Ram2TB>(e => e.ProvinciaId);
+            //modelBuilder.Entity<FMV_Ram2TB>()
+            //   .HasOne(e => e.Provincia)
+            //   .WithOne()
+            //   .HasForeignKey<FMV_Ram2TB>(e => e.ProvinciaId);
 
-            modelBuilder.Entity<FMV_Ram2TB>()
-               .HasOne(e => e.TipoInstitucion)
-               .WithOne()
-               .HasForeignKey<FMV_Ram2TB>(e => e.TipoInstitucionId);
+            //modelBuilder.Entity<FMV_Ram2TB>()
+            //   .HasOne(e => e.TipoInstitucion)
+            //   .WithOne()
+            //   .HasForeignKey<FMV_Ram2TB>(e => e.TipoInstitucionId);
 
-            modelBuilder.Entity<FMV_Ram2TB>()
-              .HasOne(e => e.InstitucionDestino)
-              .WithOne()
-              .HasForeignKey<FMV_Ram2TB>(e => e.InstitucionId);
+            //modelBuilder.Entity<FMV_Ram2TB>()
+            //  .HasOne(e => e.InstitucionDestino)
+            //  .WithOne()
+            //  .HasForeignKey<FMV_Ram2TB>(e => e.InstitucionId);
 
             modelBuilder.Entity<FMV_Ram2TB>()
              .Property(e => e.ObservacionInfoNotifica)
