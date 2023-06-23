@@ -12,12 +12,12 @@ namespace DataModel
 {
     public enum enumUserRoleType
     {
-        [Description("Otros")]
-        None = 0,
+        [Description("Usuario del Sistema")]
+        SysUser = 0,
         [Description("Administrador")]
         Admin = 1,
-        [Description("Usuario del Sistema")]
-        SysUser = 2,
+        //[Description("Usuario del Sistema")]
+        //SysUser = 2,
         [Description("Secretaria - Departamento de Auditorías")]
         SecDepAudit = 3,
         [Description("Secretaria - Sección de Licencias")]
@@ -33,7 +33,11 @@ namespace DataModel
         [Description("Evaluador - Inscripción de Materia Prima")]
         EvaInsMP = 9,
         [Description("Consultor de Correspondencias")]
-        ConsultCo = 9,
+        ConsultCo = 10,
+        [Description("Farmacéutico - Inspector")]
+        FarmaInspector = 11,
+        [Description("Técnico - Inspector")]
+        TecInspector = 12,
     }
 
     public class ApplicationUser : IdentityUser
@@ -49,7 +53,7 @@ namespace DataModel
             set { base.Email = value; }
         }
 
-        public enumUserRoleType UserRoleType { get; set; } = enumUserRoleType.None;
+        public enumUserRoleType UserRoleType { get; set; } = enumUserRoleType.SysUser;
         
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string UserRoleTypeDesc

@@ -127,7 +127,7 @@ namespace Aig.Auditoria.Components.Correspondencia
         {
             switch (Correspondencia.DptoSeccionType)
             {
-                case enumUserRoleType.None: { break; }
+                case enumUserRoleType.SysUser: { break; }
                 default:
                     {
                         Correspondencia.DptoSeccion = DataModel.Helper.Helper.GetDescription(Correspondencia.DptoSeccionType);

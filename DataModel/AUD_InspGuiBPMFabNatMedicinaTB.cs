@@ -5539,7 +5539,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "En caso de análisis o producción por contrato, ¿El contratista (contratado) es informado y acepta que puede ser inspeccionado por  la Autoridad Reguladora?",
-                        Criterio = "CALIFICABLES",
+                        Criterio = "CALIFICABLE",
                         Articulo = "15.1.6",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },

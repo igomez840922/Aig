@@ -1,15 +1,13 @@
-﻿@using DataModel.Helper;
-@using DataModel;
-
+﻿@using DataModel;
 @if (User != null)
 {
     <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="formModal">@languageContainerService.Keys["Usuario Nuevo"]</h5>
+                    <h5 class="modal-title" id="formModal">@languageContainerService.Keys["Edit"]</h5>
                     <button type="button" class="close" @onclick="(e)=>{Cancel();}"
-                        aria-label="Close">
+                            aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -17,59 +15,30 @@
                 <div class="modal-body">
                     <EditForm Model="@User" OnValidSubmit="SaveData">
                         <DataAnnotationsValidator />
-                        <h4>@languageContainerService.Keys["Información de la Cuenta"]</h4>
+
+                       @*  <h4>@languageContainerService.Keys["Información de la Cuenta"]</h4>
                         <div class="row clearfix">
                             <div class="col-sm-6">
-                                <label>@languageContainerService.Keys["Usuario (Correo)"]</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="User.UserName" />
-                                        <ValidationMessage For=@(() => User.UserName) />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6"></div>
-
-                            <div class="col-sm-6">
-                                <label>@languageContainerService.Keys["Contraseña"]</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="User.Password" type="password" />
-                                        <ValidationMessage For=@(() => User.Password) />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label>@languageContainerService.Keys["Confirmar Contraseña"]</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="User.PasswordConfirm" type="password" />
-                                        <ValidationMessage For=@(() => User.PasswordConfirm) />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
                                 <label>@languageContainerService.Keys["Role"]</label>
-                                <div class="form-group">     
+                                <div class="form-group">
                                     <div class="form-line">
+
+
                                         <RadzenDropDown AllowClear=" false" TValue="enumUserRoleType" Class="form-control" @bind-Value=@User.UserRoleType
-                                                    AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
                                                         Data=@(Enum.GetValues(typeof(enumUserRoleType)))>
-                                        <Template Context="tContext">
-                                            @(DataModel.Helper.Helper.GetDescription(tContext))
-                                        </Template>
-                                    </RadzenDropDown>
+                                            <Template Context="tContext">
+                                                @(DataModel.Helper.Helper.GetDescription(tContext))
+                                            </Template>
+                                        </RadzenDropDown>
                                         <ValidationMessage For=@(() => User.UserRoleType) />
                                     </div>
-                                    
+
                                 </div>
                             </div>
+                        </div> *@
+                        
 
-                           
-                        </div>
                         <h4>@languageContainerService.Keys["Datos Personales"]</h4>
                         <div class="row clearfix">
 
@@ -77,8 +46,8 @@
                                 <label for="password">@languageContainerService.Keys["Primer Nombre"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="User.FirstName" />
-                                        <ValidationMessage For=@(() => User.FirstName) />
+                                        <InputText class="form-control" @bind-Value="User.UserProfile.FirstName" />
+                                        <ValidationMessage For=@(() => User.UserProfile.FirstName) />
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +56,8 @@
                                 <label for="password">@languageContainerService.Keys["Segundo Nombre"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="User.SecondName" />
-                                        <ValidationMessage For=@(() => User.SecondName) />
+                                        <InputText class="form-control" @bind-Value="User.UserProfile.SecondName" />
+                                        <ValidationMessage For=@(() => User.UserProfile.SecondName) />
                                     </div>
                                 </div>
                             </div>
@@ -97,8 +66,8 @@
                                 <label for="password">@languageContainerService.Keys["Primer Apellido"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="User.SureName" />
-                                        <ValidationMessage For=@(() => User.SureName) />
+                                        <InputText class="form-control" @bind-Value="User.UserProfile.SureName" />
+                                        <ValidationMessage For=@(() => User.UserProfile.SureName) />
                                     </div>
                                 </div>
                             </div>
@@ -107,8 +76,8 @@
                                 <label for="password">@languageContainerService.Keys["Segundo Apellido"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="User.SecondSurName" />
-                                        <ValidationMessage For=@(() => User.SecondSurName) />
+                                        <InputText class="form-control" @bind-Value="User.UserProfile.SecondSurName" />
+                                        <ValidationMessage For=@(() => User.UserProfile.SecondSurName) />
                                     </div>
                                 </div>
                             </div>
@@ -125,19 +94,20 @@
                                         <ValidationMessage For=@(() => User.PhoneNumber) />
                                     </div>
                                 </div>
-                            </div>
+                            </div>                           
 
                         </div>
+
                         <br>
                         <div class="modal-footer">
 
                             <button type="submit"
-                                class="btn btn-info waves-effect">
+                                    class="btn btn-info waves-effect">
                                 @languageContainerService.Keys["Save"]
                             </button>
 
                             <button type="button" class="btn btn-danger waves-effect"
-                                @onclick="(e)=>{Cancel();}">
+                            @onclick="(e)=>{Cancel();}">
                                 @languageContainerService.Keys["Cancel"]
                             </button>
                         </div>
@@ -153,5 +123,3 @@
     </div>
 
 }
-
-<div class="modal-backdrop fade show"></div>

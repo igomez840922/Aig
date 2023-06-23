@@ -938,7 +938,7 @@ namespace DataModel
                             Capitulo="423, 424",
                             Articulo="",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                            Observaciones = string.Format("T(°C):{0}\r\nHR(%):{1}\r\n","","")
+                            Observaciones = string.Format("T(°C):{0}\r\nHR(%):{1}","","")
                         },
                     new ContenidoPreguntas()
                         {

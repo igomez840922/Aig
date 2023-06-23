@@ -154,10 +154,10 @@ namespace Aig.Auditoria.Pages.Settings.SystemUsers
 
         private async Task OnDelete(ApplicationUser data)
         {
-            OpenDeleteDialog = true;
             //bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
+            //await bus.Publish(new DeleteConfirmationOpenEvent());
             model.Data = data;
-            await bus.Publish(new DeleteConfirmationOpenEvent());
+            OpenDeleteDialog = true;
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)
         {

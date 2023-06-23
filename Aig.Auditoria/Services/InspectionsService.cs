@@ -37,7 +37,7 @@ namespace Aig.Auditoria.Services
                                (model.ProvinceId != null ? data.DatosEstablecimiento.ProvinciaId == model.ProvinceId : true) &&
                                (model.FromDate != null ? data.FechaInicio >= model.FromDate : true) &&
                                (model.ToDate != null ? data.FechaInicio <= model.ToDate : true)
-                               orderby data.FechaInicio
+                               orderby data.FechaInicio descending
                                select new InspeccionDTO {
                                    Id = data.Id,
                                    NumActa = data.NumActa,
@@ -6015,10 +6015,11 @@ namespace Aig.Auditoria.Services
             {
                 DalService.DBContext.Entry(result).Property(b => b.ParticipantesDNFD).IsModified = true;
 
-                if (result.InspGuiBPMFabCosmeticoMed != null)
+                if (result.InspGuiaBPM_Bpa != null)
                 {
                     DalService.DBContext.Entry(result.InspGuiaBPM_Bpa).Property(b => b.DatosRepresentLegal).IsModified = true;
                     DalService.DBContext.Entry(result.InspGuiaBPM_Bpa).Property(b => b.DatosRegente).IsModified = true;
+                    //DalService.DBContext.Entry(result.InspGuiaBPM_Bpa).Property(b => b.ParticipantesDNFD).IsModified = true;
                 }
 
                 DalService.DBContext.SaveChanges();

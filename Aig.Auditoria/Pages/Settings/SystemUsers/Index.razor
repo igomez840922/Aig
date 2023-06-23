@@ -71,6 +71,7 @@
                                                             <th>@languageContainerService.Keys["Usuario"]</th>
                                                             <th>@languageContainerService.Keys["Nombre Completo"]</th>
                                                             <th>@languageContainerService.Keys["PhoneNumber"]</th>
+                                                            <th>@languageContainerService.Keys["Role"]</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -81,6 +82,7 @@
                                                                         <td>@(dt.UserName)</td>
                                                                         <td>@(dt.UserProfile?.FullName??"")</td>
                                                                         <td>@(dt.PhoneNumber)</td>
+                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.UserRoleType))</td>
                                                                         <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
@@ -148,6 +150,6 @@
 }
 @if (OpenDeleteDialog)
 {
-    <Aig.Auditoria.Components.DeleteConfirmDialog></Aig.Auditoria.Components.DeleteConfirmDialog>
+    <Aig.Auditoria.Components.DeleteConfirmDialog2></Aig.Auditoria.Components.DeleteConfirmDialog2>
 }
 

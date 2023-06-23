@@ -230,7 +230,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas(){
                             Titulo = "Es importador de:",
-                            IsHeader = true,
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                         {
@@ -299,7 +299,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Producen, envasan, empacan y analizan productos a terceros?",
+                        Titulo = "Producen, envasan, empacan y analizan productos a terceros?".ToUpper(),
                         Criterio="Informativo",
                             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
@@ -333,33 +333,33 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Tienen aprobadas por parte de la autoridad reguladora las condiciones para las siguientes áreas de producción:",
+                        Titulo = "Tienen aprobadas por parte de la autoridad reguladora las condiciones para las siguientes áreas de producción:".ToUpper(),
                         Criterio = "Informativo",
-                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(){ HideEvaluacion=true}},
-                    },
-                    new ContenidoPreguntas()
-                    {
-                        Titulo = "Áreas de sólidos no estériles",
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Áreas de líquidos no estériles",
+                        Titulo = "Áreas de sólidos no estériles".ToUpper(),
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Semisólidos no estériles",
+                        Titulo = "Áreas de líquidos no estériles".ToUpper(),
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Áreas de productos estériles",
+                        Titulo = "Semisólidos no estériles".ToUpper(),
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Áreas especiales de fabricación",
+                        Titulo = "Áreas de productos estériles".ToUpper(),
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas()
+                    {
+                        Titulo = "Áreas especiales de fabricación".ToUpper(),
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
@@ -389,6 +389,11 @@ namespace DataModel
             OrganizacionPersonal = new AUD_ContenidoGenerico();
             OrganizacionPersonal.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas()
+                    {
+                        Titulo = "ORGANIZACIÓN Y PERSONAL",
+                        Capitulo="7",
+                        IsHeader=true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "ORGANIZACIÓN",
                         Capitulo="7.1",
@@ -1086,7 +1091,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?. Formatos de registros?",
+                        Titulo = "Hay instrumentos para medir la temperatura y humedad y estas mediciones están dentro de los parámetros establecidos para los materiales y productos almacenados?",
                         Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
                     },
@@ -1287,7 +1292,12 @@ namespace DataModel
         {
             AreaDispMatPrima = new AUD_ContenidoGenerico();
             AreaDispMatPrima.LContenido = new List<ContenidoPreguntas>() {
-                        new ContenidoPreguntas()
+                       new ContenidoPreguntas()
+                    {
+                        Titulo = "Área de dispensando de materia prima".ToUpper(),
+                        Capitulo="8.3",
+                        IsHeader = true,
+                    }, new ContenidoPreguntas()
                     {
                         Titulo = "Existe un área separada e identificada, para llevar a cabo las operaciones de dispensación? ",
                         Criterio = "CRITICO",
@@ -1413,6 +1423,11 @@ namespace DataModel
             AreaProduccion = new AUD_ContenidoGenerico();
             AreaProduccion.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas()
+                    {
+                        Titulo = "Área de producción".ToUpper(),
+                        Capitulo="8.4",
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "El laboratorio cuenta con áreas de tamaño, diseño y servicios (aire comprimido, agua, luz, ventilación, etc.) para efectuar los procesos de producción que corresponden?",
                         Criterio = "INFORMATIVO",
@@ -1639,7 +1654,7 @@ namespace DataModel
                         Titulo = "El área de empaque:",
                         Criterio = "MAYOR",
                         Articulo="8.5.2",
-                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(){ HideEvaluacion=true}},
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
@@ -1735,7 +1750,7 @@ namespace DataModel
                     {
                         Titulo = "Según las operaciones que se realizan se dispone de las siguientes áreas:",
                         Criterio = "CRITICO",
-                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(){ HideEvaluacion=true}},
+                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
                     {
@@ -1856,6 +1871,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Están los servicios sanitarios accesibles a las áreas de trabajo y no se comunican directamente con las áreas de producción?",
+                        Articulo="8.7.1",
                         Criterio = "CRITICO",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -2006,6 +2022,11 @@ namespace DataModel
             EquiposGeneralidades = new AUD_ContenidoGenerico();
             EquiposGeneralidades.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas()
+                    {
+                        Titulo = "EQUIPO",
+                        Capitulo="9",
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "GENERALIDADES",
                         Capitulo="9.1",
@@ -2186,15 +2207,10 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Si el equipo es muy pesado, está diseñado para que se pueda ejecutar su limpieza, sanitización o esterilización en el área de producción?",
+                        Titulo = "Si el equipo es muy pesado, está diseñado para que se pueda ejecutar su limpieza, sanitización o esterilización en el área de producción?\r\nSe identifican todos los equipos limpios con una etiqueta que indique la siguiente información:",
+                        Articulo="9.1.5",
                         Criterio = "MAYOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-                    },
-                    new ContenidoPreguntas()
-                    {
-                        Titulo = "Se identifican todos los equipos limpios con una etiqueta que indique la siguiente información:",
-                        Articulo="9.1.5",
-                        IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {
@@ -2736,7 +2752,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Producción:",
+                        Titulo = "Producción",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -2865,7 +2881,12 @@ namespace DataModel
         {
             MatProducts = new AUD_ContenidoGenerico();
             MatProducts.LContenido = new List<ContenidoPreguntas>() {
-                        new ContenidoPreguntas()
+                       new ContenidoPreguntas()
+                    {
+                        Titulo = "Materiales y Productos".ToUpper(),
+                        Capitulo="10",
+                        IsHeader = true,
+                    }, new ContenidoPreguntas()
                     {
                         Titulo = "GENERALIDADES",
                         Capitulo="10.1",
@@ -3649,6 +3670,11 @@ namespace DataModel
             Documentacion.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas()
                     {
+                        Titulo = "Documentacion".ToUpper(),
+                        Capitulo="11",
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
+                    {
                         Titulo = "GENERALIDADES",
                         Capitulo="11.1",
                         IsHeader = true,
@@ -3721,7 +3747,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Hay en los documentos que lo requieran, espacio para permitir la realización del registro de datos? ",
+                        Titulo = "Hay en los documentos que lo requieran, espacio para permitir la realización del registro de datos?",
                         Criterio = "MENOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -4479,6 +4505,12 @@ namespace DataModel
             Produccion.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas()
                     {
+                        Titulo = "Producción".ToUpper(),
+
+                        Capitulo="12",
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
+                    {
                         Titulo = "GENERALIDADES",
 
                         Capitulo="12.1",
@@ -4578,7 +4610,7 @@ namespace DataModel
                         Criterio = "MAYOR",
 
 
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion(){ HideEvaluacion=true}},
                     },
                     new ContenidoPreguntas()
                     {
@@ -4586,7 +4618,7 @@ namespace DataModel
                         Criterio = "MAYOR",
 
 
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion() { HideEvaluacion=true} },
                     },
                     new ContenidoPreguntas()
                     {
@@ -4979,7 +5011,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Existe un programa y procedimiento escrito para realizar los controles microbiológicos de superficie?",
-                        Criterio = "CRITICO",
+                        Criterio = "MAYOR",
 
                         Articulo="12.3.4",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
@@ -4994,7 +5026,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "En caso de que estos controles microbiológicos se salgan de los límites específicos se realiza alguna medida correctiva?",
-                        Criterio = "MAYOR",
+                        Criterio = "CRITICO",
 
 
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
@@ -5037,8 +5069,8 @@ namespace DataModel
                         Criterio = "CRITICO",
 
 
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
-                    },
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true},new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion()},
+                      },
                     new ContenidoPreguntas()
                     {
                         Titulo = "Se inspecciona y verifica el material impreso antes de la codificación del número de lote y fecha de vencimiento de cada producción?",
@@ -5238,6 +5270,11 @@ namespace DataModel
             GarantiaCalidad = new AUD_ContenidoGenerico();
             GarantiaCalidad.LContenido = new List<ContenidoPreguntas>() {
                        new ContenidoPreguntas()
+                    {
+                        Titulo = "Garantía de Calidad".ToUpper(),
+                        Capitulo="13",
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "GENERALIDADES",
 
@@ -5468,6 +5505,13 @@ namespace DataModel
             ControlCalidad = new AUD_ContenidoGenerico();
             ControlCalidad.LContenido = new List<ContenidoPreguntas>() {
                        new ContenidoPreguntas()
+                    {
+                        Titulo = "Control de Calidad".ToUpper(),
+
+                        Capitulo="14",
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "GENERALIDADES",
 
@@ -7110,6 +7154,13 @@ namespace DataModel
             ProdAnalisisContrato = new AUD_ContenidoGenerico();
             ProdAnalisisContrato.LContenido = new List<ContenidoPreguntas>() {
                        new ContenidoPreguntas()
+                    {
+                        Titulo = "Producción y análisis por contrato".ToUpper(),
+
+                        Capitulo="15",
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "GENERALIDADES",
                         Capitulo="15.1",
@@ -9220,6 +9271,13 @@ namespace DataModel
             QuejasReclamos.LContenido = new List<ContenidoPreguntas>() {
                       new ContenidoPreguntas()
                     {
+                        Titulo = "QUEJAS, RECLAMOS Y RETIRO DE PRODUCTOS".ToUpper(),
+
+                        Capitulo="17",
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
+                    {
                         Titulo = "GENERALIDADES",
                         Capitulo="17.1",
                         IsHeader = true,
@@ -9531,7 +9589,14 @@ namespace DataModel
         {
             AutoInspecAuditCal = new AUD_ContenidoGenerico();
             AutoInspecAuditCal.LContenido = new List<ContenidoPreguntas>() {
-                      new ContenidoPreguntas()
+                       new ContenidoPreguntas()
+                    {
+                        Titulo = "AUTOINSPECCIONES Y AUDITORIAS DE CALIDAD",
+
+                        Capitulo="18",
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "AUTOINSPECCIONES",
 
@@ -9779,7 +9844,16 @@ namespace DataModel
         {
             FabProdFarmEsteril_A = new AUD_ContenidoGenerico();
             FabProdFarmEsteril_A.LContenido = new List<ContenidoPreguntas>() {
-                     new ContenidoPreguntas()
+                       new ContenidoPreguntas()
+                    {
+                        Titulo = "ANEXO A:",
+                        IsHeader=true,
+                   },new ContenidoPreguntas()
+                    {
+                        Titulo = "A. Fabricación de Productos Farmacéuticos Estériles.".ToUpper(),
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "Qué tipo de producto fábrica:",
 
@@ -9823,8 +9897,8 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "GENERALIDADES",
-                        Criterio = "MAYOR",
-                        Capitulo="A.1",
+                        Criterio = "",
+                        Capitulo= "A.1",
 
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                    },
@@ -10014,10 +10088,10 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "PRODUCCIÓN ASÉPTICA",
-                        Criterio = "MAYOR",
-                        Capitulo="A.2",
-                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
-                  },
+                        Criterio = "",
+
+                        IsHeader = true,
+                    },
                     new ContenidoPreguntas()
                     {
                         Titulo = "La producción aséptica se realiza con materiales estériles? ",
@@ -10160,6 +10234,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Existen registros?",
+                        Criterio = "MAYOR",
 
 
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -10223,7 +10298,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "Se utiliza vestimenta acorde a las áreas y tareas que se realizan, según procedimiento?",
-                        Criterio = "",
+                        Criterio = "MAYOR",
 
                         Articulo="A.5.6",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -11059,6 +11134,14 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
+                        Titulo = "Esterilización de los recipientes de productos a granel",
+                        Criterio = "MAYOR",
+
+
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas()
+                    {
                         Titulo = "Esterilización de equipos, cuando aplique",
                         Criterio = "MAYOR",
 
@@ -11637,7 +11720,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Se utilizan el número de unidades de indicadores de acuerdo al tamaño de la carga?",
+                        Titulo = "Son distribuidos en toda la carga?",
                         Criterio = "MAYOR",
 
 
@@ -12083,6 +12166,20 @@ namespace DataModel
             Lactamicos.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas()
                     {
+                        Titulo = "ANEXO B".ToUpper(),
+
+                        Capitulo="",
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
+                    {
+                        Titulo = "B. FABRICACIÓN DE PRODUCTOS FARMACÉUTICOS β-LACTÁMICOS".ToUpper(),
+                        
+                        Capitulo="",
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
+                    {
                         Titulo = "PERSONAL",
 
                         Capitulo="B.2",
@@ -12442,6 +12539,14 @@ namespace DataModel
                         Articulo="B.6.1",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
+                    new ContenidoPreguntas()
+                    {
+                        Titulo = "Existen registros?",
+                        Criterio = "MAYOR",
+
+                        Articulo="",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
              };
         }
         public void Inicializa_ProdCitostatico()
@@ -12449,6 +12554,20 @@ namespace DataModel
             ProdCitostatico = new AUD_ContenidoGenerico();
             ProdCitostatico.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas()
+                    {
+                        Titulo = "ANEXO C",
+
+                        Capitulo=" ",
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
+                    {
+                        Titulo = "C. FABRICACIÓN DE PRODUCTOS CON HORMONAS Y PRODUCTOS CITOSTÁTICOS",
+                       
+                        Capitulo=" ",
+
+                        IsHeader = true,
+                    },new ContenidoPreguntas()
                     {
                         Titulo = "PERSONAL",
 

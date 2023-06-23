@@ -135,7 +135,8 @@ namespace DataModel
                     {
                         Titulo = "De la autorización de funcionamiento",
                         IsHeader = true,
-                    },new ContenidoPreguntas()
+                        Articulo="6.1",
+                     },new ContenidoPreguntas()
                         {
                             Titulo = "El laboratorio Acondicionador posee permiso sanitario de funcionamiento o licencia sanitaria, autorizada por la autoridad reguladora del país.",
                             Criterio = "CRÍTICO",
@@ -246,7 +247,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Medicamentos Cosméticos?",
+                        Titulo = "Cosméticos?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
                     new ContenidoPreguntas()
@@ -266,7 +267,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "Acondicionan y analizan productos a terceros?\r\nCuáles y de qué empresa(s)?. Anexar Listado",
+                        Titulo = "Acondicionan y analizan productos a terceros?\r\nCuáles y de qué empresa(s)?. Anexar Listado".ToUpper(),
                         //IsHeader = true,
                         Criterio = "Crítico",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -4495,11 +4496,10 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "La unidad de control de calidad tiene las siguientes obligaciones:",
-
-
                         Articulo="14.1.4",
+                        Criterio = "MAYOR",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                        IsHeader=true,
+                        //IsHeader=true,
                     },
                     new ContenidoPreguntas()
                     {

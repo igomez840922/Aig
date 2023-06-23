@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Aig.Auditoria.Components.SystemUsers
-{    
-    public partial class Edit
+{
+    public partial class Edit2
     {
         [Inject]
         ISystemUserService systemUserService { get; set; }
 
         [Parameter]
-        public ApplicationUser User { get; set; } 
+        public ApplicationUser User { get; set; }
 
         protected async override Task OnInitializedAsync()
         {

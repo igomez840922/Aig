@@ -125,13 +125,13 @@ namespace Aig.FarmacoVigilancia.Services
                 model.Ldata = null;
                 model.Total = 0;
                 model.Ldata = (from data in DalService.DBContext.Set<ApplicationUser>()
-                               where data.UserRoleType == enumUserRoleType.Admin &&
+                               where 
                                (string.IsNullOrEmpty(model.Filter) ? true : (data.UserProfile.FirstName.Contains(model.Filter) || data.UserProfile.SecondName.Contains(model.Filter) || data.UserProfile.SureName.Contains(model.Filter) || data.UserProfile.SecondSurName.Contains(model.Filter) || data.Email.Contains(model.Filter) || data.PhoneNumber.Contains(model.Filter)))
                                orderby data.UserProfile.FirstName
                                select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<ApplicationUser>()
-                               where data.UserRoleType == enumUserRoleType.Admin &&
+                               where 
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.UserProfile.FirstName.Contains(model.Filter) || data.UserProfile.SecondName.Contains(model.Filter) || data.UserProfile.SureName.Contains(model.Filter) || data.UserProfile.SecondSurName.Contains(model.Filter) || data.Email.Contains(model.Filter) || data.PhoneNumber.Contains(model.Filter)))
                                select data).Count();
 
@@ -146,7 +146,6 @@ namespace Aig.FarmacoVigilancia.Services
         public async Task<List<ApplicationUser>> GetAll()
         {
             return (from data in DalService.DBContext.Set<ApplicationUser>()
-                    where data.UserRoleType != enumUserRoleType.None
                     select data).ToList();
         }
 

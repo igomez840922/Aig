@@ -60,7 +60,7 @@ namespace Aig.Auditoria.Components.SystemUsers
         //Save Data and Close
         protected async Task SaveData()
         {
-            User.UserRoleType = enumUserRoleType.Admin;
+            //User.UserRoleType = enumUserRoleType.Admin;
             var result = await systemUserService.Save(User);
             if (result != null)
             {

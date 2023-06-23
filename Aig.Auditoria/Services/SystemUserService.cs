@@ -125,13 +125,13 @@ namespace Aig.Auditoria.Services
                 model.Ldata = null;
                 model.Total = 0;
                 model.Ldata = (from data in DalService.DBContext.Set<ApplicationUser>()
-                               where data.UserRoleType == enumUserRoleType.Admin &&
+                               where 
                                (string.IsNullOrEmpty(model.Filter) ? true : (data.UserProfile.FirstName.Contains(model.Filter) || data.UserProfile.SecondName.Contains(model.Filter) || data.UserProfile.SureName.Contains(model.Filter) || data.UserProfile.SecondSurName.Contains(model.Filter) || data.Email.Contains(model.Filter) || data.PhoneNumber.Contains(model.Filter)))
                                orderby data.UserProfile.FirstName
                                select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<ApplicationUser>()
-                               where data.UserRoleType == enumUserRoleType.Admin &&
+                               where 
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.UserProfile.FirstName.Contains(model.Filter) || data.UserProfile.SecondName.Contains(model.Filter) || data.UserProfile.SureName.Contains(model.Filter) || data.UserProfile.SecondSurName.Contains(model.Filter) || data.Email.Contains(model.Filter) || data.PhoneNumber.Contains(model.Filter)))
                                select data).Count();
 
@@ -146,7 +146,6 @@ namespace Aig.Auditoria.Services
         public async Task<List<ApplicationUser>> GetAll()
         {
             return (from data in DalService.DBContext.Set<ApplicationUser>()
-                    where data.UserRoleType != enumUserRoleType.None
                     select data).ToList();
         }
 
@@ -200,8 +199,20 @@ namespace Aig.Auditoria.Services
 
                 var user = await UserManager.FindByIdAsync(data.Id);
                 user.UserProfile = data.UserProfile;
+                user.UserRoleType = data.UserRoleType;
 
                 var result = await UserManager.UpdateAsync(user);
+
+                var roles = await UserManager.GetRolesAsync(user);
+                if (roles?.Count > 0)
+                {
+                    foreach(var role in roles)
+                    {
+                        await UserManager.RemoveFromRoleAsync(user,role);
+                    }
+                }
+                await UserManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(data.UserRoleType));
+
 
                 return result;
             }
@@ -217,7 +228,7 @@ namespace Aig.Auditoria.Services
         {
             ApplicationUser user = await UserManager.FindByIdAsync(Id);
 
-            if (user != null) //&& user.FromSystem
+            if (user != null && user.UserName == "admin")
                 return IdentityResult.Failed(new IdentityError[] { new IdentityError() { Code = "", Description = "los datos no pudieron ser eliminados" } });
 
             var result = await UserManager.DeleteAsync(user);

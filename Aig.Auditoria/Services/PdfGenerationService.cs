@@ -3812,7 +3812,7 @@ namespace Aig.Auditoria.Services
                         });
 
                         page.Content().Column(column => {
-                            column.Item().AlignCenter().Text("ACTA DE INVESTIGACIONES").Bold();
+                            column.Item().AlignCenter().Text("ACTA DE INSPECCIóN".ToUpper()).Bold();
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
                             //column.Item().AlignLeft().Text(string.Format("Hora de Inicio: {0}", inspection.FechaInicio.ToString("hh:mm tt")));
@@ -6181,7 +6181,7 @@ namespace Aig.Auditoria.Services
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("CRITERIO MENOR: aquel que en atención a las recomendaciones de las Buenas Prácticas de Manufactura, puede afectar en forma leve la calidad, seguridad de los productos y seguridad de los trabajadores, en su interacción con los productos y procesos."));
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN: ".ToUpper() + "(Informativo)")).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
                             if(inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
@@ -6199,11 +6199,11 @@ namespace Aig.Auditoria.Services
                             }
                             if (inspection.InspGuiaBPMFabricanteMed?.DatosRegente != null)
                             {
-                                column.Item().AlignLeft().Text(string.Format("Regente farmacéutico / Director técnico: {0}, Cedula: {1}", inspection.InspGuiaBPMFabricanteMed.DatosRegente.Nombre, inspection.InspGuiaBPMFabricanteMed.DatosRegente.Cedula));
+                                column.Item().AlignLeft().Text(string.Format("Regente farmacéutico / Director técnico y número de colegiado: {0}, Cedula: {1}", inspection.InspGuiaBPMFabricanteMed.DatosRegente.Nombre, inspection.InspGuiaBPMFabricanteMed.DatosRegente.Cedula));
                             }
                             
                             
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES: ".ToUpper() + "(Informativo)")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.DatosEstablecimiento?.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Provincia: {0}", inspection.DatosEstablecimiento?.Provincia?.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Distrito: {0}", inspection.DatosEstablecimiento?.Distrito?.Nombre));
@@ -6297,7 +6297,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"));
                             column.Item().AlignLeft().Text(string.Format(DataModel.Helper.Helper.GetDescription(inspection.InspGuiaBPMFabricanteMed.ProcesoVigilanciaSanit)));
 
-                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiaBPMFabricanteMed.FechaUltimaVista?.ToString("dd/MM/yyyy") ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0} (Anexar copia de la hoja de la última inspección)", inspection.InspGuiaBPMFabricanteMed.FechaUltimaVista?.ToString("dd/MM/yyyy") ?? ""));
 
                             if (inspection.InspGuiaBPMFabricanteMed?.ClasifActComerciales?.LContenido?.Count > 0)
                             {
@@ -6877,7 +6877,7 @@ namespace Aig.Auditoria.Services
                             }
                             if (inspection.InspGuiaBPMFabricanteMed?.Equipos?.LContenido?.Count > 0)
                             {
-                                //column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
                                 //column.Item().AlignLeft().Text(string.Format("ÁREAS DE ACONDICIONAMIENTO PARA EMPAQUE SECUNDARIO".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
@@ -8115,7 +8115,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
                             
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN: Informativo".ToUpper())).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
                             if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
@@ -8137,7 +8137,7 @@ namespace Aig.Auditoria.Services
                             }
                             
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES: Informativo".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.DatosEstablecimiento?.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Provincia: {0}", inspection.DatosEstablecimiento?.Provincia?.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Distrito: {0}", inspection.DatosEstablecimiento?.Distrito?.Nombre));
@@ -8229,7 +8229,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.ClasifActComerciales?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL: ".ToUpper() + "Informativo")).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8283,7 +8283,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.ClasifEstablecimiento?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Clasificación del Establecimiento:".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Clasificación del Establecimiento: ".ToUpper() + "Informativo")).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8337,7 +8337,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.OrganizacionPersonal?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ORGANIZACIÓN Y PERSONAL:".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("7. ORGANIZACIÓN Y PERSONAL:".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8563,7 +8563,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.EquiposGeneralidades?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Equipo".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("9. Equipo".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8618,7 +8618,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.MatProducts?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Materiales y Productos".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("10. Materiales y Productos".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8673,7 +8673,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.Documentacion?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Documentación".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("11. Documentación".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8728,7 +8728,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.Acondicionamiento?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Acondicionamiento".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("12. Acondicionamiento".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8783,7 +8783,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.GarantiaCalidad?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Garantía de Calidad".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("13. Garantía de Calidad".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8838,7 +8838,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.ControlCalidad?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Control de Calidad".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("14. Control de Calidad".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8893,7 +8893,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.ProdAnalisisContrato?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Producción y Análisis por Contrato".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("15. Producción y Análisis por Contrato".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8948,7 +8948,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.ValGenerales?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Validación".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("16. Validación".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9003,7 +9003,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.QuejasReclamos?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Quejas, Reclamos y Retiros de Productos".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("17. Quejas, Reclamos y Retiros de Productos".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9058,7 +9058,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMLabAcondicionador?.AutoInspecAuditCal?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("AutoInspección y Auditorías de Calidad".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("18. AutoInspección y Auditorías de Calidad".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9345,7 +9345,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
                             column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection.Establecimiento.TipoEstablecimiento)));
                             
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("I. PARTICIPANTES EN LA INSPECCIÓN:".ToUpper() + " (Informativo)")).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Autoridad Sanitaria:"));
                             if (inspection.ParticipantesDNFD?.LParticipantes?.Count > 0)
@@ -9367,7 +9367,7 @@ namespace Aig.Auditoria.Services
                             }
                             
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper())).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("II. GENERALIDADES:".ToUpper() + " (Informativo)")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.DatosEstablecimiento?.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Provincia: {0}", inspection.DatosEstablecimiento?.Provincia?.Nombre));
                             column.Item().AlignLeft().Text(string.Format("Distrito: {0}", inspection.DatosEstablecimiento?.Distrito?.Nombre));
@@ -9465,7 +9465,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("¿Está el establecimiento sometido a un proceso periódico de vigilancia y control sanitario por la autoridad competente?"));
                             column.Item().AlignLeft().Text(string.Format(DataModel.Helper.Helper.GetDescription(inspection.InspGuiBPMFabCosmeticoMed.ProcesoVigilanciaSanit)));
 
-                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0}", inspection.InspGuiBPMFabCosmeticoMed.FechaUltimaVista?.ToString("dd/MM/yyyy") ?? ""));
+                            column.Item().AlignLeft().Text(string.Format("Fecha de la última visita: {0} (Anexar copia de la hoja de la última inspección)", inspection.InspGuiBPMFabCosmeticoMed.FechaUltimaVista?.ToString("dd/MM/yyyy") ?? ""));
 
                             if (inspection.InspGuiBPMFabCosmeticoMed?.ClasifActComerciales?.LContenido?.Count > 0)
                             {
@@ -9599,7 +9599,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AdminInfoGeneral?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Administración e Información General:".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CAPITULO I - ADMINISTRACIÓN E INFORMACIÓN GENERAL".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9674,7 +9674,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.CondExtAlmacenas?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Condiciones Externas".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CAPITULO II - ALMACENES".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9748,7 +9748,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.CondIntAlmacenas?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Condiciones Internas".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Condiciones Internas".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9822,7 +9822,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AreaRecepMateriaPrima?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Área de Recepción de Materia Prima".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Área de Recepción de Materia Prima".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9896,7 +9896,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AlmacenMateriaPrima?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Almacén de Materia Prima".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Almacén de Materia Prima".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -9970,7 +9970,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AlmacenMatAcondicionamineto?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Área de almacenamiento de Materiales de Acondicionamiento, Empaque y Envase".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Área de almacenamiento de Materiales de Acondicionamiento, Empaque y Envase".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10044,7 +10044,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.RecepProductoTerminado?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Recepción de Producto Terminado (de producción al almacén)".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Recepción de Producto Terminado (de producción al almacén)".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10118,7 +10118,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AlmacenProductoTerminado?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Almacén de Producto Terminado".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Almacén de Producto Terminado".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10192,7 +10192,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.ProductoDevueltoRechazado?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Área de productos Devueltos y/o Rechazados".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Área de productos Devueltos y/o Rechazados".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10266,7 +10266,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.DistProductoTerminado?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Distribución de Productos Terminados".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Distribución de Productos Terminados".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10340,7 +10340,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.ManejoQuejaReclamos?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Manejo de quejas y reclamos de productos comercializados".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Manejo de quejas y reclamos de productos comercializados".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10414,7 +10414,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.RetiroProcMercado?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ALMACENES - Retiro de Productos del Mercado".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Retiro de Productos del Mercado".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10488,7 +10488,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.SistemaInstAgua?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Sistemas e Instalaciones de Agua".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CAPITULO III-SISTEMAS CRÍTICOS DE APOYO".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10562,7 +10562,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.OsmosisInversa?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Osmosis Inversa".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Osmosis Inversa".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10636,7 +10636,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.SistemaDeIonizacion?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Sistema de Deionización".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Sistema de Deionización".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10710,7 +10710,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.CalibraVerifEquipo?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Calibraciones y Verificaciones de equipo".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Calibraciones y Verificaciones de equipo".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10784,7 +10784,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.Validaciones?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Validaciones".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Validaciones".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10858,7 +10858,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.MantAreaEquipos?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("SISTEMAS CRITICOS DE APOYO - Mantenimiento de áreas y equipos".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Mantenimiento de áreas y equipos".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -10932,7 +10932,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AreaProdCondExternas?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Condiciones Externas".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CAPITULO IV - ÁREAS DE PRODUCCIÓN".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11006,7 +11006,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AreaProdCondInternas?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Condiciones Internas".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Condiciones Internas".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11080,7 +11080,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AreaOrganizaDocumentacion?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Organización y Documentación".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Organización y Documentación".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11154,7 +11154,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AreaDispensionOrdFab?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Área de Dispensación de Ordenes de Fabricación".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Área de Dispensación de Ordenes de Fabricación".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11228,7 +11228,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.FabProdDesinfectante?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Fabricación de Productos Desinfectantes".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Fabricación de Productos Desinfectantes".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11302,7 +11302,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.FabPlaguicida?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Fabricación de Plaguicidas".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Fabricación de Plaguicidas".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11376,7 +11376,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.FabCosmeticos?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ÁREAS DE PRODUCCIÓN - Fabricación de Cosméticos".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Fabricación de Cosméticos".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11450,7 +11450,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AreaEnvasado?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ACONDICIONAMIENTO - Área de Envasado".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CAPITULO V - ACONDICIONAMIENTO".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11524,7 +11524,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AreaEtiquetadoEmpaque?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ACONDICIONAMIENTO - Área de Etiquetado y Empaque".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Área de Etiquetado y Empaque".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11598,7 +11598,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.LabControlCalidad?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("CONTROL DE CALIDAD - Laboratorio de Control de Calidad".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CAPITULO VI - CONTROL DE CALIDAD".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11672,7 +11672,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.AnalisisContrato?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("CONTROL DE CALIDAD".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11746,7 +11746,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabCosmeticoMed?.InspeccionAudito?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Inspecciones y Auditoría".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CAPITULO VII - INSPECCIONES Y AUDITORÍA".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -11817,22 +11817,6 @@ namespace Aig.Auditoria.Services
                                     }
                                 });
                             }
-
-                            //column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            //{
-                            //    table.ColumnsDefinition(columns =>
-                            //    {
-                            //        columns.RelativeColumn();
-                            //    });
-
-                            //    table.Header(header =>
-                            //    {
-                            //        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
-                            //    });
-
-                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
-
-                            //});
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
@@ -14341,7 +14325,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabNatMedicina?.Generalidades15?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Capítulo 14".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Capítulo 15".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -14507,7 +14491,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiBPMFabNatMedicina?.AuditoriaCalidad?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Capítulo 15".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Capítulo 16".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -14787,7 +14771,10 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignCenter().Text("Guía para las Buenas Prácticas de Almacenamiento, Distribución y Transporte de Medicamentos y Otros Productos para la Salud Humana".ToUpper()).Bold();
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text("I. INTRODUCCIÓN.\r\nII. CLASIFICACIÓN DE LOS CRITERIOS DE EVALUACIÓN\r\nIII. CRITERIO DE APROBACIÓN\r\nIV. SOLICITUD PARA OBTENCIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE\r\n ALMACENAMIENTO Y DISTRIBUCIÓN\r\n. DATOS GENERALES DEL ESTABLECIMIENTO Y DE LA INSPECCIÓN\r\n\r\n1.DISPOSICIONES GENERALES DEL ESTABLECIMIENTO FARMACÉUTICO  \r\n1.1. Generalidades\r\n1.2. Documentación\r\n2.AREAS DEL ESTABLECIMIENTO\r\n2.1. Instalaciones\r\n2.2. Área de Recepción y Despacho\r\n2.3. Área de Almacén\r\n2.4. Almacenamiento de Productos\r\n       de Cadena de Frío\r\n2.5. Almacenamiento de\r\n       Estupefacientes o psicotrópicos\r\n2.6. Productos inflamables\r\n2.7. Plaguicidas\r\n2.8. Cosméticos\r\n2.9. Materia prima para la fabricación de productos regulados por la Dirección Nacional de Farmacia y Drogas  \r\n2.10. Productos retirados del mercado\r\n2.11. Productos devueltos del mercado\r\n2.12. Productos Falsificados o Ilícitos\r\n3.DISTRIBUCIÓN  \r\n3.1. Especificaciones para Productos a Distribuir\r\n3.2. Registros de Distribución\r\n4.DEL TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS\r\n5. AUTO-INSPECCIÓN\r\n6. CONCLUSIONES");
+                            column.Item().PaddingVertical(5).AlignCenter().Text("ANEXO");
+
+                            column.Item().AlignLeft().Text("ÍNDICE\r\n");
+                            column.Item().PaddingVertical(5).AlignLeft().Text("I. INTRODUCCIÓN.\r\nII. CLASIFICACIÓN DE LOS CRITERIOS DE EVALUACIÓN\r\nIII. CRITERIO DE APROBACIÓN\r\nIV. SOLICITUD PARA OBTENCIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE\r\n ALMACENAMIENTO Y DISTRIBUCIÓN\r\nV. DATOS GENERALES DEL ESTABLECIMIENTO Y DE LA INSPECCIÓN\r\n\r\n1.DISPOSICIONES GENERALES DEL ESTABLECIMIENTO FARMACÉUTICO  \r\n1.1. Generalidades\r\n1.2. Documentación\r\n2.AREAS DEL ESTABLECIMIENTO\r\n2.1. Instalaciones\r\n2.2. Área de Recepción y Despacho\r\n2.3. Área de Almacén\r\n2.4. Almacenamiento de Productos\r\n       de Cadena de Frío\r\n2.5. Almacenamiento de\r\n       Estupefacientes o psicotrópicos\r\n2.6. Productos inflamables\r\n2.7. Plaguicidas\r\n2.8. Cosméticos\r\n2.9. Materia prima para la fabricación de productos regulados por la Dirección Nacional de Farmacia y Drogas  \r\n2.10. Productos retirados del mercado\r\n2.11. Productos devueltos del mercado\r\n2.12. Productos Falsificados o Ilícitos\r\n3. DISTRIBUCIÓN  \r\n3.1. Especificaciones para Productos a Distribuir\r\n3.2. Registros de Distribución\r\n4.DEL TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS\r\n5. AUTO-INSPECCIÓN\r\n6. CONCLUSIONES");
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("I. INTRODUCCIÓN".ToUpper())).Bold();
@@ -14818,7 +14805,7 @@ namespace Aig.Auditoria.Services
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("V. DATOS GENERALES DEL ESTABLECIMIENTO".ToUpper())).Bold();
 
-                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Establecimiento Farmacéutico:")).Bold();
+                            column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Establecimiento Farmacéutico")).Bold();
                             column.Item().AlignLeft().Text(string.Format("Nombre de la empresa: {0}", inspection.DatosEstablecimiento?.Nombre??""));
                             column.Item().AlignLeft().Text(string.Format("Provincia: {0}", inspection.DatosEstablecimiento?.Provincia?.Nombre??""));
                             column.Item().AlignLeft().Text(string.Format("Distrito: {0}", inspection.DatosEstablecimiento?.Distrito?.Nombre ?? ""));
@@ -14930,7 +14917,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPM_Bpa?.DispGenerlestablecimiento?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("DISPOSICIONES GENERALES DEL ESTABLECIMIENTO".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("1. DISPOSICIONES GENERALES DEL ESTABLECIMIENTO".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -14948,7 +14935,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -14957,8 +14944,8 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().ColumnSpan(7).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero>0? dat.Numero:"").Bold();
+                                            table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
@@ -14986,7 +14973,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPM_Bpa?.AreasEstablecimiento?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("AREAS DEL ESTABLECIMIENTO".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("2. AREAS DEL ESTABLECIMIENTO".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -15004,7 +14991,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -15013,8 +15000,8 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().ColumnSpan(7).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero > 0 ? dat.Numero : "").Bold();
+                                            table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
@@ -15042,7 +15029,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPM_Bpa?.Distribucion?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("DISTRIBUCIÓN".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("3. DISTRIBUCIÓN".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -15060,7 +15047,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -15069,8 +15056,8 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().ColumnSpan(7).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero > 0 ? dat.Numero : "").Bold();
+                                            table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
@@ -15098,7 +15085,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPM_Bpa?.TransProdFarmaceuticos?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("4. TRANSPORTE PARA LOS PRODUCTOS FARMACÉUTICOS".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -15116,7 +15103,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -15125,8 +15112,8 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().ColumnSpan(7).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero > 0 ? dat.Numero : "").Bold();
+                                            table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
@@ -15154,7 +15141,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPM_Bpa?.AutoInspec?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("AUTO-INSPECCIÓN".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("5. AUTO-INSPECCIÓN".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -15172,7 +15159,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -15181,8 +15168,8 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().ColumnSpan(7).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero > 0 ? dat.Numero : "").Bold();
+                                            table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
@@ -15208,10 +15195,25 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
+                            column.Item().PaddingVertical(5).Text("6. CONCLUSIONES:".ToUpper()).Bold();
+                            column.Item().AlignTop().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn();
+                                });
 
-                            
-                            column.Item().PaddingVertical(5).Text("CONCLUSIONES:\r\nObservaciones".ToUpper()).Bold();
-                            column.Item().Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
+                                });
+
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+
+                            });
+
+                            //column.Item().PaddingVertical(5).Text("CONCLUSIONES:\r\nObservaciones".ToUpper()).Bold();
+                            //column.Item().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             column.Item().PaddingVertical(5).Text(string.Format("Se culmina la Inspección por Verificación del cumplimiento de las Buenas Prácticas de Almacenamiento, Distribución y Transporte a las {0}, del día {1} de {2} de {3}", inspection.DatosConclusiones?.FechaFinalizacion?.ToString("hh:mm tt"), inspection.DatosConclusiones?.FechaFinalizacion?.ToString("dd"), Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones?.FechaFinalizacion?.ToString("MM")??"0")), inspection.DatosConclusiones?.FechaFinalizacion?.ToString("yyyy")));
 

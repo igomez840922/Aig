@@ -1,4 +1,5 @@
-﻿@if (User != null)
+﻿@using DataModel;
+@if (User != null)
 {
     <div class="modal fade show" id="exampleModal" tabindex="-1" style="display: block;overflow-y: auto;" aria-modal="true" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop">
         <div class="modal-dialog modal-xl" role="document">
@@ -14,6 +15,30 @@
                 <div class="modal-body">
                     <EditForm Model="@User" OnValidSubmit="SaveData">
                         <DataAnnotationsValidator />
+
+                        <h4>@languageContainerService.Keys["Información de la Cuenta"]</h4>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <label>@languageContainerService.Keys["Role"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+
+
+                                        <RadzenDropDown AllowClear=" false" TValue="enumUserRoleType" Class="form-control" @bind-Value=@User.UserRoleType
+                                                        AllowFiltering="  true" FilterCaseSensitivity="@Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="@Radzen.StringFilterOperator.Contains"
+                                                        Data=@(Enum.GetValues(typeof(enumUserRoleType)))>
+                                            <Template Context="tContext">
+                                                @(DataModel.Helper.Helper.GetDescription(tContext))
+                                            </Template>
+                                        </RadzenDropDown>
+                                        <ValidationMessage For=@(() => User.UserRoleType) />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+
                         <h4>@languageContainerService.Keys["Datos Personales"]</h4>
                         <div class="row clearfix">
 

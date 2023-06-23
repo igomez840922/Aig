@@ -33,7 +33,7 @@ namespace DataModel.Models
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string PhoneNumber { get; set; }
 
-        public enumUserRoleType UserRoleType { get; set; } = enumUserRoleType.None;
+        public enumUserRoleType UserRoleType { get; set; } = enumUserRoleType.SysUser;
 
         [StringLength(250)]
         [Required(ErrorMessage = "campo requerido")]

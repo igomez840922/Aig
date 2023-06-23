@@ -307,7 +307,8 @@ namespace DataModel
             new ContenidoPreguntas()
                 {
                     Titulo = "Otros",
-                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    Observaciones = "Detallar:"
                 },
             new ContenidoPreguntas()
                 {
