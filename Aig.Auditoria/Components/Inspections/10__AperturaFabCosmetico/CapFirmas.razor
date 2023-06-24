@@ -1,0 +1,311 @@
+﻿@using DataModel.Helper;
+@implements IDisposable
+
+@if (Inspeccion != null)
+{
+    if (showSignasure)
+    {
+        <Aig.Auditoria.Components.Signage.Index OnSignature="OnSignature"></Aig.Auditoria.Components.Signage.Index>
+    }
+    else
+    {
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    @(Inspeccion != null && Inspeccion.Id > 0 ? "ACTA: " + Inspeccion.NumActa : @languageContainerService.Keys["NewInspection"]) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.TipoActa))
+                                </h3>
+                            </div>
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="kt-portlet__head-actions">
+                                    <button type="button" class="btn btn-danger btn-sm btn-bold"
+                                        @onclick="(e)=>{Cancel();}">
+                                        @languageContainerService.Keys["Cerrar"]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-portlet__body--fit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="kt-portlet__body">
+                                        <EditForm OnValidSubmit="SaveData" EditContext="@editContext">
+                                            <DataAnnotationsValidator />
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <h5>@languageContainerService.Keys["Firmas"]</h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="row clearfix">
+
+                                                @if (Inspeccion?.InspAperFabricanteCosmetMed?.DatosRepresentLegal != null)
+                                                {
+                                                    <div class="col-sm-6">
+                                                        <h5>@languageContainerService.Keys["Por el Establecimiento"]</h5>
+                                                        <div class="row clearfix">
+                                                            <div class="col-sm-12">
+                                                                <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Nombre" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Nombre) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Cargo" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Cargo) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Cedula" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Cedula) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                <div class="col-sm-12">
+                                                                    @*<label>@languageContainerService.Keys["Signature"]</label>*@
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <img src="@Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal.Firma" style="width:100%!important;border:solid 1px;margin-bottom: 5px;">
+                                                                            <button type="button" class="btn btn-sm btn-outline-primary waves-effect"
+                                                                            @onclick="(e)=>{OpenSignature(1);}">
+                                                                                @languageContainerService.Keys["Firmar"]
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                }
+
+                                                @if (Inspeccion?.InspAperFabricanteCosmetMed?.DatosRegente != null)
+                                                {
+                                                    <div class="col-sm-6">
+                                                        <h5>@languageContainerService.Keys["Regente Farmaceutico"]</h5>
+                                                        <div class="row clearfix">
+                                                            <div class="col-sm-8">
+                                                                <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Nombre" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Nombre) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.NumRegistro" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.NumRegistro) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Cargo" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Cargo) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Cedula" />
+                                                                        <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Cedula) />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                                <div class="col-sm-12">
+                                                                    @*<label>@languageContainerService.Keys["Signature"]</label>*@
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <img src="@Inspeccion.InspAperFabricanteCosmetMed.DatosRegente.Firma" style="width:100%!important;border:solid 1px;margin-bottom: 5px;">
+                                                                            <button type="button" class="btn btn-sm btn-outline-primary waves-effect"
+                                                                            @onclick="(e)=>{OpenSignature(2);}">
+                                                                                @languageContainerService.Keys["Firmar"]
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                                    @if (Inspeccion?.InspAperFabricanteCosmetMed?.DatosResponsable != null)
+                                                    {
+                                                        <div class="col-sm-6">
+                                                            <h5>@languageContainerService.Keys["Responsable"]</h5>
+                                                            <div class="row clearfix">
+                                                                <div class="col-sm-8">
+                                                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Nombre" />
+                                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Nombre) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.NumRegistro" />
+                                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.NumRegistro) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label for="password">@languageContainerService.Keys["Charge"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Cargo" />
+                                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Cargo) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Cedula" />
+                                                                            <ValidationMessage For=@(() => Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Cedula) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-12">
+                                                                    @*<label>@languageContainerService.Keys["Signature"]</label>*@
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <img src="@Inspeccion.InspAperFabricanteCosmetMed.DatosResponsable.Firma" style="width:100%!important;border:solid 1px;margin-bottom: 5px;">
+                                                                            <button type="button" class="btn btn-sm btn-outline-primary waves-effect"
+                                                                            @onclick="(e)=>{OpenSignature(4);}">
+                                                                                @languageContainerService.Keys["Firmar"]
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                <div class="col-sm-12">
+                                                    <h5>@languageContainerService.Keys["DNFDParticipants"]</h5>
+                                                </div>
+                                                @if (Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
+                                                {
+                                                    @foreach (var dt in Inspeccion.ParticipantesDNFD.LParticipantes)
+                                                    {
+
+                                                        <div class="col-sm-6">
+                                                            <div class="row clearfix">
+                                                                <div class="col-sm-12">
+                                                                    <label for="password">@languageContainerService.Keys["FullName"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText disabled="disabled" class="form-control" @bind-Value="dt.NombreCompleto" />
+                                                                            <ValidationMessage For=@(() => dt.NombreCompleto) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <label for="password">@languageContainerService.Keys["RegisterNumber"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText disabled="disabled" class="form-control" @bind-Value="dt.RegistroNumero" />
+                                                                            <ValidationMessage For=@(() => dt.RegistroNumero) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                 <div class="col-sm-6">
+                                                                    <label for="password">@languageContainerService.Keys["IdentificationCard"]</label>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <InputText disabled="disabled" class="form-control" @bind-Value="dt.CedulaIdentificacion" />
+                                                                            <ValidationMessage For=@(() => dt.CedulaIdentificacion) />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                    <div class="col-sm-12">
+                                                                        @*<label>@languageContainerService.Keys["Signature"]</label>*@
+                                                                        <div class="form-group">
+                                                                            <div class="form-line">
+                                                                                <img src="@dt.Firma" style="width:100%!important;border:solid 1px;margin-bottom: 5px;">
+                                                                                <button type="button" class="btn btn-sm btn-outline-primary waves-effect"
+                                                                                @onclick="(e)=>{OpenSignature(dt);}">
+                                                                                    @languageContainerService.Keys["Firmar"]
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+
+
+                                            <br><br>
+
+                                            <div class="kt-portlet__foot" style="text-align:right;">
+                                                <div class="kt-form__actions">
+
+                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                            class="btn btn-success waves-effect">
+                                                        @languageContainerService.Keys["SaveExit"]
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            class="btn btn-info waves-effect">
+                                                        @languageContainerService.Keys["Save"]
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        @onclick="(e)=>{Cancel();}">
+                                                        @languageContainerService.Keys["Cerrar"]
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </EditForm>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+}
+

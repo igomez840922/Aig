@@ -159,7 +159,7 @@ namespace Aig.Auditoria.Services
 
                         page.Content().Column(column =>
                         {
-                            column.Item().AlignCenter().Text("ACTA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE FARMACIA").Bold();
+                            column.Item().AlignCenter().Text("GUíA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE FARMACIA".ToUpper()).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
@@ -768,7 +768,7 @@ namespace Aig.Auditoria.Services
                         });
 
                         page.Content().Column(column => {
-                            column.Item().AlignCenter().Text("ACTA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE AGENCIA DISTRIBUIDORA").Bold();
+                            column.Item().AlignCenter().Text("GUíA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE AGENCIA DISTRIBUIDORA".ToUpper()).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
@@ -3862,28 +3862,34 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
+
+                            
                             if (inspection.InspInvestigacion.DetallesInvestigacion != null)
                             {
-                                column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("A continuación, se describen los detalles de la inspección:\r\n{0}", inspection.InspInvestigacion.DetallesInvestigacion.DetalleInspeccion));
+                                column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Motivo de la Investigación:\r\n{0}", inspection.InspInvestigacion.DetallesInvestigacion.DetalleVerificacion));
+
+                                column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Detalles de la Inspección:\r\n{0}", inspection.InspInvestigacion.DetallesInvestigacion.DetalleInspeccion));
                                 //column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("Se adjunta acta de retención y retiro de productos: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.DetallesInvestigacion.AdjuntaActaRetencion)));
                                 //column.Item().PaddingVertical(5).AlignLeft().Text(string.Format("No se puede movilizar los productos hasta culminar la investigación: {0}", DataModel.Helper.Helper.GetDescription(inspection.InspInvestigacion.DetallesInvestigacion.MovilizarProductos)));
                             }
 
-                            column.Item().PaddingVertical(5).AlignTop().Table(table =>
-                            {
-                                table.ColumnsDefinition(columns =>
-                                {
-                                    columns.RelativeColumn();
-                                });
 
-                                table.Header(header =>
-                                {
-                                    header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Se Finaliza la Inspección por").Bold();
-                                });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection?.DatosConclusiones?.ObservacionesFinales);
+                            //column.Item().PaddingVertical(5).AlignTop().Table(table =>
+                            //{
+                            //    table.ColumnsDefinition(columns =>
+                            //    {
+                            //        columns.RelativeColumn();
+                            //    });
 
-                            });
+                            //    table.Header(header =>
+                            //    {
+                            //        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Se Finaliza la Inspección por").Bold();
+                            //    });
+
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection?.DatosConclusiones?.ObservacionesFinales);
+
+                            //});
 
                             //column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             //{
@@ -5718,22 +5724,167 @@ namespace Aig.Auditoria.Services
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo Electronico");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento?.Correo));
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("REGENTE FARMACEUTICO");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("REGENTE FARMACEUTICO(A)");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.Nombre);
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.Cedula);
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Num. Registro");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.NumRegistro);
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("REPRESENTANTE LEGAL");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Propietario o Representante Legal".ToUpper());
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRepresentLegal?.Nombre);
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRepresentLegal?.Cedula);
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("PRODUCTOS QUE FABRICA");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Productos que fabricaran (adjuntar listado si lo poseen)".ToUpper());
                                 table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.ProdFabrican?.ProductosDesc);
 
                             });
+
+                            if (inspection.InspAperFabricanteCosmetMed?.EstructuraOrganizativa?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("GENERALIDADES".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Cumple".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.EstructuraOrganizativa.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspAperFabricanteCosmetMed?.Almacenes?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("ALMACENES".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Cumple".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.Almacenes.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspAperFabricanteCosmetMed?.Almacenes2?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                //column.Item().AlignLeft().Text(string.Format("Áreas de Almacenamiento".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1.5);
+                                        columns.RelativeColumn((float)1.5);
+                                        columns.RelativeColumn((float)1.5);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Materia Prima".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Material de Acondicionamiento".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Producto Terminado".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.Almacenes2.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    if (eva.HideEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" ");
+
+                                                    }
+                                                    else
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
 
                             if (inspection.InspAperFabricanteCosmetMed?.Documantacion?.LContenido?.Count > 0)
                             {
@@ -5778,64 +5929,7 @@ namespace Aig.Auditoria.Services
                                     }
                                 });
                             }
-
-                            if (inspection.InspAperFabricanteCosmetMed?.Almacenes?.LContenido?.Count > 0)
-                            {
-                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Áreas de Almacenamiento".ToUpper())).Bold();
-                                column.Item().Table(table =>
-                                {
-                                    table.ColumnsDefinition(columns =>
-                                    {
-                                        columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)1.5);
-                                        columns.RelativeColumn((float)1.5);
-                                        columns.RelativeColumn((float)1.5);
-                                        columns.RelativeColumn((float)4);
-                                    });
-                                    table.Header(header =>
-                                    {
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Materia Prima".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Material de Acondicionamiento".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Producto Terminado".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
-                                    });
-                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.Almacenes.LContenido)
-                                    {
-                                        if (dat.IsHeader)
-                                        {
-                                            table.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                        }
-                                        else
-                                        {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            if (dat.LEvaluacion?.Count > 0)
-                                            {
-                                                foreach (var eva in dat.LEvaluacion)
-                                                {
-                                                    if (eva.HideEvaluacion)
-                                                    {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" ");
-
-                                                    }
-                                                    else
-                                                    {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-
-                                                    }
-                                                }
-                                            }
-                                            else
-                                            {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                            }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
-                                        }
-                                    }
-                                });
-                            }
-                                                        
+                                                                                    
                             if (inspection.InspAperFabricanteCosmetMed?.AreasAuxiliares?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
@@ -5880,6 +5974,227 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
+                            if (inspection.InspAperFabricanteCosmetMed?.SistemaCriticoApoyo?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("III - SISTEMAS CRITICOS DE APOYO".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Cumple".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.SistemaCriticoApoyo.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspAperFabricanteCosmetMed?.AreaProduccion?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("IV - ÁREAS DE PRODUCCIÓN".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Cumple".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.AreaProduccion.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+                            
+                            if (inspection.InspAperFabricanteCosmetMed?.Acondicionamiento?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("V - ACONDICIONAMIENTO".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Cumple".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.Acondicionamiento.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspAperFabricanteCosmetMed?.ControlCalidad?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("VI- CONTROL DE CALIDAD".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Cumple".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.ControlCalidad.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspAperFabricanteCosmetMed?.InspeccionAuditoria?.LContenido?.Count > 0)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("VII- INSPECCIONES Y AUDITORÍA".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Punto por evaluar".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Cumple".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    foreach (var dat in inspection.InspAperFabricanteCosmetMed.InspeccionAuditoria.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                        }
+                                    }
+                                });
+                            }
+
+
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format(" ")).Bold();
                             //column.Item().AlignLeft().Text("El establecimiento se compromete a que los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos, estén completos y acorde con la Normativa vigente y según las actividades a las que se dedicará el establecimiento.  De igual forma el establecimiento deberá tener a disposición de la Autoridad Reguladora los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos cuando esta lo solicite y al momento de Auditoría de Buenas prácticas de Fabricación.");
 
@@ -5916,9 +6231,17 @@ namespace Aig.Auditoria.Services
 
                             }
 
+                            //column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("PROCEDIMIENTOS OPERATIVOS ESTÁNDARES")).Bold();
+                            //column.Item().AlignLeft().Text("El establecimiento se compromete a que los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos, estén completos y acorde con la Normativa vigente y según las actividades a las que se dedicará el establecimiento.  De igual forma el establecimiento deberá tener a disposición de la Autoridad Reguladora los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos cuando esta lo solicite y al momento de Auditoría de Buenas prácticas de Fabricación.");
+
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("CRITERIO TÉCNICO")).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo N° 95 del 14 de mayo de 2019, por el cual se reglamentan las Buenas Prácticas de Fabricación de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.DatosEstablecimiento?.Nombre, inspection.DatosEstablecimiento?.Direccion, (inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE"), DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricanteCosmetMed.ProdFabrican?.TipoProductos ?? enumTipoProductosImportacion.Otros) + (inspection.InspAperFabricanteCosmetMed.ProdFabrican?.TipoProductos == enumTipoProductosImportacion.Otros ? inspection.InspAperFabricanteCosmetMed.ProdFabrican?.ProductosDesc ?? "" : ""), inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones?.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
-                                                        
+                            column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo 115 del 16 de agosto de 2022, por el cual se reglamentan las Buenas Prácticas de Fabricación de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", inspection.DatosEstablecimiento?.Nombre, inspection.DatosEstablecimiento?.Direccion, (inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE"), DataModel.Helper.Helper.GetDescription(inspection.InspAperFabricanteCosmetMed.ProdFabrican?.TipoProductos ?? enumTipoProductosImportacion.Otros) + (inspection.InspAperFabricanteCosmetMed.ProdFabrican?.TipoProductos == enumTipoProductosImportacion.Otros ? inspection.InspAperFabricanteCosmetMed.ProdFabrican?.ProductosDesc ?? "" : ""), inspection.DatosConclusiones?.FechaFinalizacion?.Day, Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.DatosConclusiones?.FechaFinalizacion?.ToString("MM") ?? "01")), inspection.DatosConclusiones?.FechaFinalizacion?.Year.ToString() ?? ""));
+
+
+                            column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("Inconformidades o desviaciones detectadas:")).Bold();
+                            column.Item().AlignLeft().Text(inspection.DatosConclusiones?.ObservacionesFinales??"");
+
+
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
                             {

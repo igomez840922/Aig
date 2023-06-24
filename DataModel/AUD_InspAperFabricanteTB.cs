@@ -980,7 +980,7 @@ namespace DataModel
                         IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Tiene el laboratorio acondicionador un procedimiento    y programa de autoinspecciones que contempla todos   los aspectos de las buenas prácticas de manufactura (acondicionamiento)?",
+                        Titulo = "AUTOINSPECCIONES\r\nTiene el laboratorio acondicionador un procedimiento y programa de autoinspecciones que contempla todos   los aspectos de las buenas prácticas de manufactura (acondicionamiento)?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
