@@ -191,7 +191,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existen fuentes de contaminación ambiental en el área circundante al edificio? En caso afirmativo, se adoptan medidas de resguardo? ",
+                        Titulo = "Existen fuentes de contaminación ambiental en el área circundante al edificio? En caso afirmativo, se adoptan medidas de resguardo?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -199,7 +199,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Está diseñado y equipado el edificio de tal forma que ofrezca la máxima protección contra el ingreso de insectos y animales? ",
+                        Titulo = "Está diseñado y equipado el edificio de tal forma que ofrezca la máxima protección contra el ingreso de insectos y animales?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -207,11 +207,11 @@ namespace DataModel
                         IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Está diseñado el edificio, de tal manera que permita el flujo de materiales, procesos y personal evitando la confusión, contaminación y errores? ",
+                        Titulo = "Está diseñado el edificio, de tal manera que permita el flujo de materiales, procesos y personal evitando la confusión, contaminación y errores?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Están las áreas de acceso restringido debidamente delimitadas e identificadas? ",
+                        Titulo = "Están las áreas de acceso restringido debidamente delimitadas e identificadas?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -223,7 +223,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Las condiciones de iluminación, temperatura, humedad y ventilación, para la producción y almacenamiento, están acordes con los requerimientos del producto? ",
+                        Titulo = "Las condiciones de iluminación, temperatura, humedad y ventilación, para la producción y almacenamiento, están acordes con los requerimientos del producto?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -231,7 +231,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Dispone el edificio de extintores adecuados a las áreas y se encuentran estos ubicados en lugares estratégicos? ",
+                        Titulo = "Dispone el edificio de extintores adecuados a las áreas y se encuentran estos ubicados en lugares estratégicos?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -261,7 +261,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Las instalaciones eléctricas están diseñadas y ubicadas de tal forma que facilitan la limpieza? ",
+                        Titulo = "Las instalaciones eléctricas están diseñadas y ubicadas de tal forma que facilitan la limpieza?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
@@ -277,11 +277,11 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Están protegidas de las condiciones ambientales las áreas de recepción y despacho? ",
+                        Titulo = "Están protegidas de las condiciones ambientales las áreas de recepción y despacho?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existe un área de despacho de producto terminado? ",
+                        Titulo = "Existe un área de despacho de producto terminado?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , },
                     },
                         new ContenidoPreguntas(){
@@ -289,7 +289,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion(), },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "El muestreo de materia prima se efectúa en área separada o en el área de pesaje o dispensado? ",
+                        Titulo = "El muestreo de materia prima se efectúa en área separada o en el área de pesaje o dispensado?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , },
                     },
                         new ContenidoPreguntas(){
@@ -313,7 +313,7 @@ namespace DataModel
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), },
                    },
                         new ContenidoPreguntas(){
-                        Titulo = "Se utilizan materias primas psicotrópicas o estupefacientes? ",
+                        Titulo = "Se utilizan materias primas psicotrópicas o estupefacientes?",
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion(), },
                    },
                         new ContenidoPreguntas(){
@@ -333,7 +333,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , },
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existe un área separada y de acceso restringido para almacenar material impreso (etiquetas, estuches, insertos y envases impresos)? ",
+                        Titulo = "Existe un área separada y de acceso restringido para almacenar material impreso (etiquetas, estuches, insertos y envases impresos)?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() , new OpcionEvaluacion(), new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , new OpcionEvaluacion() , },
                     },
                         new ContenidoPreguntas(){
@@ -351,15 +351,15 @@ namespace DataModel
             AreaDispMateriaPrima = new AUD_ContenidoGenerico();
             AreaDispMateriaPrima.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
-                        Titulo = "Existe un área separada e identificada, para llevar a cabo las operaciones de dispensación? ",
+                        Titulo = "Existe un área separada e identificada, para llevar a cabo las operaciones de dispensación?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Tiene paredes, pisos, techos lisos y curvas sanitarias? ",
+                        Titulo = "Tiene paredes, pisos, techos lisos y curvas sanitarias?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Cuenta con un sistema de inyección y extracción de aire que garanticen la no contaminación cruzada y seguridad del operario? ",
+                        Titulo = "Cuenta con un sistema de inyección y extracción de aire que garanticen la no contaminación cruzada y seguridad del operario?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -401,7 +401,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "El laboratorio cuenta con áreas de tamaño, diseño y servicios (aire comprimido, agua, luz, ventilación, etc.) para efectuar los procesos de producción que corresponden? ",
+                        Titulo = "El laboratorio cuenta con áreas de tamaño, diseño y servicios (aire comprimido, agua, luz, ventilación, etc.) para efectuar los procesos de producción que corresponden?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -413,7 +413,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Tienen paredes, pisos y techos lisos con curvas sanitarias de tal forma que permitan la fácil limpieza y sanitización? ",
+                        Titulo = "Tienen paredes, pisos y techos lisos con curvas sanitarias de tal forma que permitan la fácil limpieza y sanitización?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -441,7 +441,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Se toman las precauciones necesarias cuando se trabaja con materias primas fotosensibles? ",
+                        Titulo = "Se toman las precauciones necesarias cuando se trabaja con materias primas fotosensibles?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -449,7 +449,7 @@ namespace DataModel
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                    },
                         new ContenidoPreguntas(){
-                        Titulo = "Están identificadas y separadas las áreas para el empaque primario de sólidos, líquidos y semisólidos? ",
+                        Titulo = "Están identificadas y separadas las áreas para el empaque primario de sólidos, líquidos y semisólidos?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -465,11 +465,11 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Están las tomas de gases y fluidos identificados? ",
+                        Titulo = "Están las tomas de gases y fluidos identificados?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Disponen de sistemas de inyección y extracción de aire? ",
+                        Titulo = "Disponen de sistemas de inyección y extracción de aire?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -549,7 +549,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Dispone de suficiente espacio para evitar confusiones y contaminación cruzada? ",
+                        Titulo = "Dispone de suficiente espacio para evitar confusiones y contaminación cruzada?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -573,7 +573,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existe equipo de seguridad como: ",
+                        Titulo = "Existe equipo de seguridad como:",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -581,7 +581,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "- lava ojos ",
+                        Titulo = "- lava ojos",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -599,7 +599,7 @@ namespace DataModel
             AreaAuxiliares = new AUD_ContenidoGenerico();
             AreaAuxiliares.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
-                        Titulo = "Están los servicios sanitarios accesibles a las áreas de trabajo y no se comunican directamente con las áreas de producción? ",
+                        Titulo = "Están los servicios sanitarios accesibles a las áreas de trabajo y no se comunican directamente con las áreas de producción?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -611,7 +611,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "La cantidad de servicios sanitarios para hombres y mujeres está de acuerdo con el número de trabajadores? ",
+                        Titulo = "La cantidad de servicios sanitarios para hombres y mujeres está de acuerdo con el número de trabajadores?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -643,11 +643,11 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Cuentan con un comedor separado de las demás áreas productivas e identificada, en buenas condiciones de orden y limpieza? ",
+                        Titulo = "Cuentan con un comedor separado de las demás áreas productivas e identificada, en buenas condiciones de orden y limpieza?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Cuentan con un área de lavandería separada y exclusiva para el lavado y secado de los uniformes utilizados por el personal? ",
+                        Titulo = "Cuentan con un área de lavandería separada y exclusiva para el lavado y secado de los uniformes utilizados por el personal?",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -669,7 +669,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "La ubicación del equipo facilita su limpieza, así como la del área en la que se encuentra? ",
+                        Titulo = "La ubicación del equipo facilita su limpieza, así como la del área en la que se encuentra?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -828,7 +828,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Formato de registros ",
+                        Titulo = "Formato de registros",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -836,7 +836,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Formato de registros ",
+                        Titulo = "Formato de registros",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -844,11 +844,11 @@ namespace DataModel
                         IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existe un procedimiento escrito para la devolución de producto? ",
+                        Titulo = "Existe un procedimiento escrito para la devolución de producto?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Formatos de registros ",
+                        Titulo = "Formatos de registros",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -880,11 +880,11 @@ namespace DataModel
                         IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Control de calidad realiza controles Físicos químicos ",
+                        Titulo = "Control de calidad realiza controles Físicos químicos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Control de calidad realiza controles Microbiológicos ",
+                        Titulo = "Control de calidad realiza controles Microbiológicos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){

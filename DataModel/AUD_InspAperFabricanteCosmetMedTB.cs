@@ -113,10 +113,10 @@ namespace DataModel
                         Titulo = "Descripción de puestos",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Responsable de investigación y desarrollo",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Responsable de investigación y desarrollo",
+                    //             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
                         new ContenidoPreguntas(){
                         Titulo = "Responsable de producción,",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -314,10 +314,10 @@ namespace DataModel
                         Titulo = "Área de almacenamiento para Etiquetas, material impreso, asegurada",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion = true }, new OpcionEvaluacion(),new OpcionEvaluacion(){ HideEvaluacion=true}},
                     },
-                    new ContenidoPreguntas(){
-                        Titulo = "Área de almacenamiento para Etiquetas, material impreso",
-                                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true},new OpcionEvaluacion(),new OpcionEvaluacion(){ HideEvaluacion=true}},
-                    },
+                    //new ContenidoPreguntas(){
+                    //    Titulo = "Área de almacenamiento para Etiquetas, material impreso",
+                    //             LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true},new OpcionEvaluacion(),new OpcionEvaluacion(){ HideEvaluacion=true}},
+                    //},
                     new ContenidoPreguntas(){
                         Titulo = "Existen advertencias o prohibiciones de: no comer, no beber, no fumar, no guardar plantas comidas y bebidas",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(),new OpcionEvaluacion(),new OpcionEvaluacion()},
