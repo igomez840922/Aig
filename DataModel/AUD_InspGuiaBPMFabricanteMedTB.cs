@@ -160,7 +160,7 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoGenerico FabProdFarmEsteril_A3 { get => fabProdFarmEsteril_A3; set => SetProperty(ref fabProdFarmEsteril_A3, value); }
 
-        //B. FABRICACIÓN DE PRODUCTOS FARMACÉUTICOS β-LACTÁMICOS - PERSONAL - INSTALACIONES - SISTEMA DE AIRE - EQUIPOS - CONTROL DE CALIDAD - 
+        //B. FABRICACIÓN DE PRODUCTOS FARMACÉUTICOS BETA-LACTÁMICOS - PERSONAL - INSTALACIONES - SISTEMA DE AIRE - EQUIPOS - CONTROL DE CALIDAD - 
         private AUD_ContenidoGenerico lactamicos;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoGenerico Lactamicos { get => lactamicos; set => SetProperty(ref lactamicos, value); }
@@ -364,7 +364,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "β-Lactámicos",
+                        Titulo = "BETA-Lactámicos",
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas()
@@ -7440,6 +7440,13 @@ namespace DataModel
             ValGenerales.LContenido = new List<ContenidoPreguntas>() {
                       new ContenidoPreguntas()
                     {
+                        Titulo = "16. Validación".ToUpper(),
+
+                        Capitulo="",
+
+                        IsHeader = true,
+                    },  new ContenidoPreguntas()
+                    {
                         Titulo = "GENERALIDADES",
 
                         Capitulo="16.1",
@@ -8356,6 +8363,7 @@ namespace DataModel
                     new ContenidoPreguntas()
                     {
                         Titulo = "SE REALIZA Y DOCUMENTA LA CALIFICACION Y VALIDACION DE SISTEMA DE AIRE.",
+                        Articulo = "g",
 
 
 
@@ -10089,7 +10097,7 @@ namespace DataModel
                     {
                         Titulo = "PRODUCCIÓN ASÉPTICA",
                         Criterio = "",
-
+                        Capitulo="A.2",
                         IsHeader = true,
                     },
                     new ContenidoPreguntas()
@@ -12173,7 +12181,7 @@ namespace DataModel
                         IsHeader = true,
                     },new ContenidoPreguntas()
                     {
-                        Titulo = "B. FABRICACIÓN DE PRODUCTOS FARMACÉUTICOS β-LACTÁMICOS".ToUpper(),
+                        Titulo = "B. FABRICACIÓN DE PRODUCTOS FARMACÉUTICOS BETA-LACTÁMICOS".ToUpper(),
                         
                         Capitulo="",
 

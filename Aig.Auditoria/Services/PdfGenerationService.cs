@@ -185,46 +185,46 @@ namespace Aig.Auditoria.Services
                                 });
 
                                 //Establecimiento
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("NOMBRE DEL ESTABLECIMIENTO");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Nombre);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Direccion);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("NOMBRE DE SOLICITANTE");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Nombre);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Tipo");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicFarm.DatosSolicitante.Tipo));
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nacionalidad");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Nacionalidad);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Cedula);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Email);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.PaisResidencia);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Provincia);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Distrito);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Corregimiento);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Direccion);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspAperCambUbicFarm.DatosSolicitante?.TelefonoResid, inspection.InspAperCambUbicFarm.DatosSolicitante?.TelefonoMovil));
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Profesión");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Profesion);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("NOMBRE DEL ESTABLECIMIENTO");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Direccion);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("NOMBRE DE SOLICITANTE");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Tipo");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicFarm.DatosSolicitante.Tipo));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nacionalidad");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Nacionalidad);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Cedula);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Email);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.PaisResidencia);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Provincia);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Distrito);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Corregimiento);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Direccion);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicFarm.DatosSolicitante?.TelefonoResid, inspection.InspAperCambUbicFarm.DatosSolicitante?.TelefonoMovil));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Profesión");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosSolicitante?.Profesion);
 
                                 table.Footer(footer =>
                                 {
-                                    footer.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ley 66 de 10 de noviembre de 1947. Código Sanitario de la República de Panamá. (G.O. 10467 de 6 de diciembre de 1947). Artículo 200. Prohíbese ejercer conjuntamente las profesiones de médico-cirujano y farmacéutico. A partir de la aprobación de este código, ningún médico que ejerza la profesión podrá ser dueño por sí mismo o por interpuesta persona, accionista o tener participación comercial cualquiera en establecimientos en que se fabriquen, preparen o vendan medicinas y artículos de cualquier clase que se usen para la prevención o curación de enfermedades, corrección de defectos o para el diagnóstico");
+                                    footer.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ley 66 de 10 de noviembre de 1947. Código Sanitario de la República de Panamá. (G.O. 10467 de 6 de diciembre de 1947). Artículo 200. Prohíbese ejercer conjuntamente las profesiones de médico-cirujano y farmacéutico. A partir de la aprobación de este código, ningún médico que ejerza la profesión podrá ser dueño por sí mismo o por interpuesta persona, accionista o tener participación comercial cualquiera en establecimientos en que se fabriquen, preparen o vendan medicinas y artículos de cualquier clase que se usen para la prevención o curación de enfermedades, corrección de defectos o para el diagnóstico");
                                 });
                             });
 
@@ -242,26 +242,26 @@ namespace Aig.Auditoria.Services
                                 });
 
                                 //Establecimiento
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.Nombre);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Registro de Idoneidad");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.NumRegistro);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.Cedula);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.Email);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.PaisResidencia);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.Provincia);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.Distrito);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.Corregimiento);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicFarm.DatosRegente?.Ubicacion);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspAperCambUbicFarm.DatosRegente?.TelefonoOfic, inspection.InspAperCambUbicFarm.DatosRegente?.TelefonoMovil));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Registro de Idoneidad");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.NumRegistro);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.Cedula);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.Email);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.PaisResidencia);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.Provincia);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.Distrito);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.Corregimiento);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicFarm.DatosRegente?.Ubicacion);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicFarm.DatosRegente?.TelefonoOfic, inspection.InspAperCambUbicFarm.DatosRegente?.TelefonoMovil));
 
                             });
 
@@ -287,7 +287,7 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                         }
                                         else
                                         {
@@ -295,11 +295,11 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
 
@@ -328,7 +328,7 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                         }
                                         else
                                         {
@@ -336,11 +336,11 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
 
@@ -369,7 +369,7 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                         }
                                         else
                                         {
@@ -377,11 +377,11 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
 
@@ -410,7 +410,7 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                         }
                                         else
                                         {
@@ -418,11 +418,11 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
 
@@ -451,7 +451,7 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                         }
                                         else
                                         {
@@ -459,11 +459,11 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
 
@@ -492,7 +492,7 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                         }
                                         else
                                         {
@@ -500,11 +500,11 @@ namespace Aig.Auditoria.Services
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
 
@@ -523,7 +523,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIONES GENERALES").Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -543,11 +543,11 @@ namespace Aig.Auditoria.Services
 
                                     if (inspection.DatosConclusiones.CumpleRequisitosMinOperacion)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
                                     else
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
 
                                 });
@@ -796,45 +796,45 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     //Establecimiento
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("NOMBRE DEL ESTABLECIMIENTO");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Nombre);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Direccion);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("NOMBRE DEL ESTABLECIMIENTO");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Direccion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
 
                                     if (inspection.InspAperCambUbicAgen.DatosSolicitante != null)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("NOMBRE DE SOLICITANTE");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Nombre);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Tipo");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosSolicitante.Tipo));
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nacionalidad");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Nacionalidad);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Cedula);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Email);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.PaisResidencia);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.Provincia);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.Distrito);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.Corregimiento);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.Direccion);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspAperCambUbicAgen.DatosSolicitante.TelefonoResid, inspection.InspAperCambUbicAgen.DatosSolicitante.TelefonoMovil));
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Profesión");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Profesion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("NOMBRE DE SOLICITANTE");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Nombre);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Tipo");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosSolicitante.Tipo));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nacionalidad");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Nacionalidad);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Cedula);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Email);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.PaisResidencia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.Provincia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.Distrito);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.Corregimiento);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante?.Direccion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicAgen.DatosSolicitante.TelefonoResid, inspection.InspAperCambUbicAgen.DatosSolicitante.TelefonoMovil));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Profesión");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosSolicitante.Profesion);
                                     }
 
                                     table.Footer(footer =>
@@ -861,32 +861,32 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     //Establecimiento
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente.Nombre);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Registro de Idoneidad");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente.NumRegistro);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente.Cedula);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente.Email);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente?.PaisResidencia);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente?.Provincia);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente?.Distrito);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente?.Corregimiento);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicAgen.DatosRegente?.Ubicacion);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspAperCambUbicAgen.DatosRegente.TelefonoOfic, inspection.InspAperCambUbicAgen.DatosRegente?.TelefonoMovil));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Registro de Idoneidad");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente.NumRegistro);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente.Cedula);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente.Email);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente?.PaisResidencia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente?.Provincia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente?.Distrito);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente?.Corregimiento);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicAgen.DatosRegente?.Ubicacion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicAgen.DatosRegente.TelefonoOfic, inspection.InspAperCambUbicAgen.DatosRegente?.TelefonoMovil));
 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Se encontraba presente al momento de la inspección");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosRegente.PresenteEnInspeccion));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Se encontraba presente al momento de la inspección");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosRegente.PresenteEnInspeccion));
 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("El Regente Farmacéutico realiza otras funciones del dentro de la empresa?");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("El Regente Farmacéutico realiza otras funciones del dentro de la empresa?");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion));
                                 });
 
                             }
@@ -915,19 +915,19 @@ namespace Aig.Auditoria.Services
                                         {
                                             if (dat.IsHeader)
                                             {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -959,19 +959,19 @@ namespace Aig.Auditoria.Services
                                         {
                                             if (dat.IsHeader)
                                             {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1003,19 +1003,19 @@ namespace Aig.Auditoria.Services
                                         {
                                             if (dat.IsHeader)
                                             {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1047,19 +1047,19 @@ namespace Aig.Auditoria.Services
                                         {
                                             if (dat.IsHeader)
                                             {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1091,19 +1091,19 @@ namespace Aig.Auditoria.Services
                                         {
                                             if (dat.IsHeader)
                                             {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1135,19 +1135,19 @@ namespace Aig.Auditoria.Services
                                         {
                                             if (dat.IsHeader)
                                             {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1179,19 +1179,19 @@ namespace Aig.Auditoria.Services
                                         {
                                             if (dat.IsHeader)
                                             {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1227,15 +1227,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1271,15 +1271,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1311,19 +1311,19 @@ namespace Aig.Auditoria.Services
                                         {
                                             if (dat.IsHeader)
                                             {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1359,15 +1359,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1403,15 +1403,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1447,15 +1447,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1491,15 +1491,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1535,15 +1535,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1579,15 +1579,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -1608,7 +1608,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIONES GENERALES").Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -1633,11 +1633,11 @@ namespace Aig.Auditoria.Services
 
                                     if (inspection.DatosConclusiones.CumpleRequisitosMinOperacion)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
                                     else
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
                                 });
                             }
@@ -1880,47 +1880,47 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     //Establecimiento
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("NOMBRE DEL ESTABLECIMIENTO");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Nombre);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Direccion);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Número de Licencia de Operación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.NumLicencia));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Vigente Desde");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteDesde?.ToString("dd/MM/yyyy") ?? ""));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Vigente Hasta");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("NOMBRE DEL ESTABLECIMIENTO");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Direccion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Número de Licencia de Operación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.NumLicencia));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Vigente Desde");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteDesde?.ToString("dd/MM/yyyy") ?? ""));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Vigente Hasta");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
 
                                     if (inspection.InspRutinaVigFarmacia.DatosRepresentLegal != null)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre del Representante Legal o Propietario");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Nombre);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Cedula);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Email);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.PaisResidencia);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Provincia);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Distrito);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Corregimiento);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Direccion);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspRutinaVigFarmacia.DatosRepresentLegal.TelefonoResid, inspection.InspRutinaVigFarmacia.DatosRepresentLegal.TelefonoMovil));
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Profesión");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Profesion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre del Representante Legal o Propietario");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Nombre);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Cedula);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Email);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.PaisResidencia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Provincia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Distrito);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Corregimiento);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosSolicitante?.Direccion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspRutinaVigFarmacia.DatosRepresentLegal.TelefonoResid, inspection.InspRutinaVigFarmacia.DatosRepresentLegal.TelefonoMovil));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Profesión");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRepresentLegal.Profesion);
                                     }
 
                                     table.Footer(footer =>
@@ -1948,43 +1948,43 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     //Establecimiento
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente.Nombre);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Registro de Idoneidad");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente.NumRegistro);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente.Cedula);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente.Email);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Se encontraba presente al momento de la inspección");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosRegente.PresenteEnInspeccion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Horario declarado en la Licencia de Operación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente.HorarioRegencia);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente?.PaisResidencia);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Provincia);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Distrito);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Corregimiento);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Ubicacion);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspRutinaVigFarmacia.DatosRegente.TelefonoOfic, inspection.InspRutinaVigFarmacia.DatosRegente?.TelefonoMovil));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Registro de Idoneidad");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente.NumRegistro);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente.Cedula);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente.Email);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Se encontraba presente al momento de la inspección");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosRegente.PresenteEnInspeccion));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Horario declarado en la Licencia de Operación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente.HorarioRegencia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.PaisResidencia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Provincia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Distrito);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Corregimiento);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosRegente?.Ubicacion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspRutinaVigFarmacia.DatosRegente.TelefonoOfic, inspection.InspRutinaVigFarmacia.DatosRegente?.TelefonoMovil));
 
                                     if (inspection.InspRutinaVigFarmacia.DatosFarmaceutico != null)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cuenta con Farmacéutico de Turno");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.CuentaConFarmaceutico));
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Horario declarado en la Licencia de Operación");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.Horario);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cuenta con Personal (Técnico en Farmacia):");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.CuentaConPersonalTecnico));
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre de Técnico en Farmacia");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.Nombre);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Registro");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.NumRegistro);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cuenta con Farmacéutico de Turno");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.CuentaConFarmaceutico));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Horario declarado en la Licencia de Operación");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.Horario);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cuenta con Personal (Técnico en Farmacia):");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.CuentaConPersonalTecnico));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre de Técnico en Farmacia");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.Nombre);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Registro");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigFarmacia.DatosFarmaceutico.NumRegistro);
                                     }
                                 });
 
@@ -2019,15 +2019,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2064,15 +2064,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2109,15 +2109,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2154,15 +2154,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2199,15 +2199,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2244,15 +2244,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2289,15 +2289,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2334,15 +2334,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2363,7 +2363,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIONES GENERALES").Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -2384,16 +2384,16 @@ namespace Aig.Auditoria.Services
 
                                     if (inspection.DatosConclusiones.CumpleRequisitosMinOperacion)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
                                     else
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
 
                                     if (inspection.DatosConclusiones.ReprogramaInspeccion)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO").Bold();
                                     }
                                 });
                             }
@@ -2570,12 +2570,12 @@ namespace Aig.Auditoria.Services
                                     });
                                     if (inspection.InspRutinaVigFarmacia?.InventarioMedicamento?.LProductos?.Count > 0) {
                                         foreach (var dat in inspection.InspRutinaVigFarmacia.InventarioMedicamento.LProductos) {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Nombre);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Fabricante);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Lote);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Existencia);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.RegistroSistema);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Nombre);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Fabricante);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Lote);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Existencia);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.RegistroSistema);
                                         }
 
                                     }
@@ -2697,47 +2697,47 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     //Establecimiento
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("NOMBRE DEL ESTABLECIMIENTO");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Nombre);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Direccion);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Número de Licencia de Operación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.NumLicencia));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Vigente Desde");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteDesde?.ToString("dd/MM/yyyy") ?? ""));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Vigente Hasta");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("NOMBRE DEL ESTABLECIMIENTO");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Direccion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Número de Licencia de Operación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.NumLicencia));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Vigente Desde");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteDesde?.ToString("dd/MM/yyyy") ?? ""));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Vigente Hasta");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
 
                                     if (inspection.InspRutinaVigAgencia.DatosRepresentLegal != null)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre del Representante Legal o Propietario");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRepresentLegal.Nombre);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRepresentLegal.Cedula);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRepresentLegal.Email);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.PaisResidencia);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.Provincia);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.Distrito);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.Corregimiento);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.Direccion);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspRutinaVigAgencia.DatosRepresentLegal.TelefonoResid, inspection.InspRutinaVigAgencia.DatosRepresentLegal.TelefonoMovil));
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Profesión");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRepresentLegal.Profesion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre del Representante Legal o Propietario");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRepresentLegal.Nombre);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRepresentLegal.Cedula);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRepresentLegal.Email);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.PaisResidencia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.Provincia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.Distrito);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.Corregimiento);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosSolicitante?.Direccion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspRutinaVigAgencia.DatosRepresentLegal.TelefonoResid, inspection.InspRutinaVigAgencia.DatosRepresentLegal.TelefonoMovil));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Profesión");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRepresentLegal.Profesion);
                                     }
 
                                     table.Footer(footer =>
@@ -2764,32 +2764,32 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     //Establecimiento
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente.Nombre);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Registro de Idoneidad");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente.NumRegistro);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente.Cedula);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente.Email);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Se encontraba presente al momento de la inspección?");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.DatosRegente.PresenteEnInspeccion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("El Regente Farmacéutico realiza otras funciones del dentro de la empresa?");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.DatosRegente.RealizaOtraFuncion));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Horario declarado en la Licencia de Operación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente.HorarioRegencia);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente?.PaisResidencia);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente?.Provincia);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente?.Distrito);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente?.Corregimiento);
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspRutinaVigAgencia.DatosRegente?.Ubicacion);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspRutinaVigAgencia.DatosRegente.TelefonoOfic, inspection.InspRutinaVigAgencia.DatosRegente?.TelefonoMovil));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Registro de Idoneidad");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente.NumRegistro);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente.Cedula);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente.Email);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Se encontraba presente al momento de la inspección?");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.DatosRegente.PresenteEnInspeccion));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("El Regente Farmacéutico realiza otras funciones del dentro de la empresa?");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspRutinaVigAgencia.DatosRegente.RealizaOtraFuncion));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Horario declarado en la Licencia de Operación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente.HorarioRegencia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente?.PaisResidencia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente?.Provincia);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente?.Distrito);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente?.Corregimiento);
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspRutinaVigAgencia.DatosRegente?.Ubicacion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspRutinaVigAgencia.DatosRegente.TelefonoOfic, inspection.InspRutinaVigAgencia.DatosRegente?.TelefonoMovil));
 
                                 });
 
@@ -2824,15 +2824,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2869,15 +2869,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2914,15 +2914,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -2959,15 +2959,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3004,15 +3004,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3049,15 +3049,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3094,15 +3094,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3139,15 +3139,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3184,15 +3184,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3229,15 +3229,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3274,15 +3274,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3319,15 +3319,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3364,15 +3364,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3409,15 +3409,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3457,15 +3457,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3501,15 +3501,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -3530,7 +3530,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIONES GENERALES").Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -3551,16 +3551,16 @@ namespace Aig.Auditoria.Services
 
                                     if (inspection.DatosConclusiones.CumpleRequisitosMinOperacion)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
                                     else
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
 
                                     if (inspection.DatosConclusiones.ReprogramaInspeccion)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO").Bold();
                                     }
                                 });
                             }
@@ -3735,12 +3735,12 @@ namespace Aig.Auditoria.Services
                                     });
                                     if (inspection.InspRutinaVigAgencia?.InventarioMedicamento?.LProductos?.Count > 0) {
                                         foreach (var dat in inspection.InspRutinaVigAgencia.InventarioMedicamento.LProductos) {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Nombre);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Fabricante);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Lote);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Existencia);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.RegistroSistema);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Nombre);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Fabricante);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Lote);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Existencia);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.RegistroSistema);
                                         }
 
                                     }
@@ -3909,7 +3909,7 @@ namespace Aig.Auditoria.Services
                             //        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Se Finaliza la Inspección por").Bold();
                             //    });
 
-                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection?.DatosConclusiones?.ObservacionesFinales);
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection?.DatosConclusiones?.ObservacionesFinales);
 
                             //});
 
@@ -3924,7 +3924,7 @@ namespace Aig.Auditoria.Services
                             //    {
                             //        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Se Finaliza la Inspección por".ToUpper()).Bold();
                             //    });
-                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection?.InspInvestigacion?.DetallesInvestigacion?.DetalleVerificacion).Bold();
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection?.InspInvestigacion?.DetallesInvestigacion?.DetalleVerificacion).Bold();
 
                             //});
 
@@ -4216,7 +4216,7 @@ namespace Aig.Auditoria.Services
                             //        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
                             //    });
 
-                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             //});
 
@@ -4751,10 +4751,10 @@ namespace Aig.Auditoria.Services
                                     });
                                     foreach (var dat in inspection.InspDisposicionFinal.InventarioMedicamento.LProductos)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Cantidad);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Nombre);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Presentacion);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Motivos);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Cantidad);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Nombre);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Presentacion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Motivos);
                                     }
                                 });
                             }
@@ -4977,39 +4977,39 @@ namespace Aig.Auditoria.Services
 
                                 //Establecimiento
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1. Establecimiento");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.1 Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.1 Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Nombre);
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.2 Ubicación");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Direccion);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.3 Teléfono");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.4 Correo Electronico");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento?.Correo));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Direccion);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.3 Teléfono");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.4 Correo Electronico");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento?.Correo));
 
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("2. Regente farmacéutico(a)");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("2.1 Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricante?.DatosRegente?.Nombre);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricante?.DatosRegente?.Cedula);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("2.2 Num. Registro");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricante?.DatosRegente?.NumRegistro);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("2.1 Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricante?.DatosRegente?.Nombre);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricante?.DatosRegente?.Cedula);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("2.2 Num. Registro");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricante?.DatosRegente?.NumRegistro);
 
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("3. Propietario o Representante Legal");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("3.1 Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricante?.DatosRepresentLegal?.Nombre);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricante?.DatosRepresentLegal?.Cedula);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("3.1 Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricante?.DatosRepresentLegal?.Nombre);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricante?.DatosRepresentLegal?.Cedula);
 
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("4. Productos que fabricarán( adjuntar listado si lo poseen)");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("4.1 Tipo");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricante?.ProdFabrican?.ProductosDesc);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("4.1 Tipo");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricante?.ProdFabrican?.ProductosDesc);
 
                             });
 
@@ -5039,19 +5039,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5083,19 +5083,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5138,28 +5138,28 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
 
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
 
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5191,19 +5191,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5239,19 +5239,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5283,19 +5283,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5327,19 +5327,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5371,19 +5371,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5419,12 +5419,12 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 1)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else if (dat.LEvaluacion?.Count > 0)
@@ -5438,7 +5438,7 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5470,19 +5470,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5654,7 +5654,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                               });
 
@@ -5740,39 +5740,39 @@ namespace Aig.Auditoria.Services
 
                                 //Establecimiento
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1. ESTABLECIMIENTO".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.1 Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.1 Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Nombre);
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.2 Ubicacion:");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" Provincia");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" Distrito");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" Corregimiento");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" Ubicación");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Direccion);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.3 Teléfono");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.4 Correo Electronico");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento?.Correo));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" Provincia");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" Distrito");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" Corregimiento");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" Ubicación");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Direccion);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.3 Teléfono");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.4 Correo Electronico");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento?.Correo));
 
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("2. REGENTE FARMACEUTICO(A)".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("2.1 Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.Nombre);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.Cedula);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("2.2 Nº de Registro");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.NumRegistro);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("2.1 Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.Nombre);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.Cedula);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("2.2 Nº de Registro");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricanteCosmetMed?.DatosRegente?.NumRegistro);
 
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("3. PROPIETARIO O REPRESENTANTE LEGAL".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("3.1 Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRepresentLegal?.Nombre);
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.DatosRepresentLegal?.Cedula);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("3.1 Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricanteCosmetMed?.DatosRepresentLegal?.Nombre);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricanteCosmetMed?.DatosRepresentLegal?.Cedula);
 
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("4. Productos que fabricarán (adjuntar listado si lo poseen)".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("4.1 Tipo");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.ProdFabrican?.ProductosDesc);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("4.1 Tipo");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricanteCosmetMed?.ProdFabrican?.ProductosDesc);
 
                             });
 
@@ -5802,19 +5802,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5846,19 +5846,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5894,28 +5894,28 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" ");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" ");
 
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
 
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5947,19 +5947,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -5991,19 +5991,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6035,19 +6035,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6079,19 +6079,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6123,19 +6123,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6167,19 +6167,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6211,19 +6211,19 @@ namespace Aig.Auditoria.Services
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6440,7 +6440,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -6620,36 +6620,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6666,7 +6666,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMFabricanteMed?.ClasifActComerciales?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("CLASIFICACIÓN DE LA ACTIVIDAD COMERCIAL:".ToUpper() + "  (Informativo)")).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -6690,36 +6690,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6727,7 +6727,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMFabricanteMed?.ClasifEstablecimiento?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("Clasificación del Establecimiento:".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("Clasificación del Establecimiento:".ToUpper() + "  (Informativo)")).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -6752,36 +6752,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().ShowOnce().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6814,36 +6814,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                    if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6876,36 +6876,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -6949,28 +6949,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(8).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
@@ -6978,7 +6978,7 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().ColumnSpan(7).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7011,36 +7011,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7077,28 +7077,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
@@ -7106,7 +7106,7 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7139,36 +7139,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7205,28 +7205,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
@@ -7234,7 +7234,7 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7267,36 +7267,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7329,36 +7329,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7391,36 +7391,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7457,28 +7457,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
@@ -7486,7 +7486,7 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7519,36 +7519,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7581,36 +7581,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7643,36 +7643,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7680,7 +7680,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMFabricanteMed?.ValGenerales?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("CALIFICACIÓN Y VALIDACIÓN".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("VALIDACIÓN".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -7705,36 +7705,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7767,36 +7767,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7829,36 +7829,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7895,28 +7895,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
@@ -7924,7 +7924,7 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -7957,36 +7957,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8023,28 +8023,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
@@ -8052,7 +8052,7 @@ namespace Aig.Auditoria.Services
                                             {
                                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8085,36 +8085,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8122,7 +8122,7 @@ namespace Aig.Auditoria.Services
                             if (inspection.InspGuiaBPMFabricanteMed?.Lactamicos?.LContenido?.Count > 0)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("FABRICACIÓN DE PRODUCTOS FARMACÉUTICOS β-LACTÁMICOS (Derivados Penicilínicos y Cefalosporínicos)".ToUpper())).Bold();
+                                column.Item().AlignLeft().Text(string.Format("FABRICACIÓN DE PRODUCTOS FARMACÉUTICOS BETA-LACTÁMICOS (Derivados Penicilínicos y Cefalosporínicos)".ToUpper())).Bold();
                                 column.Item().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
@@ -8147,36 +8147,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8209,36 +8209,36 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
                                                     if (!eva.HideEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                     else
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8257,7 +8257,7 @@ namespace Aig.Auditoria.Services
                             //        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
                             //    });
 
-                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             //});
 
@@ -8554,29 +8554,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8617,29 +8617,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8671,29 +8671,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8726,29 +8726,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8781,29 +8781,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8842,29 +8842,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
                                                 table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8897,29 +8897,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -8952,29 +8952,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9007,29 +9007,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9062,29 +9062,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9117,29 +9117,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9172,29 +9172,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9227,29 +9227,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9282,29 +9282,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9337,29 +9337,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9392,29 +9392,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9447,29 +9447,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -9488,7 +9488,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -9784,38 +9784,38 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                         }
@@ -9858,38 +9858,38 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold(); ;
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold(); ;
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold(); ;
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold(); ;
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold(); ;
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold(); ;
                                             //table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                         }
@@ -9923,37 +9923,37 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                         }
@@ -9990,45 +9990,45 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold(); ;
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold(); ;
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
 
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10065,44 +10065,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10139,44 +10139,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10213,44 +10213,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10287,44 +10287,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10361,44 +10361,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10435,44 +10435,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10509,44 +10509,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10583,44 +10583,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10657,44 +10657,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10731,44 +10731,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10805,44 +10805,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10879,44 +10879,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -10953,44 +10953,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11027,44 +11027,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11101,44 +11101,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11175,44 +11175,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11249,44 +11249,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11323,44 +11323,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11397,44 +11397,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11471,44 +11471,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11545,44 +11545,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11619,44 +11619,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11693,44 +11693,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11767,44 +11767,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11841,44 +11841,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11915,44 +11915,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -11989,44 +11989,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -12063,44 +12063,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -12137,44 +12137,44 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("").Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax>0? dat.PuntosMax:"");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax>0? dat.PuntosMax:"");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.PuntosMax > 0 ? dat.PuntosObtenido : "");
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             if (dat.LSubPreguntas?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LSubPreguntas)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(eva.Nombre);
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(eva.Nombre);
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                                 }
                                             }
                                         }
@@ -12505,29 +12505,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -12560,29 +12560,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -12615,29 +12615,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -12670,29 +12670,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -12725,29 +12725,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -12780,29 +12780,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -12835,29 +12835,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -12891,29 +12891,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -12946,29 +12946,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13001,29 +13001,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13056,29 +13056,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13111,29 +13111,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13166,29 +13166,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13221,29 +13221,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13276,29 +13276,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13331,29 +13331,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13387,29 +13387,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13442,29 +13442,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13497,29 +13497,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13552,29 +13552,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13608,29 +13608,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13663,29 +13663,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13718,29 +13718,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13773,29 +13773,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13828,29 +13828,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13883,29 +13883,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13938,29 +13938,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -13994,29 +13994,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14049,29 +14049,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14104,29 +14104,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14160,29 +14160,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                           table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                           table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14216,29 +14216,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14271,29 +14271,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14327,29 +14327,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14382,29 +14382,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14437,29 +14437,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14492,29 +14492,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14547,29 +14547,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14603,29 +14603,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14658,29 +14658,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14714,29 +14714,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14769,29 +14769,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14824,29 +14824,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14880,29 +14880,29 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo).Bold();
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo).Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo).Bold();
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -14921,7 +14921,7 @@ namespace Aig.Auditoria.Services
                             //        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
                             //    });
 
-                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                            //    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             //});
 
@@ -15308,28 +15308,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero>0? dat.Numero:"").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero>0? dat.Numero:"").Bold();
                                             table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -15364,28 +15364,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero > 0 ? dat.Numero : "").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero > 0 ? dat.Numero : "").Bold();
                                             table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -15420,28 +15420,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero > 0 ? dat.Numero : "").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero > 0 ? dat.Numero : "").Bold();
                                             table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -15476,28 +15476,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero > 0 ? dat.Numero : "").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero > 0 ? dat.Numero : "").Bold();
                                             table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -15532,28 +15532,28 @@ namespace Aig.Auditoria.Services
                                     {
                                         if (dat.IsHeader)
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero > 0 ? dat.Numero : "").Bold();
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero > 0 ? dat.Numero : "").Bold();
                                             table.Cell().ColumnSpan(6).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else
                                         {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Criterio);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Capitulo);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Articulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Criterio);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Capitulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Articulo);
                                             if (dat.LEvaluacion?.Count > 0)
                                             {
                                                 foreach (var eva in dat.LEvaluacion)
                                                 {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -15572,7 +15572,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper()).Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -15817,31 +15817,31 @@ namespace Aig.Auditoria.Services
 
                                 //Establecimiento
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1. ESTABLECIMIENTO".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.1 Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.1 Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Nombre);
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.2 Ubicacion:");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" Provincia");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" Distrito");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" Corregimiento");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? "");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(" Ubicación");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento?.Direccion);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.3 Teléfono");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("1.4 Correo Electronico");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento?.Correo));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" Provincia");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Provincia?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" Distrito");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Distrito?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" Corregimiento");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Corregimiento?.Nombre ?? "");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(" Ubicación");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento?.Direccion);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.3 Teléfono");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento?.Telefono));
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("1.4 Correo Electronico");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento?.Correo));
                                                                
                                 table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("3. Propietario artesano".ToUpper());
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("3.1 Nombre");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperturaCosmetArtesanal?.DatosRepresentLegal?.Nombre);
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("3.2 Cédula");
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperturaCosmetArtesanal?.DatosRepresentLegal?.Cedula);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("3.1 Nombre");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperturaCosmetArtesanal?.DatosRepresentLegal?.Nombre);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("3.2 Cédula");
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperturaCosmetArtesanal?.DatosRepresentLegal?.Cedula);
 
                                 //table.Cell().ColumnSpan(2).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("4. Productos que fabricarán (adjuntar listado si lo poseen)".ToUpper());
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("4.1 Tipo");
-                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperFabricanteCosmetMed?.ProdFabrican?.ProductosDesc);
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("4.1 Tipo");
+                                //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperFabricanteCosmetMed?.ProdFabrican?.ProductosDesc);
 
                             });
                            
@@ -15864,21 +15864,21 @@ namespace Aig.Auditoria.Services
                                     });
                                     foreach (var dat in inspection.InspAperturaCosmetArtesanal.Documentacion.LContenido) {
                                         if (dat.IsHeader) {
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
                                             table.Cell().ColumnSpan(4).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0) {
                                                 foreach (var eva in dat.LEvaluacion) {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -15899,20 +15899,20 @@ namespace Aig.Auditoria.Services
                                     });
                                     foreach (var dat in inspection.InspAperturaCosmetArtesanal.Locales.LContenido) {
                                         if (dat.IsHeader) {
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
                                             table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0) {
                                                 foreach (var eva in dat.LEvaluacion) {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -15937,20 +15937,20 @@ namespace Aig.Auditoria.Services
                                     });
                                     foreach (var dat in inspection.InspAperturaCosmetArtesanal.AreaAlmacenamiento.LContenido) {
                                         if (dat.IsHeader) {
-                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Numero);
+                                            //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Numero);
                                             table.Cell().ColumnSpan(5).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo).Bold();
                                         }
                                         else {
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                             if (dat.LEvaluacion?.Count > 0) {
                                                 foreach (var eva in dat.LEvaluacion) {
-                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                 }
                                             }
                                             else {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("");
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("");
                                             }
-                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                         }
                                     }
                                 });
@@ -16110,7 +16110,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Inconformidades o desviaciones detectadas".ToUpper()).Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -16198,47 +16198,47 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     //Establecimiento
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("NOMBRE DEL ESTABLECIMIENTO");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Nombre);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosEstablecimiento.Direccion);
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Número de Licencia de Operación");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.NumLicencia));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Vigente Desde");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteDesde?.ToString("dd/MM/yyyy") ?? ""));
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Vigente Hasta");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("NOMBRE DEL ESTABLECIMIENTO");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Nombre);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Provincia?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Distrito?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Corregimiento?.Nombre ?? "");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosEstablecimiento.Direccion);
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.Telefono));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Número de Licencia de Operación");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.NumLicencia));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Vigente Desde");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteDesde?.ToString("dd/MM/yyyy") ?? ""));
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Vigente Hasta");
+                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0}", inspection.DatosEstablecimiento.VigenteHasta?.ToString("dd/MM/yyyy") ?? ""));
 
                                     if (inspection.InspAperCambUbicBotiquin.DatosRepresentLegal != null)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre del Representante Legal o Propietario");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.Nombre);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.Cedula);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.Email);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.PaisResidencia);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.Provincia);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.Distrito);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.Corregimiento);
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.Direccion);
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.TelefonoResid, inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.TelefonoMovil));
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Profesión");
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.Profesion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre del Representante Legal o Propietario");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.Nombre);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.Cedula);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.Email);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.PaisResidencia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.Provincia);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.Distrito);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.Corregimiento);
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                                        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosSolicitante?.Direccion);
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.TelefonoResid, inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.TelefonoMovil));
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Profesión");
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRepresentLegal.Profesion);
                                     }
 
                                     table.Footer(footer =>
@@ -16265,32 +16265,32 @@ namespace Aig.Auditoria.Services
                             //        });
 
                             //        //Establecimiento
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Nombre");
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente.Nombre);
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Registro de Idoneidad");
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente.NumRegistro);
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Cédula de Identidad Personal");
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente.Cedula);
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Correo electrónico");
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente.Email);
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Se encontraba presente al momento de la inspección?");
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicBotiquin.DatosRegente.PresenteEnInspeccion));
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("El Regente Farmacéutico realiza otras funciones del dentro de la empresa?");
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicBotiquin.DatosRegente.RealizaOtraFuncion));
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Horario declarado en la Licencia de Operación");
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente.HorarioRegencia);
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Residencia");
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.PaisResidencia);
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Provincia");
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.Provincia);
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Distrito");
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.Distrito);
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Corregimiento");
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.Corregimiento);
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Ubicación");
-                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.Ubicacion);
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("Teléfono / Celular");
-                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(string.Format("{0} / {1}", inspection.InspAperCambUbicBotiquin.DatosRegente.TelefonoOfic, inspection.InspAperCambUbicBotiquin.DatosRegente?.TelefonoMovil));
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Nombre");
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente.Nombre);
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Registro de Idoneidad");
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente.NumRegistro);
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Cédula de Identidad Personal");
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente.Cedula);
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Correo electrónico");
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente.Email);
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Se encontraba presente al momento de la inspección?");
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicBotiquin.DatosRegente.PresenteEnInspeccion));
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("El Regente Farmacéutico realiza otras funciones del dentro de la empresa?");
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicBotiquin.DatosRegente.RealizaOtraFuncion));
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Horario declarado en la Licencia de Operación");
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente.HorarioRegencia);
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Residencia");
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.PaisResidencia);
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Provincia");
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.Provincia);
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Distrito");
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.Distrito);
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Corregimiento");
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.Corregimiento);
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Ubicación");
+                            //        //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.InspAperCambUbicBotiquin.DatosRegente?.Ubicacion);
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
+                            //        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicBotiquin.DatosRegente.TelefonoOfic, inspection.InspAperCambUbicBotiquin.DatosRegente?.TelefonoMovil));
 
                             //    });
 
@@ -16324,15 +16324,15 @@ namespace Aig.Auditoria.Services
                                             }
                                             else
                                             {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
                                                 if (dat.LEvaluacion?.Count > 0)
                                                 {
                                                     foreach (var eva in dat.LEvaluacion)
                                                     {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
                                                     }
                                                 }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Observaciones);
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
                                             }
                                         }
 
@@ -16352,7 +16352,7 @@ namespace Aig.Auditoria.Services
                                     header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIONES GENERALES").Bold();
                                 });
 
-                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(inspection.DatosConclusiones?.ObservacionesFinales);
+                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(inspection.DatosConclusiones?.ObservacionesFinales);
 
                             });
 
@@ -16375,16 +16375,16 @@ namespace Aig.Auditoria.Services
 
                                     if (inspection.DatosConclusiones.CumpleRequisitosMinOperacion)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
                                     else
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("EL LOCAL NO CUMPLE ESTRUCTURALMENTE CON LOS REQUISITOS MÍNIMOS PARA OPERAR").Bold();
                                     }
 
                                     if (inspection.DatosConclusiones.ReprogramaInspeccion)
                                     {
-                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text("SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO").Bold();
+                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("SE REPROGRAMA INSPECCIÓN AL ESTABLECIMIENTO").Bold();
                                     }
                                 });
                             }
